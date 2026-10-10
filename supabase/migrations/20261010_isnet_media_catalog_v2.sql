@@ -30,20 +30,23 @@ revoke all on public.isnet_media_assets from anon;
 grant select,insert,update on public.isnet_media_assets to authenticated;
 drop policy if exists isnet_media_admin_read on public.isnet_media_assets;
 create policy isnet_media_admin_read on public.isnet_media_assets for select to authenticated
-using (exists(select 1 from public.admin_users a where a.user_id = auth.uid()));
+using (exists(select 1 from public.profiles a where a.id = auth.uid() and a.is_active and a.role in ('super_admin','admin','site_admin','editor')));
 drop policy if exists isnet_media_admin_insert on public.isnet_media_assets;
 create policy isnet_media_admin_insert on public.isnet_media_assets for insert to authenticated
-with check (exists(select 1 from public.admin_users a where a.user_id = auth.uid()));
+with check (exists(select 1 from public.profiles a where a.id = auth.uid() and a.is_active and a.role in ('super_admin','admin','site_admin','editor')));
 drop policy if exists isnet_media_admin_update on public.isnet_media_assets;
 create policy isnet_media_admin_update on public.isnet_media_assets for update to authenticated
-using (exists(select 1 from public.admin_users a where a.user_id = auth.uid()))
-with check (exists(select 1 from public.admin_users a where a.user_id = auth.uid()));
+using (exists(select 1 from public.profiles a where a.id = auth.uid() and a.is_active and a.role in ('super_admin','admin','site_admin','editor')))
+with check (exists(select 1 from public.profiles a where a.id = auth.uid() and a.is_active and a.role in ('super_admin','admin','site_admin','editor')));
 insert into storage.buckets(id,name,public,file_size_limit,allowed_mime_types)
 values('isnet-event-media','isnet-event-media',false,5242880,array['image/jpeg','image/png','image/webp'])
 on conflict(id) do nothing;
 drop policy if exists isnet_event_media_admin_read on storage.objects;
 create policy isnet_event_media_admin_read on storage.objects for select to authenticated
-using(bucket_id='isnet-event-media' and exists(select 1 from public.admin_users a where a.user_id=auth.uid()));
+using(bucket_id='isnet-event-media' and exists(select 1 from public.profiles a where a.id=auth.uid() and a.is_active and a.role in ('super_admin','admin','site_admin','editor')));
 drop policy if exists isnet_event_media_admin_insert on storage.objects;
 create policy isnet_event_media_admin_insert on storage.objects for insert to authenticated
-with check(bucket_id='isnet-event-media' and exists(select 1 from public.admin_users a where a.user_id=auth.uid()));
+with check(bucket_id='isnet-event-media' and exists(select 1 from public.profiles a where a.id=auth.uid() and a.is_active and a.role in ('super_admin','admin','site_admin','editor')));
+
+drop policy if exists isnet_event_media_admin_delete on storage.objects;
+create policy isnet_event_media_admin_delete on storage.objects for delete to authenticated using(bucket_id='isnet-event-media' and exists(select 1 from public.profiles a where a.id=auth.uid() and a.is_active and a.role in ('super_admin','admin','site_admin','editor')));
