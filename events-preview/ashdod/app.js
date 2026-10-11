@@ -381,7 +381,9 @@ function scheduleSummary(e){
   }
   const dates=uniqueOccurrenceDates(e);
   const times=[...new Set(occ.map(x=>formatTime(x.start_time)))];
-  return occ.length+' מועדים'+(times.length===1?' · '+times[0]:' · שעות שונות');
+  const upcoming=occ.filter(x=>x.start_date>=iso(today())).sort((a,b)=>(a.start_date+(a.start_time||"")).localeCompare(b.start_date+(b.start_time||"")));
+  const first=upcoming[0]||occ.slice().sort((a,b)=>a.start_date.localeCompare(b.start_date))[0];
+  return fmtFull.format(localDate(first.start_date))+' · '+formatTime(first.start_time)+' · עוד '+(occ.length-1)+' מועדים';
 }
 function categoryWithSubtype(e){
   const group=window.publicTaxonomy?.find(c=>c.id===e.category);
@@ -1006,8 +1008,9 @@ function renderResults(){
         ...subDefs.map(s=>({id:s.id,label:s.label,count:counts.get(s.id)||0})),
         ...present.filter(id=>!subDefs.some(s=>s.id===id)).map(id=>({id,label:id,count:counts.get(id)||0}))
       ];
+      const visibleSubs=subs.filter(s=>s.count>0);
       const railId="isnetCategoryRail"+index;
-      const tabs=subs.length?'<div class="isnetCategoryTabs" aria-label="תתי קטגוריות של '+escapeHtml(label)+'"><button type="button" class="is-active" data-rail-sub="" aria-pressed="true">הכול</button>'+subs.map(s=>'<button type="button" data-rail-sub="'+escapeHtml(s.id)+'" aria-pressed="false"'+(s.count?'':' disabled title="אין כרגע אירועים בתת־קטגוריה זו"')+'>'+escapeHtml(s.label)+' <small>('+s.count+')</small></button>').join("")+'</div>':"";
+      const tabs=visibleSubs.length?'<div class="isnetCategoryTabs" aria-label="תתי קטגוריות של '+escapeHtml(label)+'"><button type="button" class="is-active" data-rail-sub="" aria-pressed="true">הכול</button>'+visibleSubs.map(s=>'<button type="button" data-rail-sub="'+escapeHtml(s.id)+'" aria-pressed="false"'+(s.count?'':' disabled title="אין כרגע אירועים בתת־קטגוריה זו"')+'>'+escapeHtml(s.label)+' <small>('+s.count+')</small></button>').join("")+'</div>':"";
       return '<section class="isnetCategorySection" data-category-section="'+escapeHtml(key)+'"><div class="isnetCategoryTop"><div><span class="isnetCategoryKicker">מה עושים באשדוד</span><h3>'+escapeHtml(label)+'</h3><span class="isnetCategoryCount">'+items.length+' אירועים</span></div><div class="isnetCategoryArrows"><button type="button" data-category-move="start" aria-label="הקודם ב'+escapeHtml(label)+'">→</button><button type="button" data-category-move="end" aria-label="הבא ב'+escapeHtml(label)+'">←</button></div></div>'+tabs+'<div class="isnetRailWrap"><div class="isnetCategoryRail" id="'+railId+'" tabindex="0" aria-label="אירועים: '+escapeHtml(label)+'">'+items.map(eventCard).join("")+'</div><button type="button" class="isnetRailOverlay isnetRailOverlay--start" data-category-move="start" aria-label="גלילה לאירועים הקודמים ב'+escapeHtml(label)+'">→</button><button type="button" class="isnetRailOverlay isnetRailOverlay--end" data-category-move="end" aria-label="גלילה לאירועים הבאים ב'+escapeHtml(label)+'">←</button></div></section>';
     }).join("");
     const itemsById=new Map(arr.map(e=>[String(e.event_id),e]));
