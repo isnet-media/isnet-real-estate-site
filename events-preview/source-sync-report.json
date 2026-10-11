@@ -1,29 +1,29 @@
 {
-  "run_at": "2026-10-10T11:56:18Z",
+  "run_at": "2026-10-11T05:26:19Z",
   "version": 1,
   "dry_run": false,
   "cities": {
     "ashdod": {
       "city": "אשדוד",
-      "total_before": 324,
+      "total_before": 414,
       "sources": {
         "ashdod_smarticket": {
           "status": "ok",
           "url": "https://ashdod.smarticket.co.il/",
-          "discovered": 216,
-          "valid": 126,
-          "new": 0,
+          "discovered": 217,
+          "valid": 127,
+          "new": 2,
           "updated": 0,
-          "images_collected": 126
+          "images_collected": 127
         },
         "mishkan_smarticket": {
           "status": "ok",
           "url": "https://mishkan-ashdod.smarticket.co.il/",
-          "discovered": 102,
-          "valid": 67,
+          "discovered": 101,
+          "valid": 66,
           "new": 0,
           "updated": 0,
-          "images_collected": 67
+          "images_collected": 66
         },
         "tickchak_ashdod": {
           "status": "ok",
@@ -44,36 +44,35 @@
           "images_collected": 0
         },
         "habama_ashdod": {
-          "status": "failed",
+          "status": "no_parseable_events",
           "url": "https://www.habama.co.il/Pages/HallGeneral.aspx?Area=2&HallGroupID=2089",
           "discovered": 0,
           "valid": 0,
           "new": 0,
           "updated": 0,
-          "images_collected": 0,
-          "error": "http_502"
+          "images_collected": 0
         }
       },
-      "new": 0,
+      "new": 2,
       "updated": 0,
       "removed_invalid": 0,
-      "removed_duplicates": 0,
-      "removed_classes": 0,
+      "removed_duplicates": 12,
+      "removed_classes": 5,
       "errors": [
-        "habama_ashdod:http_502"
+        "habama_ashdod:no_parseable_events"
       ],
-      "repaired_event_ids": 0,
-      "total_after": 324
+      "repaired_event_ids": 1,
+      "total_after": 399
     },
     "rishon-lezion": {
       "city": "ראשון לציון",
-      "total_before": 335,
+      "total_before": 417,
       "sources": {
         "htrl": {
           "status": "ok",
           "url": "https://htrl.co.il/לוח-שנה/",
-          "discovered": 147,
-          "valid": 118,
+          "discovered": 146,
+          "valid": 117,
           "new": 0,
           "updated": 0,
           "images_collected": 0
@@ -81,8 +80,8 @@
         "htrl_adults": {
           "status": "ok",
           "url": "https://htrl.co.il/third-calendar/",
-          "discovered": 117,
-          "valid": 78,
+          "discovered": 116,
+          "valid": 77,
           "new": 0,
           "updated": 0,
           "images_collected": 0
@@ -92,7 +91,7 @@
           "url": "https://yama.smarticket.co.il/",
           "discovered": 11,
           "valid": 11,
-          "new": 0,
+          "new": 4,
           "updated": 0,
           "images_collected": 11
         },
@@ -125,17 +124,17 @@
           "error": "ReadTimeout"
         }
       },
-      "new": 0,
+      "new": 4,
       "updated": 0,
       "removed_invalid": 0,
-      "removed_duplicates": 0,
-      "removed_classes": 0,
+      "removed_duplicates": 3,
+      "removed_classes": 4,
       "errors": [
         "RIZONE+:no_parseable_events",
         "Eventim:ReadTimeout"
       ],
       "repaired_event_ids": 0,
-      "total_after": 335
+      "total_after": 414
     }
   },
   "note": "Missing listings never trigger automatic cancellations; source failures preserve data."
