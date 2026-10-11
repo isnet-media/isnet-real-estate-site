@@ -19,3 +19,6 @@
 @media(max-width:900px){.isnetCategoryRail>.eventCard{flex-basis:235px!important;width:235px!important}}
 @media(max-width:650px){#eventsGrid:has(.isnetCategorySection){gap:20px!important;margin:0!important;padding:0!important}.isnetCategoryTop h3{font-size:23px}.isnetCategoryArrows button{width:34px;height:34px;font-size:18px}.isnetCategoryRail{gap:12px;padding-bottom:14px}.isnetCategoryRail>.eventCard{flex-basis:min(71vw,290px)!important;width:min(71vw,290px)!important}.isnetCategorySection{padding-bottom:12px}}
 @media(prefers-reduced-motion:reduce){.isnetCategoryRail{scroll-behavior:auto!important}}
+
+/* The category rows own their headings and arrows; hide the old single-rail header. */
+.results:has(.isnetCategorySection) #isnetLegacyRailHeading,.results:has(.isnetCategorySection) .isnetSwipeHint{display:none!important}
