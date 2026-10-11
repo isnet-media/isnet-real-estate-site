@@ -75,6 +75,8 @@ def fingerprint_master_html(check: bool = False) -> list[str]:
     pattern = r"\b((?:app|event|places|movie|cinema)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css)(?:\?v=[^\"'& ]+)?"
     for html in sorted(MASTER.glob("*.html")):
         original = html.read_text(encoding="utf-8")
+        if "<!-- ISNET ASHDOD PILOT -->" in original:
+            continue  # Pilot assets carry their own versions; do not rewrite them.
 
         def version_asset(match):
             filename = match.group(1)
@@ -108,7 +110,10 @@ def run(check: bool = False) -> int:
         dest = ROOT / slug
         assert (dest / "data" / "events.json").is_file(), "City-specific event dataset missing: " + slug
         for src in source_files:
-            expected = localize(src.read_text(encoding="utf-8"), src.name, city, src.suffix)
+            source = src.read_text(encoding="utf-8")
+            if "<!-- ISNET ASHDOD PILOT -->" in source:
+                continue  # Leave the other city on its last reviewed entry point.
+            expected = localize(source, src.name, city, src.suffix)
             if "אשדוד" in expected or "https://ashdodnet.com" in expected:
                 raise AssertionError(f"Unlocalized Ashdod text in {slug}/{src.name}")
             path = dest / src.name

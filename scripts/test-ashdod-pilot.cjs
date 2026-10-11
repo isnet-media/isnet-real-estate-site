@@ -1,0 +1,34 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const nodes=new Map();
+const ctx={Intl,URL,URLSearchParams,Date,location:{pathname:'/test/',href:'https://isnet.co.il/events-preview/ashdod/event.html'},window:{},document:{getElementById(id){if(!nodes.has(id))nodes.set(id,{innerHTML:'',hidden:false});return nodes.get(id)}}};
+vm.createContext(ctx);
+vm.runInContext(fs.readFileSync('events-preview/shared/editorial-safety.js','utf8'),ctx);
+vm.runInContext(fs.readFileSync('events-preview/ashdod/pilot/event.js','utf8').replace(/\ninit\(\);\s*$/,''),ctx);
+const event=(id,date,extra={})=>({event_id:id,title:id,category:'music',start_date:date,...extra});
+const at=new Date('2026-10-11T10:00:00Z');
+assert.equal(ctx.isUpcoming(event('future','2026-10-12'),at),true);
+assert.equal(ctx.isUpcoming(event('past','2026-10-10'),at),false);
+assert.equal(ctx.isUpcoming(event('earlier today','2026-10-11',{start_time:'12:00'}),at),false);
+assert.equal(ctx.isUpcoming(event('later today','2026-10-11',{start_time:'14:00'}),at),true);
+assert.equal(ctx.isUpcoming(event('bad','2026-99'),at),false);
+assert.equal(ctx.isUpcoming(event('draft','2026-10-12',{publication_status:'draft'}),at),false);
+ctx.renderRelated(event('current','2099-10-12'),[
+ event('current','2099-10-12'),event('past','2020-01-01'),event('next','2099-10-13'),event('next','2099-10-14'),event('other','2099-10-13',{category:'kids'})
+]);
+const related=nodes.get('relatedGrid').innerHTML;
+assert.equal((related.match(/class="relatedCard"/g)||[]).length,1,'future recommendations render and deduplicate');
+assert(!related.includes('past')&&!related.includes('other'));
+assert.equal(ctx.meaningfulEventDescription({description:"מחפשים מה לעשות? הזמינו כרטיסים לכל האירועים באתר טיקצ'אק LIVE"}), '');
+assert.equal(ctx.meaningfulEventDescription({long_description:'לפי אתר המקור יש לבדוק מידע לפני פרסום',description:'מופע במונארט אשדוד ביום שני בשעה 11:00.'}),'מופע במונארט אשדוד ביום שני בשעה 11:00.');
+assert.equal(ctx.purchaseAction(event('phone','2099-10-12',{contact_phone:'08-8545170'})).href,'tel:088545170');
+assert.equal(ctx.purchaseAction(event('old','2020-01-01',{purchase_url:'https://example.com/ticket'})),null);
+assert.equal(ctx.purchaseAction(event('aggregator','2099-10-12',{purchase_url:'https://live.tickchak.co.il/ashdod',contact_phone:'123'})).kind,'phone');
+const app=fs.readFileSync('events-preview/ashdod/pilot/app.js','utf8');
+const from=app.indexOf('function nextWeekendRange(){'),to=app.indexOf('\nfunction formatTime',from);
+ctx.today=()=>new Date('2026-10-17T12:00:00');
+ctx.daysFrom=(base,n)=>{const d=new Date(base);d.setDate(d.getDate()+n);return d};
+vm.runInContext(app.slice(from,to),ctx);
+assert.equal(ctx.nextWeekendRange()[1].getDate(),17,'Saturday stays in the current weekend');
+console.log('PASS: upcoming dates, Israel clock, visible recommendations, duplicates, editorial safety, contact fallback, past CTA and Saturday filter');

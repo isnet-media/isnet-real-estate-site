@@ -64,12 +64,14 @@ jobs:
         run: |
           python scripts/sync_event_city_views.py
           python scripts/sync_event_city_views.py --check
-          for script in events-preview/ashdod/*.js events-preview/rishon-lezion/*.js; do
+          for script in events-preview/ashdod/*.js events-preview/ashdod/pilot/*.js events-preview/rishon-lezion/*.js; do
             node --check "$script"
           done
 
       - name: Test compact event date previews
-        run: node scripts/test-event-date-chips.cjs
+        run: |
+          node scripts/test-event-date-chips.cjs
+          node scripts/test-ashdod-pilot.cjs
 
       - name: Verify organizer portals and institution links
         id: institution_audit
