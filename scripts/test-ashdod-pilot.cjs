@@ -54,3 +54,9 @@ assert.equal(familyIntent.terms.length,0,'conversational verb must not be requir
 assert(ctx.eventSemanticScore(event('סערה בדלי מים','2099-10-12',{category:'kids',short_pitch:'הצגת ילדים לגילאי 4–10'}),familyIntent)>0,'verified child event matches family intent');
 assert.equal(ctx.parseSearchIntent('אסף מור יוסף').terms.length,3,'performer names remain required search terms');
 console.log('PASS: conversational family search and performer-name search');
+
+assert.equal(ctx.eventSemanticScore(event('adult comedy','2099-10-12',{category:'standup',long_description:'סיפורים על ילדותו של האמן ועל חיי המשפחה.'}),familyIntent),null,'childhood biography is not a children activity');
+assert.equal(ctx.eventSemanticScore(event('senior festival','2099-10-12',{category:'festival',title:'פסטיבל ילד פלא - יעודי לגדולות מהחיים'}),familyIntent),null,'senior club event is not a family recommendation');
+assert.equal(ctx.eventSemanticScore(event('adult age limit','2099-10-12',{category:'theatre',short_pitch:'מופע לכל המשפחה',age_min:18}),familyIntent),null,'verified adult age limit takes precedence');
+assert(ctx.eventSemanticScore(event('family theatre','2099-10-12',{category:'theatre',short_pitch:'הצגה להורים ולילדים'}),familyIntent)>0,'family theatre remains discoverable');
+console.log('PASS: family search excludes adult shows, childhood biographies and senior-only events');

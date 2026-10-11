@@ -656,6 +656,16 @@ function eventSemanticScore(e,intent){
   if(intent.age!=null&&e.age_min!=null&&intent.age<e.age_min)return null;
   if(intent.age!=null&&e.age_max!=null&&intent.age>e.age_max)return null;
   const hay=eventSearchText(e),norm=hebrewSearchText(hay);
+  if(intent.concepts.some(c=>c.id==="family")){
+    const childAudience=(e.audiences||[]).some(a=>["kids","families"].includes(a));
+    if(e.age_min>=18||/(?:ייעודי|יעודי)\s+לגדולות מהחיים/.test(e.title||""))return null;
+    if(e.category==="standup"&&!childAudience)return null;
+    if(!childAudience&&(e.audiences||[]).some(a=>["adults","seniors"].includes(a)))return null;
+    const explicitFamily=e.category==="kids"||childAudience||
+      (e.age_max!=null&&e.age_max<=17)||
+      /לילדים|למשפחות|לכל המשפחה|הצגת ילדים|שעת סיפור|להורים ולילדים|הורה מלווה|לגילאי\s*\d/.test(hay);
+    if(!explicitFamily)return null;
+  }
   let score=0,matchedConcepts=0,matchedTerms=0;
   for(const concept of intent.concepts){
     let points=concept.cats[e.category]||0;
