@@ -440,7 +440,9 @@ function cinemaCard(movie){
        '<img src="'+image+'" alt="" loading="lazy">'+
        '<span class="cinemaPlay"><i>▶</i><b>צפו בטריילר</b></span>'+
      '</button>'
-    :'<div class="cinemaPoster cinemaPoster--fallback"><span class="cinemaFallbackIcon">🎬</span><b>'+escapeHtml(movie.title)+'</b><span>לשעות ופרטים בעמוד הסרט</span></div>';
+    :movie.trailer_page_url
+      ?'<a class="cinemaPoster cinemaPoster--fallback cinemaExternalTrailer" href="'+escapeHtml(movie.trailer_page_url)+'" target="_blank" rel="noopener noreferrer" aria-label="עמוד הטריילר הרשמי של '+escapeHtml(movie.title)+'"><span class="cinemaFallbackIcon">▶</span><b>'+escapeHtml(movie.title)+'</b><span>צפו בטריילר באתר הקולנוע ↗</span></a>'
+      :'<div class="cinemaPoster cinemaPoster--fallback"><span class="cinemaFallbackIcon">🎬</span><b>'+escapeHtml(movie.title)+'</b><span>לשעות ופרטים בעמוד הסרט</span></div>';
   return '<article class="cinemaCard" data-movie="'+escapeHtml(movie.id)+'">'+
     media+
     '<div class="cinemaCard__body">'+
