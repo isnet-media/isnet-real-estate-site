@@ -903,7 +903,7 @@ function renderCategories(){
   // Legacy events can still use workshop; preserve access until feed migration.
   if(state.events.some(e=>e.category==="workshop")&&!cats.includes("workshop"))cats.push("workshop");
   const counts={};groupEvents(state.events).forEach(e=>counts[e.category]=(counts[e.category]||0)+1);
-  if(state.cinema.length)counts.cinema=state.cinema.length;
+  counts.cinema=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
   const visibleCats=cats.filter(c=>(counts[c]||0)>0);
   $("categoryGrid").innerHTML=visibleCats.map(c=>{
     const isCinema=c==="cinema";

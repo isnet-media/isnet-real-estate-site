@@ -1,6 +1,6 @@
 # Daily Ashdod cinema refresh
 
-`Refresh verified Ashdod cinema` runs at 05:15 UTC every day (08:15 in Israeli summer time, 07:15 in winter) and can also be run manually. It updates `events-preview/ashdod/data/cinema.json` and `cinema-refresh-status.json`, commits only those two files, and triggers `Publish priceboard` through `workflow_run`. The publishing workflow checks out the current `main`, including the collector's bot commit. A non-fast-forward push fails instead of overwriting another editor.
+`Refresh verified Ashdod cinema` runs at 05:15 UTC every day (08:15 in Israeli summer time, 07:15 in winter) and can also be run manually. It updates `events-preview/ashdod/data/cinema.json` and `cinema-refresh-status.json`, commits only those two files, and triggers `Publish priceboard` through `workflow_run`. The publishing workflow checks out the current `main`, including the collector's bot commit. Unrelated concurrent commits are integrated with a normal rebase; conflicting cinema edits stop publication instead of overwriting another editor.
 
 ## Official sources and city boundaries
 
