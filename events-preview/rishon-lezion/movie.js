@@ -32,7 +32,7 @@ function renderHero(movie){
   ].filter(Boolean).map(x=>'<span>'+escapeHtml(x)+'</span>').join("");
   if(movie.trailer_youtube_id){
     const img="https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg";
-    $("heroMedia").innerHTML='<button id="heroMediaTrailer" class="heroPoster" type="button"><img src="'+img+'" alt=""><span><i>▶</i><b>צפו בטריילר</b></span></button>';
+    $("heroMedia").innerHTML='<button id="heroMediaTrailer" class="heroPoster" type="button"><img src="'+img+'" alt="" onerror="this.remove()"><span><i>▶</i><b>צפו בטריילר</b></span></button>';
     $("heroTrailer").hidden=false;
     $("heroTrailer").onclick=()=>document.getElementById("trailerSection")?.scrollIntoView({behavior:"smooth",block:"start"});
     $("heroMediaTrailer").onclick=()=>document.getElementById("trailerSection")?.scrollIntoView({behavior:"smooth",block:"start"});
@@ -88,7 +88,7 @@ function renderRelated(movie,all){
   $("relatedGrid").innerHTML=related.slice(0,4).map(m=>{
     const img=m.trailer_youtube_id?"https://i.ytimg.com/vi/"+encodeURIComponent(m.trailer_youtube_id)+"/hqdefault.jpg":"";
     return '<a class="relatedCard" href="'+movieUrl(m.id)+'">'+
-      '<div class="relatedCard__media">'+(img?'<img src="'+img+'" alt="">':'<div class="relatedFallback">🎬</div>')+'</div>'+
+      '<div class="relatedCard__media">'+(img?'<img src="'+img+'" alt="" onerror="this.remove()">':'<div class="relatedFallback">🎬</div>')+'</div>'+
       '<div class="relatedCard__body">'+(m.is_family?'<span class="miniBadge">ילדים ומשפחה</span>':'')+'<h3>'+escapeHtml(m.title)+'</h3><span>'+escapeHtml(m.venues.map(v=>v.id==="cinema-city"?"סינמה סיטי":"פלאנט").join(" · "))+'</span></div>'+
     '</a>';
   }).join("");
