@@ -990,7 +990,7 @@ function renderResults(){
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
     const keys=[...buckets.keys()].sort((a,b)=>{
       const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
-      return (ai<0?999:ai)-(bi<0?999);
+      return (ai<0?999:ai)-(bi<0?999:bi);
     });
     $("eventsGrid").innerHTML=keys.map((key,index)=>{
       const items=buckets.get(key);
