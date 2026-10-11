@@ -41,7 +41,7 @@ function card(m){
   '</article>';
 }
 function render(){
-  const arr=state.movies.filter(matches).sort((a,b)=>a.title.localeCompare(b.title,"he"));
+  const arr=state.movies.filter(m=>m.venues.some(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=todayIso()&&Array.isArray(times)&&times.length))).filter(matches).sort((a,b)=>a.title.localeCompare(b.title,"he"));
   $("cinemaGrid").innerHTML=arr.map(card).join("");
   $("emptyState").hidden=arr.length>0;
   $("resultsMeta").textContent=arr.length+" סרטים";
