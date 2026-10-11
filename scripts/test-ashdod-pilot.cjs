@@ -45,3 +45,12 @@ console.log('PASS: board merges CMS corrections before filtering dates');
 ctx.renderRelated(event('current','2099-10-12',{category:'standup'}),[event('n1','2099-10-13',{title:'נועה מנור',category:'standup'}),event('n2','2099-10-13',{title:'נועה מנור במופע סטנדאפ',category:'standup'})]);
 assert.equal((nodes.get('relatedGrid').innerHTML.match(/class="relatedCard"/g)||[]).length,1,'generic standup title suffix does not duplicate recommendations');
 console.log('PASS: semantic title duplicates in recommendations');
+
+const searchStart=app.indexOf('const SEARCH_CONCEPTS='),searchEnd=app.indexOf('function preciseSubcategoryIntent(',searchStart);
+vm.runInContext(app.slice(searchStart,searchEnd),ctx);
+ctx.iso=()=> '2026-10-11';
+const familyIntent=ctx.parseSearchIntent('לאן יוצאים עם הילדים');
+assert.equal(familyIntent.terms.length,0,'conversational verb must not be required in event text');
+assert(ctx.eventSemanticScore(event('סערה בדלי מים','2099-10-12',{category:'kids',short_pitch:'הצגת ילדים לגילאי 4–10'}),familyIntent)>0,'verified child event matches family intent');
+assert.equal(ctx.parseSearchIntent('אסף מור יוסף').terms.length,3,'performer names remain required search terms');
+console.log('PASS: conversational family search and performer-name search');

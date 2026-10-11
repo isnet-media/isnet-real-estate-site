@@ -628,7 +628,7 @@ function parseSearchIntent(q){
   const age=ageMatch?Number(ageMatch[1]):null;
   // Remove conversational instructions, prepositions and recognized concepts.
   // Only specific names/venues remain as required keyword signals.
-  const conversational=new Set(["לאן","לאיפה","לאיזה","לאיזו","היכן","איפה","כיצד","איך","אפשרי","רעיונות","רעיון","המלצות","המלצה","הצעות","תציע","תציעו","להציע","תן","תני","תנו","תרצה","תמצאו","לצאת","לצאתם","ללכת","לבלות","בוא","בואו","כדאי","מומלץ","מומלצת","כייפי","כיפי","הילדים","הילדות","הקטנים","הקטנות","המשפחה","משפחתית","לילדים","למשפחה","והילדים","באשדוד","באזור","בסביבה","בסביבה שלי","הלילה","בערב","לערב","לשבת","בשבת","בסופש","במחר","להיום","השבת","בחינם","זול","זולה","מחיר","תקציב","מקסימום","בילוי","פעילות","פעילויות","אירוע","אירועים","דברים","אטרקציה","אטרקציות","מקומות","מקום","הצגה","הצגות","הופעה","הופעות","מופע","מופעים"]);
+  const conversational=new Set(["לאן","יוצאים","יוצאות","יוצא","יוצאת","לאיפה","לאיזה","לאיזו","היכן","איפה","כיצד","איך","אפשרי","רעיונות","רעיון","המלצות","המלצה","הצעות","תציע","תציעו","להציע","תן","תני","תנו","תרצה","תמצאו","לצאת","לצאתם","ללכת","לבלות","בוא","בואו","כדאי","מומלץ","מומלצת","כייפי","כיפי","הילדים","הילדות","הקטנים","הקטנות","המשפחה","משפחתית","לילדים","למשפחה","והילדים","באשדוד","באזור","בסביבה","בסביבה שלי","הלילה","בערב","לערב","לשבת","בשבת","בסופש","במחר","להיום","השבת","בחינם","זול","זולה","מחיר","תקציב","מקסימום","בילוי","פעילות","פעילויות","אירוע","אירועים","דברים","אטרקציה","אטרקציות","מקומות","מקום","הצגה","הצגות","הופעה","הופעות","מופע","מופעים"]);
   const remaining=s.split(/\s+/).filter(w=>
     w&&!SEARCH_STOPWORDS.has(w)&&!conversational.has(w)&&
     !concepts.some(c=>textIncludesConcept(w,c.words))&&
@@ -637,7 +637,7 @@ function parseSearchIntent(q){
   return {concepts,date,free,maxPrice,age,terms:remaining,query:s};
 }
 function eventSearchText(e){
-  return [e.title,e.description,e.venue,e.organizer,e.home_team,e.away_team,e.sport_branch,catLabels[e.category],...(e.audiences||[]),...(e.sources||[]).map(s=>s.name)].filter(Boolean).join(" ");
+  return [e.title,e.description,e.short_pitch,e.long_description,e.venue,e.organizer,e.home_team,e.away_team,e.sport_branch,catLabels[e.category],...(e.audiences||[]),...(e.sources||[]).map(s=>s.name)].filter(Boolean).join(" ");
 }
 function searchDateMatches(e,period){
   if(!period)return true;
