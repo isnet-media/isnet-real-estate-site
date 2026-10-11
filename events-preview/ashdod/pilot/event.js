@@ -122,7 +122,7 @@ function groupPurchaseAction(occ){
   return null;
 }
 function trustedImage(e){
-  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true);
+  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.image_represents_event!==false&&!/microsoft_oauth_logo|no_pic\.png|favicon/i.test(e.image_url));
 }
 function bestImageEvent(occ){
   return occ.find(e=>trustedImage(e)&&e.thumbnail_ready===true)
@@ -220,6 +220,7 @@ function safeEditorial(value){
 }
 function cleanEditorialText(value){
   let text=String(value||"");
+  text=text.replace(/[^.!?\n]*(?:לא פורסם בעמוד המקור|לא צוין במקור|לא ניתן לאמת|לפני פרסום|נדרש לאמת)[^.!?\n]*[.!?]?/g,"");
   text=text.replace(/\\([()_:/])/g,"$1");
   text=text.replace(/\(\s*\[([^\]]+)\]\(\s*https?:\/\/[^)]+\)\s*\)/gi,"");
   text=text.replace(/\[([^\]]+)\]\(\s*https?:\/\/[^)]+\)/gi,"$1");
@@ -321,7 +322,7 @@ function renderHero(e,occ,imageEvent){
 
   if(trustedImage(imageEvent)){
     const src=imageEvent.thumbnail_ready&&imageEvent.thumbnail_url?imageEvent.thumbnail_url:imageEvent.image_url;
-    $("heroImage").innerHTML='<img src="'+escapeHtml(src)+'" alt="'+escapeHtml(eventDisplayTitle(e))+'">';
+    $("heroImage").innerHTML='<img data-event-image-id="'+escapeHtml(e.event_id)+'" src="'+escapeHtml(src)+'" alt="'+escapeHtml(eventDisplayTitle(e))+'">';
   }else{
     if(e.category==="lecture"){
       const key=String(e.event_id||e.title||"");
@@ -404,7 +405,7 @@ function renderSchedule(occ){
       '<div class="scheduleCopy"><b>'+escapeHtml(fmtFull.format(d))+'</b>'+
         (e.variant_label?'<strong class="scheduleVariant">'+escapeHtml(e.variant_label)+'</strong>':"")+
         '<span>'+escapeHtml(formatTime(e.start_time))+' · '+escapeHtml(e.venue||"המיקום יפורסם")+'</span>'+
-        (own?'<a class="scheduleBuy" href="'+escapeHtml(own.href)+'" '+(own.kind==="url"?'target="_blank" rel="noopener"':'')+'>'+(e.ticket_status==="sold_out"?"אזלו הכרטיסים · לפרטי המקור ←":"לפרטים ולהזמנה ←")+'</a>':"")+
+        (own?'<a class="scheduleBuy" href="'+escapeHtml(own.href)+'" '+(own.kind==="url"?'target="_blank" rel="noopener"':'')+'>'+(e.ticket_status==="sold_out"?"אזלו הכרטיסים · לפרטי המקור ←":escapeHtml(own.label)+" ←")+'</a>':"")+
       '</div>'+
     '</div>';
   }).join("");

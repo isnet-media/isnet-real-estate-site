@@ -235,7 +235,7 @@ function toggleFavorite(id){
 }
 
 function hasTrustedSourceImage(e){
-  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true);
+  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.image_represents_event!==false&&!/microsoft_oauth_logo|no_pic\.png|favicon/i.test(e.image_url));
 }
 function fallbackImage(e){
   return state.fallbacks?.[e.category]?.image||state.fallbacks?.other?.image||"";

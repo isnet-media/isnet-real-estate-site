@@ -25,6 +25,8 @@ assert.equal(ctx.meaningfulEventDescription({long_description:'לפי אתר ה�
 assert.equal(ctx.purchaseAction(event('phone','2099-10-12',{contact_phone:'08-8545170'})).href,'tel:088545170');
 assert.equal(ctx.purchaseAction(event('old','2020-01-01',{purchase_url:'https://example.com/ticket'})),null);
 assert.equal(ctx.purchaseAction(event('aggregator','2099-10-12',{purchase_url:'https://live.tickchak.co.il/ashdod',contact_phone:'123'})).kind,'phone');
+assert.equal(ctx.trustedImage({image_url:'https://static.smarticket.co.il/assets/microsoft_oauth_logo.png',image_verified:true,image_publishable:true}),false);
+assert.equal(ctx.trustedImage({image_url:'category.webp',image_verified:true,image_publishable:true,image_represents_event:false}),false);
 const app=fs.readFileSync('events-preview/ashdod/pilot/app.js','utf8');
 const from=app.indexOf('function nextWeekendRange(){'),to=app.indexOf('\nfunction formatTime',from);
 ctx.today=()=>new Date('2026-10-17T12:00:00');
