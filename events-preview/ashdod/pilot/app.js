@@ -1030,7 +1030,7 @@ function renderResults(){
     const preferred=["music","theatre","standup","kids","cinema","lecture","workshop","sport","exhibition","festival","conference","community","seniors","tour","food"];
     const buckets=new Map();
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
-    const keys=[...buckets.keys()].sort((a,b)=>{
+    const keys=[...buckets.keys()].filter(key=>buckets.get(key).length>=4).sort((a,b)=>{
       const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
       return (ai<0?999:ai)-(bi<0?999:bi);
     });
@@ -1111,6 +1111,8 @@ function bindDynamic(){
   document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{
     window.ashdodAnalytics?.send("select_category",{category:b.dataset.cat,category_name:catLabels[b.dataset.cat] || b.dataset.cat,selection_type:state.category===b.dataset.cat ? "clear" : "select"});
     if(b.dataset.cat==="cinema"){
+      location.href="cinema.html";
+      return;
       state.category=null;
       state.cinemaOpen=true;
       render();
