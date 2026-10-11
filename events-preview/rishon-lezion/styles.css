@@ -1651,3 +1651,9 @@ main{position:relative;z-index:3}
 .categoryInlineSubtypes{display:flex;flex-wrap:wrap;gap:6px;padding:8px;border:1px solid #dbe5f1;border-radius:14px;background:#fff}
 .categoryInlineSubtypes button{border:1px solid #d1deed;background:#f7faff;color:#173f6e;font-size:12px;font-weight:750;padding:7px 10px;border-radius:999px;cursor:pointer}
 .categoryInlineSubtypes button.is-active{background:#2166ce;color:#fff;border-color:#2166ce}
+
+/* Official portrait posters retain the full artwork in the existing card frame. */
+.cinemaPoster img{object-fit:contain;background:#101827}
+a.cinemaPoster--fallback{cursor:pointer;padding:0}
+a.cinemaPoster--fallback img{position:absolute;inset:0}
+a.cinemaPoster--fallback>span:last-child{position:absolute;z-index:2;bottom:10px;left:8px;right:8px;color:#fff;background:rgba(3,10,20,.8);padding:7px;border-radius:8px}
