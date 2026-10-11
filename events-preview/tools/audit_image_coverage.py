@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-root = Path(__file__).resolve().parents[3]
+root = Path(__file__).resolve().parents[2]
 taxonomy_path = root / "events-preview/admin/data/taxonomy.json"
 images = root / "events-preview/shared/images/defaults"
 taxonomy = json.loads(taxonomy_path.read_text(encoding="utf-8"))
