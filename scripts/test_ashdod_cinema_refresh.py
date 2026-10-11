@@ -57,11 +57,25 @@ class RefreshTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Non-Ashdod'):
                 intake.collect_city()
 
+    def test_verified_official_poster_is_published_with_provenance(self):
+        row = self.row()
+        row['poster_verified'] = {'url': 'https://hotcinema.co.il/images/film.jpg',
+            'source_url': row['source_url'], 'verified_at': intake.STAMP}
+        updated, report = intake.merge(self.original, {'cinema-city': {'status': 'ok', 'movies': [row]}})
+        self.assertEqual(updated['movies'][0]['poster_url'], row['poster_verified']['url'])
+        self.assertEqual(report['counts']['official_poster'], 1)
+
+    def test_failed_poster_refresh_keeps_verified_image(self):
+        self.original['movies'][0]['poster_url'] = 'https://hotcinema.co.il/images/film.jpg'
+        row = self.row(); row['poster_error'] = 'Network timeout'
+        updated, _ = intake.merge(self.original, {'cinema-city': {'status': 'ok', 'movies': [row]}})
+        self.assertEqual(updated['movies'][0]['poster_url'], self.original['movies'][0]['poster_url'])
+
     def test_poster_candidate_does_not_become_published_image(self):
         row = self.row(); row['poster_source_url'] = 'https://example.com/poster.jpg'
         updated, report = intake.merge(self.original, {'cinema-city': {'status': 'ok', 'movies': [row]}})
         self.assertNotIn('poster_url', updated['movies'][0])
-        self.assertEqual(report['counts']['authorized_poster'], 0)
+        self.assertEqual(report['counts']['official_poster'], 0)
 
 
 if __name__ == '__main__':

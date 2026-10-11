@@ -426,7 +426,7 @@ function cinemaScheduleInfo(venue){
 function cinemaCard(movie){
   const visibleVenues=movie.venues.filter(v=>state.cinemaVenue==="all"||v.id===state.cinemaVenue);
   const hasTrailer=Boolean(movie.trailer_youtube_id);
-  const image=hasTrailer?"https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg":"";
+  const image=movie.poster_url||(hasTrailer?"https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg":"");
   const venues=visibleVenues.map(v=>{
     const info=cinemaScheduleInfo(v);
     const times=info.times.length?info.times.slice(0,6).map(t=>'<span class="cinemaTime">'+escapeHtml(t)+'</span>').join(""):'<span class="cinemaNoTimes">בדקו שעות עדכניות</span>';
@@ -438,12 +438,12 @@ function cinemaCard(movie){
   }).join("");
   const media=hasTrailer
     ?'<button class="cinemaPoster" data-trailer="'+escapeHtml(movie.id)+'" aria-label="צפו בטריילר של '+escapeHtml(movie.title)+'">'+
-       '<img src="'+image+'" alt="" loading="lazy">'+
+       '<img src="'+escapeHtml(image)+'" alt="'+escapeHtml(movie.title)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">'+
        '<span class="cinemaPlay"><i>▶</i><b>צפו בטריילר</b></span>'+
      '</button>'
     :movie.trailer_page_url
       ?'<a class="cinemaPoster cinemaPoster--fallback cinemaExternalTrailer" href="'+escapeHtml(movie.trailer_page_url)+'" target="_blank" rel="noopener noreferrer" aria-label="עמוד הטריילר הרשמי של '+escapeHtml(movie.title)+'"><span class="cinemaFallbackIcon">▶</span><b>'+escapeHtml(movie.title)+'</b><span>צפו בטריילר באתר הקולנוע ↗</span></a>'
-      :'<div class="cinemaPoster cinemaPoster--fallback"><span class="cinemaFallbackIcon">🎬</span><b>'+escapeHtml(movie.title)+'</b><span>לשעות ופרטים בעמוד הסרט</span></div>';
+      :'<a class="cinemaPoster cinemaPoster--fallback" href="movie.html?id='+encodeURIComponent(movie.id)+'">'+(image?'<img src="'+escapeHtml(image)+'" alt="'+escapeHtml(movie.title)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">':'<span class="cinemaFallbackIcon">🎬</span>')+'<span>טריילר רשמי טרם אומת · לפרטים ושעות ←</span></a>';
   return '<article class="cinemaCard" data-movie="'+escapeHtml(movie.id)+'">'+
     media+
     '<div class="cinemaCard__body">'+

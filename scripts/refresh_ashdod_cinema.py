@@ -3,7 +3,7 @@
 
 Public Cinema City CMS queries use the same anonymous visitor instance as its
 website. No credentials, browser challenge solving, or private endpoints.
-Poster URLs are editorial candidates only unless reuse permission is recorded.
+Official promotional poster URLs are validated and referenced remotely; no image is copied.
 """
 import argparse
 import copy
@@ -71,6 +71,17 @@ def youtube_id(url):
     return match[1] if match else None
 
 
+def publisher_kind(author):
+    # Reviewed distributor, studio and creator identities; unknown channels are not official by default.
+    official = {'unitedkingfilms', 'Tulip Entertainment', 'Amazon MGM Studios', 'סרטי נחשון',
+        'ARIA אופרה בקולנוע', 'Lev Cinema', 'Red Cape רד קייפ', 'New Cinema - קולנוע חדש',
+        'Shoval Film Production', 'Filmhouse. Israel', 'Disney Israel', 'Transfax Film Productions',
+        'עמית אולמן - Amit Ulman', 'Intramovies', 'MarvelIsrael', 'סולטיז', 'Sony Pictures Entertainment',
+        ' КиноРай- KinoRai- кино в Израиле на русском языке'}
+    portals = {'סרט סרט - חדשות הקולנוע', 'אתר סרט', 'Rotten Tomatoes Classic Trailers'}
+    return 'official_publisher' if author in official else 'cinema_portal' if author in portals else 'unverified_publisher'
+
+
 def verify_trailer(row):
     override = OVERRIDES.get(base_title(row['title']))
     if override:
@@ -88,10 +99,28 @@ def verify_trailer(row):
             raise ValueError('Official publisher identity changed')
         row['trailer_verified'] = {'youtube_id': vid, 'title': data.get('title'),
                                    'author': data.get('author_name'),
+                                   'publisher_kind': publisher_kind(data.get('author_name')),
                                    'author_url': data.get('author_url'),
                                    'verified_at': STAMP, 'method': 'official cinema link + YouTube oEmbed'}
     except Exception as exc:
         row['trailer_error'] = str(exc)[:180]
+    return row
+
+
+def verify_poster(row):
+    url = row.get('poster_source_url')
+    if not url:
+        return row
+    try:
+        with requests.get(url, timeout=20, stream=True) as response:
+            response.raise_for_status()
+            content_type = response.headers.get('Content-Type', '')
+            if not content_type.startswith('image/'):
+                raise ValueError('Official poster URL did not return an image')
+        row['poster_verified'] = {'url': url, 'source_url': row['source_url'],
+            'verified_at': STAMP, 'content_type': content_type, 'delivery': 'remote_official_source'}
+    except Exception as exc:
+        row['poster_error'] = str(exc)[:180]
     return row
 
 
@@ -296,6 +325,11 @@ def merge(existing, sources):
             if row.get('poster_source_url'):
                 movie.setdefault('poster_candidates', {})[venue_id] = {'url': row['poster_source_url'],
                     'source_url': row['source_url'], 'rights_status': 'reuse_permission_not_verified'}
+            if row.get('poster_verified') and (venue_id == 'cinema-city' or not movie.get('poster_url')):
+                movie['poster_url'] = row['poster_verified']['url']
+                movie['poster_verification'] = row['poster_verified']
+            if row.get('trailer_error'):
+                movie['trailer_review_note'] = row['trailer_error']
             trailer = row.get('trailer_verified')
             if trailer and (row.get('trailer_source_override') or not movie.get('trailer_youtube_id') or movie.get('trailer_youtube_id') == trailer['youtube_id']):
                 movie['trailer_youtube_id'] = trailer['youtube_id']
@@ -318,24 +352,27 @@ def merge(existing, sources):
             venue['sessions'].extend(row['sessions'])
     existing['movies'] = movies
     existing['updated_at'] = STAMP
+    existing['source_name'] = 'סינמה סיטי ו־HOT Cinema — הקרנות מאומתות באשדוד'
+    existing['source_url'] = CITY + '/city/ashdod'
     existing['sources'] = [{'id': key, 'name': VENUES[key],
         'url': CITY + '/city/ashdod' if key == 'cinema-city' else HOT + '/theater/5',
         'status': result['status'], 'checked_at': STAMP} for key,result in sources.items()]
     existing['refresh_policy'] = {'timezone': 'Asia/Jerusalem', 'schedule_utc': '15 5 * * *',
         'failure_behavior': 'retain previously verified metadata and schedules; expired dates are hidden',
-        'poster_policy': 'do not publish poster candidates until explicit reuse permission is recorded'}
+        'poster_policy': 'reference verified official promotional image URLs remotely; retain source attribution'}
     active = [m for m in movies if any(any(d >= TODAY and t for d, t in v.get('schedule', {}).items()) for v in m['venues'])]
     existing['stats'] = {'movie_cards': len(active), 'family_movie_cards': sum(bool(m.get('is_family')) for m in active),
         'cinema_city_movies': sum(any(v['id'] == 'cinema-city' and any(d >= TODAY and t for d,t in v.get('schedule',{}).items()) for v in m['venues']) for m in active),
         'hot_cinema_movies': sum(any(v['id'] == 'hot-cinema' and any(d >= TODAY and t for d,t in v.get('schedule',{}).items()) for v in m['venues']) for m in active)}
     report = {'checked_at': STAMP, 'city': 'אשדוד', 'sources': {k: {f:v for f,v in r.items() if f != 'movies'} for k,r in sources.items()},
         'counts': {'active_movies': len(active), 'synopsis': sum(bool(m.get('synopsis')) for m in active),
-            'authorized_poster': sum(bool(m.get('poster_url') and m.get('poster_reuse_permission')) for m in active),
+            'official_poster': sum(bool(m.get('poster_url') and m.get('poster_verification')) for m in active),
             'trailer': sum(bool(m.get('trailer_youtube_id')) for m in active),
+            'official_publisher_trailer': sum(bool(m.get('trailer_youtube_id') and m.get('trailer_verification',{}).get('publisher_kind') == 'official_publisher') for m in active),
             'verified_showtimes': sum(any(v.get('schedule_verified_at') and any(d >= TODAY and t for d,t in v.get('schedule',{}).items()) for v in m['venues']) for m in active),
             'runtime': sum(bool(m.get('runtime_minutes')) for m in active), 'age_rating': sum(bool(m.get('age_rating')) for m in active)},
-        'missing': [{'id': m['id'], 'title': m['title'], 'fields': [f for f in ('synopsis','runtime_minutes','age_rating','trailer_youtube_id') if not m.get(f)]} for m in active if any(not m.get(f) for f in ('synopsis','runtime_minutes','age_rating','trailer_youtube_id'))],
-        'poster_note': 'Official poster candidates collected; reuse permission not established, so candidates are not published.'}
+        'missing': [{'id': m['id'], 'title': m['title'], 'fields': [f for f in ('synopsis','genres','runtime_minutes','poster_url','trailer_youtube_id') if not m.get(f)]} for m in active if any(not m.get(f) for f in ('synopsis','genres','runtime_minutes','poster_url','trailer_youtube_id'))],
+        'poster_note': 'Official promotional images referenced remotely after image URL validation; no rights ownership is asserted.'}
     return existing, report
 
 
@@ -372,6 +409,7 @@ def main():
                     row['trailer_url'] = None
             with ThreadPoolExecutor(max_workers=3) as pool:
                 rows = list(pool.map(verify_trailer, rows))
+                rows = list(pool.map(verify_poster, rows))
             sources[key] = {'status': 'ok', 'movies': rows, 'movie_variants': len(rows),
                 'excluded_non_films': excluded,
                 'sessions': sum(len(r['sessions']) for r in rows),

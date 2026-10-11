@@ -1,13 +1,51 @@
 {
   "city": "אשדוד",
-  "publication_intent": "publish_existing_verified_schedule",
-  "schedule_date": "2026-10-11",
-  "cinema_city": {
-    "titles_with_showtimes": 22,
-    "showtime_entries": 47
+  "checked_at": "2026-10-11T17:17:51+03:00",
+  "counts": {
+    "active_movies": 63,
+    "synopsis": 63,
+    "trailer": 60,
+    "verified_showtimes": 63,
+    "runtime": 63,
+    "age_rating": 63,
+    "official_poster": 63,
+    "official_publisher_trailer": 56
   },
-  "hot_cinema": {
-    "verified_current_schedule": false
+  "sources": {
+    "cinema-city": {
+      "status": "ok",
+      "movie_variants": 57,
+      "excluded_non_films": [],
+      "sessions": 266,
+      "metadata_errors": [],
+      "trailer_errors": [
+        {
+          "title": "פנתר כפול",
+          "error": "Same video linked to unrelated movies; needs editorial verification"
+        },
+        {
+          "title": "לב זהב",
+          "error": "Same video linked to unrelated movies; needs editorial verification"
+        },
+        {
+          "title": "מים רבים",
+          "error": "Same video linked to unrelated movies; needs editorial verification"
+        }
+      ]
+    },
+    "hot-cinema": {
+      "status": "ok",
+      "movie_variants": 38,
+      "excluded_non_films": [
+        {
+          "title": "שבלול בצנצנת",
+          "reason": "Official description identifies a stage/storytelling event"
+        }
+      ],
+      "sessions": 115,
+      "metadata_errors": [],
+      "trailer_errors": []
+    }
   },
-  "notes": "Cinema titles and times originate from the existing curated cinema.json. Official theater intake is currently review-only; this file does not assert new theater-verified data."
+  "verification_scope": "Fresh official source intake; live-browser verification must be performed after deployment"
 }

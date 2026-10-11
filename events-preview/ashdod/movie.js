@@ -30,13 +30,13 @@ function renderHero(movie){
     (movie.genres||[]).join(" · ")
   ].filter(Boolean).map(x=>'<span>'+escapeHtml(x)+'</span>').join("");
   if(movie.trailer_youtube_id){
-    const img="https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg";
-    $("heroMedia").innerHTML='<button id="heroMediaTrailer" class="heroPoster" type="button"><img src="'+img+'" alt="" onerror="this.remove()"><span><i>▶</i><b>צפו בטריילר</b></span></button>';
+    const img=movie.poster_url||"https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg";
+    $("heroMedia").innerHTML='<button id="heroMediaTrailer" class="heroPoster" type="button"><img src="'+escapeHtml(img)+'" alt="'+escapeHtml(movie.title)+'" referrerpolicy="no-referrer" onerror="this.remove()"><span><i>▶</i><b>צפו בטריילר</b></span></button>';
     $("heroTrailer").hidden=false;
     $("heroTrailer").onclick=()=>document.getElementById("trailerSection")?.scrollIntoView({behavior:"smooth",block:"start"});
     $("heroMediaTrailer").onclick=()=>document.getElementById("trailerSection")?.scrollIntoView({behavior:"smooth",block:"start"});
   }else{
-    $("heroMedia").innerHTML='<div class="heroFallback"><span>🎬</span><b>'+escapeHtml(movie.title)+'</b></div>';
+    $("heroMedia").innerHTML=movie.poster_url?'<img class="officialPoster" src="'+escapeHtml(movie.poster_url)+'" alt="כרזת הסרט '+escapeHtml(movie.title)+'" referrerpolicy="no-referrer" onerror="this.remove()">':'<div class="heroFallback"><span>🎬</span><b>'+escapeHtml(movie.title)+'</b></div>';
     $("heroTrailer").hidden=true;
   }
 }
@@ -63,8 +63,10 @@ function renderSchedules(movie){
   }).join("");
 }
 function renderTrailer(movie){
-  if(!movie.trailer_youtube_id){$("trailerSection").hidden=true;return}
+  if(!movie.trailer_youtube_id){$("trailerSection").hidden=false;$("youtubeFrame").parentElement.hidden=true;$("trailerAvailability").textContent="טריילר רשמי לסרט זה טרם אומת. נציג אותו כשיימצא מקור מתאים.";$("trailerExternal").hidden=true;return}
   $("trailerSection").hidden=false;
+  $("trailerAvailability").textContent=movie.trailer_verification?.publisher_kind==="cinema_portal"?"קדימון המקושר מאתר בית הקולנוע; פורסם בערוץ קולנוע.":"קדימון מערוץ המפיץ או היוצר.";
+  $("trailerExternal").href="https://www.youtube.com/watch?v="+encodeURIComponent(movie.trailer_youtube_id);
   $("youtubeFrame").src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(movie.trailer_youtube_id)+"?rel=0";
   $("youtubeFrame").title="טריילר - "+movie.title;
 }
@@ -85,9 +87,9 @@ function renderRelated(movie,all){
     return af-bf||a.title.localeCompare(b.title,"he");
   });
   $("relatedGrid").innerHTML=related.slice(0,4).map(m=>{
-    const img=m.trailer_youtube_id?"https://i.ytimg.com/vi/"+encodeURIComponent(m.trailer_youtube_id)+"/hqdefault.jpg":"";
+    const img=m.poster_url||(m.trailer_youtube_id?"https://i.ytimg.com/vi/"+encodeURIComponent(m.trailer_youtube_id)+"/hqdefault.jpg":"");
     return '<a class="relatedCard" href="'+movieUrl(m.id)+'">'+
-      '<div class="relatedCard__media">'+(img?'<img src="'+img+'" alt="" onerror="this.remove()">':'<div class="relatedFallback">🎬</div>')+'</div>'+
+      '<div class="relatedCard__media">'+(img?'<img src="'+escapeHtml(img)+'" alt="" onerror="this.remove()">':'<div class="relatedFallback">🎬</div>')+'</div>'+
       '<div class="relatedCard__body">'+(m.is_family?'<span class="miniBadge">ילדים ומשפחה</span>':'')+'<h3>'+escapeHtml(m.title)+'</h3><span>'+escapeHtml(m.venues.map(v=>v.id==="cinema-city"?"סינמה סיטי":"HOT Cinema").join(" · "))+'</span></div>'+
     '</a>';
   }).join("");

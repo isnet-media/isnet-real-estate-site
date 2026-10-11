@@ -64,7 +64,7 @@ jobs:
                   out.write(f"- {venue}: {source['status']}; {source.get('sessions',0)} verified sessions\n")
                   if source['status'] != 'ok': print(f"::warning::{venue}: {source.get('error','source failed')}; existing data preserved")
               out.write('\nCounts: '+json.dumps(r.get('counts',{}),ensure_ascii=False)+'\n')
-              out.write('\nMissing details: '+str(len(r.get('missing',[])))+' films. Poster candidates require reuse permission.\n')
+              out.write('\nMissing details: '+str(len(r.get('missing',[])))+' films. Official poster URLs are checked before remote display.\n')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
