@@ -74,3 +74,33 @@
 /* Align heading-level arrows closer to category tabs and event cards. */
 @media(min-width:651px){.isnetCategoryArrows{position:relative;transform:translateY(38px);z-index:3}}
 @media(max-width:650px){.isnetCategoryArrows{position:relative;transform:translateY(10px);z-index:3}}
+
+
+/* Mobile/desktop usability audit: October 11 2026 */
+.isnetCategorySection{overflow:visible!important;min-width:0}
+.isnetRailWrap{overflow:hidden!important;width:100%;min-width:0}
+.isnetCategoryRail{scroll-padding-inline:8px!important;padding-inline:8px!important;scroll-snap-type:x mandatory}
+.isnetCategoryRail>.eventCard{scroll-snap-align:start!important;scroll-snap-stop:normal}
+.isnetCategoryRail .eventFooter .price,.isnetCategoryRail .price{color:#ffdf88!important;font-weight:900!important;text-shadow:0 1px 1px #0007}
+.isnetCategoryRail .eventInfo__row{font-size:15px!important;line-height:1.45!important}
+.isnetCategoryRail .eventFooter{margin-top:8px!important;padding-top:8px!important}
+.isnetCategoryRail .eventBody{padding:12px!important}
+.isnetCategoryRail .eventBody h3{margin-top:6px!important;margin-bottom:8px!important;min-height:0!important}
+.isnetCategoryRail .eventMedia,.isnetCategoryRail .mediaWrap{aspect-ratio:16/11!important;max-height:210px}
+.isnetCategoryRail .eventMedia img,.isnetCategoryRail .mediaWrap img{object-fit:cover}
+.isnetCategoryTabs button:disabled{display:none!important}
+.isnetRailOverlay{display:none!important}
+.isnetCategoryArrows{transform:none!important;z-index:2!important}
+.isnetCategoryTop{min-width:0!important}
+.isnetCategoryTop>div:first-child{min-width:0}
+.isnetCategoryTop h3{overflow-wrap:anywhere}
+@media(max-width:650px){
+ .isnetCategorySection{padding-inline:0!important}
+ .isnetCategoryRail{padding:3px 8px 14px!important;gap:10px!important}
+ .isnetCategoryRail>.eventCard{flex:0 0 min(80vw,302px)!important;width:min(80vw,302px)!important;max-width:min(80vw,302px)!important}
+ .isnetCategoryTop{gap:8px!important}
+ .isnetCategoryTop h3{font-size:21px!important;line-height:1.22!important}
+ .isnetCategoryArrows button{width:34px!important;height:34px!important}
+ .isnetCategoryRail .eventInfo__row{font-size:14px!important}
+ .isnetCategoryRail .eventMedia,.isnetCategoryRail .mediaWrap{max-height:185px}
+}
