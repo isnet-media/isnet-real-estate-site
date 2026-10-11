@@ -1114,14 +1114,30 @@ function closeModal(){$("eventModal").hidden=true;document.body.style.overflow="
 function resetAll(){state.quick="all";state.date=null;state.periodStart=null;state.periodEnd=null;state.periodType=null;state.calendarCollapsed=true;state.category=null;state.subcategory=null;state.cinemaOpen=false;state.sportTeam="all";state.sportBranch="all";state.query="";state.favoritesOnly=false;state.sort="date";resetCalendarToToday();$("searchInput").value="";$("sortSelect").value="date";render();renderCinema()}
 
 async function init(){
-  const [data,fallbacks,cinema,sports,taxonomy]=await Promise.all([
+  const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
     fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
     fetch("data/cinema.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({movies:[]})),
     fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
-    fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]}))
+    fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
+    window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod")||Promise.resolve([])
   ]);
   state.events=(data.events||[]).filter(e=>e.start_date>=iso(today())&&!isNonEventActivity(e));
+  // Reflect published CMS records on the event board as well as on detail pages.
+  const existingById=new Map(state.events.map((event,index)=>[event.event_id,index]));
+  for(const row of (Array.isArray(cmsRows)?cmsRows:[])){
+    const event=row?.payload;
+    if(!event||!event.start_date||event.start_date<iso(today()))continue;
+    const id=row.event_id||event.event_id;
+    if(!id)continue;
+    const pos=existingById.get(id);
+    if(pos!==undefined){
+      state.events[pos]={...state.events[pos],...event,event_id:id};
+    }else if(row.record_type==="manual"&&!isNonEventActivity(event)){
+      existingById.set(id,state.events.length);
+      state.events.push({...event,event_id:id});
+    }
+  }
   state.fallbacks=fallbacks;
   state.generatedAt=data.generated_at||null;
   state.cinema=cinema.movies||[];
