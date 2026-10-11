@@ -5,13 +5,12 @@ from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 
+# Official theater listings only. Ashdod pilot; expand after validating data extraction.
 SOURCES={
  "ashdod":{
-  "cinema-city":"https://www.seret.co.il/movies/s_theatres.asp?TID=240&m=1",
-  "hot-cinema":"https://www.seret.co.il/Movies/s_theatres.asp?TID=119"},
- "rishon-lezion":{
-  "cinema-city":"https://m.seret.co.il/s_theatres.asp?m=0&tid=154",
-  "planet":"https://www.seret.co.il/movies/s_theatres.asp?TID=162"}}
+  "cinema-city":"https://www.cinema-city.co.il/city/ashdod",
+  "hot-cinema":"https://hotcinema.co.il/theater/5"
+ }}
 class Text(HTMLParser):
  def __init__(self): super().__init__(); self.bits=[]; self.skip=0
  def handle_starttag(self,t,a):
@@ -38,7 +37,7 @@ def main():
     doc=fetch(url)
     p=Text();p.feed(doc)
     lines=p.bits
-    item.update({"ok":True,"page_title":next((v for v in lines if "קולנוע" in v or "סינמה" in v),""),"preview_text":lines[:120],"potential_showtimes":len(re.findall(r"\\b(?:[01]?\\d|2[0-3]):[0-5]\\d\\b"," ".join(lines)))})
+    item.update({"ok":True,"page_title":next((v for v in lines if "קולנוע" in v or "סינמה" in v),""),"preview_text":lines[:350],"potential_showtimes":len(re.findall(r"\\b(?:[01]?\\d|2[0-3]):[0-5]\\d\\b"," ".join(lines)))})
    except Exception as exc:item.update({"ok":False,"error":str(exc)[:200]})
    results["sources"].append(item)
  out=Path("cinema-review-candidates.json");out.write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding="utf-8")
