@@ -982,7 +982,46 @@ function renderActiveFilters(){
 }
 function renderResults(){
   const arr=filtered();
-  $("eventsGrid").innerHTML=arr.map(eventCard).join("");
+  const groupedView=!state.query.trim()&&!state.category&&!state.subcategory;
+  if(groupedView){
+    const taxonomy=window.publicTaxonomy||[];
+    const preferred=["music","theatre","standup","kids","cinema","lecture","workshop","sport","exhibition","festival","conference","community","seniors","tour","food"];
+    const buckets=new Map();
+    arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
+    const keys=[...buckets.keys()].sort((a,b)=>{
+      const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
+      return (ai<0?999:ai)-(bi<0?999);
+    });
+    $("eventsGrid").innerHTML=keys.map((key,index)=>{
+      const items=buckets.get(key);
+      const def=taxonomy.find(t=>t.id===key);
+      const label=def?.label||catLabels[key]||key;
+      const subDefs=def?.subcategories||[];
+      const present=[...new Set(items.map(e=>e.subcategory).filter(Boolean))];
+      const subs=present.map(id=>({id,label:subDefs.find(s=>s.id===id)?.label||id}));
+      const railId="isnetCategoryRail"+index;
+      const tabs=subs.length?'<div class="isnetCategoryTabs" aria-label="תתי קטגוריות של '+escapeHtml(label)+'"><button type="button" class="is-active" data-rail-sub="" aria-pressed="true">הכול</button>'+subs.map(s=>'<button type="button" data-rail-sub="'+escapeHtml(s.id)+'" aria-pressed="false">'+escapeHtml(s.label)+'</button>').join("")+'</div>':"";
+      return '<section class="isnetCategorySection" data-category-section="'+escapeHtml(key)+'"><div class="isnetCategoryTop"><div><span class="isnetCategoryKicker">מה עושים באשדוד</span><h3>'+escapeHtml(label)+'</h3><span class="isnetCategoryCount">'+items.length+' אירועים</span></div><div class="isnetCategoryArrows"><button type="button" data-category-move="start" aria-label="הקודם ב'+escapeHtml(label)+'">→</button><button type="button" data-category-move="end" aria-label="הבא ב'+escapeHtml(label)+'">←</button></div></div>'+tabs+'<div class="isnetCategoryRail" id="'+railId+'" tabindex="0" aria-label="אירועים: '+escapeHtml(label)+'">'+items.map(eventCard).join("")+'</div></section>';
+    }).join("");
+    const itemsById=new Map(arr.map(e=>[String(e.event_id),e]));
+    document.querySelectorAll(".isnetCategorySection").forEach(section=>{
+      const rail=section.querySelector(".isnetCategoryRail");
+      section.querySelectorAll("[data-rail-sub]").forEach(tab=>tab.addEventListener("click",()=>{
+        const sub=tab.dataset.railSub;
+        section.querySelectorAll("[data-rail-sub]").forEach(b=>{const active=b===tab;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active))});
+        rail.querySelectorAll(".eventCard").forEach(card=>{
+          const event=itemsById.get(card.dataset.event);
+          card.hidden=Boolean(sub&&event?.subcategory!==sub);
+        });
+        rail.scrollTo({left:0,behavior:"instant"});
+      }));
+      section.querySelectorAll("[data-category-move]").forEach(btn=>btn.addEventListener("click",()=>{
+        const card=rail.querySelector(".eventCard:not([hidden])");
+        const distance=(card?.getBoundingClientRect().width||240)+16;
+        rail.scrollBy({left:(btn.dataset.categoryMove==="start"?distance:-distance),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+      }));
+    });
+  }else $("eventsGrid").innerHTML=arr.map(eventCard).join("");
   const sports=state.category==="sport";
   const title=$("resultsTitle");
   const smartIntent=state.query.trim()?parseSearchIntent(state.query.trim()):null;
