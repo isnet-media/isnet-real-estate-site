@@ -74,6 +74,13 @@ existing=json.loads(dataset_path.read_text(encoding="utf-8"))
 lookup={}
 for film in existing.get("movies",[]):
  lookup.setdefault(norm_title(film.get("title")),[]).append(film)
+def base_title(s):
+ s=unicodedata.normalize("NFKC",s or "").strip()
+ s=re.sub(r"\\s*[-–—]?\\s*(?:מדובב(?: לעברית| לרוסית)?|אנגלית|גרסה באנגלית|עם כתוביות)\\s*$","",s)
+ return norm_title(s)
+base_lookup={}
+for film in existing.get("movies",[]):
+ base_lookup.setdefault(base_title(film.get("title")),[]).append(film)
 matched=[]
 unmatched=[]
 for source in output["sources"]:
@@ -81,6 +88,10 @@ for source in output["sources"]:
  for item in source["movies"]:
   ids=item.get("trailer_ids_found") or []
   candidates=lookup.get(norm_title(item.get("title")) or "",[])
+  # Accept a normalized language suffix only if exactly one local film has that base title.
+  if not candidates:
+   possible=base_lookup.get(base_title(item.get("title")),[])
+   if len(possible)==1 and len(lookup.get(norm_title(possible[0].get("title")),[]))==1:candidates=possible
   if len(candidates)==1 and ids:
    target=candidates[0]
    if target["id"] not in [x["id"] for x in matched]:
