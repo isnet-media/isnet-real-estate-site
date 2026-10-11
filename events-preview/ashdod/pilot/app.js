@@ -469,7 +469,7 @@ function cinemaCard(movie){
   }).join("");
   const media=hasTrailer
     ?'<button class="cinemaPoster" data-trailer="'+escapeHtml(movie.id)+'" aria-label="צפו בטריילר של '+escapeHtml(movie.title)+'">'+
-       '<img src="'+image+'" alt="" loading="lazy">'+
+       '<img src="'+image+'" alt="" loading="lazy" onerror="this.remove()">'+
        '<span class="cinemaPlay"><i>▶</i><b>צפו בטריילר</b></span>'+
      '</button>'
     :movie.trailer_page_url
