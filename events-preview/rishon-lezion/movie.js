@@ -39,7 +39,7 @@ function renderHero(movie){
     $("heroMediaTrailer").onclick=()=>document.getElementById("trailerSection")?.scrollIntoView({behavior:"smooth",block:"start"});
   }else{
     $("heroMedia").innerHTML=movie.poster_url?'<img class="officialPoster" src="'+escapeHtml(movie.poster_url)+'" alt="כרזת הסרט '+escapeHtml(movie.title)+'" referrerpolicy="no-referrer" data-image-fallback="'+escapeHtml(imageFallback)+'" onerror="if(this.dataset.imageFallback){const u=this.dataset.imageFallback;delete this.dataset.imageFallback;if(u!==this.src){this.src=u}else{this.remove()}}else{this.remove()}">':'<div class="heroFallback"><span>🎬</span><b>'+escapeHtml(movie.title)+'</b></div>';
-    $("heroTrailer").hidden=true;
+    $("heroTrailer").hidden=true;$("heroTrailer").style.display="none";
   }
 }
 function screeningLanguage(venue,date,time){
@@ -65,9 +65,9 @@ function renderSchedules(movie){
   }).join("");
 }
 function renderTrailer(movie){
-  if(!movie.trailer_youtube_id){$("trailerSection").hidden=false;$("youtubeFrame").parentElement.hidden=true;$("trailerAvailability").textContent="טריילר רשמי לסרט זה טרם אומת. נציג אותו כשיימצא מקור מתאים.";$("trailerExternal").hidden=true;return}
+  if(!movie.trailer_youtube_id){$("trailerSection").hidden=false;$("youtubeFrame").parentElement.hidden=true;$("trailerAvailability").textContent="טריילר רשמי לסרט זה טרם אומת. נציג אותו כשיימצא מקור מתאים.";$("trailerExternal").hidden=true;$("trailerExternal").style.display="none";$("youtubeFrame").parentElement.style.display="none";return}
   $("trailerSection").hidden=false;
-  $("trailerAvailability").textContent=movie.trailer_verification?.publisher_kind==="cinema_portal"?"קדימון המקושר מאתר בית הקולנוע; פורסם בערוץ קולנוע.":"קדימון מערוץ המפיץ או היוצר.";
+  $("trailerAvailability").textContent=movie.trailer_verification?.publisher_kind==="cinema_portal"?"טריילר מאומת המקושר מעמוד הסרט באתר רשת הקולנוע.":"קדימון מערוץ המפיץ או היוצר.";
   $("trailerExternal").href="https://www.youtube.com/watch?v="+encodeURIComponent(movie.trailer_youtube_id);
   $("youtubeFrame").src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(movie.trailer_youtube_id)+"?rel=0";
   $("youtubeFrame").title="טריילר - "+movie.title;
