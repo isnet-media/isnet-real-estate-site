@@ -45,7 +45,7 @@ const favorites=new Set(JSON.parse(localStorage.getItem("isnet-events-favorites"
 
 function localDate(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
 function iso(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
-function today(){const d=new Date();d.setHours(0,0,0,0);return d}
+function today(){return localDate(new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date()))}
 function daysFrom(base,n){const d=new Date(base);d.setDate(d.getDate()+n);return d}
 function startOfWeek(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()-x.getDay());return x}
 function firstOfMonth(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(1);return x}
@@ -1162,6 +1162,19 @@ function openEvent(id){
 function closeModal(){$("eventModal").hidden=true;document.body.style.overflow=""}
 function resetAll(){state.quick="all";state.date=null;state.periodStart=null;state.periodEnd=null;state.periodType=null;state.calendarCollapsed=true;state.category=null;state.subcategory=null;state.cinemaOpen=false;state.sportTeam="all";state.sportBranch="all";state.query="";state.favoritesOnly=false;state.sort="date";resetCalendarToToday();$("searchInput").value="";$("sortSelect").value="date";render();renderCinema()}
 
+function publishedBoardEvents(base,rows,day){
+  const events=new Map(base.map(e=>[e.event_id,e]));
+  for(const row of (Array.isArray(rows)?rows:[])){
+    const payload=row?.payload,id=row?.event_id||payload?.event_id;
+    if(!id||!payload)continue;
+    if(events.has(id))events.set(id,{...events.get(id),...payload,event_id:id});
+    else if(row.record_type==="manual")events.set(id,{...payload,event_id:id});
+  }
+  // CMS corrections can move a previously future occurrence into the past.
+  // Merge first; filter dates only once the published facts have been applied.
+  return [...events.values()].filter(e=>e.start_date>=day&&!isNonEventActivity(e)&&e.status!=="cancelled"&&e.publication_status!=="draft"&&e.is_active!==false);
+}
+
 async function init(){
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
     fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()),
@@ -1171,22 +1184,7 @@ async function init(){
     fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
     window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod")||Promise.resolve([])
   ]);
-  state.events=(data.events||[]).filter(e=>e.start_date>=iso(today())&&!isNonEventActivity(e));
-  // Reflect published CMS records on the event board as well as on detail pages.
-  const existingById=new Map(state.events.map((event,index)=>[event.event_id,index]));
-  for(const row of (Array.isArray(cmsRows)?cmsRows:[])){
-    const event=row?.payload;
-    if(!event||!event.start_date||event.start_date<iso(today()))continue;
-    const id=row.event_id||event.event_id;
-    if(!id)continue;
-    const pos=existingById.get(id);
-    if(pos!==undefined){
-      state.events[pos]={...state.events[pos],...event,event_id:id};
-    }else if(row.record_type==="manual"&&!isNonEventActivity(event)){
-      existingById.set(id,state.events.length);
-      state.events.push({...event,event_id:id});
-    }
-  }
+  state.events=publishedBoardEvents(data.events||[],cmsRows,iso(today()));
   state.fallbacks=fallbacks;
   state.generatedAt=data.generated_at||null;
   state.cinema=cinema.movies||[];

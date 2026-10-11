@@ -137,7 +137,7 @@ function richEvent(occ){
 function uniqueByTitle(events){
   const seen=new Set(),out=[];
   for(const e of events){
-    const k=eventGroupKey(e);
+    const k=normalizeSearch(eventDisplayTitle(e));
     if(seen.has(k))continue;
     seen.add(k);out.push(e);
   }
@@ -448,7 +448,7 @@ function renderPractical(e,occ){
 function renderRelated(current,all){
   const currentKey=eventGroupKey(current);
   const related=uniqueByTitle(
-    all.filter(e=>eventGroupKey(e)!==currentKey&&e.category===current.category&&isUpcoming(e))
+    all.filter(e=>eventGroupKey(e)!==currentKey&&normalizeSearch(eventDisplayTitle(e))!==normalizeSearch(eventDisplayTitle(current))&&e.category===current.category&&isUpcoming(e))
       .sort((a,b)=>(a.start_date+(a.start_time||"99:99")).localeCompare(b.start_date+(b.start_time||"99:99")))
   ).slice(0,3);
 
@@ -537,8 +537,10 @@ async function init(){
     const key=eventGroupKey(base);
     const series=all.filter(e=>eventGroupKey(e)===key)
       .sort((a,b)=>(a.start_date+(a.start_time||"99:99")).localeCompare(b.start_date+(b.start_time||"99:99")));
-    const upcoming=series.filter(e=>isUpcoming(e));
-    const occ=upcoming.length?upcoming:series;
+    const occurrenceKeys=new Set();
+    const distinct=series.filter(e=>{const k=e.start_date+"T"+(e.start_time||"")+"|"+(e.venue||"");if(occurrenceKeys.has(k))return false;occurrenceKeys.add(k);return true});
+    const upcoming=distinct.filter(e=>isUpcoming(e));
+    const occ=upcoming.length?upcoming:distinct;
     const e={...richEvent(occ),start_date:occ[0].start_date,start_time:occ[0].start_time};
     const imageEvent=bestImageEvent(occ);
 

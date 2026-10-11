@@ -34,3 +34,10 @@ ctx.daysFrom=(base,n)=>{const d=new Date(base);d.setDate(d.getDate()+n);return d
 vm.runInContext(app.slice(from,to),ctx);
 assert.equal(ctx.nextWeekendRange()[1].getDate(),17,'Saturday stays in the current weekend');
 console.log('PASS: upcoming dates, Israel clock, visible recommendations, duplicates, editorial safety, contact fallback, past CTA and Saturday filter');
+
+ctx.isNonEventActivity=()=>false;
+const mergeStart=app.indexOf('function publishedBoardEvents('),mergeEnd=app.indexOf('async function init(){',mergeStart);
+vm.runInContext(app.slice(mergeStart,mergeEnd),ctx);
+assert.equal(ctx.publishedBoardEvents([event('corrected','2026-10-11')],[{event_id:'corrected',payload:{start_date:'2026-10-10'}}],'2026-10-11').length,0,'CMS past-date corrections must remove cards');
+assert.equal(ctx.publishedBoardEvents([event('rescheduled','2026-10-10')],[{event_id:'rescheduled',payload:{start_date:'2026-10-12'}}],'2026-10-11').length,1,'CMS future-date corrections must restore cards');
+console.log('PASS: board merges CMS corrections before filtering dates');
