@@ -2,7 +2,7 @@
 """Unfiltered Ashdod cinema experiment: scan official venues and movie detail pages.
 Never use saved ISNET trailers to fill gaps. This is a diagnostic, not publication.
 """
-import json,re,time
+import json,re,time,unicodedata,os
 from pathlib import Path
 from urllib.parse import urljoin,urlsplit
 import requests
@@ -64,3 +64,38 @@ for r in output["sources"]:print(r["source"],r["status"],"links",r.get("links_fo
 
 for report in output["sources"]:
  for row in report["movies"][:4]: print("MEDIA_SAMPLE",json.dumps(row,ensure_ascii=False)[:2200])
+
+def norm_title(s):
+ s=unicodedata.normalize("NFKC",s or "").strip()
+ s=re.sub(r"\\s*[-–—]\\s*(?:מדובב(?: לעברית)?|עם כתוביות)\\s*$","",s)
+ return re.sub(r"[^0-9a-zא-ת]+","",s.lower())
+dataset_path=Path("events-preview/ashdod/data/cinema.json")
+existing=json.loads(dataset_path.read_text(encoding="utf-8"))
+lookup={}
+for film in existing.get("movies",[]):
+ lookup.setdefault(norm_title(film.get("title")),[]).append(film)
+matched=[]
+unmatched=[]
+for source in output["sources"]:
+ if source["source"]!="hot-cinema":continue
+ for item in source["movies"]:
+  ids=item.get("trailer_ids_found") or []
+  candidates=lookup.get(norm_title(item.get("title")) or "",[])
+  if len(candidates)==1 and ids:
+   target=candidates[0]
+   if target["id"] not in [x["id"] for x in matched]:
+    matched.append({"id":target["id"],"title":target["title"],"source_title":item["title"],"trailer_id":ids[0],"source_url":item["url"]})
+  else:unmatched.append({"title":item.get("title"),"reason":"no_trailer" if not ids else "no_exact_match"})
+output["official_matched_to_existing"]=matched
+output["unmatched_sample"]=unmatched[:30]
+Path("cinema-unfiltered-ashdod-report.json").write_text(json.dumps(output,ensure_ascii=False,indent=2),encoding="utf-8")
+print("MATCHED_EXISTING",len(matched),"unmatched",len(unmatched))
+print("MATCHED_FILMS",json.dumps(matched,ensure_ascii=False))
+if os.environ.get("ISNET_PUBLISH_FRESH")=="1" and len(matched)>=3:
+ for item in matched:
+  dest=next(m for m in existing["movies"] if m["id"]==item["id"])
+  dest["trailer_youtube_id"]=item["trailer_id"]
+  dest["trailer_source_url"]=item["source_url"]
+  dest["trailer_source_name"]="HOT Cinema Ashdod - official embedded trailer"
+ dataset_path.write_text(json.dumps(existing,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+ print("PUBLISHED_FRESH_TRAILERS",len(matched))
