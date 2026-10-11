@@ -438,8 +438,10 @@ function featureCard(e){
     '<div class="featureVenue">⌖ '+escapeHtml(e.venue||"המיקום יפורסם")+'</div></div></article>';
 }
 
+function cinemaToday(){return new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
+function cinemaVenueActive(venue){return Object.entries(venue.schedule||{}).some(([day,times])=>day>=cinemaToday()&&Array.isArray(times)&&times.length)}
 function cinemaScheduleInfo(venue){
-  const day=iso(today());
+  const day=cinemaToday();
   const schedule=venue.schedule||{};
   if(Array.isArray(schedule[day])&&schedule[day].length){
     return {date:day,label:"היום",times:schedule[day]};
@@ -453,7 +455,7 @@ function cinemaScheduleInfo(venue){
   return {date:null,label:"לשעות מעודכנות",times:[]};
 }
 function cinemaCard(movie){
-  const visibleVenues=movie.venues.filter(v=>state.cinemaVenue==="all"||v.id===state.cinemaVenue);
+  const visibleVenues=movie.venues.filter(v=>cinemaVenueActive(v)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue));
   const hasTrailer=Boolean(movie.trailer_youtube_id);
   const image=hasTrailer?"https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg":"";
   const venues=visibleVenues.map(v=>{
@@ -472,7 +474,7 @@ function cinemaCard(movie){
      '</button>'
     :movie.trailer_page_url
       ?'<a class="cinemaPoster cinemaPoster--fallback cinemaExternalTrailer" href="'+escapeHtml(movie.trailer_page_url)+'" target="_blank" rel="noopener noreferrer" aria-label="עמוד הטריילר הרשמי של '+escapeHtml(movie.title)+'"><span class="cinemaFallbackIcon">▶</span><b>'+escapeHtml(movie.title)+'</b><span>צפו בטריילר באתר הקולנוע ↗</span></a>'
-      :'<div class="cinemaPoster cinemaPoster--fallback"><span class="cinemaFallbackIcon">🎬</span><b>'+escapeHtml(movie.title)+'</b><span>לשעות ופרטים בעמוד הסרט</span></div>';
+      :'<a href="movie.html?id='+encodeURIComponent(movie.id)+'" class="cinemaPoster cinemaPoster--fallback"><span class="cinemaFallbackIcon">🎬</span><b>'+escapeHtml(movie.title)+'</b><span>לשעות ופרטים בעמוד הסרט</span></a>';
   return '<article class="cinemaCard" data-movie="'+escapeHtml(movie.id)+'">'+
     media+
     '<div class="cinemaCard__body">'+
@@ -480,8 +482,9 @@ function cinemaCard(movie){
         (movie.is_family?'<span class="family">ילדים ומשפחה</span>':'')+
         visibleVenues.map(v=>'<span>'+escapeHtml(v.id==="cinema-city"?"סינמה סיטי":"HOT Cinema")+'</span>').join("")+
       '</div>'+
-      '<h3>'+escapeHtml(movie.title)+'</h3>'+
+      '<h3><a href="movie.html?id='+encodeURIComponent(movie.id)+'">'+escapeHtml(movie.title)+'</a></h3>'+
       '<p>'+escapeHtml(movie.synopsis||"")+'</p>'+
+      '<div class="cinemaVenueBadges">'+[movie.runtime_minutes?movie.runtime_minutes+' דקות':null,movie.age_rating,(movie.genres||[]).join(' · ')].filter(Boolean).map(x=>'<span>'+escapeHtml(x)+'</span>').join('')+'</div>'+
       '<div class="cinemaSchedules">'+venues+'</div>'+
     '</div>'+
   '</article>';
@@ -491,16 +494,16 @@ function renderCinema(){
   section.hidden=!state.cinemaOpen;
   if(!state.cinemaOpen){grid.innerHTML="";return}
   const arr=state.cinema
-    .filter(m=>m.venues.some(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=iso(today())&&Array.isArray(times)&&times.length)))
+    .filter(m=>m.venues.some(v=>cinemaVenueActive(v)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue)))
     .filter(m=>state.cinemaAudience==="all"||m.is_family===true)
     .filter(m=>state.cinemaVenue==="all"||m.venues.some(v=>v.id===state.cinemaVenue))
     .sort((a,b)=>{
-      const day=iso(today());
+      const day=cinemaToday();
       const at=a.venues.some(v=>Array.isArray(v.schedule?.[day])&&v.schedule[day].length)?0:1;
       const bt=b.venues.some(v=>Array.isArray(v.schedule?.[day])&&v.schedule[day].length)?0:1;
       return at-bt||a.title.localeCompare(b.title,"he");
     });
-  grid.innerHTML=arr.length?arr.map(cinemaCard).join(""):'<div class="cinemaEmpty"><h3>סרטי הקולנוע בעיר מתעדכנים</h3><p>עדיין אין במאגר סרטים מאומתים עם שעות הקרנה לבית הקולנוע שבחרתם. לא נציג שעות או טריילרים לא בדוקים.</p><p>ניתן בינתיים לבדוק את ההקרנות באתרים הרשמיים של בתי הקולנוע.</p><div class="cinemaEmpty__links"><a href="https://www.cinema-city.co.il/" target="_blank" rel="noopener noreferrer">סינמה סיטי ←</a><a href="https://www.planetcinema.co.il/rishon" target="_blank" rel="noopener noreferrer">פלאנט ראשון לציון ←</a></div></div>';
+  grid.innerHTML=arr.length?arr.map(cinemaCard).join(""):'<div class="cinemaEmpty"><h3>סרטי הקולנוע בעיר מתעדכנים</h3><p>עדיין אין במאגר סרטים מאומתים עם שעות הקרנה לבית הקולנוע שבחרתם. לא נציג שעות או טריילרים לא בדוקים.</p><p>ניתן בינתיים לבדוק את ההקרנות באתרים הרשמיים של בתי הקולנוע.</p><div class="cinemaEmpty__links"><a href="https://www.cinema-city.co.il/" target="_blank" rel="noopener noreferrer">סינמה סיטי ←</a><a href="https://hotcinema.co.il/theater/5" target="_blank" rel="noopener noreferrer">HOT Cinema אשדוד ←</a></div></div>';
   document.querySelectorAll("#cinemaFilters [data-cinema]").forEach(b=>b.classList.toggle("is-active",b.dataset.cinema===state.cinemaVenue));
   document.querySelectorAll("#cinemaAudienceFilters [data-audience]").forEach(b=>b.classList.toggle("is-active",b.dataset.audience===state.cinemaAudience));
   document.querySelectorAll("[data-trailer]").forEach(b=>b.onclick=e=>{e.stopPropagation();openTrailer(b.dataset.trailer)});
@@ -525,7 +528,7 @@ function openTrailer(id){
   $("trailerSynopsis").textContent=movie.synopsis||"";
   $("trailerFrame").src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(movie.trailer_youtube_id)+"?autoplay=1&rel=0";
   $("trailerFrame").title="טריילר - "+movie.title;
-  $("trailerLinks").innerHTML='<a href="movie.html?id='+encodeURIComponent(movie.id)+'">כל הימים, השעות והפרטים אצלנו ←</a>';
+  $("trailerLinks").innerHTML='<a href="movie.html?id='+encodeURIComponent(movie.id)+'">כל הימים, השעות והפרטים אצלנו ←</a><a href="https://www.youtube.com/watch?v='+encodeURIComponent(movie.trailer_youtube_id)+'" target="_blank" rel="noopener noreferrer">פתיחת הטריילר ב־YouTube ↗</a>';
   $("trailerModal").hidden=false;
   document.body.style.overflow="hidden";
 }

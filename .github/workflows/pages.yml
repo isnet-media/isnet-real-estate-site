@@ -33,6 +33,7 @@ on:
       - "Apply verified Ashdod event subcategories"
       - "Refresh Ashdod event source images"
       - "Enrich event content with AI"
+      - "Refresh verified Ashdod cinema"
     types: [completed]
 
 permissions:
@@ -54,6 +55,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Node for pricebook checks
         uses: actions/setup-node@v4
