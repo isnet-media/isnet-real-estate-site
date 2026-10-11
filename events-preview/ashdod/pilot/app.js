@@ -309,14 +309,15 @@ function defaultCategoryImage(e){
   const cat=DEFAULT_IMAGE_CATEGORIES.has(raw)?raw:(raw==="workshop"?"exhibition":"community");
   const sub=String(e?.subcategory||"").replace(/[^a-z0-9-]/g,"");
   const base="../shared/images/defaults/";
-  const subSvg=sub&&cat===raw?base+cat+"-"+sub+".svg":"";
+  const subCategory=sub.startsWith("senior-")?"seniors":cat;
+  const subSvg=sub&&cat===raw?base+subCategory+"-"+sub+".svg":"";
   const primary=base+"category-"+cat+".svg";
   // Only use illustration photos for clearly identified activity types.
   // The WebP files are optional: until uploaded, the existing SVGs remain available.
   const title=String(e?.title||"");
   const rules=[
     [/ציור|צייר|אקריליק|צבעי מים|מכחול|קנבס/,"senior-painting.webp"],
-    [/סריגה|רקמה|מלאכת יד|חרוזים|תכשיטנות|מקרמה/,"senior-handcraft.webp"],
+    [/סריגה|סרוג|רקמה|מלאכת יד|חרוזים|תכשיטנות|מקרמה/,"senior-handcraft.webp"],
     [/בישול|אפייה|שף|מטבח|קולינר/,"senior-cooking.webp"],
     [/מחשב|סמארטפון|טלפון חכם|דיגיטל|אינטרנט|טכנולוגיה/,"senior-digital.webp"],
     [/יוגה|פילאטיס|התעמלות|כושר|תנועה|מתיחות/,"senior-fitness.webp"],
@@ -328,9 +329,10 @@ function defaultCategoryImage(e){
     [/ברידג'|קלפים|משחקי קופסה|שחמט|רמי/,"senior-board-games.webp"],
     [/מפגש חברתי|קפה חברתי|בוקר חברתי/,"senior-social-coffee.webp"]
   ];
-  const matched=cat==="seniors"?rules.find(([pattern])=>pattern.test(title)):null;
+  const seniorActivity=cat==="seniors"||(cat==="tour"&&sub==="senior-trips");
+  const matched=seniorActivity?rules.find(([pattern])=>pattern.test(title)):null;
   const bySub={"senior-trips":"senior-guided-tour.webp","senior-lectures":"senior-lecture.webp","senior-music":"senior-live-music.webp","senior-sport":"senior-fitness.webp","senior-digital":"senior-digital.webp","senior-social":"senior-social-coffee.webp"};
-  const photo=matched?.[1]||(cat==="seniors"?bySub[sub]:"");
+  const photo=matched?.[1]||(seniorActivity?bySub[sub]:"");
   return {primary,subcategory:photo?base+"ashdod-seniors/"+photo:subSvg,subcategorySvg:subSvg};
 }
 function defaultCategoryArt(e){
