@@ -26,17 +26,20 @@ def movie_links(doc,base):
  return found
 def extract_youtube(html):
  ids=[]
- for pat in [r"(?:youtube\\.com/embed/|youtube\\.com/watch\\?v=|youtu\\.be/|youtube-nocookie\\.com/embed/)([A-Za-z0-9_-]{11})"]:
-  for v in re.findall(pat,html,re.I):
-   if v not in ids:ids.append(v)
+ soup=BeautifulSoup(html,"html.parser")
+ for node in soup.select("iframe[src], iframe[data-src], a[href]"):
+  src=node.get("src") or node.get("data-src") or node.get("href") or ""
+  m=re.search(r"(?:youtube[.]com/(?:embed/|watch[?]v=)|youtu[.]be/|youtube-nocookie[.]com/embed/)([A-Za-z0-9_-]{11})",src)
+  if m and m.group(1) not in ids:ids.append(m.group(1))
  return ids
+
 output={"mode":"unfiltered_live_source_only","sources":[]}
 for key,base in BASES.items():
  report={"source":key,"url":base,"movies":[],"status":"unknown"}
  try:
   html=get(base);links=movie_links(html,base)
   report["source_page_bytes"]=len(html);report["links_found"]=len(links)
-  for url,title in list(links.items())[:4]:
+  for url,title in list(links.items())[:120]:
    try:
     detail=get(url)
     soup=BeautifulSoup(detail,"html.parser")
