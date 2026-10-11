@@ -1,0 +1,31 @@
+name: Audit event illustration coverage
+on:
+  pull_request:
+    paths:
+      - 'events-preview/shared/images/defaults/**'
+      - 'events-preview/admin/data/taxonomy.json'
+      - 'events-preview/tools/audit_image_coverage.py'
+      - '.github/workflows/audit-event-images.yml'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Count missing category and subcategory illustrations
+        run: |
+          python events-preview/tools/audit_image_coverage.py > image-coverage-report.json
+          python - <<'PY'
+          import json, os
+          data=json.load(open('image-coverage-report.json'))
+          s=data['summary']
+          summary=f"## Event illustration coverage\n\n- Main categories: {s['primary_total']}\n- Missing main images: {s['primary_missing']}\n- Subcategories: {s['subcategory_total']}\n- Missing subcategory images: {s['subcategory_missing']}\n"
+          print(summary)
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f: f.write(summary)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: image-coverage-report
+          path: image-coverage-report.json
