@@ -1,0 +1,74 @@
+/* ISNET desktop editorial experience. Preview branch only.
+   Inspired by the quality and density of international city-event portals;
+   original RTL styling, no third-party code copied. */
+@media (min-width: 901px) {
+  :root { --desktop-gold:#e2bd76; --desktop-ink:#f6f2ea; }
+  html { scroll-padding-top:30px; }
+  body { background:#101115; }
+  .shell { width:min(1460px,calc(100% - 100px)); max-width:1460px; margin-inline:auto; }
+  .siteTopbar { background:#0d0e12; border-bottom:1px solid #303036; }
+  .siteTopbar__inner { max-width:1460px; width:calc(100% - 100px); margin:auto; min-height:88px; display:flex; align-items:center; justify-content:space-between; }
+  .siteTopbar__brand img { object-fit:contain; max-height:72px; }
+  .hero { position:relative; isolation:isolate; min-height:430px; padding:58px 0 48px; border-bottom:1px solid rgba(226,189,118,.2);
+    background:radial-gradient(ellipse at 17% 38%,rgba(187,138,69,.15),transparent 36%),linear-gradient(120deg,#191a20,#0b0c10 70%)!important; }
+  .hero:after { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background:linear-gradient(90deg,transparent 48%,rgba(223,190,127,.06)),
+    repeating-linear-gradient(125deg,transparent 0 48px,rgba(255,255,255,.012) 49px 50px); }
+  .hero__content { max-width:1000px; margin-inline:auto; text-align:center; }
+  .eyebrow { color:var(--desktop-gold)!important; letter-spacing:.16em; font-weight:800; }
+  .heroTitle { margin:12px auto 12px; line-height:1.05; text-wrap:balance; filter:drop-shadow(0 12px 24px #0008); }
+  .heroTitle__top,.heroTitle__bottom { font-size:clamp(50px,5.5vw,86px); }
+  .hero__lead { color:#d3d0cb!important; font-size:clamp(18px,1.5vw,22px); margin:18px auto 29px; max-width:760px; }
+  .searchBox { max-width:790px; margin:0 auto; background:#24252d!important; border:1px solid #5c554a!important;
+    border-radius:18px!important; box-shadow:0 12px 38px #0008,0 0 0 5px #ffffff05; min-height:66px; }
+  .searchBox input { min-height:64px; background:transparent!important; color:#fff!important; font-size:18px; }
+  .searchBox:focus-within { border-color:var(--desktop-gold)!important; box-shadow:0 0 0 4px #e2bd7628; }
+  .quickFilters { display:flex; justify-content:center; flex-wrap:wrap; gap:9px; max-width:1080px; margin:23px auto 0; }
+  .quickFilters button { background:#292a31; color:#eee; border:1px solid #494951; border-radius:999px; min-height:39px; padding:7px 16px; transition:background .18s,transform .18s,border-color .18s; }
+  .quickFilters button:hover { background:#393941; transform:translateY(-2px); border-color:#ac9163; }
+  .quickFilters button.is-active { background:#dec18a; border-color:#dec18a; color:#151519; font-weight:800; }
+  .heroStats { color:#c8c7ce; }
+  main.shell { padding-top:22px; padding-bottom:80px; }
+  main .section { margin-block:28px 58px; }
+  .sectionHead { display:flex; justify-content:space-between; align-items:end; margin-bottom:24px; }
+  .sectionHead h2,.resultsTop h2 { font-size:clamp(29px,2.8vw,39px); letter-spacing:-.035em; color:#f7f3ec!important; }
+  .sectionHead__kicker { color:var(--desktop-gold)!important; font-weight:800; }
+  .categoryGrid { display:grid!important; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px!important; overflow:visible!important; }
+  .categoryGrid>* { min-width:0; transition:transform .2s ease, box-shadow .2s ease; }
+  .categoryGrid>*:hover { transform:translateY(-4px); box-shadow:0 14px 30px #0006; }
+  .fixedCategoryGrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:18px; }
+  .fixedCategoryCard { background:#1d1e24!important; border:1px solid #383940!important; border-radius:14px!important; color:#f0eee8!important; min-height:64px; padding:16px 20px; transition:border-color .2s,background .2s; }
+  .fixedCategoryCard:hover { border-color:#ad8d58!important; background:#27272b!important; }
+  .results { padding-top:26px; border-top:1px solid #36343a; }
+  .resultsTop { display:flex; justify-content:space-between; align-items:end; gap:22px; margin-bottom:20px; }
+  .resultsActions { display:flex; align-items:center; gap:12px; }
+  .sortSelect,.pillAction { background:#24252d!important; color:#f6f3ec!important; border:1px solid #54545b!important; border-radius:12px; min-height:42px; }
+  .isnetRailHeading { margin:28px 0 14px; }
+  .isnetRailHeading h2 { font-size:27px; }
+  .isnetRailArrow { width:44px; height:44px; background:#28282d; border:1px solid #62606a; }
+  .isnetRailArrow:hover { background:#4c3b24; border-color:#e2bd76; }
+  .eventsGrid { display:grid!important; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px!important; overflow:visible!important; padding:4px 0 20px!important; }
+  .eventsGrid>.eventCard { width:auto!important; max-width:none!important; min-width:0; border-radius:19px!important; overflow:hidden;
+    border:1px solid #3a3b43!important; background:#1e1f26!important; transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease; }
+  .eventsGrid>.eventCard:hover { transform:translateY(-6px); border-color:#967f55!important; box-shadow:0 22px 45px #0009!important; }
+  .eventCard :is(h3,h4) { font-size:clamp(18px,1.3vw,22px); line-height:1.4; }
+  .eventCard .eventMedia { aspect-ratio:16/10; }
+  .eventCard img { width:100%; height:100%; object-fit:cover; }
+  .calendarBox,.cinemaPanel,.sportsPanel__inner { background:#1b1c22!important; border:1px solid #3a3b43!important; border-radius:22px; padding:22px; }
+  .dateSection__reset { font-size:19px; }
+  .footer { border-top:1px solid #38353a; background:#0d0e11; }
+  :is(button,a,input,select):focus-visible { outline:3px solid #e2bd76!important; outline-offset:3px; }
+}
+@media (min-width: 901px) and (max-width:1250px) {
+  .shell,.siteTopbar__inner { width:calc(100% - 64px); }
+  .categoryGrid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  .eventsGrid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media (min-width: 651px) and (max-width:900px) {
+  .shell { width:calc(100% - 46px); }
+  .eventsGrid { display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+  .categoryGrid { display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .eventsGrid>.eventCard,.categoryGrid>* { transition:none!important; }
+}
