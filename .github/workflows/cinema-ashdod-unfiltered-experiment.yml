@@ -1,0 +1,24 @@
+name: Cinema Ashdod unfiltered intake experiment
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/experiment_ashdod_cinema_unfiltered.py"
+      - ".github/workflows/cinema-ashdod-unfiltered-experiment.yml"
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install requests beautifulsoup4
+      - name: Read official movie pages without filters or cached trailers
+        run: python scripts/experiment_ashdod_cinema_unfiltered.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cinema-ashdod-unfiltered-report
+          path: cinema-unfiltered-ashdod-report.json
+          retention-days: 14
