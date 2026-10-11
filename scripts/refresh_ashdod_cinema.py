@@ -368,6 +368,7 @@ def merge(existing, sources):
         'counts': {'active_movies': len(active), 'synopsis': sum(bool(m.get('synopsis')) for m in active),
             'official_poster': sum(bool(m.get('poster_url') and m.get('poster_verification')) for m in active),
             'trailer': sum(bool(m.get('trailer_youtube_id')) for m in active),
+            'verified_trailer': sum(bool(m.get('trailer_youtube_id')) for m in active),
             'official_publisher_trailer': sum(bool(m.get('trailer_youtube_id') and m.get('trailer_verification',{}).get('publisher_kind') == 'official_publisher') for m in active),
             'verified_showtimes': sum(any(v.get('schedule_verified_at') and any(d >= TODAY and t for d,t in v.get('schedule',{}).items()) for v in m['venues']) for m in active),
             'runtime': sum(bool(m.get('runtime_minutes')) for m in active), 'age_rating': sum(bool(m.get('age_rating')) for m in active)},
