@@ -7,6 +7,14 @@ on:
       - 'events-preview/tools/audit_image_coverage.py'
       - '.github/workflows/audit-event-images.yml'
   workflow_dispatch:
+  schedule:
+    - cron: "40 5 * * *"
+  workflow_run:
+    workflows: ["Daily city event intake", "Enrich Ashdod event images", "Verify and cache Rishon event photos"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: [".github/workflows/audit-event-images.yml"]
 jobs:
   audit:
     runs-on: ubuntu-latest
