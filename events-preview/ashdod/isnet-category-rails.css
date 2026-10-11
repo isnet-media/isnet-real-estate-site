@@ -21,3 +21,7 @@
 
 /* The category rows own their headings and arrows; hide the old single-rail header. */
 .results:has(.isnetCategorySection) #isnetLegacyRailHeading,.results:has(.isnetCategorySection) .isnetSwipeHint{display:none!important}
+
+/* Show the full taxonomy without suggesting unavailable events. */
+.isnetCategoryTabs button:disabled{opacity:.48;cursor:not-allowed;border-style:dashed}
+.isnetCategoryTabs button small{font-size:11px;font-weight:600;opacity:.85}
