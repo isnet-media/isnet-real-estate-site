@@ -1113,12 +1113,6 @@ function bindDynamic(){
     if(b.dataset.cat==="cinema"){
       location.href="cinema.html";
       return;
-      state.category=null;
-      state.cinemaOpen=true;
-      render();
-      renderCinema();
-      requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({behavior:"smooth",block:"start"}));
-      return;
     }
     state.cinemaOpen=false;
     renderCinema();
