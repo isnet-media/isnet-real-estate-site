@@ -1,0 +1,28 @@
+/* Compact event discovery toolbar: removes wide empty header zone. */
+.isnetCompactToolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"heading date";gap:12px 22px;align-items:center;background:linear-gradient(115deg,#1e2028,#17191f);border:1px solid #363943;border-radius:19px;padding:18px 22px;margin:0 0 22px}
+.isnetCompactToolbar .resultsTop{grid-area:heading;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:22px;min-width:0;margin:0!important}
+.isnetCompactToolbar .resultsTop>div:first-child{min-width:0}
+.isnetCompactToolbar #resultsTitle{margin:2px 0 4px!important;font-size:clamp(25px,2.5vw,33px)!important;line-height:1.2;color:#fff}
+.isnetCompactToolbar .resultsTop .sectionHead__kicker{font-size:12px;color:#f0ce72}
+.isnetCompactToolbar .resultsPublisher{display:none!important}
+.isnetCompactToolbar #resultCount{margin:4px 0 0!important;font-size:13px;color:#d1d2d9}
+.isnetCompactToolbar .resultsActions{display:flex!important;flex-wrap:wrap;gap:9px;align-items:center;margin:0!important;padding:0!important;overflow:visible!important}
+.isnetCompactToolbar .resultsActions>*{height:42px;min-height:42px;padding:8px 12px;border:1px solid #545662;border-radius:10px;background:#292c35!important;color:#f6f7f9!important;font:700 13px Assistant,sans-serif}
+.isnetCompactToolbar .dateSection{grid-area:date;margin:0!important;padding:0!important;align-self:center;position:relative}
+.isnetCompactToolbar .dateSection #resetDate{margin:0!important;padding:9px 14px!important;min-height:42px!important;font:800 14px Assistant,sans-serif!important;border-radius:10px!important}
+.isnetCompactToolbar .calendarBox:not([hidden]){position:absolute;inset-inline-end:0;top:calc(100% + 10px);width:min(690px,calc(100vw - 40px));max-height:min(75vh,650px);overflow:auto;z-index:50;background:#20232b!important;color:#fff!important;border:1px solid #51535d;border-radius:16px;box-shadow:0 18px 48px #000b;padding:16px}
+main.shell>.results{margin-top:12px!important}
+@media(max-width:1000px){
+ .isnetCompactToolbar{grid-template-columns:minmax(0,1fr);grid-template-areas:"heading" "date";gap:12px;padding:16px}
+ .isnetCompactToolbar .resultsTop{gap:12px}
+ .isnetCompactToolbar .dateSection{justify-self:start}
+}
+@media(max-width:650px){
+ .isnetCompactToolbar{padding:13px;border-radius:14px;margin-bottom:15px}
+ .isnetCompactToolbar .resultsTop{display:flex!important;flex-direction:column;align-items:stretch!important}
+ .isnetCompactToolbar #resultsTitle{font-size:24px!important}
+ .isnetCompactToolbar .resultsActions{justify-content:flex-start}
+ .isnetCompactToolbar .resultsActions>*{font-size:12px;min-height:38px;height:38px}
+ .isnetCompactToolbar .dateSection #resetDate{min-height:40px!important}
+ .isnetCompactToolbar .calendarBox:not([hidden]){inset-inline-end:auto;inset-inline-start:0;width:calc(100vw - 42px)}
+}
