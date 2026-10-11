@@ -134,10 +134,14 @@ function richEvent(occ){
     ||occ.find(e=>e.long_description||e.short_pitch||e.youtube_id)
     ||occ[0];
 }
+function recommendationKey(e){
+  const title=normalizeSearch(eventDisplayTitle(e));
+  return e.category==="standup"?title.replace(/\s+(?:ב?מופע\s+)?סטנדאפ$/,""):title;
+}
 function uniqueByTitle(events){
   const seen=new Set(),out=[];
   for(const e of events){
-    const k=normalizeSearch(eventDisplayTitle(e));
+    const k=recommendationKey(e);
     if(seen.has(k))continue;
     seen.add(k);out.push(e);
   }
@@ -215,6 +219,7 @@ function isUpcoming(e,now=new Date()){
 }
 function safeEditorial(value){
   const text=cleanEditorialText(value);
+  if(/מה שמרמז|לא ניתן לאשר|בגרסאות קודמות/.test(text))return "";
   if(/(?:טיקצ[׳\x27]?אק|tickchak).{0,120}(?:מגוון|אירועים|כרטיסים|מופעים|אתר)|(?:מגוון|אירועים|כרטיסים|מופעים|אתר).{0,120}(?:טיקצ[׳\x27]?אק|tickchak)/i.test(text))return "";
   return window.ISNET_EDITORIAL_SAFETY?.publicText(text)??text;
 }
@@ -314,7 +319,7 @@ function renderHero(e,occ,imageEvent){
   const dates=[...new Set(occ.map(x=>x.start_date).filter(Boolean))];
   $("heroMeta").innerHTML=[
     venues[0]||"המיקום יפורסם",
-    dates.length>1?dates.length+" תאריכים":fmtFull.format(localDate(occ[0].start_date)),
+    (dates.length>1?"המועד הקרוב: ":"")+fmtFull.format(localDate(occ[0].start_date)),
     formatTime(occ[0].start_time),
     priceText(occ[0]),
     e.duration_minutes?e.duration_minutes+" דקות":null
@@ -448,7 +453,7 @@ function renderPractical(e,occ){
 function renderRelated(current,all){
   const currentKey=eventGroupKey(current);
   const related=uniqueByTitle(
-    all.filter(e=>eventGroupKey(e)!==currentKey&&normalizeSearch(eventDisplayTitle(e))!==normalizeSearch(eventDisplayTitle(current))&&e.category===current.category&&isUpcoming(e))
+    all.filter(e=>eventGroupKey(e)!==currentKey&&recommendationKey(e)!==recommendationKey(current)&&e.category===current.category&&isUpcoming(e))
       .sort((a,b)=>(a.start_date+(a.start_time||"99:99")).localeCompare(b.start_date+(b.start_time||"99:99")))
   ).slice(0,3);
 

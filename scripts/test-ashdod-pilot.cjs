@@ -41,3 +41,7 @@ vm.runInContext(app.slice(mergeStart,mergeEnd),ctx);
 assert.equal(ctx.publishedBoardEvents([event('corrected','2026-10-11')],[{event_id:'corrected',payload:{start_date:'2026-10-10'}}],'2026-10-11').length,0,'CMS past-date corrections must remove cards');
 assert.equal(ctx.publishedBoardEvents([event('rescheduled','2026-10-10')],[{event_id:'rescheduled',payload:{start_date:'2026-10-12'}}],'2026-10-11').length,1,'CMS future-date corrections must restore cards');
 console.log('PASS: board merges CMS corrections before filtering dates');
+
+ctx.renderRelated(event('current','2099-10-12',{category:'standup'}),[event('n1','2099-10-13',{title:'נועה מנור',category:'standup'}),event('n2','2099-10-13',{title:'נועה מנור במופע סטנדאפ',category:'standup'})]);
+assert.equal((nodes.get('relatedGrid').innerHTML.match(/class="relatedCard"/g)||[]).length,1,'generic standup title suffix does not duplicate recommendations');
+console.log('PASS: semantic title duplicates in recommendations');

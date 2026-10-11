@@ -62,3 +62,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 .eventHero__media img[data-event-image-id="evt_40_20261012"]{object-fit:cover;object-position:center 75%}
 .shell.relatedSection{padding-bottom:38px}
 .scheduleCopy{min-width:0;overflow-wrap:anywhere}
+
+.eventHero__media .fallback{background:linear-gradient(135deg,#302c21,#1a1c22);color:#f3e7ce;font-size:26px;padding:24px;text-align:center}
+.eventHero__media:has(.fallback){aspect-ratio:16/9;max-height:230px}
+.contentGrid:not(:has(.storyColumn>section:not([hidden]))){grid-template-columns:minmax(0,1fr)}
+.contentGrid:not(:has(.storyColumn>section:not([hidden]))) .sideColumn{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:620px){.eventHero__media:has(.fallback){max-height:170px}.contentGrid:not(:has(.storyColumn>section:not([hidden]))) .sideColumn{grid-template-columns:1fr}}
