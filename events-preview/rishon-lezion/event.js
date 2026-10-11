@@ -243,6 +243,8 @@ function meaningfulEventDescription(e){
     : [e.long_description,e.series_description,e.description,e.short_pitch];
   return candidates.map(cleanEditorialText).find(v=>
     v.length>=25 &&
+    !/(?:טיקצ[׳\x27]?אק|tickchak).{0,120}(?:מגוון|אירועים|כרטיסים|מופעים|אתר)/i.test(v) &&
+    !/(?:מגוון|אירועים|כרטיסים|מופעים|אתר).{0,120}(?:טיקצ[׳\x27]?אק|tickchak)/i.test(v) &&
     !v.includes("תיאור מפורט של האירוע לא פורסם") &&
     !v.includes("המועד, המחיר, המיקום ודרכי יצירת הקשר מופיעים")
   )||"";
@@ -424,7 +426,7 @@ function renderPractical(e,occ){
 function renderRelated(current,all){
   const currentKey=eventGroupKey(current);
   const related=uniqueByTitle(
-    all.filter(e=>eventGroupKey(e)!==currentKey&&e.category===current.category)
+    all.filter(e=>eventGroupKey(e)!==currentKey&&e.category===current.category&&/^\\d{4}-\\d{2}-\\d{2}$/.test(e.start_date||"")&&e.start_date>=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10))
       .sort((a,b)=>(a.start_date+(a.start_time||"99:99")).localeCompare(b.start_date+(b.start_time||"99:99")))
   ).slice(0,3);
 
