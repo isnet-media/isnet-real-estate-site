@@ -26,7 +26,7 @@ def movie_links(doc,base):
  return found
 def extract_youtube(html):
  ids=[]
- for pat in [r"(?:youtube\.com/embed/|youtube\.com/watch\?v=|youtu\.be/|youtube-nocookie\.com/embed/)([A-Za-z0-9_-]{11})",r'["\\'](?:youtubeId|youtube_id|youtubeVideoId|trailerYoutubeId)["\\']\s*:\s*["\\']([A-Za-z0-9_-]{11})']:
+ for pat in [r"(?:youtube\\.com/embed/|youtube\\.com/watch\\?v=|youtu\\.be/|youtube-nocookie\\.com/embed/)([A-Za-z0-9_-]{11})"]:
   for v in re.findall(pat,html,re.I):
    if v not in ids:ids.append(v)
  return ids
