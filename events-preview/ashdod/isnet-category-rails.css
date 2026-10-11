@@ -60,3 +60,13 @@
 @media (min-width:651px){
  .isnetCategoryRail>.eventCard{flex:0 0 clamp(220px,20vw,280px)!important;width:clamp(220px,20vw,280px)!important;max-width:280px!important}
 }
+
+/* Two coordinated navigation pairs: heading and in-rail edge controls. */
+.isnetRailWrap{position:relative;min-width:0;max-width:100%}
+.isnetRailOverlay{position:absolute;z-index:8;top:43%;transform:translateY(-50%);width:42px;height:54px;border:1px solid #e8d19a99;border-radius:11px;background:#101217dc;color:#fff;font-size:25px;cursor:pointer;box-shadow:0 8px 24px #0009;display:grid;place-items:center;backdrop-filter:blur(8px)}
+.isnetRailOverlay--start{right:6px}
+.isnetRailOverlay--end{left:6px}
+.isnetRailOverlay:hover,.isnetRailOverlay:focus-visible{background:#393024;color:#ffe18e;border-color:#f1d17b;outline-offset:3px}
+.isnetCategoryRail{scroll-padding-inline:48px}
+@media(max-width:650px){.isnetRailOverlay{width:32px;height:42px;font-size:19px;opacity:.88}.isnetRailOverlay--start{right:2px}.isnetRailOverlay--end{left:2px}.isnetCategoryRail{scroll-padding-inline:35px}}
+@media(prefers-reduced-motion:reduce){.isnetRailOverlay{transition:none}}
