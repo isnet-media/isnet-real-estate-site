@@ -459,6 +459,7 @@ function renderCinema(){
   section.hidden=!state.cinemaOpen;
   if(!state.cinemaOpen){grid.innerHTML="";return}
   const arr=state.cinema
+    .filter(m=>m.venues.some(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=iso(today())&&Array.isArray(times)&&times.length)))
     .filter(m=>state.cinemaAudience==="all"||m.is_family===true)
     .filter(m=>state.cinemaVenue==="all"||m.venues.some(v=>v.id===state.cinemaVenue))
     .sort((a,b)=>{
