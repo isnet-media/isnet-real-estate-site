@@ -272,12 +272,8 @@ function eventImageHTML(e,mode="card"){
   const special=specialEventArt(e);
   if(!special&&!hasTrustedSourceImage(e)){
     const fallback=fallbackImage(e);
-    const paths=defaultCategoryImage(e);
-    const primary=fallback||paths.primary;
-    const preferred=paths.subcategory||primary;
-    const secondary=paths.subcategorySvg&&paths.subcategorySvg!==preferred?paths.subcategorySvg:primary;
-    if(!preferred)return "";
-    return '<span class="eventArtStage is-category-image"><img class="eventArtMain eventArtFull" src="'+escapeHtml(preferred)+'" alt="תמונת קטגוריה להמחשה" loading="lazy" data-secondary-fallback="'+escapeHtml(secondary)+'" data-primary-fallback="'+escapeHtml(primary)+'" onerror="if(!this.dataset.triedSecondary && this.dataset.secondaryFallback && this.src!==new URL(this.dataset.secondaryFallback,location.href).href){this.dataset.triedSecondary=\'1\';this.src=this.dataset.secondaryFallback}else if(!this.dataset.triedPrimary && this.dataset.primaryFallback && this.src!==new URL(this.dataset.primaryFallback,location.href).href){this.dataset.triedPrimary=\'1\';this.src=this.dataset.primaryFallback}else{this.remove()}"></span>';
+    if(!fallback)return "";
+    return '<span class="eventArtStage is-category-image"><img class="eventArtMain eventArtFull" src="'+escapeHtml(fallback)+'" alt="תמונת קטגוריה להמחשה" loading="lazy"></span>';
   }
   const useThumb=!special&&mode==="card"&&e.thumbnail_ready===true&&e.thumbnail_url;
   const src=escapeHtml(special||(useThumb?e.thumbnail_url:e.image_url));
@@ -309,12 +305,7 @@ function defaultCategoryImage(e){
   const raw=String(e?.category||"");
   const cat=DEFAULT_IMAGE_CATEGORIES.has(raw)?raw:(raw==="workshop"?"exhibition":"community");
   const sub=String(e?.subcategory||"").replace(/[^a-z0-9-]/g,"");
-  const seniorsPhoto={"senior-trips":"seniors-trips.webp","senior-lectures":"seniors-lectures.webp","senior-workshops":"seniors-workshops.webp"};
-  // A painting photo must not represent unrelated crafts, photography or other workshops.
-  const title=String(e?.title||"")+" "+String(e?.description||"");
-  const isPaintingWorkshop=/ציור|צייר|אקריליק|צבעי מים|קנבס|מכחול|אמנות פלסטית/.test(title);
-  const photo=cat==="seniors"&&(sub!=="senior-workshops"||isPaintingWorkshop)?seniorsPhoto[sub]:"";
-  return {primary:"../shared/images/defaults/category-"+cat+".svg",subcategory:photo?"../shared/images/defaults/"+photo:(sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""),subcategorySvg:sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""};
+  return {primary:"../shared/images/defaults/category-"+cat+".svg",subcategory:sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""};
 }
 function defaultCategoryArt(e){
   const paths=defaultCategoryImage(e);
@@ -1003,7 +994,7 @@ function renderResults(){
     const preferred=["music","theatre","standup","kids","cinema","lecture","workshop","sport","exhibition","festival","conference","community","seniors","tour","food"];
     const buckets=new Map();
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
-    const keys=[...buckets.keys()].sort((a,b)=>{
+    const keys=[...buckets.keys()].filter(key=>buckets.get(key).length>=4).sort((a,b)=>{
       const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
       return (ai<0?999:ai)-(bi<0?999:bi);
     });
