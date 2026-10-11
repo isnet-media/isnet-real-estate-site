@@ -1,0 +1,20 @@
+/* Category-first event discovery — Ashdod live, 2026-10-11 */
+#eventsGrid:has(.isnetCategorySection){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;overflow:visible!important;gap:32px!important;padding:0!important;margin:0!important;scroll-snap-type:none!important}
+.isnetCategorySection{width:100%;min-width:0;padding:0 0 25px;border-bottom:1px solid #ffffff24}
+.isnetCategoryTop{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:10px}
+.isnetCategoryTop h3{font:800 clamp(22px,2.5vw,32px)/1.2 Heebo,Assistant,sans-serif;color:#fff;margin:3px 0 5px}
+.isnetCategoryKicker{font:700 12px Assistant,sans-serif;color:#eacb6e}
+.isnetCategoryCount{color:#b8bbc3;font:600 13px Assistant,sans-serif}
+.isnetCategoryArrows{display:flex;gap:8px;flex-shrink:0}
+.isnetCategoryArrows button{border:1px solid #666670;border-radius:9px;background:#292b33;color:#fff;cursor:pointer;width:43px;height:43px;font-size:22px}
+.isnetCategoryArrows button:hover{border-color:#eacb6e;background:#3d3425}
+.isnetCategoryTabs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:thin;margin:8px 0 13px;padding:2px 1px 8px}
+.isnetCategoryTabs button{white-space:nowrap;flex-shrink:0;padding:6px 12px;border:1px solid #555760;border-radius:20px;background:#25272e;color:#e1e1e5;font:600 13px Assistant,sans-serif;cursor:pointer}
+.isnetCategoryTabs button.is-active{background:#eed076;color:#15151a;border-color:#eed076;font-weight:800}
+.isnetCategoryRail{display:flex;flex-wrap:nowrap;gap:15px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:3px;padding:4px 3px 20px;scrollbar-width:thin;scrollbar-color:#64666d transparent;direction:rtl;scroll-behavior:smooth}
+.isnetCategoryRail>.eventCard{flex:0 0 clamp(192px,19vw,260px)!important;width:clamp(192px,19vw,260px)!important;max-width:none!important;scroll-snap-align:start;min-width:0!important;align-self:stretch}
+.isnetCategoryRail>.eventCard[hidden]{display:none!important}
+.isnetCategoryRail .eventMedia{aspect-ratio:4/3}
+@media(max-width:900px){.isnetCategoryRail>.eventCard{flex-basis:235px!important;width:235px!important}}
+@media(max-width:650px){#eventsGrid:has(.isnetCategorySection){gap:20px!important;margin:0!important;padding:0!important}.isnetCategoryTop h3{font-size:23px}.isnetCategoryArrows button{width:34px;height:34px;font-size:18px}.isnetCategoryRail{gap:12px;padding-bottom:14px}.isnetCategoryRail>.eventCard{flex-basis:min(71vw,290px)!important;width:min(71vw,290px)!important}.isnetCategorySection{padding-bottom:12px}}
+@media(prefers-reduced-motion:reduce){.isnetCategoryRail{scroll-behavior:auto!important}}
