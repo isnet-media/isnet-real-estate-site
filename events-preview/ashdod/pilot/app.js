@@ -1035,11 +1035,15 @@ function renderResults(){
     const preferred=["music","theatre","standup","kids","cinema","lecture","workshop","sport","exhibition","festival","conference","community","seniors","tour","food"];
     const buckets=new Map();
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
-    const keys=[...buckets.keys()].filter(key=>buckets.get(key).length>=4).sort((a,b)=>{
+    const activeCinemaCount=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
+    const categoryKeys=[...buckets.keys()].filter(key=>key!=="cinema"&&buckets.get(key).length>=4);
+    if(activeCinemaCount)categoryKeys.push("cinema");
+    const keys=categoryKeys.sort((a,b)=>{
       const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
       return (ai<0?999:ai)-(bi<0?999:bi);
     });
     $("eventsGrid").innerHTML=keys.map((key,index)=>{
+      if(key==="cinema")return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><span class="isnetCategoryKicker">מה עושים באשדוד</span><h3><a href="cinema.html">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים עם שעות הקרנה</span></div><a class="cinemaDetails" href="cinema.html">כל הסרטים והשעות ←</a></div></section>';
       const items=buckets.get(key);
       const def=taxonomy.find(t=>t.id===key);
       const label=def?.label||catLabels[key]||key;
