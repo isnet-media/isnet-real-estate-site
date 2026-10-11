@@ -308,12 +308,30 @@ function defaultCategoryImage(e){
   const raw=String(e?.category||"");
   const cat=DEFAULT_IMAGE_CATEGORIES.has(raw)?raw:(raw==="workshop"?"exhibition":"community");
   const sub=String(e?.subcategory||"").replace(/[^a-z0-9-]/g,"");
-  const seniorsPhoto={"senior-trips":"seniors-trips.webp","senior-lectures":"seniors-lectures.webp","senior-workshops":"seniors-workshops.webp"};
-  // A painting photo must not represent unrelated crafts, photography or other workshops.
-  const title=String(e?.title||"")+" "+String(e?.description||"");
-  const isPaintingWorkshop=/ציור|צייר|אקריליק|צבעי מים|קנבס|מכחול|אמנות פלסטית/.test(title);
-  const photo=cat==="seniors"&&(sub!=="senior-workshops"||isPaintingWorkshop)?seniorsPhoto[sub]:"";
-  return {primary:"../shared/images/defaults/category-"+cat+".svg",subcategory:photo?"../shared/images/defaults/"+photo:(sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""),subcategorySvg:sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""};
+  const base="../shared/images/defaults/";
+  const subSvg=sub&&cat===raw?base+cat+"-"+sub+".svg":"";
+  const primary=base+"category-"+cat+".svg";
+  // Only use illustration photos for clearly identified activity types.
+  // The WebP files are optional: until uploaded, the existing SVGs remain available.
+  const title=String(e?.title||"");
+  const rules=[
+    [/ציור|צייר|אקריליק|צבעי מים|מכחול|קנבס/,"senior-painting.webp"],
+    [/סריגה|רקמה|מלאכת יד|חרוזים|תכשיטנות|מקרמה/,"senior-handcraft.webp"],
+    [/בישול|אפייה|שף|מטבח|קולינר/,"senior-cooking.webp"],
+    [/מחשב|סמארטפון|טלפון חכם|דיגיטל|אינטרנט|טכנולוגיה/,"senior-digital.webp"],
+    [/יוגה|פילאטיס|התעמלות|כושר|תנועה|מתיחות/,"senior-fitness.webp"],
+    [/סיור|טיול|מטייל|הליכה מודרכת/,"senior-guided-tour.webp"],
+    [/הרצאה|שיחה עם|מפגש עם מרצה/,"senior-lecture.webp"],
+    [/הצגה|תיאטרון/,"senior-theater.webp"],
+    [/קולנוע|סרט/,"senior-cinema.webp"],
+    [/מופע מוזיק|שירה בציבור|מוזיקה|קונצרט|זמר/,"senior-live-music.webp"],
+    [/ברידג'|קלפים|משחקי קופסה|שחמט|רמי/,"senior-board-games.webp"],
+    [/מפגש חברתי|קפה חברתי|בוקר חברתי/,"senior-social-coffee.webp"]
+  ];
+  const matched=cat==="seniors"?rules.find(([pattern])=>pattern.test(title)):null;
+  const bySub={"senior-trips":"senior-guided-tour.webp","senior-lectures":"senior-lecture.webp","senior-music":"senior-live-music.webp","senior-sport":"senior-fitness.webp","senior-digital":"senior-digital.webp","senior-social":"senior-social-coffee.webp"};
+  const photo=matched?.[1]||(cat==="seniors"?bySub[sub]:"");
+  return {primary,subcategory:photo?base+"ashdod-seniors/"+photo:subSvg,subcategorySvg:subSvg};
 }
 function defaultCategoryArt(e){
   const paths=defaultCategoryImage(e);
