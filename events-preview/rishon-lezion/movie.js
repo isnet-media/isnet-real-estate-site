@@ -6,9 +6,10 @@ function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;",
 function localDate(s){const [y,m,d]=String(s||"").split("-").map(Number);return new Date(y,m-1,d)}
 function movieUrl(id){return "movie.html?id="+encodeURIComponent(id)}
 function venueLabel(id){return id==="cinema-city"?"סינמה סיטי ראשון לציון":"פלאנט ראשון לציון"}
+function cinemaToday(){return new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
 function allDates(movie){
   const dates=new Set();
-  movie.venues.forEach(v=>Object.keys(v.schedule||{}).forEach(d=>dates.add(d)));
+  movie.venues.forEach(v=>Object.keys(v.schedule||{}).filter(d=>d>=cinemaToday()).forEach(d=>dates.add(d)));
   return [...dates].sort();
 }
 function renderHero(movie){
@@ -24,7 +25,10 @@ function renderHero(movie){
   $("heroMeta").innerHTML=[
     movie.venues.length===2?"מוצג בשני בתי קולנוע":movie.venues[0]?.name,
     dates.length?dates.length+" ימי הקרנה מעודכנים":"השעות מתעדכנות",
-    movie.trailer_youtube_id?"טריילר זמין":null
+    movie.trailer_youtube_id?"טריילר זמין":null,
+    movie.runtime_minutes?movie.runtime_minutes+" דקות":null,
+    movie.age_rating,
+    (movie.genres||[]).join(" · ")
   ].filter(Boolean).map(x=>'<span>'+escapeHtml(x)+'</span>').join("");
   if(movie.trailer_youtube_id){
     const img="https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg";
@@ -37,16 +41,21 @@ function renderHero(movie){
     $("heroTrailer").hidden=true;
   }
 }
+function screeningLanguage(venue,date,time){
+  const languages=[...new Set((venue.sessions||[]).filter(s=>s.date===date&&s.time===time).map(s=>s.dubbed_language).filter(Boolean))];
+  const labels={he:"עברית",ru:"רוסית",en:"אנגלית",fr:"צרפתית"};
+  return languages.map(l=>"מדובב: "+(labels[l]||l)).join(" / ");
+}
 function renderSchedules(movie){
   $("cinemaSchedules").innerHTML=movie.venues.map(v=>{
-    const dates=Object.keys(v.schedule||{}).sort();
+    const dates=Object.keys(v.schedule||{}).filter(d=>d>=cinemaToday()).sort();
     const rows=dates.length?dates.map(date=>{
-      const times=(v.schedule[date]||[]).map(t=>'<span class="showtime">'+escapeHtml(t)+'</span>').join("");
+      const times=(v.schedule[date]||[]).map(t=>'<span class="showtime">'+escapeHtml(t)+(screeningLanguage(v,date,t)?' · '+escapeHtml(screeningLanguage(v,date,t)):'')+'</span>').join("");
       return '<div class="dayRow">'+
         '<div class="dayDate"><b>'+escapeHtml(fmtShort.format(localDate(date)))+'</b><span>'+escapeHtml(date.split("-").reverse().join("."))+'</span></div>'+
         '<div class="dayTimes">'+times+'</div>'+
       '</div>';
-    }).join(""):'<div class="noSchedule">השעות המדויקות טרם פורסמו אצלנו. הן ייכנסו אוטומטית בעדכון הקרוב.</div>';
+    }).join(""):'<div class="noSchedule">אין כרגע שעות הקרנה מאומתות במאגר. בדקו באתר הרשמי של בית הקולנוע.</div>';
     return '<section class="cinemaBlock">'+
       '<div class="cinemaBlock__head"><div><span>בית קולנוע</span><h3>'+escapeHtml(v.name)+'</h3></div>'+
       '<span class="screeningCount">'+dates.length+' ימים</span></div>'+
@@ -62,7 +71,7 @@ function renderTrailer(movie){
 }
 function renderSources(movie,updatedAt){
   $("sourceLinks").innerHTML=movie.venues.map(v=>
-    '<a href="'+escapeHtml(v.article_url)+'" target="_blank" rel="noopener"><b>'+escapeHtml(v.name)+'</b><span>מקור הנתונים בראשון נט ↗</span></a>'
+    '<a href="'+escapeHtml(v.article_url)+'" target="_blank" rel="noopener"><b>'+escapeHtml(v.name)+'</b><span>פרטים וכרטיסים באתר המקור ↗</span></a>'
   ).join("");
   if(updatedAt){
     const d=new Date(updatedAt);
@@ -70,7 +79,7 @@ function renderSources(movie,updatedAt){
   }
 }
 function renderRelated(movie,all){
-  let related=all.filter(m=>m.id!==movie.id);
+  let related=all.filter(m=>m.id!==movie.id&&allDates(m).length);
   related.sort((a,b)=>{
     const af=Boolean(a.is_family)===Boolean(movie.is_family)?0:1;
     const bf=Boolean(b.is_family)===Boolean(movie.is_family)?0:1;
@@ -88,8 +97,8 @@ async function init(){
   try{
     const id=new URLSearchParams(location.search).get("id");
     if(!id)throw new Error("missing id");
-    const data=await fetch("data/cinema.json?v=20261005-4").then(r=>{if(!r.ok)throw new Error("data");return r.json()});
-    const movie=(data.movies||[]).find(m=>m.id===id);
+    const data=await fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()});
+    const movie=(data.movies||[]).find(m=>m.id===id||(m.aliases||[]).includes(id));
     if(!movie)throw new Error("movie");
     renderHero(movie);
     renderSchedules(movie);
