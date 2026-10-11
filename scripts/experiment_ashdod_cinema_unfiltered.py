@@ -36,7 +36,7 @@ for key,base in BASES.items():
  try:
   html=get(base);links=movie_links(html,base)
   report["source_page_bytes"]=len(html);report["links_found"]=len(links)
-  for url,title in list(links.items())[:120]:
+  for url,title in list(links.items())[:4]:
    try:
     detail=get(url)
     soup=BeautifulSoup(detail,"html.parser")
@@ -58,3 +58,6 @@ output["movies_with_trailer_candidates"]=sum(bool(x.get("trailer_ids_found")) fo
 Path("cinema-unfiltered-ashdod-report.json").write_text(json.dumps(output,ensure_ascii=False,indent=2),encoding="utf-8")
 print(json.dumps({k:output[k] for k in ("total_detail_pages","movies_with_trailer_candidates")},ensure_ascii=False))
 for r in output["sources"]:print(r["source"],r["status"],"links",r.get("links_found"),"checked",len(r["movies"]),"trailers",sum(bool(x.get("trailer_ids_found")) for x in r["movies"]))
+
+for report in output["sources"]:
+ for row in report["movies"][:4]: print("MEDIA_SAMPLE",json.dumps(row,ensure_ascii=False)[:2200])
