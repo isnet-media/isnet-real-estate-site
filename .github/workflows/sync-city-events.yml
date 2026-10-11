@@ -18,7 +18,7 @@ on:
       - "scripts/test_city_event_intake.py"
       - ".github/workflows/sync-city-events.yml"
   schedule:
-    # Lightweight discovery check once daily. Full event processing runs only for new records.
+    # Scan configured source calendars daily and audit both complete city datasets.
     - cron: "10 5 * * *"
 
 permissions:
@@ -78,16 +78,13 @@ jobs:
           print(f"has_new={'true' if total > 0 else 'false'}")
           PY
 
-      - name: Verify details for newly-added event data
-        if: steps.changes.outputs.has_new == 'true'
+      - name: Verify missing details across city event data
         run: python -u scripts/enrich_smarticket_event_details.py
 
-      - name: Link verified local institutions for newly-added event data
-        if: steps.changes.outputs.has_new == 'true'
+      - name: Link verified local institutions across city event data
         run: python -u scripts/enrich_events_institutions.py
 
-      - name: Audit newly-added event data
-        if: steps.changes.outputs.has_new == 'true'
+      - name: Audit all city event data
         run: python -u scripts/audit_events_institutions.py
 
       - name: Check dataset shape and source audit
