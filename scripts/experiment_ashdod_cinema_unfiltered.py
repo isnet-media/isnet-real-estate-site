@@ -42,7 +42,12 @@ for key,base in BASES.items():
     soup=BeautifulSoup(detail,"html.parser")
     title=title or (soup.select_one("h1").get_text(" ",strip=True) if soup.select_one("h1") else "")
     vids=extract_youtube(detail)
-    report["movies"].append({"title":title,"url":url,"trailer_ids_found":vids,"has_description":bool(soup.select_one('meta[name="description"]'))})
+    media_tags=[{"tag":t.name,"src":str(t.get("src") or t.get("data-src") or "")[:180]} for t in soup.select("iframe[src],iframe[data-src],video[src],source[src]")][:8]
+    hints=[]
+    for term in ("youtube","youtube.com","youtu.be","vimeo","trailer","videoUrl","VideoUrl","טריילר","jwplayer","player"):
+     count=detail.lower().count(term.lower())
+     if count:hints.append({"term":term,"count":count})
+    report["movies"].append({"title":title,"url":url,"trailer_ids_found":vids,"has_description":bool(soup.select_one('meta[name="description"]')),"video_hints":hints,"media_tags":media_tags})
    except Exception as e:report["movies"].append({"title":title,"url":url,"error":str(e)[:150]})
    time.sleep(.3)
   report["status"]="scanned"
