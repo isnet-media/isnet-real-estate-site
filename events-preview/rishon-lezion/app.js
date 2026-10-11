@@ -275,8 +275,9 @@ function eventImageHTML(e,mode="card"){
     const paths=defaultCategoryImage(e);
     const primary=fallback||paths.primary;
     const preferred=paths.subcategory||primary;
+    const secondary=paths.subcategorySvg&&paths.subcategorySvg!==preferred?paths.subcategorySvg:primary;
     if(!preferred)return "";
-    return '<span class="eventArtStage is-category-image"><img class="eventArtMain eventArtFull" src="'+escapeHtml(preferred)+'" alt="תמונת קטגוריה להמחשה" loading="lazy" data-primary-fallback="'+escapeHtml(primary)+'" onerror="if(this.dataset.primaryFallback && !this.dataset.triedPrimary && this.src!==new URL(this.dataset.primaryFallback,location.href).href){this.dataset.triedPrimary=\'1\';this.src=this.dataset.primaryFallback}else{this.remove()}"></span>';
+    return '<span class="eventArtStage is-category-image"><img class="eventArtMain eventArtFull" src="'+escapeHtml(preferred)+'" alt="תמונת קטגוריה להמחשה" loading="lazy" data-secondary-fallback="'+escapeHtml(secondary)+'" data-primary-fallback="'+escapeHtml(primary)+'" onerror="if(!this.dataset.triedSecondary && this.dataset.secondaryFallback && this.src!==new URL(this.dataset.secondaryFallback,location.href).href){this.dataset.triedSecondary=\'1\';this.src=this.dataset.secondaryFallback}else if(!this.dataset.triedPrimary && this.dataset.primaryFallback && this.src!==new URL(this.dataset.primaryFallback,location.href).href){this.dataset.triedPrimary=\'1\';this.src=this.dataset.primaryFallback}else{this.remove()}"></span>';
   }
   const useThumb=!special&&mode==="card"&&e.thumbnail_ready===true&&e.thumbnail_url;
   const src=escapeHtml(special||(useThumb?e.thumbnail_url:e.image_url));
@@ -310,7 +311,7 @@ function defaultCategoryImage(e){
   const sub=String(e?.subcategory||"").replace(/[^a-z0-9-]/g,"");
   const seniorsPhoto={"senior-trips":"seniors-trips.webp","senior-lectures":"seniors-lectures.webp","senior-workshops":"seniors-workshops.webp"};
   const photo=cat==="seniors"?seniorsPhoto[sub]:"";
-  return {primary:"../shared/images/defaults/category-"+cat+".svg",subcategory:photo?"../shared/images/defaults/"+photo:(sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":"")};
+  return {primary:"../shared/images/defaults/category-"+cat+".svg",subcategory:photo?"../shared/images/defaults/"+photo:(sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""),subcategorySvg:sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""};
 }
 function defaultCategoryArt(e){
   const paths=defaultCategoryImage(e);
