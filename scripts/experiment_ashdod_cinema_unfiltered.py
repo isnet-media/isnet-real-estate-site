@@ -67,7 +67,7 @@ for report in output["sources"]:
 
 def norm_title(s):
  s=unicodedata.normalize("NFKC",s or "").strip()
- s=re.sub(r"\\s*[-–—]\\s*(?:מדובב(?: לעברית)?|עם כתוביות)\\s*$","",s)
+ s=re.sub(r"\s*[-–—]\s*(?:מדובב(?: לעברית)?|עם כתוביות)\s*$","",s)
  return re.sub(r"[^0-9a-zא-ת]+","",s.lower())
 dataset_path=Path("events-preview/ashdod/data/cinema.json")
 existing=json.loads(dataset_path.read_text(encoding="utf-8"))
@@ -97,5 +97,5 @@ if os.environ.get("ISNET_PUBLISH_FRESH")=="1" and len(matched)>=3:
   dest["trailer_youtube_id"]=item["trailer_id"]
   dest["trailer_source_url"]=item["source_url"]
   dest["trailer_source_name"]="HOT Cinema Ashdod - official embedded trailer"
- dataset_path.write_text(json.dumps(existing,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+ dataset_path.write_text(json.dumps(existing,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
  print("PUBLISHED_FRESH_TRAILERS",len(matched))
