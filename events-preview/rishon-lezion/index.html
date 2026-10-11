@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="dark-preview-desktop.css?v=20261011-2">
   <link rel="stylesheet" href="dark-preview-editorial-v3.css?v=20261011-2">
   <link rel="stylesheet" href="isnet-category-rails.css?v=20261011-1">
+  <link rel="stylesheet" href="isnet-places-menu.css?v=20261011-1">
 
 <style>
 /* Distinct editorial treatments for lecture cards. The actual six generated
@@ -68,6 +69,18 @@
       <a class="siteTopbar__brand siteTopbar__events" href="./" aria-label="לעמוד הראשי של מה עושים בראשון לציון" title="לעמוד הראשי של מה עושים בראשון לציון">
         <img src="assets/branding/what-to-do-ashdod.svg" width="420" height="150" alt="מה עושים בראשון לציון" decoding="async">
       </a>
+      <nav class="isnetPlacesMenu" aria-label="מקומות ומוסדות בעיר">
+        <details><summary>מקומות ומוסדות <span aria-hidden="true">▾</span></summary>
+          <div class="isnetPlacesMenu__items">
+            <a href="places.html?category=culture">מוסדות תרבות</a>
+            <a href="places.html?category=parks">פארקים</a>
+            <a href="places.html?category=nature">טבע וטיולים</a>
+            <a href="places.html?category=beaches">חופים</a>
+            <a href="places.html?category=attractions">אטרקציות</a>
+            <a href="places.html?category=must-see">מקומות שכדאי להכיר</a>
+          </div>
+        </details>
+      </nav>
     </div>
   </header>
   <header class="hero">
@@ -225,20 +238,7 @@
       </div>
     </section>
 
-    <section class="section isnetSecondaryDiscovery">
-      <div class="sectionHead">
-        <div><span class="sectionHead__kicker">לפי מצב הרוח</span><h2>מה מתחשק לכם?</h2></div>
-      </div>
-      <div id="categoryGrid" class="categoryGrid"></div>
-      <div class="fixedCategoryGrid" aria-label="מקומות קבועים בראשון לציון">
-        <a class="fixedCategoryCard" href="places.html?category=parks"><span>פארקים בראשון לציון</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=nature"><span>טבע וטיולים</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=beaches"><span>החופים בראשון לציון</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=attractions"><span>אטרקציות</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=culture"><span>מוסדות תרבות בראשון לציון</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=must-see"><span>מקומות שחייבים להכיר</span><b>←</b></a>
-      </div>
-    </section>
+    <div id="categoryGrid" hidden aria-hidden="true"></div>
   </main>
 
   <div id="trailerModal" class="trailerModal" hidden>
