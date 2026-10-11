@@ -998,9 +998,13 @@ function renderResults(){
       const label=def?.label||catLabels[key]||key;
       const subDefs=def?.subcategories||[];
       const present=[...new Set(items.map(e=>e.subcategory).filter(Boolean))];
-      const subs=present.map(id=>({id,label:subDefs.find(s=>s.id===id)?.label||id}));
+      const counts=new Map(present.map(id=>[id,items.filter(e=>e.subcategory===id).length]));
+      const subs=[
+        ...subDefs.map(s=>({id:s.id,label:s.label,count:counts.get(s.id)||0})),
+        ...present.filter(id=>!subDefs.some(s=>s.id===id)).map(id=>({id,label:id,count:counts.get(id)||0}))
+      ];
       const railId="isnetCategoryRail"+index;
-      const tabs=subs.length?'<div class="isnetCategoryTabs" aria-label="תתי קטגוריות של '+escapeHtml(label)+'"><button type="button" class="is-active" data-rail-sub="" aria-pressed="true">הכול</button>'+subs.map(s=>'<button type="button" data-rail-sub="'+escapeHtml(s.id)+'" aria-pressed="false">'+escapeHtml(s.label)+'</button>').join("")+'</div>':"";
+      const tabs=subs.length?'<div class="isnetCategoryTabs" aria-label="תתי קטגוריות של '+escapeHtml(label)+'"><button type="button" class="is-active" data-rail-sub="" aria-pressed="true">הכול</button>'+subs.map(s=>'<button type="button" data-rail-sub="'+escapeHtml(s.id)+'" aria-pressed="false"'+(s.count?'':' disabled title="אין כרגע אירועים בתת־קטגוריה זו"')+'>'+escapeHtml(s.label)+' <small>('+s.count+')</small></button>').join("")+'</div>':"";
       return '<section class="isnetCategorySection" data-category-section="'+escapeHtml(key)+'"><div class="isnetCategoryTop"><div><span class="isnetCategoryKicker">מה עושים באשדוד</span><h3>'+escapeHtml(label)+'</h3><span class="isnetCategoryCount">'+items.length+' אירועים</span></div><div class="isnetCategoryArrows"><button type="button" data-category-move="start" aria-label="הקודם ב'+escapeHtml(label)+'">→</button><button type="button" data-category-move="end" aria-label="הבא ב'+escapeHtml(label)+'">←</button></div></div>'+tabs+'<div class="isnetCategoryRail" id="'+railId+'" tabindex="0" aria-label="אירועים: '+escapeHtml(label)+'">'+items.map(eventCard).join("")+'</div></section>';
     }).join("");
     const itemsById=new Map(arr.map(e=>[String(e.event_id),e]));
