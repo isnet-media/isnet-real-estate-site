@@ -309,7 +309,10 @@ function defaultCategoryImage(e){
   const cat=DEFAULT_IMAGE_CATEGORIES.has(raw)?raw:(raw==="workshop"?"exhibition":"community");
   const sub=String(e?.subcategory||"").replace(/[^a-z0-9-]/g,"");
   const seniorsPhoto={"senior-trips":"seniors-trips.webp","senior-lectures":"seniors-lectures.webp","senior-workshops":"seniors-workshops.webp"};
-  const photo=cat==="seniors"?seniorsPhoto[sub]:"";
+  // A painting photo must not represent unrelated crafts, photography or other workshops.
+  const title=String(e?.title||"")+" "+String(e?.description||"");
+  const isPaintingWorkshop=/ציור|צייר|אקריליק|צבעי מים|קנבס|מכחול|אמנות פלסטית/.test(title);
+  const photo=cat==="seniors"&&(sub!=="senior-workshops"||isPaintingWorkshop)?seniorsPhoto[sub]:"";
   return {primary:"../shared/images/defaults/category-"+cat+".svg",subcategory:photo?"../shared/images/defaults/"+photo:(sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""),subcategorySvg:sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""};
 }
 function defaultCategoryArt(e){
