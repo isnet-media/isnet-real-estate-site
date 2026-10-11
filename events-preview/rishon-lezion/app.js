@@ -308,7 +308,9 @@ function defaultCategoryImage(e){
   const raw=String(e?.category||"");
   const cat=DEFAULT_IMAGE_CATEGORIES.has(raw)?raw:(raw==="workshop"?"exhibition":"community");
   const sub=String(e?.subcategory||"").replace(/[^a-z0-9-]/g,"");
-  return {primary:"../shared/images/defaults/category-"+cat+".svg",subcategory:sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":""};
+  const seniorsPhoto={"senior-trips":"seniors-trips.webp","senior-lectures":"seniors-lectures.webp","senior-workshops":"seniors-workshops.webp"};
+  const photo=cat==="seniors"?seniorsPhoto[sub]:"";
+  return {primary:"../shared/images/defaults/category-"+cat+".svg",subcategory:photo?"../shared/images/defaults/"+photo:(sub&&cat===raw?"../shared/images/defaults/"+cat+"-"+sub+".svg":"")};
 }
 function defaultCategoryArt(e){
   const paths=defaultCategoryImage(e);
