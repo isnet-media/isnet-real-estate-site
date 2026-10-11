@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="isnet-category-rails.css?v=20261011-2">
   <link rel="stylesheet" href="isnet-places-menu.css?v=20261011-1">
   <link rel="stylesheet" href="isnet-site-menu.css?v=20261011-1">
+  <link rel="stylesheet" href="isnet-compact-toolbar.css?v=20261011-1">
 
 <style>
 /* Distinct editorial treatments for lecture cards. The actual six generated
@@ -143,40 +144,7 @@
   </header>
 
   <main class="shell">
-    <section class="section dateSection">
-      <button id="resetDate" class="textButton dateSection__reset" type="button" aria-label="בחרו תאריך"></button>
-      <div id="calendarBox" class="calendarBox" hidden>
-        <div class="calendarTop">
-          <div class="calendarViewSwitch" aria-label="תצוגת יומן">
-            <button id="weekViewButton" class="is-active" type="button">שבוע</button>
-            <button id="monthViewButton" type="button">חודש</button>
-          </div>
 
-          <div class="calendarPeriodNav">
-            <button id="calendarPrev" class="calendarArrow" type="button" aria-label="תקופה קודמת">›</button>
-            <select id="calendarMonthSelect" class="calendarMonthSelect" aria-label="בחירת חודש"></select>
-            <button id="calendarApply" class="calendarApply calendarApply--inline" type="button">הצג אירועי השבוע</button>
-            <button id="calendarAllDates" class="calendarAllDates" type="button">כל התאריכים</button>
-            <button id="calendarNext" class="calendarArrow" type="button" aria-label="תקופה הבאה">‹</button>
-          </div>
-        </div>
-
-        <div id="calendarPeriodLabel" class="calendarPeriodLabel" aria-live="polite" hidden></div>
-        <div id="calendarSelectionText" class="calendarSelectionText" hidden></div>
-
-        <div id="weekCalendar" class="weekCalendar">
-          <div id="dateRail" class="dateRail" aria-label="בחירת תאריך"></div>
-        </div>
-
-        <div id="monthCalendar" class="monthCalendar" hidden>
-          <div class="monthWeekdays" aria-hidden="true">
-            <span>א׳</span><span>ב׳</span><span>ג׳</span><span>ד׳</span><span>ה׳</span><span>ו׳</span><span>ש׳</span>
-          </div>
-          <div id="monthGrid" class="monthGrid" aria-label="יומן חודשי"></div>
-        </div>
-
-      </div>
-    </section>
 
 
 
@@ -232,6 +200,7 @@
     </section>
 
     <section class="section results">
+      <div class="isnetCompactToolbar">
       <div class="resultsTop">
         <div>
           <span class="sectionHead__kicker">כל העיר במקום אחד</span>
@@ -247,6 +216,41 @@
             <option value="priceHigh">מחיר גבוה</option>
           </select>
         </div>
+    <section class="section dateSection">
+      <button id="resetDate" class="textButton dateSection__reset" type="button" aria-label="בחרו תאריך"></button>
+      <div id="calendarBox" class="calendarBox" hidden>
+        <div class="calendarTop">
+          <div class="calendarViewSwitch" aria-label="תצוגת יומן">
+            <button id="weekViewButton" class="is-active" type="button">שבוע</button>
+            <button id="monthViewButton" type="button">חודש</button>
+          </div>
+
+          <div class="calendarPeriodNav">
+            <button id="calendarPrev" class="calendarArrow" type="button" aria-label="תקופה קודמת">›</button>
+            <select id="calendarMonthSelect" class="calendarMonthSelect" aria-label="בחירת חודש"></select>
+            <button id="calendarApply" class="calendarApply calendarApply--inline" type="button">הצג אירועי השבוע</button>
+            <button id="calendarAllDates" class="calendarAllDates" type="button">כל התאריכים</button>
+            <button id="calendarNext" class="calendarArrow" type="button" aria-label="תקופה הבאה">‹</button>
+          </div>
+        </div>
+
+        <div id="calendarPeriodLabel" class="calendarPeriodLabel" aria-live="polite" hidden></div>
+        <div id="calendarSelectionText" class="calendarSelectionText" hidden></div>
+
+        <div id="weekCalendar" class="weekCalendar">
+          <div id="dateRail" class="dateRail" aria-label="בחירת תאריך"></div>
+        </div>
+
+        <div id="monthCalendar" class="monthCalendar" hidden>
+          <div class="monthWeekdays" aria-hidden="true">
+            <span>א׳</span><span>ב׳</span><span>ג׳</span><span>ד׳</span><span>ה׳</span><span>ו׳</span><span>ש׳</span>
+          </div>
+          <div id="monthGrid" class="monthGrid" aria-label="יומן חודשי"></div>
+        </div>
+
+      </div>
+    </section>
+      </div>
       </div>
 
       <div id="activeFilters" class="activeFilters"></div>
