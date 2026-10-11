@@ -272,8 +272,11 @@ function eventImageHTML(e,mode="card"){
   const special=specialEventArt(e);
   if(!special&&!hasTrustedSourceImage(e)){
     const fallback=fallbackImage(e);
-    if(!fallback)return "";
-    return '<span class="eventArtStage is-category-image"><img class="eventArtMain eventArtFull" src="'+escapeHtml(fallback)+'" alt="תמונת קטגוריה להמחשה" loading="lazy"></span>';
+    const paths=defaultCategoryImage(e);
+    const primary=fallback||paths.primary;
+    const preferred=paths.subcategory||primary;
+    if(!preferred)return "";
+    return '<span class="eventArtStage is-category-image"><img class="eventArtMain eventArtFull" src="'+escapeHtml(preferred)+'" alt="תמונת קטגוריה להמחשה" loading="lazy" data-primary-fallback="'+escapeHtml(primary)+'" onerror="if(this.dataset.primaryFallback && !this.dataset.triedPrimary && this.src!==new URL(this.dataset.primaryFallback,location.href).href){this.dataset.triedPrimary=\'1\';this.src=this.dataset.primaryFallback}else{this.remove()}"></span>';
   }
   const useThumb=!special&&mode==="card"&&e.thumbnail_ready===true&&e.thumbnail_url;
   const src=escapeHtml(special||(useThumb?e.thumbnail_url:e.image_url));
