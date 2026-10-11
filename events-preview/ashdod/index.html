@@ -3,11 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#07162b">
+  <meta name="theme-color" content="#101115">
   <title>מה עושים באשדוד? | מבית אשדוד נט</title>
   <meta name="description" content="כל האירועים, ההופעות, הסטנדאפ, הילדים, ההצגות, ההרצאות והתערוכות באשדוד במקום אחד.">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Heebo:wght@500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css?v=20261010-inline-subtypes4">
   <link rel="stylesheet" href="publisher-brand.css?v=20261008-dualbrand3">
+  <link rel="stylesheet" href="editorial-live-base-v3.css?v=20261011-2">
+  <link rel="stylesheet" href="dark-preview-desktop.css?v=20261011-2">
+  <link rel="stylesheet" href="dark-preview-editorial-v3.css?v=20261011-2">
 
 <style>
 /* Distinct editorial treatments for lecture cards. The actual six generated
@@ -137,20 +140,7 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="sectionHead">
-        <div><span class="sectionHead__kicker">לפי מצב הרוח</span><h2>מה מתחשק לכם?</h2></div>
-      </div>
-      <div id="categoryGrid" class="categoryGrid"></div>
-      <div class="fixedCategoryGrid" aria-label="מקומות קבועים באשדוד">
-        <a class="fixedCategoryCard" href="places.html?category=parks"><span>פארקים באשדוד</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=nature"><span>טבע וטיולים</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=beaches"><span>החופים באשדוד</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=attractions"><span>אטרקציות</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=culture"><span>מוסדות תרבות באשדוד</span><b>←</b></a>
-        <a class="fixedCategoryCard" href="places.html?category=must-see"><span>מקומות שחייבים להכיר</span><b>←</b></a>
-      </div>
-    </section>
+
 
     <section id="cinemaSection" class="section cinemaSection" hidden>
       <div class="cinemaPanel">
@@ -222,12 +212,29 @@
       </div>
 
       <div id="activeFilters" class="activeFilters"></div>
+      <div class="isnetRailHeading"><div><span class="isnetRailEyebrow">לגלות את אשדוד</span><h2>אירועים שמחכים לכם</h2></div><div class="isnetRailArrows"><button type="button" class="isnetRailArrow" data-rail-dir="start" aria-label="לאירועים הקודמים">→</button><button type="button" class="isnetRailArrow" data-rail-dir="end" aria-label="לאירועים הבאים">←</button></div></div>
+      <p class="isnetSwipeHint">החליקו ימינה ושמאלה כדי לראות עוד אירועים</p>
       <div id="eventsGrid" class="eventsGrid"></div>
       <div id="emptyState" class="emptyState" hidden>
         <div class="emptyState__icon">◌</div>
         <h3>לא מצאנו בדיוק את זה</h3>
         <p>נסו להסיר מסנן או לבחור תאריך אחר.</p>
         <button id="resetAll" class="primaryButton">הציגו את כל האירועים</button>
+      </div>
+    </section>
+
+    <section class="section isnetSecondaryDiscovery">
+      <div class="sectionHead">
+        <div><span class="sectionHead__kicker">לפי מצב הרוח</span><h2>מה מתחשק לכם?</h2></div>
+      </div>
+      <div id="categoryGrid" class="categoryGrid"></div>
+      <div class="fixedCategoryGrid" aria-label="מקומות קבועים באשדוד">
+        <a class="fixedCategoryCard" href="places.html?category=parks"><span>פארקים באשדוד</span><b>←</b></a>
+        <a class="fixedCategoryCard" href="places.html?category=nature"><span>טבע וטיולים</span><b>←</b></a>
+        <a class="fixedCategoryCard" href="places.html?category=beaches"><span>החופים באשדוד</span><b>←</b></a>
+        <a class="fixedCategoryCard" href="places.html?category=attractions"><span>אטרקציות</span><b>←</b></a>
+        <a class="fixedCategoryCard" href="places.html?category=culture"><span>מוסדות תרבות באשדוד</span><b>←</b></a>
+        <a class="fixedCategoryCard" href="places.html?category=must-see"><span>מקומות שחייבים להכיר</span><b>←</b></a>
       </div>
     </section>
   </main>
@@ -298,5 +305,6 @@
 })();
 </script>
 
+  <script defer src="dark-preview-ux.js?v=20261011-2"></script>
 </body>
 </html>
