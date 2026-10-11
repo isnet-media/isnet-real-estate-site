@@ -26,3 +26,38 @@
 /* Show the full taxonomy without suggesting unavailable events. */
 .isnetCategoryTabs button:disabled{opacity:.48;cursor:not-allowed;border-style:dashed}
 .isnetCategoryTabs button small{font-size:11px;font-weight:600;opacity:.85}
+
+/* v2: keep headings, filters and cards together; readable cards at every width. */
+.isnetCategorySection{display:block!important;box-sizing:border-box;max-width:100%;overflow:hidden}
+.isnetCategoryTop{margin:0 0 9px!important}
+.isnetCategoryTabs{margin:6px 0 9px!important}
+.isnetCategoryRail{width:100%;max-width:100%;box-sizing:border-box;min-width:0;margin:0!important;align-items:stretch}
+.isnetCategoryRail>.eventCard{margin:0!important;box-sizing:border-box;overflow:hidden;min-height:0!important}
+.isnetCategoryRail .eventBody{min-width:0!important;overflow:hidden;padding:13px!important}
+.isnetCategoryRail .eventBody h3{font-size:19px!important;line-height:1.38!important;min-height:0!important;overflow-wrap:anywhere}
+.isnetCategoryRail .eventInfo__row{font-size:13px!important;line-height:1.45!important}
+.isnetCategoryRail .eventFooter .price{font-size:15px!important}
+.isnetCategoryRail .eventFooter .linkCue{font-size:14px!important}
+.isnetCategoryRail .badges .badge{font-size:11px!important}
+.isnetCategoryRail .categoryBadge .cardCategoryStack strong{color:#152b47!important}
+.isnetCategoryRail .categoryBadge .cardCategoryStack small{color:#345473!important}
+.isnetCategoryRail .eventInfo,.isnetCategoryRail .eventInfo__row{color:#dbdce3!important}
+.isnetCategoryRail .eventInfo__row i{color:#f2ce74!important}
+.isnetCategoryTabs{scroll-snap-type:x proximity}
+.isnetCategoryTabs button{scroll-snap-align:start}
+@media (max-width:650px){
+ .isnetCategorySection{padding-inline:0!important}
+ .isnetCategoryTop{align-items:center}
+ .isnetCategoryTop h3{font-size:21px!important}
+ .isnetCategoryRail{padding-inline:1px!important;overflow-x:auto!important;touch-action:pan-x pan-y}
+ .isnetCategoryRail>.eventCard{flex:0 0 min(76vw,300px)!important;width:min(76vw,300px)!important;max-width:min(76vw,300px)!important}
+ .isnetCategoryTabs{gap:6px}
+ .isnetCategoryTabs button{font-size:12px;padding:6px 9px}
+ .isnetCategoryRail .eventBody h3{font-size:18px!important}
+ .isnetCategoryRail .eventInfo__row{font-size:13px!important}
+ .resultsTop{flex-wrap:wrap!important}
+ .resultsActions{flex-wrap:wrap!important}
+}
+@media (min-width:651px){
+ .isnetCategoryRail>.eventCard{flex:0 0 clamp(220px,20vw,280px)!important;width:clamp(220px,20vw,280px)!important;max-width:280px!important}
+}
