@@ -38,7 +38,7 @@
 const $=id=>document.getElementById(id);
 const catLabels={
   music:"מוזיקה",standup:"סטנדאפ",kids:"ילדים ומשפחה",theatre:"תיאטרון",
-  lecture:"הרצאות",exhibition:"תערוכות",cinema:"קולנוע",
+  lecture:"הרצאות",workshop:"סדנאות ויצירה",seniors:"הגיל השלישי",exhibition:"תערוכות",cinema:"קולנוע",
   festival:"פסטיבלים",community:"קהילה",sport:"ספורט בראשון לציון",tour:"סיורים",other:"אירוע"
 };
 let sportsMeta={branches:{},teams:[]};
@@ -122,12 +122,14 @@ function trustedImage(e){
   return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true);
 }
 function bestImageEvent(occ){
-  return occ.find(e=>trustedImage(e)&&e.thumbnail_ready===true)
+  return occ.find(e=>e.source_content_authoritative&&trustedImage(e))
+    ||occ.find(e=>trustedImage(e)&&e.thumbnail_ready===true)
     ||occ.find(e=>trustedImage(e))
     ||occ[0];
 }
 function richEvent(occ){
-  return occ.find(e=>e.rich_content_status==="enriched")
+  return occ.find(e=>e.source_content_authoritative)
+    ||occ.find(e=>e.rich_content_status==="enriched")
     ||occ.find(e=>e.long_description||e.short_pitch||e.youtube_id)
     ||occ[0];
 }
