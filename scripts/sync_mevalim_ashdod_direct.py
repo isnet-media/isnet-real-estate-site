@@ -37,8 +37,8 @@ def remove_conflicting_address(text):
         if 'אשדוד' not in line and any(city in line for city in OTHER_CITIES):
             removed.append(clean(line));return ''
         return line
-    value=re.sub(r'כתובת\\s*[:：]\\s*[^\\n]+',replace,text or '')
-    value=re.sub(r'חשוב לדעת\\s*(?=אודות האירוע)','',value)
+    value=re.sub(r'כתובת\s*[:：]\s*[^\n]+',replace,text or '')
+    value=re.sub(r'חשוב לדעת\s*(?=אודות האירוע)','',value)
     return value.strip(),removed
 
 def get(url):
