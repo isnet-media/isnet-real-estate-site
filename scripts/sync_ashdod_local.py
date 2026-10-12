@@ -48,10 +48,10 @@ def localize(e,name):
  e['source']='local_'+name;e['local_source_name']=name;e['local_source_refresh']=True
  e['event_id']='local_'+hashlib.sha256((name+'|'+str(ticket_identity(e))+'|'+e['start_date']+'|'+e['start_time']).encode()).hexdigest()[:22]
  e['source_content_authoritative']=True;e['content_locked']=True;e['source_priority']=1
- e['source_fact_status']='date_time_venue_confirmed'
+ e['source_fact_status']='date_time_venue_confirmed' if e.get('start_time') else 'date_venue_confirmed_hour_missing'
  e['source_description']=e.get('description','')
  if not e.get('description'):
-  e['description']=e['series_description']=f"{e['title']} — {e['venue']}. מועד האירוע: {e['start_date']}, בשעה {e['start_time']}."
+  e['description']=e['series_description']=f"{e['title']} — {e['venue']}. מועד האירוע: {e['start_date']}."+(f" שעה: {e['start_time']}." if e.get('start_time') else ' השעה המדויקת טרם פורסמה.')
   e['content_completion_status']='facts_only';e['internal_notes'].append('תיאור המקור חסר; פורסמו עובדות מאומתות בלבד, ללא המצאת תוכנית.')
  else:e['content_completion_status']='source_description'
  e['source_image_kind']='source_card_image' if e.get('image_url') else 'not_available'
@@ -81,6 +81,10 @@ def card(row,name):
   body=p.select_one('.entry-content, .content-text, .page-content, #event-description')
   if body:e['description']=e['series_description']=text(body)
  if name=='ofek_ashdod':
+  # Ofek's structured startDate uses midnight as a date placeholder. Its
+  # explicitly labelled civil-date/hour fields are the verified schedule.
+  e['start_date']=row['start_date'];e['start_time']=row['start_time']
+  if e['start_time']=='00:00':e['start_time']='';e['internal_notes'].append('במקור מופיעה שעת חצות כללית; שעה מדויקת טרם אומתה.')
   place=p.select_one('.eic-place .eic-value')
   if place and text(place) not in ['חיצוני','']:
    e['venue']=text(place)
@@ -251,6 +255,16 @@ def image_policy(events):
 def legacy_local(e):
  return bool(e.get('local_source_refresh') or e.get('source') in SOURCES or any(s.get('name') in SOURCES for s in e.get('sources',[]))) and not str(e.get('source','')).startswith(('supplemental_','mevalim_'))
 def merge(snap):
+ # Repair snapshots produced before the Ofek midnight-metadata correction.
+ def repair_hour(e):
+  if e.get('local_source_name')!='ofek_ashdod' or e.get('start_time')!='00:00':return e
+  try:
+   q=page(e['content_source_url']);field=next((f for f in q.select('.eic-field') if text(f.select_one('.eic-label'))=='שעה'),None);clock=text(field.select_one('.eic-value')) if field else ''
+  except requests.RequestException:clock=''
+  if not re.fullmatch(r'(?:[01]\d|2[0-3]):[0-5]\d',clock) or clock=='00:00':clock='';e.setdefault('internal_notes',[]).append('שעה מדויקת טרם אומתה; אין לפרסם חצות משדה התאריך המובנה.')
+  if e.get('content_completion_status')=='facts_only':e['description']=e['series_description']=''
+  kind=e.get('source_image_kind');e['start_time']=clock;e=localize(e,'ofek_ashdod');e['source_image_kind']=kind;return e
+ with ThreadPoolExecutor(max_workers=4) as pool:snap['events']=list(pool.map(repair_hour,snap['events']))
  path=ROOT/'events-preview/ashdod/data/events.json';data=json.loads(path.read_text());old=data['events'];archive=OUT/'ashdod-local-reset-backup.json'
  removed=[e for e in old if legacy_local(e) and not e.get('local_source_refresh')]
  if removed and not archive.exists():archive.write_text(json.dumps(dict(at=snap['at'],events=removed),ensure_ascii=False,indent=2)+'\n')
@@ -291,7 +305,7 @@ def merge(snap):
   if not any(s['id']==e['subcategory'] for s in cat.get('subcategories',[])):
    cat.setdefault('subcategories',[]).append(dict(id=e['subcategory'],label=e.get('source_subcategory') or ('סדנאות לילדים' if e['subcategory']=='creative-workshops' else 'פעילויות'),requires_mapping=e.get('taxonomy_review_required',False)))
  taxpath.write_text(json.dumps(tax,ensure_ascii=False,indent=2)+'\n')
- report={k:v for k,v in snap.items() if k!='events'};report.update(published_local_occurrences=len(new),legacy_quarantined=len(removed),duplicates_matched=duplicates,existing_images_completed=completed_images,with_text=sum(bool(e.get('description')) for e in new),with_image=sum(bool(e.get('image_url')) for e in new),illustrations=sum(e['source_image_kind']=='illustration' for e in new),total=len(data['events']))
+ report={k:v for k,v in snap.items() if k!='events'};report.update(published_local_occurrences=len(new),legacy_quarantined=len(removed),duplicates_matched=duplicates,existing_images_completed=completed_images,with_text=sum(bool(e.get('description')) for e in new),with_image=sum(bool(e.get('image_url')) for e in new),illustrations=sum(e['source_image_kind']=='illustration' for e in new),missing_verified_hour=sum(not e.get('start_time') for e in new),total=len(data['events']))
  (OUT/'ashdod-local-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k not in ['sources','undated_services']},ensure_ascii=False),flush=True)
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--collect-only',action='store_true');ap.add_argument('--snapshot');a=ap.parse_args();OUT.mkdir(exist_ok=True)
