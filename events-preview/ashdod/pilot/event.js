@@ -123,10 +123,11 @@ function groupPurchaseAction(occ){
   return null;
 }
 function trustedImage(e){
-  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon/i.test(e.image_url));
+  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
 }
 function bestImageEvent(occ){
-  return occ.find(e=>e.source_content_authoritative&&trustedImage(e))
+  return occ.find(e=>e.image_source==="friends"&&trustedImage(e))
+    ||occ.find(e=>e.source_content_authoritative&&trustedImage(e))
     ||occ.find(e=>trustedImage(e)&&e.thumbnail_ready===true)
     ||occ.find(e=>trustedImage(e))
     ||occ[0];

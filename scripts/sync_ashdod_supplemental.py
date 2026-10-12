@@ -58,6 +58,7 @@ def make(src,title,date,time,venue,url,description='',img=None,raw='',uid=None):
  eid=src+'_as_'+hashlib.sha256((str(uid or url)+date+time).encode()).hexdigest()[:18]
  e=dict(event_id=eid,source='supplemental_'+src,city='אשדוד',title=clean(title),start_date=date,start_time=time,venue=clean(venue),status='active',category=cat,subcategory=sub,source_category=raw,source_subcategory=raw,description=text,series_description=text,image_url=img,image_origin_url=img,image_source=src,image_verified=bool(img),image_publishable=bool(img),image_represents_event=bool(img),image_strategy='source_event_image_copy',image_rights_status='publisher_directed_source_reuse',ticket_url=url,purchase_url=url,content_source_url=url,source_content_authoritative=True,content_locked=True,source_priority=2,last_imported_at=datetime.now(Z).isoformat(),internal_notes=[],taxonomy_review_required=sub.startswith('source-'))
  e['source_image_kind']='source_placeholder' if source_placeholder(img) else 'source_event_photo' if img else 'not_available'
+ if source_placeholder(img):e['image_verified']=e['image_publishable']=e['image_represents_event']=False
  if removed:e['removed_conflicting_source_addresses']=removed
  if e['taxonomy_review_required']:e['internal_notes'].append('נפתחה קטגוריה/תת קטגוריה חדשה; שיוך מוצע לקהילה ופנאי: '+(raw or 'ללא קטגוריה במקור'))
  return e
@@ -120,7 +121,9 @@ def detail(e):
   e['source_detail_error']=str(ex)[:200]
   if isinstance(ex,requests.HTTPError) and ex.response is not None and ex.response.url==e.get('purchase_url'):
    e['unavailable_original_purchase_url']=e['purchase_url'];e['purchase_url']=None;e['ticket_url']=e['content_source_url'];e['source_purchase_confirmation_pending']=True
- e['image_verified']=e['image_publishable']=e['image_represents_event']=bool(e.get('image_url'))
+ img=e.get('image_url')
+ e['source_image_kind']='source_placeholder' if source_placeholder(img) else 'source_event_photo' if img else 'not_available'
+ e['image_verified']=e['image_publishable']=e['image_represents_event']=bool(img) and not source_placeholder(img)
  e['description'],removed=remove_conflicting_address(e.get('description'));e['series_description']=e['description']
  return e
 

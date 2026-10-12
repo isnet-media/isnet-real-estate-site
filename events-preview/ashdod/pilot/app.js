@@ -186,7 +186,8 @@ function uniqueOccurrenceDates(e){
 function groupedEvent(e,visibleOccurrence=e){
   const occ=eventOccurrences(e);
   if(occ.length<=1)return e.series_title?{...e,title:eventDisplayTitle(e),description:e.series_description||e.description}:e;
-  const imageEvent=occ.find(x=>hasTrustedSourceImage(x)&&x.thumbnail_ready===true)
+  const imageEvent=occ.find(x=>hasTrustedSourceImage(x)&&x.image_source==="friends")
+    ||occ.find(x=>hasTrustedSourceImage(x)&&x.thumbnail_ready===true)
     ||occ.find(x=>hasTrustedSourceImage(x))
     ||visibleOccurrence;
   const isSportGroup=isRepresentativeHomeGame(visibleOccurrence);
@@ -202,6 +203,8 @@ function groupedEvent(e,visibleOccurrence=e){
     image_credit:imageEvent.image_credit,
     image_publishable:imageEvent.image_publishable,
     image_verified:imageEvent.image_verified,
+    image_represents_event:imageEvent.image_represents_event,
+    source_image_kind:imageEvent.source_image_kind,
     thumbnail_url:imageEvent.thumbnail_url,
     thumbnail_ready:imageEvent.thumbnail_ready,
     thumbnail_ratio:imageEvent.thumbnail_ratio,
@@ -237,7 +240,7 @@ function toggleFavorite(id){
 }
 
 function hasTrustedSourceImage(e){
-  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon/i.test(e.image_url));
+  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
 }
 function fallbackImage(e){
   return state.fallbacks?.[e.category]?.image||state.fallbacks?.other?.image||"";
