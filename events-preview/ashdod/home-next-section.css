@@ -1,16 +1,16 @@
-/* ISNET next-home-section editorial refinements; no event data changes */
-.results{padding-block-start:26px!important}
-.results .isnetCompactToolbar{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:linear-gradient(130deg,#202229,#171a21);padding:25px 26px;margin-bottom:29px;box-shadow:0 16px 35px rgba(0,0,0,.12)}
-.results .resultsTop{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.results .resultsTop h2{font:850 clamp(25px,3vw,39px)/1.18 Heebo,Assistant,sans-serif!important;letter-spacing:-.7px;margin:4px 0 7px;color:#fff}
-.results .sectionHead__kicker{color:#eac477;font-size:12px;font-weight:800}
-.results .resultsPublisher{display:inline-flex;align-items:center;gap:4px;opacity:.86}
-.results #resultCount{font-size:14px;color:#bac0ca}
-.results .resultsActions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.results .resultsActions button,.results .resultsActions select{min-height:43px;border-radius:11px;border:1px solid #555861;background:#2c3039;color:#f6f7f9}
-.results .isnetCategorySection{margin-top:28px}
-.results .isnetCategoryTop{align-items:center;margin-bottom:12px}
-.results .isnetCategoryTop h3{font-size:clamp(24px,2.6vw,33px)!important}
-.results .isnetCategoryCount{color:#adb5c2}
-.results .isnetCategoryRail{gap:13px!important}
-@media(max-width:650px){.results{padding-block-start:12px!important}.results .isnetCompactToolbar{padding:17px 14px;margin-bottom:17px;border-radius:16px}.results .resultsTop{align-items:flex-start;gap:14px}.results .resultsTop h2{font-size:25px!important}.results .resultsActions{width:100%;gap:7px}.results .resultsActions button,.results .resultsActions select{min-height:44px}.results .isnetCategorySection{margin-top:16px}.results .isnetCategoryTop h3{font-size:22px!important}.results .isnetCategoryRail{gap:10px!important}}
+/* ISNET universal category navigation, placed below stage ribbon */
+.isnetNavDiscovery{padding:26px 0 31px;color:#f8fafc;direction:rtl}
+.isnetNavDiscovery__intro{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:20px}
+.isnetNavDiscovery__kicker{color:#e8bb74;font:800 12px Heebo,Assistant,sans-serif}
+.isnetNavDiscovery h2{font:900 clamp(25px,3vw,34px)/1.2 Heebo,Assistant,sans-serif;margin:6px 0;color:#fff}
+.isnetNavDiscovery p{margin:0;color:#bbc0cc;font-size:14px}
+.isnetNavDiscovery__all{color:#e8bb74;font-size:14px;font-weight:800;white-space:nowrap;text-decoration:none}
+.isnetNavDiscovery__grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:11px}
+.isnetNavCategory{min-width:0;min-height:118px;padding:17px 7px 12px;border-radius:15px;background:linear-gradient(145deg,#23262f,#191c24);border:1px solid #ffffff16;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#fff;text-align:center;text-decoration:none;position:relative;transition:transform .18s,border-color .18s,background .18s}
+.isnetNavCategory:hover,.isnetNavCategory:focus-visible{transform:translateY(-3px);border-color:#e5b46a;background:linear-gradient(145deg,#333039,#22242b)}
+.isnetNavCategory__icon{font:800 31px/1 Heebo,Arial,sans-serif;color:#e9b76f;min-height:35px;display:flex;align-items:center}
+.isnetNavCategory__label{font:800 13px/1.4 Heebo,Assistant,sans-serif}
+.isnetNavCategory__arrow{position:absolute;left:9px;bottom:7px;color:#b6a487;font-size:12px;opacity:.6}
+@media(max-width:900px){.isnetNavDiscovery__grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:650px){.isnetNavDiscovery{padding:21px 0 24px}.isnetNavDiscovery__intro{align-items:center;margin-bottom:15px}.isnetNavDiscovery h2{font-size:25px}.isnetNavDiscovery p{font-size:12px;max-width:260px}.isnetNavDiscovery__all{font-size:11px}.isnetNavDiscovery__grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.isnetNavCategory{min-height:89px;padding:11px 4px 10px;border-radius:12px;gap:5px}.isnetNavCategory__icon{font-size:26px;min-height:28px}.isnetNavCategory__label{font-size:12px}.isnetNavCategory__arrow{display:none}}
+@media(prefers-reduced-motion:reduce){.isnetNavCategory{transition:none}}
