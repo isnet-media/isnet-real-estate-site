@@ -63,6 +63,7 @@
 </style>
 
   <link rel="stylesheet" href="pilot/home.css?v=20261011-pilot5">
+  <link rel="stylesheet" href="home-next-section.css?v=20261012-next1">
   <link rel="stylesheet" href="stage-showcase.css?v=20261012-v1">
 </head>
 <body>
@@ -114,32 +115,11 @@
     <div class="hero__glow"></div>
     <div class="shell">
       <div class="hero__content">
-        <p class="eyebrow">יוצאים. מבלים. מגלים.</p>
         <h1 class="heroTitle" aria-label="מה עושים באשדוד?">
           <span class="heroTitle__top">מה עושים</span>
           <span class="heroTitle__bottom">באשדוד?</span>
         </h1>
         <div class="heroTitle__accent" aria-hidden="true"></div>
-        <p class="hero__lead">הופעות, הצגות, ילדים, סטנדאפ, תרבות וכל מה שקורה בעיר — במקום אחד.</p>
-        <div class="searchBox">
-          <button id="searchSubmit" class="searchBox__icon searchBox__submit" type="button" aria-label="חפשו אירועים" title="חפשו אירועים">⌕</button>
-          <input id="searchInput" type="search" autocomplete="off" enterkeyhint="search" aria-label="חיפוש אירועים" placeholder="ספרו מה מתחשק לכם: משהו מצחיק הערב, בילוי עם הילדים בשבת...">
-          <button id="clearSearch" class="searchBox__clear" type="button" aria-label="נקה חיפוש">×</button>
-        </div>
-        <div id="searchFeedback" class="searchFeedback" role="status" aria-live="polite" hidden></div>
-        <div id="quickFilters" class="quickFilters">
-          <button data-quick="all" class="is-active">הכול</button>
-          <button data-quick="today">היום</button>
-          <button data-quick="tomorrow">מחר</button>
-          <button data-quick="weekend">סופ"ש</button>
-          <button data-quick="kids">ילדים ומשפחה</button>
-          <button data-quick="adults">למבוגרים</button>
-          <button data-quick="free">חינם</button>
-          <button data-quick="standup">סטנדאפ</button>
-          <button data-quick="music">הופעות</button>
-          <button data-quick="lecture">הרצאות</button>
-          <button data-quick="theatre">תיאטרון</button>
-        </div>
         <section class="stageShowcase" aria-label="תמונות השראה מעולם הבמה והבידור"><div class="stageShowcase__track" aria-hidden="true"><div class="stageShowcase__set">
               <figure><img src="assets/featured-stage/epic_rock_show__carousel_640x480.webp" alt="" loading="lazy" decoding="async"></figure>
               <figure><img src="assets/featured-stage/ballet_swan_lake_moonlight__carousel_640x480.webp" alt="" loading="lazy" decoding="async"></figure>
@@ -166,6 +146,42 @@
   </header>
 
   <main class="shell">
+  <section class="isnetNavDiscovery" aria-label="כל האפשרויות לבילוי באשדוד"><nav class="isnetNavDiscovery__primary" aria-label="תחומי בילוי מרכזיים">
+    <a class="isnetNavFeature isnetNavFeature--gold" href="./?category=music"><span class="isnetNavFeature__icon" aria-hidden="true">◈</span><span class="isnetNavFeature__copy"><strong>הופעות במה</strong><small>הצגות, מוזיקה, סטנדאפ</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>
+    <a class="isnetNavFeature isnetNavFeature--pink" href="./?category=kids"><span class="isnetNavFeature__icon" aria-hidden="true">♧</span><span class="isnetNavFeature__copy"><strong>ילדים</strong><small>מופעים, פעילויות, שעת סיפור</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>
+    <a class="isnetNavFeature isnetNavFeature--blue" href="cinema.html"><span class="isnetNavFeature__icon" aria-hidden="true">▣</span><span class="isnetNavFeature__copy"><strong>קולנוע</strong><small>כל הסרטים בעיר</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>
+    <a class="isnetNavFeature isnetNavFeature--green" href="./?category=seniors"><span class="isnetNavFeature__icon" aria-hidden="true">♧</span><span class="isnetNavFeature__copy"><strong>גימלאים</strong><small>הרצאות, סיורים ופעילויות</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>
+  </nav><nav class="isnetNavDiscovery__secondary" aria-label="קטגוריות נוספות">
+    <a class="isnetNavSmall" href="./?category=lecture"><span aria-hidden="true">◉</span><strong>הרצאות</strong></a>
+    <a class="isnetNavSmall" href="./?category=tour"><span aria-hidden="true">⌁</span><strong>טיולים</strong></a>
+    <a class="isnetNavSmall" href="./?category=exhibition"><span aria-hidden="true">▧</span><strong>תערוכות</strong></a>
+    <a class="isnetNavSmall" href="./?category=sport"><span aria-hidden="true">✧</span><strong>אירועי ספורט</strong></a>
+    <a class="isnetNavSmall" href="./?category=festival"><span aria-hidden="true">✦</span><strong>פסטיבלים</strong></a>
+    <a class="isnetNavSmall" href="./?category=community"><span aria-hidden="true">♡</span><strong>אירועי קהילה</strong></a>
+  </nav>
+    <div class="isnetNavDiscovery__search" aria-label="חיפוש חופשי של בילויים בעיר">
+        <div class="searchBox">
+          <button id="searchSubmit" class="searchBox__icon searchBox__submit" type="button" aria-label="חפשו אירועים" title="חפשו אירועים">⌕</button>
+          <input id="searchInput" type="search" autocomplete="off" enterkeyhint="search" aria-label="חיפוש אירועים" placeholder="ספרו מה מתחשק לכם: משהו מצחיק הערב, בילוי עם הילדים בשבת...">
+          <button id="clearSearch" class="searchBox__clear" type="button" aria-label="נקה חיפוש">×</button>
+        </div>
+        <div id="searchFeedback" class="searchFeedback" role="status" aria-live="polite" hidden></div>
+        <div id="quickFilters" class="quickFilters">
+          <button data-quick="all" class="is-active">הכול</button>
+          <button data-quick="today">היום</button>
+          <button data-quick="tomorrow">מחר</button>
+          <button data-quick="weekend">סופ"ש</button>
+          <button data-quick="kids">ילדים ומשפחה</button>
+          <button data-quick="adults">למבוגרים</button>
+          <button data-quick="free">חינם</button>
+          <button data-quick="standup">סטנדאפ</button>
+          <button data-quick="music">הופעות</button>
+          <button data-quick="lecture">הרצאות</button>
+          <button data-quick="theatre">תיאטרון</button>
+        </div>
+    </div>
+  </section>
+
 
 
 
