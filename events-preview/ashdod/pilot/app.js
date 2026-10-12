@@ -1046,7 +1046,15 @@ function renderResults(){
       return (ai<0?999:ai)-(bi<0?999:bi);
     });
     $("eventsGrid").innerHTML=keys.map((key,index)=>{
-      if(key==="cinema")return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><span class="isnetCategoryKicker">מה עושים באשדוד</span><h3><a href="cinema.html">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים עם שעות הקרנה</span></div><a class="cinemaDetails" href="cinema.html">כל הסרטים והשעות ←</a></div></section>';
+      if(key==="cinema"){
+        const films=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).slice(0,18);
+        const cards=films.map(m=>{
+          const poster=m.poster_url||m.image_url||(m.trailer_youtube_id?'https://i.ytimg.com/vi/'+encodeURIComponent(m.trailer_youtube_id)+'/hqdefault.jpg':'');
+          const image=poster?'<img src="'+escapeHtml(poster)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">':'<span class="homeCinemaCard__fallback">🎬</span>';
+          return '<a class="homeCinemaCard" href="movie.html?id='+encodeURIComponent(m.id)+'" aria-label="פרטים ושעות הקרנה: '+escapeHtml(m.title)+'"><span class="homeCinemaCard__media">'+image+'</span><span class="homeCinemaCard__title">'+escapeHtml(m.title)+'</span><span class="homeCinemaCard__action">לפרטים והקרנות ←</span></a>';
+        }).join("");
+        return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><span class="isnetCategoryKicker">מה עושים באשדוד</span><h3><a href="cinema.html">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים עם שעות הקרנה</span></div><a class="cinemaDetails" href="cinema.html">כל הסרטים והשעות ←</a></div><div class="isnetRailWrap"><div class="isnetCategoryRail homeCinemaRail" tabindex="0" aria-label="סרטי הקולנוע באשדוד">'+cards+'</div></div></section>';
+      }
       const items=buckets.get(key);
       const def=taxonomy.find(t=>t.id===key);
       const label=def?.label||catLabels[key]||key;
