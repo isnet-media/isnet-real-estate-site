@@ -62,6 +62,7 @@ function nextWeekendRange(){
 }
 function formatTime(t){return t||"השעה תפורסם"}
 function isNonEventActivity(e){
+  if(e?.source_content_authoritative)return false;
   if(String(e?.event_id||"").startsWith("auto_"))return false;
   const text=[e?.title,e?.series_title,e?.description,e?.variant_label].filter(Boolean).join(" ");
   if(e?.category==="classes")return true;

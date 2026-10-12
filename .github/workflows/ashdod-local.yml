@@ -3,11 +3,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '20 6 * * *'
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/ashdod-local.yml'
-      - 'scripts/sync_ashdod_local.py'
 permissions:
   contents: write
 concurrency:
@@ -26,6 +21,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests beautifulsoup4
+      - name: Test recoverable reset and source isolation
+        run: python scripts/test_ashdod_local.py
       - name: Collect fresh local cards and image provenance
         run: python scripts/sync_ashdod_local.py --collect-only
       - name: Merge into current main and publish

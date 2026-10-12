@@ -54,6 +54,11 @@ def card(row,name):
  if matches:
   e=convert(matches[0],name)
   if not e:raise ValueError('detail city mismatch')
+  duration=re.fullmatch(r'PT(?:(\d+)H)?(?:(\d+)M)?',str(matches[0].get('duration','')))
+  if duration:e['duration_minutes']=int(duration[1] or 0)*60+int(duration[2] or 0)
+  location=matches[0].get('location') or {}
+  if isinstance(location,dict) and location.get('streetAddress'):e['venue_address']=location['streetAddress']
+  if str(e.get('price_min_ils')) in ['0','0.00']:e['is_free']=True
  else:e=make(name,row['title'],row['start_date'],row['start_time'],row['venue'],u)
  e['content_source_url']=u
  body=p.select_one('.txt_container, [itemprop=description], .event-description')
