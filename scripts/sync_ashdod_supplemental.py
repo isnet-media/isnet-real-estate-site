@@ -4,7 +4,7 @@ import argparse, json, re, math, hashlib
 from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, parse_qs
 from concurrent.futures import ThreadPoolExecutor
 import requests
 from bs4 import BeautifulSoup
@@ -138,7 +138,8 @@ def collect(src):
    q=page(url);node=q.select_one('#__NEXT_DATA__')
    if not node:raise ValueError('Missing Leaan source state: '+url)
    data=json.loads(node.get_text())['props']['pageProps']
-   for event in objects(data):
+   primary={'data':data.get('data'),'pageData':data.get('initialState',{}).get('pageData',{})}
+   for event in objects(primary):
     if isinstance(event.get('location'),dict) and event['location'].get('city')=='אשדוד' and event.get('event_start'):event['_source_page']=url
    return data
   def safe_state(url):
@@ -160,6 +161,19 @@ def collect(src):
  return list({e['event_id']:e for e in out}.values())
 def baseline():
  p=page('https://www.mevalim.co.il/ashdod/');out=[]
+ config=re.search(r'var mevalimAjax = (\{.*?\});',str(p));ajax=json.loads(config[1]) if config else None
+ for button in p.select('.mevalim_load_more_events__btn'):
+  if button.get('data-is-passed')!='0':continue
+  if not ajax:raise ValueError('Mevalim pagination configuration missing')
+  n=2
+  while True:
+   r=requests.post(ajax['url'],data={'action':'mevalim_load_more_events','nonce':ajax['nonce'],'is_passed':'0','post_id':button['data-table-id'],'page':n,'source_type':button.get('data-source-type','')},timeout=40);r.raise_for_status();j=r.json()
+   if not j.get('success'):raise ValueError('Mevalim load-more failed')
+   fragment=BeautifulSoup(j.get('data',{}).get('content',''),'html.parser');table=p.new_tag('table')
+   for row in fragment.select('tr'):table.append(row)
+   p.append(table)
+   if not j.get('data',{}).get('canLoadMore'):break
+   n+=1
  for table in p.select('table'):
   for tr in table.select('tr'):
    name=tr.select_one('.rgbcode_table_shortcode_table_event_name');day=tr.select_one('.rgbcode_table_shortcode_table_date');tm=tr.select_one('.rgbcode_table_shortcode_table_time')
@@ -175,12 +189,23 @@ def equivalent(a,b):
  if a['start_date']!=b['start_date']:return False
  if a.get('start_time') and b.get('start_time') and a['start_time']!=b['start_time']:return False
  x=norm(a['title']).replace('באשדוד','').replace('תאטרון','תיאטרון').replace('אימי','אמי');y=norm(b['title']).replace('באשדוד','').replace('תאטרון','תיאטרון').replace('אימי','אמי')
+ core=lambda t:norm(re.split(r'\s[-–|]\s',t.replace('באשדוד',''))[0]).replace('תאטרון','תיאטרון').replace('אימי','אמי')
+ ac,bc=core(a['title']),core(b['title']);same_core=len(ac)>=4 and ac==bc
+ named=[['ישראלי','ישראלית'],['רוסיה','רוסי'],['נתי הגעתי']]
+ tags=lambda t:{i for i,terms in enumerate(named) if any(term in t for term in terms)}
+ if tags(a['title']) and tags(b['title']) and tags(a['title'])!=tags(b['title']):same_core=False
  words=lambda t:set(re.findall(r'[א-ת]{2,}',t.replace('באשדוד','')))
  ax,by=words(a['title']),words(b['title']);tokens=len(ax&by)>=3 and (ax<=by or by<=ax)
- return x==y or tokens or (min(len(x),len(y))>=6 and (x in y or y in x))
+ return x==y or same_core or tokens or (min(len(x),len(y))>=6 and (x in y or y in x))
+def ticket_identity(e):
+ u=e.get('purchase_url') or e.get('ticket_url') or e.get('content_source_url') or '';p=urlparse(u);q=parse_qs(p.query);m=re.search(r'/event/(\d+)',p.path)
+ uid=q.get('id') or q.get('event') or ([m[1]] if m else None)
+ return (p.hostname,str(uid[0])) if uid else (p.hostname,p.path.rstrip('/'))
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--collect-only',action='store_true');ap.add_argument('--snapshot');args=ap.parse_args();OUT.mkdir(exist_ok=True)
- if args.snapshot:snap=json.loads(Path(args.snapshot).read_text())
+ if args.snapshot:
+  snap=json.loads(Path(args.snapshot).read_text())
+  (OUT/'ashdod-supplemental-snapshot.json').write_text(json.dumps(snap,ensure_ascii=False,indent=2)+'\n')
  else:
   base=baseline();new=[];status={};excluded=[]
   for src in SOURCES:
@@ -204,12 +229,16 @@ def main():
    if not e.get(key) and previous.get(key):e[key]=previous[key];e['source_detail_incomplete']=True
   e['image_publishable']=e['image_verified']=e['image_represents_event']=bool(e.get('image_url'));new.append(e)
  removed=[];kept=[]
+ preferred=[e for e in old if e.get('source')=='mevalim_direct']
+ new=[e for e in new if not any(equivalent(e,m) for m in preferred)]
  for e in old:
   # Replace matching occurrences only. Never delete unrelated source records.
-  match=next((n for n in new if equivalent(dict(title=e.get('title',''),start_date=e.get('start_date')),n) and str(e.get('start_time') or '')[:5]==n['start_time']),None)
+  match=next((n for n in new if e.get('event_id')==n['event_id']),None)
+  if not match:match=next((n for n in new if e.get('start_date')==n['start_date'] and ((ticket_identity(e)==ticket_identity(n) and ticket_identity(n)[0]) or (equivalent(dict(title=e.get('title',''),start_date=e.get('start_date')),n) and str(e.get('start_time') or '')[:5]==n['start_time']))),None)
+  if not match and e.get('source')!='mevalim_direct' and any(equivalent(e,m) for m in preferred):match=True
   if match and e.get('source')!='mevalim_direct':removed.append(e)
   else:kept.append(e)
- data['events']=kept+new;data.setdefault('stats',{})['events']=len(data['events']);path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+ data['events']=kept+new;data['generated_at']=snap['at'];data['generatedAt']=snap['at'];data.setdefault('stats',{})['events']=len(data['events']);path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  taxpath=OUT/'taxonomy.json';tax=json.loads(taxpath.read_text());cats=tax['primary_categories']
  for e in new:
   cat=next((c for c in cats if c['id']==e['category']),None)
