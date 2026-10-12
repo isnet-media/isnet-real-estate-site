@@ -73,7 +73,7 @@ def collect_row(row,stamp):
         if duration:e['source_duration_text']=duration.group()
         ages=re.search(r'מומלץ לגילאים[^\n]*',text)
         if ages:e['source_age_text']=ages.group()
-        e['details_verified']=True;e['detail_checked_at']=stamp
+        e['details_verified']=bool(text or image);e['detail_checked_at']=stamp
     except Exception as ex:issues.append(type(ex).__name__+': '+str(ex)[:150])
     return e,issues
 def merge(data,new):
@@ -99,8 +99,23 @@ def main():
         assert rows,'Empty source listing'
         with ThreadPoolExecutor(max_workers=4) as pool:result=list(pool.map(lambda row:collect_row(row,stamp),rows))
         new=[e for e,i in result];issues=[{'event_id':e['event_id'],'title':e['title'],'issues':i} for e,i in result if i]
+    # An incomplete detail response must not erase a previously read source card.
+    complete=ROOT/'events-preview/admin/data/mevalim-ashdod-last-complete.json'
+    prior={e['event_id']:e for e in json.loads(complete.read_text()).get('events',[])} if complete.exists() else {}
+    preserved=0
+    for e in new:
+        old=prior.get(e['event_id'],{})
+        if not e.get('description') and old.get('description'):
+            e['description']=old['description'];e['series_description']=old['series_description'];e['source_detail_incomplete']=True;preserved+=1
+        if not e.get('image_url') and old.get('image_url'):
+            for key in ['image_url','image_origin_url','image_source','image_verified','image_publishable','image_represents_event','image_strategy','image_rights_status','image_verified_at','image_credit']:
+                if key in old:e[key]=old[key]
+        if e.get('source_detail_incomplete'):
+            e['details_verified']=old.get('details_verified',False);e['detail_checked_at']=old.get('detail_checked_at')
     out=ROOT/'events-preview/admin/data/mevalim-ashdod-direct-snapshot.json'
     out.write_text(json.dumps({'at':stamp,'source':URL,'events':new,'issues':issues},ensure_ascii=False,indent=2)+'\n')
+    if not preserved and sum(bool(e.get('description') and e.get('image_url')) for e in new)>=len(new)-1:
+        complete.write_text(out.read_text())
     removed=[]
     if not args.collect_only:
         path=ROOT/'events-preview/ashdod/data/events.json';data=json.loads(path.read_text());removed=merge(data,new);path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
@@ -118,7 +133,7 @@ def main():
             if not any(s['id']==e['subcategory'] for s in cat.get('subcategories',[])):
                 cat.setdefault('subcategories',[]).append({'id':e['subcategory'],'label':e['source_category'] or 'לא סווג במקור','requires_mapping':True})
         path.write_text(json.dumps(tax,ensure_ascii=False,indent=2)+'\n')
-    report={'at':stamp,'occurrences':len(new),'descriptions':sum(bool(e['description']) for e in new),'images':sum(bool(e['image_url']) for e in new),'replaced':len(removed),'issues':issues,'published_to_dataset':not args.collect_only}
+    report={'at':stamp,'occurrences':len(new),'descriptions':sum(bool(e['description']) for e in new),'images':sum(bool(e['image_url']) for e in new),'preserved_source_cards':preserved,'replaced':len(removed),'issues':issues,'published_to_dataset':not args.collect_only}
     (ROOT/'events-preview/admin/data/mevalim-ashdod-direct-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:v for k,v in report.items() if k!='issues'},ensure_ascii=False))
 if __name__=='__main__':main()
