@@ -28,6 +28,19 @@ def same_show(old,new):
     b=clean(new['title'])
     ac=norm(re.split(r'\s[-–|]\s',a)[0]);bc=norm(re.split(r'\s[-–|]\s',b)[0])
     return (len(ac)>=5 and ac in norm(b)) or (len(bc)>=5 and bc in norm(a))
+
+OTHER_CITIES=('פתח תקווה','פתח תקוה','תל אביב','ראשון לציון','ירושלים','חיפה','באר שבע','נתניה','הרצליה','רמת גן','גבעתיים','חולון','בת ים','רחובות','יבנה','אשקלון','קרית גת','קריית גת','רעננה','כפר סבא','הוד השרון','מודיעין','נס ציונה','אילת')
+def remove_conflicting_address(text):
+    removed=[]
+    def replace(match):
+        line=match.group(0)
+        if 'אשדוד' not in line and any(city in line for city in OTHER_CITIES):
+            removed.append(clean(line));return ''
+        return line
+    value=re.sub(r'כתובת\\s*[:：]\\s*[^\\n]+',replace,text or '')
+    value=re.sub(r'חשוב לדעת\\s*(?=אודות האירוע)','',value)
+    return value.strip(),removed
+
 def get(url):
     r=requests.get(url,headers=HEAD,timeout=45);r.raise_for_status();return BeautifulSoup(r.text,'html.parser')
 def collect_row(row,stamp):
@@ -112,6 +125,12 @@ def main():
                 if key in old:e[key]=old[key]
         if e.get('source_detail_incomplete'):
             e['details_verified']=old.get('details_verified',False);e['detail_checked_at']=old.get('detail_checked_at')
+    for e in new:
+        text,removed_addresses=remove_conflicting_address(e.get('description'))
+        e['description']=e['series_description']=text
+        if removed_addresses:
+            e.setdefault('internal_notes',[]).append('הוסרה כתובת של עיר אחרת מהתיאור; מקום האירוע נשמר לפי הפניית הרכישה: '+e['venue'])
+            e['removed_conflicting_source_addresses']=removed_addresses
     out=ROOT/'events-preview/admin/data/mevalim-ashdod-direct-snapshot.json'
     out.write_text(json.dumps({'at':stamp,'source':URL,'events':new,'issues':issues},ensure_ascii=False,indent=2)+'\n')
     if not preserved and sum(bool(e.get('description') and e.get('image_url')) for e in new)>=len(new)-1:
