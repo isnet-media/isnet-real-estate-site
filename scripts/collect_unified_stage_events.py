@@ -118,8 +118,8 @@ def mevalim_ticket_extract(soup,page):
     videos=[]
     for a in soup.select("iframe[src],a[href],img[src]"):
         v=a.get("src") or a.get("href") or ""
-        m=re.search(r"(?:img\\.youtube\\.com/vi/|youtube\\.com/embed/|youtu\\.be/)([a-zA-Z0-9_-]{11})",v)
-        if m:videos.append("https://www.youtube.com/watch?v="+m.group(1))
+        video_match=re.search(r"(?:img\\.youtube\\.com/vi/|youtube\\.com/embed/|youtu\\.be/)([a-zA-Z0-9_-]{11})",v)
+        if video_match:videos.append("https://www.youtube.com/watch?v="+video_match.group(1))
     return [{"title":title,"city":city,"venue":venue,"date_time":f"{y}-{m.zfill(2)}-{d.zfill(2)}T{clock}:00",
              "end_time":None,"description":details[0] if details else txtmeta(soup,"description"),
              "image_url":urljoin(page,img) if img else None,"video_url":videos[0] if videos else None,
