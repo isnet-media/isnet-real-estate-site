@@ -41,5 +41,10 @@ class LocalResetTests(unittest.TestCase):
  def test_rich_life_experience_is_not_a_music_genre(self):
   e=self.event('local_ashdod_smarticket');e.update(title='מוצאים עוגן בתוך הסערה | לנשים בלבד',category='music',description='ניסיון החיים העשיר והחוסן שבניתם',internal_notes=[],local_source_name='ashdod_smarticket')
   s.classify_local(e);self.assertEqual(e['category'],'community');self.assertEqual(e['subcategory'],'women-events')
+ def test_primary_schedule_confirms_year_instead_of_short_post_date(self):
+  from bs4 import BeautifulSoup
+  p=BeautifulSoup('<img src="/FilesSrc/Galleries/Pic.jpg" alt="מופע מחול"><div id="PageContent"><h1>מופע מחול</h1><p>הפקת המחול</p><h2>מועדים</h2><table><tr><td>08.03.2027</td><td>שני</td><td>20:00</td><td><a href="tickets.asp?showURL=8224">הזמנה</a></td></tr></table></div>','html.parser')
+  e=s.primary_cards('tarbutashdod','https://www.mishkan-ashdod.co.il/event.asp?event=5717',p,dict(event_date='8.3',location='המשכן',content=dict(rendered='הפקת המחול'),link='https://www.tarbutashdod.com/post'))[0]
+  self.assertEqual(e['start_date'],'2027-03-08');self.assertEqual(e['start_time'],'20:00');self.assertEqual(e['image_url'],'https://www.mishkan-ashdod.co.il/FilesSrc/Galleries/Pic.jpg')
 
 if __name__=='__main__':unittest.main()

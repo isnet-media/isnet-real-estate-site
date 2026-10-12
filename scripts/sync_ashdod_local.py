@@ -17,10 +17,11 @@ OUT=ROOT/'events-preview/admin/data'
 SOURCES={
  'ashdod_smarticket':dict(url='https://ashdod.smarticket.co.il/',parser='smarticket',venue='אשדוד'),
  'mishkan_smarticket':dict(url='https://mishkan-ashdod.smarticket.co.il/',parser='smarticket',venue='המשכן לאמנויות הבמה אשדוד'),
+ 'mishkan_primary':dict(url='https://www.mishkan-ashdod.co.il/events.asp',parser='mishkan_primary',venue='המשכן לאמנויות הבמה אשדוד'),
  'ofek_ashdod':dict(url='https://www.ofek-ashdod.org.il/page.php?type=events',parser='ofek',venue='קתדרת אופק, אשדוד',listing_pages=[dict(url='https://www.ofek-ashdod.org.il/page.php?gr='+str(gr)+'&m=296&type=events',category=cat) for gr,cat in [(644,'tour'),(643,'lecture'),(648,'lecture'),(1140,'workshop')]]),
  'up60':dict(url='https://www.coing.co/Ashdod_up60',parser='coing',venue='אפ 60+, סטרומה 5, אשדוד'),
  'ironit':dict(url='https://www.ironit.org.il/',parser='ironit',venue='אשדוד'),
- 'tarbutashdod':dict(url='https://www.tarbutashdod.com/',parser='ironit',venue='אשדוד'),
+ 'tarbutashdod':dict(url='https://www.tarbutashdod.com/',parser='municipal_posts',venue='אשדוד',public_api='https://www.tarbutashdod.com/wp-json/wp/v2/posts?per_page=50'),
 }
 def get(url,**kw):
  r=requests.get(url,timeout=30,headers={'User-Agent':'ISNET local public event reader/1.0',**kw.pop('headers',{})},**kw);r.raise_for_status();return r
@@ -124,6 +125,55 @@ def coing(name,spec,p):
    else:undated.append(dict(title=title,url=u,reason='אין מועד עתידי ושעה מאומתים בכרטיס; שירות קבוע או הרשמת התעניינות'))
   if not fresh:break
  return out,issues,undated
+def primary_cards(name,u,p,post=None):
+ h=p.select_one('#PageContent h1');title=text(h) or (post or {}).get('title',{}).get('rendered','')
+ if not title:return []
+ body=p.select_one('#PageContent');description=text(body).split('מועדים',1)[0].removeprefix(title).strip()
+ key=re.sub(r'\s+',' ',title).strip().casefold()
+ im=next((i for i in p.select('img[src]') if '/FilesSrc/Galleries/' in i['src'] and key==re.sub(r'\s+',' ',i.get('alt','')).strip().casefold()),None)
+ photo=urljoin(u,im['src']) if im else (post or {}).get('featured_image_url')
+ out=[]
+ for tr in p.select('tr'):
+  cells=tr.find_all('td',recursive=False)
+  if len(cells)<3 or not re.fullmatch(r'\d{1,2}\.\d{1,2}\.\d{4}',text(cells[0])) or not re.fullmatch(r'\d{2}:\d{2}',text(cells[2])):continue
+  d=datetime.strptime(text(cells[0]),'%d.%m.%Y').date().isoformat();clock=text(cells[2]);venue=(post or {}).get('location') or SOURCES['mishkan_primary']['venue']
+  e=make(name,title,d,clock,venue,u,(post or {}).get('content',{}).get('rendered') or description,photo)
+  a=tr.select_one('a[href]');buy=urljoin(u,a['href']) if a else u;e['purchase_url']=e['ticket_url']=buy
+  e['verified_schedule_source_url']=u;e['source_image_kind']='source_card_image' if photo else 'not_available'
+  if post:e['crosscheck_sources']=[post['link']]
+  if future(e):out.append(localize(e,name))
+ return out
+def primary(name,spec,p):
+ links={urljoin(spec['url'],a['href']) for a in p.select('a[href]') if 'event.asp?' in a['href']};out=[];issues=[]
+ def read(u):
+  try:return primary_cards(name,u,page(u)),None
+  except Exception as ex:return [],dict(url=u,error=str(ex)[:250])
+ with ThreadPoolExecutor(max_workers=4) as pool:
+  for rows,error in pool.map(read,sorted(links)):
+   out.extend(rows)
+   if error:issues.append(error)
+ return out,issues,[]
+def municipal(name,spec,p):
+ out=[];issues=[];undated=[];pn=1
+ while True:
+  r=get(spec['public_api'],params={'page':pn});posts=r.json()
+  for post in posts:
+   if post.get('status')!='publish':continue
+   buy=post.get('ticket_link') or '';rows=[]
+   if buy:
+    try:
+     detail=page(buy)
+     if urlparse(buy).hostname=='www.mishkan-ashdod.co.il':rows=primary_cards(name,buy,detail,post)
+     else:
+      for o in ld(detail):
+       e=convert(o,name)
+       if e and future(e):e['crosscheck_sources']=[post['link']];rows.append(localize(e,name))
+    except Exception as ex:issues.append(dict(url=buy,error=str(ex)[:250]))
+   out.extend(rows)
+   if not rows:undated.append(dict(title=BeautifulSoup(post.get('title',{}).get('rendered',''),'html.parser').get_text(),url=post['link'],reason='לא אומתו תאריך עתידי מלא ושעה; אין להסיק שנה מתאריך מקוצר או להפוך מועד הגשת מועמדות לאירוע'))
+  if pn>=int(r.headers.get('X-WP-TotalPages','1')):break
+  pn+=1
+ return out,issues,undated
 def ironit(name,spec,p):
  origins=[(spec['url'],p)];issues=[];out=[];undated=[]
  for a in p.select('a[href]'):
@@ -208,15 +258,24 @@ def merge(snap):
  # preserve only records already rebuilt under this policy, never old generic material.
  failed={name for name,v in snap['sources'].items() if not v.get('ok') or v.get('issues')}
  kept=[e for e in old if not legacy_local(e) or (e.get('local_source_refresh') and e.get('local_source_name') in failed)]
- new=[];duplicates=0
+ new=[];duplicates=0;completed_images=0
  for e in snap['events']:
   classify_local(e)
   match=next((k for k in kept+new if k.get('start_date')==e['start_date'] and str(k.get('start_time') or '')[:5]==e['start_time'] and (equivalent(k,e) or (ticket_identity(k)==ticket_identity(e) and ticket_identity(e)[0]))),None)
   if match:
    if match.get('local_source_refresh'):
+    if e['local_source_name']=='mishkan_primary':
+     for field in ['venue','venue_address','price_min_ils','price_max_ils','is_free']:
+      if match.get(field) is not None:e[field]=match[field]
     if match in kept:kept.remove(match)
     else:new.remove(match)
    else:
+    if e.get('source_image_kind')=='source_card_image' and e.get('image_verified') and (not match.get('image_url') or match.get('source_image_kind') in ['illustration','source_placeholder','not_available'] or any(w in str(match.get('image_url')) for w in ['/placeholders/','no_pic.png'])):
+     completed_images+=1
+     for field in ['image_url','image_origin_url','image_source','image_verified','image_publishable','image_represents_event','source_image_kind','image_strategy','image_review_status']:
+      if field in e:match[field]=e[field]
+     match.pop('image_caption',None)
+    if not match.get('description') and e.get('source_description'):match['description']=match['series_description']=e['source_description']
     match.setdefault('crosscheck_sources',[])
     if e['content_source_url'] not in match['crosscheck_sources']:match['crosscheck_sources'].append(e['content_source_url'])
     duplicates+=1;continue
@@ -232,7 +291,7 @@ def merge(snap):
   if not any(s['id']==e['subcategory'] for s in cat.get('subcategories',[])):
    cat.setdefault('subcategories',[]).append(dict(id=e['subcategory'],label=e.get('source_subcategory') or ('סדנאות לילדים' if e['subcategory']=='creative-workshops' else 'פעילויות'),requires_mapping=e.get('taxonomy_review_required',False)))
  taxpath.write_text(json.dumps(tax,ensure_ascii=False,indent=2)+'\n')
- report={k:v for k,v in snap.items() if k!='events'};report.update(published_local_occurrences=len(new),legacy_quarantined=len(removed),duplicates_matched=duplicates,with_text=sum(bool(e.get('description')) for e in new),with_image=sum(bool(e.get('image_url')) for e in new),illustrations=sum(e['source_image_kind']=='illustration' for e in new),total=len(data['events']))
+ report={k:v for k,v in snap.items() if k!='events'};report.update(published_local_occurrences=len(new),legacy_quarantined=len(removed),duplicates_matched=duplicates,existing_images_completed=completed_images,with_text=sum(bool(e.get('description')) for e in new),with_image=sum(bool(e.get('image_url')) for e in new),illustrations=sum(e['source_image_kind']=='illustration' for e in new),total=len(data['events']))
  (OUT/'ashdod-local-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items() if k not in ['sources','undated_services']},ensure_ascii=False),flush=True)
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--collect-only',action='store_true');ap.add_argument('--snapshot');a=ap.parse_args();OUT.mkdir(exist_ok=True)
@@ -243,6 +302,8 @@ def main():
    try:
     p=page(spec['url'])
     if spec['parser']=='smarticket':rows,issues,services=smart(name,spec,p)
+    elif spec['parser']=='mishkan_primary':rows,issues,services=primary(name,spec,p)
+    elif spec['parser']=='municipal_posts':rows,issues,services=municipal(name,spec,p)
     elif spec['parser']=='ofek':
      raw=extract_ofek_events(p,spec,fetch_once,limit=1000);rows,issues,services=[],[],[]
     elif spec['parser']=='coing':rows,issues,services=coing(name,spec,p)

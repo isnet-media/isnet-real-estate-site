@@ -12,10 +12,11 @@ no longer collects the three local sources it previously owned.
 | --- | --- |
 | Ashdod Smarticket | All dated future listing occurrences; open individual card; structured date, clock, location, price, source description and image. Covers municipal community centres, library, museums, Monart and local programmes advertised there. |
 | Mishkan Smarticket | Same contract, with deduplication against national-board performances. |
+| Mishkan original programme | Read the advertised `events.asp` catalogue and each `event.asp` card. Use its dated schedule table, production description and photograph whose alt text matches the production heading. Fresh ticketing venue/price data is preserved on matching occurrences. |
 | Ofek | Public dated category listings and individual civil date/hour confirmation; seniors activity classification; never infer new recurrence dates from a course brochure. Missing meeting point is explicit. |
 | UP60 Coing | Read the public community id and advertised public paginated listing endpoint; open individual cards. Undated services/interested-registration cards go to the scan report, never get invented dates. |
 | Ironit | Homepage and advertised calendar event links; explicit event schema or source-exported Outlook calendar facts; source booking link, description and event-image provenance. Unsupported calendar structure goes to the report. |
-| Municipal cultural department | Follow its advertised events calendar and cards. Report denied reads; never claim complete coverage after a failed read. |
+| Municipal cultural department | Read the public WordPress post endpoint advertised by its own calendar, including pagination. A shortened date without a year is confirmed against the linked production schedule. Undated calls for submissions remain report entries, not invented events. |
 
 Local source descriptions are preserved when present; a missing description
 gets only a factual title/location/date/hour line. No editorial length test,
@@ -23,7 +24,7 @@ AI rewrite, workshop exclusion or taxonomy gate blocks a dated event. Missing
 categories are noted for mapping. This does not infer a target audience,
 programme, speaker, price or address absent from the source.
 
-Image checks verify the response is an image. Repeated generic imagery, logos,
+Image checks verify image bytes, including JPEG files served as octet-stream. Repeated generic imagery, logos,
 site-root URLs, placeholders and explicit Unsplash imagery are not automatically
 published as event photos. Appropriate existing topical photo-bank illustrations
 are used when available and labelled as illustrations. A source-card image's
