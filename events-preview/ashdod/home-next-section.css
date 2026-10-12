@@ -107,3 +107,14 @@
 .isnetNavDiscovery__search{margin-bottom:15px!important}
 .isnetDateGateway{margin-top:0!important}
 @media(max-width:650px){.isnetNavDiscovery__search{margin-bottom:12px!important}}
+
+/* Populate home cinema rail from the same movie dataset as the cinema page */
+.homeCinemaRail{display:flex!important;overflow-x:auto!important;gap:13px!important;scroll-snap-type:x proximity;padding:4px 2px 14px;direction:rtl}
+.homeCinemaCard{display:flex;flex-direction:column;flex:0 0 182px;width:182px;min-width:0;border:1px solid #3c4554;background:#171c26;border-radius:15px;color:#fff;text-decoration:none;overflow:hidden;scroll-snap-align:start}
+.homeCinemaCard__media{display:grid;place-items:center;aspect-ratio:2/3;background:#232733}
+.homeCinemaCard__media img{width:100%;height:100%;object-fit:cover;display:block}
+.homeCinemaCard__fallback{font-size:32px}
+.homeCinemaCard__title{font:800 15px/1.35 Heebo,Assistant,sans-serif;padding:10px 11px 3px;min-height:51px}
+.homeCinemaCard__action{color:#e9c17b;font:700 12px Assistant,sans-serif;padding:2px 11px 12px}
+.homeCinemaCard:hover,.homeCinemaCard:focus-visible{border-color:#e9c17b}
+@media(max-width:650px){.homeCinemaCard{flex-basis:143px;width:143px}.homeCinemaCard__title{font-size:13px;min-height:46px}}
