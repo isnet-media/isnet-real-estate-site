@@ -63,5 +63,16 @@ class LocalResetTests(unittest.TestCase):
    (data/'events.json').write_text(json.dumps(dict(events=[old])));(out/'taxonomy.json').write_text(json.dumps(dict(primary_categories=[])))
    with patch.object(s,'ROOT',root),patch.object(s,'OUT',out):s.merge(dict(at='now',sources={'ashdod_smarticket':dict(ok=True)},events=[fresh]))
    result=json.loads((data/'events.json').read_text())['events'][0];self.assertEqual(result['venue'],'מונארט');self.assertEqual(result['address'],'דרך ארץ 8 אשדוד');self.assertEqual(result['price_min_ils'],79)
+ def test_future_coing_card_without_jsonld_is_collected(self):
+  from bs4 import BeautifulSoup
+  from datetime import datetime
+  stamp=int(datetime(2030,10,14,10,0,tzinfo=s.Z).timestamp())
+  html=f'<li data-date="{stamp}" data-tags=\'["אוריינות דיגיטלית"]\'><a class="community-resource-link" href="https://community.ashdod.muni.il/Ashdod_up60/1">סדנת אוריינות דיגיטלית</a></li>'
+  class Response:
+   def __init__(self,pn):self.pn=pn
+   def json(self):return dict(success=True,items=[html] if self.pn==1 else [])
+  detail=BeautifulSoup('<h1>סדנת אוריינות דיגיטלית</h1><div id="ev-desc-description">היכרות עם כלים דיגיטליים</div><script>var group = {"image_cover":"https://org-images.coing.co/photo.png"};</script>','html.parser')
+  with patch.object(s,'get',side_effect=lambda u,**kw:Response(kw['params']['page'])),patch.object(s,'page',return_value=detail):rows,issues,undated=s.coing('up60',s.SOURCES['up60'],BeautifulSoup('<script>var cid = 6593;</script>','html.parser'))
+  self.assertEqual(len(rows),1);self.assertEqual(rows[0]['start_time'],'10:00');self.assertEqual(rows[0]['subcategory'],'senior-digital');self.assertEqual(undated,[])
 
 if __name__=='__main__':unittest.main()

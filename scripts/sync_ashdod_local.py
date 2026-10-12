@@ -57,6 +57,7 @@ def localize(e,name):
  e['source_image_kind']='source_card_image' if e.get('image_url') else 'not_available'
  if name in ['ofek_ashdod','up60']:
   activity=e.get('activity_type') or e['category'];e['category']='seniors';e['subcategory']={'lecture':'senior-lectures','tour':'senior-trips','workshop':'senior-workshops','music':'senior-music','sport':'senior-sport'}.get(activity,'senior-social');e['audiences']=['seniors']
+  if re.search(r'דיגיטל|סמארטפון|בנייד',e['title']):e['subcategory']='senior-digital'
  elif re.search(r'\b(?:ל|ה)?ילדים\b|לכל המשפחה|שעת סיפור|פעוט',e['title']):
   e['category']='kids';e['subcategory']='creative-workshops' if 'סדנ' in e['title'] else 'kids-activities'
  classify_local(e)
@@ -120,7 +121,22 @@ def coing(name,spec,p):
   for html in j['items']:
    q=BeautifulSoup(html,'html.parser');a=q.select_one('a.community-resource-link[href]')
    if not a or a['href'] in seen:continue
-   seen.add(a['href']);fresh+=1;u=a['href'];d=page(u);h=d.select_one('h1');title=text(h)
+   seen.add(a['href']);fresh+=1;u=a['href']
+   try:d=page(u)
+   except requests.RequestException as ex:issues.append(dict(url=u,error=str(ex)[:250]));continue
+   h=d.select_one('h1');title=text(h)
+   container=q.select_one('li[data-date]');stamp=container.get('data-date','') if container else ''
+   start=datetime.fromtimestamp(int(stamp),Z) if re.fullmatch(r'\d{10}',stamp) else None
+   if start and start.date()<datetime.now(Z).date():
+    undated.append(dict(title=title,url=u,reason='אירוע עבר במקור: '+start.isoformat(),source_date=start.isoformat(),not_published_reason='past'));continue
+   if start:
+    group_match=re.search(r'var group\s*=\s*(\{.*?\});',str(d),re.S)
+    group=json.loads(group_match[1]) if group_match else {}
+    venue=spec['venue']
+    if 'בזום' in title or 'מקוון' in title:venue='מקוון — קהילת אפ 60+ אשדוד'
+    tags=', '.join(json.loads(container.get('data-tags','[]'))) if container else ''
+    e=make(name,title,start.date().isoformat(),start.strftime('%H:%M'),venue,u,text(d.select_one('#ev-desc-description')),group.get('image_cover') or group.get('image_thumbnail'),tags)
+    e['verified_schedule_source']='public_card_data_date';out.append(localize(e,name));continue
    rows=ld(d)
    if rows:
     for o in rows:
@@ -335,7 +351,7 @@ def main():
      for r in raw:
       try:rows.append(card(r,name))
       except Exception as ex:issues.append(dict(url=r['ticket_url'],error=str(ex)[:250]))
-    events.extend(rows);undated.extend(services);states[name]=dict(ok=True,read=len(rows),issues=issues,undated=len(services),url=spec['url'])
+    events.extend(rows);undated.extend(services);states[name]=dict(ok=True,read=len(rows),issues=issues,undated=sum(s.get('not_published_reason')!='past' for s in services),past=sum(s.get('not_published_reason')=='past' for s in services),url=spec['url'])
    except Exception as ex:states[name]=dict(ok=False,error=str(ex)[:250],url=spec['url'])
    print(name,json.dumps(states[name],ensure_ascii=False),flush=True)
   image_policy(events);snap=dict(at=datetime.now(Z).isoformat(),sources=states,events=events,undated_services=undated)
