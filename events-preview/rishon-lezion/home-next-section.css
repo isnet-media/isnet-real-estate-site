@@ -71,3 +71,15 @@
 /* Remove obsolete oversized events summary panel, preserve DOM for event JS. */
 .results .isnetCompactToolbar{display:none!important}
 .results{padding-top:8px!important}
+
+/* Four feature cards: shorter, centered premium layout */
+.isnetNavDiscovery__primary{width:min(100%,900px)!important;margin-inline:auto!important;gap:12px!important}
+.isnetNavFeature{min-height:78px!important;padding:10px 14px!important}
+.isnetNavFeature__copy strong{font-size:22px!important}
+.isnetNavFeature__icon{width:39px!important;height:39px!important;flex-basis:39px!important;font-size:23px!important}
+@media(max-width:650px){
+.isnetNavDiscovery__primary{width:100%!important;gap:8px!important}
+.isnetNavFeature{min-height:76px!important;padding:9px 8px!important}
+.isnetNavFeature__copy strong{font-size:16px!important}
+.isnetNavFeature__copy small{font-size:10px!important}
+}
