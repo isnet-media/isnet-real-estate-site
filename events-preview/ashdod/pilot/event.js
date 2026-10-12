@@ -424,7 +424,7 @@ function renderPractical(e,occ){
   const venues=[...new Set(occ.map(x=>x.venue).filter(Boolean))];
   const prices=occ.map(priceText);
   const onePrice=[...new Set(prices)].length===1?prices[0]:"המחיר משתנה לפי מועד";
-  const audience=(Array.isArray(e.audiences)&&e.audiences.length)?e.audiences.join(", "):null;
+  const audience=(Array.isArray(e.audiences)&&e.audiences.length)?e.audiences.map(a=>({seniors:"הגיל השלישי",women:"נשים",kids:"ילדים",families:"משפחות",adults:"מבוגרים"}[a]||a)).join(", "):null;
   const age=e.age_min!=null?"מגיל "+e.age_min:null;
   const rows=[
     ["מקום",venues.filter(v=>v!==e.city).join(" / ")||"המיקום המדויק לא פורסם במקור"],
@@ -441,7 +441,7 @@ function renderPractical(e,occ){
   const info=rows.map(([a,b])=>'<div class="infoRow"><b>'+escapeHtml(a)+'</b><span>'+escapeHtml(b)+'</span></div>').join("");
   const contact=String(e.contact_phone||e.purchase_phone||"").replace(/[^0-9+*]/g,"");
   const contactHtml=contact?'<div class="infoRow"><b>טלפון לבירורים</b><a href="tel:'+escapeHtml(contact)+'">'+escapeHtml(e.contact_phone||e.purchase_phone)+'</a>'+(e.contact_phone_secondary?'<a class="contactSecondary" href="tel:'+escapeHtml(String(e.contact_phone_secondary).replace(/[^0-9+]/g,""))+'">'+escapeHtml(e.contact_phone_secondary)+'</a>':"")+'</div>':"";
-  const venueAddress=e.address||(e.venue&&e.venue!=="אשדוד"?e.venue:"");
+  const venueAddress=e.address||(e.venue&&e.venue!=="אשדוד"&&!/לא פורסמ|לא פורסם/.test(e.venue)?e.venue:"");
   const maps=venueAddress?'<div class="infoRow"><b>ניווט</b><a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(venueAddress)+'" target="_blank" rel="noopener">לפתיחת מפה ←</a></div>':"";
   const origin=String(e.ticket_url||e.purchase_url||"");
   const source=origin.startsWith("https://")?'<div class="infoRow"><b>מקור המידע</b><a href="'+escapeHtml(origin)+'" target="_blank" rel="noopener">לעמוד האירוע ←</a></div>':"";
