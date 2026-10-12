@@ -1172,7 +1172,7 @@ async function init(){
     fetch("data/cinema.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({movies:[]})),
     fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
     fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
-    window.ISNET_PUBLIC_CMS?.publishedEvents?.("rishon-lezion")||Promise.resolve([])
+    window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod")||Promise.resolve([])
   ]);
   state.events=(data.events||[]).filter(e=>e.start_date>=iso(today())&&!isNonEventActivity(e));
   // Reflect published CMS records on the event board as well as on detail pages.
