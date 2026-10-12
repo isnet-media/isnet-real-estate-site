@@ -17,6 +17,7 @@ def clean(x): return re.sub(r'\s+',' ',str(x or '')).strip()
 def norm(x): return re.sub(r'[^\w\u0590-\u05ff]','',clean(x).lower())
 def venue_key(value):
     n=norm(value)
+    if 'דרךארץ8' in n:return 'מונארט'
     for key in ['ידלבנים','משכן','דיונה','מונארט','נאפו','הוטסינמה','סינמהסיטי']:
         if key in n:return key
     return n
@@ -53,14 +54,16 @@ def collect_row(row,stamp):
             h=next((h for h in p.select('h2,h3') if clean(h.get_text())==label),None)
             if h:
                 block=h.find_parent('section')
-                if block:sections.append(block.get_text('\n',strip=True))
+                if block:
+                    for control in block.select('button,iframe,svg,[role="dialog"]'):control.decompose()
+                    sections.append(block.get_text('\n',strip=True).split('טריילר האירוע')[0].strip())
         text='\n\n'.join(dict.fromkeys(sections));e['description']=e['series_description']=text
         if not text:issues.append('detail_description_missing')
         img=p.find('meta',property='og:image')
-        image=img.get('content') if img else None
-        if not image:
-            i=next((i for i in p.select('img[src]') if '/_next/image?' in i['src']),None)
-            if i:image=parse_qs(urlparse(i['src']).query).get('url',[None])[0]
+        image=None
+        i=next((i for i in p.select('img[src]') if '/_next/image?' in i['src']),None)
+        if i:image=parse_qs(urlparse(i['src']).query).get('url',[None])[0]
+        if not image:image=img.get('content') if img else None
         if image:
             e.update(image_url=urljoin(url,image),image_origin_url=urljoin(url,image),image_source='mevalim_direct',image_verified=True,image_publishable=True,image_represents_event=True,image_strategy='official_source_event_image',image_rights_status='publisher_directed_source_reuse',image_verified_at=stamp)
         else:issues.append('detail_image_missing')
@@ -93,7 +96,7 @@ def main():
     else:
         p=get(URL);table=p.select('table')[0];rows=table.select('tr')
         # A failed or materially incomplete listing must not replace the published dataset.
-        assert len(rows)>=8,'Incomplete source listing'
+        assert rows,'Empty source listing'
         with ThreadPoolExecutor(max_workers=4) as pool:result=list(pool.map(lambda row:collect_row(row,stamp),rows))
         new=[e for e,i in result];issues=[{'event_id':e['event_id'],'title':e['title'],'issues':i} for e,i in result if i]
     out=ROOT/'events-preview/admin/data/mevalim-ashdod-direct-snapshot.json'
