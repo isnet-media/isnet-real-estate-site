@@ -42,11 +42,14 @@ def image(o):
  if isinstance(x,list):x=x[0] if x else None
  if isinstance(x,dict):x=x.get('url') or x.get('contentUrl')
  return x
-RULES=[(r'פסטיבל|festival','festival','festival'),(r'כנס|פאנל','conference','conference'),(r'קולינריה|אוכל|בישול','food','food-events'),(r'סטנד.?אפ|standup','standup','standup'),(r'סדנ|ציור|פיסול|קרמיקה','workshop','creative'),(r'הרצא|מרצה|פאנל|כנס|lecture','lecture','lecture'),(r'תערוכ|מוזיאון|מוזאון','exhibition','exhibition'),(r'שעת סיפור','kids','story-time'),(r'ילדים|ילד|קטנטנ|פעוט|משפחה|childrens','kids','kids-activities'),(r'בלט|מחול|טנגו|פלמנקו','music','dance'),(r'תיאטרון|תאטרון|הצג|מחזמר|theater','theatre','theatre'),(r'מוזיקה|מוסיקה|קונצרט|concert|שיר|להקה|זמר|מופע|הופע','music','live'),(r'סיור|טיול','tour','guided-tours'),(r'ספורט|פילאטיס|יוגה','sport','activities'),(r'גיל השלישי|גמלאי','seniors','seniors-activities')]
+RULES=[(r'פסטיבל|festival','festival','festival'),(r'כנס|פאנל','conference','conference'),(r'קולינריה|אוכל|בישול','food','food-events'),(r'סטנד.?אפ|standup','standup','standup'),(r'סדנ|ציור|פיסול|קרמיקה','workshop','creative'),(r'הרצא|מרצה|פאנל|כנס|lecture','lecture','lecture'),(r'תערוכ|מוזיאון|מוזאון','exhibition','exhibition'),(r'שעת סיפור','kids','story-time'),(r'ילדים|ילד|קטנטנ|פעוט|משפחה|childrens','kids','kids-activities'),(r'בלט|מחול|טנגו|פלמנקו','music','dance'),(r'תיאטרון|תאטרון|הצג|מחזמר|קומדיה|theater','theatre','theatre'),(r'מוזיקה|מוסיקה|קונצרט|concert|שיר|להקה|זמר|מופע|הופע','music','live'),(r'סיור|טיול','tour','guided-tours'),(r'ספורט|פילאטיס|יוגה','sport','activities'),(r'גיל השלישי|גמלאי','seniors','seniors-activities')]
 def category(raw,title):
  for text in [raw,title]:
   for pattern,cat,sub in RULES:
-   if re.search(pattern,text,re.I):return cat,sub
+   if not re.search(pattern,text,re.I):continue
+   if text==title and cat=='kids' and not re.search(r'\bילדים\b|קטנטנ|פעוט|לכל המשפחה|למשפחות|childrens|שעת סיפור',text,re.I):continue
+   if text==title and cat=='music' and sub=='live' and not re.search(r'מוזיק|מוסיק|קונצרט|concert|שיר|להקה|זמר|הופעות חיות|הופעה חיה',text,re.I):continue
+   return cat,sub
  return 'community','source-'+hashlib.sha256((raw or 'פעילות').encode()).hexdigest()[:10]
 def source_placeholder(url):return any(x in str(url or '') for x in ['/placeholders/','/images/live/more/eventNew.jpg','/images/artists/artistShadow.png'])
 def make(src,title,date,time,venue,url,description='',img=None,raw='',uid=None):
