@@ -40,7 +40,7 @@ const $=id=>document.getElementById(id);
 const fmtDate=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
 const fmtFull=new Intl.DateTimeFormat("he-IL",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
 const currency=new Intl.NumberFormat("he-IL",{style:"currency",currency:"ILS",maximumFractionDigits:0});
-const catLabels={music:"הופעות ומוזיקה",standup:"סטנדאפ",theatre:"תיאטרון והצגות",kids:"ילדים ומשפחה",lecture:"הרצאות וכנסים",workshop:"סדנאות ויצירה",exhibition:"תערוכות ואמנות",cinema:"קולנוע",festival:"פסטיבלים",community:"קהילה ופנאי",sport:"ספורט בראשון לציון",seniors:"הגיל השלישי וגמלאים",other:"עוד"};
+const catLabels={conference:"כנסים ופאנלים",food:"אוכל וקולינריה",tour:"טיולים וסיורים",music:"הופעות ומוזיקה",standup:"סטנדאפ",theatre:"תיאטרון והצגות",kids:"ילדים ומשפחה",lecture:"הרצאות וכנסים",workshop:"סדנאות ויצירה",exhibition:"תערוכות ואמנות",cinema:"קולנוע",festival:"פסטיבלים",community:"קהילה ופנאי",sport:"ספורט בראשון לציון",seniors:"הגיל השלישי וגמלאים",other:"עוד"};
 const catIcons={music:"♫",standup:"◉",theatre:"◇",kids:"★",lecture:"▣",workshop:"✎",exhibition:"▤",cinema:"▶",festival:"✺",community:"◎",sport:"⚑",seniors:"♟",other:"+"};
 const favorites=new Set(JSON.parse(localStorage.getItem("isnet-events-favorites")||"[]"));
 
@@ -71,6 +71,7 @@ function isNonEventActivity(e){
 function priceText(e){
   if(e.is_free===true)return "חינם";
   if(e.price_min_ils==null)return "מחיר לא פורסם";
+  if(e.price_is_starting)return "החל מ־"+currency.format(e.price_min_ils);
   if(e.price_max_ils!=null&&e.price_max_ils!==e.price_min_ils)return currency.format(e.price_min_ils)+"–"+currency.format(e.price_max_ils);
   return currency.format(e.price_min_ils);
 }

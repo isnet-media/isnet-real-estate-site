@@ -36,7 +36,7 @@
 })();
 
 const $=id=>document.getElementById(id);
-const catLabels={
+const catLabels={conference:"כנסים ופאנלים",food:"אוכל וקולינריה",tour:"טיולים וסיורים",
   music:"מוזיקה",standup:"סטנדאפ",kids:"ילדים ומשפחה",theatre:"תיאטרון",
   lecture:"הרצאות",workshop:"סדנאות ויצירה",seniors:"הגיל השלישי",exhibition:"תערוכות",cinema:"קולנוע",
   festival:"פסטיבלים",community:"קהילה",sport:"ספורט בראשון לציון",tour:"סיורים",other:"אירוע"
@@ -64,6 +64,7 @@ function formatTime(t){return t||"השעה תפורסם"}
 function priceText(e){
   if(e.is_free===true)return "חינם";
   if(e.price_min_ils==null)return "מחיר לא פורסם";
+  if(e.price_is_starting)return "החל מ־"+currency.format(e.price_min_ils);
   if(e.price_max_ils!=null&&e.price_max_ils!==e.price_min_ils)return currency.format(e.price_min_ils)+"–"+currency.format(e.price_max_ils);
   return currency.format(e.price_min_ils);
 }
@@ -416,7 +417,7 @@ function renderPractical(e,occ){
   const venueAddress=e.address||(e.venue&&e.venue!=="ראשון לציון"?e.venue:"");
   const maps=venueAddress?'<div class="infoRow"><b>ניווט</b><a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(venueAddress)+'" target="_blank" rel="noopener">לפתיחת מפה ←</a></div>':"";
   const origin=String(e.ticket_url||e.purchase_url||"");
-  const source=origin.startsWith("https://")?'<div class="infoRow"><b>מקור רשמי</b><a href="'+escapeHtml(origin)+'" target="_blank" rel="noopener">לעמוד האירוע ←</a></div>':"";
+  const source=origin.startsWith("https://")?'<div class="infoRow"><b>מקור המידע</b><a href="'+escapeHtml(origin)+'" target="_blank" rel="noopener">לעמוד האירוע ←</a></div>':"";
   const safeOperator=/^[a-z0-9_]+$/.test(e.operator_id||"")?e.operator_id:null;
   const operatorPage=safeOperator?'<div class="infoRow"><b>כל הפעילויות של המפעיל</b>'+
     '<a href="operator.html?id='+encodeURIComponent(safeOperator)+'">'+escapeHtml(e.operator_name||e.organizer||"כל הפעילויות")+' ←</a></div>':"";
