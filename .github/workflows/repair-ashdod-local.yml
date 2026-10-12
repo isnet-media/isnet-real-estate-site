@@ -1,0 +1,40 @@
+name: Repair Ashdod local source facts
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/repair-ashdod-local.yml']
+permissions:
+  contents: write
+concurrency:
+  group: isnet-event-data-writes
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4
+      - run: python scripts/test_ashdod_local.py
+      - name: Apply corrected policy to the completed scan
+        run: |
+          cp events-preview/admin/data/ashdod-local-snapshot.json /tmp/local-source.json
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            python scripts/sync_ashdod_local.py --snapshot /tmp/local-source.json
+            git add events-preview/ashdod/data/events.json events-preview/admin/data/ashdod-local-*.json events-preview/admin/data/taxonomy.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'Correct official local venues and Ofek schedule hours'
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1

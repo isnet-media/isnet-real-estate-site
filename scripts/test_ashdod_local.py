@@ -46,5 +46,22 @@ class LocalResetTests(unittest.TestCase):
   p=BeautifulSoup('<img src="/FilesSrc/Galleries/Pic.jpg" alt="מופע מחול"><div id="PageContent"><h1>מופע מחול</h1><p>הפקת המחול</p><h2>מועדים</h2><table><tr><td>08.03.2027</td><td>שני</td><td>20:00</td><td><a href="tickets.asp?showURL=8224">הזמנה</a></td></tr></table></div>','html.parser')
   e=s.primary_cards('tarbutashdod','https://www.mishkan-ashdod.co.il/event.asp?event=5717',p,dict(event_date='8.3',location='המשכן',content=dict(rendered='הפקת המחול'),link='https://www.tarbutashdod.com/post'))[0]
   self.assertEqual(e['start_date'],'2027-03-08');self.assertEqual(e['start_time'],'20:00');self.assertEqual(e['image_url'],'https://www.mishkan-ashdod.co.il/FilesSrc/Galleries/Pic.jpg')
+ def test_midnight_metadata_is_replaced_by_explicit_ofek_hour(self):
+  from bs4 import BeautifulSoup
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);out=root/'events-preview/admin/data';out.mkdir(parents=True);data=root/'events-preview/ashdod/data';data.mkdir(parents=True)
+   e=self.event('local_ofek_ashdod');e.update(local_source_refresh=True,local_source_name='ofek_ashdod',start_time='00:00',internal_notes=[],content_completion_status='facts_only')
+   (data/'events.json').write_text(json.dumps(dict(events=[])));(out/'taxonomy.json').write_text(json.dumps(dict(primary_categories=[])))
+   doc=BeautifulSoup('<div class="eic-field"><span class="eic-label">שעה</span><span class="eic-value">07:20</span></div>','html.parser')
+   with patch.object(s,'ROOT',root),patch.object(s,'OUT',out),patch.object(s,'page',return_value=doc):s.merge(dict(at='now',sources={'ofek_ashdod':dict(ok=True)},events=[e]))
+   result=json.loads((data/'events.json').read_text())['events'][0];self.assertEqual(result['start_time'],'07:20');self.assertNotIn('00:00',result['description'])
+ def test_official_venue_corrects_portal_without_overwriting_discount(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);out=root/'events-preview/admin/data';out.mkdir(parents=True);data=root/'events-preview/ashdod/data';data.mkdir(parents=True)
+   old=self.event('supplemental_makore','old');old.update(venue='מוזיאון',address='כתובת שגויה',price_min_ils=79)
+   fresh=self.event('local_ashdod_smarticket','fresh');fresh.update(local_source_refresh=True,local_source_name='ashdod_smarticket',venue='מונארט',venue_address='דרך ארץ 8 אשדוד',price_min_ils=100)
+   (data/'events.json').write_text(json.dumps(dict(events=[old])));(out/'taxonomy.json').write_text(json.dumps(dict(primary_categories=[])))
+   with patch.object(s,'ROOT',root),patch.object(s,'OUT',out):s.merge(dict(at='now',sources={'ashdod_smarticket':dict(ok=True)},events=[fresh]))
+   result=json.loads((data/'events.json').read_text())['events'][0];self.assertEqual(result['venue'],'מונארט');self.assertEqual(result['address'],'דרך ארץ 8 אשדוד');self.assertEqual(result['price_min_ils'],79)
 
 if __name__=='__main__':unittest.main()

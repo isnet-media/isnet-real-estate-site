@@ -71,7 +71,7 @@ def card(row,name):
   duration=re.fullmatch(r'PT(?:(\d+)H)?(?:(\d+)M)?',str(matches[0].get('duration','')))
   if duration:e['duration_minutes']=int(duration[1] or 0)*60+int(duration[2] or 0)
   location=matches[0].get('location') or {}
-  if isinstance(location,dict) and location.get('streetAddress'):e['venue_address']=location['streetAddress']
+  if isinstance(location,dict) and location.get('streetAddress'):e['venue_address']=e['address']=location['streetAddress']
   if str(e.get('price_min_ils')) in ['0','0.00']:e['is_free']=True
  else:e=make(name,row['title'],row['start_date'],row['start_time'],row['venue'],u)
  e['content_source_url']=u
@@ -265,6 +265,7 @@ def merge(snap):
   if e.get('content_completion_status')=='facts_only':e['description']=e['series_description']=''
   kind=e.get('source_image_kind');e['start_time']=clock;e=localize(e,'ofek_ashdod');e['source_image_kind']=kind;return e
  with ThreadPoolExecutor(max_workers=4) as pool:snap['events']=list(pool.map(repair_hour,snap['events']))
+ (OUT/'ashdod-local-snapshot.json').write_text(json.dumps(snap,ensure_ascii=False,indent=2)+'\n')
  path=ROOT/'events-preview/ashdod/data/events.json';data=json.loads(path.read_text());old=data['events'];archive=OUT/'ashdod-local-reset-backup.json'
  removed=[e for e in old if legacy_local(e) and not e.get('local_source_refresh')]
  if removed and not archive.exists():archive.write_text(json.dumps(dict(at=snap['at'],events=removed),ensure_ascii=False,indent=2)+'\n')
@@ -284,6 +285,14 @@ def merge(snap):
     if match in kept:kept.remove(match)
     else:new.remove(match)
    else:
+    # An exact occurrence corroborated by an official seller outranks a portal
+    # for the venue, without replacing working discount prices/ticket routes.
+    if e.get('local_source_name') in ['ashdod_smarticket','mishkan_smarticket'] and e.get('venue_address'):
+     if match.get('venue')!=e['venue']:
+      match.setdefault('internal_notes',[]).append('מיקום מהלוח הארצי הוחלף לפי כרטיס הרכישה הרשמי: '+e['content_source_url'])
+      for field in ['address','address_text','venue_address','venue_id','contact_phone','contact_phone_secondary','venue_phone','contact_email','contact_url','latitude','longitude','lat','lng']:
+       match.pop(field,None)
+     match['venue']=e['venue'];match['venue_address']=match['address']=e['venue_address'];match['verified_venue_source_url']=e['content_source_url']
     if e.get('source_image_kind')=='source_card_image' and e.get('image_verified') and (not match.get('image_url') or match.get('source_image_kind') in ['illustration','source_placeholder','not_available'] or any(w in str(match.get('image_url')) for w in ['/placeholders/','no_pic.png'])):
      completed_images+=1
      for field in ['image_url','image_origin_url','image_source','image_verified','image_publishable','image_represents_event','source_image_kind','image_strategy','image_review_status']:
