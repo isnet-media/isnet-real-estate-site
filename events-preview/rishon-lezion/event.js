@@ -103,7 +103,7 @@ function isBlockedPurchaseUrl(url){
 }
 function purchaseAction(e){
   const url=String(e.purchase_url||"").trim();
-  if(/^https:\/\//i.test(url)&&!isBlockedPurchaseUrl(url)){
+  if(/^https:\/\//i.test(url)&&(e.source_content_authoritative||!isBlockedPurchaseUrl(url))){
     return {href:url,label:e.ticket_status==="sold_out"?"פרטי הרכישה":"לרכישת כרטיסים",kind:"url",soldOut:e.ticket_status==="sold_out"};
   }
   if(e.ticket_status==="sold_out")return null;
@@ -236,6 +236,7 @@ function autoPitch(e){
     (e.ticket_status==="sold_out"?" • הכרטיסים אזלו":"");
 }
 function meaningfulEventDescription(e){
+  if(e.source_content_authoritative)return String(e.series_description||e.description||"").trim();
   // Prefer editorial descriptions already attributed to this event.
   // Research citations and URLs are never part of public editorial copy.
   const candidates=e.content_source_url && e.description_manual_override!==true
