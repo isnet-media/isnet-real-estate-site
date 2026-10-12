@@ -15,6 +15,18 @@ HEAD={'User-Agent':'ISNET-Ashdod-Mevalim/1.0'}
 MAP={'הצגות ילדים':('kids','kids-theatre'),'סטנדאפ':('standup','standup'),'הצגות תיאטרון':('theatre','theatre'),'תיאטרון':('theatre','theatre'),'מחזות זמר,תיאטרון':('theatre','musical'),'הופעות חיות':('music','live'),'מחזות זמר':('theatre','musical'),'מחול ובלט':('music','dance'),'קונצרטים':('music','concert'),'הרצאות':('lecture','lecture'),'סרטים':('cinema','film')}
 def clean(x): return re.sub(r'\s+',' ',str(x or '')).strip()
 def norm(x): return re.sub(r'[^\w\u0590-\u05ff]','',clean(x).lower())
+def venue_key(value):
+    n=norm(value)
+    for key in ['ידלבנים','משכן','דיונה','מונארט','נאפו','הוטסינמה','סינמהסיטי']:
+        if key in n:return key
+    return n
+def same_show(old,new):
+    if old.get('start_date')!=new['start_date'] or str(old.get('start_time') or '')[:5]!=new['start_time']:return False
+    if not venue_key(old.get('venue')) or venue_key(old.get('venue'))!=venue_key(new['venue']):return False
+    a=clean(old.get('title')).replace('באשדוד','').replace('אימי הגנרלית','אמי הגנרלית')
+    b=clean(new['title'])
+    ac=norm(re.split(r'\s[-–|]\s',a)[0]);bc=norm(re.split(r'\s[-–|]\s',b)[0])
+    return (len(ac)>=5 and ac in norm(b)) or (len(bc)>=5 and bc in norm(a))
 def get(url):
     r=requests.get(url,headers=HEAD,timeout=45);r.raise_for_status();return BeautifulSoup(r.text,'html.parser')
 def collect_row(row,stamp):
@@ -68,7 +80,7 @@ def merge(data,new):
     for e in data['events']:
         link=e.get('ticket_url') or e.get('purchase_url') or e.get('content_source_url') or ''
         key=(norm(e.get('title')),e.get('start_date'),str(e.get('start_time') or '')[:5])
-        match=key in keys or (urlparse(link).hostname=='tickets.mevalim.co.il' and urlparse(link).path in urls)
+        match=key in keys or (urlparse(link).hostname=='tickets.mevalim.co.il' and urlparse(link).path in urls) or any(same_show(e,n) for n in new)
         if match:removed.append(e)
         else:kept.append(e)
     data['events']=kept+new;data.setdefault('stats',{})['events']=len(data['events'])
