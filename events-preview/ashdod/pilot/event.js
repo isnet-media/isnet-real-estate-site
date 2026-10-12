@@ -35,7 +35,7 @@
 })();
 
 const $=id=>document.getElementById(id);
-const catLabels={
+const catLabels={conference:"כנסים ופאנלים",food:"אוכל וקולינריה",tour:"טיולים וסיורים",
   music:"מוזיקה",standup:"סטנדאפ",kids:"ילדים ומשפחה",theatre:"תיאטרון",
   lecture:"הרצאות",exhibition:"תערוכות",cinema:"קולנוע",
   festival:"פסטיבלים",community:"קהילה",sport:"ספורט באשדוד",tour:"סיורים",other:"אירוע"
@@ -63,6 +63,7 @@ function formatTime(t){return t||"השעה תפורסם"}
 function priceText(e){
   if(e.is_free===true)return "חינם";
   if(e.price_min_ils==null)return "מחיר לא פורסם";
+  if(e.price_is_starting)return "החל מ־"+currency.format(e.price_min_ils);
   if(e.price_max_ils!=null&&e.price_max_ils!==e.price_min_ils)return currency.format(e.price_min_ils)+"–"+currency.format(e.price_max_ils);
   return currency.format(e.price_min_ils);
 }
@@ -103,7 +104,7 @@ function isBlockedPurchaseUrl(url){
 function purchaseAction(e){
   if(!isUpcoming(e))return null;
   const url=String(e.purchase_url||"").trim();
-  if(/^https:\/\//i.test(url)&&!isBlockedPurchaseUrl(url)){
+  if(/^https:\/\//i.test(url)&&(e.source_content_authoritative||!isBlockedPurchaseUrl(url))){
     return {href:url,label:e.ticket_status==="sold_out"?"פרטי הרכישה":"לרכישת כרטיסים",kind:"url",soldOut:e.ticket_status==="sold_out"};
   }
   if(e.ticket_status==="sold_out")return null;
@@ -125,12 +126,14 @@ function trustedImage(e){
   return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.image_represents_event!==false&&!/microsoft_oauth_logo|no_pic\.png|favicon/i.test(e.image_url));
 }
 function bestImageEvent(occ){
-  return occ.find(e=>trustedImage(e)&&e.thumbnail_ready===true)
+  return occ.find(e=>e.source_content_authoritative&&trustedImage(e))
+    ||occ.find(e=>trustedImage(e)&&e.thumbnail_ready===true)
     ||occ.find(e=>trustedImage(e))
     ||occ[0];
 }
 function richEvent(occ){
-  return occ.find(e=>e.rich_content_status==="enriched")
+  return occ.find(e=>e.source_content_authoritative)
+    ||occ.find(e=>e.rich_content_status==="enriched")
     ||occ.find(e=>e.long_description||e.short_pitch||e.youtube_id)
     ||occ[0];
 }
@@ -260,6 +263,7 @@ function autoPitch(e){
     (e.ticket_status==="sold_out"?" • הכרטיסים אזלו":"");
 }
 function meaningfulEventDescription(e){
+  if(e.source_content_authoritative)return String(e.series_description||e.description||"").trim();
   // Prefer editorial descriptions already attributed to this event.
   // Research citations and URLs are never part of public editorial copy.
   const candidates=e.content_source_url && e.description_manual_override!==true
@@ -440,7 +444,7 @@ function renderPractical(e,occ){
   const venueAddress=e.address||(e.venue&&e.venue!=="אשדוד"?e.venue:"");
   const maps=venueAddress?'<div class="infoRow"><b>ניווט</b><a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(venueAddress)+'" target="_blank" rel="noopener">לפתיחת מפה ←</a></div>':"";
   const origin=String(e.ticket_url||e.purchase_url||"");
-  const source=origin.startsWith("https://")?'<div class="infoRow"><b>מקור רשמי</b><a href="'+escapeHtml(origin)+'" target="_blank" rel="noopener">לעמוד האירוע ←</a></div>':"";
+  const source=origin.startsWith("https://")?'<div class="infoRow"><b>מקור המידע</b><a href="'+escapeHtml(origin)+'" target="_blank" rel="noopener">לעמוד האירוע ←</a></div>':"";
   const safeOperator=/^[a-z0-9_]+$/.test(e.operator_id||"")?e.operator_id:null;
   const operatorPage=safeOperator?'<div class="infoRow"><b>כל הפעילויות של המפעיל</b>'+
     '<a href="operator.html?id='+encodeURIComponent(safeOperator)+'">'+escapeHtml(e.operator_name||e.organizer||"כל הפעילויות")+' ←</a></div>':"";
