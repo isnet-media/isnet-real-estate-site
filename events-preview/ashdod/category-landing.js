@@ -9,16 +9,27 @@ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 const iso=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 const ids=new Set(entry[2]);let events=[];
 const unique=e=>String(e.event_id||e.id||"");
+function trustedImage(e){
+  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
+}
+function categoryImage(e){
+ const photos={theatre:"theatre",standup:"standup",kids:"kids",lecture:"lecture"};
+ if(photos[e.category])return "../media-bank/defaults/"+photos[e.category]+".webp";
+ if(e.category==="seniors")return "../media-bank/defaults/seniors/seniors-lecture.webp";
+ return "../shared/images/defaults/category-"+(config[e.category]?e.category:"community")+".svg";
+}
 function render(){
  const q=document.getElementById("q").value.trim().toLocaleLowerCase("he");
  const filtered=events.filter(e=>ids.has(e.category)&&(!q||String(e.title||"").toLocaleLowerCase("he").includes(q)));
  document.getElementById("count").textContent=filtered.length+" אירועים";
  document.getElementById("empty").hidden=filtered.length>0;
  document.getElementById("cards").innerHTML=filtered.map(e=>{
- const image=e.image_url||e.image||e.thumbnail_url||e.poster_url||"";
+ const original=events.find(x=>x.title===e.title&&x.image_source==="friends"&&trustedImage(x))||e;
+ const sourceImage=trustedImage(original);
+ const image=sourceImage?(original.thumbnail_ready&&original.thumbnail_url?original.thumbnail_url:original.image_url):categoryImage(e);
  const venue=esc(e.venue||"אשדוד");
  const date=esc(e.start_date||"");
- const media=image?'<img class="image" src="'+esc(image)+'" loading="lazy" alt="" onerror="this.outerHTML=\'<div class=&quot;image placeholder&quot;>✦</div>\'">':'<div class="image placeholder">✦</div>';
+ const media=image?'<img class="image" src="'+esc(image)+'" loading="lazy" alt="'+esc(sourceImage?e.title:"תמונת המחשה")+'" onerror="this.outerHTML=\'<div class=&quot;image placeholder&quot;>✦</div>\'">':'<div class="image placeholder">✦</div>';
  return '<a class="card" href="event.html?id='+encodeURIComponent(unique(e))+'">'+media+'<div class="body"><h2>'+esc(e.title)+'</h2><div class="meta">'+date+' · '+venue+'</div><div class="action">לפרטי האירוע ←</div></div></a>';
  }).join("");
 }
