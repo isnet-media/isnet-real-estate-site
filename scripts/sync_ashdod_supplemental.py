@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 from sync_mevalim_ashdod_direct import clean, norm, same_show, remove_conflicting_address
 ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/'events-preview/admin/data'; Z=ZoneInfo('Asia/Jerusalem')
+SOURCE_WARNINGS={}
 SOURCES={'makore':'https://www.makore.co.il/browse/city/אשדוד','tickchak':'https://live.tickchak.co.il/ashdod','friends':'https://friends-hist.co.il/city_cat/אשדוד','leaan':'https://www.leaan.co.il/','sababa':'https://sababa.events/he/venues/tsentr-stsenicheskikh-iskusstv-ashdod/'}
 def page(url):
  r=requests.get(url,timeout=40,headers={'User-Agent':'ISNET official event source reader/1.0'});r.raise_for_status();return BeautifulSoup(r.text,'html.parser')
@@ -41,15 +42,16 @@ def image(o):
  if isinstance(x,list):x=x[0] if x else None
  if isinstance(x,dict):x=x.get('url') or x.get('contentUrl')
  return x
-RULES=[(r'סטנד.?אפ|standup','standup','standup'),(r'סדנ|יצירה|ציור|פיסול|קרמיקה','workshop','creative'),(r'הרצא|כנס|lecture','lecture','lecture'),(r'תערוכ|מוזיאון|מוזאון','exhibition','exhibition'),(r'שעת סיפור','kids','story-time'),(r'ילדים|ילד|קטנטנ|פעוט|משפחה|childrens','kids','kids-activities'),(r'תיאטרון|הצגה|theater','theatre','theatre'),(r'מוזיקה|מוסיקה|קונצרט|concert|שירי|מופע|הופעה','music','live'),(r'ספורט|פילאטיס|יוגה','sport','activities'),(r'גיל השלישי|גמלאי','seniors','seniors-activities')]
+RULES=[(r'סטנד.?אפ|standup','standup','standup'),(r'סדנ|יצירה|ציור|פיסול|קרמיקה','workshop','creative'),(r'הרצא|כנס|lecture','lecture','lecture'),(r'תערוכ|מוזיאון|מוזאון','exhibition','exhibition'),(r'שעת סיפור','kids','story-time'),(r'ילדים|ילד|קטנטנ|פעוט|משפחה|childrens','kids','kids-activities'),(r'תיאטרון|הצגה|theater','theatre','theatre'),(r'מוזיקה|מוסיקה|קונצרט|concert|שיר|להקה|זמר|מופע|הופעה','music','live'),(r'ספורט|פילאטיס|יוגה','sport','activities'),(r'גיל השלישי|גמלאי','seniors','seniors-activities')]
 def category(raw,title):
  for pattern,cat,sub in RULES:
   if re.search(pattern,raw+' '+title,re.I):return cat,sub
  return 'community','source-'+hashlib.sha256((raw or 'פעילות').encode()).hexdigest()[:10]
 def make(src,title,date,time,venue,url,description='',img=None,raw='',uid=None):
- cat,sub=category(raw,title);text=BeautifulSoup(description or '','html.parser').get_text('\n',strip=True);text,removed=remove_conflicting_address(text)
+ text=BeautifulSoup(description or '','html.parser').get_text('\n',strip=True);text,removed=remove_conflicting_address(text);cat,sub=category(raw,title if raw else title+' '+text[:700])
  eid=src+'_as_'+hashlib.sha256((str(uid or url)+date+time).encode()).hexdigest()[:18]
  e=dict(event_id=eid,source='supplemental_'+src,city='אשדוד',title=clean(title),start_date=date,start_time=time,venue=clean(venue),status='active',category=cat,subcategory=sub,source_category=raw,source_subcategory=raw,description=text,series_description=text,image_url=img,image_origin_url=img,image_source=src,image_verified=bool(img),image_publishable=bool(img),image_represents_event=bool(img),image_strategy='official_source_event_image',image_rights_status='publisher_directed_source_reuse',ticket_url=url,purchase_url=url,content_source_url=url,source_content_authoritative=True,content_locked=True,source_priority=2,last_imported_at=datetime.now(Z).isoformat(),internal_notes=[],taxonomy_review_required=sub.startswith('source-'))
+ e['source_image_kind']='source_placeholder' if '/placeholders/' in str(img) else 'source_event_photo' if img else 'not_available'
  if removed:e['removed_conflicting_source_addresses']=removed
  if e['taxonomy_review_required']:e['internal_notes'].append('נפתחה קטגוריה/תת קטגוריה חדשה; שיוך מוצע לקהילה ופנאי: '+(raw or 'ללא קטגוריה במקור'))
  return e
@@ -79,6 +81,13 @@ def detail(e):
    if block and block.get_text(strip=True):e['description']=e['series_description']=block.get_text('\n',strip=True);break
   if e['source']=='supplemental_makore' and 'smarticket.co.il' in urlparse(e['ticket_url']).hostname:
    original=page(e['ticket_url']);block=original.select_one('.txt_container');im=original.find('meta',property='og:image')
+   primary_time=original.select_one('.event-time');primary_date=original.select_one('.breadcrumb_event')
+   if primary_time:
+    m=re.search(r'\d{2}:\d{2}',primary_time.get_text())
+    if m:e['start_time']=m[0]
+   if primary_date:
+    m=re.search(r'\d{2}/\d{2}/\d{4}',primary_date.get_text())
+    if m:e['start_date']=datetime.strptime(m[0],'%d/%m/%Y').date().isoformat()
    if block:e['description']=e['series_description']=block.get_text('\n',strip=True).removeprefix('פרטים נוספים').strip();e['source_detail_text']=e['description']
    if im and im.get('content'):e['image_url']=e['image_origin_url']=urljoin(e['ticket_url'],im['content']);e['image_source']='smarticket'
   e['detail_checked_at']=datetime.now(Z).isoformat()
@@ -116,6 +125,16 @@ def collect(src):
   script=p.select_one('#__NEXT_DATA__')
   if not script:raise ValueError('Source state unavailable')
   initial=json.loads(script.get_text())['props']['pageProps']['initialState']; states=[initial]
+  sitemap=page('https://www.leaan.co.il/site-map');links=list(dict.fromkeys(urljoin(SOURCES[src],a['href']) for a in sitemap.select('a[href*="/events/"]')));routes={urlparse(u).path.rsplit('/',1)[-1]:u for u in links}
+  def state(url):
+   q=page(url);node=q.select_one('#__NEXT_DATA__')
+   if not node:raise ValueError('Missing Leaan source state: '+url)
+   return json.loads(node.get_text())['props']['pageProps']['initialState']
+  def safe_state(url):
+   try:return state(url)
+   except Exception as ex:return {'_fetch_error':str(ex)[:200]}
+  with ThreadPoolExecutor(max_workers=8) as pool:extra=list(pool.map(safe_state,links))
+  SOURCE_WARNINGS[src]=[x['_fetch_error'] for x in extra if '_fetch_error' in x];states.extend(x for x in extra if '_fetch_error' not in x)
   for cat in initial.get('categories',[]):
    cp=page('https://www.leaan.co.il/category/'+cat['category_name'].replace(' ','-'));cs=cp.select_one('#__NEXT_DATA__')
    if cs:states.append(json.loads(cs.get_text())['props']['pageProps']['initialState'])
@@ -123,7 +142,7 @@ def collect(src):
    if not isinstance(o.get('location'),dict) or o['location'].get('city')!='אשדוד' or not o.get('event_start'):continue
    dt=datetime.fromtimestamp(o['event_start'],Z);raw=', '.join(c.get('category_name','') for c in (o.get('categories') or {}).values())
    # Use only source-provided URLs; do not invent a detail route.
-   url=o.get('redirect_url') or SOURCES[src]
+   url=o.get('redirect_url') or routes.get(str(o.get('id'))) or SOURCES[src]
    out.append(make(src,o.get('event_name') or o.get('name'),dt.date().isoformat(),dt.strftime('%H:%M'),o['location'].get('name','אשדוד'),url,o.get('description',''),image(o),raw,o['event_id']))
  out=[e for e in out if e and e['start_date']>=datetime.now(Z).date().isoformat()]
  if not out:raise ValueError('No source events parsed; retain previous records')
@@ -143,8 +162,11 @@ def baseline():
  return out
 def equivalent(a,b):
  if a['start_date']!=b['start_date']:return False
- x=norm(a['title']).replace('באשדוד','');y=norm(b['title']).replace('באשדוד','')
- return x==y or (min(len(x),len(y))>=6 and (x in y or y in x))
+ if a.get('start_time') and b.get('start_time') and a['start_time']!=b['start_time']:return False
+ x=norm(a['title']).replace('באשדוד','').replace('תאטרון','תיאטרון').replace('אימי','אמי');y=norm(b['title']).replace('באשדוד','').replace('תאטרון','תיאטרון').replace('אימי','אמי')
+ words=lambda t:set(re.findall(r'[א-ת]{2,}',t.replace('באשדוד','')))
+ ax,by=words(a['title']),words(b['title']);tokens=len(ax&by)>=3 and (ax<=by or by<=ax)
+ return x==y or tokens or (min(len(x),len(y))>=6 and (x in y or y in x))
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--collect-only',action='store_true');ap.add_argument('--snapshot');args=ap.parse_args();OUT.mkdir(exist_ok=True)
  if args.snapshot:snap=json.loads(Path(args.snapshot).read_text())
@@ -155,14 +177,14 @@ def main():
     rows=collect(src);unique=[e for e in rows if not any(equivalent(e,b) for b in base)];excluded.extend(e for e in rows if e not in unique)
     if src in ['makore','tickchak']:
      with ThreadPoolExecutor(max_workers=8) as pool:unique=list(pool.map(detail,unique))
-    new.extend(unique);status[src]={'ok':True,'read':len(rows),'not_in_mevalim':len(unique)}
+    new.extend(unique);status[src]={'ok':True,'read':len(rows),'not_in_mevalim':len(unique),'detail_fetch_failures':len(SOURCE_WARNINGS.get(src,[]))}
    except Exception as ex:status[src]={'ok':False,'error':str(ex)[:300]}
    print(src,status[src],flush=True)
   snap={'at':datetime.now(Z).isoformat(),'sources':status,'mevalim_compared':len(base),'events':new,'excluded_mevalim':len(excluded)}
   (OUT/'ashdod-supplemental-snapshot.json').write_text(json.dumps(snap,ensure_ascii=False,indent=2)+'\n')
  if args.collect_only:return
  path=ROOT/'events-preview/ashdod/data/events.json';data=json.loads(path.read_text());old=data['events'];new=[];duplicates=0
- for e in snap['events']:
+ for e in sorted(snap['events'],key=lambda e:{'supplemental_friends':0,'supplemental_leaan':1,'supplemental_tickchak':2,'supplemental_sababa':3,'supplemental_makore':4}.get(e['source'],5)):
   match=next((n for n in new if equivalent(e,n) and e['start_time']==n['start_time']),None)
   if match:
    duplicates+=1;match.setdefault('crosscheck_sources',[]).append(e['content_source_url']);continue
@@ -182,7 +204,8 @@ def main():
   cat=next((c for c in cats if c['id']==e['category']),None)
   if not cat:cat=dict(id=e['category'],label={'workshop':'סדנאות ויצירה','community':'קהילה ופנאי'}.get(e['category'],e['category']),subcategories=[]);cats.append(cat)
   if not any(s['id']==e['subcategory'] for s in cat.get('subcategories',[])):cat.setdefault('subcategories',[]).append(dict(id=e['subcategory'],label=e['source_category'] or 'פעילויות',requires_mapping=e['taxonomy_review_required']))
+ tax.setdefault('source_taxonomies',{})['ashdod_supplemental']={'label':'מקורות ארציים – השלמות לאשדוד','categories':[{'label':raw or 'ללא קטגוריה במקור','source':src,'requires_mapping':not raw} for src,raw in sorted({(e['source'],e.get('source_category','')) for e in new})]}
  taxpath.write_text(json.dumps(tax,ensure_ascii=False,indent=2)+'\n')
- report={k:v for k,v in snap.items() if k!='events'};report.update(published_occurrences=len(new),replaced=len(removed),duplicates_merged=duplicates,with_image=sum(bool(e.get('image_url')) for e in new),with_text=sum(bool(e.get('description')) for e in new))
+ report={k:v for k,v in snap.items() if k!='events'};report.update(published_occurrences=len(new),replaced=len(removed),duplicates_merged=duplicates,with_image=sum(bool(e.get('image_url')) for e in new),with_text=sum(bool(e.get('description')) for e in new),source_placeholder_images=sum('/placeholders/' in str(e.get('image_url')) for e in new),replaced_legacy_occurrences=sum(not str(e.get('source','')).startswith('supplemental_') for e in removed))
  (OUT/'ashdod-supplemental-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');(OUT/'ashdod-supplemental-replaced.json').write_text(json.dumps({'at':snap['at'],'events':removed},ensure_ascii=False,indent=2)+'\n');print(json.dumps(report,ensure_ascii=False))
 if __name__=='__main__':main()

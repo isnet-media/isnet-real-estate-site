@@ -44,7 +44,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') && 'pages' || format('pages-skipped-{0}', github.run_id) }}
   cancel-in-progress: true
 
 jobs:
