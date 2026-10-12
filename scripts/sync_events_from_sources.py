@@ -68,6 +68,8 @@ SOURCES = {
          "venue": "ראשון לציון", "source_type": "secondary"},
     ],
 }
+# Local Ashdod cards are owned by the source-specific daily rebuild.
+SOURCES['ashdod'] = [s for s in SOURCES['ashdod'] if s['name'] not in {'ashdod_smarticket', 'mishkan_smarticket', 'ofek_ashdod'}]
 CITY_LABELS = {"ashdod": "אשדוד", "rishon-lezion": "ראשון לציון"}
 DAY_DOT = re.compile(r"^(\d{1,2})[./](\d{1,2})[./](\d{2}|\d{4})$")
 HEBREW_DATE = re.compile(r"(?:ביום\s+)?(?:יום\s+)?(?:ראשון|שני|שלישי|רביעי|חמישי|שישי|שבת)?\s*,?\s*(\d{1,2})\s+([א-ת״']+)\s+(\d{4})")

@@ -123,7 +123,7 @@ function groupPurchaseAction(occ){
   return null;
 }
 function trustedImage(e){
-  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.image_represents_event!==false&&!/microsoft_oauth_logo|no_pic\.png|favicon/i.test(e.image_url));
+  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon/i.test(e.image_url));
 }
 function bestImageEvent(occ){
   return occ.find(e=>e.source_content_authoritative&&trustedImage(e))
@@ -331,7 +331,7 @@ function renderHero(e,occ,imageEvent){
 
   if(trustedImage(imageEvent)){
     const src=imageEvent.thumbnail_ready&&imageEvent.thumbnail_url?imageEvent.thumbnail_url:imageEvent.image_url;
-    $("heroImage").innerHTML='<img data-event-image-id="'+escapeHtml(e.event_id)+'" src="'+escapeHtml(src)+'" alt="'+escapeHtml(eventDisplayTitle(e))+'">';
+    $("heroImage").innerHTML='<img data-event-image-id="'+escapeHtml(e.event_id)+'" src="'+escapeHtml(src)+'" alt="'+escapeHtml(eventDisplayTitle(e))+'">'+(imageEvent.image_caption?'<span class="image-caption" style="position:absolute;bottom:8px;right:8px;padding:4px 8px;background:#171717cc;color:white;font-size:12px">'+escapeHtml(imageEvent.image_caption)+'</span>':'');
   }else{
     if(e.category==="lecture"){
       const key=String(e.event_id||e.title||"");

@@ -1,0 +1,51 @@
+name: Daily Ashdod local source publication
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ashdod-local.yml'
+      - 'scripts/sync_ashdod_local.py'
+permissions:
+  contents: write
+concurrency:
+  group: isnet-event-data-writes
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4
+      - name: Collect fresh local cards and image provenance
+        run: python scripts/sync_ashdod_local.py --collect-only
+      - name: Merge into current main and publish
+        run: |
+          cp events-preview/admin/data/ashdod-local-snapshot.json /tmp/local-source.json
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            python scripts/sync_ashdod_local.py --snapshot /tmp/local-source.json
+            git add events-preview/ashdod/data/events.json events-preview/admin/data/ashdod-local-*.json events-preview/admin/data/taxonomy.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'Rebuild Ashdod local event cards from current official sources'
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1
+      - name: Preserve scan evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ashdod-local-scan
+          path: events-preview/admin/data/ashdod-local-*.json
