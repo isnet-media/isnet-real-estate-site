@@ -90,6 +90,7 @@ function stageSourceQualityIssues(e){
 }
 function issuesFor(e){
   const issues=stageSourceQualityIssues(e);
+  if(e.taxonomy_review_required)issues.push({key:"needs_subcategory",label:"נפתחה קטגוריה/תת קטגוריה חדשה: "+(e.source_category||"לא סווג במקור"),level:"warn"});
   const desc=String(e._description||e.long_description||e.event_summary||e.short_pitch||"");
   if(!desc.trim())issues.push({key:"needs_content",label:"חסר תוכן",level:"warn"});
   else if(hasEditorialNote(desc))issues.push({key:"needs_content",label:"הערת מערכת בתוכן",level:"bad"});
