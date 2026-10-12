@@ -265,7 +265,7 @@ const SPECIAL_EVENT_ART={
   "תשאירי פתוח":"assets/special/leave-open.svg",
   "שירי קריוקי בקצב הדרבוקה":"assets/special/karaoke-darbuka.svg"
 };
-function specialEventArt(e){return SPECIAL_EVENT_ART[String(e?.title||"").trim()]||""}
+function specialEventArt(e){if(e?.source_content_authoritative)return "";return SPECIAL_EVENT_ART[String(e?.title||"").trim()]||""}
 
 function eventImageHTML(e,mode="card"){
   const special=specialEventArt(e);

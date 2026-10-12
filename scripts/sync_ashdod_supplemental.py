@@ -61,7 +61,7 @@ def convert(o,src):
  dt=datetime.fromisoformat(o['startDate'].replace('Z','+00:00'));dt=dt.astimezone(Z) if dt.tzinfo else dt.replace(tzinfo=Z)
  offers=o.get('offers') or {};offers=offers[0] if isinstance(offers,list) and offers else offers
  url=o.get('url') or str(o.get('@id','')).split('#')[0] or offers.get('url','')
- e=make(src,o['name'],dt.date().isoformat(),dt.strftime('%H:%M'),loc.get('name','אשדוד'),url,o.get('description',''),image(o),str(o.get('genre') or o.get('additionalType') or urlparse(url).path.split('/')[1]),o.get('@id') or url)
+ e=make(src,o['name'],dt.date().isoformat(),dt.strftime('%H:%M'),loc.get('name','אשדוד'),url,o.get('description',''),image(o),str(o.get('genre') or o.get('additionalType') or ({'concerts':'הופעות חיות','theater':'תיאטרון','standup':'סטנדאפ','childrens-shows':'ילדים ומשפחה','lectures':'הרצאות'}.get(urlparse(url).path.split('/')[1],''))),o.get('@id') or url)
  e['purchase_url']=e['ticket_url']=offers.get('url') or url
  if offers.get('price') is not None:e['price_min_ils']=offers['price']
  if 'SoldOut' in offers.get('availability',''):e['ticket_status']='sold_out'
@@ -107,7 +107,15 @@ def collect(src):
    for more in pool.map(lambda n:makore_rows(page(SOURCES[src]+'?pages='+str(n))),range(2,math.ceil(count/per)+1)):rows.extend(more)
   if len(rows)<count:raise ValueError(f'Incomplete pagination: {len(rows)}/{count}')
   out=[convert(o,src) for o in rows]
- elif src in ['tickchak','sababa']:out=[convert(o,src) for o in ld(p)]
+ elif src in ['tickchak','sababa']:
+  rows=ld(p)
+  if src=='sababa':
+   seen={SOURCES[src]};pending=[urljoin(SOURCES[src],a['href']) for a in p.select('a[rel=next],.pagination a[href],a.page-numbers[href]')]
+   while pending:
+    url=pending.pop(0)
+    if url in seen or urlparse(url).hostname!=urlparse(SOURCES[src]).hostname:continue
+    seen.add(url);q=page(url);rows.extend(ld(q));pending.extend(urljoin(url,a['href']) for a in q.select('a[rel=next],.pagination a[href],a.page-numbers[href]'))
+  out=[convert(o,src) for o in rows]
  elif src=='friends':
   posters={row.select_one('a.btn_info[href]')['href']:row.select_one('img[src]')['src'] for row in p.select('.search_show_row') if row.select_one('a.btn_info[href]') and row.select_one('img[src]')}
   links=list(posters)
@@ -125,11 +133,14 @@ def collect(src):
   script=p.select_one('#__NEXT_DATA__')
   if not script:raise ValueError('Source state unavailable')
   initial=json.loads(script.get_text())['props']['pageProps']['initialState']; states=[initial]
-  sitemap=page('https://www.leaan.co.il/site-map');links=list(dict.fromkeys(urljoin(SOURCES[src],a['href']) for a in sitemap.select('a[href*="/events/"]')));routes={urlparse(u).path.rsplit('/',1)[-1]:u for u in links}
+  sitemap=page('https://www.leaan.co.il/site-map');event_links=list(dict.fromkeys(urljoin(SOURCES[src],a['href']) for a in sitemap.select('a[href*="/events/"]')));routes={urlparse(u).path.rsplit('/',1)[-1]:u for u in event_links};artist_links=[urljoin(SOURCES[src],a['href']) for a in sitemap.select('a[href*="/category/"]') if len(urlparse(a['href']).path.strip('/').split('/'))>=3];links=list(dict.fromkeys(event_links+artist_links))
   def state(url):
    q=page(url);node=q.select_one('#__NEXT_DATA__')
    if not node:raise ValueError('Missing Leaan source state: '+url)
-   return json.loads(node.get_text())['props']['pageProps']['initialState']
+   data=json.loads(node.get_text())['props']['pageProps']
+   for event in objects(data):
+    if isinstance(event.get('location'),dict) and event['location'].get('city')=='אשדוד' and event.get('event_start'):event['_source_page']=url
+   return data
   def safe_state(url):
    try:return state(url)
    except Exception as ex:return {'_fetch_error':str(ex)[:200]}
@@ -142,7 +153,7 @@ def collect(src):
    if not isinstance(o.get('location'),dict) or o['location'].get('city')!='אשדוד' or not o.get('event_start'):continue
    dt=datetime.fromtimestamp(o['event_start'],Z);raw=', '.join(c.get('category_name','') for c in (o.get('categories') or {}).values())
    # Use only source-provided URLs; do not invent a detail route.
-   url=o.get('redirect_url') or routes.get(str(o.get('id'))) or SOURCES[src]
+   url=o.get('redirect_url') or routes.get(str(o.get('id'))) or o.get('_source_page') or SOURCES[src]
    out.append(make(src,o.get('event_name') or o.get('name'),dt.date().isoformat(),dt.strftime('%H:%M'),o['location'].get('name','אשדוד'),url,o.get('description',''),image(o),raw,o['event_id']))
  out=[e for e in out if e and e['start_date']>=datetime.now(Z).date().isoformat()]
  if not out:raise ValueError('No source events parsed; retain previous records')
