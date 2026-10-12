@@ -17,3 +17,32 @@
 .hero #quickFilters{display:none!important}
 @media(max-width:650px){.hero .hero__content{margin-top:12px!important}.isnetNavDiscovery{padding-top:10px}.isnetNavDiscovery__primary{gap:9px;margin-bottom:13px}.isnetNavFeature{padding:12px 10px;min-height:112px;border-radius:15px;gap:7px}.isnetNavFeature__icon{width:39px;height:39px;flex-basis:39px;font-size:24px}.isnetNavFeature__copy strong{font-size:17px}.isnetNavFeature__copy small{font-size:11px}.isnetNavFeature__arrow{width:22px;height:22px;flex-basis:22px;font-size:12px}.isnetNavDiscovery__secondary{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.isnetNavSmall{min-height:78px;gap:7px}.isnetNavSmall span{font-size:24px}.isnetNavSmall strong{font-size:12px}.isnetNavDiscovery__search{margin-top:16px}}
 @media(prefers-reduced-motion:reduce){.isnetNavFeature{transition:none}}
+
+/* Approved compact category and date navigation */
+.isnetNavFeature{min-height:94px!important;padding:12px 16px!important;gap:12px!important}
+.isnetNavFeature__icon{width:47px!important;height:47px!important;flex:0 0 47px!important;font-size:26px!important}
+.isnetNavFeature__copy strong{font-size:clamp(18px,2vw,25px)!important}
+.isnetNavFeature__copy small{font-size:12px!important}
+.isnetNavSmall{min-height:68px!important;gap:5px!important;padding:9px 5px!important}
+.isnetNavSmall span{font-size:23px!important}
+.isnetNavDiscovery{padding-bottom:16px!important}
+.isnetDateGateway{margin:19px auto 12px;max-width:1120px;direction:rtl}
+.isnetDateGateway__top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+#isnetOpenCalendar{display:flex;align-items:center;gap:12px;white-space:nowrap;padding:12px 18px;min-height:47px;border:1px solid #e5b85c;border-radius:13px;background:#25221d;color:#f8d17e;font:800 17px Heebo,Assistant,sans-serif;cursor:pointer}
+.isnetDateGateway__quick{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.isnetDateGateway__quick button{min-height:42px;padding:9px 16px;border:1px solid #4e5764;border-radius:30px;color:#f4f4f7;background:#1d222b;font:700 14px Assistant,sans-serif;cursor:pointer}
+.isnetDateGateway__quick button:is(:hover,:focus-visible,.is-active){border-color:#edbf6d;color:#edbf6d}
+.isnetNavDiscovery>.dateSection{margin:0!important;padding:0!important}
+.isnetNavDiscovery>.dateSection #resetDate{display:none!important}
+.isnetNavDiscovery>.dateSection #calendarBox:not([hidden]){margin:12px 0;padding:18px;border:1px solid #4b5260;border-radius:16px;background:#191d25}
+.results .dateSection{display:none!important}
+@media(max-width:650px){
+ .isnetNavFeature{min-height:80px!important;padding:10px 8px!important;gap:6px!important}
+ .isnetNavFeature__icon{width:33px!important;height:33px!important;flex-basis:33px!important;font-size:22px!important}
+ .isnetNavFeature__copy strong{font-size:16px!important}
+ .isnetNavFeature__copy small{font-size:10px!important}
+ .isnetNavSmall{min-height:66px!important}
+ .isnetDateGateway__top{align-items:flex-start}
+ .isnetDateGateway__quick{display:flex;flex-wrap:nowrap;width:100%;overflow-x:auto;padding:4px 0 8px}
+ .isnetDateGateway__quick button{white-space:nowrap;flex:0 0 auto;padding:8px 13px}
+}
