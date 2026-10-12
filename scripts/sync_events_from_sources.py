@@ -840,17 +840,19 @@ def merge(city_slug, specs, dry_run=False):
     payload = json.loads(data_path.read_text(encoding="utf-8"))
     events = payload["events"]
     for e in events:
+        if e.get("source_content_authoritative"):
+            continue
         pu = str(e.get("purchase_url") or "")
         host = (urlsplit(pu).hostname or "").lower() if pu else ""
         if host == "tickchak.co.il" or host == "live.tickchak.co.il" or host.endswith(".tickchak.co.il"):
             e["purchase_url"] = None
             if e.get("purchase_source") in (None, "official_listing", "direct"):
                 e["purchase_source"] = "blocked_competitor_listing"
-    removed_classes = [e for e in events if is_classes_candidate(
+    removed_classes = [e for e in events if not e.get("source_content_authoritative") and is_classes_candidate(
         e.get("title"), e.get("category"), e.get("description"), e.get("series_title"), e.get("variant_label")
     )]
     if removed_classes:
-        events[:] = [e for e in events if not is_classes_candidate(
+        events[:] = [e for e in events if e.get("source_content_authoritative") or not is_classes_candidate(
             e.get("title"), e.get("category"), e.get("description"), e.get("series_title"), e.get("variant_label")
         )]
     ids_before = {e.get("event_id") for e in events}
@@ -961,6 +963,8 @@ def merge(city_slug, specs, dry_run=False):
             }
             match = existing_match(events, incoming, name)
             if match:
+                if match.get("source_content_authoritative"):
+                    continue
                 changed = False
                 # Only update date/time from the same official source. A missing
                 # or changed price never silently destroys existing editorial data.
