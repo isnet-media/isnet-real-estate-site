@@ -38,5 +38,8 @@ class LocalResetTests(unittest.TestCase):
   e=self.event('local_ironit');e.update(image_url='https://official.example/photo.jfif',source_image_kind='source_card_image',internal_notes=[])
   with patch.object(s.requests,'get',return_value=Response()):s.image_policy([e])
   self.assertTrue(e['image_verified']);self.assertEqual(e['source_image_kind'],'source_card_image')
+ def test_rich_life_experience_is_not_a_music_genre(self):
+  e=self.event('local_ashdod_smarticket');e.update(title='מוצאים עוגן בתוך הסערה | לנשים בלבד',category='music',description='ניסיון החיים העשיר והחוסן שבניתם',internal_notes=[],local_source_name='ashdod_smarticket')
+  s.classify_local(e);self.assertEqual(e['category'],'community');self.assertEqual(e['subcategory'],'women-events')
 
 if __name__=='__main__':unittest.main()

@@ -31,6 +31,18 @@ def fetch_once(spec):
 def text(node):return node.get_text('\n',strip=True) if node else ''
 def future(e):
  return bool(e.get('start_date') and e.get('start_time') and e.get('venue') and e['start_date']>=datetime.now(Z).date().isoformat())
+def classify_local(e):
+ if e.get('local_source_name') in ['ofek_ashdod','up60']:return
+ title=e.get('title','');body=e.get('source_description') or e.get('description','')
+ if re.search(r'\b(?:ל|ה)?ילדים\b|לכל המשפחה|שעת סיפור|פעוט',title):e.update(category='kids',subcategory='creative-workshops' if 'סדנ' in title else 'kids-activities')
+ elif re.search(r'סדנ|קורס|חוג',title):e.update(category='workshop',subcategory='creative')
+ elif re.search(r'פילאטיס|יוגה|התעמלות',title):e.update(category='sport',subcategory='activities')
+ elif re.search(r'הרצא|פאנל|כנס|מפגש שיח',title):e.update(category='lecture',subcategory='lecture')
+ elif 'מועדון קריאה' in title:e.update(category='community',subcategory='reading-clubs')
+ elif e.get('category')=='music' and not re.search(r'מוזיק|מוסיק|קונצרט|תזמורת|\b(?:ה|ל)?שירים\b|\b(?:ה|ל)?להקה\b|\b(?:ה|ל)?זמר\b|מחול|בלט|הופעה חיה|מופע מוזיקלי',title+' '+body):
+  e.update(category='community',subcategory='community-meeting',taxonomy_review_required=True)
+  e.setdefault('internal_notes',[]).append('אין ראיה שמדובר בהופעה מוזיקלית; נדרש שיוך תוכני מדויק.')
+ if e['category']=='community' and re.search(r'לנשים|נשים|גדולות מהחיים',title):e['subcategory']='women-events';e['audiences']=['women']
 def localize(e,name):
  e['source']='local_'+name;e['local_source_name']=name;e['local_source_refresh']=True
  e['event_id']='local_'+hashlib.sha256((name+'|'+str(ticket_identity(e))+'|'+e['start_date']+'|'+e['start_time']).encode()).hexdigest()[:22]
@@ -46,6 +58,7 @@ def localize(e,name):
   activity=e.get('activity_type') or e['category'];e['category']='seniors';e['subcategory']={'lecture':'senior-lectures','tour':'senior-trips','workshop':'senior-workshops','music':'senior-music','sport':'senior-sport'}.get(activity,'senior-social');e['audiences']=['seniors']
  elif re.search(r'\b(?:ל|ה)?ילדים\b|לכל המשפחה|שעת סיפור|פעוט',e['title']):
   e['category']='kids';e['subcategory']='creative-workshops' if 'סדנ' in e['title'] else 'kids-activities'
+ classify_local(e)
  return e
 def card(row,name):
  u=row['ticket_url'];p=page(u);structured=ld(p)
@@ -197,6 +210,7 @@ def merge(snap):
  kept=[e for e in old if not legacy_local(e) or (e.get('local_source_refresh') and e.get('local_source_name') in failed)]
  new=[];duplicates=0
  for e in snap['events']:
+  classify_local(e)
   match=next((k for k in kept+new if k.get('start_date')==e['start_date'] and str(k.get('start_time') or '')[:5]==e['start_time'] and (equivalent(k,e) or (ticket_identity(k)==ticket_identity(e) and ticket_identity(e)[0]))),None)
   if match:
    if match.get('local_source_refresh'):
