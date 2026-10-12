@@ -270,6 +270,7 @@ const SPECIAL_EVENT_ART={
 function specialEventArt(e){if(e?.source_content_authoritative)return "";return SPECIAL_EVENT_ART[String(e?.title||"").trim()]||""}
 
 function eventImageHTML(e,mode="card"){
+  if(e?.local_source_refresh&&!hasTrustedSourceImage(e))return '<span class="eventArtStage"><span style="padding:20px;color:#b5bac6">תמונה מתאימה טרם פורסמה</span></span>';
   const special=specialEventArt(e);
   if(!special&&!hasTrustedSourceImage(e)){
     const fallback=fallbackImage(e);

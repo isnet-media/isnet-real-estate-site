@@ -120,6 +120,7 @@ def ironit(name,spec,p):
   try:origins.append((u,page(u)))
   except Exception as ex:issues.append(dict(url=u,error=str(ex)[:250]))
  links={urljoin(origin,a['href']) for origin,q in origins for a in q.select('a[href]') if '/events/' in a['href'] or '/event/' in a['href']}
+ if not links:issues.append(dict(url=spec['url'],error='calendar_cards_not_supported_or_not_exposed; cannot claim full source coverage'))
  for u in sorted(links):
   try:
    q=page(u);buy=next((urljoin(u,a['href']) for a in q.select('a[href]') if 'smarticket.co.il' in a['href'] and '/event/' in a['href']),None)
@@ -153,17 +154,22 @@ def ironit(name,spec,p):
 def image_policy(events):
  # Repeated site art across unrelated productions is not an event photograph.
  titles={}
+ for e in events:
+  if e.get('rejected_source_image_url'):
+   e['image_url']=e['rejected_source_image_url'];e['source_image_kind']='source_card_image'
  for e in events:titles.setdefault(e.get('image_url'),set()).add(e['title'])
  def check(u):
   if not u:return u,False
   if u.startswith('/events-preview/'):return u,(ROOT/u.lstrip('/')).is_file()
   try:
    r=requests.get(u,stream=True,timeout=20,headers={'User-Agent':'ISNET local event image verification/1.0'})
-   ok=r.ok and r.headers.get('Content-Type','').lower().startswith('image/');r.close();return u,ok
+   header=next(r.iter_content(32),b'')
+   magic=header.startswith((b'\xff\xd8\xff',b'\x89PNG\r\n\x1a\n',b'GIF87a',b'GIF89a')) or (header.startswith(b'RIFF') and header[8:12]==b'WEBP') or b'ftypavif' in header[:20]
+   ok=r.ok and magic;r.close();return u,ok
   except requests.RequestException:return u,False
  with ThreadPoolExecutor(max_workers=4) as pool:valid=dict(pool.map(check,titles))
  for e in events:
-  u=e.get('image_url') or '';generic=bool(u and (len(titles.get(u,set()))>3 or urlparse(u).path in ['','/'] or any(w in u.lower() for w in ['placeholder','logo','no-image','unsplash.com'])))
+  u=e.get('image_url') or '';generic=bool(u and (len(titles.get(u,set()))>3 or urlparse(u).path in ['','/'] or any(w in u.lower() for w in ['placeholder','logo','no-image','no_pic','unsplash.com'])))
   if generic or (u and not valid.get(u)):
    e['rejected_source_image_url']=u;e['internal_notes'].append('תמונת המקור כללית או לא נטענה בבדיקת תמונה; נבחרה חלופה מתאימה ככל שקיימת.');u=''
   if not u:
@@ -176,7 +182,8 @@ def image_policy(events):
    elif e['category']=='workshop':u='/events-preview/shared/images/defaults/seniors-workshops.webp'
    if u:e['source_image_kind']='illustration';e['image_caption']='תמונת אילוסטרציה';e['image_strategy']='local_topic_photo_bank'
    else:e['source_image_kind']='not_available';e['image_strategy']='awaiting_suitable_photo';e['internal_notes'].append('חסרה תמונה מתאימה; לא הועתקה תמונה גנרית מהרשומה הישנה.')
-  else:e['image_strategy']='source_card_image'
+  else:
+   e['image_strategy']='source_card_image';e['source_image_kind']='source_card_image';e.pop('image_caption',None);e.pop('rejected_source_image_url',None)
   e['image_url']=u or None;e['image_origin_url']=u or None;e['image_verified']=e['image_publishable']=bool(u);e['image_represents_event']=bool(u and e['source_image_kind']!='illustration');e['image_review_status']='source_card_provenance' if e['source_image_kind']=='source_card_image' else e['source_image_kind']
 def legacy_local(e):
  return bool(e.get('local_source_refresh') or e.get('source') in SOURCES or any(s.get('name') in SOURCES for s in e.get('sources',[]))) and not str(e.get('source','')).startswith(('supplemental_','mevalim_'))

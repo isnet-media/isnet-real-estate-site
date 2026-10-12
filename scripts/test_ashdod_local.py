@@ -29,5 +29,14 @@ class LocalResetTests(unittest.TestCase):
  def test_child_workshop_and_factual_short_copy(self):
   e=self.event('x');e.update(title='סדנת ציור לילדים',description='',internal_notes=[])
   r=s.localize(e,'ironit');self.assertEqual(r['category'],'kids');self.assertEqual(r['content_completion_status'],'facts_only');self.assertNotIn('משתתפים',r['description'])
+ def test_valid_jpeg_is_accepted_with_octet_stream_header(self):
+  class Response:
+   ok=True
+   headers={'Content-Type':'application/octet-stream'}
+   def iter_content(self,n):yield b'\xff\xd8\xff\xe0JFIF'
+   def close(self):pass
+  e=self.event('local_ironit');e.update(image_url='https://official.example/photo.jfif',source_image_kind='source_card_image',internal_notes=[])
+  with patch.object(s.requests,'get',return_value=Response()):s.image_policy([e])
+  self.assertTrue(e['image_verified']);self.assertEqual(e['source_image_kind'],'source_card_image')
 
 if __name__=='__main__':unittest.main()
