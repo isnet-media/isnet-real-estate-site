@@ -26,12 +26,22 @@ def ld(p):
   try:out.extend(o for o in objects(json.loads(s.get_text())) if 'Event' in str(o.get('@type','')) and o.get('startDate'))
   except (ValueError,TypeError):pass
  return out
+def makore_rows(p):
+ rows=ld(p)
+ for card in p.select('[data-testid="event-card"]'):
+  a=card.select_one('a[href]');im=card.select_one('img[src]');tags=card.select('[data-testid="event-card-category-badge"]')
+  if not a:continue
+  for o in rows:
+   if urlparse(o.get('url','')).path==urlparse(a['href']).path:
+    o['genre']=', '.join(t.get_text(strip=True) for t in tags)
+    if im:o['image']=urljoin(SOURCES['makore'],im['src'])
+ return rows
 def image(o):
  x=o.get('image') or o.get('vivenu_image')
  if isinstance(x,list):x=x[0] if x else None
  if isinstance(x,dict):x=x.get('url') or x.get('contentUrl')
  return x
-RULES=[(r'סטנד.?אפ|standup','standup','standup'),(r'סדנ|יצירה|ציור|פיסול|קרמיקה','workshop','creative'),(r'הרצא|כנס|lecture','lecture','lecture'),(r'תערוכ|מוזיאון|מוזאון','exhibition','exhibition'),(r'שעת סיפור','kids','story-time'),(r'ילדים|ילד|קטנטנ|פעוט|משפחה|childrens','kids','kids-activities'),(r'תיאטרון|הצגה|theater','theatre','theatre'),(r'מוזיקה|מוסיקה|קונצרט|concert|שירי|מופע|הופעה','music','live'),(r'גיל השלישי|גמלאי','seniors','seniors-activities')]
+RULES=[(r'סטנד.?אפ|standup','standup','standup'),(r'סדנ|יצירה|ציור|פיסול|קרמיקה','workshop','creative'),(r'הרצא|כנס|lecture','lecture','lecture'),(r'תערוכ|מוזיאון|מוזאון','exhibition','exhibition'),(r'שעת סיפור','kids','story-time'),(r'ילדים|ילד|קטנטנ|פעוט|משפחה|childrens','kids','kids-activities'),(r'תיאטרון|הצגה|theater','theatre','theatre'),(r'מוזיקה|מוסיקה|קונצרט|concert|שירי|מופע|הופעה','music','live'),(r'ספורט|פילאטיס|יוגה','sport','activities'),(r'גיל השלישי|גמלאי','seniors','seniors-activities')]
 def category(raw,title):
  for pattern,cat,sub in RULES:
   if re.search(pattern,raw+' '+title,re.I):return cat,sub
@@ -39,7 +49,7 @@ def category(raw,title):
 def make(src,title,date,time,venue,url,description='',img=None,raw='',uid=None):
  cat,sub=category(raw,title);text=BeautifulSoup(description or '','html.parser').get_text('\n',strip=True);text,removed=remove_conflicting_address(text)
  eid=src+'_as_'+hashlib.sha256((str(uid or url)+date+time).encode()).hexdigest()[:18]
- e=dict(event_id=eid,source='supplemental_'+src,city='אשדוד',title=clean(title),start_date=date,start_time=time,venue=clean(venue),status='active',category=cat,subcategory=sub,source_category=raw,source_subcategory=raw,description=text,series_description=text,image_url=img,image_origin_url=img,image_source=src,image_verified=bool(img),image_publishable=bool(img),image_represents_event=bool(img),image_strategy='official_source_event_image',image_rights_status='publisher_directed_source_reuse',ticket_url=url,purchase_url=url,content_source_url=url,source_content_authoritative=True,source_priority=2,last_imported_at=datetime.now(Z).isoformat(),internal_notes=[],taxonomy_review_required=sub.startswith('source-'))
+ e=dict(event_id=eid,source='supplemental_'+src,city='אשדוד',title=clean(title),start_date=date,start_time=time,venue=clean(venue),status='active',category=cat,subcategory=sub,source_category=raw,source_subcategory=raw,description=text,series_description=text,image_url=img,image_origin_url=img,image_source=src,image_verified=bool(img),image_publishable=bool(img),image_represents_event=bool(img),image_strategy='official_source_event_image',image_rights_status='publisher_directed_source_reuse',ticket_url=url,purchase_url=url,content_source_url=url,source_content_authoritative=True,content_locked=True,source_priority=2,last_imported_at=datetime.now(Z).isoformat(),internal_notes=[],taxonomy_review_required=sub.startswith('source-'))
  if removed:e['removed_conflicting_source_addresses']=removed
  if e['taxonomy_review_required']:e['internal_notes'].append('נפתחה קטגוריה/תת קטגוריה חדשה; שיוך מוצע לקהילה ופנאי: '+(raw or 'ללא קטגוריה במקור'))
  return e
@@ -57,7 +67,7 @@ def convert(o,src):
 def detail(e):
  try:
   p=page(e['content_source_url']); meta=p.find('meta',property='og:image')
-  if meta and meta.get('content'):e['image_url']=e['image_origin_url']=urljoin(e['content_source_url'],meta['content'])
+  if meta and meta.get('content') and e['source']!='supplemental_makore':e['image_url']=e['image_origin_url']=urljoin(e['content_source_url'],meta['content'])
   matches=[x for x in ld(p) if norm(x.get('name'))==norm(e['title'])]
   if matches:
    o=matches[0]
@@ -67,6 +77,10 @@ def detail(e):
   for selector in ['.wrap_brief','.event-description','[itemprop="description"]']:
    block=p.select_one(selector)
    if block and block.get_text(strip=True):e['description']=e['series_description']=block.get_text('\n',strip=True);break
+  if e['source']=='supplemental_makore' and 'smarticket.co.il' in urlparse(e['ticket_url']).hostname:
+   original=page(e['ticket_url']);block=original.select_one('.txt_container');im=original.find('meta',property='og:image')
+   if block:e['description']=e['series_description']=block.get_text('\n',strip=True).removeprefix('פרטים נוספים').strip();e['source_detail_text']=e['description']
+   if im and im.get('content'):e['image_url']=e['image_origin_url']=urljoin(e['ticket_url'],im['content']);e['image_source']='smarticket'
   e['detail_checked_at']=datetime.now(Z).isoformat()
  except Exception as ex:e['source_detail_error']=str(ex)[:200]
  e['image_verified']=e['image_publishable']=e['image_represents_event']=bool(e.get('image_url'))
@@ -76,24 +90,25 @@ def detail(e):
 def collect(src):
  p=page(SOURCES[src]);out=[]
  if src=='makore':
-  rows=ld(p);h=p.find('h1');m=re.search(r'\d+',h.get_text()) if h else None
+  rows=makore_rows(p);h=p.find('h1');m=re.search(r'\d+',h.get_text()) if h else None
   if not m:raise ValueError('Listing count unavailable; retain previously published cards')
   count=int(m[0]);per=len(rows)
   if not per:raise ValueError('Empty listing')
   with ThreadPoolExecutor(max_workers=5) as pool:
-   for more in pool.map(lambda n:ld(page(SOURCES[src]+'?pages='+str(n))),range(2,math.ceil(count/per)+1)):rows.extend(more)
+   for more in pool.map(lambda n:makore_rows(page(SOURCES[src]+'?pages='+str(n))),range(2,math.ceil(count/per)+1)):rows.extend(more)
   if len(rows)<count:raise ValueError(f'Incomplete pagination: {len(rows)}/{count}')
   out=[convert(o,src) for o in rows]
  elif src in ['tickchak','sababa']:out=[convert(o,src) for o in ld(p)]
  elif src=='friends':
-  links=list(dict.fromkeys(a['href'] for a in p.select('.search_show_row a.btn_info[href]')))
+  posters={row.select_one('a.btn_info[href]')['href']:row.select_one('img[src]')['src'] for row in p.select('.search_show_row') if row.select_one('a.btn_info[href]') and row.select_one('img[src]')}
+  links=list(posters)
   def read(url):
    q=page(url);h=q.find('h1');title=h.get_text(' ',strip=True) if h else '';desc=q.select_one('.wrap_brief');meta=q.find('meta',property='og:image');events=[]
    for block in q.select('.info_col'):
     header=block.select_one('.date_time_address');d=block.select_one('.date_wrap');v=block.select_one('.address_wrap')
     if not header or not d or 'אשדוד' not in header.get_text():continue
     tm=re.search(r'\b\d{2}:\d{2}\b',header.get_text());date=datetime.strptime(d.get_text(strip=True),'%d/%m/%y')
-    events.append(make(src,title,date.date().isoformat(),tm[0] if tm else '',v.get_text(' ',strip=True) if v else 'אשדוד',url,desc.get_text('\n',strip=True) if desc else '',meta.get('content') if meta else None))
+    events.append(make(src,title,date.date().isoformat(),tm[0] if tm else '',v.get_text(' ',strip=True) if v else 'אשדוד',url,desc.get_text('\n',strip=True) if desc else '',meta.get('content') if meta else posters.get(url)))
    return events
   with ThreadPoolExecutor(max_workers=6) as pool:
    for rows in pool.map(read,links):out.extend(rows)

@@ -77,7 +77,7 @@ def needs_enrichment(event):
     Bot-generated content is refreshed when missing or when its enrichment
     version is older than the current editorial pipeline.
     """
-    if event.get("content_locked") is True:
+    if event.get("source_content_authoritative") or event.get("content_locked") is True:
         return False
     # Category cleanup is a priority: "other" is a temporary bucket, not a final classification.
     if event.get("category") == "other":

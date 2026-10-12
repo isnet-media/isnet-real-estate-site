@@ -10,6 +10,8 @@ data=json.loads(events_path.read_text(encoding="utf-8"))
 bad=("/languages/il.gif","artistshadow","eventnew.jpg","no_pic","no-pic","placeholder","smarticket_logo","microsoft_oauth_logo","google_oauth_logo","facebook_oauth","oauth_logo","oauth","_logo_")
 cleared=0
 for e in data.get("events",[]):
+    if e.get("source_content_authoritative"):
+        continue
     u=(e.get("image_url") or "").lower()
     if u and any(x in u for x in bad):
         e["image_url"]=None

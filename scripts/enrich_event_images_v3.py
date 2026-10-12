@@ -199,7 +199,7 @@ def content_ready_for_media(e):
     return bool(e.get("content_ready_for_media") is True or len(str(text).strip())>=80 or len(str(brief).strip())>=40)
 
 def main():
-    payload=json.loads(DATA.read_text(encoding="utf-8")); events=[e for e in (payload.get("events") or []) if in_horizon(e)]
+    payload=json.loads(DATA.read_text(encoding="utf-8")); events=[e for e in (payload.get("events") or []) if in_horizon(e) and not e.get("source_content_authoritative")]
     stats=Counter(); failures=[]; roots={}; pages={}; title_cache={}
     for e in events:
         if e.get("image_url") and generic(e["image_url"]):
