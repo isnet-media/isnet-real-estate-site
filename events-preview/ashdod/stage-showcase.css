@@ -1,0 +1,12 @@
+/* ISNET city-brand stage showcase — isolated design prototype */
+.stageShowcase{width:100%;overflow:hidden;position:relative;margin:26px 0 16px;direction:ltr;mask-image:linear-gradient(to right,transparent,#000 4%,#000 96%,transparent)}
+.stageShowcase__track{display:flex;width:max-content;animation:stageMarquee 46s linear infinite;will-change:transform}
+.stageShowcase__set{display:flex;flex:none;gap:9px;padding-right:9px}
+.stageShowcase figure{flex:none;margin:0;width:clamp(160px,22vw,245px);height:clamp(145px,17vw,195px);overflow:hidden;border-radius:13px;background:#20252b;border:1px solid #ffffff29}
+.stageShowcase img{display:block;width:100%;height:100%;object-fit:cover}
+@keyframes stageMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.stageShowcase:hover .stageShowcase__track{animation-play-state:paused}
+#categoryGrid{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:10px!important;overflow:visible!important}
+#categoryGrid>*{min-width:0!important;width:auto!important;max-width:none!important}
+@media(max-width:700px){.stageShowcase{margin:18px -15px 20px;width:calc(100% + 30px)}.stageShowcase figure{width:145px;height:150px;border-radius:11px}.stageShowcase__track{animation-duration:40s}#categoryGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}#categoryGrid>*{padding:10px 5px!important;min-height:78px!important}}
+@media(prefers-reduced-motion:reduce){.stageShowcase{overflow-x:auto;mask-image:none}.stageShowcase__track{animation:none;will-change:auto}}
