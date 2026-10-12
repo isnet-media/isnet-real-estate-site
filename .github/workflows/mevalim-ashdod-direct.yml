@@ -1,0 +1,45 @@
+name: Daily Mevalim Ashdod direct event publication
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 4 * * *'
+  push:
+    branches: [main]
+    paths:
+      - scripts/sync_mevalim_ashdod_direct.py
+      - .github/workflows/mevalim-ashdod-direct.yml
+permissions:
+  contents: write
+concurrency:
+  group: isnet-event-data-writes
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4
+      - name: Read all Mevalim-sold Ashdod occurrences and their purchase cards
+        run: python scripts/sync_mevalim_ashdod_direct.py --collect-only
+      - name: Merge into latest data and publish with retry
+        run: |
+          cp events-preview/admin/data/mevalim-ashdod-direct-snapshot.json /tmp/mevalim-source.json
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            python scripts/sync_mevalim_ashdod_direct.py --snapshot /tmp/mevalim-source.json
+            git add events-preview/ashdod/data/events.json events-preview/admin/data/mevalim-ashdod-* events-preview/admin/data/taxonomy.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'Publish complete Mevalim Ashdod purchase cards'
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1
