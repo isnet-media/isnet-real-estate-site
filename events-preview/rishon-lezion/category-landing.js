@@ -1,5 +1,6 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
 (()=>{
+if(location.pathname.includes("/ashdod/")&&new URLSearchParams(location.search).get("category")==="seniors"&&window.ISNET_SENIORS){window.ISNET_SENIORS.init();return;}
 if(location.pathname.includes("/ashdod/")&&new URLSearchParams(location.search).get("category")==="exhibition"&&window.ISNET_EXHIBITIONS){window.ISNET_EXHIBITIONS.init();return;}
 const config={stage:["הופעות במה","הצגות, מוזיקה וסטנדאפ",["music","theatre","standup"]],music:["הופעות ומוזיקה","מופעי מוזיקה בעיר",["music"]],theatre:["הצגות","תיאטרון ומחזות בעיר",["theatre"]],standup:["סטנדאפ","מופעי סטנדאפ בעיר",["standup"]],kids:["ילדים ומשפחה","מופעים, הצגות ופעילויות לילדים",["kids"]],seniors:["גימלאים","הרצאות, סיורים ופעילויות לגיל השלישי",["seniors"]],lecture:["הרצאות","תוכן, מפגשים וידע",["lecture"]],tour:["טיולים וסיורים","לגלות את העיר והסביבה",["tour"]],exhibition:["תערוכות","אמנות ותערוכות בעיר",["exhibition"]],sport:["אירועי ספורט","משחקים ואירועי ספורט",["sport"]],community:["אירועי קהילה","מפגשים ואירועים קהילתיים",["community"]],conference:["כנסים","כנסים ופאנלים",["conference"]],food:["קולינריה","אירועי אוכל בעיר",["food"]]};
 const params=new URLSearchParams(location.search),key=params.get("category")||"stage",entry=config[key]||config.stage;
