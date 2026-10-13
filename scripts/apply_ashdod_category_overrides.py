@@ -10,8 +10,8 @@ def apply_ashdod_category_overrides(events,root):
  for event in events:
   if event.get('category')=='tour':
    event.update(category='seniors',subcategory='senior-trips');count+=1
-  elif event.get('category')=='community':
+  else:
    rule=rules.get(html.unescape(str(event.get('title') or '')).strip())
-   if rule:
+   if rule and (rule.get('all_categories') is True or event.get('category')=='community'):
     event.update(category=rule['category'],subcategory=rule['subcategory']);count+=1
  return count
