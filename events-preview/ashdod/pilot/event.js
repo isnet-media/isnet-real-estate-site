@@ -280,7 +280,7 @@ function meaningfulEventDescription(e){
 }
 function autoHighlights(e,occ){
   const items=[];
-  if(occ.length>1)items.push(occ.length+" מועדים לבחירה באשדוד");
+  if(occ.length>1)items.push("מועדי האירוע מפורטים בעמוד");
   else items.push("מועד האירוע מרוכז וברור בעמוד");
   if(e.venue)items.push("מיקום: "+e.venue);
   else items.push("פרטי המקום יתעדכנו עם פרסומם");
@@ -315,8 +315,7 @@ function renderHero(e,occ,imageEvent){
     '<a class="badge accent categoryLink" href="index.html?category='+encodeURIComponent(e.category||"other")+'#events" title="לעוד אירועים בקטגוריה">'+escapeHtml(catLabels[e.category]||"אירוע")+' ←</a>'+
     (sportBadge?'<span class="badge">'+escapeHtml(sportBadge.icon)+' '+escapeHtml(sportBadge.label)+'</span>':"")+
     (occ.every(x=>x.ticket_status==="sold_out")?'<span class="badge badge--soldout">אזלו הכרטיסים</span>':"")+
-    (occ.every(x=>!isUpcoming(x))?'<span class="badge badge--soldout">האירוע הסתיים</span>':"")+
-    (occ.length>1?'<span class="badge">'+occ.length+' מועדים באשדוד</span>':"");
+    (occ.every(x=>!isUpcoming(x))?'<span class="badge badge--soldout">האירוע הסתיים</span>':"");
   $("eventTitle").textContent=displayTitle;
   $("eventPitch").textContent=safeEditorial(e.short_pitch)||meaningfulEventDescription(e).slice(0,240)||autoPitch({...e,title:displayTitle});
 
@@ -436,8 +435,7 @@ function renderPractical(e,occ){
     ...(age?[["גילים",age]]:[]),
     ...(audience?[["קהל",audience]]:[]),
     ...(e.organizer?[["מארגן",e.organizer]]:[]),
-    ...(e.ticket_provider?[["מערכת כרטיסים",e.ticket_provider]]:[]),
-    ["מספר מועדים",String(occ.length)]
+    ...(e.ticket_provider?[["מערכת כרטיסים",e.ticket_provider]]:[])
   ];
   const info=rows.map(([a,b])=>'<div class="infoRow"><b>'+escapeHtml(a)+'</b><span>'+escapeHtml(b)+'</span></div>').join("");
   const contact=String(e.contact_phone||e.purchase_phone||"").replace(/[^0-9+*]/g,"");
