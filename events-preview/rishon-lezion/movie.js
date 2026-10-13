@@ -49,11 +49,19 @@ function screeningLanguage(venue,date,time){
   const labels={he:"עברית",ru:"רוסית",en:"אנגלית",fr:"צרפתית"};
   return languages.map(l=>"מדובב: "+(labels[l]||l)).join(" / ");
 }
+function screeningBookingUrl(venue,date,time){
+  const urls=[...new Set((venue.sessions||[]).filter(s=>s.date===date&&s.time===time).map(s=>s.booking_url).filter(url=>/^https:\/\//.test(url||"")))];
+  if(urls.length===1)return urls[0];
+  return /^https:\/\//.test(venue.article_url||"")?venue.article_url:"";
+}
 function renderSchedules(movie){
   $("cinemaSchedules").innerHTML=movie.venues.map(v=>{
-    const dates=Object.keys(v.schedule||{}).filter(d=>d>=cinemaToday()).sort();
+    const dates=Object.keys(v.schedule||{}).filter(d=>d>=cinemaToday()&&Array.isArray(v.schedule[d])&&v.schedule[d].length).sort();
     const rows=dates.length?dates.map(date=>{
-      const times=(v.schedule[date]||[]).map(t=>'<span class="showtime">'+escapeHtml(t)+(screeningLanguage(v,date,t)?' · '+escapeHtml(screeningLanguage(v,date,t)):'')+'</span>').join("");
+      const times=(v.schedule[date]||[]).map(t=>{
+        const url=screeningBookingUrl(v,date,t),label=t+(screeningLanguage(v,date,t)?" · "+screeningLanguage(v,date,t):"");
+        return url?'<a class="showtime" href="'+escapeHtml(url)+'" target="_blank" rel="noopener noreferrer" aria-label="'+escapeHtml("פרטים והזמנה · "+movie.title+" · "+v.name+" · "+date+" · "+label)+'">'+escapeHtml(label)+'</a>':'<span class="showtime">'+escapeHtml(label)+'</span>';
+      }).join("");
       return '<div class="dayRow">'+
         '<div class="dayDate"><b>'+escapeHtml(fmtShort.format(localDate(date)))+'</b><span>'+escapeHtml(date.split("-").reverse().join("."))+'</span></div>'+
         '<div class="dayTimes">'+times+'</div>'+
@@ -61,7 +69,7 @@ function renderSchedules(movie){
     }).join(""):'<div class="noSchedule">אין כרגע שעות הקרנה מאומתות במאגר. בדקו באתר הרשמי של בית הקולנוע.</div>';
     return '<section class="cinemaBlock">'+
       '<div class="cinemaBlock__head"><div><span>בית קולנוע</span><h3>'+escapeHtml(v.name)+'</h3></div>'+
-      '<span class="screeningCount">'+dates.length+' ימים</span></div>'+
+      '<span class="screeningCount">הקרנות קרובות</span></div>'+
       '<div class="daysList">'+rows+'</div>'+
     '</section>';
   }).join("");
