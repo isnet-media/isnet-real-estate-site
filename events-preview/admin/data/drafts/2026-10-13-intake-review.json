@@ -1,0 +1,41 @@
+{
+  "type": "isnet_daily_intake_review_draft",
+  "date": "2026-10-13",
+  "timezone": "Asia/Jerusalem",
+  "status": "pending_validation_not_authorized_for_publication",
+  "sources": {
+    "national_discovery": "events-preview/admin/data/national-events-discovery.json",
+    "national_import": "events-preview/admin/data/national-board-import-report.json",
+    "mevalim_direct": "events-preview/admin/data/mevalim-ashdod-direct-report.json"
+  },
+  "national_candidates": {
+    "ashdod": 175,
+    "rishon-lezion": 78,
+    "total": 253,
+    "validation": "none has independently verified date and venue in discovery candidates",
+    "image_rights": "unknown"
+  },
+  "github_dataset_additions_reported": {
+    "ashdod": 20,
+    "rishon-lezion": 7,
+    "total": 27,
+    "publication": "not_verified_live"
+  },
+  "supabase": {
+    "project": "isnet-ai-cms",
+    "cms_event_records_created_on_2026_10_13": 0,
+    "live_content_rows": 0,
+    "ingest_runs_rows": 0
+  },
+  "publication_gate": {
+    "publication_enabled": false,
+    "images_authorized": false,
+    "cms_modified": false
+  },
+  "duplicate_policy": "Do not publish or create CMS event records until normalized city+title+date+venue is checked against both GitHub city datasets and Supabase CMS. Do not overwrite verified source images or human edits.",
+  "review_notes": [
+    "Discovery includes navigation pages and event listings, not all 253 are valid events.",
+    "No event-level draft was written to Supabase: candidate date/venue validation and cross-store dedup are incomplete.",
+    "This draft manifest and the discovery candidate file are staged in GitHub on a non-deploy branch. They are not public event publications."
+  ]
+}
