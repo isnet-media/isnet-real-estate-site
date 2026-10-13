@@ -71,3 +71,9 @@
 @media (min-width:901px) and (max-width:1250px){
   .siteTopbar .siteTopbar__inner{width:calc(100% - 64px);}
 }
+
+/* Keep the mobile panel directly below the compact sticky header. */
+@media(max-width:650px){
+ .siteTopbar .isnetSiteMenu__panel{top:68px;max-height:calc(100dvh - 80px)}
+ .siteTopbar .siteTopbar__inner{padding-top:max(8px,env(safe-area-inset-top))}
+}
