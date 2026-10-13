@@ -75,12 +75,13 @@ async function init(){
    document.querySelector('#exActivityEmpty').hidden=activityRows.length>0;
    document.querySelector('#exActivities').innerHTML=activityRows.map((g,i)=>{
     const e=g.records[0],id='activity-'+i;schedules.set(id,g);
-    const source=e.image_verified&&e.image_publishable&&e.image_represents_event!==false&&e.source_image_kind!=='illustration'&&!/\/illustrations\//.test(e.image_url||'')?e.image_url:'';
-    const image=safeUrl(source||window.isnetEventIllustration?.(e)?.src||'');
+    const source=e.image_verified&&e.image_publishable&&e.image_represents_event!==false&&e.source_image_kind!=='illustration'&&e.source_image_kind!=='source_placeholder'&&!/\/illustrations\/|\/placeholders\/|no_pic\.png|artistShadow\.png|microsoft_oauth_logo/.test(e.image_url||'')?e.image_url:'';
+    const museumPhoto=!source&&/פלשתים/.test(g.venue)?exhibitions.find(x=>x.id==='philistines'):null;
+    const image=safeUrl(source||museumPhoto?.image||window.isnetEventIllustration?.(e)?.src||'');
     const clean=window.ISNET_EDITORIAL_SAFETY?.publicText;
     const description=[e.description,e.series_description].map(s=>clean?clean(s):String(s||'')).find(Boolean)||'';
     const desc=description.replace(/\s+/g,' ').slice(0,180);
-    return '<article class="exActivity">'+(image?'<img loading="lazy" src="'+esc(image)+'" alt="'+esc(source?g.title:'המחשה: '+g.title)+'">':'')+(!source&&image?'<small class="exCredit">המחשה</small>':'')+'<h3>'+esc(g.title)+'</h3><p>'+esc(g.venue)+'</p>'+(desc?'<p>'+esc(desc)+(desc.length===180?'…':'')+'</p>':'')+schedule(g,id)+'</article>';
+    return '<article class="exActivity">'+(image?'<img loading="lazy" src="'+esc(image)+'" alt="'+esc(source?g.title:museumPhoto?'תצלום מתוך התערוכה עולמם של הפלשתים':'המחשה: '+g.title)+'">':'')+(!source&&image?'<small class="exCredit">'+(museumPhoto?'תצלום מתוך התערוכה · '+esc(museumPhoto.credit):'המחשה')+'</small>':'')+'<h3>'+esc(g.title)+'</h3><p>'+esc(g.venue)+'</p>'+(desc?'<p>'+esc(desc)+(desc.length===180?'…':'')+'</p>':'')+schedule(g,id)+'</article>';
    }).join('');
   }
   root.addEventListener('click',e=>{if(e.target.closest('[data-plan]')){const d=root.querySelector('#museum-schedule');if(d)d.open=true;root.querySelector('#museum-visit').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});d?.querySelector('summary')?.focus({preventScroll:true})}});
