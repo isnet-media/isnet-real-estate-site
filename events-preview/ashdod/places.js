@@ -31,7 +31,10 @@ function renderHero(cat){
 function placeCard(item){
   const tags=(item.badges||[]).map(x=>'<span>'+esc(x)+'</span>').join("");
   const highlights=(item.highlights||[]).map(x=>'<li>'+esc(x)+'</li>').join("");
-  return '<article class="placeCard">'+
+  const exhibitions=(item.current_exhibitions||[]).map(x=>
+    '<a href="'+esc(x.source_url)+'" target="_blank" rel="noopener" style="display:block;color:inherit;text-decoration:none"><img src="'+esc(x.image)+'" alt="'+esc(x.title)+'" loading="lazy" style="width:100%;height:100px;object-fit:contain;background:#101116;border-radius:8px"><strong style="display:block;font-size:13px;margin-top:6px">'+esc(x.title)+'</strong><small style="display:block;color:#c1c5cc;font-size:11px">'+esc(x.image_credit)+'</small></a>'
+  ).join("");
+  return '<article class="placeCard" id="'+esc(item.id)+'" style="scroll-margin-top:90px">'+
     '<div class="placeMedia">'+
       '<img src="'+esc(item.image)+'" alt="'+esc(item.name)+'" loading="lazy" onerror="this.closest(\'.placeMedia\').classList.add(\'imageFailed\');this.remove()">'+
       '<div class="placeBadges">'+tags+'</div>'+
@@ -43,7 +46,9 @@ function placeCard(item){
       '<h3>'+esc(item.tagline||"")+'</h3>'+
       '<p>'+esc(item.description||"")+'</p>'+
       '<ul class="placeHighlights">'+highlights+'</ul>'+
+      (exhibitions?'<section aria-label="תערוכות שמוצגות כעת"><h3>מציגות כעת במוזיאון</h3><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0">'+exhibitions+'</div></section>':'')+
       '<div class="placeActions">'+
+        (item.museum_url?'<a class="primaryAction" href="'+esc(item.museum_url)+'" target="_blank" rel="noopener">פעילויות המוזיאון ←</a>':'')+
         '<a class="primaryAction" href="'+mapsUrl(item.map_query||item.name+" אשדוד")+'" target="_blank" rel="noopener">איך מגיעים ←</a>'+
       '</div>'+
     '</div>'+
@@ -137,6 +142,7 @@ async function init(){
     renderBeachInfo(cat);
     renderSafety(cat);
     $("placesPanel").hidden=false;
+    if(location.hash)document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({block:"start"});
   }catch(err){
     console.error(err);
     renderComingSoon();

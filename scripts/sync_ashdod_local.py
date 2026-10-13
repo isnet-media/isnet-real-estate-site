@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Daily local Ashdod cards: fresh facts, recoverable legacy reset, no invented dates."""
+from apply_ashdod_museum_media import apply_ashdod_museum_media
 import argparse, json, re, hashlib
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
@@ -319,7 +320,7 @@ def merge(snap):
     if e['content_source_url'] not in match['crosscheck_sources']:match['crosscheck_sources'].append(e['content_source_url'])
     duplicates+=1;continue
   if not any(k['event_id']==e['event_id'] for k in new):new.append(e)
- data['events']=kept+new;data['generated_at']=data['generatedAt']=snap['at'];data.setdefault('stats',{})['events']=len(data['events'])
+ data['events']=kept+new;apply_ashdod_museum_media(data['events'],ROOT);data['generated_at']=data['generatedAt']=snap['at'];data.setdefault('stats',{})['events']=len(data['events'])
  assert len({e['event_id'] for e in data['events']})==len(data['events'])
  path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  taxpath=OUT/'taxonomy.json';tax=json.loads(taxpath.read_text())

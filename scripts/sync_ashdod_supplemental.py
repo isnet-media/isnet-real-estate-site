@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Source-authoritative Ashdod supplements. No editorial text/image gating."""
+from apply_ashdod_museum_media import apply_ashdod_museum_media
 import argparse, json, re, math, hashlib
 from pathlib import Path
 from datetime import datetime
@@ -295,7 +296,7 @@ def main():
   if not match and e.get('source')!='mevalim_direct' and any(preferred_match(e,m) for m in preferred):match=True
   if match and e.get('source')!='mevalim_direct':removed.append(e)
   else:kept.append(e)
- data['events']=kept+new;data['generated_at']=datetime.now(Z).isoformat();data['generatedAt']=data['generated_at'];data.setdefault('stats',{})['events']=len(data['events']);path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+ data['events']=kept+new;apply_ashdod_museum_media(data['events'],ROOT);data['generated_at']=datetime.now(Z).isoformat();data['generatedAt']=data['generated_at'];data.setdefault('stats',{})['events']=len(data['events']);path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  taxpath=OUT/'taxonomy.json';tax=json.loads(taxpath.read_text());cats=tax['primary_categories']
  for e in new:
   cat=next((c for c in cats if c['id']==e['category']),None)
