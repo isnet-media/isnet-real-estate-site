@@ -3,8 +3,53 @@
   <!-- ISNET shared layout: edit the Ashdod source; synced automatically --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101318"><title>אירועים לפי קטגוריה | מה עושים בראשון לציון</title>
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Heebo:wght@500;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="category-landing.css?v=1"></head>
-<body><header class="top"><a class="brand" href="./">מה עושים <em>בראשון לציון?</em></a><a href="./" class="back">← לעמוד הראשי</a></header>
+<link rel="stylesheet" href="category-landing.css?v=1"><link rel="stylesheet" href="publisher-brand.css?v=5cdb1ab4ad1c">
+<link rel="stylesheet" href="isnet-site-menu.css?v=20261013-shared-sticky">
+</head>
+<body><header class="siteTopbar" aria-label="ניווט ראשי">
+    <div class="siteTopbar__inner">
+      <a class="siteTopbar__brand siteTopbar__ashdodnet" href="https://www.rishonet.com/" target="_blank" rel="noopener" aria-label="לעמוד הראשי של ראשון נט" title="לעמוד הראשי של ראשון נט">
+        <img src="assets/branding/site-logo.png" width="195" height="107" alt="ראשון נט" decoding="async">
+      </a>
+      <a class="siteTopbar__brand siteTopbar__events" href="./" aria-label="לעמוד הראשי של מה עושים בראשון לציון" title="לעמוד הראשי של מה עושים בראשון לציון">
+        <img src="assets/branding/what-to-do-ashdod.svg" width="420" height="150" alt="מה עושים בראשון לציון" decoding="async">
+      </a>
+      <nav class="isnetSiteMenu" aria-label="כל אזורי האתר">
+        <details>
+          <summary aria-label="פתיחת תפריט האתר"><span class="isnetHamburger" aria-hidden="true"><i></i><i></i><i></i></span><span>תפריט</span></summary>
+          <div class="isnetSiteMenu__panel">
+            <a class="isnetSiteMenu__home" href="./">עמוד הבית — כל האירועים ←</a>
+            <div class="isnetSiteMenu__heading">אירועים לפי קטגוריה</div>
+            <div class="isnetSiteMenu__links">
+              <a href="category.html?category=stage">הופעות ומוזיקה</a>
+              <a href="./?category=theatre">תיאטרון והצגות</a>
+              <a href="./?category=standup">סטנדאפ ובידור</a>
+              <a href="category.html?category=kids">ילדים ומשפחה</a>
+              <a href="cinema.html">קולנוע וסרטים</a>
+              <a href="category.html?category=lecture">הרצאות</a>
+              <a href="./?category=conference">כנסים ופאנלים</a>
+              <a href="category.html?category=sport">אירועי ספורט</a>
+              <a href="category.html?category=exhibition">תערוכות ואמנות</a>
+              <a href="category.html?category=festival">פסטיבלים</a>
+              <a href="category.html?category=community">קהילה ופנאי</a>
+              <a href="category.html?category=tour">טיולים וסיורים</a>
+              <a href="category.html?category=seniors">הגיל השלישי וגמלאים</a>
+              <a href="./?category=food">אוכל וקולינריה</a>
+            </div>
+            <div class="isnetSiteMenu__heading">מקומות קבועים בעיר</div>
+            <div class="isnetSiteMenu__links">
+              <a href="places.html?category=culture">מוסדות תרבות</a>
+              <a href="places.html?category=parks">פארקים</a>
+              <a href="places.html?category=beaches">חופים</a>
+              <a href="places.html?category=nature">טבע וטיולים</a>
+              <a href="places.html?category=attractions">אטרקציות</a>
+              <a href="places.html?category=must-see">מקומות שכדאי להכיר</a>
+            </div>
+          </div>
+        </details>
+      </nav>
+    </div>
+  </header>
 <main class="wrap"><div class="heading"><div class="eyebrow">מה עושים בראשון לציון · קטגוריות</div><h1 id="title">מגלים אירועים</h1><p id="lead">כל האירועים במקום אחד</p></div>
 <nav id="subcategories" class="subcategories" aria-label="סוגי מופעים"></nav>
 <div class="tools"><label class="search"><span>⌕</span><input id="q" type="search" placeholder="חפשו אירוע בקטגוריה..." aria-label="חיפוש בתוך הקטגוריה"></label><span id="count" aria-live="polite"></span></div>
