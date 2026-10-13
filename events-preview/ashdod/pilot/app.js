@@ -273,6 +273,8 @@ const SPECIAL_EVENT_ART={
 function specialEventArt(e){if(e?.source_content_authoritative)return "";return SPECIAL_EVENT_ART[String(e?.title||"").trim()]||""}
 
 function eventImageHTML(e,mode="card"){
+  const illustration=!hasTrustedSourceImage(e)&&window.isnetEventIllustration?.(e);
+  if(illustration)return '<span class="eventArtStage is-subcategory-illustration"><img class="eventArtMain eventArtFull" src="'+escapeHtml(illustration.src)+'" alt="המחשה: '+escapeHtml(illustration.label)+'" loading="lazy" onerror="this.closest(\'.eventArtStage\').remove()"><span style="position:absolute;bottom:8px;left:8px;padding:3px 7px;background:#171717b8;color:white;font-size:11px;border-radius:4px">המחשה</span></span>';
   if(e?.local_source_refresh&&!hasTrustedSourceImage(e))return '<span class="eventArtStage"><span style="padding:20px;color:#b5bac6">תמונה מתאימה טרם פורסמה</span></span>';
   const special=specialEventArt(e);
   if(!special&&!hasTrustedSourceImage(e)){
@@ -347,6 +349,8 @@ function defaultCategoryArt(e){
   return '<img class="defaultCategoryArt" src="'+escapeHtml(src)+'" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;pointer-events:none" data-primary-fallback="'+escapeHtml(paths.primary)+'" onerror="if(this.dataset.primaryFallback && !this.dataset.triedPrimary){this.dataset.triedPrimary=\'1\';this.src=this.dataset.primaryFallback}else{this.remove()}" />';
 }
 function fallbackMediaHTML(e){
+  const illustration=window.isnetEventIllustration?.(e);
+  if(illustration)return '<div class="category-fallback"><img class="defaultCategoryArt" src="'+escapeHtml(illustration.src)+'" alt="המחשה: '+escapeHtml(illustration.label)+'" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none"></div>';
   if(e.category==="sport"&&isRepresentativeHomeGame(e)){
     const team=sportTeamConfig(e),branch=sportBranchMeta(e);
     return '<div class="category-fallback sportFallback">'+

@@ -13,6 +13,8 @@ function trustedImage(e){
   return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
 }
 function categoryImage(e){
+ const illustration=window.isnetEventIllustration?.(e);
+ if(illustration)return illustration.src;
  const photos={theatre:"theatre",standup:"standup",kids:"kids",lecture:"lecture"};
  if(photos[e.category])return "../media-bank/defaults/"+photos[e.category]+".webp";
  if(e.category==="seniors")return "../media-bank/defaults/seniors/seniors-lecture.webp";

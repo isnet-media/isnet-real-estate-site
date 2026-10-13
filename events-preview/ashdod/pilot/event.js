@@ -333,7 +333,10 @@ function renderHero(e,occ,imageEvent){
     const src=imageEvent.thumbnail_ready&&imageEvent.thumbnail_url?imageEvent.thumbnail_url:imageEvent.image_url;
     $("heroImage").innerHTML='<img data-event-image-id="'+escapeHtml(e.event_id)+'" src="'+escapeHtml(src)+'" alt="'+escapeHtml(eventDisplayTitle(e))+'">'+(imageEvent.image_caption?'<span class="image-caption" style="position:absolute;bottom:8px;right:8px;padding:4px 8px;background:#171717cc;color:white;font-size:12px">'+escapeHtml(imageEvent.image_caption)+'</span>':'');
   }else{
-    if(e.category==="lecture"){
+    const illustration=window.isnetEventIllustration?.(e);
+    if(illustration){
+      $("heroImage").innerHTML='<img src="'+escapeHtml(illustration.src)+'" alt="המחשה: '+escapeHtml(illustration.label)+'"><span class="image-caption" style="position:absolute;bottom:8px;left:8px;padding:4px 8px;background:#171717cc;color:white;font-size:12px">המחשה</span>';
+    }else if(e.category==="lecture"){
       const key=String(e.event_id||e.title||"");
       const theme=[...key].reduce((n,c)=>(n*29+c.charCodeAt(0))>>>0,3)%6;
       $("heroImage").innerHTML='<div class="fallback detailLectureArt detailLectureArt--'+theme+'">'+
