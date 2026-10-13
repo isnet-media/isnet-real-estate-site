@@ -1,4 +1,4 @@
-/* Ashdod homepage brand lockup; leaves category and detail page layouts intact. */
+/* Shared Ashdod brand lockup, applied only to branded Ashdod headers. */
 .isnetBrandHeader{background:#0b0d12!important;border-bottom:1px solid #ffffff18!important;box-shadow:none!important}
 .isnetBrandHeader .siteTopbar__inner{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:18px!important;width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;min-height:76px!important;padding:8px 0!important;box-sizing:border-box}
 .isnetBrandGroup{display:flex;align-items:center;gap:18px;direction:rtl;flex:0 1 auto;min-width:0}
@@ -24,3 +24,8 @@
  .isnetBrandHeader .isnetSiteMenu__panel{top:calc(72px + env(safe-area-inset-top,0px));max-height:calc(100dvh - 84px - env(safe-area-inset-top,0px))}
 }
 @media(prefers-reduced-motion:reduce){.isnetBrandHeader .siteTopbar__brand{transition:none}}
+
+/* Align the endorsement above the Ashdod word, beside the emblem. */
+.isnetBrandHeader .siteTopbar__ashdodnet{position:relative;flex-direction:row;gap:0}
+.isnetBrandHeader .isnetBrandByline{position:absolute;top:8px;inset-inline-start:19px;width:49px;text-align:center;white-space:nowrap;font-size:11px;line-height:1.1}
+@media(max-width:650px){.isnetBrandHeader .isnetBrandByline{top:10px;inset-inline-start:13px;width:42px;font-size:10px}}
