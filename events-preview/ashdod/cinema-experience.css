@@ -142,3 +142,10 @@ body.cinemaMode .cinemaLoading{display:grid;place-items:center;gap:12px;min-heig
 #cinemaLoading[hidden]{display:none!important}
 .cinemaLoading>span{font-size:32px}
 body.cinemaMode .cinemaEmpty button{margin:12px 0}
+
+/* Keep the landing page on the cinema canvas and reveal the film wall sooner. */
+#cinemaSection{background:transparent!important;border:0!important;box-shadow:none!important;margin-top:0!important}
+@media(min-width:751px){.cinemaSpotlight{grid-template-columns:minmax(0,1fr) 210px;padding:24px 40px;margin-bottom:20px;gap:42px}.cinemaSpotlight__poster{max-width:210px}#cinemaSection .cinemaHead{margin-bottom:20px}#cinemaSection .cinemaHead h1{font-size:46px}}
+
+body.cinemaMode .trailerLinks a{background:#29231c!important;color:#efcf90!important;border:1px solid #76603c;text-decoration:none}
+body.cinemaMode .trailerModal__body .cinemaKicker{color:#d7bc81}

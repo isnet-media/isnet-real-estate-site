@@ -551,8 +551,10 @@ function renderCinema(){
     }else updated.textContent=suffix;
   }
 }
+let trailerReturnFocus=null;
 function openTrailer(id){
   const movie=state.cinema.find(m=>m.id===id); if(!movie||!movie.trailer_youtube_id)return;
+  trailerReturnFocus=document.activeElement;
   $("trailerTitle").textContent=movie.title;
   $("trailerSynopsis").textContent=movie.synopsis||"";
   $("trailerFrame").src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(movie.trailer_youtube_id)+"?autoplay=1&rel=0";
@@ -560,12 +562,14 @@ function openTrailer(id){
   $("trailerLinks").innerHTML='<a href="movie.html?id='+encodeURIComponent(movie.id)+'">כל הימים, השעות והפרטים אצלנו ←</a><a href="https://www.youtube.com/watch?v='+encodeURIComponent(movie.trailer_youtube_id)+'" target="_blank" rel="noopener noreferrer">פתיחת הטריילר ב־YouTube ↗</a>';
   $("trailerModal").hidden=false;
   document.body.style.overflow="hidden";
+  document.querySelector(".trailerModal__close")?.focus();
 }
 function openEventVideo(eventId){
   const e=state.events.find(item=>String(item.event_id)===String(eventId));
   if(!e)return;
   const video=eventVideoInfo(e);
   if(!video)return;
+  trailerReturnFocus=document.activeElement;
   $("trailerTitle").textContent=e.series_title||e.title||"סרטון מהאירוע";
   $("trailerSynopsis").textContent=video.title;
   $("trailerFrame").src="https://www.youtube-nocookie.com/embed/"+video.id+"?autoplay=1&rel=0";
@@ -576,8 +580,10 @@ function openEventVideo(eventId){
 }
 function closeTrailer(){
   const modal=$("trailerModal"); if(!modal)return;
+  const wasOpen=!modal.hidden;
   modal.hidden=true;
   $("trailerFrame").src="";
+  if(wasOpen&&trailerReturnFocus?.isConnected)trailerReturnFocus.focus();
   if($("eventModal").hidden)document.body.style.overflow="";
 }
 
@@ -1414,6 +1420,14 @@ async function init(){
   document.querySelectorAll("[data-close-trailer]").forEach(x=>x.onclick=closeTrailer);
   document.querySelectorAll("[data-close-modal]").forEach(x=>x.onclick=closeModal);
   $("modalFavorite").onclick=()=>{toggleFavorite($("modalFavorite").dataset.id);openEvent($("modalFavorite").dataset.id)};
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeTrailer()} });
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){closeModal();closeTrailer()}
+    if(e.key==="Tab"&&!$("trailerModal").hidden){
+      const focusable=[...document.querySelectorAll(".trailerModal__card button,.trailerModal__card a[href],.trailerModal__card iframe")];
+      const first=focusable[0],last=focusable.at(-1);
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus()}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus()}
+    }
+  });
 }
 init().catch(err=>{console.error(err);if(document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});

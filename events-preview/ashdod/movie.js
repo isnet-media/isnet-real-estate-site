@@ -6,9 +6,10 @@ function localDate(s){const [y,m,d]=String(s||"").split("-").map(Number);return 
 function movieUrl(id){return "movie.html?id="+encodeURIComponent(id)}
 function venueLabel(id){return id==="cinema-city"?"סינמה סיטי אשדוד":"HOT Cinema אשדוד"}
 function cinemaToday(){return new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
+function activeMovieVenues(movie){return movie.venues.filter(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=cinemaToday()&&Array.isArray(times)&&times.length))}
 function allDates(movie){
   const dates=new Set();
-  movie.venues.forEach(v=>Object.keys(v.schedule||{}).filter(d=>d>=cinemaToday()).forEach(d=>dates.add(d)));
+  activeMovieVenues(movie).forEach(v=>Object.keys(v.schedule||{}).filter(d=>d>=cinemaToday()&&Array.isArray(v.schedule[d])&&v.schedule[d].length).forEach(d=>dates.add(d)));
   return [...dates].sort();
 }
 function renderHero(movie){
@@ -18,12 +19,13 @@ function renderHero(movie){
   $("movieSynopsis").textContent=movie.synopsis||"כל הימים, השעות ובתי הקולנוע באשדוד במקום אחד.";
   const badges=[];
   if(movie.is_family)badges.push('<span class="badge family">ילדים ומשפחה</span>');
-  movie.venues.forEach(v=>badges.push('<span class="badge">'+escapeHtml(v.name)+'</span>'));
+  const activeVenues=activeMovieVenues(movie);
+  activeVenues.forEach(v=>badges.push('<span class="badge">'+escapeHtml(v.name)+'</span>'));
   $("heroBadges").innerHTML=badges.join("");
   const dates=allDates(movie);
   $("heroMeta").innerHTML=[
-    movie.venues.length===2?"מוצג בשני בתי קולנוע":movie.venues[0]?.name,
-    dates.length?dates.length+" ימי הקרנה מעודכנים":"השעות מתעדכנות",
+    activeVenues.length===2?"מוצג בשני בתי קולנוע":activeVenues[0]?.name,
+    dates.length?"הקרנות מעודכנות":"השעות מתעדכנות",
     movie.trailer_youtube_id?"טריילר זמין":null,
     movie.runtime_minutes?movie.runtime_minutes+" דקות":null,
     movie.age_rating,
@@ -110,6 +112,7 @@ async function init(){
     renderRelated(movie,data.movies||[]);
     $("loadingState").hidden=true;
     $("page").hidden=false;
+    if(location.hash==="#showtimes"||location.hash==="#trailerSection")requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView({block:"start"}));
   }catch(err){
     console.error(err);
     $("loadingState").hidden=true;
