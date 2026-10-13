@@ -51,3 +51,23 @@
   }
   .siteTopbar .isnetSiteMenu summary{gap:7px;font-size:13px;}
 }
+
+/* Same sticky header across the home page and public detail pages. */
+.siteTopbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#08090d!important;
+  border-bottom:1px solid #ffffff22;
+}
+.siteTopbar .isnetSiteMenu summary{line-height:1.48;}
+@media (min-width:901px){
+  .siteTopbar .siteTopbar__inner{
+    max-width:1460px;
+    width:calc(100% - 100px);
+    min-height:88px;
+  }
+}
+@media (min-width:901px) and (max-width:1250px){
+  .siteTopbar .siteTopbar__inner{width:calc(100% - 64px);}
+}
