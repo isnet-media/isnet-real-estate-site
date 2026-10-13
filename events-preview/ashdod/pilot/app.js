@@ -1063,7 +1063,7 @@ function renderResults(){
   const groupedView=!state.query.trim()&&!state.category&&!state.subcategory;
   if(groupedView){
     const taxonomy=window.publicTaxonomy||[];
-    const preferred=["music","theatre","standup","kids","cinema","lecture","workshop","sport","exhibition","conference","community","seniors","tour","food"];
+    const preferred=["music","theatre","standup","kids","cinema","lecture","seniors","workshop","sport","community","tour","food","conference","exhibition"];
     const buckets=new Map();
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
     const activeCinemaCount=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
