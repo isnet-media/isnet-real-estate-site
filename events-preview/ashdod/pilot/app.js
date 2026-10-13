@@ -430,7 +430,7 @@ function eventCard(e){
   const occ=eventOccurrences(e);
   const multi=occ.length>1;
   return '<article class="eventCard'+(e.category==="sport"?" eventCard--sport":"")+'" data-event="'+e.event_id+'"><div class="mediaWrap">'+mediaHTML(e)+dateChipHTML(e)+'</div>'+
-    '<div class="eventBody">'+sportIdentityHTML(e)+'<div class="badges"><button type="button" class="badge categoryBadge" data-cat="'+escapeHtml(e.category||"other")+'" title="הצג עוד אירועים בקטגוריה">'+categoryWithSubtype(e)+' ←</button>'+sportBranchBadgeHTML(e)+statusBadge(e)+(multi?'<span class="badge datesCount">'+occ.length+' מועדים</span>':'')+'</div>'+
+    '<div class="eventBody">'+sportIdentityHTML(e)+'<div class="badges">'+sportBranchBadgeHTML(e)+statusBadge(e)+(multi?'<span class="badge datesCount">'+occ.length+' מועדים</span>':'')+'</div>'+
     '<h3><a href="event.html?id='+encodeURIComponent(e.event_id)+'">'+escapeHtml(e.title)+'</a></h3>'+
     '<div class="eventInfo"><span class="eventInfo__row"><i>◷</i><span>'+escapeHtml(scheduleSummary(e))+'</span></span>'+
     '<span class="eventInfo__row"><i>⌖</i><span>'+escapeHtml(e.venue||"המיקום יפורסם")+'</span></span></div>'+
@@ -438,7 +438,7 @@ function eventCard(e){
 }
 function featureCard(e){
   return '<article class="featureCard" data-event="'+e.event_id+'">'+mediaHTML(e,"featureMedia")+
-    '<div class="featureBody">'+sportIdentityHTML(e)+'<div class="badges"><button type="button" class="badge categoryBadge" data-cat="'+escapeHtml(e.category||"other")+'" title="הצג עוד אירועים בקטגוריה">'+categoryWithSubtype(e)+' ←</button>'+statusBadge(e)+'</div>'+
+    '<div class="featureBody">'+sportIdentityHTML(e)+'<div class="badges">'+statusBadge(e)+'</div>'+
     '<h3><a href="event.html?id='+encodeURIComponent(e.event_id)+'">'+escapeHtml(e.title)+'</a></h3>'+
     '<div class="featureMeta"><span>'+escapeHtml(fmtFull.format(localDate(e.start_date)))+'</span><span>·</span><span>'+escapeHtml(formatTime(e.start_time))+'</span></div>'+
     '<div class="featureVenue">⌖ '+escapeHtml(e.venue||"המיקום יפורסם")+'</div></div></article>';
