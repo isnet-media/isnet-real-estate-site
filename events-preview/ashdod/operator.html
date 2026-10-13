@@ -7,7 +7,7 @@
 <meta name="description" content="כל ההרצאות, הסדנאות, המופעים והטיולים של המפעילים המקומיים עם מידע להרשמה וליצירת קשר.">
 <meta name="theme-color" content="#07182d">
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Heebo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="publisher-brand.css">
+
 <style>
 :root{--navy:#0b223f;--blue:#1b63a7;--ink:#10223a;--muted:#61748a;--line:#e0e9f3;--surface:#fff}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f3f7fd;color:var(--ink);font-family:Assistant,Arial,sans-serif;line-height:1.5}
@@ -47,14 +47,54 @@ a{color:var(--blue)}button,a{outline-offset:3px}button{cursor:pointer;font:inher
 .footer{padding:18px 0 40px;color:#687e92;font-size:13px}
 @media(max-width:770px){.layout{grid-template-columns:1fr}.contact{position:static;order:-1}.cards{grid-template-columns:1fr}.siteHead__inner{align-items:flex-start}.siteHead__links{gap:8px}.siteHead__brand img{width:65px}.box{padding:18px}.hero{padding:8px 0 17px}}
 </style>
+<link rel="stylesheet" href="publisher-brand.css?v=20261008-dualbrand3">
+<link rel="stylesheet" href="isnet-site-menu.css?v=20261013-shared-sticky">
 </head>
 <body>
-<header class="siteHead">
- <div class="shell siteHead__inner">
-   <a class="siteHead__brand" href="https://ashdodnet.com/" target="_blank" rel="noopener" aria-label="לאתר אשדוד נט"><img src="assets/branding/site-logo.png" alt="אשדוד נט"><span>מבית אשדוד נט</span></a>
-   <nav class="siteHead__links"><a href="./">מה עושים באשדוד? ←</a><a href="./#eventsGrid">כל האירועים</a></nav>
- </div>
-</header>
+<header class="siteTopbar" aria-label="ניווט ראשי">
+    <div class="siteTopbar__inner">
+      <a class="siteTopbar__brand siteTopbar__ashdodnet" href="https://ashdodnet.com/" target="_blank" rel="noopener" aria-label="לעמוד הראשי של אשדוד נט" title="לעמוד הראשי של אשדוד נט">
+        <img src="assets/branding/site-logo.png" width="195" height="107" alt="אשדוד נט" decoding="async">
+      </a>
+      <a class="siteTopbar__brand siteTopbar__events" href="./" aria-label="לעמוד הראשי של מה עושים באשדוד" title="לעמוד הראשי של מה עושים באשדוד">
+        <img src="assets/branding/what-to-do-ashdod.svg" width="420" height="150" alt="מה עושים באשדוד" decoding="async">
+      </a>
+      <nav class="isnetSiteMenu" aria-label="כל אזורי האתר">
+        <details>
+          <summary aria-label="פתיחת תפריט האתר"><span class="isnetHamburger" aria-hidden="true"><i></i><i></i><i></i></span><span>תפריט</span></summary>
+          <div class="isnetSiteMenu__panel">
+            <a class="isnetSiteMenu__home" href="./">עמוד הבית — כל האירועים ←</a>
+            <div class="isnetSiteMenu__heading">אירועים לפי קטגוריה</div>
+            <div class="isnetSiteMenu__links">
+              <a href="category.html?category=stage">הופעות ומוזיקה</a>
+              <a href="./?category=theatre">תיאטרון והצגות</a>
+              <a href="./?category=standup">סטנדאפ ובידור</a>
+              <a href="category.html?category=kids">ילדים ומשפחה</a>
+              <a href="cinema.html">קולנוע וסרטים</a>
+              <a href="category.html?category=lecture">הרצאות</a>
+              <a href="./?category=conference">כנסים ופאנלים</a>
+              <a href="category.html?category=sport">אירועי ספורט</a>
+              <a href="category.html?category=exhibition">תערוכות ואמנות</a>
+              <a href="category.html?category=festival">פסטיבלים</a>
+              <a href="category.html?category=community">קהילה ופנאי</a>
+              <a href="category.html?category=tour">טיולים וסיורים</a>
+              <a href="category.html?category=seniors">הגיל השלישי וגמלאים</a>
+              <a href="./?category=food">אוכל וקולינריה</a>
+            </div>
+            <div class="isnetSiteMenu__heading">מקומות קבועים בעיר</div>
+            <div class="isnetSiteMenu__links">
+              <a href="places.html?category=culture">מוסדות תרבות</a>
+              <a href="places.html?category=parks">פארקים</a>
+              <a href="places.html?category=beaches">חופים</a>
+              <a href="places.html?category=nature">טבע וטיולים</a>
+              <a href="places.html?category=attractions">אטרקציות</a>
+              <a href="places.html?category=must-see">מקומות שכדאי להכיר</a>
+            </div>
+          </div>
+        </details>
+      </nav>
+    </div>
+  </header>
 <div class="shell">
  <div class="breadcrumb"><a href="./">לוח האירועים</a> / כל פעילויות המפעיל</div>
  <section class="hero" aria-live="polite"><span class="kicker" id="brandline">מפעיל מקומי</span><h1 id="operatorTitle">טוענים את פרטי המפעיל...</h1><p id="operatorDescription"></p></section>
