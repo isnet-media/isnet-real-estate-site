@@ -931,17 +931,13 @@ function renderHeroStats(){
   const el=$("heroStats");if(!el)return;
   const upcomingOccurrences=state.events.filter(e=>localDate(e.start_date)>=today());
   const upcoming=groupEvents(upcomingOccurrences);
-  const venues=new Set(upcomingOccurrences.map(e=>e.venue).filter(Boolean));
-  const categories=new Set(upcomingOccurrences.map(e=>e.category).filter(Boolean));
   let updated="";
   if(state.generatedAt){
     const d=new Date(state.generatedAt);
     if(!Number.isNaN(d.getTime()))updated=new Intl.DateTimeFormat("he-IL",{day:"numeric",month:"numeric",hour:"2-digit",minute:"2-digit"}).format(d);
   }
   el.innerHTML=
-    '<span><b>'+upcoming.length+'</b> אירועים קרובים</span>'+
-    '<span><b>'+venues.size+'</b> מוקדים בעיר</span>'+
-    '<span><b>'+categories.size+'</b> סוגי בילוי</span>'+
+    '<span><b>'+upcoming.length+'</b> אירועים</span>'+
     (updated?'<span>עודכן '+escapeHtml(updated)+'</span>':"");
 }
 function discoverEvents(){
