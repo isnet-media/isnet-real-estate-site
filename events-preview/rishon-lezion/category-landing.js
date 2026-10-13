@@ -1,6 +1,6 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
 (()=>{
-if(location.pathname.includes("/ashdod/")&&new URLSearchParams(location.search).get("category")==="conference"){location.replace("./");return;}
+if(location.pathname.includes("/ashdod/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
 if(location.pathname.includes("/ashdod/")&&new URLSearchParams(location.search).get("category")==="seniors"&&window.ISNET_SENIORS){window.ISNET_SENIORS.init();return;}
 if(location.pathname.includes("/ashdod/")&&new URLSearchParams(location.search).get("category")==="exhibition"&&window.ISNET_EXHIBITIONS){window.ISNET_EXHIBITIONS.init();return;}
 if(location.pathname.includes("/ashdod/")&&new URLSearchParams(location.search).get("category")==="kids"&&window.ISNET_KIDS){window.ISNET_KIDS.init();return;}
