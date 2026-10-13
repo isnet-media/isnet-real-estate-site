@@ -6,8 +6,18 @@ const topics={all:'הכול','senior-trips':'טיולים וסיורים','senio
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeUrl=s=>{if(!s)return '';try{const u=new URL(s,location.href);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}};
 function clock(now=new Date()){const p=Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now).map(p=>[p.type,p.value]));return {day:p.year+'-'+p.month+'-'+p.day,time:p.hour+':'+p.minute}}
+// Display shared adult lectures without changing their source category or ID.
+function adultLecture(e){
+ if(!e||e.category!=='lecture')return false;
+ const audience=(Array.isArray(e.audiences)?e.audiences:[]).map(a=>String(a).toLowerCase());
+ const young=new Set(['kids','children','youth','teens','ילדים','נוער']);
+ if(audience.length&&audience.every(a=>young.has(a)))return false;
+ if(e.age_max!==null&&e.age_max!==undefined&&e.age_max!==''&&Number.isFinite(Number(e.age_max))&&Number(e.age_max)<60)return false;
+ if(/(?:לילדים|לנוער|לבני נוער)/.test(e.title||'')&&!/(?:להורים|הורות|סבים|סבתות)/.test(e.title||''))return false;
+ return true;
+}
 function visible(e,at=clock()){
- if(!e||e.category!=='seniors'||e.is_active===false||['cancelled','canceled','inactive','hidden','draft','deleted'].includes(e.status)||['draft','hidden','unpublished','archived'].includes(e.publication_status))return false;
+ if(!e||!(e.category==='seniors'||adultLecture(e))||e.is_active===false||['cancelled','canceled','inactive','hidden','draft','deleted'].includes(e.status)||['draft','hidden','unpublished','archived'].includes(e.publication_status))return false;
  if(!/^\d{4}-\d{2}-\d{2}$/.test(e.start_date||''))return false;
  const until=e.end_date&&e.end_date>=e.start_date?e.end_date:e.start_date;
  if(until<at.day)return false;
@@ -17,7 +27,7 @@ function visible(e,at=clock()){
 function mergeRows(base,overrides=[]){const map=new Map(base.filter(Boolean).map(e=>[e.event_id||e.id,e]));for(const row of overrides){const id=row?.event_id||row?.payload?.event_id;if(id&&row.payload&&(map.has(id)||row.record_type==='manual'))map.set(id,{...map.get(id),...row.payload,event_id:id})}return [...map.values()]}
 const clean=s=>window.ISNET_EDITORIAL_SAFETY?.publicText?.(String(s||''))??String(s||'');
 function title(e){return clean(e.title).replace(/\s*\d{1,2}[/.]\d{1,2}[/.](?:\d{4}|\d{2})\s*$/,'').trim()}
-function topic(e){return topics[e.subcategory]?e.subcategory:'other'}
+function topic(e){return e.category==='lecture'?'senior-lectures':topics[e.subcategory]?e.subcategory:'other'}
 function matches(e,q){return !q||[title(e),e.title,e.venue,e.address,e.description,e.series_description,e.source_description,e.local_source_name==='ofek_ashdod'?'אופק':'',topics[topic(e)]].join(' ').toLocaleLowerCase('he').includes(q.toLocaleLowerCase('he'))}
 const date=s=>new Intl.DateTimeFormat('he-IL',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(s+'T12:00:00Z'));
 const month=s=>new Intl.DateTimeFormat('he-IL',{month:'long',year:'numeric'}).format(new Date(s+'-01T12:00:00Z'));
@@ -33,8 +43,8 @@ function picture(e){
  return {url:bank[topic(e)]?'../shared/images/defaults/ashdod-seniors/'+bank[topic(e)]+'.webp':'',original:false};
 }
 function summary(e){
- const texts=[e.source_description,e.description,e.series_description].map(clean);
- const text=texts.find(t=>t&&t!==e.title&&!/מועד האירוע:|שעה:|לא פורסמה/.test(t));
+ const texts=[e.source_description,e.description,e.series_description].map(clean).map(t=>t.split('\n').filter(line=>!['עמוד הבית','>',e.title,'סדרת הערים המרתקות','ערים מרתקות'].includes(line.trim())).join(' ').trim());
+ const text=texts.find(t=>t&&t!==e.title&&!/מועד האירוע:|שעה:|לא פורסמה|^לא נמצא תיאור$/.test(t));
  if(text)return text.replace(/<[^>]*>/g,'').replace(/\s+/g,' ').slice(0,170);
  if(topic(e)==='senior-trips')return 'טיול או סיור מודרך'+(e.local_source_name==='ofek_ashdod'?' במסגרת אופק':'')+'. פרטי המסלול וההשתתפות בעמוד הפעילות.';
  if(topic(e)==='senior-lectures')return 'מפגש הרצאות והעשרה'+(e.local_source_name==='ofek_ashdod'?' במסגרת אופק':'')+'. פרטי התוכנית וההרשמה בעמוד הפעילות.';
@@ -99,5 +109,5 @@ async function init(){
 
  }catch{root.innerHTML='<p class="snEmpty" role="alert">לא ניתן לטעון כרגע את הפעילויות. <a href="./?category=seniors">לפעילויות בעמוד הראשי ←</a></p>'}
 }
-window.ISNET_SENIORS={init,visible,mergeRows,matches,title,picture,price,card,readSaved,inPeriod,filterRows};
+window.ISNET_SENIORS={init,visible,mergeRows,matches,title,picture,price,card,readSaved,inPeriod,filterRows,adultLecture};
 })();
