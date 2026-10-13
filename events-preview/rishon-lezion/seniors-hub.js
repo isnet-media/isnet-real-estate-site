@@ -17,8 +17,13 @@ function adultLecture(e){
  if(/(?:לילדים|לנוער|לבני נוער)/.test(e.title||'')&&!/(?:להורים|הורות|סבים|סבתות)/.test(e.title||''))return false;
  return true;
 }
+function up60Activity(e){
+ if(!e)return false;
+ const organizer=[e.venue,e.venue_name,e.organizer,e.organizer_name,e.local_source_name].filter(v=>typeof v==='string').join(' ');
+ return /אפ\s*60\s*\+?|up\s*60\s*\+?/i.test(organizer)||/community\.ashdod\.muni\.il\/Ashdod_up60(?:[/?#]|$)/i.test(e.content_source_url||e.source_url||'');
+}
 function visible(e,at=clock()){
- if(!e||!(e.category==='seniors'||adultLecture(e))||e.is_active===false||['cancelled','canceled','inactive','hidden','draft','deleted'].includes(e.status)||['draft','hidden','unpublished','archived'].includes(e.publication_status))return false;
+ if(!e||!(e.category==='seniors'||adultLecture(e)||up60Activity(e))||e.is_active===false||['cancelled','canceled','inactive','hidden','draft','deleted'].includes(e.status)||['draft','hidden','unpublished','archived'].includes(e.publication_status))return false;
  if(!/^\d{4}-\d{2}-\d{2}$/.test(e.start_date||''))return false;
  const until=e.end_date&&e.end_date>=e.start_date?e.end_date:e.start_date;
  if(until<at.day)return false;
@@ -28,7 +33,15 @@ function visible(e,at=clock()){
 function mergeRows(base,overrides=[]){const map=new Map(base.filter(Boolean).map(e=>[e.event_id||e.id,e]));for(const row of overrides){const id=row?.event_id||row?.payload?.event_id;if(id&&row.payload&&(map.has(id)||row.record_type==='manual'))map.set(id,{...map.get(id),...row.payload,event_id:id})}return [...map.values()]}
 const clean=s=>window.ISNET_EDITORIAL_SAFETY?.publicText?.(String(s||''))??String(s||'');
 function title(e){return clean(e.title).replace(/\s*\d{1,2}[/.]\d{1,2}[/.](?:\d{4}|\d{2})\s*$/,'').trim()}
-function topic(e){return e.category==='lecture'?'senior-lectures':topics[e.subcategory]?e.subcategory:'other'}
+function topic(e){
+ if(up60Activity(e)){
+  if(e.category==='lecture')return 'senior-lectures';
+  if(/דיגיטלי|רשתות חברתיות|בינה מלאכותית|\bAI\b|קאנבה|קנבה|חופשה בקליק/i.test(e.title||''))return 'senior-digital';
+  if(/בריא|בריאות|זיכרון/.test(e.title||''))return 'senior-health';
+  return topics[e.subcategory]?e.subcategory:'senior-workshops';
+ }
+ return e.category==='lecture'?'senior-lectures':topics[e.subcategory]?e.subcategory:'other';
+}
 function matches(e,q){return !q||[title(e),e.title,e.venue,e.address,e.description,e.series_description,e.source_description,e.local_source_name==='ofek_ashdod'?'אופק':'',topics[topic(e)]].join(' ').toLocaleLowerCase('he').includes(q.toLocaleLowerCase('he'))}
 const date=s=>new Intl.DateTimeFormat('he-IL',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(s+'T12:00:00Z'));
 const month=s=>new Intl.DateTimeFormat('he-IL',{month:'long',year:'numeric'}).format(new Date(s+'-01T12:00:00Z'));
@@ -63,11 +76,11 @@ function inPeriod(e,period,at=clock()){
 }
 function filterRows(rows,{active='all',q='',period='all',savedOnly=false,saved=new Set(),at=clock()}={}){return rows.filter(e=>visible(e,at)&&(active==='all'||topic(e)===active)&&matches(e,q)&&inPeriod(e,period,at)&&(!savedOnly||saved.has(e.event_id||e.id)))}
 function card(e,saved=false){
- const img=picture(e),url=safeUrl(e.purchase_url||e.ticket_url),p=price(e),t=title(e);
+ const img=picture(e),url=safeUrl(e.purchase_url||e.ticket_url),p=price(e),t=title(e),soldOut=['sold_out','soldout','sold-out'].includes(e.ticket_status);
  const trip=topic(e)==='senior-trips',unknownMeeting=/נקודת המפגש לא פורסמה/.test(e.venue||'');
  const venue=unknownMeeting?'סיור מטעם אופק':(!e.venue||e.venue==='ראשון לציון'?'מיקום מפורט: יש לברר עם המארגן':clean(e.venue));
  const practical=[e.meeting_point?'נקודת מפגש: '+clean(e.meeting_point):unknownMeeting?'לנקודת המפגש: יש לברר עם אופק':'',typeof e.accessibility==='string'?'נגישות: '+clean(e.accessibility):'',e.walking_level?'רמת הליכה: '+clean(e.walking_level):''].filter(Boolean);
- return '<article class="snCard" data-event-id="'+esc(e.event_id||e.id)+'"><button type="button" class="snSave" data-save="'+esc(e.event_id||e.id)+'" aria-pressed="'+saved+'" aria-label="'+esc((saved?'הסרת ':'שמירת ')+t+' '+(saved?'מהמועדפים':'למועדפים'))+'"><span aria-hidden="true">'+(saved?'♥':'♡')+'</span></button><a class="snMedia" href="'+esc(detail(e))+'" tabindex="-1" aria-hidden="true">'+(img.url?'<img src="'+esc(img.url)+'" alt="" loading="lazy" decoding="async">':'<span class="snMediaText" aria-hidden="true">'+esc(topics[topic(e)])+'</span>')+(!img.original&&img.url?'<span class="snCredit">המחשה</span>':'')+'</a><div class="snCardCopy"><h3><a href="'+esc(detail(e))+'">'+esc(trip&&!/סיור|טיול/.test(t)?'סיור: '+t:t)+'</a></h3><p class="snSummary">'+esc(summary(e))+'</p><p class="snDate">'+esc(date(e.start_date))+(e.start_time?' · <bdi>'+esc(e.start_time)+'</bdi>':'')+'</p><p class="snVenue">'+esc(venue)+'</p>'+(practical.length?'<details class="snPractical"><summary>מידע לקראת היציאה</summary><p>'+practical.map(esc).join('<br>')+'</p>'+(unknownMeeting&&e.purchase_phone&&/^[\d\s+()-]+$/.test(e.purchase_phone)?'<a href="tel:'+esc(e.purchase_phone.replace(/[^\d+]/g,''))+'">בירור בטלפון '+esc(e.purchase_phone)+'</a>':'')+'</details>':'')+'<div class="snCardBottom">'+(p?'<p class="snPrice">'+esc(p)+'<small>מחיר שפורסם · פרטי התשלום בהזמנה</small></p>':'')+'<div class="snActions"><a class="snButton" href="'+esc(detail(e))+'">לפרטי הפעילות ←</a>'+(url?'<a class="snBooking" href="'+esc(url)+'" target="_blank" rel="noopener">לפרטים והרשמה ↗</a>':'')+'</div></div></div></article>';
+ return '<article class="snCard" data-event-id="'+esc(e.event_id||e.id)+'"><button type="button" class="snSave" data-save="'+esc(e.event_id||e.id)+'" aria-pressed="'+saved+'" aria-label="'+esc((saved?'הסרת ':'שמירת ')+t+' '+(saved?'מהמועדפים':'למועדפים'))+'"><span aria-hidden="true">'+(saved?'♥':'♡')+'</span></button><a class="snMedia" href="'+esc(detail(e))+'" tabindex="-1" aria-hidden="true">'+(img.url?'<img src="'+esc(img.url)+'" alt="" loading="lazy" decoding="async">':'<span class="snMediaText" aria-hidden="true">'+esc(topics[topic(e)])+'</span>')+(!img.original&&img.url?'<span class="snCredit">המחשה</span>':'')+'</a><div class="snCardCopy"><h3><a href="'+esc(detail(e))+'">'+esc(trip&&!/סיור|טיול/.test(t)?'סיור: '+t:t)+'</a></h3><p class="snSummary">'+esc(summary(e))+'</p><p class="snDate">'+esc(date(e.start_date))+(e.start_time?' · <bdi>'+esc(e.start_time)+'</bdi>':'')+'</p><p class="snVenue">'+esc(venue)+'</p>'+(practical.length?'<details class="snPractical"><summary>מידע לקראת היציאה</summary><p>'+practical.map(esc).join('<br>')+'</p>'+(unknownMeeting&&e.purchase_phone&&/^[\d\s+()-]+$/.test(e.purchase_phone)?'<a href="tel:'+esc(e.purchase_phone.replace(/[^\d+]/g,''))+'">בירור בטלפון '+esc(e.purchase_phone)+'</a>':'')+'</details>':'')+'<div class="snCardBottom">'+(soldOut?'<p class="snAvailability">מצב ההרשמה הידוע: אזלו המקומות</p>':'')+(p?'<p class="snPrice">'+esc(p)+'<small>מחיר שפורסם · פרטי התשלום בהזמנה</small></p>':'')+'<div class="snActions"><a class="snButton" href="'+esc(detail(e))+'">לפרטי הפעילות ←</a>'+(url?'<a class="snBooking" href="'+esc(url)+'" target="_blank" rel="noopener">'+(soldOut?'לבדיקת זמינות באתר המארגן ↗':'לפרטים והרשמה ↗')+'</a>':'')+'</div></div></div></article>';
 }
 const explore=[['הצגות ותיאטרון','ערב של סיפור ובמה','category.html?category=theatre','◈'],['תערוכות ואמנות','מבט חדש במוזיאונים בעיר','category.html?category=exhibition','▧'],['חופים','ים, אוויר ורגע לעצמכם','places.html?category=beaches','≈'],['מוזיקה והופעות','למצוא את הצלילים שלכם','category.html?category=music','♫'],['קולנוע','סרט טוב על המסך הגדול','cinema.html','▣'],['פארקים וטבע','לצאת החוצה ולהחליף אווירה','places.html?category=parks','♧'],['הרצאות','סקרנות בכל גיל','category.html?category=lecture','◉'],['סטנדאפ','לצאת ולצחוק','category.html?category=standup','✧']];
 async function init(){
@@ -110,5 +123,5 @@ async function init(){
 
  }catch{root.innerHTML='<p class="snEmpty" role="alert">לא ניתן לטעון כרגע את הפעילויות. <a href="./?category=seniors">לפעילויות בעמוד הראשי ←</a></p>'}
 }
-window.ISNET_SENIORS={init,visible,mergeRows,matches,title,picture,price,card,readSaved,inPeriod,filterRows,adultLecture};
+window.ISNET_SENIORS={init,visible,mergeRows,matches,title,picture,price,card,readSaved,inPeriod,filterRows,adultLecture,up60Activity,topic};
 })();
