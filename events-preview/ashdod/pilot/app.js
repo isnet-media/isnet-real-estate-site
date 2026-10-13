@@ -404,10 +404,10 @@ function dateChipHTML(e){
     const remaining=dates.length-limit;
     return remaining>0
       ?'<a class="dateStack__more dateStack__more--'+(limit===4?"mobile":"desktop")+
-        '" href="'+escapeHtml(href)+'" aria-label="לצפייה בכל המועדים, '+(remaining===1?"עוד מועד אחד":"עוד "+remaining+" מועדים")+'">'+(remaining===1?"עוד מועד אחד":"עוד "+remaining+" מועדים")+' <span aria-hidden="true">←</span></a>'
+        '" href="'+escapeHtml(href)+'" aria-label="לצפייה בכל התאריכים">כל התאריכים <span aria-hidden="true">←</span></a>'
       :"";
   };
-  return '<div class="dateStack" aria-label="'+dates.length+' תאריכים שונים">'+chips+more(5)+more(4)+'</div>';
+  return '<div class="dateStack" aria-label="תאריכי האירוע">'+chips+more(5)+more(4)+'</div>';
 }
 function scheduleSummary(e){
   const occ=eventOccurrences(e);
@@ -418,7 +418,7 @@ function scheduleSummary(e){
   const times=[...new Set(occ.map(x=>formatTime(x.start_time)))];
   const upcoming=occ.filter(x=>x.start_date>=iso(today())).sort((a,b)=>(a.start_date+(a.start_time||"")).localeCompare(b.start_date+(b.start_time||"")));
   const first=upcoming[0]||occ.slice().sort((a,b)=>a.start_date.localeCompare(b.start_date))[0];
-  return fmtFull.format(localDate(first.start_date))+' · '+formatTime(first.start_time)+' · עוד '+(occ.length-1)+' מועדים';
+  return fmtFull.format(localDate(first.start_date))+' · '+formatTime(first.start_time);
 }
 function categoryWithSubtype(e){
   const group=window.publicTaxonomy?.find(c=>c.id===e.category);
@@ -430,7 +430,7 @@ function eventCard(e){
   const occ=eventOccurrences(e);
   const multi=occ.length>1;
   return '<article class="eventCard'+(e.category==="sport"?" eventCard--sport":"")+'" data-event="'+e.event_id+'"><div class="mediaWrap">'+mediaHTML(e)+dateChipHTML(e)+'</div>'+
-    '<div class="eventBody">'+sportIdentityHTML(e)+'<div class="badges">'+sportBranchBadgeHTML(e)+statusBadge(e)+(multi?'<span class="badge datesCount">'+occ.length+' מועדים</span>':'')+'</div>'+
+    '<div class="eventBody">'+sportIdentityHTML(e)+'<div class="badges">'+sportBranchBadgeHTML(e)+statusBadge(e)+'</div>'+
     '<h3><a href="event.html?id='+encodeURIComponent(e.event_id)+'">'+escapeHtml(e.title)+'</a></h3>'+
     '<div class="eventInfo"><span class="eventInfo__row"><i>◷</i><span>'+escapeHtml(scheduleSummary(e))+'</span></span>'+
     '<span class="eventInfo__row"><i>⌖</i><span>'+escapeHtml(e.venue||"המיקום יפורסם")+'</span></span></div>'+
@@ -1184,7 +1184,7 @@ function openEvent(id){
   const occ=eventOccurrences(e);
   $("modalTitle").textContent=e.title;
   $("modalDescription").textContent=e.description||"כל הפרטים החשובים במקום אחד. מומלץ לוודא את פרטי האירוע מול המארגן לפני הגעה.";
-  $("modalBadges").innerHTML='<span class="badge">'+escapeHtml(catLabels[e.category]||"אירוע")+'</span>'+statusBadge(e)+(occ.length>1?'<span class="badge datesCount">'+occ.length+' מועדים</span>':'');
+  $("modalBadges").innerHTML='<span class="badge">'+escapeHtml(catLabels[e.category]||"אירוע")+'</span>'+statusBadge(e);
   $("modalMedia").className="modal__media cat-"+(e.category||"other")+(hasTrustedSourceImage(e)?"":" has-fallback-image");
   $("modalMedia").innerHTML=eventImageHTML(e,"modal")+fallbackMediaHTML(e);
   $("modalFacts").innerHTML=[
