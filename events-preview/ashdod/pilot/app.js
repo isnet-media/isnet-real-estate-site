@@ -1258,7 +1258,7 @@ function publishedBoardEvents(base,rows,day){
 }
 
 async function init(){
-  if(location.pathname.includes("/ashdod/")&&new URLSearchParams(location.search).get("category")==="conference"){location.replace("./");return;}
+  if(location.pathname.includes("/ashdod/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
     fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
@@ -1273,7 +1273,7 @@ async function init(){
   state.cinema=cinema.movies||[];
   state.cinemaUpdatedAt=cinema.updated_at||null;
   state.sportsMeta=sports||{branches:{},teams:[]};
-  window.publicTaxonomy=(taxonomy.primary_categories||[]).filter(c=>c.id!=="conference"||!location.pathname.includes("/ashdod/"));
+  window.publicTaxonomy=(taxonomy.primary_categories||[]).filter(c=>!["conference","food"].includes(c.id)||!location.pathname.includes("/ashdod/"));
   for(const item of window.publicTaxonomy)catLabels[item.id]=item.label;
   const requestedCategory=new URLSearchParams(location.search).get("category");
   if(requestedCategory&&Object.prototype.hasOwnProperty.call(catLabels,requestedCategory))state.category=requestedCategory;
