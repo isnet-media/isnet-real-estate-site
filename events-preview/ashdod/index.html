@@ -65,8 +65,10 @@
   <link rel="stylesheet" href="home-next-section.css?v=20261012-home-cinema1">
   <link rel="stylesheet" href="stage-showcase.css?v=20261012-v1">
   <link rel="stylesheet" href="pilot/home.css?v=20261013-mobile-polish3">
+  <link rel="stylesheet" href="cinema-experience.css?v=20261013-screen1">
 </head>
 <body>
+  <script>if(location.hash==="#cinema")document.body.classList.add("cinemaMode");</script>
   <header class="siteTopbar" aria-label="ניווט ראשי">
     <div class="siteTopbar__inner">
       <a class="siteTopbar__brand siteTopbar__ashdodnet" href="https://ashdodnet.com/" target="_blank" rel="noopener" aria-label="לעמוד הראשי של אשדוד נט" title="לעמוד הראשי של אשדוד נט">
@@ -146,6 +148,7 @@
   </header>
 
   <main class="shell">
+    <div id="cinemaLoading" class="cinemaLoading" role="status"><span aria-hidden="true">◉</span><p>מכינים לכם ערב של קולנוע…</p></div>
   <section class="isnetNavDiscovery" aria-label="כל האפשרויות לבילוי באשדוד"><nav class="isnetNavDiscovery__primary" aria-label="תחומי בילוי מרכזיים">
     <a class="isnetNavFeature isnetNavFeature--gold" href="category.html?category=stage"><span class="isnetNavFeature__icon" aria-hidden="true">◈</span><span class="isnetNavFeature__copy"><strong>הופעות במה</strong><small>הצגות, מוזיקה, סטנדאפ</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>
     <a class="isnetNavFeature isnetNavFeature--pink" href="category.html?category=kids"><span class="isnetNavFeature__icon" aria-hidden="true">♧</span><span class="isnetNavFeature__copy"><strong>ילדים</strong><small>מופעים, פעילויות, שעת סיפור</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>
@@ -221,18 +224,19 @@
 
 
 
-    <section id="cinemaSection" class="section cinemaSection" hidden>
+    <section id="cinemaSection" class="section cinemaSection" aria-label="קולנוע באשדוד" hidden>
       <div class="cinemaPanel">
         <div class="cinemaHead">
           <div>
             <span class="cinemaKicker">קולנוע באשדוד</span>
-            <h2>כל הסרטים באשדוד</h2>
-            <p>סרטים, שעות הקרנה וטריילרים — סינמה סיטי ו־HOT Cinema במקום אחד.</p>
+            <h1>ערב של קולנוע.</h1>
+            <p>בחרו סרט. צפו בטריילר. מצאו את ההקרנה שלכם.</p>
           </div>
           <div class="cinemaHeadActions">
             <button id="cinemaClose" class="cinemaBackButton" type="button">← חזרה לכל האירועים</button>
           </div>
         </div>
+        <section id="cinemaSpotlight" class="cinemaSpotlight" aria-label="סרט על המסך באשדוד" hidden></section>
         <div class="cinemaToolbar">
           <div class="cinemaFilterGroups">
             <div id="cinemaAudienceFilters" class="cinemaFilters" aria-label="סינון לפי סוג סרט">
@@ -245,7 +249,8 @@
               <button data-cinema="hot-cinema">HOT Cinema</button>
             </div>
           </div>
-          <span id="cinemaUpdated" class="cinemaUpdated"></span>
+          <label class="cinemaSearchField"><span>איזה סרט מתחשק לכם?</span><input id="cinemaSearch" type="search" placeholder="חפשו סרט או ז׳אנר" autocomplete="off"></label>
+          <span id="cinemaUpdated" class="cinemaUpdated" role="status"></span>
         </div>
         <div id="cinemaGrid" class="cinemaGrid"></div>
       </div>
@@ -351,7 +356,7 @@
   <script src="../shared/public-cms.js?v=20261011-board-sync" defer></script>
   <script src="event-illustrations.js?v=20261013-photo-bank-complete2" defer></script>
 <script src="ashdod-event-identities.js?v=20261013-comedy1" defer></script>
-<script src="pilot/app.js?v=20261013-comedy1" defer></script>
+<script src="pilot/app.js?v=20261013-screen1" defer></script>
 
 <script>
 (async function(){

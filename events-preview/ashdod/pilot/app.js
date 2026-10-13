@@ -34,7 +34,7 @@
   window.ashdodAnalytics = {send,metadata,safeSearch};
 })();
 
-const state={events:[],fallbacks:{},generatedAt:null,cinema:[],cinemaVenue:"all",cinemaAudience:"all",cinemaOpen:false,cinemaUpdatedAt:null,sportsMeta:{branches:{},teams:[]},sportTeam:"all",sportBranch:"all",calendarMode:"week",calendarWeek:null,calendarMonth:null,calendarCollapsed:true,periodStart:null,periodEnd:null,periodType:null,quick:"all",date:null,category:null,subcategory:null,query:"",favoritesOnly:false,sort:"date",discoverSeed:0};
+const state={events:[],fallbacks:{},generatedAt:null,cinema:[],cinemaVenue:"all",cinemaAudience:"all",cinemaOpen:false,cinemaUpdatedAt:null,cinemaQuery:"",sportsMeta:{branches:{},teams:[]},sportTeam:"all",sportBranch:"all",calendarMode:"week",calendarWeek:null,calendarMonth:null,calendarCollapsed:true,periodStart:null,periodEnd:null,periodType:null,quick:"all",date:null,category:null,subcategory:null,query:"",favoritesOnly:false,sort:"date",discoverSeed:0};
 const $=id=>document.getElementById(id);
 const fmtDate=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
 const fmtFull=new Intl.DateTimeFormat("he-IL",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
@@ -464,13 +464,26 @@ function cinemaScheduleInfo(venue){
   }
   return {date:null,label:"לשעות מעודכנות",times:[]};
 }
+function cinemaPosterImage(movie){
+  if(/^https:\/\//.test(movie.poster_url||"")&&movie.poster_verification?.url===movie.poster_url)return movie.poster_url;
+  return movie.trailer_youtube_id?"https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg":"";
+}
+function cinemaSpotlight(movies){
+  const mount=$("cinemaSpotlight");if(!mount)return;
+  const film=state.cinema.find(m=>movies.some(x=>x.id===m.id)&&cinemaPosterImage(m)&&m.trailer_youtube_id)||movies[0];
+  mount.hidden=!film;if(!film){mount.innerHTML="";return}
+  const image=cinemaPosterImage(film),href="movie.html?id="+encodeURIComponent(film.id);
+  const next=film.venues.filter(v=>cinemaVenueActive(v)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue)).map(cinemaScheduleInfo).sort((a,b)=>String(a.date||"").localeCompare(String(b.date||"")))[0];
+  const meta=[film.runtime_minutes?film.runtime_minutes+" דקות":null,(film.genres||[]).join(" · "),next?next.label:null].filter(Boolean).map(x=>'<span>'+escapeHtml(x)+'</span>').join("");
+  mount.innerHTML='<div class="cinemaSpotlight__copy"><span class="cinemaSpotlight__eyebrow">על המסך באשדוד</span><h2>'+escapeHtml(film.title)+'</h2><div class="cinemaSpotlight__meta">'+meta+'</div><p>'+escapeHtml(film.synopsis||"")+'</p><div class="cinemaSpotlight__actions">'+(film.trailer_youtube_id?'<button type="button" data-trailer="'+escapeHtml(film.id)+'"><span aria-hidden="true">▶</span> צפו בטריילר</button>':"")+'<a href="'+href+'">לשעות ולכרטיסים <span aria-hidden="true">←</span></a></div></div>'+(image?'<a class="cinemaSpotlight__poster" href="'+href+'" aria-label="לפרטי הסרט '+escapeHtml(film.title)+'"><img src="'+escapeHtml(image)+'" alt="כרזת הסרט '+escapeHtml(film.title)+'" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.hidden=true"></a>':"");
+}
 function cinemaCard(movie){
   const visibleVenues=movie.venues.filter(v=>cinemaVenueActive(v)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue));
   const hasTrailer=Boolean(movie.trailer_youtube_id);
-  const image=hasTrailer?"https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg":"";
+  const image=cinemaPosterImage(movie);
   const venues=visibleVenues.map(v=>{
     const info=cinemaScheduleInfo(v);
-    const times=info.times.length?info.times.slice(0,6).map(t=>'<span class="cinemaTime">'+escapeHtml(t)+'</span>').join(""):'<span class="cinemaNoTimes">בדקו שעות עדכניות</span>';
+    const times=info.times.length?info.times.slice(0,6).map(t=>'<a class="cinemaTime" href="movie.html?id='+encodeURIComponent(movie.id)+'#showtimes" aria-label="'+escapeHtml(movie.title+' · '+info.label+' · '+t)+'">'+escapeHtml(t)+'</a>').join(""):'<span class="cinemaNoTimes">בדקו שעות עדכניות</span>';
     return '<div class="cinemaVenueRow">'+
       '<div class="cinemaVenueName"><b>'+escapeHtml(v.name)+'</b><span>'+escapeHtml(info.label)+'</span></div>'+
       '<div class="cinemaTimes">'+times+'</div>'+
@@ -479,12 +492,12 @@ function cinemaCard(movie){
   }).join("");
   const media=hasTrailer
     ?'<button class="cinemaPoster" data-trailer="'+escapeHtml(movie.id)+'" aria-label="צפו בטריילר של '+escapeHtml(movie.title)+'">'+
-       '<img src="'+image+'" alt="" loading="lazy" onerror="this.remove()">'+
+       '<img src="'+escapeHtml(image)+'" alt="כרזת הסרט '+escapeHtml(movie.title)+'" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">'+
        '<span class="cinemaPlay"><i>▶</i><b>צפו בטריילר</b></span>'+
      '</button>'
     :movie.trailer_page_url
-      ?'<a class="cinemaPoster cinemaPoster--fallback cinemaExternalTrailer" href="'+escapeHtml(movie.trailer_page_url)+'" target="_blank" rel="noopener noreferrer" aria-label="עמוד הטריילר הרשמי של '+escapeHtml(movie.title)+'"><span class="cinemaFallbackIcon">▶</span><b>'+escapeHtml(movie.title)+'</b><span>צפו בטריילר באתר הקולנוע ↗</span></a>'
-      :'<a href="movie.html?id='+encodeURIComponent(movie.id)+'" class="cinemaPoster cinemaPoster--fallback"><span class="cinemaFallbackIcon">🎬</span><b>'+escapeHtml(movie.title)+'</b><span>לשעות ופרטים בעמוד הסרט</span></a>';
+      ?'<a class="cinemaPoster cinemaPoster--fallback cinemaExternalTrailer" href="'+escapeHtml(movie.trailer_page_url)+'" target="_blank" rel="noopener noreferrer" aria-label="עמוד הטריילר הרשמי של '+escapeHtml(movie.title)+'">'+(image?'<img src="'+escapeHtml(image)+'" alt="כרזת הסרט '+escapeHtml(movie.title)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">':'<span class="cinemaFallbackIcon">▶</span><b>'+escapeHtml(movie.title)+'</b>')+'<span class="cinemaPlay"><b>טריילר באתר הקולנוע ↗</b></span></a>'
+      :'<a href="movie.html?id='+encodeURIComponent(movie.id)+'" class="cinemaPoster cinemaPoster--fallback">'+(image?'<img src="'+escapeHtml(image)+'" alt="כרזת הסרט '+escapeHtml(movie.title)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">':'<span class="cinemaFallbackIcon">🎬</span><b>'+escapeHtml(movie.title)+'</b>')+'<span class="cinemaPlay"><b>לשעות ולפרטים ←</b></span></a>';
   return '<article class="cinemaCard" data-movie="'+escapeHtml(movie.id)+'">'+
     media+
     '<div class="cinemaCard__body">'+
@@ -502,10 +515,14 @@ function cinemaCard(movie){
 function renderCinema(){
   const grid=$("cinemaGrid"),section=$("cinemaSection"); if(!grid||!section)return;
   section.hidden=!state.cinemaOpen;
+  document.body.classList.toggle("cinemaMode",state.cinemaOpen);
+  if($("cinemaLoading"))$("cinemaLoading").hidden=true;
+  document.title=state.cinemaOpen?"סרטים באשדוד | מה עושים באשדוד?":"מה עושים באשדוד? | מבית אשדוד נט";
   if(!state.cinemaOpen){grid.innerHTML="";return}
   const arr=state.cinema
     .filter(m=>m.venues.some(v=>cinemaVenueActive(v)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue)))
     .filter(m=>state.cinemaAudience==="all"||m.is_family===true)
+    .filter(m=>!state.cinemaQuery||normalizeSearch([m.title,m.synopsis,...(m.genres||[])].join(" ")).includes(normalizeSearch(state.cinemaQuery)))
     .filter(m=>state.cinemaVenue==="all"||m.venues.some(v=>v.id===state.cinemaVenue))
     .sort((a,b)=>{
       const day=cinemaToday();
@@ -513,7 +530,9 @@ function renderCinema(){
       const bt=b.venues.some(v=>Array.isArray(v.schedule?.[day])&&v.schedule[day].length)?0:1;
       return at-bt||a.title.localeCompare(b.title,"he");
     });
-  grid.innerHTML=arr.length?arr.map(cinemaCard).join(""):'<div class="cinemaEmpty"><h3>סרטי הקולנוע בעיר מתעדכנים</h3><p>עדיין אין במאגר סרטים מאומתים עם שעות הקרנה לבית הקולנוע שבחרתם. לא נציג שעות או טריילרים לא בדוקים.</p><p>ניתן בינתיים לבדוק את ההקרנות באתרים הרשמיים של בתי הקולנוע.</p><div class="cinemaEmpty__links"><a href="https://www.cinema-city.co.il/" target="_blank" rel="noopener noreferrer">סינמה סיטי ←</a><a href="https://hotcinema.co.il/theater/5" target="_blank" rel="noopener noreferrer">HOT Cinema אשדוד ←</a></div></div>';
+  cinemaSpotlight(arr);
+  grid.innerHTML=arr.length?arr.map(cinemaCard).join(""):'<div class="cinemaEmpty"><h3>לא מצאנו סרט שמתאים לבחירה</h3><p>נסו חיפוש אחר, בחרו את שני בתי הקולנוע או עברו לכל הסרטים.</p><button id="cinemaResetFilters" type="button" class="cinemaBackButton">הציגו את כל הסרטים</button><div class="cinemaEmpty__links"><a href="https://www.cinema-city.co.il/" target="_blank" rel="noopener noreferrer">סינמה סיטי ←</a><a href="https://hotcinema.co.il/theater/5" target="_blank" rel="noopener noreferrer">HOT Cinema אשדוד ←</a></div></div>';
+  if($("cinemaResetFilters"))$("cinemaResetFilters").onclick=()=>{state.cinemaQuery="";state.cinemaVenue="all";state.cinemaAudience="all";$("cinemaSearch").value="";renderCinema()};
   document.querySelectorAll("#cinemaFilters [data-cinema]").forEach(b=>b.classList.toggle("is-active",b.dataset.cinema===state.cinemaVenue));
   document.querySelectorAll("#cinemaAudienceFilters [data-audience]").forEach(b=>b.classList.toggle("is-active",b.dataset.audience===state.cinemaAudience));
   document.querySelectorAll("[data-trailer]").forEach(b=>b.onclick=e=>{e.stopPropagation();openTrailer(b.dataset.trailer)});
@@ -1383,15 +1402,18 @@ async function init(){
     const b=e.target.closest("[data-audience]"); if(!b)return;
     state.cinemaAudience=b.dataset.audience; renderCinema();
   };
+  window.addEventListener("hashchange",()=>{state.cinemaOpen=location.hash==="#cinema";renderCinema();if(state.cinemaOpen)$("cinemaSection").scrollIntoView({block:"start"})});
+  $("cinemaSearch").oninput=e=>{state.cinemaQuery=e.target.value;renderCinema()};
   $("cinemaClose").onclick=()=>{
     state.cinemaOpen=false;
     renderCinema();
     renderCategories();
-    $("categoryGrid")?.scrollIntoView({behavior:"smooth",block:"center"});
+    history.replaceState(null,"",location.pathname+location.search);
+    window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   };
   document.querySelectorAll("[data-close-trailer]").forEach(x=>x.onclick=closeTrailer);
   document.querySelectorAll("[data-close-modal]").forEach(x=>x.onclick=closeModal);
   $("modalFavorite").onclick=()=>{toggleFavorite($("modalFavorite").dataset.id);openEvent($("modalFavorite").dataset.id)};
   document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeTrailer()} });
 }
-init().catch(err=>{console.error(err);$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
+init().catch(err=>{console.error(err);if(document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
