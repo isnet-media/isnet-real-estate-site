@@ -18,6 +18,7 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'events-preview/admin/data'
 SOURCES={
  'ashdod_smarticket':dict(url='https://ashdod.smarticket.co.il/',parser='smarticket',venue='אשדוד'),
+ 'gdolot_hachaim':dict(url='https://ashdod.smarticket.co.il/מועדון_גדולות_מהחיים',parser='smarticket',venue='אשדוד'),
  'mishkan_smarticket':dict(url='https://mishkan-ashdod.smarticket.co.il/',parser='smarticket',venue='המשכן לאמנויות הבמה אשדוד'),
  'mishkan_primary':dict(url='https://www.mishkan-ashdod.co.il/events.asp',parser='mishkan_primary',venue='המשכן לאמנויות הבמה אשדוד'),
  'ofek_ashdod':dict(url='https://www.ofek-ashdod.org.il/page.php?type=events',parser='ofek',venue='קתדרת אופק, אשדוד',listing_pages=[dict(url='https://www.ofek-ashdod.org.il/page.php?gr='+str(gr)+'&m=296&type=events',category=cat) for gr,cat in [(644,'tour'),(643,'lecture'),(648,'lecture'),(1140,'workshop')]]),
@@ -63,6 +64,9 @@ def localize(e,name):
  elif re.search(r'\b(?:ל|ה)?ילדים\b|לכל המשפחה|שעת סיפור|פעוט',e['title']):
   e['category']='kids';e['subcategory']='creative-workshops' if 'סדנ' in e['title'] else 'kids-activities'
  classify_local(e)
+ if name=='gdolot_hachaim':
+  e['audience_program']='gdolot_hachaim';e['source_listing_url']=SOURCES[name]['url'];e['audiences']=list(dict.fromkeys(e.get('audiences',[])+['seniors']))
+  apply_ashdod_category_overrides([e],ROOT)
  return e
 def card(row,name):
  u=row['ticket_url'];p=page(u);structured=ld(p)
@@ -296,6 +300,13 @@ def merge(snap):
   classify_local(e)
   match=next((k for k in kept+new if k.get('start_date')==e['start_date'] and str(k.get('start_time') or '')[:5]==e['start_time'] and (equivalent(k,e) or (ticket_identity(k)==ticket_identity(e) and ticket_identity(e)[0]))),None)
   if match:
+   if e.get('audience_program')=='gdolot_hachaim':
+    # Membership enriches an existing occurrence without replacing its media or facts.
+    match['audience_program']='gdolot_hachaim';match['source_listing_url']=e['source_listing_url']
+    match['audiences']=list(dict.fromkeys(match.get('audiences',[])+['seniors']))
+    match.setdefault('crosscheck_sources',[])
+    if e['content_source_url'] not in match['crosscheck_sources']:match['crosscheck_sources'].append(e['content_source_url'])
+    duplicates+=1;continue
    if match.get('local_source_refresh'):
     if e['local_source_name']=='mishkan_primary':
      for field in ['venue','venue_address','price_min_ils','price_max_ils','is_free']:

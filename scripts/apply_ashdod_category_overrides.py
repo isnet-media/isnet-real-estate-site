@@ -9,10 +9,10 @@ def apply_ashdod_category_overrides(events,root):
  count=0
  for event in events:
   audience_text=' '.join(str(event.get(k) or '') for k in ('title','organizer','organizer_name'))
-  senior_audience=any(x in audience_text for x in ('גדולות מהחיים','אזרחים ותיקים','אזרחים וותיקים'))
+  senior_audience=event.get('audience_program')=='gdolot_hachaim' or event.get('local_source_name')=='gdolot_hachaim' or any(x in audience_text for x in ('גדולות מהחיים','אזרחים ותיקים','אזרחים וותיקים'))
   if senior_audience:
    title=str(event.get('title') or '')
-   if any(x in title for x in ('פילאטיס','ספורט על כיסא')):sub='senior-sport'
+   if any(x in title for x in ('פילאטיס','ספורט על כיסא','בודי בלט','בונה עצם')):sub='senior-sport'
    elif 'יריד בריאות' in title:sub='senior-health'
    elif 'ריקוד' in title:sub='senior-dance'
    elif any(x in title for x in ('קנווה','קאנבה','קנבה','בנייד','דיגיטל')):sub='senior-digital'
