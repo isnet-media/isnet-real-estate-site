@@ -97,6 +97,6 @@
       }
       if(name)version=4;
     }
-    return name?{src:new URL(name+".webp",version===4?fourthBase:(version===3?thirdBase:(version===2?nextBase:base))).href,label}:null;
+    return name?{src:new URL(name+".webp"+(name==="folk-dance"?"?v=20261013-repaired":""),version===4?fourthBase:(version===3?thirdBase:(version===2?nextBase:base))).href,label}:null;
   };
 })();
