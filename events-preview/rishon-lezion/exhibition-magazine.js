@@ -68,14 +68,14 @@ async function init(){
    const q=document.querySelector('#exSearch').value.trim().toLocaleLowerCase('he');
    const artRows=validCatalog.filter(e=>searchMatches(e,q));
    const activityRows=activities.filter(g=>g.records.some(e=>searchMatches(e,q)));
-   document.querySelector('#exCount').textContent=artRows.length+' תערוכות · '+activityRows.length+' סיורים ומפגשים';
+   document.querySelector('#exCount').textContent=artRows.length+(artRows.length===1?' תערוכה · ':' תערוכות · ')+activityRows.length+(activityRows.length===1?' סיור או מפגש':' סיורים ומפגשים');
    document.querySelector('#exFeature').innerHTML=artRows[0]?art(artRows[0],true):'';
    document.querySelector('#exGallery').innerHTML=artRows.slice(1).map(e=>art(e)).join('');
    document.querySelector('#exEmpty').hidden=artRows.length>0;
    document.querySelector('#exActivityEmpty').hidden=activityRows.length>0;
    document.querySelector('#exActivities').innerHTML=activityRows.map((g,i)=>{
     const e=g.records[0],id='activity-'+i;schedules.set(id,g);
-    const source=e.image_verified&&e.image_publishable&&e.image_represents_event!==false?e.image_url:'';
+    const source=e.image_verified&&e.image_publishable&&e.image_represents_event!==false&&e.source_image_kind!=='illustration'&&!/\/illustrations\//.test(e.image_url||'')?e.image_url:'';
     const image=safeUrl(source||window.isnetEventIllustration?.(e)?.src||'');
     const clean=window.ISNET_EDITORIAL_SAFETY?.publicText;
     const description=[e.description,e.series_description].map(s=>clean?clean(s):String(s||'')).find(Boolean)||'';
