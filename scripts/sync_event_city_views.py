@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1] / "events-preview"
 MASTER = ROOT / "ashdod"
 TARGETS = {
     "rishon-lezion": {
+        "slug": "rishon-lezion",
         "name": "ראשון לציון",
         "brand": "ראשון נט",
         "website": "https://www.rishonet.com/",
@@ -36,6 +37,11 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     content = content.replace("https://ashdodnet.com", city["website"].rstrip("/"))
     content = content.replace("אשדוד נט", city["brand"])
     content = content.replace("אשדוד", city["name"])
+    # CMS city identifiers are ASCII slugs and must be localized explicitly.
+    # Otherwise the Rishon public board silently fetches Ashdod CMS events.
+    if suffix == ".js":
+        content = content.replace('publishedEvents?.("ashdod")',
+                                  'publishedEvents?.("' + city["slug"] + '")')
     # Cinema venues are city-specific. Preserve IDs on the canonical Ashdod site.
     content = content.replace("HOT Cinema", city["second_cinema"])
     content = content.replace('data-cinema="hot-cinema"', 'data-cinema="' + city["second_cinema_id"] + '"')
