@@ -38,7 +38,7 @@ const $=id=>document.getElementById(id);
 const catLabels={conference:"כנסים ופאנלים",food:"אוכל וקולינריה",tour:"טיולים וסיורים",
   music:"מוזיקה",standup:"סטנדאפ",kids:"ילדים ומשפחה",theatre:"תיאטרון",
   lecture:"הרצאות",exhibition:"תערוכות",cinema:"קולנוע",
-  festival:"פסטיבלים",community:"קהילה",sport:"ספורט באשדוד",tour:"סיורים",other:"אירוע"
+  community:"קהילה",sport:"ספורט באשדוד",tour:"סיורים",other:"אירוע"
 };
 let sportsMeta={branches:{},teams:[]};
 const fmtFull=new Intl.DateTimeFormat("he-IL",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
@@ -251,7 +251,7 @@ function categoryExperience(e){
     exhibition:"בילוי של אמנות ותרבות",
     workshop:"פעילות מעשית וסדנה",
     cinema:"אירוע קולנוע והקרנה",
-    festival:"אירוע פסטיבל וחוויה עירונית",
+    
     community:"מפגש קהילתי",
     sport:"משחק בית או אירוע ספורטיבי בעיר",
     tour:"סיור וחוויה בעיר"
@@ -300,7 +300,7 @@ function autoSuitability(e){
     cinema:"מתאים למי שמחפש הקרנה או אירוע קולנוע.",
     community:"מתאים למי שמחפש פעילות ומפגש קהילתי בעיר.",
     sport:"מתאים למי שמחפש פעילות ספורטיבית; מומלץ לבדוק דרישות השתתפות אצל המארגן.",
-    festival:"מתאים למי שמחפש אירוע עירוני רחב וחוויית בילוי.",
+    
     tour:"מתאים למי שמחפש סיור או פעילות היכרות עם העיר."
   };
   return map[e.category]||"מתאים למי שמחפש בילוי, תרבות ופנאי באשדוד.";
