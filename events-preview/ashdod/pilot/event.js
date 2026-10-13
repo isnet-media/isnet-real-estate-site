@@ -407,6 +407,16 @@ function renderPeople(e){
   $("peopleGrid").innerHTML=html;
 }
 
+function sourceOfferLinks(e){
+  if(!Array.isArray(e._source_offers)||e._source_offers.length<2)return "";
+  return '<div class="sourceOffers"><b>אפשרויות הזמנה נוספות</b>'+e._source_offers
+    .filter(o=>o.url!==(e.purchase_url||e.ticket_url))
+    .map(o=>{
+      const price=o.price_min_ils!=null?(o.price_is_starting?"החל מ־":"")+currency.format(o.price_min_ils):"בדקו מחיר באתר";
+      const member=o.member_price_min_ils!=null?" · לחברי ההסתדרות החל מ־"+currency.format(o.member_price_min_ils):"";
+      return '<a class="scheduleBuy" href="'+escapeHtml(o.url)+'" target="_blank" rel="noopener">'+escapeHtml(o.name+" · "+price+member)+" ←</a>";
+    }).join("")+"</div>";
+}
 function renderSchedule(occ){
   const groupAction=groupPurchaseAction(occ);
   $("scheduleList").innerHTML=occ.map(e=>{
@@ -418,6 +428,7 @@ function renderSchedule(occ){
         (e.variant_label?'<strong class="scheduleVariant">'+escapeHtml(e.variant_label)+'</strong>':"")+
         '<span>'+escapeHtml(formatTime(e.start_time))+' · '+escapeHtml(e.venue||"המיקום יפורסם")+'</span>'+
         (own?'<a class="scheduleBuy" href="'+escapeHtml(own.href)+'" '+(own.kind==="url"?'target="_blank" rel="noopener"':'')+'>'+(e.ticket_status==="sold_out"?"אזלו הכרטיסים · לפרטי המקור ←":escapeHtml(own.label)+" ←")+'</a>':"")+
+        sourceOfferLinks(e)+
       '</div>'+
     '</div>';
   }).join("");
@@ -506,7 +517,7 @@ async function init(){
     };
     const cmsRows=Array.isArray(publishedCmsRows)?publishedCmsRows:[];
     const cmsById=new Map(cmsRows.map(r=>[r.event_id,r]));
-    const all=(data.events||[]).map(event=>{
+    let all=(data.events||[]).map(event=>{
       const entry=editorialById[event.event_id];
       const artistVideo=!event.youtube_id&&!entry?.youtube_id?matchArtistVideo(event):null;
       const cms=cmsById.get(event.event_id);
@@ -537,9 +548,13 @@ async function init(){
       }
     }
 
-    const base=requestedId
-      ? all.find(e=>e.event_id===requestedId)
-      : all.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug));
+    const originalAll=all;
+    all=window.ISNET_EVENT_IDENTITIES?.reconcile?.(all)||all;
+    const original=requestedId
+      ? originalAll.find(e=>e.event_id===requestedId)
+      : originalAll.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug));
+    const base=(!requestedId&&all.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug)))
+      ||(original&&all.find(e=>e.event_id===original.event_id||e._source_event_ids?.includes(original.event_id)));
     if(!base)throw new Error("event");
     const canonicalSlug=eventSlug(base);
     if(!requestedSlug || slugifyHebrew(requestedSlug)!==canonicalSlug){

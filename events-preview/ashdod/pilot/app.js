@@ -1240,7 +1240,7 @@ async function init(){
     fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
     window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod")||Promise.resolve([])
   ]);
-  state.events=publishedBoardEvents(data.events||[],cmsRows,iso(today()));
+  state.events=(window.ISNET_EVENT_IDENTITIES?.reconcile?.(publishedBoardEvents(data.events||[],cmsRows,iso(today())))||publishedBoardEvents(data.events||[],cmsRows,iso(today())));
   state.fallbacks=fallbacks;
   state.generatedAt=data.generated_at||null;
   state.cinema=cinema.movies||[];
