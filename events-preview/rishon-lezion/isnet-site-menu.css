@@ -15,3 +15,40 @@
 .isnetSiteMenu__links a{display:block;text-decoration:none;color:#f7f6f3!important;padding:10px 9px;background:#292a32;border:1px solid #383941;border-radius:8px;font-size:14px;font-weight:650}
 .isnetSiteMenu__links a:hover,.isnetSiteMenu__links a:focus-visible{background:#45404a;border-color:#dbc17e;color:#fff!important}
 @media(max-width:650px){.isnetSiteMenu summary{padding:9px 10px;font-size:13px}.isnetSiteMenu__panel{position:fixed;inset-inline:12px;top:82px;width:auto;max-height:calc(100dvh - 99px);padding:13px}.isnetSiteMenu__links a{font-size:13px;padding:11px 8px}}
+
+/* Three equal-size mobile header controls. */
+@media (max-width:650px){
+  .siteTopbar .siteTopbar__inner{
+    display:grid;
+    grid-template-columns:repeat(3,86px);
+    justify-content:space-between;
+    align-items:center;
+    width:calc(100% - 20px);
+    min-height:60px;
+    gap:8px;
+    padding-block:8px;
+    box-sizing:border-box;
+  }
+  .siteTopbar .siteTopbar__brand,
+  .siteTopbar .isnetSiteMenu summary{
+    width:86px;
+    height:44px;
+    min-height:44px;
+    padding:5px;
+    border-radius:10px;
+    box-sizing:border-box;
+    justify-content:center;
+  }
+  .siteTopbar .siteTopbar__brand img{
+    width:auto;
+    height:auto;
+    max-width:76px;
+    max-height:32px;
+    object-fit:contain;
+  }
+  .siteTopbar .isnetSiteMenu{
+    width:86px;
+    margin-inline-start:0;
+  }
+  .siteTopbar .isnetSiteMenu summary{gap:7px;font-size:13px;}
+}
