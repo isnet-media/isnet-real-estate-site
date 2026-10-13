@@ -4,13 +4,23 @@
   const scriptUrl=document.currentScript.src;
   const base=new URL("assets/illustrations/v1/",scriptUrl);
   const nextBase=new URL("assets/illustrations/v2/",scriptUrl);
+  const thirdBase=new URL("assets/illustrations/v3/",scriptUrl);
+  window.isnetEventDefaultImage=function(e){return /(?:^|\/)defaults\//i.test(String(e?.image_url||""));};
   window.isnetEventIllustration=function(e){
     if(!e)return null;
     const title=String(e.title||"");
     const sub=String(e.subcategory||"");
     const cat=String(e.category||"");
     let name="",label="",version=1;
-    if(sub==="story-time"||/שעת סיפור/.test(title)){
+    if(/קריאה|הקרא/.test(title)&&/כלב/.test(title)){
+      name="reading-with-dog";label="קריאה בעזרת כלבים";version=3;
+    }else if(cat==="kids"&&/כתיבה/.test(title)){
+      name="kids-writing";label="כתיבה לילדים";version=3;
+    }else if(cat!=="kids"&&/סדנ.*כתיבה|מפגשי כתיבה|כותבות אהבה/.test(title)){
+      name="adult-writing";label="כתיבה יוצרת";version=3;
+    }else if(["workshop","seniors","community"].includes(cat)&&/רשתות חברתיות|טיפים בנייד|בינה מלאכותית|קורס קנווה|סמארטפון|מחשבים|דיגיטל/.test(title)){
+      name="digital-learning";label="למידה דיגיטלית";version=3;
+    }else if(sub==="story-time"||/שעת סיפור/.test(title)){
       name="story-time";label="שעת סיפור";
     }else if((cat==="kids"||/ילדים|לילדים/.test(title)) &&
       (/יצירה|ציור|קרמיקה|פיסול|מלאכת יד/.test(title)||sub==="kids-workshops")){
@@ -31,6 +41,6 @@
         name="standup-stage";label="סטנדאפ";version=2;
       }
     }
-    return name?{src:new URL(name+".webp",version===2?nextBase:base).href,label}:null;
+    return name?{src:new URL(name+".webp",version===3?thirdBase:(version===2?nextBase:base)).href,label}:null;
   };
 })();
