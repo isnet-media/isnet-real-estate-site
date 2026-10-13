@@ -939,7 +939,7 @@ function renderCategories(){
   if(state.events.some(e=>e.category==="workshop")&&!cats.includes("workshop"))cats.push("workshop");
   const counts={};groupEvents(state.events).forEach(e=>counts[e.category]=(counts[e.category]||0)+1);
   counts.cinema=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
-  const visibleCats=cats.filter(c=>(counts[c]||0)>0);
+  const visibleCats=cats.filter(c=>c!=="community"&&c!=="tour"&&(counts[c]||0)>0);
   $("categoryGrid").innerHTML=visibleCats.map(c=>{
     const isCinema=c==="cinema";
     const active=isCinema?state.cinemaOpen:state.category===c;
@@ -1067,8 +1067,8 @@ function renderResults(){
     const buckets=new Map();
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
     const activeCinemaCount=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
-    const categoryKeys=[...buckets.keys()].filter(key=>key!=="cinema"&&buckets.get(key).length>=4);
-    if(activeCinemaCount)categoryKeys.push("cinema");
+    const categoryKeys=[...buckets.keys()].filter(key=>key!=="cinema"&&key!=="other"&&key!=="community"&&key!=="tour"&&buckets.get(key).length>0);
+    if(activeCinemaCount||(buckets.get("cinema")||[]).length)categoryKeys.push("cinema");
     const keys=categoryKeys.sort((a,b)=>{
       const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
       return (ai<0?999:ai)-(bi<0?999:bi);
@@ -1076,12 +1076,13 @@ function renderResults(){
     $("eventsGrid").innerHTML=keys.map((key,index)=>{
       if(key==="cinema"){
         const films=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).slice(0,18);
+        const screenings=buckets.get("cinema")||[];
         const cards=films.map(m=>{
           const poster=m.poster_url||m.image_url||(m.trailer_youtube_id?'https://i.ytimg.com/vi/'+encodeURIComponent(m.trailer_youtube_id)+'/hqdefault.jpg':'');
           const image=poster?'<img src="'+escapeHtml(poster)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">':'<span class="homeCinemaCard__fallback">🎬</span>';
           return '<a class="homeCinemaCard" href="movie.html?id='+encodeURIComponent(m.id)+'" aria-label="פרטים ושעות הקרנה: '+escapeHtml(m.title)+'"><span class="homeCinemaCard__media">'+image+'</span><span class="homeCinemaCard__title">'+escapeHtml(m.title)+'</span><span class="homeCinemaCard__action">לפרטים והקרנות ←</span></a>';
-        }).join("");
-        return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><span class="isnetCategoryKicker">מה עושים באשדוד</span><h3><a href="cinema.html">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים עם שעות הקרנה</span></div><a class="cinemaDetails" href="cinema.html">כל הסרטים והשעות ←</a></div><div class="isnetRailWrap"><div class="isnetCategoryRail homeCinemaRail" tabindex="0" aria-label="סרטי הקולנוע באשדוד">'+cards+'</div></div></section>';
+        }).join("")+screenings.map(eventCard).join("");
+        return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><h3><a href="cinema.html">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים'+(screenings.length?' · '+screenings.length+' הקרנות מיוחדות':'')+'</span></div><a class="cinemaDetails" href="cinema.html">כל הסרטים והשעות ←</a></div><div class="isnetRailWrap"><div class="isnetCategoryRail homeCinemaRail" tabindex="0" aria-label="סרטי הקולנוע באשדוד">'+cards+'</div></div></section>';
       }
       const items=buckets.get(key);
       const def=taxonomy.find(t=>t.id===key);
@@ -1096,7 +1097,7 @@ function renderResults(){
       const visibleSubs=subs.filter(s=>s.count>0);
       const railId="isnetCategoryRail"+index;
       const tabs=visibleSubs.length?'<div class="isnetCategoryTabs" aria-label="תתי קטגוריות של '+escapeHtml(label)+'"><button type="button" class="is-active" data-rail-sub="" aria-pressed="true">הכול</button>'+visibleSubs.map(s=>'<button type="button" data-rail-sub="'+escapeHtml(s.id)+'" aria-pressed="false"'+(s.count?'':' disabled title="אין כרגע אירועים בתת־קטגוריה זו"')+'>'+escapeHtml(s.label)+' <small>('+s.count+')</small></button>').join("")+'</div>':"";
-      return '<section class="isnetCategorySection" data-category-section="'+escapeHtml(key)+'"><div class="isnetCategoryTop"><div><span class="isnetCategoryKicker">מה עושים באשדוד</span><h3><a href="category.html?category='+encodeURIComponent(key)+'">'+escapeHtml(label)+'</a></h3><span class="isnetCategoryCount">'+items.length+' אירועים</span></div><div class="isnetCategoryArrows"><button type="button" data-category-move="start" aria-label="הקודם ב'+escapeHtml(label)+'">→</button><button type="button" data-category-move="end" aria-label="הבא ב'+escapeHtml(label)+'">←</button></div></div>'+tabs+'<div class="isnetRailWrap"><div class="isnetCategoryRail" id="'+railId+'" tabindex="0" aria-label="אירועים: '+escapeHtml(label)+'">'+items.map(eventCard).join("")+'</div><button type="button" class="isnetRailOverlay isnetRailOverlay--start" data-category-move="start" aria-label="גלילה לאירועים הקודמים ב'+escapeHtml(label)+'">→</button><button type="button" class="isnetRailOverlay isnetRailOverlay--end" data-category-move="end" aria-label="גלילה לאירועים הבאים ב'+escapeHtml(label)+'">←</button></div></section>';
+      return '<section class="isnetCategorySection" data-category-section="'+escapeHtml(key)+'"><div class="isnetCategoryTop"><div><h3><a href="category.html?category='+encodeURIComponent(key)+'">'+escapeHtml(label)+'</a></h3><span class="isnetCategoryCount">'+items.length+' אירועים</span></div><div class="isnetCategoryArrows"><button type="button" data-category-move="start" aria-label="הקודם ב'+escapeHtml(label)+'">→</button><button type="button" data-category-move="end" aria-label="הבא ב'+escapeHtml(label)+'">←</button></div></div><div class="isnetRailWrap"><div class="isnetCategoryRail" id="'+railId+'" tabindex="0" aria-label="אירועים: '+escapeHtml(label)+'">'+items.map(eventCard).join("")+'</div><button type="button" class="isnetRailOverlay isnetRailOverlay--start" data-category-move="start" aria-label="גלילה לאירועים הקודמים ב'+escapeHtml(label)+'">→</button><button type="button" class="isnetRailOverlay isnetRailOverlay--end" data-category-move="end" aria-label="גלילה לאירועים הבאים ב'+escapeHtml(label)+'">←</button></div></section>';
     }).join("");
     const itemsById=new Map(arr.map(e=>[String(e.event_id),e]));
     document.querySelectorAll(".isnetCategorySection").forEach(section=>{

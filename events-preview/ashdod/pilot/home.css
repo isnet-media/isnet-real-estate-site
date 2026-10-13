@@ -94,3 +94,21 @@
 
 /* Cards must opt out of the legacy per-card stretch rule as well. */
 .isnetCategoryRail>.eventCard{align-self:flex-start!important}
+
+/* Homepage only: single-line identity and coordinated compact category gateways. */
+body:not(.cinemaMode) .heroTitle{display:flex!important;flex-wrap:nowrap!important;justify-content:center;align-items:baseline;gap:.2em;white-space:nowrap;font-size:clamp(28px,7.3vw,64px)!important}
+body:not(.cinemaMode) .heroTitle__top,body:not(.cinemaMode) .heroTitle__bottom{display:inline!important;font-size:inherit!important;line-height:1.2!important;white-space:nowrap}
+.isnetNavDiscovery__secondary{grid-template-columns:repeat(3,minmax(0,1fr))!important;width:min(100%,900px)!important;max-width:900px!important}
+.isnetNavDiscovery__secondary .isnetNavSmall{--accent:#bba16b;flex-direction:row;gap:10px!important;border-color:color-mix(in srgb,var(--accent) 60%,transparent)!important;background:radial-gradient(ellipse at 4% 100%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 65%),linear-gradient(145deg,#25252c,#0b1119 80%)!important;box-shadow:inset 0 1px 0 #ffffff17,0 6px 18px #0002;border-radius:16px!important;min-height:68px!important}
+.isnetNavSmall[href*="lecture"]{--accent:#d6ba72!important}
+.isnetNavSmall[href*="exhibition"]{--accent:#b696dd!important}
+.isnetNavSmall[href*="sport"]{--accent:#76b8cf!important}
+.isnetNavDiscovery__secondary .isnetNavSmall span{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-size:19px!important;background:#111923}
+.isnetNavDiscovery__secondary .isnetNavSmall strong{font-size:14px;white-space:nowrap}
+@media(max-width:650px){
+ body:not(.cinemaMode) .heroTitle{font-size:clamp(25px,7.3vw,46px)!important}
+ .isnetNavDiscovery__secondary{gap:8px!important}
+ .isnetNavDiscovery__secondary .isnetNavSmall{flex-direction:column;gap:6px!important;min-height:78px!important;padding:9px 4px!important}
+ .isnetNavDiscovery__secondary .isnetNavSmall strong{font-size:11px!important}
+ .isnetNavDiscovery__secondary .isnetNavSmall span{width:28px;height:28px;flex-basis:28px;font-size:17px!important}
+}
