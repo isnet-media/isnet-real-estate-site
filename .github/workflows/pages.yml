@@ -114,6 +114,38 @@ jobs:
           path: .
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
+      - name: Release timed-out Pages deployment
+        env:
+          PAGES_RECOVERY_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, time, urllib.request, urllib.error
+          base = "https://api.github.com/repos/isnet-media/isnet-real-estate-site/pages/deployments/8feb16be9d93b9b87fd5ed9a0e41b1250e437854"
+          headers = {"Authorization": "Bearer " + os.environ["PAGES_RECOVERY_TOKEN"], "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
+          def request(suffix="", method="GET"):
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(base + suffix, headers=headers, method=method), timeout=20) as response:
+                      body = response.read()
+                      return json.loads(body) if body else {}
+              except urllib.error.HTTPError as error:
+                  if error.code == 404:
+                      return {"status": "not_found"}
+                  raise
+          terminal = {"succeed", "succeeded", "failure", "failed", "cancelled", "canceled", "not_found"}
+          status = request().get("status")
+          print("Previous timed-out deployment:", status)
+          if status not in terminal:
+              request("/cancel", "POST")
+              for attempt in range(12):
+                  time.sleep(5)
+                  status = request().get("status")
+                  print("Cancellation status:", status)
+                  if status in terminal:
+                      break
+              else:
+                  raise SystemExit("GitHub Pages has not released the timed-out deployment; publication is blocked.")
+          PY
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
