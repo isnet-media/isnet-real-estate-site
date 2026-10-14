@@ -1,52 +1,51 @@
 {
-  "run_at": "2026-10-13T05:30:06Z",
+  "run_at": "2026-10-14T10:09:41Z",
   "version": 1,
   "dry_run": false,
   "cities": {
     "ashdod": {
       "city": "אשדוד",
-      "total_before": 524,
+      "total_before": 549,
       "sources": {
         "tickchak_ashdod": {
           "status": "ok",
           "url": "https://live.tickchak.co.il/ashdod",
-          "discovered": 34,
-          "valid": 31,
+          "discovered": 32,
+          "valid": 29,
           "new": 5,
           "updated": 0,
-          "images_collected": 31
+          "images_collected": 29
         },
         "habama_ashdod": {
-          "status": "failed",
+          "status": "no_parseable_events",
           "url": "https://www.habama.co.il/Pages/HallGeneral.aspx?Area=2&HallGroupID=2089",
           "discovered": 0,
           "valid": 0,
           "new": 0,
           "updated": 0,
-          "images_collected": 0,
-          "error": "ReadTimeout"
+          "images_collected": 0
         }
       },
       "new": 5,
       "updated": 0,
       "removed_invalid": 0,
-      "removed_duplicates": 16,
-      "removed_classes": 1,
+      "removed_duplicates": 13,
+      "removed_classes": 4,
       "errors": [
-        "habama_ashdod:ReadTimeout"
+        "habama_ashdod:no_parseable_events"
       ],
       "repaired_event_ids": 0,
-      "total_after": 512
+      "total_after": 537
     },
     "rishon-lezion": {
       "city": "ראשון לציון",
-      "total_before": 426,
+      "total_before": 440,
       "sources": {
         "htrl": {
           "status": "ok",
           "url": "https://htrl.co.il/לוח-שנה/",
-          "discovered": 149,
-          "valid": 120,
+          "discovered": 150,
+          "valid": 121,
           "new": 2,
           "updated": 0,
           "images_collected": 0
@@ -101,14 +100,14 @@
       "new": 4,
       "updated": 0,
       "removed_invalid": 0,
-      "removed_duplicates": 1,
-      "removed_classes": 0,
+      "removed_duplicates": 4,
+      "removed_classes": 2,
       "errors": [
         "RIZONE+:no_parseable_events",
         "Eventim:ReadTimeout"
       ],
       "repaired_event_ids": 0,
-      "total_after": 429
+      "total_after": 438
     }
   },
   "note": "Missing listings never trigger automatic cancellations; source failures preserve data."
