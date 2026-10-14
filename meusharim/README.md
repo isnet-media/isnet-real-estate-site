@@ -30,6 +30,8 @@ Missing fields remain empty and do not imply zero price or open registration. Th
 
 ## Homepage placements
 
-The homepage renders only 10 curated placements from `ashdod/data/featured.json`. IDs, display titles and positions are independent of the collector; source refreshes preserve them. These are editorial choices, not a measured popularity ranking. Set `sponsored: true` for a paid placement to show the Hebrew "ממומן" badge. Never label a paid placement as an independent recommendation.
+The homepage renders only 6 curated placements from `ashdod/data/featured.json`. IDs, display titles and positions are independent of the collector; source refreshes preserve them. These are editorial choices, not a measured popularity ranking. Set `sponsored: true` for a paid placement to show the Hebrew "ממומן" badge. Never label a paid placement as an independent recommendation.
 
 Homepage filters lead to `catalog.html` with URL query parameters for search, age, activity, subcategory, district, center and weekday. The full directory uses smaller standard cards and pages results in batches of 24.
+
+The tennis homepage placement groups the public tennis listings at Beit Lavron and district D (Goldie). `source_ids` retains the group association and each `venues` entry links to the internal catalog filtered to that center, where original course schedules and registration links remain separate.
