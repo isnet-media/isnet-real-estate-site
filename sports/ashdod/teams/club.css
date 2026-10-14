@@ -9,3 +9,6 @@
 
 /* Decorative panels must not become hidden scroll containers when a button receives focus. */
 .next-match,.club-hero{overflow:clip}
+
+/* Club identity: no individual player is featured above the squad. */
+.hero-football{display:flex;align-items:center;justify-content:center;padding:12px 24px;position:relative;min-width:0}.hero-football svg{width:100%;max-width:500px;height:auto;overflow:visible}@media(max-width:700px){.hero-football{position:absolute;width:155px;left:-20px;bottom:6px;opacity:.42;padding:0;pointer-events:none}.hero-football svg{width:155px}.hero-copy{z-index:2}}@media(prefers-reduced-motion:no-preference){.hero-football svg{animation:club-reveal .7s ease-out both}@keyframes club-reveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}}
