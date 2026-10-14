@@ -1269,6 +1269,9 @@ async function init(){
     window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod")||Promise.resolve([])
   ]);
   state.events=(window.ISNET_EVENT_IDENTITIES?.reconcile?.(publishedBoardEvents(data.events||[],cmsRows,iso(today())))||publishedBoardEvents(data.events||[],cmsRows,iso(today())));
+  // Do not publish ambiguous imported source-name records as real events:
+  // a generic "מבלים" title can carry an unrelated poster and source homepage.
+  state.events=state.events.filter(e=>!/^מבלים(?:\s*[-–—:]\s*)?$/.test(String(e.title||"").trim()));
   state.fallbacks=fallbacks;
   state.generatedAt=data.generated_at||null;
   state.cinema=cinema.movies||[];
