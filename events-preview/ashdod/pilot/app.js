@@ -940,7 +940,7 @@ function renderCategories(){
   if(state.events.some(e=>e.category==="workshop")&&!cats.includes("workshop"))cats.push("workshop");
   const counts={};groupEvents(state.events).forEach(e=>counts[e.category]=(counts[e.category]||0)+1);
   counts.cinema=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
-  const visibleCats=cats.filter(c=>c!=="community"&&c!=="tour"&&(counts[c]||0)>0);
+  const visibleCats=cats.filter(c=>c!=="community"&&c!=="tour"&&c!=="conference"&&(counts[c]||0)>0);
   $("categoryGrid").innerHTML=visibleCats.map(c=>{
     const isCinema=c==="cinema";
     const active=isCinema?state.cinemaOpen:state.category===c;
@@ -1068,7 +1068,7 @@ function renderResults(){
     const buckets=new Map();
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
     const activeCinemaCount=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
-    const categoryKeys=[...buckets.keys()].filter(key=>key!=="cinema"&&key!=="other"&&key!=="community"&&key!=="tour"&&buckets.get(key).length>0);
+    const categoryKeys=[...buckets.keys()].filter(key=>key!=="cinema"&&key!=="other"&&key!=="community"&&key!=="tour"&&key!=="conference"&&buckets.get(key).length>0);
     if(activeCinemaCount||(buckets.get("cinema")||[]).length)categoryKeys.push("cinema");
     const keys=categoryKeys.sort((a,b)=>{
       const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
