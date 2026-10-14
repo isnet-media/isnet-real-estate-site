@@ -128,7 +128,8 @@ async function init(){
   const summaryBar=activities.querySelector('.snActivityBar');
   const cultureBlock=root.querySelector('#senior-culture');
   if(summaryBar&&cultureBlock)cultureBlock.before(summaryBar);
-  activities.querySelector('.snActivityBar').insertAdjacentHTML('afterend','<p id="snSaveStatus" class="snSaveStatus" role="status" aria-live="polite"></p>');
+  // The summary may now live outside activities; use its saved reference rather than querying the old parent.
+  (summaryBar||activities).insertAdjacentHTML('afterend','<p id="snSaveStatus" class="snSaveStatus" role="status" aria-live="polite"></p>');
   root.querySelector('#snMonth').value='all';
   const empty=root.querySelector('#snEmpty');
   function render(){
