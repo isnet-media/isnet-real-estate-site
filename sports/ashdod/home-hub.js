@@ -1,0 +1,7 @@
+(()=>{'use strict';const bound=new WeakSet();let queued=false;
+function update(rail){const max=Math.max(0,rail.scrollWidth-rail.clientWidth),pos=Math.min(max,Math.abs(rail.scrollLeft));document.querySelectorAll('[data-home-rail="'+rail.id+'"]').forEach(b=>{b.disabled=Number(b.dataset.step)<0?pos<3:max-pos<3})}
+function move(id,step){const rail=document.getElementById(id),card=rail?.querySelector('a');if(!card)return;const gap=parseFloat(getComputedStyle(rail).columnGap)||12;rail.scrollBy({left:-step*(card.getBoundingClientRect().width+gap),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+function scan(){document.querySelectorAll('.home-swipe').forEach(rail=>{if(!bound.has(rail)){bound.add(rail);rail.addEventListener('scroll',()=>update(rail),{passive:true});rail.addEventListener('keydown',e=>{if(e.target!==rail||!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();if(e.key==='Home'||e.key==='End')rail.scrollTo({left:e.key==='Home'?0:-rail.scrollWidth,behavior:'auto'});else move(rail.id,e.key==='ArrowLeft'?1:-1)});if('ResizeObserver'in window)new ResizeObserver(()=>update(rail)).observe(rail)}update(rail)})}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-home-rail]');if(b)move(b.dataset.homeRail,Number(b.dataset.step))});
+new MutationObserver(()=>{if(!queued){queued=true;requestAnimationFrame(()=>{queued=false;scan()})}}).observe(document.querySelector('main'),{childList:true,subtree:true});scan();window.addEventListener('load',scan);
+})();
