@@ -71,12 +71,27 @@ function card(e,saved=false){
  return '<article class="kdCard" data-event-id="'+esc(e.event_id||e.id)+'"><button type="button" class="kdSave" data-save="'+esc(e.event_id||e.id)+'" aria-pressed="'+saved+'" aria-label="'+esc((saved?'הסרת ':'שמירת ')+t+' '+(saved?'מהמועדפים':'למועדפים'))+'"><span aria-hidden="true">'+(saved?'♥':'♡')+'</span></button><a class="kdMedia" href="'+esc(detail(e))+'" tabindex="-1" aria-hidden="true">'+(img.url?'<img src="'+esc(img.url)+'" alt="" loading="lazy" decoding="async">':'<span class="kdMediaText" aria-hidden="true">'+esc(topics[topic(e)])+'</span>')+(!img.original&&img.url?'<span class="kdCredit">המחשה</span>':'')+'</a><div class="kdCardCopy"><h3><a href="'+esc(detail(e))+'">'+esc(t)+'</a></h3><p class="kdSummary">'+esc(summary(e))+'</p><p class="kdDate">'+esc(date(e.start_date))+(e.start_time?' · <bdi>'+esc(e.start_time)+'</bdi>':'')+'</p><p class="kdVenue">'+esc(venue)+'</p>'+(ageText?'<p class="kdAge">'+esc(ageText)+'</p>':'')+(practical.length?'<details class="kdPractical"><summary>מידע לקראת היציאה</summary><p>'+practical.map(esc).join('<br>')+'</p>'+(unknownMeeting&&e.purchase_phone&&/^[\d\s+()-]+$/.test(e.purchase_phone)?'<a href="tel:'+esc(e.purchase_phone.replace(/[^\d+]/g,''))+'">בירור בטלפון '+esc(e.purchase_phone)+'</a>':'')+'</details>':'')+'<div class="kdCardBottom">'+(soldOut?'<p class="kdAvailability">מצב ההרשמה הידוע: אזלו המקומות</p>':'')+(p?'<p class="kdPrice">'+esc(p)+'<small>מחיר שפורסם · פרטי התשלום בהזמנה</small></p>':'')+'<div class="kdActions"><a class="kdButton" href="'+esc(detail(e))+'">לפרטי הפעילות ←</a>'+(url?'<a class="kdBooking" href="'+esc(url)+'" target="_blank" rel="noopener">'+(soldOut?'לבדיקת זמינות באתר המארגן ↗':'לפרטים והרשמה ↗')+'</a>':'')+'</div></div></div></article>';
 }
 const explore=[['פארקים ומשחקים','מרחב לרוץ, לשחק ולבלות','places.html?category=parks','♧'],['חופים וטיילת','חול, אוויר ים וזמן ביחד','places.html?category=beaches','≈'],['אטרקציות','למצוא את ההרפתקה הבאה','places.html?category=attractions','✧'],['קולנוע','לבחור סרט שמתאים לילדים','cinema.html','▣'],['מוזיאונים ותערוכות','יום של סקרנות ואמנות','category.html?category=exhibition','▧'],['טבע בעיר','לגלות את ראשון לציון ברגל','places.html?category=nature','❋']];
+function todayIso(){return clock().day}
+function movieHasTimes(m){return (m.venues||[]).some(v=>Object.entries(v.schedule||{}).some(([d,t])=>d>=todayIso()&&Array.isArray(t)&&t.length))}
+function familyFilms(data){return (data.movies||[]).filter(m=>m.is_family===true&&(movieHasTimes(m)||m.family_catalog_source_url)).sort((a,b)=>Number(movieHasTimes(b))-Number(movieHasTimes(a))||a.title.localeCompare(b.title,'he'))}
+function filmCard(m){
+ const href='movie.html?id='+encodeURIComponent(m.id),active=(m.venues||[]).filter(v=>Object.entries(v.schedule||{}).some(([d,t])=>d>=todayIso()&&Array.isArray(t)&&t.length));
+ const next=active.flatMap(v=>Object.entries(v.schedule||{}).filter(([d,t])=>d>=todayIso()&&Array.isArray(t)&&t.length).map(([date,times])=>({date,times,venue:v}))).sort((a,b)=>a.date.localeCompare(b.date))[0];
+ const poster=m.poster_verification?.url===m.poster_url?m.poster_url:'';
+ const schedule=next?'<p class="kdFilmNext">'+esc(new Intl.DateTimeFormat('he-IL',{weekday:'short',day:'numeric',month:'short'}).format(new Date(next.date+'T12:00:00')))+' · '+esc(next.times.slice(0,3).join(' · '))+'</p><p class="kdFilmVenue">'+esc(active.map(v=>v.name).join(' / '))+'</p>':'<p class="kdFilmPending">'+(m.release_date>todayIso()?'בקרוב בקולנוע · '+esc(m.release_date.split('-').reverse().join('.')):'מקטלוג הילדים')+'<br>שעות בראשון לציון טרם אומתו</p>';
+ return '<article class="kdFilmCard"><a class="kdFilmPoster" href="'+href+'">'+(poster?'<img src="'+esc(poster)+'" alt="כרזת הסרט '+esc(m.title)+'" loading="lazy" referrerpolicy="no-referrer">':'<span aria-hidden="true">▣</span>')+(m.trailer_youtube_id?'<span class="kdFilmTrailer">▶ טריילר ופרטים</span>':'')+'</a><div class="kdFilmBody"><h3><a href="'+href+'">'+esc(m.title)+'</a></h3><p class="kdFilmMeta">'+esc([m.runtime_minutes?m.runtime_minutes+' דקות':null,m.age_rating].filter(Boolean).join(' · '))+'</p>'+schedule+'<a class="kdFilmDetails" href="'+href+'">'+(next?'לכל ההקרנות והכרטיסים':'לפרטי הסרט ובדיקת הקרנות')+' ←</a></div></article>';
+}
+function movieSection(data){
+ const films=familyFilms(data);if(!films.length)return '';
+ const active=films.filter(movieHasTimes),catalog=films.filter(m=>!movieHasTimes(m));
+ return '<section id="kids-movies" class="kdMovies" aria-labelledby="kdMoviesTitle"><div class="kdMovieHeading"><div><span class="kdEyebrow">המסך הגדול, ביחד</span><h2 id="kdMoviesTitle">סרטים לילדים ולמשפחה</h2><p>בחרו הרפתקה, צפו בטריילר ומצאו את ההקרנה שלכם.</p></div><a href="./?audience=family#cinema">לכל סרטי הילדים בקולנוע ←</a></div>'+(active.length?'<h3 class="kdFilmGroupTitle">עם הקרנות בראשון לציון <span>'+active.length+' סרטים</span></h3><div class="kdFilmRail" tabindex="0" aria-label="סרטי ילדים עם הקרנות בראשון לציון">'+active.map(filmCard).join('')+'</div>':'')+(catalog.length?'<h3 class="kdFilmGroupTitle">עוד סרטים מעולם הילדים</h3><p class="kdFilmNote">מהקטלוג הרשמי של רשתות הקולנוע. זמינות בראשון לציון נבדקת בעמוד הסרט; אין כרגע שעות מקומיות מאומתות.</p><div class="kdFilmRail" tabindex="0" aria-label="סרטי ילדים מהקטלוג הרשמי">'+catalog.map(filmCard).join('')+'</div>':'')+'</section>';
+}
 async function init(){
  document.body.classList.add('kidsPage');document.querySelector('.siteTopbar').outerHTML=header;
  document.title='ילדים בראשון לציון — פעילויות, הצגות ובילוי משפחתי | מה עושים בראשון לציון';
  const root=document.querySelector('main');root.innerHTML='<p role="status">טוענים פעילויות ורעיונות לבילוי…</p>';
  try{
-  const [data,cms]=await Promise.all([fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()}),window.ISNET_PUBLIC_CMS?.publishedEvents?.('ashdod')||Promise.resolve([])]);
+  const [data,cms,cinema]=await Promise.all([fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()}),window.ISNET_PUBLIC_CMS?.publishedEvents?.('ashdod')||Promise.resolve([]),fetch('data/cinema.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('cinema');return r.json()}).catch(()=>({movies:[]}))]);
   const rows=mergeRows(window.ISNET_EVENT_IDENTITIES?.reconcile?.(data.events||[])||data.events||[],cms).filter(e=>visible(e)).sort((a,b)=>(a.start_date+' '+(a.start_time||'')).localeCompare(b.start_date+' '+(b.start_time||'')));
   const months=[...new Set(rows.map(e=>e.start_date.slice(0,7)))];let active='all',savedOnly=false,saved=new Set();
   const storageKey='isnet-ashdod-kids-saved-v1';try{saved=readSaved(localStorage.getItem(storageKey))}catch{}
@@ -84,6 +99,8 @@ async function init(){
   // Bring the activities forward, while keeping a short gateway to general leisure.
   const activities=root.querySelector('#kids-activities'),discovery=root.querySelector('#kids-explore');
   activities.after(discovery);
+  activities.insertAdjacentHTML('afterend',movieSection(cinema));
+  if(familyFilms(cinema).length)root.querySelector('.kdIntroLinks').insertAdjacentHTML('beforeend','<a href="#kids-movies">לסרטי הילדים ↓</a>');
   activities.insertAdjacentHTML('beforebegin','<nav class="kdCityGateway" aria-label="בילויים משפחתיים בעיר"><span>יוצאים להרפתקה?</span><a href="places.html?category=parks">פארק ←</a><a href="places.html?category=attractions">אטרקציה ←</a><a href="places.html?category=beaches">יום ליד הים ←</a><a href="#kids-explore">כל הרעיונות ↓</a></nav>');
   activities.querySelector('.kdSectionHead').insertAdjacentHTML('afterend','<div class="kdHomeControls"><nav class="kdPeriods" aria-label="בחירת תקופה מהירה"><button type="button" data-period="soon">הקרובים</button><button type="button" data-period="week">בשבעת הימים הקרובים</button><button type="button" data-period="month">החודש</button><button type="button" data-period="all">כל התאריכים</button></nav><button type="button" id="kdSaved" aria-pressed="false">♡ המועדפים שלי</button></div><p class="kdSavedHint">לחצו על הלב בכרטיסייה כדי לשמור פעילות. המועדפים נשמרים בדפדפן הזה, ללא הרשמה.</p><p id="kdSaveStatus" class="kdSaveStatus" role="status" aria-live="polite"></p>');
   root.querySelector('#kdMonth').value='soon';
@@ -111,5 +128,6 @@ async function init(){
 
  }catch{root.innerHTML='<p class="kdEmpty" role="alert">לא ניתן לטעון כרגע את הפעילויות. <a href="./?category=kids">לפעילויות ילדים בעמוד הראשי ←</a></p>'}
 }
-window.ISNET_KIDS={init,visible,mergeRows,matches,title,picture,price,card,readSaved,inPeriod,filterRows,forKids,topic};
+window.ISNET_KIDS={init,visible,mergeRows,matches,title,picture,price,card,readSaved,inPeriod,filterRows,forKids,topic,familyFilms,filmCard,movieSection};
 })();
+
