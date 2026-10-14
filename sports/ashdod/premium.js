@@ -7,7 +7,7 @@
   const sport=document.body.dataset.sport,section=document.body.dataset.teamSection;
   const matches=d.items.filter(m=>(!sport||m.sport===sport)&&(!section||section==='בוגרים'&&m.sport==='כדורגל')&&Number.isFinite(m.team_score)&&Number.isFinite(m.opponent_score));
   const selected=d.items.filter(m=>['football-1198','football-6922','football-6929','football-7276','basket-men'].includes(m.id)&&Number.isFinite(m.team_score)&&Number.isFinite(m.opponent_score));
-  holder.style.gridTemplateColumns=`repeat(${Math.max(1,selected.length)},minmax(0,1fr))`;
+  holder.style.gridTemplateColumns=`repeat(${Math.max(1,selected.length)},minmax(260px,1fr))`;holder.style.overflowX='auto';holder.style.maxWidth='100%';
   holder.innerHTML=selected.map(m=>{
    const age=Date.now()-Date.parse(m.fetched_at);
    const active=m.status==='live'&&Number.isFinite(age)&&age>=-30000&&age<120000;
