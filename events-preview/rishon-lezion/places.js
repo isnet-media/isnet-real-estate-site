@@ -51,7 +51,7 @@ function placeCard(item){
       (exhibitions?'<section aria-label="תערוכות שמוצגות כעת"><h3>מציגות כעת במוזיאון</h3><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0">'+exhibitions+'</div></section>':'')+
       (state.category==='kids-attractions'&&item.notice?'<p class="kidsAttractionNotice">'+esc(item.notice)+'</p>':'')+
       '<div class="placeActions">'+
-        (state.category==='kids-attractions'?'<a class="primaryAction" href="attraction.html?id='+encodeURIComponent(item.id)+'">לפרטי האטרקציה ←</a>':'')+
+        (state.category==='kids-attractions'?'<a class="primaryAction" href="attraction.html?id='+encodeURIComponent(item.id)+'">לפרטי האטרקציה ←</a>'+ (item.phone?'<a class="primaryAction" href="tel:'+esc(String(item.phone).replace(/[^+0-9]/g,''))+'">☎ '+esc(item.phone)+'</a>':'')+(item.booking_url?'<a class="primaryAction" href="'+esc(item.booking_url)+'" target="_blank" rel="noopener">הזמנה ישירה ↗</a>':'')+(!item.booking_url&&item.operator_website_url?'<a class="primaryAction" href="'+esc(item.operator_website_url)+'" target="_blank" rel="noopener">אתר המקום ↗</a>':''):'')+
         (item.museum_url?'<a class="primaryAction" href="'+esc(item.museum_url)+'" target="_blank" rel="noopener">פעילויות המוזיאון ←</a>':'')+
         '<a class="primaryAction" href="'+mapsUrl(item.map_query||item.name+" ראשון לציון")+'" target="_blank" rel="noopener">איך מגיעים ←</a>'+
       '</div>'+
