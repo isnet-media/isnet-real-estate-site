@@ -131,7 +131,7 @@ jobs:
                   if error.code == 404:
                       return {"status": "not_found"}
                   raise
-          terminal = {"succeed", "succeeded", "failure", "failed", "cancelled", "canceled", "not_found"}
+          terminal = {"succeed", "succeeded", "failure", "failed", "cancelled", "canceled", "deployment_cancelled", "deployment_failed", "not_found"}
           status = request().get("status")
           print("Previous timed-out deployment:", status)
           if status not in terminal:
