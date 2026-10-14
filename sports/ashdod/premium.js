@@ -17,7 +17,7 @@
    const mark=opponent?.logo?`<img src="${esc(opponent.logo)}" alt="">`:`<span class="opponent-mark" aria-hidden="true">${esc(m.opponent.trim().split(/\s+/).filter(w=>!['הפועל','מכבי'].includes(w)).slice(0,2).map(w=>w[0]).join(''))}</span>`;
    return `<a class="strip-game" href="results.html#${esc(m.id)}" aria-label="${esc(m.team)} ${m.team_score}, ${esc(m.opponent)} ${m.opponent_score}, ${esc(status)}"><div class="match-topline"><span>${esc(m.sport)} · ${esc(m.date)}</span><span class="match-status">${esc(status)}</span></div><div class="match-body"><span class="match-side"><img src="${esc(m.logo)}" alt=""><strong>${esc(m.team)}</strong></span><span class="match-score"><b>${m.team_score}</b><i>:</i><b>${m.opponent_score}</b></span><span class="match-side">${mark}<strong>${esc(m.opponent)}</strong></span></div></a>`;
   }).join('')||'<span class="rail-loading">תוצאות למסגרת זו טרם זמינות. <a href="results.html" style="color:white">לכל תוצאות המחזור ←</a></span>';
-  if(document.body.classList.contains('sport-home')){
+  if(document.body.classList.contains('sport-home')&&!document.querySelector('#city-games')){
    document.querySelector('.next-strip')?.remove();
    const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
    const dateKey=x=>{const a=(x||'').split('/');return a.length===3?`${a[2]}-${a[1].padStart(2,'0')}-${a[0].padStart(2,'0')}`:''};
@@ -28,3 +28,4 @@
  }
  refresh();setInterval(refresh,30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});
 })();
+
