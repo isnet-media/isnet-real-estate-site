@@ -59,11 +59,15 @@ def refresh_team(team):
     s = attempt('team ' + team['id'], lambda: fetch(team['source']))
     if s and 'פרטי קבוצה' in text(s.title):
         tables = views(s, team['source'])
+        table_valid = True
         for table in candidate['tables']:
             matches = [v for v in tables if v['headers'] == table['headers'] and len(v['rows']) >= 2]
             if len(matches) == 1:
                 table['rows'] = matches[0]['rows']
-        ok.append(True)
+            else:
+                table_valid = False
+                ERRORS.append('team ' + team['id'] + ': standings schema mismatch')
+        ok.append(table_valid)
     else:
         ok.append(False)
     for field in ['players', 'scorers']:
@@ -147,6 +151,12 @@ def report(g, team):
         kinds = [c for c in event.get('class', []) if c not in ['node', 'team1', 'team2']]
         if minute and name:
             record['events'].append({'minute': minute, 'name': name, 'kind': ' '.join(kinds), 'own': ('team1' in event.get('class', [])) == record['is_home']})
+    # IFA labels converted penalties separately from ordinary goals. Include them
+    # only when both teams' event counts exactly reconcile to the final result.
+    scoring = [e for e in record['events'] if e['kind'] in ['goal', 'penalty']]
+    if record.get('completed') and sum(e['own'] for e in scoring) == record['team_score'] and sum(not e['own'] for e in scoring) == record['opponent_score']:
+        record['goals'] = [{k: e[k] for k in ['minute', 'name', 'own']} for e in scoring]
+        record['goal_events_reconciled'] = True
     record['fetched_at'] = NOW
     return record
 
