@@ -58,3 +58,23 @@ body[data-page="home"] .catalog{position:relative}body[data-page="home"] .catalo
 @media(min-width:600px){.events-logo-link img{width:126px}.topinner{gap:20px}}
 @media(min-width:1000px){.events-logo-link img{width:162px}.topinner .brandlock{margin-inline:auto}}
 @media(max-width:399px){.topinner{padding-inline:10px;gap:6px}.topinner .brand{font-size:24px}.topinner .brandmark{width:25px;transform:scale(.85)}.topinner .brandlock{gap:3px}.topinner .tag{font-size:8px}.topinner .publisher-logo img{width:76px;height:35px}.topinner .citybadge{padding-right:6px}.events-logo-link img{width:72px}}
+
+/* Readable mobile categories: full descriptions and high-contrast type. */
+@media(max-width:599px){
+ .tiles{gap:10px}
+ .tile.isnetNavFeature,.tile.isnetNavFeature.active{display:grid;grid-template-columns:28px minmax(0,1fr) 24px;column-gap:6px;row-gap:9px;padding:12px 10px;min-height:116px;align-content:start;align-items:center}
+ .isnetNavFeature__icon{grid-column:1;grid-row:1;width:28px;height:28px;flex-basis:28px;font-size:20px}
+ .isnetNavFeature__copy{display:contents}
+ .isnetNavFeature__copy strong{grid-column:2/4;grid-row:1;font-size:16px;line-height:1.45;font-weight:800;color:#143c6b;overflow-wrap:normal}
+ .isnetNavFeature__copy small{grid-column:1/3;grid-row:2;display:block;-webkit-line-clamp:unset;overflow:visible;font-size:13px;line-height:1.55;font-weight:600;color:#344e68}
+ .isnetNavFeature__arrow{grid-column:3;grid-row:2;width:24px;height:24px;font-size:16px;color:#244d70;border-color:#8da7bd;align-self:end}
+ .filter-caption{font-size:16px;line-height:1.4;color:#173e65}
+ .filter-controls select{font-size:17px;line-height:1.45;color:#173e65}
+ .filter-controls label{gap:10px;padding-top:11px;padding-bottom:11px}
+ .filter-toggle{font-size:17px;color:#244968}
+ .search-box input{font-size:17px;color:#173e65}
+ .search-box input::placeholder{color:#4b6176;opacity:1}
+ .mobile-nav a{font-size:13px;font-weight:600;color:#315b7c}
+ .discovery-hub .section h2{font-size:24px}
+ .card .info,.card .subtitle{font-size:15px;line-height:1.6;color:#344e68}
+}
