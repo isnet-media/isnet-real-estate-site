@@ -71,3 +71,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 
 .sourceOffers{display:grid;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid #ffffff20;font-size:13px}
 .sourceOffers>b{color:#c0bec5;font-size:13px}
+
+/* Flow dates after editorial content to avoid long unused desktop columns. */
+.contentGrid{display:flex;flex-direction:column;gap:14px;padding-top:24px}.storyColumn,.sideColumn{width:100%;min-width:0}.sideColumn{position:static;display:grid;grid-template-columns:minmax(0,2fr) minmax(240px,1fr);gap:16px;align-items:start}.scheduleList{grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px}.scheduleItem{min-width:0}.eventHero__media img{object-fit:contain!important}
+@media(max-width:850px){.sideColumn{grid-template-columns:1fr}.scheduleList{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}}
+@media(max-width:580px){.scheduleList{grid-template-columns:1fr}.contentGrid{gap:10px;padding-top:16px}}
