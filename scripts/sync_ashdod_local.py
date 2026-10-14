@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 from sync_ashdod_supplemental import make, ld, convert, equivalent, ticket_identity, Z
 from sync_events_from_sources import smarticket_rows
 from ofek_event_source import extract_ofek_events
+from ironit_library_source import collect_library
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'events-preview/admin/data'
@@ -24,6 +25,7 @@ SOURCES={
  'ofek_ashdod':dict(url='https://www.ofek-ashdod.org.il/page.php?type=events',parser='ofek',venue='קתדרת אופק, אשדוד',listing_pages=[dict(url='https://www.ofek-ashdod.org.il/page.php?gr='+str(gr)+'&m=296&type=events',category=cat) for gr,cat in [(644,'tour'),(643,'lecture'),(648,'lecture'),(1140,'workshop')]]),
  'up60':dict(url='https://www.coing.co/Ashdod_up60',parser='coing',venue='אפ 60+, סטרומה 5, אשדוד'),
  'ironit':dict(url='https://www.ironit.org.il/',parser='ironit',venue='אשדוד'),
+ 'ironit_library':dict(url='https://www.ironit.org.il/city-cultural-institutions/הספריה-העירונית-ע״ש-מאירהוף/',parser='ironit_library',venue='הספרייה העירונית אשדוד ע״ש מאירהוף'),
  'tarbutashdod':dict(url='https://www.tarbutashdod.com/',parser='municipal_posts',venue='אשדוד',public_api='https://www.tarbutashdod.com/wp-json/wp/v2/posts?per_page=50'),
 }
 def get(url,**kw):
@@ -36,6 +38,8 @@ def text(node):return node.get_text('\n',strip=True) if node else ''
 def future(e):
  return bool(e.get('start_date') and e.get('start_time') and e.get('venue') and e['start_date']>=datetime.now(Z).date().isoformat())
 def classify_local(e):
+ if e.get('library_program')=='kids':e.update(category='kids',subcategory=e.get('subcategory') if str(e.get('subcategory','')).startswith('kids-') or e.get('subcategory')=='creative-workshops' else 'creative-workshops');return
+ if e.get('library_program')=='adults' and 'מועדון קריאה' in e.get('title',''):e.update(category='workshop',subcategory='reading-clubs');return
  if e.get('local_source_name') in ['ofek_ashdod','up60']:return
  title=e.get('title','');body=e.get('source_description') or e.get('description','')
  if re.search(r'\b(?:ל|ה)?ילדים\b|לכל המשפחה|שעת סיפור|פעוט',title):e.update(category='kids',subcategory='creative-workshops' if 'סדנ' in title else 'kids-activities')
@@ -300,6 +304,16 @@ def merge(snap):
   classify_local(e)
   match=next((k for k in kept+new if k.get('start_date')==e['start_date'] and str(k.get('start_time') or '')[:5]==e['start_time'] and (equivalent(k,e) or (ticket_identity(k)==ticket_identity(e) and ticket_identity(e)[0]))),None)
   if match:
+   if e.get('local_source_name')=='ironit_library':
+    match['library_program']=e['library_program'];match['source_listing_url']=e['source_listing_url']
+    match['audiences']=list(dict.fromkeys(match.get('audiences',[])+e.get('audiences',[])))
+    match['official_age_groups']=e.get('official_age_groups',[])
+    if e.get('library_program')=='kids':match.update(category='kids',subcategory=e['subcategory'])
+    elif 'מועדון קריאה' in e['title']:match.update(category='workshop',subcategory='reading-clubs')
+    match.setdefault('crosscheck_sources',[])
+    for u in [e['content_source_url']]+e.get('crosscheck_sources',[]):
+     if u not in match['crosscheck_sources']:match['crosscheck_sources'].append(u)
+    duplicates+=1;continue
    if e.get('audience_program')=='gdolot_hachaim':
     # Membership enriches an existing occurrence without replacing its media or facts.
     match['audience_program']='gdolot_hachaim';match['source_listing_url']=e['source_listing_url']
@@ -359,6 +373,7 @@ def main():
     elif spec['parser']=='ofek':
      raw=extract_ofek_events(p,spec,fetch_once,limit=1000);rows,issues,services=[],[],[]
     elif spec['parser']=='coing':rows,issues,services=coing(name,spec,p)
+    elif spec['parser']=='ironit_library':rows,issues,services=collect_library(name,spec,page,make,localize,card,future)
     else:rows,issues,services=ironit(name,spec,p)
     if spec['parser']=='ofek':
      for r in raw:
@@ -371,3 +386,4 @@ def main():
  (OUT/'ashdod-local-snapshot.json').write_text(json.dumps(snap,ensure_ascii=False,indent=2)+'\n')
  if not a.collect_only:merge(snap)
 if __name__=='__main__':main()
+
