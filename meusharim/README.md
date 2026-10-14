@@ -27,3 +27,9 @@ Serve `meusharim/ashdod/` as the static root. `app.js` reads `data/classes.json`
 `data/coverage.json` reports inventory counts, verification counts, errors, duplicates and field completion. `data/qa-sample.json` records a deterministic 20-course source comparison.
 
 Missing fields remain empty and do not imply zero price or open registration. The UI loads 24 cards initially and supports additional results, free text, age, activity, district and individual weekdays.
+
+## Homepage placements
+
+The homepage renders only 10 curated placements from `ashdod/data/featured.json`. IDs, display titles and positions are independent of the collector; source refreshes preserve them. These are editorial choices, not a measured popularity ranking. Set `sponsored: true` for a paid placement to show the Hebrew "ממומן" badge. Never label a paid placement as an independent recommendation.
+
+Homepage filters lead to `catalog.html` with URL query parameters for search, age, activity, subcategory, district, center and weekday. The full directory uses smaller standard cards and pages results in batches of 24.
