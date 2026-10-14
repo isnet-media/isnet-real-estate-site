@@ -21,8 +21,29 @@ function up60Activity(e){
  const organizer=[e.venue,e.venue_name,e.organizer,e.organizer_name,e.local_source_name].filter(v=>typeof v==='string').join(' ');
  return /אפ\s*60\s*\+?|up\s*60\s*\+?/i.test(organizer)||/community\.ashdod\.muni\.il\/Ashdod_up60(?:[/?#]|$)/i.test(e.content_source_url||e.source_url||'');
 }
+
+let cultureCatalog={programs:[]};
+const normalizeCulture=s=>String(s||'').replace(/\s*-?\s*עונת המנויים.*$/,'').replace(/[^\p{L}\p{N}]+/gu,'');
+function goodLifeProgram(e){
+ if(!e)return null;
+ const urls=[e.content_source_url,e.purchase_url,e.ticket_url,...(e.crosscheck_sources||[])].filter(Boolean).join(' ');
+ return cultureCatalog.programs.find(p=>new RegExp('event(?:=|%3D)'+p.source_event+'(?:[^0-9]|$)').test(urls)||p.tickets.some(t=>new RegExp('(?:showURL=|/event/)'+t.seller_id+'(?:[^0-9]|$)').test(urls))||(normalizeCulture(e.title)===normalizeCulture(p.title)&&/משכן/.test(e.venue||'')&&e.start_date===p.date))||null;
+}
+function cultureSection(rows){
+ const programs=cultureCatalog.programs.map(p=>({p,events:rows.filter(e=>goodLifeProgram(e)?.id===p.id)})).filter(g=>g.events.length);
+ if(!programs.length)return '';
+ return '<section class="snCulture" id="senior-culture" aria-labelledby="snCultureTitle"><div class="snCultureHead"><div><span class="snCultureEyebrow">בוקר של תרבות במשכן</span><h2 id="snCultureTitle">סדרת החיים הטובים</h2><p>מוזיקה, סיפורים ומפגשים שמכניסים צבע לשגרה.<br>בחרו מופע ושעה שמתאימים לכם.</p></div><a class="snCultureSource" href="'+esc(safeUrl(cultureCatalog.source_url))+'" target="_blank" rel="noopener">על הסדרה במשכן ↗</a></div><div class="snCultureGrid">'+programs.map(({p,events})=>{
+ const first=events.slice().sort((a,b)=>a.start_time.localeCompare(b.start_time))[0];
+ const byTime=new Map();for(const e of events)if(!byTime.has(e.start_date+' '+e.start_time))byTime.set(e.start_date+' '+e.start_time,e);
+ return '<article class="snCultureCard"><a class="snCultureMedia" href="'+esc(detail(first))+'" tabindex="-1" aria-hidden="true"><img src="'+esc(safeUrl(p.image_url))+'" alt="" loading="lazy" decoding="async"><span class="snCulturePhotoCredit">צילום: '+esc(p.image_credit)+'</span></a><div class="snCultureCopy"><h3><a href="'+esc(detail(first))+'">'+esc(p.title)+'</a></h3><p class="snCultureSummary">'+esc(p.description)+'</p><p class="snCultureDate">'+esc(date(first.start_date))+'</p><div class="snCultureTimes" aria-label="בחירת שעה למופע '+esc(p.title)+'">'+[...byTime.values()].sort((a,b)=>a.start_time.localeCompare(b.start_time)).map(e=>{
+ const slot=p.tickets.find(t=>t.time===e.start_time);const booking=safeUrl(slot?.booking_url||e.purchase_url||p.source_url);
+ return '<a href="'+esc(booking)+'" target="_blank" rel="noopener" aria-label="'+esc(p.title+' בשעה '+e.start_time+' — פרטים והזמנה')+'"><bdi>'+esc(e.start_time)+'</bdi><span>להזמנה ↗</span></a>';
+ }).join('')+'</div><a class="snCultureDetails" href="'+esc(detail(first))+'">לפרטי המופע ←</a></div></article>';
+ }).join('')+'</div><p class="snCultureHint">מחיר, זכאות למנוי וזמינות כרטיסים — באתר המשכן.</p></section>';
+}
+
 function visible(e,at=clock()){
- if(!e||!(e.category==='seniors'||adultLecture(e)||up60Activity(e))||e.is_active===false||['cancelled','canceled','inactive','hidden','draft','deleted'].includes(e.status)||['draft','hidden','unpublished','archived'].includes(e.publication_status))return false;
+ if(!e||!(e.category==='seniors'||adultLecture(e)||up60Activity(e)||goodLifeProgram(e))||e.is_active===false||['cancelled','canceled','inactive','hidden','draft','deleted'].includes(e.status)||['draft','hidden','unpublished','archived'].includes(e.publication_status))return false;
  if(!/^\d{4}-\d{2}-\d{2}$/.test(e.start_date||''))return false;
  const until=e.end_date&&e.end_date>=e.start_date?e.end_date:e.start_date;
  if(until<at.day)return false;
@@ -33,6 +54,7 @@ function mergeRows(base,overrides=[]){const map=new Map(base.filter(Boolean).map
 const clean=s=>window.ISNET_EDITORIAL_SAFETY?.publicText?.(String(s||''))??String(s||'');
 function title(e){return clean(e.title).replace(/\s*\d{1,2}[/.]\d{1,2}[/.](?:\d{4}|\d{2})\s*$/,'').trim()}
 function topic(e){
+ if(goodLifeProgram(e))return 'senior-culture';
  if(up60Activity(e)){
   if(e.category==='lecture')return 'senior-lectures';
   if(/דיגיטלי|רשתות חברתיות|בינה מלאכותית|\bAI\b|קאנבה|קנבה|חופשה בקליק/i.test(e.title||''))return 'senior-digital';
@@ -87,21 +109,23 @@ async function init(){
  document.title='גימלאים — פנאי, תרבות וטיולים באשדוד | מה עושים באשדוד';
  const root=document.querySelector('main');root.innerHTML='<p role="status">טוענים פעילויות ורעיונות לבילוי…</p>';
  try{
-  const [data,cms]=await Promise.all([fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()}),window.ISNET_PUBLIC_CMS?.publishedEvents?.('ashdod')||Promise.resolve([])]);
+  const [data,cms,culture]=await Promise.all([fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()}),window.ISNET_PUBLIC_CMS?.publishedEvents?.('ashdod')||Promise.resolve([]),fetch('data/senior-culture.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('culture');return r.json()}).catch(()=>({programs:[]}))]);
+  cultureCatalog=culture;
   const rows=mergeRows(window.ISNET_EVENT_IDENTITIES?.reconcile?.(data.events||[])||data.events||[],cms).filter(e=>visible(e)).sort((a,b)=>(a.start_date+' '+(a.start_time||'')).localeCompare(b.start_date+' '+(b.start_time||'')));
   const months=[...new Set(rows.map(e=>e.start_date.slice(0,7)))];let active='all',savedOnly=false,saved=new Set();
   const storageKey='isnet-ashdod-seniors-saved-v1';try{saved=readSaved(localStorage.getItem(storageKey))}catch{}
-  root.innerHTML='<a class="snBreadcrumb" href="./">כל הבילויים באשדוד ←</a><header class="snIntro"><div><span class="snEyebrow">זמן לדברים שאוהבים</span><h1>הבית של הגימלאים<br><em>באשדוד</em></h1><p class="snLead">לצאת, להכיר, ללמוד וליהנות.<br>כל מה שמתחשק לעשות בעיר, במקום אחד.</p><div class="snIntroLinks"><a href="#senior-activities">לפעילויות הקרובות ↓</a><a href="#senior-explore">לעוד בילויים בעיר ↓</a></div></div><figure class="snCityPhoto"><a href="places.html?category=beaches" aria-label="גלו את חופי אשדוד"><img src="https://ashdodnet.com/dyncontent/2020/1/15/fba23138-8d97-488e-8e71-8eba6f163329.jpg" alt="רצועת החוף באשדוד" fetchpriority="high" decoding="async"><span>הים תמיד קרוב<br><small>גלו את החופים בעיר ←</small></span></a><figcaption>צילום: אשדוד נט</figcaption></figure></header><section class="snExplore" id="senior-explore" aria-labelledby="snExploreTitle"><div class="snSectionHead"><h2 id="snExploreTitle">עוד דרכים ליהנות מאשדוד</h2><p>בחרו לפי מה שאתם אוהבים</p></div><nav class="snExploreGrid" aria-label="בילויים נוספים בעיר">'+explore.map(([t,d,u,i])=>'<a class="snExploreLink" href="'+u+'"><span class="snExploreIcon" aria-hidden="true">'+i+'</span><span><strong>'+t+'</strong><small>'+d+'</small></span><span class="snArrow" aria-hidden="true">←</span></a>').join('')+'</nav></section><section id="senior-activities" aria-labelledby="snActivityTitle"><div class="snSectionHead"><h2 id="snActivityTitle">הפעילויות הקרובות לגימלאים</h2><p>כל המועדים לפי סדר התאריכים</p></div><nav class="snFilters" aria-label="סינון לפי תחום עניין">'+Object.entries(topics).filter(([k])=>k==='all'||rows.some(e=>topic(e)===k)).map(([k,t])=>'<button type="button" data-topic="'+k+'" aria-pressed="'+(k==='all')+'">'+t+'</button>').join('')+'</nav><div class="snTools"><label class="snSearch"><span aria-hidden="true">⌕</span><input id="snSearch" type="search" placeholder="חפשו פעילות, מקום או מארגן" aria-label="חיפוש פעילות, מקום או מארגן"></label><label class="snMonthLabel" for="snMonth">מתי יוצאים?<select id="snMonth"><option value="all">כל החודשים</option><option value="soon">ב־30 הימים הקרובים</option><option value="week">בשבעת הימים הקרובים</option><option value="month">החודש</option>'+months.map(m=>'<option value="'+m+'">'+month(m)+'</option>').join('')+'</select></label></div><div class="snResultBar"><p id="snCount" role="status" aria-live="polite"></p><button id="snReset" type="button" hidden>ניקוי הסינון</button></div><div id="snResults"></div><div id="snEmpty" class="snEmpty" hidden><h3>לא נמצאה פעילות מתאימה לבחירה</h3><p>אפשר לבחור חודש אחר, לנקות את הסינון או לגלות עוד בילויים בעיר.</p><a href="#senior-explore">לעוד בילויים בעיר ↑</a></div></section><footer class="snFooter"><a href="./">לכל האירועים באשדוד ←</a></footer>';
+  root.innerHTML='<a class="snBreadcrumb" href="./">כל הבילויים באשדוד ←</a><header class="snIntro"><div><span class="snEyebrow">זמן לדברים שאוהבים</span><h1>הבית של הגימלאים<br><em>באשדוד</em></h1><p class="snLead">לצאת, להכיר, ללמוד וליהנות.<br>כל מה שמתחשק לעשות בעיר, במקום אחד.</p><div class="snIntroLinks"><a href="#senior-activities">לפעילויות הקרובות ↓</a><a href="#senior-culture">לבוקר של תרבות ↓</a><a href="#senior-explore">לעוד בילויים בעיר ↓</a></div></div><figure class="snCityPhoto"><a href="places.html?category=beaches" aria-label="גלו את חופי אשדוד"><img src="https://ashdodnet.com/dyncontent/2020/1/15/fba23138-8d97-488e-8e71-8eba6f163329.jpg" alt="רצועת החוף באשדוד" fetchpriority="high" decoding="async"><span>הים תמיד קרוב<br><small>גלו את החופים בעיר ←</small></span></a><figcaption>צילום: אשדוד נט</figcaption></figure></header><section class="snExplore" id="senior-explore" aria-labelledby="snExploreTitle"><div class="snSectionHead"><h2 id="snExploreTitle">עוד דרכים ליהנות מאשדוד</h2><p>בחרו לפי מה שאתם אוהבים</p></div><nav class="snExploreGrid" aria-label="בילויים נוספים בעיר">'+explore.map(([t,d,u,i])=>'<a class="snExploreLink" href="'+u+'"><span class="snExploreIcon" aria-hidden="true">'+i+'</span><span><strong>'+t+'</strong><small>'+d+'</small></span><span class="snArrow" aria-hidden="true">←</span></a>').join('')+'</nav></section><section id="senior-activities" aria-labelledby="snActivityTitle"><div class="snSectionHead"><h2 id="snActivityTitle">הפעילויות הקרובות לגימלאים</h2><p>כל המועדים לפי סדר התאריכים</p></div><nav class="snFilters" aria-label="סינון לפי תחום עניין">'+Object.entries(topics).filter(([k])=>k==='all'||rows.some(e=>topic(e)===k)).map(([k,t])=>'<button type="button" data-topic="'+k+'" aria-pressed="'+(k==='all')+'">'+t+'</button>').join('')+'</nav><div class="snTools"><label class="snSearch"><span aria-hidden="true">⌕</span><input id="snSearch" type="search" placeholder="חפשו פעילות, מקום או מארגן" aria-label="חיפוש פעילות, מקום או מארגן"></label><label class="snMonthLabel" for="snMonth">מתי יוצאים?<select id="snMonth"><option value="all">כל החודשים</option><option value="soon">ב־30 הימים הקרובים</option><option value="week">בשבעת הימים הקרובים</option><option value="month">החודש</option>'+months.map(m=>'<option value="'+m+'">'+month(m)+'</option>').join('')+'</select></label></div><div class="snResultBar"><p id="snCount" role="status" aria-live="polite"></p><button id="snReset" type="button" hidden>ניקוי הסינון</button></div><div id="snResults"></div><div id="snEmpty" class="snEmpty" hidden><h3>לא נמצאה פעילות מתאימה לבחירה</h3><p>אפשר לבחור חודש אחר, לנקות את הסינון או לגלות עוד בילויים בעיר.</p><a href="#senior-explore">לעוד בילויים בעיר ↑</a></div></section><footer class="snFooter"><a href="./">לכל האירועים באשדוד ←</a></footer>';
   // Bring the activities forward, while keeping a short gateway to general leisure.
   const activities=root.querySelector('#senior-activities'),discovery=root.querySelector('#senior-explore');
   activities.after(discovery);
+  activities.insertAdjacentHTML('beforebegin',cultureSection(rows));
   activities.insertAdjacentHTML('beforebegin','<nav class="snCityGateway" aria-label="בילויים לכל תושבי העיר"><span>מתחשק לכם גם…</span><a href="category.html?category=theatre">הצגה ←</a><a href="category.html?category=exhibition">תערוכה ←</a><a href="places.html?category=beaches">יום ליד הים ←</a><a href="#senior-explore">כל הרעיונות ↓</a></nav>');
   activities.querySelector('.snSectionHead').insertAdjacentHTML('afterend','<div class="snHomeControls"><nav class="snPeriods" aria-label="בחירת תקופה מהירה"><button type="button" data-period="soon">הקרובים</button><button type="button" data-period="week">בשבעת הימים הקרובים</button><button type="button" data-period="month">החודש</button><button type="button" data-period="all">כל התאריכים</button></nav><button type="button" id="snSaved" aria-pressed="false">♡ המועדפים שלי</button></div><p class="snSavedHint">לחצו על הלב בכרטיסייה כדי לשמור פעילות. המועדפים נשמרים בדפדפן הזה, ללא הרשמה.</p><p id="snSaveStatus" class="snSaveStatus" role="status" aria-live="polite"></p>');
   root.querySelector('#snMonth').value='soon';
   const empty=root.querySelector('#snEmpty');
   function render(){
    const q=root.querySelector('#snSearch').value.trim(),selected=root.querySelector('#snMonth').value;
-   const found=filterRows(rows,{active,q,period:selected,savedOnly,saved});
+   const found=filterRows(rows,{active,q,period:selected,savedOnly,saved}).filter(e=>!goodLifeProgram(e)||active==='senior-culture'||q||savedOnly);
    root.querySelector('#snCount').textContent=(found.length===1?'פעילות אחת':found.length+' פעילויות')+(savedOnly?' במועדפים':'');root.querySelector('#snEmpty').hidden=found.length>0;root.querySelector('#snReset').hidden=!q&&selected==='all'&&active==='all'&&!savedOnly;
    empty.querySelector('h3').textContent=savedOnly?'עוד אין כאן פעילויות שמורות':'לא נמצאה פעילות מתאימה לבחירה';empty.querySelector('p').textContent=savedOnly?'בחרו פעילות ולחצו על הלב כדי לחזור אליה בקלות. אפשר לשמור גם פעילות בחודש רחוק יותר.':'אפשר לבחור חודש אחר, לנקות את הסינון או לגלות עוד בילויים בעיר.';
    const groups=new Map();for(const e of found){const m=e.start_date.slice(0,7);if(!groups.has(m))groups.set(m,[]);groups.get(m).push(e)}
@@ -122,5 +146,5 @@ async function init(){
 
  }catch{root.innerHTML='<p class="snEmpty" role="alert">לא ניתן לטעון כרגע את הפעילויות. <a href="./?category=seniors">לפעילויות בעמוד הראשי ←</a></p>'}
 }
-window.ISNET_SENIORS={init,visible,mergeRows,matches,title,picture,price,card,readSaved,inPeriod,filterRows,adultLecture,up60Activity,topic};
+window.ISNET_SENIORS={init,visible,mergeRows,matches,title,picture,price,card,readSaved,inPeriod,filterRows,adultLecture,up60Activity,topic,goodLifeProgram,cultureSection};
 })();
