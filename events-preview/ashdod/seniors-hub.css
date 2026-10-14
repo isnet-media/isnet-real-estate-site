@@ -71,3 +71,29 @@
 @media(max-width:650px){.snCulture{margin:16px -2px 30px;padding:20px 14px;border-radius:19px}.snCultureHead{display:block;margin-bottom:20px}.snCultureHead h2{font-size:30px}.snCultureHead p{font-size:18px}.snCultureSource{display:inline-block;margin-top:16px;font-size:16px}.snCultureGrid{display:grid;grid-auto-flow:column;grid-auto-columns:86%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;gap:13px;padding-bottom:13px;overscroll-behavior-inline:contain;scrollbar-color:#a08855 #1a252c;scrollbar-width:thin}.snCultureCard{scroll-snap-align:start}.snCultureMedia{height:180px}.snCultureCopy{padding:18px}.snCultureCopy h3{font-size:22px}.snCultureSummary{font-size:17px}.snCultureDate{font-size:16px}.snIntroLinks a{flex:1 1 40%}.snCultureHint{font-size:14px}}
 
 .snWorldNav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:15px 0 28px}.snWorldNav a{position:relative;padding:20px 16px;border:1px solid #91c9b53b;border-radius:17px;background:linear-gradient(130deg,#26443d70,#1b252c);text-decoration:none;min-height:104px;display:flex;flex-direction:column;justify-content:center}.snWorldNav a:first-child{border-color:#e3c79570;background:linear-gradient(130deg,#5c442b60,#282c30)}.snWorldNav span{position:absolute;inset-inline-end:14px;top:12px;font-size:26px;color:#e5c98c}.snWorldNav strong{font:800 20px/1.5 Heebo,Arial,sans-serif;padding-inline-end:28px;color:#f2f4ec}.snWorldNav small{font-size:16px;line-height:1.5;color:#c4d7cd;margin-top:6px}@media(max-width:650px){.snWorldNav{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0 20px}.snWorldNav a{padding:16px 12px;min-height:108px}.snWorldNav span{font-size:20px;inset-inline-end:10px;top:10px}.snWorldNav strong{font-size:18px;padding-inline-end:19px}.snWorldNav small{font-size:14px}}
+
+/* Seniors landing follows the simplified kids hierarchy: heading, 4 category tiles, search and date, culture, activities. */
+.seniorsPage .snIntro{display:block;padding:12px 0 10px;min-height:0}
+.seniorsPage .snIntro h1{font-size:clamp(31px,4vw,47px);line-height:1.16;margin:0}
+.seniorsPage .snIntro h1 em{display:inline;font-style:normal}
+.seniorsPage .snWorldNav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:14px 0 12px}
+.seniorsPage .snWorldNav a{min-height:118px;padding:18px 14px;gap:4px;border-radius:19px}
+.seniorsPage .snWorldNav strong{font-size:19px}
+.seniorsPage .snWorldNav small{font-size:14px}
+.seniorsPage .snTools{display:flex;align-items:end;flex-wrap:wrap;gap:14px;padding:15px;margin:0 0 21px;border:1px solid #ffffff26;background:#1d292b;border-radius:16px}
+.seniorsPage .snSearch{flex:1 1 230px;min-width:0}
+.seniorsPage .snTopicLabel{display:flex;flex-direction:column;gap:7px;font-size:16px;color:#d1dfd8}
+.seniorsPage .snTopicLabel select{min-height:54px;max-width:100%;padding:12px 14px;background:#1a252b;color:#f7faf8;border:1px solid #688579;border-radius:12px;font:700 18px Assistant,Arial,sans-serif}
+.seniorsPage :is(#senior-activities,#senior-culture){scroll-margin-top:105px}
+@media(max-width:750px){
+.seniorsPage .snIntro{padding:8px 0}
+.seniorsPage .snIntro h1{font-size:clamp(29px,8vw,38px)}
+.seniorsPage .snWorldNav{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.seniorsPage .snWorldNav a{min-height:100px;padding:14px 11px}
+.seniorsPage .snWorldNav strong{font-size:17px}
+.seniorsPage .snWorldNav small{font-size:13px}
+.seniorsPage .snTools{padding:12px;gap:10px;margin-bottom:15px}
+.seniorsPage .snSearch{flex:1 1 100%;width:100%}
+.seniorsPage .snTopicLabel,.seniorsPage .snMonthLabel{flex:1 1 135px;min-width:0}
+.seniorsPage .snTopicLabel select,.seniorsPage .snMonthLabel select{width:100%;min-width:0}
+}
