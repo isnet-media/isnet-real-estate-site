@@ -127,7 +127,7 @@ async function init(){
   activities.insertAdjacentHTML('afterend',movieSection(cinema));
 
   activities.querySelector('.kdSectionHead').insertAdjacentHTML('afterend','<p id="kdSaveStatus" class="kdSaveStatus" role="status" aria-live="polite"></p>');
-  root.querySelector('#kdMonth').value='soon';
+  root.querySelector('#kdMonth').value='all';
   const empty=root.querySelector('#kdEmpty');
   function render(){
    const q=root.querySelector('#kdSearch').value.trim(),selected=root.querySelector('#kdMonth').value;
