@@ -98,3 +98,17 @@
 .seniorsPage .snTopicLabel,.seniorsPage .snMonthLabel{flex:1 1 135px;min-width:0}
 .seniorsPage .snTopicLabel select,.seniorsPage .snMonthLabel select{width:100%;min-width:0}
 }
+
+
+/* Unified activity heading, count and favorites; no scattered duplicate bars. */
+.seniorsPage .snActivityBar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px 24px;margin:10px 0 15px;padding:16px 18px;border:1px solid #708d8145;border-radius:16px;background:#1d2929}
+.seniorsPage .snActivityTitleGroup{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 16px;min-width:0}
+.seniorsPage .snActivityTitleGroup h2{margin:0;font:800 25px/1.4 Heebo,Arial,sans-serif}
+.seniorsPage #snCount{font-weight:800;font-size:17px;color:#dfcb9a;white-space:nowrap}
+.seniorsPage .snFavoritesGroup{display:flex;align-items:center;flex-wrap:wrap;gap:10px 13px;max-width:510px}
+.seniorsPage #snSaved{cursor:pointer;flex-shrink:0;border:1px solid #90697d80;border-radius:11px;padding:11px 14px;min-height:44px;background:#352832;color:#f4d3e2;font:800 16px Assistant,Arial,sans-serif}
+.seniorsPage #snSaved[aria-pressed=true]{background:#e4c1d3;color:#2a1724}
+.seniorsPage .snFavoritesGroup .snSavedHint{margin:0;font-size:14px;line-height:1.5;color:#bdcec6;flex:1 1 175px}
+.seniorsPage .snResultBar{min-height:0;margin:0 0 8px;justify-content:flex-end}
+.seniorsPage .snResultBar:has(#snReset[hidden]){display:none}
+@media(max-width:700px){.seniorsPage .snActivityBar{padding:13px 12px;gap:12px}.seniorsPage .snActivityTitleGroup h2{font-size:22px}.seniorsPage .snFavoritesGroup{width:100%;max-width:none;gap:9px}.seniorsPage #snSaved{width:auto;flex-shrink:0}.seniorsPage .snFavoritesGroup .snSavedHint{font-size:13px}}
