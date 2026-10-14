@@ -582,6 +582,17 @@ async function init(){
       }]
     });
 
+    // A dedicated back-link always returns family visitors to the top of their own hub.
+    if(e.category==="kids"||/^kids-|^story-time$/.test(String(e.subcategory||""))){
+      const hero=document.querySelector(".eventHero .shell");
+      if(hero&&!document.getElementById("kidsHubReturn")){
+        const back=document.createElement("a");
+        back.id="kidsHubReturn";back.href="category.html?category=kids";
+        back.textContent="→ חזרה לעמוד הילדים והמשפחה";
+        back.style.cssText="display:inline-flex;margin:0 0 16px;padding:10px 14px;color:#f3dfaa;background:#26232d;border:1px solid #6b5c46;border-radius:10px;text-decoration:none;font-weight:800";
+        hero.before(back);
+      }
+    }
     renderHero(e,occ,imageEvent);
     renderStory(e,occ);
     renderVideo(e);
