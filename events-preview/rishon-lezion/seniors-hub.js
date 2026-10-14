@@ -125,6 +125,10 @@ async function init(){
   root.querySelector('.snWorldNav').after(toolbar);
   toolbar.after(activities);
   activities.insertAdjacentHTML('beforebegin',cultureSection(rows));
+  // Place the unified activities summary directly above the featured Good Life series.
+  const summaryBar=activities.querySelector('.snActivityBar');
+  const cultureBlock=root.querySelector('#senior-culture');
+  if(summaryBar&&cultureBlock)cultureBlock.before(summaryBar);
   activities.querySelector('.snActivityBar').insertAdjacentHTML('afterend','<p id="snSaveStatus" class="snSaveStatus" role="status" aria-live="polite"></p>');
   root.querySelector('#snMonth').value='all';
   const empty=root.querySelector('#snEmpty');
