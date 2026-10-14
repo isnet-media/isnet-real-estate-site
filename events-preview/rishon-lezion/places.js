@@ -1,6 +1,7 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
 const $=id=>document.getElementById(id);
 const titles={
+  "kids-attractions":"אטרקציות לילדים בראשון לציון והסביבה",
   parks:"פארקים בראשון לציון",
   nature:"טבע וטיולים",
   beaches:"החופים בראשון לציון",
@@ -37,7 +38,7 @@ function placeCard(item){
   ).join("");
   return '<article class="placeCard" id="'+esc(item.id)+'" style="scroll-margin-top:90px">'+
     '<div class="placeMedia">'+
-      '<img src="'+esc(item.image)+'" alt="'+esc(item.name)+'" loading="lazy" onerror="this.closest(\'.placeMedia\').classList.add(\'imageFailed\');this.remove()">'+
+      (item.image?'<img src="'+esc(item.image)+'" alt="'+esc(item.name)+'" loading="lazy" onerror="this.closest(\'.placeMedia\').classList.add(\'imageFailed\');this.remove()">':'<span class="placeMediaIcon" aria-hidden="true">'+esc(item.icon||'✧')+'</span>')+
       '<div class="placeBadges">'+tags+'</div>'+
       (item.image_credit?'<small class="imageCredit">'+esc(item.image_credit)+'</small>':'')+
     '</div>'+
@@ -48,7 +49,9 @@ function placeCard(item){
       '<p>'+esc(item.description||"")+'</p>'+
       '<ul class="placeHighlights">'+highlights+'</ul>'+
       (exhibitions?'<section aria-label="תערוכות שמוצגות כעת"><h3>מציגות כעת במוזיאון</h3><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0">'+exhibitions+'</div></section>':'')+
+      (state.category==='kids-attractions'&&item.notice?'<p class="kidsAttractionNotice">'+esc(item.notice)+'</p>':'')+
       '<div class="placeActions">'+
+        (state.category==='kids-attractions'&&item.source_url?'<a class="primaryAction" href="'+esc(item.source_url)+'" target="_blank" rel="noopener">לפרטים ותכנון הביקור ↗</a>':'')+
         (item.museum_url?'<a class="primaryAction" href="'+esc(item.museum_url)+'" target="_blank" rel="noopener">פעילויות המוזיאון ←</a>':'')+
         '<a class="primaryAction" href="'+mapsUrl(item.map_query||item.name+" ראשון לציון")+'" target="_blank" rel="noopener">איך מגיעים ←</a>'+
       '</div>'+
@@ -137,6 +140,7 @@ async function init(){
     state.data=data;
     const cat=data.categories?.[state.category];
     if(!cat){renderComingSoon();return}
+    if(state.category==="kids-attractions"){document.body.classList.add("kidsAttractionsPage");$("placesHero").insertAdjacentHTML("beforebegin",'<a class="kidsAttractionsBack" href="category.html?category=kids">לעולם הילדים בראשון לציון ←</a>');$("tourismSourceLink").textContent="עוד רעיונות באתר טיולי ↗";}
     renderHero(cat);
     renderFilters(cat);
     renderGrid(cat);
