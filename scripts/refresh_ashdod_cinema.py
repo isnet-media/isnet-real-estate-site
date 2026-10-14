@@ -33,6 +33,7 @@ TODAY = datetime.now(TZ).date().isoformat()
 STAMP = datetime.now(TZ).isoformat(timespec='seconds')
 CACHE = None
 OVERRIDES = {}
+FAMILY_CATALOG_TITLES = set()
 
 
 def request(url, payload=None, headers=None):
@@ -61,6 +62,7 @@ def plain(text):
 
 def base_title(title):
     title = unicodedata.normalize('NFKC', title or '')
+    title = re.sub(r'^לוני טונס(?:\s+מציגים)?\s*:?\s*', 'לוני טונס ', title)
     title = re.sub(r'^(?:סינמה נוסטלגיה\s*[-–:]\s*|אופרה בשלייקס\s*[-–:]\s*)', '', title)
     title = re.split(r'\s*[-–]?\s*(?:מדובב|מתורגם|גרסה באנגלית|באנגלית|אנגלית\s*$|הקרנה רגישה)', title)[0]
     return re.sub(r'[^a-z0-9א-ת]', '', title.lower())
@@ -142,6 +144,7 @@ def city_query(token, collection, filter_):
 
 
 def collect_city():
+    global FAMILY_CATALOG_TITLES
     # Anonymous public visitor token, never persisted into the dataset/report.
     tokens = json.loads(request(CITY + '/_api/v1/access-tokens'))
     token = tokens['apps']['675bbcef-18d8-41f5-800e-131ec9e08762']['instance']
@@ -185,6 +188,29 @@ def collect_city():
             'booking_url': 'https://tickets.cinema-city.co.il/order/' + str(session['externalId']),
             'screen': session.get('venueTypeName'), 'dubbed_language': payload.get('dubbedLanguageISO'),
             'subtitled_language': payload.get('subbedLanguageISO')})
+    # Keep the official children's catalog even when no Ashdod sessions are published.
+    kids_page = BeautifulSoup(request(CITY + '/movie-categories/kids'), 'html.parser')
+    kids_titles = {base_title(h.get_text(' ', strip=True)) for h in kids_page.select('h2')}
+    if len(kids_titles) < 5:
+        raise ValueError('Incomplete official kids catalog; existing data retained')
+    for ident, feature in features.items():
+        release = str((feature.get('dateStarted') or {}).get('$date', ''))[:10]
+        upcoming_limit = (datetime.now(TZ).date() + timedelta(days=14)).isoformat()
+        in_catalog = base_title(feature.get('name', '')) in kids_titles or ('KIDSHOW' in feature.get('categoryName', []) and release and release <= upcoming_limit)
+        if not in_catalog or 'SHOW' in feature.get('categoryName', []):
+            continue
+        row = rows.setdefault(ident, {'source_id': ident, 'title': feature['name'],
+            'source_url': CITY + '/movie/' + ident, 'venue_id': 'cinema-city',
+            'synopsis': plain(feature.get('synopsis')), 'genres': feature.get('genre') or [],
+            'runtime_minutes': int(feature.get('duration') or 0) or None,
+            'age_rating': feature.get('ratingName'),
+            'poster_source_url': feature.get('imageSourceUrl') or feature.get('image'),
+            'trailer_url': feature.get('trailer'), 'schedule': {}, 'sessions': []})
+        row['is_family'] = True
+        row['family_catalog_source_url'] = CITY + '/movie-categories/kids'
+        FAMILY_CATALOG_TITLES.add(base_title(row['title']))
+        if release:
+            row['release_date'] = release
     if not rows:
         raise ValueError('Empty official Ashdod listing; existing schedules retained for review')
     return list(rows.values())
@@ -238,7 +264,9 @@ def collect_hot():
     for group in groups:
         ident = int(group['MovieId'])
         name = group['MovieName'].strip()
-        if re.search(r'קומדי בר|סטנד.?אפ|פודקאסט|שרנו.*המסיבה', name):
+        if re.search(r'קומדי בר|סטנד.?אפ|פודקאסט|שרנו.*מסיבה', name):
+            continue
+        if not any(str(s.get('Date', ''))[:10] >= TODAY for s in group.get('Dates', [])):
             continue
         feature = features.get(ident, {})
         if not feature.get('PageUrl'):
@@ -263,6 +291,20 @@ def collect_hot():
                 'screen': group.get('ScreeningType')})
     if not rows:
         raise ValueError('Empty official HOT Ashdod listing; existing schedules retained for review')
+    known_family = set(FAMILY_CATALOG_TITLES)
+    if DATA.is_file():
+        known_family.update(base_title(m['title']) for m in json.loads(DATA.read_text()).get('movies', [])
+            if m.get('is_family') or any(g in m.get('genres', []) for g in ('ילדים', 'למשפחה', 'משפחה')))
+    for ident, feature in features.items():
+        name = feature.get('Name', '')
+        if not feature.get('PageUrl') or not (base_title(name) in known_family or re.search(r'מדובב(?: לעברית)?$', name.strip())):
+            continue
+        row = rows.setdefault(ident, {'source_id': str(ident), 'title': name, 'venue_id': 'hot-cinema',
+            'source_url': urljoin(HOT, feature['PageUrl']), 'schedule': {}, 'sessions': [],
+            'poster_source_url': urljoin(HOT + '/images/', feature.get('Poster', '')),
+            'synopsis': '', 'genres': []})
+        row['is_family'] = True
+        row['family_catalog_source_url'] = HOT + '/ShowingNow'
     with ThreadPoolExecutor(max_workers=3) as pool:
         return list(pool.map(hot_detail, rows.values()))
 
@@ -293,6 +335,12 @@ def merge(existing, sources):
     for venue_id, result in sources.items():
         if result['status'] != 'ok':
             continue
+        if venue_id in ('cinema-city', 'hot-cinema'):
+            for movie in movies:
+                origin = CITY if venue_id == 'cinema-city' else HOT
+                if str(movie.get('family_catalog_source_url', '')).startswith(origin):
+                    movie.pop('family_catalog_source_url', None)
+                    movie.pop('family_catalog_checked_at', None)
         # Only successful complete official snapshots may replace this venue's schedules.
         for movie in movies:
             for venue in movie.get('venues', []):
@@ -320,8 +368,13 @@ def merge(existing, sources):
                 if row.get(field) and not movie.get(field):
                     movie[field] = row[field]
                     movie.setdefault('metadata_sources', {})[field] = row['source_url']
-            if 'אנימציה' in row.get('genres', []) or re.search(r'מדובב(?: לעברית)?$', row['title']):
+            if row.get('is_family') or any(g in row.get('genres', []) for g in ('ילדים', 'למשפחה', 'משפחה', 'אנימציה')) or re.search(r'מדובב(?: לעברית)?$', row['title']):
                 movie['is_family'] = True
+            if row.get('family_catalog_source_url'):
+                movie['family_catalog_source_url'] = row['family_catalog_source_url']
+                movie['family_catalog_checked_at'] = STAMP
+                if row.get('release_date'):
+                    movie['release_date'] = row['release_date']
             if row.get('poster_source_url'):
                 movie.setdefault('poster_candidates', {})[venue_id] = {'url': row['poster_source_url'],
                     'source_url': row['source_url'], 'rights_status': 'reuse_permission_not_verified'}
@@ -438,3 +491,4 @@ def main():
 
 if __name__ == '__main__':
     sys.exit(main())
+

@@ -450,6 +450,7 @@ function featureCard(e){
 
 function cinemaToday(){return new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
 function cinemaVenueActive(venue){return Object.entries(venue.schedule||{}).some(([day,times])=>day>=cinemaToday()&&Array.isArray(times)&&times.length)}
+function cinemaMovieAvailable(movie){return movie.venues.some(cinemaVenueActive)||Boolean(movie.is_family&&movie.family_catalog_source_url)}
 function cinemaScheduleInfo(venue){
   const day=cinemaToday();
   const schedule=venue.schedule||{};
@@ -470,20 +471,20 @@ function cinemaPosterImage(movie){
 }
 function cinemaSpotlight(movies){
   const mount=$("cinemaSpotlight");if(!mount)return;
-  const film=state.cinema.find(m=>movies.some(x=>x.id===m.id)&&cinemaPosterImage(m)&&m.trailer_youtube_id)||movies[0];
+  const film=state.cinema.find(m=>movies.some(x=>x.id===m.id)&&m.venues.some(cinemaVenueActive)&&cinemaPosterImage(m)&&m.trailer_youtube_id)||movies.find(m=>m.venues.some(cinemaVenueActive))||movies[0];
   mount.hidden=!film;if(!film){mount.innerHTML="";return}
   const image=cinemaPosterImage(film),href="movie.html?id="+encodeURIComponent(film.id);
   const next=film.venues.filter(v=>cinemaVenueActive(v)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue)).map(cinemaScheduleInfo).sort((a,b)=>String(a.date||"").localeCompare(String(b.date||"")))[0];
   const meta=[film.runtime_minutes?film.runtime_minutes+" דקות":null,(film.genres||[]).join(" · "),next?next.label:null].filter(Boolean).map(x=>'<span>'+escapeHtml(x)+'</span>').join("");
-  mount.innerHTML='<div class="cinemaSpotlight__copy"><span class="cinemaSpotlight__eyebrow">על המסך באשדוד</span><h2>'+escapeHtml(film.title)+'</h2><div class="cinemaSpotlight__meta">'+meta+'</div><p>'+escapeHtml(film.synopsis||"")+'</p><div class="cinemaSpotlight__actions">'+(film.trailer_youtube_id?'<button type="button" data-trailer="'+escapeHtml(film.id)+'"><span aria-hidden="true">▶</span> צפו בטריילר</button>':"")+'<a href="'+href+'">לשעות ולכרטיסים <span aria-hidden="true">←</span></a></div></div>'+(image?'<a class="cinemaSpotlight__poster" href="'+href+'" aria-label="לפרטי הסרט '+escapeHtml(film.title)+'"><img src="'+escapeHtml(image)+'" alt="כרזת הסרט '+escapeHtml(film.title)+'" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.hidden=true"></a>':"");
+  mount.innerHTML='<div class="cinemaSpotlight__copy"><span class="cinemaSpotlight__eyebrow">'+(film.venues.some(cinemaVenueActive)?'על המסך באשדוד':'מעולם סרטי הילדים')+'</span><h2>'+escapeHtml(film.title)+'</h2><div class="cinemaSpotlight__meta">'+meta+'</div><p>'+escapeHtml(film.synopsis||"")+'</p><div class="cinemaSpotlight__actions">'+(film.trailer_youtube_id?'<button type="button" data-trailer="'+escapeHtml(film.id)+'"><span aria-hidden="true">▶</span> צפו בטריילר</button>':"")+'<a href="'+href+'">לשעות ולכרטיסים <span aria-hidden="true">←</span></a></div></div>'+(image?'<a class="cinemaSpotlight__poster" href="'+href+'" aria-label="לפרטי הסרט '+escapeHtml(film.title)+'"><img src="'+escapeHtml(image)+'" alt="כרזת הסרט '+escapeHtml(film.title)+'" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="this.parentElement.hidden=true"></a>':"");
 }
 function cinemaCard(movie){
-  const visibleVenues=movie.venues.filter(v=>cinemaVenueActive(v)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue));
+  const visibleVenues=movie.venues.filter(v=>(cinemaVenueActive(v)||movie.is_family&&movie.family_catalog_source_url)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue));
   const hasTrailer=Boolean(movie.trailer_youtube_id);
   const image=cinemaPosterImage(movie);
   const venues=visibleVenues.map(v=>{
     const info=cinemaScheduleInfo(v);
-    const times=info.times.length?info.times.slice(0,6).map(t=>'<a class="cinemaTime" href="movie.html?id='+encodeURIComponent(movie.id)+'#showtimes" aria-label="'+escapeHtml(movie.title+' · '+info.label+' · '+t)+'">'+escapeHtml(t)+'</a>').join(""):'<span class="cinemaNoTimes">בדקו שעות עדכניות</span>';
+    const times=info.times.length?info.times.slice(0,6).map(t=>'<a class="cinemaTime" href="movie.html?id='+encodeURIComponent(movie.id)+'#showtimes" aria-label="'+escapeHtml(movie.title+' · '+info.label+' · '+t)+'">'+escapeHtml(t)+'</a>').join(""):'<span class="cinemaNoTimes">מקטלוג הילדים · שעות באשדוד טרם אומתו</span>';
     return '<div class="cinemaVenueRow">'+
       '<div class="cinemaVenueName"><b>'+escapeHtml(v.name)+'</b><span>'+escapeHtml(info.label)+'</span></div>'+
       '<div class="cinemaTimes">'+times+'</div>'+
@@ -520,7 +521,7 @@ function renderCinema(){
   document.title=state.cinemaOpen?"סרטים באשדוד | מה עושים באשדוד?":"מה עושים באשדוד? | מבית אשדוד נט";
   if(!state.cinemaOpen){grid.innerHTML="";return}
   const arr=state.cinema
-    .filter(m=>m.venues.some(v=>cinemaVenueActive(v)&&(state.cinemaVenue==="all"||v.id===state.cinemaVenue)))
+    .filter(m=>cinemaMovieAvailable(m)&&m.venues.some(v=>state.cinemaVenue==="all"||v.id===state.cinemaVenue))
     .filter(m=>state.cinemaAudience==="all"||m.is_family===true)
     .filter(m=>!state.cinemaQuery||normalizeSearch([m.title,m.synopsis,...(m.genres||[])].join(" ")).includes(normalizeSearch(state.cinemaQuery)))
     .filter(m=>state.cinemaVenue==="all"||m.venues.some(v=>v.id===state.cinemaVenue))
@@ -1279,7 +1280,7 @@ async function init(){
   if(requestedCategory&&Object.prototype.hasOwnProperty.call(catLabels,requestedCategory))state.category=requestedCategory;
   const requestedSub=new URLSearchParams(location.search).get("subcategory");
   if(requestedSub&&window.publicTaxonomy.find(c=>c.id===state.category)?.subcategories?.some(x=>x.id===requestedSub))state.subcategory=requestedSub;
-  if(location.hash==="#cinema")state.cinemaOpen=true;
+  if(location.hash==="#cinema"){state.cinemaOpen=true;if(new URLSearchParams(location.search).get("audience")==="family")state.cinemaAudience="family";}
   render();
   renderCinema();
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));
@@ -1433,3 +1434,4 @@ async function init(){
   });
 }
 init().catch(err=>{console.error(err);if(document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
+
