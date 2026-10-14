@@ -35,3 +35,11 @@ The homepage renders only 6 curated placements from `ashdod/data/featured.json`.
 Homepage filters lead to `catalog.html` with URL query parameters for search, age, activity, subcategory, district, center and weekday. The full directory uses smaller standard cards and pages results in batches of 24.
 
 The tennis homepage placement groups the public tennis listings at Beit Lavron and district D (Goldie). `source_ids` retains the group association and each `venues` entry links to the internal catalog filtered to that center, where original course schedules and registration links remain separate.
+
+## Internal course pages
+
+`ashdod/course.html?id=ironit-20211` renders one course using the public-source catalog. Descriptions, age groups, venue, district, instructor and schedule come from `classes.json`; unknown fields are omitted. Source schedule strings list the end time first, so the UI presents a left-to-right start–end range. Enrollment buttons retain the exact public-source `registration_url`, including the group parameters. Missing direct registration links lead to the source course page and are labeled as operator inquiry.
+
+`course.html?id=tennis-ak` groups the 17 public tennis listings in the two user-selected venues, while each group has its own original registration URL. Regular listing titles, images and detail buttons open the corresponding internal page.
+
+Design references reviewed: ClassBento's wheel-throwing detail page (photo, essential details, activity description and booking), and Yonkers Pottery's class schedule (age, times and enrollment).
