@@ -32,6 +32,11 @@ JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this genera
 
 
 def localize(content: str, name: str, city: dict, suffix: str) -> str:
+    # The Ashdod courses partner link belongs only to the Ashdod edition.
+    content = content.replace(
+        "<a class=\"isnetNavSmall\" data-city-only=\"ashdod\" href=\"https://meusharim-ashdod-v1.ebs987449.chatgpt.site/\"><span aria-hidden=\"true\">▧</span><strong>חוגים והעשרה</strong></a>",
+        "<a class=\"isnetNavSmall\" href=\"category.html?category=exhibition\"><span aria-hidden=\"true\">▧</span><strong>תערוכות</strong></a>",
+    )
     # These are authored interface strings. Source data is NOT changed.
     content = content.replace("https://ashdodnet.com/", city["website"])
     content = content.replace("https://ashdodnet.com", city["website"].rstrip("/"))
