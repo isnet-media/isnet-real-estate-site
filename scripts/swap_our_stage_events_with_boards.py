@@ -2,6 +2,7 @@
 """Replace our auto-created stage event occurrences with matched board records.
 Only title+date matches; preserve all unrelated events and manual editor locks.
 """
+from apply_ashdod_category_overrides import apply_ashdod_category_overrides
 import hashlib,html,json,os,re
 from collections import defaultdict
 from datetime import datetime
@@ -64,6 +65,7 @@ def main():
             replacement.append(new);removed.append(e["event_id"])
         if enabled and replacement:
             data["events"]=kept+replacement
+            if city=="ashdod":apply_ashdod_category_overrides(data["events"],ROOT)
             path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         report["cities"][city]={"replaced":len(replacement) if enabled else 0,"ready":len(replacement),
             "unmatched_originals_retained":ignored,"original_event_ids_preserved":True}
@@ -104,6 +106,7 @@ def main():
                 seen.add(key)
         if enabled and new:
             data["events"].extend(new)
+            if city=="ashdod":apply_ashdod_category_overrides(data["events"],ROOT)
             path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         report["cities"][city]["new_imported"]=len(new) if enabled else 0
         report["cities"][city]["invalid_source_rows_skipped"]=skipped
@@ -134,6 +137,7 @@ def main():
         removed_duplicates=sum(id(e) in drop for e in data["events"])
         if enabled and drop:
             data["events"]=[e for e in data["events"] if id(e) not in drop]
+            if city=="ashdod":apply_ashdod_category_overrides(data["events"],ROOT)
             path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         report["cities"][city]["duplicate_agent_records_removed"]=removed_duplicates if enabled else 0
         report["cities"][city]["duplicates_preserved_if_editor_locked"]=True
