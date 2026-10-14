@@ -44,14 +44,14 @@ function placeCard(item){
     '</div>'+
     '<div class="placeBody">'+
       '<span class="placeType">'+esc(state.cat?.item_label||(state.category==="beaches"?"חוף בראשון לציון":"מקום בראשון לציון"))+'</span>'+
-      '<h2>'+esc(item.name)+'</h2>'+
+      '<h2>'+(state.category==='kids-attractions'?'<a style="color:inherit;text-decoration:none" href="attraction.html?id='+encodeURIComponent(item.id)+'">'+esc(item.name)+'</a>':esc(item.name))+'</h2>'+
       '<h3>'+esc(item.tagline||"")+'</h3>'+
       '<p>'+esc(item.description||"")+'</p>'+
       '<ul class="placeHighlights">'+highlights+'</ul>'+
       (exhibitions?'<section aria-label="תערוכות שמוצגות כעת"><h3>מציגות כעת במוזיאון</h3><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0">'+exhibitions+'</div></section>':'')+
       (state.category==='kids-attractions'&&item.notice?'<p class="kidsAttractionNotice">'+esc(item.notice)+'</p>':'')+
       '<div class="placeActions">'+
-        (state.category==='kids-attractions'&&item.source_url?'<a class="primaryAction" href="'+esc(item.source_url)+'" target="_blank" rel="noopener">לפרטים ותכנון הביקור ↗</a>':'')+
+        (state.category==='kids-attractions'?'<a class="primaryAction" href="attraction.html?id='+encodeURIComponent(item.id)+'">לפרטי האטרקציה ←</a>':'')+
         (item.museum_url?'<a class="primaryAction" href="'+esc(item.museum_url)+'" target="_blank" rel="noopener">פעילויות המוזיאון ←</a>':'')+
         '<a class="primaryAction" href="'+mapsUrl(item.map_query||item.name+" ראשון לציון")+'" target="_blank" rel="noopener">איך מגיעים ←</a>'+
       '</div>'+
