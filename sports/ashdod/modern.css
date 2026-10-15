@@ -115,3 +115,6 @@ body{background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased
 .club-page .horizontal-rail .player-card-body>strong{font-size:22px}.club-page .horizontal-rail .player-mini-stats>span{font-size:12px}.club-page .horizontal-rail .player-nationality{font-size:12px}.club-page .horizontal-rail .player-card-more{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){.home-portal,.home-team-card,.original-card{transition:none!important;transform:none!important}}
+
+/* Lead story is a wide editorial card; avoid an empty column beside shorter stories. */
+@media(min-width:1001px){.original-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.original-card:first-child{grid-column:1/-1;grid-row:auto;display:grid;grid-template-columns:1.1fr 1fr}.original-card:first-child img{aspect-ratio:16/9;height:100%;max-height:360px}.original-card:first-child .original-copy{padding:28px}.original-card:not(:first-child) .original-copy{padding:18px}.original-card:not(:first-child) h3{font-size:20px}}
