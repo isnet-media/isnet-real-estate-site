@@ -1,7 +1,7 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
 // Ashdod GA4: public event metadata only; never transmit raw search text or URLs.
 (function () {
-  if (!/\/events-preview\/ashdod(?:\/|$)/.test(location.pathname) || window.ashdodAnalytics) return;
+  if (!/\/events-preview\/rishon-lezion(?:\/|$)/.test(location.pathname) || window.ashdodAnalytics) return;
   const id = "G-YEFDXMCHB1";
   let debug = new URLSearchParams(location.search).get("ga_debug") === "1";
   try { if (debug) sessionStorage.setItem("ashdod-ga-debug","1"); debug = debug || sessionStorage.getItem("ashdod-ga-debug") === "1"; } catch {}

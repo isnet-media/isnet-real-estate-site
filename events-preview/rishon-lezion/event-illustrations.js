@@ -3,10 +3,10 @@
    This selects fallback media only; original event photographs take priority. */
 (function(){
   const scriptUrl=document.currentScript.src;
-  const base=new URL("assets/illustrations/v1/",scriptUrl);
-  const nextBase=new URL("assets/illustrations/v2/",scriptUrl);
-  const thirdBase=new URL("assets/illustrations/v3/",scriptUrl);
-  const fourthBase=new URL("assets/illustrations/v4/",scriptUrl);
+  const base=new URL("../ashdod/assets/illustrations/v1/",scriptUrl);
+  const nextBase=new URL("../ashdod/assets/illustrations/v2/",scriptUrl);
+  const thirdBase=new URL("../ashdod/assets/illustrations/v3/",scriptUrl);
+  const fourthBase=new URL("../ashdod/assets/illustrations/v4/",scriptUrl);
   window.isnetEventDefaultImage=function(e){return /(?:^|\/)defaults\//i.test(String(e?.image_url||""));};
   window.isnetEventIllustration=function(e){
     if(!e)return null;
@@ -74,7 +74,7 @@
       else if(/נקודת מפגש|פלשת|ארכיאולוג/.test(text)&&cat==="exhibition"){name="history-museum";label="מוזיאון והיסטוריה";}
       else if(/מוצאים עוגן|דקה לנשום|אני הרבה יותר|מאמא דייאלי/.test(title)){name="wellbeing-circle";label="מפגש חברתי";}
       else if(/FATE.*FIRE|CON TEH PARTIRO/.test(title)){
-        return {src:new URL("assets/featured-stage/orchestra_conductor_golden_hall__carousel_640x480.webp",scriptUrl).href,label:"קונצרט"};
+        return {src:new URL("../ashdod/assets/featured-stage/orchestra_conductor_golden_hall__carousel_640x480.webp",scriptUrl).href,label:"קונצרט"};
       }
       else if(/השועל המוסיקלי|טריפונס/.test(title)){name="live-music";label="מופע מוזיקה";}
       else if(cat==="sport"){

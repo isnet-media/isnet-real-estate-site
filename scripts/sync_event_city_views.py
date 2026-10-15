@@ -25,7 +25,7 @@ TARGETS = {
     },
 }
 FRONTEND_EXTENSIONS = {".html", ".css", ".js"}
-SKIP_NAMES = set()
+SKIP_NAMES = {"dark-preview.html", "hero-international-preview.html", "ashdod-event-identities.js", "ashdod-analytics.js"}
 HEAD_MARKER = "<!-- ISNET shared layout: edit the Ashdod source; synced automatically -->"
 CSS_MARKER = "/* ISNET shared layout: edit events-preview/ashdod, not this generated file. */"
 JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this generated file."
@@ -37,11 +37,57 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         "<a class=\"isnetNavSmall\" data-city-only=\"ashdod\" href=\"https://meusharim-ashdod-v1.ebs987449.chatgpt.site/\"><span aria-hidden=\"true\">▧</span><strong>חוגים והעשרה</strong></a>",
         "<a class=\"isnetNavSmall\" href=\"category.html?category=exhibition\"><span aria-hidden=\"true\">▧</span><strong>תערוכות</strong></a>",
     )
+    # The city has its own data and booking destinations. Share presentation only.
+    content = content.replace(' data-city-only="ashdod"', '')
+    content = re.sub(r'<script\b[^>]*src="(?:ashdod-event-identities|ashdod-analytics)\.js[^" ]*"[^>]*></script>', '', content)
+    content = content.replace('/ashdod/', '/' + city['slug'] + '/')
+    content = content.replace(r'\/ashdod', r'\/' + city['slug'])
+    content = content.replace('isnet-ashdod-', 'isnet-' + city['slug'] + '-')
+    content = content.replace('publishedEvents?.(\"ashdod\")', 'publishedEvents?.(\"' + city['slug'] + '\")')
+    content = content.replace("publishedEvents?.('ashdod')", "publishedEvents?.('" + city['slug'] + "')")
+    # Shared, non-geographic illustration assets remain in the canonical bank.
+    content = re.sub(r'(?<![A-Za-z0-9_./-])assets/(?!branding/)', '../ashdod/assets/', content)
+    content = content.replace('assets/branding/what-to-do-ashdod', 'assets/branding/what-to-do-rishon')
+    content = content.replace('assets/branding/ashdodnet-dark.svg', 'assets/branding/rishonet-dark.svg')
+    # Local partner/catalogs never silently load Ashdod content.
+    if name == 'site-search-chat.js':
+        content = content.replace("if(/חוג|קורס/.test(raw)&&!payload.courses)", "if(false&&/חוג|קורס/.test(raw)&&!payload.courses)")
+        content = content.replace('/meusharim/ashdod/data/classes.json', 'data/classes.json')
+    if name == 'site-search-engine.js':
+        content = content.replace("const groups=[", "const groups=[\n ['seniors','גמלאים',['גמלאים','גימלאים','גמלאי','ותיקים','הגיל השלישי'],['seniors','גמלאים','גימלאים','ותיקים','לגלות תרבות']],")
+        content = content.replace("e.sport_branch].filter(Boolean)", "e.sport_branch,...(e.local_source_name==='htrl_adults'?['seniors']:[])].filter(Boolean)")
+        content = content.replace("const s=norm(q).slice(0,500)", "const s=norm(q).replace(/(?:ב?ראשונ לציונ|ב?ראשלצ)/g,' ').trim().slice(0,500)")
+    if name == 'saturday.js':
+        content = content.replace('../rishon-lezion/data/', '../ashdod/data/')
+        content = content.replace("_guideCity:'ראשון לציון',_guideBase:'../rishon-lezion/'", "_guideCity:'ASHDOD_NEARBY',_guideBase:'../ashdod/'")
+    if name == 'seniors-hub.js':
+        content = content.replace('סדרת החיים הטובים ומופעים', 'תרבות, הצגות ומוזיקה בעיר')
+        content = content.replace('href=\"#senior-culture\"', 'href=\"category.html?category=stage\"')
+        links = __import__('json').loads((ROOT / city['slug'] / 'data/senior-guide.json').read_text())['links']
+        cards = '<section class=\"snExplore\"><div class=\"snSectionHead\"><h2>קהילה ותרבות לגמלאים בראשון לציון</h2></div><nav class=\"snExploreGrid\">' + ''.join('<a class=\"snExploreLink\" href=\"'+r['url']+'\" target=\"_blank\" rel=\"noopener\"><span><strong>'+r['title']+'</strong><small>'+r['description']+'</small></span><span aria-hidden=\"true\">↗</span></a>' for r in links) + '</nav></section>'
+        content = content.replace('activities.after(discovery);', 'activities.after(discovery);discovery.insertAdjacentHTML(\"afterbegin\",'+__import__('json').dumps(cards,ensure_ascii=False)+');')
+    if name == 'kids-hub.js':
+        guide = __import__('json').loads((ROOT / city['slug'] / 'data/family-guide.json').read_text())
+        content = re.sub(r'(function familyGuide\(\)\{\s*const sources=)\[[\s\S]*?\n \];', lambda m:m[1]+__import__('json').dumps(guide['links'],ensure_ascii=False)+';', content)
+        content = content.replace('מופע חנוכה לילדים ולמשפחות במשכן לאמנויות הבמה באשדוד.', 'מופע חנוכה לילדים ולמשפחות. פרטי האולם וההשתתפות בעמוד האירוע.')
+    if name == 'index.html':
+        # Geography-specific photography must not be relabeled as another city.
+        def local_discovery(m):
+            card=m[0]
+            kind='culture' if 'category=culture' in card else 'park' if 'category=parks' in card else 'beach' if 'category=beaches' in card else 'attraction' if 'attractions.html' in card else 'nature' if 'category=nature' in card else 'city'
+            import json
+            places=json.loads((ROOT/city['slug']/'data/places.json').read_text())['categories']
+            key={'park':'parks','beach':'beaches','attraction':'attractions','city':'must-see'}.get(kind,kind)
+            image=places[key]['hero_image']
+            card=re.sub(r'<img src="[^"]+"',lambda _: '<img src="'+image+'"',card)
+            return re.sub(r'(<small class="cityDiscover__credit">)[\s\S]*?(</small>)',r'\1איור להמחשה · ISNET\2',card)
+        content=re.sub(r'<a class="cityDiscover__card"[\s\S]*?</a>',local_discovery,content)
     # These are authored interface strings. Source data is NOT changed.
     content = content.replace("https://ashdodnet.com/", city["website"])
     content = content.replace("https://ashdodnet.com", city["website"].rstrip("/"))
     content = content.replace("אשדוד נט", city["brand"])
     content = content.replace("אשדוד", city["name"])
+    content = content.replace('ASHDOD_NEARBY', 'אשדוד')
     # CMS city identifiers are ASCII slugs and must be localized explicitly.
     # Otherwise the Rishon public board silently fetches Ashdod CMS events.
     if suffix == ".js":
@@ -72,7 +118,7 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         content = CSS_MARKER + "\n" + content
     elif suffix == ".js":
         content = JS_MARKER + "\n" + content
-    return content
+    return "\n".join(line.rstrip() for line in content.split("\n"))
 
 
 
@@ -122,10 +168,8 @@ def run(check: bool = False) -> int:
         assert (dest / "data" / "events.json").is_file(), "City-specific event dataset missing: " + slug
         for src in source_files:
             source = src.read_text(encoding="utf-8")
-            if "<!-- ISNET ASHDOD PILOT -->" in source:
-                continue  # Leave the other city on its last reviewed entry point.
             expected = localize(source, src.name, city, src.suffix)
-            if "אשדוד" in expected or "https://ashdodnet.com" in expected:
+            if "https://ashdodnet.com" in expected:
                 raise AssertionError(f"Unlocalized Ashdod text in {slug}/{src.name}")
             path = dest / src.name
             current = path.read_text(encoding="utf-8") if path.is_file() else None
@@ -133,6 +177,16 @@ def run(check: bool = False) -> int:
                 stale.append(f"{slug}/{src.name}")
                 if not check:
                     path.write_text(expected, encoding="utf-8")
+    # The reviewed pilot and its rails are the current homepage implementation.
+    for slug, city in TARGETS.items():
+        for src in sorted((MASTER / 'pilot').glob('*')):
+            if not src.is_file() or src.suffix not in FRONTEND_EXTENSIONS: continue
+            path = ROOT / slug / 'pilot' / src.name
+            expected = localize(src.read_text(), src.name, city, src.suffix)
+            if not path.exists() or path.read_text() != expected:
+                stale.append(f'{slug}/pilot/{src.name}')
+                if not check:
+                    path.parent.mkdir(exist_ok=True);path.write_text(expected)
     status = "OUT OF SYNC" if check and stale else "UPDATED" if stale else "IN SYNC"
     print(f"Event UI {status}; {len(source_files)} frontend files sourced from Ashdod; "
           f"{len(TARGETS)} target city; {len(stale)} changed files.")

@@ -28,6 +28,7 @@ EDITORIAL = ROOT / 'events-preview/ashdod/data/cinema-editorial.json'
 TZ = ZoneInfo('Asia/Jerusalem')
 CITY = 'https://www.cinema-city.co.il'
 HOT = 'https://hotcinema.co.il'
+CITY_SLUG = 'ashdod'
 VENUES = {'cinema-city': 'סינמה סיטי אשדוד', 'hot-cinema': 'HOT Cinema אשדוד'}
 TODAY = datetime.now(TZ).date().isoformat()
 STAMP = datetime.now(TZ).isoformat(timespec='seconds')
@@ -148,7 +149,7 @@ def collect_city():
     # Anonymous public visitor token, never persisted into the dataset/report.
     tokens = json.loads(request(CITY + '/_api/v1/access-tokens'))
     token = tokens['apps']['675bbcef-18d8-41f5-800e-131ec9e08762']['instance']
-    locations = city_query(token, 'CityDynamicPage', {'slug': 'ashdod', 'active': True})
+    locations = city_query(token, 'CityDynamicPage', {'slug': CITY_SLUG, 'active': True})
     if len(locations) != 1 or locations[0]['hebrewName'] != VENUES['cinema-city']:
         raise ValueError('Ashdod branch identity could not be verified')
     location = locations[0]
@@ -397,7 +398,7 @@ def merge(existing, sources):
                 venue = {'id': venue_id, 'name': VENUES[venue_id], 'schedule': {}, 'sessions': []}
                 movie['venues'].append(venue)
             venue['article_url'] = row['source_url']
-            venue['schedule_source_url'] = CITY + '/city/ashdod' if venue_id == 'cinema-city' else HOT + '/theater/5'
+            venue['schedule_source_url'] = CITY + '/city/' + CITY_SLUG if venue_id == 'cinema-city' else HOT + '/theater/5'
             venue['schedule_verified_at'] = STAMP
             venue['source_branch_id'] = 1181 if venue_id == 'cinema-city' else 5
             for day, times in row['schedule'].items():
@@ -406,9 +407,9 @@ def merge(existing, sources):
     existing['movies'] = movies
     existing['updated_at'] = STAMP
     existing['source_name'] = 'סינמה סיטי ו־HOT Cinema — הקרנות מאומתות באשדוד'
-    existing['source_url'] = CITY + '/city/ashdod'
+    existing['source_url'] = CITY + '/city/' + CITY_SLUG
     existing['sources'] = [{'id': key, 'name': VENUES[key],
-        'url': CITY + '/city/ashdod' if key == 'cinema-city' else HOT + '/theater/5',
+        'url': CITY + '/city/' + CITY_SLUG if key == 'cinema-city' else HOT + '/theater/5',
         'status': result['status'], 'checked_at': STAMP} for key,result in sources.items()]
     existing['refresh_policy'] = {'timezone': 'Asia/Jerusalem', 'schedule_utc': '15 5 * * *',
         'failure_behavior': 'retain previously verified metadata and schedules; expired dates are hidden',

@@ -1,7 +1,7 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
 (function(){
 'use strict';
-if(!/\/ashdod(?:\/|$)/.test(location.pathname))return;
+if(!/\/rishon-lezion(?:\/|$)/.test(location.pathname))return;
 const input=document.getElementById('searchInput'),submit=document.getElementById('searchSubmit'),clear=document.getElementById('clearSearch');
 if(!input||!submit||!window.Worker||!window.ISNET_SEARCH_CATALOG)return;
 const host=document.querySelector('.isnetNavDiscovery__search');
@@ -38,7 +38,7 @@ async function run(){
  busy=true;reset.disabled=true;if(clear)clear.disabled=true;lastQuery=raw;message(raw,true);status.textContent='מחפש בתיאורים, בתתי־הקטגוריות ובמועדים שבאתר…';
  try{
   await ensure();
-  if(/חוג|קורס/.test(raw)&&!payload.courses){coursesPromise=coursesPromise||json('/meusharim/ashdod/data/classes.json');payload.courses=(await coursesPromise).records||[];await initialize()}
+  if(false&&/חוג|קורס/.test(raw)&&!payload.courses){coursesPromise=coursesPromise||json('/meusharim/rishon-lezion/data/classes.json');payload.courses=(await coursesPromise).records||[];await initialize()}
   const query=expectAge&&/^(?:\d{1,2}|שנתיים|שלוש|ארבע|חמש|שש|שבע|שמונה|תשע|עשר)$/.test(raw)?'בן '+raw:raw;
   const now=new Date(),day=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(now),parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Jerusalem',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(now).split(':');
   const id=++sequence;const result=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>{jobs.delete(id);reject(Error('search timeout'))},10000);jobs.set(id,{resolve,reject,timer});worker.postMessage({kind:'search',id,query,context,day,nowMinutes:Number(parts[0])*60+Number(parts[1])})});

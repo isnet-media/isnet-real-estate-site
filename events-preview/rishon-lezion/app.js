@@ -1,7 +1,7 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
 // Ashdod GA4: public event metadata only; never transmit raw search text or URLs.
 (function () {
-  if (!/\/events-preview\/ashdod(?:\/|$)/.test(location.pathname) || window.ashdodAnalytics) return;
+  if (!/\/events-preview\/rishon-lezion(?:\/|$)/.test(location.pathname) || window.ashdodAnalytics) return;
   const id = "G-YEFDXMCHB1";
   let debug = new URLSearchParams(location.search).get("ga_debug") === "1";
   try { if (debug) sessionStorage.setItem("ashdod-ga-debug","1"); debug = debug || sessionStorage.getItem("ashdod-ga-debug") === "1"; } catch {}
@@ -262,10 +262,10 @@ function handleEventImageError(img){
   else img.remove();
 }
 const SPECIAL_EVENT_ART={
-  "הרצאה של יונתן סררו":"assets/special/y-serror-lecture.svg",
-  "סערה בדלי מים":"assets/special/storm-in-glass.svg",
-  "תשאירי פתוח":"assets/special/leave-open.svg",
-  "שירי קריוקי בקצב הדרבוקה":"assets/special/karaoke-darbuka.svg"
+  "הרצאה של יונתן סררו":"../ashdod/assets/special/y-serror-lecture.svg",
+  "סערה בדלי מים":"../ashdod/assets/special/storm-in-glass.svg",
+  "תשאירי פתוח":"../ashdod/assets/special/leave-open.svg",
+  "שירי קריוקי בקצב הדרבוקה":"../ashdod/assets/special/karaoke-darbuka.svg"
 };
 function specialEventArt(e){if(e?.source_content_authoritative)return "";return SPECIAL_EVENT_ART[String(e?.title||"").trim()]||""}
 
@@ -1169,7 +1169,7 @@ async function init(){
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
     fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
-    fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema HTTP "+r.status);return r.json()}).then(d=>{if(!Array.isArray(d.movies)||!d.movies.length)throw new Error("empty cinema");return d}).catch(()=>fetch("https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/events-preview/ashdod/data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema fallback HTTP "+r.status);return r.json()})).catch(()=>({movies:[]})),
+    fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema HTTP "+r.status);return r.json()}).then(d=>{if(!Array.isArray(d.movies)||!d.movies.length)throw new Error("empty cinema");return d}).catch(()=>fetch("https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/events-preview/rishon-lezion/data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema fallback HTTP "+r.status);return r.json()})).catch(()=>({movies:[]})),
     fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
     fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
     window.ISNET_PUBLIC_CMS?.publishedEvents?.("rishon-lezion")||Promise.resolve([])

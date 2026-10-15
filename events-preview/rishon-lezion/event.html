@@ -2,6 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <!-- ISNET shared layout: edit the Ashdod source; synced automatically -->
+  <!-- ISNET ASHDOD PILOT -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07162b">
@@ -15,7 +16,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Heebo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="event.css?v=5467d487341f">
-  <link rel="stylesheet" href="publisher-brand.css?v=5cdb1ab4ad1c">
+
+  <link rel="stylesheet" href="pilot/detail.css?v=20261013-source-offers1">
+<link rel="stylesheet" href="publisher-brand.css?v=5cdb1ab4ad1c">
+<link rel="stylesheet" href="isnet-site-menu.css?v=20261013-shared-sticky">
+<link rel="stylesheet" href="home-brand-header.css?v=20261013-all-pages1">
 </head>
 <body>
   <header class="siteTopbar" aria-label="ניווט ראשי">
@@ -24,8 +29,42 @@
         <img src="assets/branding/site-logo.png" width="195" height="107" alt="ראשון נט" decoding="async">
       </a>
       <a class="siteTopbar__brand siteTopbar__events" href="./" aria-label="לעמוד הראשי של מה עושים בראשון לציון" title="לעמוד הראשי של מה עושים בראשון לציון">
-        <img src="assets/branding/what-to-do-ashdod.svg" width="420" height="150" alt="מה עושים בראשון לציון" decoding="async">
+        <img src="assets/branding/what-to-do-rishon.svg" width="420" height="150" alt="מה עושים בראשון לציון" decoding="async">
       </a>
+      <nav class="isnetSiteMenu" aria-label="כל אזורי האתר">
+        <details>
+          <summary aria-label="פתיחת תפריט האתר"><span class="isnetHamburger" aria-hidden="true"><i></i><i></i><i></i></span><span>תפריט</span></summary>
+          <div class="isnetSiteMenu__panel">
+            <a class="isnetSiteMenu__home" href="./">עמוד הבית — כל האירועים ←</a>
+            <div class="isnetSiteMenu__heading">אירועים לפי קטגוריה</div>
+            <div class="isnetSiteMenu__links">
+              <a href="category.html?category=stage">הופעות ומוזיקה</a>
+              <a href="./?category=theatre">תיאטרון והצגות</a>
+              <a href="./?category=standup">סטנדאפ ובידור</a>
+              <a href="category.html?category=kids">ילדים ומשפחה</a>
+              <a href="cinema.html">קולנוע וסרטים</a>
+              <a href="category.html?category=lecture">הרצאות</a>
+              <a href="./?category=conference">כנסים ופאנלים</a>
+              <a href="category.html?category=sport">אירועי ספורט</a>
+              <a href="category.html?category=exhibition">תערוכות ואמנות</a>
+
+              <a href="category.html?category=community">קהילה ופנאי</a>
+              <a href="category.html?category=tour">טיולים וסיורים</a>
+              <a href="category.html?category=seniors">הגיל השלישי וגמלאים</a>
+              <a href="./?category=food">אוכל וקולינריה</a>
+            </div>
+            <div class="isnetSiteMenu__heading">מקומות קבועים בעיר</div>
+            <div class="isnetSiteMenu__links">
+              <a href="places.html?category=culture">מוסדות תרבות</a>
+              <a href="places.html?category=parks">פארקים</a>
+              <a href="places.html?category=beaches">חופים</a>
+              <a href="places.html?category=nature">טבע וטיולים</a>
+              <a href="places.html?category=attractions">אטרקציות</a>
+              <a href="places.html?category=must-see">מקומות שכדאי להכיר</a>
+            </div>
+          </div>
+        </details>
+      </nav>
     </div>
   </header>
 
@@ -76,12 +115,7 @@
           <div id="peopleGrid" class="peopleGrid"></div>
         </section>
 
-        <section id="relatedSection" class="relatedSection">
-          <div class="sectionHead">
-            <div><span class="kicker">עוד באותו כיוון</span><h2>אולי יעניין אתכם גם</h2></div>
-          </div>
-          <div id="relatedGrid" class="relatedGrid"></div>
-        </section>
+
       </article>
 
       <aside class="sideColumn">
@@ -97,6 +131,12 @@
         </section>
       </aside>
     </div>
+        <section id="relatedSection" class="shell relatedSection">
+          <div class="sectionHead">
+            <div><span class="kicker">עוד באותו כיוון</span><h2>אולי יעניין אתכם גם</h2></div>
+          </div>
+          <div id="relatedGrid" class="relatedGrid"></div>
+        </section>
   </main>
 
   <div id="loadingState" class="state shell">
@@ -117,7 +157,11 @@
     </div>
   </footer>
 
-  <script src="../shared/editorial-safety.js?v=20261010-1"></script>\n  <script src="../shared/public-cms.js?v=20261007-1600"></script>
-  <script src="event.js?v=62f844484076"></script>
+  <script src="../shared/editorial-safety.js?v=20261010-1"></script>
+  <script src="../shared/public-cms.js?v=20261007-1600"></script>
+  <script src="event-illustrations.js?v=20261013-photo-bank-complete2"></script>
+
+<script src="pilot/event.js?v=e0ad695cdb33"></script>
+<script src="shared-brand-header.js?v=20261013-all-pages1" defer></script>
 </body>
 </html>
