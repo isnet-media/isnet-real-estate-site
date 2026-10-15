@@ -112,3 +112,6 @@
 .seniorsPage .snResultBar{min-height:0;margin:0 0 8px;justify-content:flex-end}
 .seniorsPage .snResultBar:has(#snReset[hidden]){display:none}
 @media(max-width:700px){.seniorsPage .snActivityBar{padding:13px 12px;gap:12px}.seniorsPage .snActivityTitleGroup h2{font-size:22px}.seniorsPage .snFavoritesGroup{width:100%;max-width:none;gap:9px}.seniorsPage #snSaved{width:auto;flex-shrink:0}.seniorsPage .snFavoritesGroup .snSavedHint{font-size:13px}}
+
+/* Mobile RTL: place select chevrons on the right, next to their labels. */
+@media(max-width:650px){.seniorsPage .snMonthLabel select,.seniorsPage select{direction:rtl;text-align:right;text-align-last:right;background-position:right 12px center;padding-right:36px;padding-left:12px}}
