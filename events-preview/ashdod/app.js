@@ -1168,7 +1168,7 @@ async function init(){
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
     fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
-    fetch("data/cinema.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({movies:[]})),
+    fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema HTTP "+r.status);return r.json()}).then(d=>{if(!Array.isArray(d.movies)||!d.movies.length)throw new Error("empty cinema");return d}).catch(()=>fetch("https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/events-preview/ashdod/data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema fallback HTTP "+r.status);return r.json()})).catch(()=>({movies:[]})),
     fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
     fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
     window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod")||Promise.resolve([])
