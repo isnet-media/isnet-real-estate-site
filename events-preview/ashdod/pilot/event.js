@@ -553,7 +553,8 @@ async function init(){
     const original=requestedId
       ? originalAll.find(e=>e.event_id===requestedId)
       : originalAll.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug));
-    const base=(!requestedId&&all.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug)))
+    const canonical=original?.canonical_event_id&&all.find(e=>e.event_id===original.canonical_event_id);
+    const base=canonical||(!requestedId&&all.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug)))
       ||(original&&all.find(e=>e.event_id===original.event_id||e._source_event_ids?.includes(original.event_id)));
     if(!base)throw new Error("event");
     const canonicalSlug=eventSlug(base);

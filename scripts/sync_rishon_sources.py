@@ -154,9 +154,17 @@ def merge(events,new):
   if match:
    if match.get('source')=='mevalim_direct'and e.get('source')!='mevalim_direct':match['crosscheck_sources']=sorted(set(match.get('crosscheck_sources',[])+[e['content_source_url']]));duplicates+=1;continue
    preserved={k:match[k]for k in ['event_id','operator_id','operator_name','venue_institution_id','age_min','age_max','audiences','address']if match.get(k)is not None}
+   if match.get('content_locked') or match.get('description_manual_override'):
+    for field in ['title','category','subcategory','categories','description','long_description','series_description','editorial_description','short_pitch','content_source_url','detail_source_url','ticket_url','purchase_url','purchase_source','is_active','visibility_reason','canonical_event_id','duplicate_of']:
+     if field in match:preserved[field]=match[field]
+   if match.get('image_verified') and match.get('image_url'):
+    for field in ['image_url','image_origin_url','image_source','image_credit','image_strategy','image_verified','image_publishable','image_rights_status','thumbnail_url','thumbnail_ready']:
+     if field in match:preserved[field]=match[field]
    for field in ['description','series_description','image_url','image_origin_url']:
     if not e.get(field)and match.get(field):e[field]=match[field]
-   match.update(e);match.update(preserved);match.pop('thumbnail_url',None);match['thumbnail_ready']=False;updated+=1
+   match.update(e);match.update(preserved)
+   if not preserved.get('thumbnail_url'):match.pop('thumbnail_url',None);match['thumbnail_ready']=False
+   updated+=1
   else:out.append(e);added+=1
  return out,{'added':added,'updated':updated,'duplicates_merged':duplicates}
 

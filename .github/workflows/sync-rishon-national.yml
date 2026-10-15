@@ -9,6 +9,10 @@ on:
       - 'scripts/sync_rishon_sources.py'
       - 'scripts/refresh_rishon_cinema.py'
       - 'scripts/planet_rishon_source.py'
+      - 'scripts/rishon_editorial_sources.py'
+      - 'scripts/apply_rishon_editorial.py'
+      - 'scripts/finalize_rishon_quality.py'
+      - 'events-preview/rishon-lezion/data/editorial-programs.json'
       - '.github/workflows/sync-rishon-national.yml'
 permissions:
   contents: write
@@ -39,13 +43,20 @@ jobs:
           git fetch origin main
           git merge --ff-only origin/main
           python scripts/sync_rishon_sources.py --snapshot /tmp/rishon-source-snapshot.json
+      - name: Read exact official program details
+        run: python -u scripts/rishon_editorial_sources.py
+      - name: Apply source-bound editorial quality
+        run: |
+          python scripts/test_rishon_editorial.py
+          python -u scripts/apply_rishon_editorial.py
+          python scripts/finalize_rishon_quality.py
       - name: Refresh verified cinema sessions
         run: python -u scripts/refresh_rishon_cinema.py
       - name: Publish only Rishon data and source report
         run: |
           git config user.name isnet-events-bot
           git config user.email actions@users.noreply.github.com
-          git add events-preview/rishon-lezion/data/events.json events-preview/rishon-lezion/data/cinema.json events-preview/rishon-lezion/data/cinema-refresh-status.json events-preview/admin/data/rishon-source-report.json
+          git add events-preview/rishon-lezion/data/events.json events-preview/rishon-lezion/data/cinema.json events-preview/rishon-lezion/data/cinema-refresh-status.json events-preview/admin/data/rishon-source-report.json events-preview/admin/data/rishon-editorial-report.json events-preview/admin/data/rishon-readiness.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Refresh Rishon events and verified cinema schedules'
           git fetch origin main

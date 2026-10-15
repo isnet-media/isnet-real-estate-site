@@ -32,6 +32,9 @@ JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this genera
 
 
 def localize(content: str, name: str, city: dict, suffix: str) -> str:
+    # Ashdod's analytics bootstrap is also embedded in the app/event bundles.
+    # A city edition must not inherit another publisher's measurement stream.
+    content = re.sub(r'// Ashdod GA4: public event metadata only;[^\n]*\n\(function \(\) \{[\s\S]*?\n\}\)\(\);\n?', '', content, count=1)
     # The Ashdod courses partner link belongs only to the Ashdod edition.
     content = content.replace(
         "<a class=\"isnetNavSmall\" data-city-only=\"ashdod\" href=\"https://meusharim-ashdod-v1.ebs987449.chatgpt.site/\"><span aria-hidden=\"true\">▧</span><strong>חוגים והעשרה</strong></a>",
@@ -60,9 +63,20 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     if name == 'saturday.js':
         content = content.replace('../rishon-lezion/data/', '../ashdod/data/')
         content = content.replace("_guideCity:'ראשון לציון',_guideBase:'../rishon-lezion/'", "_guideCity:'ASHDOD_NEARBY',_guideBase:'../ashdod/'")
+        content = content.replace('אוכל בביג', 'אוכל במתחמי הבילוי')
+    if name in ('attractions.html','attraction.html'):
+        content = content.replace('new URL(x);', 'new URL(x,location.href);')
+        content = content.replace('kind:assignKind(x)', 'kind:x.kind||assignKind(x)')
+        content = content.replace('audiences:["kids","adults"]', 'audiences:x.audiences||["kids","adults"]')
+        content = content.replace('...normalizePlaces(places),', '...normalizePlaces(places).filter(x=>!(extra.verified_sources||[]).some(y=>y.id===x.id)),')
     if name == 'seniors-hub.js':
         content = content.replace('סדרת החיים הטובים ומופעים', 'תרבות, הצגות ומוזיקה בעיר')
-        content = content.replace('href=\"#senior-culture\"', 'href=\"category.html?category=stage\"')
+        for old,new in [('בוקר של תרבות במשכן','לגלות תרבות בראשון'),('סדרת החיים הטובים','מופעים ומפגשים קרובים'),('על הסדרה במשכן','ללוח לגלות תרבות'),('באתר המשכן','באתר המארגן')]:
+            content = content.replace(old,new)
+        content = content.replace("cultureCatalog.programs.find(p=>", "cultureCatalog.programs.find(p=>(p.event_ids||[]).includes(e.event_id)||")
+        content = content.replace("צילום: '+esc(p.image_credit)", "'+esc(p.image_credit)")
+        content = content.replace("e.category==='seniors'||adultLecture(e)", "e.category==='seniors'||e.audiences?.includes('seniors')||adultLecture(e)")
+        content = content.replace("return e.category==='lecture'?'senior-lectures':topics[e.subcategory]?e.subcategory:'other';", "return e.category==='lecture'?'senior-lectures':topics[e.subcategory]?e.subcategory:({tour:'senior-trips',workshop:'senior-workshops',music:'senior-music',theatre:'senior-culture',cinema:'senior-culture',community:'senior-social'}[e.category]||'other');")
         links = __import__('json').loads((ROOT / city['slug'] / 'data/senior-guide.json').read_text())['links']
         cards = '<section class=\"snExplore\"><div class=\"snSectionHead\"><h2>קהילה ותרבות לגמלאים בראשון לציון</h2></div><nav class=\"snExploreGrid\">' + ''.join('<a class=\"snExploreLink\" href=\"'+r['url']+'\" target=\"_blank\" rel=\"noopener\"><span><strong>'+r['title']+'</strong><small>'+r['description']+'</small></span><span aria-hidden=\"true\">↗</span></a>' for r in links) + '</nav></section>'
         content = content.replace('activities.after(discovery);', 'activities.after(discovery);discovery.insertAdjacentHTML(\"afterbegin\",'+__import__('json').dumps(cards,ensure_ascii=False)+');')
@@ -70,6 +84,9 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         guide = __import__('json').loads((ROOT / city['slug'] / 'data/family-guide.json').read_text())
         content = re.sub(r'(function familyGuide\(\)\{\s*const sources=)\[[\s\S]*?\n \];', lambda m:m[1]+__import__('json').dumps(guide['links'],ensure_ascii=False)+';', content)
         content = content.replace('מופע חנוכה לילדים ולמשפחות במשכן לאמנויות הבמה באשדוד.', 'מופע חנוכה לילדים ולמשפחות. פרטי האולם וההשתתפות בעמוד האירוע.')
+        content = content.replace("const ageText=age.length===2?", "const ageText=e.age_text?clean(e.age_text):age.length===2?")
+    if name in ('kids-hub.js','seniors-hub.js'):
+        content = content.replace('[e.source_description,e.description,e.series_description]', '[e.editorial_description,e.description,e.series_description,e.source_description]')
     if name == 'index.html':
         # Geography-specific photography must not be relabeled as another city.
         def local_discovery(m):

@@ -28,23 +28,23 @@ const normalizeCulture=s=>String(s||'').replace(/\s*-?\s*עונת המנויים
 function goodLifeProgram(e){
  if(!e)return null;
  const urls=[e.content_source_url,e.purchase_url,e.ticket_url,...(e.crosscheck_sources||[])].filter(Boolean).join(' ');
- return cultureCatalog.programs.find(p=>new RegExp('event(?:=|%3D)'+p.source_event+'(?:[^0-9]|$)').test(urls)||p.tickets.some(t=>new RegExp('(?:showURL=|/event/)'+t.seller_id+'(?:[^0-9]|$)').test(urls))||(normalizeCulture(e.title)===normalizeCulture(p.title)&&/משכן/.test(e.venue||'')&&e.start_date===p.date))||null;
+ return cultureCatalog.programs.find(p=>(p.event_ids||[]).includes(e.event_id)||new RegExp('event(?:=|%3D)'+p.source_event+'(?:[^0-9]|$)').test(urls)||p.tickets.some(t=>new RegExp('(?:showURL=|/event/)'+t.seller_id+'(?:[^0-9]|$)').test(urls))||(normalizeCulture(e.title)===normalizeCulture(p.title)&&/משכן/.test(e.venue||'')&&e.start_date===p.date))||null;
 }
 function cultureSection(rows){
  const programs=cultureCatalog.programs.map(p=>({p,events:rows.filter(e=>goodLifeProgram(e)?.id===p.id)})).filter(g=>g.events.length);
  if(!programs.length)return '';
- return '<section class="snCulture" id="senior-culture" aria-labelledby="snCultureTitle"><div class="snCultureHead"><div><span class="snCultureEyebrow">בוקר של תרבות במשכן</span><h2 id="snCultureTitle">סדרת החיים הטובים</h2><p>מוזיקה, סיפורים ומפגשים שמכניסים צבע לשגרה.<br>בחרו מופע ושעה שמתאימים לכם.</p></div><a class="snCultureSource" href="'+esc(safeUrl(cultureCatalog.source_url))+'" target="_blank" rel="noopener">על הסדרה במשכן ↗</a></div><div class="snCultureGrid">'+programs.map(({p,events})=>{
+ return '<section class="snCulture" id="senior-culture" aria-labelledby="snCultureTitle"><div class="snCultureHead"><div><span class="snCultureEyebrow">לגלות תרבות בראשון</span><h2 id="snCultureTitle">מופעים ומפגשים קרובים</h2><p>מוזיקה, סיפורים ומפגשים שמכניסים צבע לשגרה.<br>בחרו מופע ושעה שמתאימים לכם.</p></div><a class="snCultureSource" href="'+esc(safeUrl(cultureCatalog.source_url))+'" target="_blank" rel="noopener">ללוח לגלות תרבות ↗</a></div><div class="snCultureGrid">'+programs.map(({p,events})=>{
  const first=events.slice().sort((a,b)=>a.start_time.localeCompare(b.start_time))[0];
  const byTime=new Map();for(const e of events)if(!byTime.has(e.start_date+' '+e.start_time))byTime.set(e.start_date+' '+e.start_time,e);
- return '<article class="snCultureCard"><a class="snCultureMedia" href="'+esc(detail(first))+'" tabindex="-1" aria-hidden="true"><img src="'+esc(safeUrl(p.image_url))+'" alt="" loading="lazy" decoding="async"><span class="snCulturePhotoCredit">צילום: '+esc(p.image_credit)+'</span></a><div class="snCultureCopy"><h3><a href="'+esc(detail(first))+'">'+esc(p.title)+'</a></h3><p class="snCultureSummary">'+esc(p.description)+'</p><p class="snCultureDate">'+esc(date(first.start_date))+'</p><div class="snCultureTimes" aria-label="בחירת שעה למופע '+esc(p.title)+'">'+[...byTime.values()].sort((a,b)=>a.start_time.localeCompare(b.start_time)).map(e=>{
+ return '<article class="snCultureCard"><a class="snCultureMedia" href="'+esc(detail(first))+'" tabindex="-1" aria-hidden="true"><img src="'+esc(safeUrl(p.image_url))+'" alt="" loading="lazy" decoding="async"><span class="snCulturePhotoCredit">'+esc(p.image_credit)+'</span></a><div class="snCultureCopy"><h3><a href="'+esc(detail(first))+'">'+esc(p.title)+'</a></h3><p class="snCultureSummary">'+esc(p.description)+'</p><p class="snCultureDate">'+esc(date(first.start_date))+'</p><div class="snCultureTimes" aria-label="בחירת שעה למופע '+esc(p.title)+'">'+[...byTime.values()].sort((a,b)=>a.start_time.localeCompare(b.start_time)).map(e=>{
  const slot=p.tickets.find(t=>t.time===e.start_time);const booking=safeUrl(slot?.booking_url||e.purchase_url||p.source_url);
  return '<a href="'+esc(booking)+'" target="_blank" rel="noopener" aria-label="'+esc(p.title+' בשעה '+e.start_time+' — פרטים והזמנה')+'"><bdi>'+esc(e.start_time)+'</bdi><span>להזמנה ↗</span></a>';
  }).join('')+'</div><a class="snCultureDetails" href="'+esc(detail(first))+'">לפרטי המופע ←</a></div></article>';
- }).join('')+'</div><p class="snCultureHint">מחיר, זכאות למנוי וזמינות כרטיסים — באתר המשכן.</p></section>';
+ }).join('')+'</div><p class="snCultureHint">מחיר, זכאות למנוי וזמינות כרטיסים — באתר המארגן.</p></section>';
 }
 
 function visible(e,at=clock()){
- if(!e||!(e.category==='seniors'||adultLecture(e)||up60Activity(e)||goodLifeProgram(e))||e.is_active===false||['cancelled','canceled','inactive','hidden','draft','deleted'].includes(e.status)||['draft','hidden','unpublished','archived'].includes(e.publication_status))return false;
+ if(!e||!(e.category==='seniors'||e.audiences?.includes('seniors')||adultLecture(e)||up60Activity(e)||goodLifeProgram(e))||e.is_active===false||['cancelled','canceled','inactive','hidden','draft','deleted'].includes(e.status)||['draft','hidden','unpublished','archived'].includes(e.publication_status))return false;
  if(!/^\d{4}-\d{2}-\d{2}$/.test(e.start_date||''))return false;
  const until=e.end_date&&e.end_date>=e.start_date?e.end_date:e.start_date;
  if(until<at.day)return false;
@@ -62,7 +62,7 @@ function topic(e){
   if(/בריא|בריאות|זיכרון/.test(e.title||''))return 'senior-health';
   return topics[e.subcategory]?e.subcategory:'senior-workshops';
  }
- return e.category==='lecture'?'senior-lectures':topics[e.subcategory]?e.subcategory:'other';
+ return e.category==='lecture'?'senior-lectures':topics[e.subcategory]?e.subcategory:({tour:'senior-trips',workshop:'senior-workshops',music:'senior-music',theatre:'senior-culture',cinema:'senior-culture',community:'senior-social'}[e.category]||'other');
 }
 function matches(e,q){return !q||[title(e),e.title,e.venue,e.address,e.description,e.series_description,e.source_description,e.local_source_name==='ofek_ashdod'?'אופק':'',topics[topic(e)]].join(' ').toLocaleLowerCase('he').includes(q.toLocaleLowerCase('he'))}
 const date=s=>new Intl.DateTimeFormat('he-IL',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(s+'T12:00:00Z'));
@@ -79,7 +79,7 @@ function picture(e){
  return {url:bank[topic(e)]?'../shared/images/defaults/ashdod-seniors/'+bank[topic(e)]+'.webp':'',original:false};
 }
 function summary(e){
- const texts=[e.source_description,e.description,e.series_description].map(clean).map(t=>t.split('\n').filter(line=>!['עמוד הבית','>',e.title,'סדרת הערים המרתקות','ערים מרתקות'].includes(line.trim())).join(' ').trim());
+ const texts=[e.editorial_description,e.description,e.series_description,e.source_description].map(clean).map(t=>t.split('\n').filter(line=>!['עמוד הבית','>',e.title,'סדרת הערים המרתקות','ערים מרתקות'].includes(line.trim())).join(' ').trim());
  const text=texts.find(t=>t&&t!==e.title&&!/מועד האירוע:|שעה:|לא פורסמה|^לא נמצא תיאור$/.test(t));
  if(text)return text.replace(/<[^>]*>/g,'').replace(/\s+/g,' ').slice(0,170);
  if(topic(e)==='senior-trips')return 'טיול או סיור מודרך'+(e.local_source_name==='ofek_ashdod'?' במסגרת אופק':'')+'. פרטי המסלול וההשתתפות בעמוד הפעילות.';
@@ -120,7 +120,7 @@ async function init(){
   const activities=root.querySelector('#senior-activities'),discovery=root.querySelector('#senior-explore');
   activities.after(discovery);discovery.insertAdjacentHTML("afterbegin","<section class=\"snExplore\"><div class=\"snSectionHead\"><h2>קהילה ותרבות לגמלאים בראשון לציון</h2></div><nav class=\"snExploreGrid\"><a class=\"snExploreLink\" href=\"https://club.rishonlezion.muni.il/RishonLeZion_Club_Vatikim\" target=\"_blank\" rel=\"noopener\"><span><strong>מועדון ותיקים העירוני</strong><small>תוכניות, הטבות ופעילויות לתושבים הוותיקים</small></span><span aria-hidden=\"true\">↗</span></a><a class=\"snExploreLink\" href=\"https://htrl.co.il/third-calendar/\" target=\"_blank\" rel=\"noopener\"><span><strong>לגלות תרבות — היכל התרבות</strong><small>לוח מפגשי הבוקר וההרצאות למבוגרים</small></span><span aria-hidden=\"true\">↗</span></a><a class=\"snExploreLink\" href=\"https://www.kotar-rishon-lezion.org.il/events-category/eventsactivities/\" target=\"_blank\" rel=\"noopener\"><span><strong>כותר ראשון</strong><small>הרצאות, מפגשי ספרות ופעילויות הספריות</small></span><span aria-hidden=\"true\">↗</span></a><a class=\"snExploreLink\" href=\"https://club.rishonlezion.muni.il/rishonlezion/RishonLeZion_Community_Events\" target=\"_blank\" rel=\"noopener\"><span><strong>אירועי הקהילה העירוניים</strong><small>פעילויות קהילה ומפגשים ברחבי העיר</small></span><span aria-hidden=\"true\">↗</span></a></nav></section>");
   // Kids-hub layout: category tiles, one search/date toolbar, featured culture, then event listings.
-  root.querySelector('.snIntro').insertAdjacentHTML('afterend','<nav class="snWorldNav" aria-label="תחומי הפעילות לגמלאים"><a href="category.html?category=stage"><span aria-hidden="true">♫</span><strong>במה ומוזיקה</strong><small>תרבות, הצגות ומוזיקה בעיר</small></a><a href="#senior-activities" data-topic="senior-lectures"><span aria-hidden="true">◉</span><strong>הרצאות והעשרה</strong><small>תוכן, ידע וסקרנות</small></a><a href="#senior-activities" data-topic="senior-trips"><span aria-hidden="true">♧</span><strong>טיולים וסיורים</strong><small>מגלים מקומות ביחד</small></a><a href="#senior-activities" data-topic="senior-workshops"><span aria-hidden="true">✧</span><strong>סדנאות ויצירה</strong><small>פעילות מעשית וחווייתית</small></a></nav>');
+  root.querySelector('.snIntro').insertAdjacentHTML('afterend','<nav class="snWorldNav" aria-label="תחומי הפעילות לגמלאים"><a href="#senior-culture"><span aria-hidden="true">♫</span><strong>במה ומוזיקה</strong><small>תרבות, הצגות ומוזיקה בעיר</small></a><a href="#senior-activities" data-topic="senior-lectures"><span aria-hidden="true">◉</span><strong>הרצאות והעשרה</strong><small>תוכן, ידע וסקרנות</small></a><a href="#senior-activities" data-topic="senior-trips"><span aria-hidden="true">♧</span><strong>טיולים וסיורים</strong><small>מגלים מקומות ביחד</small></a><a href="#senior-activities" data-topic="senior-workshops"><span aria-hidden="true">✧</span><strong>סדנאות ויצירה</strong><small>פעילות מעשית וחווייתית</small></a></nav>');
   const toolbar=activities.querySelector('.snTools');
   root.querySelector('.snWorldNav').after(toolbar);
   toolbar.after(activities);

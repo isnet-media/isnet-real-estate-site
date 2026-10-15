@@ -15,7 +15,8 @@ import unicodedata
 from collections import Counter
 from difflib import SequenceMatcher
 from pathlib import Path
-from datetime import date
+from datetime import date, datetime, timedelta
+from zoneinfo import ZoneInfo
 from urllib.parse import quote, unquote, urljoin, urlparse
 
 import requests
@@ -32,6 +33,7 @@ PRODUCTIONS_INDEX = ROOT / "events-preview" / "media-bank" / "data" / "productio
 AGENTS = {"User-Agent": "Mozilla/5.0 (compatible; ISNET-EventsImageQA/1.0; editorial event listings)", "Accept-Language": "he-IL,he;q=0.9,en;q=0.8"}
 SITES = {
     "htrl": ["https://htrl.co.il/show/", "https://htrl.co.il/", "https://htrl.co.il/לוח-שנה/"],
+    "htrl_adults": ["https://htrl.co.il/third-calendar/"],
     "kotar_rishon": ["https://www.kotar-rishon-lezion.org.il/events-category/eventsactivities/"],
     "yama": ["https://yama.smarticket.co.il/"],
     "RIZONE+": ["https://club.rishonlezion.muni.il/"],
@@ -42,7 +44,7 @@ session = requests.Session()
 session.headers.update(AGENTS)
 cache = {}
 link_indexes = {}
-EVENT_HORIZON_MONTHS = 12
+EVENT_HORIZON_MONTHS = 5
 
 def add_months(d, months):
     import calendar
@@ -54,8 +56,8 @@ def add_months(d, months):
 
 def in_horizon(e):
     value = str(e.get("start_date") or "")
-    today = date.today()
-    return today.isoformat() <= value <= add_months(today, EVENT_HORIZON_MONTHS).isoformat()
+    today = datetime.now(ZoneInfo('Asia/Jerusalem')).date()
+    return e.get('is_active') is not False and today.isoformat() <= value <= (today+timedelta(days=153)).isoformat()
 
 
 def norm(value):
@@ -163,14 +165,14 @@ def possible_details(e):
             found.append((title_score(wanted, slug), url))
         slug = re.sub(r"\s+", "-", norm(wanted))
         found.append((.75, "https://htrl.co.il/show/" + quote(slug) + "/"))
-    for u in [e.get("ticket_url"), e.get("purchase_url")]:
+    for u in [e.get("detail_source_url"),e.get("ticket_url"), e.get("purchase_url")]:
         if not u or not u.startswith("https://"):
             continue
         # Treat only event-specific links as detail pages, never category/home pages.
         path = urlparse(u).path.strip("/")
-        if source == "htrl" and path.startswith("show/"):
+        if source in ("htrl","htrl_adults") and path.startswith(("show/","show-culture/")):
             found.append((1.0, u))
-        elif source in ("kotar_rishon", "yama", "RIZONE+", "Eventim") and len(path) > 35:
+        elif source in ("kotar_rishon", "yama", "RIZONE+", "Eventim") and (len(path) > 35 or re.fullmatch(r"event/\d+",path)):
             found.append((.82, u))
     found.sort(reverse=True)
     seen, chosen = set(), []
@@ -194,7 +196,7 @@ def image_candidates(doc, page_url, title):
         for m in doc.select('meta[property="' + prop + '"],meta[name="' + prop + '"]'):
             if m.get("content"):
                 out.append((110, urljoin(page_url, m["content"])))
-    main = doc.find("main") or doc.find("article") or doc.body
+    main = (doc.select_one("main > section") if "htrl.co.il" in page_url else None) or doc.find("main") or doc.find("article") or doc.body
     if main:
         for img in main.select("img"):
             label = (img.get("alt") or "") + " " + (img.get("title") or "")
@@ -209,7 +211,8 @@ def image_candidates(doc, page_url, title):
 def download_photo(url, origin):
     if not url.startswith("https://"):
         return None
-    if any(word in urlparse(url).path.lower().split("/")[-1] for word in GENERIC):
+    filename=unquote(urlparse(url).path).lower()
+    if any(word in filename for word in ["בית-יד-לבנים","כותר-אלון","בית-גורדון","גלריה-לאמנות"]) or any(word in filename.split("/")[-1] for word in GENERIC):
         return None
     try:
         session.headers["Referer"] = origin
@@ -278,6 +281,11 @@ def enrich():
     for ix, e in enumerate(events, 1):
         title = e.get("title", "")
         current = e.get("image_url") or ""
+        if e.get("image_strategy")=="approved_category_illustration" and current.startswith(("../ashdod/assets/illustrations/","../shared/images/defaults/")):
+            # Editorial fallback remains until the exact source-detail collector
+            # discovers an official image. Never relabel it as an event photo.
+            reasons["approved_category_illustration"] += 1
+            continue
         if e.get("image_strategy") == "official_event_poster" and current.startswith("assets/events/") and (SITE / current).is_file():
             found[e.get("event_id")] = current
             continue
@@ -420,7 +428,8 @@ def enrich():
     report = {
         "generated_at": doc["image_audit_generated_at"],
         "total_events": len(events),
-        "verified_event_photos": sum(1 for e in events if e.get("image_verified") is True and e.get("image_strategy") == "official_event_poster"),
+        "verified_event_photos": sum(1 for e in events if e.get("image_verified") is True and e.get("image_strategy") != "approved_category_illustration"),
+        "approved_illustrations": sum(e.get("image_strategy")=="approved_category_illustration" for e in events),
         "unverified_event_photos": sum(1 for e in events if e.get("image_verified") is not True),
         "breakdown": dict(reasons),
         "manual_review": failures,
