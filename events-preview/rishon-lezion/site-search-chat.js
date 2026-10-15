@@ -21,8 +21,8 @@ async function ensure(){
   const started=Date.now();while(!window.ISNET_SEARCH_CATALOG()?.events?.length){if(Date.now()-started>15000)throw Error('catalog unavailable');await new Promise(r=>setTimeout(r,200))}
   const base=window.ISNET_SEARCH_CATALOG();
   placesPromise=placesPromise||json('data/places.json').catch(()=>null);
-  const places=await placesPromise;payload={...base,places};
-  worker=new Worker('site-search-engine.js?v=20261015-1');worker.onerror=fail;
+  const [places,saturdayGuide]=await Promise.all([placesPromise,json('data/saturday-guide.json?v=20261015-1').catch(()=>null)]);payload={...base,places,saturdayGuide};
+  worker=new Worker('site-search-engine.js?v=20261015-saturday2');worker.onerror=fail;
   worker.onmessage=e=>{const data=e.data;if(data.kind==='ready'){const job=jobs.get('init');if(job){clearTimeout(job.timer);jobs.delete('init');job.resolve(data)}return}const job=jobs.get(data.id);if(!job)return;clearTimeout(job.timer);jobs.delete(data.id);if(data.kind==='error')job.reject(Error('search failed'));else job.resolve(data)};
   await initialize();if(!places)status.textContent='מידע על מקומות קבועים לא נטען; החיפוש זמין באירועים ובקולנוע.';
  })().catch(e=>{fail();throw e});return readyPromise;
@@ -33,6 +33,7 @@ const types={event:'אירוע',movie:'סרט',place:'מקום או אטרקצי
 function cards(items){const grid=document.createElement('div');grid.className='siteSearchChat__cards';for(const r of items){const card=document.createElement('article');card.className='siteSearchChat__card';const category=document.createElement('small');category.textContent=[types[r.type],r.category,r.subcategory].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).join(' · ');const h=document.createElement('h3');h.textContent=r.title;card.append(category,h);if(r.description){const p=document.createElement('p');p.textContent=r.description+(r.description.length>=240?'…':'');card.append(p)}const facts=document.createElement('p');facts.textContent=[r.venue,r.date?new Date(r.date+'T12:00:00').toLocaleDateString('he-IL'):null,r.time,r.price==null?'מחיר לא צוין':r.price===0?'חינם':'החל מ־'+r.price+' ₪'].filter(Boolean).join(' · ');card.append(facts);if(r.reasons.length){const why=document.createElement('small');why.textContent='התאמה לפי התוכן: '+r.reasons.join(' · ');card.append(why)}for(const note of r.notes){const n=document.createElement('small');n.textContent=note;card.append(n)}const a=document.createElement('a');a.href=r.href;a.textContent=r.type==='movie'?'לפרטי הסרט וההקרנות ←':r.type==='course'?'לפרטי החוג והרשמה ←':r.type==='place'?'לפרטי המקום ←':'לפרטי האירוע והזמנה ←';card.append(a);grid.append(card)}log.append(grid)}
 async function run(){
  const raw=input.value.trim().slice(0,500);if(!raw||busy)return;
+ if(/^(?:מה (?:לעשות|עושים|יש לעשות|אפשר לעשות)|מה פתוח|פתוח)\s+ב?שבת(?:\s+בראשון לציון)?[?!.]*$/.test(raw)){location.href='saturday.html'+(/בראשון לציון/.test(raw)?'?area=ashdod':'');return}
  panel.hidden=false;const feedback=document.getElementById('searchFeedback');if(feedback)feedback.hidden=true;
  busy=true;reset.disabled=true;if(clear)clear.disabled=true;lastQuery=raw;message(raw,true);status.textContent='מחפש בתיאורים, בתתי־הקטגוריות ובמועדים שבאתר…';
  try{
@@ -58,3 +59,4 @@ submit.addEventListener('click',e=>{if(!enabled())return;e.preventDefault();e.st
 function newSearch(){context=null;expectAge=false;lastQuery='';log.replaceChildren();panel.hidden=true;input.value='';input.placeholder='כתוב בצורה חופשית, מה אתה מחפש';status.textContent='';input.focus()}
 reset.onclick=newSearch;clear?.addEventListener('click',e=>{if(!enabled())return;e.stopImmediatePropagation();newSearch()},true);
 })();
+
