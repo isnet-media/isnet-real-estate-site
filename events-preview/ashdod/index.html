@@ -81,6 +81,7 @@
 .isnetNavDiscovery__search .searchBox__clear{color:#344b65!important;flex-shrink:0}
 @media(max-width:600px){.isnetNavDiscovery__search{padding:12px!important;margin-top:20px!important}.freeSearchLabel{font-size:16px;margin-bottom:8px}.isnetNavDiscovery__search .searchBox{padding:5px!important;gap:5px!important}.isnetNavDiscovery__search .searchBox input{font-size:14px!important;min-height:52px;padding-inline:0!important}.isnetNavDiscovery__search .searchBox__submit{width:32px!important;height:38px!important;min-width:32px!important}.isnetNavDiscovery__search .searchBox__clear{width:24px!important;min-width:24px!important;padding:0!important}}
 </style>
+<style id="saturday-entrypoint">.isnetNavSmall.saturdayCategory{border-color:#d8b878!important;background:linear-gradient(135deg,#51412c,#29272a)!important;color:#ffe1a7!important}.saturdayShortcut{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border:1px solid #d8b878;border-radius:22px;background:#3c3428;color:#ffe1a7;text-decoration:none;font:700 14px Heebo,Arial,sans-serif;white-space:nowrap}</style>
 </head>
 <body>
   <script>if(location.hash==="#cinema")document.body.classList.add("cinemaMode");</script>
@@ -171,6 +172,7 @@
     <a class="isnetNavFeature isnetNavFeature--blue" href="cinema.html"><span class="isnetNavFeature__icon" aria-hidden="true">▣</span><span class="isnetNavFeature__copy"><strong>קולנוע</strong><small>כל הסרטים בעיר</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>
     <a class="isnetNavFeature isnetNavFeature--green" href="category.html?category=seniors"><span class="isnetNavFeature__icon" aria-hidden="true">♧</span><span class="isnetNavFeature__copy"><strong>גימלאים</strong><small>הרצאות, סיורים ופעילויות</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>
   </nav><nav class="isnetNavDiscovery__secondary" aria-label="קטגוריות נוספות">
+    <a class="isnetNavSmall saturdayCategory" data-city-only="ashdod" href="saturday.html"><span aria-hidden="true">☀</span><strong>פתוח בשבת</strong></a>
     <a class="isnetNavSmall" href="category.html?category=lecture"><span aria-hidden="true">◉</span><strong>הרצאות</strong></a>
 
     <a class="isnetNavSmall" data-city-only="ashdod" href="https://meusharim-ashdod-v1.ebs987449.chatgpt.site/"><span aria-hidden="true">▧</span><strong>חוגים והעשרה</strong></a>
@@ -186,6 +188,7 @@
         </div>
         <div id="searchFeedback" class="searchFeedback" role="status" aria-live="polite" hidden></div>
         <div id="quickFilters" class="quickFilters">
+          <a class="saturdayShortcut" data-city-only="ashdod" href="saturday.html">מה עושים בשבת? ←</a>
           <button data-quick="all" class="is-active">הכול</button>
           <button data-quick="today">היום</button>
           <button data-quick="tomorrow">מחר</button>
@@ -402,6 +405,6 @@
   <script defer src="home-date-gateway.js?v=20261012-1"></script>
   <script defer src="pilot/rails.js?v=20261011-pilot6"></script>
 <script src="shared-brand-header.js?v=20261013-all-pages1" defer></script>
-<script defer src="site-search-chat.js?v=20261015-1"></script>
+<script defer src="site-search-chat.js?v=20261015-saturday2"></script>
 </body>
 </html>
