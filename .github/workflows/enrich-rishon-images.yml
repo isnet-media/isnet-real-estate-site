@@ -54,4 +54,21 @@ jobs:
             exit 0
           fi
           git commit -m "Add verified Rishon LeZion event photos and image audit"
-          git push
+          for retry in 1 2 3 4; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              # Recompute image choices on the newest events rather than
+              # replacing concurrent event/source edits with an old snapshot.
+              git rebase --abort
+              git reset --hard origin/main
+              python -u scripts/enrich_rishon_event_images.py
+              python scripts/reuse_media_bank_images.py --city rishon-lezion
+              git add events-preview/rishon-lezion/data/events.json events-preview/rishon-lezion/data/image-audit.json events-preview/rishon-lezion/assets/events/
+              if git diff --cached --quiet; then exit 0; fi
+              git commit -m "Verify Rishon event photos against latest event data"
+              continue
+            fi
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          echo "Image verification finished but could not publish after retries" >&2
+          exit 1

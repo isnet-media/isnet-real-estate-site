@@ -398,9 +398,9 @@ def merge(existing, sources):
                 venue = {'id': venue_id, 'name': VENUES[venue_id], 'schedule': {}, 'sessions': []}
                 movie['venues'].append(venue)
             venue['article_url'] = row['source_url']
-            venue['schedule_source_url'] = CITY + '/city/' + CITY_SLUG if venue_id == 'cinema-city' else HOT + '/theater/5'
+            venue['schedule_source_url'] = row.get('schedule_source_url') or (CITY + '/city/' + CITY_SLUG if venue_id == 'cinema-city' else HOT + '/theater/5')
             venue['schedule_verified_at'] = STAMP
-            venue['source_branch_id'] = 1181 if venue_id == 'cinema-city' else 5
+            venue['source_branch_id'] = row.get('source_branch_id') or (1181 if venue_id == 'cinema-city' else 5)
             for day, times in row['schedule'].items():
                 venue['schedule'][day] = sorted(set(venue['schedule'].get(day, [])) | set(times))
             venue['sessions'].extend(row['sessions'])
@@ -409,7 +409,7 @@ def merge(existing, sources):
     existing['source_name'] = 'סינמה סיטי ו־HOT Cinema — הקרנות מאומתות באשדוד'
     existing['source_url'] = CITY + '/city/' + CITY_SLUG
     existing['sources'] = [{'id': key, 'name': VENUES[key],
-        'url': CITY + '/city/' + CITY_SLUG if key == 'cinema-city' else HOT + '/theater/5',
+        'url': result.get('source_url') or (CITY + '/city/' + CITY_SLUG if key == 'cinema-city' else HOT + '/theater/5'),
         'status': result['status'], 'checked_at': STAMP} for key,result in sources.items()]
     existing['refresh_policy'] = {'timezone': 'Asia/Jerusalem', 'schedule_utc': '15 5 * * *',
         'failure_behavior': 'retain previously verified metadata and schedules; expired dates are hidden',
