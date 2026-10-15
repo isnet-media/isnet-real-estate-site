@@ -118,3 +118,21 @@ body{background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased
 
 /* Lead story is a wide editorial card; avoid an empty column beside shorter stories. */
 @media(min-width:1001px){.original-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.original-card:first-child{grid-column:1/-1;grid-row:auto;display:grid;grid-template-columns:1.1fr 1fr}.original-card:first-child img{aspect-ratio:16/9;height:100%;max-height:360px}.original-card:first-child .original-copy{padding:28px}.original-card:not(:first-child) .original-copy{padding:18px}.original-card:not(:first-child) h3{font-size:20px}}
+
+/* Mobile newsroom: neutralize the older two-column card rule at its specificity. */
+@media(max-width:1000px){
+.sport-home .original-news{width:100%;max-width:100%;min-width:0}
+.sport-home .original-heading{max-width:100%;align-items:flex-start;flex-direction:column}
+.sport-home .original-heading h2{font-size:25px;line-height:1.3;overflow-wrap:break-word}
+.sport-home .original-pilot{white-space:normal;font-size:12px}
+.sport-home .news-rail-controls{display:flex}
+.sport-home .original-grid{display:flex!important;grid-template-columns:none;align-items:flex-start;gap:14px;width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:3px 2px 16px}
+.sport-home .original-grid>.original-card,.sport-home .original-grid>.original-card:first-child{display:flex;flex-direction:column;flex:0 0 86%;width:86%;max-width:430px;min-width:0;height:auto!important;min-height:0;grid-column:auto;grid-row:auto;align-self:flex-start;scroll-snap-align:start;padding:0}
+.sport-home .original-card>a{width:100%;flex:none;display:block}
+.sport-home .original-card img,.sport-home .original-card:first-child img{width:100%;height:auto;aspect-ratio:16/10;max-height:none;object-fit:cover;border-radius:0;display:block}
+.sport-home .original-card .original-copy{display:block;width:100%;min-width:0;padding:18px}
+.sport-home .original-card .original-copy h3,.sport-home .original-card:first-child .original-copy h3{font-size:22px;line-height:1.4;margin:10px 0 12px;letter-spacing:-.3px;word-break:normal;overflow-wrap:break-word}
+.sport-home .original-card .original-copy p{font-size:16px;line-height:1.7;margin:0 0 16px;color:#59616e}
+.sport-home .original-card .original-category{font-size:12px;line-height:1.5}
+.sport-home .original-card .original-read{font-size:14px;min-height:44px;display:flex;align-items:center}
+}
