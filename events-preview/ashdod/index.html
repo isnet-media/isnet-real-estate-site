@@ -69,6 +69,18 @@
   <link rel="stylesheet" href="home-brand-header.css?v=20261013-all-pages1">
   <link rel="stylesheet" href="home-category-heading.css?v=20261013-inline-count1">
 <link rel="stylesheet" href="home-city-discover.css?v=20261013-discover1">
+
+<style id="free-search-emphasis">
+.isnetNavDiscovery__search{padding:18px!important;border:1px solid #b9914d!important;border-radius:20px;background:linear-gradient(135deg,#27272d,#191a20);box-shadow:0 8px 26px #0002}
+.freeSearchLabel{display:block;text-align:right;margin:0 2px 10px;color:#f1d29a;font:700 18px/1.5 Heebo,Arial,sans-serif}
+.isnetNavDiscovery__search .searchBox{border:2px solid #d1b275!important;background:#fffdf8!important;box-shadow:none!important;border-radius:14px!important}
+.isnetNavDiscovery__search .searchBox input{color:#1c2d43!important;font-size:18px!important;font-weight:600;min-height:56px}
+.isnetNavDiscovery__search .searchBox input::placeholder{color:#46566b!important;opacity:1;font-weight:500}
+.isnetNavDiscovery__search .searchBox:focus-within{outline:3px solid #e4bf79;outline-offset:4px;transform:none}
+.isnetNavDiscovery__search .searchBox__submit{background:#203b59!important;color:#fff!important;border:0;flex-shrink:0}
+.isnetNavDiscovery__search .searchBox__clear{color:#344b65!important;flex-shrink:0}
+@media(max-width:600px){.isnetNavDiscovery__search{padding:12px!important;margin-top:20px!important}.freeSearchLabel{font-size:16px;margin-bottom:8px}.isnetNavDiscovery__search .searchBox{padding:5px!important;gap:5px!important}.isnetNavDiscovery__search .searchBox input{font-size:14px!important;min-height:52px;padding-inline:0!important}.isnetNavDiscovery__search .searchBox__submit{width:32px!important;height:38px!important;min-width:32px!important}.isnetNavDiscovery__search .searchBox__clear{width:24px!important;min-width:24px!important;padding:0!important}}
+</style>
 </head>
 <body>
   <script>if(location.hash==="#cinema")document.body.classList.add("cinemaMode");</script>
@@ -166,9 +178,10 @@
 
   </nav>
     <div class="isnetNavDiscovery__search" aria-label="חיפוש חופשי של בילויים בעיר">
+        <label class="freeSearchLabel" for="searchInput">חיפוש חופשי של בילויים ואירועים</label>
         <div class="searchBox">
           <button id="searchSubmit" class="searchBox__icon searchBox__submit" type="button" aria-label="חפשו אירועים" title="חפשו אירועים">⌕</button>
-          <input id="searchInput" type="search" autocomplete="off" enterkeyhint="search" aria-label="חיפוש אירועים" placeholder="ספרו מה מתחשק לכם: משהו מצחיק הערב, בילוי עם הילדים בשבת...">
+          <input id="searchInput" type="search" autocomplete="off" enterkeyhint="search" aria-label="כתוב בצורה חופשית, מה אתה מחפש" placeholder="כתוב בצורה חופשית, מה אתה מחפש">
           <button id="clearSearch" class="searchBox__clear" type="button" aria-label="נקה חיפוש">×</button>
         </div>
         <div id="searchFeedback" class="searchFeedback" role="status" aria-live="polite" hidden></div>
