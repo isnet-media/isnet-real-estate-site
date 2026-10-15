@@ -1,0 +1,13 @@
+const assert=require('assert/strict'),fs=require('fs'),{performance}=require('perf_hooks'),E=require('../events-preview/ashdod/site-search-engine.js');
+const fixture={events:[{event_id:'kids',title:'הצגת ילדים מצחיקה',description:'קומדיה לכל המשפחה',category:'kids',subcategory:'kids-theatre',start_date:'2026-10-17',start_time:'16:00',age_min:3,age_max:8,price_min_ils:50},{event_id:'adult',title:'סטנדאפ למבוגרים',category:'standup',start_date:'2026-10-17',start_time:'20:00',age_min:18,price_min_ils:90},{event_id:'old',title:'הצגת ילדים',category:'kids',start_date:'2020-01-01'},{event_id:'unknown',title:'הרצאה',category:'lecture',start_date:'2026-10-17'}],movies:[{id:'movie',title:'סרט ילדים מצחיק',synopsis:'קומדיה לכל המשפחה',genres:['קומדיה'],is_family:true,age_rating:'מותר לכל',venues:[{name:'סינמה סיטי',schedule:{'2026-10-17':['14:00','17:00'],'2020-01-01':['12:00']}}]}],taxonomy:[{id:'kids',label:'ילדים',subcategories:[{id:'kids-theatre',label:'הצגות ילדים'}]}],places:{categories:{parks:{title:'פארקים',items:[{id:'p',name:'פארק אשדוד ים',description:'מקום למשפחות',tags:['families']} ]}}}};
+const docs=E.create(fixture);const run=(q,prev)=>E.search(docs,E.parse(q,prev),'2026-10-15',13*60);
+let r=run('סרט מצחיק לילדים בשבת');assert.equal(r.results[0].id,'m:movie');assert.equal(r.results[0].date,'2026-10-17');assert.equal(r.results[0].href,'movie.html?id=movie');
+r=run('אחרי 16:00',r.context);assert.equal(r.results[0].time,'17:00');assert.equal(r.context.type,'movie');
+r=run('עם הילד בן ארבע בשבת');assert(!r.results.some(x=>x.id==='e:adult'));assert.equal(r.context.age,4);
+r=run('סטנדפ');assert.equal(r.results[0].id,'e:adult');
+r=run('סרטים עד 50 שקל');assert.equal(r.count,0); // Unknown price never becomes free.
+assert.equal(run('גכעכטלמ').count,0);
+assert.equal(run('פארק בשבת').count,0); // No invented opening schedule.
+assert.equal(run('הצגת ילדים',null).results[0].subcategory,'הצגות ילדים');
+
+console.log('PASS: unified search constraints and grounded routing');
