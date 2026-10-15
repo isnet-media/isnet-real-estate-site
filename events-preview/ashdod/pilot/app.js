@@ -1436,5 +1436,6 @@ async function init(){
     }
   });
 }
+window.ISNET_SEARCH_CATALOG=()=>({events:state.events,movies:state.cinema,taxonomy:window.publicTaxonomy||[]});
 init().catch(err=>{console.error(err);if(document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
 
