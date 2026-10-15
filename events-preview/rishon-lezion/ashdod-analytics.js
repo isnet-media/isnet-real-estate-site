@@ -7,6 +7,10 @@
   try { if (debug) sessionStorage.setItem("ashdod-ga-debug","1"); debug = debug || sessionStorage.getItem("ashdod-ga-debug") === "1"; } catch {}
 
   const cleanUrl = value => { try { const u = new URL(value); return u.origin + u.pathname; } catch { return ""; } };
+  const categoryNames={stage:"הופעות במה",kids:"ילדים ומשפחה",seniors:"גמלאים",lecture:"הרצאות",sport:"אירועי ספורט",exhibition:"תערוכות",music:"מוזיקה",theatre:"הצגות",standup:"סטנדאפ",cinema:"קולנוע",community:"קהילה",food:"קולינריה ואוכל",tour:"טיולים",workshop:"סדנאות"};
+  const pageUrl=new URL(location.href),category=pageUrl.pathname.endsWith("/category.html")?pageUrl.searchParams.get("category"):pageUrl.hash==="#cinema"?"cinema":null;
+  const measuredLocation=cleanUrl(location.href)+(categoryNames[category]?(pageUrl.pathname.endsWith("/category.html")?"?category="+encodeURIComponent(category):"#cinema"):"");
+  const pageTitle=categoryNames[category]?categoryNames[category]+" | מה עושים בראשון לציון":document.title;
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
   if (!window.__ashdodGa4Initialized) {
@@ -17,7 +21,7 @@
       document.head.appendChild(tag);
       window.gtag("js", new Date());
     }
-    window.gtag("config", id, {page_location:cleanUrl(location.href), page_referrer:cleanUrl(document.referrer), content_group:"events_ashdod", ...(debug ? {debug_mode:true} : {})});
+    window.gtag("config", id, {page_location:measuredLocation, page_title:pageTitle, page_referrer:cleanUrl(document.referrer), content_group:"events_ashdod", ...(debug ? {debug_mode:true} : {})});
   }
   const vocabulary = new Set("לאן לצאת מה עושים עם הילדים ילדים ילד ילדה משפחה משפחות היום מחר השבוע סוף שבוע סופש בסופש חינם זול הופעות הופעה מוזיקה מוסיקה סטנדאפ תיאטרון הצגות הצגה קולנוע סרט סרטים הרצאות הרצאה סדנאות סדנה יצירה אמנות אומנות תערוכות תערוכה פסטיבל פסטיבלים קהילה ספורט כדורגל כדורסל כדוריד כדורעף גלישה טיולים טבע פארקים פארק חופים חוף ים ראשון לציון בראשון לציון מבוגרים למבוגרים גמלאים גמלאי גיל השלישי אזרחים ותיקים זוג זוגות ערב בוקר צהריים בילוי בילויים לנוער נוער לילדים קטנים קטנות".split(" "));
   const safeSearch = value => {
