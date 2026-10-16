@@ -101,18 +101,23 @@ function isBlockedPurchaseUrl(url){
     return host==="live.tickchak.co.il"||host==="tickchak.co.il"||host.endsWith(".tickchak.co.il");
   }catch{return true}
 }
+let purchaseHealth={results:{}};
+function isBrokenPurchaseUrl(url){
+  const result=purchaseHealth.results?.[url],age=Date.now()-Date.parse(result?.checked_at||'');
+  return result?.state==='broken'&&Number.isFinite(age)&&age>=0&&age<7*86400000;
+}
 function purchaseAction(e){
   if(["cancelled","canceled","postponed"].includes(e.status))return null;
   if(!isUpcoming(e))return null;
   const url=String(e.purchase_url||"").trim();
-  if(/^https:\/\//i.test(url)&&(e.source_content_authoritative||!isBlockedPurchaseUrl(url))){
+  if(!isBrokenPurchaseUrl(url)&&/^https:\/\//i.test(url)&&(e.source_content_authoritative||!isBlockedPurchaseUrl(url))){
     return {href:url,label:e.ticket_status==="sold_out"?"פרטי הרכישה":"לרכישת כרטיסים",kind:"url",soldOut:e.ticket_status==="sold_out"};
   }
   if(e.ticket_status==="sold_out")return null;
   const phone=String(e.purchase_phone||e.contact_phone||e.venue_phone||"").trim().replace(/[^0-9+]/g,"");
   if(phone)return {href:"tel:"+phone,label:"טלפון לבירורים",kind:"phone"};
   const source=String(e.venue_website||e.ticket_url||"").trim();
-  if(/^https:\/\//i.test(source))return {href:source,label:e.venue_website?"לאתר המארגן":"לעמוד האירוע",kind:"url"};
+  if(!isBrokenPurchaseUrl(source)&&/^https:\/\//i.test(source))return {href:source,label:e.venue_website?"לאתר המארגן":"לעמוד האירוע",kind:"url"};
   return null;
 }
 function groupPurchaseAction(occ){
@@ -496,13 +501,15 @@ async function init(){
     const requestedId=params.get("id");
     const requestedSlug=params.get("slug");
     if(!requestedId&&!requestedSlug)throw new Error("missing event key");
-    const [data,sports,editorial,artistVideos,publishedCmsRows]=await Promise.all([
+    const [data,sports,editorial,artistVideos,publishedCmsRows,linkHealth]=await Promise.all([
       (window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()})),
       fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
       fetch("data/editorial.json",{cache:"no-store"}).then(r=>r.ok?r.json():{events:{}}).catch(()=>({events:{}})),
       fetch("../shared/standup-videos.json",{cache:"no-store"}).then(r=>r.ok?r.json():{artists:[]}).catch(()=>({artists:[]})),
-      window.ISNET_PUBLIC_CMS?.publishedEvents?.(location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"ashdod")||Promise.resolve([])
+      window.ISNET_PUBLIC_CMS?.publishedEvents?.(location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"ashdod")||Promise.resolve([]),
+      fetch("../shared/purchase-link-health.json",{cache:"no-cache"}).then(r=>r.ok?r.json():{results:{}}).catch(()=>({results:{}}))
     ]);
+    purchaseHealth=linkHealth||{results:{}};
     sportsMeta=sports||{branches:{},teams:[]};
     const editorialById=editorial?.events||{};
     // Reuse a verified artist clip automatically across cities and future performances.

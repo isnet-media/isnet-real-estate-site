@@ -89,7 +89,7 @@
 .saturdayHomepageFeature .isnetNavFeature__copy small{font-size:13px!important;line-height:1.5!important;color:#d5cec2!important}
 .saturdayHomepageFeature .isnetNavFeature__arrow{display:grid!important;font-size:20px;color:#e2c080}
 @media(max-width:650px){.saturdayHomepageFeature{padding:12px 14px!important;gap:10px!important;min-height:76px}.saturdayHomepageFeature .isnetNavFeature__icon{width:32px!important;height:32px!important;flex:0 0 32px!important;font-size:20px!important}.saturdayHomepageFeature .isnetNavFeature__copy strong{font-size:18px!important}.saturdayHomepageFeature .isnetNavFeature__copy small{font-size:12px!important}.saturdayHomepageFeature .isnetNavFeature__arrow{width:26px;height:26px;flex:0 0 26px}}
-</style><script src="ashdod-analytics.js?v=20261015-ga-complete1"></script></head>
+</style><script src="ashdod-analytics.js?v=20261015-ga-complete1"></script><style>.savedListActions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0 20px}.savedListActions button{font:700 15px Assistant,sans-serif;padding:10px 15px;border:1px solid #66606a;border-radius:12px;background:#252630;color:#f3dfb4;cursor:pointer}.savedListActions button[aria-pressed="true"]{background:#5b4323}.savedListActions span{flex-basis:100%;font-size:14px;line-height:1.5;color:#ddd}.savedListActions [hidden]{display:none!important}</style></head>
 <body>
   <script>if(location.hash==="#cinema")document.body.classList.add("cinemaMode");</script>
   <header class="siteTopbar isnetBrandHeader" aria-label="ניווט ראשי">
@@ -121,7 +121,7 @@
 
 
               <a href="category.html?category=seniors">הגיל השלישי וגמלאים</a>
-              
+
             </div>
             <div class="isnetSiteMenu__heading">מקומות קבועים בעיר</div>
             <div class="isnetSiteMenu__links">
@@ -303,6 +303,12 @@
       </div>
     </section>
 
+    <nav class="savedListActions" aria-label="המועדפים שלי ושיתוף רשימה">
+      <button id="favoritesOnly" class="pillAction" aria-pressed="false">♡ המועדפים שלי</button>
+      <button id="shareFavorites" class="pillAction" type="button">שיתוף המועדפים</button>
+      <button id="savedListReset" class="pillAction" type="button" hidden>חזרה לכל האירועים</button>
+      <span id="savedListStatus" role="status"></span>
+    </nav>
     <section class="section results">
       <div class="isnetCompactToolbar">
       <div class="resultsTop">
@@ -313,8 +319,7 @@
           <p id="resultCount" class="muted"></p>
         </div>
         <div class="resultsActions">
-          <button id="shareFavorites" class="pillAction" type="button">שיתוף המועדפים</button><span id="savedListStatus" role="status"></span>
-          <button id="favoritesOnly" class="pillAction" aria-pressed="false">♡ המועדפים שלי</button>
+
           <select id="sortSelect" class="sortSelect" aria-label="מיון אירועים">
             <option value="date">הקרובים ביותר</option>
             <option value="priceLow">מחיר נמוך</option>
@@ -386,7 +391,7 @@
   <script src="event-illustrations.js?v=20261013-photo-bank-complete2" defer></script>
 <script src="ashdod-event-identities.js?v=20261013-comedy1" defer></script>
 <script src="../shared/saved-list.js?v=20261016-1"></script>
-<script src="pilot/app.js?v=db1b856a762b" defer></script>
+<script src="pilot/app.js?v=0b176ddac675" defer></script>
 
 <script>
 document.addEventListener("DOMContentLoaded",async function(){

@@ -58,6 +58,11 @@ def build(with_cms=False):
     day=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat()
     sitemap=Element('urlset',xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
     urls=set()
+    audit_path=ROOT/'events-preview/admin/data/purchase-link-audit.json'
+    audit=json.loads(audit_path.read_text()) if audit_path.exists() else {}
+    broken={url:row for url,row in audit.get('results',{}).items() if row.get('state')=='broken'}
+    (ROOT/'events-preview/shared/purchase-link-health.json').write_text(json.dumps({'generated_at':audit.get('generated_at'),'results':broken},ensure_ascii=False,separators=(',',':')))
+
     for city in CITIES:
         folder=ROOT/'events-preview'/city
         original=(folder/'data/events.json').read_bytes();data=json.loads(original)

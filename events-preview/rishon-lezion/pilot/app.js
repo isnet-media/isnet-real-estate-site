@@ -1105,6 +1105,7 @@ function renderResults(){
 }
 function render(){
   document.querySelectorAll("#quickFilters button").forEach(b=>b.classList.toggle("is-active",b.dataset.quick===state.quick));
+  $("savedListReset").hidden=!(sharedSaved||state.favoritesOnly);
   $("favoritesOnly").setAttribute("aria-pressed",state.favoritesOnly?"true":"false");
   renderDates();renderCategories();renderSubcategories();renderHeroStats();renderSportsFilters();renderActiveFilters();renderResults();
   bindDynamic();
@@ -1373,6 +1374,7 @@ async function init(){
     requestAnimationFrame(()=>$("eventsGrid")?.scrollIntoView({behavior:"smooth",block:"start"}));
   };
 
+  $("savedListReset").onclick=resetAll;
   $("shareFavorites").onclick=async()=>{
     const ids=state.events.filter(e=>favorites.has(e.event_id)).map(e=>e.event_id),notice=$("savedListStatus");
     if(!ids.length){notice.textContent="שמרו אירועים במועדפים כדי לשתף רשימה.";return;}

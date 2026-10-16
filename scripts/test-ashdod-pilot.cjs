@@ -60,3 +60,10 @@ assert.equal(ctx.eventSemanticScore(event('senior festival','2099-10-12',{catego
 assert.equal(ctx.eventSemanticScore(event('adult age limit','2099-10-12',{category:'theatre',short_pitch:'מופע לכל המשפחה',age_min:18}),familyIntent),null,'verified adult age limit takes precedence');
 assert(ctx.eventSemanticScore(event('family theatre','2099-10-12',{category:'theatre',short_pitch:'הצגה להורים ולילדים'}),familyIntent)>0,'family theatre remains discoverable');
 console.log('PASS: family search excludes adult shows, childhood biographies and senior-only events');
+
+vm.runInContext('purchaseHealth={results:{"https://tickets.example/event":{state:"broken",checked_at:new Date().toISOString()}}}',ctx);
+assert.equal(ctx.purchaseAction(event('broken','2099-01-01',{purchase_url:'https://tickets.example/event'})),null);
+assert.equal(ctx.purchaseAction(event('broken','2099-01-01',{purchase_url:'https://tickets.example/event',contact_phone:'08-1234567'})).kind,'phone');
+vm.runInContext('purchaseHealth={results:{"https://tickets.example/event":{state:"broken",checked_at:"2020-01-01T00:00:00Z"}}}',ctx);
+assert.equal(ctx.purchaseAction(event('old-audit','2099-01-01',{purchase_url:'https://tickets.example/event'})).kind,'url');
+console.log('PASS: recent exact broken-link suppression, contact fallback, stale-audit expiry');
