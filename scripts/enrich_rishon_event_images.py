@@ -239,7 +239,7 @@ def bank_asset_url(media):
     u = media.get("url") or ""
     if not u:
         return None
-    if u.startswith(("http://", "https://", "data:")):
+    if u.startswith(("http://", "https://", "data:", "/events-preview/")):
         return u
     city = (media.get("cities") or [None])[0]
     if u.startswith("media-bank/"):
