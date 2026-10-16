@@ -87,6 +87,10 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         content = content.replace("const ageText=age.length===2?", "const ageText=e.age_text?clean(e.age_text):age.length===2?")
     if name in ('kids-hub.js','seniors-hub.js'):
         content = content.replace('[e.source_description,e.description,e.series_description]', '[e.editorial_description,e.description,e.series_description,e.source_description]')
+    if name == 'category-landing.js' and not (ROOT / city['slug'] / 'data/exhibitions-magazine.json').is_file():
+        # A city without a curated exhibition catalog uses its own event list.
+        # Do not launch Ashdod's museum magazine with missing city data.
+        content = '\n'.join(line for line in content.split('\n') if 'window.ISNET_EXHIBITIONS.init()' not in line)
     if name == 'index.html':
         # Geography-specific photography must not be relabeled as another city.
         def local_discovery(m):
