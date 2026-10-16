@@ -11,3 +11,15 @@ assert.equal(run('פארק בשבת').count,0); // No invented opening schedule.
 assert.equal(run('הצגת ילדים',null).results[0].subcategory,'הצגות ילדים');
 
 console.log('PASS: unified search constraints and grounded routing');
+
+const locationDocs=E.create({events:[
+ {event_id:'in',title:'הצגת ילדים',category:'kids',start_date:'2026-10-17',price_min_ils:30,venue_type:'indoor'},
+ {event_id:'out',title:'הצגת ילדים',category:'kids',start_date:'2026-10-17',price_min_ils:30,is_indoor:false},
+ {event_id:'unknown-setting',title:'הצגת ילדים',category:'kids',start_date:'2026-10-17',price_min_ils:30}
+]});
+let locationContext=E.parse('משהו לילדים בשבת עד 50 שקלים לא בחוץ');
+assert.equal(locationContext.setting,'indoor');assert(!locationContext.concepts?.includes('nature'));
+assert.deepEqual(E.search(locationDocs,locationContext,'2026-10-15',0).results.map(x=>x.id),['e:in']);
+locationContext=E.parse('רק בחוץ',locationContext);assert.equal(locationContext.setting,'outdoor');
+assert.deepEqual(E.search(locationDocs,locationContext,'2026-10-15',0).results.map(x=>x.id),['e:out']);
+console.log('PASS: negated outdoor intent and explicit location evidence; unknown settings excluded');
