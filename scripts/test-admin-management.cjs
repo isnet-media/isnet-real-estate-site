@@ -18,3 +18,8 @@ assert.equal(run(`issuesFor({price:50,is_free:true}).some(i=>i.key==='price_conf
 assert.equal(run(`issuesFor({}).some(i=>i.key==='needs_date')`),true);
 assert.match(run('todayInIsrael()'),/^\d{4}-\d{2}-\d{2}$/);
 console.log('PASS: pagination beyond 1200 records, search reset, ongoing events, duplicate candidates, missing fields and price conflicts');
+
+run(`purchaseAudit={results:{'https://example.com/broken':{state:'broken',http_status:404,checked_at:new Date().toISOString()},'https://example.com/blocked':{state:'unverified',reason:'access_restricted',http_status:403,checked_at:new Date().toISOString()}}}`);
+assert.equal(run(`issuesFor({purchase_url:'https://example.com/broken'}).some(i=>i.key==='needs_ticket'&&i.level==='bad')`),true);
+assert.equal(run(`issuesFor({purchase_url:'https://example.com/blocked'}).some(i=>i.key==='needs_link_review'&&i.level==='warn')`),true);
+console.log('PASS: actual 404s and blocked checks are distinct editorial issues');

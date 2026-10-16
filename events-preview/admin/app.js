@@ -14,6 +14,7 @@ const cityConfig=[
   {slug:"rishon-lezion",name:"ראשון לציון",base:"../rishon-lezion/"}
 ];
 let all=[];
+let purchaseAudit={results:{}};
 let sourceReports=[],pendingSnapshots={};
 const selectedEvents=new Set();
 let savedRecords=new Map();
@@ -122,6 +123,13 @@ function issuesFor(e){
   if((e.is_free===true||e.free===true)&&Number.isFinite(price)&&price>0)issues.push({key:"price_conflict",label:"סתירה בין מחיר לסימון חינם",level:"bad"});
   const purchase=e.purchase_url||e.ticket_url;
   if(purchase&&!/^https?:\/\//i.test(String(purchase)))issues.push({key:"needs_ticket",label:"קישור רכישה בפורמט לא תקין",level:"bad"});
+  const health=purchaseAudit.results?.[purchase];
+  if(health){
+    const age=Date.now()-new Date(health.checked_at).getTime();
+    if(!Number.isFinite(age)||age>7*86400000)issues.push({key:'needs_link_review',label:'בדיקת קישור ישנה — נדרש רענון',level:'warn'});
+    else if(health.state==='broken')issues.push({key:'needs_ticket',label:'קישור לא זמין: HTTP '+health.http_status,level:'bad'});
+    else if(health.state==='needs_review'||health.state==='unverified')issues.push({key:'needs_link_review',label:health.reason==='generic_homepage'?'קישור לדף בית כללי':health.reason==='access_restricted'||health.reason==='verification_page'?'המקור חסם בדיקה אוטומטית — לא אומת':'קישור דורש בדיקה',level:'warn'});
+  }
   return issues;
 }
 function annotateDuplicates(events){
@@ -143,11 +151,13 @@ async function load(){
   taxonomyCategories=(await taxonomyResponse.json()).primary_categories||[];
   for(const item of taxonomyCategories)categoryLabels[item.id]=item.label;
   $("resultCount").textContent="טוען נתונים...";
-  const [shared,analyticsData]=await Promise.all([
+  const [shared,analyticsData,linkAudit]=await Promise.all([
     fetch("../shared/standup-videos.json",{cache:"no-store"}).then(r=>r.ok?r.json():{artists:[]}).catch(()=>({artists:[]})),
-    fetch("data/event-analytics.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null)
+    fetch("data/event-analytics.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch("data/purchase-link-audit.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null)
   ]);
   if(analyticsData) analytics=analyticsData;
+  purchaseAudit=linkAudit||{results:{}};
   const groups=await Promise.all(cityConfig.map(async city=>{
     const [data,editorial]=await Promise.all([
       fetch(city.base+"data/events.json",{cache:"no-store"}).then(r=>r.json()),
@@ -303,6 +313,8 @@ function render(resetPage=true){
 $("category").addEventListener("change",()=>{renderSubcategoryFilter();render()});
 $("clearBtn").addEventListener("click",()=>{["q","city","category","status","quality","subcategory","fromDate","toDate"].forEach(id=>$(id).value="");renderSubcategoryFilter();render()});
 function renderSync(){
+ const linkSummary=$("linkAuditSummary");
+ if(linkSummary)linkSummary.textContent=purchaseAudit.generated_at?'בדיקת קישורי רכישה מ־'+new Date(purchaseAudit.generated_at).toLocaleString('he-IL')+': '+purchaseAudit.checked_urls+' כתובות נבדקו; '+(purchaseAudit.summary?.broken||0)+' לא זמינות, '+(purchaseAudit.summary?.unverified||0)+' לא אומתו.'+(purchaseAudit.complete?'':' הבדיקה חלקית.')+' תגובת שרת תקינה אינה הוכחה לזמינות כרטיסים.':'בדיקת קישורי הרכישה טרם זמינה.';
  const target=$("syncSummary");if(!target)return;
  target.innerHTML=sourceReports.map(r=>{
   const missing=[...savedRecords.values()].filter(row=>row.city_slug===r.city.slug&&row.record_type!=='manual'&&!r.events[row.event_id]);

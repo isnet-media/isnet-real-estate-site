@@ -27,6 +27,7 @@ on:
     - cron: "30 7,19 * * *"
   workflow_run:
     workflows:
+      - "Normalize event provenance and audit purchase links"
       - "Repair Rishon public quality"
       - "Refresh Ashdod club match data"
       - "Verify and cache Rishon event photos"

@@ -33,6 +33,7 @@
 
   <main>
     <details class="panel" style="padding:20px;margin-bottom:20px"><summary><strong>מרכז סנכרון ומקורות</strong></summary><p>ההשוואה מתייחסת לקובצי הנתונים של הערים. היא אינה מפעילה סריקה חדשה באתרים החיצוניים. אין מחיקות אוטומטיות בעקבות היעלמות מהמקור.</p><div id="syncSummary" class="stats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))"></div><button id="saveSourceBaseline" class="secondary" type="button">שמור נקודת השוואה בדפדפן הזה</button><p id="syncNote" role="status"></p></details>
+    <p id="linkAuditSummary" role="status"></p>
     <section id="summary" class="stats" aria-label="סיכום"></section>
 
     <section class="panel filters">
@@ -81,7 +82,8 @@
             <option value="needs_content">חסר תוכן</option>
             <option value="needs_image">חסרה/לא מאושרת תמונה</option>
             <option value="needs_video">סטנדאפ ללא סרטון</option>
-            <option value="needs_ticket">ללא קישור פעולה</option>
+            <option value="needs_ticket">קישור חסר או לא תקין</option>
+            <option value="needs_link_review">קישור שלא אומת / דורש בדיקה</option>
             <option value="needs_date">חסר תאריך</option>
             <option value="needs_time">חסרה שעה</option>
             <option value="needs_location">חסר מקום</option>
@@ -139,7 +141,7 @@
   <template id="statTemplate">
     <article class="stat"><strong></strong><span></span><small></small></article>
   </template>
-  <script src="app.js?v=20261016-sync-bulk1"></script>
+  <script src="app.js?v=20261016-link-audit1"></script>
 <script type="module">
 import {requireAuth,signOut} from "./auth/guard.js?v=20261007-1225";
 const auth=await requireAuth();
