@@ -97,7 +97,11 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
             key={'park':'parks','beach':'beaches','attraction':'attractions','city':'must-see'}.get(kind,kind)
             image=places[key]['hero_image']
             card=re.sub(r'<img src="[^"]+"',lambda _: '<img src="'+image+'"',card)
-            return re.sub(r'(<small class="cityDiscover__credit">)[\s\S]*?(</small>)',r'\1איור להמחשה · ISNET\2',card)
+            from html import escape
+            credit=escape(places[key].get('hero_credit','מקור: ראשון נט'))
+            alt=escape(places[key].get('hero_alt',places[key]['title']),quote=True)
+            card=re.sub(r'(<img[^>]* alt=")[^"]*',lambda m:m[1]+alt,card)
+            return re.sub(r'(<small class="cityDiscover__credit">)[\s\S]*?(</small>)',lambda m:m[1]+credit+m[2],card)
         content=re.sub(r'<a class="cityDiscover__card"[\s\S]*?</a>',local_discovery,content)
     # These are authored interface strings. Source data is NOT changed.
     content = content.replace("https://ashdodnet.com/", city["website"])
