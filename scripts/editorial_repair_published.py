@@ -54,7 +54,8 @@ def passes(result):
     return (result.get("content_ready_for_media") is True and supported("what") and supported("why_attend")
             and (supported("audience") or supported("participants"))
             and len(desc)>=140 and len(pitch)>=35 and len(pitch)<=350
-            and not re.search(r'https?://|\\[מקור\\]',desc+" "+pitch)\n            and not has_internal_notes(desc+" "+pitch))
+            and not re.search(r'https?://|\\[מקור\\]',desc+" "+pitch)
+            and not has_internal_notes(desc+" "+pitch))
 
 def main():
     if os.getenv("EDITORIAL_REPAIR_WRITE_ENABLED") != "YES_AFTER_LEAK_AUDIT":
@@ -75,7 +76,7 @@ def main():
         records=cms.json()
         if not records or records[0].get("publication_status")!="published": continue
         row=records[0]
-        if (row.get("payload") or {}).get("content_locked"): continue
+        if (row.get("payload") or {}).get("content_locked") or (row.get("payload") or {}).get("description_manual_override") or any(field in (row.get("payload") or {}).get("locked_fields", []) for field in ("long_description", "short_pitch")): continue
         if (row.get("payload") or {}).get("editorial_repaired_at"): continue
         checked+=1
         links=[u for u in source_urls({**event,**(row.get("payload") or {})}) if credible_specific(u,event)]

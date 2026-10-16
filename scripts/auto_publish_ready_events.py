@@ -17,6 +17,8 @@ from pathlib import Path
 from urllib.parse import quote
 
 import requests
+from zoneinfo import ZoneInfo
+from event_overrides import merge_event
 
 ROOT = Path(__file__).resolve().parents[1]
 CITIES = {
@@ -40,7 +42,7 @@ SESSION.headers.update({
 # and must not be sent as Authorization: Bearer.
 if SERVICE_KEY.count(".") == 2 and not SERVICE_KEY.startswith("sb_secret_"):
     SESSION.headers["Authorization"] = f"Bearer {SERVICE_KEY}"
-TODAY_DATE = date.today()
+TODAY_DATE = datetime.now(ZoneInfo("Asia/Jerusalem")).date()
 TODAY = TODAY_DATE.isoformat()
 EVENT_HORIZON_MONTHS = 5
 
@@ -87,6 +89,7 @@ def duplicate_keys(events: list[dict]) -> set[str]:
         key = "|".join([
             e["_citySlug"],
             str(e.get("start_date") or ""),
+            str(e.get("start_time") or ""),
             norm(e.get("title")),
             norm(e.get("venue")),
         ])
@@ -150,29 +153,35 @@ def evaluate(event: dict, dupes: set[str]) -> dict:
 
 def get_cms_records() -> dict[str, dict]:
     url = f"{SUPABASE_URL}/rest/v1/cms_event_records"
-    params = {"select": "*"}
-    r = SESSION.get(url, params=params, timeout=30)
-    if not r.ok:
-        body=(r.text or "")[:1000]
-        print(f"SUPABASE READ ERROR status={r.status_code} body={body}", file=sys.stderr)
-    r.raise_for_status()
-    rows = r.json()
-    return {f'{row["city_slug"]}:{row["event_id"]}': row for row in rows}
+    rows = []
+    for offset in range(0, 1000000, 200):
+        params = {"select": "*", "order": "city_slug.asc,event_id.asc", "offset": offset, "limit": 200}
+        response = SESSION.get(url, params=params, timeout=30)
+        response.raise_for_status()
+        page = response.json()
+        if not isinstance(page, list):
+            raise ValueError("Invalid CMS record response")
+        rows.extend(page)
+        if len(page) < 200:
+            return {f'{row["city_slug"]}:{row["event_id"]}': row for row in rows}
+    raise RuntimeError("CMS pagination safety limit reached; no partial publication")
 
 def load_events(cms: dict[str, dict]) -> list[dict]:
     out = []
     for city, path in CITIES.items():
         doc = json.loads(path.read_text(encoding="utf-8"))
         for base in doc.get("events", []):
-            event_date = str(base.get("start_date") or "")
-            if event_date < TODAY or event_date > HORIZON_END:
-                continue
             key = f'{city}:{base.get("event_id")}'
             row = cms.get(key)
             payload = row.get("payload") if row and isinstance(row.get("payload"), dict) else {}
-            merged = {**base, **payload}
+            merged = merge_event(base, payload)
+            start = str(merged.get("start_date") or "")
+            until = str(merged.get("end_date") or start)
+            if not start or until < TODAY or start > HORIZON_END:
+                continue
             merged["_citySlug"] = city
             merged["_recordType"] = row.get("record_type") if row else "override"
+            merged["_cmsVersion"] = row.get("updated_at") if row else None
             merged["_alreadyPublished"] = bool(row and row.get("publication_status") == "published")
             if merged.get("status") in {"archived", "trashed", "hidden"}:
                 continue
@@ -189,7 +198,7 @@ def load_events(cms: dict[str, dict]) -> list[dict]:
         if payload.get("status") in {"archived", "trashed", "hidden"}:
             continue
         e = {**payload, "event_id": row["event_id"], "_citySlug": row["city_slug"],
-             "_recordType": "manual", "_alreadyPublished": row.get("publication_status") == "published"}
+             "_recordType": "manual", "_cmsVersion": row.get("updated_at"), "_alreadyPublished": row.get("publication_status") == "published"}
         out.append(e)
     return out
 
@@ -220,10 +229,17 @@ def publish(event: dict, qa: dict) -> None:
         "updated_at": now,
     }
     url = f"{SUPABASE_URL}/rest/v1/cms_event_records"
-    params = {"on_conflict": "city_slug,event_id"}
-    headers = {"Prefer": "resolution=merge-duplicates,return=minimal"}
-    r = SESSION.post(url, params=params, headers=headers, data=json.dumps(row, ensure_ascii=False).encode("utf-8"), timeout=30)
-    r.raise_for_status()
+    headers = {"Prefer": "return=representation"}
+    body = json.dumps(row, ensure_ascii=False).encode("utf-8")
+    if event.get("_cmsVersion"):
+        params = {"city_slug": "eq." + event["_citySlug"], "event_id": "eq." + str(event["event_id"]), "updated_at": "eq." + event["_cmsVersion"]}
+        response = SESSION.patch(url, params=params, headers=headers, data=body, timeout=30)
+    else:
+        # Insert only: a newly created editorial record must never be overwritten.
+        response = SESSION.post(url, headers=headers, data=body, timeout=30)
+    response.raise_for_status()
+    if not response.json():
+        raise RuntimeError("CMS record changed during preparation; publication stopped")
 
 def main() -> int:
     cms = get_cms_records()
