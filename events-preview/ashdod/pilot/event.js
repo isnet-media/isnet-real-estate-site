@@ -181,10 +181,11 @@ function ensureMeta(propertyOrName,value,isProperty=false){
   if(!el){el=document.createElement("meta");el.setAttribute(isProperty?"property":"name",propertyOrName);document.head.appendChild(el)}
   el.setAttribute("content",value);
 }
+function canonicalEventUrl(e){return new URL("event.html?slug="+encodeURIComponent(e._canonical_slug||eventSlug(e)),location.href).href;}
 function applySeo(e){
   const title=(e.seo_title||eventDisplayTitle(e))+" | מה עושים באשדוד?";
   const desc=(safeEditorial(e.seo_description)||meaningfulEventDescription(e)||autoPitch({...e,title:eventDisplayTitle(e)})).slice(0,180);
-  const canonical=new URL("event.html?slug="+encodeURIComponent(eventSlug(e)),location.href).href;
+  const canonical=canonicalEventUrl(e);
   document.title=title;
   document.querySelector('meta[name="description"]')?.setAttribute("content",desc);
   let link=document.head.querySelector('link[rel="canonical"]');
@@ -580,7 +581,7 @@ async function init(){
     const distinct=series.filter(e=>{const k=e.start_date+"T"+(e.start_time||"")+"|"+(e.venue||"");if(occurrenceKeys.has(k))return false;occurrenceKeys.add(k);return true});
     const upcoming=distinct.filter(e=>isUpcoming(e));
     const occ=upcoming.length?upcoming:distinct;
-    const e={...richEvent(occ),start_date:occ[0].start_date,start_time:occ[0].start_time};
+    const e={...richEvent(occ),_canonical_slug:canonicalSlug,start_date:occ[0].start_date,start_time:occ[0].start_time};
     const imageEvent=bestImageEvent(occ);
 
     // GA4 standard ecommerce-style event view. item_id lets the Data API

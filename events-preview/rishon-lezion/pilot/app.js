@@ -1254,7 +1254,7 @@ async function init(){
   const requestedSub=new URLSearchParams(location.search).get("subcategory");
   if(requestedSub&&window.publicTaxonomy.find(c=>c.id===state.category)?.subcategories?.some(x=>x.id===requestedSub))state.subcategory=requestedSub;
   if(location.hash==="#cinema"){state.cinemaOpen=true;if(new URLSearchParams(location.search).get("audience")==="family")state.cinemaAudience="family";}
-  if(sharedSaved)$("savedListStatus").textContent="רשימה ששיתפו איתך · אינה משנה את המועדפים שלך. להצגת כל האירועים לחצו על איפוס.";
+  if(sharedSaved)$("savedListStatus").textContent="רשימה ששיתפו איתך · אינה משנה את המועדפים שלך. להצגת כל האירועים לחצו על חזרה לכל האירועים.";
   render();
   renderCinema();
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));

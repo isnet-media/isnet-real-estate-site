@@ -67,3 +67,6 @@ assert.equal(ctx.purchaseAction(event('broken','2099-01-01',{purchase_url:'https
 vm.runInContext('purchaseHealth={results:{"https://tickets.example/event":{state:"broken",checked_at:"2020-01-01T00:00:00Z"}}}',ctx);
 assert.equal(ctx.purchaseAction(event('old-audit','2099-01-01',{purchase_url:'https://tickets.example/event'})).kind,'url');
 console.log('PASS: recent exact broken-link suppression, contact fallback, stale-audit expiry');
+
+assert.equal(new URL(ctx.canonicalEventUrl({event_id:'richer-other-occurrence',title:'כותרת מעודכנת',_canonical_slug:'selected-occurrence'})).searchParams.get('slug'),'selected-occurrence');
+console.log('PASS: richer grouped content retains the selected event canonical slug');
