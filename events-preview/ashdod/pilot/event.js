@@ -157,18 +157,28 @@ function uniqueByTitle(events){
   }
   return out;
 }
-function slugifyHebrew(value){
+function slugifyHebrew(value,limit=90){
   return String(value||"").normalize("NFKC").trim().toLowerCase()
     .replace(/["'״׳]/g,"")
     .replace(/[^\p{L}\p{N}]+/gu,"-")
     .replace(/^-+|-+$/g,"")
-    .slice(0,90);
+    .slice(0,limit);
 }
 function eventSlug(e){
   if(e?.seo_slug)return slugifyHebrew(e.seo_slug);
   const base=slugifyHebrew(eventDisplayTitle(e))||"event";
   const suffix=String(e?.event_id||"").replace(/[^a-zA-Z0-9]+/g,"").slice(-8).toLowerCase();
   return suffix?base+"-"+suffix:base;
+}
+function findSlugEvent(events,requested){
+  const normalized=slugifyHebrew(requested,200),exact=events.find(e=>eventSlug(e)===normalized);
+  if(exact)return exact;
+  // Source collectors can replace an imported ID with its verified source ID.
+  // Recover only the exact display title of a generated slug, in one unambiguous group.
+  if(!/-[a-z0-9]{8}$/.test(normalized))return null;
+  const title=normalized.replace(/-[a-z0-9]{8}$/,''),matches=events.filter(e=>slugifyHebrew(eventDisplayTitle(e))===title);
+  if(!matches.length||new Set(matches.map(eventGroupKey)).size!==1)return null;
+  return matches.slice().sort((a,b)=>String(a.event_id).localeCompare(String(b.event_id)))[0];
 }
 function directEventUrl(eventOrId){
   const e=typeof eventOrId==="object"?eventOrId:null;
@@ -565,13 +575,13 @@ async function init(){
     all=window.ISNET_EVENT_IDENTITIES?.reconcile?.(all)||all;
     const original=requestedId
       ? originalAll.find(e=>e.event_id===requestedId)
-      : originalAll.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug));
+      : findSlugEvent(originalAll,requestedSlug);
     const canonical=original?.canonical_event_id&&all.find(e=>e.event_id===original.canonical_event_id);
-    const base=canonical||(!requestedId&&all.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug)))
+    const base=canonical||(!requestedId&&findSlugEvent(all,requestedSlug))
       ||(original&&all.find(e=>e.event_id===original.event_id||e._source_event_ids?.includes(original.event_id)));
     if(!base||["hidden","draft","archived","trashed","deleted"].includes(base.status)||["draft","unpublished","hidden","archived"].includes(base.publication_status))throw new Error("event");
     const canonicalSlug=eventSlug(base);
-    if(!requestedSlug || slugifyHebrew(requestedSlug)!==canonicalSlug){
+    if(!requestedSlug || slugifyHebrew(requestedSlug,200)!==canonicalSlug){
       history.replaceState(null,"","event.html?slug="+encodeURIComponent(canonicalSlug));
     }
     const key=eventGroupKey(base);
@@ -629,7 +639,7 @@ async function init(){
         const u=new URL(link.href);
         const relatedId=u.searchParams.get("id");
         const relatedSlug=u.searchParams.get("slug");
-        const selected=relatedId?all.find(item=>item.event_id===relatedId):all.find(item=>eventSlug(item)===slugifyHebrew(relatedSlug));
+        const selected=relatedId?all.find(item=>item.event_id===relatedId):findSlugEvent(all,relatedSlug);
         if(selected) window.ashdodAnalytics?.send("select_event",window.ashdodAnalytics.metadata(selected));
       }
     });

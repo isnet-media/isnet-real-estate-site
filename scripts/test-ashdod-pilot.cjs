@@ -70,3 +70,12 @@ console.log('PASS: recent exact broken-link suppression, contact fallback, stale
 
 assert.equal(new URL(ctx.canonicalEventUrl({event_id:'richer-other-occurrence',title:'כותרת מעודכנת',_canonical_slug:'selected-occurrence'})).searchParams.get('slug'),'selected-occurrence');
 console.log('PASS: richer grouped content retains the selected event canonical slug');
+
+const replaced={event_id:'makore_as_newid12345678',title:'מופע בשם מדויק',start_date:'2099-01-01'};
+assert.equal(ctx.findSlugEvent([replaced],'מופע-בשם-מדויק-oldid123').event_id,replaced.event_id);
+assert.equal(ctx.findSlugEvent([replaced],'שם-שונה-oldid123'),null);
+assert.equal(ctx.findSlugEvent([{...replaced,series_id:'one'},{...replaced,event_id:'other',series_id:'two'}],'מופע-בשם-מדויק-oldid123'),null);
+console.log('PASS: exact-title legacy slug recovery after source ID replacement; ambiguous groups rejected');
+
+const longTitleEvent={event_id:'long-title-12345678',title:'א'.repeat(120)};assert.equal(ctx.findSlugEvent([longTitleEvent],ctx.eventSlug(longTitleEvent)),longTitleEvent);
+console.log('PASS: full generated slugs retain ID suffixes for long Hebrew titles');
