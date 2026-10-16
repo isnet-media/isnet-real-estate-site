@@ -36,7 +36,7 @@ jobs:
 
       - name: Verify GA4 configuration
         env:
-          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID || vars.GA4_PROPERTY_ID || '292529666' }}
           GA4_SERVICE_ACCOUNT_JSON: ${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}
         run: |
           test -n "$GA4_PROPERTY_ID" || { echo "::error::Missing GA4_PROPERTY_ID"; exit 2; }
@@ -44,7 +44,7 @@ jobs:
 
       - name: Fetch event analytics
         env:
-          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID || vars.GA4_PROPERTY_ID || '292529666' }}
           GA4_SERVICE_ACCOUNT_JSON: ${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}
         run: python scripts/fetch_event_analytics.py
 

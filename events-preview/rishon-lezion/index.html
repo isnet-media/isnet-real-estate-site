@@ -390,7 +390,7 @@
 <script src="pilot/app.js?v=370454dfad12" defer></script>
 
 <script>
-(async function(){
+document.addEventListener("DOMContentLoaded",async function(){
   const mount=document.getElementById("operatorStrip");if(!mount)return;
   try{
     const [registry,data]=await Promise.all([
@@ -409,7 +409,7 @@
     }).join("");
     mount.hidden=!visible.length;
   }catch(error){mount.hidden=true}
-})();
+});
 </script>
 
   <script defer src="home-date-gateway.js?v=20261012-1"></script>
