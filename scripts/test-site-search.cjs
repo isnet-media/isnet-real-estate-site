@@ -23,3 +23,6 @@ assert.deepEqual(E.search(locationDocs,locationContext,'2026-10-15',0).results.m
 locationContext=E.parse('רק בחוץ',locationContext);assert.equal(locationContext.setting,'outdoor');
 assert.deepEqual(E.search(locationDocs,locationContext,'2026-10-15',0).results.map(x=>x.id),['e:out']);
 console.log('PASS: negated outdoor intent and explicit location evidence; unknown settings excluded');
+
+assert.deepEqual(E.search(locationDocs,E.parse('במקום סגור'),'2026-10-15',0).results.map(x=>x.id),['e:in']);
+assert(!E.parse('לא בחוץ',E.parse('טיולים בחוץ')).concepts.includes('nature'));

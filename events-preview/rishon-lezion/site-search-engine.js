@@ -30,7 +30,7 @@ function parse(q,previous){
  const s=norm(q).replace(/(?:ב?ראשונ לציונ|ב?ראשלצ)/g,' ').trim().slice(0,500);if(/^(?:מה (?:לעשות|עושימ|יש|אפשר)|מה פתוח)/.test(s))previous=null;const c={...(previous||{}),terms:[]};
  if(/(?:חיפוש חדש|התחל מחדש|נקה)/.test(s))return {terms:[],reset:true};
  const indoorOnly=/לא בחוצ|בלי בחוצ|לא באוויר הפתוח|במקומ סגור|במקומות סגורימ|בתוכ מבנה/.test(s);
- if(indoorOnly)c.setting='indoor';else if(/רק בחוצ|רק באוויר הפתוח/.test(s))c.setting='outdoor';else if(/בלי הגבלת מקומ/.test(s))delete c.setting;
+ if(indoorOnly){c.setting='indoor';if(c.concepts)c.concepts=c.concepts.filter(id=>id!=='nature');}else if(/רק בחוצ|רק באוויר הפתוח/.test(s))c.setting='outdoor';else if(/בלי הגבלת מקומ/.test(s))delete c.setting;
  const concepts=groups.filter(g=>any(s,g[2])&&!((indoorOnly||/רק בחוצ|רק באוויר הפתוח/.test(s))&&g[0]==='nature'));if(concepts.length)c.concepts=concepts.map(g=>g[0]);
  if(/קולנוע|סרט|סינמה|הוט סינמה/.test(s))c.type='movie';else if(/חוג|קורס/.test(s))c.type='course';else if(/אטרקצי|חדר[י ]+בריחה|באולינג|בולינג|קריוקי|פארק|חופ|שיט|שייט/.test(s))c.type='place';else if(/הצג|הופע|סטנד|הרצא|קונצרט/.test(s))c.type='event';
  if(any(s,['ילדים','ילד','ילדה','משפחה','משפחתי','משפחתית','קטנטנים','פעוטות']))c.family=true;
@@ -78,7 +78,7 @@ function search(docs,c,day,nowMinutes){
  for(const id of c.concepts||[]){const g=groups.find(g=>g[0]===id);if(g&&any(d.text,g[3])){score+=15;reasons.push(g[1])}else{score=-1;break}}
  if(score<0)continue;
  let all=true;for(const term of c.terms||[]){const variants=forms(term);if(variants.some(t=>has(d.titleText,t))){score+=25;continue}if(variants.some(t=>d.tokens.includes(t))){score+=10;continue}if(term.length>=4&&d.tokens.some(t=>Math.abs(t.length-term.length)<=1&&distance(term,t)<=(term.length>=7?2:1))){score+=4;continue}all=false;break}if(!all)continue;
- if(!(c.concepts?.length||c.terms?.length||c.type||c.family!=null||c.period||c.maxPrice!=null||c.age!=null))continue;
+ if(!(c.concepts?.length||c.terms?.length||c.type||c.setting||c.family!=null||c.period||c.maxPrice!=null||c.age!=null))continue;
  dates.sort((a,b)=>(a.date+' '+a.time).localeCompare(b.date+' '+b.time));
  const notes=[];if(c.age!=null&&d.min==null&&d.max==null)notes.push('התאמת גיל מדויקת לא צוינה');if(d.type==='place')notes.push(d.openingKind==='outdoor'?'מסלול טיול עצמאי — יש לבדוק גישה, מזג אוויר וסגירות':d.hours?'שעות שבת רגילות: '+d.hours+'; יש לוודא חריגים מול המקום':'יש לבדוק שעות פתיחה ומחיר מול המקום');if(d.type==='course')notes.push('לימים, שעות ומחיר — בדף החוג');
  matches.push({id:d.id,type:d.type,title:d.title,description:d.description.slice(0,240),category:d.category,subcategory:d.subcategory,venue:dates[0]?.venue||d.venue,href:d.href,date:dates[0]?.date,time:dates[0]?.time,price:d.price,reasons,notes,score:score+(c.type?10:0)})}
