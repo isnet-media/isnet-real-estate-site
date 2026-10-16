@@ -91,6 +91,11 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         # A city without a curated exhibition catalog uses its own event list.
         # Do not launch Ashdod's museum magazine with missing city data.
         content = '\n'.join(line for line in content.split('\n') if 'window.ISNET_EXHIBITIONS.init()' not in line)
+    if name == 'category.html' and (ROOT / city['slug'] / 'data/exhibitions-magazine.json').is_file():
+        # City-owned catalog and renderer; never relabel another city's museums.
+        asset = ROOT / city['slug'] / 'rishon-exhibitions.js'
+        digest = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+        content = content.replace('<script src="category-landing.js', '<script src="rishon-exhibitions.js?v=' + digest + '" defer></script>\n<script src="category-landing.js')
     if name == 'index.html':
         # Geography-specific photography must not be relabeled as another city.
         def local_discovery(m):
