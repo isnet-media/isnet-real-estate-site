@@ -115,6 +115,11 @@ jobs:
           node scripts/test-event-sync.cjs
           python scripts/build_event_public_assets.py --with-cms
 
+      - name: Build central comparison of public source snapshots
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/build_event_source_history.py
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:

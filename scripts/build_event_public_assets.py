@@ -51,7 +51,7 @@ def merge(events,rows):
         out[key]=event
     return list(out.values())
 def visible(e,day):
-    return e.get('is_active') is not False and e.get('status') not in ('hidden','draft','archived','trashed','deleted') and e.get('publication_status') not in ('draft','hidden','unpublished','archived') and (e.get('end_date') or e.get('start_date') or '')>=day
+    return e.get('seo_index') is not False and e.get('is_active') is not False and e.get('status') not in ('hidden','draft','archived','trashed','deleted') and e.get('publication_status') not in ('draft','hidden','unpublished','archived') and (e.get('end_date') or e.get('start_date') or '')>=day
 
 def build(with_cms=False):
     report={'generated_at':datetime.now(ZoneInfo('UTC')).isoformat(),'measurement':'Serialized payload bytes and gzip bytes; not a browser latency or load test.','cities':{}}

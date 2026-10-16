@@ -39,6 +39,11 @@
       }
       return rows;
     },
+    async listEventRevisions(city,eventId,offset=0){
+      const db=client();if(!db)throw new Error('database unavailable');
+      const {data,error}=await db.from('cms_event_revisions').select('id,action,before_row,after_row,recorded_at').eq('city_slug',city).eq('event_id',eventId).order('id',{ascending:false}).range(offset,offset+24);
+      if(error)throw error;return data||[];
+    },
     async getEventRecord(city,eventId){
       const db=client();if(!db)return null;
       const {data,error}=await db.from("cms_event_records").select("*").eq("city_slug",city).eq("event_id",eventId).maybeSingle();

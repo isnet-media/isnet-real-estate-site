@@ -14,7 +14,7 @@ const cityConfig=[
   {slug:"rishon-lezion",name:"ראשון לציון",base:"../rishon-lezion/"}
 ];
 let all=[];
-let siteBuildReport=null;
+let siteBuildReport=null,centralHistory=null;
 let purchaseAudit={results:{}};
 let sourceReports=[],pendingSnapshots={};
 const selectedEvents=new Set();
@@ -152,14 +152,15 @@ async function load(){
   taxonomyCategories=(await taxonomyResponse.json()).primary_categories||[];
   for(const item of taxonomyCategories)categoryLabels[item.id]=item.label;
   $("resultCount").textContent="טוען נתונים...";
-  const [shared,analyticsData,linkAudit,buildReport]=await Promise.all([
+  const [shared,analyticsData,linkAudit,buildReport,sourceHistory]=await Promise.all([
     fetch("../shared/standup-videos.json",{cache:"no-store"}).then(r=>r.ok?r.json():{artists:[]}).catch(()=>({artists:[]})),
     fetch("data/event-analytics.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null),
     fetch("data/purchase-link-audit.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null),
-    fetch("data/site-build-report.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null)
+    fetch("data/site-build-report.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch("data/source-history.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null)
   ]);
   if(analyticsData) analytics=analyticsData;
-  purchaseAudit=linkAudit||{results:{}};siteBuildReport=buildReport;
+  purchaseAudit=linkAudit||{results:{}};siteBuildReport=buildReport;centralHistory=sourceHistory;
   const groups=await Promise.all(cityConfig.map(async city=>{
     const [data,editorial]=await Promise.all([
       fetch(city.base+"data/events.json",{cache:"no-store"}).then(r=>r.json()),
@@ -171,10 +172,11 @@ async function load(){
       const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));
       snapshot.events[e.event_id]={title:e.title,hash:Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('')};
     }
-    const baseline=readJson('isnet-sync-baseline:'+city.slug,null);
+    const central=centralHistory?.cities?.[city.slug];
+    const baseline=central?.available?{events:central.previous,checked_at:central.previous_at}:readJson('isnet-sync-baseline:'+city.slug,null);
     pendingSnapshots[city.slug]=snapshot;
     const current=snapshot.events,previous=baseline?.events||{};
-    sourceReports.push({city,...snapshot,baselineAt:baseline?.checked_at||null,added:baseline?Object.keys(current).filter(id=>!previous[id]):[],changed:baseline?Object.keys(current).filter(id=>previous[id]&&previous[id].hash!==current[id].hash):[],removed:baseline?Object.keys(previous).filter(id=>!current[id]):[],previous});
+    sourceReports.push({city,central:Boolean(central?.available),previousSha:central?.previous_sha,...snapshot,baselineAt:baseline?.checked_at||null,added:baseline?Object.keys(current).filter(id=>!previous[id]):[],changed:baseline?Object.keys(current).filter(id=>previous[id]&&previous[id].hash!==current[id].hash):[],removed:baseline?Object.keys(previous).filter(id=>!current[id]):[],previous});
     return (data.events||[]).map(e=>{
       const ed=editorialEntry(editorial,e.event_id);
       const video=e.youtube_id||(ed.video_verified===true&&ed.youtube_id)||artistVideoFor(e,shared)?.youtube_id||null;
@@ -323,7 +325,7 @@ function renderSync(){
  target.innerHTML=sourceReports.map(r=>{
   const missing=[...savedRecords.values()].filter(row=>row.city_slug===r.city.slug&&row.record_type!=='manual'&&!r.events[row.event_id]);
   const changes=[['נוספו',r.added],['השתנו',r.changed],['אינם במקור הנוכחי',r.removed]].map(([label,ids])=>'<details><summary>'+label+': '+ids.length+'</summary><ul>'+ids.slice(0,100).map(id=>'<li>'+esc(r.events[id]?.title||r.previous[id]?.title||id)+'</li>').join('')+'</ul></details>').join('');
-  return '<article class="panel" style="padding:16px"><h3>'+esc(r.city.name)+'</h3><p>'+Object.keys(r.events).length+' אירועים במקור · '+[...savedRecords.values()].filter(row=>row.city_slug===r.city.slug).length+' רשומות בניהול</p><p>עדכון שמדווח במקור: '+esc(r.generated_at?new Date(r.generated_at).toLocaleString('he-IL'):'לא דווח')+'</p><p>'+ (r.baselineAt?'השוואה לבדיקה בדפדפן הזה מ־'+esc(new Date(r.baselineAt).toLocaleString('he-IL')):'אין עדיין נקודת השוואה בדפדפן הזה.')+'</p>'+changes+'<p>'+missing.length+' רשומות ניהול אינן במקור הנוכחי; לא נמחקו אוטומטית.</p></article>';
+  return '<article class="panel" style="padding:16px"><h3>'+esc(r.city.name)+'</h3><p>'+Object.keys(r.events).length+' אירועים במקור · '+[...savedRecords.values()].filter(row=>row.city_slug===r.city.slug).length+' רשומות בניהול</p><p>עדכון שמדווח במקור: '+esc(r.generated_at?new Date(r.generated_at).toLocaleString('he-IL'):'לא דווח')+'</p><p>'+ (r.baselineAt?(r.central?'השוואה מרכזית לגרסת מקור קודמת מ־':'השוואה לבדיקה בדפדפן הזה מ־')+esc(new Date(r.baselineAt).toLocaleString('he-IL')):'אין עדיין נקודת השוואה בדפדפן הזה.')+'</p>'+changes+'<p>'+missing.length+' רשומות ניהול אינן במקור הנוכחי; לא נמחקו אוטומטית.</p></article>';
  }).join('');
 }
 $("saveSourceBaseline")?.addEventListener('click',()=>{

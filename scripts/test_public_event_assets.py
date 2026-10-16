@@ -18,3 +18,11 @@ code='\n'.join(functions)+"\nlet s='';process.stdin.on('data',x=>s+=x);process.s
 actual=json.loads(subprocess.check_output(['node','-e',code],input=json.dumps(events).encode()))
 assert actual==[slug(e) for e in events]
 print('PASS: bounded listing copy, private fields omitted, hidden/past filtering, canonical slug parity for',len(events),'events')
+
+from build_event_source_history import snapshot,compare
+prior=snapshot({'events':[base]});next_=snapshot({'events':[{**base,'title':'שינוי'}]})
+assert compare(next_,prior)['changed']==[base['event_id']]
+assert compare({},prior)['removed']==[base['event_id']]
+assert compare(prior,{})['added']==[base['event_id']]
+
+assert not visible({**base,'seo_index':False},'2026-10-16')

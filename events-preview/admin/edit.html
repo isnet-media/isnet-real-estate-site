@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="auth/config.js?v=20261007-1225"></script>
   <script src="../shared/event-overlay.js?v=20261016-sync1"></script>
-  <script src="cms-db.js?v=20261016-safe-save1"></script>
+  <script src="cms-db.js?v=20261016-history1"></script>
 </head>
 <body>
 <header class="topbar edit-topbar">
@@ -126,6 +126,11 @@
       </section>
 
       <section class="panel edit-card">
+        <h2>היסטוריית שינויים מרכזית</h2>
+        <p id="historyStatus" role="status">בדיקת ההיסטוריה מחייבת שהרכיב יותקן במסד הנתונים. שחזור נטען לעריכה ואינו מתפרסם אוטומטית.</p>
+        <button id="loadHistory" type="button" class="ghost wide">הצגת גרסאות קודמות</button>
+        <div id="historyEntries"></div>
+        <hr>
         <h2>פעולות</h2>
         <button id="publishBtn" class="primary wide">פרסם באתר</button>
         <button id="saveDraftBtn" class="ghost wide">שמור טיוטה</button>
@@ -138,7 +143,7 @@
     </aside>
   </section>
 </main>
-<script src="edit.js?v=20261016-safe-save1"></script>
+<script src="edit.js?v=20261016-history1"></script>
 <script type="module">
 import {requireAuth,signOut} from "./auth/guard.js?v=20261007-1225";
 const auth=await requireAuth();

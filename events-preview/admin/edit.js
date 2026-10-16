@@ -223,3 +223,31 @@ async function publishCurrentEvent(){
   }
 }
 $("publishBtn")?.addEventListener("click",publishCurrentEvent);
+
+let historyOffset=0;
+$("loadHistory")?.addEventListener('click',async()=>{
+ const button=$("loadHistory"),status=$("historyStatus"),target=$("historyEntries");button.disabled=true;
+ try{
+  const rows=await window.ISNET_DB.listEventRevisions(city,id,historyOffset);
+  if(!historyOffset)target.replaceChildren();
+  for(const revision of rows){
+   const snapshot=revision.after_row||revision.before_row;if(!snapshot?.payload)continue;
+   const article=document.createElement('article'),label=document.createElement('p'),load=document.createElement('button');
+   label.textContent=new Date(revision.recorded_at).toLocaleString('he-IL')+' · '+(snapshot.payload.title||id)+' · '+revision.action;
+   load.type='button';load.className='ghost wide';load.textContent='טעינת גרסה זו לעריכה';
+   load.addEventListener('click',()=>{
+    if(dirty&&!confirm('לטעון את הגרסה הקודמת במקום השינויים שטרם נשמרו?'))return;
+    const payload=JSON.parse(JSON.stringify(snapshot.payload));savedPayload=payload;releasedFields.clear();
+    const merged=window.ISNET_EVENT_OVERLAY.merge(original.event,payload);
+    fill(merged,payload.description_manual_override?{...original.editorial,...payload}:original.editorial);
+    if(payload.image_data_url){currentImageData=payload.image_data_url;$("imagePreview").style.backgroundImage='url("'+payload.image_data_url+'")';}
+    setBaseline();renderLocks();dirty=true;
+    $("saveNote").textContent='גרסה קודמת נטענה לעריכה בלבד. בדקו את השדות ושמרו; מצב הפרסום הקיים לא השתנה.';
+   });
+   article.append(label,load);target.append(article);
+  }
+  historyOffset+=rows.length;button.hidden=rows.length<25;button.textContent='טעינת גרסאות נוספות';
+  status.textContent=historyOffset?'מוצגות '+historyOffset+' גרסאות. ההיסטוריה מתחילה רק ממועד הפעלת הרכיב.':'אין גרסאות שמורות לאירוע הזה.';
+ }catch(error){status.textContent=['42P01','PGRST205'].includes(error.code)?'היסטוריית השינויים עדיין אינה מותקנת במסד הנתונים. לא בוצע שחזור.':'לא ניתן לקרוא היסטוריה כרגע. לא בוצע שחזור.';}
+ finally{button.disabled=false;}
+});
