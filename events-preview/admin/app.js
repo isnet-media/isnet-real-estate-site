@@ -172,11 +172,12 @@ async function load(){
       const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));
       snapshot.events[e.event_id]={title:e.title,hash:Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('')};
     }
-    const central=centralHistory?.cities?.[city.slug];
-    const baseline=central?.available?{events:central.previous,checked_at:central.previous_at}:readJson('isnet-sync-baseline:'+city.slug,null);
+    const central=centralHistory?.cities?.[city.slug],localBaseline=readJson('isnet-sync-baseline:'+city.slug,null);
+    const usingCentral=!localBaseline&&central?.available;
+    const baseline=localBaseline||(usingCentral?{events:central.previous,checked_at:central.previous_at}:null);
     pendingSnapshots[city.slug]=snapshot;
     const current=snapshot.events,previous=baseline?.events||{};
-    sourceReports.push({city,central:Boolean(central?.available),previousSha:central?.previous_sha,...snapshot,baselineAt:baseline?.checked_at||null,added:baseline?Object.keys(current).filter(id=>!previous[id]):[],changed:baseline?Object.keys(current).filter(id=>previous[id]&&previous[id].hash!==current[id].hash):[],removed:baseline?Object.keys(previous).filter(id=>!current[id]):[],previous});
+    sourceReports.push({city,central:Boolean(usingCentral),previousSha:central?.previous_sha,...snapshot,baselineAt:baseline?.checked_at||null,added:baseline?Object.keys(current).filter(id=>!previous[id]):[],changed:baseline?Object.keys(current).filter(id=>previous[id]&&previous[id].hash!==current[id].hash):[],removed:baseline?Object.keys(previous).filter(id=>!current[id]):[],previous});
     return (data.events||[]).map(e=>{
       const ed=editorialEntry(editorial,e.event_id);
       const video=e.youtube_id||(ed.video_verified===true&&ed.youtube_id)||artistVideoFor(e,shared)?.youtube_id||null;
