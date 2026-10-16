@@ -1034,7 +1034,7 @@ function renderResults(){
     const buckets=new Map();
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
     const activeCinemaCount=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
-    const categoryKeys=[...buckets.keys()].filter(key=>key!=="cinema"&&key!=="other"&&key!=="community"&&key!=="tour"&&key!=="conference"&&buckets.get(key).length>0);
+    const categoryKeys=[...buckets.keys()].filter(key=>key!=="cinema"&&key!=="other"&&key!=="community"&&key!=="tour"&&key!=="conference"&&buckets.get(key).length>=4);
     if(activeCinemaCount||(buckets.get("cinema")||[]).length)categoryKeys.push("cinema");
     const keys=categoryKeys.sort((a,b)=>{
       const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
