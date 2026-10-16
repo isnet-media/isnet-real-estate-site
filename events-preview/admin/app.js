@@ -14,6 +14,9 @@ const cityConfig=[
   {slug:"rishon-lezion",name:"ראשון לציון",base:"../rishon-lezion/"}
 ];
 let all=[];
+let sourceReports=[],pendingSnapshots={};
+const selectedEvents=new Set();
+let savedRecords=new Map();
 let analytics={generated_at:null,views_7d:{},views_30d:{},views_all:{}};
 const LOCAL_OVERRIDES_KEY="isnet-event-overrides";
 const LOCAL_NEW_KEY="isnet-new-events";
@@ -35,7 +38,8 @@ function applyLocalOverride(e){
 }
 function mergeDbRecordWithFreshMedia(e,db){
   if(!db?.payload)return e;
-  const merged={...e,...db.payload,_dbRecord:true};
+  const merged={...(window.ISNET_EVENT_OVERLAY?.merge(e,db.payload)||{...e,...db.payload}),_dbRecord:true};
+  if(db.payload.overlay_version===2){merged._description=merged.long_description||merged.series_description||merged.description||"";return merged;}
   const manualImage=Boolean(db.payload.image_manual_override===true);
   if(!manualImage){
     const mediaFields=[
@@ -114,8 +118,10 @@ function issuesFor(e){
   if(!e.start_time)issues.push({key:"needs_time",label:"חסרה שעה",level:"warn"});
   if(!e.venue&&!e.address)issues.push({key:"needs_location",label:"חסר מקום",level:"warn"});
   if(e._duplicate)issues.push({key:"duplicate",label:"חשד לכפילות באותו מועד ומקום",level:"warn"});
-  const price=Number(e.price);
+  const price=Number(e.price_min_ils??e.price);
   if((e.is_free===true||e.free===true)&&Number.isFinite(price)&&price>0)issues.push({key:"price_conflict",label:"סתירה בין מחיר לסימון חינם",level:"bad"});
+  const purchase=e.purchase_url||e.ticket_url;
+  if(purchase&&!/^https?:\/\//i.test(String(purchase)))issues.push({key:"needs_ticket",label:"קישור רכישה בפורמט לא תקין",level:"bad"});
   return issues;
 }
 function annotateDuplicates(events){
@@ -131,6 +137,7 @@ function annotateDuplicates(events){
   return events;
 }
 async function load(){
+  sourceReports=[];pendingSnapshots={};
   const taxonomyResponse=await fetch("data/taxonomy.json",{cache:"no-store"});
   if(!taxonomyResponse.ok)throw Error("taxonomy unavailable");
   taxonomyCategories=(await taxonomyResponse.json()).primary_categories||[];
@@ -146,6 +153,16 @@ async function load(){
       fetch(city.base+"data/events.json",{cache:"no-store"}).then(r=>r.json()),
       fetch(city.base+"data/editorial.json",{cache:"no-store"}).then(r=>r.ok?r.json():{events:{}}).catch(()=>({events:{}}))
     ]);
+    const snapshot={generated_at:data.generated_at||data.updated_at||null,events:{}};
+    for(const e of data.events||[]){
+      const text=JSON.stringify([e.title,e.start_date,e.end_date,e.start_time,e.venue,e.category,e.subcategory,e.purchase_url,e.ticket_status,e.image_url,e.description,e.long_description]);
+      const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));
+      snapshot.events[e.event_id]={title:e.title,hash:Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('')};
+    }
+    const baseline=readJson('isnet-sync-baseline:'+city.slug,null);
+    pendingSnapshots[city.slug]=snapshot;
+    const current=snapshot.events,previous=baseline?.events||{};
+    sourceReports.push({city,...snapshot,baselineAt:baseline?.checked_at||null,added:baseline?Object.keys(current).filter(id=>!previous[id]):[],changed:baseline?Object.keys(current).filter(id=>previous[id]&&previous[id].hash!==current[id].hash):[],removed:baseline?Object.keys(previous).filter(id=>!current[id]):[],previous});
     return (data.events||[]).map(e=>{
       const ed=editorialEntry(editorial,e.event_id);
       const video=e.youtube_id||(ed.video_verified===true&&ed.youtube_id)||artistVideoFor(e,shared)?.youtube_id||null;
@@ -156,6 +173,7 @@ async function load(){
   }));
   const dbRecords=await (window.ISNET_DB?.listEventRecords?.()||Promise.resolve([]));
   const dbMap=new Map(dbRecords.map(r=>[r.city_slug+":"+r.event_id,r]));
+  savedRecords=dbMap;
   const persisted=groups.flat().map(e=>{
     const db=dbMap.get(e._citySlug+":"+e.event_id);
     if(db?.payload)return mergeDbRecordWithFreshMedia(e,db);
@@ -171,12 +189,13 @@ async function load(){
   const unique=new Map();
   for(const e of [...persisted,...dbManual,...local])unique.set(e._citySlug+":"+e.event_id,e);
   all=annotateDuplicates([...unique.values()]).map(e=>({...e,_issues:issuesFor(e)}));
-  buildFilters();renderSubcategoryFilter();render();
+  buildFilters();renderSubcategoryFilter();render();renderSync();
 }
 function buildFilters(){
   const cities=[...new Set(all.map(e=>e.city).filter(Boolean))].sort();
   $("city").innerHTML='<option value="">כל הערים</option>'+cities.map(x=>'<option>'+esc(x)+'</option>').join("");
   const cats=taxonomyCategories.map(x=>x.id);
+  if($("bulkCategory"))$("bulkCategory").innerHTML='<option value="">בחרו קטגוריה</option>'+cats.map(x=>'<option value="'+esc(x)+'">'+esc(categoryLabels[x]||x)+'</option>').join("");
   $("category").innerHTML='<option value="">כל הקטגוריות</option>'+cats.map(x=>'<option value="'+esc(x)+'">'+esc(categoryLabels[x]||x)+'</option>').join("");
 }
 function renderSubcategoryFilter(){
@@ -198,6 +217,8 @@ function filtered(){
   return all.filter(e=>{
     
     if(city&&e.city!==city)return false;
+    if($("fromDate")?.value&&(lastEventDate(e)||'')<$("fromDate").value)return false;
+    if($("toDate")?.value&&(e.start_date||'')>$("toDate").value)return false;
     if(cat&&e.category!==cat)return false;
     if(sub&&e.subcategory!==sub)return false;
     if(status==="active"&&(e.status!=="active"||lastEventDate(e)<today))return false;
@@ -245,6 +266,7 @@ function render(resetPage=true){
   $("previousPage").disabled=currentPage===1;
   $("nextPage").disabled=currentPage===pages;
   $("empty").hidden=rows.length>0;
+  if($("selectedCount"))$("selectedCount").textContent=selectedEvents.size+" אירועים נבחרו";
   $("rows").innerHTML=rows.slice(start,start+PAGE_SIZE).map(e=>{
     const rawImg=e.thumbnail_url||e.image_url||"";
     const img=rawImg ? (/^(https?:|data:)/.test(rawImg)?rawImg:e._cityBase+rawImg) : "";
@@ -257,11 +279,11 @@ function render(resetPage=true){
     const src=sourceLabel(e);
     const issues=e._issues.length?e._issues.map(i=>'<span class="tag '+i.level+'">'+esc(i.label)+'</span>').join(""):'<span class="tag good">תקין</span>';
     const url=e._cityBase+"event.html?id="+encodeURIComponent(e.event_id);
-    const editUrl=(e._localNew?"new.html?v=20261007-1300&edit=1&city=":"edit.html?v=20261007-1300&city=")+encodeURIComponent(e._citySlug)+"&id="+encodeURIComponent(e.event_id);
+    const editUrl=("edit.html?v=20261016-safe-save1&city=")+encodeURIComponent(e._citySlug)+"&id="+encodeURIComponent(e.event_id);
     const statusLabel=e.status==="draft"?"טיוטה":e.status==="hidden"?"מוסתר":e.status==="archived"?"ארכיון":e.status==="trashed"?"בסל":"";
     const promotionLabel=e.promotion==="promoted"?"מקודם":e.promotion==="recommended"?"מומלץ":"רגיל";
     const promotionClass=e.promotion==="promoted"?"promotion-promoted":e.promotion==="recommended"?"promotion-recommended":"promotion-normal";
-    return '<tr>'+
+    return '<tr><td><input type="checkbox" data-select="'+esc(e._citySlug+':'+e.event_id)+'" aria-label="בחר '+esc(e.title)+'" '+(selectedEvents.has(e._citySlug+':'+e.event_id)?'checked':'')+'></td>'+
       '<td><div class="event-cell">'+(img?'<img class="thumb" loading="lazy" decoding="async" src="'+esc(img)+'" alt="">':'<div class="thumb"></div>')+
       '<div><div class="event-name">'+esc(e.title)+'</div><div class="event-id">'+esc(e.event_id)+'</div>'+(statusLabel?'<span class="status-chip status-'+esc(e.status)+'">'+esc(statusLabel)+'</span>':'')+'</div></div></td>'+
       '<td class="image-status">'+imageStatus+'</td>'+
@@ -277,9 +299,52 @@ function render(resetPage=true){
       '</tr>';
   }).join("");
 }
-["q","city","status","quality","subcategory","sortOrder"].forEach(id=>$(id).addEventListener("input",render));
+["q","city","status","quality","subcategory","sortOrder","fromDate","toDate"].forEach(id=>$(id).addEventListener("input",render));
 $("category").addEventListener("change",()=>{renderSubcategoryFilter();render()});
-$("clearBtn").addEventListener("click",()=>{["q","city","category","status","quality","subcategory"].forEach(id=>$(id).value="");renderSubcategoryFilter();render()});
+$("clearBtn").addEventListener("click",()=>{["q","city","category","status","quality","subcategory","fromDate","toDate"].forEach(id=>$(id).value="");renderSubcategoryFilter();render()});
+function renderSync(){
+ const target=$("syncSummary");if(!target)return;
+ target.innerHTML=sourceReports.map(r=>{
+  const missing=[...savedRecords.values()].filter(row=>row.city_slug===r.city.slug&&row.record_type!=='manual'&&!r.events[row.event_id]);
+  const changes=[['נוספו',r.added],['השתנו',r.changed],['אינם במקור הנוכחי',r.removed]].map(([label,ids])=>'<details><summary>'+label+': '+ids.length+'</summary><ul>'+ids.slice(0,100).map(id=>'<li>'+esc(r.events[id]?.title||r.previous[id]?.title||id)+'</li>').join('')+'</ul></details>').join('');
+  return '<article class="panel" style="padding:16px"><h3>'+esc(r.city.name)+'</h3><p>'+Object.keys(r.events).length+' אירועים במקור · '+[...savedRecords.values()].filter(row=>row.city_slug===r.city.slug).length+' רשומות בניהול</p><p>עדכון שמדווח במקור: '+esc(r.generated_at?new Date(r.generated_at).toLocaleString('he-IL'):'לא דווח')+'</p><p>'+ (r.baselineAt?'השוואה לבדיקה בדפדפן הזה מ־'+esc(new Date(r.baselineAt).toLocaleString('he-IL')):'אין עדיין נקודת השוואה בדפדפן הזה.')+'</p>'+changes+'<p>'+missing.length+' רשומות ניהול אינן במקור הנוכחי; לא נמחקו אוטומטית.</p></article>';
+ }).join('');
+}
+$("saveSourceBaseline")?.addEventListener('click',()=>{
+ try{for(const [city,snapshot] of Object.entries(pendingSnapshots))localStorage.setItem('isnet-sync-baseline:'+city,JSON.stringify({...snapshot,checked_at:new Date().toISOString()}));$("syncNote").textContent='נקודת ההשוואה נשמרה בדפדפן הזה. ברענון הבא יוצגו ההבדלים.';}
+ catch(error){$("syncNote").textContent='לא ניתן לשמור נקודת השוואה בדפדפן: '+error.message;}
+});
+$("rows").addEventListener('change',event=>{
+ const input=event.target;if(!input.dataset?.select)return;
+ if(input.checked)selectedEvents.add(input.dataset.select);else selectedEvents.delete(input.dataset.select);
+ $("selectedCount").textContent=selectedEvents.size+' אירועים נבחרו';
+});
+$("selectPage")?.addEventListener('click',()=>{for(const e of filtered().slice((currentPage-1)*PAGE_SIZE,currentPage*PAGE_SIZE))selectedEvents.add(e._citySlug+':'+e.event_id);render(false)});
+$("clearSelection")?.addEventListener('click',()=>{selectedEvents.clear();render(false)});
+$("bulkApply")?.addEventListener('click',async()=>{
+ const action=$("bulkAction").value,category=$("bulkCategory").value;
+ const chosen=all.filter(e=>selectedEvents.has(e._citySlug+':'+e.event_id));
+ if(!chosen.length||!action)return;
+ if(action==='category'&&!category){$("bulkNote").textContent='בחרו קטגוריה.';return;}
+ if(!confirm('להחיל את הפעולה על '+chosen.length+' האירועים שנבחרו?'))return;
+ const button=$("bulkApply");button.disabled=true;let success=0;const errors=[];
+ for(const e of chosen){
+  const record=savedRecords.get(e._citySlug+':'+e.event_id);
+  const previous=record?.payload||{};let payload={...previous};
+  if(action==='category'){
+   const locks=new Set(previous.overlay_version===2?previous.locked_fields||[]:window.ISNET_EVENT_OVERLAY.fields.filter(key=>Object.prototype.hasOwnProperty.call(previous,key)));
+   locks.add('category');locks.add('subcategory');
+   payload={...payload,overlay_version:2,locked_fields:[...locks],category,subcategory:null,category_manual_override:true,subcategory_manual_override:true};
+  }else if(action==='hide')payload.status='hidden';
+  else payload.promotion=action;
+  try{await window.ISNET_DB.savePublicPatch(e._citySlug,e.event_id,payload,record?.record_type||'override');success++;selectedEvents.delete(e._citySlug+':'+e.event_id);}
+  catch(error){errors.push(e.title+': '+error.message);}
+  $("bulkNote").textContent='נשמרו '+success+' מתוך '+chosen.length;
+ }
+ button.disabled=false;
+ try{await load();}catch(error){errors.push('רענון הרשימה נכשל: '+error.message);}
+ $("bulkNote").textContent='נשמרו '+success+' אירועים.'+(errors.length?' שגיאות: '+errors.join(' | '):'');
+});
 $("previousPage").addEventListener("click",()=>{currentPage--;render(false)});
 $("nextPage").addEventListener("click",()=>{currentPage++;render(false)});
 $("refreshBtn").addEventListener("click",()=>load().catch(err=>{$("resultCount").textContent="הרענון נכשל — נסו שוב";console.error(err)}));

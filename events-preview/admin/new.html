@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="edit.css?v=20261007-1120">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="auth/config.js?v=20261007-1225"></script>
-  <script src="cms-db.js?v=20261007-1245"></script>
+  <script src="../shared/event-overlay.js?v=20261016-sync1"></script>
+  <script src="cms-db.js?v=20261016-safe-save1"></script>
 </head>
 <body>
 <header class="topbar edit-topbar">
@@ -23,7 +24,7 @@
   </div>
 </header>
 <main class="edit-main">
-  <div class="notice">האירוע יישמר כרגע כטיוטה מקומית. לאחר חיבור ה־API המאובטח, אותו מסך ישמור ויפרסם למערכת החיה.</div>
+  <div class="notice">האירוע יישמר כטיוטה במערכת המרכזית. הפרסום מתבצע ממסך העריכה.</div>
   <section class="editor-layout">
     <div class="editor-column">
       <section class="panel edit-card">
@@ -114,12 +115,12 @@
       <section class="panel edit-card">
         <h2>שמירה</h2>
         <button id="saveBtn" class="primary wide">שמור אירוע חדש</button>
-        <p class="save-note" id="saveNote">האירוע יישמר כטיוטה במחשב הזה.</p>
+        <p class="save-note" id="saveNote">האירוע יישמר כטיוטה במערכת המרכזית.</p>
       </section>
     </aside>
   </section>
 </main>
-<script src="new.js?v=20261009-taxonomy2"></script>
+<script src="new.js?v=20261016-clone1"></script>
 <script type="module">
 import {requireAuth,signOut} from "./auth/guard.js?v=20261007-1225";
 const auth=await requireAuth();

@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');
+const tools=require('../events-preview/shared/event-tools.js');
+const data=tools.calendar([{event_id:'one',title:'ילדים, תיאטרון; ערב',start_date:'2026-11-01',start_time:'20:30',venue:'היכל'},{event_id:'two',title:'תערוכה',start_date:'2026-11-02',end_date:'2026-11-04'},{event_id:'canceled',title:'בוטל',start_date:'2026-11-02',status:'cancelled'}],'https://example.com/event.html?id=one');
+assert.match(data,/DTSTART;TZID=Asia\/Jerusalem:20261101T203000/);
+assert.match(data,/DTSTART;VALUE=DATE:20261102/);assert.match(data,/DTEND;VALUE=DATE:20261105/);
+assert.equal((data.match(/BEGIN:VEVENT/g)||[]).length,2);assert.ok(!data.includes('UID:canceled'));
+assert.match(data,/ילדים\\, תיאטרון\\; ערב/);
+const long=tools.calendar([{event_id:'x',title:'אירוע בעברית '.repeat(20),start_date:'2026-11-02'}],'https://example.com');
+for(const line of long.split('\r\n'))assert.ok(Buffer.byteLength(line,'utf8')<=75);
+assert.equal(tools.readSaved().size,0);
+console.log('PASS: calendar Israel timezone, all-day end dates, cancelled event exclusion, escaping and UTF-8 folding, unavailable storage fallback');

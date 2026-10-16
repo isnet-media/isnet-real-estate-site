@@ -49,8 +49,8 @@ function normEventText(v){
 async function existingEventsForCity(city){
   const base=city==="ashdod"?"../ashdod/":"../rishon-lezion/";
   const [data,records]=await Promise.all([
-    fetch(base+"data/events.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({events:[]})),
-    (window.ISNET_DB?.listEventRecords?.()||Promise.resolve([])).catch(()=>[])
+    fetch(base+"data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("source unavailable");return r.json()}),
+    (window.ISNET_DB?.listEventRecords?.()||Promise.resolve([]))
   ]);
   const db=(records||[])
     .filter(r=>r.city_slug===city)
@@ -63,6 +63,7 @@ async function editorialGate(candidate){
   const exact=events.find(e=>
     normEventText(e.title)===nt &&
     String(e.start_date||"")===String(candidate.start_date||"") &&
+    String(e.start_time||"")===String(candidate.start_time||"") &&
     (!nv || !e.venue || normEventText(e.venue)===nv)
   );
   if(exact)return {decision:"stop_duplicate",event:exact};
@@ -81,12 +82,14 @@ $("imageFile").addEventListener("change",e=>{
   const reader=new FileReader();reader.onload=()=>{imageData=reader.result;$("imagePreview").style.backgroundImage='url("'+reader.result+'")';$("imageApproved").checked=false;$("imageState").innerHTML='<span class="tag warn">תמונה חדשה · דורשת אישור</span>'};reader.readAsDataURL(file);
 });
 $("saveBtn").addEventListener("click",async()=>{
+  const button=$("saveBtn");if(button.disabled)return;button.disabled=true;
+  try{
   const title=$("title").value.trim(),date=$("startDate").value,city=$("city").value;
   if(!title||!date){alert("יש להזין לפחות כותרת ותאריך.");return}
   const item={
     event_id:idFor(city),_citySlug:city,city:city==="ashdod"?"אשדוד":"ראשון לציון",
     title,short_pitch:$("shortPitch").value.trim(),long_description:$("description").value.trim(),
-    category:$("category").value,subcategory:$("subcategory").value||null,secondary_categories:selectedTaxonomy("secondaryCategories"),audiences:selectedTaxonomy("audiencesText"),topics:selectedTaxonomy("topics"),organizations:selectedTaxonomy("organizations"),distribution_targets:selectedTaxonomy("distributionTargets"),smart_distribution:$("smartDistribution").checked,seo_title:$("seoTitle").value.trim(),seo_description:$("seoDescription").value.trim(),seo_slug:$("seoSlug").value.trim()||makeSlug(title),schema_type:$("schemaType").value,seo_index:$("seoIndex").checked,promote_home:$("promoteHome").checked,promote_city:$("promoteCity").checked,promote_section:$("promoteSection").checked,promotion:$("promotion").value,status:"draft",start_date:date,start_time:$("startTime").value,
+    category:$("category").value,subcategory:$("subcategory").value||null,secondary_categories:selectedTaxonomy("secondaryCategories"),audiences:selectedTaxonomy("audiencesText"),topics:selectedTaxonomy("topics"),organizations:selectedTaxonomy("organizations"),distribution_targets:selectedTaxonomy("distributionTargets"),smart_distribution:$("smartDistribution").checked,seo_title:$("seoTitle").value.trim(),seo_description:$("seoDescription").value.trim(),seo_slug:$("seoSlug").value.trim()||(makeSlug(title)+"-"+Date.now().toString(36)),schema_type:$("schemaType").value,seo_index:$("seoIndex").checked,promote_home:$("promoteHome").checked,promote_city:$("promoteCity").checked,promote_section:$("promoteSection").checked,promotion:$("promotion").value,status:"draft",start_date:date,start_time:$("startTime").value,
     venue:$("venue").value.trim(),address:$("address").value.trim(),
     purchase_url:$("purchaseUrl").value.trim(),youtube_id:$("youtubeId").value.trim(),
     image_credit:$("imageCredit").value.trim(),image_publishable:$("imageApproved").checked,
@@ -115,7 +118,7 @@ $("saveBtn").addEventListener("click",async()=>{
       item.editorial_gate_decision="open_new_process";
     }
   }catch(err){
-    console.warn("editorial gate unavailable",err);
+    $("saveNote").textContent="לא ניתן לבדוק כפילויות כרגע. נסו שוב לפני שמירה.";console.warn(err);return;
   }
 
   try{
@@ -124,10 +127,30 @@ $("saveBtn").addEventListener("click",async()=>{
   }catch(err){
     const list=read();list.unshift(item);write(list);
     $("saveNote").textContent="השרת לא היה זמין; נשמר גיבוי מקומי.";
-    console.error(err);
+    console.error(err);return;
   }
   setTimeout(()=>location.href="./?status=draft",700);
+  }finally{button.disabled=false;}
 });
 $("city").addEventListener("change",renderOrganizations);
 $("category").addEventListener("change",()=>renderSubcategories($("category").value));
-loadTaxonomy().catch(console.error);
+async function prefillClone(){
+ const params=new URLSearchParams(location.search),id=params.get('clone'),city=params.get('city');
+ if(!id||!['ashdod','rishon-lezion'].includes(city))return;
+ const [data,record]=await Promise.all([fetch('../'+city+'/data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('source unavailable');return r.json()}),window.ISNET_DB.getEventRecord(city,id)]);
+ const source=(data.events||[]).find(e=>e.event_id===id)||{};
+ const e=window.ISNET_EVENT_OVERLAY.merge(source,record?.payload||{});
+ if(!e.title)throw new Error('לא נמצא אירוע לשכפול');
+ $('city').value=city;renderOrganizations();renderPrimaryCategories(e.category);renderSubcategories(e.category,e.subcategory);
+ for(const [node,key] of Object.entries({title:'title',shortPitch:'short_pitch',description:'long_description',venue:'venue',address:'address',purchaseUrl:'purchase_url',youtubeId:'youtube_id',imageCredit:'image_credit'}))$(node).value=e[key]||'';
+ for(const container of ['secondaryCategories','audiencesText','topics','organizations','distributionTargets']){
+  const field={secondaryCategories:'secondary_categories',audiencesText:'audiences',distributionTargets:'distribution_targets'}[container]||container;
+  for(const input of $(container).querySelectorAll('input'))input.checked=(e[field]||[]).includes(input.value);
+ }
+ imageData=e.image_url||e.image_data_url||null;
+ if(imageData){if(!/^(https?:|data:)/.test(imageData))imageData=new URL('../'+city+'/'+imageData,location.href).href;$('imagePreview').style.backgroundImage='url("'+imageData.replace(/"/g,'%22')+'")';}
+ $('imageApproved').checked=e.image_publishable===true&&e.image_verified===true;
+ $('startDate').value='';$('startTime').value='';$('seoSlug').value='';
+ $('saveNote').textContent='הועתקו פרטי האירוע. בחרו תאריך ושעה חדשים; העותק יישמר כטיוטה נפרדת.';
+}
+loadTaxonomy().then(prefillClone).catch(error=>{$('saveNote').textContent='לא ניתן לטעון את הטופס: '+error.message;console.error(error)});

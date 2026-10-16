@@ -41,7 +41,7 @@ function render(){
 }
 document.getElementById("q").addEventListener("input",render);
 Promise.all([
- fetch("data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("data");return r.json()}),
+ (window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("data");return r.json()})),
  window.ISNET_PUBLIC_CMS?.publishedEvents?.(location.pathname.split("/").filter(Boolean)[1])||Promise.resolve([])
 ]).then(([d,cms])=>{
  const rows=(window.ISNET_EVENT_IDENTITIES?.reconcile?.(Array.isArray(d.events)?d.events:[])||(Array.isArray(d.events)?d.events:[]));

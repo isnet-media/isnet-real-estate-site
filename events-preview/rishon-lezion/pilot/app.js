@@ -7,7 +7,8 @@ const fmtFull=new Intl.DateTimeFormat("he-IL",{weekday:"long",day:"numeric",mont
 const currency=new Intl.NumberFormat("he-IL",{style:"currency",currency:"ILS",maximumFractionDigits:0});
 const catLabels={conference:"כנסים ופאנלים",food:"אוכל וקולינריה",tour:"טיולים וסיורים",music:"הופעות ומוזיקה",standup:"סטנדאפ",theatre:"תיאטרון והצגות",kids:"ילדים ומשפחה",lecture:"הרצאות וכנסים",workshop:"סדנאות ויצירה",exhibition:"תערוכות ואמנות",cinema:"קולנוע",community:"קהילה ופנאי",sport:"ספורט בראשון לציון",seniors:"הגיל השלישי וגמלאים",other:"עוד"};
 const catIcons={music:"♫",standup:"◉",theatre:"◇",kids:"★",lecture:"▣",workshop:"✎",exhibition:"▤",cinema:"▶",community:"◎",sport:"⚑",seniors:"♟",other:"+"};
-const favorites=new Set(JSON.parse(localStorage.getItem("isnet-events-favorites")||"[]"));
+let savedFavorites=[];try{const parsed=JSON.parse(localStorage.getItem("isnet-events-favorites")||"[]");if(Array.isArray(parsed))savedFavorites=parsed.filter(id=>typeof id==="string");}catch{}
+const favorites=new Set(savedFavorites);
 
 function localDate(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
 function iso(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
@@ -1221,13 +1222,13 @@ function publishedBoardEvents(base,rows,day){
   }
   // CMS corrections can move a previously future occurrence into the past.
   // Merge first; filter dates only once the published facts have been applied.
-  return [...events.values()].filter(e=>e.start_date>=day&&!isNonEventActivity(e)&&e.status!=="cancelled"&&e.publication_status!=="draft"&&e.is_active!==false);
+  return [...events.values()].filter(e=>(e.end_date||e.start_date)>=day&&!isNonEventActivity(e)&&!["cancelled","canceled","hidden","draft","archived","trashed","deleted"].includes(e.status)&&!["draft","hidden","unpublished","archived"].includes(e.publication_status)&&e.is_active!==false);
 }
 
 async function init(){
   if(location.pathname.includes("/rishon-lezion/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
-    fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()),
+    (window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
     fetch("data/cinema.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({movies:[]})),
     fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),

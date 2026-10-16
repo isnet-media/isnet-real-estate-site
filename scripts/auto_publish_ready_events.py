@@ -202,7 +202,7 @@ def publish(event: dict, qa: dict) -> None:
         "status": "active",
         "publication_status": "published",
         "published_at": now,
-        "public_path": f"/events/{slug}",
+        "public_path": f"/events-preview/{event['_citySlug']}/event.html?slug={quote(slug, safe='')}",
         "agent_qa_score": qa["score"],
         "agent_source_confidence": qa["confidence"],
         "agent_publish_decision": "auto_publish",
@@ -216,7 +216,7 @@ def publish(event: dict, qa: dict) -> None:
         "seo_slug": slug,
         "publication_status": "published",
         "published_at": now,
-        "public_path": f"/events/{slug}",
+        "public_path": f"/events-preview/{event['_citySlug']}/event.html?slug={quote(slug, safe='')}",
         "updated_at": now,
     }
     url = f"{SUPABASE_URL}/rest/v1/cms_event_records"

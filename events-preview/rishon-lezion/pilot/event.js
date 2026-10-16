@@ -68,6 +68,7 @@ function isBlockedPurchaseUrl(url){
   }catch{return true}
 }
 function purchaseAction(e){
+  if(["cancelled","canceled","postponed"].includes(e.status))return null;
   if(!isUpcoming(e))return null;
   const url=String(e.purchase_url||"").trim();
   if(/^https:\/\//i.test(url)&&(e.source_content_authoritative||!isBlockedPurchaseUrl(url))){
@@ -164,7 +165,8 @@ function applySeo(e){
     "@type":"Event",
     name:eventDisplayTitle(e),
     startDate:e.start_date+(e.start_time?"T"+e.start_time:""),
-    eventStatus:"https://schema.org/EventScheduled",
+    eventStatus:e.status==="cancelled"?"https://schema.org/EventCancelled":e.status==="postponed"?"https://schema.org/EventPostponed":"https://schema.org/EventScheduled",
+    endDate:e.end_date||undefined,
     eventAttendanceMode:"https://schema.org/OfflineEventAttendanceMode",
     location:e.venue?{"@type":"Place",name:e.venue,...(e.address?{address:e.address}:{})}:undefined,
     image:image?[new URL(image,location.href).href]:undefined,
@@ -279,10 +281,12 @@ function renderHero(e,occ,imageEvent){
   const sportBadge=e.category==="sport"?sportBranchMeta(e):null;
   $("heroBadges").innerHTML=
     '<a class="badge accent categoryLink" href="index.html?category='+encodeURIComponent(e.category||"other")+'#events" title="לעוד אירועים בקטגוריה">'+escapeHtml(catLabels[e.category]||"אירוע")+' ←</a>'+
+    (e.status==="cancelled"?'<span class="badge badge--soldout">האירוע בוטל</span>':e.status==="postponed"?'<span class="badge badge--soldout">האירוע נדחה — בדקו מועד חדש אצל המארגן</span>':'')+
     (sportBadge?'<span class="badge">'+escapeHtml(sportBadge.icon)+' '+escapeHtml(sportBadge.label)+'</span>':"")+
     (occ.every(x=>x.ticket_status==="sold_out")?'<span class="badge badge--soldout">אזלו הכרטיסים</span>':"")+
     (occ.every(x=>!isUpcoming(x))?'<span class="badge badge--soldout">האירוע הסתיים</span>':"");
   $("eventTitle").textContent=displayTitle;
+  window.ISNET_EVENT_TOOLS?.render(e,occ);
   $("eventPitch").textContent=safeEditorial(e.short_pitch)||meaningfulEventDescription(e).slice(0,240)||autoPitch({...e,title:displayTitle});
 
   const venues=[...new Set(occ.map(x=>x.venue).filter(Boolean))];
@@ -405,11 +409,12 @@ function renderPractical(e,occ){
   const prices=occ.map(priceText);
   const onePrice=[...new Set(prices)].length===1?prices[0]:"המחיר משתנה לפי מועד";
   const audience=(Array.isArray(e.audiences)&&e.audiences.length)?e.audiences.map(a=>({seniors:"הגיל השלישי",women:"נשים",kids:"ילדים",families:"משפחות",adults:"מבוגרים"}[a]||a)).join(", "):null;
-  const age=e.age_min!=null?"מגיל "+e.age_min:null;
+  const age=e.age_min!=null&&e.age_max!=null?"גילאי "+e.age_min+"–"+e.age_max:e.age_min!=null?"מגיל "+e.age_min:e.age_max!=null?"עד גיל "+e.age_max:null;
   const rows=[
     ["מקום",venues.filter(v=>v!==e.city).join(" / ")||"המיקום המדויק לא פורסם במקור"],
     ...(e.address?[["כתובת",e.address]]:[]),
     ["מחיר",onePrice],
+    ...(typeof e.accessibility==="string"&&e.accessibility.trim()?[["נגישות",e.accessibility]]:[]),
     ["כרטיסים",occ.every(x=>x.ticket_status==="sold_out")?"אזלו הכרטיסים":"יש לבדוק זמינות באתר המקור"],
     ...(e.duration_minutes?[["משך",e.duration_minutes+" דקות"]]:[]),
     ...(age?[["גילים",age]]:[]),
@@ -458,7 +463,7 @@ async function init(){
     const requestedSlug=params.get("slug");
     if(!requestedId&&!requestedSlug)throw new Error("missing event key");
     const [data,sports,editorial,artistVideos,publishedCmsRows]=await Promise.all([
-      fetch("data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()}),
+      (window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()})),
       fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
       fetch("data/editorial.json",{cache:"no-store"}).then(r=>r.ok?r.json():{events:{}}).catch(()=>({events:{}})),
       fetch("../shared/standup-videos.json",{cache:"no-store"}).then(r=>r.ok?r.json():{artists:[]}).catch(()=>({artists:[]})),
@@ -522,7 +527,7 @@ async function init(){
     const canonical=original?.canonical_event_id&&all.find(e=>e.event_id===original.canonical_event_id);
     const base=canonical||(!requestedId&&all.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug)))
       ||(original&&all.find(e=>e.event_id===original.event_id||e._source_event_ids?.includes(original.event_id)));
-    if(!base)throw new Error("event");
+    if(!base||["hidden","draft","archived","trashed","deleted"].includes(base.status)||["draft","unpublished","hidden","archived"].includes(base.publication_status))throw new Error("event");
     const canonicalSlug=eventSlug(base);
     if(!requestedSlug || slugifyHebrew(requestedSlug)!==canonicalSlug){
       history.replaceState(null,"","event.html?slug="+encodeURIComponent(canonicalSlug));

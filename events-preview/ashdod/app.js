@@ -41,7 +41,8 @@ const fmtFull=new Intl.DateTimeFormat("he-IL",{weekday:"long",day:"numeric",mont
 const currency=new Intl.NumberFormat("he-IL",{style:"currency",currency:"ILS",maximumFractionDigits:0});
 const catLabels={conference:"כנסים ופאנלים",food:"אוכל וקולינריה",tour:"טיולים וסיורים",music:"הופעות ומוזיקה",standup:"סטנדאפ",theatre:"תיאטרון והצגות",kids:"ילדים ומשפחה",lecture:"הרצאות וכנסים",workshop:"סדנאות ויצירה",exhibition:"תערוכות ואמנות",cinema:"קולנוע",festival:"פסטיבלים",community:"קהילה ופנאי",sport:"ספורט באשדוד",seniors:"הגיל השלישי וגמלאים",other:"עוד"};
 const catIcons={music:"♫",standup:"◉",theatre:"◇",kids:"★",lecture:"▣",workshop:"✎",exhibition:"▤",cinema:"▶",festival:"✺",community:"◎",sport:"⚑",seniors:"♟",other:"+"};
-const favorites=new Set(JSON.parse(localStorage.getItem("isnet-events-favorites")||"[]"));
+let savedFavorites=[];try{const parsed=JSON.parse(localStorage.getItem("isnet-events-favorites")||"[]");if(Array.isArray(parsed))savedFavorites=parsed.filter(id=>typeof id==="string");}catch{}
+const favorites=new Set(savedFavorites);
 
 function localDate(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
 function iso(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
@@ -1166,19 +1167,19 @@ function resetAll(){state.quick="all";state.date=null;state.periodStart=null;sta
 
 async function init(){
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
-    fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()),
+    (window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
     fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema HTTP "+r.status);return r.json()}).then(d=>{if(!Array.isArray(d.movies)||!d.movies.length)throw new Error("empty cinema");return d}).catch(()=>fetch("https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/events-preview/ashdod/data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema fallback HTTP "+r.status);return r.json()})).catch(()=>({movies:[]})),
     fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
     fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
     window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod")||Promise.resolve([])
   ]);
-  state.events=(data.events||[]).filter(e=>e.start_date>=iso(today())&&!isNonEventActivity(e));
+  state.events=(data.events||[]).filter(e=>!isNonEventActivity(e));
   // Reflect published CMS records on the event board as well as on detail pages.
   const existingById=new Map(state.events.map((event,index)=>[event.event_id,index]));
   for(const row of (Array.isArray(cmsRows)?cmsRows:[])){
     const event=row?.payload;
-    if(!event||!event.start_date||event.start_date<iso(today()))continue;
+    if(!event||!event.start_date||(event.end_date||event.start_date)<iso(today()))continue;
     const id=row.event_id||event.event_id;
     if(!id)continue;
     const pos=existingById.get(id);
@@ -1189,6 +1190,7 @@ async function init(){
       state.events.push({...event,event_id:id});
     }
   }
+  state.events=state.events.filter(e=>(e.end_date||e.start_date)>=iso(today())&&e.is_active!==false&&!["hidden","draft","archived","trashed","deleted","cancelled","canceled"].includes(e.status)&&!["draft","unpublished","hidden","archived"].includes(e.publication_status));
   state.fallbacks=fallbacks;
   state.generatedAt=data.generated_at||null;
   state.cinema=cinema.movies||[];

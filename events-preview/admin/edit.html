@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="edit.css?v=20261007-1120">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="auth/config.js?v=20261007-1225"></script>
-  <script src="cms-db.js?v=20261007-1600"></script>
+  <script src="../shared/event-overlay.js?v=20261016-sync1"></script>
+  <script src="cms-db.js?v=20261016-safe-save1"></script>
 </head>
 <body>
 <header class="topbar edit-topbar">
@@ -20,6 +21,7 @@
   </div>
   <div class="top-actions">
     <a class="secondary action-link" href="./">חזרה לכל האירועים</a>
+    <a id="cloneLink" class="secondary action-link" href="new.html">שכפל למועד חדש</a>
     <button id="previewBtn" class="secondary">תצוגה באתר</button>
   </div>
 </header>
@@ -35,7 +37,7 @@
         <div class="three">
           <label><span>קטגוריה ראשית</span><select id="category"></select></label>
           <label><span>תת־קטגוריה</span><select id="subcategory"><option value="">בחרו תת־קטגוריה</option></select></label>
-          <label><span>סטטוס</span><select id="status"><option value="active">פעיל</option><option value="draft">טיוטה</option><option value="hidden">מוסתר</option><option value="published">פורסם</option></select></label>
+          <label><span>סטטוס</span><select id="status"><option value="active">פעיל</option><option value="draft">טיוטה</option><option value="hidden">מוסתר</option><option value="published">פורסם</option><option value="cancelled">בוטל</option><option value="postponed">נדחה</option></select></label>
         </div>
         <label><span>עדיפות / קידום</span>
           <select id="promotion">
@@ -93,6 +95,13 @@
           <label><span>מקום</span><input id="venue" type="text"></label>
         </div>
         <label><span>כתובת</span><input id="address" type="text"></label>
+        <label><span>תאריך סיום (לאירוע מתמשך)</span><input id="endDate" type="date"></label>
+        <div class="two"><label><span>מגיל</span><input id="ageMin" type="number" min="0" max="120"></label><label><span>עד גיל</span><input id="ageMax" type="number" min="0" max="120"></label></div>
+        <label><span>מצב כרטיסים</span><select id="ticketStatus"><option value="">לא ידוע</option><option value="available">זמינים לפי המקור</option><option value="sold_out">אזלו</option></select></label>
+        <label><span>מארגן</span><input id="organizer" type="text"></label>
+        <label><span>מידע נגישות מהמקור</span><textarea id="accessibility" rows="3"></textarea></label>
+        <label><span>טלפון ציבורי לבירורים</span><input id="contactPhone" type="tel"></label>
+        <label><span>מקור המידע</span><input id="sourceUrl" type="url" dir="ltr"></label>
       </section>
 
       <section class="panel edit-card">
@@ -103,6 +112,7 @@
     </div>
 
     <aside class="side-column">
+      <section class="panel edit-card"><h2>הגנה על עריכות וסנכרון</h2><p>שדות ששונו ידנית נשמרים מול עדכוני המקור. להסרת הגנה בטלו את הסימון ושמרו.</p><div id="syncLocks"></div></section>
       <section class="panel edit-card media-card">
         <h2>תמונה</h2>
         <div id="imagePreview" class="large-preview"></div>
@@ -128,7 +138,7 @@
     </aside>
   </section>
 </main>
-<script src="edit.js?v=20261009-taxonomy2"></script>
+<script src="edit.js?v=20261016-safe-save1"></script>
 <script type="module">
 import {requireAuth,signOut} from "./auth/guard.js?v=20261007-1225";
 const auth=await requireAuth();

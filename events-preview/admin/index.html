@@ -8,17 +8,18 @@
   <link rel="stylesheet" href="styles.css?v=20261010-taxonomy-stack2">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="auth/config.js?v=20261007-1225"></script>
-  <script src="cms-db.js?v=20261007-1300"></script>
+  <script src="../shared/event-overlay.js?v=20261016-sync1"></script>
+  <script src="cms-db.js?v=20261016-safe-save1"></script>
 </head>
 <body>
   <header class="topbar">
     <div>
       <div class="eyebrow">ISNET AI CMS · פיילוט אירועים</div>
       <h1>מרכז ניהול אירועים</h1>
-      <p>מסך בקרה ראשוני על אשדוד וראשון לציון. בשלב זה צפייה ובקרה בלבד.</p>
+      <p>ניהול, עריכה ובקרת איכות של האירועים באשדוד ובראשון לציון.</p>
     </div>
     <div class="top-actions">
-      <span class="mode">פיילוט CMS · טיוטות מקומיות</span>
+      <span class="mode">עריכה · פרסום · בקרת איכות</span>
       <a class="primary permissions-link" href="users.html?v=20261007-1150">👤 ניהול משתמשים והרשאות</a>
       <a class="secondary action-link" href="agents.html?v=20261007-1400">🤖 סוכנים ואוטומציות</a>
       <a class="secondary action-link" href="media.html?v=20261007-media">🖼️ בנק מדיה</a>
@@ -31,6 +32,7 @@
   </header>
 
   <main>
+    <details class="panel" style="padding:20px;margin-bottom:20px"><summary><strong>מרכז סנכרון ומקורות</strong></summary><p>ההשוואה מתייחסת לקובצי הנתונים של הערים. היא אינה מפעילה סריקה חדשה באתרים החיצוניים. אין מחיקות אוטומטיות בעקבות היעלמות מהמקור.</p><div id="syncSummary" class="stats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))"></div><button id="saveSourceBaseline" class="secondary" type="button">שמור נקודת השוואה בדפדפן הזה</button><p id="syncNote" role="status"></p></details>
     <section id="summary" class="stats" aria-label="סיכום"></section>
 
     <section class="panel filters">
@@ -43,6 +45,7 @@
       </div>
       <div class="filter-grid">
         <label><span>סדר תצוגה</span><select id="sortOrder"><option value="latest">האחרונים שעלו — קודם</option><option value="event_date">לפי מועד האירוע</option></select></label>
+        <label><span>מתאריך</span><input id="fromDate" type="date"></label><label><span>עד תאריך</span><input id="toDate" type="date"></label>
         <label class="search">
           <span>חיפוש</span>
           <input id="q" type="search" placeholder="למשל: סטנדאפ, מוזיאון, קובי מימון">
@@ -97,11 +100,16 @@
           <p id="resultCount">טוען...</p>
         </div>
       </div>
+      <div class="top-actions" style="padding:16px;flex-wrap:wrap">
+        <button id="selectPage" type="button" class="secondary">בחר עמוד</button><button id="clearSelection" type="button" class="secondary">נקה בחירה</button><span id="selectedCount">0 אירועים נבחרו</span>
+        <select id="bulkAction" aria-label="פעולה מרוכזת"><option value="">בחרו פעולה</option><option value="hide">הסתרה</option><option value="recommended">סימון כמומלץ</option><option value="promoted">קידום</option><option value="normal">ביטול קידום</option><option value="category">שינוי קטגוריה</option></select>
+        <select id="bulkCategory" aria-label="קטגוריה לפעולה מרוכזת"></select><button id="bulkApply" type="button" class="primary">החל על הנבחרים</button><p id="bulkNote" role="status"></p>
+      </div>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>אירוע</th>
+              <th>בחירה</th><th>אירוע</th>
               <th>תמונה</th>
               <th>עיר</th>
               <th>קטגוריה</th>
@@ -131,7 +139,7 @@
   <template id="statTemplate">
     <article class="stat"><strong></strong><span></span><small></small></article>
   </template>
-  <script src="app.js?v=20261016-admin-pagination"></script>
+  <script src="app.js?v=20261016-sync-bulk1"></script>
 <script type="module">
 import {requireAuth,signOut} from "./auth/guard.js?v=20261007-1225";
 const auth=await requireAuth();
