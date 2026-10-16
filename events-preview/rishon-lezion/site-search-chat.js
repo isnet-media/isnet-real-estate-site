@@ -19,10 +19,11 @@ async function ensure(){
  if(readyPromise)return readyPromise;
  readyPromise=(async()=>{
   const started=Date.now();while(!window.ISNET_SEARCH_CATALOG()?.events?.length){if(Date.now()-started>15000)throw Error('catalog unavailable');await new Promise(r=>setTimeout(r,200))}
+  await window.ISNET_LOAD_FULL_SEARCH?.();
   const base=window.ISNET_SEARCH_CATALOG();
   placesPromise=placesPromise||json('data/places.json').catch(()=>null);
   const [places,saturdayGuide]=await Promise.all([placesPromise,json('data/saturday-guide.json?v=20261015-1').catch(()=>null)]);payload={...base,places,saturdayGuide};
-  worker=new Worker('site-search-engine.js?v=20261016-setting1');worker.onerror=fail;
+  worker=new Worker('site-search-engine.js?v=20261016-alternatives1');worker.onerror=fail;
   worker.onmessage=e=>{const data=e.data;if(data.kind==='ready'){const job=jobs.get('init');if(job){clearTimeout(job.timer);jobs.delete('init');job.resolve(data)}return}const job=jobs.get(data.id);if(!job)return;clearTimeout(job.timer);jobs.delete(data.id);if(data.kind==='error')job.reject(Error('search failed'));else job.resolve(data)};
   await initialize();if(!places)status.textContent='מידע על מקומות קבועים לא נטען; החיפוש זמין באירועים ובקולנוע.';
  })().catch(e=>{fail();throw e});return readyPromise;
@@ -46,6 +47,7 @@ async function run(){
   if(context.reset){context=null;expectAge=false;message('החיפוש אופס. מה מחפשים עכשיו?');status.textContent='';return}
   const constraints=[context.setting==='indoor'?'במקום סגור בלבד':context.setting==='outdoor'?'בחוץ בלבד':null,context.family===true?'לילדים ולמשפחה':context.family===false?'למבוגרים':null,context.age!=null?'גיל '+context.age:null,context.period?({today:'היום',tomorrow:'מחר',saturday:'בשבת',friday:'בשישי',weekend:'בסוף השבוע',week:'השבוע'})[context.period]:null,context.maxPrice!=null?'עד '+context.maxPrice+' ₪':null,context.after!=null?'אחרי '+String(Math.floor(context.after/60)).padStart(2,'0')+':'+String(context.after%60).padStart(2,'0'):null].filter(Boolean);
   if(result.count){message('מצאתי '+result.count+' אפשרויות'+(constraints.length?' לפי: '+constraints.join(' · '):'')+'.'+(result.count>12?' מוצגות 12 התוצאות הראשונות.':''));cards(result.results)}else message('לא נמצאה התאמה במידע הזמין באתר'+(constraints.length?' לפי: '+constraints.join(' · '):'')+'. אפשר לשנות תאריך, תקציב או נושא. מקומות קבועים וחוגים אינם מוצגים לפי יום מסוים בלי מידע מאומת על מועדים.');
+  if(!result.count)for(const alternative of result.alternatives||[]){message('חלופה: '+alternative.label+'. יתר הבקשות נשמרו.');cards(alternative.results);}
   if(context.setting)message('סוג המקום נבדק רק לפי מידע מפורש במקור. פריטים שסוג המקום שלהם אינו ידוע אינם מוצגים בחיפוש הזה.');
   if(expectAge)message('בני כמה הילדים? אפשר לכתוב כאן גיל, ואדייק את החיפוש.');
   status.textContent='אפשר להמשיך באותו חיפוש: „רק בשבת”, „אחרי 16:00” או „עד 100 שקל”. התשובות מבוססות על מאגר האתר; מידע חסר אינו מושלם בניחוש.';

@@ -26,3 +26,6 @@ console.log('PASS: negated outdoor intent and explicit location evidence; unknow
 
 assert.deepEqual(E.search(locationDocs,E.parse('במקום סגור'),'2026-10-15',0).results.map(x=>x.id),['e:in']);
 assert(!E.parse('לא בחוץ',E.parse('טיולים בחוץ')).concepts.includes('nature'));
+
+const fallback=run('הצגת ילדים בשבת עד 20 שקל');assert.equal(fallback.count,0);assert(fallback.alternatives.some(a=>a.label.includes('תקציב')&&a.results.some(x=>x.id==='e:kids')));assert(!fallback.alternatives.some(a=>a.results.some(x=>x.id==='e:adult')));assert.equal(run('גכעכטלמ').alternatives.length,0);
+console.log('PASS: labeled budget/date alternatives preserve family, age, location and named terms');

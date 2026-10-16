@@ -107,6 +107,14 @@ jobs:
           npm ci --prefix "$RUNNER_TEMP/pricebook-qa" --ignore-scripts --no-audit --no-fund
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/qa-pricebooks.cjs
 
+      - name: Build compact event listings and canonical sitemap
+        run: |
+          python scripts/test_public_event_assets.py
+          node scripts/test-saved-list.cjs
+          node scripts/test-ga4-view.cjs
+          node scripts/test-event-sync.cjs
+          python scripts/build_event_public_assets.py --with-cms
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:

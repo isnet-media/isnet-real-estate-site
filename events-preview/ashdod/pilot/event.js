@@ -199,14 +199,14 @@ function applySeo(e){
     "@type":"Event",
     name:eventDisplayTitle(e),
     startDate:e.start_date+(e.start_time?"T"+e.start_time:""),
-    eventStatus:e.status==="cancelled"?"https://schema.org/EventCancelled":e.status==="postponed"?"https://schema.org/EventPostponed":"https://schema.org/EventScheduled",
+    eventStatus:["cancelled","canceled"].includes(e.status)?"https://schema.org/EventCancelled":e.status==="postponed"?"https://schema.org/EventPostponed":"https://schema.org/EventScheduled",
     endDate:e.end_date||undefined,
     eventAttendanceMode:"https://schema.org/OfflineEventAttendanceMode",
     location:e.venue?{"@type":"Place",name:e.venue,...(e.address?{address:e.address}:{})}:undefined,
     image:image?[new URL(image,location.href).href]:undefined,
     description:desc,
     url:canonical,
-    offers:(e.purchase_url||e.ticket_url)?{"@type":"Offer",url:e.purchase_url||e.ticket_url,availability:e.ticket_status==="sold_out"?"https://schema.org/SoldOut":"https://schema.org/InStock"}:undefined
+    offers:(e.purchase_url||e.ticket_url)?{"@type":"Offer",url:e.purchase_url||e.ticket_url,...(e.ticket_status==="sold_out"?{availability:"https://schema.org/SoldOut"}:e.ticket_status==="available"?{availability:"https://schema.org/InStock"}:{}),...(e.is_free===true?{price:0,priceCurrency:"ILS"}:typeof e.price_min_ils==="number"?{price:e.price_min_ils,priceCurrency:"ILS"}:{})}:undefined
   };
   Object.keys(schema).forEach(k=>schema[k]===undefined&&delete schema[k]);
   let script=document.getElementById("eventSchema");

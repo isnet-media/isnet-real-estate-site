@@ -26,7 +26,7 @@
     return [...new Set(tokens.filter(t => vocabulary.has(t)))].join(" ").slice(0,100) || "[withheld]";
   };
   const metadata = e => e ? {event_id:String(e.event_id || "").slice(0,100),event_title:String(e.series_title || e.title || "").slice(0,100),category:String(e.category || "").slice(0,40),event_date:/^\d{4}-\d{2}-\d{2}$/.test(e.start_date || "") ? e.start_date : ""} : {};
-  const allowed = new Set(["search","select_category","select_event","select_date","ticket_click"]);
+  const allowed = new Set(["search","select_category","select_event","select_date","ticket_click","view_item"]);
   const send = (name, params = {}) => {
     if (!allowed.has(name)) return;
     window.gtag("event",name,{...params,send_to:id,page_location:cleanUrl(location.href),page_referrer:cleanUrl(document.referrer),transport_type:"beacon",...(debug ? {debug_mode:true} : {})});
@@ -43,6 +43,7 @@ const catLabels={conference:"כנסים ופאנלים",food:"אוכל וקול�
 const catIcons={music:"♫",standup:"◉",theatre:"◇",kids:"★",lecture:"▣",workshop:"✎",exhibition:"▤",cinema:"▶",community:"◎",sport:"⚑",seniors:"♟",other:"+"};
 let savedFavorites=[];try{const parsed=JSON.parse(localStorage.getItem("isnet-events-favorites")||"[]");if(Array.isArray(parsed))savedFavorites=parsed.filter(id=>typeof id==="string");}catch{}
 const favorites=new Set(savedFavorites);
+let sharedSaved=window.ISNET_SAVED_LIST?.decode(location.hash);
 
 function localDate(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
 function iso(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
@@ -798,7 +799,8 @@ function matchesPreciseIntent(event,rule){
 function filtered(){
   const q=state.query.trim(),intent=q?parseSearchIntent(q):null;
   let arr=state.events.filter(e=>{
-    if(isPersistentExhibition(e)&&state.category!=="exhibition")return false;
+    if(sharedSaved&&!sharedSaved.includes(e.event_id))return false;
+    if(isPersistentExhibition(e)&&state.category!=="exhibition"&&!sharedSaved)return false;
     if(q && !matchesPreciseIntent(e,preciseSubcategoryIntent(q)))return false;
     if(q){
       // A new conversational query stands on its own; older quick/date/category selections
@@ -979,7 +981,7 @@ function discoverEvents(){
   return rotated.slice(0,5);
 }
 function hasActiveSelection(){
-  return state.quick!=="all"||Boolean(state.date)||Boolean(state.periodStart)||Boolean(state.category)||Boolean(state.query.trim())||state.favoritesOnly||state.sort!=="date";
+  return Boolean(sharedSaved)||state.quick!=="all"||Boolean(state.date)||Boolean(state.periodStart)||Boolean(state.category)||Boolean(state.query.trim())||state.favoritesOnly||state.sort!=="date";
 }
 function renderDiscover(){
   const section=$("discoverSection");
@@ -1244,7 +1246,7 @@ function openEvent(id){
   $("eventModal").hidden=false;document.body.style.overflow="hidden";
 }
 function closeModal(){$("eventModal").hidden=true;document.body.style.overflow=""}
-function resetAll(){state.quick="all";state.date=null;state.periodStart=null;state.periodEnd=null;state.periodType=null;state.calendarCollapsed=true;state.category=null;state.subcategory=null;state.cinemaOpen=false;state.sportTeam="all";state.sportBranch="all";state.query="";state.favoritesOnly=false;state.sort="date";resetCalendarToToday();$("searchInput").value="";$("sortSelect").value="date";render();renderCinema()}
+function resetAll(){sharedSaved=null;if(location.hash.startsWith("#saved="))history.replaceState(null,"",location.pathname+location.search);$("savedListStatus").textContent="";state.quick="all";state.date=null;state.periodStart=null;state.periodEnd=null;state.periodType=null;state.calendarCollapsed=true;state.category=null;state.subcategory=null;state.cinemaOpen=false;state.sportTeam="all";state.sportBranch="all";state.query="";state.favoritesOnly=false;state.sort="date";resetCalendarToToday();$("searchInput").value="";$("sortSelect").value="date";render();renderCinema()}
 
 function publishedBoardEvents(base,rows,day){
   const events=new Map(base.map(e=>[e.event_id,e]));
@@ -1262,12 +1264,12 @@ function publishedBoardEvents(base,rows,day){
 async function init(){
   if(location.pathname.includes("/ashdod/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
-    (window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
+    (window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
     fetch("data/cinema.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({movies:[]})),
     fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
     fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
-    window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod")||Promise.resolve([])
+    window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod",{listing:true})||Promise.resolve([])
   ]);
   state.events=(window.ISNET_EVENT_IDENTITIES?.reconcile?.(publishedBoardEvents(data.events||[],cmsRows,iso(today())))||publishedBoardEvents(data.events||[],cmsRows,iso(today())));
   // Do not publish ambiguous imported source-name records as real events:
@@ -1285,6 +1287,7 @@ async function init(){
   const requestedSub=new URLSearchParams(location.search).get("subcategory");
   if(requestedSub&&window.publicTaxonomy.find(c=>c.id===state.category)?.subcategories?.some(x=>x.id===requestedSub))state.subcategory=requestedSub;
   if(location.hash==="#cinema"){state.cinemaOpen=true;if(new URLSearchParams(location.search).get("audience")==="family")state.cinemaAudience="family";}
+  if(sharedSaved)$("savedListStatus").textContent="רשימה ששיתפו איתך · אינה משנה את המועדפים שלך. להצגת כל האירועים לחצו על איפוס.";
   render();
   renderCinema();
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));
@@ -1404,6 +1407,12 @@ async function init(){
     requestAnimationFrame(()=>$("eventsGrid")?.scrollIntoView({behavior:"smooth",block:"start"}));
   };
 
+  $("shareFavorites").onclick=async()=>{
+    const ids=state.events.filter(e=>favorites.has(e.event_id)).map(e=>e.event_id),notice=$("savedListStatus");
+    if(!ids.length){notice.textContent="שמרו אירועים במועדפים כדי לשתף רשימה.";return;}
+    try{const url=window.ISNET_SAVED_LIST.link(location.href,ids);if(navigator.share)await navigator.share({title:"האירועים ששמרתי",url});else if(navigator.clipboard){await navigator.clipboard.writeText(url);notice.textContent="הקישור לרשימה הועתק. כל מי שיקבל אותו יוכל לראות את הרשימה.";}else{notice.textContent="קישור לשיתוף: "+url;}}
+    catch(error){if(error.name!=="AbortError")notice.textContent=error.message==="LIST_TOO_LONG"?"אפשר לשתף עד 100 אירועים ברשימה אחת.":"השיתוף לא הצליח. נסו שוב.";}
+  };
   $("favoritesOnly").onclick=()=>{state.favoritesOnly=!state.favoritesOnly;render()};
   $("sortSelect").onchange=e=>{state.sort=e.target.value;render()};
   $("resetAll").onclick=resetAll;
@@ -1415,7 +1424,7 @@ async function init(){
     const b=e.target.closest("[data-audience]"); if(!b)return;
     state.cinemaAudience=b.dataset.audience; renderCinema();
   };
-  window.addEventListener("hashchange",()=>{state.cinemaOpen=location.hash==="#cinema";renderCinema();if(state.cinemaOpen)$("cinemaSection").scrollIntoView({block:"start"})});
+  window.addEventListener("hashchange",()=>{sharedSaved=window.ISNET_SAVED_LIST?.decode(location.hash);$("savedListStatus").textContent=sharedSaved?"רשימה ששיתפו איתך · אינה משנה את המועדפים שלך.":"";render();state.cinemaOpen=location.hash==="#cinema";renderCinema();if(state.cinemaOpen)$("cinemaSection").scrollIntoView({block:"start"})});
   $("cinemaSearch").oninput=e=>{state.cinemaQuery=e.target.value;renderCinema()};
   $("cinemaClose").onclick=()=>{
     state.cinemaOpen=false;
@@ -1437,6 +1446,13 @@ async function init(){
     }
   });
 }
+let fullSearchPromise;
+window.ISNET_LOAD_FULL_SEARCH=()=>{
+ if(!fullSearchPromise)fullSearchPromise=Promise.all([window.ISNET_PUBLIC_CMS.loadSource(),window.ISNET_PUBLIC_CMS.publishedEvents()]).then(([data,rows])=>{
+ state.events=window.ISNET_EVENT_IDENTITIES?.reconcile?.(publishedBoardEvents(data.events||[],rows,iso(today())))||publishedBoardEvents(data.events||[],rows,iso(today()));return state.events;
+ }).catch(error=>{fullSearchPromise=null;throw error;});
+ return fullSearchPromise;
+};
 window.ISNET_SEARCH_CATALOG=()=>({events:state.events,movies:state.cinema,taxonomy:window.publicTaxonomy||[]});
 init().catch(err=>{console.error(err);if(document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
 

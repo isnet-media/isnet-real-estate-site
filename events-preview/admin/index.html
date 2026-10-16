@@ -33,7 +33,8 @@
 
   <main>
     <details class="panel" style="padding:20px;margin-bottom:20px"><summary><strong>מרכז סנכרון ומקורות</strong></summary><p>ההשוואה מתייחסת לקובצי הנתונים של הערים. היא אינה מפעילה סריקה חדשה באתרים החיצוניים. אין מחיקות אוטומטיות בעקבות היעלמות מהמקור.</p><div id="syncSummary" class="stats" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))"></div><button id="saveSourceBaseline" class="secondary" type="button">שמור נקודת השוואה בדפדפן הזה</button><p id="syncNote" role="status"></p></details>
-    <p id="linkAuditSummary" role="status"></p>
+    <p id="performanceSummary" role="status"></p>
+      <p id="linkAuditSummary" role="status"></p>
     <section id="summary" class="stats" aria-label="סיכום"></section>
 
     <section class="panel filters">
@@ -141,7 +142,7 @@
   <template id="statTemplate">
     <article class="stat"><strong></strong><span></span><small></small></article>
   </template>
-  <script src="app.js?v=20261016-link-audit1"></script>
+  <script src="app.js?v=20261016-performance1"></script>
 <script type="module">
 import {requireAuth,signOut} from "./auth/guard.js?v=20261007-1225";
 const auth=await requireAuth();

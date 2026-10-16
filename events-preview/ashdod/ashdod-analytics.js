@@ -30,7 +30,7 @@
     return [...new Set(tokens.filter(t => vocabulary.has(t)))].join(" ").slice(0,100) || "[withheld]";
   };
   const metadata = e => e ? {event_id:String(e.event_id || "").slice(0,100),event_title:String(e.series_title || e.title || "").slice(0,100),category:String(e.category || "").slice(0,40),event_date:/^\d{4}-\d{2}-\d{2}$/.test(e.start_date || "") ? e.start_date : ""} : {};
-  const allowed = new Set(["search","select_category","select_event","select_date","ticket_click"]);
+  const allowed = new Set(["search","select_category","select_event","select_date","ticket_click","view_item"]);
   const send = (name, params = {}) => {
     if (!allowed.has(name)) return;
     window.gtag("event",name,{...params,send_to:id,page_location:cleanUrl(location.href),page_referrer:cleanUrl(document.referrer),transport_type:"beacon",...(debug ? {debug_mode:true} : {})});

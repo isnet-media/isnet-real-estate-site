@@ -33,10 +33,13 @@ vm.runInNewContext(fs.readFileSync('events-preview/admin/cms-db.js','utf8'),{win
  let sourceCalls=0,cmsCalls=0;
  const win={ISNET_EVENT_OVERLAY:overlay};
  vm.runInNewContext(fs.readFileSync('events-preview/shared/public-cms.js','utf8'),{window:win,document:{currentScript:{src:'https://example.com/events-preview/shared/public-cms.js'}},location:{pathname:'/events-preview/ashdod/'},URL,Map,console,fetch:async address=>{
-  const u=new URL(address);if(u.pathname.endsWith('events.json')){sourceCalls++;return {ok:true,json:async()=>({events:[base]})};}
+  const u=new URL(address);if(u.pathname.endsWith('events-cards.json'))return {ok:true,json:async()=>({events:[{event_id:'card',title:'compact'}]})};
+  if(u.pathname.endsWith('events.json')){sourceCalls++;return {ok:true,json:async()=>({events:[base]})};}
   cmsCalls++;const offset=Number(u.searchParams.get('offset'));return {ok:true,json:async()=>Array.from({length:Math.max(0,Math.min(200,405-offset))},(_,i)=>({event_id:String(offset+i),payload:{title:'event'},record_type:'manual'}))};
  }});
  const [source,rows,again]=await Promise.all([win.ISNET_PUBLIC_CMS.loadSource(),win.ISNET_PUBLIC_CMS.publishedEvents('ashdod'),win.ISNET_PUBLIC_CMS.publishedEvents('ashdod')]);
  assert.equal(rows.length,405);assert.equal(again,rows);assert.equal(sourceCalls,1);assert.equal(cmsCalls,3);
+ const compact=await win.ISNET_PUBLIC_CMS.loadCards();assert.equal(compact.events[0].title,'compact');
+ await win.ISNET_PUBLIC_CMS.publishedEvents('ashdod',{listing:true});assert.equal(sourceCalls,1);assert.equal(cmsCalls,3);
  console.log('PASS: source-field locks, explicit unlock, manual copy and images, visibility, 405-record DB/API pagination, concurrent edit rejection, safe save, shared fetch deduplication');
 })().catch(error=>{console.error(error);process.exitCode=1});

@@ -14,6 +14,7 @@ const cityConfig=[
   {slug:"rishon-lezion",name:"ראשון לציון",base:"../rishon-lezion/"}
 ];
 let all=[];
+let siteBuildReport=null;
 let purchaseAudit={results:{}};
 let sourceReports=[],pendingSnapshots={};
 const selectedEvents=new Set();
@@ -151,13 +152,14 @@ async function load(){
   taxonomyCategories=(await taxonomyResponse.json()).primary_categories||[];
   for(const item of taxonomyCategories)categoryLabels[item.id]=item.label;
   $("resultCount").textContent="טוען נתונים...";
-  const [shared,analyticsData,linkAudit]=await Promise.all([
+  const [shared,analyticsData,linkAudit,buildReport]=await Promise.all([
     fetch("../shared/standup-videos.json",{cache:"no-store"}).then(r=>r.ok?r.json():{artists:[]}).catch(()=>({artists:[]})),
     fetch("data/event-analytics.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null),
-    fetch("data/purchase-link-audit.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null)
+    fetch("data/purchase-link-audit.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch("data/site-build-report.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).catch(()=>null)
   ]);
   if(analyticsData) analytics=analyticsData;
-  purchaseAudit=linkAudit||{results:{}};
+  purchaseAudit=linkAudit||{results:{}};siteBuildReport=buildReport;
   const groups=await Promise.all(cityConfig.map(async city=>{
     const [data,editorial]=await Promise.all([
       fetch(city.base+"data/events.json",{cache:"no-store"}).then(r=>r.json()),
@@ -313,6 +315,8 @@ function render(resetPage=true){
 $("category").addEventListener("change",()=>{renderSubcategoryFilter();render()});
 $("clearBtn").addEventListener("click",()=>{["q","city","category","status","quality","subcategory","fromDate","toDate"].forEach(id=>$(id).value="");renderSubcategoryFilter();render()});
 function renderSync(){
+ const performanceSummary=$("performanceSummary");
+ if(performanceSummary)performanceSummary.textContent=siteBuildReport?.cities?'משקל נתוני כרטיסים לעומת המאגר המלא: '+Object.entries(siteBuildReport.cities).map(([city,x])=>(cityConfig.find(c=>c.slug===city)?.name||city)+': '+Math.round(x.listing_bytes/x.full_bytes*100)+'% מהמשקל המקורי; לאחר דחיסה '+Math.round(x.listing_gzip_bytes/x.full_gzip_bytes*100)+'%.').join(' ')+' נמדד גודל הנתונים בלבד; זה אינו מבחן עומס או מדידת זמן טעינה.':'';
  const linkSummary=$("linkAuditSummary");
  if(linkSummary)linkSummary.textContent=purchaseAudit.generated_at?'בדיקת קישורי רכישה מ־'+new Date(purchaseAudit.generated_at).toLocaleString('he-IL')+': '+purchaseAudit.checked_urls+' כתובות נבדקו; '+(purchaseAudit.summary?.broken||0)+' לא זמינות, '+(purchaseAudit.summary?.unverified||0)+' לא אומתו.'+(purchaseAudit.complete?'':' הבדיקה חלקית.')+' תגובת שרת תקינה אינה הוכחה לזמינות כרטיסים.':'בדיקת קישורי הרכישה טרם זמינה.';
  const target=$("syncSummary");if(!target)return;

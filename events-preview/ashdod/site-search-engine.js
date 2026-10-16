@@ -61,7 +61,7 @@ function create(payload){
 }
 const shift=(day,n)=>{const d=new Date(day+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
 function dateMatch(date,c,day){if(date<day)return false;const dow=new Date(day+'T12:00:00Z').getUTCDay(),friday=shift(day,(5-dow+7)%7),saturday=shift(day,(6-dow+7)%7);switch(c.period){case'today':return date===day;case'tomorrow':return date===shift(day,1);case'friday':return date===friday;case'saturday':return date===saturday;case'weekend':return date===friday||date===saturday;case'week':return date<=shift(day,6);default:return true}}
-function search(docs,c,day,nowMinutes){
+function search(docs,c,day,nowMinutes,allowAlternatives=true){
  const matches=[];for(const d of docs){if(c.setting&&d.setting!==c.setting)continue;if(c.type&&d.type!==c.type)continue;if(c.family===true&&!d.family&&!any(d.text,['לילדים','למשפחה','לכל המשפחה','פעוטות']))continue;if(c.family===false&&d.family)continue;
  if(c.age!=null&&((d.min!=null&&c.age<d.min)||(d.max!=null&&c.age>d.max)))continue;
  if(c.maxPrice!=null&&(d.price==null||d.price>c.maxPrice))continue;
@@ -80,7 +80,14 @@ function search(docs,c,day,nowMinutes){
  dates.sort((a,b)=>(a.date+' '+a.time).localeCompare(b.date+' '+b.time));
  const notes=[];if(c.age!=null&&d.min==null&&d.max==null)notes.push('התאמת גיל מדויקת לא צוינה');if(d.type==='place')notes.push(d.openingKind==='outdoor'?'מסלול טיול עצמאי — יש לבדוק גישה, מזג אוויר וסגירות':d.hours?'שעות שבת רגילות: '+d.hours+'; יש לוודא חריגים מול המקום':'יש לבדוק שעות פתיחה ומחיר מול המקום');if(d.type==='course')notes.push('לימים, שעות ומחיר — בדף החוג');
  matches.push({id:d.id,type:d.type,title:d.title,description:d.description.slice(0,240),category:d.category,subcategory:d.subcategory,venue:dates[0]?.venue||d.venue,href:d.href,date:dates[0]?.date,time:dates[0]?.time,price:d.price,reasons,notes,score:score+(c.type?10:0)})}
- matches.sort((a,b)=>b.score-a.score||String(a.date||'9999').localeCompare(String(b.date||'9999'))||a.title.localeCompare(b.title,'he'));const seen=new Set();const unique=matches.filter(d=>{const key=d.type+norm(d.title)+d.date+d.time;if(seen.has(key))return false;seen.add(key);return true});return {count:unique.length,results:unique.slice(0,12),needsAge:c.family===true&&c.age==null,context:c};
+ matches.sort((a,b)=>b.score-a.score||String(a.date||'9999').localeCompare(String(b.date||'9999'))||a.title.localeCompare(b.title,'he'));const seen=new Set();const unique=matches.filter(d=>{const key=d.type+norm(d.title)+d.date+d.time;if(seen.has(key))return false;seen.add(key);return true});const alternatives=[];
+ if(allowAlternatives&&!unique.length){
+  const options=[];
+  if(c.period||c.after!=null){const relaxed={...c};delete relaxed.period;delete relaxed.after;options.push(['ללא סינון מועד ושעה',relaxed]);}
+  if(c.maxPrice!=null){const relaxed={...c};delete relaxed.maxPrice;options.push(['ללא הגבלת תקציב — המחיר מופיע בכל תוצאה כשידוע',relaxed]);}
+  for(const [label,relaxed] of options){const found=search(docs,relaxed,day,nowMinutes,false);if(found.count)alternatives.push({label,count:found.count,results:found.results.slice(0,3)});}
+ }
+ return {count:unique.length,results:unique.slice(0,12),alternatives,needsAge:c.family===true&&c.age==null,context:c};
 }
 const api={norm,parse,create,search};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.SiteSearchEngine=api;
 if(typeof WorkerGlobalScope!=='undefined'&&root instanceof WorkerGlobalScope){let docs=[];root.onmessage=e=>{try{if(e.data.kind==='init'){docs=create(e.data.payload);root.postMessage({kind:'ready',count:docs.length});return}const context=parse(e.data.query,e.data.context);const result=search(docs,context,e.data.day,e.data.nowMinutes);root.postMessage({kind:'result',id:e.data.id,...result})}catch(_){root.postMessage({kind:'error',id:e.data.id})}}}

@@ -314,6 +314,7 @@
           <p id="resultCount" class="muted"></p>
         </div>
         <div class="resultsActions">
+          <button id="shareFavorites" class="pillAction" type="button">שיתוף המועדפים</button><span id="savedListStatus" role="status"></span>
           <button id="favoritesOnly" class="pillAction" aria-pressed="false">♡ המועדפים שלי</button>
           <select id="sortSelect" class="sortSelect" aria-label="מיון אירועים">
             <option value="date">הקרובים ביותר</option>
@@ -382,18 +383,19 @@
   </footer>
 
   <script src="../shared/event-overlay.js?v=20261016-sync1"></script>
-  <script src="../shared/public-cms.js?v=20261016-sync1" defer></script>
+  <script src="../shared/public-cms.js?v=20261016-cards1" defer></script>
   <script src="event-illustrations.js?v=20261013-photo-bank-complete2" defer></script>
 
-<script src="pilot/app.js?v=5730c7259467" defer></script>
+<script src="../shared/saved-list.js?v=20261016-1"></script>
+<script src="pilot/app.js?v=370454dfad12" defer></script>
 
 <script>
 (async function(){
   const mount=document.getElementById("operatorStrip");if(!mount)return;
   try{
     const [registry,data]=await Promise.all([
-      fetch("data/institutions.json",{cache:"no-store"}).then(x=>x.json()),
-      fetch("data/events.json",{cache:"no-store"}).then(x=>x.json())
+      fetch("data/institutions.json",{cache:"no-cache"}).then(x=>x.json()),
+      (window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-cache"}).then(x=>x.json()))
     ]);
     const visible=(registry.institutions||[]).filter(x=>x.kind==="operator"&&x.featured);
     const escape=v=>String(v||"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -413,6 +415,6 @@
   <script defer src="home-date-gateway.js?v=20261012-1"></script>
   <script defer src="pilot/rails.js?v=20261011-pilot6"></script>
 <script src="shared-brand-header.js?v=20261013-all-pages1" defer></script>
-<script defer src="site-search-chat.js?v=20261016-setting1"></script>
+<script defer src="site-search-chat.js?v=20261016-full-search1"></script>
 </body>
 </html>
