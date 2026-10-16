@@ -1,4 +1,12 @@
-const TODAY="2026-10-07";
+function todayInIsrael(){
+  const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());
+  const value=type=>parts.find(part=>part.type===type).value;
+  return value("year")+"-"+value("month")+"-"+value("day");
+}
+let currentPage=1;
+const PAGE_SIZE=100;
+function lastEventDate(e){return e.end_date||e.start_date||"";}
+
 let taxonomyCategories=[];
 const categoryLabels={music:"מוזיקה",standup:"סטנדאפ",kids:"ילדים",theatre:"תיאטרון",lecture:"הרצאות",exhibition:"תערוכות",workshop:"סדנאות",cinema:"קולנוע",festival:"פסטיבלים",community:"קהילה",sport:"ספורט",seniors:"הגיל השלישי וגמלאים",other:"אחר"};
 const cityConfig=[
@@ -102,7 +110,25 @@ function issuesFor(e){
   }
   if(e.category==="standup"&&!e._video)issues.push({key:"needs_video",label:"וידאו",level:"warn"});
   if(!(e.purchase_url||e.ticket_url||e.purchase_phone))issues.push({key:"needs_ticket",label:"פעולה",level:"warn"});
+  if(!e.start_date)issues.push({key:"needs_date",label:"חסר תאריך",level:"bad"});
+  if(!e.start_time)issues.push({key:"needs_time",label:"חסרה שעה",level:"warn"});
+  if(!e.venue&&!e.address)issues.push({key:"needs_location",label:"חסר מקום",level:"warn"});
+  if(e._duplicate)issues.push({key:"duplicate",label:"חשד לכפילות באותו מועד ומקום",level:"warn"});
+  const price=Number(e.price);
+  if((e.is_free===true||e.free===true)&&Number.isFinite(price)&&price>0)issues.push({key:"price_conflict",label:"סתירה בין מחיר לסימון חינם",level:"bad"});
   return issues;
+}
+function annotateDuplicates(events){
+  const groups=new Map();
+  for(const e of events){
+    e._duplicate=false;
+    const normalize=value=>String(value||"").normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}]/gu,"");
+    if(!e.title||!e.start_date||!e.venue)continue;
+    const key=[e._citySlug,normalize(e.title),e.start_date,e.start_time||"",normalize(e.venue)].join("|");
+    const group=groups.get(key)||[];group.push(e);groups.set(key,group);
+  }
+  for(const group of groups.values())if(group.length>1)for(const e of group)e._duplicate=true;
+  return events;
 }
 async function load(){
   const taxonomyResponse=await fetch("data/taxonomy.json",{cache:"no-store"});
@@ -142,7 +168,9 @@ async function load(){
   });
   const dbManualKeys=new Set(dbManual.map(e=>e._citySlug+":"+e.event_id));
   const local=localNewEvents().filter(e=>!dbManualKeys.has(e._citySlug+":"+e.event_id)).map(e=>({...e,_localNew:true,_cityBase:e._citySlug==="ashdod"?"../ashdod/":"../rishon-lezion/"}));
-  all=[...persisted,...dbManual,...local].map(e=>({...e,_issues:issuesFor(e)}));
+  const unique=new Map();
+  for(const e of [...persisted,...dbManual,...local])unique.set(e._citySlug+":"+e.event_id,e);
+  all=annotateDuplicates([...unique.values()]).map(e=>({...e,_issues:issuesFor(e)}));
   buildFilters();renderSubcategoryFilter();render();
 }
 function buildFilters(){
@@ -166,14 +194,14 @@ function sourceLabel(e){return e.image_source||e.source_id||e.source||e.sources?
 function filtered(){
   const q=$("q").value.trim().toLowerCase(),city=$("city").value,cat=$("category").value,status=$("status").value,quality=$("quality").value;
   const sub=$("subcategory").value;
-  const horizon=horizonEnd();
+  const today=todayInIsrael();
   return all.filter(e=>{
-    if(e.start_date&&e.start_date>horizon)return false;
+    
     if(city&&e.city!==city)return false;
     if(cat&&e.category!==cat)return false;
     if(sub&&e.subcategory!==sub)return false;
-    if(status==="active"&&(e.status!=="active"||e.start_date<TODAY))return false;
-    if(status==="expired"&&(e.status!=="active"||e.start_date>=TODAY))return false;
+    if(status==="active"&&(e.status!=="active"||lastEventDate(e)<today))return false;
+    if(status==="expired"&&(e.status!=="active"||lastEventDate(e)>=today))return false;
     if(["draft","hidden","archived","trashed"].includes(status)&&e.status!==status)return false;
     if(quality==="clean"&&e._issues.length)return false;
     if(quality&&quality!=="clean"&&!e._issues.some(i=>i.key===quality))return false;
@@ -186,7 +214,8 @@ function filtered(){
 }
 function renderStats(){
   const horizon=horizonEnd();
-  const active=all.filter(e=>e.start_date>=TODAY&&e.start_date<=horizon);
+  const today=todayInIsrael();
+  const active=all.filter(e=>lastEventDate(e)>=today&&e.start_date<=horizon);
   const stats=[
     [all.length,"כל האירועים","כולל טיוטות מקומיות"],
     [active.filter(e=>e.status==="active").length,"אירועים עתידיים","פעילים מהיום והלאה"],
@@ -204,12 +233,19 @@ function viewsCell(e){
   if(!analytics.generated_at)return '<span class="tag warn" title="ממתין לחיבור GA4">ממתין ל-GA4</span>';
   return '<div class="views-cell" title="7 ימים / 30 ימים / מצטבר"><b>'+allTime.toLocaleString("he-IL")+'</b><small>'+v7.toLocaleString("he-IL")+' / '+v30.toLocaleString("he-IL")+'</small></div>';
 }
-function render(){
+function render(resetPage=true){
+  if(resetPage)currentPage=1;
   renderStats();
   const rows=filtered();
-  $("resultCount").textContent=rows.length+" אירועים מוצגים מתוך "+all.length;
+  const pages=Math.max(1,Math.ceil(rows.length/PAGE_SIZE));
+  currentPage=Math.min(currentPage,pages);
+  const start=(currentPage-1)*PAGE_SIZE;
+  $("resultCount").textContent=rows.length?"מציג "+(start+1)+"–"+Math.min(start+PAGE_SIZE,rows.length)+" מתוך "+rows.length+" תוצאות · "+all.length+" אירועים במערכת":"אין תוצאות · "+all.length+" אירועים במערכת";
+  $("pageStatus").textContent="עמוד "+currentPage+" מתוך "+pages;
+  $("previousPage").disabled=currentPage===1;
+  $("nextPage").disabled=currentPage===pages;
   $("empty").hidden=rows.length>0;
-  $("rows").innerHTML=rows.slice(0,500).map(e=>{
+  $("rows").innerHTML=rows.slice(start,start+PAGE_SIZE).map(e=>{
     const rawImg=e.thumbnail_url||e.image_url||"";
     const img=rawImg ? (/^(https?:|data:)/.test(rawImg)?rawImg:e._cityBase+rawImg) : "";
     const imageApproved=Boolean(rawImg&&e.image_publishable===true&&e.image_verified===true);
@@ -226,7 +262,7 @@ function render(){
     const promotionLabel=e.promotion==="promoted"?"מקודם":e.promotion==="recommended"?"מומלץ":"רגיל";
     const promotionClass=e.promotion==="promoted"?"promotion-promoted":e.promotion==="recommended"?"promotion-recommended":"promotion-normal";
     return '<tr>'+
-      '<td><div class="event-cell">'+(img?'<img class="thumb" src="'+esc(img)+'" alt="">':'<div class="thumb"></div>')+
+      '<td><div class="event-cell">'+(img?'<img class="thumb" loading="lazy" decoding="async" src="'+esc(img)+'" alt="">':'<div class="thumb"></div>')+
       '<div><div class="event-name">'+esc(e.title)+'</div><div class="event-id">'+esc(e.event_id)+'</div>'+(statusLabel?'<span class="status-chip status-'+esc(e.status)+'">'+esc(statusLabel)+'</span>':'')+'</div></div></td>'+
       '<td class="image-status">'+imageStatus+'</td>'+
       '<td>'+esc(e.city)+'</td><td><div class="category-stack"><strong>'+esc(categoryLabels[e.category]||e.category||"—")+'</strong><small>'+esc(subcategoryLabel(e))+'</small></div></td>'+
@@ -244,5 +280,7 @@ function render(){
 ["q","city","status","quality","subcategory","sortOrder"].forEach(id=>$(id).addEventListener("input",render));
 $("category").addEventListener("change",()=>{renderSubcategoryFilter();render()});
 $("clearBtn").addEventListener("click",()=>{["q","city","category","status","quality","subcategory"].forEach(id=>$(id).value="");renderSubcategoryFilter();render()});
-$("refreshBtn").addEventListener("click",load);
+$("previousPage").addEventListener("click",()=>{currentPage--;render(false)});
+$("nextPage").addEventListener("click",()=>{currentPage++;render(false)});
+$("refreshBtn").addEventListener("click",()=>load().catch(err=>{$("resultCount").textContent="הרענון נכשל — נסו שוב";console.error(err)}));
 load().catch(err=>{$("resultCount").textContent="שגיאה בטעינת הנתונים";console.error(err)});
