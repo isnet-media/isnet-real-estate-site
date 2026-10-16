@@ -131,7 +131,7 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
             digest = hashlib.sha256(localized.encode("utf-8")).hexdigest()[:12]
             return filename + "?v=" + digest
         content = re.sub(
-            r"\b((?:app|event|places|movie|cinema)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css)(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])",
+            r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])",
             cache_bust, content,
         )
         content = content.replace("<head>", "<head>\n  " + HEAD_MARKER, 1)
@@ -150,11 +150,9 @@ def fingerprint_master_html(check: bool = False) -> list[str]:
     Only local frontend assets are rewritten, and only in the build workspace.
     """
     changed = []
-    pattern = r"\b((?:app|event|places|movie|cinema)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css)(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])"
+    pattern = r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])"
     for html in sorted(MASTER.glob("*.html")):
         original = html.read_text(encoding="utf-8")
-        if "<!-- ISNET ASHDOD PILOT -->" in original:
-            continue  # Pilot assets carry their own versions; do not rewrite them.
 
         def version_asset(match):
             filename = match.group(1)
