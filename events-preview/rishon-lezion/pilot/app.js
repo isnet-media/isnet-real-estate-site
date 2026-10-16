@@ -1030,7 +1030,7 @@ function renderActiveFilters(){
 }
 function renderResults(){
   const arr=filtered();
-  const groupedView=!state.query.trim()&&!state.category&&!state.subcategory;
+  const groupedView=!state.query.trim()&&!state.category&&!state.subcategory&&!state.favoritesOnly&&!sharedSaved;
   if(groupedView){
     const taxonomy=window.publicTaxonomy||[];
     const preferred=["music","theatre","standup","kids","cinema","lecture","seniors","workshop","sport","community","tour","food","conference","exhibition"];
