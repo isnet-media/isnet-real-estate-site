@@ -1,0 +1,45 @@
+name: Repair Rishon public quality
+on:
+  push:
+    branches: [main]
+    paths: ['scripts/repair_rishon_public_quality.py', '.github/workflows/repair-rishon-quality.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: rishon-public-quality-repair
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests beautifulsoup4
+      - name: Validate and repair current records
+        run: |
+          python scripts/test_rishon_editorial.py
+          python scripts/finalize_rishon_quality.py
+      - name: Save repaired city records without overwriting concurrent intake
+        run: |
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3 4; do
+            git add events-preview/rishon-lezion/data/events.json events-preview/admin/data/rishon-readiness.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'Repair Rishon public occurrences and source descriptions'
+            git fetch origin main
+            if git rebase origin/main; then
+              if git push origin HEAD:main; then exit 0; fi
+            else
+              git rebase --abort
+            fi
+            git reset --hard origin/main
+            python scripts/finalize_rishon_quality.py
+          done
+          exit 1

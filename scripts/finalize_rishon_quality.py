@@ -23,6 +23,8 @@ def fallback(e):
  return '../ashdod/assets/illustrations/v4/'+name+'.webp'if name else None
 
 def finalize(data,catalog):
+ from repair_rishon_public_quality import prepare,finish
+ data,catalog=prepare(data,catalog)
  events=data['events'];aliases={norm(k):norm(v)for k,v in catalog.get('title_aliases',{}).items()};by_name=defaultdict(list);stats=Counter()
  # Multiple feeds can carry the same stable ID; retain the richest record once.
  unique={}
@@ -92,6 +94,7 @@ def finalize(data,catalog):
    image=fallback(e)
    if image and(SITE/image).exists():
     e.update(image_url=image,image_source='ISNET approved activity illustration bank',image_origin_url=image,image_credit='אילוסטרציה להמחשה: ISNET',image_strategy='approved_category_illustration',image_verified=True,image_publishable=True,image_rights_status='isnet_owned_illustration',thumbnail_url=image,thumbnail_ready=True);stats['approved_illustrations']+=1
+ stats.update(finish(data,catalog))
  return data,dict(stats)
 
 def main():

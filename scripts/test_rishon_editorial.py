@@ -64,4 +64,24 @@ class EditorialTests(unittest.TestCase):
   with patch.object(source,'page',return_value=BeautifulSoup(html,'html.parser')):rows=source.museum_rows('https://yama.smarticket.co.il/visit')
   self.assertEqual(len(rows),1);self.assertEqual(rows[0]['booking_url'],'https://yama.smarticket.co.il/visit/?id=4922')
 
+ def test_root_relative_media_is_not_prefixed_with_city(self):
+  from repair_rishon_public_quality import normalize_media
+  self.assertEqual(normalize_media('../rishon-lezion//events-preview/media-bank/cards/a.webp'),'/events-preview/media-bank/cards/a.webp')
+  self.assertEqual(normalize_media('/events-preview/media-bank/cards/a.webp'),'/events-preview/media-bank/cards/a.webp')
+  self.assertEqual(normalize_media('https://example.com/a.webp'),'https://example.com/a.webp')
+ def test_title_aliases_hide_same_occurrence_but_preserve_different_times(self):
+  from repair_rishon_public_quality import prepare,finish
+  rows=[self.event(title='מצחיקונת',category='theatre'),self.event(event_id='alias',title='מחזמר מצחיקונת - Funny Girl',category='theatre'),self.event(event_id='later',title='מצחיקונת',category='theatre',start_time='19:00')]
+  d,c=prepare({'events':rows},{'programs':[]});finish(d,c)
+  self.assertEqual(sum(e.get('is_active')is not False for e in rows),2)
+  self.assertTrue(rows[2]['is_active']);self.assertEqual(rows[1]['canonical_event_id'],'original')
+ def test_named_cinderella_productions_are_not_aliased(self):
+  from repair_rishon_public_quality import prepare
+  d,c=prepare({'events':[]},{'programs':[],'title_aliases':{'סינדרלה — מחזמר חנוכה עם נעמה סופר על':'סינדרלה - בכיכובה של רינת גבאי קיץ 2026'}})
+  self.assertNotIn('סינדרלה — מחזמר חנוכה עם נעמה סופר על',c['title_aliases'])
+ def test_dance_at_museum_is_not_an_exhibition(self):
+  e=self.event(title='להקת המחול ורטיגו - "נונה" גרסת המוזיאון',category='exhibition',venue='מוזיאון אגם')
+  q.finalize({'events':[e]},{'programs':[]})
+  self.assertEqual(e['category'],'music');self.assertEqual(e['subcategory'],'dance');self.assertNotIn('exhibition',e['categories'])
+
 if __name__=='__main__':unittest.main()
