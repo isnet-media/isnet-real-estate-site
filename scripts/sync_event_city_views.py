@@ -25,7 +25,7 @@ TARGETS = {
     },
 }
 FRONTEND_EXTENSIONS = {".html", ".css", ".js"}
-SKIP_NAMES = {"dark-preview.html", "hero-international-preview.html", "ashdod-event-identities.js", "ashdod-analytics.js"}
+SKIP_NAMES = {"restaurants.html", "restaurants.css", "restaurants.js", "dark-preview.html", "hero-international-preview.html", "ashdod-event-identities.js", "ashdod-analytics.js"}
 HEAD_MARKER = "<!-- ISNET shared layout: edit the Ashdod source; synced automatically -->"
 CSS_MARKER = "/* ISNET shared layout: edit events-preview/ashdod, not this generated file. */"
 JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this generated file."
@@ -40,6 +40,8 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         "<a class=\"isnetNavSmall\" data-city-only=\"ashdod\" href=\"https://meusharim-ashdod-v1.ebs987449.chatgpt.site/\"><span aria-hidden=\"true\">▧</span><strong>חוגים והעשרה</strong></a>",
         "<a class=\"isnetNavSmall\" href=\"category.html?category=exhibition\"><span aria-hidden=\"true\">▧</span><strong>תערוכות</strong></a>",
     )
+    # The culinary catalog is Ashdod-owned; do not relabel it for other cities.
+    content = re.sub(r'<a\b[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>', '', content)
     # The city has its own data and booking destinations. Share presentation only.
     content = content.replace(' data-city-only="ashdod"', '')
     content = re.sub(r'<script\b[^>]*src="(?:ashdod-event-identities|ashdod-analytics)\.js[^" ]*"[^>]*></script>', '', content)
