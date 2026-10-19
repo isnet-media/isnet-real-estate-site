@@ -168,7 +168,8 @@ function ensureMeta(propertyOrName,value,isProperty=false){
   el.setAttribute("content",value);
 }
 function applySeo(e){
-  const title=(e.seo_title||eventDisplayTitle(e))+" | מה עושים באשדוד?";
+  const localTitle=e.seo_title||eventDisplayTitle(e);
+  const title=(localTitle.includes("אשדוד")?localTitle:localTitle+" באשדוד")+" | מה עושים באשדוד";
   const desc=(e.seo_description||e.short_pitch||e.series_description||e.description||autoPitch({...e,title:eventDisplayTitle(e)})).slice(0,180);
   const canonical=new URL("event.html?slug="+encodeURIComponent(eventSlug(e)),location.href).href;
   document.title=title;
@@ -203,6 +204,7 @@ function applySeo(e){
   let script=document.getElementById("eventSchema");
   if(!script){script=document.createElement("script");script.id="eventSchema";script.type="application/ld+json";document.head.appendChild(script)}
   script.textContent=JSON.stringify(schema);
+  window.ISNET_SEO?.event(e);
 }
 function cleanEditorialText(value){
   let text=String(value||"");

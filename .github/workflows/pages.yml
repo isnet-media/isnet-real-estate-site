@@ -111,6 +111,7 @@ jobs:
       - name: Build compact event listings and canonical sitemap
         run: |
           python scripts/test_public_event_assets.py
+          python scripts/test_event_seo.py
           node scripts/test-saved-list.cjs
           node scripts/test-ga4-view.cjs
           node scripts/test-event-sync.cjs
