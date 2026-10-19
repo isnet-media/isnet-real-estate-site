@@ -43,6 +43,7 @@ function parse(q,previous){
  const recognized=new Set(concepts.flatMap(g=>g[2].flatMap(w=>norm(w).split(' '))));
  c.terms=s.split(' ').filter(w=>w&&!(c.setting&&settingWords.has(w))&&!/^\d+$/.test(w)&&!forms(w).some(f=>stop.has(f)||recognized.has(f))&&!['אחר','הצהריימ','מתחשק','מתאימ','מתאימה','שמתאימ'].includes(w));
  if(previous&&!c.terms.length&&previous.terms?.length)c.terms=previous.terms;
+ c.titleQuery=s;
  return c;
 }
 function settingOf(record){
@@ -64,7 +65,11 @@ function create(payload){
 const shift=(day,n)=>{const d=new Date(day+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
 function dateMatch(date,c,day){if(date<day)return false;const dow=new Date(day+'T12:00:00Z').getUTCDay(),friday=shift(day,(5-dow+7)%7),saturday=shift(day,(6-dow+7)%7);switch(c.period){case'today':return date===day;case'tomorrow':return date===shift(day,1);case'friday':return date===friday;case'saturday':return date===saturday;case'weekend':return date===friday||date===saturday;case'week':return date<=shift(day,6);default:return true}}
 function search(docs,c,day,nowMinutes,allowAlternatives=true){
- const matches=[];for(const d of docs){if(c.setting&&d.setting!==c.setting)continue;if(c.type&&d.type!==c.type)continue;if(c.family===true&&!d.family&&!any(d.text,['לילדים','למשפחה','לכל המשפחה','פעוטות']))continue;if(c.family===false&&d.family)continue;
+ // A phrase present in an event title is a name lookup, not an implicit date filter.
+ const titleQuery=c.titleQuery||'';
+ const titleLookup=titleQuery.split(' ').length>=2&&docs.some(d=>['event','movie'].includes(d.type)&&d.titleText.includes(titleQuery));
+ if(titleLookup)c={titleQuery,titleLookup:true,terms:[]};
+ const matches=[];for(const d of docs){if(titleLookup&&!d.titleText.includes(titleQuery))continue;if(c.setting&&d.setting!==c.setting)continue;if(c.type&&d.type!==c.type)continue;if(c.family===true&&!d.family&&!any(d.text,['לילדים','למשפחה','לכל המשפחה','פעוטות']))continue;if(c.family===false&&d.family)continue;
  if(c.age!=null&&((d.min!=null&&c.age<d.min)||(d.max!=null&&c.age>d.max)))continue;
  if(c.maxPrice!=null&&(d.price==null||d.price>c.maxPrice))continue;
  let dates=d.dates.filter(x=>dateMatch(x.date,c,day)&&(!x.time||x.date!==day||nowMinutes==null||Number(x.time.slice(0,2))*60+Number(x.time.slice(3,5))>=nowMinutes)&&(c.after==null||(x.time&&Number(x.time.slice(0,2))*60+Number(x.time.slice(3,5))>=c.after)));
@@ -78,7 +83,7 @@ function search(docs,c,day,nowMinutes,allowAlternatives=true){
  for(const id of c.concepts||[]){const g=groups.find(g=>g[0]===id);if(g&&any(d.text,g[3])){score+=15;reasons.push(g[1])}else{score=-1;break}}
  if(score<0)continue;
  let all=true;for(const term of c.terms||[]){const variants=forms(term);if(variants.some(t=>has(d.titleText,t))){score+=25;continue}if(variants.some(t=>d.tokens.includes(t))){score+=10;continue}if(term.length>=4&&d.tokens.some(t=>Math.abs(t.length-term.length)<=1&&distance(term,t)<=(term.length>=7?2:1))){score+=4;continue}all=false;break}if(!all)continue;
- if(!(c.concepts?.length||c.terms?.length||c.type||c.setting||c.family!=null||c.period||c.maxPrice!=null||c.age!=null))continue;
+ if(!(c.titleLookup||c.concepts?.length||c.terms?.length||c.type||c.setting||c.family!=null||c.period||c.maxPrice!=null||c.age!=null))continue;
  dates.sort((a,b)=>(a.date+' '+a.time).localeCompare(b.date+' '+b.time));
  const notes=[];if(c.age!=null&&d.min==null&&d.max==null)notes.push('התאמת גיל מדויקת לא צוינה');if(d.type==='place')notes.push(d.openingKind==='outdoor'?'מסלול טיול עצמאי — יש לבדוק גישה, מזג אוויר וסגירות':d.hours?'שעות שבת רגילות: '+d.hours+'; יש לוודא חריגים מול המקום':'יש לבדוק שעות פתיחה ומחיר מול המקום');if(d.type==='course')notes.push('לימים, שעות ומחיר — בדף החוג');
  matches.push({id:d.id,type:d.type,title:d.title,description:d.description.slice(0,240),category:d.category,subcategory:d.subcategory,venue:dates[0]?.venue||d.venue,href:d.href,date:dates[0]?.date,time:dates[0]?.time,price:d.price,reasons,notes,score:score+(c.type?10:0)})}

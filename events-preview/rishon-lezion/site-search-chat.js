@@ -23,7 +23,7 @@ async function ensure(){
   const base=window.ISNET_SEARCH_CATALOG();
   placesPromise=placesPromise||json('data/places.json').catch(()=>null);
   const [places,saturdayGuide]=await Promise.all([placesPromise,json('data/saturday-guide.json?v=20261015-1').catch(()=>null)]);payload={...base,places,saturdayGuide};
-  worker=new Worker('site-search-engine.js?v=20261016-alternatives1');worker.onerror=fail;
+  worker=new Worker('site-search-engine.js?v=20261019-titlelookup1');worker.onerror=fail;
   worker.onmessage=e=>{const data=e.data;if(data.kind==='ready'){const job=jobs.get('init');if(job){clearTimeout(job.timer);jobs.delete('init');job.resolve(data)}return}const job=jobs.get(data.id);if(!job)return;clearTimeout(job.timer);jobs.delete(data.id);if(data.kind==='error')job.reject(Error('search failed'));else job.resolve(data)};
   await initialize();if(!places)status.textContent='מידע על מקומות קבועים לא נטען; החיפוש זמין באירועים ובקולנוע.';
  })().catch(e=>{fail();throw e});return readyPromise;

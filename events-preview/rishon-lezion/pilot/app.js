@@ -764,7 +764,10 @@ function matchesPreciseIntent(event,rule){
 }
 function filtered(){
   const q=state.query.trim(),intent=q?parseSearchIntent(q):null;
+  const titleQuery=normalizeSearch(q);
+  const titleLookup=titleQuery.split(/\s+/).length>=2&&state.events.some(e=>normalizeSearch(e.title).includes(titleQuery));
   let arr=state.events.filter(e=>{
+    if(titleLookup)return e.start_date>=iso(today())&&normalizeSearch(e.title).includes(titleQuery);
     if(sharedSaved&&!sharedSaved.includes(e.event_id))return false;
     if(isPersistentExhibition(e)&&state.category!=="exhibition"&&!sharedSaved)return false;
     if(q && !matchesPreciseIntent(e,preciseSubcategoryIntent(q)))return false;
