@@ -26,6 +26,13 @@ class LocalResetTests(unittest.TestCase):
    (data/'events.json').write_text(json.dumps(dict(events=[fresh])));(out/'taxonomy.json').write_text(json.dumps(dict(primary_categories=[])))
    with patch.object(s,'ROOT',root),patch.object(s,'OUT',out):s.merge(dict(at='now',sources={'up60':dict(ok=False)},events=[]))
    self.assertEqual(json.loads((data/'events.json').read_text())['events'],[fresh])
+ def test_partial_success_preserves_previously_verified_event(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);out=root/'events-preview/admin/data';out.mkdir(parents=True);data=root/'events-preview/ashdod/data';data.mkdir(parents=True)
+   old=self.event('local_ironit','verified');old.update(local_source_refresh=True,local_source_name='ironit')
+   (data/'events.json').write_text(json.dumps(dict(events=[old])));(out/'taxonomy.json').write_text(json.dumps(dict(primary_categories=[])))
+   with patch.object(s,'ROOT',root),patch.object(s,'OUT',out):s.merge(dict(at='now',sources={'ironit':dict(ok=True,read=0)},events=[]))
+   self.assertEqual(json.loads((data/'events.json').read_text())['events'],[old])
  def test_child_workshop_and_factual_short_copy(self):
   e=self.event('x');e.update(title='סדנת ציור לילדים',description='',internal_notes=[])
   r=s.localize(e,'ironit');self.assertEqual(r['category'],'kids');self.assertEqual(r['content_completion_status'],'facts_only');self.assertNotIn('משתתפים',r['description'])

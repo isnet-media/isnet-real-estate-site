@@ -21,6 +21,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -32,16 +33,38 @@ jobs:
           STAGE_SWAP_FROM_BOARDS: YES_MATCHED_EVENTS_ONLY
         run: python scripts/swap_our_stage_events_with_boards.py
       - name: Diagnose remaining unmatched event occurrences
+        continue-on-error: true
         run: python scripts/diagnose_stage_coverage.py
       - name: Check source coverage for safe stage-board replacement
+        continue-on-error: true
         run: python scripts/audit_stage_rebuild_readiness.py
       - name: Save collection and published updates together
         run: |
           git config user.name "isnet-events-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add events-preview/admin/data/unified-stage-events-ashdod-rishon.json events-preview/ashdod/data/events.json events-preview/admin/data/stage-image-publication-ashdod.json events-preview/admin/data/stage-rebuild-readiness.json events-preview/admin/data/stage-coverage-diagnostics.json events-preview/admin/data/stage-board-swap-report.json events-preview/rishon-lezion/data/events.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Collect stage candidates and publish verified Ashdod media"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
+          cp events-preview/admin/data/unified-stage-events-ashdod-rishon.json /tmp/stage-source-snapshot.json
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/stage-source-snapshot.json events-preview/admin/data/unified-stage-events-ashdod-rishon.json
+            STAGE_SWAP_FROM_BOARDS=YES_MATCHED_EVENTS_ONLY python scripts/swap_our_stage_events_with_boards.py
+            python scripts/diagnose_stage_coverage.py || echo "::warning::Stage coverage diagnostic failed; collected events remain available."
+            python scripts/audit_stage_rebuild_readiness.py || echo "::warning::Stage readiness diagnostic failed; no full-feed replacement is permitted."
+            git add events-preview/admin/data/unified-stage-events-ashdod-rishon.json events-preview/ashdod/data/events.json events-preview/admin/data/stage-image-publication-ashdod.json events-preview/admin/data/stage-rebuild-readiness.json events-preview/admin/data/stage-coverage-diagnostics.json events-preview/admin/data/stage-board-swap-report.json events-preview/rishon-lezion/data/events.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m "Merge collected stage events into latest city feeds"
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          echo "::error::Could not save stage events after four merge attempts; recover the source snapshot from the artifact."
+          exit 1
+      - name: Preserve collection evidence even if publication fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unified-stage-source-${{ github.run_id }}
+          path: |
+            /tmp/stage-source-snapshot.json
+            events-preview/admin/data/unified-stage-events-ashdod-rishon.json
+            events-preview/admin/data/stage-coverage-diagnostics.json
+            events-preview/admin/data/stage-board-swap-report.json
+          if-no-files-found: warn

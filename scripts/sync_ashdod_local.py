@@ -298,7 +298,9 @@ def merge(snap):
  # Initial user-authorized reset quarantines all legacy local cards. Later failed reads
  # preserve only records already rebuilt under this policy, never old generic material.
  failed={name for name,v in snap['sources'].items() if not v.get('ok') or v.get('issues')}
- kept=[e for e in old if not legacy_local(e) or (e.get('local_source_refresh') and e.get('local_source_name') in failed)]
+ # A successful HTTP read can still contain only part of a source listing.
+ # Absence is not a cancellation; refresh matching records, retain unmatched facts.
+ kept=[e for e in old if not legacy_local(e) or e.get('local_source_refresh')]
  new=[];duplicates=0;completed_images=0
  for e in snap['events']:
   classify_local(e)
