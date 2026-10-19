@@ -18,7 +18,7 @@ const style=document.createElement('style');style.textContent=`
 `;document.head.append(style);
 share.addEventListener('click',async()=>{
  const url=new URL(location.pathname,location.origin);
- for(const key of ['id','slug','category','subcategory','date','area','audience','topic','food','venue','team','place','cuisine','mood']){const value=new URL(location.href).searchParams.get(key);if(value)url.searchParams.set(key,value)}
+ for(const key of ['id','slug','category','subcategory','date','area','audience','topic','food','venue','team']){const value=new URL(location.href).searchParams.get(key);if(value)url.searchParams.set(key,value)}
  if(/^#[\w-]+$/.test(location.hash))url.hash=location.hash;
  const title=document.querySelector('main h1,.cinemaBrand h1,.hero h1')?.textContent?.trim()||document.title||'מה עושים באשדוד';
  const payload={title,text:title+' · מה עושים באשדוד',url:url.href};

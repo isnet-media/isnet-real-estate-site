@@ -9,5 +9,4 @@ if(eventsImg){eventsImg.src='assets/branding/what-to-do-ashdod-dark.svg?v=202610
 if(publisherImg){publisherImg.src='assets/branding/ashdodnet-dark.svg?v=20261013-brand1';publisherImg.width=195;publisherImg.height=82;}
 if(!publisher.querySelector('.isnetBrandByline')){const byline=document.createElement('span');byline.className='isnetBrandByline';byline.textContent='מבית';publisher.prepend(byline);}
 
-const menu=header.querySelector('.isnetSiteMenu__links');if(menu&&!menu.querySelector('[href="restaurants.html"]')){const link=document.createElement('a');link.href='restaurants.html';link.textContent='מסעדות וקולינריה';menu.append(link);}
 })();
