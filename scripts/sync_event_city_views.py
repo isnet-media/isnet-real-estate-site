@@ -25,7 +25,7 @@ TARGETS = {
     },
 }
 FRONTEND_EXTENSIONS = {".html", ".css", ".js"}
-SKIP_NAMES = {"restaurants.html", "restaurants.css", "restaurants.js", "dark-preview.html", "hero-international-preview.html", "ashdod-event-identities.js", "ashdod-analytics.js"}
+SKIP_NAMES = {"isnet-advertise.js", "restaurants.html", "restaurants.css", "restaurants.js", "dark-preview.html", "hero-international-preview.html", "ashdod-event-identities.js", "ashdod-analytics.js"}
 HEAD_MARKER = "<!-- ISNET shared layout: edit the Ashdod source; synced automatically -->"
 CSS_MARKER = "/* ISNET shared layout: edit events-preview/ashdod, not this generated file. */"
 JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this generated file."
@@ -44,7 +44,7 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     content = re.sub(r'<a\b[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>', '', content)
     # The city has its own data and booking destinations. Share presentation only.
     content = content.replace(' data-city-only="ashdod"', '')
-    content = re.sub(r'<script\b[^>]*src="(?:ashdod-event-identities|ashdod-analytics)\.js[^" ]*"[^>]*></script>', '', content)
+    content = re.sub(r'<script\b[^>]*src="(?:ashdod-event-identities|ashdod-analytics|isnet-advertise)\.js[^" ]*"[^>]*></script>', '', content)
     content = content.replace('/ashdod/', '/' + city['slug'] + '/')
     content = content.replace(r'\/ashdod', r'\/' + city['slug'])
     content = content.replace('isnet-ashdod-', 'isnet-' + city['slug'] + '-')
