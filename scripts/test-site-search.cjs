@@ -29,3 +29,11 @@ assert(!E.parse('לא בחוץ',E.parse('טיולים בחוץ')).concepts.inclu
 
 const fallback=run('הצגת ילדים בשבת עד 20 שקל');assert.equal(fallback.count,0);assert(fallback.alternatives.some(a=>a.label.includes('תקציב')&&a.results.some(x=>x.id==='e:kids')));assert(!fallback.alternatives.some(a=>a.results.some(x=>x.id==='e:adult')));assert.equal(run('גכעכטלמ').alternatives.length,0);
 console.log('PASS: labeled budget/date alternatives preserve family, age, location and named terms');
+
+const namedDocs=E.create({events:[{event_id:'mansdorf',title:'שבת של ספורט והשראה לכל המשפחה',description:'מפגש עם עמוס מנסדורף',category:'lecture',start_date:'2026-11-14',start_time:'09:30'},{event_id:'match',title:'כדורעף',category:'sport',start_date:'2026-10-24',start_time:'19:00'}]});
+for(const q of ['שבת של ספורט','שבת של ספורט והשראה לכל המשפחה']){
+ const result=E.search(namedDocs,E.parse(q),'2026-10-19',0);
+ assert.equal(result.results[0]?.id,'e:mansdorf');assert.equal(result.results[0].date,'2026-11-14');assert.equal(result.context.period,undefined);
+}
+assert.equal(E.search(namedDocs,E.parse('ספורט בשבת'),'2026-10-19',0).results[0]?.id,'e:match');
+console.log('PASS: event title containing Saturday is found beyond the nearest weekend; explicit Saturday requests remain constrained');
