@@ -6,3 +6,14 @@ let r=G.build(fixture,'2026-10-17');assert.equal(r.length,4);assert.equal(r.find
 const E=require('../events-preview/ashdod/site-search-engine.js');const c=E.parse('מה לעשות בשבת באשדוד',{type:'movie',maxPrice:0,terms:['ישן']});assert.equal(c.type,undefined);assert.equal(c.maxPrice,undefined);assert.deepEqual(c.terms,[]);console.log('PASS: Saturday dates, schedules, cancellations, filters and fresh search context');
 
 const dated={guide:{items:[{id:'dated',title:'פארק',kind:'attraction',recurring_saturday:true,open_dates:['2026-10-17'],hours_by_date:{'2026-10-17':'10:00–19:00'},hours:'לפי תאריך'}]}};assert.equal(G.build(dated,'2026-10-17')[0].hours,'10:00–19:00');assert.equal(G.build(dated,'2026-10-24').length,0);
+
+const allCategories=['lecture','music','standup','theatre','kids','sport','conference','community','seniors','exhibition','workshop','other'];
+const categoryEvents=allCategories.map(category=>({event_id:category,title:'אירוע '+category,category,start_date:'2026-11-14',start_time:'10:00',venue:'אולם '+category}));
+assert.equal(G.build({events:categoryEvents},'2026-11-14').length,allCategories.length);
+const familyLecture={event_id:'mansdorf',title:'שבת של ספורט והשראה לכל המשפחה',category:'lecture',start_date:'2026-11-14',start_time:'09:30'};
+assert.equal(G.build({events:[familyLecture]},'2026-11-14',{audience:'family'}).length,1);
+const merged=G.mergePublished([familyLecture],[{event_id:'manual',record_type:'manual',publication_status:'published',payload:{title:'הרצאה שהוסיף העורך',category:'lecture',start_date:'2026-11-14',start_time:'11:00'}},{event_id:'mansdorf',publication_status:'published',payload:{...familyLecture,start_date:'2026-11-21'}}]);
+assert.equal(G.build({events:merged},'2026-11-14')[0].title,'הרצאה שהוסיף העורך');
+assert.equal(G.build({events:merged},'2026-11-21')[0].title,familyLecture.title);
+for(const status of ['hidden','draft','archived','trashed','deleted','cancelled','canceled'])assert.equal(G.build({events:[{...familyLecture,status}]},'2026-11-14').length,0);
+console.log('PASS: all Saturday categories, family lectures, manual CMS additions, corrected dates and hidden event exclusions');
