@@ -8,4 +8,4 @@ document.getElementById("chips").innerHTML=Object.entries(kinds).map(([k,n])=>'<
 document.getElementById("chips").addEventListener("click",e=>{let b=e.target.closest("[data-kind]");if(b){state.kind=b.dataset.kind;render()}});
 document.getElementById("audience").value=state.audience;for(const k of ["audience","area"]){document.getElementById(k).addEventListener("change",e=>{state[k]=e.target.value;render()})}document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value.trim();render()});
 Promise.all([fetch("data/places.json",{cache:"no-store"}).then(r=>r.json()),fetch("data/attractions-guide.json",{cache:"no-store"}).then(r=>r.json())]).then(([places,extra])=>{entries=[...normalizePlaces(places).filter(x=>!(extra.verified_sources||[]).some(y=>y.id===x.id)),...(extra.verified_sources||[]).map(x=>({...x,local:false,area:"ashdod"}))];render()}).catch(()=>{document.getElementById("grid").innerHTML='<div class="empty">לא ניתן לטעון כרגע את האטרקציות.</div>'});
-</script></body></html>
+</script><script defer src="site-share.js?v=20261019-all-pages2"></script></body></html>
