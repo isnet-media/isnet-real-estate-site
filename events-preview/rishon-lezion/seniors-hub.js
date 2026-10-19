@@ -143,7 +143,7 @@ async function init(){
    root.querySelector('#snCount').textContent=(found.length===1?'פעילות אחת':found.length+' פעילויות')+(savedOnly?' במועדפים':'');root.querySelector('#snEmpty').hidden=found.length>0;root.querySelector('#snReset').hidden=!q&&selected==='all'&&active==='all'&&!savedOnly;
    empty.querySelector('h3').textContent=savedOnly?'עוד אין כאן פעילויות שמורות':'לא נמצאה פעילות מתאימה לבחירה';empty.querySelector('p').textContent=savedOnly?'בחרו פעילות ולחצו על הלב כדי לחזור אליה בקלות. אפשר לשמור גם פעילות בחודש רחוק יותר.':'אפשר לבחור חודש אחר, לנקות את הסינון או לגלות עוד בילויים בעיר.';
    const groups=new Map();for(const e of found){const m=e.start_date.slice(0,7);if(!groups.has(m))groups.set(m,[]);groups.get(m).push(e)}
-   root.querySelector('#snResults').innerHTML=[...groups].map(([m,events])=>'<section class="snMonthGroup" aria-label="'+esc(month(m))+'"><h2>'+esc(month(m))+'</h2><div class="snCards">'+events.map(e=>card(e,saved.has(e.event_id||e.id))).join('')+'</div></section>').join('');
+   root.querySelector('#snResults').innerHTML=active==='senior-trips'?'<div class="snCards" aria-label="כל הטיולים לפי תאריך">'+found.map(e=>card(e,saved.has(e.event_id||e.id))).join('')+'</div>':[...groups].map(([m,events])=>'<section class="snMonthGroup" aria-label="'+esc(month(m))+'"><h2>'+esc(month(m))+'</h2><div class="snCards">'+events.map(e=>card(e,saved.has(e.event_id||e.id))).join('')+'</div></section>').join('');
    root.querySelectorAll('[data-topic]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.topic===active)));
    root.querySelector('#snTopic').value=active;
 
