@@ -132,6 +132,9 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         content=re.sub(r'<section class="cityDiscover"[\s\S]*?</section>', '', content)
         content=re.sub(r'<a[^>]*href="(?:places|attractions|saturday)\.html[^"]*"[^>]*>[\s\S]*?</a>', '', content)
         if name=='index.html':
+            content=re.sub(r'<a class="isnetNavFeature isnetNavFeature--blue" href="cinema.html">[\s\S]*?</a>', '<a class="isnetNavFeature isnetNavFeature--blue" href="https://easy.co.il/list/Restaurants?region=883" target="_blank" rel="noopener noreferrer"><span class="isnetNavFeature__icon" aria-hidden="true">♨</span><span class="isnetNavFeature__copy"><strong>מסעדות וקולינריה ביבנה</strong><small>מסעדות, בתי קפה ואוכל בעיר</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>', content)
+            content=re.sub(r'<a class="isnetNavSmall" href="category.html\?category=exhibition">[\s\S]*?</a>', '<a class="isnetNavSmall" href="../ashdod/cinema.html"><span aria-hidden="true">▣</span><strong>קולנוע באשדוד</strong></a>', content)
+            content=re.sub(r'<a class="isnetNavSmall" href="category.html\?category=sport">[\s\S]*?</a>', '<a class="isnetNavSmall" href="../rishon-lezion/cinema.html"><span aria-hidden="true">▣</span><strong>קולנוע בראשון לציון</strong></a>', content)
             content=re.sub(r'<a class="cityDiscover__card"[\s\S]*?</a>', '', content)
 
     # CMS city identifiers are ASCII slugs and must be localized explicitly.
