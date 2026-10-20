@@ -122,6 +122,7 @@ jobs:
           node scripts/test-event-sync.cjs
           python scripts/build_event_public_assets.py --with-cms
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-category-listings.cjs
+          NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-yavne-quality.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-hub-listings.cjs
 
       - name: Build central comparison of public source snapshots

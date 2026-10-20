@@ -27,7 +27,7 @@ TARGETS = {
     },
 }
 FRONTEND_EXTENSIONS = {".html", ".css", ".js"}
-SKIP_NAMES = {"site-seo.js", "seo-pages.css", "isnet-advertise.js", "restaurants.html", "restaurants.css", "restaurants.js", "dark-preview.html", "hero-international-preview.html", "ashdod-event-identities.js", "ashdod-analytics.js"}
+SKIP_NAMES = {"yavne-events.js", "site-seo.js", "seo-pages.css", "isnet-advertise.js", "restaurants.html", "restaurants.css", "restaurants.js", "dark-preview.html", "hero-international-preview.html", "ashdod-event-identities.js", "ashdod-analytics.js"}
 HEAD_MARKER = "<!-- ISNET shared layout: edit the Ashdod source; synced automatically -->"
 CSS_MARKER = "/* ISNET shared layout: edit events-preview/ashdod, not this generated file. */"
 JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this generated file."
@@ -137,13 +137,44 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
             marker='  renderCinema();\n  if(state.cinemaOpen)'
             refresh='  renderCinema();\n  if(window.ISNET_CITY_BOOTSTRAP&&window.ISNET_PUBLIC_CMS){\n    Promise.all([window.ISNET_PUBLIC_CMS.loadCards("yavne"),window.ISNET_PUBLIC_CMS.publishedEvents("yavne",{listing:true})]).then(([fresh,rows])=>{\n      const updated=publishedBoardEvents(fresh.events||[],rows,iso(today()));\n      if(updated.length){state.events=updated;state.generatedAt=fresh.generated_at||state.generatedAt;render();renderCinema();}\n    }).catch(error=>console.warn("Keeping the published Yavne event snapshot",error));\n  }\n  if(state.cinemaOpen)'
             content=content.replace(marker,refresh,1)
-        if name=='index.html' and suffix=='.html':
+        if name in ('index.html','category.html') and suffix=='.html':
             data=json.loads((ROOT/'yavne/data/events.json').read_text())
             data['events']=[{k:v for k,v in event.items() if k not in {'image_candidates','source_detail_text','raw_html','raw','html'}} for event in data.get('events',[])]
             data['taxonomy']=json.loads((ROOT/'admin/data/taxonomy.json').read_text())
             packed=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
             content=content.replace('<head>','<head>\n<script id="yavne-event-bootstrap">window.ISNET_CITY_BOOTSTRAP='+packed+';</script>',1)
 
+        if suffix=='.js' and name in ('category-landing.js','app.js','pilot/app.js'):
+            content=content.replace('const counts={};groupEvents(state.events).forEach(e=>counts[e.category]=(counts[e.category]||0)+1);', 'const counts={};groupEvents(state.events).forEach(e=>{for(const c of cats)if(window.YAVNE_EVENTS.matches(e,new Set([c])))counts[c]=(counts[c]||0)+1;});')
+            content=content.replace('ids.has(e.category)', 'window.YAVNE_EVENTS.matches(e,ids)')
+            content=content.replace('if(state.category&&e.category!==state.category)return false;', 'if(state.category&&!window.YAVNE_EVENTS.matches(e,new Set([state.category])))return false;')
+            content=content.replace('if(state.subcategory&&e.subcategory!==state.subcategory)return false;', 'if(state.subcategory&&!window.YAVNE_EVENTS.matchesSub(e,state.category,state.subcategory))return false;')
+            content=content.replace('e.category===c&&e.subcategory===sub.id', 'window.YAVNE_EVENTS.matchesSub(e,c,sub.id)')
+        if name=='category-landing.js':
+            content=content.replace('const filtered=events.filter(e=>', 'const selectedSub=params.get("subcategory");\n const filtered=events.filter(e=>(!selectedSub||window.YAVNE_EVENTS.matchesSub(e,key,selectedSub))&&')
+            # Real data-driven subcategories, retaining the stage navigation.
+            content=content.replace('sort((a,b)=>String(a.start_date||"").localeCompare(String(b.start_date||"")));render();', 'sort((a,b)=>String(a.start_date||"").localeCompare(String(b.start_date||"")));window.YAVNE_EVENTS.subnav(events,key,params);render();')
+        if name in ('kids-hub.js','seniors-hub.js'):
+            # Empty city place directories must not become prominent dead ends.
+            local_explore="const explore=[['הצגות ותיאטרון','הצגות ומופעים ביבנה','category.html?category=theatre','◈'],['מוזיקה והופעות','הצלילים והמופעים בעיר','category.html?category=music','♫'],['קולנוע','הקרנות בסינמטק יבנה','cinema.html','▣'],['מסעדות וקולינריה','בתי קפה ומסעדות ביבנה','restaurants.html','♨'],['אירועי קהילה','מפגשים ופעילויות בעיר','category.html?category=community','✧']];"
+            content=re.sub(r'const explore=\[[^\n]+;',lambda _:local_explore,content)
+            content=content.replace('href="#senior-culture"','href="category.html?category=stage"')
+        if name=='seniors-hub.js':
+            # Broad adult lecture inclusion remains; health lectures have a second topic.
+            content=content.replace("if(goodLifeProgram(e))return 'senior-culture';", "const member=e.category_memberships?.find(x=>x.category==='seniors');if(member?.subcategory&&topics[member.subcategory])return member.subcategory;\n if(goodLifeProgram(e))return 'senior-culture';")
+        if name=='seniors-hub.js':
+            content=content.replace("active==='all'||topic(e)===active", "active==='all'||topic(e)===active||window.YAVNE_EVENTS.matchesSub(e,'seniors',active)||(active==='senior-lectures'&&adultLecture(e))")
+        if name=='event.js':
+            content=content.replace('all.find(e=>e.event_id===requestedId)', 'all.find(e=>e.event_id===requestedId||e.source_aliases?.some(a=>a.event_id===requestedId))')
+        if suffix=='.html':
+            helper=(ROOT/'yavne/yavne-events.js').read_text()
+            version=hashlib.sha256(helper.encode()).hexdigest()[:12]
+            content=re.sub(r'(<script[^>]*src="../shared/public-cms.js[^>]*></script>)',lambda m:m[1]+'\n<script src="yavne-events.js?v='+version+'" defer></script>',content)
+            # Every existing navigation menu has the same local classes destination.
+            content=content.replace('href="category.html?category=stage">הופעות ומוזיקה</a>', 'href="category.html?category=stage">הופעות ומוזיקה</a><a href="https://meusharim-yavne.ebs987449.chatgpt.site/">חוגים ביבנה</a>')
+        if name=='index.html':
+            classes='<a class="isnetNavFeature isnetNavFeature--gold" href="https://meusharim-yavne.ebs987449.chatgpt.site/"><span class="isnetNavFeature__icon" aria-hidden="true">▧</span><span class="isnetNavFeature__copy"><strong>חוגים ביבנה</strong><small>חוגים, קורסים ופעילויות העשרה</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>'
+            content=content.replace('</nav><nav class="isnetNavDiscovery__lifestyle"',classes+'</nav><nav class="isnetNavDiscovery__lifestyle"',1)
         content=re.sub(r'<button[^>]*data-(?:cinema|venue)="(?:cinema-city|cinematheque)"[^>]*>.*?</button>', '', content)
         content=re.sub(r'<a[^>]*href="https://(?:www\.)?(?:cinema-city\.co\.il|hotcinema\.co\.il)[^"]*"[^>]*>.*?</a>', '', content)
         content=content.replace('בחרו את שני בתי הקולנוע','בדקו מועדי הקרנות נוספים')

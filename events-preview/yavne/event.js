@@ -480,7 +480,7 @@ async function init(){
     }
 
     const base=requestedId
-      ? all.find(e=>e.event_id===requestedId)
+      ? all.find(e=>e.event_id===requestedId||e.source_aliases?.some(a=>a.event_id===requestedId))
       : all.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug));
     if(!base||["hidden","draft","archived","trashed","deleted"].includes(base.status)||["draft","unpublished","hidden","archived"].includes(base.publication_status))throw new Error("event");
     const canonicalSlug=eventSlug(base);

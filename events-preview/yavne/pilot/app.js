@@ -780,8 +780,8 @@ function filtered(){
     if(!matchesQuick(e))return false;
     if(state.date&&e.start_date!==state.date)return false;
     if(state.periodStart&&state.periodEnd&&(e.start_date<state.periodStart||e.start_date>state.periodEnd))return false;
-    if(state.category&&e.category!==state.category)return false;
-    if(state.subcategory&&e.subcategory!==state.subcategory)return false;
+    if(state.category&&!window.YAVNE_EVENTS.matches(e,new Set([state.category])))return false;
+    if(state.subcategory&&!window.YAVNE_EVENTS.matchesSub(e,state.category,state.subcategory))return false;
     if(state.category==="sport"){
       if(state.sportBranch!=="all"&&sportKey(e)!==state.sportBranch)return false;
       if(state.sportTeam!=="all"&&sportTeamConfig(e)?.id!==state.sportTeam)return false;
@@ -911,7 +911,7 @@ function renderCategories(){
   const cats=configured.map(c=>c.id).sort((a,b)=>preferredOrder.indexOf(a)-preferredOrder.indexOf(b));
   // Legacy events can still use workshop; preserve access until feed migration.
   if(state.events.some(e=>e.category==="workshop")&&!cats.includes("workshop"))cats.push("workshop");
-  const counts={};groupEvents(state.events).forEach(e=>counts[e.category]=(counts[e.category]||0)+1);
+  const counts={};groupEvents(state.events).forEach(e=>{for(const c of cats)if(window.YAVNE_EVENTS.matches(e,new Set([c])))counts[c]=(counts[c]||0)+1;});
   counts.cinema=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
   const visibleCats=cats.filter(c=>c!=="community"&&c!=="tour"&&c!=="conference"&&(counts[c]||0)>0);
   $("categoryGrid").innerHTML=visibleCats.map(c=>{
@@ -924,7 +924,7 @@ function renderCategories(){
       '<span class="categoryCard__copy"><b>'+label+'</b><small>'+countLabel+'</small></span>'+
       '<span class="categoryCard__arrow">←</span>'+
     '</button>';
-    const subs=(configured.find(x=>x.id===c)?.subcategories||[]).filter(sub=>state.events.some(e=>e.category===c&&e.subcategory===sub.id));
+    const subs=(configured.find(x=>x.id===c)?.subcategories||[]).filter(sub=>state.events.some(e=>window.YAVNE_EVENTS.matchesSub(e,c,sub.id)));
     if(!active||isCinema||!subs.length)return '<div class="categoryTile">'+card+'</div>';
     return '<div class="categoryTile">'+card+'<div class="categoryInlineSubtypes"><button data-sub="" class="'+(!state.subcategory?'is-active':'')+'">כל האירועים</button>'+subs.map(sub=>'<button data-sub="'+escapeHtml(sub.id)+'" class="'+(state.subcategory===sub.id?'is-active':'')+'">'+escapeHtml(sub.label)+'</button>').join('')+'</div></div>';
   }).join("");

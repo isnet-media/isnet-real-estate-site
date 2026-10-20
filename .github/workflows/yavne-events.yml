@@ -7,6 +7,7 @@ on:
       - scripts/sync_yavne_events.py
       - scripts/yavne_event_quality.py
       - scripts/cache_yavne_images.py
+      - scripts/audit_yavne_event_media.py
       - .github/workflows/yavne-events.yml
   schedule:
     - cron: '25 5 * * *'
@@ -29,6 +30,7 @@ jobs:
       - run: pip install requests beautifulsoup4 pillow
       - run: python scripts/test_yavne_events.py
       - run: python -u scripts/sync_yavne_events.py
+      - run: python -u scripts/audit_yavne_event_media.py
       - run: python -u scripts/cache_yavne_images.py
       - run: |
           python scripts/sync_event_city_views.py

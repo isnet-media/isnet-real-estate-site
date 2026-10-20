@@ -26,7 +26,8 @@ function categoryImage(e){
 }
 function render(){
  const q=document.getElementById("q").value.trim().toLocaleLowerCase("he");
- const filtered=events.filter(e=>ids.has(e.category)&&(!q||String(e.title||"").toLocaleLowerCase("he").includes(q)));
+ const selectedSub=params.get("subcategory");
+ const filtered=events.filter(e=>(!selectedSub||window.YAVNE_EVENTS.matchesSub(e,key,selectedSub))&&window.YAVNE_EVENTS.matches(e,ids)&&(!q||String(e.title||"").toLocaleLowerCase("he").includes(q)));
  document.getElementById("count").textContent=filtered.length+" אירועים";
  document.getElementById("empty").hidden=filtered.length>0;
  document.getElementById("cards").innerHTML=filtered.map(e=>{
@@ -50,6 +51,6 @@ Promise.all([
   const id=row?.event_id||row?.payload?.event_id;
   if(id&&row.payload&&(map.has(id)||row.record_type==="manual"))map.set(id,{...map.get(id),...row.payload,event_id:id});
  }
- events=[...map.values()].filter(e=>ids.has(e.category)&&e.is_active!==false&&!["cancelled","canceled","hidden","draft","deleted"].includes(e.status)&&!["hidden","draft","unpublished","archived"].includes(e.publication_status)&&(!e.start_date||e.start_date>=iso)).sort((a,b)=>String(a.start_date||"").localeCompare(String(b.start_date||"")));render();
+ events=[...map.values()].filter(e=>window.YAVNE_EVENTS.matches(e,ids)&&e.is_active!==false&&!["cancelled","canceled","hidden","draft","deleted"].includes(e.status)&&!["hidden","draft","unpublished","archived"].includes(e.publication_status)&&(!e.start_date||e.start_date>=iso)).sort((a,b)=>String(a.start_date||"").localeCompare(String(b.start_date||"")));window.YAVNE_EVENTS.subnav(events,key,params);render();
 }).catch(()=>{document.getElementById("empty").hidden=false;document.getElementById("empty").textContent="לא ניתן לטעון כרגע את רשימת האירועים. נסו שוב מאוחר יותר.";});
 })();
