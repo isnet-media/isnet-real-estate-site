@@ -123,7 +123,8 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     content = content.replace('ASHDOD_NEARBY', 'אשדוד')
     if city['slug']=='yavne':
         content=content.replace('בראשון לציון','ביבנה').replace('לגלות תרבות בראשון','תרבות ביבנה')
-        content=content.replace("cityEvents('ashdod')","cityEvents('yavne')")
+        content=content.replace("cityEvents('ashdod')","cityEvents('yavne')").replace("cityEvents('rishon-lezion')","cityEvents('ashdod')")
+        content=content.replace('location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"ashdod"', '"yavne"')
         content=content.replace('סינמה סיטי יבנה','סינמטק יבנה')
         content=re.sub(r'<button[^>]*data-(?:cinema|venue)="(?:cinema-city|cinematheque)"[^>]*>.*?</button>', '', content)
         content=re.sub(r'<a[^>]*href="https://(?:www\.)?(?:cinema-city\.co\.il|hotcinema\.co\.il)[^"]*"[^>]*>.*?</a>', '', content)
@@ -132,8 +133,6 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         content=re.sub(r'<a[^>]*href="(?:places|attractions|saturday)\.html[^"]*"[^>]*>[\s\S]*?</a>', '', content)
         if name=='index.html':
             content=re.sub(r'<a class="cityDiscover__card"[\s\S]*?</a>', '', content)
-        if name=='saturday.js':
-            content=content.replace("cityEvents('yavne')","cityEvents('yavne')",1)
 
     # CMS city identifiers are ASCII slugs and must be localized explicitly.
     # Otherwise the Rishon public board silently fetches Ashdod CMS events.

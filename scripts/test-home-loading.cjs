@@ -21,4 +21,4 @@ async function check(city,fail){
  assert.equal(state.cinemaLoading,false);assert.equal(state.cinema.length,fail?0:1);
  assert.equal(state.sportsMeta.teams.length,fail?0:1);assert.equal(rendered,2);assert.equal(cinemaRendered,2);assert.equal(sportsRendered,1);
 }
-(async()=>{for(const city of ['ashdod','rishon-lezion'])for(const fail of [false,true])await check(city,fail);console.log('PASS: event list renders independently of delayed cinema/sports; successful and failed responses recover; correct city CMS');})().catch(e=>{console.error(e);process.exitCode=1});
+(async()=>{for(const city of ['ashdod','rishon-lezion','yavne'])for(const fail of [false,true])await check(city,fail);console.log('PASS: event list renders independently of delayed cinema/sports; successful and failed responses recover; correct city CMS');})().catch(e=>{console.error(e);process.exitCode=1});

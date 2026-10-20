@@ -2,7 +2,7 @@
 """Bounded public endpoint checks; this is not a browser or load test."""
 import argparse,json,re,subprocess,tempfile,time
 from pathlib import Path
-CITIES=('ashdod','rishon-lezion')
+CITIES=('ashdod','rishon-lezion','yavne')
 BASE='https://isnet.co.il/events-preview/'
 def check(url,kind):
     with tempfile.TemporaryDirectory() as folder:
