@@ -55,7 +55,7 @@ async function init(){
  const root=document.querySelector('main');
  root.innerHTML='<p role="status">טוענים את התערוכות והביקורים…</p>';
  try{
-  const [data,catalog,cms]=await Promise.all([(window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()})),fetch('data/exhibitions-magazine.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('catalog');return r.json()}),window.ISNET_PUBLIC_CMS?.publishedEvents?.('rishon-lezion')||Promise.resolve([])]);
+  const [data,catalog,cms]=await Promise.all([(window.ISNET_PUBLIC_CMS?.loadHub?.()||fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()})),fetch('data/exhibitions-magazine.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('catalog');return r.json()}),window.ISNET_PUBLIC_CMS?.publishedEvents?.('rishon-lezion',{hub:true})||Promise.resolve([])]);
   const at=clock();
   const rows=mergeRows(data.events||[],cms).filter(e=>isVisibleOccurrence(e,at));
   const groups=groupActivities(rows),museum=groupActivities(rows.filter(admission))[0];

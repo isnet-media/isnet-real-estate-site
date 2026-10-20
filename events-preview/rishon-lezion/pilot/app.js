@@ -485,7 +485,8 @@ function renderCinema(){
   const grid=$("cinemaGrid"),section=$("cinemaSection"); if(!grid||!section)return;
   section.hidden=!state.cinemaOpen;
   document.body.classList.toggle("cinemaMode",state.cinemaOpen);
-  if($("cinemaLoading"))$("cinemaLoading").hidden=true;
+  if($("cinemaLoading"))$("cinemaLoading").hidden=!state.cinemaLoading;
+  if(state.cinemaLoading){grid.innerHTML="";return;}
   document.title=state.cinemaOpen?"סרטים בראשון לציון | מה עושים בראשון לציון?":"מה עושים בראשון לציון? | מבית ראשון נט";
   if(!state.cinemaOpen){grid.innerHTML="";return}
   const arr=state.cinema
@@ -1233,13 +1234,15 @@ function publishedBoardEvents(base,rows,day){
 
 async function init(){
   if(location.pathname.includes("/rishon-lezion/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
-  const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
+  // Independent sections must not delay the first usable event list.
+  state.cinemaLoading=true;
+  const cinemaRequest=fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("cinema");return r.json()}).catch(()=>({movies:[]}));
+  const sportsRequest=fetch("data/sports.json?v=20261005-2").then(r=>{if(!r.ok)throw Error("sports");return r.json()}).catch(()=>({branches:{},teams:[]}));
+  const [data,fallbacks,taxonomy,cmsRows]=await Promise.all([
     (window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
-    fetch("data/cinema.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({movies:[]})),
-    fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
     fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
-    window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod",{listing:true})||Promise.resolve([])
+    window.ISNET_PUBLIC_CMS?.publishedEvents?.("rishon-lezion",{listing:true})||Promise.resolve([])
   ]);
   state.events=(window.ISNET_EVENT_IDENTITIES?.reconcile?.(publishedBoardEvents(data.events||[],cmsRows,iso(today())))||publishedBoardEvents(data.events||[],cmsRows,iso(today())));
   // Do not publish ambiguous imported source-name records as real events:
@@ -1247,9 +1250,6 @@ async function init(){
   state.events=state.events.filter(e=>!/^מבלים(?:\s*[-–—:]\s*)?$/.test(String(e.title||"").trim()));
   state.fallbacks=fallbacks;
   state.generatedAt=data.generated_at||null;
-  state.cinema=cinema.movies||[];
-  state.cinemaUpdatedAt=cinema.updated_at||null;
-  state.sportsMeta=sports||{branches:{},teams:[]};
   window.publicTaxonomy=(taxonomy.primary_categories||[]).filter(c=>!["conference","food"].includes(c.id)||!location.pathname.includes("/rishon-lezion/"));
   for(const item of window.publicTaxonomy)catLabels[item.id]=item.label;
   const requestedCategory=new URLSearchParams(location.search).get("category");
@@ -1261,6 +1261,11 @@ async function init(){
   render();
   renderCinema();
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));
+  cinemaRequest.then(cinema=>{
+    state.cinema=cinema.movies||[];state.cinemaUpdatedAt=cinema.updated_at||null;state.cinemaLoading=false;
+    render();renderCinema();
+  });
+  sportsRequest.then(sports=>{state.sportsMeta=sports;renderSportsFilters();});
   const searchInput=$("searchInput");
   let searchTimer, lastMeasuredSearch = "";
   const measureSearch = () => {

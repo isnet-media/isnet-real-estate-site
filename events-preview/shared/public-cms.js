@@ -3,7 +3,7 @@
   const key="sb_publishable_njxvSKmgkOQqkGL3JbWiIA_od-9l3wb";
   const root=new URL('../',document.currentScript.src);
   const timeout=()=>typeof AbortSignal!=='undefined'&&AbortSignal.timeout?AbortSignal.timeout(15000):undefined;
-  const sourceRequests=new Map(),cardRequests=new Map(),cmsRequests=new Map(),rawRequests=new Map();
+  const sourceRequests=new Map(),cardRequests=new Map(),hubRequests=new Map(),cmsRequests=new Map(),rawRequests=new Map();
   const metrics={sourceLoads:0,publishedLoads:0,pages:0,sourceMilliseconds:0,publishedMilliseconds:0};
   const clock=()=>typeof performance!=="undefined"?performance.now():Date.now();
   function cityName(city){
@@ -20,6 +20,11 @@
     if(!cardRequests.has(city))cardRequests.set(city,fetch(new URL(city+'/data/events-cards.json',root),{cache:'no-cache',signal:timeout()}).then(r=>{if(!r.ok)throw new Error('Listing unavailable');return r.json()}).catch(()=>loadSource(city)));
     return cardRequests.get(city);
   }
+  function loadHub(city){
+    city=cityName(city);
+    if(!hubRequests.has(city))hubRequests.set(city,fetch(new URL(city+'/data/events-hubs.json',root),{cache:'no-cache',signal:timeout()}).then(r=>{if(!r.ok)throw new Error('Hub listing unavailable');return r.json()}).then(data=>{if(data.hub_schema!==1||!Array.isArray(data.events))throw new Error('Invalid hub listing');return data}).catch(()=>loadSource(city)));
+    return hubRequests.get(city);
+  }
   async function readRows(city){
     const rows=[];const started=clock();metrics.publishedLoads++;
     for(let offset=0;;offset+=200){
@@ -32,16 +37,16 @@
     metrics.publishedMilliseconds+=clock()-started;
     return rows;
   }
-  async function readPublished(city,listing){
+  async function readPublished(city,listing,hub){
     if(!rawRequests.has(city))rawRequests.set(city,readRows(city).catch(error=>{rawRequests.delete(city);throw error;}));
-    const [rows,source]=await Promise.all([rawRequests.get(city),listing?loadCards(city):loadSource(city)]);
+    const [rows,source]=await Promise.all([rawRequests.get(city),hub?loadHub(city):listing?loadCards(city):loadSource(city)]);
     const base=new Map((source.events||[]).map(e=>[String(e.event_id),e]));
     return rows.map(row=>({...row,payload:window.ISNET_EVENT_OVERLAY?.merge(base.get(String(row.event_id))||{},row.payload)||row.payload}));
   }
-  window.ISNET_PUBLIC_CMS={loadSource,loadCards,metrics,
+  window.ISNET_PUBLIC_CMS={loadSource,loadCards,loadHub,metrics,
     publishedEvents(city,options={}){
-      city=cityName(city);const cacheKey=city+(options.listing?':cards':':full');
-      if(!cmsRequests.has(cacheKey))cmsRequests.set(cacheKey,readPublished(city,options.listing).catch(error=>{cmsRequests.delete(cacheKey);console.warn(error);window.ISNET_CMS_DEGRADED=true;return []}));
+      city=cityName(city);const cacheKey=city+(options.hub?':hub':options.listing?':cards':':full');
+      if(!cmsRequests.has(cacheKey))cmsRequests.set(cacheKey,readPublished(city,options.listing,options.hub).catch(error=>{cmsRequests.delete(cacheKey);console.warn(error);window.ISNET_CMS_DEGRADED=true;return []}));
       return cmsRequests.get(cacheKey);
     }
   };

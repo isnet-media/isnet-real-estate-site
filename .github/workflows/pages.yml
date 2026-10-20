@@ -85,6 +85,7 @@ jobs:
         run: |
           node scripts/test-event-date-chips.cjs
           node scripts/test-ashdod-pilot.cjs
+          node scripts/test-home-loading.cjs
 
       - name: Verify organizer portals and institution links
         id: institution_audit
@@ -117,6 +118,7 @@ jobs:
           node scripts/test-event-sync.cjs
           python scripts/build_event_public_assets.py --with-cms
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-category-listings.cjs
+          NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-hub-listings.cjs
 
       - name: Build central comparison of public source snapshots
         env:

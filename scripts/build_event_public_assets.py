@@ -22,6 +22,11 @@ def compact(event):
     out['_listing_only']=True
     return out
 
+# Specialized hubs search full public copy; never truncate these text fields.
+HUB_FIELDS=frozenset('accessibility address age_max age_min age_text audiences category city contact_phone content_source_url crosscheck_sources description description_manual_override editorial_description end_date end_time event_id id image_credit image_data_url image_manual_override image_publishable image_represents_event image_url image_verified is_active is_free local_source_name locked_fields long_description meeting_point member_price_min_ils organizer organizer_name overlay_version price_is_starting price_max_ils price_min_ils publication_status purchase_phone purchase_url series_description short_pitch source source_description source_image_kind source_priority start_date start_time status subcategory thumbnail_ready thumbnail_url ticket_status ticket_url title venue venue_name walking_level youtube_id'.split())
+def hub_event(event):
+    return {k:v for k,v in event.items() if k in HUB_FIELDS}
+
 def slugify(value):
     s=unicodedata.normalize('NFKC',str(value or '')).strip().lower()
     s=re.sub('[\"\u0027״׳]','',s)
@@ -70,6 +75,8 @@ def build(with_cms=False):
         cards={**data,'events':[compact(e) for e in data['events']],'listing_only':True}
         encoded=json.dumps(cards,ensure_ascii=False,separators=(',',':')).encode()
         (folder/'data/events-cards.json').write_bytes(encoded)
+        hub_encoded=json.dumps({**data,'events':[hub_event(e) for e in data['events']],'hub_schema':1},ensure_ascii=False,separators=(',',':')).encode()
+        (folder/'data/events-hubs.json').write_bytes(hub_encoded)
         events=merge(data['events'],published(city)) if with_cms else data['events']
         if city=='ashdod' and with_cms:
             seo_urls,seo_report=build_seo(ROOT,events,slug,visible,day)
@@ -80,7 +87,7 @@ def build(with_cms=False):
             urls.add(f'https://isnet.co.il/events-preview/{city}/'+path)
         event_urls={f'https://isnet.co.il/events-preview/{city}/event.html?'+urlencode({'slug':slug(e)}) for e in events if visible(e,day)}
         if city!='ashdod' or not with_cms:urls.update(event_urls)
-        report['cities'][city]={'events':len(data['events']),'full_bytes':len(original),'listing_bytes':len(encoded),'full_gzip_bytes':len(gzip.compress(original)),'listing_gzip_bytes':len(gzip.compress(encoded)),'canonical_event_urls':len(event_urls),'published_cms_included':with_cms}
+        report['cities'][city]={'events':len(data['events']),'hub_bytes':len(hub_encoded),'hub_gzip_bytes':len(gzip.compress(hub_encoded)),'full_bytes':len(original),'listing_bytes':len(encoded),'full_gzip_bytes':len(gzip.compress(original)),'listing_gzip_bytes':len(gzip.compress(encoded)),'canonical_event_urls':len(event_urls),'published_cms_included':with_cms}
     for url in sorted(urls):SubElement(SubElement(sitemap,'url'),'loc').text=url
     if with_cms:
         (ROOT/'events-preview/sitemap.xml').write_bytes(tostring(sitemap,encoding='utf-8',xml_declaration=True))

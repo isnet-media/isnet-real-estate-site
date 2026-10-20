@@ -1,5 +1,5 @@
 import json,subprocess
-from build_event_public_assets import compact,slug,visible,merge,ROOT
+from build_event_public_assets import compact,hub_event,HUB_FIELDS,LONG_FIELDS,slug,visible,merge,ROOT
 base={'event_id':'example_123456789','title':'שלום עולם!','description':'א'*1000,'internal_notes':'private','long_description':'detail','start_date':'2099-01-01'}
 card=compact(base)
 assert card['description']=='א'*400 and 'internal_notes' not in card and 'long_description' not in card
@@ -26,3 +26,14 @@ assert compare({},prior)['removed']==[base['event_id']]
 assert compare(prior,{})['added']==[base['event_id']]
 
 assert not visible({**base,'seo_index':False},'2026-10-16')
+
+# Hub feeds retain every searched public text and locked overlay base field.
+for city in ('ashdod','rishon-lezion'):
+    source=json.loads((ROOT/f'events-preview/{city}/data/events.json').read_text())
+    for event in source['events']:
+        hub=hub_event(event)
+        for field in LONG_FIELDS:
+            if field in event: assert hub.get(field)==event[field]
+        for field in ('internal_notes','source_detail_text','review_notes','editorial_notes'):
+            assert field not in hub
+print('PASS: hub text retained without truncation; private editorial notes excluded')

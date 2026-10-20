@@ -123,6 +123,7 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     # CMS city identifiers are ASCII slugs and must be localized explicitly.
     # Otherwise the Rishon public board silently fetches Ashdod CMS events.
     if suffix == ".js":
+        content = re.sub(r'publishedEvents\?\.\(([\"\'])ashdod\1(?=[,)])', lambda m: 'publishedEvents?.('+m.group(1)+city["slug"]+m.group(1), content)
         content = content.replace('publishedEvents?.("ashdod")',
                                   'publishedEvents?.("' + city["slug"] + '")')
     # Cinema venues are city-specific. Preserve IDs on the canonical Ashdod site.

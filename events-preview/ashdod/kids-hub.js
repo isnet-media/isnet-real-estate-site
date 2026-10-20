@@ -113,7 +113,7 @@ async function init(){
  document.title='ילדים באשדוד — פעילויות, הצגות ובילוי משפחתי | מה עושים באשדוד';
  const root=document.querySelector('main');root.innerHTML='<p role="status">טוענים פעילויות ורעיונות לבילוי…</p>';
  try{
-  const [data,cms,cinema]=await Promise.all([(window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()})),window.ISNET_PUBLIC_CMS?.publishedEvents?.('ashdod')||Promise.resolve([]),fetch('data/cinema.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('cinema');return r.json()}).catch(()=>({movies:[]}))]);
+  const [data,cms,cinema]=await Promise.all([(window.ISNET_PUBLIC_CMS?.loadHub?.()||fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()})),window.ISNET_PUBLIC_CMS?.publishedEvents?.('ashdod',{hub:true})||Promise.resolve([]),fetch('data/cinema.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('cinema');return r.json()}).catch(()=>({movies:[]}))]);
   const rows=mergeRows(window.ISNET_EVENT_IDENTITIES?.reconcile?.(data.events||[])||data.events||[],cms).filter(e=>visible(e)).sort((a,b)=>(a.start_date+' '+(a.start_time||'')).localeCompare(b.start_date+' '+(b.start_time||'')));
   const months=[...new Set(rows.map(e=>e.start_date.slice(0,7)))];let active='all',savedOnly=false,saved=new Set();
   const storageKey='isnet-events-favorites';try{saved=readSaved(localStorage.getItem(storageKey));const legacy=readSaved(localStorage.getItem('isnet-ashdod-kids-saved-v1'));for(const id of legacy)saved.add(id);localStorage.setItem(storageKey,JSON.stringify([...saved]));localStorage.removeItem('isnet-ashdod-kids-saved-v1');}catch{}
