@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - scripts/sync_yavne_events.py
+      - scripts/yavne_event_quality.py
       - .github/workflows/yavne-events.yml
   schedule:
     - cron: '25 5 * * *'
@@ -34,7 +35,7 @@ jobs:
           rm -f events-preview/admin/data/site-build-report.json
           git config user.name 'isnet-events-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add events-preview/yavne events-preview/admin/data/yavne-source-report.json
+          git add events-preview/yavne events-preview/admin/data/yavne-source-report.json events-preview/admin/data/yavne-non-event-review.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Refresh verified Yavne events and city frontend'
           git pull --rebase origin main

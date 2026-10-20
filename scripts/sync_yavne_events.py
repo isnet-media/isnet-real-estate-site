@@ -6,6 +6,9 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import sync_events_from_sources as core
 SOURCES=[
+ {"name":"friends_yavne","url":"https://friends-hist.co.il/hall/היכל-התרבות-יבנה/","parser":"generic","venue":"יבנה","source_type":"secondary"},
+ {"name":"easy_yavne","url":"https://easy.co.il/list/Events?region=883","parser":"generic","venue":"יבנה","source_type":"secondary"},
+ {"name":"makore_yavne","url":"https://www.makore.co.il/browse/city/יבנה","parser":"generic","venue":"יבנה","source_type":"secondary"},
  {"name":"mevalim_yavne","url":"https://www.mevalim.co.il/yavne/","parser":"mevalim","venue":"יבנה","source_type":"secondary"},
  {"name":"tickchak_yavne","url":"https://live.tickchak.co.il/yavne","parser":"generic","venue":"יבנה","source_type":"secondary"},
  {'name':'yavne_municipality','url':'https://www.yavne.muni.il/events/','parser':'yavne_community','venue':'יבנה','source_type':'official'},
@@ -27,7 +30,8 @@ def community_rows(soup,source):
   venue=text[m.end():].split('פרטים נוספים')[0].strip() or 'יבנה'
   row={'title':title,'start_date':day,'start_time':m[2],'venue':venue,'ticket_url':url,'purchase_url':url,'quality_flags':['automated_official_listing']}
   row.update(core.image_candidate_from_node(a,source));rows.append(row)
- return rows
+ from yavne_event_quality import EXCLUDE
+ return [r for r in rows if not EXCLUDE.search(r['title'])]
 original_fetch=core.fetch_once
 page_cache={}
 def cached_fetch(source):
@@ -54,7 +58,7 @@ def source_rows(soup,source):
    row={'title':title,'start_date':dt.date().isoformat(),'start_time':dt.strftime('%H:%M'),'venue':venue,'ticket_url':link,'purchase_url':link,'category':MAP.get(node.get('data-mvlm-event-category'),('other',''))[0],'quality_flags':['automated_city_board']}
    row.update(core.image_candidate_from_node(node,source));rows.append(row)
   return rows
- return original_rows(soup,source)
+ return [r for r in original_rows(soup,source) if 'גן יבנה' not in (r.get('venue','')+' '+r.get('title','')) and ('יבנה' in r.get('venue','') or source['name']=='htyavne')]
 def main():
  core.CITY_LABELS['yavne']='יבנה';core.source_rows=source_rows;core.fetch_once=cached_fetch
  report=core.merge('yavne',sorted(SOURCES,key=lambda s:s['source_type']!='official'),False)
@@ -84,6 +88,17 @@ def main():
   if 'סטנדאפ' in e['title'] or 'סטנד אפ' in e['title']:e['category']='standup'
   # A hall name containing cinematheque is not evidence of a film screening.
   if e['category']=='cinema' and any(x in e['title'] for x in ['סטנד','זינגר','נוסבאום','אלתרמן','פיניש']):e['category']='standup'
+ from yavne_event_quality import refine
+ data['events'],held=refine(data['events'])
+ (core.BASE/'admin/data/yavne-non-event-review.json').write_text(json.dumps({'reason':'Classes, skills groups and individual guidance excluded from events board','events':held},ensure_ascii=False,indent=2))
+ report['public_after_quality']=len(data['events']);report['excluded_non_events']=len(held)
+ films={}
+ summaries={'מפרץ ההרפתקאות':'יחידת החילוץ יוצאת להרפתקה באי דינוזאורים, שם היא נדרשת להתמודד עם סכנת התפרצות הר געש. הקרנה בסינמטק יבנה.','בלב הפרא':'קצין כוחות מיוחדים וכלבו שורדים התרסקות מטוס באלסקה ונאבקים לחזור הביתה. בראד פיט מככב בסרטו של דיוויד אייר.'}
+ for e in data['events']:
+  if e['category']!='cinema':continue
+  movie=films.setdefault(e['title'],{'id':'yavne-film-'+core.hashlib.sha256(e['title'].encode()).hexdigest()[:12],'title':e['title'],'synopsis':summaries.get(e['title'],e['description']),'poster_url':e.get('image_url') if e.get('image_publishable') else None,'is_family':e['title']=='מפרץ ההרפתקאות','venues':[{'id':'cinematheque','name':'סינמטק יבנה','article_url':e.get('purchase_url') or e['ticket_url'],'schedule':{},'sessions':[]}]})
+  venue=movie['venues'][0];venue['schedule'].setdefault(e['start_date'],[]).append(e['start_time']);venue['sessions'].append({'date':e['start_date'],'time':e['start_time'],'booking_url':e.get('purchase_url') or e['ticket_url']})
+ (core.BASE/'yavne/data/cinema.json').write_text(json.dumps({'city':'יבנה','source_name':'סינמטק יבנה — מועדים מהיכל התרבות','movies':list(films.values())},ensure_ascii=False,indent=2))
  data['stats']={'events':len(data['events'])};path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  (core.BASE/'admin/data/yavne-source-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
  print(json.dumps(report,ensure_ascii=False))
