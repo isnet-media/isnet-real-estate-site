@@ -169,7 +169,9 @@ def main():
   item['source_label']='איזי' if 'easy.co.il' in seed['url'] else 'Rest'
   if '/shared/og' in (item.get('original_image_url') or '') or '/shared/og' in (item.get('image') or ''):item['image']='';item['original_image_url']=''
   if seed.get('image_url'):
-   item['image']='';item['original_image_url']=seed['image_url'];item['image_source_url']=seed.get('image_source_url',seed['url'])
+   
+   if item.get('original_image_url')!=seed['image_url']:item['image']=''
+   item['original_image_url']=seed['image_url'];item['image_source_url']=seed.get('image_source_url',seed['url']);item['credit']=seed.get('image_credit',item.get('credit',''))
   if seed['url'] in {r.get('url') for r in REPORT['rejected'] if r.get('reason')=='permanently_closed'}:continue
   rows.append(item)
  if len(rows)<15:raise SystemExit('Insufficient verified city coverage; preserving existing public data')

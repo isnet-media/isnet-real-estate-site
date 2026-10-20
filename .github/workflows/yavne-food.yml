@@ -6,6 +6,7 @@ on:
     paths:
       - scripts/collect_yavne_food.py
       - scripts/build_yavne_food.py
+      - scripts/enrich_yavne_food_photos.py
       - events-preview/yavne/data/food-source-seeds.json
       - .github/workflows/yavne-food.yml
 permissions:
@@ -26,6 +27,7 @@ jobs:
           python-version: '3.12'
       - run: pip install requests beautifulsoup4 pillow
       - run: python -u scripts/collect_yavne_food.py
+      - run: python -u scripts/enrich_yavne_food_photos.py
       - run: python scripts/build_yavne_food.py
       - run: node --check events-preview/yavne/restaurants.js
       - run: |

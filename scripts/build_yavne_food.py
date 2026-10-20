@@ -4,28 +4,34 @@ import json,re,hashlib
 from pathlib import Path
 from sync_event_city_views import localize,TARGETS
 ROOT=Path(__file__).resolve().parents[1];MASTER=ROOT/'events-preview/ashdod';DEST=ROOT/'events-preview/yavne'
+RESTAURANTS={"על גחלים","ארטורוס Arturos","פורטבלו","WHITE","ג'פניקה","ריבר","שיפודי התקווה","אם בורגר","B Burger","Y BURGERS","Beef Pack","בורגר 110"}
 def build():
  payload=json.loads((DEST/'data/restaurants.json').read_text());places=payload['restaurants'];city=TARGETS['yavne']
  for p in places:
-  overrides={"New York Hot Dog Yavne":('street','נקניקיות ואוכל רחוב'),"בורגר 110":('burger','המבורגרים'),"יול'ס טוסט נקניק ונקנקיות":('street','טוסטים ונקניקיות'),"שייק אפ":('dessert','שייקים ומיצים'),"יגאל מבשל בשבילכם":('local','אוכל ביתי ומוכן')}
+  overrides={"גוני ציז":('pizza','פיצה ופסטה'),"New York Hot Dog Yavne":('street','נקניקיות ואוכל רחוב'),"בורגר 110":('burger','המבורגרים'),"יול'ס טוסט נקניק ונקנקיות":('street','טוסטים ונקניקיות'),"שייק אפ":('dessert','שייקים ומיצים'),"יגאל מבשל בשבילכם":('local','אוכל ביתי ומוכן')}
   if p['name'] in overrides:
    p['kind'],p['label']=overrides[p['name']];p['kinds']=[p['kind']]
   typ=p.get('source_business_type','')
   if 'כשר' in typ or 'בד"צ' in typ:
    p['kosher']='לפי עמוד העסק: '+typ+'. יש לוודא תעודת כשרות בתוקף מול המקום.';p['kosherVerified']=True
   p['kinds']=list(dict.fromkeys(p.get('kinds') or [p['kind']]))
-  if p['kind'] in {'restaurant','meat','burger','italian','asian','fish','bar','street','pizza'} and 'restaurant' not in p['kinds']:p['kinds'].append('restaurant')
+  p['kinds']=[k for k in p['kinds'] if k!='restaurant']
+  if p['name'] in RESTAURANTS:p['kinds'].insert(0,'restaurant')
+  elif p['kind'] in {'burger','restaurant'}:p['kind']='street';p['kinds']=['street'];p['label']='אוכל רחוב'
+  if p['name']=='Re Bar':p['kind']='dessert';p['kinds']=['dessert'];p['label']='שייקים ומיצים'
+
   if 'קייטרינג' in p.get('source_business_type',''):p['kinds'].append('catering')
   if p['kind']=='coffee_carts':p['kinds'].append('cafe')
   if p['kind']=='bakery' and any(w in p['name'] for w in ['עוג','מתוק','cakes','קונדיטור']):p['kinds'].append('dessert')
   p['source_label']=p.get('source_label') or 'עמוד העסק'
   p['site_label']='לעמוד העסק' if any(w in p.get('site','') for w in ['easy.co.il','rest.co.il']) else 'לאתר המקום'
   p.setdefault('kosher','לא אומתה כשרות עדכנית');p.setdefault('credit','')
+ places.sort(key=lambda p: (0 if p['name'] in {'פורטבלו','WHITE',"ג'פניקה",'ריבר','על גחלים','ארטורוס Arturos'} else 1 if 'restaurant' in p['kinds'] else 2, p['name']))
  js=localize((MASTER/'restaurants.js').read_text(),'restaurants.js',city,'.js')
  start=js.index('const places=');end=js.index('\nconst kinds=',start)
  js=js[:start]+'const places='+json.dumps(places,ensure_ascii=False,separators=(',',':'))+';'+js[end:]
  start=js.index('const kinds=');end=js.index('\nconst esc=',start)
- kinds={'all':'הכול','restaurant':'מסעדות','meat':'בשרים וגריל','burger':'המבורגרים','italian':'איטלקי','asian':'אסייתי וסושי','fish':'דגים','street':'אוכל רחוב וחומוס','pizza':'פיצריות','cafe':'בתי קפה','coffee_carts':'עגלות קפה','bakery':'מאפיות וקונדיטוריות','dessert':'גלידה ומתוקים','local':'אוכל ביתי ומוכן','bar':'ברים ואוכל','deli':'מעדניות','catering':'קייטרינג ואירוח','wine':'יין ומשקאות'}
+ kinds={'all':'הכול','restaurant':'מסעדות','street':'פלאפל ואוכל רחוב','pizza':'פיצריות','cafe':'בתי קפה','coffee_carts':'עגלות קפה','bakery':'מאפיות וקונדיטוריות','dessert':'גלידה ומתוקים','local':'אוכל ביתי ומוכן','bar':'ברים ואוכל','deli':'מעדניות','catering':'קייטרינג ואירוח','wine':'יין ומשקאות'}
  js=js[:start]+'const kinds='+json.dumps(kinds,ensure_ascii=False)+';'+js[end:]
  js=js.replace("Object.entries(kinds).map","Object.entries(kinds).filter(([k])=>k==='all'||places.some(p=>(p.kinds||[p.kind]).includes(k))).map")
  js=js.replace(">אתר המקום ↗</a>",">'+esc(p.site_label)+' ↗</a>")
