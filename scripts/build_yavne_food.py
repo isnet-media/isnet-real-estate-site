@@ -7,6 +7,12 @@ ROOT=Path(__file__).resolve().parents[1];MASTER=ROOT/'events-preview/ashdod';DES
 def build():
  payload=json.loads((DEST/'data/restaurants.json').read_text());places=payload['restaurants'];city=TARGETS['yavne']
  for p in places:
+  overrides={"New York Hot Dog Yavne":('street','נקניקיות ואוכל רחוב'),"בורגר 110":('burger','המבורגרים'),"יול'ס טוסט נקניק ונקנקיות":('street','טוסטים ונקניקיות'),"שייק אפ":('dessert','שייקים ומיצים'),"יגאל מבשל בשבילכם":('local','אוכל ביתי ומוכן')}
+  if p['name'] in overrides:
+   p['kind'],p['label']=overrides[p['name']];p['kinds']=[p['kind']]
+  typ=p.get('source_business_type','')
+  if 'כשר' in typ or 'בד"צ' in typ:
+   p['kosher']='לפי עמוד העסק: '+typ+'. יש לוודא תעודת כשרות בתוקף מול המקום.';p['kosherVerified']=True
   p['kinds']=list(dict.fromkeys(p.get('kinds') or [p['kind']]))
   if p['kind'] in {'restaurant','meat','burger','italian','asian','fish','bar','street'} and 'restaurant' not in p['kinds']:p['kinds'].append('restaurant')
   if 'קייטרינג' in p.get('source_business_type',''):p['kinds'].append('catering')
@@ -19,7 +25,7 @@ def build():
  start=js.index('const places=');end=js.index('\nconst kinds=',start)
  js=js[:start]+'const places='+json.dumps(places,ensure_ascii=False,separators=(',',':'))+';'+js[end:]
  start=js.index('const kinds=');end=js.index('\nconst esc=',start)
- kinds={'all':'הכול','restaurant':'מסעדות','meat':'בשרים וגריל','burger':'המבורגרים','italian':'איטלקי','asian':'אסייתי וסושי','fish':'דגים','street':'אוכל רחוב וחומוס','pizza':'פיצריות','cafe':'בתי קפה','coffee_carts':'עגלות קפה','bakery':'מאפיות וקונדיטוריות','dessert':'גלידה ומתוקים','local':'אוכל ביתי ומוכן','bar':'ברים ואוכל','deli':'מעדניות','catering':'קייטרינג ואירוח'}
+ kinds={'all':'הכול','restaurant':'מסעדות','meat':'בשרים וגריל','burger':'המבורגרים','italian':'איטלקי','asian':'אסייתי וסושי','fish':'דגים','street':'אוכל רחוב וחומוס','pizza':'פיצריות','cafe':'בתי קפה','coffee_carts':'עגלות קפה','bakery':'מאפיות וקונדיטוריות','dessert':'גלידה ומתוקים','local':'אוכל ביתי ומוכן','bar':'ברים ואוכל','deli':'מעדניות','catering':'קייטרינג ואירוח','wine':'יין ומשקאות'}
  js=js[:start]+'const kinds='+json.dumps(kinds,ensure_ascii=False)+';'+js[end:]
  js=js.replace("p.kind===state.kind","(p.kinds||[p.kind]).includes(state.kind)")
  js=js.replace("['sea','evening','coffee']","['family','evening','coffee']")
@@ -33,6 +39,7 @@ def build():
  html=localize((MASTER/'restaurants.html').read_text(),'restaurants.html',city,'.html')
  html=html.replace('ASHDOD','YAVNE').replace('עיר של ים.','קרוב לבית.').replace('ים תיכון. שולחן פתוח.','יבנה. סביב השולחן.').replace('מהדגים של הנמל לקפה של הבוקר, מארוחה טובה לערב שנשארים בו עוד קצת. בואו למצוא את המקום שלכם.','מסעדות, בתי קפה ועגלות קפה, מאפיות, אוכל רחוב ומתוקים. כל המקומות ביבנה, עם כרטיס אישי ודרכי קשר.').replace('מסעדות דגים, בשרים, מטבח אסייתי ובתי קפה','מסעדות, בתי קפה, עגלות קפה, מאפיות ואוכל רחוב')
  html=html.replace('data-mood="sea"','data-mood="family"').replace('עם הפנים לים','משהו לאכול').replace('נוף, בריזה ושולחן טוב','מוצאים מקום לפי הטעם שלכם').replace('value="sea">עם נוף לים','value="family">ארוחה בעיר').replace('נבדק ב־19.10.2026','נבדק ב־'+payload['checked_at'])
+ html=html.replace('ים אחד.','עיר אחת.').replace('דגים וים, מטבחים שעברו בין דורות','מטבחים שעברו בין דורות').replace('כל המקומות ביבנה, עם כרטיס אישי','מקומות ביבנה, עם כרטיס אישי').replace('<button type="button" data-service="saturday" aria-pressed="false">פתוח בשבת</button>','')
  hero=next((p for p in places if p['kind']=='coffee_carts' and p.get('image')),None) or next((p for p in places if p['kind']=='cafe' and p.get('image')),None) or next((p for p in places if p.get('image')),None)
  if hero:
   from html import escape

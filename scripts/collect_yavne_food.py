@@ -38,10 +38,10 @@ def address_text(a):
  return clean(a)
 def classify(name,meta):
  t=norm(name+' '+meta)
- for k,terms in [('coffee_carts',['עגלתקפה','פודטראק']),('pizza',['פיצה','פיצריה']),('dessert',['גליד','יוגורט','שוקולד','מתוקים','קינוח','עוגות']),('bakery',['מאפ','קונדיטור','בורקס']),('burger',['burger','בורגר']),('asian',['סושי','אסיי','אסיא','תאילנדי','דיםסאם']),('cafe',['קפה','cafe','coffee']),('fish',['דגים']),('local',['בית','מוכן','גחנון','תבשיל','קייטרינג']),('street',['פלאפל','שווארמה','חומוס','טוסט','טורטיה','נקניק','בפיתה']),('italian',['איטלקי','פסטה']),('meat',['בשר','גחלים','שיפוד']),('bar',['ברמסעדה','פאב','bar'])]:
+ for k,terms in [('coffee_carts',['עגלתקפה','פודטראק']),('deli',['מעדניה','מעדנייה']),('wine',['חנותיין','חנותאלכוהול']),('pizza',['פיצה','פיצריה']),('dessert',['גליד','יוגורט','שוקולד','מתוקים','קינוח','עוגות']),('bakery',['מאפ','קונדיטור','בורקס']),('burger',['burger','בורגר']),('asian',['סושי','אסיי','אסיא','תאילנדי','דיםסאם']),('cafe',['קפה','cafe','coffee']),('fish',['דגים']),('local',['בית','מוכן','גחנון','תבשיל','קייטרינג']),('street',['פלאפל','שווארמה','חומוס','טוסט','טורטיה','נקניק','בפיתה']),('italian',['איטלקי','פסטה']),('meat',['בשר','גחלים','שיפוד']),('bar',['ברמסעדה','פאב','bar'])]:
   if any(norm(x) in t for x in terms):return k
  return 'restaurant'
-LABEL={'coffee_carts':'עגלת קפה','pizza':'פיצריה','dessert':'גלידה ומתוקים','bakery':'מאפייה וקונדיטוריה','burger':'המבורגרים','asian':'מטבח אסייתי','cafe':'בית קפה','fish':'דגים','local':'אוכל ביתי ומוכן','street':'אוכל רחוב','italian':'מטבח איטלקי','meat':'בשרים וגריל','bar':'בר ואוכל','restaurant':'מסעדה'}
+LABEL={'coffee_carts':'עגלת קפה','pizza':'פיצריה','dessert':'גלידה ומתוקים','bakery':'מאפייה וקונדיטוריה','burger':'המבורגרים','asian':'מטבח אסייתי','cafe':'בית קפה','fish':'דגים','local':'אוכל ביתי ומוכן','street':'אוכל רחוב','italian':'מטבח איטלקי','meat':'בשרים וגריל','bar':'בר ואוכל','restaurant':'מסעדה','deli':'מעדנייה','wine':'יין ומשקאות'}
 def make(name,address,url,meta='',image=None):
  name=clean(name).replace(' מנוהל','');address=clean(address)
  if not name or len(name)>100 or not locality(address):return None
@@ -112,7 +112,7 @@ def detail(url):
   REPORT['details'].append({'url':url,'error':str(exc)[:130]});return None
 def cache_image(item):
  url=item.get('original_image_url') or ''
- if not url.startswith('https://') or re.search(r'logo|placeholder|default|no.?image|icon|avatar',url,re.I):return
+ if not url.startswith('https://') or re.search(r'logo|placeholder|default|no.?image|icon|avatar|/shared/og',url,re.I):return
  try:
   r=requests.get(url,headers={'User-Agent':HEAD['User-Agent'],'Referer':item['source_url']},timeout=18);r.raise_for_status()
   if len(r.content)>12_000_000:raise ValueError('too_large')
@@ -157,7 +157,21 @@ def main():
   elif item.get('phone') or item.get('activity_evidence'):
    for k,v in item.items():
     if v and (k not in {'description','image','id'} or not old.get(k)):old[k]=v
- rows=list(merged.values())
+ rows=[]
+ for seed in json.loads((CITY/'data/food-source-seeds.json').read_text()):
+  item=make(seed['name'],seed['address'],seed['url'],seed['type'])
+  if not item:continue
+  matches=[p for p in merged.values() if p.get('source_url','').rstrip('/')==seed['url'].rstrip('/')]
+  matches.sort(key=lambda p:sum(bool(p.get(k)) for k in ['image','phone','original_image_url']),reverse=True)
+  if matches:
+   for k in ['image','credit','phone','site','original_image_url','image_source_url']:
+    if matches[0].get(k):item[k]=matches[0][k]
+  item['source_label']='איזי' if 'easy.co.il' in seed['url'] else 'Rest'
+  if '/shared/og' in item.get('original_image_url','') or '/shared/og' in item.get('image',''):item['image']='';item['original_image_url']=''
+  if seed.get('image_url'):
+   item['image']='';item['original_image_url']=seed['image_url'];item['image_source_url']=seed.get('image_source_url',seed['url'])
+  if seed['url'] in {r.get('url') for r in REPORT['rejected'] if r.get('reason')=='permanently_closed'}:continue
+  rows.append(item)
  if len(rows)<15:raise SystemExit('Insufficient verified city coverage; preserving existing public data')
  with ThreadPoolExecutor(max_workers=4) as pool:list(pool.map(cache_image,[p for p in rows if not p.get('image')]))
  rows.sort(key=lambda x:(x['kind'],x['name']))

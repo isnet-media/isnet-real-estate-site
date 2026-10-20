@@ -83,7 +83,7 @@ def build(with_cms=False):
             urls.update(seo_urls)
         for path in ('','restaurants.html','category.html?category=stage','category.html?category=music','category.html?category=theatre','category.html?category=standup','category.html?category=lecture','category.html?category=sport','category.html?category=exhibition','category.html?category=community','category.html?category=kids','category.html?category=seniors','cinema.html','saturday.html','attractions.html'):
             if city=='ashdod' and with_cms and path.startswith('category.html'):continue
-            if path=='restaurants.html' and city!='ashdod':continue
+            if path=='restaurants.html' and city not in {'ashdod','yavne'}:continue
             urls.add(f'https://isnet.co.il/events-preview/{city}/'+path)
         event_urls={f'https://isnet.co.il/events-preview/{city}/event.html?'+urlencode({'slug':slug(e)}) for e in events if visible(e,day)}
         if city!='ashdod' or not with_cms:urls.update(event_urls)
