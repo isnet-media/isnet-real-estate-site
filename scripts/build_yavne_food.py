@@ -48,6 +48,7 @@ def build():
  html=html.replace('ASHDOD','YAVNE').replace('עיר של ים.','קרוב לבית.').replace('ים תיכון. שולחן פתוח.','יבנה. סביב השולחן.').replace('מהדגים של הנמל לקפה של הבוקר, מארוחה טובה לערב שנשארים בו עוד קצת. בואו למצוא את המקום שלכם.','מסעדות, בתי קפה ועגלות קפה, מאפיות, אוכל רחוב ומתוקים. כל המקומות ביבנה, עם כרטיס אישי ודרכי קשר.').replace('מסעדות דגים, בשרים, מטבח אסייתי ובתי קפה','מסעדות, בתי קפה, עגלות קפה, מאפיות ואוכל רחוב')
  html=html.replace('data-mood="sea"','data-mood="family"').replace('עם הפנים לים','משהו לאכול').replace('נוף, בריזה ושולחן טוב','מוצאים מקום לפי הטעם שלכם').replace('value="sea">עם נוף לים','value="family">ארוחה בעיר').replace('נבדק ב־19.10.2026','נבדק ב־'+payload['checked_at'])
  html=html.replace('ים אחד.','עיר אחת.').replace('דגים וים, מטבחים שעברו בין דורות','מטבחים שעברו בין דורות').replace('כל המקומות ביבנה, עם כרטיס אישי','מקומות ביבנה, עם כרטיס אישי').replace('<button type="button" data-service="saturday" aria-pressed="false">פתוח בשבת</button>','')
+ html=re.sub(r'<section class="moods wrap"[\s\S]*?</section>','',html,count=1)
  hero=next((p for p in places if p['kind']=='coffee_carts' and p.get('image')),None) or next((p for p in places if p['kind']=='cafe' and p.get('image')),None) or next((p for p in places if p.get('image')),None)
  if hero:
   from html import escape

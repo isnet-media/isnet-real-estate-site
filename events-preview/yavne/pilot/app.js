@@ -1239,10 +1239,10 @@ async function init(){
   const cinemaRequest=fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("cinema");return r.json()}).catch(()=>({movies:[]}));
   const sportsRequest=fetch("data/sports.json?v=20261005-2").then(r=>{if(!r.ok)throw Error("sports");return r.json()}).catch(()=>({branches:{},teams:[]}));
   const [data,fallbacks,taxonomy,cmsRows]=await Promise.all([
-    (window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
-    fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
-    fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
-    window.ISNET_PUBLIC_CMS?.publishedEvents?.("yavne",{listing:true})||Promise.resolve([])
+    (window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP):(window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()))),
+    (window.ISNET_CITY_BOOTSTRAP?Promise.resolve({}):fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({}))),
+    (window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP.taxonomy):fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]}))),
+    (window.ISNET_CITY_BOOTSTRAP?Promise.resolve([]):window.ISNET_PUBLIC_CMS?.publishedEvents?.("yavne",{listing:true})||Promise.resolve([]))
   ]);
   state.events=(window.ISNET_EVENT_IDENTITIES?.reconcile?.(publishedBoardEvents(data.events||[],cmsRows,iso(today())))||publishedBoardEvents(data.events||[],cmsRows,iso(today())));
   // Do not publish ambiguous imported source-name records as real events:
@@ -1260,6 +1260,12 @@ async function init(){
   if(sharedSaved)$("savedListStatus").textContent="רשימה ששיתפו איתך · אינה משנה את המועדפים שלך. להצגת כל האירועים לחצו על חזרה לכל האירועים.";
   render();
   renderCinema();
+  if(window.ISNET_CITY_BOOTSTRAP&&window.ISNET_PUBLIC_CMS){
+    Promise.all([window.ISNET_PUBLIC_CMS.loadCards("yavne"),window.ISNET_PUBLIC_CMS.publishedEvents("yavne",{listing:true})]).then(([fresh,rows])=>{
+      const updated=publishedBoardEvents(fresh.events||[],rows,iso(today()));
+      if(updated.length){state.events=updated;state.generatedAt=fresh.generated_at||state.generatedAt;render();renderCinema();}
+    }).catch(error=>console.warn("Keeping the published Yavne event snapshot",error));
+  }
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));
   cinemaRequest.then(cinema=>{
     state.cinema=cinema.movies||[];state.cinemaUpdatedAt=cinema.updated_at||null;state.cinemaLoading=false;

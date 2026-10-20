@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import re
 from pathlib import Path
 
@@ -126,6 +127,23 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         content=content.replace("cityEvents('ashdod')","cityEvents('yavne')").replace("cityEvents('rishon-lezion')","cityEvents('ashdod')")
         content=content.replace('location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"ashdod"', '"yavne"')
         content=content.replace('סינמה סיטי יבנה','סינמטק יבנה')
+        # Yavne must render from the same published HTML even when JSON/CMS requests fail.
+        if suffix=='.js' and Path(name).name=='app.js':
+            content=content.replace('(window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json()))','(window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP):(window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())))')
+            content=content.replace('fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({}))','(window.ISNET_CITY_BOOTSTRAP?Promise.resolve({}):fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})))')
+            content=content.replace('fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]}))','(window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP.taxonomy):fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})))')
+            content=content.replace('window.ISNET_PUBLIC_CMS?.publishedEvents?.("yavne",{listing:true})||Promise.resolve([])','(window.ISNET_CITY_BOOTSTRAP?Promise.resolve([]):window.ISNET_PUBLIC_CMS?.publishedEvents?.("yavne",{listing:true})||Promise.resolve([]))')
+            content=content.replace('window.ISNET_PUBLIC_CMS?.publishedEvents?.("ashdod",{listing:true})||Promise.resolve([])','(window.ISNET_CITY_BOOTSTRAP?Promise.resolve([]):window.ISNET_PUBLIC_CMS?.publishedEvents?.("yavne",{listing:true})||Promise.resolve([]))')
+            marker='  renderCinema();\n  if(state.cinemaOpen)'
+            refresh='  renderCinema();\n  if(window.ISNET_CITY_BOOTSTRAP&&window.ISNET_PUBLIC_CMS){\n    Promise.all([window.ISNET_PUBLIC_CMS.loadCards("yavne"),window.ISNET_PUBLIC_CMS.publishedEvents("yavne",{listing:true})]).then(([fresh,rows])=>{\n      const updated=publishedBoardEvents(fresh.events||[],rows,iso(today()));\n      if(updated.length){state.events=updated;state.generatedAt=fresh.generated_at||state.generatedAt;render();renderCinema();}\n    }).catch(error=>console.warn("Keeping the published Yavne event snapshot",error));\n  }\n  if(state.cinemaOpen)'
+            content=content.replace(marker,refresh,1)
+        if name=='index.html' and suffix=='.html':
+            data=json.loads((ROOT/'yavne/data/events.json').read_text())
+            data['events']=[{k:v for k,v in event.items() if k not in {'image_candidates','source_detail_text','raw_html','raw','html'}} for event in data.get('events',[])]
+            data['taxonomy']=json.loads((ROOT/'admin/data/taxonomy.json').read_text())
+            packed=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
+            content=content.replace('<head>','<head>\n<script id="yavne-event-bootstrap">window.ISNET_CITY_BOOTSTRAP='+packed+';</script>',1)
+
         content=re.sub(r'<button[^>]*data-(?:cinema|venue)="(?:cinema-city|cinematheque)"[^>]*>.*?</button>', '', content)
         content=re.sub(r'<a[^>]*href="https://(?:www\.)?(?:cinema-city\.co\.il|hotcinema\.co\.il)[^"]*"[^>]*>.*?</a>', '', content)
         content=content.replace('בחרו את שני בתי הקולנוע','בדקו מועדי הקרנות נוספים')

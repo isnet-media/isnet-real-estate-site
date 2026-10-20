@@ -1134,10 +1134,10 @@ function resetAll(){state.quick="all";state.date=null;state.periodStart=null;sta
 async function init(){
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
     (window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
-    fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),
+    (window.ISNET_CITY_BOOTSTRAP?Promise.resolve({}):fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({}))),
     fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema HTTP "+r.status);return r.json()}).then(d=>{if(!Array.isArray(d.movies)||!d.movies.length)throw new Error("empty cinema");return d}).catch(()=>fetch("https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/events-preview/yavne/data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("cinema fallback HTTP "+r.status);return r.json()})).catch(()=>({movies:[]})),
     fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
-    fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]})),
+    (window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP.taxonomy):fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]}))),
     window.ISNET_PUBLIC_CMS?.publishedEvents?.("yavne")||Promise.resolve([])
   ]);
   state.events=(data.events||[]).filter(e=>!isNonEventActivity(e));
@@ -1171,6 +1171,12 @@ async function init(){
   if(location.hash==="#cinema")state.cinemaOpen=true;
   render();
   renderCinema();
+  if(window.ISNET_CITY_BOOTSTRAP&&window.ISNET_PUBLIC_CMS){
+    Promise.all([window.ISNET_PUBLIC_CMS.loadCards("yavne"),window.ISNET_PUBLIC_CMS.publishedEvents("yavne",{listing:true})]).then(([fresh,rows])=>{
+      const updated=publishedBoardEvents(fresh.events||[],rows,iso(today()));
+      if(updated.length){state.events=updated;state.generatedAt=fresh.generated_at||state.generatedAt;render();renderCinema();}
+    }).catch(error=>console.warn("Keeping the published Yavne event snapshot",error));
+  }
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));
   const searchInput=$("searchInput");
   let searchTimer, lastMeasuredSearch = "";
