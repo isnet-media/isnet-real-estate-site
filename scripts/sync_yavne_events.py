@@ -40,6 +40,32 @@ def cached_fetch(source):
  result,error=page_cache[url]
  # Parsers may remove script nodes; each caller receives its own tree.
  return (BeautifulSoup(str(result),'html.parser') if result else None),error
+original_structured=core.generic_jsonld_rows
+timezone_corrections={}
+def structured_rows(soup,source):
+ from zoneinfo import ZoneInfo
+ def walk(value):
+  if isinstance(value,list):
+   for v in value:yield from walk(v)
+  elif isinstance(value,dict):
+   kind=value.get('@type','')
+   if 'Event' in kind:yield value
+   for v in value.values():
+    if isinstance(v,(dict,list)):yield from walk(v)
+ for node in soup.select('script[type="application/ld+json"]'):
+  try:entries=list(walk(json.loads(node.string or node.get_text())))
+  except (ValueError,TypeError):continue
+  for entry in entries:
+   try:dt=datetime.fromisoformat(entry.get('startDate','').replace('Z','+00:00'))
+   except (ValueError,TypeError):continue
+   if dt.tzinfo is None:continue
+   local=dt.astimezone(ZoneInfo('Asia/Jerusalem'))
+   timezone_corrections[(entry.get('name'),dt.date().isoformat(),dt.strftime('%H:%M'))]=(local.date().isoformat(),local.strftime('%H:%M'))
+ rows=original_structured(soup,source)
+ for row in rows:
+  key=(row['title'],row['start_date'],row['start_time'])
+  if key in timezone_corrections:row['start_date'],row['start_time']=timezone_corrections[key]
+ return rows
 original_rows=core.source_rows
 def source_rows(soup,source):
  if source['parser']=='yavne_community':return community_rows(soup,source)
@@ -60,7 +86,18 @@ def source_rows(soup,source):
   return rows
  return [r for r in original_rows(soup,source) if 'גן יבנה' not in (r.get('venue','')+' '+r.get('title','')) and ('יבנה' in r.get('venue','') or source['name']=='htyavne')]
 def main():
- core.CITY_LABELS['yavne']='יבנה';core.source_rows=source_rows;core.fetch_once=cached_fetch
+ core.CITY_LABELS['yavne']='יבנה';core.source_rows=source_rows;core.fetch_once=cached_fetch;core.generic_jsonld_rows=structured_rows
+ # Repair the first import's UTC display times before the shared occurrence merge.
+ spec=next(s for s in SOURCES if s['name']=='makore_yavne')
+ page,error=cached_fetch(spec)
+ if page:
+  structured_rows(page,spec)
+  existing_path=core.BASE/'yavne/data/events.json';existing=json.loads(existing_path.read_text())
+  for event in existing['events']:
+   key=(event['title'],event['start_date'],event['start_time'])
+   if any(s.get('name')=='makore_yavne' for s in event.get('sources',[])) and key in timezone_corrections:
+    event['start_date'],event['start_time']=timezone_corrections[key]
+  existing_path.write_text(json.dumps(existing,ensure_ascii=False,indent=2)+'\n')
  report=core.merge('yavne',sorted(SOURCES,key=lambda s:s['source_type']!='official'),False)
  path=core.BASE/'yavne/data/events.json';data=json.loads(path.read_text())
  labels={'music':'מופע מוזיקה','kids':'הצגה לילדים ולמשפחות','standup':'מופע סטנדאפ','theatre':'הצגת תיאטרון','lecture':'הרצאה','community':'מפגש קהילתי','cinema':'הקרנה','seniors':'מפגש תרבות'}

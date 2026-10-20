@@ -9,6 +9,9 @@ def refine(events):
   title=e['title'];text=e.get('source_detail_text') or '';head=text.split('פרטים נוספים')[0]
   if EXCLUDE.search(title) or 'גן יבנה' in title+' '+(e.get('venue') or ''):held.append(e);continue
   e['venue']=re.sub(r'\s+ל$','',e.get('venue') or '')
+  e['venue']=re.sub(r',?\s*יבנה$','',e['venue']).strip() if 'היכל התרבות' not in e['venue'] and 'סינמטק' not in e['venue'] else e['venue']
+  e['venue']=re.sub(r'\s+מפה$','',e['venue'])
+  if e['venue'] in {'הדוגית 6','הדוגית 6, יבנה'}:e['venue']='סינמטק יבנה, הדוגית 6'
   if 'סינמטק יבנה' in head:e['venue']='סינמטק יבנה, הדוגית 6'
   elif 'היכל התרבות יבנה' in head:e['venue']='היכל התרבות יבנה'
   host=core.urlsplit(e.get('detail_source_url') or e.get('ticket_url') or '').hostname or ''
