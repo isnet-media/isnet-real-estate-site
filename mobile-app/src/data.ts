@@ -1,7 +1,9 @@
 export const BASE='https://isnet.co.il/events-preview/ashdod/';
 export type EventItem={event_id?:string;title?:string;series_title?:string;category?:string;subcategory?:string;start_date?:string;start_time?:string;image_url?:string;image?:string;ticket_url?:string;source_url?:string;description?:string;venue?:string};
-export type Movie={id?:string;title?:string;poster_url?:string;trailer_url?:string};
-const load=async(path:string)=>{const r=await fetch(BASE+path,{headers:{Accept:'application/json'}});if(!r.ok)throw Error('HTTP '+r.status);return r.json()};
-export async function getEvents():Promise<EventItem[]>{const data=await load('data/events.json');return Array.isArray(data)?data:Array.isArray(data.events)?data.events:[]}
-export async function getMovies():Promise<Movie[]>{const data=await load('data/cinema.json');return Array.isArray(data.movies)?data.movies:[]}
+export type Movie={id?:string;title?:string;poster_url?:string;trailer_url?:string;trailer_youtube_id?:string;venues?:Array<{name?:string;article_url?:string;schedule?:Record<string,string[]>}>};
+const load=async(path:string)=>{const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),15000);try{const r=await fetch(BASE+path,{headers:{Accept:'application/json'},signal:controller.signal});if(!r.ok)throw Error('HTTP '+r.status);return await r.json()}finally{clearTimeout(timeout)}};
+export async function getEvents():Promise<EventItem[]>{const data=await load('data/events.json');if(Array.isArray(data))return data;if(Array.isArray(data.events))return data.events;if(Array.isArray(data.items))return data.items;throw Error('Unexpected events schema')}
+export async function getMovies():Promise<Movie[]>{const data=await load('data/cinema.json');if(!Array.isArray(data.movies))throw Error('Unexpected cinema schema');return data.movies}
+export function trailerUrl(m:Movie):string|undefined{if(m.trailer_url?.startsWith('https://'))return m.trailer_url;if(m.trailer_youtube_id&&/^[a-zA-Z0-9_-]{11}$/.test(m.trailer_youtube_id))return 'https://www.youtube.com/watch?v='+m.trailer_youtube_id;return undefined}
+export function movieBookingUrl(m:Movie):string|undefined{return m.venues?.find(v=>v.article_url?.startsWith('https://'))?.article_url}
 export const categories:Record<string,string>={music:'הופעות',standup:'סטנדאפ',theatre:'הצגות',kids:'ילדים ומשפחה',cinema:'קולנוע',lecture:'הרצאות',exhibition:'תערוכות',sport:'ספורט',community:'קהילה',seniors:'הגיל השלישי',festival:'פסטיבלים',food:'קולינריה'};
