@@ -28,7 +28,7 @@ jobs:
           export TODAY="$(date -u +%F)"
           python scripts/discover_standup_videos.py
       - name: Upload editorial review queue
-        if: ${{ hashFiles('standup-review.json') != '' }}
+        if: ${{ always() && hashFiles('standup-review.json') != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: standup-video-candidates

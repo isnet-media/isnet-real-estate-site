@@ -49,9 +49,16 @@ def main():
     candidates = []
     key = os.getenv("YOUTUBE_API_KEY", "").strip()
     if not key:
-        print("YOUTUBE_API_KEY not set; new-artist video discovery is disabled.")
+        out = Path(os.getenv("OUTPUT_PATH", "/tmp/standup-review.json"))
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps({
+            "status": "blocked", "reason": "missing_youtube_api_key",
+            "uncovered_artists": sorted(artists), "pending_review": [],
+            "catalog_reuse_available": True,
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print("::error::YOUTUBE_API_KEY not set; new-artist discovery did not run.")
         print("Verified catalog reuse continues to work without a key.")
-        return 0
+        return 2
     for artist in sorted(artists)[:30]:
         params = urllib.parse.urlencode({
             "part": "snippet", "type": "video",
