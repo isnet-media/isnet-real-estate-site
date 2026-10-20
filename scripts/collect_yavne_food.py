@@ -167,7 +167,7 @@ def main():
    for k in ['image','credit','phone','site','original_image_url','image_source_url']:
     if matches[0].get(k):item[k]=matches[0][k]
   item['source_label']='איזי' if 'easy.co.il' in seed['url'] else 'Rest'
-  if '/shared/og' in item.get('original_image_url','') or '/shared/og' in item.get('image',''):item['image']='';item['original_image_url']=''
+  if '/shared/og' in (item.get('original_image_url') or '') or '/shared/og' in (item.get('image') or ''):item['image']='';item['original_image_url']=''
   if seed.get('image_url'):
    item['image']='';item['original_image_url']=seed['image_url'];item['image_source_url']=seed.get('image_source_url',seed['url'])
   if seed['url'] in {r.get('url') for r in REPORT['rejected'] if r.get('reason')=='permanently_closed'}:continue
