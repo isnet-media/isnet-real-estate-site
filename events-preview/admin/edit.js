@@ -1,4 +1,4 @@
-const cityMap={"ashdod":{name:"אשדוד",base:"../ashdod/"},"rishon-lezion":{name:"ראשון לציון",base:"../rishon-lezion/"}};
+const cityMap={"ashdod":{name:"אשדוד",base:"../ashdod/"},"rishon-lezion":{name:"ראשון לציון",base:"../rishon-lezion/"},"yavne":{name:"יבנה",base:"../yavne/"}};
 const $=id=>document.getElementById(id);
 const params=new URLSearchParams(location.search);
 const city=params.get("city"),id=params.get("id");

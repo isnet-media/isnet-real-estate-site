@@ -47,7 +47,7 @@ function normEventText(v){
     .replace(/\s+/g," ").trim();
 }
 async function existingEventsForCity(city){
-  const base=city==="ashdod"?"../ashdod/":"../rishon-lezion/";
+  const base="../"+city+"/";
   const [data,records]=await Promise.all([
     fetch(base+"data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("source unavailable");return r.json()}),
     (window.ISNET_DB?.listEventRecords?.()||Promise.resolve([]))
@@ -87,7 +87,7 @@ $("saveBtn").addEventListener("click",async()=>{
   const title=$("title").value.trim(),date=$("startDate").value,city=$("city").value;
   if(!title||!date){alert("יש להזין לפחות כותרת ותאריך.");return}
   const item={
-    event_id:idFor(city),_citySlug:city,city:city==="ashdod"?"אשדוד":"ראשון לציון",
+    event_id:idFor(city),_citySlug:city,city:({ashdod:"אשדוד","rishon-lezion":"ראשון לציון",yavne:"יבנה"})[city],
     title,short_pitch:$("shortPitch").value.trim(),long_description:$("description").value.trim(),
     category:$("category").value,subcategory:$("subcategory").value||null,secondary_categories:selectedTaxonomy("secondaryCategories"),audiences:selectedTaxonomy("audiencesText"),topics:selectedTaxonomy("topics"),organizations:selectedTaxonomy("organizations"),distribution_targets:selectedTaxonomy("distributionTargets"),smart_distribution:$("smartDistribution").checked,seo_title:($("seoTitle").value.trim()||window.ISNET_SEO_EDITOR?.suggestion().title||""),seo_description:($("seoDescription").value.trim()||window.ISNET_SEO_EDITOR?.suggestion().description||""),seo_slug:$("seoSlug").value.trim()||(makeSlug(title)+"-"+Date.now().toString(36)),schema_type:$("schemaType").value,seo_index:$("seoIndex").checked,promote_home:$("promoteHome").checked,promote_city:$("promoteCity").checked,promote_section:$("promoteSection").checked,promotion:$("promotion").value,status:"draft",start_date:date,start_time:$("startTime").value,
     venue:$("venue").value.trim(),address:$("address").value.trim(),
@@ -136,7 +136,7 @@ $("city").addEventListener("change",renderOrganizations);
 $("category").addEventListener("change",()=>renderSubcategories($("category").value));
 async function prefillClone(){
  const params=new URLSearchParams(location.search),id=params.get('clone'),city=params.get('city');
- if(!id||!['ashdod','rishon-lezion'].includes(city))return;
+ if(!id||!['ashdod','rishon-lezion','yavne'].includes(city))return;
  const [data,record]=await Promise.all([fetch('../'+city+'/data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('source unavailable');return r.json()}),window.ISNET_DB.getEventRecord(city,id)]);
  const source=(data.events||[]).find(e=>e.event_id===id)||{};
  const e=window.ISNET_EVENT_OVERLAY.merge(source,record?.payload||{});

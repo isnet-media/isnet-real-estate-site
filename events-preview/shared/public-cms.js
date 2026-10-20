@@ -8,7 +8,7 @@
   const clock=()=>typeof performance!=="undefined"?performance.now():Date.now();
   function cityName(city){
     city=city||location.pathname.match(/events-preview\/([^/]+)/)?.[1];
-    if(!['ashdod','rishon-lezion'].includes(city))throw new Error('Unknown city');return city;
+    if(!['ashdod','rishon-lezion','yavne'].includes(city))throw new Error('Unknown city');return city;
   }
   function loadSource(city){
     city=cityName(city);

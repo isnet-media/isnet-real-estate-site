@@ -11,7 +11,8 @@ let taxonomyCategories=[];
 const categoryLabels={music:"מוזיקה",standup:"סטנדאפ",kids:"ילדים",theatre:"תיאטרון",lecture:"הרצאות",exhibition:"תערוכות",workshop:"סדנאות",cinema:"קולנוע",festival:"פסטיבלים",community:"קהילה",sport:"ספורט",seniors:"הגיל השלישי וגמלאים",other:"אחר"};
 const cityConfig=[
   {slug:"ashdod",name:"אשדוד",base:"../ashdod/"},
-  {slug:"rishon-lezion",name:"ראשון לציון",base:"../rishon-lezion/"}
+  {slug:"rishon-lezion",name:"ראשון לציון",base:"../rishon-lezion/"},
+  {slug:"yavne",name:"יבנה",base:"../yavne/"}
 ];
 let all=[];
 let siteBuildReport=null,centralHistory=null;
@@ -196,11 +197,11 @@ async function load(){
   });
   const dbManual=dbRecords.filter(r=>r.record_type==="manual").map(r=>{
     const e={...(r.payload||{}),event_id:r.event_id,_citySlug:r.city_slug,_dbRecord:true,_localNew:true};
-    e._cityBase=e._citySlug==="ashdod"?"../ashdod/":"../rishon-lezion/";
+    e._cityBase="../"+e._citySlug+"/";
     return e;
   });
   const dbManualKeys=new Set(dbManual.map(e=>e._citySlug+":"+e.event_id));
-  const local=localNewEvents().filter(e=>!dbManualKeys.has(e._citySlug+":"+e.event_id)).map(e=>({...e,_localNew:true,_cityBase:e._citySlug==="ashdod"?"../ashdod/":"../rishon-lezion/"}));
+  const local=localNewEvents().filter(e=>!dbManualKeys.has(e._citySlug+":"+e.event_id)).map(e=>({...e,_localNew:true,_cityBase:"../"+e._citySlug+"/"}));
   const unique=new Map();
   for(const e of [...persisted,...dbManual,...local])unique.set(e._citySlug+":"+e.event_id,e);
   all=annotateDuplicates([...unique.values()]).map(e=>({...e,_issues:issuesFor(e)}));

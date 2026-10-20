@@ -1,0 +1,41 @@
+name: Refresh Yavne events
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/sync_yavne_events.py
+      - .github/workflows/yavne-events.yml
+  schedule:
+    - cron: '25 5 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: isnet-event-data-writes
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4
+      - run: python scripts/test_yavne_events.py
+      - run: python -u scripts/sync_yavne_events.py
+      - run: |
+          python scripts/sync_event_city_views.py
+          python scripts/build_event_public_assets.py
+          git restore -- events-preview/ashdod events-preview/rishon-lezion
+          rm -f events-preview/admin/data/site-build-report.json
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add events-preview/yavne events-preview/admin/data/yavne-source-report.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh verified Yavne events and city frontend'
+          git pull --rebase origin main
+          git push origin HEAD:main

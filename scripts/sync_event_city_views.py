@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "events-preview"
 MASTER = ROOT / "ashdod"
 TARGETS = {
+    "yavne": {"slug":"yavne","name":"יבנה","brand":"יבנה נט","website":"https://www.yavnenet.co.il/","second_cinema":"סינמטק יבנה","second_cinema_id":"cinematheque"},
     "rishon-lezion": {
         "slug": "rishon-lezion",
         "name": "ראשון לציון",
@@ -52,8 +53,8 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     content = content.replace("publishedEvents?.('ashdod')", "publishedEvents?.('" + city['slug'] + "')")
     # Shared, non-geographic illustration assets remain in the canonical bank.
     content = re.sub(r'(?<![A-Za-z0-9_./-])assets/(?!branding/)', '../ashdod/assets/', content)
-    content = content.replace('assets/branding/what-to-do-ashdod', 'assets/branding/what-to-do-rishon')
-    content = content.replace('assets/branding/ashdodnet-dark.svg', 'assets/branding/rishonet-dark.svg')
+    content = content.replace('assets/branding/what-to-do-ashdod', 'assets/branding/what-to-do-' + ('yavne' if city['slug']=='yavne' else 'rishon'))
+    content = content.replace('assets/branding/ashdodnet-dark.svg', 'assets/branding/' + ('yavnenet-dark.svg' if city['slug']=='yavne' else 'rishonet-dark.svg'))
     # Local partner/catalogs never silently load Ashdod content.
     if name == 'site-search-chat.js':
         content = content.replace("if(/חוג|קורס/.test(raw)&&!payload.courses)", "if(false&&/חוג|קורס/.test(raw)&&!payload.courses)")
@@ -120,6 +121,20 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     content = content.replace("אשדוד נט", city["brand"])
     content = content.replace("אשדוד", city["name"])
     content = content.replace('ASHDOD_NEARBY', 'אשדוד')
+    if city['slug']=='yavne':
+        content=content.replace('בראשון לציון','ביבנה').replace('לגלות תרבות בראשון','תרבות ביבנה')
+        content=content.replace("cityEvents('ashdod')","cityEvents('yavne')")
+        content=content.replace('סינמה סיטי יבנה','סינמטק יבנה')
+        content=re.sub(r'<button[^>]*data-(?:cinema|venue)="(?:cinema-city|cinematheque)"[^>]*>.*?</button>', '', content)
+        content=re.sub(r'<a[^>]*href="https://(?:www\.)?(?:cinema-city\.co\.il|hotcinema\.co\.il)[^"]*"[^>]*>.*?</a>', '', content)
+        content=content.replace('בחרו את שני בתי הקולנוע','בדקו מועדי הקרנות נוספים')
+        content=re.sub(r'<section class="cityDiscover"[\s\S]*?</section>', '', content)
+        content=re.sub(r'<a[^>]*href="(?:places|attractions|saturday)\.html[^"]*"[^>]*>[\s\S]*?</a>', '', content)
+        if name=='index.html':
+            content=re.sub(r'<a class="cityDiscover__card"[\s\S]*?</a>', '', content)
+        if name=='saturday.js':
+            content=content.replace("cityEvents('yavne')","cityEvents('yavne')",1)
+
     # CMS city identifiers are ASCII slugs and must be localized explicitly.
     # Otherwise the Rishon public board silently fetches Ashdod CMS events.
     if suffix == ".js":
