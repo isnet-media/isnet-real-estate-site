@@ -120,7 +120,7 @@ def cache_image(item):
   if min(img.size)<180:raise ValueError('too_small')
   img.thumbnail((1200,900));out=CITY/'assets/restaurants';out.mkdir(exist_ok=True,parents=True)
   img.save(out/(item['id']+'.webp'),'WEBP',quality=86)
-  item['image']='assets/restaurants/'+item['id']+'.webp';item['credit']='תמונת המקום במקור המקושר';item['image_source_url']=item['source_url']
+  item['image']='assets/restaurants/'+item['id']+'.webp';item['credit']=item.get('credit') or 'תמונת המקום במקור המקושר';item['image_source_url']=item.get('image_source_url') or item['source_url']
  except Exception as exc:REPORT.setdefault('image_errors',[]).append({'id':item['id'],'error':str(exc)[:100]})
 def main():
  items=json.loads(DATA.read_text())['restaurants'] if DATA.exists() else []
