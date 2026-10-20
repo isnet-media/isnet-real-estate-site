@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-20T13:50:05.326692+00:00",
+  "checked_at": "2026-10-20T13:50:44.217368+00:00",
   "mode": "apply",
   "state": "attention",
   "scope": "Ashdod source feeds; CMS overlays remain authoritative; no claim of live-page verification",
   "input_sha256": {
-    "events-preview/ashdod/data/events.json": "ba3fc4430fdd15ff01a74618103377b58b61995352159980b0bd4c71acd99c34",
+    "events-preview/ashdod/data/events.json": "43073fafa0047e4a801e34cd10565b2b885d69c8492eb962223800579ed67dd9",
     "events-preview/admin/data/taxonomy.json": "95bfbeab8c4ae566baac77c96b7d6e21d61e3e93c1ed376728ad5ed7ffe3991c",
     "events-preview/admin/data/subcategory-definitions.json": "6c2273cba22422c976f2834c424b8229c222037ca7090f86faffafc6c4f7223b",
     "events-preview/shared/standup-videos.json": "d1e6b4414492ed406bec59c7e4066f4ce9fd6c13f30ec2a4e9d036a3a6de41d7"
@@ -4132,6 +4132,12 @@
       "reason": "Source reports failed or partial collection"
     },
     {
+      "id": "upstream-workflow",
+      "type": "source_workflow_failed",
+      "title": "Refresh Ashdod event source images",
+      "reason": "Upstream workflow failure; https://github.com/isnet-media/isnet-real-estate-site/actions/runs/39433804561"
+    },
+    {
       "id": "trailer-hot-cinema-3973",
       "type": "cinema_trailer",
       "title": "סינמה נוסטלגיה - ברבור שחור",
@@ -4140,7 +4146,7 @@
   ],
   "counts": {
     "repairs": 0,
-    "unresolved": 590
+    "unresolved": 591
   },
   "data_readback_verified": true
 }
