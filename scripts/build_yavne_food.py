@@ -14,7 +14,7 @@ def build():
   if 'כשר' in typ or 'בד"צ' in typ:
    p['kosher']='לפי עמוד העסק: '+typ+'. יש לוודא תעודת כשרות בתוקף מול המקום.';p['kosherVerified']=True
   p['kinds']=list(dict.fromkeys(p.get('kinds') or [p['kind']]))
-  if p['kind'] in {'restaurant','meat','burger','italian','asian','fish','bar','street'} and 'restaurant' not in p['kinds']:p['kinds'].append('restaurant')
+  if p['kind'] in {'restaurant','meat','burger','italian','asian','fish','bar','street','pizza'} and 'restaurant' not in p['kinds']:p['kinds'].append('restaurant')
   if 'קייטרינג' in p.get('source_business_type',''):p['kinds'].append('catering')
   if p['kind']=='coffee_carts':p['kinds'].append('cafe')
   if p['kind']=='bakery' and any(w in p['name'] for w in ['עוג','מתוק','cakes','קונדיטור']):p['kinds'].append('dessert')
@@ -27,6 +27,8 @@ def build():
  start=js.index('const kinds=');end=js.index('\nconst esc=',start)
  kinds={'all':'הכול','restaurant':'מסעדות','meat':'בשרים וגריל','burger':'המבורגרים','italian':'איטלקי','asian':'אסייתי וסושי','fish':'דגים','street':'אוכל רחוב וחומוס','pizza':'פיצריות','cafe':'בתי קפה','coffee_carts':'עגלות קפה','bakery':'מאפיות וקונדיטוריות','dessert':'גלידה ומתוקים','local':'אוכל ביתי ומוכן','bar':'ברים ואוכל','deli':'מעדניות','catering':'קייטרינג ואירוח','wine':'יין ומשקאות'}
  js=js[:start]+'const kinds='+json.dumps(kinds,ensure_ascii=False)+';'+js[end:]
+ js=js.replace("Object.entries(kinds).map","Object.entries(kinds).filter(([k])=>k==='all'||places.some(p=>(p.kinds||[p.kind]).includes(k))).map")
+ js=js.replace(">אתר המקום ↗</a>",">'+esc(p.site_label)+' ↗</a>")
  js=js.replace("p.kind===state.kind","(p.kinds||[p.kind]).includes(state.kind)")
  js=js.replace("['sea','evening','coffee']","['family','evening','coffee']")
  js=js.replace('נבדק ב־19.10.2026',"נבדק ב־'+esc(p.checked_at||'2026-10-20')+'")
