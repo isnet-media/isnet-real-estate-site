@@ -167,6 +167,11 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         if name=='event.js':
             content=content.replace('all.find(e=>e.event_id===requestedId)', 'all.find(e=>e.event_id===requestedId||e.source_aliases?.some(a=>a.event_id===requestedId))')
         if suffix=='.html':
+            def yavne_bundle_version(match):
+                asset=match.group(1)+'.js'
+                localized=localize((MASTER/asset).read_text(),asset,city,'.js')
+                return asset+'?v='+hashlib.sha256(localized.encode()).hexdigest()[:12]
+            content=re.sub(r'(kids-hub|seniors-hub|category-landing)\.js(?:\?v=[^\"\s]+)?',yavne_bundle_version,content)
             helper=(ROOT/'yavne/yavne-events.js').read_text()
             version=hashlib.sha256(helper.encode()).hexdigest()[:12]
             content=re.sub(r'(<script[^>]*src="../shared/public-cms.js[^>]*></script>)',lambda m:m[1]+'\n<script src="yavne-events.js?v='+version+'" defer></script>',content)

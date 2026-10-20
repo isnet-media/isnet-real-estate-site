@@ -16,6 +16,7 @@
  window.isnetEventIllustration=e=>{
   if(!e)return null;
   const sub=e.subcategory||'';
+  if(sub==='concerts')return {src:'../ashdod/assets/featured-stage/orchestra_conductor_golden_hall__carousel_640x480.webp',label:'קונצרט — המחשה'};
   const mapped={history:['v4/history-museum','היסטוריה'], 'travel-geography':['v4/history-museum','תרבויות העולם'], 'parenting-family':['v4/wellbeing-circle','מפגש והרצאה'], 'psychology-growth':['v4/wellbeing-circle','התפתחות אישית'], 'reading-clubs':['v4/book-club','מועדון קריאה'], 'dance-performance':['v4/ballet-dance','מחול'], 'folk-dancing':['v4/folk-dance','ריקודי עם'], 'story-time':['v1/story-time','שעת סיפור']};
   const item=mapped[sub];
   if(item)return {src:'../ashdod/assets/illustrations/'+item[0]+'.webp',label:item[1]+' — המחשה'};

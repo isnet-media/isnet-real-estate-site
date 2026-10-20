@@ -6,7 +6,7 @@ EXCLUDE=re.compile(r'הדרכת הורים|הדרכה בשימושי|מיומנ�
 def refine(events):
  kept=[];held=[]
  for e in events:
-  title=e['title'];text=e.get('source_detail_text') or '';head=text.split('פרטים נוספים')[0]
+  title=e['title'];text=(e.get('source_detail_text') or '').split('רוצים עוד אירועים')[0];head=text.split('פרטים נוספים')[0]
   if EXCLUDE.search(title) or 'גן יבנה' in title+' '+(e.get('venue') or ''):held.append(e);continue
   e['venue']=re.sub(r'\s+ל$','',e.get('venue') or '')
   e['venue']=re.sub(r',?\s*יבנה$','',e['venue']).strip() if 'היכל התרבות' not in e['venue'] and 'סינמטק' not in e['venue'] else e['venue']
@@ -35,6 +35,11 @@ def refine(events):
    detail=e.get('detail_source_url') or e.get('ticket_url') or ''
    if core.urlsplit(detail).hostname in {'www.htyavne.co.il','htyavne.co.il','yavne-matnasim.smarticket.co.il'}:e['purchase_url']=detail
   classify(e)
+  # Reject unrelated ticket links scraped from a seller's surrounding page.
+  detail=e.get('detail_source_url') or e.get('ticket_url') or ''
+  purchase=e.get('purchase_url') or ''
+  if ('ticket.gozalypro.com/112317' in purchase and 'סיפור הנס' not in title) or ('makore.co.il/event/' in purchase and purchase!=detail):
+   e['purchase_url']=detail;e['purchase_source']='event_detail_fallback'
   kept.append(e)
  # Only coalesce same-time, same-venue records with a shared exact title prefix
  # or substantial shared title evidence. Prefer official facts and keep aliases.

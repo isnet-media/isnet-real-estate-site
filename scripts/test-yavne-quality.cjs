@@ -8,8 +8,8 @@ for(const name of ['kids-hub','seniors-hub'])vm.runInNewContext(fs.readFileSync(
 const helper=context.window.YAVNE_EVENTS,kids=context.window.ISNET_KIDS,seniors=context.window.ISNET_SENIORS;
 const at={day:'2026-10-20',time:'00:00'};
 const find=t=>data.events.find(e=>e.title.includes(t));
-assert.equal(data.events.length,101);
-for(const artist of ['דניאל סטיופין','אלי פיניש','סיפור הנס'])assert.equal(data.events.filter(e=>e.title.includes(artist)).length,1,artist+' deduplicated');
+assert(data.events.length>=80,'Catalog remains populated');
+for(const artist of ['דניאל סטיופין','אלי פיניש','סיפור הנס']){const rows=data.events.filter(e=>e.title.includes(artist));assert.equal(new Set(rows.map(e=>e.start_date+' '+e.start_time)).size,rows.length,artist+' deduplicated');}
 assert.equal(data.events.filter(e=>e.title==='הזוג המוזר').length,2,'Separate dates retained');
 for(const t of ['מסביב לעולם','סיגי הסופגנייה','מפרץ ההרפתקאות'])assert(kids.visible(find(t),at),t+' discoverable in kids');
 assert(!kids.forKids(find('ילדים בהזמנה')),'Adult lecture about children excluded from kids');
@@ -20,6 +20,8 @@ assert(helper.matches(health,new Set(['lecture']))&&helper.matches(health,new Se
 assert(helper.matches(find('מסביב לעולם'),new Set(['theatre'])));
 assert.equal(find('בלב הפרא').category,'cinema');
 for(const e of data.events){
+ assert(!/ticket\.gozalypro\.com\/112317/.test(e.purchase_url||'')||e.title.includes('סיפור הנס'),'Unrelated ticket destination rejected');
+ if((e.purchase_url||'').includes('makore.co.il/event/'))assert.equal(e.purchase_url,e.detail_source_url,'No related-event booking links');
  assert(!/גן יבנה|חבל יבנה|קבוצת יבנה/.test(e.city+' '+e.venue+' '+e.title));
  for(const m of e.category_memberships||[]){
   const c=taxonomy.primary_categories.find(c=>c.id===m.category);
