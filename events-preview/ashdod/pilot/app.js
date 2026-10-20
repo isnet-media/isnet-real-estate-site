@@ -1075,7 +1075,7 @@ function renderResults(){
     const buckets=new Map();
     arr.forEach(e=>{const key=e.category||"other";if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(e)});
     const activeCinemaCount=state.cinema.filter(m=>m.venues.some(cinemaVenueActive)).length;
-    const categoryKeys=[...buckets.keys()].filter(key=>key!=="cinema"&&key!=="other"&&key!=="community"&&key!=="tour"&&key!=="conference"&&buckets.get(key).length>=4);
+    const categoryKeys=[...buckets.keys()].filter(key=>key!=="workshop"&&key!=="cinema"&&key!=="other"&&key!=="community"&&key!=="tour"&&key!=="conference"&&buckets.get(key).length>=4);
     if(activeCinemaCount||(buckets.get("cinema")||[]).length)categoryKeys.push("cinema");
     const keys=categoryKeys.sort((a,b)=>{
       const ai=preferred.indexOf(a),bi=preferred.indexOf(b);
@@ -1095,17 +1095,17 @@ function renderResults(){
       const items=buckets.get(key);
       const def=taxonomy.find(t=>t.id===key);
       const label=def?.label||catLabels[key]||key;
-      const subDefs=def?.subcategories||[];
+      const subDefs=(def?.subcategories||[]).filter(s=>s.requires_mapping!==true&&!/^(event|he|\d+)$/i.test(s.label||""));
       const present=[...new Set(items.map(e=>e.subcategory).filter(Boolean))];
       const counts=new Map(present.map(id=>[id,items.filter(e=>e.subcategory===id).length]));
       const subs=[
         ...subDefs.map(s=>({id:s.id,label:s.label,count:counts.get(s.id)||0})),
-        ...present.filter(id=>!subDefs.some(s=>s.id===id)).map(id=>({id,label:taxonomy.flatMap(c=>c.subcategories||[]).find(s=>s.id===id)?.label,count:counts.get(id)||0})).filter(s=>s.label)
+        ...present.filter(id=>!subDefs.some(s=>s.id===id)).map(id=>({id,label:taxonomy.flatMap(c=>c.subcategories||[]).find(s=>s.id===id&&s.requires_mapping!==true&&!/^(event|he|\d+)$/i.test(s.label||""))?.label,count:counts.get(id)||0})).filter(s=>s.label)
       ];
       const visibleSubs=subs.filter(s=>s.count>0);
       const railId="isnetCategoryRail"+index;
       const tabs=visibleSubs.length?'<div class="isnetCategoryTabs" aria-label="תתי קטגוריות של '+escapeHtml(label)+'"><button type="button" class="is-active" data-rail-sub="" aria-pressed="true">הכול</button>'+visibleSubs.map(s=>'<button type="button" data-rail-sub="'+escapeHtml(s.id)+'" aria-pressed="false"'+(s.count?'':' disabled title="אין כרגע אירועים בתת־קטגוריה זו"')+'>'+escapeHtml(s.label)+' <small>('+s.count+')</small></button>').join("")+'</div>':"";
-      return '<section class="isnetCategorySection" data-category-section="'+escapeHtml(key)+'"><div class="isnetCategoryTop"><div><h3><a href="'+(key==="workshop"?"./?category=":"category.html?category=")+encodeURIComponent(key)+'">'+escapeHtml(label)+'</a></h3><span class="isnetCategoryCount">'+items.length+' אירועים</span></div><div class="isnetCategoryArrows"><button type="button" data-category-move="start" aria-label="הקודם ב'+escapeHtml(label)+'">→</button><button type="button" data-category-move="end" aria-label="הבא ב'+escapeHtml(label)+'">←</button></div></div><div class="isnetRailWrap"><div class="isnetCategoryRail" id="'+railId+'" tabindex="0" aria-label="אירועים: '+escapeHtml(label)+'">'+items.map(eventCard).join("")+'</div><button type="button" class="isnetRailOverlay isnetRailOverlay--start" data-category-move="start" aria-label="גלילה לאירועים הקודמים ב'+escapeHtml(label)+'">→</button><button type="button" class="isnetRailOverlay isnetRailOverlay--end" data-category-move="end" aria-label="גלילה לאירועים הבאים ב'+escapeHtml(label)+'">←</button></div></section>';
+      return '<section class="isnetCategorySection" data-category-section="'+escapeHtml(key)+'"><div class="isnetCategoryTop"><div><h3><a href="'+(key==="workshop"?"./?category=":"category.html?category=")+encodeURIComponent(key)+'">'+escapeHtml(label)+'</a></h3><span class="isnetCategoryCount">'+items.length+' אירועים</span></div><div class="isnetCategoryArrows"><button type="button" data-category-move="start" aria-label="הקודם ב'+escapeHtml(label)+'">→</button><button type="button" data-category-move="end" aria-label="הבא ב'+escapeHtml(label)+'">←</button></div></div>'+tabs+'<div class="isnetRailWrap"><div class="isnetCategoryRail" id="'+railId+'" tabindex="0" aria-label="אירועים: '+escapeHtml(label)+'">'+items.map(eventCard).join("")+'</div><button type="button" class="isnetRailOverlay isnetRailOverlay--start" data-category-move="start" aria-label="גלילה לאירועים הקודמים ב'+escapeHtml(label)+'">→</button><button type="button" class="isnetRailOverlay isnetRailOverlay--end" data-category-move="end" aria-label="גלילה לאירועים הבאים ב'+escapeHtml(label)+'">←</button></div></section>';
     }).join("");
     const itemsById=new Map(arr.map(e=>[String(e.event_id),e]));
     document.querySelectorAll(".isnetCategorySection").forEach(section=>{
