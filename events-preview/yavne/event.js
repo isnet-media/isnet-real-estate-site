@@ -427,7 +427,7 @@ async function init(){
       fetch("data/sports.json?v=20261005-2").then(r=>r.json()).catch(()=>({branches:{},teams:[]})),
       fetch("data/editorial.json",{cache:"no-store"}).then(r=>r.ok?r.json():{events:{}}).catch(()=>({events:{}})),
       fetch("../shared/standup-videos.json",{cache:"no-store"}).then(r=>r.ok?r.json():{artists:[]}).catch(()=>({artists:[]})),
-      window.ISNET_PUBLIC_CMS?.publishedEvents?.(location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"ashdod")||Promise.resolve([])
+      window.ISNET_PUBLIC_CMS?.publishedEvents?.("yavne")||Promise.resolve([])
     ]);
     sportsMeta=sports||{branches:{},teams:[]};
     const editorialById=editorial?.events||{};
