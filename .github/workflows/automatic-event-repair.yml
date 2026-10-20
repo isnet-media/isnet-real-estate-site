@@ -1,0 +1,79 @@
+name: Repair event quality automatically
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 */2 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/repair_event_quality.py'
+      - 'scripts/test_automatic_event_repair.py'
+      - '.github/workflows/automatic-event-repair.yml'
+  workflow_run:
+    workflows:
+      - 'Daily Ashdod local source publication'
+      - 'Daily Ashdod supplemental source publication'
+      - 'Daily Mevalim Ashdod direct event publication'
+      - 'Discover national event board candidates'
+      - 'Refresh verified Ashdod cinema'
+      - 'Refresh Ashdod event source images'
+      - 'Daily city event intake'
+    types: [completed]
+permissions:
+  contents: write
+concurrency:
+  group: isnet-event-data-writes
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      UPSTREAM_NAME: ${{ github.event.workflow_run.name }}
+      UPSTREAM_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+      UPSTREAM_URL: ${{ github.event.workflow_run.html_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test ambiguity, locks, idempotence and rollback
+        run: python scripts/test_automatic_event_repair.py
+      - name: Repair on latest main and save evidence atomically in Git
+        run: |
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python scripts/repair_event_quality.py --apply
+            python scripts/test_automatic_event_repair.py
+            python scripts/test_subcategory_definitions.py
+            git add events-preview/ashdod/data/events.json events-preview/admin/data/taxonomy.json events-preview/admin/data/automatic-repair-status.json events-preview/admin/data/automatic-repair-history.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'Repair verified event quality and record unresolved exceptions'
+            if git push origin HEAD:main; then exit 0; fi
+          done
+          exit 1
+      - name: Explain unresolved findings without claiming a healthy site
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path('events-preview/admin/data/automatic-repair-status.json')
+          if p.exists():
+              d=json.loads(p.read_text())
+              with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+                  f.write(f"## Event repair: {d['state']}\n\nApplied repairs: {d['counts']['repairs']}. Unresolved: {d['counts']['unresolved']}.\n\nSuccess means the worker completed; unresolved findings still require treatment.\n")
+              if d['unresolved']: print('::warning::Event repair completed with unresolved exceptions; inspect the admin repair dashboard.')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: automatic-event-repair-evidence
+          path: events-preview/admin/data/automatic-repair-*.json
+          retention-days: 30

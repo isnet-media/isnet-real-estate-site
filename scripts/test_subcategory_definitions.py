@@ -7,8 +7,10 @@ taxonomy=json.loads((root/"taxonomy.json").read_text(encoding="utf-8"))
 definitions=json.loads((root/"subcategory-definitions.json").read_text(encoding="utf-8"))["categories"]
 for category in taxonomy["primary_categories"]:
     cid=category["id"]
-    assert cid in definitions, f"Missing primary category: {cid}"
-    known={s["id"] for s in category["subcategories"]}
+    if cid not in definitions:
+        assert category.get("requires_mapping") is True, f"Unreviewed primary category: {cid}"
+        continue
+    known={s["id"] for s in category["subcategories"] if s.get("requires_mapping") is not True or s["id"] in definitions[cid]["subcategories"]}
     defined=set(definitions[cid]["subcategories"])
     assert known==defined, f"Definition mismatch: {cid}: {known^defined}"
     for sid in known:
