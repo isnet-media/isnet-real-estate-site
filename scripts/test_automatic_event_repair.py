@@ -17,11 +17,14 @@ class Tests(unittest.TestCase):
   e=event();e['title']='אמן לדוגמה ואמן אחר במופע סטנדאפ';self.assertNotIn('youtube_id',repair({'events':[e]},TAX,DEFS,CLIPS,'2026-10-20')[0]['events'][0])
   c=copy.deepcopy(CLIPS);c['artists'][0]['verified_at']='2027-01-01';self.assertNotIn('youtube_id',repair({'events':[event()]},TAX,DEFS,c,'2026-10-20')[0]['events'][0])
  def test_same_source_image_only(self):
-  a=event('a',content_source_url='https://official/event/1',image_url='https://official/photo.jpg',image_verified=True,image_publishable=True,source_image_kind='source_card_image');b=event('b',content_source_url='https://official/event/1');c=event('c',content_source_url='https://official/event/2')
+  a=event('a',content_source_url='https://official/event/1',image_url='https://official/photo.jpg',image_verified=True,image_publishable=True,source_image_kind='source_card_image',image_represents_event=True);b=event('b',content_source_url='https://official/event/1');c=event('c',content_source_url='https://official/event/2')
   result=repair({'events':[a,b,c]},TAX,DEFS,CLIPS,'2026-10-20')[0]['events'];self.assertEqual(result[1]['image_url'],a['image_url']);self.assertNotIn('image_url',result[2])
  def test_ambiguous_donor_and_manual_image(self):
-  a=event('a',content_source_url='u',image_url='https://official/a.jpg',image_verified=True,image_publishable=True);b={**a,'event_id':'b','image_url':'https://official/b.jpg'};c=event('c',content_source_url='u');self.assertNotIn('image_url',repair({'events':[a,b,c]},TAX,DEFS,CLIPS,'2026-10-20')[0]['events'][2])
+  a=event('a',content_source_url='u',image_url='https://official/a.jpg',image_verified=True,image_publishable=True,source_image_kind='source_card_image',image_represents_event=True);b={**a,'event_id':'b','image_url':'https://official/b.jpg'};c=event('c',content_source_url='u');self.assertNotIn('image_url',repair({'events':[a,b,c]},TAX,DEFS,CLIPS,'2026-10-20')[0]['events'][2])
   c['image_manual_override']=True;self.assertNotIn('image_url',repair({'events':[a,c]},TAX,DEFS,CLIPS,'2026-10-20')[0]['events'][1])
+ def test_generic_opengraph_is_not_media_evidence(self):
+  a=event('a',content_source_url='u',image_url='https://official/opengraph-image',image_verified=True,image_publishable=True);b=event('b',content_source_url='u')
+  self.assertNotIn('image_url',repair({'events':[a,b]},TAX,DEFS,CLIPS,'2026-10-20')[0]['events'][1])
  def test_duplicates_and_inactive(self):
   e=event();self.assertEqual(len(repair({'events':[e,e]},TAX,DEFS,CLIPS,'2026-10-20')[0]['events']),1)
   with self.assertRaises(ValueError):repair({'events':[e,{**e,'title':'אחר'}]},TAX,DEFS,CLIPS,'2026-10-20')

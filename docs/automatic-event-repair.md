@@ -9,7 +9,9 @@ Repairs are limited to:
 - Subtypes from explicit title/source evidence with >=0.95 confidence, using the
   intersection of reviewed definitions and the current taxonomy.
 - Missing media from a unique verified, publishable donor with exactly the same
-  title and source detail URL. Old thumbnails are invalidated. Good media and
+  title and source detail URL, explicit source-card provenance and confirmed
+  event representation. Generic OpenGraph endpoints are never evidence. Old
+  thumbnails are invalidated. Good media and
   manual image overrides remain intact.
 - Missing stand-up clips from an exact artist/alias match in the verified shared
   catalog, verified within the last 30 days. Clips remain labelled representative.

@@ -57,7 +57,7 @@ def repair(data,taxonomy,definitions,catalog,day):
     # Media donors must be the SAME production and SAME explicit source detail URL.
     donors={}
     for e in rows:
-        if (e.get('image_url') and e.get('image_verified') is True and e.get('image_publishable') is True and e.get('image_represents_event') is not False and e.get('source_image_kind') not in ('illustration','source_placeholder','not_available') and not re.search(r'illustration|defaults/|placeholder|no_pic|favicon',e['image_url'],re.I)):
+        if (e.get('image_url') and e.get('image_verified') is True and e.get('image_publishable') is True and e.get('image_represents_event') is True and e.get('source_image_kind')=='source_card_image' and not re.search(r'illustration|defaults/|placeholder|no_pic|favicon|opengraph-image',e['image_url'],re.I)):
             key=(norm(e.get('title')),e.get('content_source_url'))
             if key[0] and key[1]:donors.setdefault(key,[]).append(e)
     clips=[]
