@@ -75,7 +75,7 @@ def repair(data,taxonomy,definitions,catalog,day):
             if target and confidence>=0.95 and not conflict and evidence in ('title','source_explicit_subcategory') and not locked(e,'category'):
                 set_fields(e,{'subcategory':target,'subcategory_review_status':'auto_repaired_from_explicit_evidence','subcategory_review_confidence':confidence},'verified_subcategory_rule')
             if e.get('subcategory') not in valid.get(cat,set()):issue('subcategory',e,'No unambiguous approved subtype from explicit event evidence')
-        bad_image=not e.get('image_url') or e.get('image_publishable') is not True or e.get('source_image_kind') in ('illustration','source_placeholder','not_available') or e.get('image_represents_event') is False or re.search(r'illustration|defaults/|placeholder|no_pic|favicon',str(e.get('image_url')),re.I)
+        bad_image=not e.get('image_url') or e.get('image_publishable') is not True or e.get('source_image_kind') in ('illustration','source_placeholder','not_available') or e.get('image_represents_event') is False or re.search(r'illustration|defaults/|placeholder|no_pic|favicon|opengraph-image',str(e.get('image_url')),re.I)
         if bad_image:
             matches=donors.get((norm(e.get('title')),e.get('content_source_url')),[])
             urls={x['image_url'] for x in matches}

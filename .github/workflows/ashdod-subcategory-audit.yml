@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: ashdod-subcategory-audit
+  group: isnet-event-data-writes
   cancel-in-progress: false
 
 jobs:
@@ -28,6 +28,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Repair verified facts and quarantine unreviewed source taxonomy
+        run: python scripts/repair_event_quality.py --apply
       - name: Validate subtype dictionary against canonical taxonomy
         run: python scripts/test_subcategory_definitions.py
       - name: Audit all event records; do not publish
@@ -40,7 +42,7 @@ jobs:
         run: |
           git config user.name "isnet-events-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add events-preview/admin/data/subcategory-audit-ashdod.json events-preview/admin/data/subcategory-apply-report-ashdod.json events-preview/ashdod/data/events.json
+          git add events-preview/admin/data/automatic-repair-status.json events-preview/admin/data/automatic-repair-history.json events-preview/admin/data/taxonomy.json events-preview/admin/data/subcategory-audit-ashdod.json events-preview/admin/data/subcategory-apply-report-ashdod.json events-preview/ashdod/data/events.json
           if ! git diff --cached --quiet; then
             git commit -m "Record Ashdod missing subcategories and review suggestions"
             git pull --rebase origin main
