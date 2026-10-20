@@ -1,0 +1,121 @@
+/* ISNET shared layout: edit events-preview/ashdod, not this generated file. */
+/* Approved ISNET design: headline, showcase, 4 premium gateways, 6 secondary links, search */
+.hero .eyebrow,.hero .hero__lead{display:none!important}
+.hero .hero__content{margin-top:18px!important}
+.hero .stageShowcase{margin-top:12px!important}
+.isnetNavDiscovery{padding:16px 0 30px;direction:rtl;color:#fff}
+.isnetNavDiscovery__primary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-bottom:18px}
+.isnetNavFeature{--accent:#e7bd62;position:relative;display:flex;align-items:center;gap:16px;min-width:0;min-height:135px;padding:20px 24px;border-radius:19px;border:1px solid var(--accent);background:radial-gradient(ellipse at 4% 100%,color-mix(in srgb,var(--accent) 19%,transparent),transparent 60%),linear-gradient(145deg,#25252c,#0b1119 80%);box-shadow:inset 0 1px 0 #ffffff17,0 8px 26px #0003;color:#fff;text-decoration:none;transition:transform .18s,box-shadow .18s}
+.isnetNavFeature--pink{--accent:#e66c9c}.isnetNavFeature--blue{--accent:#46baff}.isnetNavFeature--green{--accent:#54d58b}
+.isnetNavFeature:hover,.isnetNavFeature:focus-visible{transform:translateY(-3px);box-shadow:0 0 25px color-mix(in srgb,var(--accent) 25%,transparent)}
+.isnetNavFeature__icon{display:grid;place-items:center;width:66px;height:66px;flex:0 0 66px;border-radius:50%;background:#111923;border:1px solid var(--accent);color:var(--accent);font-size:35px}
+.isnetNavFeature__copy{display:flex;flex-direction:column;min-width:0;gap:5px}.isnetNavFeature__copy strong{font:850 clamp(21px,2.4vw,29px)/1.2 Heebo,Assistant,sans-serif}.isnetNavFeature__copy small{color:#bac2d1;font:600 14px/1.4 Assistant,sans-serif}
+.isnetNavFeature__arrow{margin-inline-start:auto;display:grid;place-items:center;border:1px solid #ffffff35;background:#ffffff0f;border-radius:50%;width:37px;height:37px;flex:0 0 37px}
+.isnetNavDiscovery__secondary{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.isnetNavSmall{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:100px;border:1px solid #506075;border-radius:14px;background:linear-gradient(145deg,#20232c,#101722);color:#fff;text-align:center;text-decoration:none;padding:13px 6px}
+.isnetNavSmall span{font-size:30px;line-height:1;color:#e0ad61}.isnetNavSmall strong{font:750 13px/1.3 Heebo,Assistant,sans-serif}.isnetNavSmall:hover,.isnetNavSmall:focus-visible{border-color:#e6b764;background:#242b38}
+.isnetNavDiscovery__search{max-width:850px;margin:22px auto 0}.isnetNavDiscovery__search .searchBox{max-width:none!important;width:100%;margin:0!important}
+.hero #quickFilters{display:none!important}
+@media(max-width:650px){.hero .hero__content{margin-top:12px!important}.isnetNavDiscovery{padding-top:10px}.isnetNavDiscovery__primary{gap:9px;margin-bottom:13px}.isnetNavFeature{padding:12px 10px;min-height:112px;border-radius:15px;gap:7px}.isnetNavFeature__icon{width:39px;height:39px;flex-basis:39px;font-size:24px}.isnetNavFeature__copy strong{font-size:17px}.isnetNavFeature__copy small{font-size:11px}.isnetNavFeature__arrow{width:22px;height:22px;flex-basis:22px;font-size:12px}.isnetNavDiscovery__secondary{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.isnetNavSmall{min-height:78px;gap:7px}.isnetNavSmall span{font-size:24px}.isnetNavSmall strong{font-size:12px}.isnetNavDiscovery__search{margin-top:16px}}
+@media(prefers-reduced-motion:reduce){.isnetNavFeature{transition:none}}
+
+/* Approved compact category and date navigation */
+.isnetNavFeature{min-height:94px!important;padding:12px 16px!important;gap:12px!important}
+.isnetNavFeature__icon{width:47px!important;height:47px!important;flex:0 0 47px!important;font-size:26px!important}
+.isnetNavFeature__copy strong{font-size:clamp(18px,2vw,25px)!important}
+.isnetNavFeature__copy small{font-size:12px!important}
+.isnetNavSmall{min-height:68px!important;gap:5px!important;padding:9px 5px!important}
+.isnetNavSmall span{font-size:23px!important}
+.isnetNavDiscovery{padding-bottom:16px!important}
+.isnetDateGateway{margin:19px auto 12px;max-width:1120px;direction:rtl}
+.isnetDateGateway__top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+#isnetOpenCalendar{display:flex;align-items:center;gap:12px;white-space:nowrap;padding:12px 18px;min-height:47px;border:1px solid #e5b85c;border-radius:13px;background:#25221d;color:#f8d17e;font:800 17px Heebo,Assistant,sans-serif;cursor:pointer}
+.isnetDateGateway__quick{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.isnetDateGateway__quick button{min-height:42px;padding:9px 16px;border:1px solid #4e5764;border-radius:30px;color:#f4f4f7;background:#1d222b;font:700 14px Assistant,sans-serif;cursor:pointer}
+.isnetDateGateway__quick button:is(:hover,:focus-visible,.is-active){border-color:#edbf6d;color:#edbf6d}
+.isnetNavDiscovery>.dateSection{margin:0!important;padding:0!important}
+.isnetNavDiscovery>.dateSection #resetDate{display:none!important}
+.isnetNavDiscovery>.dateSection #calendarBox:not([hidden]){margin:12px 0;padding:18px;border:1px solid #4b5260;border-radius:16px;background:#191d25}
+.results .dateSection{display:none!important}
+@media(max-width:650px){
+ .isnetNavFeature{min-height:80px!important;padding:10px 8px!important;gap:6px!important}
+ .isnetNavFeature__icon{width:33px!important;height:33px!important;flex-basis:33px!important;font-size:22px!important}
+ .isnetNavFeature__copy strong{font-size:16px!important}
+ .isnetNavFeature__copy small{font-size:10px!important}
+ .isnetNavSmall{min-height:66px!important}
+ .isnetDateGateway__top{align-items:flex-start}
+ .isnetDateGateway__quick{display:flex;flex-wrap:nowrap;width:100%;overflow-x:auto;padding:4px 0 8px}
+ .isnetDateGateway__quick button{white-space:nowrap;flex:0 0 auto;padding:8px 13px}
+}
+
+/* Keep legacy filter controls for existing JS bindings, but remove duplicate visible row. */
+.isnetNavDiscovery #quickFilters{display:none!important}
+
+/* Compact date controls — October 12 refinements */
+.isnetDateGateway{margin:9px auto 5px!important}
+.isnetDateGateway__top{gap:8px!important;align-items:center!important}
+.isnetDateGateway__quick{gap:6px!important}
+.isnetDateGateway__quick button{min-height:37px!important;padding:7px 12px!important;font-size:13px!important;border-radius:22px!important}
+#isnetOpenCalendar{min-height:41px!important;padding:9px 14px!important;font-size:15px!important;border-radius:12px!important}
+.isnetNavDiscovery>.dateSection #calendarBox:not([hidden]){margin:8px 0 0!important;padding:14px!important}
+@media(max-width:650px){.isnetDateGateway{margin:7px auto 4px!important}.isnetDateGateway__quick{gap:5px!important;padding:2px 0 4px!important}.isnetDateGateway__quick button{min-height:36px!important;padding:7px 10px!important;font-size:12px!important}#isnetOpenCalendar{min-height:39px!important;padding:8px 12px!important;font-size:14px!important}}
+
+/* Date row v5: eliminate stretched empty desktop gap */
+.isnetDateGateway{max-width:850px!important;margin:6px auto 0!important}
+.isnetDateGateway__top{display:flex!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important;gap:10px!important}
+.isnetDateGateway__quick{width:auto!important;display:flex!important;justify-content:center!important;gap:6px!important}
+.isnetNavDiscovery__search{margin-bottom:0!important}
+.isnetNavDiscovery{padding-bottom:8px!important}
+@media(max-width:650px){.isnetDateGateway{margin:6px auto 0!important}.isnetDateGateway__top{justify-content:flex-start!important;gap:7px!important}.isnetDateGateway__quick{width:100%!important;justify-content:flex-start!important}}
+
+/* Remove obsolete oversized events summary panel, preserve DOM for event JS. */
+.results .isnetCompactToolbar{display:none!important}
+.results{padding-top:8px!important}
+
+/* Four feature cards: shorter, centered premium layout */
+.isnetNavDiscovery__primary{width:min(100%,900px)!important;margin-inline:auto!important;gap:12px!important}
+.isnetNavFeature{min-height:78px!important;padding:10px 14px!important}
+.isnetNavFeature__copy strong{font-size:22px!important}
+.isnetNavFeature__icon{width:39px!important;height:39px!important;flex-basis:39px!important;font-size:23px!important}
+@media(max-width:650px){
+.isnetNavDiscovery__primary{width:100%!important;gap:8px!important}
+.isnetNavFeature{min-height:76px!important;padding:9px 8px!important}
+.isnetNavFeature__copy strong{font-size:16px!important}
+.isnetNavFeature__copy small{font-size:10px!important}
+}
+
+/* Approved secondary categories: centered grid of 3 columns × 2 rows */
+.isnetNavDiscovery__secondary{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  width:min(100%,760px)!important;
+  max-width:760px!important;
+  margin-inline:auto!important;
+  gap:9px!important;
+}
+.isnetNavDiscovery__secondary .isnetNavSmall{
+  min-width:0!important;
+  min-height:66px!important;
+  padding:8px 8px!important;
+  gap:5px!important;
+}
+@media(max-width:650px){
+  .isnetNavDiscovery__secondary{width:100%!important;gap:7px!important}
+  .isnetNavDiscovery__secondary .isnetNavSmall{min-height:66px!important}
+}
+
+/* Optical breathing space between free search and date controls */
+.isnetNavDiscovery__search{margin-bottom:15px!important}
+.isnetDateGateway{margin-top:0!important}
+@media(max-width:650px){.isnetNavDiscovery__search{margin-bottom:12px!important}}
+
+/* Populate home cinema rail from the same movie dataset as the cinema page */
+.homeCinemaRail{display:flex!important;overflow-x:auto!important;gap:13px!important;scroll-snap-type:x proximity;padding:4px 2px 14px;direction:rtl}
+.homeCinemaCard{display:flex;flex-direction:column;flex:0 0 182px;width:182px;min-width:0;border:1px solid #3c4554;background:#171c26;border-radius:15px;color:#fff;text-decoration:none;overflow:hidden;scroll-snap-align:start}
+.homeCinemaCard__media{display:grid;place-items:center;aspect-ratio:2/3;background:#232733}
+.homeCinemaCard__media img{width:100%;height:100%;object-fit:cover;display:block}
+.homeCinemaCard__fallback{font-size:32px}
+.homeCinemaCard__title{font:800 15px/1.35 Heebo,Assistant,sans-serif;padding:10px 11px 3px;min-height:51px}
+.homeCinemaCard__action{color:#e9c17b;font:700 12px Assistant,sans-serif;padding:2px 11px 12px}
+.homeCinemaCard:hover,.homeCinemaCard:focus-visible{border-color:#e9c17b}
+@media(max-width:650px){.homeCinemaCard{flex-basis:143px;width:143px}.homeCinemaCard__title{font-size:13px;min-height:46px}}

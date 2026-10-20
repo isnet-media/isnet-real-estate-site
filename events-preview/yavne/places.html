@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <!-- ISNET shared layout: edit the Ashdod source; synced automatically -->
+  <script>
+    // Preserve legacy attraction links while keeping a single canonical attractions hub.
+    (function(){var p=new URLSearchParams(location.search);if(p.get("category")==="attractions"){location.replace("attractions.html");}else if(p.get("category")==="kids-attractions"){location.replace("attractions.html?audience=kids");}})();
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07162b">
+  <title>מה עושים ביבנה?</title>
+  <meta name="description" content="מדריך החופים של יבנה: תמונות, אופי החוף, למי מתאים, מה יש במקום ואיך מגיעים.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Heebo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="places.css?v=21d43a5327f7">
+
+<link rel="stylesheet" href="publisher-brand.css?v=5cdb1ab4ad1c">
+<link rel="stylesheet" href="isnet-site-menu.css?v=20261013-shared-sticky">
+<link rel="stylesheet" href="home-brand-header.css?v=20261013-all-pages1">
+</head>
+<body>
+  <header class="siteTopbar" aria-label="ניווט ראשי">
+    <div class="siteTopbar__inner">
+      <a class="siteTopbar__brand siteTopbar__ashdodnet" href="https://www.yavnenet.co.il/" target="_blank" rel="noopener" aria-label="לעמוד הראשי של יבנה נט" title="לעמוד הראשי של יבנה נט">
+        <img src="assets/branding/site-logo.png" width="195" height="107" alt="יבנה נט" decoding="async">
+      </a>
+      <a class="siteTopbar__brand siteTopbar__events" href="./" aria-label="לעמוד הראשי של מה עושים ביבנה" title="לעמוד הראשי של מה עושים ביבנה">
+        <img src="assets/branding/what-to-do-yavne.svg" width="420" height="150" alt="מה עושים ביבנה" decoding="async">
+      </a>
+      <nav class="isnetSiteMenu" aria-label="כל אזורי האתר">
+        <details>
+          <summary aria-label="פתיחת תפריט האתר"><span class="isnetHamburger" aria-hidden="true"><i></i><i></i><i></i></span><span>תפריט</span></summary>
+          <div class="isnetSiteMenu__panel">
+            <a class="isnetSiteMenu__home" href="./">עמוד הבית — כל האירועים ←</a>
+            <div class="isnetSiteMenu__heading">אירועים לפי קטגוריה</div>
+            <div class="isnetSiteMenu__links">
+              <a href="category.html?category=stage">הופעות ומוזיקה</a>
+              <a href="./?category=theatre">תיאטרון והצגות</a>
+              <a href="./?category=standup">סטנדאפ ובידור</a>
+              <a href="category.html?category=kids">ילדים ומשפחה</a>
+              <a href="cinema.html">קולנוע וסרטים</a>
+              <a href="category.html?category=lecture">הרצאות</a>
+              <a href="./?category=conference">כנסים ופאנלים</a>
+              <a href="category.html?category=sport">אירועי ספורט</a>
+              <a href="category.html?category=exhibition">תערוכות ואמנות</a>
+
+              <a href="category.html?category=community">קהילה ופנאי</a>
+              <a href="category.html?category=tour">טיולים וסיורים</a>
+              <a href="category.html?category=seniors">הגיל השלישי וגמלאים</a>
+              <a href="./?category=food">אוכל וקולינריה</a>
+            </div>
+            <div class="isnetSiteMenu__heading">מקומות קבועים בעיר</div>
+            <div class="isnetSiteMenu__links">
+
+
+
+
+
+
+            </div>
+          </div>
+        </details>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="placesHero" class="placesHero">
+      <div id="heroBackdrop" class="placesHero__backdrop"></div>
+      <div class="placesHero__shade"></div>
+      <div class="shell placesHero__content">
+        <span id="placesEyebrow" class="eyebrow"></span>
+        <h1 id="placesTitle"></h1>
+        <p id="placesIntro" class="placesIntro"></p>
+        <div id="placesStats" class="placesStats"></div>
+      </div>
+      <div id="heroCredit" class="heroCredit"></div>
+    </section>
+
+    <div class="shell">
+      <section id="placesToolbar" class="placesToolbar" hidden>
+        <div>
+          <span class="sectionKicker">בחרו לפי מצב הרוח</span>
+          <h2 id="placesFilterTitle">מה מתאים לכם?</h2>
+        </div>
+        <div id="placeFilters" class="placeFilters"></div>
+      </section>
+
+      <section id="placesPanel" class="placesPanel">
+        <div id="placesGrid" class="placesGrid">
+          <div class="loadingState"><span></span><b>טוענים את המקומות הכי יפים ביבנה...</b></div>
+        </div>
+      </section>
+
+      <section id="beachInfo" class="beachInfo" hidden>
+        <div id="seasonCard" class="infoPanel infoPanel--season"></div>
+        <div id="environmentCard" class="infoPanel infoPanel--environment"></div>
+        <div id="dailyStatusCard" class="infoPanel infoPanel--status"></div>
+        <div class="rulesPanel">
+          <div class="rulesPanel__head">
+            <span class="sectionKicker">כדאי לדעת לפני שמגיעים</span>
+            <h2>כללי ההתנהגות בחופי יבנה</h2>
+          </div>
+          <div id="beachRules" class="beachRules"></div>
+        </div>
+      </section>
+
+      <section id="safetyCard" class="safetyCard" hidden>
+        <div class="safetyIcon">!</div>
+        <div class="safetyCopy">
+          <span class="sectionKicker">מידע חשוב</span>
+          <h2 id="safetyTitle"></h2>
+          <p id="safetyText"></p>
+          <div class="safetyLinks">
+            <a id="officialStatusLink" target="_blank" rel="noopener">לעדכון הרשמי על החופים ←</a>
+            <a id="tourismSourceLink" target="_blank" rel="noopener">מקור: תיירות יבנה</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="comingSoon" class="comingSoon" hidden>
+        <span>מה עושים ביבנה?</span>
+        <h2 id="comingSoonTitle"></h2>
+        <p>אנחנו בונים גם את המדור הזה ברמה מלאה. בקרוב יופיעו כאן המקומות הטובים ביותר בעיר, עם תמונות, פרטים והמלצות.</p>
+        <a href="./">← חזרה למה עושים ביבנה?</a>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <div><strong>מה עושים ביבנה?</strong><span>מבית יבנה נט</span></div>
+      <div class="footerLinks">
+        <a href="./">חזרה לעמוד הראשי</a>
+        <a href="https://www.yavnenet.co.il/" target="_blank" rel="noopener">יבנה נט</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="places.js?v=f65c627ba2a9" defer></script>
+<script src="shared-brand-header.js?v=20261019-all-share2" defer></script>
+<script defer src="site-share.js?v=20261019-all-pages2"></script></body>
+</html>
