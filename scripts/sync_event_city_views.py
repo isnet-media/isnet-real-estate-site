@@ -137,6 +137,9 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
             saturday_card = saturday.group(0).replace(' saturdayHomepageFeature', '')
             content = content[:saturday.start()] + content[saturday.end():]
         content = content.replace('</nav><nav class="isnetNavDiscovery__lifestyle"', saturday_card + classes + '</nav><nav class="isnetNavDiscovery__lifestyle"', 1)
+        culinary = '<a class="isnetNavFeature culinaryHomepageFeature" href="restaurants.html"><span class="isnetNavFeature__icon" aria-hidden="true">♧</span><span class="isnetNavFeature__copy"><strong>ראשון על השולחן</strong><small>מסעדות, ברי יין ויקבים בסביבה</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>'
+        content = content.replace('<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה">', '<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה">' + culinary, 1)
+
     # These are authored interface strings. Source data is NOT changed.
     content = content.replace("https://ashdodnet.com/", city["website"])
     content = content.replace("https://ashdodnet.com", city["website"].rstrip("/"))
