@@ -43,7 +43,7 @@ assert sum('יכין' in p['name'] for p in family['products'])>=3
 print('Verified both baskets: exact source prices, kg metadata, complete-only ranking, ties, mean and percentage gap')
 
 # A family basket must compare every connected branch, with equal quantities.
-assert family['complete_branch_count']==len(family['branches'])==14
+assert family['complete_branch_count']==len(family['branches'])==len(json.loads((D/'data/catalog.json').read_text())['branches'])
 assert 60000<=family['average_cents']<=70000
 for b in family['branches']:
  assert b['equivalent_count']==sum(l['match_type']=='equivalent' for l in b['lines'])
@@ -56,4 +56,4 @@ for b in family['branches']:
    if product['unit_quantity'] in ('גרם','גרמים'):
     assert Decimal(product['quantity'])==l['package_grams']
 assert any(l['match_type']=='equivalent' for b in family['branches'] for l in b['lines'])
-print('Verified 14/14 family coverage, target average, equal equivalent weights and whole-package arithmetic')
+print('Verified all connected branches family coverage, target average, equal equivalent weights and whole-package arithmetic')
