@@ -9,6 +9,8 @@ for name in ['index.html','catalog.html','course.html','app.js','course.js','sty
  s=s.replace('yavnenet.svg','rishonet.svg').replace('what-to-do-yavne.svg','what-to-do-rishon.svg')
  s=s.replace('ביבנה','בראשון לציון').replace('יבנה נט','ראשון נט').replace('יבנה','ראשון לציון')
  s=s.replace('הקבוצות והמסלולים','החוגים והמסלולים').replace('קבוצות שמתאימות לכם','חוגים שמתאימים לכם').replace('קבוצות ומסלולים','חוגים ומסלולים')
+ s=s.replace('עושים את החיים מגוונים יותר במקום','חוגים, קורסים והעשרה לכל הגילאים בראשון לציון')
+ s=s.replace('rishonet.svg?v=2','rishonet.svg?v=light1')
  s=s.replace('מידע ממפעילי החוגים בראשון לציון','מידע מחוברות החוגים העירוניות').replace('המידע נאסף מעמודי המפעילים בראשון לציון.','המידע נאסף מחוברות החוגים העירוניות לשנת 2026–2027.')
  # Keep group labels attached to their schedule rows.
  if name=='course.js':s=s.replace("row.day?'יום '+row.day:'מועד'","(row.day?'יום '+row.day:'מועד')+(row.label?' · '+row.label:'')")
@@ -18,6 +20,7 @@ for name in ['index.html','catalog.html','course.html','app.js','course.js','sty
   s=s.replace("}else if(r.day||r.time)",";if(r.schedule.length>2)b.append(node('div','info','ועוד '+(r.schedule.length-2)+' מועדים בכרטיס החוג'));}else if(r.day||r.time)")
  (D/name).write_text(s)
 for src,dest in [('rishonet-dark.svg','rishonet.svg'),('what-to-do-rishon-dark.svg','what-to-do-rishon.svg')]:shutil.copy(ROOT/'events-preview/rishon-lezion/assets/branding'/src,D/'assets'/dest)
+logo=D/'assets/rishonet.svg';logo.write_text(logo.read_text().replace('#fffaf2','#103d72'))
 for old in ['yavnenet.svg','what-to-do-yavne.svg']:(D/'assets'/old).unlink(missing_ok=True)
 # The photo bank remains shared; its provenance is retained alongside assignments.
 bank=json.loads((T/'data/image-bank.json').read_text());data=json.loads((D/'data/classes.json').read_text());used={}
