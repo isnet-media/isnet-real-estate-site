@@ -17,6 +17,8 @@ on:
       - "SUPER.ASHDOD/**"
       - "scripts/build_super_city_basket.py"
       - "scripts/test_super_city_basket.py"
+      - "scripts/build_super_smart_shopping.py"
+      - "scripts/test_super_smart_shopping.cjs"
       - "scripts/super-ashdod/city-basket-products.json"
       - "scripts/super-ashdod/city-family-basket.json"
       - "scripts/super_ashdod_shell.py"
@@ -146,6 +148,8 @@ jobs:
         run: |
           python scripts/build_super_city_basket.py
           python scripts/test_super_city_basket.py
+          python scripts/build_super_smart_shopping.py
+          node scripts/test_super_smart_shopping.cjs
           node --check SUPER.ASHDOD/assets/city-basket.js
 
       - name: Apply shared supermarket header to all current and future pages
