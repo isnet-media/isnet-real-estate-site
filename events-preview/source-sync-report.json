@@ -1,20 +1,20 @@
 {
-  "run_at": "2026-10-19T10:43:33Z",
+  "run_at": "2026-10-21T10:05:53Z",
   "version": 1,
   "dry_run": false,
   "cities": {
     "ashdod": {
       "city": "אשדוד",
-      "total_before": 635,
+      "total_before": 688,
       "sources": {
         "tickchak_ashdod": {
           "status": "ok",
           "url": "https://live.tickchak.co.il/ashdod",
           "discovered": 31,
           "valid": 27,
-          "new": 5,
+          "new": 6,
           "updated": 0,
-          "images_collected": 27
+          "images_collected": 26
         },
         "habama_ashdod": {
           "status": "no_parseable_events",
@@ -26,35 +26,35 @@
           "images_collected": 0
         }
       },
-      "new": 5,
+      "new": 6,
       "updated": 0,
       "removed_invalid": 0,
-      "removed_duplicates": 12,
-      "removed_classes": 0,
+      "removed_duplicates": 10,
+      "removed_classes": 2,
       "errors": [
         "habama_ashdod:no_parseable_events"
       ],
       "repaired_event_ids": 0,
-      "total_after": 628
+      "total_after": 682
     },
     "rishon-lezion": {
       "city": "ראשון לציון",
-      "total_before": 705,
+      "total_before": 789,
       "sources": {
         "htrl": {
           "status": "ok",
           "url": "https://htrl.co.il/לוח-שנה/",
-          "discovered": 146,
-          "valid": 118,
-          "new": 1,
+          "discovered": 147,
+          "valid": 119,
+          "new": 4,
           "updated": 0,
           "images_collected": 0
         },
         "htrl_adults": {
           "status": "ok",
           "url": "https://htrl.co.il/third-calendar/",
-          "discovered": 108,
-          "valid": 73,
+          "discovered": 102,
+          "valid": 68,
           "new": 0,
           "updated": 0,
           "images_collected": 0
@@ -62,21 +62,20 @@
         "yama": {
           "status": "ok",
           "url": "https://yama.smarticket.co.il/",
-          "discovered": 12,
-          "valid": 12,
-          "new": 2,
+          "discovered": 13,
+          "valid": 13,
+          "new": 5,
           "updated": 0,
-          "images_collected": 12
+          "images_collected": 13
         },
         "kotar_rishon": {
-          "status": "failed",
+          "status": "ok",
           "url": "https://www.kotar-rishon-lezion.org.il/events-category/eventsactivities/",
-          "discovered": 0,
-          "valid": 0,
-          "new": 0,
+          "discovered": 80,
+          "valid": 40,
+          "new": 10,
           "updated": 0,
-          "images_collected": 0,
-          "error": "ReadTimeout"
+          "images_collected": 0
         },
         "RIZONE+": {
           "status": "no_parseable_events",
@@ -98,18 +97,17 @@
           "error": "ReadTimeout"
         }
       },
-      "new": 3,
+      "new": 19,
       "updated": 0,
       "removed_invalid": 0,
-      "removed_duplicates": 11,
-      "removed_classes": 2,
+      "removed_duplicates": 8,
+      "removed_classes": 11,
       "errors": [
-        "kotar_rishon:ReadTimeout",
         "RIZONE+:no_parseable_events",
         "Eventim:ReadTimeout"
       ],
       "repaired_event_ids": 0,
-      "total_after": 695
+      "total_after": 789
     }
   },
   "note": "Missing listings never trigger automatic cancellations; source failures preserve data."
