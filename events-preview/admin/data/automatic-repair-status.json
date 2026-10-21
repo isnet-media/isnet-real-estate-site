@@ -1,16 +1,63 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-21T09:30:57.598421+00:00",
+  "checked_at": "2026-10-21T09:41:17.009296+00:00",
   "mode": "apply",
   "state": "attention",
   "scope": "Ashdod source feeds; CMS overlays remain authoritative; no claim of live-page verification",
   "input_sha256": {
-    "events-preview/ashdod/data/events.json": "08aa1072c6e978705b6f8ed58026928e54d0d717e3767fe77816349e8bd6dc46",
-    "events-preview/admin/data/taxonomy.json": "95bfbeab8c4ae566baac77c96b7d6e21d61e3e93c1ed376728ad5ed7ffe3991c",
+    "events-preview/ashdod/data/events.json": "232045915ba275ea17ec4c3b024ef5f3c44928af88a5796d643206fb869905e8",
+    "events-preview/admin/data/taxonomy.json": "cd094168d20edb06bc5fa1d493636864c7c66afa851c5936b5c456ee0c6ab196",
     "events-preview/admin/data/subcategory-definitions.json": "6c2273cba22422c976f2834c424b8229c222037ca7090f86faffafc6c4f7223b",
     "events-preview/shared/standup-videos.json": "d1e6b4414492ed406bec59c7e4066f4ce9fd6c13f30ec2a4e9d036a3a6de41d7"
   },
-  "repairs": [],
+  "repairs": [
+    {
+      "event_id": "mevalim_as_123115",
+      "reason": "verified_exact_artist_catalog",
+      "before": {
+        "youtube_id": null,
+        "youtube_title": null,
+        "youtube_note": null,
+        "video_verified": null,
+        "clip_type": null
+      },
+      "after": {
+        "youtube_id": "zdSz94Ub8n8",
+        "youtube_title": "פאטמה הסטנדאפיסטית – קטע מההופעה",
+        "youtube_note": "קטע סטנדאפ מייצג מערוץ האמנית, לא טריילר של ההופעה המסוימת.",
+        "video_verified": true,
+        "clip_type": "representative"
+      }
+    },
+    {
+      "event_id": "mevalim_as_131131",
+      "reason": "verified_subcategory_rule",
+      "before": {
+        "subcategory": "theatre",
+        "subcategory_review_status": null,
+        "subcategory_review_confidence": null
+      },
+      "after": {
+        "subcategory": "comedy",
+        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
+        "subcategory_review_confidence": 0.97
+      }
+    },
+    {
+      "event_id": "mevalim_as_131123",
+      "reason": "verified_subcategory_rule",
+      "before": {
+        "subcategory": "theatre",
+        "subcategory_review_status": null,
+        "subcategory_review_confidence": null
+      },
+      "after": {
+        "subcategory": "comedy",
+        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
+        "subcategory_review_confidence": 0.97
+      }
+    }
+  ],
   "unresolved": [
     {
       "id": "cd5f7d917527b38a2361",
@@ -251,20 +298,6 @@
       "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
-      "id": "8c2424121e8fc2e14d13",
-      "type": "subcategory",
-      "event_id": "mevalim_as_131968",
-      "title": "סינמה נוסטלגיה - שודדי הקאריביים 2 - תיבה של איש מת",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "15d396cccf8a831d4735",
-      "type": "standup_video",
-      "event_id": "mevalim_as_131176",
-      "title": "שלומי קוריאט במופע סטנדאפ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
       "id": "d3e69918dc430d7b72f0",
       "type": "subcategory",
       "event_id": "tickchak_as_7d6caa8a39874cb615",
@@ -291,13 +324,6 @@
       "event_id": "sport_20261024_maccabi_ashdod_m_volleyball",
       "title": "מכבי אשדוד - הפועל חוסאם נצרת",
       "reason": "No unique verified same-production source image; research required"
-    },
-    {
-      "id": "4989f6da38ea063616a3",
-      "type": "standup_video",
-      "event_id": "mevalim_as_131635",
-      "title": "גברת רביע - טיפול זוגי 5:55",
-      "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
       "id": "fd60a9b2dc5f1de850f4",
@@ -363,13 +389,6 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "c8db52c5ccb7f9850512",
-      "type": "standup_video",
-      "event_id": "mevalim_as_129633",
-      "title": "תמיר בוסקילה במופע סטנדאפ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
       "id": "395a78a69c2de97d4b75",
       "type": "subcategory",
       "event_id": "museum_course_17621_20261106",
@@ -398,24 +417,10 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "538d0b57ab9f6c91c92d",
-      "type": "standup_video",
-      "event_id": "mevalim_as_129756",
-      "title": "סתיו פרחי במופע סטנדאפ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
       "id": "bf25216b2488b1e894a0",
       "type": "subcategory",
       "event_id": "local_f6a1212758c9c50ed21b36",
       "title": "מועדון קריאה שכולו אהבה - סדרת מפגשים בהנחיית הסופרת שרית חיים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "18c372175d9b294d7983",
-      "type": "subcategory",
-      "event_id": "mevalim_as_131422",
-      "title": "החולה ההודי - תאטרון הקאמרי",
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
@@ -433,13 +438,6 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "24abf6a7532c3a37e071",
-      "type": "subcategory",
-      "event_id": "mevalim_as_130962",
-      "title": "BLACK & WHITE. LIVE CINEMA",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
       "id": "ba2e924e562c79111a43",
       "type": "subcategory",
       "event_id": "makore_as_1c0d3095282b40e5d1",
@@ -451,13 +449,6 @@
       "type": "subcategory",
       "event_id": "museum_course_17621_20261204",
       "title": "קורס קרמיקה אבניים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "8bb100e04c728c5018dc",
-      "type": "subcategory",
-      "event_id": "mevalim_as_132062",
-      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
@@ -503,45 +494,10 @@
       "reason": "No unique verified same-production source image; research required"
     },
     {
-      "id": "bf799ab10ee70e83f24d",
-      "type": "subcategory",
-      "event_id": "mevalim_as_131424",
-      "title": "אור לגויים - בית ליסין",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "ad1bc896aa340c06d5bf",
-      "type": "standup_video",
-      "event_id": "mevalim_as_130398",
-      "title": "יוסיאל נאמן במופע סטנדאפ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "1618e174c5ed7cc0dee8",
-      "type": "standup_video",
-      "event_id": "mevalim_as_127202",
-      "title": "דניאל סטיופין",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
       "id": "3fcc755ecedae3feaf15",
       "type": "subcategory",
       "event_id": "local_9f889dc9e3d4d2974be925",
       "title": "מועדון קריאה שכולו אהבה - סדרת מפגשים בהנחיית הסופרת שרית חיים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "13a4a08ec08b5a03bf9a",
-      "type": "standup_video",
-      "event_id": "mevalim_as_128057",
-      "title": "שלומי קוריאט במופע סטנדאפ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "58e637302ca8698c3a25",
-      "type": "subcategory",
-      "event_id": "mevalim_as_131056",
-      "title": "טריפונס",
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
@@ -930,132 +886,6 @@
       "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
-      "id": "514fcf489522b1b9d294",
-      "type": "subcategory",
-      "event_id": "board_3238d5e5846b4afbb8",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "9d12db56a659f3f12b5c",
-      "type": "subcategory",
-      "event_id": "board_5456c4cd0ef25129f9",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "872e5504ccdd1b3b026d",
-      "type": "subcategory",
-      "event_id": "board_0996fe3ef666fe9175",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "b08f2db6f8b9e902a6d6",
-      "type": "subcategory",
-      "event_id": "board_ea61a66e649eb982ed",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "d923f8d18e9ba7c6c36f",
-      "type": "subcategory",
-      "event_id": "board_c19af35b234bf50175",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "59dea240cdedbf6acf5e",
-      "type": "subcategory",
-      "event_id": "board_014923caa6d0522ec5",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "3f5a8ded393641343a3a",
-      "type": "subcategory",
-      "event_id": "board_a6cced9e59272a9c6d",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "a79e272182e6e953803c",
-      "type": "subcategory",
-      "event_id": "board_2e693d3a9ea31b2253",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "e7bdb25250f360b55b1e",
-      "type": "subcategory",
-      "event_id": "board_1c84de77e234ced10b",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "fa8a44968bb2c8fcda3f",
-      "type": "subcategory",
-      "event_id": "board_3c38db4ece26f3315f",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "cb609525b3af38c761a2",
-      "type": "subcategory",
-      "event_id": "board_10c14344070e65e011",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "252a7534d595ed79f252",
-      "type": "subcategory",
-      "event_id": "board_60922477d972b068b4",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "c624fb343abfb4aa173c",
-      "type": "subcategory",
-      "event_id": "board_8029dc4cb03db883a4",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "0b3d7373514c4edac062",
-      "type": "subcategory",
-      "event_id": "board_41e5ef7481c18fcd26",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "a41f6be0df61b2134cf5",
-      "type": "subcategory",
-      "event_id": "board_c97a6018a2dcbd8e13",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "59c9464efaecc072b18c",
-      "type": "subcategory",
-      "event_id": "board_1e0fb0baad2c746995",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "78b18de13afa3e01b3fe",
-      "type": "subcategory",
-      "event_id": "board_6e8f5cfff6f476931e",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "15dfa09896250f993a19",
-      "type": "subcategory",
-      "event_id": "board_2b67e61e7f7e4071b7",
-      "title": "מבלים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
       "id": "5ff951c8be7ee2d34bc4",
       "type": "standup_video",
       "event_id": "friends_as_cab289dedf10fa4c60",
@@ -1207,13 +1037,6 @@
       "type": "standup_video",
       "event_id": "tickchak_as_382652ce97c2903279",
       "title": "מוטי אהרונוביץ במופע סטנדאפ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "7d7ef385a08f959cc9e0",
-      "type": "standup_video",
-      "event_id": "tickchak_as_566cc7d2dd9d7a6edd",
-      "title": "מופע סטנד אפ - שלומי קוריאט",
       "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
@@ -2026,13 +1849,6 @@
       "type": "image",
       "event_id": "makore_as_058d094d51a3ce7d32",
       "title": "כניסה למוזאון לתרבות הפלשתים- ביקור בתערוכת הקבע עולמם של הפלשתים ותערוכת קו התפר- אנתרופולוגיית אופנה",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
-      "id": "ac55064877fab01533bf",
-      "type": "image",
-      "event_id": "makore_as_35b0f5301f53db8e77",
-      "title": "עופרה",
       "reason": "No unique verified same-production source image; research required"
     },
     {
@@ -3730,20 +3546,6 @@
       "reason": "No unique verified same-production source image; research required"
     },
     {
-      "id": "0d26f9ef7031c01f4123",
-      "type": "subcategory",
-      "event_id": "local_dbbbc827210b3ad558ef46",
-      "title": "הקסם שבצבע - בכיכובה של סתיו בכל הצבעים",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "0b403198d134a938dcab",
-      "type": "image",
-      "event_id": "local_dbbbc827210b3ad558ef46",
-      "title": "הקסם שבצבע - בכיכובה של סתיו בכל הצבעים",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
       "id": "689cbd3576489c32550b",
       "type": "image",
       "event_id": "local_bc8748f857cf741df600d5",
@@ -3989,6 +3791,230 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
+      "id": "8c2424121e8fc2e14d13",
+      "type": "subcategory",
+      "event_id": "mevalim_as_131968",
+      "title": "סינמה נוסטלגיה - שודדי הקאריביים 2 - תיבה של איש מת",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "15d396cccf8a831d4735",
+      "type": "standup_video",
+      "event_id": "mevalim_as_131176",
+      "title": "שלומי קוריאט במופע סטנדאפ",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "4989f6da38ea063616a3",
+      "type": "standup_video",
+      "event_id": "mevalim_as_131635",
+      "title": "גברת רביע - טיפול זוגי 5:55",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "c8db52c5ccb7f9850512",
+      "type": "standup_video",
+      "event_id": "mevalim_as_129633",
+      "title": "תמיר בוסקילה במופע סטנדאפ",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "538d0b57ab9f6c91c92d",
+      "type": "standup_video",
+      "event_id": "mevalim_as_129756",
+      "title": "סתיו פרחי במופע סטנדאפ",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "18c372175d9b294d7983",
+      "type": "subcategory",
+      "event_id": "mevalim_as_131422",
+      "title": "החולה ההודי - תאטרון הקאמרי",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "24abf6a7532c3a37e071",
+      "type": "subcategory",
+      "event_id": "mevalim_as_130962",
+      "title": "BLACK & WHITE. LIVE CINEMA",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "b93b0bb0a80f7c84f821",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132121",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "5abd1fd613feb83f2ca2",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132128",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "8bb100e04c728c5018dc",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132062",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "28c0433eb5ce0cf48b1a",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132122",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "34fd84ea04320d965ad4",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132129",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "8797aae801f5cec57100",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132116",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "5e296f4b679a25841f75",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132123",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "cec46d0dc11878f3f097",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132130",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "84819344459b5e5a078b",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132117",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "568c83e8fda28a934638",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132124",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "311d88e471289331d27a",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132131",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "f335e6ea20f3fc593fb7",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132118",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "c252eea1e124c35a70a9",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132125",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "3a71650dcd7b2c2c73bd",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132132",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "2bf73d3bfe653fd96708",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132119",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "a55e5a4075cbcb20e4e5",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132126",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "018fe7f1ce2f95151431",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132133",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "5ae14386f555d2649114",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132120",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "66487d6608d02103b6e3",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132127",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "70d948c39f42da3cfd62",
+      "type": "subcategory",
+      "event_id": "mevalim_as_132134",
+      "title": "ICE PLANET FEST חנוכה על הקרח 2026 המופע שממשיך גם אחרי שהמופע נגמר!",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "bf799ab10ee70e83f24d",
+      "type": "subcategory",
+      "event_id": "mevalim_as_131424",
+      "title": "אור לגויים - בית ליסין",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "ad1bc896aa340c06d5bf",
+      "type": "standup_video",
+      "event_id": "mevalim_as_130398",
+      "title": "יוסיאל נאמן במופע סטנדאפ",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "1618e174c5ed7cc0dee8",
+      "type": "standup_video",
+      "event_id": "mevalim_as_127202",
+      "title": "דניאל סטיופין",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "13a4a08ec08b5a03bf9a",
+      "type": "standup_video",
+      "event_id": "mevalim_as_128057",
+      "title": "שלומי קוריאט במופע סטנדאפ",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "58e637302ca8698c3a25",
+      "type": "subcategory",
+      "event_id": "mevalim_as_131056",
+      "title": "טריפונס",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
       "id": "source-ironit_library",
       "type": "source_partial",
       "title": "ironit_library",
@@ -4020,8 +4046,8 @@
     }
   ],
   "counts": {
-    "repairs": 0,
-    "unresolved": 573
+    "repairs": 3,
+    "unresolved": 570
   },
   "data_readback_verified": true
 }
