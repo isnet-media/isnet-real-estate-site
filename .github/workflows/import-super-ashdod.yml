@@ -1,0 +1,35 @@
+name: Import reviewed Ashdod supermarket site
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/super-ashdod/manifest.json
+      - scripts/import_super_ashdod.py
+      - .github/workflows/import-super-ashdod.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: import-super-ashdod
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Download and verify reviewed public assets
+        run: |
+          python -m pip install requests
+          python scripts/import_super_ashdod.py
+      - name: Commit independent website snapshot
+        run: |
+          git config user.name "ISNET site publisher"
+          git config user.email "site-publisher@users.noreply.github.com"
+          git add SUPER.ASHDOD
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Publish reviewed Ashdod supermarket site at SUPER.ASHDOD"
+          git pull --rebase origin main
+          git push origin HEAD:main
