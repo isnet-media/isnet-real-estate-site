@@ -27,7 +27,7 @@ def build():
  for key,values in shards.items():write(D/'offers'/f'{key}.json',values)
  catalog=json.loads((D/'catalog.json').read_text());catalog['branches']=[b for b in catalog['branches'] if b['id'] not in bids]+snapshot['branches']
  catalog['retrieved_at']=max(catalog.get('retrieved_at',''),snapshot['retrieved_at']);catalog['product_count']=len(products);catalog['offer_count']=sum(len(p['offers']) for p in products.values())
- catalog['rows']=[[pid,p['name'],p['quantity'],p['unit_quantity'],p['weighted'],p.get('manufacturer',''),min(o['price'] for o in p['offers']),len(p['offers']),[o['branch_id'] for o in p['offers']],p['calculation_unit']] for pid,p in products.items()]
+ catalog['rows']=[[pid,p['name'],p['quantity'],p['unit_quantity'],p['weighted'],p.get('manufacturer',''),min((o['price'] for o in p['offers'] if o.get('eligible_for_basket') and o['price']>0),default=None),len(p['offers']),[o['branch_id'] for o in p['offers']],p['calculation_unit']] for pid,p in products.items()]
  write(D/'catalog.json',catalog)
  prices=json.loads((D/'prices.json').read_text())
  for k in ('branches','retrieved_at','product_count','offer_count'):prices[k]=catalog[k]

@@ -150,7 +150,7 @@ def run(raw_dir):
  updated=sum(r['status']=='updated' for r in reports)
  if updated:catalog['retrieved_at']=now.isoformat()
  catalog.update(branches=branches,product_count=len(products),offer_count=sum(len(p['offers']) for p in products.values()))
- catalog['rows']=[[pid,p['name'],p['quantity'],p['unit_quantity'],p['weighted'],p.get('manufacturer',''),min(o['price'] for o in p['offers']),len(p['offers']),[o['branch_id'] for o in p['offers']],p['calculation_unit']] for pid,p in products.items()]
+ catalog['rows']=[[pid,p['name'],p['quantity'],p['unit_quantity'],p['weighted'],p.get('manufacturer',''),min((o['price'] for o in p['offers'] if o.get('eligible_for_basket') and o['price']>0),default=None),len(p['offers']),[o['branch_id'] for o in p['offers']],p['calculation_unit']] for pid,p in products.items()]
  write(D/'catalog.json',catalog)
  prices=json.loads((D/'prices.json').read_text())
  for k in ('branches','retrieved_at','product_count','offer_count'):prices[k]=catalog[k]
