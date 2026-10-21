@@ -13,7 +13,7 @@ def dec(s):
  try:return Decimal(str(s or '0'))
  except InvalidOperation:return Decimal(0)
 def cents(n):return int((dec(n)*100).quantize(Decimal('1')))
-def text(node,key):return (node.findtext(key) or '').strip()
+def text(node,key):return next(((c.text or '').strip() for c in node if c.tag.split('}')[-1].casefold()==key.casefold()),'')
 def kg(s):return bool(re.fullmatch(r'(?:1\s*)?(?:קילוגרמים?|קילוגרם|ק[״\"]?ג)',str(s).strip()))
 def when(s):
  try:

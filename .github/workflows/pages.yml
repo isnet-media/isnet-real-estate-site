@@ -43,6 +43,7 @@ on:
     - cron: "30 7,19 * * *"
   workflow_run:
     workflows:
+      - "Refresh Ashdod supermarket prices"
       - "Import reviewed Ashdod supermarket site"
       - "Normalize event provenance and audit purchase links"
       - "Repair Rishon public quality"
