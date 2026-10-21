@@ -15,10 +15,14 @@ for name in ['index.html','catalog.html','course.html','app.js','course.js','sty
  # Keep group labels attached to their schedule rows.
  if name=='course.js':s=s.replace("row.day?'יום '+row.day:'מועד'","(row.day?'יום '+row.day:'מועד')+(row.label?' · '+row.label:'')")
  if name=='app.js':
+  s=s.replace("const t=node('button','tile isnetNavFeature')", "const t=node('a','tile isnetNavFeature')")
+  s=s.replace("t.type='button';t.dataset.category=c;t.onclick=()=>{el('category').value=el('category').value===c?'':c;limit=24;render()}", "t.dataset.category=c;t.href='./catalog.html?'+new URLSearchParams({category:c})")
   s=s.replace("t.day+' · '+t.time", "t.day+' · '+t.time+(t.label?' · '+t.label:'')")
   s=s.replace("for(const t of r.schedule)","for(const t of r.schedule.slice(0,2))")
   s=s.replace("}else if(r.day||r.time)",";if(r.schedule.length>2)b.append(node('div','info','ועוד '+(r.schedule.length-2)+' מועדים בכרטיס החוג'));}else if(r.day||r.time)")
  (D/name).write_text(s)
+with (D/'style.css').open('a') as css:
+ css.write('\n.tiles>a.tile{text-decoration:none;color:inherit}\n')
 for src,dest in [('rishonet-dark.svg','rishonet.svg'),('what-to-do-rishon-dark.svg','what-to-do-rishon.svg')]:shutil.copy(ROOT/'events-preview/rishon-lezion/assets/branding'/src,D/'assets'/dest)
 logo=D/'assets/rishonet.svg';logo.write_text(logo.read_text().replace('#fffaf2','#103d72'))
 for old in ['yavnenet.svg','what-to-do-yavne.svg']:(D/'assets'/old).unlink(missing_ok=True)
