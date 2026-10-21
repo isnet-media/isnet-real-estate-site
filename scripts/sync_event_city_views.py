@@ -55,6 +55,7 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     # Shared, non-geographic illustration assets remain in the canonical bank.
     content = re.sub(r'(?<![A-Za-z0-9_./-])assets/(?!branding/)', '../ashdod/assets/', content)
     content = content.replace('assets/branding/what-to-do-ashdod', 'assets/branding/what-to-do-' + ('yavne' if city['slug']=='yavne' else 'rishon'))
+    content = content.replace('what-to-do-' + ('yavne' if city['slug']=='yavne' else 'rishon') + '-dark.svg?v=20261020-logo2', 'what-to-do-' + ('yavne' if city['slug']=='yavne' else 'rishon') + '-dark.svg?v=20261021-door1')
     content = content.replace('assets/branding/ashdodnet-dark.svg', 'assets/branding/' + ('yavnenet-dark.svg' if city['slug']=='yavne' else 'rishonet-dark.svg'))
     # Local partner/catalogs never silently load Ashdod content.
     if name == 'site-search-chat.js':
