@@ -48,6 +48,14 @@ def norm(v):
 
 def bad_reason(url):
     low=str(url or "").lower()
+    parsed=urlparse(low)
+    host=parsed.hostname or ""
+    path=parsed.path.rstrip("/")
+    if (host=="smarticket.co.il" or host.endswith(".smarticket.co.il")) and path in (
+        "/images/logo.png", "/images/logo.jpg", "/images/logo.webp", "/images/logo.svg",
+        "/logo.png", "/logo.jpg", "/logo.webp", "/logo.svg",
+    ):
+        return "technical_asset:smarticket_logo"
     for token in BAD:
         if token in low:
             return "technical_asset:"+token
