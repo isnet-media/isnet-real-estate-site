@@ -71,6 +71,12 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         content = content.replace("e.sport_branch].filter(Boolean)", "e.sport_branch,...(e.local_source_name==='htrl_adults'?['seniors']:[])].filter(Boolean)")
         content = content.replace("const s=norm(q).slice(0,500)", "const s=norm(q).replace(/(?:ב?ראשונ לציונ|ב?ראשלצ)/g,' ').trim().slice(0,500)")
     if name == 'saturday.js':
+        if city['slug'] == 'rishon-lezion':
+            # Saturday events belong to the edition being viewed. Do not label
+            # Ashdod records as local or route Rishon records through Ashdod.
+            content = content.replace("cityEvents('rishon-lezion')", "Promise.resolve({events:[]})")
+            content = content.replace("cityEvents('ashdod')", "cityEvents('rishon-lezion')")
+            content = content.replace("fetch('../rishon-lezion/data/cinema.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()})", "Promise.resolve({movies:[]})")
         content = content.replace('../rishon-lezion/data/', '../ashdod/data/')
         content = content.replace("_guideCity:'ראשון לציון',_guideBase:'../rishon-lezion/'", "_guideCity:'ASHDOD_NEARBY',_guideBase:'../ashdod/'")
         content = content.replace('אוכל בביג', 'אוכל במתחמי הבילוי')
