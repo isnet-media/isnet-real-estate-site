@@ -14,7 +14,8 @@ passwords, not private customer accounts. No credentials are stored in source.
 
 Full files are followed by all listed subsequent price deltas. XML branch identity,
 publication date, source hashes, plausible product counts and finite prices are
-checked before replacing any branch. A failed branch keeps its previous prices
+checked before replacing any branch. Connections use bounded timeouts and retries, plus one focused recovery pass after
+other branches finish. A failed branch keeps its previous prices
 AND their actual file date. A failed fetch never becomes a zero price. A zero price
 in a successfully parsed delta removes that observation. Publisher ItemStatus=0
 is NOT treated as a deletion flag. Local short item codes are namespaced by chain.

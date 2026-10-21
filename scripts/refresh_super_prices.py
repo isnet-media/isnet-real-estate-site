@@ -19,7 +19,7 @@ ACCOUNTS={'רמי לוי':'RamiLevi','יוחננוף':'yohananof','אושר עד
 def session():
  s=requests.Session();s.mount('https://',HTTPAdapter(max_retries=Retry(total=2,backoff_factor=1,status_forcelist=[429,500,502,503,504],allowed_methods=['GET','HEAD'])));return s
 def request(s,url,**kw):
- r=s.request(kw.pop('method','GET'),url,timeout=(12,40),**kw);r.raise_for_status();return r
+ r=s.request(kw.pop('method','GET'),url,timeout=(25,45),**kw);r.raise_for_status();return r
 
 def filetime(name):
  m=re.search(r'-(\d{8})-?(\d{4,6})\.',name,re.I)
@@ -128,6 +128,13 @@ def run(raw_dir):
  for f in (D/'offers').glob('*.json'):products.update(json.loads(f.read_text()))
  raw_dir.mkdir(parents=True,exist_ok=True)
  with ThreadPoolExecutor(max_workers=4) as pool:results=list(pool.map(lambda b:refresh_branch(b,raw_dir,now),catalog['branches']))
+ # One recovery pass only, after other sources had time to complete.
+ for index,(branch,products,report) in enumerate(results):
+  report['attempts']=1
+  if products is None:
+   retried=refresh_branch(branch,raw_dir,datetime.now(TZ))
+   retried[2]['attempts']=2;retried[2]['first_error']=report.get('error')
+   results[index]=retried
  reports=[];branches=[]
  for b,new,report in results:
   branches.append(b);reports.append(report)
