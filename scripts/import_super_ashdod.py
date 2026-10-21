@@ -11,9 +11,12 @@ def download(entry):
  rel=entry['path'];p=Path(rel)
  if p.is_absolute() or '..' in p.parts:raise ValueError('Unsafe asset path')
  u=manifest['origin']+'/'+rel
- res=requests.get(u,timeout=60)
- res.raise_for_status()
- b=res.content
+ if rel.endswith('.html'):
+  b=(ROOT/'scripts/super-ashdod/html'/rel).read_bytes()
+ else:
+  res=requests.get(u,timeout=60)
+  res.raise_for_status()
+  b=res.content
  if hashlib.sha256(b).hexdigest()!=entry['sha256']:raise ValueError('Snapshot hash mismatch: '+rel)
  if rel.endswith('.html'):
   b=b.replace(b'<head>',b'<head><meta name="robots" content="noindex,nofollow">',1)
