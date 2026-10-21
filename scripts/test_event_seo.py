@@ -17,3 +17,28 @@ with tempfile.TemporaryDirectory() as tmp:
  # Removing or hiding an event also removes its stale HTML on the next build.
  build_seo(root,[],slug,visible,'2026-10-19');assert not list((city/'discover').glob('event-*.html'))
 print('PASS: local titles, static HTML, escaped text, privacy, published-only coverage, empty subtype noindex, real price/availability, timezone, stale-page removal')
+
+# Homepage identity is present before JavaScript and stays city-specific.
+from html.parser import HTMLParser
+class HomeHead(HTMLParser):
+ def __init__(self):
+  super().__init__();self.canonicals=[];self.description=None
+ def handle_starttag(self,tag,attrs):
+  a=dict(attrs)
+  if tag=='link' and a.get('rel')=='canonical':self.canonicals.append(a.get('href'))
+  if tag=='meta' and a.get('name')=='description':self.description=a.get('content')
+repo=Path(__file__).resolve().parents[1]
+home=(repo/'events-preview/ashdod/index.html').read_text();head=HomeHead();head.feed(home)
+assert head.canonicals==['https://isnet.co.il/events-preview/ashdod/']
+assert 'מה עושים באשדוד' in head.description
+import re
+schema=json.loads(re.search(r'<script type="application/ld\+json" id="homeSiteSchema">(.*?)</script>',home,re.S)[1])
+website=next(x for x in schema['@graph'] if x['@type']=='WebSite')
+assert website['name']=='מה עושים באשדוד' and website['url']==head.canonicals[0]
+assert website['publisher']['@id']=='https://ashdodnet.com/#organization'
+from sync_event_city_views import localize,TARGETS
+for city in TARGETS.values():
+ localized=localize(home,'index.html',city,'.html')
+ assert 'homeSiteSchema' not in localized and 'aboutEventsTitle' not in localized
+ assert 'https://isnet.co.il/events-preview/ashdod/' not in localized
+print('PASS: static homepage canonical, Hebrew identity, publisher relationship and city isolation')

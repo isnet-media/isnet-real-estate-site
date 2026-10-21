@@ -34,6 +34,11 @@ JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this genera
 
 
 def localize(content: str, name: str, city: dict, suffix: str) -> str:
+    # Preserve other city editions' existing search metadata.
+    content = content.replace('מה עושים באשדוד? אירועים, הופעות ובילויים | אשדוד נט', 'מה עושים באשדוד? | מבית אשדוד נט')
+    content = content.replace('מה עושים באשדוד היום ובסוף השבוע? הופעות, הצגות, סטנדאפ, סרטים, פעילויות לילדים, בילויים לגמלאים ומסעדות — באתר האירועים של אשדוד נט.', 'כל האירועים, ההופעות, הסטנדאפ, הילדים, ההצגות, ההרצאות והתערוכות באשדוד במקום אחד.')
+    # The Ashdod homepage identity belongs only to this edition.
+    content = re.sub(r'<!-- ASHDOD_HOME_SEO_START -->[\s\S]*?<!-- ASHDOD_HOME_SEO_END -->', '', content)
     # Ashdod's analytics bootstrap is also embedded in the app/event bundles.
     # A city edition must not inherit another publisher's measurement stream.
     content = re.sub(r'// Ashdod GA4: public event metadata only;[^\n]*\n\(function \(\) \{[\s\S]*?\n\}\)\(\);\n?', '', content, count=1)
