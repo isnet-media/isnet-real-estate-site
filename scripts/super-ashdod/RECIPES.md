@@ -1,9 +1,14 @@
-# Family recipes
+# Ashdod family recipes
 
-Canonical public section: https://isnet.co.il/SUPER.ASHDOD/recipes/
+Canonical URL: https://isnet.co.il/SUPER.ASHDOD/recipes/
 
-Twelve original full-meal recipes serve 4–5. Data is in SUPER.ASHDOD/recipes/recipes.json. Costs are planning estimates for ingredient usage, including pantry ingredients, not live branch quotations or whole-package checkout totals. No nutrition quantities are claimed.
+18 illustrated full meals for4–5 people. Curated collections contain8,8,and6 suggestions below familymeal ceilings50,75,and100 ILS; some meals intentionally occur in more than one collection. All18 remain accessible via allmeals.
 
-Regenerate HTML with `python scripts/build_super_recipes.py`. Check using `python scripts/test_super_recipes.py` and `node --check SUPER.ASHDOD/recipes/recipes.js`. Images are distinct AI-generated illustrations, disclosed in the footer. Prompts are recorded in recipe-image-prompts.json.
+Family ingredient-use cost is primary. Secondary perperson average is the mean of total/4 and total/5. Wholepackage checkout cost is not represented. Prices use median regular branch prices for selected references from the2026-10-21 officialfeed snapshot. Limitedcoverage and exact sourcefiles are exposed in eachrecipe and price-reference.json. No stock claim or singleshop basket claim.
 
-The old one-time bootstrap importer is now manual-only and refuses to overwrite a site containing recipes. Edit this repository for the canonical external site. Do not run the old import to update prices: it would discard subsequent site edits.
+Data: SUPER.ASHDOD/recipes/recipes.json and price-reference.json.
+Build: python scripts/build_super_recipes.py
+Validate: python scripts/test_super_recipes.py
+Optional price refresh from a new verifiedsnapshot: python scripts/super-ashdod/build_recipe_prices.py /path/to/normalized-direct.json
+
+Recipe photos are AI illustrations. Generated HTML is tracked. The legacy importer cannot overwrite this section. Publish selected changes through the canonical GitHub Pages repository; preserve other teams' files.
