@@ -5,6 +5,7 @@ import hashlib,json,shutil,requests
 ROOT=Path(__file__).resolve().parents[1]
 manifest=json.loads((ROOT/'scripts/super-ashdod/manifest.json').read_text())
 stage=ROOT/'.super-ashdod-staging';target=ROOT/'SUPER.ASHDOD'
+if (target/'recipes').exists():raise RuntimeError('The independent site has evolved. Bootstrap import must not overwrite recipes or subsequent edits.')
 if stage.exists():shutil.rmtree(stage)
 stage.mkdir()
 def download(entry):

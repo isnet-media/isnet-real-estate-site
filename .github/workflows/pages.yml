@@ -78,6 +78,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Validate Ashdod family recipes
+        run: python scripts/test_super_recipes.py
+
       - name: Synchronize city layouts and validate JavaScript
         run: |
           python scripts/sync_event_city_views.py
