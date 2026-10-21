@@ -15,6 +15,10 @@ on:
       - "meusharim/**"
       - "sports/**"
       - "SUPER.ASHDOD/**"
+      - "scripts/build_super_city_basket.py"
+      - "scripts/test_super_city_basket.py"
+      - "scripts/super-ashdod/city-basket-products.json"
+      - "scripts/super-ashdod/city-family-basket.json"
       - "scripts/super_ashdod_shell.py"
       - "scripts/test_super_shell.py"
       - "scripts/build_super_recipes.py"
@@ -137,6 +141,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python scripts/build_event_source_history.py
+
+      - name: Rebuild and verify the fixed supermarket comparison baskets
+        run: |
+          python scripts/build_super_city_basket.py
+          python scripts/test_super_city_basket.py
+          node --check SUPER.ASHDOD/assets/city-basket.js
 
       - name: Apply shared supermarket header to all current and future pages
         run: |
