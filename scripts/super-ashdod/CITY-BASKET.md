@@ -12,3 +12,6 @@ Definitions: city-family-basket.json and city-basket-products.json in this direc
 Rebuild: python scripts/build_super_city_basket.py
 Verify: python scripts/test_super_city_basket.py
 The publishing workflow rebuilds from the latest ingested catalog before deployment.
+
+## Comparable items
+Family basket candidate priority is stable: reference product first, then explicitly approved equivalents. Bread alternatives retain 750 g whole-wheat packages and package counts. Frozen salmon alternatives retain frozen fillets/portions and 1.8 kg total; skin/cut/brand differences are disclosed. Weighted alternatives require explicit kg metadata on both product and offer with unchanged raw price. Each line exposes `match_type`, actual product ID/name, actual purchased quantity, pricing unit and any equivalence note; branches expose `equivalent_count`. No cross-branch price imputation or zero-filling. A missing offer is not a claim that the store does not sell the item. Invalid or ambiguous weight data remains excluded.

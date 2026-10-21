@@ -27,23 +27,23 @@ def build_variant(definition,catalog,variant):
   lines=[]
   for item in products:
    matches=[]
-   for pid in item.get('candidates',[item['id']]):
-    p=product(pid)
+   for candidate in ([{'id':pid,'pricing_unit':item['pricing_unit'],'quantity':item['quantity']} for pid in item.get('candidates',[item['id']])]+item.get('alternatives',[])):
+    pid=candidate['id'];p=product(pid)
     if not p:continue
     for o in p.get('offers',[]):
      if o['branch_id']!=branch['id'] or o.get('source_type')!='official_file' or o.get('kind')!='רגיל' or o.get('eligible_for_basket') is not True or o.get('price',0)<=0:continue
-     if item['pricing_unit']=='kg':
+     if candidate['pricing_unit']=='kg':
       # Both source product and offer must explicitly indicate kg. No guessing
       # from plausible prices and no blind conversion of malformed gram fields.
       if p.get('weighted')!='1' or not kg_unit(p.get('unit_quantity')) or not kg_unit(o.get('raw_unit')) or o.get('calculation_unit')!='kg' or o.get('raw_price') is None or cents(o['price'])!=cents(o['raw_price']):continue
      elif o.get('calculation_unit')!='package':continue
-     matches.append((pid,p,o))
+     matches.append((pid,p,o,candidate))
     if matches:break # Fixed candidate priority, never cheapest-per-product choice.
    assert len({cents(m[2]['price']) for m in matches})<=1,('Conflicting regular prices',branch['id'],item['id'])
-   selected=matches[0] if matches else None;pid,p,o=selected if selected else (None,None,None)
-   lines.append({'id':item['id'],'product_id':pid,'source_name':p['name'] if p else None,'quantity':item['quantity'],'pricing_unit':item['pricing_unit'],'price_cents':cents(o['price']) if o else None,'line_total_cents':cents(Decimal(str(o['price']))*Decimal(str(item['quantity']))) if o else None,'source_type':o.get('source_type') if o else None,'kind':o.get('kind') if o else None,'source_url':(o.get('source_url') or branch.get('price_file_url')) if o else None,'price_updated_at':o.get('updated_at') if o else None,'raw_unit':o.get('raw_unit') if o else None,'product_unit':p.get('unit_quantity') if p else None,'raw_price':o.get('raw_price') if o else None})
+   selected=matches[0] if matches else None;pid,p,o,chosen=selected if selected else (None,None,None,None)
+   lines.append({'id':item['id'],'product_id':pid,'source_name':p['name'] if p else None,'quantity':chosen['quantity'] if chosen else item['quantity'],'pricing_unit':chosen['pricing_unit'] if chosen else item['pricing_unit'],'match_type':('equivalent' if pid!=item['id'] else 'identical') if pid else None,'equivalence_note':item.get('equivalence_note','אותו סוג וזן ובאותה כמות; ספק, גודל, איכות וכשרות עשויים להשתנות') if pid!=item['id'] else None,'price_cents':cents(o['price']) if o else None,'line_total_cents':cents(Decimal(str(o['price']))*Decimal(str(chosen['quantity']))) if o else None,'source_type':o.get('source_type') if o else None,'kind':o.get('kind') if o else None,'source_url':(o.get('source_url') or branch.get('price_file_url')) if o else None,'price_updated_at':o.get('updated_at') if o else None,'raw_unit':o.get('raw_unit') if o else None,'product_unit':p.get('unit_quantity') if p else None,'raw_price':o.get('raw_price') if o else None})
   found=sum(x['line_total_cents'] is not None for x in lines);complete=found==len(products)
-  branches.append({**{k:branch.get(k) for k in ['id','chain','name','address','city','file_date','source_url','price_file_url','files_applied']},'lines':lines,'found':found,'complete':complete,'total_cents':sum(x['line_total_cents'] for x in lines) if complete else None})
+  branches.append({**{k:branch.get(k) for k in ['id','chain','name','address','city','file_date','source_url','price_file_url','files_applied']},'lines':lines,'equivalent_count':sum(x.get('match_type')=='equivalent' for x in lines),'found':found,'complete':complete,'total_cents':sum(x['line_total_cents'] for x in lines) if complete else None})
  branches.sort(key=lambda b:(not b['complete'],b['total_cents'] if b['complete'] else -b['found'],b['chain'],b['name']))
  complete=[b for b in branches if b['complete']];rankable=len(complete)>=2;minimum=complete[0]['total_cents'] if rankable else None;maximum=complete[-1]['total_cents'] if rankable else None
  status=json.loads((D/'data/source-status.json').read_text())

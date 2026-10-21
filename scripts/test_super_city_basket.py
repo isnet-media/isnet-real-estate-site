@@ -10,17 +10,20 @@ for key,data in bundle['variants'].items():
  for b in data['branches']:
   assert len(b['lines'])==len(data['products'])
   for item,line in zip(data['products'],b['lines']):
-   assert item['id']==line['id'] and line['quantity']==item['quantity']
+   assert item['id']==line['id'] 
    if line['price_cents'] is None:assert line['line_total_cents'] is None;continue
    assert line['kind']=='רגיל' and line['source_type']=='official_file' and line['source_url'].startswith('https://')
-   assert line['product_id'] in item.get('candidates',[item['id']])
+   assert line['product_id'] in item.get('candidates',[item['id']])+[a['id'] for a in item.get('alternatives',[])]
+   assert line['match_type']==('identical' if line['product_id']==item['id'] else 'equivalent')
+   expected=next((a for a in item.get('alternatives',[]) if a['id']==line['product_id']),item)
+   assert line['quantity']==expected['quantity'] and line['pricing_unit']==expected['pricing_unit']
    suffix=line['product_id'][-2:]
    if suffix not in shards:shards[suffix]=json.loads((D/'data/offers'/f'{suffix}.json').read_text())
    product=shards[suffix][line['product_id']]
    offers=[o for o in product['offers'] if o['branch_id']==b['id'] and o.get('kind')=='רגיל' and o.get('eligible_for_basket') and o.get('source_type')=='official_file']
    assert any(cents(o['price'])==line['price_cents'] for o in offers)
-   assert line['line_total_cents']==cents(Decimal(line['price_cents'])/100*Decimal(str(item['quantity'])))
-   if item['pricing_unit']=='kg':assert kg_unit(line['raw_unit']) and kg_unit(line['product_unit']) and cents(line['raw_price'])==line['price_cents']
+   assert line['line_total_cents']==cents(Decimal(line['price_cents'])/100*Decimal(str(line['quantity'])))
+   if line['pricing_unit']=='kg':assert kg_unit(line['raw_unit']) and kg_unit(line['product_unit']) and cents(line['raw_price'])==line['price_cents']
    else:assert product['weighted']=='0' and product['calculation_unit']=='package'
   found=sum(l['price_cents'] is not None for l in b['lines']);assert found==b['found'];assert b['complete']==(found==len(data['products']))
   if b['complete']:
