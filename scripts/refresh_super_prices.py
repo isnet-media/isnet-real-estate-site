@@ -129,9 +129,9 @@ def run(raw_dir):
  raw_dir.mkdir(parents=True,exist_ok=True)
  with ThreadPoolExecutor(max_workers=4) as pool:results=list(pool.map(lambda b:refresh_branch(b,raw_dir,now),catalog['branches']))
  # One recovery pass only, after other sources had time to complete.
- for index,(branch,products,report) in enumerate(results):
+ for index,(branch,branch_products,report) in enumerate(results):
   report['attempts']=1
-  if products is None:
+  if branch_products is None:
    retried=refresh_branch(branch,raw_dir,datetime.now(TZ))
    retried[2]['attempts']=2;retried[2]['first_error']=report.get('error')
    results[index]=retried
