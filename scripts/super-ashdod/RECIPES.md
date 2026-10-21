@@ -12,3 +12,7 @@ Validate: python scripts/test_super_recipes.py
 Optional price refresh from a new verifiedsnapshot: python scripts/super-ashdod/build_recipe_prices.py /path/to/normalized-direct.json
 
 Recipe photos are AI illustrations. Generated HTML is tracked. The legacy importer cannot overwrite this section. Publish selected changes through the canonical GitHub Pages repository; preserve other teams' files.
+
+## Shared brand and category shell
+
+Single source: SUPER.ASHDOD/assets/branding/super-shell.html. Recipe generation uses scripts/super_ashdod_shell.py directly. Every publication applies the same shell to all HTML pages below SUPER.ASHDOD, including newly added nested pages, then checks synchronization. Asset templates and local QA fixtures are excluded. Run `python scripts/super_ashdod_shell.py` after any generator; never copy a separate brand/category header into a new page.

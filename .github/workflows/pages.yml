@@ -15,6 +15,9 @@ on:
       - "meusharim/**"
       - "sports/**"
       - "SUPER.ASHDOD/**"
+      - "scripts/super_ashdod_shell.py"
+      - "scripts/test_super_shell.py"
+      - "scripts/build_super_recipes.py"
       - "scripts/sync_event_city_views.py"
       - "scripts/test-event-date-chips.cjs"
       - "scripts/test-institution-ui.cjs"
@@ -134,6 +137,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python scripts/build_event_source_history.py
+
+      - name: Apply shared supermarket header to all current and future pages
+        run: |
+          python scripts/super_ashdod_shell.py
+          python scripts/super_ashdod_shell.py --check
+          python scripts/test_super_shell.py
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
