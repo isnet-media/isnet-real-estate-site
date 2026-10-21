@@ -19,6 +19,7 @@ on:
       - "scripts/super-ashdod/shufersal-20261021.json.gz"
       - "scripts/build_super_city_basket.py"
       - "scripts/test_super_homepage.py"
+      - "scripts/test_super_live_loading.cjs"
       - "scripts/test_super_city_basket.py"
       - "scripts/build_super_smart_shopping.py"
       - "scripts/test_super_smart_shopping.cjs"
@@ -154,6 +155,7 @@ jobs:
       - name: Rebuild and verify the fixed supermarket comparison baskets
         run: |
           python scripts/test_super_homepage.py
+          node scripts/test_super_live_loading.cjs
           python scripts/import_super_shufersal.py
           python scripts/build_super_city_basket.py
           python scripts/test_super_city_basket.py
