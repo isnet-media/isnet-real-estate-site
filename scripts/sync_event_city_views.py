@@ -188,9 +188,9 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
             version=hashlib.sha256(helper.encode()).hexdigest()[:12]
             content=re.sub(r'(<script[^>]*src="../shared/public-cms.js[^>]*></script>)',lambda m:m[1]+'\n<script src="yavne-events.js?v='+version+'" defer></script>',content)
             # Every existing navigation menu has the same local classes destination.
-            content=content.replace('href="category.html?category=stage">הופעות ומוזיקה</a>', 'href="category.html?category=stage">הופעות ומוזיקה</a><a href="https://meusharim-yavne.ebs987449.chatgpt.site/">חוגים ביבנה</a>')
+            content=content.replace('href="category.html?category=stage">הופעות ומוזיקה</a>', 'href="category.html?category=stage">הופעות ומוזיקה</a><a href="https://isnet.co.il/meusharim/yavne/">חוגים ביבנה</a>')
         if name=='index.html':
-            classes='<a class="isnetNavFeature isnetNavFeature--gold" href="https://meusharim-yavne.ebs987449.chatgpt.site/"><span class="isnetNavFeature__icon" aria-hidden="true">▧</span><span class="isnetNavFeature__copy"><strong>חוגים ביבנה</strong><small>חוגים, קורסים ופעילויות העשרה</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>'
+            classes='<a class="isnetNavFeature isnetNavFeature--gold" href="https://isnet.co.il/meusharim/yavne/"><span class="isnetNavFeature__icon" aria-hidden="true">▧</span><span class="isnetNavFeature__copy"><strong>חוגים ביבנה</strong><small>חוגים, קורסים ופעילויות העשרה</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>'
             content=content.replace('</nav><nav class="isnetNavDiscovery__lifestyle"',classes+'</nav><nav class="isnetNavDiscovery__lifestyle"',1)
         content=re.sub(r'<button[^>]*data-(?:cinema|venue)="(?:cinema-city|cinematheque)"[^>]*>.*?</button>', '', content)
         content=re.sub(r'<a[^>]*href="https://(?:www\.)?(?:cinema-city\.co\.il|hotcinema\.co\.il)[^"]*"[^>]*>.*?</a>', '', content)
