@@ -131,7 +131,7 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     if city['slug'] == 'rishon-lezion' and name == 'index.html':
         content = content.replace('href="category.html?category=stage">הופעות ומוזיקה</a>', 'href="category.html?category=stage">הופעות ומוזיקה</a><a href="https://isnet.co.il/meusharim/rishon-lezion/">חוגים בראשון לציון</a>')
         classes = '<a class="isnetNavFeature isnetNavFeature--gold" href="https://isnet.co.il/meusharim/rishon-lezion/"><span class="isnetNavFeature__icon" aria-hidden="true">▧</span><span class="isnetNavFeature__copy"><strong>חוגים בראשון לציון</strong><small>חוגים, קורסים ופעילויות העשרה</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>'
-        saturday = re.search(r'<a class="isnetNavFeature[^"]*saturdayHomepageFeature"[^>]*>[\\s\\S]*?</a>', content)
+        saturday = re.search(r'<a class="isnetNavFeature[^"]*saturdayHomepageFeature"[^>]*>.*?</a>', content, re.S)
         saturday_card = ''
         if saturday:
             saturday_card = saturday.group(0).replace(' saturdayHomepageFeature', '')
