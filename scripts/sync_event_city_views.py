@@ -128,6 +128,10 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
             card=re.sub(r'(<img[^>]* alt=")[^"]*',lambda m:m[1]+alt,card)
             return re.sub(r'(<small class="cityDiscover__credit">)[\s\S]*?(</small>)',lambda m:m[1]+credit+m[2],card)
         content=re.sub(r'<a class="cityDiscover__card"[\s\S]*?</a>',local_discovery,content)
+    if city['slug'] == 'rishon-lezion' and name == 'index.html':
+        content = content.replace('href="category.html?category=stage">הופעות ומוזיקה</a>', 'href="category.html?category=stage">הופעות ומוזיקה</a><a href="https://isnet.co.il/meusharim/rishon-lezion/">חוגים בראשון לציון</a>')
+        classes = '<a class="isnetNavFeature isnetNavFeature--gold" href="https://isnet.co.il/meusharim/rishon-lezion/"><span class="isnetNavFeature__icon" aria-hidden="true">▧</span><span class="isnetNavFeature__copy"><strong>חוגים בראשון לציון</strong><small>חוגים, קורסים ופעילויות העשרה</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>'
+        content = content.replace('</nav><nav class="isnetNavDiscovery__lifestyle"', classes + '</nav><nav class="isnetNavDiscovery__lifestyle"', 1)
     # These are authored interface strings. Source data is NOT changed.
     content = content.replace("https://ashdodnet.com/", city["website"])
     content = content.replace("https://ashdodnet.com", city["website"].rstrip("/"))
