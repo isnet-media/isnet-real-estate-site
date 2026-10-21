@@ -2,6 +2,7 @@
 let data,lookup={},branchMap={},items={},query='',limit=36,branchFilter=null;
 const el=s=>document.querySelector(s),money=n=>'₪'+n.toLocaleString('he-IL',{minimumFractionDigits:2,maximumFractionDigits:2}),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),round=n=>Math.round(n*100)/100;
 try{items=JSON.parse(localStorage.getItem('isnetRealBasket')||'{}')}catch{}
+window.superProductChoices=()=>data?.products||[];
 const shardPromises={};
 async function ensureProducts(ids){const missing=[...new Set(ids.filter(id=>lookup[id]&&!lookup[id].offers).map(id=>id.slice(-2)))];try{await Promise.all(missing.map(k=>shardPromises[k]||(shardPromises[k]=fetch('data/offers/'+encodeURIComponent(k)+'.json').then(r=>{if(!r.ok)throw Error('Offer data unavailable');return r.json()}).then(j=>{for(let[id,p]of Object.entries(j))if(lookup[id])Object.assign(lookup[id],p)}))));}catch(e){modal('<h2>לא הצלחנו לטעון את המחירים</h2><p>הרשימה שלכם נשמרה. אפשר לנסות שוב בעוד רגע.</p>');throw e}}
 function safeURL(s){try{let u=new URL(s);return u.protocol==='https:'?esc(u.href):'#'}catch{return '#'}}
