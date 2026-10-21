@@ -131,7 +131,12 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     if city['slug'] == 'rishon-lezion' and name == 'index.html':
         content = content.replace('href="category.html?category=stage">הופעות ומוזיקה</a>', 'href="category.html?category=stage">הופעות ומוזיקה</a><a href="https://isnet.co.il/meusharim/rishon-lezion/">חוגים בראשון לציון</a>')
         classes = '<a class="isnetNavFeature isnetNavFeature--gold" href="https://isnet.co.il/meusharim/rishon-lezion/"><span class="isnetNavFeature__icon" aria-hidden="true">▧</span><span class="isnetNavFeature__copy"><strong>חוגים בראשון לציון</strong><small>חוגים, קורסים ופעילויות העשרה</small></span><span class="isnetNavFeature__arrow" aria-hidden="true">←</span></a>'
-        content = content.replace('</nav><nav class="isnetNavDiscovery__lifestyle"', classes + '</nav><nav class="isnetNavDiscovery__lifestyle"', 1)
+        saturday = re.search(r'<a class="isnetNavFeature[^"]*saturdayHomepageFeature"[^>]*>[\\s\\S]*?</a>', content)
+        saturday_card = ''
+        if saturday:
+            saturday_card = saturday.group(0).replace(' saturdayHomepageFeature', '')
+            content = content[:saturday.start()] + content[saturday.end():]
+        content = content.replace('</nav><nav class="isnetNavDiscovery__lifestyle"', saturday_card + classes + '</nav><nav class="isnetNavDiscovery__lifestyle"', 1)
     # These are authored interface strings. Source data is NOT changed.
     content = content.replace("https://ashdodnet.com/", city["website"])
     content = content.replace("https://ashdodnet.com", city["website"].rstrip("/"))
