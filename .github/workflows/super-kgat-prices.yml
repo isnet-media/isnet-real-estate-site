@@ -1,0 +1,47 @@
+name: Refresh Kiryat Gat supermarket prices
+on:
+  schedule:
+    - cron: '55 5 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/refresh_kgat_super_prices.py
+      - scripts/super-kgat/**
+      - .github/workflows/super-kgat-prices.yml
+permissions:
+  contents: write
+concurrency:
+  group: kgat-supermarket-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
+      - name: Collect reviewed physical Kiryat Gat branches
+        run: |
+          python scripts/refresh_kgat_super_prices.py --raw-dir "$RUNNER_TEMP/kgat-official"
+          python scripts/build_kgat_super.py
+          python scripts/test_kgat_super.py
+      - name: Preserve collection evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kgat-supermarket-${{ github.run_id }}
+          path: SUPER.KGAT/data/refresh-status.json
+          retention-days: 30
+      - name: Publish only validated Kiryat Gat data
+        run: |
+          git config user.name 'ISNET supermarket updater'
+          git config user.email 'actions@users.noreply.github.com'
+          git add SUPER.KGAT/data/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh verified Kiryat Gat supermarket prices'
+          git pull --rebase origin main
+          git push origin HEAD:main

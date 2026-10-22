@@ -16,6 +16,10 @@ on:
       - "sports/**"
       - "SUPER.ASHDOD/**"
       - "SUPER.YAVNE/**"
+      - "SUPER.KGAT/**"
+      - "scripts/*kgat_super*.py"
+      - "scripts/refresh_kgat_super_prices.py"
+      - "scripts/super-kgat/**"
       - "scripts/*yavne_super*.py"
       - "scripts/refresh_yavne_super_prices.py"
       - "scripts/super_city_runtime.py"
@@ -53,6 +57,7 @@ on:
     workflows:
       - "Refresh Ashdod supermarket prices"
       - "Refresh Yavne supermarket prices"
+      - "Refresh Kiryat Gat supermarket prices"
       - "Import reviewed Ashdod supermarket site"
       - "Normalize event provenance and audit purchase links"
       - "Repair Rishon public quality"
@@ -187,6 +192,12 @@ jobs:
           python scripts/build_yavne_super.py
           python scripts/test_yavne_super.py
           for script in SUPER.YAVNE/live.js SUPER.YAVNE/assets/*.js; do node --check "$script"; done
+
+      - name: Verify Kiryat Gat supermarket edition
+        run: |
+          python scripts/build_kgat_super.py
+          python scripts/test_kgat_super.py
+          for script in SUPER.KGAT/live.js SUPER.KGAT/assets/*.js; do node --check "$script"; done
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
