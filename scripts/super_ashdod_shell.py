@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 SITE=ROOT/'SUPER.ASHDOD'
 TEMPLATE=SITE/'assets/branding/super-shell.html'
 START='<!-- SUPER_SHELL_START -->';END='<!-- SUPER_SHELL_END -->'
-VERSION='3'
+VERSION='4'
 
 def render_shell(prefix,category=None,cart_count=False):
  text=TEMPLATE.read_text().strip().replace('{{ROOT}}',prefix).replace('{{CART_COUNT}}',' <span class="super-cart-count" id="count">0</span>' if cart_count else '')

@@ -1,5 +1,5 @@
 """Regression checks for new nested pages, idempotence and content preservation."""
-from super_ashdod_shell import SITE,decorate,pages,START
+from super_ashdod_shell import SITE,decorate,pages,START,VERSION
 from html.parser import HTMLParser
 from urllib.parse import urlsplit
 class Links(HTMLParser):
@@ -20,7 +20,7 @@ newpath=SITE/'future'/'nested'/'new-page.html'
 new='<!doctype html><html lang="he" dir="rtl"><head><title>New</title></head><body><article><header>Article title stays</header><p>New content</p></article></body></html>'
 result=decorate(new,newpath)
 assert result.count(START)==1 and 'Article title stays' in result and 'New content' in result
-assert '../../assets/branding/super-header.css?v=3' in result
+assert f'../../assets/branding/super-header.css?v={VERSION}' in result
 assert 'href="../../compare/"' in result
 assert decorate(result,newpath)==result
 implicit=decorate('<html><head><title>Implicit</title></head><main>Preserve future content</main></html>',newpath)
