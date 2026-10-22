@@ -18,6 +18,10 @@ on:
       - "SUPER.YAVNE/**"
       - "SUPER.KGAT/**"
       - "SUPER.RISHON/**"
+      - "SUPER.HOLON/**"
+      - "scripts/*holon_super*.py"
+      - "scripts/refresh_holon_super_prices.py"
+      - "scripts/super-holon/**"
       - "scripts/*rishon_super*.py"
       - "scripts/refresh_rishon_super_prices.py"
       - "scripts/super-rishon/**"
@@ -65,6 +69,7 @@ on:
       - "Refresh Yavne supermarket prices"
       - "Refresh Kiryat Gat supermarket prices"
       - "Refresh Rishon supermarket prices"
+      - "Refresh Holon supermarket prices"
       - "Import reviewed Ashdod supermarket site"
       - "Normalize event provenance and audit purchase links"
       - "Repair Rishon public quality"
@@ -211,6 +216,13 @@ jobs:
           python scripts/build_rishon_super.py
           python scripts/test_rishon_super.py
           for script in SUPER.RISHON/live.js SUPER.RISHON/assets/*.js; do node --check "$script"; done
+
+      - name: Verify Holon supermarket edition
+        run: |
+          python scripts/build_holon_super.py
+          python scripts/test_holon_super.py
+          node scripts/test_holon_deals.cjs
+          for script in SUPER.HOLON/live.js SUPER.HOLON/assets/*.js; do node --check "$script"; done
 
       - name: Apply and verify Yavne analytics on all generated pages
         run: |
