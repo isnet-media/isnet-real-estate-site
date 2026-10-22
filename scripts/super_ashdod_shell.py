@@ -42,6 +42,8 @@ def decorate(text,path):
  assets=f'<link rel="stylesheet" href="{prefix}assets/branding/super-header.css?v={VERSION}"><script defer src="{prefix}assets/branding/super-header.js?v={VERSION}"></script>'
  text=re.sub(r'<script\b[^>]*src="[^"]*assets/ashdod-analytics\.js[^"]*"[^>]*>\s*</script>','',text)
  assets+=f'<script defer src="{prefix}assets/ashdod-analytics.js?v=1"></script>'
+ text=re.sub(r'<link\b[^>]*href="[^"]*assets/design-system\.css[^"]*"[^>]*>','',text)
+ assets+=f'<link rel="stylesheet" href="{prefix}assets/design-system.css?v=1">'
  text=text.replace('</head>',assets+'</head>',1)
  assert text.count(START)==text.count(END)==1,path
  assert text.count('class="super-sticky"')==1 and text.count('class="super-category-track"')==1,path

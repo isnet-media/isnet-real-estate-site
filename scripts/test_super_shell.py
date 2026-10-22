@@ -22,6 +22,8 @@ result=decorate(new,newpath)
 assert result.count(START)==1 and 'Article title stays' in result and 'New content' in result
 assert f'../../assets/branding/super-header.css?v={VERSION}' in result
 assert 'href="../../compare/"' in result
+assert '../../assets/design-system.css?v=1' in result
+assert result.count('assets/design-system.css')==1
 assert decorate(result,newpath)==result
 implicit=decorate('<html><head><title>Implicit</title></head><main>Preserve future content</main></html>',newpath)
 assert 'Preserve future content' in implicit and implicit.count(START)==1
