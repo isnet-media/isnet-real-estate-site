@@ -13,5 +13,8 @@ def build():
  for path in shell.pages():
   text=shell.decorate(path.read_text(),path)
   text=re.sub(r'<script\b[^>]*src="[^\"]*assets/ashdod-analytics\.js[^\"]*"[^>]*>\s*</script>','',text)
+  tag='<script src="/SUPER.KGAT/assets/kgat-analytics.js?v=20261022-1" defer></script>'
+  text=re.sub(r'<script\b[^>]*src="/SUPER\.KGAT/assets/kgat-analytics\.js[^\"]*"[^>]*>\s*</script>\s*','',text)
+  text=text.replace('</head>',tag+'\n</head>',1)
   if path.read_text()!=text:path.write_text(text)
 if __name__=='__main__':build()
