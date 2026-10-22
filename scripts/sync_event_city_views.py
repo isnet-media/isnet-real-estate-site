@@ -228,6 +228,11 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     content = content.replace('id==="hot-cinema"', 'id==="' + city["second_cinema_id"] + '"')
     # Avoid hardcoded dates on JS/CSS bundle URLs: the deployment adds fresh HTML
     # every time the Ashdod source changes.
+    if city["slug"] == "yavne":
+        content = content.replace("window.ashdodAnalytics", "window.yavneAnalytics")
+        if suffix == ".html":
+            from apply_yavne_analytics import decorate
+            content = decorate(content)
     if suffix == ".html":
         def cache_bust(match):
             filename = match.group(1)

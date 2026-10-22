@@ -564,7 +564,7 @@ async function init(){
 
     // GA4 standard ecommerce-style event view. item_id lets the Data API
     // aggregate views per event without exposing personal information.
-    window.ashdodAnalytics?.send("view_item",{
+    window.yavneAnalytics?.send("view_item",{
       currency:"ILS",
       value:Number(e.price_min_ils||0),
       items:[{
@@ -599,7 +599,7 @@ async function init(){
       if (link.matches("#heroBuy, .scheduleBuy")) {
         const row = link.closest(".scheduleItem");
         const selected = row ? occ[Array.from(document.querySelectorAll(".scheduleItem")).indexOf(row)] : e;
-        const analytics = window.ashdodAnalytics;
+        const analytics = window.yavneAnalytics;
         const params = {...analytics?.metadata(selected),purchase_method:link.protocol === "tel:" ? "phone" : "website"};
         if (row) analytics?.send("select_date",{...analytics.metadata(selected),selected_date:selected.start_date,selection_type:"event_occurrence"});
         analytics?.send("ticket_click",params);
@@ -608,7 +608,7 @@ async function init(){
         const relatedId=u.searchParams.get("id");
         const relatedSlug=u.searchParams.get("slug");
         const selected=relatedId?all.find(item=>item.event_id===relatedId):findSlugEvent(all,relatedSlug);
-        if(selected) window.ashdodAnalytics?.send("select_event",window.ashdodAnalytics.metadata(selected));
+        if(selected) window.yavneAnalytics?.send("select_event",window.yavneAnalytics.metadata(selected));
       }
     });
 

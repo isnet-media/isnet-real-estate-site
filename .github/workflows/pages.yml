@@ -43,6 +43,8 @@ on:
       - "scripts/test_super_shell.py"
       - "scripts/build_super_recipes.py"
       - "scripts/sync_event_city_views.py"
+      - "scripts/apply_yavne_analytics.py"
+      - "scripts/test-yavne-analytics.cjs"
       - "scripts/test-event-date-chips.cjs"
       - "scripts/test-institution-ui.cjs"
       - ".github/workflows/pages.yml"
@@ -198,6 +200,12 @@ jobs:
           python scripts/build_kgat_super.py
           python scripts/test_kgat_super.py
           for script in SUPER.KGAT/live.js SUPER.KGAT/assets/*.js; do node --check "$script"; done
+
+      - name: Apply and verify Yavne analytics on all generated pages
+        run: |
+          python scripts/apply_yavne_analytics.py
+          python scripts/apply_yavne_analytics.py --check
+          node scripts/test-yavne-analytics.cjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

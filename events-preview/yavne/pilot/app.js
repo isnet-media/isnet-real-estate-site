@@ -1120,7 +1120,7 @@ function bindDynamic(){
   document.querySelectorAll("[data-event-video]").forEach(b=>b.onclick=e=>{e.stopPropagation();openEventVideo(b.dataset.eventVideo)});
   document.querySelectorAll("[data-date]").forEach(b=>b.onclick=()=>{
     const next=state.date===b.dataset.date?null:b.dataset.date;
-    window.ashdodAnalytics?.send("select_date",{selected_date:next || "all",selection_type:next ? "day" : "clear"});
+    window.yavneAnalytics?.send("select_date",{selected_date:next || "all",selection_type:next ? "day" : "clear"});
     state.date=next;
     state.periodStart=null;state.periodEnd=null;state.periodType=null;
     state.quick="all";
@@ -1133,7 +1133,7 @@ function bindDynamic(){
     requestAnimationFrame(()=>$("resultsTitle")?.scrollIntoView({behavior:"smooth",block:"start"}));
   });
   document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{
-    window.ashdodAnalytics?.send("select_category",{category:b.dataset.cat,category_name:catLabels[b.dataset.cat] || b.dataset.cat,selection_type:state.category===b.dataset.cat ? "clear" : "select"});
+    window.yavneAnalytics?.send("select_category",{category:b.dataset.cat,category_name:catLabels[b.dataset.cat] || b.dataset.cat,selection_type:state.category===b.dataset.cat ? "clear" : "select"});
     if(b.dataset.cat==="cinema"){
       location.href="cinema.html";
       return;
@@ -1280,7 +1280,7 @@ async function init(){
     if (!query) { lastMeasuredSearch = ""; return; }
     if (query === lastMeasuredSearch) return;
     lastMeasuredSearch = query;
-    const analytics = window.ashdodAnalytics;
+    const analytics = window.yavneAnalytics;
     analytics?.send("search",{search_term:analytics.safeSearch(query),result_count:groupEvents(filtered()).length});
   };
   document.addEventListener("click", event => {
@@ -1291,7 +1291,7 @@ async function init(){
     let id = card?.dataset.event;
     if (link) id = new URL(link.href).searchParams.get("id");
     const selected = state.events.find(item => item.event_id === id);
-    if (selected) window.ashdodAnalytics?.send("select_event",window.ashdodAnalytics.metadata(selected));
+    if (selected) window.yavneAnalytics?.send("select_event",window.yavneAnalytics.metadata(selected));
   },true);
   const showSearchResults=()=>{
     clearTimeout(searchTimer);
@@ -1317,8 +1317,8 @@ async function init(){
   };
   $("quickFilters").onclick=e=>{
     const b=e.target.closest("[data-quick]");if(!b)return;
-    if (["kids","standup","music","lecture","theatre"].includes(b.dataset.quick)) window.ashdodAnalytics?.send("select_category",{category:b.dataset.quick,selection_type:"quick_filter"});
-    if (["today","tomorrow","weekend"].includes(b.dataset.quick)) window.ashdodAnalytics?.send("select_date",{selection_type:b.dataset.quick});
+    if (["kids","standup","music","lecture","theatre"].includes(b.dataset.quick)) window.yavneAnalytics?.send("select_category",{category:b.dataset.quick,selection_type:"quick_filter"});
+    if (["today","tomorrow","weekend"].includes(b.dataset.quick)) window.yavneAnalytics?.send("select_date",{selection_type:b.dataset.quick});
     state.quick=b.dataset.quick;state.date=null;state.periodStart=null;state.periodEnd=null;state.periodType=null;render()
   };
   const clearCalendarSelection=()=>{
@@ -1383,7 +1383,7 @@ async function init(){
       const start=firstOfMonth(state.calendarMonth),end=new Date(start.getFullYear(),start.getMonth()+1,0);
       state.periodStart=iso(start);state.periodEnd=iso(end);state.periodType="month";
     }
-    window.ashdodAnalytics?.send("select_date",{selection_type:state.periodType,date_start:state.periodStart,date_end:state.periodEnd});
+    window.yavneAnalytics?.send("select_date",{selection_type:state.periodType,date_start:state.periodStart,date_end:state.periodEnd});
     render();
     requestAnimationFrame(()=>$("eventsGrid")?.scrollIntoView({behavior:"smooth",block:"start"}));
   };
