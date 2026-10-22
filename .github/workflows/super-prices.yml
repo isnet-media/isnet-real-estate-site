@@ -1,7 +1,8 @@
 name: Refresh Ashdod supermarket prices
 on:
   schedule:
-    - cron: '10 5 * * *'
+    # GitHub Actions cron uses UTC: 06:30 Israel summer / 05:30 winter.
+    - cron: '30 3 * * *'
   workflow_dispatch:
   push:
     branches: [main]
