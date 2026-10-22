@@ -20,6 +20,7 @@ on:
       - "scripts/build_super_city_basket.py"
       - "scripts/test_super_homepage.py"
       - "scripts/test_super_live_loading.cjs"
+      - "scripts/test_super_product_groups.cjs"
       - "scripts/test_super_city_basket.py"
       - "scripts/build_super_smart_shopping.py"
       - "scripts/test_super_smart_shopping.cjs"
@@ -156,6 +157,7 @@ jobs:
         run: |
           python scripts/test_super_homepage.py
           node scripts/test_super_live_loading.cjs
+          node scripts/test_super_product_groups.cjs
           python scripts/import_super_shufersal.py
           python scripts/build_super_city_basket.py
           python scripts/test_super_city_basket.py
