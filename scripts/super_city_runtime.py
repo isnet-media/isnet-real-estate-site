@@ -5,7 +5,7 @@ from pathlib import Path
 import importlib.util
 ROOT=Path(__file__).resolve().parents[1]
 def load(name,city='YAVNE'):
- assert city in ('YAVNE','KGAT'),'Only the reviewed city edition is supported'
+ assert city in ('YAVNE','KGAT','RISHON'),'Only the reviewed city edition is supported'
  spec=importlib.util.spec_from_file_location('city_'+name,ROOT/'scripts'/f'{name}.py')
  module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
  site=ROOT/('SUPER.'+city)
