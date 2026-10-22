@@ -15,6 +15,11 @@ on:
       - "meusharim/**"
       - "sports/**"
       - "SUPER.ASHDOD/**"
+      - "SUPER.YAVNE/**"
+      - "scripts/*yavne_super*.py"
+      - "scripts/refresh_yavne_super_prices.py"
+      - "scripts/super_city_runtime.py"
+      - "scripts/super-yavne/**"
       - "scripts/import_super_shufersal.py"
       - "scripts/super-ashdod/shufersal-20261021.json.gz"
       - "scripts/build_super_city_basket.py"
@@ -47,6 +52,7 @@ on:
   workflow_run:
     workflows:
       - "Refresh Ashdod supermarket prices"
+      - "Refresh Yavne supermarket prices"
       - "Import reviewed Ashdod supermarket site"
       - "Normalize event provenance and audit purchase links"
       - "Repair Rishon public quality"
@@ -174,6 +180,13 @@ jobs:
           python scripts/super_ashdod_shell.py
           python scripts/super_ashdod_shell.py --check
           python scripts/test_super_shell.py
+
+      - name: Build and verify the independent Yavne supermarket edition
+        run: |
+          pip install beautifulsoup4==4.14.2
+          python scripts/build_yavne_super.py
+          python scripts/test_yavne_super.py
+          for script in SUPER.YAVNE/live.js SUPER.YAVNE/assets/*.js; do node --check "$script"; done
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
