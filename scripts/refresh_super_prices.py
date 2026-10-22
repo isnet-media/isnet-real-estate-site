@@ -12,6 +12,8 @@ import xml.etree.ElementTree as ET
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from requests.exceptions import ConnectionError as RequestConnectionError, Timeout as RequestTimeout
+import time,random
 from bs4 import BeautifulSoup
 ROOT=Path(__file__).resolve().parents[1];D=ROOT/'SUPER.ASHDOD/data';TZ=ZoneInfo('Asia/Jerusalem')
 PUBLIC='https://url.publishedprices.co.il'
@@ -19,7 +21,17 @@ ACCOUNTS={'רמי לוי':'RamiLevi','יוחננוף':'yohananof','אושר עד
 def session():
  s=requests.Session();s.mount('https://',HTTPAdapter(max_retries=Retry(total=2,backoff_factor=1,status_forcelist=[429,500,502,503,504],allowed_methods=['GET','HEAD'])));return s
 def request(s,url,**kw):
- r=s.request(kw.pop('method','GET'),url,timeout=(25,45),**kw);r.raise_for_status();return r
+ method=kw.pop('method','GET')
+ # Official price feeds periodically time out. Retry only transport failures,
+ # preserving the original URL, request method and verified data rules.
+ for attempt in range(3):
+  try:
+   r=s.request(method,url,timeout=(30,50),**kw)
+   r.raise_for_status()
+   return r
+  except (RequestConnectionError,RequestTimeout):
+   if attempt==2:raise
+   time.sleep(min(12,2**(attempt+1))+random.uniform(0,1))
 
 def filetime(name):
  m=re.search(r'-(\d{8})-?(\d{4,6})\.',name,re.I)
