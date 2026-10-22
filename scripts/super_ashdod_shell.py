@@ -19,7 +19,7 @@ def render_shell(prefix,category=None,cart_count=False):
 def decorate(text,path):
  relative=Path(path).relative_to(SITE)
  prefix=os.path.relpath(SITE,Path(path).parent).replace(os.sep,'/')+'/'
- category='home' if relative==Path('index.html') else 'recipes' if relative.parts[0]=='recipes' else None
+ category='home' if relative==Path('index.html') else 'recipes' if relative.parts[0]=='recipes' else 'smart' if relative.parts[0]=='smart-shopping' else 'deals' if relative.parts[0]=='deals' else None
  shell=render_shell(prefix,category,cart_count=category=='home')
  # Legacy guides use implicit head/body; make those explicit before decoration.
  if not re.search(r'<head(?:\s|>)',text,re.I):

@@ -21,7 +21,7 @@ new='<!doctype html><html lang="he" dir="rtl"><head><title>New</title></head><bo
 result=decorate(new,newpath)
 assert result.count(START)==1 and 'Article title stays' in result and 'New content' in result
 assert '../../assets/branding/super-header.css?v=3' in result
-assert 'href="../../#products"' in result
+assert 'href="../../compare/"' in result
 assert decorate(result,newpath)==result
 implicit=decorate('<html><head><title>Implicit</title></head><main>Preserve future content</main></html>',newpath)
 assert 'Preserve future content' in implicit and implicit.count(START)==1

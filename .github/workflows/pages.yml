@@ -15,8 +15,19 @@ on:
       - "meusharim/**"
       - "sports/**"
       - "SUPER.ASHDOD/**"
+      - "scripts/import_super_shufersal.py"
+      - "scripts/super-ashdod/shufersal-20261021.json.gz"
       - "scripts/build_super_city_basket.py"
+      - "scripts/test_super_homepage.py"
+      - "scripts/test_super_live_loading.cjs"
+      - "scripts/test_super_product_groups.cjs"
+      - "scripts/test_super_comparison_page.cjs"
       - "scripts/test_super_city_basket.py"
+      - "scripts/build_super_smart_shopping.py"
+      - "scripts/test_super_smart_shopping.cjs"
+      - "scripts/build_super_deals.py"
+      - "scripts/test_super_deals.py"
+      - "scripts/test_super_deals.cjs"
       - "scripts/super-ashdod/city-basket-products.json"
       - "scripts/super-ashdod/city-family-basket.json"
       - "scripts/super_ashdod_shell.py"
@@ -35,6 +46,7 @@ on:
     - cron: "30 7,19 * * *"
   workflow_run:
     workflows:
+      - "Refresh Ashdod supermarket prices"
       - "Import reviewed Ashdod supermarket site"
       - "Normalize event provenance and audit purchase links"
       - "Repair Rishon public quality"
@@ -144,8 +156,17 @@ jobs:
 
       - name: Rebuild and verify the fixed supermarket comparison baskets
         run: |
+          python scripts/test_super_homepage.py
+          node scripts/test_super_live_loading.cjs
+          node scripts/test_super_product_groups.cjs
+          node scripts/test_super_comparison_page.cjs
+          python scripts/import_super_shufersal.py
           python scripts/build_super_city_basket.py
           python scripts/test_super_city_basket.py
+          python scripts/build_super_smart_shopping.py
+          node scripts/test_super_smart_shopping.cjs
+          python scripts/test_super_deals.py
+          node scripts/test_super_deals.cjs
           node --check SUPER.ASHDOD/assets/city-basket.js
 
       - name: Apply shared supermarket header to all current and future pages
