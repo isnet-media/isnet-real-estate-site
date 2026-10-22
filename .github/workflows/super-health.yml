@@ -1,11 +1,9 @@
 name: Ashdod supermarket public health
 on:
   schedule:
-    - cron: '35 * * * *'
+    # One daily verification after the morning collection (UTC).
+    - cron: '30 6 * * *'
   workflow_dispatch:
-  workflow_run:
-    workflows: ['Publish priceboard']
-    types: [completed]
 permissions:
   contents: read
 jobs:
