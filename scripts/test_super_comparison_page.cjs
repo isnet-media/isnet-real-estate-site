@@ -1,6 +1,6 @@
 // Branch ranking and the public gap must use one verified, cheapest offer per branch.
 const assert=require('node:assert/strict'),fs=require('node:fs');
-const {summarize,searchRank}=require('../SUPER.ASHDOD/assets/compare-page.js');
+const {summarize,searchRank,selectProducts}=require('../SUPER.ASHDOD/assets/compare-page.js');
 const branches=['a','b','c','d'].map(id=>({id,name:id}));
 const product=(id,offers,calculation_unit='package')=>({id,name:id,calculation_unit,offers});
 const offer=(branch_id,price,extra={})=>({branch_id,price,calculation_unit:'package',...extra});
@@ -17,3 +17,9 @@ console.log('Verified per-branch minimums, sorting, gap denominator, invalid uni
 
 assert.ok(searchRank({name:'עגבנייה רגילה',key:'tomato-regular'},'עגבניה')<searchRank({name:'עגבניה מרוסקות · 800 גרם',key:'catalogue-x'},'עגבניה'));
 assert.ok(searchRank({name:'אורז פרסי · 1 ק״ג',key:'rice'},'אורז פרסי')<searchRank({name:'רוטב לאורז פרסי',key:'sauce'},'אורז פרסי'));
+
+const variants=[product('favourite',[offer('a',12),offer('b',18)]),product('alternative',[offer('a',8),offer('c',10)])];
+const exact=summarize(selectProducts(variants,'exact','favourite'),branches),alternatives=summarize(selectProducts(variants,'all','favourite'),branches);
+assert.deepEqual(exact.ranked.map(r=>r.branch.id),['a','b']);assert.equal(exact.min,12);assert.equal(exact.gap,6);assert.equal(exact.percent,50);
+assert.equal(alternatives.min,8);assert.equal(alternatives.ranked.length,3);assert.equal(selectProducts(variants,'exact','missing').length,0);
+console.log('Verified exact product filtering, alternatives, recalculated coverage and gap, and no silent variant fallback');
