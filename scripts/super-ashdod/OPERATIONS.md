@@ -63,3 +63,18 @@ of the specific supermarket commit, preserving unrelated ISNET project changes.
 Recipe prices remain a separately dated reference estimate; the current daily
 pipeline does not claim to update recipe ingredient medians or recipe budgets.
 Do not label those estimates with the collection date unless rebuilt and tested.
+
+## Netto Chisachon, added 22 October 2026
+
+The official Bina Stores file identifies chain 7290058156016, store 197 as
+נטו חיסכון אשדוד, האורגים 13. Its first verified full price file contains 6,733
+products. This is distinct from the former Haavoda 64 location, now 100 ומעבר.
+The existing daily collector registers this reviewed branch and uses the Bina
+connector; no second scheduled collector is introduced. Total connected: 20.
+
+The shared family basket uses reviewed 1-litre canola oil, 550g sweet corn,
+550g canned chickpeas and 600g frozen salmon equivalents. The baked-beans line
+was removed from ALL branches because the new source reports conflicting pack
+weights (550/580g versus the reference 560g); prices or weights are not invented.
+All remaining quantities are unchanged. A missing promotion file is not replaced
+by fabricated offers. Three complete daily collections must cover all 20 branches.

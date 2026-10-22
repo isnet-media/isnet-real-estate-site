@@ -54,8 +54,8 @@ def listing(b):
  elif chain=='שופרסל':
   html=request(s,'https://prices.shufersal.co.il/FileObject/UpdateCategory',params={'catID':0,'storeId':int(b['store_id'])}).text
   entries=[{'name':unquote(urlparse(a['href']).path.split('/')[-1]),'url':a['href']} for a in BeautifulSoup(html,'html.parser').select('a[href]') if a['href'].startswith('https://')]
- elif chain=='זול ובגדול':
-  base='https://zolvebegadol.binaprojects.com/';request(s,base+'Main.aspx')
+ elif chain in ('זול ובגדול','נטו חיסכון'):
+  base='https://'+('supersapir' if chain=='נטו חיסכון' else 'zolvebegadol')+'.binaprojects.com/';request(s,base+'Main.aspx')
   for day in (datetime.now(TZ).date(),datetime.now(TZ).date()-timedelta(days=1)):
    for typ in ('4','6'):
     js=request(s,base+'MainIO_Hok.aspx',method='POST',data={'WStore':str(int(b['store_id'])),'WDate':day.strftime('%d/%m/%Y'),'WFileType':typ}).json()
@@ -125,6 +125,10 @@ def refresh_branch(b,raw_dir,now):
 def write(path,obj):path.write_text(json.dumps(obj,ensure_ascii=False,separators=(',',':'))+'\n')
 def run(raw_dir):
  now=datetime.now(TZ);catalog=json.loads((D/'catalog.json').read_text());products={}
+ # Reviewed official Stores file: chain 7290058156016, store 197, Haorgim 13.
+ # Register only this physical Ashdod branch; never substitute the former store.
+ if catalog.get('city')=='אשדוד' and not any(b['id']=='7290058156016-197' for b in catalog['branches']):
+  catalog['branches'].append({'id':'7290058156016-197','chain':'נטו חיסכון','chain_id':'7290058156016','store_id':'197','name':'נטו חיסכון אשדוד','address':'האורגים 13, אשדוד','city':'אשדוד','source_url':'https://supersapir.binaprojects.com/','source_type':'official_file','product_count':6733,'identity_source':'Stores7290058156016-000-20261022-034528.GZ'})
  for f in (D/'offers').glob('*.json'):products.update(json.loads(f.read_text()))
  raw_dir.mkdir(parents=True,exist_ok=True)
  with ThreadPoolExecutor(max_workers=4) as pool:results=list(pool.map(lambda b:refresh_branch(b,raw_dir,now),catalog['branches']))
@@ -155,6 +159,9 @@ def run(raw_dir):
  prices=json.loads((D/'prices.json').read_text())
  for k in ('branches','retrieved_at','product_count','offer_count'):prices[k]=catalog[k]
  prices['branch_count']=len(branches);prices['chains']=dict(collections.Counter(b['chain'] for b in branches));write(D/'prices.json',prices)
+ status_path=D/'source-status.json'
+ if status_path.exists():
+  status=json.loads(status_path.read_text());status['connected']=prices['chains'];status['updated_at']=now.date().isoformat();status.setdefault('connection_notes',{})['נטו חיסכון']='סניף 197 בהאורגים 13; מקור רשמי Bina. נפרד מהסניף הקודם בהעבודה 64 שהוחלף ב-100 ומעבר.';write(status_path,status)
  report={'checked_at':now.isoformat(),'updated_count':updated,'branch_count':len(branches),'all_sources_updated':updated==len(branches),'branches':reports};write(D/'refresh-status.json',report)
  from build_super_deals import build
  # Promotion publication failure must preserve the last verified selection.

@@ -39,7 +39,7 @@ for key,data in bundle['variants'].items():
   assert data['average_cents']==round(sum(b['total_cents'] for b in complete)/len(complete))
 family=bundle['variants']['family'];assert family['target_budget_ils']==[600,700]
 assert {'פירות','ירקות','עוף ודגים'}<={p.get('group') for p in family['products']}
-assert sum('יכין' in p['name'] for p in family['products'])>=3
+assert {'7290000208329','7290000208428'}<={p['id'] for p in family['products']} # Two canned-food lines with equal-size reviewed equivalents
 print('Verified both baskets: exact source prices, kg metadata, complete-only ranking, ties, mean and percentage gap')
 
 # A family basket must compare every connected branch, with equal quantities.

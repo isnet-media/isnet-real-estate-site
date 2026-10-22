@@ -8,7 +8,7 @@ def get(path):
 paths=['','deals/','recipes/','smart-shopping/','data/prices.json','data/refresh-status.json']
 with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:responses=dict(pool.map(get,paths))
 prices=responses['data/prices.json'].json();refresh=responses['data/refresh-status.json'].json()
-assert prices['branch_count']>=19,'Connected branch coverage dropped'
+assert prices['branch_count']>=20,'Connected branch coverage dropped'
 stale=[b['id'] for b in prices['branches'] if (now.date()-date.fromisoformat(b['file_date'])).days>1]
 assert not stale,'Stale branches: '+','.join(stale)
 assert (now-datetime.fromisoformat(refresh['checked_at'])).total_seconds()<30*3600,'Daily collection overdue'
