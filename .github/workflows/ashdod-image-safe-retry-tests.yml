@@ -1,0 +1,22 @@
+name: Verify safe Ashdod image-refresh retries
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/refresh-ashdod-event-images.yml'
+      - '.github/workflows/enrich-events-images.yml'
+      - '.github/workflows/ashdod-image-safe-retry-tests.yml'
+      - 'tests/test_ashdod_image_safe_retry.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  image-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate identifier guard and concurrency settings
+        run: python -m unittest discover -s tests -p test_ashdod_image_safe_retry.py -v
