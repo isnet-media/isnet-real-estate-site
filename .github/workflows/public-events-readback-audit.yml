@@ -1,15 +1,24 @@
 name: Verify public event feed read-back
 on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 7 * * *'
+  workflow_run:
+    workflows: ['Unified Ashdod and Rishon stage event collection']
+    types: [completed]
   push:
     branches: [audit/public-stage-feed-readback-20261023]
     paths:
       - 'scripts/verify_public_event_readback.py'
       - '.github/workflows/public-events-readback-audit.yml'
-  workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: isnet-events-public-feed-readback
+  cancel-in-progress: false
 jobs:
   audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
