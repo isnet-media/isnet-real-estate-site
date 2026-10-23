@@ -6,6 +6,7 @@ on:
       - '.github/workflows/enrich-events-images.yml'
       - '.github/workflows/ashdod-image-safe-retry-tests.yml'
       - 'tests/test_ashdod_image_safe_retry.py'
+      - 'tests/test_ashdod_image_retry_integration.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -18,5 +19,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate identifier guard and concurrency settings
-        run: python -m unittest discover -s tests -p test_ashdod_image_safe_retry.py -v
+      - name: Check shell syntax for the real retry step
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import runpy
+          step = runpy.run_path('tests/test_ashdod_image_retry_integration.py')['commit_step']()
+          Path('/tmp/isnet-image-retry.sh').write_text(step, encoding='utf-8')
+          PY
+          bash -n /tmp/isnet-image-retry.sh
+      - name: Test event ID integrity and concurrent Git writers
+        run: python -m unittest discover -s tests -p 'test_ashdod_image*.py' -v
