@@ -1,6 +1,6 @@
 """Publication checks for independent Yavne data, units, paths and shared UI."""
 from pathlib import Path
-import json,math,sys,importlib.util
+import json,math,sys,importlib.util,argparse
 from super_city_runtime import ROOT,load
 D=ROOT/'SUPER.YAVNE';data=D/'data'
 cat=json.loads((data/'catalog.json').read_text());prices=json.loads((data/'prices.json').read_text());ids={b['id'] for b in cat['branches']}
@@ -30,5 +30,13 @@ for p in [D/'live.js',D/'assets/compare-page.js']:
  t=p.read_text();assert 'isnetRealBasket' not in t and 'isnetYavneBasket' in t
 # Reuse the existing local-link audit without touching Ashdod's report.
 spec=importlib.util.spec_from_file_location('city_audit',ROOT/'scripts/audit_super_site.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);m.SITE=D;m.D=data
-r=m.audit();assert not r['errors'] and not r['stale_branches']
+parser=argparse.ArgumentParser(description='Validate Yavne supermarket site and price-source freshness')
+parser.add_argument('--deployment-only',action='store_true',help='Allow the unrelated website deployment to continue with an explicit freshness warning; dedicated refresh remains strict')
+args=parser.parse_args()
+r=m.audit()
+assert not r['errors'], 'Yavne supermarket has broken public pages or links'
+if r['stale_branches']:
+ msg=f"Yavne supermarket has {len(r['stale_branches'])} stale official price sources; price coverage is not fresh"
+ if not args.deployment_only:raise AssertionError(msg)
+ print(f"::warning title=Yavne price freshness::{msg}. Site health report retains full source dates; events deployment is not blocked.")
 print('Yavne verified: 7 branches, isolated offers and lists, complete equivalent basket, shared mobile shell, local links')

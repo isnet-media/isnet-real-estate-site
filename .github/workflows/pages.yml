@@ -217,7 +217,10 @@ jobs:
         run: |
           pip install beautifulsoup4==4.14.2
           python scripts/build_yavne_super.py
-          python scripts/test_yavne_super.py
+          # Frontend deployment still enforces local links, IDs and data integrity,
+          # while stale official Yavne feeds stay reported in site-health.json.
+          # The dedicated supermarket refresh keeps strict freshness checks.
+          python scripts/test_yavne_super.py --deployment-only
           for script in SUPER.YAVNE/live.js SUPER.YAVNE/assets/*.js; do node --check "$script"; done
 
       - name: Verify Kiryat Gat supermarket edition
