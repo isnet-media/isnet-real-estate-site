@@ -89,16 +89,29 @@ def collect_row(row,stamp):
         e['details_verified']=bool(text or image);e['detail_checked_at']=stamp
     except Exception as ex:issues.append(type(ex).__name__+': '+str(ex)[:150])
     return e,issues
+def same_verified_occurrence(old,new):
+    """Only identical title, date, time and venue can justify cross-source deduplication.
+
+    A shared purchase URL can point to different performances, so URL matching alone
+    must never delete another event's occurrence.
+    """
+    if old.get('start_date') != new.get('start_date'): return False
+    if str(old.get('start_time') or '')[:5] != str(new.get('start_time') or '')[:5]: return False
+    old_venue=venue_key(old.get('venue'))
+    new_venue=venue_key(new.get('venue'))
+    if not old_venue or not new_venue or old_venue != new_venue: return False
+    title=norm(old.get('title'))
+    return len(title) >= 5 and title == norm(new.get('title'))
+
 def merge(data,new):
-    keys={(norm(e['title']),e['start_date'],e['start_time']) for e in new}
-    urls={urlparse(e['ticket_url']).path for e in new if urlparse(e.get('ticket_url','')).hostname=='tickets.mevalim.co.il'}
+    """Replace direct-source IDs, not unrelated occurrences or title-only matches."""
+    new_ids={e['event_id'] for e in new}
     kept=[];removed=[]
     for e in data['events']:
-        link=e.get('ticket_url') or e.get('purchase_url') or e.get('content_source_url') or ''
-        key=(norm(e.get('title')),e.get('start_date'),str(e.get('start_time') or '')[:5])
-        match=key in keys or (urlparse(link).hostname=='tickets.mevalim.co.il' and urlparse(link).path in urls) or any(same_show(e,n) for n in new)
-        if match:removed.append(e)
-        else:kept.append(e)
+        direct_id=e.get('event_id') in new_ids
+        exact_duplicate=not direct_id and any(same_verified_occurrence(e,n) for n in new)
+        if direct_id or exact_duplicate: removed.append(e)
+        else: kept.append(e)
     data['events']=kept+new;data.setdefault('stats',{})['events']=len(data['events'])
     return removed
 def main():
