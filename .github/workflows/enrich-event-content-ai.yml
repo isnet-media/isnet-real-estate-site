@@ -59,6 +59,24 @@ jobs:
             echo "=== Content enrichment batch $batch ==="
             python -u scripts/enrich_event_content_ai.py
 
+            # A depleted API balance is not a transient retryable error.
+            # Stop before committing or starting another batch; keep live data unchanged.
+            if python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("events-preview/content-enrichment-report.json").read_text(encoding="utf-8"))
+          exhausted = any(
+              "credit_balance_exhausted" in str(event.get("error", ""))
+              or "insufficient_quota" in str(event.get("error", ""))
+              for event in report.get("events", [])
+          )
+          raise SystemExit(0 if exhausted else 1)
+          PY
+            then
+              echo "::error::OpenAI API credits exhausted. No event content was published; replenish the API project balance before retrying."
+              exit 2
+            fi
+
             git add events-preview/ashdod/data/events.json \
                     events-preview/content-enrichment-report.json
 
