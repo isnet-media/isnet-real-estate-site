@@ -2,18 +2,31 @@
 import json, time
 from collections import Counter
 from pathlib import Path
+from urllib.parse import urlsplit
 
 root=Path(__file__).resolve().parents[1]
 events_path=root/"events-preview"/"ashdod"/"data"/"events.json"
 report_path=root/"events-preview"/"ashdod"/"data"/"image-enrichment-report.json"
 data=json.loads(events_path.read_text(encoding="utf-8"))
 bad=("/languages/il.gif","artistshadow","eventnew.jpg","no_pic","no-pic","placeholder","smarticket_logo","microsoft_oauth_logo","google_oauth_logo","facebook_oauth","oauth_logo","oauth","_logo_")
+
+def is_smarticket_logo(url):
+    """Exact technical logo URLs are not event artwork, even on authoritative records."""
+    parsed=urlsplit(str(url or "").strip())
+    host=(parsed.hostname or "").lower()
+    path=parsed.path.lower().rstrip("/")
+    return (host=="smarticket.co.il" or host.endswith(".smarticket.co.il")) and path in (
+        "/images/logo.png", "/images/logo.jpg", "/images/logo.webp", "/images/logo.svg",
+        "/logo.png", "/logo.jpg", "/logo.webp", "/logo.svg",
+    )
+
 cleared=0
 for e in data.get("events",[]):
-    if e.get("source_content_authoritative"):
-        continue
     u=(e.get("image_url") or "").lower()
-    if u and any(x in u for x in bad):
+    logo=is_smarticket_logo(u)
+    if e.get("source_content_authoritative") and not logo:
+        continue
+    if u and (logo or any(x in u for x in bad)):
         e["image_url"]=None
         e["image_source"]=None
         e["image_credit"]=None

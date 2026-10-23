@@ -1,0 +1,24 @@
+name: Verify Smarticket logo safety (PR #9)
+on:
+  push:
+    branches:
+      - fix/smarticket-logos-safety-20261021-1755
+    paths:
+      - scripts/build_media_bank.py
+      - scripts/clean_event_image_placeholders_v2.py
+      - scripts/recover_event_listing_images.py
+      - tests/test_smarticket_logo_safety.py
+      - .github/workflows/smarticket-logo-regression.yml
+permissions:
+  contents: read
+jobs:
+  smarticket-logo-fixtures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify rejection of ticketing-site logos in temp fixtures
+        run: python -m unittest discover -s tests -p 'test_smarticket_logo_safety.py' -v

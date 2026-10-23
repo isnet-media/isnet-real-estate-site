@@ -9,7 +9,7 @@ from urllib.request import Request, urlopen
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"events-preview"/"ashdod"/"data"/"events.json"
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36"
-BAD=("no_pic","no-pic","placeholder","smarticket_logo","_logo_","/languages/","artistshadow","eventnew.jpg","favicon","sprite","spinner")
+BAD=("no_pic","no-pic","placeholder","smarticket_logo","_logo_","/images/logo.","/logo.","/languages/","artistshadow","eventnew.jpg","favicon","sprite","spinner")
 SIGNALS=("/uploads/","/thumbs/","/caps/","livenew_","updateartistimage")
 
 def norm(s):
