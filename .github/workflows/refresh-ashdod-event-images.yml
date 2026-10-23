@@ -21,7 +21,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: isnet-event-data-writes
+  group: enrich-ashdod-event-images
   cancel-in-progress: false
 
 jobs:
@@ -40,6 +40,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Snapshot event identifiers before image-only enrichment
+        run: cp events-preview/ashdod/data/events.json /tmp/ashdod-images-before.json
+
       - name: Pull event-page images from recorded sources
         run: python scripts/enrich_event_images_v3.py
 
@@ -52,14 +55,30 @@ jobs:
       - name: Recalculate verified coverage
         run: python scripts/clean_event_image_placeholders_v2.py
 
-      - name: Commit image enrichment
+      - name: Commit image enrichment safely against concurrent writers
         run: |
-          if git diff --quiet -- events-preview/ashdod/data/events.json events-preview/ashdod/data/image-enrichment-report.json; then
-            echo "No image changes."
-            exit 0
-          fi
           git config user.name "isnet-events-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add events-preview/ashdod/data/events.json events-preview/ashdod/data/image-enrichment-report.json
-          git commit -m "Refresh Ashdod source event images"
-          git push
+          for attempt in 1 2 3 4; do
+            # Never modify the set of event records in an image-only job.
+            python -c 'import json, collections; p="events-preview/ashdod/data/events.json"; a=json.load(open("/tmp/ashdod-images-before.json", encoding="utf-8")); b=json.load(open(p, encoding="utf-8")); get=lambda x: collections.Counter(str(e.get("event_id")) for e in x.get("events", [])); assert get(a)==get(b), "Safety stop: image refresh changed event identifiers"'
+            if git diff --quiet -- events-preview/ashdod/data/events.json events-preview/ashdod/data/image-enrichment-report.json; then
+              echo "No image changes."
+              exit 0
+            fi
+            git add events-preview/ashdod/data/events.json events-preview/ashdod/data/image-enrichment-report.json
+            git commit -m "Refresh Ashdod source event images"
+            if git push origin HEAD:main; then exit 0; fi
+
+            # The remote moved. Discard only this runner's unpushed image result;
+            # recompute it on the latest main so source/identity edits are preserved.
+            git fetch origin main
+            git reset --hard origin/main
+            cp events-preview/ashdod/data/events.json /tmp/ashdod-images-before.json
+            python scripts/enrich_event_images_v3.py
+            python scripts/clean_event_image_placeholders_v2.py
+            python scripts/recover_event_listing_images.py
+            python scripts/clean_event_image_placeholders_v2.py
+          done
+          echo "::error::Image refresh was not published after four safe attempts."
+          exit 1
