@@ -1,0 +1,46 @@
+name: Verify public event feed read-back
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 7 * * *'
+  workflow_run:
+    workflows: ['Unified Ashdod and Rishon stage event collection']
+    types: [completed]
+  push:
+    branches: [audit/public-stage-feed-readback-20261023]
+    paths:
+      - 'scripts/verify_public_event_readback.py'
+      - '.github/workflows/public-events-readback-audit.yml'
+permissions:
+  contents: read
+concurrency:
+  group: isnet-events-public-feed-readback
+  cancel-in-progress: false
+jobs:
+  audit:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout current production data from main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: current-main
+          fetch-depth: 1
+      - name: Checkout read-only verification code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: audit-code
+          fetch-depth: 1
+      - name: Compare public JSON with current GitHub feed
+        run: python audit-code/scripts/verify_public_event_readback.py --repo-root current-main --output /tmp/isnet-public-event-readback.json
+      - name: Retain read-back evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-event-readback-${{ github.run_id }}
+          path: /tmp/isnet-public-event-readback.json
+          retention-days: 14
+          if-no-files-found: warn
