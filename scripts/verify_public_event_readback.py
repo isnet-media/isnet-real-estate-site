@@ -122,7 +122,7 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    if any(x["status"] in {"error", "fetch_failed", "invalid_public_json"} for x in report["cities"].values()):
+    if any(x["status"] != "match" for x in report["cities"].values()):
         sys.exit(2)
 
 
