@@ -20,6 +20,10 @@ on:
       - "SUPER.KGAT/**"
       - "SUPER.RISHON/**"
       - "SUPER.HOLON/**"
+      - "SUPER.BATYAM/**"
+      - "scripts/*batyam_super*.py"
+      - "scripts/refresh_batyam_super_prices.py"
+      - "scripts/super-batyam/**"
       - "scripts/*holon_super*.py"
       - "scripts/refresh_holon_super_prices.py"
       - "scripts/super-holon/**"
@@ -71,6 +75,7 @@ on:
       - "Refresh Kiryat Gat supermarket prices"
       - "Refresh Rishon supermarket prices"
       - "Refresh Holon supermarket prices"
+      - "Refresh Bat Yam supermarket prices"
       - "Import reviewed Ashdod supermarket site"
       - "Normalize event provenance and audit purchase links"
       - "Repair Rishon public quality"
@@ -224,6 +229,12 @@ jobs:
           python scripts/test_holon_super.py
           node scripts/test_holon_deals.cjs
           for script in SUPER.HOLON/live.js SUPER.HOLON/assets/*.js; do node --check "$script"; done
+
+      - name: Verify Bat Yam supermarket edition
+        run: |
+          python scripts/build_batyam_super.py
+          python scripts/test_batyam_super.py
+          for script in SUPER.BATYAM/live.js SUPER.BATYAM/assets/*.js; do node --check "$script"; done
 
       - name: Apply and verify Yavne analytics on all generated pages
         run: |
