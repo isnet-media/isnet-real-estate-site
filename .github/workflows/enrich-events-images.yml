@@ -41,6 +41,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Snapshot event identifiers before image-only enrichment
+        run: cp events-preview/ashdod/data/events.json /tmp/ashdod-images-before.json
+
       # Source-first editorial rule: search the original event source before
       # reusing any artist/production media-bank image.
       - name: Pull original event images from recorded event sources
@@ -59,20 +62,35 @@ jobs:
         continue-on-error: true
         run: python scripts/clean_event_image_placeholders_v2.py
 
-      - name: Commit enriched event data
+      - name: Commit image-only enrichment with safe retry on concurrent updates
         run: |
-          if git diff --quiet -- events-preview/ashdod/data/events.json events-preview/ashdod/data/image-enrichment-report.json; then
-            echo "No enrichment changes."
-            exit 0
-          fi
           git config user.name "isnet-events-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add events-preview/ashdod/data/events.json \
-                  events-preview/ashdod/data/image-enrichment-report.json \
-                  events-preview/ashdod/data/listing-image-fill-report.json \
-                  events-preview/ashdod/assets/events
-          git commit -m "Enrich Ashdod events with source images"
-          # Another automation may have updated main while image enrichment was running.
-          # Rebase our generated data commit onto the latest main before pushing.
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for attempt in 1 2 3 4; do
+            # Image enrichment must never add, remove or change the identity
+            # multiset of event records, even if some source fetches fail.
+            python -c 'import json, collections; p="events-preview/ashdod/data/events.json"; a=json.load(open("/tmp/ashdod-images-before.json", encoding="utf-8")); b=json.load(open(p, encoding="utf-8")); ids=lambda x: collections.Counter(str(e.get("event_id")) for e in x.get("events", [])); assert ids(a)==ids(b), "Safety stop: image enrichment changed event identifiers"'
+            git add events-preview/ashdod/data/events.json \
+                    events-preview/ashdod/data/image-enrichment-report.json \
+                    events-preview/ashdod/data/listing-image-fill-report.json \
+                    events-preview/ashdod/assets/events
+            if git diff --cached --quiet; then
+              echo "No enrichment changes."
+              exit 0
+            fi
+            git commit -m "Enrich Ashdod events with source images"
+            if git push origin HEAD:main; then exit 0; fi
+
+            # Another writer updated main. Rebuild image changes from the
+            # newest event feed instead of rebasing stale generated JSON.
+            # Only throw away this runner's unpushed commit, never remote data.
+            git fetch origin main
+            git reset --hard origin/main
+            cp events-preview/ashdod/data/events.json /tmp/ashdod-images-before.json
+            python scripts/enrich_event_images_v3.py
+            python scripts/fast_fill_event_images_from_listings.py
+            python scripts/reuse_media_bank_images.py --city ashdod
+            python scripts/clean_event_image_placeholders_v2.py
+          done
+          echo "::error::Image enrichment could not be published after four safe attempts."
+          exit 1
