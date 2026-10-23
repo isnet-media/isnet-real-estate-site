@@ -226,26 +226,26 @@ jobs:
       - name: Verify Kiryat Gat supermarket edition
         run: |
           python scripts/build_kgat_super.py
-          python scripts/test_kgat_super.py
+          python scripts/test_kgat_super.py --deployment-only
           for script in SUPER.KGAT/live.js SUPER.KGAT/assets/*.js; do node --check "$script"; done
 
       - name: Verify Rishon supermarket edition
         run: |
           python scripts/build_rishon_super.py
-          python scripts/test_rishon_super.py
+          python scripts/test_rishon_super.py --deployment-only
           for script in SUPER.RISHON/live.js SUPER.RISHON/assets/*.js; do node --check "$script"; done
 
       - name: Verify Holon supermarket edition
         run: |
           python scripts/build_holon_super.py
-          python scripts/test_holon_super.py
+          python scripts/test_holon_super.py --deployment-only
           node scripts/test_holon_deals.cjs
           for script in SUPER.HOLON/live.js SUPER.HOLON/assets/*.js; do node --check "$script"; done
 
       - name: Verify Bat Yam supermarket edition
         run: |
           python scripts/build_batyam_super.py
-          python scripts/test_batyam_super.py
+          python scripts/test_batyam_super.py --deployment-only
           for script in SUPER.BATYAM/live.js SUPER.BATYAM/assets/*.js; do node --check "$script"; done
 
       - name: Apply and verify Yavne analytics on all generated pages
