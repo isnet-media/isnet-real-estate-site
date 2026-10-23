@@ -48,3 +48,16 @@ with tempfile.TemporaryDirectory() as tmp:
  actual_catalog=json.loads((data/'catalog.json').read_text());assert actual_catalog['product_count']==2 and actual_catalog['branches'][0]['file_date']=='2026-10-20'
  assert report['updated_count']==1 and not report['all_sources_updated'] and report['branches'][0]['attempts']==2
 print('Passed: partial recovery preserves previous branch prices, products and true source dates')
+
+# Two independent failed sources must recover concurrently, once each.
+from threading import Barrier
+barrier=Barrier(2,timeout=3)
+results=[({'id':str(i)},None,{'status':'retained_previous','error':'first timeout'}) for i in range(2)]
+def recovered(branch,raw_dir,now):
+ barrier.wait()
+ return branch,{'verified':True},{'status':'updated'}
+with patch.object(r,'refresh_branch',side_effect=recovered) as retry:
+ r.recover_branches(results,Path('/unused'))
+ assert retry.call_count==2
+assert all(x[2]['attempts']==2 and x[2]['first_error']=='first timeout' for x in results)
+print('Passed: independent source recovery runs concurrently with one retry per branch')

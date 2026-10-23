@@ -14,11 +14,11 @@ permissions:
   contents: write
 concurrency:
   group: super-price-refresh
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

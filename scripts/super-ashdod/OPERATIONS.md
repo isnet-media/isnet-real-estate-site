@@ -6,7 +6,7 @@ it does not run inside the Ashdodnet CMS. Browser shopping lists remain local.
 
 ## Collection and publication
 
-`super-prices.yml` runs each morning at 05:10 UTC (07:10 winter / 08:10 summer Israel),
+`super-prices.yml` runs each morning at 03:30 UTC (05:30 winter / 06:30 summer Israel),
 on demand and when collector code changes. Only registered branch IDs from the
 catalogue are collected. `refresh_super_prices.py` uses official public file
 portals; publishedprices accounts are retailer-provided public users with empty
@@ -15,7 +15,8 @@ passwords, not private customer accounts. No credentials are stored in source.
 Full files are followed by all listed subsequent price deltas. XML branch identity,
 publication date, source hashes, plausible product counts and finite prices are
 checked before replacing any branch. Connections use bounded timeouts and retries, plus one focused recovery pass after
-other branches finish. A failed branch keeps its previous prices
+other branches finish, using at most four concurrent workers instead of serial
+timeouts. The job allows 45 minutes and an active run is not cancelled by a new trigger. A failed branch keeps its previous prices
 AND their actual file date. A failed fetch never becomes a zero price. A zero price
 in a successfully parsed delta removes that observation. Publisher ItemStatus=0
 is NOT treated as a deletion flag. Local short item codes are namespaced by chain.
@@ -78,3 +79,11 @@ was removed from ALL branches because the new source reports conflicting pack
 weights (550/580g versus the reference 560g); prices or weights are not invented.
 All remaining quantities are unchanged. A missing promotion file is not replaced
 by fabricated offers. Three complete daily collections must cover all 20 branches.
+
+## City publication checks, 23 October 2026
+
+City builders regenerate their own HTML and product-group assets as well as data.
+Each city workflow stages its entire validated SUPER.<CITY>/ directory before
+rebasing, so generated interface changes cannot leave a dirty checkout that blocks
+publication. No unrelated city paths are included. Shopping-list regression tests
+cover all six cities and preserve existing lists when trying the sample basket.

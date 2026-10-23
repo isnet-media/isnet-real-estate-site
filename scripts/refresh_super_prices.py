@@ -135,6 +135,19 @@ def refresh_branch(b,raw_dir,now):
   print(b['id'],'retained_previous',report['error'],flush=True);return b,None,report
 
 def write(path,obj):path.write_text(json.dumps(obj,ensure_ascii=False,separators=(',',':'))+'\n')
+def recover_branches(results,raw_dir):
+ failed=[]
+ for index,(_,products,report) in enumerate(results):
+  report['attempts']=1
+  if products is None:failed.append(index)
+ def retry(index):
+  branch,_,previous=results[index]
+  retried=refresh_branch(branch,raw_dir,datetime.now(TZ))
+  retried[2]['attempts']=2;retried[2]['first_error']=previous.get('error')
+  return index,retried
+ with ThreadPoolExecutor(max_workers=4) as pool:
+  for index,retried in pool.map(retry,failed):results[index]=retried
+
 def run(raw_dir):
  now=datetime.now(TZ);catalog=json.loads((D/'catalog.json').read_text());products={}
  # Reviewed official Stores file: chain 7290058156016, store 197, Haorgim 13.
@@ -144,13 +157,9 @@ def run(raw_dir):
  for f in (D/'offers').glob('*.json'):products.update(json.loads(f.read_text()))
  raw_dir.mkdir(parents=True,exist_ok=True)
  with ThreadPoolExecutor(max_workers=4) as pool:results=list(pool.map(lambda b:refresh_branch(b,raw_dir,now),catalog['branches']))
- # One recovery pass only, after other sources had time to complete.
- for index,(branch,branch_products,report) in enumerate(results):
-  report['attempts']=1
-  if branch_products is None:
-   retried=refresh_branch(branch,raw_dir,datetime.now(TZ))
-   retried[2]['attempts']=2;retried[2]['first_error']=report.get('error')
-   results[index]=retried
+ # One bounded recovery pass, with the same four-worker limit as collection.
+ # Independent source timeouts must not add up serially and abort publication.
+ recover_branches(results,raw_dir)
  reports=[];branches=[]
  for b,new,report in results:
   branches.append(b);reports.append(report)

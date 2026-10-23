@@ -42,6 +42,7 @@ on:
       - "scripts/build_super_city_basket.py"
       - "scripts/test_super_homepage.py"
       - "scripts/test_super_live_loading.cjs"
+      - "scripts/test_super_city_lists.cjs"
       - "scripts/test_super_product_groups.cjs"
       - "scripts/test_super_comparison_page.cjs"
       - "scripts/test_super_city_basket.py"
@@ -187,6 +188,7 @@ jobs:
         run: |
           python scripts/test_super_homepage.py
           node scripts/test_super_live_loading.cjs
+          node scripts/test_super_city_lists.cjs
           node scripts/test_super_product_groups.cjs
           node scripts/test_super_comparison_page.cjs
           python scripts/import_super_shufersal.py
