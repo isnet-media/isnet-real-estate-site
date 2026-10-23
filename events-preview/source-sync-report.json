@@ -1,20 +1,20 @@
 {
-  "run_at": "2026-10-22T10:08:22Z",
+  "run_at": "2026-10-23T10:01:19Z",
   "version": 1,
   "dry_run": false,
   "cities": {
     "ashdod": {
       "city": "אשדוד",
-      "total_before": 706,
+      "total_before": 700,
       "sources": {
         "tickchak_ashdod": {
           "status": "ok",
           "url": "https://live.tickchak.co.il/ashdod",
-          "discovered": 31,
-          "valid": 27,
-          "new": 4,
+          "discovered": 35,
+          "valid": 31,
+          "new": 8,
           "updated": 0,
-          "images_collected": 26
+          "images_collected": 27
         },
         "habama_ashdod": {
           "status": "no_parseable_events",
@@ -26,27 +26,27 @@
           "images_collected": 0
         }
       },
-      "new": 4,
+      "new": 8,
       "updated": 0,
       "removed_invalid": 0,
-      "removed_duplicates": 12,
-      "removed_classes": 1,
+      "removed_duplicates": 2,
+      "removed_classes": 0,
       "errors": [
         "habama_ashdod:no_parseable_events"
       ],
       "repaired_event_ids": 0,
-      "total_after": 697
+      "total_after": 706
     },
     "rishon-lezion": {
       "city": "ראשון לציון",
-      "total_before": 835,
+      "total_before": 904,
       "sources": {
         "htrl": {
           "status": "ok",
           "url": "https://htrl.co.il/לוח-שנה/",
           "discovered": 149,
           "valid": 121,
-          "new": 3,
+          "new": 1,
           "updated": 0,
           "images_collected": 0
         },
@@ -64,16 +64,16 @@
           "url": "https://yama.smarticket.co.il/",
           "discovered": 13,
           "valid": 13,
-          "new": 4,
+          "new": 6,
           "updated": 0,
           "images_collected": 13
         },
         "kotar_rishon": {
           "status": "ok",
           "url": "https://www.kotar-rishon-lezion.org.il/events-category/eventsactivities/",
-          "discovered": 86,
-          "valid": 43,
-          "new": 7,
+          "discovered": 84,
+          "valid": 42,
+          "new": 0,
           "updated": 0,
           "images_collected": 0
         },
@@ -97,17 +97,17 @@
           "error": "ReadTimeout"
         }
       },
-      "new": 14,
+      "new": 7,
       "updated": 0,
       "removed_invalid": 0,
-      "removed_duplicates": 8,
-      "removed_classes": 7,
+      "removed_duplicates": 10,
+      "removed_classes": 3,
       "errors": [
         "RIZONE+:no_parseable_events",
         "Eventim:ReadTimeout"
       ],
       "repaired_event_ids": 0,
-      "total_after": 834
+      "total_after": 898
     }
   },
   "note": "Missing listings never trigger automatic cancellations; source failures preserve data."
