@@ -77,6 +77,10 @@ def main():
         seen={(normal(e.get("title")),str(e.get("start_date") or ""),str(e.get("start_time") or "")[:5])
               for e in data.get("events",[])}
         new=[];skipped=0
+        # Preserve existing identities. Different-looking source cards can
+        # otherwise hash to an ID already in use by a previously merged card.
+        known_ids={str(e.get("event_id")) for e in data.get("events",[]) if e.get("event_id")}
+        id_collisions=[]
         for (source_city,title,date),items in index.items():
             if source_city!=city:continue
             for group in [items]:
@@ -93,7 +97,15 @@ def main():
                 image=selected.get("image_url") if good_image(selected.get("image_url")) else None
                 desc=good_copy(selected.get("description"))
                 uid=hashlib.sha256(("|".join([city,title,date,tm])).encode()).hexdigest()[:18]
-                new.append({"event_id":"board_"+uid,"title":html.unescape(selected["title"]),
+                new_id="board_"+uid
+                if new_id in known_ids:
+                    # Do not overwrite, drop or rekey an existing card. Report
+                    # the attempted collision for later source/CMS review.
+                    id_collisions.append({"event_id":new_id,"title":selected["title"],
+                                          "date":date,"time":tm,"venue":selected["venue"]})
+                    continue
+                known_ids.add(new_id)
+                new.append({"event_id":new_id,"title":html.unescape(selected["title"]),
                     "city":"אשדוד" if city=="ashdod" else "ראשון לציון","category":cat,
                     "source_category":raw,"start_date":date,"start_time":tm,
                     "venue":html.unescape(selected["venue"]),"status":"active","description":desc,
@@ -110,6 +122,8 @@ def main():
             path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         report["cities"][city]["new_imported"]=len(new) if enabled else 0
         report["cities"][city]["invalid_source_rows_skipped"]=skipped
+        report["cities"][city]["id_collisions_skipped"]=len(id_collisions)
+        report["cities"][city]["id_collision_examples"]=id_collisions[:10]
     # Remove duplicate records created by our earlier agents when a matching
     # nationally sourced occurrence is already in the same city feed.
     # Source identity and occurrence date/time, not category or approval flags,
