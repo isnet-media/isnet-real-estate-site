@@ -220,6 +220,36 @@ def load_bank_reuse():
         out[p.get("production_key") or norm(p.get("name"))]=m
     return out
 
+def image_coverage_counts(events):
+    """Count event artwork separately from category illustrations and unverified images.
+
+    These are metadata-based QA counts, not independent copyright or visual
+    identity verification. Representative owned artwork may remain visible in
+    the UI, but must never be reported as an event-specific photograph.
+    """
+    counts = Counter()
+    for event in events:
+        has_image = bool(event.get("image_url") or event.get("thumbnail_url"))
+        if not has_image:
+            counts["still_missing"] += 1
+        elif (event.get("image_strategy") == "super_editor_representative_fallback"
+              or event.get("image_represents_event") is False):
+            counts["representative_fallback_images"] += 1
+        elif event.get("image_verified") is True and event.get("image_publishable") is True:
+            counts["verified_images"] += 1
+        else:
+            counts["unverified_or_unknown_images"] += 1
+
+    return {
+        "images_present": len(events) - counts["still_missing"],
+        "verified_images": counts["verified_images"],
+        "representative_fallback_images": counts["representative_fallback_images"],
+        "unverified_or_unknown_images": counts["unverified_or_unknown_images"],
+        "still_missing": counts["still_missing"],
+        "needs_verified_event_photo": len(events) - counts["verified_images"],
+    }
+
+
 def main():
     data=json.loads(DATA.read_text(encoding="utf-8"));events=[e for e in (data.get("events") or []) if in_horizon(e)]
     bank_reuse=load_bank_reuse()
@@ -364,7 +394,8 @@ def main():
     missing=[e for e in events if not (e.get("image_url") or e.get("thumbnail_url"))]
     report={
       "generated_at":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),
-      "total_events":len(events),"verified_images":len(events)-len(missing),"still_missing":len(missing),
+      "total_events":len(events),**image_coverage_counts(events),
+      "coverage_basis":"metadata_only; representative illustrations excluded from verified event artwork",
       "stats":dict(stats),"revoked_assets":revoked_assets,"newly_filled":new,
       "missing":[{"event_id":e.get("event_id"),"title":e.get("title"),"category":e.get("category"),"ticket_url":e.get("ticket_url")} for e in missing]
     }
