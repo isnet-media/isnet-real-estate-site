@@ -67,6 +67,8 @@ def compare_city(city, root):
     result["public_count"] = len(live)
     local_ids, local_by_id = index(local)
     live_ids, live_by_id = index(live)
+    local_duplicates = sorted(key for key, n in local_ids.items() if n > 1)
+    live_duplicates = sorted(key for key, n in live_ids.items() if n > 1)
     missing = sorted((local_ids - live_ids).elements())
     extra = sorted((live_ids - local_ids).elements())
     common = sorted(local_by_id.keys() & live_by_id.keys())
@@ -83,6 +85,14 @@ def compare_city(city, root):
     result.update({
         "github_distinct_ids": len(local_by_id),
         "public_distinct_ids": len(live_by_id),
+        # Parity of JSON delivery does not prove uniqueness of event identities.
+        "github_duplicate_event_id_groups": len(local_duplicates),
+        "public_duplicate_event_id_groups": len(live_duplicates),
+        "github_duplicate_event_rows": sum(n - 1 for n in local_ids.values() if n > 1),
+        "public_duplicate_event_rows": sum(n - 1 for n in live_ids.values() if n > 1),
+        "github_duplicate_event_id_examples": local_duplicates[:20],
+        "public_duplicate_event_id_examples": live_duplicates[:20],
+        "event_ids_unique": not local_duplicates and not live_duplicates,
         "common_ids": len(common),
         "missing_public_ids": len(missing),
         "extra_public_ids": len(extra),
@@ -122,6 +132,9 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
+    for city, finding in report["cities"].items():
+        if finding.get("github_duplicate_event_id_groups", 0):
+            print(f"::warning::{city} has {finding['github_duplicate_event_id_groups']} colliding event IDs; JSON parity does not verify record uniqueness.")
     if any(x["status"] != "match" for x in report["cities"].values()):
         sys.exit(2)
 
