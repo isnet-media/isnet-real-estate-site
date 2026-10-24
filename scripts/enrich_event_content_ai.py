@@ -33,6 +33,11 @@ TARGET_CITY = os.getenv("EVENT_ENRICHMENT_CITY", "ashdod").strip()
 EVENT_HORIZON_MONTHS = 5
 
 
+class ApiQuotaExhausted(RuntimeError):
+    """Permanent API billing failure: do not retry or mutate the event feed."""
+
+
+
 def add_months(d, months):
     import calendar
     month_index = d.month - 1 + months
@@ -279,6 +284,8 @@ def ask_model(event, source_text, source_url, require_web_search=False):
     )
     if not r.ok:
         body = (r.text or "")[:1600]
+        if "credit_balance_exhausted" in body or "insufficient_quota" in body:
+            raise ApiQuotaExhausted(f"OpenAI API {r.status_code}: {body}")
         raise RuntimeError(f"OpenAI API {r.status_code}: {body}")
     obj = r.json()
     text = clean_text(obj.get("output_text"))
@@ -397,6 +404,7 @@ def main():
     horizon_end = add_months(today_date, EVENT_HORIZON_MONTHS).isoformat()
     checked = enriched = insufficient = fetch_failed = model_failed = 0
     rows = []
+    quota_exhausted = False
 
     city_items = CITIES.items() if TARGET_CITY in {"", "all"} else [(TARGET_CITY, CITIES[TARGET_CITY])]
     for slug, path in city_items:
@@ -428,6 +436,8 @@ def main():
                     try:
                         result = ask_model(event, source_text, source_url, require_web_search=require_web_search)
                         break
+                    except ApiQuotaExhausted:
+                        raise  # Permanent billing error; never retry.
                     except Exception as exc:
                         last_exc = exc
                         print("MODEL RETRY", slug, event.get("event_id"), attempt, clean_text(str(exc))[:400], flush=True)
@@ -442,6 +452,15 @@ def main():
                 insufficient += int(not ok)
                 changed = True
                 rows.append({"city": slug, "event_id": event.get("event_id"), "title": event.get("title"), "status": event["content_enrichment_status"]})
+            except ApiQuotaExhausted as exc:
+                # Stop on the first exhausted-credit response. The workflow will fail
+                # without committing feed changes; previously published content stays put.
+                model_failed += 1
+                quota_exhausted = True
+                err = clean_text(str(exc))[:1200]
+                rows.append({"city": slug, "event_id": event.get("event_id"), "title": event.get("title"), "status": "quota_exhausted", "error": err})
+                print("MODEL QUOTA EXHAUSTED - stopping immediately", slug, event.get("event_id"), err, flush=True)
+                break
             except Exception as exc:
                 model_failed += 1
                 event["content_enrichment_status"] = "model_error"
@@ -452,8 +471,10 @@ def main():
                 print("MODEL ERROR - deferred", slug, event.get("event_id"), err, flush=True)
                 changed = True
             time.sleep(0.15)
-        if changed:
+        if changed and not quota_exhausted:
             path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if quota_exhausted:
+            break
 
     report = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -463,11 +484,12 @@ def main():
         "insufficient": insufficient,
         "source_text_insufficient": fetch_failed,
         "model_failed": model_failed,
+        "api_quota_exhausted": quota_exhausted,
         "events": rows,
     }
     REPORT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("CONTENT ENRICHMENT", json.dumps({k:v for k,v in report.items() if k != "events"}, ensure_ascii=False), flush=True)
-    return 0
+    return 2 if quota_exhausted else 0
 
 if __name__ == "__main__":
     raise SystemExit(main())
