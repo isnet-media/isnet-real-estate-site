@@ -1,5 +1,6 @@
 """Regression checks for conservative stage deduplication and public-feed ID audit."""
 import io
+import hashlib
 import json
 import os
 import sys
@@ -30,20 +31,23 @@ def event(event_id, venue, source, **extra):
 
 
 class SafeStageMergeTests(unittest.TestCase):
-    def run_swap(self, events):
+    def run_swap(self, events, candidates=None, include_report=False):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             collected_path = root / "events-preview/admin/data/unified-stage-events-ashdod-rishon.json"
             report_path = root / "events-preview/admin/data/stage-board-swap-report.json"
             collected_path.parent.mkdir(parents=True)
-            collected_path.write_text(json.dumps({"events": []}), encoding="utf-8")
+            collected_path.write_text(json.dumps({"events": candidates or []}), encoding="utf-8")
             for city in ("ashdod", "rishon-lezion"):
                 path = root / f"events-preview/{city}/data/events.json"
                 path.parent.mkdir(parents=True)
                 path.write_text(json.dumps({"events": events if city == "rishon-lezion" else []}), encoding="utf-8")
             with mock.patch.object(swap, "ROOT", root), mock.patch.object(swap, "COLLECT", collected_path), mock.patch.object(swap, "REPORT", report_path), mock.patch.dict(os.environ, {"STAGE_SWAP_FROM_BOARDS": "YES_MATCHED_EVENTS_ONLY"}), redirect_stdout(io.StringIO()):
                 swap.main()
-            return json.loads((root / "events-preview/rishon-lezion/data/events.json").read_text())["events"]
+            result = json.loads((root / "events-preview/rishon-lezion/data/events.json").read_text())["events"]
+            if include_report:
+                return result, json.loads(report_path.read_text())["cities"]["rishon-lezion"]
+            return result
 
     def test_same_title_date_time_but_different_venues_must_both_survive(self):
         before = [event("board_a", "Hall A", "national_stage_boards"), event("auto_b", "Hall B", "agent")]
@@ -61,6 +65,38 @@ class SafeStageMergeTests(unittest.TestCase):
         before = [event("board_a", "Hall A", "national_stage_boards"), event("auto_b", "Hall A", "agent", human_manual_override=True)]
         self.assertEqual(len(self.run_swap(before)), 2)
 
+
+    def test_new_board_card_must_not_duplicate_an_existing_event_id(self):
+        candidate = {
+            "city": "rishon-lezion",
+            "title": "Test stage production",
+            "date_time": "2099-11-20T20:00:00",
+            "venue": "Hall A",
+            "source_id": "mevalim",
+        }
+        generated = "board_" + hashlib.sha256(
+            "rishon-lezion|test stage production|2099-11-20|20:00".encode()
+        ).hexdigest()[:18]
+        existing = event(generated, "Hall B", "mevalim_direct", title="Another show")
+        after, report = self.run_swap([existing], candidates=[candidate], include_report=True)
+        self.assertEqual(after, [existing])
+        self.assertEqual(report["new_imported"], 0)
+        self.assertEqual(report["id_collisions_skipped"], 1)
+        self.assertEqual(report["id_collision_examples"][0]["event_id"], generated)
+
+    def test_new_board_card_without_id_collision_is_still_imported(self):
+        candidate = {
+            "city": "rishon-lezion",
+            "title": "Test stage production",
+            "date_time": "2099-11-20T20:00:00",
+            "venue": "Hall A",
+            "source_id": "mevalim",
+        }
+        after, report = self.run_swap([], candidates=[candidate], include_report=True)
+        self.assertEqual(len(after), 1)
+        self.assertTrue(after[0]["event_id"].startswith("board_"))
+        self.assertEqual(report["new_imported"], 1)
+        self.assertEqual(report["id_collisions_skipped"], 0)
 
 class FakeResponse:
     status = 200
