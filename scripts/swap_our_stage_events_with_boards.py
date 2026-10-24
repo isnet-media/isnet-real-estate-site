@@ -120,8 +120,11 @@ def main():
         groups=defaultdict(list)
         for e in data["events"]:
             dt=(str(e.get("start_date") or ""),str(e.get("start_time") or "")[:5])
-            if e.get("category") in CATS and dt[0]>=today and dt[1] and normal(e.get("title")):
-                groups[(normal(e.get("title")),*dt)].append(e)
+            # Never deduplicate separate venues or records with an unknown venue.
+            # Title + date + time alone is not sufficient proof of one occurrence.
+            venue_key=normal(e.get("venue"))
+            if e.get("category") in CATS and dt[0]>=today and dt[1] and normal(e.get("title")) and venue_key:
+                groups[(normal(e.get("title")),*dt,venue_key)].append(e)
         drop=set()
         for key,group in groups.items():
             board=[e for e in group if e.get("source")=="national_stage_boards" or str(e.get("event_id") or "").startswith("board_")]
