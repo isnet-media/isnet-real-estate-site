@@ -1,45 +1,16 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-24T11:09:32.401251+00:00",
+  "checked_at": "2026-10-24T11:33:50.468420+00:00",
   "mode": "apply",
   "state": "attention",
   "scope": "Ashdod source feeds; CMS overlays remain authoritative; no claim of live-page verification",
   "input_sha256": {
-    "events-preview/ashdod/data/events.json": "7e171f25638b25949036e3fda7aa81ac5325c987a809d50c09b1621e7a978540",
+    "events-preview/ashdod/data/events.json": "d925386fa74656d19282f8ccefbdb21ecd1411eef95def6de3311b27d1b5dd43",
     "events-preview/admin/data/taxonomy.json": "72310e50ad395f9c4cb646863490b33aa263290b00c2920a697d4edc453da084",
     "events-preview/admin/data/subcategory-definitions.json": "6c2273cba22422c976f2834c424b8229c222037ca7090f86faffafc6c4f7223b",
     "events-preview/shared/standup-videos.json": "d1e6b4414492ed406bec59c7e4066f4ce9fd6c13f30ec2a4e9d036a3a6de41d7"
   },
-  "repairs": [
-    {
-      "event_id": "local_e58234264f1d4f0a6ad382",
-      "reason": "verified_subcategory_rule",
-      "before": {
-        "subcategory": "kids-activities",
-        "subcategory_review_status": null,
-        "subcategory_review_confidence": null
-      },
-      "after": {
-        "subcategory": "story-time",
-        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
-        "subcategory_review_confidence": 0.99
-      }
-    },
-    {
-      "event_id": "local_7de878c4cb898c2384bbfb",
-      "reason": "verified_subcategory_rule",
-      "before": {
-        "subcategory": "kids-activities",
-        "subcategory_review_status": null,
-        "subcategory_review_confidence": null
-      },
-      "after": {
-        "subcategory": "story-time",
-        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
-        "subcategory_review_confidence": 0.99
-      }
-    }
-  ],
+  "repairs": [],
   "unresolved": [
     {
       "id": "cd5f7d917527b38a2361",
@@ -3318,62 +3289,6 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "03ee41a7b220632ec93d",
-      "type": "standup_video",
-      "event_id": "evt_52_20261028",
-      "title": "אדיר מילר",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "2704b33052c8cfbcfd76",
-      "type": "standup_video",
-      "event_id": "evt_53_20261029",
-      "title": "בן בן ברוך",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "995dd0b4dda04ad34690",
-      "type": "content",
-      "event_id": "auto_as_9f171b38443c970d3e5b",
-      "title": "החולה ההודי - תיאטרון הקאמרי",
-      "reason": "Missing event description; source research required"
-    },
-    {
-      "id": "35dc0b698dfa61d592f2",
-      "type": "content",
-      "event_id": "auto_as_30ec2ea30430b22683d4",
-      "title": "החולה ההודי - תיאטרון הקאמרי",
-      "reason": "Missing event description; source research required"
-    },
-    {
-      "id": "203b3eac8dcce516843e",
-      "type": "content",
-      "event_id": "auto_as_74f83a3ec2c7e4c91806",
-      "title": "החולה ההודי - תיאטרון הקאמרי",
-      "reason": "Missing event description; source research required"
-    },
-    {
-      "id": "fd98fda11867280a68cd",
-      "type": "content",
-      "event_id": "auto_as_937629d0f9bb1089b498",
-      "title": "החולה ההודי - תיאטרון הקאמרי",
-      "reason": "Missing event description; source research required"
-    },
-    {
-      "id": "7a15a917b3aa7157372a",
-      "type": "standup_video",
-      "event_id": "evt_59_20261121",
-      "title": "אורי חזקיה",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "e2983c941e8e4c91d92b",
-      "type": "standup_video",
-      "event_id": "auto_as_2b8d59b9f755ec9b7983",
-      "title": "מתן פרץ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
       "id": "1ec9b5772f2c9d9c72cf",
       "type": "subcategory",
       "event_id": "local_4b0897feb798626d6cd8b7",
@@ -4305,6 +4220,62 @@
       "reason": "No unique verified same-production source image; research required"
     },
     {
+      "id": "03ee41a7b220632ec93d",
+      "type": "standup_video",
+      "event_id": "evt_52_20261028",
+      "title": "אדיר מילר",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "2704b33052c8cfbcfd76",
+      "type": "standup_video",
+      "event_id": "evt_53_20261029",
+      "title": "בן בן ברוך",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "995dd0b4dda04ad34690",
+      "type": "content",
+      "event_id": "auto_as_9f171b38443c970d3e5b",
+      "title": "החולה ההודי - תיאטרון הקאמרי",
+      "reason": "Missing event description; source research required"
+    },
+    {
+      "id": "35dc0b698dfa61d592f2",
+      "type": "content",
+      "event_id": "auto_as_30ec2ea30430b22683d4",
+      "title": "החולה ההודי - תיאטרון הקאמרי",
+      "reason": "Missing event description; source research required"
+    },
+    {
+      "id": "203b3eac8dcce516843e",
+      "type": "content",
+      "event_id": "auto_as_74f83a3ec2c7e4c91806",
+      "title": "החולה ההודי - תיאטרון הקאמרי",
+      "reason": "Missing event description; source research required"
+    },
+    {
+      "id": "fd98fda11867280a68cd",
+      "type": "content",
+      "event_id": "auto_as_937629d0f9bb1089b498",
+      "title": "החולה ההודי - תיאטרון הקאמרי",
+      "reason": "Missing event description; source research required"
+    },
+    {
+      "id": "7a15a917b3aa7157372a",
+      "type": "standup_video",
+      "event_id": "evt_59_20261121",
+      "title": "אורי חזקיה",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "e2983c941e8e4c91d92b",
+      "type": "standup_video",
+      "event_id": "auto_as_2b8d59b9f755ec9b7983",
+      "title": "מתן פרץ",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
       "id": "source-ironit_library",
       "type": "source_partial",
       "title": "ironit_library",
@@ -4336,7 +4307,7 @@
     }
   ],
   "counts": {
-    "repairs": 2,
+    "repairs": 0,
     "unresolved": 614
   },
   "data_readback_verified": true
