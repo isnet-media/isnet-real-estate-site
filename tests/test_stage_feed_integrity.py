@@ -131,7 +131,8 @@ class SafeStageMergeTests(unittest.TestCase):
                          image_url="https://example.org/approved.jpg",
                          image_source="official",
                          image_verified=True, image_publishable=True,
-                         image_rights_status="approved")
+                         image_rights_status="approved",
+                         cms_post_id=8123, editorial_tags=["Ashdod local"])
         candidate = {
             "city": "rishon-lezion", "title": original["title"],
             "date_time": "2099-11-20T20:00:00", "venue": "Hall A",
@@ -147,6 +148,8 @@ class SafeStageMergeTests(unittest.TestCase):
                     "image_publishable", "image_rights_status"):
             self.assertEqual(after[0].get(key), original.get(key), key)
         self.assertNotIn("image_origin_url", after[0], "Rejected image URL must not leak into provenance")
+        self.assertEqual(after[0]["cms_post_id"], 8123, "Preserve the original CMS reference")
+        self.assertEqual(after[0]["editorial_tags"], ["Ashdod local"])
 
 class FakeResponse:
     status = 200
