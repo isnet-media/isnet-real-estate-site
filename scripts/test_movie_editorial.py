@@ -9,7 +9,8 @@ registry=json.loads((ROOT/'events-preview/shared/data/movie-editorial.json').rea
 index=json.loads((ROOT/'events-preview/shared/data/movie-page-index.json').read_text())
 urls=set();total=0
 for key,record in registry['movies'].items():
-    assert len(record['original_text'])>=100,key
+    assert len(record['original_text'].split())>=140,(key,'expanded viewing guide required')
+    assert len(record['original_text'].split('\n\n'))>=3,(key,'story, context and viewer guidance')
     assert record.get('synopsis_sources'),key
     for field in ('critics','audience_rating'):
         source=record.get(field)

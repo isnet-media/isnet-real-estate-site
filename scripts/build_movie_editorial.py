@@ -47,7 +47,7 @@ def schedule_html(movie,day):
   out.append('<section class="cinemaBlock"><div class="cinemaBlock__head"><h3>'+esc(venue['name'])+'</h3></div>'+(''.join(rows) or '<p class="noSchedule">אין כרגע שעות הקרנה מאומתות. בדקו באתר בית הקולנוע.</p>')+'</section>')
  return ''.join(out)
 def build():
- registry=json.loads((ROOT/'events-preview/shared/data/movie-editorial.json').read_text());aliases=registry['aliases'];records=registry['movies'];today=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat();urls=[];index={};report={'cities':{},'editorial_records':len(records),'audience_scores':sum(bool(r.get('audience_rating')) for r in records.values()),'critics_summaries':sum(bool(r.get('critics')) for r in records.values())}
+ registry=json.loads((ROOT/'events-preview/shared/data/movie-editorial.json').read_text());aliases=registry['aliases'];records=registry['movies'];today=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat();urls=[];index={};report={'cities':{},'editorial_records':len(records),'audience_scores':sum(bool(r.get('audience_rating')) for r in records.values()),'critics_summaries':sum(bool(r.get('critics')) for r in records.values()),'description_words':{'min':min(len(r.get('original_text','').split()) for r in records.values()),'max':max(len(r.get('original_text','').split()) for r in records.values())}}
  for city,label in CITIES.items():
   folder=ROOT/'events-preview'/city;data=json.loads((folder/'data/cinema.json').read_text());groups={};index[city]={}
   for m in data['movies']:
