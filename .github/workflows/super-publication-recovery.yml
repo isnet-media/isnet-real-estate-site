@@ -22,7 +22,7 @@ jobs:
       - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
       - name: Restore and validate original collection without another scan
         run: |
-          for city in YAVNE BATYAM; do
+          for city in $(python -c 'import json; print(" ".join(json.load(open(".supermarket-recovery/manifest.json"))["cities"]))'); do
             python scripts/restore_super_candidate.py --city "$city"
             script_city=$(echo "$city" | tr '[:upper:]' '[:lower:]')
             python "scripts/build_${script_city}_super.py"

@@ -21,4 +21,4 @@ def restore(city):
  assert report['updated_count']==manifest['cities'][city]['updated_count']
  print('Restored existing collection evidence:',city,report['checked_at'],report['updated_count'])
 if __name__=='__main__':
- p=argparse.ArgumentParser();p.add_argument('--city',choices=['YAVNE','BATYAM'],required=True);restore(p.parse_args().city)
+ p=argparse.ArgumentParser();p.add_argument('--city',choices=['ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM'],required=True);restore(p.parse_args().city)
