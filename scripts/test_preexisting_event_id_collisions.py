@@ -18,6 +18,10 @@ def check_rejects(before, after):
 def main():
     originals = [row("same", "original a"), row("same", "original b"), row("unique", "old")]
     assert verify_preserved_duplicates(originals, list(originals), "test") == 1
+    assert verify_preserved_duplicates(originals, list(reversed(originals)), "test") == 1
+    assert verify_preserved_duplicates(
+        originals, [originals[0], originals[1], row("unique", "updated")], "test"
+    ) == 1
     updated = originals + [row("fresh", "new")]
     assert verify_preserved_duplicates(originals, updated, "test") == 1
     assert verify_preserved_duplicates(
@@ -27,7 +31,9 @@ def main():
     check_rejects(originals, [originals[0], originals[2]])
     check_rejects(originals, [originals[0], row("same", "overwritten"), originals[2]])
     check_rejects(originals, originals + [row("same", "duplicated again")])
-    print("6 legacy-collision safety scenarios passed")
+    check_rejects(originals, [row("same", "original a"), row("same", "original b"),
+                              row("same", "third"), originals[2]])
+    print("10 legacy-collision safety scenarios passed")
 
 
 if __name__ == "__main__":
