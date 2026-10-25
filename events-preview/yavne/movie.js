@@ -121,14 +121,17 @@ if(document.fonts?.ready)document.fonts.ready.then(configureDescription);
 window.addEventListener("resize",configureDescription);
 async function init(){
   try{
+    // Fetch the feed concurrently, but redirect old links as soon as the index is ready.
+    const dataRequest=fetch("data/cinema.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()});
+    dataRequest.catch(()=>{});
     await window.CinemaEditorial?.ready;
     const id=new URLSearchParams(location.search).get("id")||document.body.dataset.movieId;
     if(!id)throw new Error("missing id");
-    const data=await fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()});
-    const movie=window.CinemaEditorial?.merge(data.movies||[],id)||(data.movies||[]).find(m=>m.id===id||(m.aliases||[]).includes(id));
-    if(!movie)throw new Error("movie");
     const cleanUrl=window.CinemaEditorial?.url(id);
     if(!document.body.dataset.staticMovie&&cleanUrl?.startsWith("/events-preview/")){location.replace(cleanUrl+location.hash);return}
+    const data=await dataRequest;
+    const movie=window.CinemaEditorial?.merge(data.movies||[],id)||(data.movies||[]).find(m=>m.id===id||(m.aliases||[]).includes(id));
+    if(!movie)throw new Error("movie");
     renderHero(movie);
     renderSchedules(movie);
     renderTrailer(movie);

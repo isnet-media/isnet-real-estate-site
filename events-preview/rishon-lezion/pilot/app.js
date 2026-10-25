@@ -1236,7 +1236,38 @@ async function init(){
   if(location.pathname.includes("/rishon-lezion/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
   // Independent sections must not delay the first usable event list.
   state.cinemaLoading=true;
-  const cinemaRequest=fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("cinema");return r.json()}).catch(()=>({movies:[]}));
+  let boardReady=false;
+  $("cinemaFilters").onclick=e=>{
+    const b=e.target.closest("[data-cinema]"); if(!b)return;
+    state.cinemaVenue=b.dataset.cinema; renderCinema();
+  };
+  $("cinemaAudienceFilters").onclick=e=>{
+    const b=e.target.closest("[data-audience]"); if(!b)return;
+    state.cinemaAudience=b.dataset.audience; renderCinema();
+  };
+  window.addEventListener("hashchange",()=>{sharedSaved=window.ISNET_SAVED_LIST?.decode(location.hash);$("savedListStatus").textContent=sharedSaved?"רשימה ששיתפו איתך · אינה משנה את המועדפים שלך.":"";render();state.cinemaOpen=location.hash==="#cinema";renderCinema();if(state.cinemaOpen)$("cinemaSection").scrollIntoView({block:"start"})});
+  $("cinemaSearch").oninput=e=>{state.cinemaQuery=e.target.value;renderCinema()};
+  $("cinemaClose").onclick=()=>{
+    state.cinemaOpen=false;
+    renderCinema();
+    renderCategories();
+    history.replaceState(null,"",location.pathname+location.search);
+    window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  };
+  document.querySelectorAll("[data-close-trailer]").forEach(x=>x.onclick=closeTrailer);
+  const cinemaRequest=fetch("data/cinema.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error("cinema");return r.json()}).catch(()=>({movies:[]}));
+  // Cinema has no dependency on event/CMS responses or editorial enrichment.
+  if(location.hash==="#cinema"){state.cinemaOpen=true;if(new URLSearchParams(location.search).get("audience")==="family")state.cinemaAudience="family";}
+  cinemaRequest.then(cinema=>{
+    state.cinema=cinema.movies||[];state.cinemaUpdatedAt=cinema.updated_at||null;state.cinemaLoading=false;
+    if(boardReady)render();
+    renderCinema();
+    window.CinemaEditorial?.ready.then(()=>{
+      state.cinema=window.CinemaEditorial.unique(cinema.movies||[]);
+      if(boardReady)render();
+      renderCinema();
+    }).catch(error=>console.warn("Keeping source cinema listing",error));
+  });
   const sportsRequest=fetch("data/sports.json?v=20261005-2").then(r=>{if(!r.ok)throw Error("sports");return r.json()}).catch(()=>({branches:{},teams:[]}));
   const [data,fallbacks,taxonomy,cmsRows]=await Promise.all([
     (window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
@@ -1258,14 +1289,11 @@ async function init(){
   if(requestedSub&&window.publicTaxonomy.find(c=>c.id===state.category)?.subcategories?.some(x=>x.id===requestedSub))state.subcategory=requestedSub;
   if(location.hash==="#cinema"){state.cinemaOpen=true;if(new URLSearchParams(location.search).get("audience")==="family")state.cinemaAudience="family";}
   if(sharedSaved)$("savedListStatus").textContent="רשימה ששיתפו איתך · אינה משנה את המועדפים שלך. להצגת כל האירועים לחצו על חזרה לכל האירועים.";
+  boardReady=true;
   render();
   renderCinema();
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));
-  cinemaRequest.then(async cinema=>{
-    await window.CinemaEditorial?.ready;
-    state.cinema=window.CinemaEditorial?.unique(cinema.movies||[])||cinema.movies||[];state.cinemaUpdatedAt=cinema.updated_at||null;state.cinemaLoading=false;
-    render();renderCinema();
-  });
+
   sportsRequest.then(sports=>{state.sportsMeta=sports;renderSportsFilters();});
   const searchInput=$("searchInput");
   let searchTimer, lastMeasuredSearch = "";
@@ -1393,24 +1421,6 @@ async function init(){
   $("favoritesOnly").onclick=()=>{state.favoritesOnly=!state.favoritesOnly;render()};
   $("sortSelect").onchange=e=>{state.sort=e.target.value;render()};
   $("resetAll").onclick=resetAll;
-  $("cinemaFilters").onclick=e=>{
-    const b=e.target.closest("[data-cinema]"); if(!b)return;
-    state.cinemaVenue=b.dataset.cinema; renderCinema();
-  };
-  $("cinemaAudienceFilters").onclick=e=>{
-    const b=e.target.closest("[data-audience]"); if(!b)return;
-    state.cinemaAudience=b.dataset.audience; renderCinema();
-  };
-  window.addEventListener("hashchange",()=>{sharedSaved=window.ISNET_SAVED_LIST?.decode(location.hash);$("savedListStatus").textContent=sharedSaved?"רשימה ששיתפו איתך · אינה משנה את המועדפים שלך.":"";render();state.cinemaOpen=location.hash==="#cinema";renderCinema();if(state.cinemaOpen)$("cinemaSection").scrollIntoView({block:"start"})});
-  $("cinemaSearch").oninput=e=>{state.cinemaQuery=e.target.value;renderCinema()};
-  $("cinemaClose").onclick=()=>{
-    state.cinemaOpen=false;
-    renderCinema();
-    renderCategories();
-    history.replaceState(null,"",location.pathname+location.search);
-    window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
-  };
-  document.querySelectorAll("[data-close-trailer]").forEach(x=>x.onclick=closeTrailer);
   document.querySelectorAll("[data-close-modal]").forEach(x=>x.onclick=closeModal);
   $("modalFavorite").onclick=()=>{toggleFavorite($("modalFavorite").dataset.id);openEvent($("modalFavorite").dataset.id)};
   document.addEventListener("keydown",e=>{
@@ -1431,5 +1441,5 @@ window.ISNET_LOAD_FULL_SEARCH=()=>{
  return fullSearchPromise;
 };
 window.ISNET_SEARCH_CATALOG=()=>({events:state.events,movies:state.cinema,taxonomy:window.publicTaxonomy||[]});
-init().catch(err=>{console.error(err);if(document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
+init().catch(err=>{console.error(err);if(state.cinemaLoading&&document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
 
