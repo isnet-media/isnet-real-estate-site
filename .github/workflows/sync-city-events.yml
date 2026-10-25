@@ -16,6 +16,8 @@ on:
       - "scripts/ofek_event_source.py"
       - "scripts/test_ofek_event_source.py"
       - "scripts/test_city_event_intake.py"
+      - "scripts/check_preexisting_event_id_collisions.py"
+      - "scripts/test_preexisting_event_id_collisions.py"
       - ".github/workflows/sync-city-events.yml"
   schedule:
     # Scan configured source calendars daily and audit both complete city datasets.
@@ -49,6 +51,7 @@ jobs:
       - name: Validate event source adapters
         run: |
           python scripts/test_city_event_intake.py
+          python scripts/test_preexisting_event_id_collisions.py
           python scripts/test_ofek_event_source.py
           python scripts/test_smarticket_details.py
           python scripts/test_institution_enrichment.py
@@ -99,9 +102,12 @@ jobs:
               assert isinstance(data["events"],list) and data["events"]
               assert all(e.get("city")==c["city"] for e in data["events"])
               keys=[e.get("event_id") for e in data["events"]]
-              assert len(keys)==len(set(keys)), f"duplicate event IDs: {slug}"
+              assert all(keys), f"missing event ID: {slug}"
               print(slug,"events",len(keys),"new",c["new"],"updated",c["updated"])
           PY
+
+      - name: Preserve legacy collision records and reject new duplicate IDs
+        run: python scripts/check_preexisting_event_id_collisions.py --baseline-ref HEAD
 
       - name: Publish datasets and operational source report
         run: |
@@ -126,6 +132,7 @@ jobs:
               python -u scripts/enrich_smarticket_event_details.py
               python -u scripts/enrich_events_institutions.py
               python -u scripts/audit_events_institutions.py
+              python scripts/check_preexisting_event_id_collisions.py --baseline-ref origin/main
               git add events-preview/ashdod/data/events.json events-preview/rishon-lezion/data/events.json events-preview/source-sync-report.json events-preview/institution-quality-report.json
               if git diff --cached --quiet; then
                 echo "Concurrent run already wrote the latest source data."
