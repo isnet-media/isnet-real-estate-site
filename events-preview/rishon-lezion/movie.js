@@ -4,7 +4,7 @@ const fmtFull=new Intl.DateTimeFormat("he-IL",{weekday:"long",day:"numeric",mont
 const fmtShort=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function localDate(s){const [y,m,d]=String(s||"").split("-").map(Number);return new Date(y,m-1,d)}
-function movieUrl(id){return "movie.html?id="+encodeURIComponent(id)}
+function movieUrl(id){return window.CinemaEditorial?.url(id)||"movie.html?id="+encodeURIComponent(id)}
 function venueLabel(id){return id==="cinema-city"?"סינמה סיטי ראשון לציון":"פלאנט ראשון לציון"}
 function cinemaToday(){return new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
 function activeMovieVenues(movie){return movie.venues.filter(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=cinemaToday()&&Array.isArray(times)&&times.length))}
@@ -108,23 +108,28 @@ function renderRelated(movie,all){
 }
 async function init(){
   try{
-    const id=new URLSearchParams(location.search).get("id");
+    await window.CinemaEditorial?.ready;
+    const id=new URLSearchParams(location.search).get("id")||document.body.dataset.movieId;
     if(!id)throw new Error("missing id");
     const data=await fetch("data/cinema.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()});
-    const movie=(data.movies||[]).find(m=>m.id===id||(m.aliases||[]).includes(id));
+    const movie=window.CinemaEditorial?.merge(data.movies||[],id)||(data.movies||[]).find(m=>m.id===id||(m.aliases||[]).includes(id));
     if(!movie)throw new Error("movie");
+    const cleanUrl=window.CinemaEditorial?.url(id);
+    if(!document.body.dataset.staticMovie&&cleanUrl?.startsWith("/events-preview/")){location.replace(cleanUrl+location.hash);return}
     renderHero(movie);
     renderSchedules(movie);
     renderTrailer(movie);
-    $("fullSynopsis").textContent=movie.synopsis||"פרטי הסרט יתעדכנו כאן.";
+    if(movie.editorial_text||!document.body.dataset.staticMovie)$("fullSynopsis").textContent=movie.editorial_text||movie.synopsis||"פרטי הסרט יתעדכנו כאן.";
     renderSources(movie,data.updated_at);
-    renderRelated(movie,data.movies||[]);
+    window.CinemaEditorial?.mount(movie);
+    renderRelated(movie,window.CinemaEditorial?.unique(data.movies||[])||data.movies||[]);
     $("loadingState").hidden=true;
     $("page").hidden=false;
     if(location.hash==="#showtimes"||location.hash==="#trailerSection")requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView({block:"start"}));
   }catch(err){
     console.error(err);
     $("loadingState").hidden=true;
+    if(document.body.dataset.staticMovie){$("page").hidden=false;return}
     $("errorState").hidden=false;
   }
 }

@@ -88,6 +88,8 @@ def build(with_cms=False):
         event_urls={f'https://isnet.co.il/events-preview/{city}/event.html?'+urlencode({'slug':slug(e)}) for e in events if visible(e,day)}
         if city!='ashdod' or not with_cms:urls.update(event_urls)
         report['cities'][city]={'events':len(data['events']),'hub_bytes':len(hub_encoded),'hub_gzip_bytes':len(gzip.compress(hub_encoded)),'full_bytes':len(original),'listing_bytes':len(encoded),'full_gzip_bytes':len(gzip.compress(original)),'listing_gzip_bytes':len(gzip.compress(encoded)),'canonical_event_urls':len(event_urls),'published_cms_included':with_cms}
+    from build_movie_editorial import build as build_movies
+    urls.update(build_movies())
     for url in sorted(urls):SubElement(SubElement(sitemap,'url'),'loc').text=url
     if with_cms:
         (ROOT/'events-preview/sitemap.xml').write_bytes(tostring(sitemap,encoding='utf-8',xml_declaration=True))

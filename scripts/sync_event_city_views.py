@@ -34,6 +34,13 @@ JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this genera
 
 
 def localize(content: str, name: str, city: dict, suffix: str) -> str:
+    # Film directories are generated from each city's own cinema feed.
+    if name == 'cinema.html':
+        marker = r'<!-- MOVIE_EDITORIAL_INDEX_START -->.*?<!-- MOVIE_EDITORIAL_INDEX_END -->'
+        current = ROOT / city['slug'] / name
+        local_index = re.search(marker, current.read_text(), re.S) if current.exists() else None
+        content = re.sub(marker, '', content, flags=re.S)
+        if local_index: content = content.replace('</body>', local_index[0] + '</body>')
     # Preserve other city editions' existing search metadata.
     content = content.replace('מה עושים באשדוד? אירועים, הופעות ובילויים | אשדוד נט', 'מה עושים באשדוד? | מבית אשדוד נט')
     content = content.replace('מה עושים באשדוד היום ובסוף השבוע? הופעות, הצגות, סטנדאפ, סרטים, פעילויות לילדים, בילויים לגמלאים ומסעדות — באתר האירועים של אשדוד נט.', 'כל האירועים, ההופעות, הסטנדאפ, הילדים, ההצגות, ההרצאות והתערוכות באשדוד במקום אחד.')

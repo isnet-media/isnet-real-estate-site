@@ -1,5 +1,5 @@
 /* Local search metadata and canonical links, driven by the publication build. */
-(()=>{'use strict';if(!location.pathname.includes('/ashdod/'))return;
+(()=>{'use strict';if(!location.pathname.includes('/ashdod/')||location.pathname.includes('/movies/'))return;
 const base=new URL('./',location.href),q=new URLSearchParams(location.search);
 const ready=fetch(new URL('data/seo-index.json',base)).then(r=>{if(!r.ok)throw Error('seo');return r.json()}).catch(()=>null);
 function meta(name,value,property=false){if(!value)return;let e=document.head.querySelector('meta['+(property?'property':'name')+'="'+name+'"]');if(!e){e=document.createElement('meta');e.setAttribute(property?'property':'name',name);document.head.append(e)}e.content=value}

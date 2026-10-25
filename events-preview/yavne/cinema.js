@@ -64,8 +64,9 @@ function closeTrailer(){
   $("trailerModal").hidden=true;$("trailerFrame").src="";document.body.style.overflow="";
 }
 async function init(){
+  await window.CinemaEditorial?.ready;
   const data=await fetch("data/cinema.json",{cache:"no-store"}).then(r=>r.json());
-  state.movies=data.movies||[];state.updatedAt=data.updated_at||null;
+  state.movies=window.CinemaEditorial?.unique(data.movies||[])||data.movies||[];state.updatedAt=data.updated_at||null;
   if(state.updatedAt){const d=new Date(state.updatedAt);if(!Number.isNaN(d.getTime()))$("cinemaUpdated").textContent="עודכן "+new Intl.DateTimeFormat("he-IL",{day:"numeric",month:"numeric",hour:"2-digit",minute:"2-digit"}).format(d)}
   document.querySelectorAll("[data-audience]").forEach(b=>b.onclick=()=>{state.audience=b.dataset.audience;render()});
   document.querySelectorAll("[data-venue]").forEach(b=>b.onclick=()=>{state.venue=b.dataset.venue;render()});
