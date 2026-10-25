@@ -71,6 +71,7 @@ on:
     - cron: "30 7,19 * * *"
   workflow_run:
     workflows:
+      - "Supermarket publication recovery"
       - "Refresh Ashdod supermarket prices"
       - "Refresh Yavne supermarket prices"
       - "Refresh Kiryat Gat supermarket prices"
