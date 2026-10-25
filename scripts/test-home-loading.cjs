@@ -6,8 +6,8 @@ async function check(city,fail){
  let cinemaResolve,sportsResolve;
  const cinema=new Promise(resolve=>cinemaResolve=resolve),sports=new Promise(resolve=>sportsResolve=resolve);
  let rendered=0,cinemaRendered=0,sportsRendered=0;
- const state={},window={ISNET_PUBLIC_CMS:{loadCards:async()=>({events:[{event_id:'one',title:'אירוע'}]}),publishedEvents:async actual=>{assert.equal(actual,city,'CMS must belong to current city');return []}}};
- const context={window,state,location:{pathname:`/events-preview/${city}/`,search:'',hash:''},URLSearchParams,catLabels:{},sharedSaved:null,iso:()=>'',today:()=>'',publishedBoardEvents:rows=>rows,render:()=>rendered++,renderCinema:()=>cinemaRendered++,renderSportsFilters:()=>sportsRendered++,fetch:address=>{
+ const state={},window={addEventListener(){},ISNET_PUBLIC_CMS:{loadCards:async()=>({events:[{event_id:'one',title:'אירוע'}]}),publishedEvents:async actual=>{assert.equal(actual,city,'CMS must belong to current city');return []}}};
+ const context={window,state,$:()=>({}),document:{querySelectorAll:()=>[]},closeTrailer(){},location:{pathname:`/events-preview/${city}/`,search:'',hash:''},URLSearchParams,catLabels:{},sharedSaved:null,iso:()=>'',today:()=>'',publishedBoardEvents:rows=>rows,render:()=>rendered++,renderCinema:()=>cinemaRendered++,renderSportsFilters:()=>sportsRendered++,fetch:address=>{
   if(address.includes('cinema.json'))return cinema;
   if(address.includes('sports.json'))return sports;
   return Promise.resolve({json:async()=>address.includes('taxonomy')?{primary_categories:[]}: {}});

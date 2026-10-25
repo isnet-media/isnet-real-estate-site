@@ -66,6 +66,7 @@ on:
       - "robots.txt"
       - "scripts/test_movie_editorial.py"
       - "scripts/test-movie-editorial.cjs"
+      - "scripts/test-cinema-loading.cjs"
       - "scripts/sync_event_city_views.py"
       - "scripts/apply_yavne_analytics.py"
       - "scripts/test-yavne-analytics.cjs"
@@ -198,6 +199,7 @@ jobs:
           python scripts/test_search_discovery.py
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-search-metadata.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-movie-editorial.cjs
+          node scripts/test-cinema-loading.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-category-listings.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-yavne-quality.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-hub-listings.cjs
