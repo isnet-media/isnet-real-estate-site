@@ -1,10 +1,19 @@
 """Restore a hash-verified publication candidate without collecting any prices."""
 import argparse,base64,gzip,hashlib,io,json,tarfile
+from datetime import datetime
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def restore(city):
  folder=ROOT/'.supermarket-recovery';manifest=json.loads((folder/'manifest.json').read_text())
  assert city in manifest['cities']
+ current_path=ROOT/('SUPER.'+city)/'data/refresh-status.json'
+ if current_path.exists():
+  current=json.loads(current_path.read_text()).get('checked_at')
+  candidate=manifest['cities'][city]['checked_at']
+  if current and datetime.fromisoformat(current)>datetime.fromisoformat(candidate):
+   raise RuntimeError('Refusing to replace a newer collection with an older recovery snapshot')
+  if current==candidate:
+   print('Original collection is already published:',city,current);return
  packed=b''.join(base64.b64decode((folder/p).read_text(),validate=True) for p in manifest['parts'])
  assert hashlib.sha256(packed).hexdigest()==manifest['sha256']
  expected='SUPER.'+city+'/data/'
