@@ -8,6 +8,7 @@ data remains isolated. Report every source, including unsupported/failed sources
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import re
@@ -740,6 +741,11 @@ def clearly_same_event(a, b):
     ta, tb = text_norm(a.get("title")), text_norm(b.get("title"))
     if not ta or not tb:
         return False
+    # Even equal titles at the same time can be distinct shows at separate venues.
+    # A missing venue is not sufficient to establish duplicate identity.
+    va, vb = text_norm(a.get("venue")), text_norm(b.get("venue"))
+    if not (va and vb and va == vb):
+        return False
     if ta == tb:
         return True
     sa = {s.get("name") for s in a.get("sources", [])}
@@ -784,6 +790,15 @@ def clean_generated_duplicates(events):
     events[:] = kept
     return removed_invalid, removed_duplicate
 
+
+
+def audit_generated_cleanup_candidates(events):
+    """Report heuristic cleanup candidates without mutating published event rows.
+
+    Existing records require source/CMS identity verification before removal.
+    """
+    preview = copy.deepcopy(events)
+    return clean_generated_duplicates(preview)
 
 
 def fix_imported_id_collisions(events, inherited_editorial_ids=frozenset()):
@@ -863,22 +878,20 @@ def merge(city_slug, specs, dry_run=False):
             e["purchase_url"] = None
             if e.get("purchase_source") in (None, "official_listing", "direct"):
                 e["purchase_source"] = "blocked_competitor_listing"
-    removed_classes = [e for e in events if e.get("event_id") not in locked_editorial_ids
-                       and not e.get("source_content_authoritative") and is_classes_candidate(
+    class_review_candidates = [e for e in events if e.get("event_id") not in locked_editorial_ids
+                               and not e.get("source_content_authoritative") and is_classes_candidate(
         e.get("title"), e.get("category"), e.get("description"), e.get("series_title"), e.get("variant_label")
     )]
-    if removed_classes:
-        events[:] = [e for e in events if e.get("event_id") in locked_editorial_ids
-                     or e.get("source_content_authoritative") or not is_classes_candidate(
-            e.get("title"), e.get("category"), e.get("description"), e.get("series_title"), e.get("variant_label")
-        )]
+    # Classification is heuristic. Preserve existing source/CMS records for
+    # review instead of deleting them merely because they resemble classes.
     ids_before = {e.get("event_id") for e in events}
     label = CITY_LABELS[city_slug]
     today = date.today()
     now = iso_now()
-    summary = {"city": label, "total_before": len(events) + len(removed_classes), "sources": {},
+    summary = {"city": label, "total_before": len(events), "sources": {},
                "new": 0, "updated": 0, "removed_invalid": 0, "removed_duplicates": 0,
-               "removed_classes": len(removed_classes), "errors": []}
+               "removed_classes": 0, "preserved_class_review_candidates": len(class_review_candidates),
+               "errors": []}
     for spec in specs:
         name = spec["name"]
         source_status = {"status": "unknown", "url": spec["url"], "discovered": 0,
@@ -1055,7 +1068,10 @@ def merge(city_slug, specs, dry_run=False):
               f"{source_status['images_collected']} images collected", flush=True)
         time.sleep(.3)
 
-    summary["removed_invalid"], summary["removed_duplicates"] = clean_generated_duplicates(events)
+    # Legacy cleanup used to erase existing records by text heuristics.
+    # Only report candidates; source/CMS identity must be verified first.
+    (summary["preserved_invalid_auto_candidates"],
+     summary["preserved_duplicate_auto_candidates"]) = audit_generated_cleanup_candidates(events)
     summary["repaired_event_ids"] = fix_imported_id_collisions(
         events, inherited_editorial_ids=locked_editorial_ids
     )
