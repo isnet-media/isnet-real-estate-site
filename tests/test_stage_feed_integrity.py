@@ -151,6 +151,31 @@ class SafeStageMergeTests(unittest.TestCase):
         self.assertEqual(after[0]["cms_post_id"], 8123, "Preserve the original CMS reference")
         self.assertEqual(after[0]["editorial_tags"], ["Ashdod local"])
 
+    def test_utc_candidate_does_not_duplicate_local_board_card(self):
+        original = event("board_current", "Hall A", "national_stage_boards")
+        candidate = {
+            "city": "rishon-lezion", "title": original["title"],
+            "date_time": "2099-11-20T18:00:00Z", "venue": "Hall A",
+            "source_id": "makore",
+        }
+        after, report = self.run_swap([original], [candidate], include_report=True)
+        self.assertEqual(after, [original])
+        self.assertEqual(report["new_imported"], 0)
+
+    def test_utc_candidate_enriches_editor_card_at_local_showtime(self):
+        original = event("auto_local", "Hall A", "agent", description="Old local copy")
+        candidate = {
+            "city": "rishon-lezion", "title": original["title"],
+            "date_time": "2099-11-20T18:00:00.000Z", "venue": "Hall A",
+            "description": "Verified source copy " * 10, "source_id": "makore",
+        }
+        after, report = self.run_swap([original], [candidate], include_report=True)
+        self.assertEqual(len(after), 1)
+        self.assertEqual(after[0]["event_id"], "auto_local")
+        self.assertEqual(after[0]["start_time"], "20:00")
+        self.assertEqual(report["replaced"], 1)
+
+
 class FakeResponse:
     status = 200
     headers = {"Last-Modified": "Sat, 24 Oct 2026 09:40:00 GMT"}
