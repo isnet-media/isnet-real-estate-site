@@ -57,9 +57,13 @@ class SafeStageMergeTests(unittest.TestCase):
         before = [event("board_a", "", "national_stage_boards"), event("auto_b", "", "agent")]
         self.assertEqual(len(self.run_swap(before)), 2)
 
-    def test_matching_venue_and_occurrence_can_remove_unlocked_agent_duplicate(self):
+    def test_matching_venue_and_occurrence_is_only_flagged_for_cms_review(self):
         before = [event("board_a", "Hall A", "national_stage_boards"), event("auto_b", "Hall A", "agent")]
-        self.assertEqual([x["event_id"] for x in self.run_swap(before)], ["board_a"])
+        after, report = self.run_swap(before, include_report=True)
+        self.assertEqual(after, before, "A possible duplicate is not permission to delete a CMS card")
+        self.assertEqual(report["duplicate_agent_records_removed"], 0)
+        self.assertEqual(report["duplicate_agent_records_review_required"], 1)
+        self.assertEqual(report["duplicate_agent_id_examples"], ["auto_b"])
 
     def test_editor_locked_card_must_not_be_removed(self):
         before = [event("board_a", "Hall A", "national_stage_boards"), event("auto_b", "Hall A", "agent", human_manual_override=True)]
@@ -97,6 +101,55 @@ class SafeStageMergeTests(unittest.TestCase):
         self.assertTrue(after[0]["event_id"].startswith("board_"))
         self.assertEqual(report["new_imported"], 1)
         self.assertEqual(report["id_collisions_skipped"], 0)
+
+    def test_matching_title_and_date_cannot_overwrite_another_venue(self):
+        original = event("auto_a", "Hall A", "agent", description="Keep the original")
+        candidate = {
+            "city": "rishon-lezion", "title": original["title"],
+            "date_time": "2099-11-20T20:00:00", "venue": "Hall B",
+            "source_id": "mevalim", "description": "B" * 120,
+        }
+        after = self.run_swap([original], [candidate])
+        self.assertEqual(after, [original])
+
+    def test_matching_title_and_date_cannot_overwrite_another_showtime(self):
+        original = event("auto_a", "Hall A", "agent", description="Keep the original")
+        candidate = {
+            "city": "rishon-lezion", "title": original["title"],
+            "date_time": "2099-11-20T21:00:00", "venue": "Hall A",
+            "source_id": "mevalim", "description": "B" * 120,
+        }
+        after = self.run_swap([original], [candidate])
+        self.assertIn(original, after)
+        self.assertEqual(len(after), 2, "Distinct showtime should be retained as a separate candidate")
+
+    def test_exact_match_does_not_erase_original_copy_or_verified_photo(self):
+        original = event("auto_a", "Hall A", "agent",
+                         description="Approved local description",
+                         series_description="Approved series description",
+                         content_source_url="https://example.org/original",
+                         image_url="https://example.org/approved.jpg",
+                         image_source="official",
+                         image_verified=True, image_publishable=True,
+                         image_rights_status="approved",
+                         cms_post_id=8123, editorial_tags=["Ashdod local"])
+        candidate = {
+            "city": "rishon-lezion", "title": original["title"],
+            "date_time": "2099-11-20T20:00:00", "venue": "Hall A",
+            "source_id": "mevalim", "description": "Short",
+            "image_url": "https://example.org/unreviewed.jpg",
+            "source_url": "https://example.org/board",
+        }
+        after, report = self.run_swap([original], [candidate], include_report=True)
+        self.assertEqual(len(after), 1)
+        self.assertEqual(report["replaced"], 1)
+        for key in ("description", "series_description", "content_source_url",
+                    "image_url", "image_source", "image_verified",
+                    "image_publishable", "image_rights_status"):
+            self.assertEqual(after[0].get(key), original.get(key), key)
+        self.assertNotIn("image_origin_url", after[0], "Rejected image URL must not leak into provenance")
+        self.assertEqual(after[0]["cms_post_id"], 8123, "Preserve the original CMS reference")
+        self.assertEqual(after[0]["editorial_tags"], ["Ashdod local"])
 
 class FakeResponse:
     status = 200

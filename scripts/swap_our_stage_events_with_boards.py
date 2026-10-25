@@ -46,11 +46,18 @@ def main():
             if not options:
                 kept.append(e);ignored+=1;continue
             selected=sorted(options,key=lambda x:(bool(good_image(x.get("image_url"))),bool(good_copy(x.get("description"))),RANK.get(x.get("source_id"),0)),reverse=True)[0]
-            if not selected.get("date_time") or not selected.get("venue"):
-                kept.append(e);continue
+            # Same title and date may refer to different halls or showtimes.
+            # Never overwrite an existing occurrence without both identities.
+            selected_time=str(selected.get("date_time") or "")[11:16]
+            if (not selected.get("venue") or not normal(e.get("venue"))
+                or normal(selected.get("venue")) != normal(e.get("venue"))
+                or not e.get("start_time") or selected_time != str(e.get("start_time"))[:5]):
+                kept.append(e);ignored+=1;continue
             copy=good_copy(selected.get("description"))
             img=selected.get("image_url") if good_image(selected.get("image_url")) else None
-            new={"event_id":e["event_id"],"title":html.unescape(selected["title"]),"city":e.get("city"),"category":e["category"],
+            # Preserve CMS linkage and any editorial metadata not managed here.
+            new=dict(e)
+            new.update({"event_id":e["event_id"],"title":html.unescape(selected["title"]),"city":e.get("city"),"category":e["category"],
                  "subcategory":e.get("subcategory"),"start_date":selected["date_time"][:10],
                  "start_time":selected["date_time"][11:16],"venue":html.unescape(selected["venue"]),
                  "status":"active","description":copy,"series_description":copy,
@@ -61,7 +68,22 @@ def main():
                  "image_represents_event":bool(img),"image_strategy":"national_board_displayed_image",
                  "image_rights_status":"publisher_directed_reuse_license_unverified" if img else "unknown",
                  "content_source_url":selected.get("source_url"),"rich_content_status":"enriched" if copy else "source_copy_unavailable",
-                 "source":"national_stage_boards","source_event_id":e["event_id"],"imported_at":e.get("imported_at") or ingestion_time,"last_imported_at":ingestion_time}
+                 "source":"national_stage_boards","source_event_id":e["event_id"],"imported_at":e.get("imported_at") or ingestion_time,"last_imported_at":ingestion_time})
+            # Board copy/images can be missing or less trustworthy than what
+            # the local editor already approved. Never erase verified content.
+            if not copy:
+                new["description"]=e.get("description") or ""
+                new["series_description"]=e.get("series_description") or e.get("description") or ""
+                new["rich_content_status"]=e.get("rich_content_status") or "source_copy_unavailable"
+                new["content_source_url"]=e.get("content_source_url")
+            if not img or (e.get("image_verified") and e.get("image_url")):
+                for field in ("image_url","image_origin_url","image_source","image_verified",
+                              "image_publishable","image_represents_event","image_strategy",
+                              "image_rights_status"):
+                    if field in e:
+                        new[field]=e[field]
+                    else:
+                        new.pop(field,None)
             replacement.append(new);removed.append(e["event_id"])
         if enabled and replacement:
             data["events"]=kept+replacement
@@ -151,12 +173,15 @@ def main():
                 if e.get("human_manual_override") is True or e.get("image_manual_override") is True or e.get("description_manual_override") is True:continue
                 if e.get("source")=="national_stage_boards" or str(e.get("event_id") or "").startswith(("auto_","evt_","board_")):
                     drop.add(id(e))
-        removed_duplicates=sum(id(e) in drop for e in data["events"])
-        if enabled and drop:
-            data["events"]=[e for e in data["events"] if id(e) not in drop]
-            if city=="ashdod":apply_ashdod_category_overrides(data["events"],ROOT)
-            path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-        report["cities"][city]["duplicate_agent_records_removed"]=removed_duplicates if enabled else 0
+        # An apparent duplicate may still have a published CMS URL or unique
+        # editorial context. Never delete it without source and CMS verification.
+        review=[e for e in data["events"] if id(e) in drop]
+        report["cities"][city]["duplicate_agent_records_removed"]=0
+        report["cities"][city]["duplicate_agent_records_review_required"]=len(review)
+        report["cities"][city]["duplicate_agent_id_examples"]=[
+            e.get("event_id") for e in review[:20]
+        ]
+        report["cities"][city]["duplicate_agent_records_preserved"]=True
         report["cities"][city]["duplicates_preserved_if_editor_locked"]=True
     report["published"]=enabled and any(x["replaced"] or x.get("new_imported") or x.get("duplicate_agent_records_removed") for x in report["cities"].values())
     REPORT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")

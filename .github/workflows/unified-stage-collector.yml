@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '05 5 * * *'
   push:
+    branches: [main]
     paths:
       - 'scripts/collect_unified_stage_events.py'
       - 'scripts/swap_our_stage_events_with_boards.py'
