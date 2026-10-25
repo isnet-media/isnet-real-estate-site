@@ -50,6 +50,19 @@ class EditorialTests(unittest.TestCase):
  def test_duplicates_retain_canonical_identity_for_old_links(self):
   p=self.event(description='הפקה',editorial_version=1,image_verified=True,image_url='https://a.test/a.jpg');dup=self.event(event_id='old-link');d={'events':[p,dup]};q.finalize(d,{'programs':[]})
   self.assertFalse(dup['is_active']);self.assertEqual(dup['canonical_event_id'],'original');self.assertEqual(len(d['events']),2)
+ def test_finalize_preserves_all_preexisting_id_collisions_without_rewrites(self):
+  for duplicate_id in ['auto_ri_preexisting', 'board_preexisting']:
+   with self.subTest(duplicate_id=duplicate_id):
+    old_rows=[
+     self.event(event_id=duplicate_id,title='גיל שוחט מארח את ניקי גולדשטיין',description='הפקה אחת',sources=[{'name':'national_stage_boards'}]),
+     self.event(event_id=duplicate_id,title='גיל שוחט',description='תיאור אחר',sources=[{'name':'mevalim_direct'}]),
+    ]
+    snapshot=copy.deepcopy(old_rows)
+    data,stats=q.finalize({'events':old_rows},{'programs':[]})
+    self.assertEqual(len(data['events']),2)
+    self.assertEqual(data['events'],snapshot)
+    self.assertEqual(stats['repeated_ids'],1)
+    self.assertEqual(stats['preexisting_collision_groups_for_review'],1)
  def test_unnamed_film_is_not_published_as_a_fabricated_program(self):
   e=self.event(title='הקרנת סרט',category='cinema');q.finalize({'events':[e]},{'programs':[]});self.assertFalse(e['is_active']);self.assertEqual(e['visibility_reason'],'awaiting_program_details')
  def test_illustration_is_explicit_and_not_credited_as_source_photo(self):
