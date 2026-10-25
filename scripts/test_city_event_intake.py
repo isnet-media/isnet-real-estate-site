@@ -85,4 +85,17 @@ collision = [
 assert m.fix_imported_id_collisions(collision)==1
 assert len({x["event_id"] for x in collision})==2, collision
 
+\nlegacy_rows = [
+    {"event_id": "board_legacy", "title": "Original first", "city": "ראשון לציון"},
+    {"event_id": "board_legacy", "title": "Original second", "city": "ראשון לציון"},
+]
+assert m.fix_imported_id_collisions(legacy_rows, inherited_editorial_ids={"board_legacy"}) == 0
+assert [e["title"] for e in legacy_rows] == ["Original first", "Original second"]
+try:
+    m.fix_imported_id_collisions([dict(e) for e in legacy_rows])
+except ValueError as e:
+    assert "Editorial event has conflicting ID" in str(e)
+else:
+    raise AssertionError("New unknown editorial collisions must fail closed")
+
 print("PASS: Smarticket Hebrew dates, HTRL, Kotar, JSON-LD, stable dedupe")
