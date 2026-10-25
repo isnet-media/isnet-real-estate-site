@@ -85,7 +85,8 @@ def build():
    dest=folder/'movies'/key/'index.html';dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(str(soup)+'\n');urls.append(url)
    links.append('<li><a href="'+esc(url)+'">'+esc(movie['title'])+' – תקציר וביקורות</a></li>')
   nav='<!-- MOVIE_EDITORIAL_INDEX_START --><nav class="cinemaEditorialIndex" aria-label="דפי הסרטים"><details><summary>כל הסרטים: תקצירים, ביקורות והקרנות</summary><ul>'+''.join(links)+'</ul></details></nav><!-- MOVIE_EDITORIAL_INDEX_END -->'
-  cinema=folder/'cinema.html';content=cinema.read_text();content=re.sub(r'<!-- MOVIE_EDITORIAL_INDEX_START -->.*?<!-- MOVIE_EDITORIAL_INDEX_END -->','',content,flags=re.S);content=content.replace('</body>',nav+'</body>');cinema.write_text(content)
+  for name in ('cinema.html','index.html'):
+   cinema=folder/name;content=cinema.read_text();content=re.sub(r'<!-- MOVIE_EDITORIAL_INDEX_START -->.*?<!-- MOVIE_EDITORIAL_INDEX_END -->','',content,flags=re.S);content=content.replace('</body>',nav+'</body>');cinema.write_text(content)
   report['cities'][city]={'feed_records':len(data['movies']),'pages':len(groups),'original_copy':sum(bool(records.get(k,{}).get('original_text')) for k in groups)}
  (ROOT/'events-preview/shared/data/movie-page-index.json').write_text(json.dumps(index,ensure_ascii=False,separators=(',',':'))+'\n')
  sitemap=Element('urlset',xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')

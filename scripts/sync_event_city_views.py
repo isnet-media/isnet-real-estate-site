@@ -35,7 +35,7 @@ JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this genera
 
 def localize(content: str, name: str, city: dict, suffix: str) -> str:
     # Film directories are generated from each city's own cinema feed.
-    if name == 'cinema.html':
+    if name in ('cinema.html', 'index.html'):
         marker = r'<!-- MOVIE_EDITORIAL_INDEX_START -->.*?<!-- MOVIE_EDITORIAL_INDEX_END -->'
         current = ROOT / city['slug'] / name
         local_index = re.search(marker, current.read_text(), re.S) if current.exists() else None

@@ -26,7 +26,7 @@ for city in CITIES:
         key=registry['aliases'].get(movie['id'],movie['id'])
         groups.setdefault(key,[]).append(movie)
         assert index[city][movie['id']].endswith('/'+key+'/')
-    nav=BeautifulSoup((ROOT/f'events-preview/{city}/cinema.html').read_text(),'html.parser')
+    nav=BeautifulSoup((ROOT/f'events-preview/{city}/index.html').read_text(),'html.parser')
     for key,movies in groups.items():
         url=BASE+city+'/movies/'+key+'/'
         page=ROOT/urlparse(url).path.lstrip('/')/'index.html'

@@ -542,7 +542,7 @@ function renderCinema(){
   document.querySelectorAll("[data-trailer]").forEach(b=>b.onclick=e=>{e.stopPropagation();openTrailer(b.dataset.trailer)});
   document.querySelectorAll("[data-movie]").forEach(card=>card.onclick=e=>{
     if(e.target.closest("[data-trailer],a,button"))return;
-    location.href="movie.html?id="+encodeURIComponent(card.dataset.movie);
+    location.href=window.CinemaEditorial?.url(card.dataset.movie)||"movie.html?id="+encodeURIComponent(card.dataset.movie);
   });
   const updated=$("cinemaUpdated");
   if(updated){
@@ -1295,8 +1295,9 @@ async function init(){
   render();
   renderCinema();
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));
-  cinemaRequest.then(cinema=>{
-    state.cinema=cinema.movies||[];state.cinemaUpdatedAt=cinema.updated_at||null;state.cinemaLoading=false;
+  cinemaRequest.then(async cinema=>{
+    await window.CinemaEditorial?.ready;
+    state.cinema=window.CinemaEditorial?.unique(cinema.movies||[])||cinema.movies||[];state.cinemaUpdatedAt=cinema.updated_at||null;state.cinemaLoading=false;
     render();renderCinema();
   });
   sportsRequest.then(sports=>{state.sportsMeta=sports;renderSportsFilters();});
