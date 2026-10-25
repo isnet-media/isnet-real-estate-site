@@ -1,63 +1,16 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-25T11:11:36.583569+00:00",
+  "checked_at": "2026-10-25T11:15:08.856804+00:00",
   "mode": "apply",
   "state": "attention",
   "scope": "Ashdod source feeds; CMS overlays remain authoritative; no claim of live-page verification",
   "input_sha256": {
-    "events-preview/ashdod/data/events.json": "5df0d5d79e4a9e89d1974bca2d2f4df66f737e7ad15954603d058cc7873e43d9",
+    "events-preview/ashdod/data/events.json": "9166337f4a2113df2fb26a8b6804ae11e38e6374672e46181d6455facea461d3",
     "events-preview/admin/data/taxonomy.json": "72310e50ad395f9c4cb646863490b33aa263290b00c2920a697d4edc453da084",
     "events-preview/admin/data/subcategory-definitions.json": "6c2273cba22422c976f2834c424b8229c222037ca7090f86faffafc6c4f7223b",
     "events-preview/shared/standup-videos.json": "d1e6b4414492ed406bec59c7e4066f4ce9fd6c13f30ec2a4e9d036a3a6de41d7"
   },
-  "repairs": [
-    {
-      "event_id": "auto_as_ffbde150545f77dbee59",
-      "reason": "verified_subcategory_rule",
-      "before": {
-        "subcategory": null,
-        "subcategory_review_status": null,
-        "subcategory_review_confidence": null
-      },
-      "after": {
-        "subcategory": "standup",
-        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
-        "subcategory_review_confidence": 0.97
-      }
-    },
-    {
-      "event_id": "auto_as_ffbde150545f77dbee59",
-      "reason": "verified_exact_artist_catalog",
-      "before": {
-        "youtube_id": null,
-        "youtube_title": null,
-        "youtube_note": null,
-        "video_verified": null,
-        "clip_type": null
-      },
-      "after": {
-        "youtube_id": "zdSz94Ub8n8",
-        "youtube_title": "פאטמה הסטנדאפיסטית – קטע מההופעה",
-        "youtube_note": "קטע סטנדאפ מייצג מערוץ האמנית, לא טריילר של ההופעה המסוימת.",
-        "video_verified": true,
-        "clip_type": "representative"
-      }
-    },
-    {
-      "event_id": "auto_as_aa9cf53083c630ee2b22",
-      "reason": "verified_subcategory_rule",
-      "before": {
-        "subcategory": null,
-        "subcategory_review_status": null,
-        "subcategory_review_confidence": null
-      },
-      "after": {
-        "subcategory": "standup",
-        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
-        "subcategory_review_confidence": 0.97
-      }
-    }
-  ],
+  "repairs": [],
   "unresolved": [
     {
       "id": "cd5f7d917527b38a2361",
@@ -387,13 +340,6 @@
       "event_id": "auto_as_d4600b27283346794fd9",
       "title": "גברת רביע באשדוד | טיפול זוגי 5:55",
       "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "aa12d770ea2aeb8e620e",
-      "type": "image",
-      "event_id": "auto_as_d4600b27283346794fd9",
-      "title": "גברת רביע באשדוד | טיפול זוגי 5:55",
-      "reason": "No unique verified same-production source image; research required"
     },
     {
       "id": "5997af2454c79eacd377",
@@ -961,13 +907,6 @@
       "event_id": "board_8029dc4cb03db883a4",
       "title": "מבלים",
       "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "9c7938be68f3f22884fd",
-      "type": "image",
-      "event_id": "auto_as_ffbde150545f77dbee59",
-      "title": "פאטמה הסטנדאפיסטית",
-      "reason": "No unique verified same-production source image; research required"
     },
     {
       "id": "8735e9c886d2ce448517",
@@ -2592,13 +2531,6 @@
       "event_id": "auto_as_4f9a7868ddca03e21852",
       "title": "משכן אומנויות הבמה אשדוד - סיפור הנס חיפזון וזהירון חנוכה",
       "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "039ff4076363d3c566c7",
-      "type": "image",
-      "event_id": "auto_as_4f9a7868ddca03e21852",
-      "title": "משכן אומנויות הבמה אשדוד - סיפור הנס חיפזון וזהירון חנוכה",
-      "reason": "No unique verified same-production source image; research required"
     },
     {
       "id": "f138391c8bc71e95a365",
@@ -4432,6 +4364,12 @@
       "reason": "Source reports failed or partial collection"
     },
     {
+      "id": "upstream-workflow",
+      "type": "source_workflow_failed",
+      "title": "Refresh Ashdod event source images",
+      "reason": "Upstream workflow skipped; https://github.com/isnet-media/isnet-real-estate-site/actions/runs/40187815488"
+    },
+    {
       "id": "trailer-hot-cinema-3973",
       "type": "cinema_trailer",
       "title": "סינמה נוסטלגיה - ברבור שחור",
@@ -4445,8 +4383,8 @@
     }
   ],
   "counts": {
-    "repairs": 3,
-    "unresolved": 627
+    "repairs": 0,
+    "unresolved": 625
   },
   "data_readback_verified": true
 }
