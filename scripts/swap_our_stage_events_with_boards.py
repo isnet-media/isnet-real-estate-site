@@ -13,6 +13,18 @@ COLLECT=ROOT/"events-preview/admin/data/unified-stage-events-ashdod-rishon.json"
 REPORT=ROOT/"events-preview/admin/data/stage-board-swap-report.json"
 CATS={"music","standup","kids","theatre"}
 RANK={"mevalim":5,"makore":4,"sababa-events":3,"tickchak-live":2,"tickchak-home":1}
+def localize_stage_datetime(value):
+    """Convert timezone-aware event datetimes to Israel wall time; preserve naive source clocks."""
+    if not isinstance(value, str) or not re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", value.strip()):
+        return value
+    try:
+        dt = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return value
+    if dt.tzinfo is None:
+        return value
+    return dt.astimezone(ZoneInfo("Asia/Jerusalem")).isoformat()
+
 def normal(x):
     return " ".join(re.sub(r"[^\w\u0590-\u05ff]+"," ",html.unescape(str(x or "")).lower()).split())
 def good_image(x):
@@ -27,7 +39,9 @@ def main():
     ingestion_time=now.isoformat()
     collected=json.loads(COLLECT.read_text(encoding="utf-8"))
     index=defaultdict(list)
-    for x in collected["events"]:
+    for original in collected["events"]:
+        x=dict(original)
+        x["date_time"]=localize_stage_datetime(x.get("date_time"))
         d=str(x.get("date_time") or "")[:10]
         if x.get("city") in ("ashdod","rishon-lezion") and d>=today and re.fullmatch(r"\d{4}-\d{2}-\d{2}",d):
             index[(x["city"],normal(x.get("title")),d)].append(x)
