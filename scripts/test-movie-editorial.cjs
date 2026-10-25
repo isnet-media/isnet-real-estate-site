@@ -2,7 +2,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('nod
 const {parseHTML}=require('linkedom');
 const registry=JSON.parse(fs.readFileSync('events-preview/shared/data/movie-editorial.json','utf8'));
 const pages=JSON.parse(fs.readFileSync('events-preview/shared/data/movie-page-index.json','utf8'));
-const {window,document}=parseHTML('<html><body><section><p id="fullSynopsis"></p></section></body></html>');
+const {window,document}=parseHTML('<html><body><section><p id="fullSynopsis"></p></section><article class="mainColumn"></article></body></html>');
 const context={window,document,location:{pathname:'/events-preview/ashdod/cinema.html',origin:'https://isnet.co.il'},URL,console,fetch:async url=>({ok:true,json:async()=>url.includes('movie-page-index')?pages:registry})};
 vm.runInNewContext(fs.readFileSync('events-preview/shared/cinema-editorial.js','utf8'),context);
 (async()=>{const api=window.CinemaEditorial;await api.ready;
@@ -17,3 +17,12 @@ api.mount({id:'our-loves'});assert.equal(document.getElementById('fullSynopsis')
 assert(document.querySelector('#movieEditorial a[href="https://www.seret.co.il/movies/s_movies.asp?MID=8593"]'));
 assert.equal(api.merge([],'missing'),null);console.log('PASS: city aliases, merged showtimes, canonical destinations, original text and attributed audience grade');
 })().catch(e=>{console.error(e);process.exitCode=1});
+
+// The full synopsis remains in the DOM while the accessible control expands it.
+const desc=parseHTML('<html><body><p id="fullSynopsis">Complete original story</p><button id="synopsisToggle" aria-expanded="false" hidden>קרא עוד</button></body></html>').document;
+const text=desc.getElementById('fullSynopsis'),toggle=desc.getElementById('synopsisToggle');
+Object.defineProperty(text,'scrollHeight',{get:()=>240});Object.defineProperty(text,'clientHeight',{get:()=>text.classList.contains('is-collapsed')?112:240});
+const script=fs.readFileSync('events-preview/ashdod/movie.js','utf8');
+const scope={$:id=>desc.getElementById(id)};vm.createContext(scope);vm.runInContext(script.slice(script.indexOf('function configureDescription(){'),script.indexOf('configureDescription();\nif(document.fonts')),scope);
+scope.configureDescription();assert(!toggle.hidden);assert(text.classList.contains('is-collapsed'));toggle.onclick();assert.equal(toggle.getAttribute('aria-expanded'),'true');assert(!text.classList.contains('is-collapsed'));assert.equal(toggle.textContent,'קרא פחות');scope.configureDescription();assert(!text.classList.contains('is-collapsed'));toggle.onclick();assert(text.classList.contains('is-collapsed'));assert.equal(text.textContent,'Complete original story');
+console.log('PASS: read more/less, ARIA state, preserved expansion on resize, full crawlable story');

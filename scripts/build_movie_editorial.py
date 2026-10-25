@@ -67,15 +67,27 @@ def build():
    for anchor in soup.select('a[href^="#"]'):anchor['href']=url+anchor['href']
    soup.head.append(soup.new_tag('link',rel='canonical',href=url));soup.head.append(soup.new_tag('meta',attrs={'name':'robots','content':'index,follow,max-image-preview:large'}))
    soup.body['data-movie-id']=movie['id'];soup.body['data-static-movie']='true';soup.find(id='page').attrs.pop('hidden',None);soup.find(id='loadingState')['hidden']=''
-   for ident,value in [('movieTitle',movie['title']),('movieSynopsis',text[:200]),('fullSynopsis',text)]:soup.find(id=ident).string=value
+   for ident,value in [('movieTitle',movie['title']),('fullSynopsis',text)]:soup.find(id=ident).string=value
    soup.find(id='cinemaSchedules').clear();soup.find(id='cinemaSchedules').append(BeautifulSoup(schedule_html(movie,today),'html.parser'))
-   soup.find(id='fullSynopsis').find_parent('section').insert_after(BeautifulSoup(editorial_html(record),'html.parser'))
+   soup.find(id='movieEditorial').replace_with(BeautifulSoup(editorial_html(record),'html.parser'))
    poster=safe(urljoin(BASE+city+'/',movie.get('poster_url') or '')) if movie.get('poster_url') else ''
    if poster:
     image=soup.new_tag('img',src=poster,alt='כרזת הסרט '+movie['title']);image['class']=['officialPoster'];soup.find(id='heroMedia').append(image)
-   source=soup.find(id='sourceLinks');source.clear()
+   tickets=soup.find(id='ticketLinks');tickets.clear();available=[]
    for v in movie['venues']:
-    if safe(v.get('article_url')):source.append(BeautifulSoup('<a href="'+esc(v['article_url'])+'" target="_blank" rel="noopener">'+esc(v['name'])+' · פרטים וכרטיסים</a>','html.parser'))
+    if safe(v.get('article_url')) and any(d>=today and times for d,times in v.get('schedule',{}).items()):
+     label_venue='ב'+v['name'].replace('HOT Cinema','הוט סינמה');available.append(v)
+     tickets.append(BeautifulSoup('<a href="'+esc(v['article_url'])+'" target="_blank" rel="noopener noreferrer">'+esc(label_venue)+' <span aria-hidden="true">↗</span></a>','html.parser'))
+   if not available:soup.find(id='ticketAvailability').attrs.pop('hidden',None)
+   trailer=movie.get('trailer_youtube_id');soup.find(id='trailerSection').attrs.pop('hidden',None)
+   if trailer and re.fullmatch(r'[a-zA-Z0-9_-]{11}',trailer):
+    soup.find(id='trailerAvailability').string='קדימון מקושר ממקור הסרט.'
+    soup.find(id='trailerExternal')['href']='https://www.youtube.com/watch?v='+trailer
+    soup.find(id='youtubeFrame')['src']='https://www.youtube-nocookie.com/embed/'+trailer+'?rel=0'
+    soup.find(id='youtubeFrame')['title']='טריילר - '+movie['title']
+   else:
+    soup.find(id='trailerAvailability').string='טריילר רשמי לסרט זה טרם אומת.'
+    soup.find(id='trailerExternal')['hidden']='';soup.find(id='youtubeFrame').parent['hidden']=''
    schema={'@context':'https://schema.org','@type':'Movie' if record.get('content_type')!='screening_event' else 'CreativeWork','@id':url+'#movie','url':url,'name':movie['title'],'description':text,'inLanguage':'he'}
    if poster:schema['image']=urljoin(BASE+city+'/',poster)
    if movie.get('runtime_minutes'):schema['duration']='PT'+str(movie['runtime_minutes'])+'M'

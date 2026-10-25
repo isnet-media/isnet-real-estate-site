@@ -34,6 +34,10 @@ for city in CITIES:
         assert soup.find(id='page') and not soup.find(id='page').has_attr('hidden'),url
         assert soup.find(id='fullSynopsis').get_text()==record['original_text'],url
         assert soup.find(id='movieEditorial') and soup.h1.get_text(),url
+        assert soup.select_one('.movieHero #fullSynopsis') and len(soup.select('#fullSynopsis'))==1
+        assert [x.get('id') for x in soup.select('.mainColumn > section')][:4]==['movieEditorial','trailerSection','movieTickets','showtimes']
+        assert soup.find(id='synopsisToggle')['aria-controls']=='fullSynopsis'
+        assert not soup.find(id='sourceLinks')
         assert soup.select_one('link[rel=canonical]')['href']==url,url
         assert soup.base['href']==f'/events-preview/{city}/'
         assert soup.select_one('a.primaryButton')['href']==url+'#showtimes'
@@ -48,6 +52,11 @@ for city in CITIES:
         else:
             assert not soup.select('.movieAudienceScore'),url
         union=merged(movies)
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        day=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat()
+        expected_tickets={v['article_url'] for v in union['venues'] if str(v.get('article_url','')).startswith('https://') and any(d>=day and t for d,t in v.get('schedule',{}).items())}
+        assert {a['href'] for a in soup.select('#ticketLinks a')}==expected_tickets,url
         for venue in union['venues']:
             for day,times in venue.get('schedule',{}).items():
                 original=set(t for m in movies for v in m['venues'] if v['id']==venue['id'] for t in v.get('schedule',{}).get(day,[]))

@@ -17,16 +17,12 @@ function renderHero(movie){
   document.title=movie.title+" | מה עושים ביבנה?";
   document.querySelector('meta[name="description"]').setAttribute("content",movie.synopsis||"כל שעות ההקרנה והפרטים על הסרט ביבנה.");
   $("movieTitle").textContent=movie.title;
-  $("movieSynopsis").textContent=movie.synopsis||"כל הימים, השעות ובתי הקולנוע ביבנה במקום אחד.";
+
   const badges=[];
   if(movie.is_family)badges.push('<span class="badge family">ילדים ומשפחה</span>');
-  const activeVenues=activeMovieVenues(movie);
-  activeVenues.forEach(v=>badges.push('<span class="badge">'+escapeHtml(v.name)+'</span>'));
+
   $("heroBadges").innerHTML=badges.join("");
-  const dates=allDates(movie);
   $("heroMeta").innerHTML=[
-    activeVenues.length===2?"מוצג בשני בתי קולנוע":activeVenues[0]?.name,
-    dates.length?"הקרנות מעודכנות":"השעות מתעדכנות",
     movie.trailer_youtube_id?"טריילר זמין":null,
     movie.runtime_minutes?movie.runtime_minutes+" דקות":null,
     movie.age_rating,
@@ -36,12 +32,10 @@ function renderHero(movie){
   if(movie.trailer_youtube_id){
     const img=movie.poster_url||"https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg";
     $("heroMedia").innerHTML='<button id="heroMediaTrailer" class="heroPoster" type="button"><img src="'+escapeHtml(img)+'" alt="'+escapeHtml(movie.title)+'" referrerpolicy="no-referrer" data-image-fallback="'+escapeHtml(imageFallback)+'" onerror="if(this.dataset.imageFallback){const u=this.dataset.imageFallback;delete this.dataset.imageFallback;if(u!==this.src){this.src=u}else{this.remove()}}else{this.remove()}"><span><i>▶</i><b>צפו בטריילר</b></span></button>';
-    $("heroTrailer").hidden=false;
-    $("heroTrailer").onclick=()=>document.getElementById("trailerSection")?.scrollIntoView({behavior:"smooth",block:"start"});
     $("heroMediaTrailer").onclick=()=>document.getElementById("trailerSection")?.scrollIntoView({behavior:"smooth",block:"start"});
   }else{
     $("heroMedia").innerHTML=movie.poster_url?'<img class="officialPoster" src="'+escapeHtml(movie.poster_url)+'" alt="כרזת הסרט '+escapeHtml(movie.title)+'" referrerpolicy="no-referrer" data-image-fallback="'+escapeHtml(imageFallback)+'" onerror="if(this.dataset.imageFallback){const u=this.dataset.imageFallback;delete this.dataset.imageFallback;if(u!==this.src){this.src=u}else{this.remove()}}else{this.remove()}">':'<div class="heroFallback"><span>🎬</span><b>'+escapeHtml(movie.title)+'</b></div>';
-    $("heroTrailer").hidden=true;$("heroTrailer").style.display="none";
+
   }
 }
 function screeningLanguage(venue,date,time){
@@ -83,9 +77,9 @@ function renderTrailer(movie){
   $("youtubeFrame").title="טריילר - "+movie.title;
 }
 function renderSources(movie,updatedAt){
-  $("sourceLinks").innerHTML=movie.venues.map(v=>
-    '<a href="'+escapeHtml(v.article_url)+'" target="_blank" rel="noopener"><b>'+escapeHtml(v.name)+'</b><span>פרטים וכרטיסים באתר המקור ↗</span></a>'
-  ).join("");
+  const venues=activeMovieVenues(movie).filter(v=>/^https:\/\//.test(v.article_url||""));
+  $("ticketLinks").innerHTML=venues.map(v=>'<a href="'+escapeHtml(v.article_url)+'" target="_blank" rel="noopener noreferrer">ב'+escapeHtml(v.name.replace('סינמטק יבנה','הוט סינמה'))+' <span aria-hidden="true">↗</span></a>').join('');
+  $("ticketAvailability").hidden=venues.length>0;
   if(updatedAt){
     const d=new Date(updatedAt);
     if(!Number.isNaN(d.getTime()))$("updatedAt").textContent="הנתונים עודכנו "+new Intl.DateTimeFormat("he-IL",{day:"numeric",month:"numeric",year:"numeric",hour:"2-digit",minute:"2-digit"}).format(d);
@@ -106,6 +100,25 @@ function renderRelated(movie,all){
     '</a>';
   }).join("");
 }
+function configureDescription(){
+  const text=$("fullSynopsis"),button=$("synopsisToggle");
+  if(!text||!button)return;
+  const expanded=button.getAttribute("aria-expanded")==="true";
+  text.classList.add("is-collapsed");
+  const overflows=text.scrollHeight>text.clientHeight+1;
+  text.classList.toggle("is-collapsed",overflows&&!expanded);
+  button.hidden=!overflows;
+  button.textContent=expanded?"קרא פחות":"קרא עוד";
+  button.onclick=()=>{
+    const next=button.getAttribute("aria-expanded")!=="true";
+    button.setAttribute("aria-expanded",String(next));
+    text.classList.toggle("is-collapsed",!next);
+    button.textContent=next?"קרא פחות":"קרא עוד";
+  };
+}
+configureDescription();
+if(document.fonts?.ready)document.fonts.ready.then(configureDescription);
+window.addEventListener("resize",configureDescription);
 async function init(){
   try{
     await window.CinemaEditorial?.ready;
@@ -122,6 +135,7 @@ async function init(){
     if(movie.editorial_text||!document.body.dataset.staticMovie)$("fullSynopsis").textContent=movie.editorial_text||movie.synopsis||"פרטי הסרט יתעדכנו כאן.";
     renderSources(movie,data.updated_at);
     window.CinemaEditorial?.mount(movie);
+    configureDescription();
     renderRelated(movie,window.CinemaEditorial?.unique(data.movies||[])||data.movies||[]);
     $("loadingState").hidden=true;
     $("page").hidden=false;

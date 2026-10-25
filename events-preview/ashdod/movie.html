@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="isnet-site-menu.css?v=20261013-shared-sticky">
   <link rel="stylesheet" href="cinema-experience.css?v=20261013-screen3">
 <link rel="stylesheet" href="home-brand-header.css?v=20261013-all-pages1">
-<script src="ashdod-analytics.js?v=20261015-ga-complete1"></script><script src="site-seo.js?v=20261019-seo1"></script><script defer src="/assets/isnet-top-navigation.js?v=20261021-nav2"></script><link rel="stylesheet" href="/events-preview/shared/cinema-editorial.css?v=20261025"><script src="/events-preview/shared/cinema-editorial.js?v=20261025"></script></head>
+<script src="ashdod-analytics.js?v=20261015-ga-complete1"></script><script src="site-seo.js?v=20261019-seo1"></script><script defer src="/assets/isnet-top-navigation.js?v=20261021-nav2"></script><link rel="stylesheet" href="/events-preview/shared/cinema-editorial.css?v=20261025-layout2"><script src="/events-preview/shared/cinema-editorial.js?v=20261025-layout2"></script></head>
 <body class="cinemaMoviePage">
   <header class="siteTopbar" aria-label="ניווט ראשי">
     <div class="siteTopbar__inner">
@@ -68,12 +68,9 @@
         <div class="movieHero__copy">
           <div id="heroBadges" class="badges"></div>
           <h1 id="movieTitle"></h1>
-          <p id="movieSynopsis" class="movieSynopsis"></p>
+          <div class="movieDescription"><p id="fullSynopsis" class="movieSynopsis fullSynopsis"></p><button id="synopsisToggle" class="synopsisToggle" type="button" aria-expanded="false" aria-controls="fullSynopsis" hidden>קרא עוד</button></div>
           <div id="heroMeta" class="heroMeta"></div>
-          <div class="heroActions">
-            <a class="primaryButton" href="#showtimes">לכל הימים והשעות</a>
-            <button id="heroTrailer" class="secondaryButton" type="button">▶ צפו בטריילר</button>
-          </div>
+
         </div>
         <div id="heroMedia" class="movieHero__media"></div>
       </div>
@@ -81,12 +78,7 @@
 
     <div class="shell contentGrid">
       <article class="mainColumn">
-        <section id="showtimes" class="contentCard">
-          <span class="kicker">כל ההקרנות במקום אחד</span>
-          <h2>ימים ושעות באשדוד</h2>
-          <p class="showtimeHint">בחרו שעה לפרטים ולהזמנה באתר בית הקולנוע.</p>
-          <div id="cinemaSchedules" class="cinemaSchedules"></div>
-        </section>
+        <section id="movieEditorial" class="contentCard movieEditorial"></section>
 
         <section id="trailerSection" class="contentCard videoCard" hidden>
           <span class="kicker">לפני שמחליטים</span>
@@ -96,10 +88,18 @@
           <div class="videoFrame"><iframe id="youtubeFrame" title="" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
         </section>
 
-        <section class="contentCard">
-          <span class="kicker">על הסרט</span>
-          <h2>תקציר</h2>
-          <p id="fullSynopsis" class="fullSynopsis"></p>
+        <section id="movieTickets" class="contentCard movieTickets">
+          <h2>לרכישת כרטיסים</h2>
+          <div id="ticketLinks" class="movieTicketLinks"></div>
+          <p id="ticketAvailability" class="showtimeHint" hidden>אין כרגע הקרנות מאומתות בעיר. בדקו את לוח ההקרנות בהמשך.</p>
+          <a class="primaryButton" href="#showtimes">לכל הימים והשעות</a>
+        </section>
+
+        <section id="showtimes" class="contentCard">
+          <span class="kicker">כל ההקרנות במקום אחד</span>
+          <h2>ימים ושעות באשדוד</h2>
+          <p class="showtimeHint">בחרו שעה לפרטים ולהזמנה באתר בית הקולנוע.</p>
+          <div id="cinemaSchedules" class="cinemaSchedules"></div>
         </section>
 
         <section id="relatedSection" class="relatedSection">
@@ -118,8 +118,8 @@
         </section>
 
         <section class="infoCard">
-          <span class="kicker">מקור ועדכון</span>
-          <div id="sourceLinks" class="sourceLinks"></div>
+          <span class="kicker">עדכון ההקרנות</span>
+
           <p id="updatedAt" class="updatedAt"></p>
         </section>
       </aside>
@@ -147,7 +147,7 @@
     </div>
   </footer>
 
-  <script src="movie.js?v=90ee5224e737"></script>
+  <script src="movie.js?v=00ed5bfbef12"></script>
 <script src="shared-brand-header.js?v=20261019-all-share2" defer></script>
 <script defer src="site-share.js?v=20261019-all-pages2"></script></body>
 </html>
