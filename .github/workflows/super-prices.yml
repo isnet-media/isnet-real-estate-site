@@ -1,35 +1,23 @@
 name: Refresh Ashdod supermarket prices
 on:
   schedule:
-    # UTC candidates; the gate permits collection only at 06:00 Israel time.
+    # 06:00 Israel in summer/winter; later wake-ups recover scheduler delays.
+    # The durable daily claim prevents any additional collection that day.
     - cron: '0 3,4 * * *'
+    - cron: '17 5,8,11,14,17,20 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/super-prices.yml
+      - scripts/super_daily_run.py
 permissions:
   contents: write
 concurrency:
   group: super-price-refresh
   cancel-in-progress: false
 jobs:
-  local-time:
-    runs-on: ubuntu-latest
-    outputs:
-      collect: ${{ steps.gate.outputs.collect }}
-    steps:
-      - name: Permit one daily collection at 06:00 Israel time
-        id: gate
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-        run: |
-          local_day=$(TZ=Asia/Jerusalem date +%Y%m%d)
-          local_hour=$(TZ=Asia/Jerusalem date +%H)
-          if [ "$local_day" -ge 20261025 ] && { [ "$EVENT_NAME" != schedule ] || [ "$local_hour" = 06 ]; }; then
-            echo "collect=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "collect=false" >> "$GITHUB_OUTPUT"
-          fi
   refresh:
-    needs: local-time
-    if: needs.local-time.outputs.collect == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -40,14 +28,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Claim one daily collection after 06:00 Israel
+        id: daily
+        run: python scripts/super_daily_run.py claim --city ASHDOD
       - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
+        if: steps.daily.outputs.collect == 'true'
       - name: Check rollback protection and branch identity
+        if: steps.daily.outputs.collect == 'true'
         run: python scripts/test_super_refresh.py
       - name: Collect official branch files
+        if: steps.daily.outputs.collect == 'true'
         run: |
           python scripts/import_super_shufersal.py
           python scripts/refresh_super_prices.py --raw-dir "$RUNNER_TEMP/super-official"
       - name: Validate publication candidate
+        if: steps.daily.outputs.collect == 'true'
         run: |
           python scripts/build_super_city_basket.py
           python scripts/test_super_city_basket.py
@@ -58,7 +53,7 @@ jobs:
           python scripts/test_super_homepage.py
           python scripts/audit_super_site.py
       - name: Preserve evidence even when validation fails
-        if: always()
+        if: always() && steps.daily.outputs.collect == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: supermarket-refresh-${{ github.run_id }}
@@ -67,15 +62,11 @@ jobs:
             SUPER.ASHDOD/data/site-health.json
           retention-days: 30
       - name: Commit validated data without overwriting concurrent edits
+        if: steps.daily.outputs.collect == 'true'
         run: |
-          git config user.name 'ISNET supermarket updater'
-          git config user.email 'actions@users.noreply.github.com'
-          git add SUPER.ASHDOD/data/
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Refresh official Ashdod supermarket prices and health report'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          python scripts/super_daily_run.py publish --city ASHDOD
       - name: Flag partial collection for monitoring
+        if: steps.daily.outputs.collect == 'true'
         run: |
           python - <<'PY'
           import json
@@ -83,3 +74,6 @@ jobs:
           r=json.loads(Path('SUPER.ASHDOD/data/refresh-status.json').read_text())
           if not r['all_sources_updated']: print('::warning::Some sources retained previous prices; inspect refresh artifact')
           PY
+      - name: Record failed attempt without publishing unvalidated data
+        if: failure() && steps.daily.outputs.collect == 'true'
+        run: python scripts/super_daily_run.py failed --city ASHDOD

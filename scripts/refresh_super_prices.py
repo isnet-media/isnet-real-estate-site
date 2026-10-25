@@ -172,6 +172,9 @@ def run(raw_dir):
  shards=collections.defaultdict(dict)
  for pid,p in products.items():shards[pid[-2:]][pid]=p
  for suffix,ps in shards.items():write(D/'offers'/f'{suffix}.json',ps)
+ # Removed products must not survive in an obsolete shard on the next refresh.
+ for old_shard in (D/'offers').glob('*.json'):
+  if old_shard.stem not in shards:old_shard.unlink()
  updated=sum(r['status']=='updated' for r in reports)
  if updated:catalog['retrieved_at']=now.isoformat()
  catalog.update(branches=branches,product_count=len(products),offer_count=sum(len(p['offers']) for p in products.values()))
@@ -183,7 +186,7 @@ def run(raw_dir):
  status_path=D/'source-status.json'
  if status_path.exists():
   status=json.loads(status_path.read_text());status['connected']=prices['chains'];status['updated_at']=now.date().isoformat();status.setdefault('connection_notes',{})['נטו חיסכון']='סניף 197 בהאורגים 13; מקור רשמי Bina. נפרד מהסניף הקודם בהעבודה 64 שהוחלף ב-100 ומעבר.';write(status_path,status)
- report={'checked_at':now.isoformat(),'updated_count':updated,'branch_count':len(branches),'all_sources_updated':updated==len(branches),'branches':reports};write(D/'refresh-status.json',report)
+ report={'checked_at':now.isoformat(),'updated_count':updated,'branch_count':len(branches),'all_sources_updated':updated==len(branches),'coverage_status':'complete' if updated==len(branches) else 'partial' if updated else 'retained_previous','branches':reports};write(D/'refresh-status.json',report)
  from build_super_deals import build
  # Promotion publication failure must preserve the last verified selection.
  old=(D/'deals.json').read_bytes()

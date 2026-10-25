@@ -1,8 +1,16 @@
 name: Refresh Bat Yam supermarket prices
 on:
   schedule:
-    - cron: '20 4 * * *'
+    # 06:00 Israel in summer/winter; later wake-ups recover scheduler delays.
+    # The durable daily claim prevents any additional collection that day.
+    - cron: '0 3,4 * * *'
+    - cron: '17 5,8,11,14,17,20 * * *'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/super-batyam-prices.yml
+      - scripts/super_daily_run.py
 permissions:
   contents: write
 concurrency:
@@ -11,32 +19,34 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Claim one daily collection after 06:00 Israel
+        id: daily
+        run: python scripts/super_daily_run.py claim --city BATYAM
       - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
+        if: steps.daily.outputs.collect == 'true'
       - name: Collect reviewed physical Bat Yam branches
+        if: steps.daily.outputs.collect == 'true'
         run: |
           python scripts/refresh_batyam_super_prices.py --raw-dir "$RUNNER_TEMP/batyam-official"
           python scripts/build_batyam_super.py
-          python scripts/test_batyam_super.py
+          python scripts/test_batyam_super.py --deployment-only
       - name: Preserve collection evidence
-        if: always()
+        if: always() && steps.daily.outputs.collect == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: batyam-supermarket-${{ github.run_id }}
           path: SUPER.BATYAM/data/refresh-status.json
           retention-days: 30
       - name: Publish only validated Bat Yam data
+        if: steps.daily.outputs.collect == 'true'
         run: |
-          git config user.name 'ISNET supermarket updater'
-          git config user.email 'actions@users.noreply.github.com'
-          # The validated city builder also regenerates HTML and product groups.
-          git add SUPER.BATYAM/
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Refresh verified Bat Yam supermarket prices'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          python scripts/super_daily_run.py publish --city BATYAM
+      - name: Record failed attempt without publishing unvalidated data
+        if: failure() && steps.daily.outputs.collect == 'true'
+        run: python scripts/super_daily_run.py failed --city BATYAM

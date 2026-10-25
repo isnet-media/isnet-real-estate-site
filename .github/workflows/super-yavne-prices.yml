@@ -1,14 +1,16 @@
 name: Refresh Yavne supermarket prices
 on:
   schedule:
-    - cron: '35 5 * * *'
+    # 06:00 Israel in summer/winter; later wake-ups recover scheduler delays.
+    # The durable daily claim prevents any additional collection that day.
+    - cron: '0 3,4 * * *'
+    - cron: '17 5,8,11,14,17,20 * * *'
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - scripts/refresh_yavne_super_prices.py
-      - scripts/super-yavne/**
       - .github/workflows/super-yavne-prices.yml
+      - scripts/super_daily_run.py
 permissions:
   contents: write
 concurrency:
@@ -17,39 +19,42 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Claim one daily collection after 06:00 Israel
+        id: daily
+        run: python scripts/super_daily_run.py claim --city YAVNE
       - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
+        if: steps.daily.outputs.collect == 'true'
       - name: Collect reviewed Yavne branches and validate city isolation
+        if: steps.daily.outputs.collect == 'true'
         run: |
           python scripts/refresh_yavne_super_prices.py --raw-dir "$RUNNER_TEMP/yavne-official"
           python scripts/build_yavne_super.py
-          python scripts/test_yavne_super.py
+          python scripts/test_yavne_super.py --deployment-only
       - name: Preserve collection evidence
-        if: always()
+        if: always() && steps.daily.outputs.collect == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: yavne-supermarket-${{ github.run_id }}
           path: SUPER.YAVNE/data/refresh-status.json
           retention-days: 30
       - name: Publish validated Yavne data
+        if: steps.daily.outputs.collect == 'true'
         run: |
-          git config user.name 'ISNET supermarket updater'
-          git config user.email 'actions@users.noreply.github.com'
-          # The validated city builder also regenerates HTML and product groups.
-          git add SUPER.YAVNE/
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Refresh verified Yavne supermarket prices'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          python scripts/super_daily_run.py publish --city YAVNE
       - name: Report retained sources
+        if: steps.daily.outputs.collect == 'true'
         run: |
           python - <<'PY'
           import json
           r=json.load(open('SUPER.YAVNE/data/refresh-status.json'))
           if not r['all_sources_updated']: print('::warning::Yavne collection is partial; previous source dates are retained')
           PY
+      - name: Record failed attempt without publishing unvalidated data
+        if: failure() && steps.daily.outputs.collect == 'true'
+        run: python scripts/super_daily_run.py failed --city YAVNE

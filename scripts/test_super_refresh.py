@@ -61,3 +61,17 @@ with patch.object(r,'refresh_branch',side_effect=recovered) as retry:
  assert retry.call_count==2
 assert all(x[2]['attempts']==2 and x[2]['first_error']=='first timeout' for x in results)
 print('Passed: independent source recovery runs concurrently with one retry per branch')
+
+# A shard whose last product is removed cannot resurrect stale offers on the next run.
+with tempfile.TemporaryDirectory() as tmp:
+ data=Path(tmp)/'data';(data/'offers').mkdir(parents=True)
+ branch=dict(b,chain='available',file_date='2026-10-21')
+ old=product('7290000000011',branch['id'],12);new=product('7290000000028',branch['id'],8)
+ (data/'offers/11.json').write_text(json.dumps({old['id']:old}))
+ (data/'catalog.json').write_text(json.dumps({'branches':[branch],'retrieved_at':'2026-10-21T08:00:00+03:00'}))
+ (data/'prices.json').write_text('{}');(data/'deals.json').write_text('{}')
+ def replace(branch,raw_dir,now):return branch,{new['id']:new},{'branch_id':branch['id'],'status':'updated'}
+ with patch.object(r,'D',data),patch.object(r,'refresh_branch',side_effect=replace),patch.object(build_super_deals,'build',return_value={}):r.run(Path(tmp)/'raw')
+ assert not (data/'offers/11.json').exists()
+ assert json.loads((data/'catalog.json').read_text())['product_count']==1
+print('Passed: deleted product shards cannot resurrect removed branch offers')
