@@ -78,7 +78,7 @@ function renderTrailer(movie){
 }
 function renderSources(movie,updatedAt){
   const venues=activeMovieVenues(movie).filter(v=>/^https:\/\//.test(v.article_url||""));
-  $("ticketLinks").innerHTML=venues.map(v=>'<a href="'+escapeHtml(v.article_url)+'" target="_blank" rel="noopener noreferrer">ב'+escapeHtml(v.name.replace('פלאנט','הוט סינמה'))+' <span aria-hidden="true">↗</span></a>').join('');
+  $("ticketLinks").innerHTML=venues.map(v=>'<a href="'+escapeHtml(v.article_url)+'" target="_blank" rel="noopener noreferrer">ב'+escapeHtml(v.name.replace(/^HOT\s+Cinema\b/i,'הוט סינמה'))+' <span aria-hidden="true">↗</span></a>').join('');
   $("ticketAvailability").hidden=venues.length>0;
   if(updatedAt){
     const d=new Date(updatedAt);

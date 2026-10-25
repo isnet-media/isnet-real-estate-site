@@ -26,3 +26,12 @@ const script=fs.readFileSync('events-preview/ashdod/movie.js','utf8');
 const scope={$:id=>desc.getElementById(id)};vm.createContext(scope);vm.runInContext(script.slice(script.indexOf('function configureDescription(){'),script.indexOf('configureDescription();\nif(document.fonts')),scope);
 scope.configureDescription();assert(!toggle.hidden);assert(text.classList.contains('is-collapsed'));toggle.onclick();assert.equal(toggle.getAttribute('aria-expanded'),'true');assert(!text.classList.contains('is-collapsed'));assert.equal(toggle.textContent,'קרא פחות');scope.configureDescription();assert(!text.classList.contains('is-collapsed'));toggle.onclick();assert(text.classList.contains('is-collapsed'));assert.equal(text.textContent,'Complete original story');
 console.log('PASS: read more/less, ARIA state, preserved expansion on resize, full crawlable story');
+// City template localization must not rename Planet or cinematheque ticket labels.
+for(const [city,name,expected] of [['ashdod','HOT Cinema אשדוד','הוט סינמה אשדוד'],['rishon-lezion','פלאנט ראשון לציון','פלאנט ראשון לציון'],['yavne','סינמטק יבנה','סינמטק יבנה']]){
+ const doc=parseHTML('<html><body><div id="ticketLinks"></div><p id="ticketAvailability"></p></body></html>').document;
+ const source=fs.readFileSync('events-preview/'+city+'/movie.js','utf8');
+ const scope={$:id=>doc.getElementById(id),activeMovieVenues:m=>m.venues,escapeHtml:s=>String(s)};vm.createContext(scope);vm.runInContext(source.slice(source.indexOf('function renderSources('),source.indexOf('function renderRelated(')),scope);
+ scope.renderSources({venues:[{name,article_url:'https://cinema.example/movie'}]},null);
+ assert(doc.getElementById('ticketLinks').textContent.includes(expected),city+' venue identity');
+}
+console.log('PASS: city-local ticket labels keep HOT Cinema, Planet and cinematheque identities');
