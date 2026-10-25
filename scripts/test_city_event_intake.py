@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Small offline regression suite for the two-city public calendar readers."""
 from pathlib import Path
+import copy
 import importlib.util
 from bs4 import BeautifulSoup
 
@@ -62,6 +63,15 @@ dupe = dict(original, event_id="auto_as_a1", title="מופע חגיגי | היכ
 entries=[dupe,manual]
 invalid, removed = m.clean_generated_duplicates(entries)
 assert len(entries)==1 and entries[0]["event_id"]=="manual123" and removed==1, entries
+
+different_venue = dict(manual, event_id="auto_as_other_venue", venue="מתנ״ס דיונה")
+assert not m.clearly_same_event(manual, different_venue), "Equal-title shows at different venues are distinct"
+unknown_venue = dict(manual, event_id="auto_as_no_venue", venue=None)
+assert not m.clearly_same_event(manual, unknown_venue), "A missing venue cannot establish identity"
+review_rows = [copy.deepcopy(manual), copy.deepcopy(dupe), different_venue]
+before_review = copy.deepcopy(review_rows)
+assert m.audit_generated_cleanup_candidates(review_rows) == (0, 1)
+assert review_rows == before_review, "Cleanup preview must not remove or alter published records"
 
 
 adult_source = {"name":"htrl_adults","url":"https://htrl.co.il/third-calendar/",

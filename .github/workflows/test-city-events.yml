@@ -2,6 +2,11 @@ name: Validate city event readers
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - "scripts/sync_events_from_sources.py"
+      - "scripts/test_city_event_intake.py"
+      - ".github/workflows/test-city-events.yml"
   push:
     branches: [main]
     paths:
