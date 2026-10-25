@@ -146,6 +146,7 @@ class SafeStageMergeTests(unittest.TestCase):
                     "image_url", "image_source", "image_verified",
                     "image_publishable", "image_rights_status"):
             self.assertEqual(after[0].get(key), original.get(key), key)
+        self.assertNotIn("image_origin_url", after[0], "Rejected image URL must not leak into provenance")
 
 class FakeResponse:
     status = 200
