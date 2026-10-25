@@ -147,26 +147,108 @@ def venue_key(value):
  if 'יד לבנימ' in text:return 'yad-labanim'
  return re.sub(r'ראשונ לציונ|ראשלצ','',text).strip()
 
-def merge(events,new):
- out=list(events);added=updated=duplicates=0
- for e in sorted(new,key=lambda e:0 if e.get('source')=='mevalim_direct'else 1):
-  match=next((x for x in out if x.get('start_date')==e['start_date']and str(x.get('start_time')or'')[:5]==e['start_time']and venue_key(x.get('venue'))==venue_key(e.get('venue'))and (mevalim.norm(x.get('title'))==mevalim.norm(e['title'])or shared.equivalent({'title':x.get('title',''),'start_date':x['start_date']},e))),None)
-  if match:
-   if match.get('source')=='mevalim_direct'and e.get('source')!='mevalim_direct':match['crosscheck_sources']=sorted(set(match.get('crosscheck_sources',[])+[e['content_source_url']]));duplicates+=1;continue
-   preserved={k:match[k]for k in ['event_id','operator_id','operator_name','venue_institution_id','age_min','age_max','audiences','address']if match.get(k)is not None}
-   if match.get('content_locked') or match.get('description_manual_override'):
-    for field in ['title','category','subcategory','categories','description','long_description','series_description','editorial_description','short_pitch','content_source_url','detail_source_url','ticket_url','purchase_url','purchase_source','is_active','visibility_reason','canonical_event_id','duplicate_of']:
-     if field in match:preserved[field]=match[field]
-   if match.get('image_verified') and match.get('image_url'):
-    for field in ['image_url','image_origin_url','image_source','image_credit','image_strategy','image_verified','image_publishable','image_rights_status','thumbnail_url','thumbnail_ready']:
-     if field in match:preserved[field]=match[field]
-   for field in ['description','series_description','image_url','image_origin_url']:
-    if not e.get(field)and match.get(field):e[field]=match[field]
-   match.update(e);match.update(preserved)
-   if not preserved.get('thumbnail_url'):match.pop('thumbnail_url',None);match['thumbnail_ready']=False
-   updated+=1
-  else:out.append(e);added+=1
- return out,{'added':added,'updated':updated,'duplicates_merged':duplicates}
+def merge(events, new):
+    """Merge source discoveries without overriding a different public ID identity.
+
+    An event_id can already be linked from the public site or CMS. If a new
+    source row reuses that ID for a different occurrence/title (or the feed
+    already contains multiple rows under it), preserve existing rows unchanged
+    and report the proposed row for manual provenance verification.
+    """
+    out = list(events)
+    added = updated = duplicates = quarantined = 0
+    collision_examples = []
+
+    for e in sorted(new, key=lambda row: 0 if row.get('source') == 'mevalim_direct' else 1):
+        event_id = e.get('event_id')
+        existing_id_rows = [x for x in out if event_id and x.get('event_id') == event_id]
+
+        def same_identity(x):
+            return (
+                bool(mevalim.norm(e.get('title')))
+                and bool(venue_key(e.get('venue')))
+                and x.get('start_date') == e.get('start_date')
+                and str(x.get('start_time') or '')[:5] == str(e.get('start_time') or '')[:5]
+                and venue_key(x.get('venue')) == venue_key(e.get('venue'))
+                and mevalim.norm(x.get('title')) == mevalim.norm(e.get('title'))
+            )
+
+        if existing_id_rows and (
+            len(existing_id_rows) != 1 or not same_identity(existing_id_rows[0])
+        ):
+            quarantined += 1
+            if len(collision_examples) < 10:
+                collision_examples.append({
+                    'event_id': event_id,
+                    'incoming_title': e.get('title'),
+                    'incoming_date': e.get('start_date'),
+                    'incoming_time': e.get('start_time'),
+                    'existing_titles': [x.get('title') for x in existing_id_rows[:3]],
+                    'reason': 'inherited_duplicate_id' if len(existing_id_rows) > 1 else 'different_identity',
+                })
+            continue
+
+        # Prefer a matching immutable ID over a fuzzy cross-source occurrence
+        # match, so another card with a similar title cannot steal the update.
+        match = existing_id_rows[0] if existing_id_rows else next(
+            (x for x in out
+             if x.get('start_date') == e['start_date']
+             and str(x.get('start_time') or '')[:5] == e['start_time']
+             and venue_key(x.get('venue')) == venue_key(e.get('venue'))
+             and (mevalim.norm(x.get('title')) == mevalim.norm(e['title'])
+                  or shared.equivalent({'title': x.get('title', ''),
+                                        'start_date': x['start_date']}, e))),
+            None,
+        )
+        if match:
+            if match.get('source') == 'mevalim_direct' and e.get('source') != 'mevalim_direct':
+                match['crosscheck_sources'] = sorted(set(
+                    match.get('crosscheck_sources', []) + [e['content_source_url']]
+                ))
+                duplicates += 1
+                continue
+            preserved = {k: match[k] for k in [
+                'event_id', 'operator_id', 'operator_name', 'venue_institution_id',
+                'age_min', 'age_max', 'audiences', 'address',
+            ] if match.get(k) is not None}
+            if match.get('content_locked') or match.get('description_manual_override'):
+                for field in [
+                    'title', 'category', 'subcategory', 'categories', 'description',
+                    'long_description', 'series_description', 'editorial_description',
+                    'short_pitch', 'content_source_url', 'detail_source_url',
+                    'ticket_url', 'purchase_url', 'purchase_source', 'is_active',
+                    'visibility_reason', 'canonical_event_id', 'duplicate_of',
+                ]:
+                    if field in match:
+                        preserved[field] = match[field]
+            if match.get('image_verified') and match.get('image_url'):
+                for field in [
+                    'image_url', 'image_origin_url', 'image_source', 'image_credit',
+                    'image_strategy', 'image_verified', 'image_publishable',
+                    'image_rights_status', 'thumbnail_url', 'thumbnail_ready',
+                ]:
+                    if field in match:
+                        preserved[field] = match[field]
+            for field in ['description', 'series_description', 'image_url', 'image_origin_url']:
+                if not e.get(field) and match.get(field):
+                    e[field] = match[field]
+            match.update(e)
+            match.update(preserved)
+            if not preserved.get('thumbnail_url'):
+                match.pop('thumbnail_url', None)
+                match['thumbnail_ready'] = False
+            updated += 1
+        else:
+            out.append(e)
+            added += 1
+
+    return out, {
+        'added': added,
+        'updated': updated,
+        'duplicates_merged': duplicates,
+        'id_collisions_quarantined': quarantined,
+        'id_collision_examples': collision_examples,
+    }
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--sources',nargs='*',default=list(SOURCES));ap.add_argument('--snapshot');ap.add_argument('--collect-only',action='store_true');args=ap.parse_args();data=json.loads(DATA.read_text());report={'checked_at':STAMP,'city':CITY,'sources':{},'warnings':WARNINGS};new=[]
