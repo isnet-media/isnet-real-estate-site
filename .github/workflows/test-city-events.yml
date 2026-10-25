@@ -9,6 +9,8 @@ on:
       - "scripts/finalize_rishon_quality.py"
       - "scripts/repair_rishon_public_quality.py"
       - "scripts/test_rishon_editorial.py"
+      - "scripts/sync_ashdod_supplemental.py"
+      - "scripts/test_ashdod_supplemental_safety.py"
       - ".github/workflows/test-city-events.yml"
   push:
     branches: [main]
@@ -26,6 +28,8 @@ on:
       - "scripts/finalize_rishon_quality.py"
       - "scripts/repair_rishon_public_quality.py"
       - "scripts/test_rishon_editorial.py"
+      - "scripts/sync_ashdod_supplemental.py"
+      - "scripts/test_ashdod_supplemental_safety.py"
       - ".github/workflows/test-city-events.yml"
 
 permissions:
@@ -50,3 +54,4 @@ jobs:
           python scripts/test_smarticket_details.py
           python scripts/test_institution_enrichment.py
           python scripts/test_rishon_editorial.py
+          python scripts/test_ashdod_supplemental_safety.py
