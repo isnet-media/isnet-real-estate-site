@@ -805,9 +805,10 @@ def fix_imported_id_collisions(events, inherited_editorial_ids=frozenset()):
     """Do not publish two rows with one linkable event ID.
 
     Different events occasionally shared a generated ID after source title
-    normalization. Existing editorial collision records must remain unchanged
-    until verified against source and CMS references. New editorial ID collisions
-    still fail closed. Only bot-owned conflicts get a deterministic, venue-aware ID.
+    normalization. ALL pre-existing collision records (including auto_ IDs) must
+    remain unchanged until verified against source and CMS references. New
+    editorial ID collisions still fail closed. Only new bot-owned conflicts may
+    get a deterministic, venue-aware ID.
     """
     ids = set()
     changed = 0
@@ -816,11 +817,11 @@ def fix_imported_id_collisions(events, inherited_editorial_ids=frozenset()):
         if current not in ids:
             ids.add(current)
             continue
+        # Preserve *all* pre-existing duplicate-ID groups, including auto_ IDs.
+        # Source/CMS identity must be verified before changing any of their rows.
+        if current in inherited_editorial_ids:
+            continue
         if not str(current).startswith("auto_"):
-            if current in inherited_editorial_ids:
-                # Exact record preservation is checked in merge() and in CI;
-                # these six historical Rishon conflicts cannot be silently rekeyed.
-                continue
             raise ValueError("Editorial event has conflicting ID: " + str(current))
         fingerprint = "|".join([
             str(current), e.get("title") or "", e.get("start_date") or "",
@@ -863,10 +864,9 @@ def merge(city_slug, specs, dry_run=False):
     payload = json.loads(data_path.read_text(encoding="utf-8"))
     events = payload["events"]
     inherited_collisions = duplicate_groups(events)
-    locked_editorial_ids = frozenset(
-        event_id for event_id in inherited_collisions
-        if not str(event_id).startswith("auto_")
-    )
+    # A generated auto_ identifier can also belong to an existing published
+    # record or CMS link. Lock every inherited collision, not just editorial IDs.
+    locked_editorial_ids = frozenset(inherited_collisions)
     for e in events:
         if e.get("event_id") in locked_editorial_ids:
             continue  # Do not rewrite historical collided editorial records.
