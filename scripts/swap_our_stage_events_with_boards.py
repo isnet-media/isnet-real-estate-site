@@ -55,7 +55,9 @@ def main():
                 kept.append(e);ignored+=1;continue
             copy=good_copy(selected.get("description"))
             img=selected.get("image_url") if good_image(selected.get("image_url")) else None
-            new={"event_id":e["event_id"],"title":html.unescape(selected["title"]),"city":e.get("city"),"category":e["category"],
+            # Preserve CMS linkage and any editorial metadata not managed here.
+            new=dict(e)
+            new.update({"event_id":e["event_id"],"title":html.unescape(selected["title"]),"city":e.get("city"),"category":e["category"],
                  "subcategory":e.get("subcategory"),"start_date":selected["date_time"][:10],
                  "start_time":selected["date_time"][11:16],"venue":html.unescape(selected["venue"]),
                  "status":"active","description":copy,"series_description":copy,
@@ -66,7 +68,7 @@ def main():
                  "image_represents_event":bool(img),"image_strategy":"national_board_displayed_image",
                  "image_rights_status":"publisher_directed_reuse_license_unverified" if img else "unknown",
                  "content_source_url":selected.get("source_url"),"rich_content_status":"enriched" if copy else "source_copy_unavailable",
-                 "source":"national_stage_boards","source_event_id":e["event_id"],"imported_at":e.get("imported_at") or ingestion_time,"last_imported_at":ingestion_time}
+                 "source":"national_stage_boards","source_event_id":e["event_id"],"imported_at":e.get("imported_at") or ingestion_time,"last_imported_at":ingestion_time})
             # Board copy/images can be missing or less trustworthy than what
             # the local editor already approved. Never erase verified content.
             if not copy:
