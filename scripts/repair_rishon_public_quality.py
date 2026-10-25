@@ -75,7 +75,7 @@ def prepare(data,catalog):
   if norm(e['title'])==norm(PROGRAMS[2][0]):e['categories']=['kids'];e['audiences']=['kids','families']
  return data,catalog
 
-def finish(data,catalog):
+def finish(data,catalog,protected_event_ids=frozenset()):
  from rishon_editorial_sources import norm
  from apply_rishon_editorial import venue_key
  aliases={norm(k):norm(v)for k,v in catalog.get('title_aliases',{}).items()}
@@ -98,7 +98,8 @@ def finish(data,catalog):
   if e.get('is_active')is not False:groups[(identity(e),e.get('start_date'),str(e.get('start_time')or'')[:5],venue(e))].append(e)
  stats=Counter()
  for rows in groups.values():
-  if len(rows)<2:continue
+  # Duplicate public identifiers are unresolved until source/CMS review.
+  if len(rows)<2 or any(e.get('event_id') in protected_event_ids for e in rows):continue
   primary=max(rows,key=lambda e:(bool(e.get('source_content_authoritative')),bool(e.get('editorial_version')),bool(e.get('image_verified')and e.get('image_strategy')!='approved_category_illustration'),len(e.get('description')or'')))
   primary.pop('canonical_event_id',None);primary.pop('duplicate_of',None)
   for other in rows:
@@ -114,6 +115,7 @@ def finish(data,catalog):
  # Resolve links through any earlier duplicate mapping without discarding records.
  byid={e['event_id']:e for e in data['events']}
  for e in data['events']:
+  if e.get('event_id') in protected_event_ids or e.get('canonical_event_id') in protected_event_ids:continue
   target=e.get('canonical_event_id');seen={e['event_id']}
   while target in byid and target not in seen:
    seen.add(target);nxt=byid[target].get('canonical_event_id')
