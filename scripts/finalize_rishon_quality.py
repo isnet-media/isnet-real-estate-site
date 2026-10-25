@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Deterministic editorial cleanup, overlap classification and approved fallbacks."""
-import json,re
+import copy,json,re
+from check_preexisting_event_id_collisions import duplicate_groups, verify_preserved_duplicates
 from collections import defaultdict,Counter
 from pathlib import Path
 from datetime import datetime,timedelta
@@ -24,18 +25,21 @@ def fallback(e):
 
 def finalize(data,catalog):
  from repair_rishon_public_quality import prepare,finish
+ # Snapshot every already-shared identifier before any editorial mutation.
+ # These identities can be linked from public pages and the CMS.
+ before=copy.deepcopy(data['events'])
+ protected_ids=frozenset(duplicate_groups(before))
  data,catalog=prepare(data,catalog)
  events=data['events'];aliases={norm(k):norm(v)for k,v in catalog.get('title_aliases',{}).items()};by_name=defaultdict(list);stats=Counter()
- # Multiple feeds can carry the same stable ID; retain the richest record once.
- unique={}
- for e in events:
-  old=unique.get(e['event_id'])
-  if old is None or (bool(e.get('editorial_version')),e.get('is_active')is not False,len(e.get('long_description')or e.get('description')or''))>(bool(old.get('editorial_version')),old.get('is_active')is not False,len(old.get('long_description')or old.get('description')or'')):unique[e['event_id']]=e
- if len(unique)!=len(events):stats['repeated_ids']=len(events)-len(unique)
- events=data['events']=list(unique.values())
+ # Colliding IDs are an audit finding, NOT a reason to discard one record.
+ # Reconciliation requires source identity, CMS and public-link verification.
+ counts=Counter(e.get('event_id') for e in events)
+ stats['repeated_ids']=sum(n-1 for n in counts.values() if n>1)
+ stats['preexisting_collision_groups_for_review']=len(protected_ids)
  for p in catalog['programs']:by_name[norm(p['lookup_title'])].append(p)
  def key(e):return aliases.get(norm(e['title']),norm(e['title']))
  for e in events:
+  if e.get('event_id') in protected_ids:continue
   day=e.get('start_date','')
   if day<TODAY.isoformat():continue
   if day>LIMIT:
@@ -72,7 +76,7 @@ def finalize(data,catalog):
  for e in events:
   if TODAY.isoformat()<=e.get('start_date','')<=LIMIT and e.get('is_active')is not False:groups[(key(e),e['start_date'],str(e.get('start_time')or'')[:5],venue_key(e.get('venue')))].append(e)
  for rows in groups.values():
-  if len(rows)<2:continue
+  if len(rows)<2 or any(e.get('event_id') in protected_ids for e in rows):continue
   primary=max(rows,key=lambda e:(bool(e.get('editorial_version')),bool(e.get('source_content_authoritative')),len(e.get('long_description')or e.get('description')or''),bool(e.get('image_verified'))))
   for other in rows:
    if other is primary:continue
@@ -82,6 +86,7 @@ def finalize(data,catalog):
    other['is_active']=False;other['duplicate_of']=primary['event_id'];other['canonical_event_id']=primary['event_id'];stats['duplicates']+=1
  by_id={e['event_id']:e for e in events}
  for e in events:
+  if e.get('event_id') in protected_ids or e.get('canonical_event_id') in protected_ids:continue
   target=e.get('canonical_event_id');seen={e['event_id']}
   while target and target not in seen and target in by_id:
    seen.add(target);next_id=by_id[target].get('canonical_event_id')
@@ -89,12 +94,21 @@ def finalize(data,catalog):
    target=next_id
   if target and target not in [e['event_id']]:e['canonical_event_id']=target;e['duplicate_of']=target
  for e in events:
+  if e.get('event_id') in protected_ids:continue
   if not TODAY.isoformat()<=e.get('start_date','')<=LIMIT or e.get('is_active')is False:continue
   if not(e.get('image_verified')and e.get('image_url')):
    image=fallback(e)
    if image and(SITE/image).exists():
     e.update(image_url=image,image_source='ISNET approved activity illustration bank',image_origin_url=image,image_credit='אילוסטרציה להמחשה: ISNET',image_strategy='approved_category_illustration',image_verified=True,image_publishable=True,image_rights_status='isnet_owned_illustration',thumbnail_url=image,thumbnail_ready=True);stats['approved_illustrations']+=1
- stats.update(finish(data,catalog))
+ stats.update(finish(data,catalog,protected_event_ids=protected_ids))
+ # prepare() can normalize fields before the editorial passes. Do not
+ # rewrite even those fields on a record in an unresolved collision group.
+ if len(data['events'])!=len(before):
+  raise ValueError('Rishon finalizer changed record count; refusing unsafe write')
+ for i,original in enumerate(before):
+  if original.get('event_id') in protected_ids:
+   data['events'][i]=original
+ verify_preserved_duplicates(before,data['events'],'rishon-lezion')
  return data,dict(stats)
 
 def main():
