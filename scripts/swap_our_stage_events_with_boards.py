@@ -80,6 +80,8 @@ def main():
                               "image_rights_status"):
                     if field in e:
                         new[field]=e[field]
+                    else:
+                        new.pop(field,None)
             replacement.append(new);removed.append(e["event_id"])
         if enabled and replacement:
             data["events"]=kept+replacement
