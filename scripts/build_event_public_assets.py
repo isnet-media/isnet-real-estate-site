@@ -78,18 +78,20 @@ def build(with_cms=False):
         hub_encoded=json.dumps({**data,'events':[hub_event(e) for e in data['events']],'hub_schema':1},ensure_ascii=False,separators=(',',':')).encode()
         (folder/'data/events-hubs.json').write_bytes(hub_encoded)
         events=merge(data['events'],published(city)) if with_cms else data['events']
-        if city=='ashdod' and with_cms:
-            seo_urls,seo_report=build_seo(ROOT,events,slug,visible,day)
+        if with_cms:
+            seo_urls,seo_report=build_seo(ROOT,events,slug,visible,day,city)
             urls.update(seo_urls)
         for path in ('','restaurants.html','category.html?category=stage','category.html?category=music','category.html?category=theatre','category.html?category=standup','category.html?category=lecture','category.html?category=sport','category.html?category=exhibition','category.html?category=community','category.html?category=kids','category.html?category=seniors','cinema.html','saturday.html','attractions.html'):
-            if city=='ashdod' and with_cms and path.startswith('category.html'):continue
+            if with_cms and (path.startswith('category.html') or path=='cinema.html'):continue
             if path=='restaurants.html' and city not in {'ashdod','yavne'}:continue
             urls.add(f'https://isnet.co.il/events-preview/{city}/'+path)
         event_urls={f'https://isnet.co.il/events-preview/{city}/event.html?'+urlencode({'slug':slug(e)}) for e in events if visible(e,day)}
-        if city!='ashdod' or not with_cms:urls.update(event_urls)
+        if not with_cms:urls.update(event_urls)
         report['cities'][city]={'events':len(data['events']),'hub_bytes':len(hub_encoded),'hub_gzip_bytes':len(gzip.compress(hub_encoded)),'full_bytes':len(original),'listing_bytes':len(encoded),'full_gzip_bytes':len(gzip.compress(original)),'listing_gzip_bytes':len(gzip.compress(encoded)),'canonical_event_urls':len(event_urls),'published_cms_included':with_cms}
     from build_movie_editorial import build as build_movies
     urls.update(build_movies())
+    from search_discovery import build as build_discovery
+    urls.update(build_discovery(ROOT))
     for url in sorted(urls):SubElement(SubElement(sitemap,'url'),'loc').text=url
     if with_cms:
         (ROOT/'events-preview/sitemap.xml').write_bytes(tostring(sitemap,encoding='utf-8',xml_declaration=True))

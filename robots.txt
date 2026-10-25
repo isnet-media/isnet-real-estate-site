@@ -1,4 +1,11 @@
+# Public search crawlers may read all published content.
 User-agent: *
 Disallow: /events-preview/admin/
-Sitemap: https://isnet.co.il/events-preview/sitemap.xml
-Sitemap: https://isnet.co.il/events-preview/movie-sitemap.xml
+Allow: /
+
+# Search discovery in ChatGPT (separate from model-training settings).
+User-agent: OAI-SearchBot
+Disallow: /events-preview/admin/
+Allow: /
+
+Sitemap: https://isnet.co.il/events-preview/sitemap-index.xml

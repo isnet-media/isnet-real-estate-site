@@ -57,6 +57,13 @@ on:
       - "scripts/test_super_shell.py"
       - "scripts/build_super_recipes.py"
       - "scripts/build_movie_editorial.py"
+      - "scripts/search_discovery.py"
+      - "scripts/event_seo.py"
+      - "scripts/notify_search_indexes.py"
+      - "scripts/test_search_discovery.py"
+      - "scripts/test-search-metadata.cjs"
+      - "scripts/build_event_public_assets.py"
+      - "robots.txt"
       - "scripts/test_movie_editorial.py"
       - "scripts/test-movie-editorial.cjs"
       - "scripts/sync_event_city_views.py"
@@ -188,6 +195,8 @@ jobs:
           node scripts/test-event-sync.cjs
           python scripts/build_event_public_assets.py --with-cms
           python scripts/test_movie_editorial.py
+          python scripts/test_search_discovery.py
+          NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-search-metadata.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-movie-editorial.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-category-listings.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-yavne-quality.cjs
@@ -279,3 +288,13 @@ jobs:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
 
+
+      - name: Restore canonical search notification state
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/events-indexnow-state.json
+          key: events-indexnow-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: events-indexnow-
+
+      - name: Notify search engines of changed public URLs
+        run: python scripts/notify_search_indexes.py --submit

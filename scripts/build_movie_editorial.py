@@ -47,6 +47,8 @@ def schedule_html(movie,day):
   out.append('<section class="cinemaBlock"><div class="cinemaBlock__head"><h3>'+esc(venue['name'])+'</h3></div>'+(''.join(rows) or '<p class="noSchedule">אין כרגע שעות הקרנה מאומתות. בדקו באתר בית הקולנוע.</p>')+'</section>')
  return ''.join(out)
 def build():
+ from search_discovery import page_schema,lastmod
+ modified={}
  registry=json.loads((ROOT/'events-preview/shared/data/movie-editorial.json').read_text());aliases=registry['aliases'];records=registry['movies'];today=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat();urls=[];index={};report={'cities':{},'editorial_records':len(records),'audience_scores':sum(bool(r.get('audience_rating')) for r in records.values()),'critics_summaries':sum(bool(r.get('critics')) for r in records.values()),'description_words':{'min':min(len(r.get('original_text','').split()) for r in records.values()),'max':max(len(r.get('original_text','').split()) for r in records.values())}}
  for city,label in CITIES.items():
   folder=ROOT/'events-preview'/city;data=json.loads((folder/'data/cinema.json').read_text());groups={};index[city]={}
@@ -61,11 +63,12 @@ def build():
    soup=BeautifulSoup(template,'html.parser');url=BASE+city+'/movies/'+key+'/'
    base=soup.new_tag('base',href='/events-preview/'+city+'/');soup.head.insert(0,base)
    title=movie['title']+' – תקציר, ביקורות והקרנות ב'+label;soup.title.string=title+' | מה עושים'
-   soup.find('meta',attrs={'name':'description'})['content']=text[:170]
-   for prop,value in [('og:title',title),('og:description',text[:200]),('og:url',url),('og:type','article')]:soup.head.append(soup.new_tag('meta',attrs={'property':prop,'content':value}))
+   summary=movie['title']+' – סיפור הסרט, ביקורות והקרנות ב'+label+'. '+text[:140]
+   soup.find('meta',attrs={'name':'description'})['content']=summary
+   for prop,value in [('og:title',title),('og:description',summary),('og:url',url),('og:type','article')]:soup.head.append(soup.new_tag('meta',attrs={'property':prop,'content':value}))
    for old in soup.select('link[rel=canonical]'):old.decompose()
    for anchor in soup.select('a[href^="#"]'):anchor['href']=url+anchor['href']
-   soup.head.append(soup.new_tag('link',rel='canonical',href=url));soup.head.append(soup.new_tag('meta',attrs={'name':'robots','content':'index,follow,max-image-preview:large'}))
+   soup.head.append(soup.new_tag('link',rel='canonical',href=url));soup.head.append(soup.new_tag('meta',attrs={'name':'robots','content':'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}))
    soup.body['data-movie-id']=movie['id'];soup.body['data-static-movie']='true';soup.find(id='page').attrs.pop('hidden',None);soup.find(id='loadingState')['hidden']=''
    for ident,value in [('movieTitle',movie['title']),('fullSynopsis',text)]:soup.find(id=ident).string=value
    soup.find(id='cinemaSchedules').clear();soup.find(id='cinemaSchedules').append(BeautifulSoup(schedule_html(movie,today),'html.parser'))
@@ -88,12 +91,23 @@ def build():
    else:
     soup.find(id='trailerAvailability').string='טריילר רשמי לסרט זה טרם אומת.'
     soup.find(id='trailerExternal')['hidden']='';soup.find(id='youtubeFrame').parent['hidden']=''
-   schema={'@context':'https://schema.org','@type':'Movie' if record.get('content_type')!='screening_event' else 'CreativeWork','@id':url+'#movie','url':url,'name':movie['title'],'description':text,'inLanguage':'he'}
+   if poster:soup.head.append(soup.new_tag('meta',attrs={'property':'og:image','content':poster}))
+   soup.head.append(soup.new_tag('meta',attrs={'property':'og:locale','content':'he_IL'}))
+   schema={'@context':'https://schema.org','@type':'Movie' if record.get('content_type')!='screening_event' else 'CreativeWork','@id':url+'#movie','url':url,'name':movie['title'],'description':text}
+   identities=[u for u in record.get('synopsis_sources',[]) if safe(u) and '/critics/' not in u]
+   if identities:schema['sameAs']=identities
    if poster:schema['image']=urljoin(BASE+city+'/',poster)
    if movie.get('runtime_minutes'):schema['duration']='PT'+str(movie['runtime_minutes'])+'M'
    if movie.get('genres'):schema['genre']=movie['genres']
    ld=soup.new_tag('script',type='application/ld+json');ld.string=json.dumps(schema,ensure_ascii=False).replace('<','\\u003c');soup.head.append(ld)
-   breadcrumb={'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':i+1,'name':name,'item':item} for i,(name,item) in enumerate([('מה עושים ב'+label,BASE+city+'/'),('קולנוע ב'+label,BASE+city+'/cinema.html'),(movie['title'],url)])]}
+   local_page=page_schema(city,url,title,summary,'WebPage');local_page['mainEntity']={'@id':url+'#movie'}
+   changed=lastmod(record,data)
+   if changed:local_page['dateModified']=changed;modified[url]=changed
+   ld=soup.new_tag('script',type='application/ld+json');ld.string=json.dumps(local_page,ensure_ascii=False).replace('<','\\u003c');soup.head.append(ld)
+   hub=BASE+city+'/cinema/'
+   crumbs_html='<nav class="movieEditorialSource" aria-label="מיקומכם באתר"><a href="'+BASE+city+'/">מה עושים ב'+esc(label)+'</a> / <a href="'+hub+'">קולנוע ב'+esc(label)+'</a> / '+esc(movie['title'])+'</nav>'
+   soup.find(id='movieTitle').insert_before(BeautifulSoup(crumbs_html,'html.parser'))
+   breadcrumb={'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':i+1,'name':name,'item':item} for i,(name,item) in enumerate([('מה עושים ב'+label,BASE+city+'/'),('קולנוע ב'+label,hub),(movie['title'],url)])]}
    ld=soup.new_tag('script',type='application/ld+json');ld.string=json.dumps(breadcrumb,ensure_ascii=False).replace('<','\\u003c');soup.head.append(ld)
    dest=folder/'movies'/key/'index.html';dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(str(soup)+'\n');urls.append(url)
    links.append('<li><a href="'+esc(url)+'">'+esc(movie['title'])+' – תקציר וביקורות</a></li>')
@@ -103,7 +117,9 @@ def build():
   report['cities'][city]={'feed_records':len(data['movies']),'pages':len(groups),'original_copy':sum(bool(records.get(k,{}).get('original_text')) for k in groups)}
  (ROOT/'events-preview/shared/data/movie-page-index.json').write_text(json.dumps(index,ensure_ascii=False,separators=(',',':'))+'\n')
  sitemap=Element('urlset',xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
- for url in sorted(urls):SubElement(SubElement(sitemap,'url'),'loc').text=url
+ for url in sorted(urls):
+  node=SubElement(sitemap,'url');SubElement(node,'loc').text=url
+  if modified.get(url):SubElement(node,'lastmod').text=modified[url]
  (ROOT/'events-preview/movie-sitemap.xml').write_bytes(tostring(sitemap,encoding='utf-8',xml_declaration=True))
  (ROOT/'events-preview/admin/data/movie-editorial-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');print(json.dumps(report,ensure_ascii=False));return urls
 if __name__=='__main__':build()

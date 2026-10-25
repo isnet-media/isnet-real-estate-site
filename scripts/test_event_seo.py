@@ -32,7 +32,8 @@ home=(repo/'events-preview/ashdod/index.html').read_text();head=HomeHead();head.
 assert head.canonicals==['https://isnet.co.il/events-preview/ashdod/']
 assert 'מה עושים באשדוד' in head.description
 import re
-schema=json.loads(re.search(r'<script type="application/ld\+json" id="homeSiteSchema">(.*?)</script>',home,re.S)[1])
+from bs4 import BeautifulSoup
+schema=json.loads(BeautifulSoup(home,'html.parser').find(id='homeSiteSchema').string)
 website=next(x for x in schema['@graph'] if x['@type']=='WebSite')
 assert website['name']=='מה עושים באשדוד' and website['url']==head.canonicals[0]
 assert website['publisher']['@id']=='https://ashdodnet.com/#organization'

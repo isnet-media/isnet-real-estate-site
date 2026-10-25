@@ -9,7 +9,7 @@ vm.runInNewContext(fs.readFileSync('events-preview/shared/cinema-editorial.js','
 for(const city of Object.keys(pages)){
  const feed=JSON.parse(fs.readFileSync('events-preview/'+city+'/data/cinema.json','utf8')).movies;
  const result=api.unique(feed);assert.equal(result.length,new Set(feed.map(m=>api.key(m.id))).size);
- for(const m of feed){const merged=api.merge(feed,m.id);assert(merged);assert.equal(merged.editorial_text,registry.movies[api.key(m.id)].original_text);assert.equal(api.url(m.id,city),pages[city][m.id]);
+ for(const m of feed){const merged=api.merge(feed,m.id);assert(merged);assert.equal(merged.editorial_text,registry.movies[api.key(m.id)]?.original_text);assert.equal(api.url(m.id,city),pages[city][m.id]);
   for(const v of m.venues)for(const [date,times] of Object.entries(v.schedule||{}))for(const time of times)assert(merged.venues.find(x=>x.id===v.id).schedule[date].includes(time));
  }
 }

@@ -12,18 +12,26 @@ def local_title(v):
 def description(e):return clean(e.get('seo_description') or e.get('short_pitch') or e.get('description') or e.get('series_description'))[:180]
 def safe_url(v):return str(v or '') if str(v or '').startswith(('https://','http://')) else ''
 def ld(v):return json.dumps(v,ensure_ascii=False).replace('<','\\u003c')
-def build_seo(root,events,slug,visible,day):
- folder=root/'events-preview/ashdod';out=folder/'discover';out.mkdir(exist_ok=True)
+def build_seo(root,events,slug,visible,day,city='ashdod'):
+ from search_discovery import EDITIONS
+ edition=EDITIONS[city];label=edition['name'];BASE='https://isnet.co.il/events-preview/'+city+'/'
+ def local_title(v):
+  title=clean(v);return title if label in title else title+' ב'+label
+ def city_text(text):
+  if city=='ashdod':return text
+  text=text.replace('<script src="ashdod-analytics.js?v=20261015-ga-complete1"></script>','')
+  return text.replace('https://ashdodnet.com/',edition['publisher_url']).replace('assets/branding/what-to-do-ashdod-dark.svg',edition['logo']).replace('assets/branding/ashdodnet-dark.svg',edition['publisher_logo']).replace('אשדוד נט',edition['publisher']).replace('אשדוד',label)
+ folder=root/'events-preview'/city;out=folder/'discover';out.mkdir(exist_ok=True)
  taxonomy=json.loads((root/'events-preview/admin/data/taxonomy.json').read_text())['primary_categories']
  taxonomy=[{'id':'stage','label':'הופעות במה','subcategories':[]}]+taxonomy
  cats={x['id']:x for x in taxonomy};rows=[e for e in events if visible(e,day)];manifest={'generated_at':datetime.now(ZoneInfo('UTC')).isoformat(),'categories':{},'events':{},'pages':{}}
- urls=set();report={'generated_at':manifest['generated_at'],'city':'ashdod','events':0,'categories':0,'subcategories':0,'warnings':[],'pages':[]}
+ urls=set();report={'generated_at':manifest['generated_at'],'city':city,'events':0,'categories':0,'subcategories':0,'warnings':[],'pages':[]}
  esc=lambda v:html.escape(str(v or ''),quote=True)
  def page(filename,title,desc,body,schema,index=True):
   canonical=BASE+'discover/'+quote(filename);urls.add(canonical) if index else None
   breadcrumbs={'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'מה עושים באשדוד','item':BASE},{'@type':'ListItem','position':2,'name':title,'item':canonical}]}
-  text='''<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="../"><title>'''+esc(title)+' | מה עושים באשדוד</title><meta name="description" content="'+esc(desc)+'"><meta name="robots" content="'+('index,follow' if index else 'noindex,follow')+'"><link rel="canonical" href="'+esc(canonical)+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(desc)+'"><meta property="og:url" content="'+esc(canonical)+'"><meta property="og:type" content="website"><link rel="stylesheet" href="seo-pages.css?v=1"><script defer src="/assets/isnet-top-navigation.js?v=20261021-nav2"></script><script defer src="site-share.js?v=20261019-all-pages2"></script><script src="ashdod-analytics.js?v=20261015-ga-complete1"></script><script type="application/ld+json">'+ld([schema,breadcrumbs])+'</script></head><body><header class="siteTopbar"><div class="isnetBrandGroup"><a href="./"><img src="assets/branding/what-to-do-ashdod-dark.svg" width="145" height="68" alt="מה עושים באשדוד"></a><a href="https://ashdodnet.com/" aria-label="מבית אשדוד נט"><small>מבית</small><img src="assets/branding/ashdodnet-dark.svg" width="80" height="34" alt="אשדוד נט"></a></div><a href="./">ראשי — מה עושים באשדוד</a></header><main><h1>'+esc(title)+'</h1><p class="lead">'+esc(desc)+'</p>'+body+'</main><footer><a href="./">כל הבילויים באשדוד</a> · מבית <a href="https://ashdodnet.com/">אשדוד נט</a></footer></body></html>'
-  (out/filename).write_text(text);report['pages'].append({'url':canonical,'title':title,'indexable':index})
+  text='''<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="../"><title>'''+esc(title)+' | מה עושים באשדוד</title><meta name="description" content="'+esc(desc)+'"><meta name="robots" content="'+('index,follow' if index else 'noindex,follow')+'"><link rel="canonical" href="'+esc(canonical)+'"><meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(desc)+'"><meta property="og:url" content="'+esc(canonical)+'"><meta property="og:type" content="website"><link rel="stylesheet" href="/events-preview/ashdod/seo-pages.css?v=1"><script defer src="/assets/isnet-top-navigation.js?v=20261021-nav2"></script><script defer src="site-share.js?v=20261019-all-pages2"></script><script src="ashdod-analytics.js?v=20261015-ga-complete1"></script><script type="application/ld+json">'+ld([schema,breadcrumbs])+'</script></head><body><header class="siteTopbar"><div class="isnetBrandGroup"><a href="./"><img src="assets/branding/what-to-do-ashdod-dark.svg" width="145" height="68" alt="מה עושים באשדוד"></a><a href="https://ashdodnet.com/" aria-label="מבית אשדוד נט"><small>מבית</small><img src="assets/branding/ashdodnet-dark.svg" width="80" height="34" alt="אשדוד נט"></a></div><a href="./">ראשי — מה עושים באשדוד</a></header><main><h1>'+esc(title)+'</h1><p class="lead">'+esc(desc)+'</p>'+body+'</main><footer><a href="./">כל הבילויים באשדוד</a> · מבית <a href="https://ashdodnet.com/">אשדוד נט</a></footer></body></html>'
+  (out/filename).write_text(city_text(text));report['pages'].append({'url':canonical,'title':title,'indexable':index})
   return canonical
  def event_file(e):return 'event-'+slug(e)+'.html'
  def event_link(e):return BASE+'discover/'+quote(event_file(e))
@@ -39,7 +47,7 @@ def build_seo(root,events,slug,visible,day):
    if time and re.match(r'^\d{2}:\d{2}',time):
     try:dt=datetime.fromisoformat(dt+'T'+time[:5]).replace(tzinfo=ZoneInfo('Asia/Jerusalem')).isoformat()
     except ValueError:pass
-   schema.update({'@type':'Event','name':name,'startDate':dt,'eventAttendanceMode':'https://schema.org/OfflineEventAttendanceMode','eventStatus':'https://schema.org/'+('EventCancelled' if e.get('status') in ('cancelled','canceled') else 'EventPostponed' if e.get('status')=='postponed' else 'EventScheduled'),'location':{'@type':'Place','name':clean(e['venue']),'address':{'@type':'PostalAddress','streetAddress':clean(e.get('address')),'addressLocality':'אשדוד','addressCountry':'IL'}}})
+   schema.update({'@type':'Event','name':name,'startDate':dt,'eventAttendanceMode':'https://schema.org/OfflineEventAttendanceMode','eventStatus':'https://schema.org/'+('EventCancelled' if e.get('status') in ('cancelled','canceled') else 'EventPostponed' if e.get('status')=='postponed' else 'EventScheduled'),'location':{'@type':'Place','name':clean(e['venue']),'address':{'@type':'PostalAddress','streetAddress':clean(e.get('address')),'addressLocality':label,'addressCountry':'IL'}}})
    if image:schema['image']=[image]
    if e.get('end_date') and e['end_date']>=e['start_date']:schema['endDate']=e['end_date']
    purchase=safe_url(e.get('purchase_url') or e.get('ticket_url'))
@@ -75,5 +83,5 @@ def build_seo(root,events,slug,visible,day):
  for old in out.glob('*.html'):
   if old.name not in expected:old.unlink()
  (folder/'data/seo-index.json').write_text(json.dumps(manifest,ensure_ascii=False,separators=(',',':')))
- (root/'events-preview/admin/data/seo-report-ashdod.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+ (root/('events-preview/admin/data/seo-report-'+city+'.json')).write_text(json.dumps(report,ensure_ascii=False,indent=2))
  return urls,report

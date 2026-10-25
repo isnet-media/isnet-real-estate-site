@@ -1,0 +1,7 @@
+/* Canonical city metadata for existing interactive views. Full HTML remains in /discover/. */
+(()=>{'use strict';const match=location.pathname.match(/^\/events-preview\/(ashdod|rishon-lezion|yavne)\/(?:pilot\/)?(?:event|category)\.html$/);if(!match)return;const city=match[1],base='/events-preview/'+city+'/',ready=fetch(base+'data/seo-index.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('metadata');return r.json()}).catch(()=>null);
+function meta(name,value){let tag=document.querySelector('meta[name="'+name+'"]');if(!tag){tag=document.createElement('meta');tag.name=name;document.head.append(tag)}tag.content=value}
+function canonical(url,index=true){if(!url?.startsWith('https://isnet.co.il'+base))return;let tag=document.querySelector('link[rel="canonical"]');if(!tag){tag=document.createElement('link');tag.rel='canonical';document.head.append(tag)}tag.href=url;meta('robots',index?'index,follow,max-image-preview:large':'noindex,follow')}
+const earlier=window.ISNET_SEO;window.ISNET_SEO={...earlier,event(event){earlier?.event?.(event);if(event.seo_index===false){meta('robots','noindex,follow');return}ready.then(data=>{const item=data?.events?.[event.event_id];if(item)canonical(item.url)})}};
+if(location.pathname.endsWith('/category.html'))ready.then(data=>{const q=new URLSearchParams(location.search),key=q.get('category')||'stage',sub=q.get('subcategory'),item=data?.categories?.[key+(sub?':'+sub:'')];if(!item)return;canonical(item.url,item.indexable);document.title=item.title+' | מה עושים';meta('description',item.description)});
+})();
