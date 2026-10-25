@@ -47,11 +47,24 @@ def build_variant(definition,catalog,variant):
   found=sum(x['line_total_cents'] is not None for x in lines);complete=found==len(products)
   branches.append({**{k:branch.get(k) for k in ['id','chain','name','address','city','file_date','source_url','price_file_url','files_applied']},'lines':lines,'equivalent_count':sum(x.get('match_type')=='equivalent' for x in lines),'found':found,'complete':complete,'total_cents':sum(x['line_total_cents'] for x in lines) if complete else None})
  branches.sort(key=lambda b:(not b['complete'],b['total_cents'] if b['complete'] else -b['found'],b['chain'],b['name']))
- if variant=='family':
-  assert all(b['complete'] for b in branches), 'Family basket must cover every connected branch: revise the product selection, never exclude branches or impute prices'
+ omitted=[]
+ if variant=='family' and branches:
+  # Keep every branch and use the same reviewed products/quantities everywhere.
+  # A disappeared reference product must not stop unrelated daily price updates.
+  missing={line['id'] for b in branches for line in b['lines'] if line['line_total_cents'] is None}
+  if missing:
+   omitted=[{'id':p['id'],'name':p['name'],'reason':'No verified price in every connected branch'} for p in products if p['id'] in missing]
+   products=[p for p in products if p['id'] not in missing]
+   for b in branches:
+    b['lines']=[l for l in b['lines'] if l['id'] not in missing]
+    b['found']=len(b['lines']);b['complete']=bool(products)
+    b['equivalent_count']=sum(l['match_type']=='equivalent' for l in b['lines'])
+    b['total_cents']=sum(l['line_total_cents'] for l in b['lines']) if b['complete'] else None
+   branches.sort(key=lambda b:(not b['complete'],b['total_cents'] if b['complete'] else 0,b['chain'],b['name']))
+
  complete=[b for b in branches if b['complete']];rankable=len(complete)>=2;minimum=complete[0]['total_cents'] if rankable else None;maximum=complete[-1]['total_cents'] if rankable else None
  status=json.loads((D/'data/source-status.json').read_text())
- result={'schema_version':1,'variant_id':variant,'city':catalog['city'],'retrieved_at':catalog['retrieved_at'],'price_date':catalog['retrieved_at'][:10],'scope_complete':catalog.get('coverage_complete',False),'price_mode':'regular_shelf_fixed_quantities','products':products,'branches':branches,'complete_branch_count':len(complete),'ranking_available':rankable,'minimum_cents':minimum,'maximum_cents':maximum,'average_cents':round(sum(b['total_cents'] for b in complete)/len(complete)) if complete else None,'gap_cents':maximum-minimum if rankable else None,'gap_percent_of_cheapest':round((maximum-minimum)/minimum*100,2) if rankable else None,'winner_ids':[b['id'] for b in complete if b['total_cents']==minimum] if rankable else [],'most_expensive_ids':[b['id'] for b in complete if b['total_cents']==maximum] if rankable else [],'pending_chains':[p['chain'] for p in status['pending']],'target_budget_ils':[600,700] if variant=='family' else None,'method':'All connected branches are included in the family basket. Approved product equivalents preserve food type and total quantities. Choose the reference first, then the first validated equivalent in a fixed published priority. Packaged items use whole packs; pack counts can differ to preserve equal total weight. Weighted fish requires explicit kg source metadata. Never infer missing prices. This curated basket contains frozen fish, frozen vegetables and packaged dates, not fresh meat or fresh fruit/vegetables. The 600-700 ILS target concerns the mean basket value, not each store. Retailer price-file data does not confirm stock.'}
+ result={'omitted_products':omitted,'reference_product_count':len(definition),'schema_version':1,'variant_id':variant,'city':catalog['city'],'retrieved_at':catalog['retrieved_at'],'price_date':catalog['retrieved_at'][:10],'scope_complete':catalog.get('coverage_complete',False),'price_mode':'regular_shelf_fixed_quantities','products':products,'branches':branches,'complete_branch_count':len(complete),'ranking_available':rankable,'minimum_cents':minimum,'maximum_cents':maximum,'average_cents':round(sum(b['total_cents'] for b in complete)/len(complete)) if complete else None,'gap_cents':maximum-minimum if rankable else None,'gap_percent_of_cheapest':round((maximum-minimum)/minimum*100,2) if rankable else None,'winner_ids':[b['id'] for b in complete if b['total_cents']==minimum] if rankable else [],'most_expensive_ids':[b['id'] for b in complete if b['total_cents']==maximum] if rankable else [],'pending_chains':[p['chain'] for p in status['pending']],'target_budget_ils':[600,700] if variant=='family' else None,'method':'All connected branches are included in the family basket. Approved product equivalents preserve food type and total quantities. Choose the reference first, then the first validated equivalent in a fixed published priority. Packaged items use whole packs; pack counts can differ to preserve equal total weight. Weighted fish requires explicit kg source metadata. Never infer missing prices. This curated basket contains frozen fish, frozen vegetables and packaged dates, not fresh meat or fresh fruit/vegetables. The 600-700 ILS target concerns the mean basket value, not each store. Retailer price-file data does not confirm stock.'}
  print(f'{variant}: {len(products)} lines; {len(complete)}/{len(branches)} complete; min={minimum}, max={maximum}, mean={result["average_cents"]} agorot')
  return result
 

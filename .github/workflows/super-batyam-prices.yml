@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: batyam-supermarket-${{ github.run_id }}
-          path: SUPER.BATYAM/data/refresh-status.json
+          path: SUPER.BATYAM/data/
           retention-days: 30
       - name: Publish only validated Bat Yam data
         if: steps.daily.outputs.collect == 'true'

@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: holon-supermarket-${{ github.run_id }}
-          path: SUPER.HOLON/data/refresh-status.json
+          path: SUPER.HOLON/data/
           retention-days: 30
       - name: Publish only validated Holon data
         if: steps.daily.outputs.collect == 'true'

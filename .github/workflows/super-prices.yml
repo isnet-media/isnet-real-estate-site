@@ -58,8 +58,7 @@ jobs:
         with:
           name: supermarket-refresh-${{ github.run_id }}
           path: |
-            SUPER.ASHDOD/data/refresh-status.json
-            SUPER.ASHDOD/data/site-health.json
+            SUPER.ASHDOD/
           retention-days: 30
       - name: Commit validated data without overwriting concurrent edits
         if: steps.daily.outputs.collect == 'true'

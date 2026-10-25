@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kgat-supermarket-${{ github.run_id }}
-          path: SUPER.KGAT/data/refresh-status.json
+          path: SUPER.KGAT/data/
           retention-days: 30
       - name: Publish only validated Kiryat Gat data
         if: steps.daily.outputs.collect == 'true'

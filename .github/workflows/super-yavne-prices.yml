@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: yavne-supermarket-${{ github.run_id }}
-          path: SUPER.YAVNE/data/refresh-status.json
+          path: SUPER.YAVNE/data/
           retention-days: 30
       - name: Publish validated Yavne data
         if: steps.daily.outputs.collect == 'true'
