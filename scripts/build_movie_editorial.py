@@ -64,6 +64,7 @@ def build():
    soup.find('meta',attrs={'name':'description'})['content']=text[:170]
    for prop,value in [('og:title',title),('og:description',text[:200]),('og:url',url),('og:type','article')]:soup.head.append(soup.new_tag('meta',attrs={'property':prop,'content':value}))
    for old in soup.select('link[rel=canonical]'):old.decompose()
+   for anchor in soup.select('a[href^="#"]'):anchor['href']=url+anchor['href']
    soup.head.append(soup.new_tag('link',rel='canonical',href=url));soup.head.append(soup.new_tag('meta',attrs={'name':'robots','content':'index,follow,max-image-preview:large'}))
    soup.body['data-movie-id']=movie['id'];soup.body['data-static-movie']='true';soup.find(id='page').attrs.pop('hidden',None);soup.find(id='loadingState')['hidden']=''
    for ident,value in [('movieTitle',movie['title']),('movieSynopsis',text[:200]),('fullSynopsis',text)]:soup.find(id=ident).string=value

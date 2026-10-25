@@ -36,6 +36,7 @@ for city in CITIES:
         assert soup.find(id='movieEditorial') and soup.h1.get_text(),url
         assert soup.select_one('link[rel=canonical]')['href']==url,url
         assert soup.base['href']==f'/events-preview/{city}/'
+        assert soup.select_one('a.primaryButton')['href']==url+'#showtimes'
         assert nav.find('a',href=url),url
         ld=[json.loads(e.string) for e in soup.select('script[type="application/ld+json"]')]
         assert any(e['@type'] in ('Movie','CreativeWork') and e['description']==record['original_text'] for e in ld)
