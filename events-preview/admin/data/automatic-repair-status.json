@@ -1,16 +1,59 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-25T16:51:14.758573+00:00",
+  "checked_at": "2026-10-25T21:16:09.109552+00:00",
   "mode": "apply",
   "state": "attention",
   "scope": "Ashdod source feeds; CMS overlays remain authoritative; no claim of live-page verification",
   "input_sha256": {
-    "events-preview/ashdod/data/events.json": "263a2cdbb349412729634a7a728c8f4b3a34d2773193ea711529a4f1732cf3cf",
+    "events-preview/ashdod/data/events.json": "cc6e87ba48bbb89697cca29983086535e9ab8d5e9814a3b9a19cec3ce3472fbe",
     "events-preview/admin/data/taxonomy.json": "72310e50ad395f9c4cb646863490b33aa263290b00c2920a697d4edc453da084",
     "events-preview/admin/data/subcategory-definitions.json": "6c2273cba22422c976f2834c424b8229c222037ca7090f86faffafc6c4f7223b",
     "events-preview/shared/standup-videos.json": "d1e6b4414492ed406bec59c7e4066f4ce9fd6c13f30ec2a4e9d036a3a6de41d7"
   },
-  "repairs": [],
+  "repairs": [
+    {
+      "event_id": "board_5f65051f2794d9c16d",
+      "reason": "verified_subcategory_rule",
+      "before": {
+        "subcategory": null,
+        "subcategory_review_status": null,
+        "subcategory_review_confidence": null
+      },
+      "after": {
+        "subcategory": "musical",
+        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
+        "subcategory_review_confidence": 0.97
+      }
+    },
+    {
+      "event_id": "board_acacf40135f3b93186",
+      "reason": "verified_subcategory_rule",
+      "before": {
+        "subcategory": null,
+        "subcategory_review_status": null,
+        "subcategory_review_confidence": null
+      },
+      "after": {
+        "subcategory": "musical",
+        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
+        "subcategory_review_confidence": 0.97
+      }
+    },
+    {
+      "event_id": "board_e7d6bc2cdc41973736",
+      "reason": "verified_subcategory_rule",
+      "before": {
+        "subcategory": null,
+        "subcategory_review_status": null,
+        "subcategory_review_confidence": null
+      },
+      "after": {
+        "subcategory": "musical",
+        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
+        "subcategory_review_confidence": 0.97
+      }
+    }
+  ],
   "unresolved": [
     {
       "id": "cd5f7d917527b38a2361",
@@ -524,13 +567,6 @@
       "reason": "No unique verified same-production source image; research required"
     },
     {
-      "id": "03ee41a7b220632ec93d",
-      "type": "standup_video",
-      "event_id": "evt_52_20261028",
-      "title": "אדיר מילר",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
       "id": "deff3339743b5345008d",
       "type": "image",
       "event_id": "makore_as_230724d008c56834fd",
@@ -578,13 +614,6 @@
       "event_id": "makore_as_8dfc4f4df88991fe55",
       "title": "וסילי גובורוחין — «ישראל במשחק הגדול» באשדוד",
       "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "2704b33052c8cfbcfd76",
-      "type": "standup_video",
-      "event_id": "evt_53_20261029",
-      "title": "בן בן ברוך",
-      "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
       "id": "4002b7df45c71f5bd377",
@@ -916,20 +945,6 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "f42878069a26da6ec8cf",
-      "type": "image",
-      "event_id": "auto_as_8d899b9358eb2e48489e",
-      "title": "פאטמה הסטנדאפיסטית הבדואית",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
-      "id": "28587953d2e72a7be869",
-      "type": "image",
-      "event_id": "auto_as_c5cfa403e54c71516354",
-      "title": "פאטמה הסטנדאפיסטית הבדואית",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
       "id": "06e82008b0fdf3ba797a",
       "type": "image",
       "event_id": "tickchak_as_7f0c4cbe735862d25e",
@@ -1028,20 +1043,6 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "aca55e4ff48b4bad5e24",
-      "type": "subcategory",
-      "event_id": "auto_as_1aefe35d1d5f921bfa75",
-      "title": "זוגיות AI",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "f299543eb82e491c616b",
-      "type": "image",
-      "event_id": "auto_as_1aefe35d1d5f921bfa75",
-      "title": "זוגיות AI",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
       "id": "8132c1c95db8125de890",
       "type": "subcategory",
       "event_id": "makore_as_0ea1f7a410f8ec6fc5",
@@ -1068,13 +1069,6 @@
       "event_id": "mevalim_as_129633",
       "title": "תמיר בוסקילה במופע סטנדאפ",
       "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "057f1868d9c2f64ada44",
-      "type": "image",
-      "event_id": "auto_as_fa8970a7269c724ec8b2",
-      "title": "תמיר בוסקילה במופע סטנדאפ",
-      "reason": "No unique verified same-production source image; research required"
     },
     {
       "id": "19b99932615731309b9c",
@@ -1350,13 +1344,6 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "86f12d0a6536c7bfbb13",
-      "type": "image",
-      "event_id": "auto_as_b924dd79da255b903e28",
-      "title": "שבלול בצנצנת - שעת סיפור תיאטרלית לקטנטנים",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
       "id": "23d3fa87ce7fd7bb4cac",
       "type": "subcategory",
       "event_id": "makore_as_6453ba2d6ef8673788",
@@ -1413,20 +1400,6 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "e37e7522fc6ca9bad8a4",
-      "type": "subcategory",
-      "event_id": "auto_as_90571c8f21969cbf3e08",
-      "title": "לה דולצ'ה נוטה – נוסטלגיה בהיכל בהנחיית דן כנר",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "e372c724eb4210f9b8a8",
-      "type": "image",
-      "event_id": "auto_as_90571c8f21969cbf3e08",
-      "title": "לה דולצ'ה נוטה – נוסטלגיה בהיכל בהנחיית דן כנר",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
       "id": "f04a6529e2dfb087d59a",
       "type": "subcategory",
       "event_id": "makore_as_07efcce957b362bc3a",
@@ -1469,13 +1442,6 @@
       "reason": "No unique verified same-production source image; research required"
     },
     {
-      "id": "85ef7054c7cea2323bcf",
-      "type": "image",
-      "event_id": "auto_as_30406ba7efe0bf0754f2",
-      "title": "כספיון - שעת סיפור תיאטרלית",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
       "id": "e7bdb25250f360b55b1e",
       "type": "subcategory",
       "event_id": "board_1c84de77e234ced10b",
@@ -1494,13 +1460,6 @@
       "type": "image",
       "event_id": "makore_as_35b0f5301f53db8e77",
       "title": "עופרה",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
-      "id": "e311b23aed9b9316465e",
-      "type": "image",
-      "event_id": "auto_as_16fff3bcf8d32c312e8a",
-      "title": "עפרה - מחזמר מרהיב על עפרה חזה",
       "reason": "No unique verified same-production source image; research required"
     },
     {
@@ -1616,13 +1575,6 @@
       "reason": "No unique verified same-production source image; research required"
     },
     {
-      "id": "995dd0b4dda04ad34690",
-      "type": "content",
-      "event_id": "auto_as_9f171b38443c970d3e5b",
-      "title": "החולה ההודי - תיאטרון הקאמרי",
-      "reason": "Missing event description; source research required"
-    },
-    {
       "id": "0717e632a62c03d52fb6",
       "type": "image",
       "event_id": "makore_as_c1cfd47fa0ee2f1393",
@@ -1663,13 +1615,6 @@
       "event_id": "local_f6a1212758c9c50ed21b36",
       "title": "מועדון קריאה שכולו אהבה - סדרת מפגשים בהנחיית הסופרת שרית חיים",
       "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "35dc0b698dfa61d592f2",
-      "type": "content",
-      "event_id": "auto_as_30ec2ea30430b22683d4",
-      "title": "החולה ההודי - תיאטרון הקאמרי",
-      "reason": "Missing event description; source research required"
     },
     {
       "id": "ba7620b2d668e910556c",
@@ -1735,13 +1680,6 @@
       "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
-      "id": "203b3eac8dcce516843e",
-      "type": "content",
-      "event_id": "auto_as_74f83a3ec2c7e4c91806",
-      "title": "החולה ההודי - תיאטרון הקאמרי",
-      "reason": "Missing event description; source research required"
-    },
-    {
       "id": "00961aac29ec567ce633",
       "type": "subcategory",
       "event_id": "auto_as_fece424c1d738492a6a7",
@@ -1796,20 +1734,6 @@
       "event_id": "auto_as_3f5ed5d784dd02374c19",
       "title": "החולה ההודי",
       "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "fd98fda11867280a68cd",
-      "type": "content",
-      "event_id": "auto_as_937629d0f9bb1089b498",
-      "title": "החולה ההודי - תיאטרון הקאמרי",
-      "reason": "Missing event description; source research required"
-    },
-    {
-      "id": "7a15a917b3aa7157372a",
-      "type": "standup_video",
-      "event_id": "evt_59_20261121",
-      "title": "אורי חזקיה",
-      "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
       "id": "b463e768ec60c493722c",
@@ -2001,32 +1925,11 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "fe07212e11c814184661",
-      "type": "subcategory",
-      "event_id": "auto_as_2b409db244e477e5b535",
-      "title": "הדבר העגול הזה - מופע ליצנות לכל המשפחה",
-      "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "eb568c1d8db80bbe043f",
-      "type": "image",
-      "event_id": "auto_as_2b409db244e477e5b535",
-      "title": "הדבר העגול הזה - מופע ליצנות לכל המשפחה",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
       "id": "cfd811ee16abc50be329",
       "type": "subcategory",
       "event_id": "auto_as_46982c8acb5b20d5ba37",
       "title": "הדבר העגול הזה - מופע ליצנות לכל המשפחה",
       "reason": "No unambiguous approved subtype from explicit event evidence"
-    },
-    {
-      "id": "c7d7cbc02a17e8bd67e2",
-      "type": "image",
-      "event_id": "auto_as_46982c8acb5b20d5ba37",
-      "title": "הדבר העגול הזה - מופע ליצנות לכל המשפחה",
-      "reason": "No unique verified same-production source image; research required"
     },
     {
       "id": "3f5a8ded393641343a3a",
@@ -2995,13 +2898,6 @@
       "reason": "No unambiguous approved subtype from explicit event evidence"
     },
     {
-      "id": "e2983c941e8e4c91d92b",
-      "type": "standup_video",
-      "event_id": "auto_as_2b8d59b9f755ec9b7983",
-      "title": "מתן פרץ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
       "id": "9dc40a5ddb9b412ebb90",
       "type": "subcategory",
       "event_id": "local_3842434be6000ddd1e4c80",
@@ -3233,13 +3129,6 @@
       "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
-      "id": "77390b92fc8a08206c5b",
-      "type": "image",
-      "event_id": "auto_as_c675505d0fbfc57c5be0",
-      "title": "יוסיאל נאמן במופע סטנדאפ",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
       "id": "b35f7f5c9e1db7051a8b",
       "type": "standup_video",
       "event_id": "auto_as_c675505d0fbfc57c5be0",
@@ -3259,27 +3148,6 @@
       "event_id": "mevalim_as_127202",
       "title": "דניאל סטיופין",
       "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "bf2859d8b7ba4e5ed877",
-      "type": "image",
-      "event_id": "auto_as_aa9cf53083c630ee2b22",
-      "title": "דניאל סטיופין (\"קופה ראשית\") - מופע סטנדאפ",
-      "reason": "No unique verified same-production source image; research required"
-    },
-    {
-      "id": "86821aab577d0146ae27",
-      "type": "standup_video",
-      "event_id": "auto_as_aa9cf53083c630ee2b22",
-      "title": "דניאל סטיופין (\"קופה ראשית\") - מופע סטנדאפ",
-      "reason": "No recent verified exact artist clip; never guess a video"
-    },
-    {
-      "id": "7e570b445145af3fc0b0",
-      "type": "content",
-      "event_id": "auto_as_aa9cf53083c630ee2b22",
-      "title": "דניאל סטיופין (\"קופה ראשית\") - מופע סטנדאפ",
-      "reason": "Missing event description; source research required"
     },
     {
       "id": "3c0216c6984a8094a5b0",
@@ -4318,6 +4186,202 @@
       "reason": "No recent verified exact artist clip; never guess a video"
     },
     {
+      "id": "03ee41a7b220632ec93d",
+      "type": "standup_video",
+      "event_id": "evt_52_20261028",
+      "title": "אדיר מילר",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "2704b33052c8cfbcfd76",
+      "type": "standup_video",
+      "event_id": "evt_53_20261029",
+      "title": "בן בן ברוך",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "75e992a8cbcc46b53f2c",
+      "type": "possible_duplicate",
+      "event_id": "auto_as_8d899b9358eb2e48489e",
+      "title": "פאטמה הסטנדאפיסטית הבדואית",
+      "reason": "Same title/date/time/venue as mevalim_as_123115; preserve IDs pending source comparison"
+    },
+    {
+      "id": "aca55e4ff48b4bad5e24",
+      "type": "subcategory",
+      "event_id": "auto_as_1aefe35d1d5f921bfa75",
+      "title": "זוגיות AI",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "e37e7522fc6ca9bad8a4",
+      "type": "subcategory",
+      "event_id": "auto_as_90571c8f21969cbf3e08",
+      "title": "לה דולצ'ה נוטה – נוסטלגיה בהיכל בהנחיית דן כנר",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "995dd0b4dda04ad34690",
+      "type": "content",
+      "event_id": "auto_as_9f171b38443c970d3e5b",
+      "title": "החולה ההודי - תיאטרון הקאמרי",
+      "reason": "Missing event description; source research required"
+    },
+    {
+      "id": "35dc0b698dfa61d592f2",
+      "type": "content",
+      "event_id": "auto_as_30ec2ea30430b22683d4",
+      "title": "החולה ההודי - תיאטרון הקאמרי",
+      "reason": "Missing event description; source research required"
+    },
+    {
+      "id": "203b3eac8dcce516843e",
+      "type": "content",
+      "event_id": "auto_as_74f83a3ec2c7e4c91806",
+      "title": "החולה ההודי - תיאטרון הקאמרי",
+      "reason": "Missing event description; source research required"
+    },
+    {
+      "id": "fd98fda11867280a68cd",
+      "type": "content",
+      "event_id": "auto_as_937629d0f9bb1089b498",
+      "title": "החולה ההודי - תיאטרון הקאמרי",
+      "reason": "Missing event description; source research required"
+    },
+    {
+      "id": "7a15a917b3aa7157372a",
+      "type": "standup_video",
+      "event_id": "evt_59_20261121",
+      "title": "אורי חזקיה",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "fe07212e11c814184661",
+      "type": "subcategory",
+      "event_id": "auto_as_2b409db244e477e5b535",
+      "title": "הדבר העגול הזה - מופע ליצנות לכל המשפחה",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "47d5f5bb144b2e2532ae",
+      "type": "possible_duplicate",
+      "event_id": "auto_as_2b409db244e477e5b535",
+      "title": "הדבר העגול הזה - מופע ליצנות לכל המשפחה",
+      "reason": "Same title/date/time/venue as mevalim_as_129436; preserve IDs pending source comparison"
+    },
+    {
+      "id": "e2983c941e8e4c91d92b",
+      "type": "standup_video",
+      "event_id": "auto_as_2b8d59b9f755ec9b7983",
+      "title": "מתן פרץ",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "bf2859d8b7ba4e5ed877",
+      "type": "image",
+      "event_id": "auto_as_aa9cf53083c630ee2b22",
+      "title": "דניאל סטיופין (\"קופה ראשית\") - מופע סטנדאפ",
+      "reason": "No unique verified same-production source image; research required"
+    },
+    {
+      "id": "86821aab577d0146ae27",
+      "type": "standup_video",
+      "event_id": "auto_as_aa9cf53083c630ee2b22",
+      "title": "דניאל סטיופין (\"קופה ראשית\") - מופע סטנדאפ",
+      "reason": "No recent verified exact artist clip; never guess a video"
+    },
+    {
+      "id": "eee08299b8822da5cff0",
+      "type": "subcategory",
+      "event_id": "board_71f6f14ce429347652",
+      "title": "מבלים",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "28d7b20e0e47900ee495",
+      "type": "subcategory",
+      "event_id": "board_e1166973c00b7dd0b6",
+      "title": "מבלים",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "4b6ef124cc7a7db8eeba",
+      "type": "subcategory",
+      "event_id": "board_0aa27c760517104e68",
+      "title": "גברת רביע באשדוד | טיפול זוגי 5:55 | יד לבנים אשדוד",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "fba1973d120906cc27e1",
+      "type": "subcategory",
+      "event_id": "board_8413aaef2db9092a9e",
+      "title": "הקוסם מארץ עוץ - לוח הופעות והזמנת כרטיסים",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "b44fbda176bf38330e69",
+      "type": "subcategory",
+      "event_id": "board_d1e8bb522f5e1bc6b9",
+      "title": "משכן אומנויות הבמה אשדוד - סיפור הנס חיפזון וזהירון חנוכה | המשכן לאמנויות הבמה אשדוד",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "bcb02204897bc95cc1b6",
+      "type": "subcategory",
+      "event_id": "board_9d0dec7ab1e7574706",
+      "title": "שושנה - בכיכובה של גל דה פז",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "919050608c298043de4a",
+      "type": "subcategory",
+      "event_id": "board_968da9ee6fcc77b71d",
+      "title": "סדנת מחול מזרחי",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "2a10b94c36e2c67c55f8",
+      "type": "image",
+      "event_id": "board_968da9ee6fcc77b71d",
+      "title": "סדנת מחול מזרחי",
+      "reason": "No unique verified same-production source image; research required"
+    },
+    {
+      "id": "b77757a98eb16f440a1b",
+      "type": "subcategory",
+      "event_id": "board_7b6490b13f0ba5233c",
+      "title": "חנות סופגניות קטנה ומצחיקה - חנוכה 2026",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "7108077aa97342ea89b3",
+      "type": "subcategory",
+      "event_id": "board_5f7aa92e22b099f5ec",
+      "title": "נישואים גרעיניים - הצגת הבידור שתחסוך לכם טיפול זוגי",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "8fcaac56f8758bb76683",
+      "type": "subcategory",
+      "event_id": "board_eb5565fd6a1a7ebe86",
+      "title": "סיפור הנס - חיפזון וזהירון חנוכה 26",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "5e6aec0dfa72c4c23217",
+      "type": "subcategory",
+      "event_id": "board_79ac79d77e5791f596",
+      "title": "היי סקול דרמה - האקדמיה למדעי היוטיוב - חנוכה 2026",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
+      "id": "bc03598e42fcb5403b84",
+      "type": "subcategory",
+      "event_id": "board_f07231348d20c9fa06",
+      "title": "שומרי הדרקונים - חנוכה 2026",
+      "reason": "No unambiguous approved subtype from explicit event evidence"
+    },
+    {
       "id": "source-ironit_library",
       "type": "source_partial",
       "title": "ironit_library",
@@ -4349,8 +4413,8 @@
     }
   ],
   "counts": {
-    "repairs": 0,
-    "unresolved": 620
+    "repairs": 3,
+    "unresolved": 623
   },
   "data_readback_verified": true
 }
