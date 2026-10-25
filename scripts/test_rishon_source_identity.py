@@ -73,7 +73,7 @@ class RishonSourceIdentitySafety(unittest.TestCase):
 
     def test_genuinely_new_distinct_ids_are_added(self):
         after, report = merge([], [event('new-a', 'Show A'),
-                                   event('new-b', 'Show B')])
+                                   event('new-b', 'Show B', time='20:30')])
         self.assertEqual(len(after), 2)
         self.assertEqual(report['added'], 2)
         self.assertEqual(report['id_collisions_quarantined'], 0)
