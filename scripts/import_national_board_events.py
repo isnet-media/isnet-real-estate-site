@@ -2,6 +2,7 @@
 """Import dated city events from national-board detail pages into city datasets."""
 import hashlib,json,re
 from datetime import date,datetime,timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from urllib.parse import urlparse
 import requests
@@ -49,6 +50,8 @@ def extract(html,url,city):
             title=string(e.get("name"));start=string(e.get("startDate"))
             try:
                 dt=datetime.fromisoformat(start.replace("Z","+00:00"))
+                if dt.tzinfo is not None:
+                    dt=dt.astimezone(ZoneInfo("Asia/Jerusalem"))
                 day=dt.date().isoformat();clock=dt.strftime("%H:%M")
             except ValueError:continue
             if day < date.today().isoformat():continue
