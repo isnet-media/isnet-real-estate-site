@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '50 4 * * *'
   push:
+    branches: [main]
     paths:
       - 'scripts/discover_national_event_boards.py'
       - 'scripts/import_national_board_events.py'

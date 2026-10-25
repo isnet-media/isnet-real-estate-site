@@ -98,6 +98,21 @@ def listing_rows(html,url,city):
         output.append(dict(title=title,start_date=dt.isoformat(),start_time=m.group(3),venue=venue,description="",image_url=None,source_url=url))
     return output
 
+def claim_import_identity(slug, row, existing_occurrences, existing_ids):
+    """Reserve an occurrence and ID only if neither is already owned."""
+    key = tuple(row[k] for k in ("title", "start_date", "start_time", "venue"))
+    if key in existing_occurrences:
+        return None, "existing_occurrence"
+    eid = "auto_" + slug[:2] + "_" + hashlib.sha256(("|".join(key)).encode()).hexdigest()[:20]
+    if eid in existing_ids:
+        # A prior source/editorial update may have changed the existing record's
+        # title, time or venue without changing its stable event_id. Do not reuse it.
+        return None, "event_id_collision"
+    existing_occurrences.add(key)
+    existing_ids.add(eid)
+    return eid, None
+
+
 def main():
     discovery=json.loads(DISC.read_text(encoding="utf-8"))
     config=json.loads(CONFIG.read_text(encoding="utf-8"))
@@ -113,7 +128,7 @@ def main():
     for slug,label in CITIES.items():
         path=ROOT/"events-preview"/slug/"data/events.json"
         data=json.loads(path.read_text(encoding="utf-8"));events=data["events"]
-        cleanup={"reclassified_existing":0,"removed_out_of_scope_existing":0}
+        cleanup={"reclassified_existing":0,"removed_out_of_scope_existing":0,"flagged_out_of_scope_existing":0}
         retained=[]
         for event in events:
             flags=set(event.get("quality_flags") or [])
@@ -125,13 +140,18 @@ def main():
                     event["quality_flags"]=sorted(flags)
                     cleanup["reclassified_existing"]+=1
                 else:
-                    cleanup["removed_out_of_scope_existing"]+=1
-                    continue
+                    # Historical imports may already be linked from the public site
+                    # or CMS. Mark for review; never delete based on title heuristics.
+                    if "national_board_scope_review" not in flags:
+                        flags.add("national_board_scope_review")
+                        event["quality_flags"]=sorted(flags)
+                        cleanup["flagged_out_of_scope_existing"]+=1
             retained.append(event)
-        if cleanup["reclassified_existing"] or cleanup["removed_out_of_scope_existing"]:
+        if cleanup["reclassified_existing"] or cleanup["flagged_out_of_scope_existing"]:
             events[:]=retained
         seen={(e.get("title"),e.get("start_date"),e.get("start_time"),e.get("venue")) for e in events}
-        counts={"added":0,"skipped_out_of_scope":0,"reclassified_existing":cleanup["reclassified_existing"],"removed_out_of_scope_existing":cleanup["removed_out_of_scope_existing"],"by_category":{}}
+        seen_ids={e.get("event_id") for e in events if e.get("event_id")}
+        counts={"added":0,"skipped_out_of_scope":0,"skipped_id_collision":0,"id_collision_examples":[],"reclassified_existing":cleanup["reclassified_existing"],"removed_out_of_scope_existing":0,"flagged_out_of_scope_existing":cleanup["flagged_out_of_scope_existing"],"by_category":{}}
         candidates=[{"city_hint":slug,"source_url":"https://www.mevalim.co.il/"+("ashdod" if slug=="ashdod" else "rishon-lezion")+"/","source_id":"mevalim"}]
         candidates += [c for c in discovery.get("candidates",[]) if c.get("source_id")!="mevalim"]
         for candidate in candidates:
@@ -165,11 +185,14 @@ def main():
                     counts["skipped_out_of_scope"]+=1
                     source_report["skipped_out_of_scope"]+=1
                     continue
-                key=tuple(row[k] for k in ("title","start_date","start_time","venue"))
-                if key in seen:
+                eid, skip_reason=claim_import_identity(slug,row,seen,seen_ids)
+                if skip_reason:
+                    if skip_reason=="event_id_collision":
+                        counts["skipped_id_collision"]+=1
+                        source_report["skipped_id_collision"]=source_report.get("skipped_id_collision",0)+1
+                        if len(counts["id_collision_examples"])<20:
+                            counts["id_collision_examples"].append({"event_id":"auto_"+slug[:2]+"_"+hashlib.sha256(("|".join(row[k] for k in ("title","start_date","start_time","venue"))).encode()).hexdigest()[:20],"title":row["title"],"date":row["start_date"],"venue":row["venue"],"source_id":source_id})
                     continue
-                seen.add(key)
-                eid="auto_"+slug[:2]+"_"+hashlib.sha256(("|".join(key)).encode()).hexdigest()[:20]
                 image=row.get("image_url")
                 events.append({
                     "event_id":eid,"city":label,"title":row["title"],
@@ -187,7 +210,7 @@ def main():
                 counts["by_category"][category]=counts["by_category"].get(category,0)+1
                 source_report["added"]+=1
                 source_report["by_category"][category]=source_report["by_category"].get(category,0)+1
-        if counts["added"] or cleanup["reclassified_existing"] or cleanup["removed_out_of_scope_existing"]:
+        if counts["added"] or cleanup["reclassified_existing"] or cleanup["flagged_out_of_scope_existing"]:
             events.sort(key=lambda e:(e.get("start_date") or "",e.get("start_time") or "",e.get("title") or ""))
             data["generated_at"]=report["generated_at"]
             data.setdefault("stats",{})["events"]=len(events)
