@@ -85,7 +85,7 @@ collision = [
 assert m.fix_imported_id_collisions(collision)==1
 assert len({x["event_id"] for x in collision})==2, collision
 
-\nlegacy_rows = [
+legacy_rows = [
     {"event_id": "board_legacy", "title": "Original first", "city": "ראשון לציון"},
     {"event_id": "board_legacy", "title": "Original second", "city": "ראשון לציון"},
 ]
