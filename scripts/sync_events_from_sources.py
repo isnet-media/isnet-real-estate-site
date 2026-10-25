@@ -15,6 +15,7 @@ import sys
 import time
 import unicodedata
 from collections import Counter
+from check_preexisting_event_id_collisions import duplicate_groups
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit
@@ -785,12 +786,13 @@ def clean_generated_duplicates(events):
 
 
 
-def fix_imported_id_collisions(events):
+def fix_imported_id_collisions(events, inherited_editorial_ids=frozenset()):
     """Do not publish two rows with one linkable event ID.
 
     Different events occasionally shared a generated ID after source title
-    normalization. Editorial IDs are immutable. Only bot-owned conflicts are
-    assigned a new deterministic, venue-aware ID.
+    normalization. Existing editorial collision records must remain unchanged
+    until verified against source and CMS references. New editorial ID collisions
+    still fail closed. Only bot-owned conflicts get a deterministic, venue-aware ID.
     """
     ids = set()
     changed = 0
@@ -800,6 +802,10 @@ def fix_imported_id_collisions(events):
             ids.add(current)
             continue
         if not str(current).startswith("auto_"):
+            if current in inherited_editorial_ids:
+                # Exact record preservation is checked in merge() and in CI;
+                # these six historical Rishon conflicts cannot be silently rekeyed.
+                continue
             raise ValueError("Editorial event has conflicting ID: " + str(current))
         fingerprint = "|".join([
             str(current), e.get("title") or "", e.get("start_date") or "",
@@ -841,7 +847,14 @@ def merge(city_slug, specs, dry_run=False):
     data_path = BASE / city_slug / "data" / "events.json"
     payload = json.loads(data_path.read_text(encoding="utf-8"))
     events = payload["events"]
+    inherited_collisions = duplicate_groups(events)
+    locked_editorial_ids = frozenset(
+        event_id for event_id in inherited_collisions
+        if not str(event_id).startswith("auto_")
+    )
     for e in events:
+        if e.get("event_id") in locked_editorial_ids:
+            continue  # Do not rewrite historical collided editorial records.
         if e.get("source_content_authoritative"):
             continue
         pu = str(e.get("purchase_url") or "")
@@ -850,11 +863,13 @@ def merge(city_slug, specs, dry_run=False):
             e["purchase_url"] = None
             if e.get("purchase_source") in (None, "official_listing", "direct"):
                 e["purchase_source"] = "blocked_competitor_listing"
-    removed_classes = [e for e in events if not e.get("source_content_authoritative") and is_classes_candidate(
+    removed_classes = [e for e in events if e.get("event_id") not in locked_editorial_ids
+                       and not e.get("source_content_authoritative") and is_classes_candidate(
         e.get("title"), e.get("category"), e.get("description"), e.get("series_title"), e.get("variant_label")
     )]
     if removed_classes:
-        events[:] = [e for e in events if e.get("source_content_authoritative") or not is_classes_candidate(
+        events[:] = [e for e in events if e.get("event_id") in locked_editorial_ids
+                     or e.get("source_content_authoritative") or not is_classes_candidate(
             e.get("title"), e.get("category"), e.get("description"), e.get("series_title"), e.get("variant_label")
         )]
     ids_before = {e.get("event_id") for e in events}
@@ -965,7 +980,7 @@ def merge(city_slug, specs, dry_run=False):
             }
             match = existing_match(events, incoming, name)
             if match:
-                if match.get("source_content_authoritative"):
+                if match.get("event_id") in locked_editorial_ids or match.get("source_content_authoritative"):
                     continue
                 changed = False
                 # Only update date/time from the same official source. A missing
@@ -1041,7 +1056,18 @@ def merge(city_slug, specs, dry_run=False):
         time.sleep(.3)
 
     summary["removed_invalid"], summary["removed_duplicates"] = clean_generated_duplicates(events)
-    summary["repaired_event_ids"] = fix_imported_id_collisions(events)
+    summary["repaired_event_ids"] = fix_imported_id_collisions(
+        events, inherited_editorial_ids=locked_editorial_ids
+    )
+    updated_collisions = duplicate_groups(events)
+    for event_id in locked_editorial_ids:
+        if updated_collisions.get(event_id) != inherited_collisions[event_id]:
+            raise ValueError(
+                f"Legacy editorial collision {event_id!r} changed in {city_slug}; "
+                "preserve every record and verify source/CMS identity manually."
+            )
+    if locked_editorial_ids:
+        print(f"Preserved {len(locked_editorial_ids)} inherited editorial collision groups in {city_slug}", flush=True)
     surviving = {e.get("event_id") for e in events}
     summary["new"] = len(surviving - ids_before)
     for name, state in summary["sources"].items():
