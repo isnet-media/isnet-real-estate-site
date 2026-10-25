@@ -5,6 +5,7 @@ Collect from national ticket boards in one pass; specialists work only on gaps.
 import json, re, time, hashlib
 from pathlib import Path
 from datetime import datetime,timezone
+from zoneinfo import ZoneInfo
 from urllib.parse import urljoin,urlparse
 import requests
 from bs4 import BeautifulSoup
@@ -18,6 +19,18 @@ CATS={"music","standup","kids","theatre"}
 HEAD={"User-Agent":"ISNET-Stage-Discovery/1.0 (isnet.co.il)","Accept-Language":"he-IL,he;q=0.9"}
 GENERIC=("אירועים באשדוד","אירועים בראשון","כל האירועים","לוח אירועים","לאתר המכירה","הצג עוד")
 def clean(x):return re.sub(r"\s+"," ",str(x or "")).strip()
+def localize_stage_datetime(value):
+    """Convert timezone-aware event datetimes to Israel wall time; preserve naive source clocks."""
+    if not isinstance(value, str) or not re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", value.strip()):
+        return value
+    try:
+        dt = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except ValueError:
+        return value
+    if dt.tzinfo is None:
+        return value
+    return dt.astimezone(ZoneInfo("Asia/Jerusalem")).isoformat()
+
 def domain(url,hostname):
     host=(urlparse(url).hostname or "").removeprefix("www.")
     root=hostname.removeprefix("www.")
@@ -62,8 +75,9 @@ def event_from_jsonld(obj,source_id,page):
     if isinstance(image,str) and any(x in image.lower() for x in ("big_star.png","logo","placeholder","default-image","no-image")):image=None
     description=clean(obj.get("description"))
     if any(x in description for x in ("באתר מבלים ריכזנו","מחפשים הופעות","לוח הופעות באשדוד עם מבצעים")):description=None
-    return {"title":name,"city":found_city,"venue":loc or None,"date_time":obj.get("startDate"),
-      "end_time":obj.get("endDate"),"description":description,
+    return {"title":name,"city":found_city,"venue":loc or None,"date_time":localize_stage_datetime(obj.get("startDate")),
+      "source_date_time":obj.get("startDate"),
+      "end_time":localize_stage_datetime(obj.get("endDate")),"description":description,
       "image_url":urljoin(page,image) if isinstance(image,str) else None,
       "video_url":video if isinstance(video,str) else None,
       "tickets_url":offers.get("url") if isinstance(offers,dict) else None,
