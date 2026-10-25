@@ -260,6 +260,43 @@ def ticket_identity(e):
  u=e.get('purchase_url') or e.get('ticket_url') or e.get('content_source_url') or '';p=urlparse(u);q=parse_qs(p.query);m=re.search(r'/event/(\d+)',p.path)
  uid=q.get('id') or q.get('event') or ([m[1]] if m else None)
  return (p.hostname,str(uid[0])) if uid else (p.hostname,p.path.rstrip('/'))
+def reconcile_ashdod_supplemental(old,new):
+ # A matching title or generic ticket URL is not verified source identity.
+ # Preserve all existing cards unless an exact supplemental occurrence is refreshed.
+ from collections import Counter
+ old_by_id={}
+ for row in old:old_by_id.setdefault(row.get('event_id'),[]).append(row)
+ replacements=set();accepted=[];review=[]
+ for incoming in new:
+  existing=old_by_id.get(incoming.get('event_id'),[])
+  if existing:
+   exact=(len(existing)==1 and str(existing[0].get('source','')).startswith('supplemental_')
+          and existing[0].get('source')==incoming.get('source')
+          and existing[0].get('start_date')==incoming.get('start_date')
+          and str(existing[0].get('start_time') or '')[:5]==str(incoming.get('start_time') or '')[:5]
+          and venue_key(existing[0].get('venue'))==venue_key(incoming.get('venue'))
+          and not (existing[0].get('content_origin')=='manual' and existing[0].get('content_locked')))
+   if exact:replacements.add(incoming['event_id']);accepted.append(incoming)
+   else:review.append({'new_id':incoming.get('event_id'),'old_ids':[r.get('event_id') for r in existing],'reason':'existing_id_requires_source_cms_review'})
+   continue
+  matches=[r for r in old if r.get('start_date')==incoming.get('start_date')
+           and str(r.get('start_time') or '')[:5]==str(incoming.get('start_time') or '')[:5]
+           and venue_key(r.get('venue'))==venue_key(incoming.get('venue'))
+           and equivalent(r,incoming)]
+  if matches:
+   review.append({'new_id':incoming.get('event_id'),'old_ids':[r.get('event_id') for r in matches[:5]],'reason':'occurrence_overlap_requires_source_cms_review'})
+   continue
+  accepted.append(incoming)
+ removed=[r for r in old if r.get('event_id') in replacements]
+ kept=[r for r in old if r.get('event_id') not in replacements]
+ before=Counter(r.get('event_id') for r in old)
+ after=Counter(r.get('event_id') for r in kept+accepted)
+ if any(after[key]<count for key,count in before.items()):
+  raise ValueError('Existing Ashdod event identity would be lost: refuse publication')
+ if len({r.get('event_id') for r in kept+accepted})!=len(kept+accepted):
+  raise ValueError('Ashdod supplemental import would duplicate an event ID')
+ return kept,accepted,removed,review
+
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--collect-only',action='store_true');ap.add_argument('--snapshot');args=ap.parse_args();OUT.mkdir(exist_ok=True)
  if args.snapshot:
@@ -286,17 +323,14 @@ def main():
   previous=next((p for p in old if p.get('event_id')==e['event_id']),{})
   for key in ['description','series_description','image_url','image_origin_url']:
    if not e.get(key) and previous.get(key):e[key]=previous[key];e['source_detail_incomplete']=True
-  e['image_publishable']=e['image_verified']=e['image_represents_event']=bool(e.get('image_url'));new.append(e)
- removed=[];kept=[]
+  img=e.get('image_url')
+  verified_image=bool(img) and not source_placeholder(img)
+  e['image_publishable']=e['image_verified']=e['image_represents_event']=verified_image
+  e['source_image_kind']='source_event_photo' if verified_image else 'source_placeholder' if img else 'not_available'
+  new.append(e)
  preferred=[e for e in old if e.get('source')=='mevalim_direct']
  new=[e for e in new if not any(preferred_match(e,m) for m in preferred)]
- for e in old:
-  # Replace matching occurrences only. Never delete unrelated source records.
-  match=next((n for n in new if e.get('event_id')==n['event_id']),None)
-  if not match:match=next((n for n in new if e.get('start_date')==n['start_date'] and ((ticket_identity(e)==ticket_identity(n) and ticket_identity(n)[0]) or (equivalent(dict(title=e.get('title',''),start_date=e.get('start_date')),n) and str(e.get('start_time') or '')[:5]==n['start_time']))),None)
-  if not match and e.get('source')!='mevalim_direct' and any(preferred_match(e,m) for m in preferred):match=True
-  if match and e.get('source')!='mevalim_direct':removed.append(e)
-  else:kept.append(e)
+ kept,new,removed,review=reconcile_ashdod_supplemental(old,new)
  data['events']=kept+new;apply_ashdod_museum_media(data['events'],ROOT);apply_ashdod_category_overrides(data['events'],ROOT);data['generated_at']=datetime.now(Z).isoformat();data['generatedAt']=data['generated_at'];data.setdefault('stats',{})['events']=len(data['events']);path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  taxpath=OUT/'taxonomy.json';tax=json.loads(taxpath.read_text());cats=tax['primary_categories']
  for e in new:
@@ -305,6 +339,6 @@ def main():
   if not any(s['id']==e['subcategory'] for s in cat.get('subcategories',[])):cat.setdefault('subcategories',[]).append(dict(id=e['subcategory'],label=e['source_category'] or 'פעילויות',requires_mapping=e['taxonomy_review_required']))
  tax.setdefault('source_taxonomies',{})['ashdod_supplemental']={'label':'מקורות ארציים – השלמות לאשדוד','categories':[{'label':raw or 'ללא קטגוריה במקור','source':src,'requires_mapping':not raw} for src,raw in sorted({(e['source'],e.get('source_category','')) for e in new})]}
  taxpath.write_text(json.dumps(tax,ensure_ascii=False,indent=2)+'\n')
- report={k:v for k,v in snap.items() if k!='events'};report['source_detail_issues']=[{'event_id':e['event_id'],'title':e['title'],'url':e.get('content_source_url'),'error':e['source_detail_error']} for e in new if e.get('source_detail_error')];report.update(published_occurrences=len(new),replaced=len(removed),duplicates_merged=duplicates,with_image=sum(bool(e.get('image_url')) for e in new),with_text=sum(bool(e.get('description')) for e in new),source_placeholder_images=sum(source_placeholder(e.get('image_url')) for e in new),replaced_legacy_occurrences=sum(not str(e.get('source','')).startswith('supplemental_') for e in removed))
+ report={k:v for k,v in snap.items() if k!='events'};report['source_detail_issues']=[{'event_id':e['event_id'],'title':e['title'],'url':e.get('content_source_url'),'error':e['source_detail_error']} for e in new if e.get('source_detail_error')];report.update(published_occurrences=len(new),replaced=len(removed),duplicates_merged=duplicates,with_image=sum(bool(e.get('image_url')) for e in new),verified_source_images=sum(bool(e.get('image_verified')) for e in new),with_text=sum(bool(e.get('description')) for e in new),source_placeholder_images=sum(source_placeholder(e.get('image_url')) for e in new),replaced_legacy_occurrences=sum(not str(e.get('source','')).startswith('supplemental_') for e in removed),preserved_legacy_records=sum(not str(e.get('source','')).startswith('supplemental_') for e in kept),awaiting_identity_review=len(review),awaiting_identity_review_examples=review[:30])
  (OUT/'ashdod-supplemental-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');(OUT/'ashdod-supplemental-replaced.json').write_text(json.dumps({'at':snap['at'],'events':removed},ensure_ascii=False,indent=2)+'\n');print(json.dumps(report,ensure_ascii=False))
 if __name__=='__main__':main()
