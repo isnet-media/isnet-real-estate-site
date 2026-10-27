@@ -14,6 +14,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from requests.exceptions import ConnectionError as RequestConnectionError, Timeout as RequestTimeout
 import time,random
+from threading import Lock
 from bs4 import BeautifulSoup
 ROOT=Path(__file__).resolve().parents[1];D=ROOT/'SUPER.ASHDOD/data';TZ=ZoneInfo('Asia/Jerusalem')
 PUBLIC='https://url.publishedprices.co.il'
@@ -47,7 +48,7 @@ def xmlbytes(s,e):
  if len(xml)>120_000_000 or b'<!DOCTYPE' in xml.upper():raise ValueError('Unsafe or oversized XML')
  return xml
 
-def listing(b):
+def uncached_listing(b):
  s=session();chain=b['chain'];entries=[]
  if chain in ACCOUNTS:
   r=request(s,PUBLIC+'/login');token=BeautifulSoup(r.text,'html.parser').find('meta',attrs={'name':'csrftoken'})['content']
@@ -75,6 +76,25 @@ def listing(b):
      if x.get('FileNm'):entries.append({'name':x['FileNm'],'url':base+'Download/'+x['FileNm']})
  else:raise ValueError('No reviewed official connector for branch')
  return s,entries
+
+
+# Fetch each retailer-wide directory once per run. Give downloads independent
+# sessions while preserving public-portal cookies, avoiding concurrent logins.
+_listing_cache={}
+_listing_locks={}
+_listing_guard=Lock()
+def listing(b):
+ shared=b['chain'] in ACCOUNTS or b['chain'] in ('קרפור','ויקטורי')
+ if not shared:return uncached_listing(b)
+ key=(b['chain'],b['chain_id'],b['source_url'])
+ with _listing_guard:lock=_listing_locks.setdefault(key,Lock())
+ with lock:
+  if key not in _listing_cache:
+   source,entries=uncached_listing(b)
+   _listing_cache[key]=(source.cookies.copy(),entries)
+  cookies,entries=_listing_cache[key]
+ result=session();result.cookies.update(cookies)
+ return result,list(entries)
 
 def field(node,key):return next(((c.text or '').strip() for c in node if c.tag.split('}')[-1].casefold()==key.casefold()),'')
 def kg(unit):return bool(re.fullmatch(r'(?:1\s*)?(?:קילוגרמים?|קילוגרם|ק[״\"]?ג)',unit))

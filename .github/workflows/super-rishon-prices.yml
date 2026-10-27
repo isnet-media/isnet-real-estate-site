@@ -36,12 +36,15 @@ jobs:
           python scripts/refresh_rishon_super_prices.py --raw-dir "$RUNNER_TEMP/rishon-official"
           python scripts/build_rishon_super.py
           python scripts/test_rishon_super.py --deployment-only
+      - name: Pack collection evidence with portable archive paths
+        if: always() && steps.daily.outputs.collect == 'true'
+        run: tar -czf "$RUNNER_TEMP/super-rishon-evidence.tar.gz" SUPER.RISHON/
       - name: Preserve collection evidence
         if: always() && steps.daily.outputs.collect == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: rishon-supermarket-${{ github.run_id }}
-          path: SUPER.RISHON/data/
+          path: ${{ runner.temp }}/super-rishon-evidence.tar.gz
           retention-days: 30
       - name: Publish only validated Rishon data
         if: steps.daily.outputs.collect == 'true'

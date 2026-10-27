@@ -36,12 +36,15 @@ jobs:
           python scripts/refresh_yavne_super_prices.py --raw-dir "$RUNNER_TEMP/yavne-official"
           python scripts/build_yavne_super.py
           python scripts/test_yavne_super.py --deployment-only
+      - name: Pack collection evidence with portable archive paths
+        if: always() && steps.daily.outputs.collect == 'true'
+        run: tar -czf "$RUNNER_TEMP/super-yavne-evidence.tar.gz" SUPER.YAVNE/
       - name: Preserve collection evidence
         if: always() && steps.daily.outputs.collect == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: yavne-supermarket-${{ github.run_id }}
-          path: SUPER.YAVNE/data/
+          path: ${{ runner.temp }}/super-yavne-evidence.tar.gz
           retention-days: 30
       - name: Publish validated Yavne data
         if: steps.daily.outputs.collect == 'true'

@@ -36,12 +36,15 @@ jobs:
           python scripts/refresh_holon_super_prices.py --raw-dir "$RUNNER_TEMP/holon-official"
           python scripts/build_holon_super.py
           python scripts/test_holon_super.py --deployment-only
+      - name: Pack collection evidence with portable archive paths
+        if: always() && steps.daily.outputs.collect == 'true'
+        run: tar -czf "$RUNNER_TEMP/super-holon-evidence.tar.gz" SUPER.HOLON/
       - name: Preserve collection evidence
         if: always() && steps.daily.outputs.collect == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: holon-supermarket-${{ github.run_id }}
-          path: SUPER.HOLON/data/
+          path: ${{ runner.temp }}/super-holon-evidence.tar.gz
           retention-days: 30
       - name: Publish only validated Holon data
         if: steps.daily.outputs.collect == 'true'

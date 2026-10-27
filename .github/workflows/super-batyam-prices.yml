@@ -36,12 +36,15 @@ jobs:
           python scripts/refresh_batyam_super_prices.py --raw-dir "$RUNNER_TEMP/batyam-official"
           python scripts/build_batyam_super.py
           python scripts/test_batyam_super.py --deployment-only
+      - name: Pack collection evidence with portable archive paths
+        if: always() && steps.daily.outputs.collect == 'true'
+        run: tar -czf "$RUNNER_TEMP/super-batyam-evidence.tar.gz" SUPER.BATYAM/
       - name: Preserve collection evidence
         if: always() && steps.daily.outputs.collect == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: batyam-supermarket-${{ github.run_id }}
-          path: SUPER.BATYAM/data/
+          path: ${{ runner.temp }}/super-batyam-evidence.tar.gz
           retention-days: 30
       - name: Publish only validated Bat Yam data
         if: steps.daily.outputs.collect == 'true'

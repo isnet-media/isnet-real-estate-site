@@ -75,3 +75,16 @@ with tempfile.TemporaryDirectory() as tmp:
  assert not (data/'offers/11.json').exists()
  assert json.loads((data/'catalog.json').read_text())['product_count']==1
 print('Passed: deleted product shards cannot resurrect removed branch offers')
+
+# Retailer-wide listings are fetched once, but downloads never share sessions.
+from concurrent.futures import ThreadPoolExecutor
+r._listing_cache.clear();r._listing_locks.clear()
+shared=dict(b,chain='קרפור',source_url='https://example.invalid/')
+source=r.session();source.cookies.set('public','session')
+with patch.object(r,'uncached_listing',return_value=(source,entries)) as fetch:
+ with ThreadPoolExecutor(max_workers=4) as pool:listed=list(pool.map(r.listing,[shared]*4))
+ assert fetch.call_count==1
+assert len({id(s) for s,_ in listed})==4
+assert all(s.cookies.get('public')=='session' and e==entries for s,e in listed)
+r._listing_cache.clear();r._listing_locks.clear()
+print('Passed: single directory fetch per retailer and independent download sessions')

@@ -36,12 +36,15 @@ jobs:
           python scripts/refresh_kgat_super_prices.py --raw-dir "$RUNNER_TEMP/kgat-official"
           python scripts/build_kgat_super.py
           python scripts/test_kgat_super.py --deployment-only
+      - name: Pack collection evidence with portable archive paths
+        if: always() && steps.daily.outputs.collect == 'true'
+        run: tar -czf "$RUNNER_TEMP/super-kgat-evidence.tar.gz" SUPER.KGAT/
       - name: Preserve collection evidence
         if: always() && steps.daily.outputs.collect == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: kgat-supermarket-${{ github.run_id }}
-          path: SUPER.KGAT/data/
+          path: ${{ runner.temp }}/super-kgat-evidence.tar.gz
           retention-days: 30
       - name: Publish only validated Kiryat Gat data
         if: steps.daily.outputs.collect == 'true'

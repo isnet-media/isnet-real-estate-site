@@ -1,4 +1,4 @@
-name: Ashdod supermarket public health
+name: All cities supermarket public health
 on:
   schedule:
     # One daily verification after the morning collection (UTC).
@@ -9,7 +9,7 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
