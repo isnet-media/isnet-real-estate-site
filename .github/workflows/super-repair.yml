@@ -1,0 +1,41 @@
+name: Publish verified supermarket repair
+on:
+  push:
+    branches: [main]
+    paths: [.supermarket-repair/manifest.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: supermarket-publication-recovery
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: pip install bsdiff4==1.3.2 requests==2.32.5 beautifulsoup4==4.14.2
+      - name: Apply and verify each city without collecting a second time
+        run: |
+          for city in ASHDOD YAVNE KGAT RISHON HOLON BATYAM; do
+            python scripts/apply_super_repair.py --city "$city"
+            if [ "$city" = ASHDOD ]; then
+              python scripts/test_super_city_basket.py
+              node scripts/test_super_smart_shopping.cjs
+              python scripts/test_super_deals.py
+              node scripts/test_super_deals.cjs
+              python scripts/test_super_homepage.py
+              python scripts/audit_super_site.py
+            else
+              script_city=$(echo "$city" | tr '[:upper:]' '[:lower:]')
+              python "scripts/test_${script_city}_super.py" --deployment-only
+            fi
+            python scripts/super_daily_run.py publish --city "$city"
+          done

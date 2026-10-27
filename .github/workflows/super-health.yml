@@ -4,10 +4,14 @@ on:
     # One daily verification after the morning collection (UTC).
     - cron: '30 6 * * *'
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Publish priceboard"]
+    types: [completed]
 permissions:
   contents: read
 jobs:
   check:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
