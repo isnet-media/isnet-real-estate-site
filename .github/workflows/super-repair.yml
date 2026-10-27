@@ -2,7 +2,10 @@ name: Publish verified supermarket repair
 on:
   push:
     branches: [main]
-    paths: [.supermarket-repair/manifest.json]
+    paths:
+      - .supermarket-repair/manifest.json
+      - scripts/apply_super_repair.py
+      - .github/workflows/super-repair.yml
   workflow_dispatch:
 permissions:
   contents: write

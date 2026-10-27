@@ -15,7 +15,8 @@ def apply(city):
  for change in changes:
   name=change['path'];path=Path(name)
   assert not path.is_absolute() and '..' not in path.parts
-  assert path.parts[0] in ['SUPER.'+c for c in CITIES] and path.parts[1]=='data'
+  assert path.parts[0] in ['SUPER.'+c for c in CITIES]
+  assert path.parts[1]=='data' or name in ('SUPER.BATYAM/index.html','SUPER.HOLON/assets/product-groups.js')
   assert name not in seen;seen.add(name)
   if path.parts[0]!='SUPER.'+city:continue
   target=ROOT/path;before=target.read_bytes() if target.exists() else b''
@@ -23,7 +24,9 @@ def apply(city):
   assert digest(before)==change['before'],'Concurrent update: refusing to overwrite '+name
   after=bsdiff4.patch(before,base64.b64decode(change['patch'],validate=True))
   assert len(after)<50_000_000 and digest(after)==change['after'],'Candidate hash mismatch'
-  if not change['delete']:json.loads(after)
+  if not change['delete']:
+   if target.suffix=='.json':json.loads(after)
+   else:after.decode('utf-8')
   prepared.append((target,after,change['delete']))
  # Validate all files before replacing any file in this city.
  for target,data,delete in prepared:
