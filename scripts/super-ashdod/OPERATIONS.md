@@ -6,8 +6,9 @@ it does not run inside the Ashdodnet CMS. Browser shopping lists remain local.
 
 ## Collection and publication
 
-`super-prices.yml` runs each morning at 03:30 UTC (05:30 winter / 06:30 summer Israel),
-on demand and when collector code changes. Only registered branch IDs from the
+`super-prices.yml` claims one collection per Israel calendar day, starting at
+06:00 local time (summer/winter UTC wake-ups plus delayed-scheduler recovery).
+Later wake-ups skip a day already claimed, including failed attempts. Only registered branch IDs from the
 catalogue are collected. `refresh_super_prices.py` uses official public file
 portals; publishedprices accounts are retailer-provided public users with empty
 passwords, not private customer accounts. No credentials are stored in source.
@@ -44,7 +45,8 @@ unreviewed food type to pass the check.
 
 ## Monitoring and recovery
 
-`super-health.yml` checks public core pages hourly, branch age (over one day), last
+`super-health.yml` checks public core pages in all six cities daily and after a
+successful Pages deployment, branch age (over one day), last
 collection age (over 30 hours), and partial sources. It is read-only. GitHub Actions
 failure notifications follow the repository owner's notification settings; the
 ChatGPT monitoring task provides a separate user-facing alert path.
@@ -87,3 +89,24 @@ Each city workflow stages its entire validated SUPER.<CITY>/ directory before
 rebasing, so generated interface changes cannot leave a dirty checkout that blocks
 publication. No unrelated city paths are included. Shopping-list regression tests
 cover all six cities and preserve existing lists when trying the sample basket.
+
+## 27 October 2026 repair
+
+All 102 registered branches across the six cities were collected from official
+27 October files in the connected workspace and passed local city publication
+checks. The previous Actions runners reported transport timeouts for Carrefour,
+Victory and other sources. Workspace recovery is evidence for this collection,
+not proof that every future Actions runner can reach each source.
+
+Namespaced offer shard names can contain `:`. Uploading the raw directory with
+upload-artifact rejected those filenames and skipped otherwise validated data
+publication. All six collection workflows now pack the evidence into tar.gz
+before uploading it. Retailer-wide listings are shared once per collector run;
+each download uses its own session with a copy of public portal cookies.
+
+The hash-verified `.supermarket-repair` package and `apply_super_repair.py` restore
+the validated collection without another source scan. Each city rejects any
+unexpected concurrent base-file change and runs its normal checks before commit.
+The monitoring automation now covers all six cities and all 102 registered branches.
+Three complete scheduled daily runs are still required to establish stable daily
+operation; a successful one-off recovery alone does not satisfy that gate.
