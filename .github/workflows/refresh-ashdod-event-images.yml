@@ -62,6 +62,13 @@ jobs:
           for attempt in 1 2 3 4; do
             # Never modify the set of event records in an image-only job.
             python -c 'import json, collections; p="events-preview/ashdod/data/events.json"; a=json.load(open("/tmp/ashdod-images-before.json", encoding="utf-8")); b=json.load(open(p, encoding="utf-8")); get=lambda x: collections.Counter(str(e.get("event_id")) for e in x.get("events", [])); assert get(a)==get(b), "Safety stop: image refresh changed event identifiers"'
+            # Avoid racing with unrelated main writers for a report timestamp-only update.
+            # A meaningful coverage-stat change (or an event-image change) is still saved.
+            if git diff --quiet -- events-preview/ashdod/data/events.json &&
+               python -c 'import json, subprocess, sys; p="events-preview/ashdod/data/image-enrichment-report.json"; now=json.load(open(p,encoding="utf-8")); previous=json.loads(subprocess.check_output(["git","show","HEAD:"+p],text=True)); [x.pop("generated_at",None) for x in (now,previous)]; sys.exit(0 if now == previous else 1)'; then
+              echo "No image or coverage change; skip timestamp-only report commit."
+              exit 0
+            fi
             if git diff --quiet -- events-preview/ashdod/data/events.json events-preview/ashdod/data/image-enrichment-report.json; then
               echo "No image changes."
               exit 0
