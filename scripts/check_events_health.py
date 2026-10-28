@@ -32,8 +32,18 @@ def main():
         targets.append(('https://qomkxhafrprooekwgsxf.supabase.co/rest/v1/cms_event_records?city_slug=eq.'+city+'&publication_status=eq.published&select=event_id&limit=1','cms'))
     results=[]
     for url,kind in targets:
-        try:row=check(url,kind)
-        except Exception as error:row={'url':url,'ok':False,'error':str(error)}
+        # Retry only an HTTP timeout once.  Persistent failures still fail health checks,
+        # while a single slow CDN response cannot trigger a false outage alarm.
+        for attempt in range(2):
+            try:
+                row=check(url,kind)
+                break
+            except Exception as error:
+                if attempt==0 and 'HTTP check failed (28)' in str(error):
+                    time.sleep(1)
+                    continue
+                row={'url':url,'ok':False,'error':str(error)}
+                break
         results.append(row)
     report={'checked_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),'measurement':'HTTP checks only; not mobile rendering, user latency, or a load test.','ok':all(r['ok'] for r in results),'results':results}
     Path(args.output).write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
