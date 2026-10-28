@@ -21,7 +21,15 @@ def is_smarticket_logo(url):
     )
 
 cleared=0
+invalid_flags_revoked=0
 for e in data.get("events",[]):
+    # An explicitly rejected image must never remain marked publishable.
+    # Retain event identity and the candidate URL for later manual review.
+    if e.get("image_rights_status") == "rejected_generic_asset":
+        if e.get("image_publishable") is True or e.get("image_verified") is True:
+            e["image_publishable"]=False
+            e["image_verified"]=False
+            invalid_flags_revoked+=1
     u=(e.get("image_url") or "").lower()
     logo=is_smarticket_logo(u)
     # A downloaded site icon may have a harmless local filename. Check its
@@ -59,11 +67,11 @@ report={
     "total_events":len(events),
     "events_with_publishable_images":len(events)-len(missing),
     "events_still_missing_images":len(missing),
-    "stats":{"generic_images_cleared":cleared},
+    "stats":{"generic_images_cleared":cleared,"rejected_metadata_flags_revoked":invalid_flags_revoked},
     "missing_by_source":dict(source_counts),
     "missing_by_category":dict(category_counts),
     "missing":[{"event_id":e.get("event_id"),"title":e.get("title"),"reason":"no_verified_source_image"} for e in missing]
 }
 events_path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-print(f"cleared={cleared} missing={len(missing)}")
+print(f"cleared={cleared} rejected_flags_revoked={invalid_flags_revoked} missing={len(missing)}")
