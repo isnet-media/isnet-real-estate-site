@@ -22,12 +22,13 @@
  <main class="login-card">
   <div class="login-logo">ISNET AI CMS</div>
   <h1>כניסה למערכת הניהול</h1>
-  <p>הזן אימייל וסיסמה.</p>
+  <p>אפשר להיכנס בלי סיסמה באמצעות קישור חד־פעמי למייל הרשום במערכת.</p>
   <div id="pilot" class="pilot" hidden>ההתחברות עדיין לא הופעלה. יש לחבר את פרטי פרויקט Supabase.</div>
   <form id="loginForm">
    <label><span>אימייל</span><input id="email" type="email" dir="ltr" autocomplete="username" required></label>
-   <label><span>סיסמה</span><input id="password" type="password" dir="ltr" autocomplete="current-password" required></label>
-   <button type="submit">כניסה</button>
+   <button id="magicLink" type="button" style="margin-bottom:18px">כניסה ללא סיסמה — שליחת קישור למייל</button>
+   <details><summary>כניסה באמצעות סיסמה</summary><label><span>סיסמה</span><input id="password" type="password" dir="ltr" autocomplete="current-password" required></label>
+   <button type="submit">כניסה עם סיסמה</button></details>
   </form>
   <p id="message" class="login-message"></p>
  </main>
@@ -39,12 +40,36 @@ if(!authConfigured()){pilot.hidden=false;form.querySelector("button").disabled=t
 else{
  const client=getClient();
  const {data:{session}}=await client.auth.getSession();
- if(session) location.replace("./");
+ function safeNext(){
+  try{
+    const target=new URL(new URLSearchParams(location.search).get("next")||"./",location.href);
+    if(target.origin===location.origin&&target.pathname.startsWith("/events-preview/admin/")&&!target.pathname.endsWith("/login.html"))return target.href;
+  }catch{}
+  return new URL("./",location.href).href;
+ }
+ if(session) location.replace(safeNext());
+ client.auth.onAuthStateChange((event,session)=>{if(session&&(event==="SIGNED_IN"))location.replace(safeNext())});
+ const magic=document.getElementById("magicLink");
+ magic.addEventListener("click",async()=>{
+   const email=document.getElementById("email");
+   if(!email.reportValidity())return;
+   magic.disabled=true;msg.textContent="מבקש קישור כניסה...";
+   try{
+     const {error}=await client.auth.signInWithOtp({
+       email:email.value.trim(),
+       options:{shouldCreateUser:false,emailRedirectTo:new URL("./login.html",location.href).href}
+     });
+     if(error)throw error;
+     msg.textContent="אם האימייל רשום במערכת, יישלח אליו קישור כניסה. בדקו גם בתיקיית הספאם.";
+   }catch(error){
+     msg.textContent=error.status===429?"נשלחו בקשות רבות. המתינו דקה ונסו שוב.":"לא ניתן לשלוח קישור כרגע. ייתכן שיש לבדוק את הגדרות הדיוור או את החשבון.";
+   }finally{magic.disabled=false}
+ });
  form.addEventListener("submit",async e=>{
   e.preventDefault();msg.textContent="מתחבר...";
   const {error}=await client.auth.signInWithPassword({email:document.getElementById("email").value.trim(),password:document.getElementById("password").value});
   if(error){msg.textContent="הכניסה נכשלה. בדוק אימייל וסיסמה.";return}
-  const next=new URLSearchParams(location.search).get("next")||"./";location.replace(next);
+  location.replace(safeNext());
  });
 }
 </script>
