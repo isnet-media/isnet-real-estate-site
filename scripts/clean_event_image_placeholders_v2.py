@@ -24,9 +24,16 @@ cleared=0
 for e in data.get("events",[]):
     u=(e.get("image_url") or "").lower()
     logo=is_smarticket_logo(u)
-    if e.get("source_content_authoritative") and not logo:
+    # A downloaded site icon may have a harmless local filename. Check its
+    # recorded origin too, including on otherwise authoritative source rows.
+    origin=(e.get("image_origin_url") or "").lower()
+    site_icon=any(
+        urlsplit(value).path.rsplit("/",1)[-1].startswith(("favicon","apple-touch-icon"))
+        for value in (u,origin)
+    )
+    if e.get("source_content_authoritative") and not (logo or site_icon):
         continue
-    if u and (logo or any(x in u for x in bad)):
+    if u and (logo or site_icon or any(x in u for x in bad)):
         e["image_url"]=None
         e["image_source"]=None
         e["image_credit"]=None
