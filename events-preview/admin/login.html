@@ -13,63 +13,119 @@
 .login-card input{height:48px;border:1px solid #d8dfeb;border-radius:10px;padding:0 12px;font:inherit}
 .login-card button{width:100%;height:48px;border:0;border-radius:10px;background:#1267e5;color:#fff;font-weight:800;font:inherit;cursor:pointer}
 .login-logo{font-weight:900;color:#1267e5;margin-bottom:8px}.login-message{margin-top:14px!important;font-size:13px}.pilot{background:#fff7dc;border:1px solid #f0d77d;color:#765800;padding:11px;border-radius:10px;margin-bottom:18px}
+
+[hidden]{display:none!important}.login-card button:disabled{opacity:.55;cursor:wait}
+.login-card .secondary-button{background:#eef4ff;color:#1258b5;margin-top:12px}
+.login-card .hint{font-size:13px;line-height:1.6;margin-top:14px}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="auth/config.js"></script>
 </head>
 <body>
-<div class="login-wrap">
- <main class="login-card">
-  <div class="login-logo">ISNET AI CMS</div>
-  <h1>כניסה למערכת הניהול</h1>
-  <p>אפשר להיכנס בלי סיסמה באמצעות קישור חד־פעמי למייל הרשום במערכת.</p>
-  <div id="pilot" class="pilot" hidden>ההתחברות עדיין לא הופעלה. יש לחבר את פרטי פרויקט Supabase.</div>
-  <form id="loginForm">
-   <label><span>אימייל</span><input id="email" type="email" dir="ltr" autocomplete="username" required></label>
-   <button id="magicLink" type="button" style="margin-bottom:18px">כניסה ללא סיסמה — שליחת קישור למייל</button>
-   <details><summary>כניסה באמצעות סיסמה</summary><label><span>סיסמה</span><input id="password" type="password" dir="ltr" autocomplete="current-password" required></label>
-   <button type="submit">כניסה עם סיסמה</button></details>
-  </form>
-  <p id="message" class="login-message"></p>
- </main>
-</div>
+<div class="login-wrap"><main class="login-card">
+<div class="login-logo">ISNET AI CMS</div>
+<h1 id="title">כניסה למערכת הניהול</h1>
+<p id="intro">היכנסו עם האימייל והסיסמה. בכניסה ראשונה אפשר ליצור סיסמה חדשה.</p>
+<form id="loginForm">
+<label>אימייל<input id="email" type="email" dir="ltr" autocomplete="username" required></label>
+<label>סיסמה<input id="password" type="password" dir="ltr" autocomplete="current-password" required></label>
+<button id="loginButton" type="submit">כניסה</button>
+<button id="resetButton" type="button" class="secondary-button">יצירת סיסמה חדשה / שכחתי סיסמה</button>
+<button id="magicLink" type="button" class="secondary-button">כניסה ללא סיסמה — קישור למייל</button>
+</form>
+<form id="passwordForm" hidden>
+<p id="account" class="hint"></p>
+<label>סיסמה חדשה<input id="newPassword" type="password" dir="ltr" autocomplete="new-password" minlength="10" required></label>
+<label>אימות סיסמה חדשה<input id="confirmPassword" type="password" dir="ltr" autocomplete="new-password" minlength="10" required></label>
+<p class="hint">בחרו סיסמה באורך 10 תווים לפחות. הסיסמה תחליף את הסיסמה הקודמת של החשבון.</p>
+<button type="submit">שמירת הסיסמה וכניסה למערכת</button>
+</form>
+<p id="message" class="login-message" role="status" aria-live="polite"></p>
+<a id="backToLogin" href="./login.html" hidden>חזרה לכניסה</a>
+</main></div>
 <script type="module">
 import {authConfigured,getClient} from "./auth/supabase.js";
-const form=document.getElementById("loginForm"),msg=document.getElementById("message"),pilot=document.getElementById("pilot");
-if(!authConfigured()){pilot.hidden=false;form.querySelector("button").disabled=true}
-else{
+const byId=id=>document.getElementById(id);
+const form=byId("loginForm"),passwordForm=byId("passwordForm"),msg=byId("message");
+const params=new URLSearchParams(location.search),hash=new URLSearchParams(location.hash.slice(1));
+let passwordMode=params.get("mode")==="password"||["recovery","invite"].includes(hash.get("type"));
+let saving=false;
+function safeNext(){
+ try{
+  const target=new URL(params.get("next")||"./",location.href);
+  if(target.origin===location.origin&&target.pathname.startsWith("/events-preview/admin/")&&!target.pathname.endsWith("/login.html"))return target.href;
+ }catch{}
+ return new URL("./",location.href).href;
+}
+function showPassword(session){
+ passwordMode=true;form.hidden=true;passwordForm.hidden=false;
+ byId("title").textContent="יצירת סיסמה חדשה";
+ byId("intro").textContent="בחרו סיסמה שתשמש אתכם בכניסה למערכת.";
+ byId("account").textContent=session?.user?.email||"";
+ byId("backToLogin").hidden=false;
+ passwordForm.querySelector("button").disabled=!session;
+ if(!session)msg.textContent="ליצירת סיסמה יש לפתוח קישור חדש שנשלח למייל. חזרו לכניסה ולחצו על יצירת סיסמה חדשה.";
+}
+function errorMessage(error){
+ if(error?.status===429)return "נשלחו בקשות רבות. המתינו דקה ונסו שוב.";
+ return "הפעולה נכשלה. נסו שוב; אם התקלה נמשכת, יש לבדוק את הגדרות ההתחברות והדיוור.";
+}
+if(!authConfigured()){
+ msg.textContent="ההתחברות אינה מוגדרת כרגע.";
+ document.querySelectorAll("button").forEach(button=>button.disabled=true);
+}else{
  const client=getClient();
- const {data:{session}}=await client.auth.getSession();
- function safeNext(){
-  try{
-    const target=new URL(new URLSearchParams(location.search).get("next")||"./",location.href);
-    if(target.origin===location.origin&&target.pathname.startsWith("/events-preview/admin/")&&!target.pathname.endsWith("/login.html"))return target.href;
-  }catch{}
-  return new URL("./",location.href).href;
- }
- if(session) location.replace(safeNext());
- client.auth.onAuthStateChange((event,session)=>{if(session&&(event==="SIGNED_IN"))location.replace(safeNext())});
- const magic=document.getElementById("magicLink");
- magic.addEventListener("click",async()=>{
-   const email=document.getElementById("email");
-   if(!email.reportValidity())return;
-   magic.disabled=true;msg.textContent="מבקש קישור כניסה...";
-   try{
-     const {error}=await client.auth.signInWithOtp({
-       email:email.value.trim(),
-       options:{shouldCreateUser:false,emailRedirectTo:new URL("./login.html",location.href).href}
-     });
-     if(error)throw error;
-     msg.textContent="אם האימייל רשום במערכת, יישלח אליו קישור כניסה. בדקו גם בתיקיית הספאם.";
-   }catch(error){
-     msg.textContent=error.status===429?"נשלחו בקשות רבות. המתינו דקה ונסו שוב.":"לא ניתן לשלוח קישור כרגע. ייתכן שיש לבדוק את הגדרות הדיוור או את החשבון.";
-   }finally{magic.disabled=false}
+ client.auth.onAuthStateChange((event,session)=>{
+  if(event==="PASSWORD_RECOVERY"){showPassword(session);return}
+  if(session&&event==="SIGNED_IN"&&!saving){
+   if(passwordMode)showPassword(session);else location.replace(safeNext());
+  }
  });
- form.addEventListener("submit",async e=>{
-  e.preventDefault();msg.textContent="מתחבר...";
-  const {error}=await client.auth.signInWithPassword({email:document.getElementById("email").value.trim(),password:document.getElementById("password").value});
-  if(error){msg.textContent="הכניסה נכשלה. בדוק אימייל וסיסמה.";return}
-  location.replace(safeNext());
+ const {data:{session},error:sessionError}=await client.auth.getSession();
+ if(hash.get("error")||sessionError){
+  msg.textContent="קישור הכניסה אינו תקין או שפג תוקפו. בקשו קישור חדש ליצירת סיסמה.";
+  history.replaceState(null,"",location.pathname+location.search);
+ }else if(passwordMode)showPassword(session);
+ else if(session)location.replace(safeNext());
+ async function sendEmail(mode){
+  const email=byId("email");if(!email.reportValidity())return;
+  const buttons=[...form.querySelectorAll("button")];buttons.forEach(b=>b.disabled=true);
+  msg.textContent="שולח בקשה...";
+  try{
+   const callback=new URL("./login.html",location.href);callback.searchParams.set("mode",mode==="reset"?"password":"login");
+   const result=mode==="reset"
+    ?await client.auth.resetPasswordForEmail(email.value.trim(),{redirectTo:callback.href})
+    :await client.auth.signInWithOtp({email:email.value.trim(),options:{shouldCreateUser:false,emailRedirectTo:callback.href}});
+   if(result.error)throw result.error;
+   msg.textContent=mode==="reset"?"אם האימייל רשום במערכת, יישלח אליו קישור ליצירת סיסמה חדשה. השתמשו במייל האחרון בלבד ובדקו גם בספאם.":"אם האימייל רשום במערכת, יישלח אליו קישור כניסה. השתמשו בקישור האחרון בלבד.";
+  }catch(error){msg.textContent=errorMessage(error)}
+  finally{buttons.forEach(b=>b.disabled=false)}
+ }
+ byId("resetButton").addEventListener("click",()=>sendEmail("reset"));
+ byId("magicLink").addEventListener("click",()=>sendEmail("magic"));
+ form.addEventListener("submit",async event=>{
+  event.preventDefault();byId("loginButton").disabled=true;msg.textContent="מתחבר...";
+  try{
+   const {error}=await client.auth.signInWithPassword({email:byId("email").value.trim(),password:byId("password").value});
+   if(error){msg.textContent="הכניסה נכשלה. בדקו אימייל וסיסמה או לחצו על יצירת סיסמה חדשה.";return}
+   location.replace(safeNext());
+  }catch(error){msg.textContent=errorMessage(error)}
+  finally{byId("loginButton").disabled=false}
+ });
+ passwordForm.addEventListener("submit",async event=>{
+  event.preventDefault();const password=byId("newPassword").value;
+  if(password!==byId("confirmPassword").value){msg.textContent="הסיסמאות אינן זהות.";return}
+  if(password.length<10){msg.textContent="בחרו סיסמה באורך 10 תווים לפחות.";return}
+  const button=passwordForm.querySelector("button");button.disabled=true;saving=true;msg.textContent="שומר סיסמה...";
+  try{
+   const {data:{user},error:authError}=await client.auth.getUser();
+   if(authError||!user){msg.textContent="תוקף האימות פג. בקשו קישור חדש ליצירת סיסמה.";return}
+   const {error}=await client.auth.updateUser({password});
+   if(error){msg.textContent=error.code==="same_password"?"בחרו סיסמה שונה מהסיסמה הקודמת.":errorMessage(error);return}
+   byId("newPassword").value="";byId("confirmPassword").value="";
+   msg.textContent="הסיסמה נשמרה. נכנסים למערכת...";location.replace(safeNext());
+  }catch(error){msg.textContent=errorMessage(error)}
+  finally{saving=false;button.disabled=false}
  });
 }
 </script>
