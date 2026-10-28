@@ -38,7 +38,7 @@ def in_horizon(e):
     return today <= d <= add_months(date.today(),EVENT_HORIZON_MONTHS).isoformat()
 
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36"
-GENERIC=("/languages/il.gif","artistshadow","/images/live/more/eventnew.jpg","eventnew.jpg","placeholder","no-image","no_image","noimage","no_pic","no-pic","blank.gif","spacer.gif","transparent.gif","favicon","smarticket_logo","microsoft_oauth_logo","google_oauth_logo","facebook_oauth","oauth_logo","oauth","/logo.","/logo/","/icons/","/icon/")
+GENERIC=("/languages/il.gif","artistshadow","/images/live/more/eventnew.jpg","eventnew.jpg","placeholder","no-image","no_image","noimage","no_pic","no-pic","blank.gif","spacer.gif","transparent.gif","favicon","apple-touch-icon","smarticket_logo","microsoft_oauth_logo","google_oauth_logo","facebook_oauth","oauth_logo","oauth","/logo.","/logo/","/icons/","/icon/")
 UNSAFE_IMAGE_STRATEGIES={"source_listing_card","same_production_reuse"}
 SIGNALS=("/uploads/","/thumbs/","/caps/","livenew_","updateartistimage","/events/","/event/","poster","banner")
 
