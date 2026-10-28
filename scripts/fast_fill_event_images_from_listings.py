@@ -30,7 +30,7 @@ def in_horizon(e):
     return today <= d <= add_months(date.today(),EVENT_HORIZON_MONTHS).isoformat()
 
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36"
-BAD=("logo","favicon","facebook_oauth","google_oauth","microsoft_oauth","artistshadow","eventnew.jpg","placeholder","no_pic","no-pic","default","sprite","spinner","languages/")
+BAD=("logo","favicon","apple-touch-icon","facebook_oauth","google_oauth","microsoft_oauth","artistshadow","eventnew.jpg","placeholder","no_pic","no-pic","default","sprite","spinner","languages/")
 TIMEOUT=18
 
 SYSTEM_FALLBACKS={
