@@ -31,6 +31,10 @@ def valid_title(title):
     return (6<=len(t)<=120 and t not in {normalize(x) for x in GENERIC}
             and len(t.split())<=15 and not re.search(r"\b(?:יום ראשון|יום שני|יום שלישי|יום רביעי|יום חמישי|יום שישי|יום שבת)\b",t))
 
+def valid_source_url(url):
+    parsed=urlparse(url or "")
+    return bool(parsed.hostname) and not parsed.path.rstrip("/").endswith("/cdn-cgi/l/email-protection")
+
 def main():
     sources=load("event-source-priority.json")["sources"]
     known={s["id"] for s in sources if s.get("enabled")}
@@ -45,7 +49,7 @@ def main():
         if x.get("source_id") not in known or not valid_title(x.get("title_candidate")):
             continue
         url=x.get("source_url") or ""
-        if not urlparse(url).hostname or urlparse(url).path.rstrip("/").endswith("/cdn-cgi/l/email-protection"):
+        if not valid_source_url(url):
             continue
         candidates.append({"title":x["title_candidate"],"source_id":x["source_id"],
                            "source_url":url,"city_hint":x.get("city_hint"),
