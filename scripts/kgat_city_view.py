@@ -17,7 +17,7 @@ def localize(content,name,city,suffix):
  content=content.replace('אשדוד נט','קריית גת נט').replace('אשדוד','קריית גת')
  content=re.sub(r'([\"\'])ashdod\1',lambda m:m[1]+'kiryat-gat'+m[1],content)
  content=content.replace('location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"kiryat-gat"','"kiryat-gat"')
- content=re.sub(r'<a\b[^>]*data-city-only="ashdod"[^>]*>[\s\S]*?</a>','',content)
+ content=re.sub(r'<a\b[^>]*data-city-only="(?:ashdod|kiryat-gat)"[^>]*>[\s\S]*?</a>','',content)
  content=re.sub(r'<a\b[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>','',content)
  content=re.sub(r'<section class="cityDiscover"[\s\S]*?</section>','',content)
  if name=='index.html':
@@ -37,6 +37,7 @@ def localize(content,name,city,suffix):
   links=json.loads((ROOT/'kiryat-gat/data/family-guide.json').read_text())['links']
   content=re.sub(r'(function familyGuide\(\)\{\s*const sources=)\[[\s\S]*?\n \];',lambda m:m[1]+json.dumps(links,ensure_ascii=False)+';',content)
  if name=='seniors-hub.js':
+  content=content.replace('בוקר של תרבות במשכן','תרבות בוקר בקריית גת').replace('סדרת החיים הטובים','מופעים ומפגשים בעיר').replace('באתר המשכן','באתר המארגן')
   content=content.replace('return e.category===\'lecture\'?\'senior-lectures\':topics[e.subcategory]?e.subcategory:\'other\';',"return e.category==='lecture'?'senior-lectures':topics[e.subcategory]?e.subcategory:({music:'senior-music',theatre:'senior-culture',cinema:'senior-culture',community:'senior-social',sport:'senior-health'}[e.category]||'other');")
  if name=='saturday.js':
   content=content.replace("cityEvents('rishon-lezion')","Promise.resolve({events:[]})")

@@ -19,6 +19,7 @@ for e in d['events']:
   assert e['image_verified'] and e['image_credit'] and e['image_source']
   assert (C/e['image_url']).is_file()
 for file in C.glob('*.html'):
+ assert 'meusharim-ashdod' not in file.read_text(),file.name
  s=BeautifulSoup(file.read_text(),'html.parser')
  for tag in s.select('script[src],link[rel=stylesheet],img[src]'):
   u=tag.get('src') or tag.get('href');u=u.split('?',1)[0]
