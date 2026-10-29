@@ -62,6 +62,8 @@ def run():
   if e['category']!='cinema':continue
   key=norm(e['title']);m=films.setdefault(key,{'id':'kgat-film-'+hashlib.sha256(key.encode()).hexdigest()[:12],'title':e['title'],'synopsis':e.get('description',''),'poster_url':e.get('image_url') if e.get('image_publishable') else None,'is_family':'kids' in e.get('audiences',[]),'venues':[{'id':'municipal-hall','name':'היכל התרבות קריית גת','article_url':e.get('purchase_url'),'schedule':{},'sessions':[]}]})
   v=m['venues'][0];v['schedule'].setdefault(e['start_date'],[]).append(e['start_time']);v['sessions'].append({'date':e['start_date'],'time':e['start_time'],'booking_url':e.get('purchase_url')})
- (R/'data/cinema.json').write_text(json.dumps({'city':'קריית גת','source_name':'החברה העירונית קריית גת — הקרנות בהיכל התרבות','updated_at':date.today().isoformat(),'movies':list(films.values())},ensure_ascii=False,indent=2)+'\n')
+ from kgat_movie_metadata import enrich
+ enrich(list(films.values()))
+ (R/'data/cinema.json').write_text(json.dumps({'city':'קריית גת','source_name':'החברה העירונית קריית גת — הקרנות בהיכל התרבות','updated_at':data.get('generated_at') or date.today().isoformat(),'movies':list(films.values())},ensure_ascii=False,indent=2)+'\n')
  print(json.dumps({'events':len(out),'verified_original_images':sum(bool(e.get('image_publishable')) for e in out),'films':len(films)},ensure_ascii=False))
 if __name__=='__main__':run()

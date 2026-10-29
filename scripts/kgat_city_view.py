@@ -47,8 +47,10 @@ def localize(content,name,city,suffix):
  content=content.replace('HOT Cinema','היכל התרבות').replace('סינמה סיטי','היכל התרבות')
  content=re.sub(r'<button[^>]*data-(?:cinema|venue)="(?:cinema-city|hot-cinema)"[^>]*>.*?</button>','',content)
  content=re.sub(r'<a[^>]*href="https://(?:www\.)?(?:cinema-city\.co\.il|hotcinema\.co\.il)[^"]*"[^>]*>.*?</a>','',content)
+ content=content.replace('שני בתי הקולנוע','כל ההקרנות').replace('פארקים, ים, תרבות ורעיונות לבילוי משפחתי','פארקים, תרבות וטיולים למשפחה')
  content=content.replace('בחרו את שני בתי הקולנוע','הקרנות בהיכל התרבות קריית גת')
  if suffix=='.html':
+  content=re.sub(r'<script defer src="/events-preview/shared/cinema-editorial.js[^"]*"></script>', '<script src="/events-preview/shared/cinema-editorial.js?v=20261029-kgat1"></script>',content)
   content=content.replace('isnet-top-navigation.js?v=20261021-nav2','isnet-top-navigation.js?v=20261029-kgat1')
   if name in ('index.html','category.html'):
    data=json.loads((ROOT/'kiryat-gat/data/events.json').read_text());data['events']=[{k:v for k,v in e.items() if k not in {'image_candidates','source_detail_text','raw_html','raw','html'}} for e in data['events']]
@@ -63,4 +65,5 @@ def localize(content,name,city,suffix):
   content=content.replace('fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]}))','(window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP.taxonomy):fetch("../admin/data/taxonomy.json").then(r=>r.json()))')
   content=content.replace('if(state.category&&e.category!==state.category)return false;','if(state.category&&!window.KGAT_EVENTS.matches(e,new Set([state.category])))return false;')
   content=content.replace('ids.has(e.category)','window.KGAT_EVENTS.matches(e,ids)')
+ content=re.sub(r'(assets/branding/(?:what-to-do-kgat-dark|kgatnet-dark)\.svg)\?v=[^\"\s\']+',r'\1?v=20261029-kgat2',content)
  return content

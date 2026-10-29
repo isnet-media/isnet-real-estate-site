@@ -1,5 +1,5 @@
 /* Original movie copy and attributed rating snapshots; source schedules stay city-owned. */
-(()=>{'use strict';let registry={aliases:{},movies:{}},pages={};const city=(location.pathname.match(/\/events-preview\/(ashdod|rishon-lezion|yavne)\//)||[])[1];
+(()=>{'use strict';let registry={aliases:{},movies:{}},pages={};const city=(location.pathname.match(/\/events-preview\/(ashdod|rishon-lezion|yavne|kiryat-gat)\//)||[])[1];
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const safe=u=>/^https:\/\//.test(u||'')?u:'';const key=id=>registry.aliases[id]||id;
 const ready=Promise.all([fetch('/events-preview/shared/data/movie-editorial.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json()}),fetch('/events-preview/shared/data/movie-page-index.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json()})]).then(([r,p])=>{registry=r;pages=p}).catch(()=>{});
 function url(id,edition=city){return pages[edition]?.[id]||'movie.html?id='+encodeURIComponent(id)}
@@ -12,6 +12,6 @@ let audience=r?'<p class="movieAudienceScore"><bdi>'+esc(r.value)+(r.scale===100
 if(record.content_type==='screening_event'){criticism='<p>זהו אירוע תוכן או שידור, ולא סרט עלילתי. ביקורות וציוני סרטים אינם מוצגים עבורו.</p>';audience='<p>לא חל על סוג האירוע הזה.</p>'}
 box.innerHTML='<h2>ביקורות ותגובת הקהל</h2><div class="movieEditorialGrid"><section><h3>מה אומרים המבקרים?</h3>'+criticism+'</section><section><h3>מה חושב הקהל?</h3>'+audience+'</section></div><p class="movieEditorialMethod">נתוני הקהל הם תמונת מצב ממקור חיצוני, לא הצבעות באתר שלנו. אחוז אהדה אינו ציון ממוצע מתוך 10. נתונים חסרים אינם מוצגים כאפס.</p><p class="movieEditorialSource">נוסח מקורי של מערכת מה עושים'+(safe(record.synopsis_sources?.[0])?' · <a target="_blank" rel="noopener" href="'+esc(record.synopsis_sources[0])+'">לפרטי הסרט במקור</a>':'')+'</p>';
 }
-document.addEventListener('click',event=>{const a=event.target.closest?.('a[href]');if(!a)return;const target=new URL(a.href,document.baseURI),edition=(target.pathname.match(/\/events-preview\/(ashdod|rishon-lezion|yavne)\/movie\.html$/)||[])[1],id=target.searchParams.get('id');if(edition&&id&&pages[edition]?.[id])a.href=new URL(pages[edition][id]+target.hash,location.origin).href},true);
+document.addEventListener('click',event=>{const a=event.target.closest?.('a[href]');if(!a)return;const target=new URL(a.href,document.baseURI),edition=(target.pathname.match(/\/events-preview\/(ashdod|rishon-lezion|yavne|kiryat-gat)\/movie\.html$/)||[])[1],id=target.searchParams.get('id');if(edition&&id&&pages[edition]?.[id])a.href=new URL(pages[edition][id]+target.hash,location.origin).href},true);
 window.CinemaEditorial={ready,key,url,merge,unique,mount};
 })();
