@@ -1,30 +1,30 @@
 {
-  "at": "2026-10-28T13:40:21.610473+02:00",
+  "at": "2026-10-29T13:53:48.175712+02:00",
   "sources": {
     "makore": {
-      "ok": false,
-      "error": "Incomplete pagination: 387/388"
+      "ok": true,
+      "read": 381,
+      "not_in_mevalim": 287,
+      "detail_fetch_failures": 0,
+      "card_detail_errors": 4
     },
     "tickchak": {
       "ok": true,
-      "read": 38,
-      "not_in_mevalim": 21,
+      "read": 40,
+      "not_in_mevalim": 23,
       "detail_fetch_failures": 0,
       "card_detail_errors": 4
     },
     "friends": {
       "ok": true,
-      "read": 42,
-      "not_in_mevalim": 25,
+      "read": 43,
+      "not_in_mevalim": 26,
       "detail_fetch_failures": 0,
       "card_detail_errors": 0
     },
     "leaan": {
-      "ok": true,
-      "read": 15,
-      "not_in_mevalim": 4,
-      "detail_fetch_failures": 3,
-      "card_detail_errors": 0
+      "ok": false,
+      "error": "Unterminated string starting at: line 1 column 1766786 (char 1766785)"
     },
     "sababa": {
       "ok": true,
@@ -34,8 +34,8 @@
       "card_detail_errors": 0
     }
   },
-  "mevalim_compared": 111,
-  "excluded_mevalim": 57,
+  "mevalim_compared": 109,
+  "excluded_mevalim": 140,
   "source_detail_issues": [
     {
       "event_id": "tickchak_as_6a638e002553d5c167",
@@ -48,19 +48,66 @@
       "title": "עומר בורשטיין",
       "url": "https://live.tickchak.co.il/standup/event/ePLJPzzMj",
       "error": "500 Server Error: Internal Server Error for url: https://www.leaan.co.il/events/e/6726"
+    },
+    {
+      "event_id": "makore_as_ad9207c7be86c70b63",
+      "title": "סיור במרכז המבקרים לדוברי צרפתית",
+      "url": "https://www.makore.co.il/event/סיור-במרכז-המבקרים-לדוברי-צרפתית--432508fd",
+      "error": "404 Client Error: Not Found for url: https://visitashdod.smarticket.co.il/event/11095/"
+    },
+    {
+      "event_id": "makore_as_4e175d06b365f58a64",
+      "title": "הדב השומר עלי-הצגה מרגשת על חיבור, אחריות והחיים לצד צרכים מיוחדים",
+      "url": "https://www.makore.co.il/event/הדב-השומר-עלי-הצגה-מרגשת-על-חיבור-אחריות-והחיים-ל--1b7e58bf",
+      "error": "404 Client Error: Not Found for url: https://ashdod.smarticket.co.il/event/17725/"
     }
   ],
-  "published_occurrences": 46,
-  "replaced": 46,
-  "duplicates_merged": 8,
-  "with_image": 46,
-  "verified_source_images": 42,
-  "with_text": 46,
-  "source_placeholder_images": 4,
+  "published_occurrences": 233,
+  "replaced": 225,
+  "duplicates_merged": 42,
+  "with_image": 233,
+  "verified_source_images": 141,
+  "with_text": 233,
+  "source_placeholder_images": 92,
   "replaced_legacy_occurrences": 0,
-  "preserved_legacy_records": 376,
-  "awaiting_identity_review": 3,
+  "preserved_legacy_records": 377,
+  "awaiting_identity_review": 68,
   "awaiting_identity_review_examples": [
+    {
+      "new_id": "friends_as_4a1e9a5c71e90515c7",
+      "old_ids": [
+        "leaan_as_26796324f90d6476e5"
+      ],
+      "reason": "occurrence_overlap_requires_source_cms_review"
+    },
+    {
+      "new_id": "tickchak_as_c9efe7f82c3f2593c6",
+      "old_ids": [
+        "makore_as_dc290a5b90d7f9061b"
+      ],
+      "reason": "occurrence_overlap_requires_source_cms_review"
+    },
+    {
+      "new_id": "tickchak_as_e1e984e18dbce2ebee",
+      "old_ids": [
+        "makore_as_6453ba2d6ef8673788"
+      ],
+      "reason": "occurrence_overlap_requires_source_cms_review"
+    },
+    {
+      "new_id": "tickchak_as_f322db5ab4e6f72443",
+      "old_ids": [
+        "leaan_as_0e8c3426947892b63b"
+      ],
+      "reason": "occurrence_overlap_requires_source_cms_review"
+    },
+    {
+      "new_id": "tickchak_as_53c33d74fb9d1bef6f",
+      "old_ids": [
+        "leaan_as_8dcbcd4fd1dde79bfe"
+      ],
+      "reason": "occurrence_overlap_requires_source_cms_review"
+    },
     {
       "new_id": "tickchak_as_7bed570d3fb3eb63cd",
       "old_ids": [
@@ -80,6 +127,160 @@
       "new_id": "tickchak_as_7f0c4cbe735862d25e",
       "old_ids": [
         "tickchak_as_7f0c4cbe735862d25e"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_8c8b0b5b6d4686ba3d",
+      "old_ids": [
+        "makore_as_8c8b0b5b6d4686ba3d"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_31bcff10bb48c005c7",
+      "old_ids": [
+        "makore_as_31bcff10bb48c005c7"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_a248acfb0caa65204f",
+      "old_ids": [
+        "makore_as_a248acfb0caa65204f"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_75fcb4dc545eed52c8",
+      "old_ids": [
+        "makore_as_75fcb4dc545eed52c8"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_7f072f5d48781fb07f",
+      "old_ids": [
+        "makore_as_7f072f5d48781fb07f"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_77be648feee6de1dc6",
+      "old_ids": [
+        "makore_as_77be648feee6de1dc6"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_39d7a9dc751f00a816",
+      "old_ids": [
+        "makore_as_39d7a9dc751f00a816"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_d9c1a506d6b472bf71",
+      "old_ids": [
+        "makore_as_d9c1a506d6b472bf71"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_554d4eedf763084b66",
+      "old_ids": [
+        "makore_as_554d4eedf763084b66"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_23f72491567637636d",
+      "old_ids": [
+        "makore_as_23f72491567637636d"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_db96f8b9c7ebe84d3a",
+      "old_ids": [
+        "makore_as_db96f8b9c7ebe84d3a"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_c115f45fce1fe92bea",
+      "old_ids": [
+        "makore_as_c115f45fce1fe92bea"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_e773e93dd098b0215a",
+      "old_ids": [
+        "local_08a51a243d360307727f49"
+      ],
+      "reason": "occurrence_overlap_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_c0837d5ff907f50a1d",
+      "old_ids": [
+        "local_d228a634abc5f6fa9d06da"
+      ],
+      "reason": "occurrence_overlap_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_dab4d4ad67ae3c3b28",
+      "old_ids": [
+        "makore_as_dab4d4ad67ae3c3b28"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_fc05097459d999bf99",
+      "old_ids": [
+        "makore_as_fc05097459d999bf99"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_6f53059872c00947d4",
+      "old_ids": [
+        "makore_as_6f53059872c00947d4"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_3246c111d16984de6d",
+      "old_ids": [
+        "makore_as_3246c111d16984de6d"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_2cdc4ae78e4eec1aa7",
+      "old_ids": [
+        "makore_as_2cdc4ae78e4eec1aa7"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_3b4534f4e77e080cf4",
+      "old_ids": [
+        "makore_as_3b4534f4e77e080cf4"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_f64b30c57bd1de8d4f",
+      "old_ids": [
+        "makore_as_f64b30c57bd1de8d4f"
+      ],
+      "reason": "existing_id_requires_source_cms_review"
+    },
+    {
+      "new_id": "makore_as_8ef7bd7498ed8e33a8",
+      "old_ids": [
+        "makore_as_8ef7bd7498ed8e33a8"
       ],
       "reason": "existing_id_requires_source_cms_review"
     }
