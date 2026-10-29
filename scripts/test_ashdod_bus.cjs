@@ -20,3 +20,6 @@ test('real feed has valid references and monotonic stop times',()=>{assert.ok(da
 test('real intracity journey exists',()=>{const groups=E.groups(data),from=groups.find(s=>s.code==='11856'),to=groups.find(s=>s.code==='12784');assert.ok(E.plan(data,{from,to,date:realDate,time:'08:00'}).some(r=>r.legs[0].route.number==='1'&&r.transfers===0))});
 test('real intercity journey reaches Tel Aviv',()=>{const from=E.groups(data).find(s=>s.code==='11856'),rs=E.plan(data,{from,to:{kind:'city',city:'תל אביב יפו'},date:realDate,time:'08:00'});assert.ok(rs.length);assert.ok(rs.every(r=>r.legs.at(-1).to.city==='תל אביב יפו'))});
 test('distance calculation and name normalization',()=>{assert.equal(E.distance({lat:31.8,lon:34.6},{lat:31.8,lon:34.6}),0);assert.equal(E.norm('רובע א׳'),'רובעא')});
+
+test('later feeder avoids unnecessary waiting at the transfer stop',()=>{const d=fixture();d.trips.push([0,'all',30000]);d.trips[1][2]=31200;const r=at(d,'a','c');assert.equal(r[0].depart,30000);assert.equal(r[0].arrive,31800)});
+test('a direct ride dominates an earlier feeder with the same arrival',()=>{const d=fixture();d.patterns.push({route:'r',headsign:'ג',stops:[['a',0,0,0,1],['c',600,600,1,0]]});d.trips.push([2,'all',29600]);const r=at(d,'a','c');assert.equal(r[0].transfers,0);assert.ok(!r.some(x=>x.transfers&&x.arrive===30200))});

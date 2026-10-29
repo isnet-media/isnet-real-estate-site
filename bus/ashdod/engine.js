@@ -15,16 +15,18 @@ function plan(data,{from,to,date,time,maxTransfers=1,limit=5}){
  const targetIndex=new Map();if(to.kind==='city')for(const p of data.patterns){let idx=-1;p.stops.forEach((s,i)=>{if(ends.has(s[0])&&s[4]===0)idx=i});targetIndex.set(p,idx)}
  const isEnd=(run,i)=>ends.has(run.p.stops[i][0])&&(to.kind!=='city'||targetIndex.get(run.p)===i);
  function add(legs){const last=legs.at(-1),first=legs[0];if(last.arrive<first.depart||last.arrive>now+12*3600)return;results.push({legs,depart:first.depart,arrive:last.arrive,duration:last.arrive-first.depart,total:last.arrive-now,wait:first.depart-now,transfers:legs.length-1})}
- // First vehicle. Keep earliest arrival at each physical stop for one-transfer search.
+ // First vehicle. Retain feasible runs so a later feeder can reduce transfer waiting.
  for(const run of rr){let board=-1;for(let i=0;i<run.p.stops.length;i++){const s=run.p.stops[i],dep=run.start+s[2];if(board<0&&origins.has(s[0])&&s[3]===0&&dep>=now&&dep<=now+6*3600)board=i;
-  if(board>=0&&i>board&&s[4]===0){const leg=directLeg(run,board,i,data);if(isEnd(run,i))add([leg]);if(leg.arrive<=now+6*3600&&(!reach.has(s[0])||reach.get(s[0]).arrive>leg.arrive))reach.set(s[0],leg)}}}
+  if(board>=0&&i>board&&s[4]===0){const leg=directLeg(run,board,i,data);if(isEnd(run,i))add([leg]);if(leg.arrive<=now+6*3600){if(!reach.has(s[0]))reach.set(s[0],[]);reach.get(s[0]).push(leg)}}}}
  if(maxTransfers){
   // Only the same physical stop (aliases with identical code/coordinates). No guessed street crossings.
-  const aliases=new Map();for(const g of groups(data)){const best=g.ids.map(id=>reach.get(id)).filter(Boolean).sort((a,b)=>a.arrive-b.arrive)[0];if(best)for(const id of g.ids)aliases.set(id,best)}
-  for(const run of rr){let board=-1,first=null;for(let i=0;i<run.p.stops.length;i++){const s=run.p.stops[i],r=aliases.get(s[0]),dep=run.start+s[2];if(board<0&&r&&r.runKey!==run.key&&s[3]===0&&dep>=r.arrive+120&&dep<=now+8*3600&&!(run.p.route===r.route.id&&run.p.headsign===r.headsign)){board=i;first=r}if(board>=0&&i>board&&s[4]===0&&isEnd(run,i))add([first,directLeg(run,board,i,data)])}}
+  const aliases=new Map();for(const g of groups(data)){const options=g.ids.flatMap(id=>reach.get(id)||[]).sort((a,b)=>a.arrive-b.arrive);if(options.length)for(const id of g.ids)aliases.set(id,options)}
+  for(const run of rr){let board=-1,first=null;for(let i=0;i<run.p.stops.length;i++){const s=run.p.stops[i],options=aliases.get(s[0])||[],dep=run.start+s[2];if(s[3]===0&&dep<=now+8*3600){for(const r of options){if(r.arrive+120>dep)break;if(r.runKey!==run.key&&!(run.p.route===r.route.id&&run.p.headsign===r.headsign)&&(!first||r.depart>first.depart)){board=i;first=r}}}if(board>=0&&i>board&&s[4]===0&&isEnd(run,i))add([first,directLeg(run,board,i,data)])}}
+
  }
  results.sort((a,b)=>a.arrive-b.arrive||a.transfers-b.transfers||b.depart-a.depart);
- const seen=new Set();return results.filter(r=>{const k=r.legs.map(l=>[l.route.id,l.from.code,l.to.code,l.depart].join(':')).join('|');if(seen.has(k))return false;seen.add(k);return true}).slice(0,limit);
+ const useful=results.filter(r=>!results.some(o=>o!==r&&o.legs.at(-1).to.code===r.legs.at(-1).to.code&&o.arrive<=r.arrive&&o.transfers<=r.transfers&&o.depart>=r.depart&&(o.arrive<r.arrive||o.transfers<r.transfers||o.depart>r.depart)));
+ const seen=new Set();return useful.filter(r=>{const k=r.legs.map(l=>[l.route.id,l.from.code,l.to.code,l.depart].join(':')).join('|');if(seen.has(k))return false;seen.add(k);return true}).slice(0,limit);
 }
 function departures(data,{stop,date,time,routeId,headsign,limit=8}){const now=time.split(':').map(Number).reduce((a,n,i)=>a+n*(i?60:3600),0),ids=new Set(stop.ids||[stop.id]),out=[];for(const run of runs(data,date)){if(routeId&&run.p.route!==routeId)continue;if(headsign&&run.p.headsign!==headsign)continue;for(const s of run.p.stops)if(ids.has(s[0])&&s[3]===0&&run.start+s[2]>=now&&run.start+s[2]<=now+12*3600)out.push({time:run.start+s[2],route:data.routes[run.p.route],headsign:run.p.headsign,stop:data.stops[s[0]]})}out.sort((a,b)=>a.time-b.time);const seen=new Set();return out.filter(d=>{const key=[d.route.id,d.headsign,d.time].join('|');if(seen.has(key))return false;seen.add(key);return true}).slice(0,limit)}
 root.BusEngine={norm,distance,dayShift,active,groups,runs,plan,departures};if(typeof module!=='undefined')module.exports=root.BusEngine;

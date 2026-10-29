@@ -29,4 +29,4 @@ GitHub Actions refreshes daily. The Pages workflow subscribes to the collector w
 `node --test scripts/test_ashdod_bus.cjs`
 `python scripts/collect_ashdod_bus.py --feed /path/to/official.zip`
 
-17 meaningful tests cover connection margins, same-stop aliases, calendars, pickup/dropoff constraints, midnight, city targets and real Ashdod/intercity journeys. Final browser QA covers the public deployed mobile and desktop flows.
+19 meaningful tests cover connection margins, same-stop aliases, calendars, pickup/dropoff constraints, midnight, city targets, later feeder selection, dominated itinerary removal and real Ashdod/intercity journeys. Final browser QA covers the public deployed mobile and desktop flows.
