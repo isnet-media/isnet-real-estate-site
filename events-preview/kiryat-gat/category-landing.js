@@ -34,8 +34,9 @@ function render(){
  const image=sourceImage?(original.thumbnail_ready&&original.thumbnail_url?original.thumbnail_url:original.image_url):categoryImage(e);
  const venue=esc(e.venue||"קריית גת");
  const date=esc(e.start_date||"")+(key==="sport"?" · "+esc(e.start_time||"השעה טרם פורסמה"):"");
- const media=image?'<img class="image" src="'+esc(image)+'" loading="lazy" alt="'+esc(sourceImage?e.title:"תמונת המחשה")+'" onerror="this.outerHTML=\'<div class=&quot;image placeholder&quot;>✦</div>\'">':'<div class="image placeholder">✦</div>';
- return '<a class="card" href="event.html?id='+encodeURIComponent(unique(e))+'">'+media+'<div class="body"><h2>'+esc(e.title)+'</h2><div class="meta">'+date+' · '+venue+'</div><div class="action">לפרטי האירוע ←</div></div></a>';
+ const media=image?'<img class="image" src="'+esc(image)+'" loading="lazy" alt="'+esc(sourceImage&&e.source_image_kind!=="illustration"?e.title:"תמונת המחשה")+'" onerror="this.outerHTML=\'<div class=&quot;image placeholder&quot;>✦</div>\'">':'<div class="image placeholder">✦</div>';
+ const mediaCredit=e.source_image_kind==='illustration'?'<small class="imageCredit">תמונת המחשה</small>':'';
+ return '<a class="card" href="event.html?id='+encodeURIComponent(unique(e))+'">'+media+mediaCredit+'<div class="body"><h2>'+esc(e.title)+'</h2><div class="meta">'+date+' · '+venue+'</div><div class="action">לפרטי האירוע ←</div></div></a>';
  }).join("");
 }
 document.getElementById("q").addEventListener("input",render);
