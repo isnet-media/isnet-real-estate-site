@@ -2,7 +2,8 @@
 import unittest
 
 from scripts.fast_fill_event_images_from_listings import bank_asset_provenance_matches as fast_bank_match
-from scripts.reuse_media_bank_images import bank_asset_provenance_matches as reusable_bank_matchfrom scripts.fast_fill_event_images_from_listings import image_coverage_counts
+from scripts.reuse_media_bank_images import bank_asset_provenance_matches as reusable_bank_match
+from scripts.fast_fill_event_images_from_listings import image_coverage_counts
 
 
 class ImageCoverageTests(unittest.TestCase):
