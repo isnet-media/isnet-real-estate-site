@@ -29,7 +29,7 @@ def normalize(title):
 def valid_title(title):
     t=normalize(title)
     return (6<=len(t)<=120 and t not in {normalize(x) for x in GENERIC}
-            and len(t.split())<=15 and not re.search(r"\\b(?:יום ראשון|יום שני|יום שלישי|יום רביעי|יום חמישי|יום שישי|יום שבת)\\b",t))
+            and len(t.split())<=15 and not re.search(r"\b(?:יום ראשון|יום שני|יום שלישי|יום רביעי|יום חמישי|יום שישי|יום שבת)\b",t))
 
 def main():
     sources=load("event-source-priority.json")["sources"]
