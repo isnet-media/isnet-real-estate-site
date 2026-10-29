@@ -41,12 +41,12 @@ jobs:
         run: |
           git config user.name "isnet-events-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -- "events-preview/rishon-lezion/*.html" "events-preview/rishon-lezion/*.js" "events-preview/rishon-lezion/*.css" "events-preview/rishon-lezion/pilot" "events-preview/yavne/*.html" "events-preview/yavne/*.js" "events-preview/yavne/*.css" "events-preview/yavne/pilot"
+          git add -- "events-preview/rishon-lezion/*.html" "events-preview/rishon-lezion/*.js" "events-preview/rishon-lezion/*.css" "events-preview/rishon-lezion/pilot" "events-preview/yavne/*.html" "events-preview/yavne/*.js" "events-preview/yavne/*.css" "events-preview/yavne/pilot" "events-preview/kiryat-gat/*.html" "events-preview/kiryat-gat/*.js" "events-preview/kiryat-gat/*.css" "events-preview/kiryat-gat/pilot"
           if git diff --cached --quiet; then
             echo "Shared layouts are current."
             exit 0
           fi
-          if git diff --cached --name-only | grep -Ev '^events-preview/(rishon-lezion|yavne)/(pilot/)?[^/]+\.(html|css|js)$'; then
+          if git diff --cached --name-only | grep -Ev '^events-preview/(rishon-lezion|yavne|kiryat-gat)/(pilot/)?[^/]+\.(html|css|js)$'; then
             echo "Refusing to change city-specific datasets." >&2
             exit 1
           fi
