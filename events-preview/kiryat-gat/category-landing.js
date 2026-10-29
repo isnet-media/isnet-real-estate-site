@@ -2,7 +2,7 @@
 if(location.pathname.includes("/kiryat-gat/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
 if(location.pathname.includes("/kiryat-gat/")&&new URLSearchParams(location.search).get("category")==="seniors"&&window.ISNET_SENIORS){window.ISNET_SENIORS.init();return;}
 if(location.pathname.includes("/kiryat-gat/")&&new URLSearchParams(location.search).get("category")==="kids"&&window.ISNET_KIDS){window.ISNET_KIDS.init();return;}
-const config={stage:["הופעות במה","הצגות, מוזיקה וסטנדאפ",["music","theatre","standup"]],music:["הופעות ומוזיקה","מופעי מוזיקה בעיר",["music"]],theatre:["הצגות","תיאטרון ומחזות בעיר",["theatre"]],standup:["סטנדאפ","מופעי סטנדאפ בעיר",["standup"]],kids:["ילדים ומשפחה","מופעים, הצגות ופעילויות לילדים",["kids"]],seniors:["גימלאים","הרצאות, סיורים ופעילויות לגיל השלישי",["seniors"]],lecture:["הרצאות","תוכן, מפגשים וידע",["lecture"]],tour:["טיולים וסיורים","לגלות את העיר והסביבה",["tour"]],exhibition:["תערוכות","אמנות ותערוכות בעיר",["exhibition"]],sport:["אירועי ספורט","משחקי הקבוצות בעיר, תחרויות ואירועי ספורט",["sport"]],community:["אירועי קהילה","מפגשים ואירועים קהילתיים",["community"]],conference:["כנסים","כנסים ופאנלים",["conference"]],food:["קולינריה","אירועי אוכל בעיר",["food"]]};
+const config={stage:["הופעות במה","הצגות, מוזיקה וסטנדאפ",["music","theatre","standup"]],music:["הופעות ומוזיקה","מופעי מוזיקה בעיר",["music"]],theatre:["הצגות","תיאטרון ומחזות בעיר",["theatre"]],standup:["סטנדאפ","מופעי סטנדאפ בעיר",["standup"]],kids:["ילדים ומשפחה","מופעים, הצגות ופעילויות לילדים",["kids"]],seniors:["גימלאים","הרצאות, סיורים ופעילויות לגיל השלישי",["seniors"]],lecture:["הרצאות","תוכן, מפגשים וידע",["lecture"]],tour:["טיולים וסיורים","לגלות את העיר והסביבה",["tour"]],exhibition:["תערוכות","אמנות ותערוכות בעיר",["exhibition"]],sport:["אירועי ספורט","משחקי בית של הקבוצות הייצוגיות, תחרויות ופעילות ספורט עממית",["sport"]],community:["אירועי קהילה","מפגשים ואירועים קהילתיים",["community"]],conference:["כנסים","כנסים ופאנלים",["conference"]],food:["קולינריה","אירועי אוכל בעיר",["food"]]};
 const params=new URLSearchParams(location.search),key=params.get("category")||"stage",entry=config[key]||config.stage;
 document.title=entry[0]+" | מה עושים בקריית גת";
 document.getElementById("title").textContent=entry[0];document.getElementById("lead").textContent=entry[1];
@@ -33,7 +33,7 @@ function render(){
  const sourceImage=trustedImage(original);
  const image=sourceImage?(original.thumbnail_ready&&original.thumbnail_url?original.thumbnail_url:original.image_url):categoryImage(e);
  const venue=esc(e.venue||"קריית גת");
- const date=esc(e.start_date||"");
+ const date=esc(e.start_date||"")+(key==="sport"?" · "+esc(e.start_time||"השעה טרם פורסמה"):"");
  const media=image?'<img class="image" src="'+esc(image)+'" loading="lazy" alt="'+esc(sourceImage?e.title:"תמונת המחשה")+'" onerror="this.outerHTML=\'<div class=&quot;image placeholder&quot;>✦</div>\'">':'<div class="image placeholder">✦</div>';
  return '<a class="card" href="event.html?id='+encodeURIComponent(unique(e))+'">'+media+'<div class="body"><h2>'+esc(e.title)+'</h2><div class="meta">'+date+' · '+venue+'</div><div class="action">לפרטי האירוע ←</div></div></a>';
  }).join("");
