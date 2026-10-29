@@ -500,7 +500,7 @@ function renderCinema(){
       return at-bt||a.title.localeCompare(b.title,"he");
     });
   cinemaSpotlight(arr);
-  grid.innerHTML=arr.length?arr.map(cinemaCard).join(""):'<div class="cinemaEmpty"><h3>לא מצאנו סרט שמתאים לבחירה</h3><p>נסו חיפוש אחר, הקרנות בהיכל התרבות קריית גת או עברו לכל הסרטים.</p><button id="cinemaResetFilters" type="button" class="cinemaBackButton">הציגו את כל הסרטים</button><div class="cinemaEmpty__links"></div></div>';
+  grid.innerHTML=arr.length?arr.map(cinemaCard).join(""):'<div class="cinemaEmpty"><h3>לא מצאנו סרט שמתאים לבחירה</h3><p>נסו חיפוש אחר, בחרו את כל ההקרנות או עברו לכל הסרטים.</p><button id="cinemaResetFilters" type="button" class="cinemaBackButton">הציגו את כל הסרטים</button><div class="cinemaEmpty__links"></div></div>';
   if($("cinemaResetFilters"))$("cinemaResetFilters").onclick=()=>{state.cinemaQuery="";state.cinemaVenue="all";state.cinemaAudience="all";$("cinemaSearch").value="";renderCinema()};
   document.querySelectorAll("#cinemaFilters [data-cinema]").forEach(b=>b.classList.toggle("is-active",b.dataset.cinema===state.cinemaVenue));
   document.querySelectorAll("#cinemaAudienceFilters [data-audience]").forEach(b=>b.classList.toggle("is-active",b.dataset.audience===state.cinemaAudience));
