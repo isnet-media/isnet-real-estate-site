@@ -66,4 +66,17 @@ def localize(content,name,city,suffix):
   content=content.replace('if(state.category&&e.category!==state.category)return false;','if(state.category&&!window.KGAT_EVENTS.matches(e,new Set([state.category])))return false;')
   content=content.replace('ids.has(e.category)','window.KGAT_EVENTS.matches(e,ids)')
  content=re.sub(r'(assets/branding/(?:what-to-do-kgat-dark|kgatnet-dark)\.svg)\?v=[^\"\s\']+',r'\1?v=20261029-kgat2',content)
+ if suffix=='.html':
+  def fingerprint(match):
+   attribute,asset=match.group(1),match.group(2)
+   source=ROOT/'ashdod'/asset
+   if source.is_file():
+    body=localize(source.read_text(),source.name,city,source.suffix)
+   else:
+    source=ROOT/'kiryat-gat'/asset
+    if not source.is_file():return match[0]
+    body=source.read_text()
+   digest=hashlib.sha256(body.encode()).hexdigest()[:12]
+   return attribute+'="'+asset+'?v='+digest+'"'
+  content=re.sub(r'(src|href)="((?:pilot/)?[A-Za-z0-9_-]+\.(?:js|css))(?:\?v=[^"\s]*)?"',fingerprint,content)
  return content
