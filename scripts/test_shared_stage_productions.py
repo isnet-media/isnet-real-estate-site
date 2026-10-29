@@ -11,6 +11,10 @@ class StageCandidateTitleTests(unittest.TestCase):
             with self.subTest(title=title):
                 self.assertFalse(valid_title(title))
 
+    def test_rejects_timetable_title_with_weekday(self):
+        self.assertFalse(valid_title("05.11.26 יום חמישי 20:30 לאתר המכירה זוגיות AI אולם דיונה אשדוד"))
+        self.assertFalse(valid_title("יום שבת 20:30 הופעה במרכז העיר"))
+
     def test_keeps_real_stage_production(self):
         self.assertTrue(valid_title("פאטמה הסטנדאפיסטית הבדואית"))
 
