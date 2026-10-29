@@ -32,6 +32,24 @@ def event_entities(e):
     productions=[x for x in (e.get("production_name"),e.get("series_name"),e.get("title")) if isinstance(x,str) and x.strip()]
     return [norm(x) for x in artists if norm(x)],[norm(x) for x in productions if norm(x)]
 
+def bank_asset_provenance_matches(event, media):
+    """Reject cross-title image reuse until a human validates media identity.
+
+    Different dates for the same normalized title remain eligible; unrelated
+    show titles and provenance-free bank records are excluded from auto-reuse.
+    """
+    refs = media.get("events")
+    title = norm(event.get("title"))
+    if not title or media.get("reuse_risk") == "review":
+        return False
+    if not isinstance(refs, list) or not refs:
+        return False
+    return all(
+        isinstance(ref, dict) and norm(ref.get("title")) == title
+        for ref in refs
+    )
+
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--city",required=True,choices=["ashdod","rishon-lezion"])
@@ -69,6 +87,9 @@ def main():
                     mid=lookup["production"][k];matched_type="production";matched_key=k;break
         if not mid: continue
         m=media[mid]
+        if not bank_asset_provenance_matches(e,m):
+            print(f"SKIP unverified cross-title media: {e.get('title')} <- {mid}")
+            continue
         card=m.get("card_url")
         if card:
             url="/events-preview/"+card.lstrip("/")
