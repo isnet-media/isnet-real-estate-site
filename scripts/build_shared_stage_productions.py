@@ -16,7 +16,7 @@ ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"events-preview/admin/data"
 OUTPUT=DATA/"stage-productions-candidates.json"
 ALLOWED={"music","standup","kids","theatre"}
-GENERIC={"אירועים באשדוד","אירועים בראשון לציון","כל האירועים","לוח הופעות","לרכישת כרטיסים","פרטים נוספים","sababa.events","אירועים","הופעות"}
+GENERIC={"אירועים באשדוד","אירועים בראשון לציון","כל האירועים","לוח הופעות","לרכישת כרטיסים","פרטים נוספים","sababa.events","אירועים","הופעות","Friends Logo","[email protected]"}
 
 def load(name):
     path=DATA/name
@@ -45,7 +45,7 @@ def main():
         if x.get("source_id") not in known or not valid_title(x.get("title_candidate")):
             continue
         url=x.get("source_url") or ""
-        if not urlparse(url).hostname:
+        if not urlparse(url).hostname or urlparse(url).path.rstrip("/").endswith("/cdn-cgi/l/email-protection"):
             continue
         candidates.append({"title":x["title_candidate"],"source_id":x["source_id"],
                            "source_url":url,"city_hint":x.get("city_hint"),
