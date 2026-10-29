@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 from event_overrides import merge_event
 from event_seo import build_seo
 ROOT=Path(__file__).resolve().parents[1]
-CITIES=('ashdod','rishon-lezion','yavne')
+CITIES=('ashdod','rishon-lezion','yavne','kiryat-gat')
 API='https://qomkxhafrprooekwgsxf.supabase.co/rest/v1/cms_event_records'
 PUBLIC_KEY='sb_publishable_njxvSKmgkOQqkGL3JbWiIA_od-9l3wb'
 LONG_FIELDS=('description','series_description','source_description','long_description','editorial_description')

@@ -1,0 +1,31 @@
+/* Shared Ashdod brand lockup, applied only to branded Ashdod headers. */
+.isnetBrandHeader{background:#0b0d12!important;border-bottom:1px solid #ffffff18!important;box-shadow:none!important}
+.isnetBrandHeader .siteTopbar__inner{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:18px!important;width:min(1200px,calc(100% - 48px))!important;max-width:1200px!important;min-height:76px!important;padding:8px 0!important;box-sizing:border-box}
+.isnetBrandGroup{display:flex;align-items:center;gap:18px;direction:rtl;flex:0 1 auto;min-width:0}
+.isnetBrandHeader .siteTopbar__brand{width:auto!important;height:56px!important;min-height:56px!important;padding:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;flex-shrink:0}
+.isnetBrandHeader .siteTopbar__events img{width:134px!important;height:56px!important;max-width:none!important;max-height:none!important;object-fit:contain;filter:none}
+.isnetBrandHeader .siteTopbar__ashdodnet{flex-direction:column;gap:2px;padding-inline-start:18px!important;border-inline-start:1px solid #ffffff30!important}
+.isnetBrandByline{color:#c9cdd5;font:500 11px/1 Assistant,Arial,sans-serif}
+.isnetBrandHeader .siteTopbar__ashdodnet img{width:88px!important;height:37px!important;max-width:none!important;max-height:none!important;object-fit:contain}
+.isnetBrandHeader .isnetSiteMenu{margin-inline-start:auto!important;width:auto!important;flex:0 0 auto}
+.isnetBrandHeader .isnetSiteMenu summary{height:48px;min-height:48px;padding:10px 13px;border-radius:12px;background:#ffffff08;border-color:#ffffff2b}
+.isnetBrandHeader .siteTopbar__brand:hover{transform:none;opacity:.8}
+.isnetBrandHeader :is(.siteTopbar__brand,summary):focus-visible{outline:2px solid #f2cd62;outline-offset:4px;border-radius:6px!important}
+@media(max-width:650px){
+ .isnetBrandHeader .siteTopbar__inner{width:calc(100% - 24px)!important;gap:12px!important;min-height:64px!important;padding:6px 0!important;padding-top:max(6px,env(safe-area-inset-top))!important}
+ .isnetBrandGroup{gap:12px}
+ .isnetBrandHeader .siteTopbar__brand{height:52px!important;min-height:52px!important}
+ .isnetBrandHeader .siteTopbar__events img{width:112px!important;height:52px!important}
+ .isnetBrandHeader .siteTopbar__ashdodnet{padding-inline-start:12px!important;gap:2px}
+ .isnetBrandHeader .siteTopbar__ashdodnet img{width:76px!important;height:32px!important}
+ .isnetBrandByline{font-size:10px}
+ .isnetBrandHeader .isnetSiteMenu summary{width:44px!important;height:44px!important;min-height:44px!important;padding:10px!important;gap:0;justify-content:center}
+ .isnetBrandHeader .isnetSiteMenu summary>span:last-child{display:none}
+ .isnetBrandHeader .isnetSiteMenu__panel{top:calc(72px + env(safe-area-inset-top,0px));max-height:calc(100dvh - 84px - env(safe-area-inset-top,0px))}
+}
+@media(prefers-reduced-motion:reduce){.isnetBrandHeader .siteTopbar__brand{transition:none}}
+
+/* Align the endorsement above the Ashdod word, beside the emblem. */
+.isnetBrandHeader .siteTopbar__ashdodnet{position:relative;flex-direction:row;gap:0}
+.isnetBrandHeader .isnetBrandByline{position:absolute;top:8px;inset-inline-start:19px;width:49px;text-align:center;white-space:nowrap;font-size:11px;line-height:1.1}
+@media(max-width:650px){.isnetBrandHeader .isnetBrandByline{top:10px;inset-inline-start:13px;width:42px;font-size:10px}}

@@ -1,0 +1,106 @@
+/* Category-first event discovery — Ashdod live, 2026-10-11 */
+#eventsGrid:has(.isnetCategorySection){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;overflow:visible!important;gap:32px!important;padding:0!important;margin:0!important;scroll-snap-type:none!important}
+.isnetCategorySection{width:100%;min-width:0;padding:0 0 25px;border-bottom:1px solid #ffffff24}
+.isnetCategoryTop{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:10px}
+.isnetCategoryTop h3{font:800 clamp(22px,2.5vw,32px)/1.2 Heebo,Assistant,sans-serif;color:#fff;margin:3px 0 5px}
+.isnetCategoryKicker{font:700 12px Assistant,sans-serif;color:#eacb6e}
+.isnetCategoryCount{color:#b8bbc3;font:600 13px Assistant,sans-serif}
+.isnetCategoryArrows{display:flex;gap:8px;flex-shrink:0}
+.isnetCategoryArrows button{border:1px solid #666670;border-radius:9px;background:#292b33;color:#fff;cursor:pointer;width:43px;height:43px;font-size:22px}
+.isnetCategoryArrows button:hover{border-color:#eacb6e;background:#3d3425}
+.isnetCategoryTabs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:thin;margin:8px 0 13px;padding:2px 1px 8px}
+.isnetCategoryTabs button{white-space:nowrap;flex-shrink:0;padding:6px 12px;border:1px solid #555760;border-radius:20px;background:#25272e;color:#e1e1e5;font:600 13px Assistant,sans-serif;cursor:pointer}
+.isnetCategoryTabs button.is-active{background:#eed076;color:#15151a;border-color:#eed076;font-weight:800}
+.isnetCategoryRail{display:flex;flex-wrap:nowrap;gap:15px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:3px;padding:4px 3px 20px;scrollbar-width:thin;scrollbar-color:#64666d transparent;direction:rtl;scroll-behavior:smooth}
+.isnetCategoryRail>.eventCard{flex:0 0 clamp(192px,19vw,260px)!important;width:clamp(192px,19vw,260px)!important;max-width:none!important;scroll-snap-align:start;min-width:0!important;align-self:stretch}
+.isnetCategoryRail>.eventCard[hidden]{display:none!important}
+.isnetCategoryRail .eventMedia{aspect-ratio:4/3}
+@media(max-width:900px){.isnetCategoryRail>.eventCard{flex-basis:235px!important;width:235px!important}}
+@media(max-width:650px){#eventsGrid:has(.isnetCategorySection){gap:20px!important;margin:0!important;padding:0!important}.isnetCategoryTop h3{font-size:23px}.isnetCategoryArrows button{width:34px;height:34px;font-size:18px}.isnetCategoryRail{gap:12px;padding-bottom:14px}.isnetCategoryRail>.eventCard{flex-basis:min(71vw,290px)!important;width:min(71vw,290px)!important}.isnetCategorySection{padding-bottom:12px}}
+@media(prefers-reduced-motion:reduce){.isnetCategoryRail{scroll-behavior:auto!important}}
+
+/* The category rows own their headings and arrows; hide the old single-rail header. */
+.results:has(.isnetCategorySection) #isnetLegacyRailHeading,.results:has(.isnetCategorySection) .isnetSwipeHint{display:none!important}
+
+/* Show the full taxonomy without suggesting unavailable events. */
+.isnetCategoryTabs button:disabled{opacity:.48;cursor:not-allowed;border-style:dashed}
+.isnetCategoryTabs button small{font-size:11px;font-weight:600;opacity:.85}
+
+/* v2: keep headings, filters and cards together; readable cards at every width. */
+.isnetCategorySection{display:block!important;box-sizing:border-box;max-width:100%;overflow:hidden}
+.isnetCategoryTop{margin:0 0 9px!important}
+.isnetCategoryTabs{margin:6px 0 9px!important}
+.isnetCategoryRail{width:100%;max-width:100%;box-sizing:border-box;min-width:0;margin:0!important;align-items:stretch}
+.isnetCategoryRail>.eventCard{margin:0!important;box-sizing:border-box;overflow:hidden;min-height:0!important}
+.isnetCategoryRail .eventBody{min-width:0!important;overflow:hidden;padding:13px!important}
+.isnetCategoryRail .eventBody h3{font-size:19px!important;line-height:1.38!important;min-height:0!important;overflow-wrap:anywhere}
+.isnetCategoryRail .eventInfo__row{font-size:13px!important;line-height:1.45!important}
+.isnetCategoryRail .eventFooter .price{font-size:15px!important}
+.isnetCategoryRail .eventFooter .linkCue{font-size:14px!important}
+.isnetCategoryRail .badges .badge{font-size:11px!important}
+.isnetCategoryRail .categoryBadge .cardCategoryStack strong{color:#152b47!important}
+.isnetCategoryRail .categoryBadge .cardCategoryStack small{color:#345473!important}
+.isnetCategoryRail .eventInfo,.isnetCategoryRail .eventInfo__row{color:#dbdce3!important}
+.isnetCategoryRail .eventInfo__row i{color:#f2ce74!important}
+.isnetCategoryTabs{scroll-snap-type:x proximity}
+.isnetCategoryTabs button{scroll-snap-align:start}
+@media (max-width:650px){
+ .isnetCategorySection{padding-inline:0!important}
+ .isnetCategoryTop{align-items:center}
+ .isnetCategoryTop h3{font-size:21px!important}
+ .isnetCategoryRail{padding-inline:1px!important;overflow-x:auto!important;touch-action:pan-x pan-y}
+ .isnetCategoryRail>.eventCard{flex:0 0 min(76vw,300px)!important;width:min(76vw,300px)!important;max-width:min(76vw,300px)!important}
+ .isnetCategoryTabs{gap:6px}
+ .isnetCategoryTabs button{font-size:12px;padding:6px 9px}
+ .isnetCategoryRail .eventBody h3{font-size:18px!important}
+ .isnetCategoryRail .eventInfo__row{font-size:13px!important}
+ .resultsTop{flex-wrap:wrap!important}
+ .resultsActions{flex-wrap:wrap!important}
+}
+@media (min-width:651px){
+ .isnetCategoryRail>.eventCard{flex:0 0 clamp(220px,20vw,280px)!important;width:clamp(220px,20vw,280px)!important;max-width:280px!important}
+}
+
+/* Two coordinated navigation pairs: heading and in-rail edge controls. */
+.isnetRailWrap{position:relative;min-width:0;max-width:100%}
+.isnetRailOverlay{position:absolute;z-index:8;top:43%;transform:translateY(-50%);width:42px;height:54px;border:1px solid #e8d19a99;border-radius:11px;background:#101217dc;color:#fff;font-size:25px;cursor:pointer;box-shadow:0 8px 24px #0009;display:grid;place-items:center;backdrop-filter:blur(8px)}
+.isnetRailOverlay--start{right:6px}
+.isnetRailOverlay--end{left:6px}
+.isnetRailOverlay:hover,.isnetRailOverlay:focus-visible{background:#393024;color:#ffe18e;border-color:#f1d17b;outline-offset:3px}
+.isnetCategoryRail{scroll-padding-inline:48px}
+@media(max-width:650px){.isnetRailOverlay{width:32px;height:42px;font-size:19px;opacity:.88}.isnetRailOverlay--start{right:2px}.isnetRailOverlay--end{left:2px}.isnetCategoryRail{scroll-padding-inline:35px}}
+@media(prefers-reduced-motion:reduce){.isnetRailOverlay{transition:none}}
+
+/* Align heading-level arrows closer to category tabs and event cards. */
+@media(min-width:651px){.isnetCategoryArrows{position:relative;transform:translateY(38px);z-index:3}}
+@media(max-width:650px){.isnetCategoryArrows{position:relative;transform:translateY(10px);z-index:3}}
+
+
+/* Mobile/desktop usability audit: October 11 2026 */
+.isnetCategorySection{overflow:visible!important;min-width:0}
+.isnetRailWrap{overflow:hidden!important;width:100%;min-width:0}
+.isnetCategoryRail{scroll-padding-inline:8px!important;padding-inline:8px!important;scroll-snap-type:x mandatory}
+.isnetCategoryRail>.eventCard{scroll-snap-align:start!important;scroll-snap-stop:normal}
+.isnetCategoryRail .eventFooter .price,.isnetCategoryRail .price{color:#ffdf88!important;font-weight:900!important;text-shadow:0 1px 1px #0007}
+.isnetCategoryRail .eventInfo__row{font-size:15px!important;line-height:1.45!important}
+.isnetCategoryRail .eventFooter{margin-top:8px!important;padding-top:8px!important}
+.isnetCategoryRail .eventBody{padding:12px!important}
+.isnetCategoryRail .eventBody h3{margin-top:6px!important;margin-bottom:8px!important;min-height:0!important}
+.isnetCategoryRail .eventMedia,.isnetCategoryRail .mediaWrap{aspect-ratio:16/11!important;max-height:210px}
+.isnetCategoryRail .eventMedia img,.isnetCategoryRail .mediaWrap img{object-fit:cover}
+.isnetCategoryTabs button:disabled{display:none!important}
+.isnetRailOverlay{display:none!important}
+.isnetCategoryArrows{transform:none!important;z-index:2!important}
+.isnetCategoryTop{min-width:0!important}
+.isnetCategoryTop>div:first-child{min-width:0}
+.isnetCategoryTop h3{overflow-wrap:anywhere}
+@media(max-width:650px){
+ .isnetCategorySection{padding-inline:0!important}
+ .isnetCategoryRail{padding:3px 8px 14px!important;gap:10px!important}
+ .isnetCategoryRail>.eventCard{flex:0 0 min(80vw,302px)!important;width:min(80vw,302px)!important;max-width:min(80vw,302px)!important}
+ .isnetCategoryTop{gap:8px!important}
+ .isnetCategoryTop h3{font-size:21px!important;line-height:1.22!important}
+ .isnetCategoryArrows button{width:34px!important;height:34px!important}
+ .isnetCategoryRail .eventInfo__row{font-size:14px!important}
+ .isnetCategoryRail .eventMedia,.isnetCategoryRail .mediaWrap{max-height:185px}
+}

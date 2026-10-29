@@ -6,7 +6,7 @@ from urllib.parse import urljoin
 from xml.etree.ElementTree import Element,SubElement,tostring
 import json,html,re
 from bs4 import BeautifulSoup
-ROOT=Path(__file__).resolve().parents[1];CITIES={'ashdod':'אשדוד','rishon-lezion':'ראשון לציון','yavne':'יבנה'}
+ROOT=Path(__file__).resolve().parents[1];CITIES={'ashdod':'אשדוד','rishon-lezion':'ראשון לציון','yavne':'יבנה','kiryat-gat':'קריית גת'}
 BASE='https://isnet.co.il/events-preview/'
 def esc(v):return html.escape(str(v or ''),quote=True)
 def safe(v):return v if isinstance(v,str) and v.startswith('https://') else ''

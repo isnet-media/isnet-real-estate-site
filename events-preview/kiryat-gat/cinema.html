@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- The cinema experience is a shared in-page panel; old deep links remain usable. -->
+  <meta http-equiv="refresh" content="0;url=./#cinema">
+  <script>location.replace("./#cinema");</script>
+  <title>סרטים בקריית גת | מה עושים בקריית גת?</title>
+  <meta name="description" content="כל הסרטים בקריית גת, שעות הקרנה, טריילרים וסינון לפי בית קולנוע.">
+  <link rel="stylesheet" href="publisher-brand.css?v=1bf86426f369">
+  <link rel="stylesheet" href="cinema.css?v=425caadc145e">
+<script defer src="/assets/isnet-top-navigation.js?v=20261021-nav2"></script><link rel="stylesheet" href="/events-preview/shared/cinema-editorial.css?v=20261025"><script defer src="/events-preview/shared/cinema-editorial.js?v=20261025"></script><link rel="stylesheet" href="kgat-local.css?v=1"></head>
+<body>
+  <header class="cinemaTop">
+    <div class="cinemaTop__inner">
+      <a class="cinemaBack" href="./">← חזרה למה עושים בקריית גת?</a>
+      <div class="cinemaBrand">
+        <span class="cinemaKicker">קריית גת נט מציג</span>
+        <h1>סרטים בקריית גת</h1>
+        <p>כל הסרטים, שעות ההקרנה והטריילרים במקום אחד.</p>
+      </div>
+      <a class="cinemaPublisher" href="https://kgatnet.co.il/" target="_blank" rel="noopener">לאתר קריית גת נט ←</a>
+    </div>
+  </header>
+
+  <main class="cinemaPage">
+    <section class="cinemaIntro">
+      <div>
+        <span class="cinemaEyebrow">מה רואים היום?</span>
+        <h2>בחרו סרט וצפו בטריילר לפני שמזמינים</h2>
+      </div>
+      <div id="cinemaUpdated" class="cinemaUpdated"></div>
+    </section>
+
+    <section class="cinemaFiltersBox" aria-label="סינון סרטים">
+      <div class="filterGroup">
+        <span>לפי קהל</span>
+        <div id="audienceFilters" class="filterButtons">
+          <button class="is-active" data-audience="all">כל הסרטים</button>
+          <button data-audience="family">ילדים ומשפחה</button>
+        </div>
+      </div>
+      <div class="filterGroup">
+        <span>לפי בית קולנוע</span>
+        <div id="venueFilters" class="filterButtons">
+          <button class="is-active" data-venue="all">שני בתי הקולנוע</button>
+          
+          
+        </div>
+      </div>
+      <label class="cinemaSearch">
+        <span>חיפוש סרט</span>
+        <input id="movieSearch" type="search" placeholder="לדוגמה: ילדים, קומדיה, דיגר">
+      </label>
+    </section>
+
+    <section>
+      <div id="resultsMeta" class="resultsMeta"></div>
+      <div id="cinemaGrid" class="cinemaGrid"></div>
+      <div id="emptyState" class="emptyState" hidden>
+        <h3>לא מצאנו סרטים מתאימים</h3>
+        <p>נסו לשנות את הסינון או את החיפוש.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="trailerModal" class="trailerModal" hidden>
+    <button class="trailerBackdrop" type="button" data-close-trailer aria-label="סגירה"></button>
+    <div class="trailerDialog" role="dialog" aria-modal="true" aria-labelledby="trailerTitle">
+      <button class="trailerClose" type="button" data-close-trailer aria-label="סגירה">×</button>
+      <div class="trailerVideo"><iframe id="trailerFrame" src="" title="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="trailerCopy">
+        <span>טריילר</span>
+        <h2 id="trailerTitle"></h2>
+        <p id="trailerSynopsis"></p>
+        <a id="trailerDetails" href="#">כל הימים, השעות והפרטים ←</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="cinema.js?v=883b55ef90f9" defer></script>
+<script defer src="site-share.js?v=20261019-all-pages2"></script><!-- MOVIE_EDITORIAL_INDEX_START --><nav class="cinemaEditorialIndex" aria-label="דפי הסרטים"><details><summary>כל הסרטים: תקצירים, ביקורות והקרנות</summary><ul><li><a href="https://isnet.co.il/events-preview/kiryat-gat/movies/cinema-city-6483/">הבדחן – תקציר וביקורות</a></li><li><a href="https://isnet.co.il/events-preview/kiryat-gat/movies/matchmaking-3/">בחורים טובים 3 – תקציר וביקורות</a></li></ul></details></nav><!-- MOVIE_EDITORIAL_INDEX_END --></body>
+</html>

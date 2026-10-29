@@ -8,6 +8,7 @@ import html,json,re
 from bs4 import BeautifulSoup
 BASE='https://isnet.co.il/events-preview/'
 EDITIONS={
+ 'kiryat-gat':{'name':'קריית גת','publisher':'קריית גת נט','publisher_url':'https://kgatnet.co.il/','logo':'assets/branding/what-to-do-kgat-dark.svg','publisher_logo':'assets/branding/kgatnet-dark.svg'},
  'ashdod':{'name':'אשדוד','publisher':'אשדוד נט','publisher_url':'https://ashdodnet.com/','logo':'assets/branding/what-to-do-ashdod-dark.svg','publisher_logo':'assets/branding/ashdodnet-dark.svg'},
  'rishon-lezion':{'name':'ראשון לציון','publisher':'ראשון נט','publisher_url':'https://www.rishonet.com/','logo':'assets/branding/what-to-do-rishon-dark.svg','publisher_logo':'assets/branding/rishonet-dark.svg'},
  'yavne':{'name':'יבנה','publisher':'יבנה נט','publisher_url':'https://www.yavnenet.co.il/','logo':'assets/branding/what-to-do-yavne-dark.svg','publisher_logo':'assets/branding/yavnenet-dark.svg'}}

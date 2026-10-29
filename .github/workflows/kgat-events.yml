@@ -1,0 +1,36 @@
+name: Refresh Kiryat Gat events
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 4 * * 1,4'
+permissions:
+  contents: write
+concurrency:
+  group: isnet-event-data-writes
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4 pillow
+      - run: python -u scripts/sync_kgat_events.py
+      - run: python scripts/repair_kgat_times.py
+      - run: python -u scripts/enrich_kgat_media.py
+      - run: python scripts/sync_event_city_views.py
+      - run: python scripts/build_event_public_assets.py
+      - run: python scripts/test_kgat_events.py
+      - run: |
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add events-preview/kiryat-gat events-preview/admin/data/kgat-*.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh verified Kiryat Gat events and media'
+          git pull --rebase origin main
+          git push origin HEAD:main

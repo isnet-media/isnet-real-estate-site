@@ -1,0 +1,114 @@
+/* Preserve the approved rail proportions while keeping the whole subject visible. */
+.isnetCategoryRail .eventArtStage img.eventArtMain{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important}
+.isnetCategoryRail .eventCard h3{line-height:1.4!important;overflow-wrap:anywhere}
+.isnetCategoryRail .eventCard .eventFooter{gap:10px;flex-wrap:wrap}
+.isnetCategoryRail:focus-visible{outline:2px solid #ffdf88;outline-offset:3px}
+.isnetCategoryTabs button{min-height:44px}
+.isnetCategoryArrows button{min-width:44px;min-height:44px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.isnetCategoryRail .eventCard[data-event="evt_40_20261012"] .eventArtStage img.eventArtMain{object-fit:cover!important;object-position:center 75%!important}
+
+.isnetCategoryRail .eventArtStage img.eventArtMain{position:absolute!important;inset:0!important;min-width:0!important;min-height:0!important}
+.isnetCategoryRail .eventCard h3{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important;max-height:none!important}
+
+/* Compact single-line event count and update date below the hero photos. */
+#heroStats{
+  flex-wrap:nowrap;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  font-size:12px;
+  white-space:nowrap;
+}
+#heroStats span{
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:none;
+  backdrop-filter:none;
+}
+
+/* Mobile-first visual polish: natural card height, clear hierarchy and touch targets. */
+.isnetCategoryRail{align-items:flex-start!important}
+.isnetCategoryRail>.eventCard{height:auto!important;border-radius:18px!important;box-shadow:0 6px 18px #0003!important}
+.isnetCategoryRail .eventBody{padding:16px!important}
+.isnetCategoryRail .eventBody h3{font-size:18px!important;line-height:1.45!important;letter-spacing:0!important;margin:0 0 12px!important}
+.isnetCategoryRail .eventBody h3 a,.isnetCategoryTop h3 a{text-decoration:none!important}
+.isnetCategoryRail .eventBody h3 a:hover,.isnetCategoryTop h3 a:hover{color:#ffe09a}
+.isnetCategoryRail .badges:empty{display:none}
+.isnetCategoryRail .eventInfo{gap:9px;margin-top:0}
+.isnetCategoryRail .eventInfo__row{color:#c7ccd5!important;font-size:14px!important;line-height:1.55!important}
+.isnetCategoryRail .eventInfo__row i{background:#ffffff08;border:1px solid #ffffff15;color:#d9ba72!important;border-radius:8px}
+.isnetCategoryRail .eventFooter{margin-top:16px!important;padding-top:13px!important;border-color:#ffffff20}
+.isnetCategoryRail .eventArtStage.is-subcategory-illustration img.eventArtMain{object-fit:cover!important}
+.isnetCategoryRail .heart{width:40px;height:40px;min-width:40px;min-height:40px;box-shadow:0 3px 10px #0003}
+.isnetCategoryTop{margin-bottom:14px!important}
+.isnetCategoryArrows button{border-radius:50%;background:#ffffff08;border-color:#ffffff25}
+.isnetCategoryTabs{scrollbar-width:none;gap:8px!important;margin-bottom:14px!important}
+.isnetCategoryTabs::-webkit-scrollbar{display:none}
+.isnetCategoryTabs button{border-color:#ffffff22;background:#ffffff05;padding:8px 14px;min-height:44px}
+.isnetCategoryRail{scrollbar-width:none}
+.isnetCategoryRail::-webkit-scrollbar{display:none}
+:where(a,button,summary,input,select):focus-visible{outline:2px solid #ffdf88;outline-offset:4px}
+@media(max-width:650px){
+  .hero .shell,main.shell{width:calc(100% - 32px)!important;max-width:100%!important}
+  .hero .hero__content{margin-top:0!important}
+  .heroTitle__top,.heroTitle__bottom{font-size:clamp(34px,10vw,42px)!important;line-height:1.12!important}
+  .hero{padding:24px 0 20px!important}
+  .stageShowcase{margin:20px -16px 18px;width:calc(100% + 32px)}
+  .stageShowcase figure{width:156px;height:156px;border-radius:14px}
+  #heroStats{font-size:12px!important;gap:12px;opacity:1;color:#c9cdd6}
+  .isnetNavDiscovery{padding-top:12px!important}
+  .isnetNavDiscovery__primary{gap:10px!important}
+  .isnetNavFeature{min-height:88px!important;padding:12px!important;gap:8px!important;border-radius:16px!important}
+  .isnetNavFeature__icon{width:30px!important;height:30px!important;flex-basis:30px!important;font-size:20px!important}
+  .isnetNavFeature__copy strong{font-size:16px!important;line-height:1.35!important}
+  .isnetNavFeature__copy small{font-size:11px!important;line-height:1.45!important}
+  .isnetNavFeature__arrow{display:none}
+  .isnetNavDiscovery__secondary{gap:8px!important}
+  .isnetNavDiscovery__secondary .isnetNavSmall{min-height:76px!important;border-radius:14px}
+  .isnetNavSmall strong{font-size:12px}
+  .searchBox input{font-size:16px!important;min-width:0}
+  .isnetDateGateway__top{gap:10px}
+  .isnetDateGateway__quick{scrollbar-width:none}
+  .isnetDateGateway__quick button{min-height:44px!important;font-size:13px!important}
+  #isnetOpenCalendar{min-height:44px!important}
+  .isnetCategoryTop h3{font-size:22px!important;line-height:1.35!important;letter-spacing:-.2px}
+  .isnetCategoryTop{gap:12px!important}
+  .isnetCategoryArrows{gap:6px}
+  .isnetCategoryArrows button{width:44px!important;height:44px!important}
+  .isnetCategoryRail{padding:2px 0 12px!important;scroll-padding-inline:0!important;gap:12px!important}
+  .isnetCategoryRail>.eventCard{flex:0 0 min(80vw,320px)!important;width:min(80vw,320px)!important;max-width:min(80vw,320px)!important}
+  .isnetCategoryRail .eventMedia,.isnetCategoryRail .mediaWrap{aspect-ratio:16/11!important;max-height:220px!important}
+  .isnetCategoryRail .eventBody h3{font-size:18px!important}
+  #eventsGrid:has(.isnetCategorySection){gap:26px!important}
+}
+@media(max-width:360px){
+  .isnetNavFeature{padding:10px 8px!important;gap:6px!important}
+  .isnetNavFeature__copy strong{font-size:14px!important}
+  .isnetNavFeature__icon{width:26px!important;height:26px!important;flex-basis:26px!important}
+  .isnetCategoryTop h3{font-size:20px!important}
+}
+@media(prefers-reduced-motion:reduce){.isnetCategoryRail{scroll-behavior:auto!important}}
+
+/* Cards must opt out of the legacy per-card stretch rule as well. */
+.isnetCategoryRail>.eventCard{align-self:flex-start!important}
+
+/* Homepage only: single-line identity and coordinated compact category gateways. */
+body:not(.cinemaMode) .heroTitle{display:flex!important;flex-wrap:nowrap!important;justify-content:center;align-items:baseline;gap:.2em;white-space:nowrap;font-size:clamp(28px,7.3vw,64px)!important}
+body:not(.cinemaMode) .heroTitle__top,body:not(.cinemaMode) .heroTitle__bottom{display:inline!important;font-size:inherit!important;line-height:1.2!important;white-space:nowrap}
+.isnetNavDiscovery__secondary{grid-template-columns:repeat(3,minmax(0,1fr))!important;width:min(100%,900px)!important;max-width:900px!important}
+.isnetNavDiscovery__secondary .isnetNavSmall{--accent:#bba16b;flex-direction:row;gap:10px!important;border-color:color-mix(in srgb,var(--accent) 60%,transparent)!important;background:radial-gradient(ellipse at 4% 100%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 65%),linear-gradient(145deg,#25252c,#0b1119 80%)!important;box-shadow:inset 0 1px 0 #ffffff17,0 6px 18px #0002;border-radius:16px!important;min-height:68px!important}
+.isnetNavSmall[href*="lecture"]{--accent:#d6ba72!important}
+.isnetNavSmall[href*="exhibition"]{--accent:#b696dd!important}
+.isnetNavSmall[href*="sport"]{--accent:#76b8cf!important}
+.isnetNavDiscovery__secondary .isnetNavSmall span{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border-radius:50%;border:1px solid var(--accent);color:var(--accent);font-size:19px!important;background:#111923}
+.isnetNavDiscovery__secondary .isnetNavSmall strong{font-size:14px;white-space:nowrap}
+@media(max-width:650px){
+ body:not(.cinemaMode) .heroTitle{font-size:clamp(25px,7.3vw,46px)!important}
+ .isnetNavDiscovery__secondary{gap:8px!important}
+ .isnetNavDiscovery__secondary .isnetNavSmall{flex-direction:column;gap:6px!important;min-height:78px!important;padding:9px 4px!important}
+ .isnetNavDiscovery__secondary .isnetNavSmall strong{font-size:11px!important}
+ .isnetNavDiscovery__secondary .isnetNavSmall span{width:28px;height:28px;flex-basis:28px;font-size:17px!important}
+}

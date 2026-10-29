@@ -1,0 +1,13 @@
+/* Permanent destinations belong in navigation, not the events feed. */
+#categoryGrid[hidden]{display:none!important}
+#operatorStrip{display:none!important}
+.siteTopbar__inner{position:relative}
+.isnetPlacesMenu{margin-inline-start:auto;flex-shrink:0;align-self:center;font-family:Assistant,sans-serif}
+.isnetPlacesMenu details{position:relative}
+.isnetPlacesMenu summary{cursor:pointer;list-style:none;color:#f1f0ec;font-weight:700;font-size:14px;border:1px solid #ffffff30;border-radius:9px;padding:9px 13px;white-space:nowrap}
+.isnetPlacesMenu summary::-webkit-details-marker{display:none}
+.isnetPlacesMenu summary:hover{border-color:#e9c96e}
+.isnetPlacesMenu__items{position:absolute;inset-inline-end:0;top:calc(100% + 9px);background:#202126;border:1px solid #555761;border-radius:12px;min-width:210px;z-index:1000;box-shadow:0 12px 30px #000a;padding:6px}
+.isnetPlacesMenu__items a{display:block;color:#f6f5f2!important;padding:10px 12px;text-decoration:none;font-size:14px;border-radius:7px}
+.isnetPlacesMenu__items a:hover,.isnetPlacesMenu__items a:focus-visible{background:#424148;color:#f6d779!important}
+@media(max-width:650px){.isnetPlacesMenu summary{font-size:12px;padding:8px}.isnetPlacesMenu__items{min-width:190px}}

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07162b">
+  <title>סרט בקריית גת | מה עושים בקריית גת?</title>
+  <meta name="description" content="כל שעות ההקרנה, בתי הקולנוע, התקציר והטריילר של הסרט בקריית גת.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Heebo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="movie.css?v=68389161404f">
+  
+<link rel="stylesheet" href="publisher-brand.css?v=1bf86426f369">
+<link rel="stylesheet" href="isnet-site-menu.css?v=20261013-shared-sticky">
+  <link rel="stylesheet" href="cinema-experience.css?v=20261013-screen3">
+<link rel="stylesheet" href="home-brand-header.css?v=20261013-all-pages1">
+<script defer src="/assets/isnet-top-navigation.js?v=20261021-nav2"></script><link rel="stylesheet" href="/events-preview/shared/cinema-editorial.css?v=20261025-depth3"><script defer src="/events-preview/shared/cinema-editorial.js?v=20261025-layout2"></script><link rel="stylesheet" href="kgat-local.css?v=1"></head>
+<body class="cinemaMoviePage">
+  <header class="siteTopbar" aria-label="ניווט ראשי">
+    <div class="siteTopbar__inner">
+      <a class="siteTopbar__brand siteTopbar__ashdodnet" href="https://kgatnet.co.il/" target="_blank" rel="noopener" aria-label="לעמוד הראשי של קריית גת נט" title="לעמוד הראשי של קריית גת נט">
+        <img src="assets/branding/what-to-do-kgat-dark.svg" width="195" height="107" alt="קריית גת נט" decoding="async">
+      </a>
+      <a class="siteTopbar__brand siteTopbar__events" href="./" aria-label="לעמוד הראשי של מה עושים בקריית גת" title="לעמוד הראשי של מה עושים בקריית גת">
+        <img src="assets/branding/what-to-do-kgat-dark.svg" width="420" height="150" alt="מה עושים בקריית גת" decoding="async">
+      </a>
+      <nav class="isnetSiteMenu" aria-label="כל אזורי האתר">
+        <details>
+          <summary aria-label="פתיחת תפריט האתר"><span class="isnetHamburger" aria-hidden="true"><i></i><i></i><i></i></span><span>תפריט</span></summary>
+          <div class="isnetSiteMenu__panel">
+            <a class="isnetSiteMenu__home" href="./">עמוד הבית — כל האירועים ←</a>
+            <div class="isnetSiteMenu__heading">אירועים לפי קטגוריה</div>
+            <div class="isnetSiteMenu__links">
+              <a href="category.html?category=stage">הופעות ומוזיקה</a>
+              <a href="./?category=theatre">תיאטרון והצגות</a>
+              <a href="./?category=standup">סטנדאפ ובידור</a>
+              <a href="category.html?category=kids">ילדים ומשפחה</a>
+              <a href="cinema.html">קולנוע וסרטים</a>
+              <a href="category.html?category=lecture">הרצאות</a>
+              <a href="./?category=conference">כנסים ופאנלים</a>
+              <a href="category.html?category=sport">אירועי ספורט</a>
+              <a href="category.html?category=exhibition">תערוכות ואמנות</a>
+              
+              <a href="category.html?category=community">קהילה ופנאי</a>
+              <a href="category.html?category=tour">טיולים וסיורים</a>
+              <a href="category.html?category=seniors">הגיל השלישי וגמלאים</a>
+              <a href="./?category=food">אוכל וקולינריה</a>
+            </div>
+            <div class="isnetSiteMenu__heading">מקומות קבועים בעיר</div>
+            <div class="isnetSiteMenu__links">
+              <a href="places.html?category=culture">מוסדות תרבות</a>
+              <a href="places.html?category=parks">פארקים</a>
+              <a href="places.html?category=beaches">חופים</a>
+              <a href="places.html?category=nature">טבע וטיולים</a>
+              <a href="places.html?category=attractions">אטרקציות</a>
+              <a href="places.html?category=must-see">מקומות שכדאי להכיר</a>
+            </div>
+          </div>
+        </details>
+      </nav>
+    </div>
+  </header>
+
+  <main id="page" hidden>
+    <section class="movieHero">
+      <div class="shell movieHero__grid">
+        <div class="movieHero__copy">
+          <div id="heroBadges" class="badges"></div>
+          <h1 id="movieTitle"></h1>
+          <div class="movieDescription"><p id="fullSynopsis" class="movieSynopsis fullSynopsis"></p><button id="synopsisToggle" class="synopsisToggle" type="button" aria-expanded="false" aria-controls="fullSynopsis" hidden>קרא עוד</button></div>
+          <div id="heroMeta" class="heroMeta"></div>
+
+        </div>
+        <div id="heroMedia" class="movieHero__media"></div>
+      </div>
+    </section>
+
+    <div class="shell contentGrid">
+      <article class="mainColumn">
+        <section id="movieEditorial" class="contentCard movieEditorial"></section>
+
+        <section id="trailerSection" class="contentCard videoCard" hidden>
+          <span class="kicker">לפני שמחליטים</span>
+          <h2>טריילר</h2>
+          <p id="trailerAvailability"></p>
+          <a id="trailerExternal" target="_blank" rel="noopener noreferrer">פתיחת הטריילר ב־YouTube ↗</a>
+          <div class="videoFrame"><iframe id="youtubeFrame" title="" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+        </section>
+
+        <section id="movieTickets" class="contentCard movieTickets">
+          <h2>לרכישת כרטיסים</h2>
+          <div id="ticketLinks" class="movieTicketLinks"></div>
+          <p id="ticketAvailability" class="showtimeHint" hidden>אין כרגע הקרנות מאומתות בעיר. בדקו את לוח ההקרנות בהמשך.</p>
+          <a class="primaryButton" href="#showtimes">לכל הימים והשעות</a>
+        </section>
+
+        <section id="showtimes" class="contentCard">
+          <span class="kicker">כל ההקרנות במקום אחד</span>
+          <h2>ימים ושעות בקריית גת</h2>
+          <p class="showtimeHint">בחרו שעה לפרטים ולהזמנה באתר בית הקולנוע.</p>
+          <div id="cinemaSchedules" class="cinemaSchedules"></div>
+        </section>
+
+        <section id="relatedSection" class="relatedSection">
+          <div class="sectionHead"><div><span class="kicker">עוד על המסך</span><h2>סרטים נוספים בקריית גת</h2></div></div>
+          <div id="relatedGrid" class="relatedGrid"></div>
+        </section>
+      </article>
+
+      <aside class="sideColumn">
+        <section class="infoCard">
+          <span class="kicker">ניווט מהיר</span>
+          <div class="navActions">
+            <a href="./#cinema" class="navAction primary">← חזרה לסרטים בקריית גת</a>
+            <a href="https://kgatnet.co.il/" target="_blank" rel="noopener" class="navAction">לאתר קריית גת נט</a>
+          </div>
+        </section>
+
+        <section class="infoCard">
+          <span class="kicker">עדכון ההקרנות</span>
+
+          <p id="updatedAt" class="updatedAt"></p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <div id="loadingState" class="state shell">
+    <div class="state__spinner"></div>
+    <p>בטעינה - כבר עולים</p>
+  </div>
+
+  <div id="errorState" class="state shell" hidden>
+    <h1>לא מצאנו את הסרט</h1>
+    <p>ייתכן שהסרט כבר אינו מוצג או שהקישור השתנה.</p>
+    <a class="primaryButton" href="./">חזרה למה עושים בקריית גת?</a>
+  </div>
+
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <div><strong>מה עושים בקריית גת?</strong><span>מבית קריית גת נט</span></div>
+      <div class="footerLinks">
+        <a href="./">חזרה לעמוד הראשי</a>
+        <a href="https://kgatnet.co.il/" target="_blank" rel="noopener">קריית גת נט</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="movie.js?v=a5893f7f6ad7"></script>
+<script src="shared-brand-header.js?v=20261019-all-share2" defer></script>
+<script defer src="site-share.js?v=20261019-all-pages2"></script></body>
+</html>

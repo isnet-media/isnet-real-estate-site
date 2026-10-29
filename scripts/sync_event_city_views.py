@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "events-preview"
 MASTER = ROOT / "ashdod"
 TARGETS = {
+    "kiryat-gat": {"slug":"kiryat-gat","name":"קריית גת","brand":"קריית גת נט","website":"https://kgatnet.co.il/","second_cinema":"היכל התרבות","second_cinema_id":"municipal-hall"},
     "yavne": {"slug":"yavne","name":"יבנה","brand":"יבנה נט","website":"https://www.yavnenet.co.il/","second_cinema":"סינמטק יבנה","second_cinema_id":"cinematheque"},
     "rishon-lezion": {
         "slug": "rishon-lezion",
@@ -34,6 +35,9 @@ JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this genera
 
 
 def localize(content: str, name: str, city: dict, suffix: str) -> str:
+    if city["slug"] == "kiryat-gat":
+        from kgat_city_view import localize as kgat_localize
+        return kgat_localize(content, name, city, suffix)
     # Film directories are generated from each city's own cinema feed.
     if name in ('cinema.html', 'index.html'):
         marker = r'<!-- MOVIE_EDITORIAL_INDEX_START -->.*?<!-- MOVIE_EDITORIAL_INDEX_END -->'
