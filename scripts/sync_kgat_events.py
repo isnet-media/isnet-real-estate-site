@@ -22,7 +22,7 @@ SOURCES=[
 ]
 CITY_RE=re.compile(r'קרי[יי]?ת\s*גת')
 cache={}; original_fetch=core.fetch_once; original_rows=core.source_rows
-metadata={}
+metadata={}; community_venues={}
 def fetch(spec):
  u=spec['url']
  if u not in cache:cache[u]=original_fetch(spec)
@@ -47,7 +47,8 @@ def rows(soup,spec):
    if not m or 'פרטים נוספים' not in text:continue
    title=text[:m.start()].strip();u=urljoin(spec['url'],a['href'])
    if urlsplit(u).hostname!='matnaskg.smarticket.co.il':continue
-   venue=text[m.end():].split('פרטים נוספים')[0].strip()
+   venue=re.sub(r'\s+ל$','',text[m.end():].split('פרטים נוספים')[0].strip())
+   community_venues[(title,datetime.strptime(m[1],'%d.%m.%Y').date().isoformat(),m[2])]=venue
    out.append(dict(title=title,start_date=datetime.strptime(m[1],'%d.%m.%Y').date().isoformat(),start_time=m[2],venue=venue,ticket_url=u,purchase_url=u,category=classify(title,text),quality_flags=['automated_official_listing']))
   return out
  if spec['parser']=='smarticket':
@@ -90,6 +91,8 @@ def main():
   if re.search(r'^חוג\b|^קורס\b|קורס ניהול|קורס פריוריטי',e['title']):held.append(e);continue
   text=metadata.get(e.get('ticket_url'),'');e['category']=classify(e['title'],text) if text else e['category']
   title=e['title'];cat=e['category'];aud=set(e.get('audiences') or [])
+  official_venue=community_venues.get((title,e['start_date'],e['start_time']))
+  if official_venue:e['venue']=official_venue
   if '60+' in text or re.search(r'60\+|גיל השלישי|לגילאי 60|בוקר של זהב',title):aud.add('seniors')
   if cat=='kids':aud.update(['kids','families'])
   e['audiences']=sorted(aud);e['city']=LABEL
