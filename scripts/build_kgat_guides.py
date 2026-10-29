@@ -21,3 +21,5 @@ save('saturday-guide',{'items':[{'id':'kgat-lachish-saturday','title':'גן לא
 # Culinary inventory has its own reviewed sources and media provenance.
 from expand_kgat_food import build as build_food
 build_food()
+from enrich_kgat_guide_images import run as enrich_images
+enrich_images()

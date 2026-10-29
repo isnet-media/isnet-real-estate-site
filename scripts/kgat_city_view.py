@@ -17,6 +17,13 @@ def localize(content,name,city,suffix):
  content=content.replace('אשדוד נט','קריית גת נט').replace('אשדוד','קריית גת')
  content=re.sub(r'([\"\'])ashdod\1',lambda m:m[1]+'kiryat-gat'+m[1],content)
  content=content.replace('location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"kiryat-gat"','"kiryat-gat"')
+ if name=='index.html':
+  food='<a class="isnetNavFeature isnetNavFeature--gold culinaryHomepageFeature" href="restaurants.html"><span aria-hidden="true" class="isnetNavFeature__icon">♨</span><span class="isnetNavFeature__copy"><strong>מסעדות וקולינריה</strong><small>מסעדות, בתי קפה ואוכל רחוב</small></span><span aria-hidden="true" class="isnetNavFeature__arrow">←</span></a>'
+  cinema='<a class="isnetNavFeature cinemaHomepageFeature" href="cinema.html"><span aria-hidden="true" class="isnetNavFeature__icon">▣</span><span class="isnetNavFeature__copy"><strong>קולנוע בהיכל התרבות</strong><small>הסרטים וההקרנות הקרובות בהיכל</small></span><span aria-hidden="true" class="isnetNavFeature__arrow">←</span></a>'
+  content=re.sub(r'<a class="isnetNavFeature isnetNavFeature--blue" href="cinema.html">[\s\S]*?</a>',lambda _:food,content,count=1)
+  # The canonical page has both a menu link and a lifestyle card. Replace the card explicitly.
+  content=re.sub(r'<a class="isnetNavFeature culinaryHomepageFeature"[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>',lambda _:cinema,content,count=1)
+  content=content.replace('<a href="cinema.html">קולנוע וסרטים</a>','<a href="restaurants.html">מסעדות וקולינריה</a>')
  content=re.sub(r'<a\b[^>]*data-city-only="(?:ashdod|kiryat-gat)"[^>]*>[\s\S]*?</a>','',content)
  content=re.sub(r'<a\b[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>','',content)
  content=re.sub(r'<section class="cityDiscover"[\s\S]*?</section>','',content)
@@ -34,6 +41,12 @@ def localize(content,name,city,suffix):
   content=content.replace('ids.has(e.category)','window.KGAT_EVENTS.matches(e,ids)')
   content=content.replace('משחקי הקבוצות בעיר, תחרויות ואירועי ספורט','משחקי בית של הקבוצות הייצוגיות, תחרויות ופעילות ספורט עממית')
   content=content.replace('const date=esc(e.start_date||"");','const date=esc(e.start_date||"")+(key==="sport"?" · "+esc(e.start_time||"השעה טרם פורסמה"):"");')
+  content=content.replace('sourceImage?e.title:"תמונת המחשה"','sourceImage&&e.source_image_kind!=="illustration"?e.title:"תמונת המחשה"')
+  content=content.replace("return '<a class=\"card\"", "const mediaCredit=e.source_image_kind==='illustration'?'<small class=\"imageCredit\">תמונת המחשה</small>':'';\n return '<a class=\"card\"")
+  content=content.replace("'+media+'<div class=\"body\">", "'+media+mediaCredit+'<div class=\"body\">")
+ if name=='attractions.html':
+  content=content.replace('alt="\'+esc(x.name)+\'"','alt="\'+esc(x.image_alt||x.name)+\'"')
+  content=content.replace('</div><div class="body"><div class="tags">','</div><div class="body">\'+(x.image_credit?\'<small class="imageCredit">\'+esc(x.image_credit)+\'</small>\':\'\')+\'<div class="tags">')
  if name in ('kids-hub.js','seniors-hub.js'):
   content=content.replace('[e.source_description,e.description,e.series_description]','[e.editorial_description,e.description,e.series_description,e.source_description]')
   content=content.replace("e.category==='seniors'||adultLecture(e)","e.category==='seniors'||e.audiences?.includes('seniors')||adultLecture(e)")

@@ -5,6 +5,7 @@ from pathlib import Path
 from urllib.parse import urljoin,urlsplit,parse_qs,urlencode,urlunsplit
 from zoneinfo import ZoneInfo
 import requests
+from enrich_kgat_guide_images import event_image
 from bs4 import BeautifulSoup
 from kgat_sport_rules import repair
 ROOT=Path(__file__).resolve().parents[1];CITY=ROOT/'events-preview/kiryat-gat'
@@ -95,6 +96,7 @@ def main():
   if prev.get('image_verified') and prev.get('image_publishable'):
    e.update({k:v for k,v in prev.items() if k.startswith(('image_','thumbnail_'))})
   if prev.get('description_manual_override'):e.update(description=prev['description'],description_manual_override=True)
+  event_image(e)
   byid[e['event_id']]=e
  feed['events']=list(byid.values());feed['stats']={'events':len(feed['events'])}
  (CITY/'data/events.json').write_text(json.dumps(feed,ensure_ascii=False,indent=2)+'\n')
