@@ -36,6 +36,7 @@ def localize(content,name,city,suffix):
  if name=='event.js':
   content=content.replace('window.ISNET_EVENT_TOOLS?.render(e,occ);','window.ISNET_EVENT_TOOLS?.render(e,occ);window.KGAT_EVENTS?.renderOffers?.(e);')
   content=content.replace('all.find(e=>e.event_id===requestedId)','all.find(e=>e.event_id===requestedId||e.source_aliases?.some(a=>a.event_id===requestedId))')
+  content=content.replace('originalAll.find(e=>e.event_id===requestedId)','originalAll.find(e=>e.event_id===requestedId||e.source_aliases?.some(a=>a.event_id===requestedId))')
  if name=='category-landing.js':
   content='\n'.join(line for line in content.split('\n') if 'window.ISNET_EXHIBITIONS.init()' not in line)
   content=content.replace('ids.has(e.category)','window.KGAT_EVENTS.matches(e,ids)')
