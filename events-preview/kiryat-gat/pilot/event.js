@@ -541,7 +541,7 @@ async function init(){
     const originalAll=all;
     all=window.ISNET_EVENT_IDENTITIES?.reconcile?.(all)||all;
     const original=requestedId
-      ? originalAll.find(e=>e.event_id===requestedId)
+      ? originalAll.find(e=>e.event_id===requestedId||e.source_aliases?.some(a=>a.event_id===requestedId))
       : findSlugEvent(originalAll,requestedSlug);
     const canonical=original?.canonical_event_id&&all.find(e=>e.event_id===original.canonical_event_id);
     const base=canonical||(!requestedId&&findSlugEvent(all,requestedSlug))
