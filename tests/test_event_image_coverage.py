@@ -1,7 +1,8 @@
 """Regression tests for report-only event-image coverage classification."""
 import unittest
 
-from scripts.fast_fill_event_images_from_listings import image_coverage_counts
+from scripts.fast_fill_event_images_from_listings import bank_asset_provenance_matches as fast_bank_match
+from scripts.reuse_media_bank_images import bank_asset_provenance_matches as reusable_bank_matchfrom scripts.fast_fill_event_images_from_listings import image_coverage_counts
 
 
 class ImageCoverageTests(unittest.TestCase):
@@ -36,6 +37,30 @@ class ImageCoverageTests(unittest.TestCase):
                 "unverified_or_unknown_images", "still_missing")),
             len(events),
         )
+
+    def test_bank_reuse_requires_same_title_for_every_provenance_reference(self):
+        same_show = {
+            "events": [
+                {"title": "מופע מקורי", "event_id": "ashdod-1", "date": "2026-11-10"},
+                {"title": "מופע מקורי", "event_id": "rishon-2", "date": "2026-12-05"},
+            ],
+            "reuse_risk": "low",
+        }
+        suspicious = {
+            "events": [
+                {"title": "סדנת צרכנות דיגיטלית"},
+                {"title": "סדנאת לעיצוב עוגות בנטו"},
+            ],
+            "reuse_risk": "low",
+        }
+        for match in (fast_bank_match, reusable_bank_match):
+            with self.subTest(implementation=match.__module__):
+                self.assertTrue(match({"title": "מופע מקורי"}, same_show))
+                self.assertFalse(match({"title": "סדנאת לעיצוב עוגות בנטו"}, suspicious))
+                self.assertFalse(match({"title": "מופע מקורי"}, {"events": []}))
+                self.assertFalse(match({"title": "מופע מקורי"}, dict(same_show, reuse_risk="review")))
+                self.assertFalse(match({"title": "מופע אחר"}, same_show))
+                self.assertFalse(match({"title": "מופע מקורי"}, {"events": [{"title": ""}]}))
 
     def test_empty_feed(self):
         result = image_coverage_counts([])
