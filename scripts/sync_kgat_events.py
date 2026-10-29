@@ -8,6 +8,7 @@ from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup
 from PIL import Image
 import sync_events_from_sources as core
+from kgat_sport_rules import sport_kind,repair,SENIOR
 CITY='kiryat-gat'; LABEL='קריית גת'; ROOT=core.BASE/CITY
 SOURCES=[
  {'name':'easy_kgat','url':'https://easy.co.il/list/Events?region=1750','parser':'generic','venue':LABEL,'source_type':'secondary'},
@@ -30,13 +31,14 @@ def fetch(spec):
  return (BeautifulSoup(str(soup),'html.parser') if soup else None),err
 
 def classify(title,text):
+ if SENIOR.search(title) and re.search(r'תנועה|ספורט|התעמלות|אימון|כושר',title) and not sport_kind(title):return 'seniors'
  if 'סרטים' in text or title in ['הבדחן','בחורים טובים 3']:return 'cinema'
  if 'סטנדאפ' in text or re.search(r'יצפאן|ברוייר|חזקיה|זינגר|קטורזה|שחר חסון|ליטל שוורץ',title):return 'standup'
  if 'ילדים' in text or 'ספריה עירונית' in text or re.search(r'הארי פוטר|שעת סיפור|חן פיית|סינדרלה',title):return 'kids'
  if re.search(r'תיאטרון|תאטרון',text):return 'theatre'
  if 'קונצרט' in text or 'מוזיקה' in text or re.search(r'קרן פלס|בר צברי|מארינה|שירי מימון|איציק קלה|אופרה|ליאת בנאי',title):return 'music'
  if re.search(r'הרצא|חיים שפירא|מיכל דליות|איתי הרמן|העולם הפיננסי|לוקחים שליטה|חוכמת דורות',title):return 'lecture'
- if re.search(r'ספורט|אימון|הליכה',title):return 'sport'
+ if sport_kind(title,text):return 'sport'
  return 'community'
 
 def rows(soup,spec):
@@ -88,6 +90,7 @@ def main():
  report=core.merge(CITY,sorted((s for s in SOURCES if s['parser']!='friends'),key=lambda s:s['source_type']!='official'),False)
  data=json.loads((ROOT/'data/events.json').read_text());held=[];events=[]
  for e in data['events']:
+  if e.get('managed_by')=='kgat_sports':events.append(e);continue
   if re.search(r'^חוג\b|^קורס\b|קורס ניהול|קורס פריוריטי',e['title']):held.append(e);continue
   text=metadata.get(e.get('ticket_url'),'');e['category']=classify(e['title'],text) if text else e['category']
   title=e['title'];cat=e['category'];aud=set(e.get('audiences') or [])
@@ -96,7 +99,7 @@ def main():
   if '60+' in text or re.search(r'60\+|גיל השלישי|לגילאי 60|בוקר של זהב',title):aud.add('seniors')
   if cat=='kids':aud.update(['kids','families'])
   e['audiences']=sorted(aud);e['city']=LABEL
-  sub={'music':'live-music','standup':'standup','theatre':'theatre','kids':'kids-shows','lecture':'general-lectures','cinema':'cinema','community':'community-events','sport':'sport-events'}.get(cat,'other')
+  sub={'music':'live-music','standup':'standup','theatre':'theatre','kids':'kids-shows','lecture':'general-lectures','cinema':'cinema','community':'community-events','sport':'sport-events','seniors':'senior-health'}.get(cat,'other')
   if 'קונצרט' in text or 'סימפונט' in title or 'סינפונייטה' in title:sub='concerts'
   if cat=='kids' and ('סדנ' in title or 'חידות' in title):sub='kids-workshops'
   e['subcategory']=sub;e['category_memberships']=[{'category':cat,'subcategory':sub}]
@@ -104,7 +107,7 @@ def main():
   kinds={'music':'מופע מוזיקה','kids':'פעילות לילדים ולמשפחות','standup':'מופע סטנדאפ','theatre':'הצגת תיאטרון','lecture':'הרצאה','cinema':'הקרנת סרט','community':'פעילות קהילתית','sport':'פעילות ספורט'}
   if not e.get('description'):e['description']=f"{title} — {kinds.get(cat,'אירוע')} ב{e['venue']}. פרטי התוכן, ההשתתפות והכרטיסים בעמוד המארגן."
   if urlsplit(e.get('ticket_url') or '').hostname=='matnaskg.smarticket.co.il':e['purchase_url']=e['ticket_url']
-  events.append(e)
+  events.append(repair(e))
  # Keep a previously verified source if a partial fetch fails, and preserve IDs.
  data['events']=events;data['stats']={'events':len(events)}
  (ROOT/'data/events.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')

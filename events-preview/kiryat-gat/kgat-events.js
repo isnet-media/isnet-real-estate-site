@@ -4,7 +4,15 @@ const snapshot=window.ISNET_CITY_BOOTSTRAP;
 const request=(name)=>fetch('data/'+name+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Event feed unavailable');return r.json()});
 const data=()=>snapshot?Promise.resolve(snapshot):request('events');
 window.ISNET_PUBLIC_CMS={loadSource:data,loadCards:data,loadHub:data,publishedEvents:()=>Promise.resolve([]),metrics:{}};
-window.KGAT_EVENTS={matches:(e,ids)=>ids.has(e.category)||(e.category_memberships||[]).some(x=>ids.has(x.category))||(ids.has('seniors')&&(e.audiences||[]).includes('seniors'))||(ids.has('kids')&&(e.audiences||[]).includes('kids'))};
+const sportEligible=e=>{
+ if(e.is_home_game===true&&e.representative_team===true&&e.home_team)return true;
+ const title=e.title||'';
+ if(/הרצא|אימון (?:מוח|זיכרון)|כושר (?:מוח|קוגניטיבי)/.test(title))return false;
+ if(/מרוץ|מירוץ|מרתון|טריאתלון/.test(title))return true;
+ if(/טורניר|אליפות|תחרו[תי]/.test(title)&&/ספורט|כדור|שחייה|שחיה|ריצה|אתלטיקה|אופניים|טניס|פאדל|ג[׳']ודו|קראטה|התעמלות|שחמט|אגרוף|בדמינטון/.test(title))return true;
+ return !/גיל\s*השלישי|גילאי\s*60|60\+|גמלאים|גימלאים/.test(title)&&/אימון פתוח|יום ספורט|צעדה|הליכה עממית|רכיבה (?:עממית|קהילתית)|ספורט עממי/.test(title);
+};
+window.KGAT_EVENTS={sportEligible,matches:(e,ids)=>(ids.has(e.category)&&(e.category!=='sport'||sportEligible(e)))||(e.category_memberships||[]).some(x=>ids.has(x.category)&&(x.category!=='sport'||sportEligible(e)))||(ids.has('seniors')&&(e.audiences||[]).includes('seniors'))||(ids.has('kids')&&(e.audiences||[]).includes('kids'))};
 window.KGAT_EVENTS.renderOffers=e=>{
  document.getElementById('kgat-friends-offer')?.remove();
  const offer=e.friends_offer;if(!offer)return;

@@ -55,7 +55,7 @@ def run():
  (R.parent/'admin/data/kgat-conflicts-review.json').write_text(json.dumps({'held':held},ensure_ascii=False,indent=2)+'\n')
  for e in out:
   if e['title']=='פינק ליידי':e['category']='theatre';e['subcategory']='theatre';e['category_memberships']=[{'category':'theatre','subcategory':'theatre'}]
- data['events']=sorted(out,key=lambda e:(e['start_date'],e['start_time'],e['title']));data['stats']={'events':len(out)}
+ data['events']=sorted(out,key=lambda e:(e['start_date'],e.get('start_time') or '99:99',e['title']));data['stats']={'events':len(out)}
  (R/'data/events.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  films={}
  for e in out:

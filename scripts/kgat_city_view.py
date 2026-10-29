@@ -32,6 +32,8 @@ def localize(content,name,city,suffix):
  if name=='category-landing.js':
   content='\n'.join(line for line in content.split('\n') if 'window.ISNET_EXHIBITIONS.init()' not in line)
   content=content.replace('ids.has(e.category)','window.KGAT_EVENTS.matches(e,ids)')
+  content=content.replace('משחקי הקבוצות בעיר, תחרויות ואירועי ספורט','משחקי בית של הקבוצות הייצוגיות, תחרויות ופעילות ספורט עממית')
+  content=content.replace('const date=esc(e.start_date||"");','const date=esc(e.start_date||"")+(key==="sport"?" · "+esc(e.start_time||"השעה טרם פורסמה"):"");')
  if name in ('kids-hub.js','seniors-hub.js'):
   content=content.replace('[e.source_description,e.description,e.series_description]','[e.editorial_description,e.description,e.series_description,e.source_description]')
   content=content.replace("e.category==='seniors'||adultLecture(e)","e.category==='seniors'||e.audiences?.includes('seniors')||adultLecture(e)")

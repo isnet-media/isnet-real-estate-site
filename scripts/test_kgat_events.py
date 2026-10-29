@@ -11,7 +11,8 @@ d=json.loads((C/'data/events.json').read_text());assert len(d['events'])>=30
 ids=set();keys=set()
 for e in d['events']:
  assert e['event_id'] not in ids;ids.add(e['event_id'])
- assert re.fullmatch(r'\d{4}-\d{2}-\d{2}',e['start_date']) and re.fullmatch(r'\d{2}:\d{2}',e['start_time'])
+ assert re.fullmatch(r'\d{4}-\d{2}-\d{2}',e['start_date'])
+ assert (e.get('managed_by')=='kgat_sports' and e.get('time_status')=='pending' and e.get('start_time') is None) or re.fullmatch(r'\d{2}:\d{2}',e['start_time'])
  assert e['city']=='קריית גת' and e['title'] and e['venue'] and e.get('description')
  assert e.get('sources') and not any(x in e['venue'] for x in ['אשדוד','יבנה','ראשון לציון'])
  k=(e['title'],e['start_date'],e['start_time'],e['venue']);assert k not in keys;keys.add(k)
