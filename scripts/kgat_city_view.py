@@ -45,6 +45,10 @@ def localize(content,name,city,suffix):
   content=content.replace("return '<a class=\"card\"", "const mediaCredit=e.source_image_kind==='illustration'?'<small class=\"imageCredit\">תמונת המחשה</small>':'';\n return '<a class=\"card\"")
   content=content.replace("'+media+'<div class=\"body\">", "'+media+mediaCredit+'<div class=\"body\">")
  if name=='attractions.html':
+  content=re.sub(r'function assignKind\(x\)\{[^\n]*\}', 'function assignKind(x){const t=x.name||"";return /קאנטרי|בריכ|שחייה/.test(t)?"water":/תרבות|מוזיאון/.test(t)?"culture":"nature"}',content,count=1)
+  content=content.replace('water:"ים ושיט"','water:"בריכות ושחייה"')
+  content=content.replace('ספורט ימי, חדרי בריחה, משחקים, טבע ורכיבה','בריכות, פארקים, טבע ומקומות לבילוי משפחתי')
+  content=content.replace('entries=[...normalizePlaces(places),...(extra.verified_sources||[]).map(x=>({...x,local:false,area:"kiryat-gat"}))];render()', 'entries=[...new Map([...normalizePlaces(places),...(extra.verified_sources||[]).map(x=>({...x,kind:assignKind(x),local:false,area:"kiryat-gat"}))].map(x=>[x.id,x])).values()];document.querySelectorAll("[data-kind]").forEach(b=>{if(b.dataset.kind!=="all"&&!entries.some(x=>x.kind===b.dataset.kind))b.remove()});render()')
   content=content.replace('alt="\'+esc(x.name)+\'"','alt="\'+esc(x.image_alt||x.name)+\'"')
   content=content.replace('</div><div class="body"><div class="tags">','</div><div class="body">\'+(x.image_credit?\'<small class="imageCredit">\'+esc(x.image_credit)+\'</small>\':\'\')+\'<div class="tags">')
  if name in ('kids-hub.js','seniors-hub.js'):
@@ -83,7 +87,7 @@ def localize(content,name,city,suffix):
   content=content.replace('fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]}))','(window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP.taxonomy):fetch("../admin/data/taxonomy.json").then(r=>r.json()))')
   content=content.replace('if(state.category&&e.category!==state.category)return false;','if(state.category&&!window.KGAT_EVENTS.matches(e,new Set([state.category])))return false;')
   content=content.replace('ids.has(e.category)','window.KGAT_EVENTS.matches(e,ids)')
- content=re.sub(r'(assets/branding/(?:what-to-do-kgat-dark|kgatnet-dark)\.svg)\?v=[^\"\s\']+',r'\1?v=20261029-kgat2',content)
+ content=re.sub(r'(assets/branding/(?:what-to-do-kgat-dark|kgatnet-dark)\.svg)\?v=[^\"\s\']+',r'\1?v=20261029-kgat3',content)
  if suffix=='.html':
   def fingerprint(match):
    attribute,asset=match.group(1),match.group(2)

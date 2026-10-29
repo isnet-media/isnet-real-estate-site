@@ -31,6 +31,7 @@ def fetch(spec):
  return (BeautifulSoup(str(soup),'html.parser') if soup else None),err
 
 def classify(title,text):
+ if title.startswith(('הרצאה','הרצאת')) and not re.search(r'לילדים|לנוער',title):return 'lecture'
  if SENIOR.search(title) and re.search(r'תנועה|ספורט|התעמלות|אימון|כושר',title) and not sport_kind(title):return 'seniors'
  if 'סרטים' in text or title in ['הבדחן','בחורים טובים 3']:return 'cinema'
  if 'סטנדאפ' in text or re.search(r'יצפאן|ברוייר|חזקיה|זינגר|קטורזה|שחר חסון|ליטל שוורץ',title):return 'standup'
@@ -94,6 +95,7 @@ def main():
   if re.search(r'^חוג\b|^קורס\b|קורס ניהול|קורס פריוריטי',e['title']):held.append(e);continue
   text=metadata.get(e.get('ticket_url'),'');e['category']=classify(e['title'],text) if text else e['category']
   title=e['title'];cat=e['category'];aud=set(e.get('audiences') or [])
+  if cat=='lecture' and title.startswith(('הרצאה','הרצאת')) and not re.search(r'לילדים|לנוער',title):aud.difference_update(['kids','families'])
   official_venue=community_venues.get((title,e['start_date'],e['start_time']))
   if official_venue:e['venue']=official_venue
   if '60+' in text or re.search(r'60\+|גיל השלישי|לגילאי 60|בוקר של זהב',title):aud.add('seniors')
