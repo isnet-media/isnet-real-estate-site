@@ -17,7 +17,7 @@ ROWS=[
 ('oshi','אושי אושי','BIG כרמי גת','asian','27294812'),
 ('mexicani','המקסיקני','היוצר 20 — יש לוודא כתובת מול המקום','street','26516646'),
 ('mexicano','מקסיקנו בר גריל','אסתר המלכה','street','10129798'),
-('japanika','ג׳פניקה','אסתר המלכה','asian','27392925'),
+('japanika','ג׳פניקה קריית גת — Japanika Quick','אסתר המלכה 11','asian','27392925'),
 ('fernando','פרננדוס כרמי גת','אסתר המלכה 13','meat','10142949'),
 ('rotem','הקוסקוס של רותם','דרך הדרום 9','local','26582999'),
 ('tunisandwich','טוניסנדוויץ','המלאכה 3','street','26890873'),
@@ -100,6 +100,7 @@ def build():
   p.update(id='kgat-'+id,name=name,en='',kind=kind,kinds=list(dict.fromkeys(['restaurant',kind] if kind not in ['bakery','dessert','catering'] else [kind])),label=LABELS[kind],moods=['coffee','family'] if kind in ['cafe','bakery','dessert'] else ['family','evening'],address=address+('' if 'קריית גת' in address or 'מחוץ לעיר' in address else ', קריית גת'),description=LABELS[kind]+' ב'+('סביבת קריית גת.' if id=='cafe' else 'קריית גת.')+' '+NOTES.get(id,'פרטי המקום והקשר במקור המקושר; מומלץ לבדוק תפריט ושעות לפני הגעה.'),image='assets/food/'+photo+'-illustration.jpg',image_role='illustration',image_alt='תמונת המחשה קולינרית — לא צילום מהמקום',credit='תמונת המחשה שנוצרה בבינה מלאכותית; לא צילום מהמסעדה',site=source,site_label='לפרטי המקום',source_url=source,source_label='איזי' if 'easy.co.il' in source else 'Rest' if 'rest.co.il' in source else 'אונטופו' if 'ontopo' in source else 'עיריית קריית גת',checked_at=DATE,city='kiryat-gat',area='nearby' if id=='cafe' else 'city',kosher='יש לבדוק תעודת כשרות עדכנית מול המקום.',kosherVerified=False,saturdayVerified=False,saturday_note='לא אומתה פתיחה בשבת ביום.')
   if id in NOTES:p['address_note']=NOTES[id]
   if id=='namisu':p.update(site='https://www.namisu.co.il/',site_label='לאתר המסעדה',phone='088660660',saturday_note='לפי אתר המקום: פתיחה במוצאי שבת, שעה אחרי צאת השבת.')
+  if id=='japanika':p.update(site='https://japanika.net/branches/',site_label='לאתר הרשת ולפרטי הסניף',description='סניף ג׳פניקה קוויק בקריית גת, באסתר המלכה 11. מטבח אסייתי וסושי. הסניף מפורסם ככשר; באיזי מצוינת רבנות מקומית.',kosher='כשר — רבנות מקומית, לפי פרסום איזי; באתר הרשת הסניף מסומן ככשר. מומלץ לבדוק תעודה עדכנית במקום.',kosherVerified=True,kosher_verification_basis='published_branch_information',kosher_source_url='https://easy.co.il/page/27392925',official_source_url='https://japanika.net/branches/',saturday_note='לפי אתר הרשת: פתיחה במוצאי שבת, כשעה וחצי לאחר צאת השבת; לא בשבת ביום.',search_aliases=['גפניקה','ג׳פניקה','ג\'פניקה','Japanika','גפניקה קרית גת'])
   if id=='fresh':p.update(booking=source,phone='088500085',description='מסעדה איטלקית במרכז BIG קריית גת, עם ארוחות בוקר, פסטות, פיצות ודגים. תפריט והזמנת שולחן בקישור המקום.')
   items.append(p)
  result={'city':'kiryat-gat','checked_at':DATE,'restaurants':items,'coverage':{'user_list_count':20,'user_list_included':20,'scope':'Reviewed Easy regional results, Rest local cards and supplied list; not a claim of exhaustive city coverage.'}}
