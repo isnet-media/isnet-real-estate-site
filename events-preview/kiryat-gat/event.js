@@ -27,7 +27,7 @@ function localDate(s){const [y,m,d]=String(s||"").split("-").map(Number);return 
 function formatTime(t){return t||"השעה תפורסם"}
 function priceText(e){
   if(e.is_free===true)return "חינם";
-  if(e.price_min_ils==null)return "מחיר לא פורסם";
+  if(e.price_min_ils==null)return e.friends_offer?.regular_price_ils!=null?"מחיר רגיל ב־FRIENDS: "+currency.format(e.friends_offer.regular_price_ils):"מחיר לא פורסם";
   if(e.price_is_starting)return "החל מ־"+currency.format(e.price_min_ils);
   if(e.price_max_ils!=null&&e.price_max_ils!==e.price_min_ils)return currency.format(e.price_min_ils)+"–"+currency.format(e.price_max_ils);
   return currency.format(e.price_min_ils);
@@ -261,7 +261,7 @@ function renderHero(e,occ,imageEvent){
     (occ.every(x=>x.ticket_status==="sold_out")?'<span class="badge badge--soldout">אזלו הכרטיסים</span>':"")+
     (occ.length>1?'<span class="badge">'+occ.length+' מועדים בקריית גת</span>':"");
   $("eventTitle").textContent=displayTitle;
-  window.ISNET_EVENT_TOOLS?.render(e,occ);
+  window.ISNET_EVENT_TOOLS?.render(e,occ);window.KGAT_EVENTS?.renderOffers?.(e);
   $("eventPitch").textContent=cleanEditorialText(e.short_pitch||e.series_description||e.description)||autoPitch({...e,title:displayTitle});
 
   const venues=[...new Set(occ.map(x=>x.venue).filter(Boolean))];

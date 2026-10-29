@@ -37,7 +37,7 @@ function isNonEventActivity(e){
 }
 function priceText(e){
   if(e.is_free===true)return "חינם";
-  if(e.price_min_ils==null)return "מחיר לא פורסם";
+  if(e.price_min_ils==null)return e.friends_offer?.regular_price_ils!=null?"מחיר רגיל ב־FRIENDS: "+currency.format(e.friends_offer.regular_price_ils):"מחיר לא פורסם";
   if(e.price_is_starting)return "החל מ־"+currency.format(e.price_min_ils);
   if(e.price_max_ils!=null&&e.price_max_ils!==e.price_min_ils)return currency.format(e.price_min_ils)+"–"+currency.format(e.price_max_ils);
   return currency.format(e.price_min_ils);
