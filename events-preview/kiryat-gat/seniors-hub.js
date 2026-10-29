@@ -32,14 +32,14 @@ function goodLifeProgram(e){
 function cultureSection(rows){
  const programs=cultureCatalog.programs.map(p=>({p,events:rows.filter(e=>goodLifeProgram(e)?.id===p.id)})).filter(g=>g.events.length);
  if(!programs.length)return '';
- return '<section class="snCulture" id="senior-culture" aria-labelledby="snCultureTitle"><div class="snCultureHead"><div><span class="snCultureEyebrow">בוקר של תרבות במשכן</span><h2 id="snCultureTitle">סדרת החיים הטובים</h2><p>מוזיקה, סיפורים ומפגשים שמכניסים צבע לשגרה.<br>בחרו מופע ושעה שמתאימים לכם.</p></div><a class="snCultureSource" href="'+esc(safeUrl(cultureCatalog.source_url))+'" target="_blank" rel="noopener">על הסדרה במשכן ↗</a></div><div class="snCultureGrid">'+programs.map(({p,events})=>{
+ return '<section class="snCulture" id="senior-culture" aria-labelledby="snCultureTitle"><div class="snCultureHead"><div><span class="snCultureEyebrow">תרבות בוקר בקריית גת</span><h2 id="snCultureTitle">מופעים ומפגשים בעיר</h2><p>מוזיקה, סיפורים ומפגשים שמכניסים צבע לשגרה.<br>בחרו מופע ושעה שמתאימים לכם.</p></div><a class="snCultureSource" href="'+esc(safeUrl(cultureCatalog.source_url))+'" target="_blank" rel="noopener">על הסדרה במשכן ↗</a></div><div class="snCultureGrid">'+programs.map(({p,events})=>{
  const first=events.slice().sort((a,b)=>a.start_time.localeCompare(b.start_time))[0];
  const byTime=new Map();for(const e of events)if(!byTime.has(e.start_date+' '+e.start_time))byTime.set(e.start_date+' '+e.start_time,e);
  return '<article class="snCultureCard"><a class="snCultureMedia" href="'+esc(detail(first))+'" tabindex="-1" aria-hidden="true"><img src="'+esc(safeUrl(p.image_url))+'" alt="" loading="lazy" decoding="async"><span class="snCulturePhotoCredit">צילום: '+esc(p.image_credit)+'</span></a><div class="snCultureCopy"><h3><a href="'+esc(detail(first))+'">'+esc(p.title)+'</a></h3><p class="snCultureSummary">'+esc(p.description)+'</p><p class="snCultureDate">'+esc(date(first.start_date))+'</p><div class="snCultureTimes" aria-label="בחירת שעה למופע '+esc(p.title)+'">'+[...byTime.values()].sort((a,b)=>a.start_time.localeCompare(b.start_time)).map(e=>{
  const slot=p.tickets.find(t=>t.time===e.start_time);const booking=safeUrl(slot?.booking_url||e.purchase_url||p.source_url);
  return '<a href="'+esc(booking)+'" target="_blank" rel="noopener" aria-label="'+esc(p.title+' בשעה '+e.start_time+' — פרטים והזמנה')+'"><bdi>'+esc(e.start_time)+'</bdi><span>להזמנה ↗</span></a>';
  }).join('')+'</div><a class="snCultureDetails" href="'+esc(detail(first))+'">לפרטי המופע ←</a></div></article>';
- }).join('')+'</div><p class="snCultureHint">מחיר, זכאות למנוי וזמינות כרטיסים — באתר המשכן.</p></section>';
+ }).join('')+'</div><p class="snCultureHint">מחיר, זכאות למנוי וזמינות כרטיסים — באתר המארגן.</p></section>';
 }
 
 function visible(e,at=clock()){
@@ -120,7 +120,7 @@ async function init(){
   const activities=root.querySelector('#senior-activities'),discovery=root.querySelector('#senior-explore');
   activities.after(discovery);
   // Kids-hub layout: category tiles, one search/date toolbar, featured culture, then event listings.
-  root.querySelector('.snIntro').insertAdjacentHTML('afterend','<nav class="snWorldNav" aria-label="תחומי הפעילות לגמלאים"><a href="#senior-culture"><span aria-hidden="true">♫</span><strong>במה ומוזיקה</strong><small>סדרת החיים הטובים ומופעים</small></a><a href="?category=seniors&subcategory=senior-lectures#senior-activities" data-topic="senior-lectures"><span aria-hidden="true">◉</span><strong>הרצאות והעשרה</strong><small>תוכן, ידע וסקרנות</small></a><a href="?category=seniors&subcategory=senior-trips#senior-activities" data-topic="senior-trips"><span aria-hidden="true">♧</span><strong>טיולים וסיורים</strong><small>מגלים מקומות ביחד</small></a><a href="?category=seniors&subcategory=senior-workshops#senior-activities" data-topic="senior-workshops"><span aria-hidden="true">✧</span><strong>סדנאות ויצירה</strong><small>פעילות מעשית וחווייתית</small></a></nav>');
+  root.querySelector('.snIntro').insertAdjacentHTML('afterend','<nav class="snWorldNav" aria-label="תחומי הפעילות לגמלאים"><a href="#senior-culture"><span aria-hidden="true">♫</span><strong>במה ומוזיקה</strong><small>מופעים ומפגשים בעיר ומופעים</small></a><a href="?category=seniors&subcategory=senior-lectures#senior-activities" data-topic="senior-lectures"><span aria-hidden="true">◉</span><strong>הרצאות והעשרה</strong><small>תוכן, ידע וסקרנות</small></a><a href="?category=seniors&subcategory=senior-trips#senior-activities" data-topic="senior-trips"><span aria-hidden="true">♧</span><strong>טיולים וסיורים</strong><small>מגלים מקומות ביחד</small></a><a href="?category=seniors&subcategory=senior-workshops#senior-activities" data-topic="senior-workshops"><span aria-hidden="true">✧</span><strong>סדנאות ויצירה</strong><small>פעילות מעשית וחווייתית</small></a></nav>');
   const toolbar=activities.querySelector('.snTools');
   root.querySelector('.snWorldNav').after(toolbar);
   toolbar.after(activities);
