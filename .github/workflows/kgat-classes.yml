@@ -1,0 +1,35 @@
+name: Monitor Kiryat Gat classes sources
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 6 1 * *'
+  push:
+    branches: [main]
+    paths: ['scripts/monitor_kgat_classes.py', 'scripts/test_kgat_classes.py', '.github/workflows/kgat-classes.yml']
+permissions:
+  contents: write
+concurrency:
+  group: kgat-classes-sources
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4 pillow
+      - run: python scripts/test_kgat_classes.py
+      - run: python scripts/monitor_kgat_classes.py
+      - run: |
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add meusharim/kiryat-gat/data/source-check.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Check Kiryat Gat classes source changes for review'
+          git pull --rebase origin main
+          git push origin HEAD:main
