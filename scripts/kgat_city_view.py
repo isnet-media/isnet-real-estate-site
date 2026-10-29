@@ -49,13 +49,14 @@ def localize(content,name,city,suffix):
  content=re.sub(r'<a[^>]*href="https://(?:www\.)?(?:cinema-city\.co\.il|hotcinema\.co\.il)[^"]*"[^>]*>.*?</a>','',content)
  content=content.replace('בחרו את שני בתי הקולנוע','הקרנות בהיכל התרבות קריית גת')
  if suffix=='.html':
+  content=content.replace('isnet-top-navigation.js?v=20261021-nav2','isnet-top-navigation.js?v=20261029-kgat1')
   if name in ('index.html','category.html'):
    data=json.loads((ROOT/'kiryat-gat/data/events.json').read_text());data['events']=[{k:v for k,v in e.items() if k not in {'image_candidates','source_detail_text','raw_html','raw','html'}} for e in data['events']]
    data['taxonomy']=json.loads((ROOT/'admin/data/taxonomy.json').read_text())
    packed=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
    content=content.replace('<head>','<head><script>window.ISNET_CITY_BOOTSTRAP='+packed+';</script>',1)
   # City adapter executes immediately after the shared reader, before UI bundles.
-  content=re.sub(r'(<script[^>]*src="../shared/public-cms.js[^>]*></script>)',lambda m:m[1]+'\n<script src="kgat-events.js?v=1" defer></script>',content)
+  content=re.sub(r'<script[^>]*src="../shared/public-cms.js[^>]*></script>', '<script src="kgat-events.js?v=2"></script>',content)
   content=content.replace('</head>','<link rel="stylesheet" href="kgat-local.css?v=1"></head>')
  if suffix=='.js' and Path(name).name=='app.js':
   content=content.replace('fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({}))','Promise.resolve({})')
