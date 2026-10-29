@@ -20,8 +20,10 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests beautifulsoup4 pillow
+      - run: python scripts/test_kgat_friends.py
       - run: python -u scripts/sync_kgat_events.py
       - run: python scripts/repair_kgat_times.py
+      - run: python -u scripts/sync_kgat_friends.py
       - run: python -u scripts/enrich_kgat_media.py
       - run: python scripts/sync_event_city_views.py
       - run: python scripts/build_event_public_assets.py

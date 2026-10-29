@@ -11,7 +11,7 @@ import sync_events_from_sources as core
 CITY='kiryat-gat'; LABEL='קריית גת'; ROOT=core.BASE/CITY
 SOURCES=[
  {'name':'easy_kgat','url':'https://easy.co.il/list/Events?region=1750','parser':'generic','venue':LABEL,'source_type':'secondary'},
- {'name':'friends_kgat','url':'https://friends-hist.co.il/כל-המופעים/?location_cat=11','parser':'generic','venue':LABEL,'source_type':'secondary'},
+ {'name':'friends_kgat','url':'https://friends-hist.co.il/hall/היכל-התרבות-קרית-גת-2/','parser':'friends','venue':LABEL,'source_type':'secondary'},
  {'name':'kgat_smarticket','url':'https://matnaskg.smarticket.co.il/','parser':'smarticket','venue':'היכל התרבות קריית גת','source_type':'official'},
  {'name':'kgat_community','url':'https://matnaskg.org.il/events/','parser':'community','venue':LABEL,'source_type':'official'},
  {'name':'kgat_municipality','url':'https://www.qiryat-gat.muni.il/events/','parser':'community','venue':LABEL,'source_type':'official'},
@@ -85,7 +85,7 @@ def main():
   if p:
    urls.update(r['ticket_url'] for r in rows(p,s) if r.get('start_date','')>=date.today().isoformat())
  with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:list(ex.map(lambda u:fetch({'url':u}),sorted(urls)[:180]))
- report=core.merge(CITY,sorted(SOURCES,key=lambda s:s['source_type']!='official'),False)
+ report=core.merge(CITY,sorted((s for s in SOURCES if s['parser']!='friends'),key=lambda s:s['source_type']!='official'),False)
  data=json.loads((ROOT/'data/events.json').read_text());held=[];events=[]
  for e in data['events']:
   if re.search(r'^חוג\b|^קורס\b|קורס ניהול|קורס פריוריטי',e['title']):held.append(e);continue

@@ -24,7 +24,10 @@ def localize(content,name,city,suffix):
   nav='<nav class="kgat-discover" aria-label="מגלים את קריית גת"><a href="restaurants.html">מסעדות ובתי קפה</a><a href="places.html?category=parks">פארקים</a><a href="places.html?category=nature">טבע וטיולים באזור</a><a href="places.html?category=culture">מוסדות תרבות</a><a href="attractions.html">אטרקציות ומשפחה</a><a href="places.html?category=must-see">מקומות להכיר</a></nav>'
   content=content.replace('<main',nav+'<main',1)
   content=content.replace('<a class="isnetNavSmall" href="places.html?category=beaches">','<a class="isnetNavSmall" href="places.html?category=nature">').replace('<strong>חופים</strong>','<strong>טיולים בסביבה</strong>')
+ if suffix=='.js':
+  content=content.replace('if(e.price_min_ils==null)return "מחיר לא פורסם";', 'if(e.price_min_ils==null)return e.friends_offer?.regular_price_ils!=null?"מחיר רגיל ב־FRIENDS: "+currency.format(e.friends_offer.regular_price_ils):"מחיר לא פורסם";')
  if name=='event.js':
+  content=content.replace('window.ISNET_EVENT_TOOLS?.render(e,occ);','window.ISNET_EVENT_TOOLS?.render(e,occ);window.KGAT_EVENTS?.renderOffers?.(e);')
   content=content.replace('all.find(e=>e.event_id===requestedId)','all.find(e=>e.event_id===requestedId||e.source_aliases?.some(a=>a.event_id===requestedId))')
  if name=='category-landing.js':
   content='\n'.join(line for line in content.split('\n') if 'window.ISNET_EXHIBITIONS.init()' not in line)

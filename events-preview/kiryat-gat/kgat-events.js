@@ -5,4 +5,16 @@ const request=(name)=>fetch('data/'+name+'.json',{cache:'no-cache'}).then(r=>{if
 const data=()=>snapshot?Promise.resolve(snapshot):request('events');
 window.ISNET_PUBLIC_CMS={loadSource:data,loadCards:data,loadHub:data,publishedEvents:()=>Promise.resolve([]),metrics:{}};
 window.KGAT_EVENTS={matches:(e,ids)=>ids.has(e.category)||(e.category_memberships||[]).some(x=>ids.has(x.category))||(ids.has('seniors')&&(e.audiences||[]).includes('seniors'))||(ids.has('kids')&&(e.audiences||[]).includes('kids'))};
+window.KGAT_EVENTS.renderOffers=e=>{
+ document.getElementById('kgat-friends-offer')?.remove();
+ const offer=e.friends_offer;if(!offer)return;
+ let url;try{url=new URL(offer.url)}catch{return}
+ if(url.protocol!=='https:'||!['friends-hist.co.il','www.friends-hist.co.il'].includes(url.hostname))return;
+ const anchor=document.getElementById('heroBuy')?.parentElement;if(!anchor)return;
+ const box=document.createElement('section');box.id='kgat-friends-offer';box.setAttribute('aria-label','אפשרות הזמנה ב־FRIENDS');box.style.cssText='padding:16px;margin-top:16px;border:1px solid #bfa57088;border-radius:12px;background:#1b2228;color:#f5f1e7;line-height:1.7';
+ const title=document.createElement('strong');title.textContent='אפשרות הזמנה ב־FRIENDS';box.append(title);
+ const facts=document.createElement('p');facts.style.margin='8px 0';facts.textContent=[offer.regular_price_ils!=null?'מחיר רגיל ב־FRIENDS: '+offer.regular_price_ils+' ₪':null,offer.member_price_ils!=null?'מחיר לחברי הסתדרות זכאים: '+offer.member_price_ils+' ₪':null].filter(Boolean).join(' · ');box.append(facts);
+ const note=document.createElement('p');note.style.cssText='font-size:14px;margin:8px 0';note.textContent='מחיר החבר מותנה בזכאות ובתנאי ההטבה. יש לבדוק זמינות ומחיר סופי בתהליך ההזמנה.';box.append(note);
+ const link=document.createElement('a');link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='לפרטים ולהזמנה ב־FRIENDS ↗';link.style.cssText='color:#f3dfb4;text-decoration:underline';box.append(link);anchor.after(box);
+};
 })();
