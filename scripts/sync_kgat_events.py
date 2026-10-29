@@ -24,6 +24,7 @@ SOURCES=[
 CITY_RE=re.compile(r'קרי[יי]?ת\s*גת')
 cache={}; original_fetch=core.fetch_once; original_rows=core.source_rows
 metadata={}; community_venues={}
+REVIEWED_CATEGORIES={'דיווה 2X':'seniors'}
 def fetch(spec):
  u=spec['url']
  if u not in cache:cache[u]=original_fetch(spec)
@@ -31,6 +32,7 @@ def fetch(spec):
  return (BeautifulSoup(str(soup),'html.parser') if soup else None),err
 
 def classify(title,text):
+ if title in REVIEWED_CATEGORIES:return REVIEWED_CATEGORIES[title]
  if title.startswith(('הרצאה','הרצאת')) and not re.search(r'לילדים|לנוער',title):return 'lecture'
  if SENIOR.search(title) and re.search(r'תנועה|ספורט|התעמלות|אימון|כושר',title) and not sport_kind(title):return 'seniors'
  if 'סרטים' in text or title in ['הבדחן','בחורים טובים 3']:return 'cinema'
@@ -93,8 +95,11 @@ def main():
  for e in data['events']:
   if e.get('managed_by')=='kgat_sports':events.append(e);continue
   if re.search(r'^חוג\b|^קורס\b|קורס ניהול|קורס פריוריטי',e['title']):held.append(e);continue
-  text=metadata.get(e.get('ticket_url'),'');e['category']=classify(e['title'],text) if text else e['category']
+  text=metadata.get(e.get('ticket_url'),'');e['category']=classify(e['title'],text) if text or e['title'] in REVIEWED_CATEGORIES else e['category']
   title=e['title'];cat=e['category'];aud=set(e.get('audiences') or [])
+  if title in REVIEWED_CATEGORIES:
+   aud.difference_update(['kids','families']);aud.add('seniors')
+   if not e.get('description_manual_override'):e['description']='מפגש בוקר עם גילה אלמגור אגמון וסנדרה שדה, בליווי הזמרת מיקה שדה. במסגרת בוקר של זהב לגילאי 60+ בהיכל התרבות קריית גת.'
   if cat=='lecture' and title.startswith(('הרצאה','הרצאת')) and not re.search(r'לילדים|לנוער',title):aud.difference_update(['kids','families'])
   official_venue=community_venues.get((title,e['start_date'],e['start_time']))
   if official_venue:e['venue']=official_venue
@@ -102,10 +107,11 @@ def main():
   if cat=='kids':aud.update(['kids','families'])
   e['audiences']=sorted(aud);e['city']=LABEL
   sub={'music':'live-music','standup':'standup','theatre':'theatre','kids':'kids-shows','lecture':'general-lectures','cinema':'cinema','community':'community-events','sport':'sport-events','seniors':'senior-health'}.get(cat,'other')
+  if cat=='seniors' and not re.search(r'תנועה|התעמלות|כושר|ספורט',title):sub='senior-culture'
   if 'קונצרט' in text or 'סימפונט' in title or 'סינפונייטה' in title:sub='concerts'
   if cat=='kids' and ('סדנ' in title or 'חידות' in title):sub='kids-workshops'
   e['subcategory']=sub;e['category_memberships']=[{'category':cat,'subcategory':sub}]
-  if 'seniors' in aud:e['category_memberships'].append({'category':'seniors','subcategory':{'lecture':'senior-lectures','music':'senior-music','sport':'senior-health'}.get(cat,'senior-culture')})
+  if 'seniors' in aud and cat!='seniors':e['category_memberships'].append({'category':'seniors','subcategory':{'lecture':'senior-lectures','music':'senior-music','sport':'senior-health'}.get(cat,'senior-culture')})
   kinds={'music':'מופע מוזיקה','kids':'פעילות לילדים ולמשפחות','standup':'מופע סטנדאפ','theatre':'הצגת תיאטרון','lecture':'הרצאה','cinema':'הקרנת סרט','community':'פעילות קהילתית','sport':'פעילות ספורט'}
   if not e.get('description'):e['description']=f"{title} — {kinds.get(cat,'אירוע')} ב{e['venue']}. פרטי התוכן, ההשתתפות והכרטיסים בעמוד המארגן."
   if urlsplit(e.get('ticket_url') or '').hostname=='matnaskg.smarticket.co.il':e['purchase_url']=e['ticket_url']

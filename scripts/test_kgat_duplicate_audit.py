@@ -9,4 +9,5 @@ other={**copy.deepcopy(base),'event_id':'another-show','start_time':'17:30'}
 assert len(reconcile([copy.deepcopy(base),other])[0])==2
 assert classify('הרצאה ברוסית עם הסופרת קרן פבזנר','ספריה עירונית פעילויות ילדים')=='lecture'
 assert classify('הרצאה לילדים','ילדים')=='kids'
+assert classify('דיווה 2X','ילדים')=='seniors'
 print('PASS: official source time, alias links, idempotency, separate official sessions and lecture classification')
