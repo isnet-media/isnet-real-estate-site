@@ -1,5 +1,12 @@
 name: Validate shared stage candidate filters
 on:
+  push:
+    branches:
+      - 'fix/stage-candidate-non-event-links-20261029-1552'
+    paths:
+      - 'scripts/build_shared_stage_productions.py'
+      - 'scripts/test_shared_stage_productions.py'
+      - '.github/workflows/stage-candidate-validation.yml'
   pull_request:
     paths:
       - 'scripts/build_shared_stage_productions.py'
