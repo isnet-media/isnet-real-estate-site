@@ -18,13 +18,6 @@ save('attractions-guide',{'items':[],'verified_sources':[dict(x,kind='outdoor' i
 save('institutions',{'institutions':culture})
 # Opening hours are verified on the park operator's current page, not assumed.
 save('saturday-guide',{'items':[{'id':'kgat-lachish-saturday','title':'גן לאומי תל לכיש','kind':'nature','area':'nearby','city':'חבל לכיש — מחוץ לקריית גת','venue':'גן לאומי תל לכיש','description':'שרידי העיר הקדומה, תצפית ומרכז מבקרים. הכניסה למרכז המבקרים בהזמנה מראש.','family':True,'saturday_hours':'08:00–16:00 (שעון חורף)','saturday_verified':True,'source_url':'https://www.parks.org.il/reserve-park/lachish/','checked_on':today,'recheck_on':today,'booking_url':'https://www.parks.org.il/reserve-park/lachish/','price':None,'note':'שעות ומגבלות עשויות להשתנות; יש לבדוק במקור לפני יציאה.'}]})
-# Local restaurant inventory. No copied reviews, ratings, or unverified kashrut.
-source='https://easy.co.il/list/Restaurants?region=26889576'
-rows=[('morduch','מורדוך הגדול','היוצר 22','meat','מסעדת בשרים'),('namisu','נאמיסו סושי','שדרות אבני החושן 1','asian','מטבח אסייתי'),('bukhari','אצל הבוכרי','דרך הדרום 9','local','מטבח בוכרי'),('toro','טורו','דרך הדרום 22','meat','בשרים וגריל'),('you','You','היוצר 22','restaurant','מסעדה'),('zoares','זוארס','אסתר המלכה','meat','מסעדת בשרים'),('oshi','אושי אושי','BIG כרמי גת','asian','סושי'),('cafe','קפה קפה','צומת פלוגות — מחוץ לעיר','cafe','קפה ומסעדה'),('italian','האיטלקיה','שדרות לכיש 37','italian','מטבח איטלקי'),('bleecker','בליקר בייקרי','דרך הדרום 22','cafe','בית קפה'),('caprese','קפרזה','דרך הדרום 20','italian','מסעדה חלבית'),('bbb','BBB','דרך הדרום 3','meat','המבורגרים')]
-restaurants=[]
-for id,name,address,kind,label in rows:
- restaurants.append({'id':'kgat-'+id,'name':name,'en':'','kind':kind,'kinds':['restaurant',kind],'label':label,'moods':['family','evening'],'address':address+('' if 'מחוץ לעיר' in address else ', קריית גת'),'description':label+' — '+name+'. מידע על המקום, תפריט ופרטי קשר במקור המקושר; יש לוודא שעות פעילות לפני הגעה.','image':'','credit':'','site':source,'site_label':'לפרטי המקום במקור','source_url':source,'source_label':'איזי' if id not in ['caprese','bbb'] else 'Rest','checked_at':today,'city':'kiryat-gat','kosher':'לא אומתה תעודת כשרות עדכנית; יש לבדוק מול המקום.','kosherVerified':False,'saturdayVerified':False,'saturday_note':'לא אומתה פתיחה בשבת ביום.'})
-for x in restaurants:
- if x['id'] in ['kgat-caprese','kgat-bbb']:x['source_url']=x['site']='https://www.rest.co.il/restaurants/kiryat-gat/'
-save('restaurants',{'city':'kiryat-gat','checked_at':today,'restaurants':restaurants})
-p=R/'restaurants.js';s=p.read_text();s=re.sub(r'const places=\[.*?\];',lambda _: 'const places='+json.dumps(restaurants,ensure_ascii=False,separators=(',',':'))+';',s,count=1,flags=re.S);p.write_text(s)
+# Culinary inventory has its own reviewed sources and media provenance.
+from expand_kgat_food import build as build_food
+build_food()
