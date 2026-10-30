@@ -24,11 +24,11 @@
    const all=Object.values(data.stops);
    return {boards:all.filter(s=>boards.has(s.id)&&s.city==='אשדוד'),alights:all.filter(s=>alights.has(s.id)&&s.city==='אשדוד')};
  }
- function plan(data,engine,{from,to,date,time,maxTransfers=1,limit=5}){
+ function plan(data,engine,{from,to,date,time,maxTransfers=1,limit=5,maxBoardMeters=1400,maxAlightMeters=1400}){
    D.point(from);D.point(to);
    const [h,m]=String(time).split(':').map(Number),start=h*3600+m*60;
    if(!Number.isInteger(h)||!Number.isInteger(m)||h<0||h>23||m<0||m>59)throw Error('Invalid departure time');
-   const stops=stopSets(data),origins=nearest(stops.boards,from,7),destinations=nearest(stops.alights,to,8),results=[];
+   const stops=stopSets(data),origins=nearest(stops.boards,from,7).filter(x=>x.straightMeters<=maxBoardMeters),destinations=nearest(stops.alights,to,8).filter(x=>x.straightMeters<=maxAlightMeters),results=[];
    for(const a of origins){
      const earliest=start+a.estimatedWalkingSeconds+buffer;
      if(earliest>=86400)continue;
