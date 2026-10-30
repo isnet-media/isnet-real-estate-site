@@ -1,0 +1,51 @@
+name: Ashdod bus planner tests
+on:
+  push:
+    paths:
+      - 'bus/ashdod/**'
+      - '.github/workflows/ashdod-bus-tests.yml'
+  pull_request:
+    paths:
+      - 'bus/ashdod/**'
+      - '.github/workflows/ashdod-bus-tests.yml'
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax validation
+        run: |
+          node --check bus/ashdod/door-to-door.js
+          node --check bus/ashdod/approximate.js
+          node --check bus/ashdod/journey-planner.js
+          node --check bus/ashdod/provider.js
+          node --check bus/ashdod/app.js
+          node --check bus/ashdod/server/gateway.cjs
+      - name: Run transport unit tests
+        run: node --test bus/ashdod/*.test.cjs bus/ashdod/server/*.test.cjs
+
+  browser-smoke:
+    needs: node-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser smoke dependencies
+        run: npm install --no-save playwright@1.55.0 leaflet@1.9.4
+      - name: Install Chromium for realistic mobile/desktop checks
+        run: npx playwright install --with-deps chromium
+      - name: Check nearby direct bus, mobile layout and Leaflet maps
+        run: node bus/ashdod/browser-smoke.cjs
+      - name: Save smoke screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ashdod-bus-mobile-desktop
+          path: bus/ashdod/screenshots/*.png
+          if-no-files-found: ignore

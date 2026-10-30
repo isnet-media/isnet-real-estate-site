@@ -1,0 +1,36 @@
+# ISNET Ashdod pedestrian routing (private infrastructure)
+# Deploy ONLY on a dedicated host after sizing and verification.
+# Do not publish these ports. Reverse proxy the gateway through HTTPS same-origin.
+services:
+  valhalla:
+    image: ghcr.io/gis-ops/docker-valhalla/valhalla:latest
+    restart: unless-stopped
+    environment:
+      - tile_urls=https://download.geofabrik.de/asia/israel-and-palestine-latest.osm.pbf
+      - server_threads=2
+    volumes:
+      - valhalla_data:/custom_files
+    networks: [routing]
+    # No public ports
+  gateway:
+    image: node:22-alpine
+    restart: unless-stopped
+    working_dir: /app
+    command: ["node","gateway.cjs"]
+    volumes:
+      - ./gateway.cjs:/app/gateway.cjs:ro
+    environment:
+      - PORT=8787
+      - BIND_HOST=0.0.0.0
+      - ALLOWED_ORIGIN=${ALLOWED_ORIGIN:?Set allowed website origin}
+      - VALHALLA_URL=http://valhalla:8002
+      - NOMINATIM_URL=${NOMINATIM_URL:?Set private Nominatim endpoint}
+    networks: [routing]
+    depends_on: [valhalla]
+    # Publish only on loopback if reverse proxy is on same host.
+    ports: ["127.0.0.1:8787:8787"]
+networks:
+  routing:
+    internal: false
+volumes:
+  valhalla_data:

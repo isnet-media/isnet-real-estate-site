@@ -58,7 +58,15 @@ function plan(data,{from,to,date,time,maxTransfers=1,limit=5}){
   for(const run of rr){let board=-1,first=null;for(let i=0;i<run.p.stops.length;i++){const s=run.p.stops[i],options=aliases.get(s[0])||[],dep=run.start+s[2];if(s[3]===0&&dep<=now+8*3600){for(const r of options){if(r.arrive+120>dep)break;if(r.runKey!==run.key&&!(run.p.route===r.route.id&&run.p.headsign===r.headsign)&&(!first||r.depart>first.depart)){board=i;first=r}}}if(board>=0&&i>board&&s[4]===0&&isEnd(run,i))add([first,directLeg(run,board,i,data)])}}
 
  }
- results.sort((a,b)=>a.arrive-b.arrive||a.transfers-b.transfers||b.depart-a.depart);
+ // Prefer a direct local bus when it reaches the destination within 20 minutes
+ // of the earliest route. Transfer routes remain available as alternatives.
+ const fastest=results.length?Math.min(...results.map(r=>r.arrive)):Infinity;
+ results.sort((a,b)=>{
+  const aDirect=a.transfers===0&&a.arrive<=fastest+1200;
+  const bDirect=b.transfers===0&&b.arrive<=fastest+1200;
+  if(aDirect!==bDirect)return aDirect?-1:1;
+  return a.arrive-b.arrive||a.transfers-b.transfers||b.depart-a.depart;
+ });
  const useful=results.filter(r=>!results.some(o=>o!==r&&o.legs.at(-1).to.code===r.legs.at(-1).to.code&&o.arrive<=r.arrive&&o.transfers<=r.transfers&&o.depart>=r.depart&&(o.arrive<r.arrive||o.transfers<r.transfers||o.depart>r.depart)));
  const seen=new Set();return useful.filter(r=>{const k=r.legs.map(l=>[l.route.id,l.from.code,l.to.code,l.depart].join(':')).join('|');if(seen.has(k))return false;seen.add(k);return true}).slice(0,limit);
 }
