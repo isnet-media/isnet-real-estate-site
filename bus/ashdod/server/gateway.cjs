@@ -41,5 +41,5 @@ async function handle(req,res){
  return json(res,404,{error:'Not found'});
 }
 const server=http.createServer((req,res)=>{handle(req,res).catch(e=>json(res,e.message==='Address with house number required'?400:502,{error:e.message==='Address with house number required'?e.message:'Routing service unavailable'}))});
-if(require.main===module)server.listen(PORT,'127.0.0.1',()=>console.log('ISNET bus gateway listening on loopback',PORT));
+if(require.main===module)server.listen(PORT,process.env.BIND_HOST||'127.0.0.1',()=>console.log('ISNET bus gateway listening on loopback',PORT));
 module.exports={validPoint,decodePolyline6,parseGeocode,server};
