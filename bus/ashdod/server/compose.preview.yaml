@@ -21,6 +21,7 @@ services:
       - ./gateway.cjs:/app/gateway.cjs:ro
     environment:
       - PORT=8787
+      - BIND_HOST=0.0.0.0
       - ALLOWED_ORIGIN=${ALLOWED_ORIGIN:?Set allowed website origin}
       - VALHALLA_URL=http://valhalla:8002
       - NOMINATIM_URL=${NOMINATIM_URL:?Set private Nominatim endpoint}
