@@ -46,3 +46,10 @@
  .quick button span,.nearby-row small,.nearby-actions button,.nearby-actions a{font-size:13px}
  .when input,.field>label,.when label{font-size:16px}
 }
+
+/* Visually distinguish travel inside Ashdod from intercity travel. */
+.tabs #localTab[aria-selected="true"]{background:#146b64;color:#fff}
+.tabs #intercityTab[aria-selected="true"]{background:#b43d35;color:#fff;box-shadow:0 3px 9px #7f211c22}
+.tabs #intercityTab[aria-selected="false"]{color:#8f3935}
+.tabs #intercityTab:focus-visible{outline:3px solid #e9a19b;outline-offset:2px}
+@media (prefers-contrast:more){.tabs #intercityTab[aria-selected="true"]{background:#8c2420}}
