@@ -39,3 +39,22 @@ test('rail destination grouping does not merge nearby boarding or transfer stops
  const place=E.places(railCase)[0];assert.ok(place.ids.includes('52243'));assert.ok(!place.ids.includes('25927'));
  assert.equal(E.resolveDestination(railCase,place.id).id,place.id);
 });
+
+test('common landmark searches resolve to source stops in both travel directions',()=>{
+ const local=E.groups(data).filter(s=>s.city==='אשדוד');
+ for(const q of ['קניון סימול','סי מול','קניון הסיטי','בית חולים','בית החולים אסותא','עירייה','עיריה','פארק אשדוד ים','מרינה','סמי שמעון','סטאר סנטר','לב אשדוד','ביג פאשן','רכבת עד הלום']){
+  const matches=E.searchChoices(local,q);assert.ok(matches.length,q);assert.ok(matches.every(x=>x.ids.every(id=>data.stops[id])),q)
+ }
+});
+test('address search ignores unverified house numbers without claiming a precise address',()=>{
+ const local=E.groups(data).filter(s=>s.city==='אשדוד');
+ const r=E.searchChoices(local,'רחוב רוגוזין 20 אשדוד');assert.ok(r.length);assert.ok(r.every(x=>x.match_note.includes('מספר הבית לא אומת')));
+ assert.ok(E.searchChoices(local,'11856').some(x=>x.code==='11856'));
+});
+test('city spelling and word order do not hide valid destinations',()=>{
+ const pool=[{kind:'city',id:'city:kg',city:'קרית גת'},{kind:'city',id:'city:r',city:'ראשון לציון'},...E.groups(data)];
+ assert.ok(E.searchChoices(pool,'קריית גת').some(x=>x.city==='קרית גת'));
+ assert.ok(E.searchChoices(pool,'ראשלצ').some(x=>x.city==='ראשון לציון'));
+ assert.ok(E.searchChoices(pool,'אשדוד אסותא').length);
+ assert.equal(E.searchChoices(pool,'יעד שאינו קיים אקראי').length,0);
+});
