@@ -254,7 +254,7 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
             digest = hashlib.sha256(localized.encode("utf-8")).hexdigest()[:12]
             return filename + "?v=" + digest
         content = re.sub(
-            r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema|saturday)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])",
+            r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema|saturday|site-share)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])",
             cache_bust, content,
         )
         content = content.replace("<head>", "<head>\n  " + HEAD_MARKER, 1)
@@ -273,7 +273,7 @@ def fingerprint_master_html(check: bool = False) -> list[str]:
     Only local frontend assets are rewritten, and only in the build workspace.
     """
     changed = []
-    pattern = r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema|saturday)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])"
+    pattern = r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema|saturday|site-share)\.js|(?:styles|event|places|movie|cinema|publisher-brand)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])"
     for html in sorted(MASTER.glob("*.html")):
         original = html.read_text(encoding="utf-8")
 
@@ -286,6 +286,8 @@ def fingerprint_master_html(check: bool = False) -> list[str]:
             return filename + "?v=" + digest
 
         expected = re.sub(pattern, version_asset, original)
+        expected = re.sub(r'isnet-top-navigation\.js\?v=[^"\s]+', 'isnet-top-navigation.js?v=20261030-share1', expected)
+        expected = re.sub(r'event-tools\.js\?v=[^"\s]+', 'event-tools.js?v=20261030-share1', expected)
         if expected != original:
             changed.append("ashdod/" + html.name)
             if not check:
