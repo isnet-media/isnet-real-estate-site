@@ -32,6 +32,8 @@ function renderApproximateResult(x){
  const map=create('a','text-button','הצגת שתי התחנות במפה ↗');
  map.href='https://www.google.com/maps/dir/?api=1&origin='+x.boarding.stop.lat+','+x.boarding.stop.lon+'&destination='+x.alighting.stop.lat+','+x.alighting.stop.lon+'&travelmode=transit';
  map.target='_blank';map.rel='noopener';
+ const timeLabel=card.querySelector('.route-time');
+ if(timeLabel){timeLabel.firstChild.textContent='כ־'+mins(x.estimatedTotalSeconds)+' דקות';const sub=timeLabel.querySelector('small');if(sub)sub.textContent='אומדן כולל מרחקי גישה בקו אווירי; לא זמן הגעה מובטח'}
  card.prepend(note,title,map);
  return card;
 }
