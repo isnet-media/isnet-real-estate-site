@@ -42,7 +42,15 @@
        }
      }
    }
-   results.sort((a,b)=>a.estimatedArrival-b.estimatedArrival||a.trip.transfers-b.trip.transfers);
+   // Local-first policy: prioritize a reasonable direct ride over a transfer.
+   // A direct option remains preferred if it arrives within 20 minutes of the fastest alternative.
+   const fastest=Math.min(...results.map(x=>x.estimatedArrival));
+   results.sort((a,b)=>{
+     const aDirect=a.trip.transfers===0&&a.estimatedArrival<=fastest+1200;
+     const bDirect=b.trip.transfers===0&&b.estimatedArrival<=fastest+1200;
+     if(aDirect!==bDirect)return aDirect?-1:1;
+     return a.estimatedArrival-b.estimatedArrival||a.trip.transfers-b.trip.transfers;
+   });
    const seen=new Set();
    return results.filter(x=>{
      const k=x.trip.legs.map(l=>[l.route.id,l.from.id,l.to.id,l.depart].join(':')).join('|');
