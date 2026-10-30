@@ -50,7 +50,7 @@ async function main(){
    await page.locator('#results .route-card').first().waitFor({state:'visible',timeout:30000});
    const eyebrow=(await page.locator('#resultEyebrow').innerText()).trim();
    assert.equal(eyebrow,'קו ישיר מתחנה סמוכה',label+': direct bus fallback missing');
-   const badges=await page.locator('#results .route-card .badge').allInnerTexts();
+   const badges=await page.locator('#results .route-card .route-badges .badge:first-child').allInnerTexts();
    assert.ok(badges.length>0,label+': missing bus results');
    assert.ok(badges.every(t=>t==='ללא החלפה'),label+': bus transfers incorrectly prioritized');
    const lines=await page.locator('#results .route-card .line-pill').allInnerTexts();
