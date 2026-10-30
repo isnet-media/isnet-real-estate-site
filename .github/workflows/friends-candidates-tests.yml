@@ -19,3 +19,29 @@ jobs:
           python-version: "3.12"
       - run: python -m pip install --disable-pip-version-check requests beautifulsoup4
       - run: python -m unittest discover -s tests -p 'test_friends_source_occurrences.py' -v
+      - name: Read-only live FRIENDS source smoke check (not a publication step)
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json, requests
+          from urllib.parse import urlparse
+          from bs4 import BeautifulSoup
+          from scripts.discover_friends_events import extract_dated_occurrences
+          cfg=json.load(open("events-preview/admin/data/event-source-priority.json",encoding="utf-8"))
+          source=next(x for x in cfg["sources"] if x["id"]=="friends-hist")
+          for city in source["cities"]:
+              try:
+                  r=requests.get(city["url"],timeout=18,headers={"User-Agent":"ISNET-Events-Source-Discovery/1.0 (isnet.co.il)"})
+                  r.raise_for_status()
+                  if urlparse(r.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
+                      raise ValueError("Unsafe redirect")
+                  rows=extract_dated_occurrences(BeautifulSoup(r.text,"html.parser"),city["slug"])
+                  print(json.dumps({"city":city["slug"],"status":"live_read_only",
+                                    "dated_candidates":len(rows),
+                                    "image_candidates":sum(bool(x["image_candidate_url"]) for x in rows),
+                                    "description_candidates":sum(bool(x["description_candidate"]) for x in rows),
+                                    "publication_enabled":False},ensure_ascii=False))
+              except Exception as exc:
+                  print(json.dumps({"city":city["slug"],"status":"unverified",
+                                    "error":type(exc).__name__+": "+str(exc)[:150]},ensure_ascii=False))
+          PY
