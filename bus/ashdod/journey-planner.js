@@ -21,11 +21,12 @@
    if(exact.length!==1)throw Error(exact.length?'Address ambiguous: choose a specific result':'Exact address not verified');
    return exact[0];
  }
- async function walkCandidates(provider,location,stops,{limit=8,radius=900}={}){
+ async function walkCandidates(provider,location,stops,{limit=8,radius=900,reverse=false}={}){
    const pool=D.candidates(stops,location,limit,radius);
    const resolved=await Promise.allSettled(pool.map(async item=>{
-     const walk=await provider.walk(location,item.stop);
-     return {...item,walk:D.verifyWalk(walk,location,item.stop)};
+     const from=reverse?item.stop:location,to=reverse?location:item.stop;
+     const walk=await provider.walk(from,to);
+     return {...item,walk:D.verifyWalk(walk,from,to)};
    }));
    return resolved.filter(x=>x.status==='fulfilled').map(x=>x.value)
      .sort((a,b)=>a.walk.durationSeconds-b.walk.durationSeconds);
@@ -36,7 +37,7 @@
    const [origin,destination]=await Promise.all([address(provider,fromText),address(provider,toText)]);
    const [boards,alights]=await Promise.all([
      walkCandidates(provider,origin,boardingStops(data)),
-     walkCandidates(provider,destination,alightingStops(data))
+     walkCandidates(provider,destination,alightingStops(data),{reverse:true})
    ]);
    if(!boards.length||!alights.length)return {routes:[],reason:'No verified walking connections',origin,destination};
    const start=seconds(time),results=[];
