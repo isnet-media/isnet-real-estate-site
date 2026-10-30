@@ -29,4 +29,11 @@ GitHub Actions refreshes daily. The Pages workflow subscribes to the collector w
 `node --test scripts/test_ashdod_bus.cjs`
 `python scripts/collect_ashdod_bus.py --feed /path/to/official.zip`
 
-19 meaningful tests cover connection margins, same-stop aliases, calendars, pickup/dropoff constraints, midnight, city targets, later feeder selection, dominated itinerary removal and real Ashdod/intercity journeys. Final browser QA covers the public deployed mobile and desktop flows.
+22 meaningful tests cover connection margins, same-stop aliases, calendars, pickup/dropoff constraints, midnight, city targets, later feeder selection, dominated itinerary removal and real Ashdod/intercity journeys. Final browser QA covers the public deployed mobile and desktop flows.
+
+
+## Rail-terminal destination and search workspace repair (2026-10-30)
+
+A known place target now groups the official bus stops in the Ashdod Ad Halom / BIG terminal within 250 m of the terminal reference point, using their source names. Grouping is destination-only: boarding/transfer stop aliases and pickup/dropoff rules are unchanged. Explicit stop searches preserve the exact stop; the old untyped destination link to stop 52242 is migrated to the rail-complex target. The reported Friday 08:53 Rogozin/Haim Moshe Shapira case is frozen as a small source-derived regression fixture and finds direct line 7 to the actual dropoff stop 52243.
+
+On submission the results occupy the same hero workspace as the search: side by side on desktop and immediately following the form on mobile. Destination shortcuts stay below both, and editing a search retains the compact workspace.

@@ -23,3 +23,19 @@ test('distance calculation and name normalization',()=>{assert.equal(E.distance(
 
 test('later feeder avoids unnecessary waiting at the transfer stop',()=>{const d=fixture();d.trips.push([0,'all',30000]);d.trips[1][2]=31200;const r=at(d,'a','c');assert.equal(r[0].depart,30000);assert.equal(r[0].arrive,31800)});
 test('a direct ride dominates an earlier feeder with the same arrival',()=>{const d=fixture();d.patterns.push({route:'r',headsign:'ג',stops:[['a',0,0,0,1],['c',600,600,1,0]]});d.trips.push([2,'all',29600]);const r=at(d,'a','c');assert.equal(r[0].transfers,0);assert.ok(!r.some(x=>x.transfers&&x.arrive===30200))});
+
+const railCase=JSON.parse(fs.readFileSync(__dirname+'/fixtures/ashdod-bus-rail-20261030.json'));
+test('reported Friday search resolves the rail complex and finds direct line 7',()=>{
+ const from=E.groups(railCase).find(g=>g.ids.includes('25927')),to=E.resolveDestination(railCase,'52242');
+ assert.equal(to.kind,'place');const rr=E.plan(railCase,{from,to,date:'2026-10-30',time:'08:53'});
+ assert.ok(rr.some(r=>r.transfers===0&&r.legs[0].route.number==='7'&&r.legs.at(-1).to.id==='52243'&&r.depart===32240));
+});
+test('explicit stop selection is preserved instead of silently widening every stop',()=>{
+ const exact=E.resolveDestination(railCase,'52242',true);assert.equal(exact.kind,'stop');
+ assert.ok(!exact.ids.includes('52243'));assert.equal(exact.ids.length,1);
+});
+test('rail destination grouping does not merge nearby boarding or transfer stops',()=>{
+ const gs=E.groups(railCase);assert.ok(!gs.some(g=>g.ids.includes('52242')&&g.ids.includes('52243')));
+ const place=E.places(railCase)[0];assert.ok(place.ids.includes('52243'));assert.ok(!place.ids.includes('25927'));
+ assert.equal(E.resolveDestination(railCase,place.id).id,place.id);
+});

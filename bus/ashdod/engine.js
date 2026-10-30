@@ -7,6 +7,17 @@ const active=(s,date)=>{const key=date.replaceAll('-','');return s&&s.start<=key
 function groups(data){const out=new Map();for(const s of Object.values(data.stops)){const key=[s.code,s.lat.toFixed(5),s.lon.toFixed(5)].join('|');if(!out.has(key))out.set(key,{...s,ids:[],kind:'stop',label:s.name+' · '+s.city,search:norm([s.name,s.city,s.code].join(' '))});out.get(key).ids.push(s.id)}return [...out.values()]}
 function runs(data,date){const out=[];for(const offset of [-1,0,1]){const d=dayShift(date,offset);for(const [pi,service,start] of data.trips){if(active(data.services[service],d))out.push({p:data.patterns[pi],start:start+offset*86400,key:[pi,service,start,offset].join('|')})}}return out}
 function directLeg(run,bi,ai,data){const a=run.p.stops[bi],b=run.p.stops[ai];return {route:data.routes[run.p.route],headsign:run.p.headsign,from:data.stops[a[0]],to:data.stops[b[0]],depart:run.start+a[2],arrive:run.start+b[1],stops:ai-bi,stopList:run.p.stops.slice(bi,ai+1).map(s=>data.stops[s[0]]),runKey:run.key}}
+
+function places(data){
+ const anchor={lat:31.7746,lon:34.665};
+ const ids=Object.values(data.stops).filter(s=>s.city==='אשדוד'&&distance(s,anchor)<=250&&norm(s.name).includes('רכבת')&&(norm(s.name).includes('מסוףביג')||norm(s.name).includes('אשדודעדהלום'))).map(s=>s.id);
+ return ids.length?[{id:'place:ashdod-rail',kind:'place',name:'רכבת אשדוד עד הלום / מסוף ביג',city:'אשדוד',lat:anchor.lat,lon:anchor.lon,ids,search:norm('רכבת תחנת רכבת עד הלום ביג מסוף ביג BIG מתחם')}]:[];
+}
+function resolveDestination(data,id,exactStop=false){
+ const pp=places(data),place=pp.find(p=>p.id===id||(!exactStop&&id==='52242'&&p.ids.includes(id)));
+ return place||groups(data).find(g=>g.ids.includes(id));
+}
+
 function destinations(data,target){if(target.kind==='city')return new Set(Object.values(data.stops).filter(s=>s.city===target.city).map(s=>s.id));return new Set(target.ids||[target.id])}
 function plan(data,{from,to,date,time,maxTransfers=1,limit=5}){
  const [hh,mm]=time.split(':').map(Number),now=hh*3600+mm*60;
@@ -29,5 +40,5 @@ function plan(data,{from,to,date,time,maxTransfers=1,limit=5}){
  const seen=new Set();return useful.filter(r=>{const k=r.legs.map(l=>[l.route.id,l.from.code,l.to.code,l.depart].join(':')).join('|');if(seen.has(k))return false;seen.add(k);return true}).slice(0,limit);
 }
 function departures(data,{stop,date,time,routeId,headsign,limit=8}){const now=time.split(':').map(Number).reduce((a,n,i)=>a+n*(i?60:3600),0),ids=new Set(stop.ids||[stop.id]),out=[];for(const run of runs(data,date)){if(routeId&&run.p.route!==routeId)continue;if(headsign&&run.p.headsign!==headsign)continue;for(const s of run.p.stops)if(ids.has(s[0])&&s[3]===0&&run.start+s[2]>=now&&run.start+s[2]<=now+12*3600)out.push({time:run.start+s[2],route:data.routes[run.p.route],headsign:run.p.headsign,stop:data.stops[s[0]]})}out.sort((a,b)=>a.time-b.time);const seen=new Set();return out.filter(d=>{const key=[d.route.id,d.headsign,d.time].join('|');if(seen.has(key))return false;seen.add(key);return true}).slice(0,limit)}
-root.BusEngine={norm,distance,dayShift,active,groups,runs,plan,departures};if(typeof module!=='undefined')module.exports=root.BusEngine;
+root.BusEngine={places,resolveDestination,norm,distance,dayShift,active,groups,runs,plan,departures};if(typeof module!=='undefined')module.exports=root.BusEngine;
 })(typeof window==='undefined'?globalThis:window);
