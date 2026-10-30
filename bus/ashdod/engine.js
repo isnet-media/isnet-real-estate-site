@@ -1,10 +1,32 @@
 /* Scheduled transit planning. Uses exact GTFS calendars, pickup/dropoff rules and direction. */
 (function(root){'use strict';
-const norm=s=>String(s||'').replace(/["'׳״־–-]/g,'').replace(/\s+/g,'').toLowerCase();
+const norm=s=>String(s||'').replace(/קריית/g,'קרית').replace(/פתח תקוה/g,'פתח תקווה').replace(/["'׳״־–-]/g,'').replace(/\s+/g,'').toLowerCase();
 const distance=(a,b)=>{const r=Math.PI/180,x=(b.lat-a.lat)*r,y=(b.lon-a.lon)*r;return 6371000*2*Math.asin(Math.sqrt(Math.sin(x/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(y/2)**2))};
 const dayShift=(date,n)=>{const d=new Date(date+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
 const active=(s,date)=>{const key=date.replaceAll('-','');return s&&s.start<=key&&s.end>=key&&s.days[new Date(date+'T12:00:00Z').getUTCDay()]===1};
-function groups(data){const out=new Map();for(const s of Object.values(data.stops)){const key=[s.code,s.lat.toFixed(5),s.lon.toFixed(5)].join('|');if(!out.has(key))out.set(key,{...s,ids:[],kind:'stop',label:s.name+' · '+s.city,search:norm([s.name,s.city,s.code].join(' '))});out.get(key).ids.push(s.id)}return [...out.values()]}
+
+/* Landmarks resolve only to named official GTFS stops; no invented coordinates.
+   Mall: seamall.co.il/contact/. Park: municipal Mefkura gate 5.
+   Marina district: municipal playground inventory (Exodus/Lili). */
+const LANDMARKS=[
+ {aliases:['קניון סימול','סימול','סי מול','קניון סי מול','seamall','sea mall','קניון הסיטי'],test:/מרכזית|גן העיר\/הגדוד העברי/},
+ {aliases:['בית חולים','בית החולים','אסותא','בית חולים אסותא'],test:/אסותא/},
+ {aliases:['עירייה','עיריה','עיריית אשדוד','עירית אשדוד','גן העיר','סיטי'],test:/גן העיר\/הגדוד העברי/},
+ {aliases:['פארק אשדוד ים','פארק אשדוד-ים','אשדוד ים','פארק ים'],test:/מפקורה/},
+ {aliases:['מרינה','רובע המרינה'],test:/אקסודוס/},
+ {aliases:['סמי שמעון','מכללת סמי שמעון','SCE'],test:/מכללת סמי שמעון/},
+ {aliases:['סטאר סנטר','סטאר','star center'],test:/סטאר סנטר/},
+ {aliases:['קניון לב אשדוד','לב אשדוד'],test:/לב אשדוד/},
+ {aliases:['תחנה מרכזית','תחנת אוטובוס מרכזית','מסוף מרכזית'],test:/מרכזית/},
+ {aliases:['ביג','BIG','ביג פאשן','תחנת רכבת','רכבת עד הלום','רכבת אשדוד','עד הלום רכבת'],test:/רכבת.*מסוף ביג/}
+];
+function aliasText(s){return s.city==='אשדוד'?LANDMARKS.filter(x=>x.test.test(s.name)).flatMap(x=>x.aliases).join(' '):''}
+function searchTerms(q){return String(q||'').replace(/[\u0591-\u05c7]/g,'').replace(/קריית/g,'קרית').replace(/פתח תקוה/g,'פתח תקווה').replace(/ת״א|ת"א|תא(?=\s|$)/g,'תל אביב').replace(/ראשל״צ|ראשל"צ|ראשלצ/g,'ראשון לציון').replace(/ביה["'״׳]*ח/g,'בית חולים').replace(/(?:^|\s)(?:רחוב|רח[.'׳]?|שדרות|שד[.'׳]?|מספר|מס[.'׳]?)(?=\s)/g,' ').replace(/[^\p{L}\p{N}]+/gu,' ').trim().split(/\s+/).filter(Boolean)}
+function searchChoices(pool,q,limit=12){const tokens=searchTerms(q),hasLetters=tokens.some(t=>/\p{L}/u.test(t)),house=hasLetters&&tokens.some(t=>/^\d+[א-ת]?$/.test(t));const wanted=tokens.filter(t=>!(house&&/^\d+[א-ת]?$/.test(t))).map(norm);const direct=norm(tokens.join(' ')),ranked=[];
+for(const x of pool){const corpus=norm([x.name,x.city,x.code,x.street,x.search,aliasText(x)].filter(Boolean).join(' '));if(wanted.every(t=>corpus.includes(t))){const exact=norm(x.name||x.city),rank=exact===direct?0:exact.startsWith(direct)?1:x.kind==='city'&&norm(x.city).includes(direct)?2:3;ranked.push({...x,match_note:house?'התאמה לרחוב או לסביבתו — מספר הבית לא אומת':undefined,_rank:rank})}}
+ranked.sort((a,b)=>a._rank-b._rank);return ranked.slice(0,limit)}
+
+function groups(data){const out=new Map();for(const s of Object.values(data.stops)){const key=[s.code,s.lat.toFixed(5),s.lon.toFixed(5)].join('|');if(!out.has(key))out.set(key,{...s,ids:[],kind:'stop',label:s.name+' · '+s.city,search:norm([s.name,s.city,s.code,s.street,s.house,aliasText(s)].join(' '))});out.get(key).ids.push(s.id)}return [...out.values()]}
 function runs(data,date){const out=[];for(const offset of [-1,0,1]){const d=dayShift(date,offset);for(const [pi,service,start] of data.trips){if(active(data.services[service],d))out.push({p:data.patterns[pi],start:start+offset*86400,key:[pi,service,start,offset].join('|')})}}return out}
 function directLeg(run,bi,ai,data){const a=run.p.stops[bi],b=run.p.stops[ai];return {route:data.routes[run.p.route],headsign:run.p.headsign,from:data.stops[a[0]],to:data.stops[b[0]],depart:run.start+a[2],arrive:run.start+b[1],stops:ai-bi,stopList:run.p.stops.slice(bi,ai+1).map(s=>data.stops[s[0]]),runKey:run.key}}
 
@@ -40,5 +62,5 @@ function plan(data,{from,to,date,time,maxTransfers=1,limit=5}){
  const seen=new Set();return useful.filter(r=>{const k=r.legs.map(l=>[l.route.id,l.from.code,l.to.code,l.depart].join(':')).join('|');if(seen.has(k))return false;seen.add(k);return true}).slice(0,limit);
 }
 function departures(data,{stop,date,time,routeId,headsign,limit=8}){const now=time.split(':').map(Number).reduce((a,n,i)=>a+n*(i?60:3600),0),ids=new Set(stop.ids||[stop.id]),out=[];for(const run of runs(data,date)){if(routeId&&run.p.route!==routeId)continue;if(headsign&&run.p.headsign!==headsign)continue;for(const s of run.p.stops)if(ids.has(s[0])&&s[3]===0&&run.start+s[2]>=now&&run.start+s[2]<=now+12*3600)out.push({time:run.start+s[2],route:data.routes[run.p.route],headsign:run.p.headsign,stop:data.stops[s[0]]})}out.sort((a,b)=>a.time-b.time);const seen=new Set();return out.filter(d=>{const key=[d.route.id,d.headsign,d.time].join('|');if(seen.has(key))return false;seen.add(key);return true}).slice(0,limit)}
-root.BusEngine={places,resolveDestination,norm,distance,dayShift,active,groups,runs,plan,departures};if(typeof module!=='undefined')module.exports=root.BusEngine;
+root.BusEngine={searchChoices,searchTerms,aliasText,places,resolveDestination,norm,distance,dayShift,active,groups,runs,plan,departures};if(typeof module!=='undefined')module.exports=root.BusEngine;
 })(typeof window==='undefined'?globalThis:window);
