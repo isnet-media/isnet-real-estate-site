@@ -35,7 +35,12 @@ jobs:
                   r.raise_for_status()
                   if urlparse(r.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
                       raise ValueError("Unsafe redirect")
-                  rows=extract_dated_occurrences(BeautifulSoup(r.text,"html.parser"),city["slug"])
+                  soup=BeautifulSoup(r.text,"html.parser")
+                  rows=extract_dated_occurrences(soup,city["slug"])
+                  if not rows:
+                      counts={selector:len(soup.select(selector)) for selector in (".search_show_row",".events_list .wrap_item",".wrap_event",".hall-name-wrap","a[href*=\"/show/\"]")}
+                      first=soup.select_one('a[href*="/show/"]')
+                      print(json.dumps({"city":city["slug"],"markup_selectors":counts,"first_show_parent":str(first.parent)[:1500] if first else None},ensure_ascii=False))
                   print(json.dumps({"city":city["slug"],"status":"live_read_only",
                                     "dated_candidates":len(rows),
                                     "image_candidates":sum(bool(x["image_candidate_url"]) for x in rows),
