@@ -11,8 +11,8 @@ function validPoint(p){return p&&typeof p.lat==='number'&&Number.isFinite(p.lat)
 function decodePolyline6(s){let i=0,lat=0,lon=0,out=[];while(i<s.length){const read=()=>{let shift=0,result=0,b;do{if(i>=s.length)throw Error('Invalid polyline');b=s.charCodeAt(i++)-63;result|=(b&31)<<shift;shift+=5;if(shift>35)throw Error('Invalid polyline')}while(b>=32);return(result&1)?~(result>>1):(result>>1)};lat+=read();lon+=read();out.push({lat:lat/1e6,lon:lon/1e6});if(out.length>10000)throw Error('Too many points')}return out}
 async function upstream(url,options={}){const c=new AbortController(),t=setTimeout(()=>c.abort(),8000);try{const r=await fetch(url,{...options,signal:c.signal});if(!r.ok)throw Error('Upstream '+r.status);return await r.json()}finally{clearTimeout(t)}}
 function addressQuery(q){const t=q.replace(/\s+/g,' ').trim();if(t.length<5||t.length>160||!/[0-9]/.test(t))throw Error('Address with house number required');return t}
-function parseGeocode(items,q){return items.filter(x=>x&&x.lat&&x.lon&&x.address&&x.address.house_number&&
-  (x.address.city==='אשדוד'||x.address.town==='אשדוד'||x.address.municipality==='אשדוד'))
+function parseGeocode(items,q){const requested=(q.match(/(?:^|\\s)(\\d+[א-ת]?)(?=\\s|$)/)||[])[1];return items.filter(x=>x&&x.lat&&x.lon&&x.address&&x.address.house_number&&
+  (x.address.city==='אשדוד'||x.address.town==='אשדוד'||x.address.municipality==='אשדוד')&&String(x.address.house_number).replace(/\\s/g,'')===requested)
  .map(x=>({label:x.display_name,lat:Number(x.lat),lon:Number(x.lon),precision:'address',
  confidence:0.9,source:'OpenStreetMap / Nominatim',houseNumber:x.address.house_number}))
  .filter(x=>validPoint(x));}
