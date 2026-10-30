@@ -23,59 +23,43 @@ jobs:
         continue-on-error: true
         run: |
           python - <<'PY'
-          import json, requests
+          import json
+          import requests
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
-          from scripts.discover_friends_events import extract_dated_occurrences, extract_city_date_hints
+          from scripts.discover_friends_events import (
+              extract_dated_occurrences, extract_city_date_hints,
+              extract_show_description_candidate,
+          )
           cfg=json.load(open("events-preview/admin/data/event-source-priority.json",encoding="utf-8"))
           source=next(x for x in cfg["sources"] if x["id"]=="friends-hist")
-          for city in source["cities"]:
-              try:
-                  r=requests.get(city["url"],timeout=18,headers={"User-Agent":"ISNET-Events-Source-Discovery/1.0 (isnet.co.il)"})
-                  r.raise_for_status()
-                  if urlparse(r.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
-                      raise ValueError("Unsafe redirect")
-                  soup=BeautifulSoup(r.text,"html.parser")
-                  rows=extract_dated_occurrences(soup,city["slug"])
-                  date_hints=extract_city_date_hints(soup,city["slug"])
-                  if not rows:
-                      counts={selector:len(soup.select(selector)) for selector in (".search_show_row",".events_list .wrap_item",".wrap_event",".hall-name-wrap","a[href*=\"/show/\"]")}
-                      first=soup.select_one('a[href*="/show/"]')
-                      first_row=soup.select_one(".search_show_row .events_list .wrap_item")
-                      print(json.dumps({"city":city["slug"],"markup_selectors":counts,"first_show_parent":str(first.parent)[:500] if first else None,"first_occurrence_html":str(first_row)[:3000] if first_row else None,"first_card_text":soup.select_one(".search_show_row").get_text(" ",strip=True)[:550] if soup.select_one(".search_show_row") else None},ensure_ascii=False))
-                  for hint in date_hints[:2]:
-                      try:
-                          detail=requests.get(hint["production_url"],timeout=16,headers={"User-Agent":"ISNET-Events-Source-Discovery/1.0 (isnet.co.il)"})
-                          detail.raise_for_status()
-                          if urlparse(detail.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
+          with requests.Session() as session:
+              for city in source["cities"]:
+                  try:
+                      r=session.get(city["url"],timeout=18,headers={"User-Agent":"ISNET-Events-Source-Discovery/1.0 (isnet.co.il)"})
+                      r.raise_for_status()
+                      if urlparse(r.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
+                          raise ValueError("Unsafe redirect")
+                      soup=BeautifulSoup(r.text,"html.parser")
+                      rows=extract_dated_occurrences(soup,city["slug"])
+                      hints=extract_city_date_hints(soup,city["slug"])
+                      checked=0; descs=0
+                      for hint in hints[:2]:
+                          d=session.get(hint["production_url"],timeout=16,headers={"User-Agent":"ISNET-Events-Source-Discovery/1.0 (isnet.co.il)"})
+                          d.raise_for_status()
+                          if urlparse(d.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
                               raise ValueError("Unsafe show redirect")
-                          detail_soup=BeautifulSoup(detail.text,"html.parser")
-                          more=extract_dated_occurrences(detail_soup,city["slug"])
-                          row=detail_soup.select_one(".search_show_row .events_list .wrap_item")
-                          dated_text=detail_soup.find(string=__import__("re").compile(r"(?<!\\d)\\d{1,2}/\\d{1,2}/\\d{2,4}(?!\\d)"))
-                          dated_parent=dated_text.parent if dated_text else None
-                          hierarchy=[]
-                          while dated_parent is not None and len(hierarchy)<5:
-                              hierarchy.append({"name":dated_parent.name,"class":dated_parent.get("class"),
-                                                "snippet":dated_parent.get_text(" ",strip=True)[:150]})
-                              dated_parent=dated_parent.parent
-                          desc_heading=detail_soup.find(string=__import__("re").compile("תיאור המופע"))
-                          desc_parent=str(desc_heading.parent.parent)[:1000] if desc_heading else None
-                          print(json.dumps({"city":city["slug"],"show_sample":hint["production_url"],
-                              "show_markup_selectors":{css:len(detail_soup.select(css)) for css in (".search_show_row",".events_list .wrap_item",".hall-name-wrap",".wrap_event",".city")},
-                              "first_detail_occurrence_html":str(row)[:2300] if row else None,
-                              "date_ancestry":hierarchy,"description_parent":desc_parent,
-                              "sample_verified_occurrences":len(more)},ensure_ascii=False))
-                      except Exception as detail_exc:
-                          print(json.dumps({"city":city["slug"],"show_sample":"unverified",
-                              "error":type(detail_exc).__name__+": "+str(detail_exc)[:100]},ensure_ascii=False))
-                  print(json.dumps({"city":city["slug"],"status":"live_read_only",
-                                    "dated_candidates":len(rows),"date_only_hints":len(date_hints),
-                                    "date_hint_images":sum(bool(x["image_candidate_url"]) for x in date_hints),
-                                    "image_candidates":sum(bool(x["image_candidate_url"]) for x in rows),
-                                    "description_candidates":sum(bool(x["description_candidate"]) for x in rows),
-                                    "publication_enabled":False},ensure_ascii=False))
-              except Exception as exc:
-                  print(json.dumps({"city":city["slug"],"status":"unverified",
-                                    "error":type(exc).__name__+": "+str(exc)[:150]},ensure_ascii=False))
+                          checked+=1
+                          descs+=int(bool(extract_show_description_candidate(BeautifulSoup(d.text,"html.parser"),hint["title"])))
+                      print(json.dumps({
+                          "city":city["slug"],"status":"live_read_only",
+                          "venue_time_confirmed":len(rows),
+                          "city_date_only_hints":len(hints),
+                          "unlicensed_image_candidates":sum(bool(x["image_candidate_url"]) for x in hints),
+                          "details_checked":checked,"description_candidates":descs,
+                          "publication_enabled":False
+                      },ensure_ascii=False))
+                  except Exception as exc:
+                      print(json.dumps({"city":city["slug"],"status":"unverified",
+                          "error":type(exc).__name__+": "+str(exc)[:150]},ensure_ascii=False))
           PY
