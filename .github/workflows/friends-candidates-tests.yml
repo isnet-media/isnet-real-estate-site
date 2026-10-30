@@ -40,7 +40,8 @@ jobs:
                   if not rows:
                       counts={selector:len(soup.select(selector)) for selector in (".search_show_row",".events_list .wrap_item",".wrap_event",".hall-name-wrap","a[href*=\"/show/\"]")}
                       first=soup.select_one('a[href*="/show/"]')
-                      print(json.dumps({"city":city["slug"],"markup_selectors":counts,"first_show_parent":str(first.parent)[:1500] if first else None},ensure_ascii=False))
+                      first_row=soup.select_one(".search_show_row .events_list .wrap_item")
+                      print(json.dumps({"city":city["slug"],"markup_selectors":counts,"first_show_parent":str(first.parent)[:500] if first else None,"first_occurrence_html":str(first_row)[:3000] if first_row else None,"first_card_text":soup.select_one(".search_show_row").get_text(" ",strip=True)[:550] if soup.select_one(".search_show_row") else None},ensure_ascii=False))
                   print(json.dumps({"city":city["slug"],"status":"live_read_only",
                                     "dated_candidates":len(rows),
                                     "image_candidates":sum(bool(x["image_candidate_url"]) for x in rows),
