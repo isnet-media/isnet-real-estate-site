@@ -1414,7 +1414,7 @@ async function init(){
   $("shareFavorites").onclick=async()=>{
     const ids=state.events.filter(e=>favorites.has(e.event_id)).map(e=>e.event_id),notice=$("savedListStatus");
     if(!ids.length){notice.textContent="שמרו אירועים במועדפים כדי לשתף רשימה.";return;}
-    try{const url=window.ISNET_SAVED_LIST.link(location.href,ids);if(navigator.share)await navigator.share({title:"האירועים ששמרתי",url});else if(navigator.clipboard){await navigator.clipboard.writeText(url);notice.textContent="הקישור לרשימה הועתק. כל מי שיקבל אותו יוכל לראות את הרשימה.";}else{notice.textContent="קישור לשיתוף: "+url;}}
+    try{const url=window.ISNET_SAVED_LIST.link(location.href,ids);if(window.ISNET_SHARE){window.ISNET_SHARE.open({title:"האירועים ששמרתי",url,details:[ids.length+" אירועים ברשימה"]});return}if(navigator.share)await navigator.share({title:"האירועים ששמרתי",url});else if(navigator.clipboard){await navigator.clipboard.writeText(url);notice.textContent="הקישור לרשימה הועתק. כל מי שיקבל אותו יוכל לראות את הרשימה.";}else{notice.textContent="קישור לשיתוף: "+url;}}
     catch(error){if(error.name!=="AbortError")notice.textContent=error.message==="LIST_TOO_LONG"?"אפשר לשתף עד 100 אירועים ברשימה אחת.":"השיתוף לא הצליח. נסו שוב.";}
   };
   $("favoritesOnly").onclick=()=>{state.favoritesOnly=!state.favoritesOnly;render()};
