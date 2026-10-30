@@ -26,6 +26,28 @@ function groupFor(stop){return allGroups.find(g=>g.ids.includes(stop.id))||{...s
 function navigation(stop){const a=create('a','','מיקום התחנה במפה ↗');a.href='https://www.google.com/maps/search/?api=1&query='+stop.lat+','+stop.lon;a.target='_blank';a.rel='noopener';return a}
 function renderResult(r,index){const card=create('article','route-card');const top=create('div','route-top'),tm=create('div','route-time',mins(r.total)+' דקות');tm.append(create('small','','עד תחנת היעד, כולל ההמתנה מהשעה שבחרתם'));const badges=create('div','route-badges');badges.append(create('span','badge',r.transfers?'החלפה אחת':'ללא החלפה'),create('span','badge outline','לפי לוח הזמנים'));top.append(tm,badges);card.append(top);const lines=create('div','route-lines');r.legs.forEach((l,i)=>{if(i)lines.append(create('span','','←'));lines.append(create('span','line-pill',l.route.number))});lines.append(create('span','',r.legs.at(-1).to.city==='אשדוד'?'ל'+stationName(r.legs.at(-1).to):r.legs.at(-1).to.city+' · '+stationName(r.legs.at(-1).to)));card.append(lines);const sum=create('div','route-summary');for(const [title,value] of [['עלייה לאוטובוס',timeNode(r.depart)],['ירידה ביעד',timeNode(r.arrive)],['נסיעה והחלפה',mins(r.duration)+' דקות']]){const d=create('div','');d.append(create('small','',title));const strong=create('strong','');typeof value==='string'?strong.textContent=value:strong.append(value);d.append(strong);sum.append(d)}card.append(sum);const details=create('details','');if(index===0)details.open=true;details.append(create('summary','','איפה עולים ואיפה יורדים?'));for(const [i,l] of r.legs.entries()){if(i){const p=create('p','transfer-note','החלפה באותה תחנה · '+mins(l.depart-r.legs[i-1].arrive)+' דקות לפי הלוח. יש לבדוק את הכיוון על השלט.');details.append(p)}const leg=create('section','leg');leg.append(create('h4','','קו '+l.route.number+' · לכיוון '+l.headsign.replaceAll('_',' / ')),create('p','muted',l.route.operator));const dep=create('div','row');dep.append(create('strong','','עולים: '+stationName(l.from)),timeNode(l.depart));const arr=create('div','row');arr.append(create('strong','','יורדים: '+stationName(l.to)),timeNode(l.arrive));leg.append(dep,create('p','muted','תחנה '+l.from.code+' · '+l.from.city),navigation(l.from),create('p','',l.stops+' תחנות · כ־'+mins(l.arrive-l.depart)+' דקות נסיעה לפי הלוח'),arr,create('p','muted','תחנה '+l.to.code+' · '+l.to.city),navigation(l.to));const ss=create('details','');ss.append(create('summary','','כל התחנות בדרך'));const list=create('ol','stops-list');l.stopList.forEach(s=>list.append(create('li','',stationName(s))));ss.append(list);leg.append(ss);details.append(leg)}
  const first=r.legs[0],freq=create('div','frequency'),deps=E.departures(data,{stop:groupFor(first.from),date:$('date').value,time:$('time').value,routeId:first.route.id,headsign:first.headsign,limit:5});freq.append(create('strong','','מתי עוד יש קו '+first.route.number+' מהתחנה הזאת?'),create('br'));deps.forEach(d=>freq.append(timeNode(d.time)));if(deps.length>1){const gaps=deps.slice(1).map((x,i)=>mins(x.time-deps[i].time));freq.append(create('div','','מרווחים בין הנסיעות המוצגות: '+(Math.min(...gaps)===Math.max(...gaps)?Math.min(...gaps):Math.min(...gaps)+'–'+Math.max(...gaps))+' דקות. התדירות משתנה לפי השעה והיום.'))}else freq.append(create('div','','לא נמצאו נסיעות נוספות בקו ובכיוון הזה בטווח החיפוש.'));freq.append(create('div','muted','אלה שעות מעבר מתוכננות בתחנה, ולא זמני הגעה חיים.'));details.append(freq);card.append(details);return card}
+function addStopsMap(card,legs){
+ const all=legs.flatMap(l=>[l.from,l.to]).filter(s=>Number.isFinite(s?.lat)&&Number.isFinite(s?.lon));
+ if(!all.length)return;
+ const btn=create('button','text-button','הצג תחנות על מפה');
+ btn.type='button';btn.setAttribute('aria-expanded','false');
+ const panel=create('div','stop-map');panel.hidden=true;
+ const note=create('p','small-note','המפה מציגה את מיקומי התחנות. הקו המחבר ביניהן סכמטי בלבד ואינו מסלול הכביש.');
+ btn.onclick=()=>{
+  panel.hidden=!panel.hidden;btn.setAttribute('aria-expanded',String(!panel.hidden));
+  if(panel.hidden)return;
+  if(!window.L){panel.textContent='המפה אינה זמינה כרגע. אפשר להשתמש בקישורי מיקום התחנות.';return}
+  if(panel.dataset.ready)return;
+  const map=window.L.map(panel,{scrollWheelZoom:false});
+  window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:19}).addTo(map);
+  const coords=all.map(s=>[s.lat,s.lon]);
+  all.forEach((stop,i)=>window.L.marker(coords[i]).addTo(map).bindPopup('תחנה '+(stop.code||'')+' · '+stationName(stop)));
+  window.L.polyline(coords,{color:'#146b64',weight:3,dashArray:'6,8'}).addTo(map);
+  map.fitBounds(window.L.latLngBounds(coords).pad(.25),{maxZoom:15});
+  panel.dataset.ready='1';setTimeout(()=>map.invalidateSize(),30);
+ };
+ card.append(btn,note,panel);
+}
 function renderApproximateResult(x){
  const card=renderResult(x.trip,0),note=create('p','result-note','מרחק בקו אווירי בלבד — לא מסלול הליכה: מתחנת המוצא שנבחרה לתחנת העלייה כ־'+x.boarding.straightMeters+' מטר; מתחנת הירידה לנקודת היעד המשוערת כ־'+x.alighting.straightMeters+' מטר. הזמן הכולל משוער בלבד, כולל קצב הליכה לדוגמה.');
  const title=create('p','result-note','תחנת עלייה: '+stationName(x.boarding.stop)+' (קוד '+x.boarding.stop.code+') · תחנת ירידה: '+stationName(x.alighting.stop)+' (קוד '+x.alighting.stop.code+')');
@@ -34,7 +56,7 @@ function renderApproximateResult(x){
  map.target='_blank';map.rel='noopener';
  const timeLabel=card.querySelector('.route-time');
  if(timeLabel){timeLabel.firstChild.textContent='כ־'+mins(x.estimatedTotalSeconds)+' דקות';const sub=timeLabel.querySelector('small');if(sub)sub.textContent='אומדן כולל מרחקי גישה בקו אווירי; לא זמן הגעה מובטח'}
- card.prepend(note,title,map);
+ card.prepend(note,title);addStopsMap(card,x.trip.legs);
  return card;
 }
 function makeUrl(){const p=new URLSearchParams({from:selected.from.id,to:selected.to.kind==='city'?'city:'+selected.to.city:selected.to.id,date:$('date').value,time:$('time').value,mode,target_kind:selected.to.kind,transfer:$('transfer').checked?'1':'0'});return location.origin+location.pathname+'?'+p.toString()}
