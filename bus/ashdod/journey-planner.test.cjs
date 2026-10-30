@@ -10,7 +10,7 @@ const provider={
  async walk(from,to){return walk(from,to)}
 };
 const data={stops:{a,b},patterns:[{stops:[['a',0,0,0,0],['b',0,0,0,0]]}]};
-const engine={plan:(_data,{from,to,time})=>from.id==='a'&&to.id==='b'&&time==='08:04'?[{depart:8*3600+10*60,arrive:8*3600+25*60,transfers:0,legs:[{route:{id:'r',number:'4'},from:a,to:b,depart:8*3600+10*60}]}]:[]};
+const engine={plan:(_data,{from,to,time})=>from.id==='a'&&to.id==='b'&&time==='08:05'?[{depart:8*3600+10*60,arrive:8*3600+25*60,transfers:0,legs:[{route:{id:'r',number:'4'},from:a,to:b,depart:8*3600+10*60}]}]:[]};
 test('reject ambiguous or street-only geocoding',async()=>{
  await assert.rejects(P.address({geocode:async()=>[{...origin,precision:'street',confidence:1,source:'test'}]},'long address'));
  await assert.rejects(P.address({geocode:async()=>[{...origin,precision:'address',confidence:1,source:'test'},{...destination,precision:'address',confidence:1,source:'test'}]},'long address'));
