@@ -67,7 +67,7 @@ async function search(e){e?.preventDefault();if(!data)return;if(!selected.from&&
   const estimates=window.BusApproximate.plan(data,E,{from:selected.from,to:selected.to,date,time:$('time').value,maxTransfers:$('transfer').checked?1:0,limit:5});
   $('resultTitle').textContent=label(selected.to);
   $('resultEyebrow').textContent='אפשרויות מתחנות סמוכות · מרחקים משוערים';
-  $('resultNote').textContent='המרחקים בקו אווירי בלבד, וההליכה בפועל עשויה להיות ארוכה יותר. הזמנים מבוססים על לוח זמנים מתוכנן, ללא מידע בזמן אמת. תחנת מוצא ויעד שנבחרו אינן בהכרח כתובות מדויקות.';
+  $('resultNote').textContent='מסלול ישיר סביר מקבל עדיפות על החלפה בין אוטובוסים. המרחקים בקו אווירי בלבד, וההליכה בפועל עשויה להיות ארוכה יותר. הזמנים מבוססים על לוח זמנים מתוכנן, ללא מידע בזמן אמת. תחנת מוצא ויעד שנבחרו אינן בהכרח כתובות מדויקות.';
   $('results').replaceChildren();estimates.forEach(x=>$('results').append(renderApproximateResult(x)));
   $('noResults').hidden=!!estimates.length;
   if(!estimates.length){$('emptyNote').textContent='לא נמצא מסלול מתאים בין התחנות הסמוכות. אפשר להמשיך למתכנן חיצוני.';fallback()}
