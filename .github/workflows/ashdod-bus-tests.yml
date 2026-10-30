@@ -47,3 +47,31 @@ jobs:
           name: ashdod-bus-release-screenshots
           path: bus/ashdod/screenshots/*.png
           if-no-files-found: ignore
+
+  live-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: browser-smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify actual public bus page after Pages deployment
+        run: node bus/ashdod/production-smoke.cjs
+      - name: Log successful live verification on release PR
+        if: success()
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 44,
+              body: '✅ LIVE_PUBLICATION_VERIFIED — https://isnet.co.il/bus/ashdod/ — page marker, direct-first JavaScript, and fresh GTFS feed checked by GitHub Actions run ' + context.runId + ' (commit ' + context.sha + ').'
+            })
