@@ -6,7 +6,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from discover_friends_events import extract_dated_occurrences, extract_city_date_hints
+from discover_friends_events import extract_dated_occurrences, extract_city_date_hints, extract_show_description_candidate
 
 
 def block(venue, when, event_id="1234"):
@@ -60,6 +60,19 @@ class FriendsOccurrenceTests(unittest.TestCase):
           <a href="https://unsafe.example/show/xyz">פרטים</a>
           <div class="events_list">{block("FRIENDS ראשון לציון", "05.11.26 20:30")}</div></div>"""
         self.assertEqual(self.parse(html, "rishon-lezion"), [])
+
+    def test_show_copy_only_with_matching_title_and_editorial_review(self):
+        html = """<h1>פאטמה הסטנדאפיסטית הבדואית</h1>
+        <div class="wrap_brief_video_inner"><div class="wrap_brief">
+        <p>מופע סטנדאפ שמשלב קטעי מוזיקה חיה, סיפור אישי וחוכמה עממית. המופע כולל סיפורים מלאי הומור, ריקודים ושירים.</p>
+        </div><div id="show_events_sec1"></div></div>"""
+        soup = BeautifulSoup(html, "html.parser")
+        self.assertTrue(extract_show_description_candidate(soup, "פאטמה הסטנדאפיסטית הבדואית"))
+        self.assertIsNone(extract_show_description_candidate(soup, "קומדיה לא קשורה"))
+        self.assertIsNone(extract_show_description_candidate(
+            BeautifulSoup("<h1>פאטמה הסטנדאפיסטית הבדואית</h1>", "html.parser"),
+            "פאטמה הסטנדאפיסטית הבדואית"
+        ))
 
     def test_city_listing_date_hint_never_invents_time_or_venue(self):
         html = """<div class="search_show_row">
