@@ -6,7 +6,7 @@ const a={id:'a',name:'A',city:'אשדוד',code:'111',lat:31.8005,lon:34.6505};
 const b={id:'b',name:'B',city:'אשדוד',code:'222',lat:31.8095,lon:34.6595};
 const walk=(from,to)=>({mode:'walking',verified:true,distanceMeters:100,durationSeconds:120,geometry:[from,to]});
 const provider={
- async geocode(q){return [{...((q==='from')?origin:destination),label:q,precision:'address',confidence:0.95,source:'test'}]},
+ async geocode(q){return [{...((q==='origin address')?origin:destination),label:q,precision:'address',confidence:0.95,source:'test'}]},
  async walk(from,to){return walk(from,to)}
 };
 const data={stops:{a,b},patterns:[{stops:[['a',0,0,0,0],['b',0,0,0,0]]}]};
@@ -16,17 +16,17 @@ test('reject ambiguous or street-only geocoding',async()=>{
  await assert.rejects(P.address({geocode:async()=>[{...origin,precision:'address',confidence:1,source:'test'},{...destination,precision:'address',confidence:1,source:'test'}]},'long address'));
 });
 test('include both walking legs in end-to-end time',async()=>{
- const x=await P.plan({data,engine,provider,fromText:'from',toText:'to',date:'2026-10-30',time:'08:00'});
+ const x=await P.plan({data,engine,provider,fromText:'origin address',toText:'target address',date:'2026-10-30',time:'08:00'});
  assert.equal(x.routes.length,1);
  assert.equal(x.routes[0].totalSeconds,27*60);
  assert.equal(x.routes[0].scheduledOnly,true);
 });
 test('destination walking route is requested in correct direction',async()=>{
- const calls=[];const x=await P.plan({data,engine,provider:{...provider,walk:async(f,t)=>{calls.push([f,t]);return walk(f,t)}},fromText:'from',toText:'to',date:'2026-10-30',time:'08:00'});
+ const calls=[];const x=await P.plan({data,engine,provider:{...provider,walk:async(f,t)=>{calls.push([f,t]);return walk(f,t)}},fromText:'origin address',toText:'target address',date:'2026-10-30',time:'08:00'});
  assert.equal(x.routes.length,1);
- assert.ok(calls.some(([f,t])=>f.id==='b'&&t.label==='to'));
+ assert.ok(calls.some(([f,t])=>f.id==='b'&&t.label==='target address'));
 });
 test('missing pedestrian paths do not generate fabricated journeys',async()=>{
- const x=await P.plan({data,engine,provider:{...provider,walk:async()=>{throw Error('No footpath')}},fromText:'from',toText:'to',date:'2026-10-30',time:'08:00'});
+ const x=await P.plan({data,engine,provider:{...provider,walk:async()=>{throw Error('No footpath')}},fromText:'origin address',toText:'target address',date:'2026-10-30',time:'08:00'});
  assert.equal(x.routes.length,0);
 });
