@@ -41,7 +41,7 @@ function addStopsMap(card,legs){
   const map=window.L.map(panel,{scrollWheelZoom:false});
   window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:19}).addTo(map);
   const coords=all.map(s=>[s.lat,s.lon]);
-  all.forEach((stop,i)=>window.L.marker(coords[i]).addTo(map).bindPopup('תחנה '+(stop.code||'')+' · '+stationName(stop)));
+  all.forEach((stop,i)=>{const popup=document.createElement('span');popup.textContent='תחנה '+(stop.code||'')+' · '+stationName(stop);window.L.marker(coords[i]).addTo(map).bindPopup(popup)});
   window.L.polyline(coords,{color:'#146b64',weight:3,dashArray:'6,8'}).addTo(map);
   map.fitBounds(window.L.latLngBounds(coords).pad(.25),{maxZoom:15});
   panel.dataset.ready='1';setTimeout(()=>map.invalidateSize(),30);
