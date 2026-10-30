@@ -18,7 +18,7 @@ def collect(feed,output):
   for r in rows(z,'stops.txt'):
    if r['location_type'] not in ('','0'):continue
    city=re.search(r'עיר:\s*(.*?)\s*רציף:',r['stop_desc'])
-   stops[r['stop_id']]={'id':r['stop_id'],'code':r['stop_code'],'name':r['stop_name'],'city':city[1].strip() if city else '', 'street':(re.search(r'רחוב:\s*(.*?)\s*בית:',r['stop_desc'])[1].strip() if re.search(r'רחוב:\s*(.*?)\s*בית:',r['stop_desc']) else ''),'house':(re.search(r'בית:\s*(.*?)\s*עיר:',r['stop_desc'])[1].strip() if re.search(r'בית:\s*(.*?)\s*עיר:',r['stop_desc']) else ''), 'lat':float(r['stop_lat']),'lon':float(r['stop_lon'])}
+   stops[r['stop_id']]={'id':r['stop_id'],'code':r['stop_code'],'name':r['stop_name'],'city':city[1].strip() if city else '', 'street':(re.search(r'רחוב:\s*(.*?)(?=\s*(?:בית|עיר|רציף):|$)',r['stop_desc'])[1].strip() if re.search(r'רחוב:\s*(.*?)(?=\s*(?:בית|עיר|רציף):|$)',r['stop_desc']) else ''),'house':(re.search(r'בית:\s*(.*?)\s*עיר:',r['stop_desc'])[1].strip() if re.search(r'בית:\s*(.*?)\s*עיר:',r['stop_desc']) else ''), 'lat':float(r['stop_lat']),'lon':float(r['stop_lon'])}
   local={k for k,v in stops.items() if v['city']=='אשדוד'}
   print('Ashdod stops',len(local),flush=True)
   alltrips={r['trip_id']:r for r in rows(z,'trips.txt')}
