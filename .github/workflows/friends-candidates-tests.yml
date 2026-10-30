@@ -43,6 +43,22 @@ jobs:
                       first=soup.select_one('a[href*="/show/"]')
                       first_row=soup.select_one(".search_show_row .events_list .wrap_item")
                       print(json.dumps({"city":city["slug"],"markup_selectors":counts,"first_show_parent":str(first.parent)[:500] if first else None,"first_occurrence_html":str(first_row)[:3000] if first_row else None,"first_card_text":soup.select_one(".search_show_row").get_text(" ",strip=True)[:550] if soup.select_one(".search_show_row") else None},ensure_ascii=False))
+                  for hint in date_hints[:2]:
+                      try:
+                          detail=requests.get(hint["production_url"],timeout=16,headers={"User-Agent":"ISNET-Events-Source-Discovery/1.0 (isnet.co.il)"})
+                          detail.raise_for_status()
+                          if urlparse(detail.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
+                              raise ValueError("Unsafe show redirect")
+                          detail_soup=BeautifulSoup(detail.text,"html.parser")
+                          more=extract_dated_occurrences(detail_soup,city["slug"])
+                          row=detail_soup.select_one(".search_show_row .events_list .wrap_item")
+                          print(json.dumps({"city":city["slug"],"show_sample":hint["production_url"],
+                              "show_markup_selectors":{css:len(detail_soup.select(css)) for css in (".search_show_row",".events_list .wrap_item",".hall-name-wrap",".wrap_event",".city")},
+                              "first_detail_occurrence_html":str(row)[:2300] if row else None,
+                              "sample_verified_occurrences":len(more)},ensure_ascii=False))
+                      except Exception as detail_exc:
+                          print(json.dumps({"city":city["slug"],"show_sample":"unverified",
+                              "error":type(detail_exc).__name__+": "+str(detail_exc)[:100]},ensure_ascii=False))
                   print(json.dumps({"city":city["slug"],"status":"live_read_only",
                                     "dated_candidates":len(rows),"date_only_hints":len(date_hints),
                                     "date_hint_images":sum(bool(x["image_candidate_url"]) for x in date_hints),
