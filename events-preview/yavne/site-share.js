@@ -17,20 +17,6 @@ const style=document.createElement('style');style.textContent=`
 @media(max-width:650px){.isnetShareHeader:not(.isnetBrandHeader)>div{flex-wrap:wrap;gap:10px}.isnetShareHeader:not(.isnetBrandHeader) .isnetSiteShare{margin-inline-start:auto}.isnetBrandHeader .siteTopbar__inner{gap:8px!important}.isnetShareHeader .isnetSiteShare{flex-direction:column;gap:2px;width:44px;height:44px;padding:4px}.isnetSiteShare__desktop{display:none}.isnetSiteShare__mobile{display:inline;font-size:10px}}
 @media(max-width:360px){.isnetBrandHeader .isnetBrandGroup{gap:8px}.isnetBrandHeader .siteTopbar__ashdodnet{padding-inline-start:8px!important}}
 `;document.head.append(style);
-share.addEventListener('click',async()=>{
- const url=new URL(location.pathname,location.origin);
- for(const key of ['id','slug','category','subcategory','date','area','audience','topic','food','venue','team','cuisine','mood','service','place']){const value=new URL(location.href).searchParams.get(key);if(value)url.searchParams.set(key,value)}
- if(/^#[\w-]+$/.test(location.hash))url.hash=location.hash;
- const title=document.querySelector('main h1,.cinemaBrand h1,.hero h1')?.textContent?.trim()||document.title||'מה עושים ביבנה';
- const payload={title,text:title+' · מה עושים ביבנה',url:url.href};
- try{if(typeof navigator.share==='function'){await navigator.share(payload);return}}catch(error){if(error.name==='AbortError')return}
- try{await navigator.clipboard.writeText(payload.url);tell('הקישור לדף הועתק — אפשר לשלוח לחברים ולמשפחה.')}
- catch{
-  let dialog=document.querySelector('.isnetShareDialog');
-  if(!dialog){dialog=document.createElement('dialog');dialog.className='isnetShareDialog';dialog.setAttribute('aria-label','העתקת קישור לדף');const label=document.createElement('label');label.textContent='העתיקו את הקישור ושלחו לחברים ולמשפחה';const field=document.createElement('input');field.readOnly=true;field.setAttribute('aria-label','קישור לדף');label.append(field);const close=document.createElement('button');close.type='button';close.textContent='סגירה';close.onclick=()=>dialog.close();dialog.append(label,close);document.body.append(dialog)}
-  const field=dialog.querySelector('input');field.value=payload.url;dialog.showModal();field.focus();field.select();
- }
-});
-
-
+share.setAttribute('data-isnet-share-open','');
+const rich=document.createElement('script');rich.src='/events-preview/shared/event-share.js?v=20261030-1';document.head.append(rich);
 })();
