@@ -183,9 +183,23 @@ def extract_city_date_hints(soup, city, today=None):
             })
     return result
 
+def extract_show_description_candidate(soup, expected_title):
+    """Source prose for editorial review only; never automatically publish/copy."""
+    heading = soup.select_one("h1")
+    actual = clean(heading.get_text(" ", strip=True)) if heading else ""
+    normalize = lambda value: re.sub(r"[^\w\u0590-\u05ff]+", "", clean(value).lower())
+    a, b = normalize(actual), normalize(expected_title)
+    if not a or not b or (a != b and not (len(a) >= 12 and len(b) >= 12 and (a in b or b in a))):
+        return None
+    content = soup.select_one(".wrap_brief_video_inner .wrap_brief")
+    description = clean(content.get_text(" ", strip=True)) if content else ""
+    if len(description) < 80:
+        return None
+    return description[:4500]
+
 def main():
     source=next(s for s in json.loads(CONFIG.read_text(encoding="utf-8"))["sources"] if s["id"]=="friends-hist")
-    items=[]; dated=[]; date_only=[]; errors=[]
+    items=[]; dated=[]; date_only=[]; errors=[]; detail_stats={}
     with requests.Session() as session:
         for entry in source["cities"]:
             try:
@@ -193,7 +207,26 @@ def main():
                 matches=extract_city(page,entry["slug"])
                 items.extend(matches)
                 dated.extend(extract_dated_occurrences(page,entry["slug"]))
-                date_only.extend(extract_city_date_hints(page,entry["slug"]))
+                hints=extract_city_date_hints(page,entry["slug"])
+                date_only.extend(hints)
+                inspected=0; descriptions=0
+                # Bounded daily scan: source page copy is held for human rewriting.
+                # Show times are not in static HTML and must remain unverified.
+                for hint in hints[:10]:
+                    try:
+                        detail=get(hint["production_url"],session)
+                        inspected+=1
+                        desc=extract_show_description_candidate(detail,hint["title"])
+                        if desc:
+                            hint["description_candidate"]=desc
+                            hint["description_source_url"]=hint["production_url"]
+                            hint["description_publishable"]=False
+                            descriptions+=1
+                    except Exception as exc:
+                        errors.append({"city":entry["slug"],"detail_url":hint["production_url"],
+                                       "error":type(exc).__name__+": "+str(exc)[:120]})
+                    time.sleep(.5)
+                detail_stats[entry["slug"]]={"detail_pages_checked":inspected,"descriptions_found":descriptions}
             except Exception as exc:
                 errors.append({"city":entry["slug"],"error":type(exc).__name__+": "+str(exc)[:240]})
             time.sleep(2)
@@ -205,10 +238,11 @@ def main():
             "dated_occurrence_candidates":dated,
             "date_hint_counts":{c["slug"]:sum(v["city"]==c["slug"] for v in date_only) for c in source["cities"]},
             "date_only_candidates":date_only,
+            "source_detail_copy_review":detail_stats,
             "date_hint_policy":"City-level date only; exact venue and time unverified; not an event occurrence and not publishable",
             "dated_candidate_policy":"Venue and full local date/time required; images and copy unlicensed and not published"}
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
     OUTPUT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    print(json.dumps({"city_counts":report["city_counts"],"dated_city_counts":report["dated_city_counts"],"date_hint_counts":report["date_hint_counts"],"errors":errors},ensure_ascii=False))
+    print(json.dumps({"city_counts":report["city_counts"],"dated_city_counts":report["dated_city_counts"],"date_hint_counts":report["date_hint_counts"],"source_detail_copy_review":detail_stats,"errors":errors},ensure_ascii=False))
 if __name__=="__main__":
     main()
