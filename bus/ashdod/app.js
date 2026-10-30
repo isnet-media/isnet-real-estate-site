@@ -77,25 +77,28 @@ async function search(e){e?.preventDefault();if(!data)return;if(!selected.from&&
   return;
  }
  routes=E.plan(data,{from:selected.from,to:selected.to,date,time:$('time').value,maxTransfers:$('transfer').checked?1:0,limit:5});
+ let fallbackTransfers=null;
  // Before offering a transfer, look for a direct bus from a very close stop.
  // These distances are explicitly straight-line estimates, not verified pedestrian routes.
  if(!routes.length&&!$('transfer').checked&&selected.from.city==='אשדוד'&&selected.to.city==='אשדוד'&&Number.isFinite(selected.from.lat)&&Number.isFinite(selected.to.lat)&&window.BusApproximate){
   const nearbyDirect=window.BusApproximate.plan(data,E,{from:selected.from,to:selected.to,date,time:$('time').value,maxTransfers:0,limit:5,maxBoardMeters:350,maxAlightMeters:500});
-  if(nearbyDirect.length){
+  fallbackTransfers=E.plan(data,{from:selected.from,to:selected.to,date,time:$('time').value,maxTransfers:1,limit:5});
+  const reasonableDirect=window.BusApproximate.reasonableDirect(nearbyDirect,fallbackTransfers);
+  if(reasonableDirect.length){
    $('resultTitle').textContent=label(selected.to);
    $('resultEyebrow').textContent='קו ישיר מתחנה סמוכה';
    $('resultNote').textContent='אין קו ישיר מתחנת העלייה שנבחרה. נמצאו קווים ישירים מתחנות קרובות, אך המרחקים אליהן הם בקו אווירי בלבד, לא מרחקי הליכה מאומתים. יש לבדוק את דרך ההליכה, מעברי החצייה וזמני ההגעה לתחנה לפני היציאה. הזמנים הם לפי לוח מתוכנן ולא מידע חי.';
    $('results').replaceChildren();
-   nearbyDirect.forEach((x,i)=>$('results').append(renderApproximateResult(x,i)));
+   reasonableDirect.forEach((x,i)=>$('results').append(renderApproximateResult(x,i)));
    $('noResults').hidden=true;$('tomorrow').hidden=true;
-   status('נמצאו '+nearbyDirect.length+' אפשרויות ישירות מתחנות סמוכות.');
+   status('נמצאו '+reasonableDirect.length+' אפשרויות ישירות מתחנות סמוכות.');
    history.replaceState(null,'',makeUrl());
    $('answer').scrollIntoView({behavior:'smooth',block:'start'});
    return;
   }
  }
  if(!routes.length&&!$('transfer').checked){
-   routes=E.plan(data,{from:selected.from,to:selected.to,date,time:$('time').value,maxTransfers:1,limit:5});
+   routes=fallbackTransfers||E.plan(data,{from:selected.from,to:selected.to,date,time:$('time').value,maxTransfers:1,limit:5});
    if(routes.length)status('לא נמצא מסלול ישיר מתחנת המוצא או מתחנות סמוכות; מוצגות אפשרויות עם החלפה כמוצא אחרון.');
  }$('resultTitle').textContent=label(selected.to);$('resultEyebrow').textContent='מ'+stationName(selected.from)+' · '+new Date(date+'T12:00:00').toLocaleDateString('he-IL',{weekday:'short',day:'numeric',month:'numeric'})+' · יציאה מהתחנה מ־'+$('time').value;$('resultNote').textContent='הזמנים מתוכננים ואינם כוללים הליכה. '+(selected.to.kind==='city'?'היעד הוא תחנת הירידה המצוינת בכל אפשרות בעיר / באזור שנבחרו. ':selected.to.kind==='place'?'היעד כולל כמה תחנות באותו מתחם; תחנת הירידה המדויקת מופיעה בכל מסלול. ':'')+'החיפוש מציע נסיעות מהרשת שנקלטה, עד שש שעות קדימה לעלייה הראשונה.';routes.forEach((r,i)=>$('results').append(renderResult(r,i)));$('noResults').hidden=!!routes.length;if(!routes.length)fallback();$('emptyNote').textContent='ייתכן שאין שירות בשעה שנבחרה, שנדרשת תחנת עלייה אחרת או שהמסלול מחייב החלפות שאינן כלולות בגרסה הזאת. אין בכך אישור שאין שירות ליעד.';const tomorrow=E.dayShift(date,1);$('tomorrow').hidden=tomorrow.replaceAll('-','')>data.valid_until;status(routes.length?'נמצאו '+routes.length+' אפשרויות לפי לוח הזמנים.':'לא נמצאו אפשרויות בטווח החיפוש.');history.replaceState(null,'',makeUrl());(matchMedia('(max-width:600px)').matches?$('answer'):document.querySelector('.hero')).scrollIntoView({behavior:'smooth',block:'start'})}catch(err){status('לא הצלחנו לחשב את המסלול כרגע. נסו שוב.',true)}finally{$('answer').setAttribute('aria-busy','false');$('search').disabled=false}}
 function nearby(){if(!data||geoBusy)return;if(!navigator.geolocation){status('הדפדפן אינו תומך במיקום. אפשר לבחור תחנה בחיפוש.',true);return}geoBusy=true;$('locate').disabled=true;status('ממתינים לאישור מיקום מהדפדפן…');navigator.geolocation.getCurrentPosition(position=>{geoBusy=false;$('locate').disabled=false;const here={lat:position.coords.latitude,lon:position.coords.longitude},found=localGroups.map(s=>({...s,meters:E.distance(here,s)})).sort((a,b)=>a.meters-b.meters).slice(0,5);$('nearbyList').replaceChildren();$('nearby').hidden=false;const acc=Math.round(position.coords.accuracy);$('nearbyNote').textContent=(found[0]?.meters>5000?'המיקום שזוהה רחוק מאשדוד. ':'')+'המרחקים הם בקו אווירי, לא מסלול הליכה. דיוק המיקום שהדפדפן דיווח: כ־'+acc+' מטר.';for(const s of found){const row=create('div','nearby-row'),copy=create('div','');copy.append(create('strong','',stationName(s)),create('small','','תחנה '+s.code+' · '+(s.meters>=1000?(s.meters/1000).toFixed(1)+' ק״מ':Math.round(s.meters)+' מטר')+' בקו אווירי'));const actions=create('div','nearby-actions'),pick=create('button','','לצאת מכאן');pick.type='button';pick.onclick=()=>{select('from',s);status('תחנת המוצא נבחרה. עכשיו בחרו יעד.');$('to').focus()};const walk=create('a','','ניווט הליכה ↗');walk.href='https://www.google.com/maps/dir/?api=1&origin='+here.lat+','+here.lon+'&destination='+s.lat+','+s.lon+'&travelmode=walking';walk.target='_blank';walk.rel='noopener';actions.append(pick,walk);row.append(copy,actions);$('nearbyList').append(row)}status('נמצאו תחנות קרובות באשדוד. בחרו מאיזו תחנה לצאת.');$('nearby').scrollIntoView({behavior:'smooth'})},error=>{geoBusy=false;$('locate').disabled=false;status(error.code===1?'לא ניתנה הרשאת מיקום. אפשר לבחור תחנה לפי שם או רחוב.':'לא הצלחנו לקבל מיקום מדויק. אפשר לבחור תחנה בחיפוש.',true)},{enableHighAccuracy:true,timeout:12000,maximumAge:60000})}
