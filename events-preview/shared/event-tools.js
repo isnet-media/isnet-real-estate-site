@@ -26,6 +26,7 @@
   const addButton=(text,action)=>{const button=doc.createElement('button');button.type='button';button.textContent=text;button.style.cssText='font:inherit;padding:9px 13px;border-radius:10px;border:1px solid #796947;background:#252630;color:#f3dfb4;cursor:pointer';button.addEventListener('click',action);toolbar.append(button);return button;};
   const url=root.location.href;
   root.ISNET_SHARE_DETAILS={title:e.series_title||e.title,url,details:[...new Set(occ.filter(x=>!['cancelled','canceled'].includes(x.status)).slice(0,6).map(x=>[x.start_date,x.start_time].filter(Boolean).join(' '))),[e.venue,e.address].filter(Boolean).join(' · ')]};
+  if(typeof root.fetch==='function')root.fetch('data/seo-index.json').then(r=>r.ok?r.json():null).then(index=>{const canonical=index?.events?.[e.event_id]?.url;if(canonical&&root.ISNET_SHARE_DETAILS?.title===(e.series_title||e.title)){const u=new URL(canonical,url);if(u.origin===new URL(url).origin&&u.pathname.startsWith(new URL('.',url).pathname+'discover/'))root.ISNET_SHARE_DETAILS.url=u.href}}).catch(()=>{});
   const saved=readSaved(),ids=occ.map(x=>String(x.event_id));
   const favorite=addButton(ids.some(id=>saved.has(id))?'♥ נשמר במועדפים':'♡ שמירה למועדפים',()=>{
    const current=readSaved(),remove=ids.some(id=>current.has(id));for(const id of ids)if(remove)current.delete(id);else current.add(id);
