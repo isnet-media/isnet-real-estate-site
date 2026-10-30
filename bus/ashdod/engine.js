@@ -33,7 +33,8 @@ function directLeg(run,bi,ai,data){const a=run.p.stops[bi],b=run.p.stops[ai];ret
 function places(data){
  const anchor={lat:31.7746,lon:34.665};
  const ids=Object.values(data.stops).filter(s=>s.city==='אשדוד'&&distance(s,anchor)<=250&&norm(s.name).includes('רכבת')&&(norm(s.name).includes('מסוףביג')||norm(s.name).includes('אשדודעדהלום'))).map(s=>s.id);
- return ids.length?[{id:'place:ashdod-rail',kind:'place',name:'רכבת אשדוד עד הלום / מסוף ביג',city:'אשדוד',lat:anchor.lat,lon:anchor.lon,ids,search:norm('רכבת תחנת רכבת עד הלום ביג מסוף ביג BIG מתחם')}]:[];
+ const out=ids.length?[{id:'place:ashdod-rail',kind:'place',name:'רכבת אשדוד עד הלום / מסוף ביג',city:'אשדוד',lat:anchor.lat,lon:anchor.lon,ids,search:norm('רכבת תחנת רכבת עד הלום ביג מסוף ביג BIG מתחם')}]:[];
+ LANDMARKS.slice(0,-1).forEach((spec,i)=>{const stops=Object.values(data.stops).filter(s=>s.city==='אשדוד'&&spec.test.test(s.name));if(stops.length)out.push({kind:'place',id:'place:ashdod-landmark-'+i,name:spec.aliases[0],city:'אשדוד',ids:stops.map(s=>s.id),lat:stops[0].lat,lon:stops[0].lon,search:norm(spec.aliases.join(' '))})});return out;
 }
 function resolveDestination(data,id,exactStop=false){
  const pp=places(data),place=pp.find(p=>p.id===id||(!exactStop&&id==='52242'&&p.ids.includes(id)));
