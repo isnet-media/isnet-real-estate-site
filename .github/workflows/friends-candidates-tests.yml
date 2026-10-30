@@ -52,9 +52,19 @@ jobs:
                           detail_soup=BeautifulSoup(detail.text,"html.parser")
                           more=extract_dated_occurrences(detail_soup,city["slug"])
                           row=detail_soup.select_one(".search_show_row .events_list .wrap_item")
+                          dated_text=detail_soup.find(string=__import__("re").compile(r"(?<!\\d)\\d{1,2}/\\d{1,2}/\\d{2,4}(?!\\d)"))
+                          dated_parent=dated_text.parent if dated_text else None
+                          hierarchy=[]
+                          while dated_parent is not None and len(hierarchy)<5:
+                              hierarchy.append({"name":dated_parent.name,"class":dated_parent.get("class"),
+                                                "snippet":dated_parent.get_text(" ",strip=True)[:150]})
+                              dated_parent=dated_parent.parent
+                          desc_heading=detail_soup.find(string=__import__("re").compile("תיאור המופע"))
+                          desc_parent=str(desc_heading.parent.parent)[:1000] if desc_heading else None
                           print(json.dumps({"city":city["slug"],"show_sample":hint["production_url"],
                               "show_markup_selectors":{css:len(detail_soup.select(css)) for css in (".search_show_row",".events_list .wrap_item",".hall-name-wrap",".wrap_event",".city")},
                               "first_detail_occurrence_html":str(row)[:2300] if row else None,
+                              "date_ancestry":hierarchy,"description_parent":desc_parent,
                               "sample_verified_occurrences":len(more)},ensure_ascii=False))
                       except Exception as detail_exc:
                           print(json.dumps({"city":city["slug"],"show_sample":"unverified",
