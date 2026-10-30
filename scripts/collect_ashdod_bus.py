@@ -18,7 +18,7 @@ def collect(feed,output):
   for r in rows(z,'stops.txt'):
    if r['location_type'] not in ('','0'):continue
    city=re.search(r'עיר:\s*(.*?)\s*רציף:',r['stop_desc'])
-   stops[r['stop_id']]={'id':r['stop_id'],'code':r['stop_code'],'name':r['stop_name'],'city':city[1].strip() if city else '', 'lat':float(r['stop_lat']),'lon':float(r['stop_lon'])}
+   stops[r['stop_id']]={'id':r['stop_id'],'code':r['stop_code'],'name':r['stop_name'],'city':city[1].strip() if city else '', 'street':(re.search(r'רחוב:\s*(.*?)\s*בית:',r['stop_desc'])[1].strip() if re.search(r'רחוב:\s*(.*?)\s*בית:',r['stop_desc']) else ''),'house':(re.search(r'בית:\s*(.*?)\s*עיר:',r['stop_desc'])[1].strip() if re.search(r'בית:\s*(.*?)\s*עיר:',r['stop_desc']) else ''), 'lat':float(r['stop_lat']),'lon':float(r['stop_lon'])}
   local={k for k,v in stops.items() if v['city']=='אשדוד'}
   print('Ashdod stops',len(local),flush=True)
   alltrips={r['trip_id']:r for r in rows(z,'trips.txt')}
@@ -56,7 +56,7 @@ def collect(feed,output):
   routes={k:{'id':k,'number':r['route_short_name'],'name':r['route_long_name'],'operator':agencies.get(r['agency_id'],''),'mode':'rail' if r['route_type']=='2' else 'bus'} for k,r in routemap.items()}
   services={k:v for k,v in services.items() if k in used_services}
   dates=[v['end'] for v in services.values()]
-  payload={'schema':1,'city':'אשדוד','generated_at':datetime.now(ZoneInfo('Asia/Jerusalem')).isoformat(),'source_url':SOURCE,'source_sha256':hashlib.sha256(Path(feed).read_bytes()).hexdigest(),'live':False,'valid_from':min(v['start'] for v in services.values()),'valid_until':max(dates),'stops':{k:stops[k] for k in sorted(used_stops,key=int)},'local_stop_ids':sorted(local&used_stops,key=int),'routes':routes,'services':services,'patterns':patterns,'trips':trips}
+  payload={'schema':1,'city':'אשדוד','generated_at':datetime.now(ZoneInfo('Asia/Jerusalem')).isoformat(),'source_url':SOURCE,'source_sha256':hashlib.sha256(Path(feed).read_bytes()).hexdigest(),'live':False,'valid_from':min(v['start'] for v in services.values()),'valid_until':max(dates),'stops':{k:stops[k] for k in sorted(used_stops,key=int)},'destination_cities':sorted({s['city'] for s in stops.values() if s['city']}),'local_source_stop_count':len(local),'local_stop_ids':sorted(local&used_stops,key=int),'routes':routes,'services':services,'patterns':patterns,'trips':trips}
   output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
   output.write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':'))+'\n')
   print('Built',len(patterns),'patterns',len(trips),'trips',len(used_stops),'stops',output.stat().st_size,'bytes',flush=True)
