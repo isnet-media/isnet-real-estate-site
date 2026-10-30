@@ -5,6 +5,7 @@ const element=s=>{if(!elements.has(s))elements.set(s,{innerHTML:'',textContent:'
 const context={window:{addEventListener(){}},document:{querySelector:element},localStorage:{getItem:()=>JSON.stringify({'7290004131074':2}),setItem:()=>writes++},fetch:()=>new Promise(()=>{}),location:{hash:''},modal:html=>dialogs.push(html),console};
 vm.createContext(context);vm.runInContext(fs.readFileSync('SUPER.ASHDOD/live.js','utf8'),context);
 context.window.renderProducts('milk');assert.match(element('#productList').innerHTML,/טוענים/);
-context.window.searchProducts('milk');assert.equal(context.location.hash,'products');
+context.window.searchProducts('milk');assert.equal(context.location.href,'compare/?q=milk');
+context.window.searchProducts('חלב 3%');assert.equal(context.location.href,'compare/?q='+encodeURIComponent('חלב 3%'));assert.equal(writes,0);
 context.window.loadSample();assert.equal(writes,0);assert.match(dialogs.pop(),/הרשימה השמורה/);
 (async()=>{await context.window.compareCart();assert.equal(writes,0);assert.match(dialogs.pop(),/הרשימה השמורה/);console.log('Verified slow catalogue search, safe sample action and preserved stored shopping list')})().catch(e=>{console.error(e);process.exitCode=1});
