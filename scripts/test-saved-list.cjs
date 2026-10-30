@@ -14,3 +14,11 @@ vm.runInContext(app.slice(app.indexOf('function renderResults(){'),app.indexOf('
 context.renderResults();assert(node('eventsGrid').innerHTML.includes('saved-one'));assert(!node('eventsGrid').hidden);
 context.state.favoritesOnly=false;context.sharedSaved=['saved-one'];context.renderResults();assert(node('eventsGrid').innerHTML.includes('saved-one'));
 console.log('PASS: a one-event saved/shared list is visible instead of being removed by home category thresholds');
+
+const share=require('../events-preview/shared/event-share.js');
+const rich=share.payload({title:'מופע לילדים',details:['2026-11-03 17:00','בית וקס'],city:'בקריית גת'},'https://isnet.co.il/events-preview/kiryat-gat/event.html?id=one&utm_source=test&q=private');
+assert(rich.text.includes('מופע לילדים\n2026-11-03 17:00\nבית וקס'));
+assert(rich.text.includes('מה עושים בקריית גת'));assert(!rich.url.includes('utm_source'));assert(!rich.url.includes('private'));assert.equal(new URL(rich.url).searchParams.get('id'),'one');
+const shared=share.payload({title:'הרשימה שלי',url},url);assert.deepEqual(S.decode(new URL(shared.url).hash),['one','two']);
+assert.equal(new URL('https://wa.me/?text='+encodeURIComponent(rich.text)).searchParams.get('text'),rich.text);
+console.log('PASS: rich WhatsApp message preserves Hebrew, dates, venue, city, saved-list hash and strips private search terms');
