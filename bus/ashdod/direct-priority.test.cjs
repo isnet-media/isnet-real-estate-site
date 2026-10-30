@@ -23,6 +23,8 @@ test('Het quarter stop 11931: nearby direct bus must precede an unnecessary tran
  assert.equal(nearest[0].trip.transfers,0);
  assert.ok(nearest.some(x=>x.boarding.straightMeters<=100&&x.trip.legs.some(l=>l.route.number==='35')),'line 35 from the adjacent platform must be found');
  assert.ok(nearest.some(x=>x.estimatedTotalSeconds<39*60),'the nearby direct bus should beat the originally shown 39-minute transfer');
+ const transfers=E.plan(data,{from,to,date,time:'13:00',maxTransfers:1,limit:5});
+ assert.ok(A.reasonableDirect(nearest,transfers).length>0,'a reasonable direct option must win over a transfer');
  for(const x of nearest){
   assert.ok(x.boarding.straightMeters<=350);
   assert.ok(x.alighting.straightMeters<=500);
@@ -37,4 +39,12 @@ test('nearby candidate radius is restrictive and never fabricates an inaccessibl
  const fixture={stops:{a,b},patterns:[{stops:[['a',0,0,0,0],['b',0,0,0,0]]}]};
  const planner={plan:()=>[{depart:29000,arrive:30000,transfers:0,legs:[{route:{id:'r',number:'4'},from:a,to:b,depart:29000,arrive:30000}]}]};
  assert.equal(A.plan(fixture,planner,{from,to,date:'2026-10-30',time:'08:00',maxTransfers:0,maxBoardMeters:5}).length,0);
+});
+
+
+test('do not prefer a very late direct bus over a much faster transfer',()=>{
+ const x=[{estimatedTotalSeconds:80*60},{estimatedTotalSeconds:28*60}];
+ const transfers=[{total:15*60}];
+ assert.deepEqual(A.reasonableDirect(x,transfers),[{estimatedTotalSeconds:28*60}]);
+ assert.equal(A.reasonableDirect([{estimatedTotalSeconds:50*60}],transfers).length,0);
 });
