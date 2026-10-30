@@ -6,7 +6,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from discover_friends_events import extract_dated_occurrences
+from discover_friends_events import extract_dated_occurrences, extract_city_date_hints
 
 
 def block(venue, when, event_id="1234"):
@@ -60,6 +60,35 @@ class FriendsOccurrenceTests(unittest.TestCase):
           <a href="https://unsafe.example/show/xyz">פרטים</a>
           <div class="events_list">{block("FRIENDS ראשון לציון", "05.11.26 20:30")}</div></div>"""
         self.assertEqual(self.parse(html, "rishon-lezion"), [])
+
+    def test_city_listing_date_hint_never_invents_time_or_venue(self):
+        html = """<div class="search_show_row">
+          <div class="wrap_img"><a href="/show/הבנאים"><img src="https://friends.smarticket.co.il/uploads/photo.jpg"></a></div>
+          <div class="wrap_title"><h3>הבנאים</h3></div>
+          <div class="events_list">
+            <div class="wrap_item"><div class="city"><span>ראשון לציון</span></div>
+              <div class="wrap_event"><span>יום חמישי</span><span>05.11.26</span></div></div>
+            <div class="wrap_item"><div class="city"><span>אשדוד</span></div>
+              <div class="wrap_event"><span>14.12.26</span></div></div>
+            <div class="wrap_item"><div class="city"><span>אשדוד</span></div>
+              <div class="wrap_event"><span>14.12.26</span></div></div>
+            <div class="wrap_item"><div class="city"><span>חדרה</span></div>
+              <div class="wrap_event"><span>11.11.26</span></div></div>
+            <div class="wrap_item"><div class="city"><span>ראשון לציון</span></div>
+              <div class="wrap_event"><span>45.13.26</span></div></div>
+          </div></div>"""
+        soup = BeautifulSoup(html, "html.parser")
+        ashdod = extract_city_date_hints(soup, "ashdod", self.today)
+        rishon = extract_city_date_hints(soup, "rishon-lezion", self.today)
+        self.assertEqual(len(ashdod), 1)
+        self.assertEqual(len(rishon), 1)
+        self.assertEqual(ashdod[0]["date_hint"], "2026-12-14")
+        self.assertEqual(rishon[0]["date_hint"], "2026-11-05")
+        self.assertIsNone(ashdod[0]["start_time"])
+        self.assertIsNone(ashdod[0]["venue"])
+        self.assertFalse(ashdod[0]["publication_enabled"])
+        self.assertEqual(ashdod[0]["image_rights_status"], "not_verified")
+        self.assertTrue(ashdod[0]["image_candidate_url"].endswith("photo.jpg"))
 
     def test_valid_future_occurrence_without_image_is_candidate(self):
         html = f"""<div class="search_show_row"><h3>מופע</h3><a href="/show/מופע">פרטים</a>
