@@ -57,5 +57,9 @@
      if(seen.has(k))return false;seen.add(k);return true;
    }).slice(0,limit);
  }
- return {nearest,plan,stopSets,distance,walkSpeed,buffer};
+ function reasonableDirect(nearby,otherRoutes,slackSeconds=1200){
+  const fastest=otherRoutes.length?Math.min(...otherRoutes.map(r=>r.total)):Infinity;
+  return nearby.filter(x=>x.estimatedTotalSeconds<=fastest+slackSeconds);
+ }
+ return {nearest,plan,reasonableDirect,stopSets,distance,walkSpeed,buffer};
 });
