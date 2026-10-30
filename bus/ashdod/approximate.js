@@ -17,7 +17,7 @@
    }));
  }
  const choice=s=>({kind:'stop',id:s.id,ids:[s.id],name:s.name,city:s.city,code:s.code});
- const hhmm=s=>String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor((s%3600)/60)).padStart(2,'0');
+ const hhmm=s=>{const m=Math.ceil(s/60);return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};
  function stopSets(data){
    const boards=new Set(),alights=new Set();
    for(const p of data.patterns)for(const s of p.stops){if(s[3]===0)boards.add(s[0]);if(s[4]===0)alights.add(s[0])}
