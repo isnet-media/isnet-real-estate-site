@@ -26,7 +26,7 @@ jobs:
           import json, requests
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
-          from scripts.discover_friends_events import extract_dated_occurrences
+          from scripts.discover_friends_events import extract_dated_occurrences, extract_city_date_hints
           cfg=json.load(open("events-preview/admin/data/event-source-priority.json",encoding="utf-8"))
           source=next(x for x in cfg["sources"] if x["id"]=="friends-hist")
           for city in source["cities"]:
@@ -37,13 +37,15 @@ jobs:
                       raise ValueError("Unsafe redirect")
                   soup=BeautifulSoup(r.text,"html.parser")
                   rows=extract_dated_occurrences(soup,city["slug"])
+                  date_hints=extract_city_date_hints(soup,city["slug"])
                   if not rows:
                       counts={selector:len(soup.select(selector)) for selector in (".search_show_row",".events_list .wrap_item",".wrap_event",".hall-name-wrap","a[href*=\"/show/\"]")}
                       first=soup.select_one('a[href*="/show/"]')
                       first_row=soup.select_one(".search_show_row .events_list .wrap_item")
                       print(json.dumps({"city":city["slug"],"markup_selectors":counts,"first_show_parent":str(first.parent)[:500] if first else None,"first_occurrence_html":str(first_row)[:3000] if first_row else None,"first_card_text":soup.select_one(".search_show_row").get_text(" ",strip=True)[:550] if soup.select_one(".search_show_row") else None},ensure_ascii=False))
                   print(json.dumps({"city":city["slug"],"status":"live_read_only",
-                                    "dated_candidates":len(rows),
+                                    "dated_candidates":len(rows),"date_only_hints":len(date_hints),
+                                    "date_hint_images":sum(bool(x["image_candidate_url"]) for x in date_hints),
                                     "image_candidates":sum(bool(x["image_candidate_url"]) for x in rows),
                                     "description_candidates":sum(bool(x["description_candidate"]) for x in rows),
                                     "publication_enabled":False},ensure_ascii=False))
