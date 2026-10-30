@@ -16,7 +16,7 @@ ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"events-preview/admin/data"
 OUTPUT=DATA/"stage-productions-candidates.json"
 ALLOWED={"music","standup","kids","theatre"}
-GENERIC={"אירועים באשדוד","אירועים בראשון לציון","כל האירועים","לוח הופעות","לרכישת כרטיסים","פרטים נוספים","sababa.events","אירועים","הופעות"}
+GENERIC={"אירועים באשדוד","אירועים בראשון לציון","כל האירועים","לוח הופעות","לרכישת כרטיסים","פרטים נוספים","sababa.events","אירועים","הופעות","Friends Logo","[email protected]"}
 
 def load(name):
     path=DATA/name
@@ -29,7 +29,11 @@ def normalize(title):
 def valid_title(title):
     t=normalize(title)
     return (6<=len(t)<=120 and t not in {normalize(x) for x in GENERIC}
-            and len(t.split())<=15 and not re.search(r"\\b(?:יום ראשון|יום שני|יום שלישי|יום רביעי|יום חמישי|יום שישי|יום שבת)\\b",t))
+            and len(t.split())<=15 and not re.search(r"\b(?:יום ראשון|יום שני|יום שלישי|יום רביעי|יום חמישי|יום שישי|יום שבת)\b",t))
+
+def valid_source_url(url):
+    parsed=urlparse(url or "")
+    return bool(parsed.hostname) and not parsed.path.rstrip("/").endswith("/cdn-cgi/l/email-protection")
 
 def main():
     sources=load("event-source-priority.json")["sources"]
@@ -45,7 +49,7 @@ def main():
         if x.get("source_id") not in known or not valid_title(x.get("title_candidate")):
             continue
         url=x.get("source_url") or ""
-        if not urlparse(url).hostname:
+        if not valid_source_url(url):
             continue
         candidates.append({"title":x["title_candidate"],"source_id":x["source_id"],
                            "source_url":url,"city_hint":x.get("city_hint"),

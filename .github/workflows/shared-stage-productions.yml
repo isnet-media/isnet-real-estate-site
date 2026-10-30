@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '35 6 * * *'
   push:
+    branches: [main]
     paths:
       - 'scripts/build_shared_stage_productions.py'
       - '.github/workflows/shared-stage-productions.yml'
