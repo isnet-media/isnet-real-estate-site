@@ -1,0 +1,28 @@
+name: Ashdod bus planner tests
+on:
+  push:
+    paths:
+      - 'bus/ashdod/**'
+      - '.github/workflows/ashdod-bus-tests.yml'
+  pull_request:
+    paths:
+      - 'bus/ashdod/**'
+      - '.github/workflows/ashdod-bus-tests.yml'
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax validation
+        run: |
+          node --check bus/ashdod/door-to-door.js
+          node --check bus/ashdod/approximate.js
+          node --check bus/ashdod/journey-planner.js
+          node --check bus/ashdod/provider.js
+          node --check bus/ashdod/app.js
+          node --check bus/ashdod/server/gateway.cjs
+      - name: Run transport unit tests
+        run: node --test bus/ashdod/*.test.cjs bus/ashdod/server/*.test.cjs
