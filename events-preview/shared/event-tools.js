@@ -25,6 +25,7 @@
   const notice=doc.createElement('span');notice.setAttribute('role','status');
   const addButton=(text,action)=>{const button=doc.createElement('button');button.type='button';button.textContent=text;button.style.cssText='font:inherit;padding:9px 13px;border-radius:10px;border:1px solid #796947;background:#252630;color:#f3dfb4;cursor:pointer';button.addEventListener('click',action);toolbar.append(button);return button;};
   const url=root.location.href;
+  root.ISNET_SHARE_DETAILS={title:e.series_title||e.title,url,details:[...new Set(occ.filter(x=>!['cancelled','canceled'].includes(x.status)).slice(0,6).map(x=>[x.start_date,x.start_time].filter(Boolean).join(' '))),[e.venue,e.address].filter(Boolean).join(' · ')]};
   const saved=readSaved(),ids=occ.map(x=>String(x.event_id));
   const favorite=addButton(ids.some(id=>saved.has(id))?'♥ נשמר במועדפים':'♡ שמירה למועדפים',()=>{
    const current=readSaved(),remove=ids.some(id=>current.has(id));for(const id of ids)if(remove)current.delete(id);else current.add(id);
@@ -34,6 +35,7 @@
    const file=new Blob([calendar(occ,url)],{type:'text/calendar;charset=utf-8'}),href=URL.createObjectURL(file),a=doc.createElement('a');a.href=href;a.download='isnet-event.ics';doc.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),10000);
   });
   addButton('שיתוף האירוע',async()=>{
+   if(root.ISNET_SHARE){root.ISNET_SHARE.open(root.ISNET_SHARE_DETAILS);return}
    try{if(root.navigator.share)await root.navigator.share({title:e.series_title||e.title,url});else if(root.navigator.clipboard){await root.navigator.clipboard.writeText(url);notice.textContent='הקישור הועתק.';}else notice.textContent='אפשר להעתיק את כתובת האירוע משורת הכתובת.';}catch(error){if(error.name!=='AbortError')notice.textContent='לא ניתן לשתף כרגע; אפשר להעתיק את כתובת האירוע.';}
   });
   toolbar.append(notice);doc.getElementById('eventTitle')?.after(toolbar);
