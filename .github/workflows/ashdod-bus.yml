@@ -9,6 +9,8 @@ on:
       - scripts/collect_ashdod_bus.py
       - scripts/test_ashdod_bus.cjs
       - bus/ashdod/engine.js
+      - scripts/collect_ashdod_rail.py
+      - scripts/refresh_ashdod_streets.py
       - .github/workflows/ashdod-bus.yml
 permissions:
   contents: write
@@ -32,16 +34,21 @@ jobs:
       - run: pip install requests
       - name: Fetch and extract the official GTFS network
         run: python -u scripts/collect_ashdod_bus.py
+      - name: Extract official rail and refresh official street index
+        run: |
+          python -u scripts/collect_ashdod_rail.py
+          python scripts/refresh_ashdod_streets.py
+          node scripts/audit_ashdod_streets.cjs
       - name: Check transit planning, calendars and dataset references
         run: |
           node --check bus/ashdod/engine.js
           node --check bus/ashdod/app.js
-          node --test scripts/test_ashdod_bus.cjs
+          node --test scripts/test_ashdod_bus.cjs bus/ashdod/*.test.cjs
       - name: Save only validated transit data
         run: |
           git config user.name 'isnet-transit-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add bus/ashdod/data/network.json
+          git add bus/ashdod/data/network.json bus/ashdod/data/rail.json bus/ashdod/data/ashdod-streets.json bus/ashdod/data/street-coverage.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Refresh verified Ashdod and intercity bus timetables'
           git pull --rebase origin main

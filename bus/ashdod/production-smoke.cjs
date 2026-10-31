@@ -2,7 +2,7 @@
 // Post-Pages-publication check. Never reports success based solely on the merge.
 const assert=require('node:assert/strict');
 const live=process.env.ISNET_BUS_LIVE_URL||'https://isnet.co.il/bus/ashdod/';
-const stamp='ashdod-readable-answer-20261031';
+const stamp='ashdod-streets-rail-20261031';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fetchText(url){
  const u=new URL(url);u.searchParams.set('_verify',Date.now().toString());
@@ -26,6 +26,10 @@ async function main(){
    assert.ok(data.stops&&data.patterns&&data.trips,'the public GTFS file is invalid or missing');
    const now=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()).replaceAll('-','');
    assert.ok(data.valid_from<=now&&data.valid_until>=now,'the public GTFS schedule is stale');
+   const streets=JSON.parse(await fetchText(new URL('data/ashdod-streets.json',live).href));
+   assert.ok(streets.streets.length>=700,'official Ashdod street index missing');
+   const rail=JSON.parse(await fetchText(new URL('data/rail.json',live).href));
+   assert.ok(rail.mode==='rail'&&rail.ashdod_origin_ids.length&&rail.valid_from<=now&&rail.valid_until>=now,'rail timetable invalid or stale');
    console.log('LIVE_PUBLICATION_VERIFIED '+live+' build='+stamp+' feed='+data.generated_at+' stops='+Object.keys(data.stops).length);
    return;
   }catch(error){

@@ -73,6 +73,7 @@ async function main(){
    await page.locator('.all-departures summary').click();
    await page.locator('.timetable-day').first().waitFor({state:'visible'});
    assert.equal(await page.locator('.timetable-day').count(),7);
+   assert.ok((await page.locator('.departure-times bdi').allTextContents()).some(t=>parseInt(t,10)>=18),label+': full-day timetable must include evening buses');
    await page.locator('.all-departures summary').click();
    await button.click(); await button.click();
    assert.equal(await panel.isHidden(),false,label+': map must reopen');
@@ -85,7 +86,26 @@ async function main(){
    await page.locator('#search').click();
    await page.waitForFunction(()=>document.querySelector('#answer').getAttribute('aria-busy')==='false');
    assert.ok(await page.locator('#results .route-card').count()>0,label+': intercity journey');
+   await page.locator('#railAlternatives .rail-card').waitFor({state:'visible'});
+   assert.equal(await page.locator('#railAlternatives .rail-card').count(),1);
+   assert.match(await page.locator('#railAlternatives .rail-access-note').first().innerText(),/אינה כלולה/);
+   assert.ok((await page.locator('.rail-access-link').getAttribute('href')).includes('mode=local'));
+   await page.screenshot({path:path.join(dir,label+'-rail.png'),fullPage:true});
+
    await page.locator('#localTab').click();
+   assert.equal(await page.locator('#railAlternatives').count(),0);
+   await page.waitForFunction(()=>document.querySelector('#dataSummary').textContent.includes('רחובות רשמיים'));
+   await page.locator('#from').fill('מיכאל אנג׳לו 9');
+   const officialStreet=page.locator('#fromOptions [role=option]').filter({hasText:/מכאל אנג/});
+   await officialStreet.click();
+   await page.locator('#to').fill('אסותא');
+   await page.locator('#to').press('ArrowDown');await page.locator('#to').press('Enter');
+   await page.locator('#search').click();
+   assert.equal(await page.locator('#noResults').isVisible(),true);
+   assert.ok(decodeURIComponent(await page.locator('#externalFallback a').getAttribute('href')).includes('מיכאל אנג׳לו 9'));
+   // Restore a known origin before testing a wholly unknown destination.
+   await page.locator('#from').fill('הכלנית/הצבעוני');await page.locator('#from').press('ArrowDown');await page.locator('#from').press('Enter');
+
    await page.locator('#to').fill('כתובת שאינה מוכרת 999');
    await page.getByRole('option',{name:/חיפוש לפי הכתובת:/}).click();
    await page.locator('#search').click();
