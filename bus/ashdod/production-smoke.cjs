@@ -2,7 +2,7 @@
 // Post-Pages-publication check. Never reports success based solely on the merge.
 const assert=require('node:assert/strict');
 const live=process.env.ISNET_BUS_LIVE_URL||'https://isnet.co.il/bus/ashdod/';
-const stamp='ashdod-release-20261031';
+const stamp='ashdod-readable-answer-20261031';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fetchText(url){
  const u=new URL(url);u.searchParams.set('_verify',Date.now().toString());

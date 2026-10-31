@@ -53,3 +53,43 @@
 .tabs #intercityTab[aria-selected="false"]{color:#8f3935}
 .tabs #intercityTab:focus-visible{outline:3px solid #e9a19b;outline-offset:2px}
 @media (prefers-contrast:more){.tabs #intercityTab[aria-selected="true"]{background:#8c2420}}
+
+/* A single, glanceable answer for people using their phone outside. */
+.simple-answer{padding:24px;color:#153c46}
+.simple-answer .route-lines{margin:0 0 12px;gap:12px;align-items:center}
+.simple-answer .line-pill{font-size:28px;padding:8px 16px;white-space:nowrap}
+.simple-answer .direction{font-size:20px;line-height:1.5}
+.simple-answer .route-badges{max-width:none;justify-content:flex-start;margin-bottom:20px}
+.simple-answer .badge{font-size:16px}
+.simple-answer .next-bus{padding:20px;background:#e8f3ec;border-radius:16px}
+.simple-answer .next-label{display:block;font-size:20px;font-weight:600}
+.simple-answer .route-time{display:block;font-size:52px;line-height:1.2;margin-top:8px;letter-spacing:0;direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+.simple-answer .next-departures{font-size:20px;line-height:1.7;margin:14px 0 20px}
+.answer-facts{display:grid;gap:0}
+.answer-fact{padding:18px 0;border-bottom:1px solid #dce3dc}
+.fact-label{display:block;font-size:18px;color:#455e63;margin-bottom:6px}
+.fact-value{display:block;font-size:24px;line-height:1.5}
+.simple-answer .station-map-link{display:flex;align-items:center;justify-content:center;min-height:52px;font-size:19px;margin:12px 0 0;border-radius:10px}
+.simple-answer .access-distance,.simple-answer .schedule-note{font-size:17px;line-height:1.6;color:#455e63}
+.simple-answer details{padding:18px 0;border-top:0;border-bottom:1px solid #dce3dc}
+.simple-answer summary{font-size:19px;line-height:1.6;min-height:48px;display:list-item;padding:8px 0}
+.simple-answer .leg,.simple-answer .stops-list{font-size:18px;line-height:1.8}
+.simple-answer .leg h4{font-size:20px}
+.simple-answer>.text-button{width:100%;margin:20px 0 0;min-height:52px;font-size:19px;white-space:normal}
+.simple-answer .stop-map{margin:12px 0;height:280px}
+.timetable-day h3{font-size:20px;margin:20px 0 8px}
+.departure-times{display:flex;gap:10px;flex-wrap:wrap;font-size:19px;line-height:1.8}
+.departure-times bdi{background:#eef5ef;border-radius:6px;padding:6px 10px}
+#resultEyebrow,#resultNote:empty{display:none}
+.answers .section-head h2{font-size:25px;line-height:1.5}
+.search-card .field>label,.search-card .when label{font-size:18px}
+.search-card .input-row input,.search-card .when input{font-size:18px;min-height:52px}
+.search-card .tabs button{font-size:19px;min-height:54px}
+.search-card .options button{font-size:19px;min-height:56px}
+.search-card .options small{font-size:16px}
+.search-card .small-note,.search-card .load-status{font-size:16px;line-height:1.6}
+.search-card .search-button{font-size:21px;min-height:58px;margin-top:18px}
+@media(max-width:600px){main{padding:0 12px}.simple-answer{padding:18px}.simple-answer .route-time{font-size:52px}.simple-answer .line-pill{font-size:26px}.simple-answer .direction{font-size:20px}.answers .section-head{flex-wrap:wrap}.answers .section-head h2{font-size:24px}.search-card{padding:18px}.when{grid-template-columns:1fr 1fr}.when button{min-height:48px;font-size:17px;grid-column:1/-1}.fact-value{font-size:23px}}
+/* Keep shared navigation from covering the answer while scrolling. */
+#isnet-public-navigation{position:relative!important;top:auto!important}
+#isnet-public-navigation a,#isnet-public-navigation button{font-size:16px;min-height:48px}

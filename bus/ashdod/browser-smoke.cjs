@@ -54,7 +54,7 @@ async function main(){
    assert.ok(badges.length>0,label+': missing bus results');
    assert.ok(badges.every(t=>t==='ללא החלפה'),label+': bus transfers incorrectly prioritized');
    const lines=await page.locator('#results .route-card .line-pill').allInnerTexts();
-   assert.ok(lines.includes('1'),label+': recommended nearby direct line 1 missing');
+   assert.ok(lines.includes('קו 1'),label+': recommended nearby direct line 1 missing');
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    assert.ok(overflow<=2,label+': horizontal overflow '+overflow+'px');
    const button=page.locator('#results .route-card').first().getByRole('button',{name:'הצג תחנות על מפה'});
@@ -66,7 +66,14 @@ async function main(){
    assert.ok(mapExists,label+': Leaflet map failed to render');
    assert.equal(await panel.locator('.leaflet-pane').first().evaluate(el=>getComputedStyle(el).position),'absolute',label+': Leaflet stylesheet was blocked');
    assert.equal(await page.locator('#results .route-card').count(),1,label+': urban search must show one recommendation');
-   assert.match(await page.locator('.route-time').innerText(),/דקות נסיעה/,label+': show ride time');
+   assert.match(await page.locator('.route-time').innerText(),/13:14/,label+': next bus must be prominent');
+   assert.ok(await page.locator('.journey-details').evaluate(el=>!el.open));
+   assert.ok(await page.locator('.all-departures').evaluate(el=>!el.open));
+   assert.ok(await page.locator('.route-time').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)>=48));
+   await page.locator('.all-departures summary').click();
+   await page.locator('.timetable-day').first().waitFor({state:'visible'});
+   assert.equal(await page.locator('.timetable-day').count(),7);
+   await page.locator('.all-departures summary').click();
    await button.click(); await button.click();
    assert.equal(await panel.isHidden(),false,label+': map must reopen');
    await page.screenshot({path:path.join(dir,label+'.png'),fullPage:true});
