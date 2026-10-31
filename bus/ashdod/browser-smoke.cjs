@@ -64,6 +64,7 @@ async function main(){
    await panel.locator('.leaflet-container').waitFor({state:'visible',timeout:10000}).catch(()=>{});
    const mapExists=await page.evaluate(()=>!!document.querySelector('#results .route-card .stop-map .leaflet-pane'));
    assert.ok(mapExists,label+': Leaflet map failed to render');
+   assert.equal(await panel.locator('.leaflet-pane').first().evaluate(el=>getComputedStyle(el).position),'absolute',label+': Leaflet stylesheet was blocked');
    assert.equal(await page.locator('#results .route-card').count(),1,label+': urban search must show one recommendation');
    assert.match(await page.locator('.route-time').innerText(),/דקות נסיעה/,label+': show ride time');
    await button.click(); await button.click();
