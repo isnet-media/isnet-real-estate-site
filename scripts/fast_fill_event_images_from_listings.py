@@ -220,6 +220,25 @@ def load_bank_reuse():
         out[p.get("production_key") or norm(p.get("name"))]=m
     return out
 
+def bank_asset_provenance_matches(event, media):
+    """Fail closed when a bank image was linked to different event titles.
+
+    A same-title show on multiple dates may reuse its artwork, but a media-bank
+    reference shared with another title is not proof of production identity.
+    This guard does not grant any copyright/license permission.
+    """
+    refs = media.get("events")
+    title = norm(event.get("title"))
+    if not title or media.get("reuse_risk") == "review":
+        return False
+    if not isinstance(refs, list) or not refs:
+        return False
+    return all(
+        isinstance(ref, dict) and norm(ref.get("title")) == title
+        for ref in refs
+    )
+
+
 def image_coverage_counts(events):
     """Count event artwork separately from category illustrations and unverified images.
 
@@ -261,6 +280,9 @@ def main():
         key=norm(e.get("production_name") or e.get("series_name") or e.get("title"))
         m=bank_reuse.get(key)
         if not m:continue
+        if not bank_asset_provenance_matches(e,m):
+            stats["central_bank_identity_rejected"]+=1
+            continue
         full=bank_asset_url(m)
         thumb="../"+m["card_url"] if m.get("card_url","").startswith("media-bank/") else full
         if not full:continue
