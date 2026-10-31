@@ -95,3 +95,16 @@
 #isnet-public-navigation a,#isnet-public-navigation button{font-size:16px;min-height:48px}
 
 .rail-alternatives{border-top:3px solid #bc6651;margin-top:30px;padding-top:24px}.rail-alternatives h2{font-size:26px;line-height:1.5}.rail-access-note{font-size:19px;line-height:1.7;color:#354f56}.rail-alternatives>.station-map-link{display:flex;justify-content:center;align-items:center;min-height:54px;font-size:19px;padding:12px;border:1px solid #b76953;border-radius:10px;margin:14px 0}.rail-card .line-pill{background:#f7e9db;color:#78422d}.rail-card .next-bus{background:#faf0e5}
+
+/* Address choices stay in the document flow and never cover the form. */
+.search-card .options{position:static;width:100%;max-height:none;overflow:visible;margin-top:12px;box-shadow:none;background:#f5f8f2;padding:8px;border:1px solid #cbdccf}
+.search-card .options .choice-heading{font-size:19px;font-weight:700;line-height:1.5;margin:8px}
+.search-card .options .choice-help{font-size:16px;line-height:1.6;color:#455e63;margin:8px}
+.station-choice{display:flex;gap:8px;align-items:stretch;border-top:1px solid #dce5db}
+.search-card .station-choice button{flex:1;min-width:0;padding:16px 10px;background:transparent;font-size:19px;line-height:1.6}
+.search-card .station-choice small{font-size:17px;color:#455e63;line-height:1.6}
+.choice-map{flex:0 0 64px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#146b64;font-size:18px;font-weight:600;min-height:56px;border-right:1px solid #dce5db}
+.search-card .address-continuation{font-size:17px;padding:14px 10px;margin-top:8px;white-space:normal;background:#fff;border:1px solid #cbdccf;border-radius:8px}
+.location-button{display:block;width:100%;min-height:54px;margin:12px 0 0;padding:12px;border:1px solid #146b64;border-radius:10px;background:#e9f4ed;color:#145950;font-size:19px;font-weight:600;line-height:1.5}
+.location-button:disabled{opacity:.6;cursor:wait}
+@media(max-width:600px){.search-card .options{padding:6px}.choice-map{flex-basis:60px}.search-card .station-choice button{font-size:18px}.search-card .station-choice small{font-size:16px}}
