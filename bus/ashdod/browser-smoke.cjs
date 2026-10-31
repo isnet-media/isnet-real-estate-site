@@ -94,6 +94,31 @@ async function main(){
 
    await page.locator('#localTab').click();
    assert.equal(await page.locator('#railAlternatives').count(),0);
+   await page.locator('#to').fill('אסותא');await page.locator('#to').press('ArrowDown');await page.locator('#to').press('Enter');
+   await page.locator('#from').fill('רוגוזין 60');
+   await page.locator('#search').click();
+   assert.equal(await page.locator('#fromOptions .station-choice').count(),3);
+   assert.match(await page.locator('#fromOptions .station-choice').first().innerText(),/רוגוזין 61/);
+   assert.equal(await page.locator('#loadStatus').evaluate(el=>el.classList.contains('error')),false);
+   const positions=await page.evaluate(()=>({options:document.querySelector('#fromOptions').getBoundingClientRect().bottom,next:document.querySelector('#to').closest('.field').getBoundingClientRect().top}));
+   assert.ok(positions.options<=positions.next,label+': address choices must not cover the destination');
+   await page.screenshot({path:path.join(dir,label+'-address-choice.png'),fullPage:true});
+   await page.locator('#fromOptions .station-choice [role=option]').first().click();
+   await page.locator('#search').click();
+   await page.waitForFunction(()=>document.querySelector('#answer').getAttribute('aria-busy')==='false');
+   // A visible location button works independently of address recognition.
+   await ctx.grantPermissions(['geolocation']);
+   await ctx.setGeolocation({latitude:31.789,longitude:34.64,accuracy:20});
+   await page.locator('#locateText').click();
+   await page.locator('#nearbyList .nearby-row').first().waitFor({state:'visible'});
+   await page.locator('#nearbyList .nearby-row').first().getByRole('button',{name:'לצאת מכאן'}).click();
+   assert.equal(await page.locator('#nearby').isVisible(),false);
+   await page.evaluate(()=>navigator.geolocation.getCurrentPosition=(_ok,fail)=>fail({code:1}));
+   await page.locator('#locateText').click();
+   assert.match(await page.locator('#loadStatus').innerText(),/המיקום לא אושר/);
+   assert.equal(await page.locator('#loadStatus').evaluate(el=>el.classList.contains('error')),false);
+   assert.equal(await page.locator('#locateText').isEnabled(),true);
+
    await page.waitForFunction(()=>document.querySelector('#dataSummary').textContent.includes('רחובות רשמיים'));
    await page.locator('#from').fill('מיכאל אנג׳לו 9');
    const officialStreet=page.locator('#fromOptions [role=option]').filter({hasText:/מכאל אנג/});
@@ -107,7 +132,7 @@ async function main(){
    await page.locator('#from').fill('הכלנית/הצבעוני');await page.locator('#from').press('ArrowDown');await page.locator('#from').press('Enter');
 
    await page.locator('#to').fill('כתובת שאינה מוכרת 999');
-   await page.getByRole('option',{name:/חיפוש לפי הכתובת:/}).click();
+   await page.getByRole('option',{name:/המשך לפי הכתובת:/}).click();
    await page.locator('#search').click();
    assert.equal(await page.locator('#noResults').isVisible(),true);
    assert.equal(await page.locator('#results .route-card').count(),0);

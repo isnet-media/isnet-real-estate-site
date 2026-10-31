@@ -27,6 +27,7 @@ jobs:
           node --check bus/ashdod/approximate.js
           node --check bus/ashdod/app.js
           node --check bus/ashdod/streets.js
+          node --check bus/ashdod/address-choices.js
           node --check bus/ashdod/rail.js
       - name: Real GTFS and direct-first regression tests
         run: node --test bus/ashdod/*.test.cjs scripts/test_ashdod_bus.cjs

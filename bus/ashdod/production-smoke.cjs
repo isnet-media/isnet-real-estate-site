@@ -2,7 +2,7 @@
 // Post-Pages-publication check. Never reports success based solely on the merge.
 const assert=require('node:assert/strict');
 const live=process.env.ISNET_BUS_LIVE_URL||'https://isnet.co.il/bus/ashdod/';
-const stamp='ashdod-streets-rail-20261031';
+const stamp='ashdod-address-choice-20261031';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fetchText(url){
  const u=new URL(url);u.searchParams.set('_verify',Date.now().toString());
@@ -26,6 +26,9 @@ async function main(){
    assert.ok(data.stops&&data.patterns&&data.trips,'the public GTFS file is invalid or missing');
    const now=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()).replaceAll('-','');
    assert.ok(data.valid_from<=now&&data.valid_until>=now,'the public GTFS schedule is stale');
+   assert.ok(html.includes('id="locateText"'),'visible location button missing');
+   const addressChoices=await fetchText(new URL('address-choices.js',live).href);
+   assert.ok(addressChoices.includes('numberGap'),'address selection helper missing');
    const streets=JSON.parse(await fetchText(new URL('data/ashdod-streets.json',live).href));
    assert.ok(streets.streets.length>=700,'official Ashdod street index missing');
    const rail=JSON.parse(await fetchText(new URL('data/rail.json',live).href));
