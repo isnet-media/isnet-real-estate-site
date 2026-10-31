@@ -2,7 +2,7 @@
 // Post-Pages-publication check. Never reports success based solely on the merge.
 const assert=require('node:assert/strict');
 const live=process.env.ISNET_BUS_LIVE_URL||'https://isnet.co.il/bus/ashdod/';
-const stamp='ashdod-direct-first-20261030';
+const stamp='ashdod-release-20261031';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fetchText(url){
  const u=new URL(url);u.searchParams.set('_verify',Date.now().toString());
@@ -17,7 +17,7 @@ async function main(){
    const html=await fetchText(live);
    assert.ok(html.includes('<meta name="isnet-build" content="'+stamp+'">'),'new build marker not deployed');
    const app=await fetchText(new URL('app.js',live).href);
-   assert.ok(app.includes('reasonableDirect('),'direct-first app.js is not present');
+   assert.ok(app.includes("mode==='intercity'&&!routes.length"),'direct-first app.js is not present');
    const engine=await fetchText(new URL('engine.js',live).href);
    assert.ok(engine.includes('aDirect'),'direct-first engine.js is not present');
    const approximate=await fetchText(new URL('approximate.js',live).href);

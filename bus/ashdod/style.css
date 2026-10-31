@@ -26,3 +26,30 @@
 .route-card .transfer-note{font-size:14px;line-height:1.7}
 .route-card .stops-list{font-size:14px;line-height:1.7}
 @media(max-width:600px){.route-card .leg{font-size:16px}.route-card .leg h4{font-size:17px}.route-card .leg .station-map-link{font-size:16px;min-height:48px}}
+
+/* Accessible, concise bus UI: readable text on desktop and mobile. */
+.intro>p,.schedule-tag,.search-card,.source-status,.result-note,.nearby>p,.about,.how p{font-size:clamp(15px,1.05vw,17px);line-height:1.65}
+.field>label,.when label,.input-row input,.options button,.search-button,.tabs button{font-size:16px}
+.input-row input::placeholder{font-size:15px}
+.small-note,.load-status,.source-status,.route-time small,.route-summary small,.route-card summary,.route-card .frequency,.route-card .frequency .muted,.quick button span{font-size:14px;line-height:1.65}
+.route-card .route-summary strong,.route-card .route-lines,.route-card .result-note{font-size:16px;line-height:1.65}
+.route-card .route-time{font-size:clamp(26px,2.3vw,34px)}
+.route-card .badge,.pilot{font-size:13px}
+.quick button,.nearby-row strong,.nearby-row small,.nearby-actions button,.nearby-actions a,.how h3,.about summary,footer{font-size:15px;line-height:1.6}
+.route-card details,.route-card .leg{line-height:1.7}
+@media(max-width:600px){
+ .intro>p,.search-card,.result-note,.source-status,.about,.how p{font-size:16px}
+ .route-card .route-summary small,.route-card .route-time small,.route-card summary,.route-card .frequency,.route-card .frequency .muted,.small-note{font-size:14px}
+ .route-card .route-summary strong,.route-card .route-lines,.route-card .leg,.route-card .leg .muted{font-size:16px}
+ .route-card .badge{font-size:12px}
+ .quick button{font-size:14px}
+ .quick button span,.nearby-row small,.nearby-actions button,.nearby-actions a{font-size:13px}
+ .when input,.field>label,.when label{font-size:16px}
+}
+
+/* Visually distinguish travel inside Ashdod from intercity travel. */
+.tabs #localTab[aria-selected="true"]{background:#146b64;color:#fff}
+.tabs #intercityTab[aria-selected="true"]{background:#b43d35;color:#fff;box-shadow:0 3px 9px #7f211c22}
+.tabs #intercityTab[aria-selected="false"]{color:#8f3935}
+.tabs #intercityTab:focus-visible{outline:3px solid #e9a19b;outline-offset:2px}
+@media (prefers-contrast:more){.tabs #intercityTab[aria-selected="true"]{background:#8c2420}}
