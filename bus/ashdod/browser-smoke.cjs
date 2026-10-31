@@ -54,7 +54,7 @@ async function main(){
    assert.ok(badges.length>0,label+': missing bus results');
    assert.ok(badges.every(t=>t==='ללא החלפה'),label+': bus transfers incorrectly prioritized');
    const lines=await page.locator('#results .route-card .line-pill').allInnerTexts();
-   assert.ok(lines.includes('35'),label+': nearby direct line 35 missing');
+   assert.ok(lines.includes('1'),label+': recommended nearby direct line 1 missing');
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    assert.ok(overflow<=2,label+': horizontal overflow '+overflow+'px');
    const button=page.locator('#results .route-card').first().getByRole('button',{name:'הצג תחנות על מפה'});
@@ -64,7 +64,29 @@ async function main(){
    await panel.locator('.leaflet-container').waitFor({state:'visible',timeout:10000}).catch(()=>{});
    const mapExists=await page.evaluate(()=>!!document.querySelector('#results .route-card .stop-map .leaflet-pane'));
    assert.ok(mapExists,label+': Leaflet map failed to render');
+   assert.equal(await panel.locator('.leaflet-pane').first().evaluate(el=>getComputedStyle(el).position),'absolute',label+': Leaflet stylesheet was blocked');
+   assert.equal(await page.locator('#results .route-card').count(),1,label+': urban search must show one recommendation');
+   assert.match(await page.locator('.route-time').innerText(),/דקות נסיעה/,label+': show ride time');
+   await button.click(); await button.click();
+   assert.equal(await panel.isHidden(),false,label+': map must reopen');
    await page.screenshot({path:path.join(dir,label+'.png'),fullPage:true});
+   // Keyboard selection must trigger the same mode change as clicking a city.
+   await page.locator('#to').fill('תל אביב');
+   await page.locator('#to').press('ArrowDown');
+   await page.locator('#to').press('Enter');
+   assert.equal(await page.locator('#intercityTab').getAttribute('aria-selected'),'true');
+   await page.locator('#search').click();
+   await page.waitForFunction(()=>document.querySelector('#answer').getAttribute('aria-busy')==='false');
+   assert.ok(await page.locator('#results .route-card').count()>0,label+': intercity journey');
+   await page.locator('#localTab').click();
+   await page.locator('#to').fill('כתובת שאינה מוכרת 999');
+   await page.getByRole('option',{name:/חיפוש לפי הכתובת:/}).click();
+   await page.locator('#search').click();
+   assert.equal(await page.locator('#noResults').isVisible(),true);
+   assert.equal(await page.locator('#results .route-card').count(),0);
+   assert.ok(await page.locator('#externalFallback a').getAttribute('href'));
+   assert.equal(await page.locator('#search').isEnabled(),true);
+
    console.log('PASS '+label+': direct routing, map, RTL and no horizontal overflow ('+badges.length+' options)');
    await ctx.close();
   }

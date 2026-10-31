@@ -23,7 +23,7 @@ jobs:
           node --check bus/ashdod/approximate.js
           node --check bus/ashdod/app.js
       - name: Real GTFS and direct-first regression tests
-        run: node --test bus/ashdod/*.test.cjs
+        run: node --test bus/ashdod/*.test.cjs scripts/test_ashdod_bus.cjs
 
   browser-smoke:
     needs: node-tests
