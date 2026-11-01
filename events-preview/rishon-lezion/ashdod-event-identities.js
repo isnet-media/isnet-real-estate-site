@@ -44,6 +44,6 @@
    return rows.filter(e=>!omitted.has(e)).map(e=>replacements.get(e)||e);
  }
  const shared=window.ISNET_EVENT_IDENTITIES;
- if(shared?.sanitize){const sharedReconcile=shared.reconcile;shared.reconcile=(rows,options)=>sharedReconcile(reconcile(rows),options)}
+ if(shared?.sanitize){const sharedReconcile=shared.reconcile,sharedResolve=shared.resolve;shared.reconcile=(rows,options)=>sharedReconcile(reconcile(rows),options);shared.resolve=(rows,id)=>{const found=sharedResolve(rows,id);return shared.reconcile(rows).find(e=>e.event_id===found?.event_id||e._source_event_ids?.includes(id))||found}}
  else window.ISNET_EVENT_IDENTITIES={reconcile};
 })();
