@@ -36,6 +36,9 @@ async function main(){
    const ctx=await browser.newContext({viewport:size,locale:'he-IL',timezoneId:'Asia/Jerusalem'});
    const page=await ctx.newPage();
    await page.addInitScript(()=>{
+    Object.defineProperty(navigator,'share',{configurable:true,value:async data=>{window.__shared=data}});
+    Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{window.__copied=text}}});
+
     const RealDate=Date, fixed=RealDate.parse('2026-10-30T11:00:00Z');
     class FixedDate extends RealDate{
       constructor(...a){super(...(a.length?a:[fixed]))}
@@ -55,6 +58,31 @@ async function main(){
    assert.ok(badges.every(t=>t==='ללא החלפה'),label+': bus transfers incorrectly prioritized');
    const lines=await page.locator('#results .route-card .line-pill').allInnerTexts();
    assert.ok(lines.includes('קו 1'),label+': recommended nearby direct line 1 missing');
+   const nav=page.locator('#isnet-public-navigation');
+   assert.equal(await nav.getByRole('link',{name:/מה עושים/}).count(),0);
+   assert.equal(await nav.getByRole('link',{name:'חזרה לאשדוד נט',exact:true}).getAttribute('href'),'https://ashdodnet.com/');
+   assert.equal(await nav.evaluate(el=>getComputedStyle(el).position),'sticky');
+   await page.evaluate(()=>window.scrollTo(0,600));
+   assert.ok(Math.abs(await nav.evaluate(el=>el.getBoundingClientRect().top))<=1,label+': navigation must stay at viewport top');
+   await nav.getByRole('button',{name:'שיתוף',exact:true}).click();
+   const share=page.locator('#bus-share-dialog');await share.waitFor({state:'visible'});
+   const wa=new URL(await share.locator('[data-channel=whatsapp]').getAttribute('href'));
+   assert.equal(wa.hostname,'wa.me');assert.ok(wa.searchParams.get('text').includes('מתי יש אוטובוס?'));
+   assert.ok(wa.searchParams.get('text').includes('from=11931'));
+   assert.ok((await share.locator('[data-channel=email]').getAttribute('href')).startsWith('mailto:?subject='));
+   assert.ok((await share.locator('[data-channel=facebook]').getAttribute('href')).includes('facebook.com/sharer'));
+   await share.locator('[data-copy-share]').click();
+   assert.ok(await page.evaluate(()=>window.__copied.includes('from=11931')));
+   await share.locator('[data-native-share]').click();
+   assert.ok(await page.evaluate(()=>window.__shared.url.includes('from=11931')));
+   await page.screenshot({path:path.join(dir,label+'-sharing.png'),fullPage:false});
+   await share.getByRole('button',{name:'סגירה',exact:true}).click();
+   await page.evaluate(()=>Object.defineProperty(navigator,'share',{configurable:true,value:undefined}));
+   await page.locator('#share').click();await share.waitFor({state:'visible'});
+   assert.equal(await share.locator('[data-native-share]').isVisible(),false);
+   assert.ok((await page.locator('meta[property="og:image"]').getAttribute('content')).endsWith('share-card.jpg'));
+   await page.keyboard.press('Escape');assert.equal(await share.isVisible(),false);
+
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    assert.ok(overflow<=2,label+': horizontal overflow '+overflow+'px');
    const button=page.locator('#results .route-card').first().getByRole('button',{name:'הצג תחנות על מפה'});
