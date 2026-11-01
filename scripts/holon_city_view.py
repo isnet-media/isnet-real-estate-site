@@ -68,6 +68,7 @@ def build_food(check=False):
    source=source.replace('assets/restaurants/rooftop.webp','../kiryat-gat/assets/food/cafe-illustration.jpg').replace('צילום: אתר Kira Rooftop','תמונת המחשה — לא צילום מהמסעדה')
    for old,new in [('עיר של ים.','קרוב לבית.'),('מהדגים של הנמל לקפה של הבוקר, מארוחה טובה לערב שנשארים בו עוד קצת. בואו למצוא את המקום שלכם.','מסעדות, בתי קפה ואוכל מקומי בחולון, עם מידע וקישורים למקומות.'),('ים תיכון. שולחן פתוח.','חולון. שולחן פתוח.'),('ים אחד.','עיר אחת.'),('דגים וים, מטבחים','מטבחים'),('עם הפנים לים','עם המשפחה'),('נוף, בריזה ושולחן טוב','ארוחה, קפה ושולחן טוב'),('עם נוף לים','ארוחה בעיר'),('data-mood="sea"','data-mood="family"'),('value="sea"','value="family"')]:source=source.replace(old,new)
   if name=='restaurants.html':source=source.replace('</head>','<meta name="holon-layout" content="canonical-ashdod-20261101"></head>')
+  if name=='restaurants.css':source+='\n/* Keep the detail close control above the shared navigation inside its dialog. */\n#foodDetail .close-dialog{z-index:10001}\n'
   source=source.replace('__HOLON_OWN_PLACES__',json.dumps(places,ensure_ascii=False,separators=(',',':')))
   if name=='restaurants.html':
    for asset,body in outputs.items():source=re.sub(re.escape(asset)+r'(?:\?v=[^"\s]+)?',asset+'?v='+hashlib.sha256(body.encode()).hexdigest()[:12],source)
