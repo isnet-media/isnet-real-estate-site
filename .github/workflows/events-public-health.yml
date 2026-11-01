@@ -1,6 +1,9 @@
 name: Public events health checks
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/check-public-event-integrity.cjs', '.github/workflows/events-public-health.yml']
   schedule:
     - cron: '23 * * * *'
   workflow_run:
