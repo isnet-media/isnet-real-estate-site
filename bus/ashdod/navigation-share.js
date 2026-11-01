@@ -3,10 +3,13 @@
  const nav=document.getElementById('isnet-public-navigation');
  if(nav){
   nav.classList.add('bus-navigation');
+  nav.querySelector('[data-isnet-marketing-open]')?.remove();
   for(const a of nav.querySelectorAll('a')){
    if(a.getAttribute('href')==='/events-preview/ashdod/')a.remove();
    if(a.href==='https://ashdodnet.com/'){a.textContent='חזרה לאשדוד נט ↗';a.removeAttribute('target');a.setAttribute('aria-label','חזרה לאשדוד נט')}
   }
+  const shareButton=nav.querySelector('[data-isnet-share-open]');
+  if(shareButton){shareButton.innerHTML='<svg class="share-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4m-6.8 7 6.8 4"/></svg><span>שיתוף</span>';shareButton.setAttribute('aria-label','שיתוף')}
   const resize=()=>document.documentElement.style.setProperty('--bus-nav-height',Math.ceil(nav.getBoundingClientRect().height)+'px');
   resize();if(window.ResizeObserver)new ResizeObserver(resize).observe(nav);else window.addEventListener('resize',resize);
  }

@@ -128,3 +128,16 @@ html{scroll-padding-top:var(--bus-nav-height,120px)}
 @media(max-width:360px){#isnet-public-navigation a,#isnet-public-navigation button{font-size:15px}#isnet-public-navigation .isnet-public-navigation__inner{gap:2px 10px}}
 
 #share{font-size:18px;min-height:48px;padding:10px 14px}
+
+/* Keep the mobile sticky bar to one readable row. */
+@media(max-width:600px){
+ #isnet-public-navigation .isnet-public-navigation__inner{flex-wrap:nowrap;gap:8px;padding:6px 8px}
+ #isnet-public-navigation a,#isnet-public-navigation button{min-height:44px}
+ #isnet-public-navigation button[data-isnet-share-open]{padding-inline:12px}
+}
+
+#isnet-public-navigation button[data-isnet-share-open]{gap:6px}
+#isnet-public-navigation .share-icon{flex-shrink:0}
+@media(max-width:360px){#isnet-public-navigation .isnet-public-navigation__inner{gap:4px;padding-inline:6px}#isnet-public-navigation button[data-isnet-share-open]{padding-inline:7px}}
+
+@media(max-width:340px){#isnet-public-navigation .isnet-public-navigation__inner{padding-inline:4px}#isnet-public-navigation button[data-isnet-share-open]{gap:4px;padding-inline:4px}}

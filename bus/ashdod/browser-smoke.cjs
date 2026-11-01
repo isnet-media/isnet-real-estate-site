@@ -59,6 +59,17 @@ async function main(){
    const lines=await page.locator('#results .route-card .line-pill').allInnerTexts();
    assert.ok(lines.includes('קו 1'),label+': recommended nearby direct line 1 missing');
    const nav=page.locator('#isnet-public-navigation');
+   assert.equal(await nav.locator('[data-isnet-marketing-open]').count(),0);
+   assert.equal(await nav.locator('[data-isnet-share-open] svg.share-icon').count(),1);
+   if(label==='mobile'){
+    for(const width of [320,360,390]){
+     await page.setViewportSize({width,height:844});
+     const rect=await nav.boundingBox();assert.ok(rect.height<=66,'sticky bar must be one row at '+width+'px, got '+rect.height);
+     assert.ok(await nav.evaluate(el=>el.scrollWidth<=document.documentElement.clientWidth+2&&[...el.querySelectorAll('a,button')].every(c=>{const r=c.getBoundingClientRect();return r.left>=-1&&r.right<=document.documentElement.clientWidth+1})),'navigation overflow at '+width);
+    }
+    await page.setViewportSize(size);
+   }
+
    assert.equal(await nav.getByRole('link',{name:/מה עושים/}).count(),0);
    assert.equal(await nav.getByRole('link',{name:'חזרה לאשדוד נט',exact:true}).getAttribute('href'),'https://ashdodnet.com/');
    assert.equal(await nav.evaluate(el=>getComputedStyle(el).position),'sticky');
