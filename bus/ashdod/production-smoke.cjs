@@ -2,7 +2,7 @@
 // Post-Pages-publication check. Never reports success based solely on the merge.
 const assert=require('node:assert/strict');
 const live=process.env.ISNET_BUS_LIVE_URL||'https://isnet.co.il/bus/ashdod/';
-const stamp='ashdod-address-choice-20261031';
+const stamp='ashdod-sticky-sharing-20261101';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function fetchText(url){
  const u=new URL(url);u.searchParams.set('_verify',Date.now().toString());
@@ -27,6 +27,10 @@ async function main(){
    const now=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()).replaceAll('-','');
    assert.ok(data.valid_from<=now&&data.valid_until>=now,'the public GTFS schedule is stale');
    assert.ok(html.includes('id="locateText"'),'visible location button missing');
+   const share=await fetchText(new URL('navigation-share.js',live).href);
+   assert.ok(share.includes('https://wa.me/')&&share.includes('חזרה לאשדוד נט'),'rich sharing/navigation missing');
+   const image=await fetch(new URL('share-card.jpg',live),{signal:AbortSignal.timeout(15000)});
+   assert.ok(image.ok&&image.headers.get('content-type')?.includes('image/jpeg'),'share preview image missing');
    const addressChoices=await fetchText(new URL('address-choices.js',live).href);
    assert.ok(addressChoices.includes('numberGap'),'address selection helper missing');
    const streets=JSON.parse(await fetchText(new URL('data/ashdod-streets.json',live).href));

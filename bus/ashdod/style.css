@@ -91,7 +91,7 @@
 .search-card .search-button{font-size:21px;min-height:58px;margin-top:18px}
 @media(max-width:600px){main{padding:0 12px}.simple-answer{padding:18px}.simple-answer .route-time{font-size:52px}.simple-answer .line-pill{font-size:26px}.simple-answer .direction{font-size:20px}.answers .section-head{flex-wrap:wrap}.answers .section-head h2{font-size:24px}.search-card{padding:18px}.when{grid-template-columns:1fr 1fr}.when button{min-height:48px;font-size:17px;grid-column:1/-1}.fact-value{font-size:23px}}
 /* Keep shared navigation from covering the answer while scrolling. */
-#isnet-public-navigation{position:relative!important;top:auto!important}
+#isnet-public-navigation{position:sticky!important;top:0!important}
 #isnet-public-navigation a,#isnet-public-navigation button{font-size:16px;min-height:48px}
 
 .rail-alternatives{border-top:3px solid #bc6651;margin-top:30px;padding-top:24px}.rail-alternatives h2{font-size:26px;line-height:1.5}.rail-access-note{font-size:19px;line-height:1.7;color:#354f56}.rail-alternatives>.station-map-link{display:flex;justify-content:center;align-items:center;min-height:54px;font-size:19px;padding:12px;border:1px solid #b76953;border-radius:10px;margin:14px 0}.rail-card .line-pill{background:#f7e9db;color:#78422d}.rail-card .next-bus{background:#faf0e5}
@@ -108,3 +108,23 @@
 .location-button{display:block;width:100%;min-height:54px;margin:12px 0 0;padding:12px;border:1px solid #146b64;border-radius:10px;background:#e9f4ed;color:#145950;font-size:19px;font-weight:600;line-height:1.5}
 .location-button:disabled{opacity:.6;cursor:wait}
 @media(max-width:600px){.search-card .options{padding:6px}.choice-map{flex-basis:60px}.search-card .station-choice button{font-size:18px}.search-card .station-choice small{font-size:16px}}
+
+/* Sticky bus navigation reserves its measured height for anchored results. */
+html{scroll-padding-top:var(--bus-nav-height,120px)}
+.hero,.answers,.nearby,.search-card,.options{scroll-margin-top:16px!important}
+#isnet-public-navigation .isnet-public-navigation__inner{gap:4px 16px;padding:8px 12px}
+#isnet-public-navigation a,#isnet-public-navigation button{min-height:48px;font-size:16px}
+#bus-share-dialog{direction:rtl;box-sizing:border-box;width:480px;max-width:calc(100% - 24px);max-height:calc(100dvh - 32px);overflow:auto;border:1px solid #c7d6cb;border-radius:18px;background:#fff;color:#153c46;padding:24px;font:18px/1.6 Heebo,Arial,sans-serif}
+#bus-share-dialog::backdrop{background:#102b3599}
+#bus-share-dialog h2{font-size:26px;margin:0 0 12px}
+#bus-share-dialog .share-description{white-space:pre-line;font-size:17px}
+#bus-share-dialog .share-options{display:grid;grid-template-columns:1fr;gap:10px}
+#bus-share-dialog .share-options a,#bus-share-dialog button{display:flex;justify-content:center;align-items:center;box-sizing:border-box;min-height:52px;border:1px solid #a9c5b5;background:#edf5ef;color:#153c46;border-radius:10px;font:600 19px/1.5 Heebo,Arial,sans-serif;text-decoration:none;padding:10px 14px;cursor:pointer}
+#bus-share-dialog .share-options [data-channel=whatsapp]{background:#146b64;color:#fff;border-color:#146b64}
+#bus-share-dialog input{width:100%;box-sizing:border-box;font-size:16px;padding:12px;border:1px solid #cbd9cf;border-radius:8px;margin-top:16px}
+#bus-share-dialog [role=status]{font-size:17px;min-height:26px;margin:10px 0}
+#bus-share-dialog .share-close{width:100%;background:white}
+#bus-share-dialog :focus-visible{outline:3px solid #d18020;outline-offset:3px}
+@media(max-width:360px){#isnet-public-navigation a,#isnet-public-navigation button{font-size:15px}#isnet-public-navigation .isnet-public-navigation__inner{gap:2px 10px}}
+
+#share{font-size:18px;min-height:48px;padding:10px 14px}
