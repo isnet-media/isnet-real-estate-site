@@ -1,0 +1,65 @@
+name: FRIENDS candidate-only extraction tests
+on:
+  pull_request:
+    paths:
+      - "scripts/discover_friends_events.py"
+      - "tests/test_friends_source_occurrences.py"
+      - ".github/workflows/friends-candidates-tests.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - run: python -m unittest discover -s tests -p 'test_friends_source_occurrences.py' -v
+      - name: Read-only live FRIENDS source smoke check (not a publication step)
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json
+          import requests
+          from urllib.parse import urlparse
+          from bs4 import BeautifulSoup
+          from scripts.discover_friends_events import (
+              extract_dated_occurrences, extract_city_date_hints,
+              extract_show_description_candidate,
+          )
+          cfg=json.load(open("events-preview/admin/data/event-source-priority.json",encoding="utf-8"))
+          source=next(x for x in cfg["sources"] if x["id"]=="friends-hist")
+          with requests.Session() as session:
+              for city in source["cities"]:
+                  try:
+                      r=session.get(city["url"],timeout=18,headers={"User-Agent":"ISNET-Events-Source-Discovery/1.0 (isnet.co.il)"})
+                      r.raise_for_status()
+                      if urlparse(r.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
+                          raise ValueError("Unsafe redirect")
+                      soup=BeautifulSoup(r.text,"html.parser")
+                      rows=extract_dated_occurrences(soup,city["slug"])
+                      hints=extract_city_date_hints(soup,city["slug"])
+                      checked=0; descs=0
+                      for hint in hints[:2]:
+                          d=session.get(hint["production_url"],timeout=16,headers={"User-Agent":"ISNET-Events-Source-Discovery/1.0 (isnet.co.il)"})
+                          d.raise_for_status()
+                          if urlparse(d.url).hostname not in ("friends-hist.co.il","www.friends-hist.co.il"):
+                              raise ValueError("Unsafe show redirect")
+                          checked+=1
+                          descs+=int(bool(extract_show_description_candidate(BeautifulSoup(d.text,"html.parser"),hint["title"])))
+                      print(json.dumps({
+                          "city":city["slug"],"status":"live_read_only",
+                          "venue_time_confirmed":len(rows),
+                          "city_date_only_hints":len(hints),
+                          "unlicensed_image_candidates":sum(bool(x["image_candidate_url"]) for x in hints),
+                          "details_checked":checked,"description_candidates":descs,
+                          "publication_enabled":False
+                      },ensure_ascii=False))
+                  except Exception as exc:
+                      print(json.dumps({"city":city["slug"],"status":"unverified",
+                          "error":type(exc).__name__+": "+str(exc)[:150]},ensure_ascii=False))
+          PY
