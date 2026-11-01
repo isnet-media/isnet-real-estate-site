@@ -33,7 +33,7 @@ vm.runInNewContext(fs.readFileSync('events-preview/admin/cms-db.js','utf8'),{win
  let sourceCalls=0,cmsCalls=0;
  const win={ISNET_EVENT_OVERLAY:overlay};
  vm.runInNewContext(fs.readFileSync('events-preview/shared/public-cms.js','utf8'),{window:win,document:{currentScript:{src:'https://example.com/events-preview/shared/public-cms.js'}},location:{pathname:'/events-preview/ashdod/'},URL,Map,console,fetch:async address=>{
-  const u=new URL(address);if(u.pathname.endsWith('events-cards.json'))return {ok:true,json:async()=>({events:[{event_id:'card',title:'compact'}]})};
+  const u=new URL(address);if(u.pathname.endsWith('event-quality-media.json'))return {ok:true,json:async()=>({repairs:{}})};if(u.pathname.endsWith('events-cards.json'))return {ok:true,json:async()=>({events:[{event_id:'card',title:'compact'}]})};
   if(u.pathname.endsWith('events.json')){sourceCalls++;return {ok:true,json:async()=>({events:[base]})};}
   cmsCalls++;const offset=Number(u.searchParams.get('offset'));return {ok:true,json:async()=>Array.from({length:Math.max(0,Math.min(200,405-offset))},(_,i)=>({event_id:String(offset+i),payload:{title:'event'},record_type:'manual'}))};
  }});

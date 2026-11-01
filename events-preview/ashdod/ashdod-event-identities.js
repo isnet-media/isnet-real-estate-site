@@ -42,5 +42,7 @@
    }
    return rows.filter(e=>!omitted.has(e)).map(e=>replacements.get(e)||e);
  }
- window.ISNET_EVENT_IDENTITIES={reconcile};
+ const shared=window.ISNET_EVENT_IDENTITIES;
+ if(shared?.sanitize){const sharedReconcile=shared.reconcile;shared.reconcile=(rows,options)=>sharedReconcile(reconcile(rows),options)}
+ else window.ISNET_EVENT_IDENTITIES={reconcile};
 })();

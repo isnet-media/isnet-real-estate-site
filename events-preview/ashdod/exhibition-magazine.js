@@ -32,7 +32,7 @@ function groupActivities(rows){
 function mergeRows(base,overrides){
  const map=new Map(base.filter(Boolean).map(e=>[e.event_id,e]));
  for(const row of overrides){const id=row?.event_id||row?.payload?.event_id;if(!id||!row.payload)continue;if(map.has(id)||row.record_type==='manual')map.set(id,{...map.get(id),...row.payload,event_id:id})}
- return [...map.values()];
+ return window.ISNET_EVENT_IDENTITIES?.reconcile([...map.values()])||[...map.values()];
 }
 const date=s=>{if(!s)return '';return new Intl.DateTimeFormat('he-IL',{day:'numeric',month:'long',year:'numeric'}).format(new Date(s+'T12:00:00Z'))};
 const href=e=>'event.html?id='+encodeURIComponent(e.event_id||e.id);

@@ -1,0 +1,39 @@
+name: Event integrity release checks
+on:
+  push:
+    branches: [main, 'feature/events-integrity-*']
+    paths: ['events-preview/shared/event-overlay.js', 'events-preview/shared/public-cms.js', 'events-preview/shared/data/event-quality-media.json', 'events-preview/*/data/events*.json', 'scripts/*event*integrity*', 'scripts/event_source_media.py', 'scripts/test_event_source_media.py', 'scripts/build_event_public_assets.py', '.github/workflows/event-integrity-tests.yml']
+  pull_request:
+    paths: ['events-preview/shared/event-overlay.js', 'events-preview/shared/public-cms.js', 'events-preview/shared/data/event-quality-media.json', 'events-preview/*/data/events*.json', 'scripts/*event*integrity*', 'scripts/event_source_media.py', 'scripts/test_event_source_media.py', 'scripts/build_event_public_assets.py', '.github/workflows/event-integrity-tests.yml']
+permissions:
+  contents: read
+jobs:
+  all-cities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: pip install beautifulsoup4 requests
+      - run: |
+          find events-preview -maxdepth 2 -name "*.js" -print0 | xargs -0 -n1 node --check
+          python scripts/test_event_source_media.py
+          node scripts/test-event-integrity.cjs
+          node scripts/test-event-sync.cjs
+          node scripts/audit-event-integrity.cjs --apply
+          python scripts/build_event_public_assets.py
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/test-event-integrity-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: event-integrity-qa
+          path: |
+            /tmp/event-integrity-qa
+            events-preview/admin/data/event-integrity-report.json

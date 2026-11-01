@@ -112,6 +112,7 @@ function purchaseAction(e){
     if(dial)return {href:"tel:"+dial,label:"חייגו לרכישת כרטיסים",kind:"phone"};
   }
   const url=String(e.purchase_url||"").trim();
+  if(/[<>]/.test(url))return null;
   if(/^https?:\/\//i.test(url)&&!isBlockedPurchaseUrl(url))return {href:url,label:"לרכישת כרטיסים",kind:"url"};
   return null;
 }
@@ -123,7 +124,7 @@ function eventGroupKey(e){
     const branchKey=normalizeSearch(e.sport_branch||sportBranchMeta(e).label||sportKey(e));
     return "sport-team:"+teamKey+":"+branchKey;
   }
-  return normalizeSearch(e?.title||"");
+  return window.ISNET_EVENT_IDENTITIES?.groupKey(e)||normalizeSearch(e?.title||"");
 }
 function eventDisplayTitle(e){
   return e?.series_title||e?.title||"אירוע";
@@ -154,9 +155,10 @@ function uniqueOccurrenceDates(e){
 function groupedEvent(e,visibleOccurrence=e){
   const occ=eventOccurrences(e);
   if(occ.length<=1)return e.series_title?{...e,title:eventDisplayTitle(e),description:e.series_description||e.description}:e;
-  const imageEvent=occ.find(x=>hasTrustedSourceImage(x)&&x.image_source==="friends")
-    ||occ.find(x=>hasTrustedSourceImage(x)&&x.thumbnail_ready===true)
-    ||occ.find(x=>hasTrustedSourceImage(x))
+  const mediaOcc=occ.filter(x=>!window.ISNET_EVENT_IDENTITIES||window.ISNET_EVENT_IDENTITIES.sameProduction(x,visibleOccurrence));
+  const imageEvent=mediaOcc.find(x=>hasTrustedSourceImage(x)&&x.image_source==="friends")
+    ||mediaOcc.find(x=>hasTrustedSourceImage(x)&&x.thumbnail_ready===true)
+    ||mediaOcc.find(x=>hasTrustedSourceImage(x))
     ||visibleOccurrence;
   const isSportGroup=isRepresentativeHomeGame(visibleOccurrence);
   const sportTeam=isSportGroup?sportTeamConfig(visibleOccurrence):null;
@@ -208,6 +210,7 @@ function toggleFavorite(id){
 }
 
 function hasTrustedSourceImage(e){
+  if(window.ISNET_EVENT_IDENTITIES&&!window.ISNET_EVENT_IDENTITIES.safeImage(e))return false;
   return Boolean(!(window.isnetEventDefaultImage?.(e)&&window.isnetEventIllustration?.(e))&&e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
 }
 function fallbackImage(e){
@@ -780,7 +783,7 @@ function filtered(){
     if(!matchesQuick(e))return false;
     if(state.date&&e.start_date!==state.date)return false;
     if(state.periodStart&&state.periodEnd&&(e.start_date<state.periodStart||e.start_date>state.periodEnd))return false;
-    if(state.category&&!window.HOLON_EVENTS.matches(e,new Set([state.category])))return false;
+    if(state.category&&!(window.ISNET_EVENT_IDENTITIES?.matchesCategory(e,new Set([state.category]))||e.category===state.category))return false;
     if(state.subcategory&&e.subcategory!==state.subcategory)return false;
     if(state.category==="sport"){
       if(state.sportBranch!=="all"&&sportKey(e)!==state.sportBranch)return false;
@@ -1233,6 +1236,7 @@ function publishedBoardEvents(base,rows,day){
 }
 
 async function init(){
+  await window.ISNET_EVENT_IDENTITIES?.ready;
   if(location.pathname.includes("/holon/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
   // Independent sections must not delay the first usable event list.
   state.cinemaLoading=true;

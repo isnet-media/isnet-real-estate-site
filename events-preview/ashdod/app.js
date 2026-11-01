@@ -144,6 +144,7 @@ function purchaseAction(e){
     if(dial)return {href:"tel:"+dial,label:"חייגו לרכישת כרטיסים",kind:"phone"};
   }
   const url=String(e.purchase_url||"").trim();
+  if(/[<>]/.test(url))return null;
   if(/^https?:\/\//i.test(url)&&!isBlockedPurchaseUrl(url))return {href:url,label:"לרכישת כרטיסים",kind:"url"};
   return null;
 }
@@ -155,7 +156,7 @@ function eventGroupKey(e){
     const branchKey=normalizeSearch(e.sport_branch||sportBranchMeta(e).label||sportKey(e));
     return "sport-team:"+teamKey+":"+branchKey;
   }
-  return normalizeSearch(e?.title||"");
+  return window.ISNET_EVENT_IDENTITIES?.groupKey(e)||normalizeSearch(e?.title||"");
 }
 function eventDisplayTitle(e){
   return e?.series_title||e?.title||"אירוע";
@@ -186,8 +187,9 @@ function uniqueOccurrenceDates(e){
 function groupedEvent(e,visibleOccurrence=e){
   const occ=eventOccurrences(e);
   if(occ.length<=1)return e.series_title?{...e,title:eventDisplayTitle(e),description:e.series_description||e.description}:e;
-  const imageEvent=occ.find(x=>hasTrustedSourceImage(x)&&x.thumbnail_ready===true)
-    ||occ.find(x=>hasTrustedSourceImage(x))
+  const mediaOcc=occ.filter(x=>!window.ISNET_EVENT_IDENTITIES||window.ISNET_EVENT_IDENTITIES.sameProduction(x,visibleOccurrence));
+  const imageEvent=mediaOcc.find(x=>hasTrustedSourceImage(x)&&x.thumbnail_ready===true)
+    ||mediaOcc.find(x=>hasTrustedSourceImage(x))
     ||visibleOccurrence;
   const isSportGroup=isRepresentativeHomeGame(visibleOccurrence);
   const sportTeam=isSportGroup?sportTeamConfig(visibleOccurrence):null;
@@ -732,7 +734,7 @@ function filtered(){
     if(!matchesQuick(e))return false;
     if(state.date&&e.start_date!==state.date)return false;
     if(state.periodStart&&state.periodEnd&&(e.start_date<state.periodStart||e.start_date>state.periodEnd))return false;
-    if(state.category&&e.category!==state.category)return false;
+    if(state.category&&!(window.ISNET_EVENT_IDENTITIES?.matchesCategory(e,new Set([state.category]))||e.category===state.category))return false;
     if(state.subcategory&&e.subcategory!==state.subcategory)return false;
     if(state.category==="sport"){
       if(state.sportBranch!=="all"&&sportKey(e)!==state.sportBranch)return false;
@@ -1166,6 +1168,7 @@ function closeModal(){$("eventModal").hidden=true;document.body.style.overflow="
 function resetAll(){state.quick="all";state.date=null;state.periodStart=null;state.periodEnd=null;state.periodType=null;state.calendarCollapsed=true;state.category=null;state.subcategory=null;state.cinemaOpen=false;state.sportTeam="all";state.sportBranch="all";state.query="";state.favoritesOnly=false;state.sort="date";resetCalendarToToday();$("searchInput").value="";$("sortSelect").value="date";render();renderCinema()}
 
 async function init(){
+  await window.ISNET_EVENT_IDENTITIES?.ready;
   const [data,fallbacks,cinema,sports,taxonomy,cmsRows]=await Promise.all([
     (window.ISNET_PUBLIC_CMS?.loadSource?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>r.json())),
     fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({})),

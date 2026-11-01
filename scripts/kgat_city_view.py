@@ -83,14 +83,14 @@ def localize(content,name,city,suffix):
    packed=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
    content=content.replace('<head>','<head><script>window.ISNET_CITY_BOOTSTRAP='+packed+';</script>',1)
   # City adapter executes immediately after the shared reader, before UI bundles.
-  content=re.sub(r'<script[^>]*src="../shared/public-cms.js[^>]*></script>', '<script src="kgat-events.js?v=2"></script>',content)
+  content=re.sub(r'<script[^>]*src="../shared/public-cms.js[^>]*></script>', '<script src="kgat-events.js?v=20261101-integrity1"></script>',content)
   content=content.replace('</head>','<link rel="stylesheet" href="kgat-local.css?v=1"></head>')
  if suffix=='.js' and Path(name).name=='app.js':
   content=content.replace('fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({}))','Promise.resolve({})')
   content=content.replace('fetch("../admin/data/taxonomy.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({primary_categories:[]}))','(window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP.taxonomy):fetch("../admin/data/taxonomy.json").then(r=>r.json()))')
   content=content.replace('if(state.category&&e.category!==state.category)return false;','if(state.category&&!window.KGAT_EVENTS.matches(e,new Set([state.category])))return false;')
   content=content.replace('ids.has(e.category)','window.KGAT_EVENTS.matches(e,ids)')
- content=re.sub(r'(assets/branding/(?:what-to-do-kgat-dark|kgatnet-dark)\.svg)\?v=[^\"\s\']+',r'\1?v=20261029-kgat3',content)
+ content=re.sub(r'(assets/branding/(?:what-to-do-kgat-dark|kgatnet-dark)\.svg)\?v=[^\\\"\s\']+',r'\1?v=20261029-kgat3',content)
  if suffix=='.html':
   def fingerprint(match):
    attribute,asset=match.group(1),match.group(2)

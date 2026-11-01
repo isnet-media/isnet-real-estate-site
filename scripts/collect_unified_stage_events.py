@@ -110,13 +110,14 @@ def detail_links(soup,base,host):
 
 def mevalim_ticket_extract(soup,page):
     if (urlparse(page).hostname or "")!="tickets.mevalim.co.il":return []
-    heading=soup.find("h1")
+    heading=next((h for h in soup.find_all("h1") if clean(h.get_text(" ",strip=True)) not in {"מבלים","Mevalim"}),None)
     title=clean(heading.get_text(" ",strip=True)) if heading else ""
     if not title or len(title)>140:return []
     raw=soup.get_text(" ",strip=True)
     hit=re.search(r"(\d{1,2}:\d{2})\s*[·•|]\s*(?:יום\s*)?[^·•|]{0,15}[·•|]\s*(\d{1,2}\.\d{1,2}\.20\d{2})\s*[·•|]\s*([^·•|]{4,100})",raw)
     if not hit:return []
     clock,day,venue=hit.groups()
+    venue=clean(re.split(r"פתיחת דלתות|כניסת קהל",venue)[0])
     city=next((k for k,names in CITIES.items() if any(n in venue for n in names)),None)
     if not city:return []
     d,m,y=day.split(".")

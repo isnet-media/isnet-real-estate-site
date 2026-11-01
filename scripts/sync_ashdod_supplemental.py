@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Source-authoritative Ashdod supplements. No editorial text/image gating."""
+from event_source_media import lazy_image, friends_image
 from apply_ashdod_museum_media import apply_ashdod_museum_media
 from apply_ashdod_category_overrides import apply_ashdod_category_overrides
 import argparse, json, re, math, hashlib
@@ -168,7 +169,7 @@ def collect(src):
     seen.add(url);q=page(url);rows.extend(ld(q));pending.extend(urljoin(url,a['href']) for a in q.select('a[rel=next],.pagination a[href],a.page-numbers[href]'))
   out=[convert(o,src) for o in rows]
  elif src=='friends':
-  posters={row.select_one('a.btn_info[href]')['href']:row.select_one('img[src]')['src'] for row in p.select('.search_show_row') if row.select_one('a.btn_info[href]') and row.select_one('img[src]')}
+  posters={row.select_one('a.btn_info[href]')['href']:lazy_image(row.select_one('img'),SOURCES[src]) for row in p.select('.search_show_row') if row.select_one('a.btn_info[href]') and row.select_one('img[src]')}
   links=list(posters)
   def read(url):
    q=page(url);h=q.find('h1');title=h.get_text(' ',strip=True) if h else '';desc=q.select_one('.wrap_brief');meta=q.find('meta',property='og:image');events=[]
@@ -176,7 +177,7 @@ def collect(src):
     header=block.select_one('.date_time_address');d=block.select_one('.date_wrap');v=block.select_one('.address_wrap')
     if not header or not d or 'אשדוד' not in header.get_text():continue
     tm=re.search(r'\b\d{2}:\d{2}\b',header.get_text());date=datetime.strptime(d.get_text(strip=True),'%d/%m/%y')
-    events.append(make(src,title,date.date().isoformat(),tm[0] if tm else '',v.get_text(' ',strip=True) if v else 'אשדוד',url,desc.get_text('\n',strip=True) if desc else '',meta.get('content') if meta else posters.get(url)))
+    events.append(make(src,title,date.date().isoformat(),tm[0] if tm else '',v.get_text(' ',strip=True) if v else 'אשדוד',url,desc.get_text('\n',strip=True) if desc else '',friends_image(q,url,posters.get(url))))
    return [friends_prices(e,q) for e in events]
   with ThreadPoolExecutor(max_workers=6) as pool:
    for rows in pool.map(read,links):out.extend(rows)
