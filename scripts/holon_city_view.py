@@ -28,6 +28,7 @@ def decorate(content,name,suffix):
   if food:
    card=food[0].replace(' data-ashdod-culinary',' data-holon-culinary')
    content=content.replace('<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה">','<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה">'+card,1)
+  content=content.replace('<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה">','<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה"><a class="isnetNavSmall" href="health.html"><span aria-hidden="true">✚</span> בריאות וחירום · בית מרקחת פתוח</a>',1)
   # Holon has no beach; do not present another city's coastline as local.
   content=re.sub(r'<a class="cityDiscover__card"[^>]*href="places.html\?category=beaches"[\s\S]*?</a>','',content)
   content=re.sub(r'<a class="isnetNavSmall"[^>]*href="places.html\?category=beaches"[\s\S]*?</a>','',content)
