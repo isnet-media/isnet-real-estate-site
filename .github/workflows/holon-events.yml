@@ -1,0 +1,35 @@
+name: Refresh Holon events and culinary guide
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '35 3 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: isnet-event-data-writes
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4 pillow
+      - run: python -u scripts/sync_holon_events.py
+      - run: python -u scripts/polish_holon_catalog.py
+      - run: python scripts/build_holon_events.py
+      - run: python scripts/test_holon_events.py
+      - name: Publish only Holon data and generated pages
+        run: |
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add events-preview/holon
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh verified Holon events, culinary sources and media'
+          git pull --rebase origin main
+          git push origin HEAD:main

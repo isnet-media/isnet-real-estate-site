@@ -1,0 +1,54 @@
+name: Holon events release checks
+on:
+  push:
+    branches: [main, 'feature/holon-events-*']
+    paths:
+      - 'events-preview/holon/**'
+      - 'scripts/*holon*events*'
+      - 'scripts/polish_holon_catalog.py'
+      - '.github/workflows/holon-events*.yml'
+  pull_request:
+    paths:
+      - 'events-preview/holon/**'
+      - 'scripts/*holon*events*'
+      - 'scripts/polish_holon_catalog.py'
+      - '.github/workflows/holon-events*.yml'
+permissions:
+  contents: read
+jobs:
+  data-and-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: pip install requests beautifulsoup4 pillow
+      - run: |
+          python -m py_compile scripts/sync_holon_events.py scripts/polish_holon_catalog.py scripts/build_holon_events.py
+          python scripts/test_holon_events.py
+          node --check events-preview/holon/app.js
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/test-holon-events-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: holon-events-qa
+          path: /tmp/holon-events-qa
+          if-no-files-found: ignore
+  live:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: data-and-browser
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-holon-events-live.cjs
