@@ -40,7 +40,7 @@ def decorate(content,name,suffix):
   if name in ['index.html','category.html']:
    data=read('events-public');data['taxonomy']=json.loads((ROOT/'admin/data/taxonomy.json').read_text())
    packed=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
-   content=content.replace('<head>','<head><script>window.ISNET_CITY_BOOTSTRAP='+packed+';</script>',1)
+   content=content.replace('<head>','<head><meta charset="utf-8"><script>window.ISNET_CITY_BOOTSTRAP='+packed+';</script>',1)
   meta='<meta name="holon-layout" content="canonical-ashdod-20261101"><meta property="og:image" content="https://isnet.co.il/events-preview/holon/assets/share-card.jpg">'
   content=content.replace('</head>',meta+'</head>')
   if name=='index.html':content=content.replace('</head>','<link rel="canonical" href="https://isnet.co.il/events-preview/holon/"></head>')
