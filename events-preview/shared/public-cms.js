@@ -3,26 +3,29 @@
   const key="sb_publishable_njxvSKmgkOQqkGL3JbWiIA_od-9l3wb";
   const root=new URL('../',document.currentScript.src);
   const timeout=()=>typeof AbortSignal!=='undefined'&&AbortSignal.timeout?AbortSignal.timeout(15000):undefined;
+  const integrity=window.ISNET_EVENT_IDENTITIES;
+  const mediaReady=integrity?.ready||Promise.resolve();
+  const checked=data=>({...data,events:(data.events||[]).map(e=>integrity?.sanitize(e)||e)});
   const sourceRequests=new Map(),cardRequests=new Map(),hubRequests=new Map(),cmsRequests=new Map(),rawRequests=new Map();
   const metrics={sourceLoads:0,publishedLoads:0,pages:0,sourceMilliseconds:0,publishedMilliseconds:0};
   const clock=()=>typeof performance!=="undefined"?performance.now():Date.now();
   function cityName(city){
     city=city||location.pathname.match(/events-preview\/([^/]+)/)?.[1];
-    if(!['ashdod','rishon-lezion','yavne'].includes(city))throw new Error('Unknown city');return city;
+    if(!['ashdod','rishon-lezion','yavne','kiryat-gat'].includes(city))throw new Error('Unknown city');return city;
   }
   function loadSource(city){
     city=cityName(city);
-    if(!sourceRequests.has(city)){const started=clock();metrics.sourceLoads++;sourceRequests.set(city,fetch(new URL(city+'/data/events.json',root),{cache:'no-cache',signal:timeout()}).then(r=>{if(!r.ok)throw new Error('Event data unavailable');return r.json()}).then(data=>{metrics.sourceMilliseconds+=clock()-started;return data}).catch(error=>{sourceRequests.delete(city);throw error}));}
+    if(!sourceRequests.has(city)){const started=clock();metrics.sourceLoads++;sourceRequests.set(city,fetch(new URL(city+'/data/events.json',root),{cache:'no-cache',signal:timeout()}).then(r=>{if(!r.ok)throw new Error('Event data unavailable');return r.json()}).then(async data=>{await mediaReady;data=checked(data);metrics.sourceMilliseconds+=clock()-started;return data}).catch(error=>{sourceRequests.delete(city);throw error}));}
     return sourceRequests.get(city);
   }
   function loadCards(city){
     city=cityName(city);
-    if(!cardRequests.has(city))cardRequests.set(city,fetch(new URL(city+'/data/events-cards.json',root),{cache:'no-cache',signal:timeout()}).then(r=>{if(!r.ok)throw new Error('Listing unavailable');return r.json()}).catch(()=>loadSource(city)));
+    if(!cardRequests.has(city))cardRequests.set(city,fetch(new URL(city+'/data/events-cards.json',root),{cache:'no-cache',signal:timeout()}).then(r=>{if(!r.ok)throw new Error('Listing unavailable');return r.json()}).then(async data=>{await mediaReady;return checked(data)}).catch(()=>loadSource(city)));
     return cardRequests.get(city);
   }
   function loadHub(city){
     city=cityName(city);
-    if(!hubRequests.has(city))hubRequests.set(city,fetch(new URL(city+'/data/events-hubs.json',root),{cache:'no-cache',signal:timeout()}).then(r=>{if(!r.ok)throw new Error('Hub listing unavailable');return r.json()}).then(data=>{if(data.hub_schema!==1||!Array.isArray(data.events))throw new Error('Invalid hub listing');return data}).catch(()=>loadSource(city)));
+    if(!hubRequests.has(city))hubRequests.set(city,fetch(new URL(city+'/data/events-hubs.json',root),{cache:'no-cache',signal:timeout()}).then(r=>{if(!r.ok)throw new Error('Hub listing unavailable');return r.json()}).then(data=>{if(data.hub_schema!==1||!Array.isArray(data.events))throw new Error('Invalid hub listing');return data}).then(async data=>{await mediaReady;return checked(data)}).catch(()=>loadSource(city)));
     return hubRequests.get(city);
   }
   async function readRows(city){
@@ -41,7 +44,7 @@
     if(!rawRequests.has(city))rawRequests.set(city,readRows(city).catch(error=>{rawRequests.delete(city);throw error;}));
     const [rows,source]=await Promise.all([rawRequests.get(city),hub?loadHub(city):listing?loadCards(city):loadSource(city)]);
     const base=new Map((source.events||[]).map(e=>[String(e.event_id),e]));
-    return rows.map(row=>({...row,payload:window.ISNET_EVENT_OVERLAY?.merge(base.get(String(row.event_id))||{},row.payload)||row.payload}));
+    return rows.map(row=>({...row,payload:integrity?.sanitize(window.ISNET_EVENT_OVERLAY?.merge(base.get(String(row.event_id))||{},row.payload)||row.payload)||(window.ISNET_EVENT_OVERLAY?.merge(base.get(String(row.event_id))||{},row.payload)||row.payload)}));
   }
   window.ISNET_PUBLIC_CMS={loadSource,loadCards,loadHub,metrics,
     publishedEvents(city,options={}){

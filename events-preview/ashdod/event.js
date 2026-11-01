@@ -53,7 +53,7 @@ function normalizeSearch(s){
 }
 function eventGroupKey(e){
   if(e?.series_id)return "series:"+String(e.series_id);
-  return normalizeSearch(e?.title||"");
+  return window.ISNET_EVENT_IDENTITIES?.groupKey(e)||normalizeSearch(e?.title||"");
 }
 function eventDisplayTitle(e){
   return e?.series_title||e?.title||"אירוע";
@@ -104,6 +104,7 @@ function isBlockedPurchaseUrl(url){
 function purchaseAction(e){
   if(["cancelled","canceled","postponed"].includes(e.status))return null;
   const url=String(e.purchase_url||"").trim();
+  if(/[<>]/.test(url))return null;
   if(/^https:\/\//i.test(url)&&(e.source_content_authoritative||!isBlockedPurchaseUrl(url))){
     return {href:url,label:e.ticket_status==="sold_out"?"פרטי הרכישה":"לרכישת כרטיסים",kind:"url",soldOut:e.ticket_status==="sold_out"};
   }
@@ -120,7 +121,7 @@ function groupPurchaseAction(occ){
   return null;
 }
 function trustedImage(e){
-  return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true);
+  return window.ISNET_EVENT_IDENTITIES?window.ISNET_EVENT_IDENTITIES.safeImage(e):Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true);
 }
 function bestImageEvent(occ){
   return occ.find(e=>e.source_content_authoritative&&trustedImage(e))
@@ -309,7 +310,7 @@ function renderHero(e,occ,imageEvent){
 
   if(trustedImage(imageEvent)){
     const src=imageEvent.thumbnail_ready&&imageEvent.thumbnail_url?imageEvent.thumbnail_url:imageEvent.image_url;
-    $("heroImage").innerHTML='<img src="'+escapeHtml(src)+'" alt="'+escapeHtml(eventDisplayTitle(e))+'">';
+    $("heroImage").innerHTML='<img src="'+escapeHtml(src)+'" data-media-alternatives="'+escapeHtml(JSON.stringify((imageEvent._image_alternatives||[]).filter(u=>u!==src)))+'" onerror="window.ISNET_EVENT_IDENTITIES.imageError(this)" alt="'+escapeHtml(eventDisplayTitle(e))+'">';
   }else{
     if(e.category==="lecture"){
       const key=String(e.event_id||e.title||"");
@@ -513,19 +514,21 @@ async function init(){
       }
     }
 
-    const base=requestedId
+    let base=requestedId
       ? all.find(e=>e.event_id===requestedId)
       : all.find(e=>eventSlug(e)===slugifyHebrew(requestedSlug));
+    base=window.ISNET_EVENT_IDENTITIES?.resolve(all,base?.event_id)||base;
     if(!base||["hidden","draft","archived","trashed","deleted"].includes(base.status)||["draft","unpublished","hidden","archived"].includes(base.publication_status))throw new Error("event");
     const canonicalSlug=eventSlug(base);
     if(!requestedSlug || slugifyHebrew(requestedSlug)!==canonicalSlug){
       history.replaceState(null,"","event.html?slug="+encodeURIComponent(canonicalSlug));
     }
     const key=eventGroupKey(base);
-    const occ=all.filter(e=>eventGroupKey(e)===key)
+    const occurrenceRows=window.ISNET_EVENT_IDENTITIES?.reconcile(all)||all;
+    const occ=occurrenceRows.filter(e=>eventGroupKey(e)===key)
       .sort((a,b)=>(a.start_date+(a.start_time||"99:99")).localeCompare(b.start_date+(b.start_time||"99:99")));
     const e=richEvent(occ);
-    const imageEvent=bestImageEvent(occ);
+    const imageEvent=bestImageEvent(occ.filter(x=>!window.ISNET_EVENT_IDENTITIES||window.ISNET_EVENT_IDENTITIES.sameProduction(x,base)))||base;
 
     // GA4 standard ecommerce-style event view. item_id lets the Data API
     // aggregate views per event without exposing personal information.
@@ -569,6 +572,7 @@ async function init(){
     $("loadingState").hidden=true;
     $("page").hidden=false;
   }catch(err){
+    console.warn("Event detail unavailable",err);
     $("loadingState").hidden=true;
     $("errorState").hidden=false;
   }

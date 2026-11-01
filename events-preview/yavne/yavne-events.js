@@ -25,7 +25,7 @@
  // The published snapshot avoids a slow or failed CMS blocking category pages.
  const api=window.ISNET_PUBLIC_CMS,data=window.ISNET_CITY_BOOTSTRAP;
  if(api&&data&&location.pathname.endsWith('/category.html')){
-  for(const method of ['loadCards','loadHub']){const original=api[method];api[method]=city=>!city||city==='yavne'?Promise.resolve(data):original(city);}
+  for(const method of ['loadCards','loadHub']){const original=api[method];api[method]=city=>!city||city==='yavne'?Promise.resolve(window.ISNET_EVENT_IDENTITIES?.ready).then(()=>({...data,events:(data.events||[]).map(e=>window.ISNET_EVENT_IDENTITIES?.sanitize(e)||e)})):original(city);}
   const published=api.publishedEvents;
   api.publishedEvents=(city,options)=>Promise.race([published(city,options),new Promise(resolve=>setTimeout(()=>resolve([]),1200))]);
  }

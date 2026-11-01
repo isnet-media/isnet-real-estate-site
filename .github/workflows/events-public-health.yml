@@ -20,6 +20,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check public city endpoints without generating load
         run: python scripts/check_events_health.py --output /tmp/isnet-health.json
+      - name: Verify live event identity and media rules in all five cities
+        run: node scripts/check-public-event-integrity.cjs
       - name: Retain health report
         if: always()
         uses: actions/upload-artifact@v4

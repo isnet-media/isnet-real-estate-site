@@ -1,6 +1,8 @@
 """Regression tests: national stage-board import must never reuse IDs or delete events."""
 import json
 import unittest
+from unittest.mock import patch
+from datetime import date
 from scripts.import_national_board_events import claim_import_identity, extract
 from scripts.collect_unified_stage_events import event_from_jsonld
 
@@ -73,7 +75,12 @@ class StageTimezoneSafety(unittest.TestCase):
         page = '<script type="application/ld+json">' + json.dumps(
             self.stage_event("2026-10-26T15:00:00.000Z"), ensure_ascii=False
         ) + '</script>'
-        rows = extract(page, "https://example.org/event", "אשדוד")
+        class ReviewDate(date):
+            @classmethod
+            def today(cls):
+                return cls(2026, 10, 25)
+        with patch("scripts.import_national_board_events.date", ReviewDate):
+            rows = extract(page, "https://example.org/event", "אשדוד")
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["start_date"], "2026-10-26")
         self.assertEqual(rows[0]["start_time"], "17:00")

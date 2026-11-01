@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build compact listing feeds and a canonical sitemap from published event facts."""
-import argparse, gzip, json, re, unicodedata
+import argparse, gzip, json, re, unicodedata, subprocess
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlencode
@@ -23,7 +23,7 @@ def compact(event):
     return out
 
 # Specialized hubs search full public copy; never truncate these text fields.
-HUB_FIELDS=frozenset('accessibility address age_max age_min age_text audiences category category_memberships city contact_phone content_source_url crosscheck_sources description description_manual_override editorial_description end_date end_time event_id id image_credit image_data_url image_manual_override image_publishable image_represents_event image_url image_verified is_active is_free local_source_name locked_fields long_description meeting_point member_price_min_ils organizer organizer_name overlay_version price_is_starting price_max_ils price_min_ils publication_status purchase_phone purchase_url series_description short_pitch source source_description source_image_kind source_priority start_date start_time status subcategory thumbnail_ready thumbnail_url ticket_status ticket_url title venue venue_name walking_level youtube_id'.split())
+HUB_FIELDS=frozenset('venue_institution_id source_content_authoritative duplicate_of _image_alternatives _verified_fact_repair _duplicate_ids _integrity_group_key accessibility address age_max age_min age_text audiences category category_memberships city contact_phone content_source_url crosscheck_sources description description_manual_override editorial_description end_date end_time event_id id image_credit image_data_url image_manual_override image_publishable image_represents_event image_url image_verified is_active is_free local_source_name locked_fields long_description meeting_point member_price_min_ils organizer organizer_name overlay_version price_is_starting price_max_ils price_min_ils publication_status purchase_phone purchase_url series_description short_pitch source source_description source_image_kind source_priority start_date start_time status subcategory thumbnail_ready thumbnail_url ticket_status ticket_url title venue venue_name walking_level youtube_id'.split())
 def hub_event(event):
     return {k:v for k,v in event.items() if k in HUB_FIELDS}
 
@@ -59,6 +59,12 @@ def merge(events,rows):
 def visible(e,day):
     return e.get('seo_index') is not False and e.get('is_active') is not False and e.get('status') not in ('hidden','draft','archived','trashed','deleted') and e.get('publication_status') not in ('draft','hidden','unpublished','archived') and (e.get('end_date') or e.get('start_date') or '')>=day
 
+def integrity_events(events):
+    # The browser and static discovery pages use the same verified identity policy.
+    script="const fs=require('fs'),q=require('./events-preview/shared/event-overlay.js').integrity,r=JSON.parse(fs.readFileSync('events-preview/shared/data/event-quality-media.json'));q.setMediaRegistry(r.repairs);q.setFactRegistry(r.fact_repairs);process.stdout.write(JSON.stringify(q.reconcile(JSON.parse(fs.readFileSync(0,'utf8')))));"
+    result=subprocess.run(['node','-e',script],input=json.dumps(events,ensure_ascii=False),text=True,capture_output=True,cwd=ROOT,check=True)
+    return json.loads(result.stdout)
+
 def build(with_cms=False):
     report={'generated_at':datetime.now(ZoneInfo('UTC')).isoformat(),'measurement':'Serialized payload bytes and gzip bytes; not a browser latency or load test.','cities':{}}
     day=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat()
@@ -77,7 +83,7 @@ def build(with_cms=False):
         (folder/'data/events-cards.json').write_bytes(encoded)
         hub_encoded=json.dumps({**data,'events':[hub_event(e) for e in data['events']],'hub_schema':1},ensure_ascii=False,separators=(',',':')).encode()
         (folder/'data/events-hubs.json').write_bytes(hub_encoded)
-        events=merge(data['events'],published(city)) if with_cms else data['events']
+        events=integrity_events(merge(data['events'],published(city)) if with_cms else data['events'])
         if with_cms:
             seo_urls,seo_report=build_seo(ROOT,events,slug,visible,day,city)
             urls.update(seo_urls)

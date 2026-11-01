@@ -2,7 +2,7 @@
 (()=>{
 const snapshot=window.ISNET_CITY_BOOTSTRAP;
 const request=(name)=>fetch('data/'+name+'.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Event feed unavailable');return r.json()});
-const data=()=>snapshot?Promise.resolve(snapshot):request('events');
+const data=()=>Promise.resolve(window.ISNET_EVENT_IDENTITIES?.ready).then(()=>snapshot||request('events')).then(d=>({...d,events:(d.events||[]).map(e=>window.ISNET_EVENT_IDENTITIES?.sanitize(e)||e)}));
 window.ISNET_PUBLIC_CMS={loadSource:data,loadCards:data,loadHub:data,publishedEvents:()=>Promise.resolve([]),metrics:{}};
 const sportEligible=e=>{
  if(e.is_home_game===true&&e.representative_team===true&&e.home_team)return true;

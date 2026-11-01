@@ -15,6 +15,7 @@ const iso=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numer
 const ids=new Set(entry[2]);let events=[];
 const unique=e=>String(e.event_id||e.id||"");
 function trustedImage(e){
+  if(window.ISNET_EVENT_IDENTITIES&&!window.ISNET_EVENT_IDENTITIES.safeImage(e))return false;
   return Boolean(!(window.isnetEventDefaultImage?.(e)&&window.isnetEventIllustration?.(e))&&e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
 }
 function categoryImage(e){
@@ -27,16 +28,17 @@ function categoryImage(e){
 }
 function render(){
  const q=document.getElementById("q").value.trim().toLocaleLowerCase("he");
- const filtered=events.filter(e=>ids.has(e.category)&&(!q||String(e.title||"").toLocaleLowerCase("he").includes(q)));
+ const filtered=events.filter(e=>(window.ISNET_EVENT_IDENTITIES?.matchesCategory(e,ids)||ids.has(e.category))&&(!q||String(e.title||"").toLocaleLowerCase("he").includes(q)));
  document.getElementById("count").textContent=filtered.length+" אירועים";
  document.getElementById("empty").hidden=filtered.length>0;
  document.getElementById("cards").innerHTML=filtered.map(e=>{
- const original=events.find(x=>x.title===e.title&&x.image_source==="friends"&&trustedImage(x))||e;
+ const original=events.find(x=>(window.ISNET_EVENT_IDENTITIES?window.ISNET_EVENT_IDENTITIES.sameProduction(x,e):x.title===e.title)&&x.image_source==="friends"&&trustedImage(x))||e;
  const sourceImage=trustedImage(original);
  const image=sourceImage?(original.thumbnail_ready&&original.thumbnail_url?original.thumbnail_url:original.image_url):categoryImage(e);
  const venue=esc(e.venue||"ראשון לציון");
  const date=esc(e.start_date||"");
- const media=image?'<img class="image" src="'+esc(image)+'" loading="lazy" alt="'+esc(sourceImage?e.title:"תמונת המחשה")+'" onerror="this.outerHTML=\'<div class=&quot;image placeholder&quot;>✦</div>\'">':'<div class="image placeholder">✦</div>';
+ let media=image?'<img class="image" src="'+esc(image)+'" loading="lazy" data-media-alternatives="'+esc(JSON.stringify((original._image_alternatives||[]).filter(u=>u!==image)))+'" alt="'+esc(sourceImage?e.title:"תמונת המחשה")+'" onerror="window.ISNET_EVENT_IDENTITIES.imageError(this)">':'<div class="image placeholder">✦</div>';
+ if(image&&(!sourceImage||original.image_represents_event===false))media='<span style="position:relative;display:block">'+media+'<span style="position:absolute;bottom:8px;right:8px;background:#111c;color:white;padding:3px 8px;border-radius:5px;font-size:13px">תמונת המחשה</span></span>';
  return '<a class="card" href="event.html?id='+encodeURIComponent(unique(e))+'">'+media+'<div class="body"><h2>'+esc(e.title)+'</h2><div class="meta">'+date+' · '+venue+'</div><div class="action">לפרטי האירוע ←</div></div></a>';
  }).join("");
 }
@@ -45,12 +47,12 @@ Promise.all([
  (window.ISNET_PUBLIC_CMS?.loadCards?.()||fetch("data/events.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("data");return r.json()})),
  window.ISNET_PUBLIC_CMS?.publishedEvents?.(location.pathname.split("/").filter(Boolean)[1],{listing:true})||Promise.resolve([])
 ]).then(([d,cms])=>{
- const rows=(window.ISNET_EVENT_IDENTITIES?.reconcile?.(Array.isArray(d.events)?d.events:[])||(Array.isArray(d.events)?d.events:[]));
+ const rows=Array.isArray(d.events)?d.events:[];
  const map=new Map(rows.filter(Boolean).map(e=>[unique(e),e]));
  for(const row of (Array.isArray(cms)?cms:[])){
   const id=row?.event_id||row?.payload?.event_id;
   if(id&&row.payload&&(map.has(id)||row.record_type==="manual"))map.set(id,{...map.get(id),...row.payload,event_id:id});
  }
- events=[...map.values()].filter(e=>ids.has(e.category)&&e.is_active!==false&&!["cancelled","canceled","hidden","draft","deleted"].includes(e.status)&&!["hidden","draft","unpublished","archived"].includes(e.publication_status)&&(!e.start_date||e.start_date>=iso)).sort((a,b)=>String(a.start_date||"").localeCompare(String(b.start_date||"")));render();
+ events=(window.ISNET_EVENT_IDENTITIES?.reconcile([...map.values()])||[...map.values()]).filter(e=>(window.ISNET_EVENT_IDENTITIES?.matchesCategory(e,ids)||ids.has(e.category))&&e.is_active!==false&&!["cancelled","canceled","hidden","draft","deleted"].includes(e.status)&&!["hidden","draft","unpublished","archived"].includes(e.publication_status)&&(!e.start_date||e.start_date>=iso)).sort((a,b)=>String(a.start_date||"").localeCompare(String(b.start_date||"")));render();
 }).catch(()=>{document.getElementById("empty").hidden=false;document.getElementById("empty").textContent="לא ניתן לטעון כרגע את רשימת האירועים. נסו שוב מאוחר יותר.";});
 })();

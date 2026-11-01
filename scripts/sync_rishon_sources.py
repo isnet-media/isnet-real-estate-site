@@ -4,6 +4,7 @@
 Collect all dated Mevalim occurrences and supplemental national/official cards.
 Source failures preserve existing records. An occurrence is keyed by title/date/time/venue.
 """
+from event_source_media import lazy_image, friends_image
 import argparse, hashlib, json, re
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime,timedelta
@@ -73,7 +74,7 @@ def convert(o,src):
  return e
 
 def collect_friends():
- p=shared.page(SOURCES['friends']);posters={urljoin(SOURCES['friends'],a['href']):urljoin(SOURCES['friends'],row.select_one('img[src]')['src']) for row in p.select('.search_show_row') if (a:=row.select_one('a.btn_info[href]')) and row.select_one('img[src]')}
+ p=shared.page(SOURCES['friends']);posters={urljoin(SOURCES['friends'],a['href']):lazy_image(row.select_one('img'),SOURCES['friends']) for row in p.select('.search_show_row') if (a:=row.select_one('a.btn_info[href]')) and row.select_one('img[src]')}
  def read(pair):
   url,poster=pair
   try:
@@ -83,7 +84,7 @@ def collect_friends():
     if not header or not d or not local(header.get_text()):continue
     dt=datetime.strptime(d.get_text(strip=True),'%d/%m/%y');tm=re.search(r'\b\d{2}:\d{2}\b',header.get_text())
     if not horizon(dt.date().isoformat())or not tm:continue
-    e=make('friends',title,dt.date().isoformat(),tm[0],v.get_text(' ',strip=True)if v else 'FRIENDS ראשון לציון',url,desc.get_text('\n',strip=True)if desc else '',poster)
+    e=make('friends',title,dt.date().isoformat(),tm[0],v.get_text(' ',strip=True)if v else 'FRIENDS ראשון לציון',url,desc.get_text('\n',strip=True)if desc else '',friends_image(q,url,poster))
     a=block.select_one('a[href*="tickets"],a.btn_purchase[href],a[href*="smarticket"]')
     if a:e['ticket_url']=e['purchase_url']=urljoin(url,a['href'])
     out.append(shared.friends_prices(e,q))

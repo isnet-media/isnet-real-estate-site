@@ -49,7 +49,7 @@ def build():
  (C/'category-fallbacks.json').write_text('{}\n')
  # Adapter supplies the canonical normalized snapshot to every list/detail/hub.
  adapter='''/* Holon-owned source snapshot for the shared ISNET frontend. */
-(()=>{const data=()=>window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP):fetch('data/events-public.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Holon feed unavailable');return r.json()});window.ISNET_PUBLIC_CMS={loadSource:data,loadCards:data,loadHub:data,publishedEvents:()=>Promise.resolve([]),metrics:{}};window.HOLON_EVENTS={matches:(e,ids)=>ids.has(e.category)||(e.category_memberships||[]).some(m=>ids.has(m.category))||(ids.has('seniors')&&e.audiences?.includes('seniors'))||(ids.has('kids')&&e.audiences?.includes('kids'))};})();\n'''
+(()=>{const raw=()=>window.ISNET_CITY_BOOTSTRAP?Promise.resolve(window.ISNET_CITY_BOOTSTRAP):fetch('data/events-public.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Holon feed unavailable');return r.json()});const data=()=>Promise.resolve(window.ISNET_EVENT_IDENTITIES?.ready).then(raw).then(d=>({...d,events:(d.events||[]).map(e=>window.ISNET_EVENT_IDENTITIES?.sanitize(e)||e)}));window.ISNET_PUBLIC_CMS={loadSource:data,loadCards:data,loadHub:data,publishedEvents:()=>Promise.resolve([]),metrics:{}};window.HOLON_EVENTS={matches:(e,ids)=>ids.has(e.category)||(e.category_memberships||[]).some(m=>ids.has(m.category))||(ids.has('seniors')&&e.audiences?.includes('seniors'))||(ids.has('kids')&&e.audiences?.includes('kids'))};})();\n'''
  (C/'holon-events.js').write_text(adapter)
  from sync_event_city_views import files_to_sync,localize,TARGETS
  city=TARGETS['holon']

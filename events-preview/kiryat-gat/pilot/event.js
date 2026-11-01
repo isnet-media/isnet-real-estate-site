@@ -18,7 +18,7 @@ function normalizeSearch(s){
 }
 function eventGroupKey(e){
   if(e?.series_id)return "series:"+String(e.series_id);
-  return normalizeSearch(e?.title||"");
+  return window.ISNET_EVENT_IDENTITIES?.groupKey(e)||normalizeSearch(e?.title||"");
 }
 function eventDisplayTitle(e){
   return e?.series_title||e?.title||"אירוע";
@@ -75,6 +75,7 @@ function purchaseAction(e){
   if(["cancelled","canceled","postponed"].includes(e.status))return null;
   if(!isUpcoming(e))return null;
   const url=String(e.purchase_url||"").trim();
+  if(/[<>]/.test(url))return null;
   if(!isBrokenPurchaseUrl(url)&&/^https:\/\//i.test(url)&&(e.source_content_authoritative||!isBlockedPurchaseUrl(url))){
     return {href:url,label:e.ticket_status==="sold_out"?"פרטי הרכישה":"לרכישת כרטיסים",kind:"url",soldOut:e.ticket_status==="sold_out"};
   }
@@ -94,6 +95,7 @@ function groupPurchaseAction(occ){
   return null;
 }
 function trustedImage(e){
+  if(window.ISNET_EVENT_IDENTITIES&&!window.ISNET_EVENT_IDENTITIES.safeImage(e))return false;
   return Boolean(!(window.isnetEventDefaultImage?.(e)&&window.isnetEventIllustration?.(e))&&e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
 }
 function bestImageEvent(occ){
@@ -318,7 +320,7 @@ function renderHero(e,occ,imageEvent){
 
   if(trustedImage(imageEvent)){
     const src=imageEvent.thumbnail_ready&&imageEvent.thumbnail_url?imageEvent.thumbnail_url:imageEvent.image_url;
-    $("heroImage").innerHTML='<img data-event-image-id="'+escapeHtml(e.event_id)+'" src="'+escapeHtml(src)+'" alt="'+escapeHtml(eventDisplayTitle(e))+'">'+(imageEvent.image_caption?'<span class="image-caption" style="position:absolute;bottom:8px;right:8px;padding:4px 8px;background:#171717cc;color:white;font-size:12px">'+escapeHtml(imageEvent.image_caption)+'</span>':'');
+    $("heroImage").innerHTML='<img data-event-image-id="'+escapeHtml(e.event_id)+'" src="'+escapeHtml(src)+'" data-media-alternatives="'+escapeHtml(JSON.stringify((imageEvent._image_alternatives||[]).filter(u=>u!==src)))+'" onerror="window.ISNET_EVENT_IDENTITIES.imageError(this)" alt="'+escapeHtml(eventDisplayTitle(e))+'">'+(imageEvent.image_caption?'<span class="image-caption" style="position:absolute;bottom:8px;right:8px;padding:4px 8px;background:#171717cc;color:white;font-size:12px">'+escapeHtml(imageEvent.image_caption)+'</span>':'');
   }else{
     const illustration=window.isnetEventIllustration?.(e);
     if(illustration){
@@ -544,7 +546,7 @@ async function init(){
       ? originalAll.find(e=>e.event_id===requestedId||e.source_aliases?.some(a=>a.event_id===requestedId))
       : findSlugEvent(originalAll,requestedSlug);
     const canonical=original?.canonical_event_id&&all.find(e=>e.event_id===original.canonical_event_id);
-    const base=canonical||(!requestedId&&findSlugEvent(all,requestedSlug))
+    const base=canonical||window.ISNET_EVENT_IDENTITIES?.resolve(originalAll,original?.event_id)||(!requestedId&&findSlugEvent(all,requestedSlug))
       ||(original&&all.find(e=>e.event_id===original.event_id||e._source_event_ids?.includes(original.event_id)));
     if(!base||["hidden","draft","archived","trashed","deleted"].includes(base.status)||["draft","unpublished","hidden","archived"].includes(base.publication_status))throw new Error("event");
     const canonicalSlug=eventSlug(base);
@@ -559,7 +561,7 @@ async function init(){
     const upcoming=distinct.filter(e=>isUpcoming(e));
     const occ=upcoming.length?upcoming:distinct;
     const e={...richEvent(occ),_canonical_slug:canonicalSlug,start_date:occ[0].start_date,start_time:occ[0].start_time};
-    const imageEvent=bestImageEvent(occ);
+    const imageEvent=bestImageEvent(occ.filter(x=>!window.ISNET_EVENT_IDENTITIES||window.ISNET_EVENT_IDENTITIES.sameProduction(x,base)))||base;
 
     // GA4 standard ecommerce-style event view. item_id lets the Data API
     // aggregate views per event without exposing personal information.
@@ -614,6 +616,7 @@ async function init(){
     $("loadingState").hidden=true;
     $("page").hidden=false;
   }catch(err){
+    console.warn("Event detail unavailable",err);
     $("loadingState").hidden=true;
     $("errorState").hidden=false;
   }
