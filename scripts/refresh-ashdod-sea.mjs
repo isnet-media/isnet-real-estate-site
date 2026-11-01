@@ -1,6 +1,7 @@
 import {mkdir, writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
+import https from 'node:https';
 
 export const SOURCE='https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml';
 export function localTime(date=new Date()) {
@@ -25,9 +26,12 @@ export function parseSea(xml,now=new Date()) {
   return {schema:1,city:'אשדוד',regionId:213,region:'החוף הדרומי',source:'השירות המטאורולוגי הישראלי',sourceUrl:SOURCE,timeZone:'Asia/Jerusalem',issuedAtLocal:time(value(xml,'IssueDateTime')),fetchedAt:now.toISOString(),periods};
 }
 async function main(){
-  const r=await fetch(SOURCE,{headers:{'User-Agent':'ISNET-Sea-Forecast/1.0 (https://ashdodnet.com/)','Cache-Control':'no-cache'},signal:AbortSignal.timeout(25000)});
-  if(!r.ok)throw new Error(`IMS HTTP ${r.status}`);
-  const xml=new TextDecoder('iso-8859-8').decode(await r.arrayBuffer()),data=parseSea(xml);
+  let bytes,lastError;
+  for(let attempt=0;attempt<3;attempt++){
+    try{bytes=await new Promise((resolve,reject)=>{const req=https.get(SOURCE,{family:4,headers:{'User-Agent':'ISNET-Sea-Forecast/1.0 (https://ashdodnet.com/)','Cache-Control':'no-cache'},signal:AbortSignal.timeout(35000)},r=>{if(r.statusCode!==200){r.resume();reject(new Error(`IMS HTTP ${r.statusCode}`));return;}const chunks=[];r.on('data',c=>chunks.push(c));r.on('end',()=>resolve(Buffer.concat(chunks)));r.on('error',reject)});req.on('error',reject)});break}catch(e){lastError=e;console.error(`IMS attempt ${attempt+1}: ${e.message}`)}
+  }
+  if(!bytes)throw lastError;
+  const xml=new TextDecoder('iso-8859-8').decode(bytes),data=parseSea(xml);
   const output=process.argv[2]||'weather/ashdod/sea.json';
   await mkdir(resolve(output,'..'),{recursive:true});await writeFile(output,JSON.stringify(data,null,2)+'\n');
   console.log(JSON.stringify({region:data.region,periods:data.periods,issuedAt:data.issuedAtLocal}));
