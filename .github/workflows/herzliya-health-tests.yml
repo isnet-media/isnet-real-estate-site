@@ -1,0 +1,33 @@
+name: Herzliya health release checks
+on:
+  push:
+    branches: [main, 'feature/herzliya-health-*']
+    paths: ['events-preview/herzliya/**', 'events-preview/holon/health.css', 'events-preview/shared/event-share.js', 'scripts/*herzliya*health*', 'scripts/build_holon_health.py', '.github/workflows/herzliya-health-tests.yml']
+  pull_request:
+    paths: ['events-preview/herzliya/**', 'events-preview/holon/health.css', 'events-preview/shared/event-share.js', 'scripts/*herzliya*health*', 'scripts/build_holon_health.py', '.github/workflows/herzliya-health-tests.yml']
+permissions:
+  contents: read
+jobs:
+  content-and-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          python scripts/build_herzliya_health.py --check
+          python scripts/test_herzliya_health.py
+          node --check scripts/test-herzliya-health.cjs
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/test-herzliya-health.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: herzliya-health-qa
+          path: /tmp/herzliya-health-qa
