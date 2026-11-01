@@ -34,7 +34,12 @@ jobs:
           ref: ${{ github.sha }}
           path: audit-code
           fetch-depth: 1
-      - name: Compare public JSON with current GitHub feed
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Normalize expected feeds with the publication integrity policy
+        run: node current-main/scripts/audit-event-integrity.cjs --apply
+      - name: Compare public JSON with normalized current GitHub feed
         run: python audit-code/scripts/verify_public_event_readback.py --repo-root current-main --output /tmp/isnet-public-event-readback.json
       - name: Retain read-back evidence
         if: always()
