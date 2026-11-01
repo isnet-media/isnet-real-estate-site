@@ -29,8 +29,8 @@ def subcat(cat,title,sid):
  return {'music':'concerts' if re.search(r'תזמורת|קונצרט|דוידוב',title) else 'singing' if re.search(r'שרים|זמר',title) else 'live','kids':'story' if re.search(r'שעת סיפור|סיפור לקטנטנים',title) else 'workshops' if re.search(r'סדנ|חוג',title) else 'shows','theatre':'dance' if 'מחול' in title else 'theatre','cinema':'meetings' if re.search(r'מפגש|שיחה',title) else 'screenings','lecture':'workshops' if re.search(r'סדנ',title) else 'lectures','exhibition':'design' if sid=='design' else 'comics' if 'קומיקס' in title else 'art'}.get(cat,{'standup':'standup','community':'community'}.get(cat,'culture'))
 def fallback(cat):return next(c['image'] for c in read('categories')['categories'] if c['id']==cat)
 def promo(url,source_url):
- if not url or '/uploads/' not in url or any(w in url.lower() for w in ['no_pic','logo','no-image']):return None
- if urlsplit(url).hostname!=urlsplit(source_url).hostname:return None
+ if not url or not ('/uploads/' in url or '/images/' in url and 'hotcinema.co.il' in urlsplit(url).hostname) or any(w in url.lower() for w in ['no_pic','logo','no-image']):return None
+ if urlsplit(url).hostname.removeprefix('www.')!=urlsplit(source_url).hostname.removeprefix('www.'):return None
  try:
   name=hashlib.sha256(url.encode()).hexdigest()[:20]+'.jpg';p=CITY/'assets/events'/name
   if not p.exists():
@@ -47,7 +47,19 @@ def ingest(spec):
   if 'JavaScript' in text and (len(text)<2000 or 'מושבת' in text):
    report.update(status='interactive_source',note='המקור דורש JavaScript; מוצג קישור ישיר, ללא המצאת אירועים');return [],report
   parser=spec.get('parser')
-  if parser=='structured':rows=core.generic_jsonld_rows(soup,{'url':spec['url'],'venue':spec['venue']})
+  if parser=='hot-events':
+   rows=[]
+   for a in soup.select('a.event-thumb[href]'):
+    heading=a.select_one('.event-thumb-name');title=clean(heading.get_text(' ',strip=True)) if heading else ''
+    image=a.select_one('img[src]')
+    for node in a.select('.event-thumb-date'):
+     hit=re.fullmatch(r'(.*חולון)\s*-\s*(\d{2}/\d{2}/\d{2})\s+(\d{2}:\d{2})',clean(node.get_text(' ',strip=True)))
+     if not hit:continue
+     dt=datetime.strptime(hit[2],'%d/%m/%y');u=urljoin(spec['url'],a['href'])
+     title=re.sub(r'\s*(?:ב?דרים סטייג|DREAM STAGE|\(פארק עסקים).*$', '',title,flags=re.I).strip()
+     title=re.sub(r'\s*\d{1,2}\.\d{1,2}(?:\.\d{2,4})?\s*$', '',title).strip()
+     rows.append(dict(title=title,start_date=dt.date().isoformat(),start_time=hit[3],venue='DREAM STAGE חולון',ticket_url=u,purchase_url=u,image_origin_url=urljoin(spec['url'],image['src']) if image else None))
+  elif parser=='structured':rows=core.generic_jsonld_rows(soup,{'url':spec['url'],'venue':spec['venue']})
   elif parser=='smarticket':rows=core.smarticket_rows(soup,{'url':spec['url'],'venue':spec['venue']})
   elif parser=='mevalim':
    rows=[]
@@ -78,7 +90,7 @@ def ingest(spec):
    if spec['id']=='hth':venue='תיאטרון חולון · '+venue if 'תיאטרון חולון' not in venue else venue
    elif spec['id'] in ['mediatheque','cinematheque','design'] and 'מדיטק' not in venue and 'חולון' not in venue:venue=('סינמטק חולון' if spec['id']=='cinematheque' else 'מוזיאון העיצוב חולון' if spec['id']=='design' else 'מדיטק חולון')+' · '+venue
    cat=classify(title,info,spec['id']);sub=subcat(cat,title,spec['id'])
-   out.append(dict(id='holon-'+hashlib.sha256((core.text_norm(title)+'|'+row['start_date']+'|'+row['start_time']+'|'+core.text_norm(venue)).encode()).hexdigest()[:16],title=title,city='חולון',start_date=row['start_date'],start_time=row['start_time'],venue=venue,category=cat,subcategory=sub,source_url=u,booking_url=row.get('purchase_url') or u,source_id=spec['id'],source_name=spec['name'],image=fallback(cat),image_credit='תמונת המחשה — לא צילום מהאירוע',description='',ticket_status=row.get('ticket_status','unknown'),price=None,source_checked_at=NOW.isoformat()))
+   out.append(dict(id='holon-'+hashlib.sha256((core.text_norm(title)+'|'+row['start_date']+'|'+row['start_time']+'|'+core.text_norm(venue)).encode()).hexdigest()[:16],title=title,city='חולון',start_date=row['start_date'],start_time=row['start_time'],venue=venue,category=cat,subcategory=sub,source_url=u,booking_url=row.get('purchase_url') or u,source_id=spec['id'],source_name=spec['name'],image=fallback(cat),image_origin_url=row.get('image_origin_url'),image_credit='תמונת המחשה — לא צילום מהאירוע',description='',ticket_status=row.get('ticket_status','unknown'),price=None,source_checked_at=NOW.isoformat()))
   report['events_found']=len(out)
   return out,report
  except Exception as ex:report.update(status='fetch_failed',note=str(ex)[:180]);return [],report
@@ -102,8 +114,10 @@ def enrich(e):
    updated=classify(e['title'],e['description'],e['source_id'])
    if updated!='community':e['category']=updated
    e['subcategory']=subcat(e['category'],e['title'],e['source_id'])
-  meta=soup.select_one('meta[property="og:image"]');url=urljoin(e['source_url'],meta.get('content','')) if meta else None
+  meta=soup.select_one('meta[property="og:image"]');url=urljoin(e['source_url'],meta.get('content','')) if meta else e.get('image_origin_url')
   image=promo(url,e['source_url'])
+  if not image and e.get('image_origin_url') and e['image_origin_url']!=url:
+   url=e['image_origin_url'];image=promo(url,e['source_url'])
   if image:e.update(image=image,image_origin_url=url,image_credit='תמונת יח״צ: '+e['source_name'],image_role='official_promotional')
   else:e.update(image=fallback(e['category']),image_role='illustration')
   if re.search(r'גמלא|גיל השלישי|מינחת|על הבוקר|בין ערביים|60\+',e['title']+' '+e['description']):e['audiences']=['seniors']

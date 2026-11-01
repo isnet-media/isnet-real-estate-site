@@ -26,7 +26,7 @@ EDITORIAL={
 'רעותי הילדה':'מופע חנוכה עם רעותי וחברים, בשילוב שירים ודמויות מעולם התוכן של הילדים.'}
 ALIASES={'כראמל 1':'כראמל','כראמל - תיאטרון אורנה פורת':'כראמל','הווירטואוזים של אריק דוידוב - קפה פריז':'דוידוב- קפה פריז','תזמורת ירושלים מזרח ומערב - תחנות בזמן איציק קלה':'תזמורת ירושלים- איציק קלה','הזוג המוזר-תיאטרון חיפה':'הזוג המוזר','מדיאה‎ - תיאטרון הקאמרי':'מדיאה'}
 def base(title):
- title=re.split(r'[\x00-\x08]',title)[0].strip();title=ALIASES.get(title,title);title=re.sub(r'^בין ערביים\s*[-–]\s*','',title);title=re.sub(r'\s*[-–]\s*(?:תיאטרון|קומדיה|מופע סטנדאפ).*$', '',title);return core.core.text_norm(title)
+ title=re.split(r'[\x00-\x08]',title)[0].strip();title=ALIASES.get(title,title);title=re.sub(r'^מופע\s+','',title);title=re.sub(r'^Party\b','פארטי',title,flags=re.I);title=re.sub(r'רעותי הילדה הישראלית.*','רעותי הילדה הישראלית',title);title=re.sub(r'^בין ערביים\s*[-–]\s*','',title);title=re.sub(r'\s*[-–]\s*(?:תיאטרון|קומדיה|מופע סטנדאפ).*$', '',title);return core.core.text_norm(title)
 def main():
  d=core.read('events');events=d['events'];categories={c['id']:c for c in core.read('categories')['categories']};held=[];out=[]
  events.sort(key=lambda e:e['source_id']=='mevalim')
@@ -37,6 +37,9 @@ def main():
   match=next((x for x in out if base(x['title'])==base(e['title']) and x['start_date']==e['start_date'] and (x['start_time']==e['start_time'] or e['source_id']=='mevalim' and abs(int(x['start_time'][:2])*60+int(x['start_time'][3:])-int(e['start_time'][:2])*60-int(e['start_time'][3:]))<=60)),None)
   if match:held.append({'title':e['title'],'date':e['start_date'],'time':e['start_time'],'source_url':e['source_url'],'reason':'same show and date; primary organizer occurrence retained'});continue
   if e['category']=='community' and e['source_id']=='hth':e['category']='theatre';e['subcategory']='theatre'
+  if e['source_id']=='hot-events' and re.search(r'הצדעה|מחווה|הרפז|תמוז|בי ג',e['title']):e['category']='music';e['subcategory']='live'
+  if e['source_id']=='hot-events' and 'יאנה דרום' in e['title']:e['category']='lecture';e['subcategory']='lectures'
+  if e['source_id']=='hot-events' and 'שבלול בצנצנת' in e['title']:e['category']='kids';e['subcategory']='shows'
   if 'שוקו וניל' in e['title']:e['category']='theatre';e['subcategory']='theatre'
   if 'סדנ' in e['title'] or 'חוג איור' in e['title']:e['category']='kids';e['subcategory']='workshops'
   if re.search(r'אלאדין|חנות סופגניות|היי סקול דרמה|אנחנו כבר גדולים|מסעדה בקצה',e['title']):e['category']='kids';e['subcategory']='shows'
