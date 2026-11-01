@@ -40,10 +40,20 @@ class HolonRelease(unittest.TestCase):
   for e in read('guides')['items']:
    if e.get('saturday'):self.assertEqual(urlsplit(e['source_url']).hostname,'park-peres.co.il')
  def test_city_bootstrap_and_sharing_metadata(self):
-  html=(C/'index.html').read_text();self.assertIn('window.HOLON_BOOTSTRAP=',html);self.assertIn('https://holonnet.co.il/',html);self.assertIn('holon-launch-20261101',html);self.assertIn('assets/share-card.jpg',html);self.assertNotIn('מה עושים באשדוד',html);self.assertIn('og:image',html)
+  html=(C/'index.html').read_text();self.assertIn('window.ISNET_CITY_BOOTSTRAP=',html);self.assertIn('https://holonnet.co.il/',html);self.assertIn('canonical-ashdod-20261101',html);self.assertIn('assets/share-card.jpg',html);self.assertNotIn('מה עושים באשדוד',html);self.assertIn('og:image',html)
   for name in ['restaurants','cinema','kids','seniors','saturday','attractions','sources']:self.assertTrue((C/(name+'.html')).is_file())
  def test_bootstrap_matches_owned_data(self):
   data=read('site');self.assertEqual(data['events'],read('events')['events']);self.assertEqual(data['restaurants'],read('restaurants')['items'])
+ def test_shared_ashdod_layout_and_ids(self):
+  public=read('events-public');self.assertEqual([e['event_id'] for e in public['events']],[e['id'] for e in read('events')['events']])
+  for filename in ['styles.css','pilot/home.css','home-date-gateway.js','pilot/rails.js']:
+   a=(R/'events-preview/ashdod'/filename).read_text();b=(C/filename).read_text();self.assertTrue(a.strip() in b or a.strip()==b.strip(),filename)
+  from bs4 import BeautifulSoup
+  master=BeautifulSoup((R/'events-preview/ashdod/index.html').read_text(),'html.parser');city=BeautifulSoup((C/'index.html').read_text(),'html.parser')
+  for selector in ['.hero','.heroMarquee','.isnetNavDiscovery','#eventsGrid','#searchInput']:
+   if master.select(selector):self.assertEqual(len(master.select(selector)),len(city.select(selector)),selector)
+  self.assertIsNotNone(city.select_one('.culinaryHomepageFeature'));self.assertIn('holon-events.js',(C/'event.html').read_text())
+  self.assertNotIn('window.HOLON_BOOTSTRAP=',(C/'index.html').read_text())
  def test_parser_does_not_expand_unknown_more_dates(self):
   sys.path.insert(0,str(R/'scripts'));import sync_holon_events as h
   self.assertEqual(h.classify('אורי חזקיה','','hth'),'standup');self.assertEqual(h.classify('אבו סאלי','','cinematheque'),'cinema');self.assertEqual(h.classify('מסעדה בקצה הקוטב - תיאטרון המדיטק','לגילאי 4 ומעלה','mediatheque'),'kids')
