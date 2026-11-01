@@ -22,3 +22,5 @@ for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon']){const
 console.log('PASS: all five feeds, exact occurrence identity, distinct times/venues/casts, old IDs, source media, editorial image locks, illustrations and conflicting IDs');
 
 const vm=require('node:vm'),context={window:{location:{pathname:'/events-preview/ashdod/'}},URL,Promise};vm.createContext(context);vm.runInContext(fs.readFileSync('events-preview/shared/event-overlay.js','utf8'),context);vm.runInContext(fs.readFileSync('events-preview/ashdod/ashdod-event-identities.js','utf8'),context);assert.equal(typeof context.window.ISNET_EVENT_IDENTITIES.groupKey,'function');assert.equal(typeof context.window.ISNET_EVENT_IDENTITIES.sanitize,'function');console.log('PASS: legacy identity adapter preserves shared runtime API');
+
+const fake={dataset:{mediaAlternatives:JSON.stringify(['https://same-show.test/backup.jpg'])},getAttribute:()=> 'https://same-show.test/blocked.jpg'};q.imageError(fake);assert.equal(fake.src,'https://same-show.test/backup.jpg');assert.equal(fake.dataset.mediaAlternatives,'[]');console.log('PASS: failed source image uses the same occurrence backup');
