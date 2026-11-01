@@ -6,12 +6,18 @@ on:
       - 'events-preview/holon/**'
       - 'scripts/*holon*events*'
       - 'scripts/polish_holon_catalog.py'
+      - 'scripts/holon_city_view.py'
+      - 'scripts/sync_event_city_views.py'
+      - 'assets/isnet-top-navigation.js'
       - '.github/workflows/holon-events*.yml'
   pull_request:
     paths:
       - 'events-preview/holon/**'
       - 'scripts/*holon*events*'
       - 'scripts/polish_holon_catalog.py'
+      - 'scripts/holon_city_view.py'
+      - 'scripts/sync_event_city_views.py'
+      - 'assets/isnet-top-navigation.js'
       - '.github/workflows/holon-events*.yml'
 permissions:
   contents: read
@@ -29,7 +35,7 @@ jobs:
           node-version: '22'
       - run: pip install requests beautifulsoup4 pillow
       - run: |
-          python -m py_compile scripts/sync_holon_events.py scripts/polish_holon_catalog.py scripts/build_holon_events.py
+          python -m py_compile scripts/sync_holon_events.py scripts/polish_holon_catalog.py scripts/build_holon_events.py scripts/holon_city_view.py scripts/sync_event_city_views.py
           python scripts/test_holon_events.py
           node --check events-preview/holon/app.js
       - run: npm install --no-save playwright@1.55.0

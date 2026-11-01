@@ -1,29 +1,13 @@
-# מה עושים בחולון — מבית חולון נט
+# מה עושים בחולון — the shared ISNET event edition
 
-Public edition: https://isnet.co.il/events-preview/holon/
+Public URL: https://isnet.co.il/events-preview/holon/
 
-Holon-owned calendars, culinary inventory, UI and release checks. Uses ISNET's dark/gold visual language and its owned illustration bank. It does not relabel another city's events, venues, restaurant photographs or analytics stream.
+Holon uses the canonical Ashdod frontend through `scripts/sync_event_city_views.py`, including the homepage hero, discovery menu, free search, calendar, category rails, event detail pages, kids and seniors hubs, cinema panel, places, Saturday guide, and culinary layout. Edit the shared Ashdod presentation source; Holon adaptations live in `scripts/holon_city_view.py`. There is no separate Holon homepage UI.
 
-## Data and sources
+`build_holon_events.py` adapts the city-owned raw feed to `data/events-public.json`, preserving original event IDs, dates, locations, booking destinations and image credits. It also builds Holon's own movie schedules and directories. No other city's events, places, restaurant photographs or analytics stream are copied. Common owned illustration banks may be reused with visible attribution.
 
-- `data/sources.json`: organizer, municipal, community, museum and culinary sources.
-- `data/source-report.json`: per-source collection status, direct-link-only sources and individual restaurant checks. Interactive and failed sources are not represented as successful intake.
-- `data/events.json`: exact dated local occurrences, booking URLs and media provenance. Unknown additional dates, prices, ages and openings are never inferred.
-- `data/restaurants.json`: direct venue/booking sources plus Rest records whose structured address explicitly confirms Holon. Existing verified directory records are retained when a listing's rotation changes.
-- `data/categories.json`: images for all categories and subcategories. Local JPG promotional images and labeled ISNET-owned generic illustrations cover every visible card.
-- `data/quality-report.json`: held duplicates/conflicts. Primary organizer schedules take precedence for the same show and date.
+The daily `Refresh Holon events and culinary guide` workflow collects city sources, polishes reviewed metadata, builds the normalized data and canonical views, and runs quality checks. The shared UI synchronization workflow also includes Holon so future layout changes propagate automatically. The culinary HTML, CSS and renderer come from Ashdod, with only city text and Holon venue data substituted.
 
-Museum closure notices and restaurant exclusions are explicit. A linked operator or club directory is separate from an actual dated event. Unknown kosher status and Saturday opening are not included in affirmative filters. Sports directories link to the club; unsourced fixtures are not fabricated.
+Sources and limitations remain explicit in `data/source-report.json` and `sources.html`; interactive sources are direct links, unknown prices/openings are not fabricated, generic images are labeled, and museum closure notices remain visible. Local raw feeds and source/media provenance are retained.
 
-## Daily pipeline
-
-`Refresh Holon events and culinary guide` runs daily at 03:35 UTC and supports manual dispatch:
-
-1. `python scripts/sync_holon_events.py`
-2. `python scripts/polish_holon_catalog.py`
-3. `python scripts/build_holon_events.py`
-4. `python scripts/test_holon_events.py`
-
-Only Holon data/media/generated pages are committed. The existing Pages workflow then publishes them. Source refresh failures retain proven data where supported and appear in the report. The release workflow verifies city isolation, all JPG files, categories, cuisines, mobile widths 320/390, desktop, search, date filters, dialogs, sharing and calendar downloads. Main pushes also verify the live release.
-
-Edit `template.html`, `app.js`, `style.css` and city data, then rebuild; `index.html` and the main category aliases embed a fast static bootstrap. There is no dependency on a signed-in CMS request to show the list. WhatsApp, Facebook, email, clipboard and native sharing are available with a city-specific JPEG preview.
+Release checks cover raw/public ID parity, photo files, data isolation, exact shared CSS and calendar/rail bundles, the actual homepage shell compared with Ashdod, 320/390px and desktop layouts, search, detail pages, sharing, kids, seniors, cinema, food and local attractions. Live checks require the canonical layout marker and normalized feed.

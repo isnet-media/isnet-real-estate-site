@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "events-preview"
 MASTER = ROOT / "ashdod"
 TARGETS = {
+    "holon": {"slug":"holon","name":"חולון","brand":"חולון נט","website":"https://holonnet.co.il/","second_cinema":"HOT CINEMA DREAM STAGE","second_cinema_id":"hot-cinema","brand_slug":"holon"},
     "kiryat-gat": {"slug":"kiryat-gat","name":"קריית גת","brand":"קריית גת נט","website":"https://kgatnet.co.il/","second_cinema":"היכל התרבות","second_cinema_id":"municipal-hall"},
     "yavne": {"slug":"yavne","name":"יבנה","brand":"יבנה נט","website":"https://www.yavnenet.co.il/","second_cinema":"סינמטק יבנה","second_cinema_id":"cinematheque"},
     "rishon-lezion": {
@@ -70,9 +71,9 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     content = content.replace("publishedEvents?.('ashdod')", "publishedEvents?.('" + city['slug'] + "')")
     # Shared, non-geographic illustration assets remain in the canonical bank.
     content = re.sub(r'(?<![A-Za-z0-9_./-])assets/(?!branding/)', '../ashdod/assets/', content)
-    content = content.replace('assets/branding/what-to-do-ashdod', 'assets/branding/what-to-do-' + ('yavne' if city['slug']=='yavne' else 'rishon'))
-    content = content.replace('what-to-do-' + ('yavne' if city['slug']=='yavne' else 'rishon') + '-dark.svg?v=20261020-logo2', 'what-to-do-' + ('yavne' if city['slug']=='yavne' else 'rishon') + '-dark.svg?v=20261021-door1')
-    content = content.replace('assets/branding/ashdodnet-dark.svg', 'assets/branding/' + ('yavnenet-dark.svg' if city['slug']=='yavne' else 'rishonet-dark.svg'))
+    content = content.replace('assets/branding/what-to-do-ashdod', 'assets/branding/what-to-do-' + city.get('brand_slug',('yavne' if city['slug']=='yavne' else 'rishon')))
+    content = content.replace('what-to-do-' + city.get('brand_slug',('yavne' if city['slug']=='yavne' else 'rishon')) + '-dark.svg?v=20261020-logo2', 'what-to-do-' + city.get('brand_slug',('yavne' if city['slug']=='yavne' else 'rishon')) + '-dark.svg?v=20261021-door1')
+    content = content.replace('assets/branding/ashdodnet-dark.svg', 'assets/branding/' + ('holonnet-dark.svg' if city['slug']=='holon' else 'yavnenet-dark.svg' if city['slug']=='yavne' else 'rishonet-dark.svg'))
     # Local partner/catalogs never silently load Ashdod content.
     if name == 'site-search-chat.js':
         content = content.replace("if(/חוג|קורס/.test(raw)&&!payload.courses)", "if(false&&/חוג|קורס/.test(raw)&&!payload.courses)")
@@ -244,6 +245,9 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         if suffix == ".html":
             from apply_yavne_analytics import decorate
             content = decorate(content)
+    if city["slug"] == "holon":
+        from holon_city_view import decorate
+        content = decorate(content, name, suffix)
     if suffix == ".html":
         def cache_bust(match):
             filename = match.group(1)
@@ -331,6 +335,9 @@ def run(check: bool = False) -> int:
                 stale.append(f'{slug}/pilot/{src.name}')
                 if not check:
                     path.parent.mkdir(exist_ok=True);path.write_text(expected)
+    if 'holon' in TARGETS:
+        from holon_city_view import build_food
+        stale.extend('holon/'+name for name in build_food(check=check))
     status = "OUT OF SYNC" if check and stale else "UPDATED" if stale else "IN SYNC"
     print(f"Event UI {status}; {len(source_files)} frontend files sourced from Ashdod; "
           f"{len(TARGETS)} target city; {len(stale)} changed files.")
