@@ -59,6 +59,8 @@ def build():
   target.write_text(localize(src.read_text(),str(rel),city,src.suffix))
  from holon_city_view import build_food
  build_food()
+ from build_holon_health import build as build_health
+ build_health()
  # Preserve formerly shared hub URLs without introducing another UI implementation.
  for name,cat in [('kids','kids'),('seniors','seniors')]:
   (C/(name+'.html')).write_text('<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=category.html?category='+cat+'"><a href="category.html?category='+cat+'">למדור בחולון</a></html>')
