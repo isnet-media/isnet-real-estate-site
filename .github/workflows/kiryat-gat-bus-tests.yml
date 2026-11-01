@@ -1,0 +1,66 @@
+name: Kiryat Gat bus release checks
+on:
+  push:
+    paths:
+      - 'bus/kiryat-gat/**'
+      - 'bus/ashdod/style.css'
+      - 'assets/isnet-top-navigation.js'
+      - 'scripts/*city*bus*'
+      - 'scripts/collect_city_rail.py'
+      - 'scripts/refresh_city_streets.py'
+      - 'scripts/audit_city_streets.cjs'
+      - '.github/workflows/kiryat-gat-bus-tests.yml'
+  pull_request:
+    paths:
+      - 'bus/kiryat-gat/**'
+      - 'bus/ashdod/style.css'
+      - 'assets/isnet-top-navigation.js'
+      - 'scripts/*city*bus*'
+      - 'scripts/collect_city_rail.py'
+      - 'scripts/refresh_city_streets.py'
+      - 'scripts/audit_city_streets.cjs'
+      - '.github/workflows/kiryat-gat-bus-tests.yml'
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate city scripts and real transport data
+        run: |
+          for script in bus/kiryat-gat/*.js; do node --check "$script"; done
+          python -m py_compile scripts/collect_city_bus.py scripts/collect_city_rail.py scripts/refresh_city_streets.py
+          node --test bus/kiryat-gat/*.test.cjs bus/ashdod/*.test.cjs scripts/test_ashdod_bus.cjs
+  browser-smoke:
+    needs: node-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0 leaflet@1.9.4
+      - run: npx playwright install --with-deps chromium
+      - name: Check Kiryat Gat on mobile and desktop
+        run: node bus/kiryat-gat/browser-smoke.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kiryat-gat-bus-qa
+          path: bus/kiryat-gat/screenshots/*.png
+          if-no-files-found: ignore
+  live-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: browser-smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify deployed city page, branding and datasets
+        run: node bus/kiryat-gat/production-smoke.cjs

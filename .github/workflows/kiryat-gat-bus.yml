@@ -1,0 +1,48 @@
+name: Refresh Kiryat Gat bus and rail schedules
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 3 * * *'
+  push:
+    branches: [main]
+    paths:
+      - scripts/collect_city_bus.py
+      - scripts/collect_city_rail.py
+      - scripts/refresh_city_streets.py
+      - .github/workflows/kiryat-gat-bus.yml
+permissions:
+  contents: write
+concurrency:
+  group: kiryat-gat-bus-schedules
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: pip install requests
+      - name: Collect and verify official city transport data
+        run: |
+          python -u scripts/collect_city_bus.py --city 'קרית גת' --feed /tmp/kiryat-gat-gtfs.zip --output bus/kiryat-gat/data/network.json
+          python -u scripts/collect_city_rail.py --city 'קרית גת' --feed /tmp/kiryat-gat-gtfs.zip --output bus/kiryat-gat/data/rail.json
+          python scripts/refresh_city_streets.py --city 'קרית גת' --city-code 2630 --minimum 300 --output bus/kiryat-gat/data/streets.json
+          node scripts/audit_city_streets.cjs kiryat-gat
+          node --test bus/kiryat-gat/*.test.cjs
+      - name: Save validated city transport data
+        run: |
+          git config user.name 'isnet-transit-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add bus/kiryat-gat/data
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh Kiryat Gat bus, rail and official streets'
+          git pull --rebase origin main
+          git push origin HEAD:main
