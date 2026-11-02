@@ -80,7 +80,7 @@ def build():
  build_listing()
  branding=C/'assets/branding';branding.mkdir(parents=True,exist_ok=True)
  for old,new in [('what-to-do-kgat-dark.svg','what-to-do-herzliya-dark.svg'),('kgatnet-dark.svg','herzliyanet-dark.svg')]:
-  text=(ROOT/'events-preview/kiryat-gat/assets/branding'/old).read_text().replace('קריית גת','הרצליה').replace('בקרית גת','בהרצליה');(branding/new).write_text(text.replace('הרצליה נט','ישראל נט'))
+  text=(ROOT/'events-preview/kiryat-gat/assets/branding'/old).read_text().replace('קריית גת','הרצליה').replace('בקרית גת','בהרצליה');(branding/new).write_text(text)
  (C/'category-fallbacks.json').write_text('{}\n')
  # Adapter supplies the canonical normalized snapshot to every list/detail/hub.
  adapter='''/* Herzliya-owned source snapshot for the shared ISNET frontend. */

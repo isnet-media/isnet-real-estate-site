@@ -115,7 +115,7 @@ function renderBeachInfo(cat){
       '<span class="infoPanel__label">מצב הים</span>'+
       '<h2>'+esc(cat.daily_status.title||"")+'</h2>'+
       '<p>'+esc(cat.daily_status.text||"")+'</p>'+
-      (cat.daily_status.source_url?'<a href="'+esc(cat.daily_status.source_url)+'" target="_blank" rel="noopener">מצב החופים בישראל נט ←</a>':'');
+      (cat.daily_status.source_url?'<a href="'+esc(cat.daily_status.source_url)+'" target="_blank" rel="noopener">מצב החופים בהרצליה נט ←</a>':'');
   }
 
   $("beachRules").innerHTML=(cat.rules||[]).map((rule,i)=>

@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "events-preview"
 MASTER = ROOT / "ashdod"
 TARGETS = {
-    "herzliya": {"slug":"herzliya","name":"הרצליה","brand":"ישראל נט","website":"https://isnet.co.il/","second_cinema":"סינמטק הרצליה","second_cinema_id":"cinematheque","brand_slug":"herzliya"},
+    "herzliya": {"slug":"herzliya","name":"הרצליה","brand":"הרצליה נט","website":"https://www.herzliyanet.co.il/","second_cinema":"סינמטק הרצליה","second_cinema_id":"cinematheque","brand_slug":"herzliya"},
     "holon": {"slug":"holon","name":"חולון","brand":"חולון נט","website":"https://holonnet.co.il/","second_cinema":"HOT CINEMA DREAM STAGE","second_cinema_id":"hot-cinema","brand_slug":"holon"},
     "kiryat-gat": {"slug":"kiryat-gat","name":"קריית גת","brand":"קריית גת נט","website":"https://kgatnet.co.il/","second_cinema":"היכל התרבות","second_cinema_id":"municipal-hall"},
     "yavne": {"slug":"yavne","name":"יבנה","brand":"יבנה נט","website":"https://www.yavnenet.co.il/","second_cinema":"סינמטק יבנה","second_cinema_id":"cinematheque"},
@@ -39,7 +39,9 @@ JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this genera
 def localize(content: str, name: str, city: dict, suffix: str) -> str:
     if name=='seniors-hub.js':content=re.sub(r'  // ASHDOD_LOCAL_SENIOR_GUIDE_START[\s\S]*?  // ASHDOD_LOCAL_SENIOR_GUIDE_END\n','',content)
     from cinema_loading import optimize
-    return optimize(_localize(content,name,city,suffix),name,suffix,city['slug'])
+    content=optimize(_localize(content,name,city,suffix),name,suffix,city['slug'])
+    content=re.sub(r'(?:(?:\.\./[a-z-]+/)*|/events-preview/[a-z-]+/)?assets/branding/(?:ashdodnet|rishonet|yavnenet|kgatnet|holonnet|herzliyanet)-dark\.svg', '/events-preview/shared/publishers/'+city['slug']+'.png', content)
+    return content
 
 
 def _localize(content: str, name: str, city: dict, suffix: str) -> str:
@@ -300,8 +302,9 @@ def fingerprint_master_html(check: bool = False) -> list[str]:
             return filename + "?v=" + digest
 
         expected = re.sub(pattern, version_asset, original)
-        expected = re.sub(r'isnet-top-navigation\.js\?v=[^"\s]+', 'isnet-top-navigation.js?v=20261030-share1', expected)
-        expected = re.sub(r'event-tools\.js\?v=[^"\s]+', 'event-tools.js?v=20261030-share1', expected)
+        expected = re.sub(r'event-overlay\.js(?:\?v=[^"\s]+)?', 'event-overlay.js?v=20261102-ofra1', expected)
+        expected = re.sub(r'isnet-top-navigation\.js\?v=[^"\s]+', 'isnet-top-navigation.js?v=20261102-city-shell1', expected)
+        expected = re.sub(r'event-tools\.js\?v=[^"\s]+', 'event-tools.js?v=20261102-city-shell1', expected)
         if expected != original:
             changed.append("ashdod/" + html.name)
             if not check:

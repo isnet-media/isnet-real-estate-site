@@ -104,7 +104,7 @@ def build_food(check=False):
    source=source.replace('האווירה בקירה רופטופ בהרצליה','תמונת המחשה של בית קפה — לא צילום ממקום בהרצליה')
    source=source.replace('נבדק ב־19.10.2026','רשימת המסעדות נערכה ב־02.11.2026')
   source=source.replace('צילום: '+chr(39)+'+esc(p.credit)',chr(39)+'+esc(p.credit)')
-  source=source.replace('herzliyanet.co.il','isnet.co.il').replace('הרצליה נט','ישראל נט').replace('צילום: \' +esc(p.credit)', '\' +esc(p.credit)')
+  source=source.replace('צילום: \' +esc(p.credit)', '\' +esc(p.credit)')
   source=source.replace('__HERZLIYA_OWN_PLACES__',json.dumps(places,ensure_ascii=False,separators=(',',':')))
   if name=='restaurants.html':
    source=re.sub(r'<script[^>]*src="(?:ashdod-analytics|site-seo|isnet-advertise)\.js[^"]*"[^>]*></script>','',source)

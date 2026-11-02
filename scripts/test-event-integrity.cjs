@@ -30,3 +30,14 @@ const manual=q.reconcile([row('source',{source_content_authoritative:true}),row(
 const comedy=[row('friends_as_cab289dedf10fa4c60',{title:'קומדי בר- סטנדאפ',city:'אשדוד',category:'standup',venue:'הוט סינמה אשדוד - אולם 2',source_priority:1}),row('makore_as_91fb472ae5344d1b11',{title:'כוכבי הקומדי בר מגיעים למרתון סטנדאפ אשדוד 19.11.26',city:'אשדוד',category:'standup',venue:'הוט סינמה אשדוד - אולם 2',source_priority:4})];assert(context.window.ISNET_EVENT_IDENTITIES.resolve(comedy,'makore_as_91fb472ae5344d1b11')._source_event_ids.includes('friends_as_cab289dedf10fa4c60'));console.log('PASS: previously reviewed comedy aliases retain old detail links');
 
 const publicGuard=require('./check-public-event-integrity.cjs');assert(publicGuard.invalidPublishedRow(row('future',{title:'מבלים',start_date:publicGuard.day})));assert(!publicGuard.invalidPublishedRow(row('archive',{title:'מבלים',start_date:'2000-01-01'})));assert(!publicGuard.invalidPublishedRow(row('hidden',{title:'מבלים',start_date:publicGuard.day,status:'hidden'})));assert(publicGuard.invalidPublishedRow(row('svg',{start_date:'2000-01-01',image_url:'data:image/svg+xml,blank'})));console.log('PASS: live publication guard distinguishes archived source history from active events');
+
+const ofraTitles=['עפרה - המחזמר על עופרה חזה','עפרה - מחזמר התיאטרון העברי','עפרה','עפרה - מחזמר מרהיב על עפרה חזה'];
+const ofraRows=ofraTitles.map((title,i)=>row('ofra-'+i,{title,category:'theatre',venue:'המשכן לאמנויות הבמה אשדוד',start_date:'2026-11-14',start_time:'21:00',purchase_url:'https://tickets.test/offer/'+i,image_url:i===0?'https://source.test/ofra.jpg':'../ashdod/assets/illustrations/theatre.jpg',image_verified:true,image_publishable:true,image_represents_event:i===0,source_image_kind:i===0?'source_card_image':'illustration'}));
+const ofra=q.reconcile(ofraRows);assert.equal(ofra.length,1);assert.equal(ofra[0].image_url,'https://source.test/ofra.jpg');
+for(const original of ofraRows)assert.equal(q.resolve(ofraRows,original.event_id).event_id,ofra[0].event_id);
+assert.equal(ofra[0].source_aliases.length,3);
+assert.equal(q.reconcile([ofraRows[0],{...ofraRows[1],start_time:'18:00'}]).length,2);
+assert.equal(q.reconcile([ofraRows[0],{...ofraRows[1],venue:'אולם מופעים דיונה אשדוד'}]).length,2);
+assert.equal(q.reconcile([ofraRows[0],{...ofraRows[1],title:'עפרה עם שחקנים אחרים'}]).length,2);
+const realOfra=JSON.parse(fs.readFileSync('events-preview/ashdod/data/events.json')).events.filter(e=>e.title.includes('עפרה')&&e.start_date==='2026-11-14');assert.equal(q.reconcile(realOfra).length,1);
+console.log('PASS: reviewed Ofra aliases collapse into one sourced poster/card; all old IDs and offers survive; other times/venues/casts remain separate');

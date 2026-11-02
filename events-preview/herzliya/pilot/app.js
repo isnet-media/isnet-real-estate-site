@@ -498,7 +498,7 @@ function renderCinema(){
   document.body.classList.toggle("cinemaMode",state.cinemaOpen);
   if($("cinemaLoading"))$("cinemaLoading").hidden=!state.cinemaLoading;
   if(state.cinemaLoading){grid.innerHTML="";return;}
-  document.title=state.cinemaOpen?"סרטים בהרצליה | מה עושים בהרצליה?":"מה עושים בהרצליה? | מבית ישראל נט";
+  document.title=state.cinemaOpen?"סרטים בהרצליה | מה עושים בהרצליה?":"מה עושים בהרצליה? | מבית הרצליה נט";
   if(!state.cinemaOpen){grid.innerHTML="";cinemaRenderSignature="";return}
   const signature=[state.cinemaUpdatedAt,state.cinema.length,state.cinemaVenue,state.cinemaAudience,state.cinemaQuery,state.cinemaLimit||24,state.cinemaEditorialReady,cinemaToday()].join("|");
   if(signature===cinemaRenderSignature)return;cinemaRenderSignature=signature;
