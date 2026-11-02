@@ -1,7 +1,7 @@
 /* Runtime safeguards: cinema paints without board/editorial/network dependencies. */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 (async()=>{
-for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya']){
+for(const city of (process.argv[2]?[process.argv[2]]:['ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya'])){
 const root='events-preview/'+city+'/',source=fs.readFileSync(root+'pilot/app.js','utf8'),full=JSON.parse(fs.readFileSync(root+'data/cinema.json')),listing=JSON.parse(fs.readFileSync(root+'data/cinema-listing.json'));
 assert(Buffer.byteLength(JSON.stringify(listing))<Buffer.byteLength(JSON.stringify(full)),'Listing must exclude heavy detail metadata');
 const html=fs.readFileSync(root+'index.html','utf8'),inline=html.match(/window\.ISNET_CINEMA_BOOTSTRAP=([\s\S]*?);<\/script>/);assert(inline,'Inline cinema bootstrap required');assert.deepEqual(JSON.parse(inline[1]),listing,'City bootstrap must match its own feed');
