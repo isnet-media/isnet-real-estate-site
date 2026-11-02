@@ -1,4 +1,7 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
+const cinemaDayFormatter=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"});
+const cinemaShortDateFormatter=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
+let cinemaRenderSignature="";function cinemaToday(){return cinemaDayFormatter.format(new Date())}
 
 const state={events:[],fallbacks:{},generatedAt:null,cinema:[],cinemaVenue:"all",cinemaAudience:"all",cinemaOpen:false,cinemaUpdatedAt:null,sportsMeta:{branches:{},teams:[]},sportTeam:"all",sportBranch:"all",calendarMode:"week",calendarWeek:null,calendarMonth:null,calendarCollapsed:true,periodStart:null,periodEnd:null,periodType:null,quick:"all",date:null,category:null,subcategory:null,query:"",favoritesOnly:false,sort:"date",discoverSeed:0};
 const $=id=>document.getElementById(id);

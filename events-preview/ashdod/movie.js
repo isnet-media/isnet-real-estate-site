@@ -123,7 +123,7 @@ async function init(){
     // Fetch the feed concurrently, but redirect old links as soon as the index is ready.
     const dataRequest=fetch("data/cinema.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw new Error("data");return r.json()});
     dataRequest.catch(()=>{});
-    await window.CinemaEditorial?.ready;
+    // Film facts and sessions render before optional shared editorial/index requests finish.
     const id=new URLSearchParams(location.search).get("id")||document.body.dataset.movieId;
     if(!id)throw new Error("missing id");
     const cleanUrl=window.CinemaEditorial?.url(id);
@@ -137,6 +137,7 @@ async function init(){
     if(movie.editorial_text||!document.body.dataset.staticMovie)$("fullSynopsis").textContent=movie.editorial_text||movie.synopsis||"פרטי הסרט יתעדכנו כאן.";
     renderSources(movie,data.updated_at);
     window.CinemaEditorial?.mount(movie);
+    window.CinemaEditorial?.ready.then(()=>window.CinemaEditorial.mount(movie));
     configureDescription();
     renderRelated(movie,window.CinemaEditorial?.unique(data.movies||[])||data.movies||[]);
     $("loadingState").hidden=true;

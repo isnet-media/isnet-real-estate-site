@@ -1,4 +1,7 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
+const cinemaDayFormatter=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"});
+const cinemaShortDateFormatter=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
+let cinemaRenderSignature="";function cinemaToday(){return cinemaDayFormatter.format(new Date())}
 
 const state={events:[],fallbacks:{},generatedAt:null,cinema:[],cinemaVenue:"all",cinemaAudience:"all",cinemaOpen:false,cinemaUpdatedAt:null,sportsMeta:{branches:{},teams:[]},sportTeam:"all",sportBranch:"all",calendarMode:"week",calendarWeek:null,calendarMonth:null,calendarCollapsed:true,periodStart:null,periodEnd:null,periodType:null,quick:"all",date:null,category:null,subcategory:null,query:"",favoritesOnly:false,sort:"date",discoverSeed:0};
 const $=id=>document.getElementById(id);
@@ -388,7 +391,7 @@ function cinemaScheduleInfo(venue){
   const next=Object.keys(schedule).filter(d=>d>=day).sort()[0];
   if(next){
     const d=localDate(next);
-    const label=sameDay(d,daysFrom(today(),1))?"מחר":new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"}).format(d);
+    const label=sameDay(d,daysFrom(today(),1))?"מחר":cinemaShortDateFormatter.format(d);
     return {date:next,label,times:schedule[next]};
   }
   return {date:null,label:"לשעות מעודכנות",times:[]};
@@ -429,9 +432,12 @@ function cinemaCard(movie){
   '</article>';
 }
 function renderCinema(){
+  const cinemaRenderStart=performance.now();
   const grid=$("cinemaGrid"),section=$("cinemaSection"); if(!grid||!section)return;
   section.hidden=!state.cinemaOpen;
-  if(!state.cinemaOpen){grid.innerHTML="";return}
+  if(!state.cinemaOpen){grid.innerHTML="";cinemaRenderSignature="";return}
+  const signature=[state.cinemaUpdatedAt,state.cinema.length,state.cinemaVenue,state.cinemaAudience,state.cinemaQuery,state.cinemaLimit||24,state.cinemaEditorialReady,cinemaToday()].join("|");
+  if(signature===cinemaRenderSignature)return;cinemaRenderSignature=signature;
   const arr=state.cinema
     .filter(m=>m.venues.some(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=iso(today())&&Array.isArray(times)&&times.length)))
     .filter(m=>state.cinemaAudience==="all"||m.is_family===true)
@@ -442,7 +448,7 @@ function renderCinema(){
       const bt=b.venues.some(v=>Array.isArray(v.schedule?.[day])&&v.schedule[day].length)?0:1;
       return at-bt||a.title.localeCompare(b.title,"he");
     });
-  grid.innerHTML=arr.length?arr.map(cinemaCard).join(""):'<div class="cinemaEmpty"><h3>סרטי הקולנוע בעיר מתעדכנים</h3><p>עדיין אין במאגר סרטים מאומתים עם שעות הקרנה לבית הקולנוע שבחרתם. לא נציג שעות או טריילרים לא בדוקים.</p><p>ניתן בינתיים לבדוק את ההקרנות באתרים הרשמיים של בתי הקולנוע.</p><div class="cinemaEmpty__links"><a href="https://www.planetcinema.co.il/rishon" target="_blank" rel="noopener noreferrer">פלאנט ראשון לציון ←</a></div></div>';
+  grid.innerHTML=arr.length?arr.slice(0,state.cinemaLimit||24).map(cinemaCard).join("")+(arr.length>(state.cinemaLimit||24)?'<button id="cinemaLoadMore" type="button" class="cinemaBackButton" style="grid-column:1/-1;justify-self:center">עוד סרטים ↓</button>':''):'<div class="cinemaEmpty"><h3>סרטי הקולנוע בעיר מתעדכנים</h3><p>עדיין אין במאגר סרטים מאומתים עם שעות הקרנה לבית הקולנוע שבחרתם. לא נציג שעות או טריילרים לא בדוקים.</p><p>ניתן בינתיים לבדוק את ההקרנות באתרים הרשמיים של בתי הקולנוע.</p><div class="cinemaEmpty__links"><a href="https://www.planetcinema.co.il/rishon" target="_blank" rel="noopener noreferrer">פלאנט ראשון לציון ←</a></div></div>';
   document.querySelectorAll("#cinemaFilters [data-cinema]").forEach(b=>b.classList.toggle("is-active",b.dataset.cinema===state.cinemaVenue));
   document.querySelectorAll("#cinemaAudienceFilters [data-audience]").forEach(b=>b.classList.toggle("is-active",b.dataset.audience===state.cinemaAudience));
   document.querySelectorAll("[data-trailer]").forEach(b=>b.onclick=e=>{e.stopPropagation();openTrailer(b.dataset.trailer)});
@@ -450,6 +456,8 @@ function renderCinema(){
     if(e.target.closest("[data-trailer],a,button"))return;
     location.href="movie.html?id="+encodeURIComponent(card.dataset.movie);
   });
+  section.dataset.cinemaRenderMs=(performance.now()-cinemaRenderStart).toFixed(1);section.dataset.cinemaReadyMs||=performance.now().toFixed(1);performance.measure("herzliya-cinema-render",{start:cinemaRenderStart,end:performance.now()});
+  if(!performance.getEntriesByName("herzliya-cinema-ready").length)performance.mark("herzliya-cinema-ready");
   const updated=$("cinemaUpdated");
   if(updated){
     let suffix=arr.length+" סרטים";
@@ -1019,6 +1027,7 @@ function renderResults(){
   }
 }
 function render(){
+  if(state.cinemaOpen)return;
   document.querySelectorAll("#quickFilters button").forEach(b=>b.classList.toggle("is-active",b.dataset.quick===state.quick));
   $("favoritesOnly").setAttribute("aria-pressed",state.favoritesOnly?"true":"false");
   renderDates();renderCategories();renderSubcategories();renderHeroStats();renderSportsFilters();renderActiveFilters();renderResults();
@@ -1302,11 +1311,11 @@ async function init(){
   $("resetAll").onclick=resetAll;
   $("cinemaFilters").onclick=e=>{
     const b=e.target.closest("[data-cinema]"); if(!b)return;
-    state.cinemaVenue=b.dataset.cinema; renderCinema();
+    state.cinemaLimit=24;state.cinemaVenue=b.dataset.cinema; renderCinema();
   };
   $("cinemaAudienceFilters").onclick=e=>{
     const b=e.target.closest("[data-audience]"); if(!b)return;
-    state.cinemaAudience=b.dataset.audience; renderCinema();
+    state.cinemaLimit=24;state.cinemaAudience=b.dataset.audience; renderCinema();
   };
   $("cinemaClose").onclick=()=>{
     state.cinemaOpen=false;

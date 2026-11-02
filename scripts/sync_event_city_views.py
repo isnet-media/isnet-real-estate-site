@@ -37,6 +37,11 @@ JS_MARKER = "// ISNET shared layout: edit events-preview/ashdod, not this genera
 
 
 def localize(content: str, name: str, city: dict, suffix: str) -> str:
+    from cinema_loading import optimize
+    return optimize(_localize(content,name,city,suffix),name,suffix,city['slug'])
+
+
+def _localize(content: str, name: str, city: dict, suffix: str) -> str:
     if city["slug"] == "kiryat-gat":
         from kgat_city_view import localize as kgat_localize
         return kgat_localize(content, name, city, suffix)
@@ -312,9 +317,22 @@ def files_to_sync():
 
 
 def run(check: bool = False) -> int:
+    from cinema_loading import build_listing, optimize
+    generated=[]
+    for slug in ['ashdod', *TARGETS]:
+        path=ROOT/slug/'data/cinema-listing.json'
+        expected=json.dumps(build_listing(slug,check=True),ensure_ascii=False,separators=(',',':'))+'\n'
+        if not path.exists() or path.read_text()!=expected:
+            generated.append(f'{slug}/data/cinema-listing.json')
+            if not check:path.write_text(expected)
+    for path in [MASTER/'index.html',MASTER/'app.js',MASTER/'pilot/app.js',MASTER/'movie.js']:
+        expected=optimize(path.read_text(),path.name,path.suffix,'ashdod')
+        if path.read_text()!=expected:
+            generated.append('ashdod/'+str(path.relative_to(MASTER)))
+            if not check:path.write_text(expected)
     source_files = files_to_sync()
     assert source_files and {"index.html", "app.js", "styles.css"} <= {p.name for p in source_files}
-    stale = fingerprint_master_html(check=check)
+    stale = generated + fingerprint_master_html(check=check)
     for slug, city in TARGETS.items():
         dest = ROOT / slug
         assert (dest / "data" / "events.json").is_file(), "City-specific event dataset missing: " + slug

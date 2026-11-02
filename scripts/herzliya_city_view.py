@@ -73,8 +73,7 @@ def decorate(content,name,suffix):
  # Canonical logo filenames already localized by the shared generator.
  content=content.replace('assets/branding/rishonet-dark.svg','assets/branding/herzliyanet-dark.svg')
  content=content.replace('what-to-do-herzliya.svg','what-to-do-herzliya-dark.svg')
- from herzliya_cinema_loading import optimize
- content=optimize(content,name,suffix)
+ content=content.replace('https://hotcinema.co.il/theater/5','https://www.cinema-city.co.il/city/glilot').replace('סינמטק הרצליה הרצליה ←','סינמה סיטי גלילות ←')
  return content.rstrip()+'\n'
 
 def build_food(check=False):

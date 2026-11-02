@@ -13,7 +13,7 @@ let sharedSaved=window.ISNET_SAVED_LIST?.decode(location.hash);
 
 function localDate(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
 function iso(d){return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
-function today(){return localDate(new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date()))}
+function today(){return localDate(cinemaToday())}
 function daysFrom(base,n){const d=new Date(base);d.setDate(d.getDate()+n);return d}
 function startOfWeek(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(x.getDate()-x.getDay());return x}
 function firstOfMonth(d){const x=new Date(d);x.setHours(0,0,0,0);x.setDate(1);return x}
@@ -420,7 +420,10 @@ function featureCard(e){
     '<div class="featureVenue">⌖ '+escapeHtml(e.venue||"המיקום יפורסם")+'</div></div></article>';
 }
 
-function cinemaToday(){return new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
+const cinemaDayFormatter=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"});
+const cinemaShortDateFormatter=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
+let cinemaDayValue="",cinemaDayCheckedAt=0,cinemaRenderSignature="";
+function cinemaToday(){const now=Date.now();if(!cinemaDayValue||now-cinemaDayCheckedAt>=1000){cinemaDayValue=cinemaDayFormatter.format(new Date(now));cinemaDayCheckedAt=now;}return cinemaDayValue;}
 function cinemaVenueActive(venue){return Object.entries(venue.schedule||{}).some(([day,times])=>day>=cinemaToday()&&Array.isArray(times)&&times.length)}
 function cinemaMovieAvailable(movie){return movie.venues.some(cinemaVenueActive)||Boolean(movie.is_family&&movie.family_catalog_source_url)}
 function cinemaScheduleInfo(venue){
@@ -432,13 +435,13 @@ function cinemaScheduleInfo(venue){
   const next=Object.keys(schedule).filter(d=>d>=day).sort()[0];
   if(next){
     const d=localDate(next);
-    const label=sameDay(d,daysFrom(today(),1))?"מחר":new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"}).format(d);
+    const label=sameDay(d,daysFrom(today(),1))?"מחר":cinemaShortDateFormatter.format(d);
     return {date:next,label,times:schedule[next]};
   }
   return {date:null,label:"לשעות מעודכנות",times:[]};
 }
 function cinemaPosterImage(movie){
-  if(/^https:\/\//.test(movie.poster_url||"")&&movie.poster_verification?.url===movie.poster_url)return movie.poster_url;
+  if(/^(?:https:\/\/|\/)/.test(movie.poster_url||"")&&movie.poster_verification?.url===movie.poster_url)return movie.poster_url;
   return movie.trailer_youtube_id?"https://i.ytimg.com/vi/"+encodeURIComponent(movie.trailer_youtube_id)+"/hqdefault.jpg":"";
 }
 function cinemaSpotlight(movies){
@@ -486,13 +489,16 @@ function cinemaCard(movie){
   '</article>';
 }
 function renderCinema(){
+  const cinemaRenderStart=performance.now();
   const grid=$("cinemaGrid"),section=$("cinemaSection"); if(!grid||!section)return;
   section.hidden=!state.cinemaOpen;
   document.body.classList.toggle("cinemaMode",state.cinemaOpen);
   if($("cinemaLoading"))$("cinemaLoading").hidden=!state.cinemaLoading;
   if(state.cinemaLoading){grid.innerHTML="";return;}
   document.title=state.cinemaOpen?"סרטים בחולון | מה עושים בחולון?":"מה עושים בחולון? | מבית חולון נט";
-  if(!state.cinemaOpen){grid.innerHTML="";return}
+  if(!state.cinemaOpen){grid.innerHTML="";cinemaRenderSignature="";return}
+  const signature=[state.cinemaUpdatedAt,state.cinema.length,state.cinemaVenue,state.cinemaAudience,state.cinemaQuery,state.cinemaLimit||24,state.cinemaEditorialReady,cinemaToday()].join("|");
+  if(signature===cinemaRenderSignature)return;cinemaRenderSignature=signature;
   const arr=state.cinema
     .filter(m=>cinemaMovieAvailable(m)&&m.venues.some(v=>state.cinemaVenue==="all"||v.id===state.cinemaVenue))
     .filter(m=>state.cinemaAudience==="all"||m.is_family===true)
@@ -505,7 +511,8 @@ function renderCinema(){
       return at-bt||a.title.localeCompare(b.title,"he");
     });
   cinemaSpotlight(arr);
-  grid.innerHTML=arr.length?arr.map(cinemaCard).join(""):'<div class="cinemaEmpty"><h3>לא מצאנו סרט שמתאים לבחירה</h3><p>נסו חיפוש אחר, בחרו את שני בתי הקולנוע או עברו לכל הסרטים.</p><button id="cinemaResetFilters" type="button" class="cinemaBackButton">הציגו את כל הסרטים</button><div class="cinemaEmpty__links"><a href="https://www.cinemaholon.org.il/" target="_blank" rel="noopener noreferrer">סינמטק חולון ←</a><a href="https://hotcinema.co.il/theater/5" target="_blank" rel="noopener noreferrer">HOT CINEMA DREAM STAGE חולון ←</a></div></div>';
+  grid.innerHTML=arr.length?arr.slice(0,state.cinemaLimit||24).map(cinemaCard).join("")+(arr.length>(state.cinemaLimit||24)?'<button id="cinemaLoadMore" type="button" class="cinemaBackButton" style="grid-column:1/-1;justify-self:center">עוד סרטים ↓</button>':''):'<div class="cinemaEmpty"><h3>לא מצאנו סרט שמתאים לבחירה</h3><p>נסו חיפוש אחר, בחרו את שני בתי הקולנוע או עברו לכל הסרטים.</p><button id="cinemaResetFilters" type="button" class="cinemaBackButton">הציגו את כל הסרטים</button><div class="cinemaEmpty__links"><a href="https://www.cinemaholon.org.il/" target="_blank" rel="noopener noreferrer">סינמטק חולון ←</a><a href="https://hotcinema.co.il/theater/5" target="_blank" rel="noopener noreferrer">HOT CINEMA DREAM STAGE חולון ←</a></div></div>';
+  if($("cinemaLoadMore"))$("cinemaLoadMore").onclick=()=>{state.cinemaLimit=(state.cinemaLimit||24)+24;renderCinema()};
   if($("cinemaResetFilters"))$("cinemaResetFilters").onclick=()=>{state.cinemaQuery="";state.cinemaVenue="all";state.cinemaAudience="all";$("cinemaSearch").value="";renderCinema()};
   document.querySelectorAll("#cinemaFilters [data-cinema]").forEach(b=>b.classList.toggle("is-active",b.dataset.cinema===state.cinemaVenue));
   document.querySelectorAll("#cinemaAudienceFilters [data-audience]").forEach(b=>b.classList.toggle("is-active",b.dataset.audience===state.cinemaAudience));
@@ -514,6 +521,8 @@ function renderCinema(){
     if(e.target.closest("[data-trailer],a,button"))return;
     location.href=window.CinemaEditorial?.url(card.dataset.movie)||"movie.html?id="+encodeURIComponent(card.dataset.movie);
   });
+  section.dataset.cinemaRenderMs=(performance.now()-cinemaRenderStart).toFixed(1);section.dataset.cinemaReadyMs||=performance.now().toFixed(1);performance.measure("herzliya-cinema-render",{start:cinemaRenderStart,end:performance.now()});
+  if(!performance.getEntriesByName("herzliya-cinema-ready").length)performance.mark("herzliya-cinema-ready");
   const updated=$("cinemaUpdated");
   if(updated){
     let suffix=arr.length+" סרטים";
@@ -1060,7 +1069,7 @@ function renderResults(){
           const image=poster?'<img src="'+escapeHtml(poster)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">':'<span class="homeCinemaCard__fallback">🎬</span>';
           return '<a class="homeCinemaCard" href="movie.html?id='+encodeURIComponent(m.id)+'" aria-label="פרטים ושעות הקרנה: '+escapeHtml(m.title)+'"><span class="homeCinemaCard__media">'+image+'</span><span class="homeCinemaCard__title">'+escapeHtml(m.title)+'</span><span class="homeCinemaCard__action">לפרטים והקרנות ←</span></a>';
         }).join("")+screenings.map(eventCard).join("");
-        return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><h3><a href="cinema.html">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים'+(screenings.length?' · '+screenings.length+' הקרנות מיוחדות':'')+'</span></div><a class="cinemaDetails" href="cinema.html">כל הסרטים והשעות ←</a></div><div class="isnetRailWrap"><div class="isnetCategoryRail homeCinemaRail" tabindex="0" aria-label="סרטי הקולנוע בחולון">'+cards+'</div></div></section>';
+        return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><h3><a href="./#cinema">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים'+(screenings.length?' · '+screenings.length+' הקרנות מיוחדות':'')+'</span></div><a class="cinemaDetails" href="./#cinema">כל הסרטים והשעות ←</a></div><div class="isnetRailWrap"><div class="isnetCategoryRail homeCinemaRail" tabindex="0" aria-label="סרטי הקולנוע בחולון">'+cards+'</div></div></section>';
       }
       const items=buckets.get(key);
       const def=taxonomy.find(t=>t.id===key);
@@ -1112,6 +1121,7 @@ function renderResults(){
   }
 }
 function render(){
+  if(state.cinemaOpen)return;
   document.querySelectorAll("#quickFilters button").forEach(b=>b.classList.toggle("is-active",b.dataset.quick===state.quick));
   $("savedListReset").hidden=!(sharedSaved||state.favoritesOnly);
   $("favoritesOnly").setAttribute("aria-pressed",state.favoritesOnly?"true":"false");
@@ -1139,7 +1149,7 @@ function bindDynamic(){
   document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{
     window.ashdodAnalytics?.send("select_category",{category:b.dataset.cat,category_name:catLabels[b.dataset.cat] || b.dataset.cat,selection_type:state.category===b.dataset.cat ? "clear" : "select"});
     if(b.dataset.cat==="cinema"){
-      location.href="cinema.html";
+      location.href="./#cinema";
       return;
     }
     state.cinemaOpen=false;
@@ -1244,23 +1254,23 @@ async function init(){
   let boardReady=false;
   $("cinemaFilters").onclick=e=>{
     const b=e.target.closest("[data-cinema]"); if(!b)return;
-    state.cinemaVenue=b.dataset.cinema; renderCinema();
+    state.cinemaLimit=24;state.cinemaVenue=b.dataset.cinema; renderCinema();
   };
   $("cinemaAudienceFilters").onclick=e=>{
     const b=e.target.closest("[data-audience]"); if(!b)return;
-    state.cinemaAudience=b.dataset.audience; renderCinema();
+    state.cinemaLimit=24;state.cinemaAudience=b.dataset.audience; renderCinema();
   };
-  window.addEventListener("hashchange",()=>{sharedSaved=window.ISNET_SAVED_LIST?.decode(location.hash);$("savedListStatus").textContent=sharedSaved?"רשימה ששיתפו איתך · אינה משנה את המועדפים שלך.":"";render();state.cinemaOpen=location.hash==="#cinema";renderCinema();if(state.cinemaOpen)$("cinemaSection").scrollIntoView({block:"start"})});
-  $("cinemaSearch").oninput=e=>{state.cinemaQuery=e.target.value;renderCinema()};
+  window.addEventListener("hashchange",()=>{sharedSaved=window.ISNET_SAVED_LIST?.decode(location.hash);$("savedListStatus").textContent=sharedSaved?"רשימה ששיתפו איתך · אינה משנה את המועדפים שלך.":"";state.cinemaOpen=location.hash==="#cinema";render();renderCinema();if(state.cinemaOpen)$("cinemaSection").scrollIntoView({block:"start"})});
+  $("cinemaSearch").oninput=e=>{state.cinemaLimit=24;state.cinemaQuery=e.target.value;renderCinema()};
   $("cinemaClose").onclick=()=>{
     state.cinemaOpen=false;
     renderCinema();
-    renderCategories();
+    render();
     history.replaceState(null,"",location.pathname+location.search);
     window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
   };
   document.querySelectorAll("[data-close-trailer]").forEach(x=>x.onclick=closeTrailer);
-  const cinemaRequest=fetch("data/cinema.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error("cinema");return r.json()}).catch(()=>({movies:[]}));
+  const cinemaRequest=(window.ISNET_CINEMA_BOOTSTRAP?Promise.resolve({ok:true,json:()=>Promise.resolve(window.ISNET_CINEMA_BOOTSTRAP)}):fetch("data/cinema-listing.json",{cache:"no-cache"})).then(r=>{if(!r.ok)throw Error("cinema");return r.json()}).catch(()=>({movies:[]}));
   // Cinema has no dependency on event/CMS responses or editorial enrichment.
   if(location.hash==="#cinema"){state.cinemaOpen=true;if(new URLSearchParams(location.search).get("audience")==="family")state.cinemaAudience="family";}
   cinemaRequest.then(cinema=>{
@@ -1268,7 +1278,7 @@ async function init(){
     if(boardReady)render();
     renderCinema();
     window.CinemaEditorial?.ready.then(()=>{
-      state.cinema=window.CinemaEditorial.unique(cinema.movies||[]);
+      state.cinema=window.CinemaEditorial.unique(cinema.movies||[]);state.cinemaEditorialReady=true;
       if(boardReady)render();
       renderCinema();
     }).catch(error=>console.warn("Keeping source cinema listing",error));
