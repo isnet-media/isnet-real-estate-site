@@ -17,7 +17,11 @@ def production_identity(e):
  return title,key,venue
 
 def build():
- raw=read('events');cats=read('categories')['categories'];guides=read('guides')['items'];food=read('restaurants')['items'];events=[]
+ raw=read('events')
+ from herzliya_event_quality import reviewed
+ corrected=[reviewed(e) for e in raw['events']]
+ if corrected!=raw['events']:raw['events']=corrected;save('events',raw)
+ cats=read('categories')['categories'];guides=read('guides')['items'];food=read('restaurants')['items'];events=[]
  submap={'shows':'kids-shows','story':'story-time','workshops':'kids-workshops','live':'live-music','singing':'live-music','meetings':'cinema','screenings':'cinema','lectures':'general-lectures','design':'exhibitions','art':'exhibitions','comics':'exhibitions'}
  identities={e['id']:production_identity(e) for e in raw['events']}
  labelled_keys={value[1:] for e in raw['events'] if (value:=identities[e['id']]) and value[0]!=e['title']}

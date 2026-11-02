@@ -83,7 +83,10 @@ class HolonRelease(unittest.TestCase):
   self.assertNotEqual(production_identity(base),production_identity({**base,'venue':'תיאטרון חולון · אולם 3'}))
   events=read('events-public')['events'];play=[e for e in events if 'אור לגויים' in e['title']]
   if play:
-   self.assertEqual(len({e.get('series_id')for e in play}),1);self.assertTrue(play[0].get('series_id'))
+   for venue in {e['venue'] for e in play}:
+    same_venue=[e for e in play if e['venue']==venue]
+    self.assertEqual(len({e.get('series_id') for e in same_venue}),1,venue)
+    self.assertTrue(same_venue[0].get('series_id'),venue)
    self.assertEqual({e.get('series_title')for e in play},{'אור לגויים'})
    raw=[e for e in read('events')['events'] if 'אור לגויים' in e['title']]
    self.assertEqual({(e['id'],e['start_date'],e['start_time'],e['booking_url'])for e in raw},{(e['event_id'],e['start_date'],e['start_time'],e['purchase_url'])for e in play})

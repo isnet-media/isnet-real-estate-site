@@ -36,6 +36,21 @@ class EditionTests(unittest.TestCase):
    for tag in s.select('script[src],link[rel="stylesheet"]'):
     u=(tag.get('src') or tag.get('href')).split('?')[0]
     if not u.startswith(('https:','http:','//')):self.assertTrue(((ROOT/u.lstrip('/')) if u.startswith('/') else p.parent/u).is_file(),name+': '+u)
+ def test_reviewed_stage_productions_are_not_films(self):
+  from herzliya_event_quality import reviewed,REVIEWED
+  for (host,path),(category,subtype) in REVIEWED.items():
+   e=dict(source_url='https://'+host+path+'/',category='cinema',start_date='2026-12-01',start_time='20:30',venue='אולם המקור')
+   fixed=reviewed(e);self.assertEqual(fixed['category'],category)
+   self.assertEqual((fixed['start_date'],fixed['start_time'],fixed['venue']),(e['start_date'],e['start_time'],e['venue']))
+  film=dict(source_url='https://www.hcinema.org.il/movies/123',category='cinema',title='עפרה')
+  self.assertEqual(reviewed(film),film)
+  self.assertFalse(any(m['title'] in ['עפרה – תיאטרון העברי','זוגות בזיג זג – קומדיה בקצב גבוה','מעשה בחמישה בלונים'] for m in read('cinema')['movies']))
+ def test_catalog_media_files_exist(self):
+  for catalog,key in [('events','events'),('categories','categories'),('guides','items'),('restaurants','items')]:
+   for row in read(catalog)[key]:
+    image=row.get('image','')
+    if image and not image.startswith(('https:','http:','data:')):
+     self.assertTrue((C/image.split('?')[0]).is_file(),catalog+': '+image)
  def test_direct_senior_catalog(self):
   catalog=read('senior-catalog');self.assertGreaterEqual(len(catalog['items']),100)
   self.assertEqual(len({x['id'] for x in catalog['items']}),len(catalog['items']))

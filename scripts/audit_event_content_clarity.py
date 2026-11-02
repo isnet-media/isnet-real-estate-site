@@ -4,7 +4,7 @@ import json,re
 from pathlib import Path
 from datetime import datetime,timezone
 ROOT=Path(__file__).resolve().parents[1]
-CITIES=("ashdod","rishon-lezion")
+CITIES=("ashdod","rishon-lezion","yavne","kiryat-gat","holon","herzliya")
 BOILERPLATE=("לרכישת כרטיסים","כרטיסים זמינים","מחיר הכרטיס","מחירים","שעת התחלה","משך משוער","בדקו את הפרטים","בעמוד הרכישה","לפרטים נוספים","המשך התהליך","הנחיות")
 CATEGORIES={"music":"מוזיקה","theatre":"תיאטרון","standup":"סטנדאפ","kids":"ילדים","lecture":"הרצאה","conference":"כנס","exhibition":"תערוכה","festival":"פסטיבל","community":"קהילה","tour":"טיול","sport":"ספורט","cinema":"קולנוע","food":"אוכל","seniors":"גמלאים"}
 def clean(x):return re.sub(r"\s+"," ",str(x or "")).strip()
@@ -34,10 +34,14 @@ def audit(e):
     return {"event_id":e.get("event_id"),"title":title,"category":category,"score":score,"severity":"critical" if score<45 else "needs_review" if score<75 else "acceptable","reasons":reasons,"questions_for_source":questions,"source_url":e.get("detail_source_url") or (e.get("sources") or [{}])[0].get("url"),"recommendation":"להשלים מידע ממקור האירוע; לא להמציא תוכן" if reasons else "ללא ליקוי בולט בבדיקה אוטומטית"}
 def main():
     for city in CITIES:
-        src=ROOT/"events-preview"/city/"data/events.json"
+        src=ROOT/"events-preview"/city/"data"/("events-public.json" if city in ("holon","herzliya") else "events.json")
         if not src.exists():continue
         events=json.loads(src.read_text(encoding="utf-8")).get("events",[])
-        results=[audit(e) for e in events]
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        day=datetime.now(ZoneInfo("Asia/Jerusalem")).date().isoformat()
+        inactive={"hidden","draft","unpublished","archived","trashed","deleted","cancelled","canceled"}
+        results=[audit(e) for e in events if (e.get("end_date") or e.get("start_date") or "")>=day and e.get("is_active") is not False and e.get("status") not in inactive and e.get("publication_status") not in inactive and not e.get("duplicate_of")]
         results.sort(key=lambda x:(x["score"],x["title"]))
         report={"generated_at":datetime.now(timezone.utc).isoformat(),"city":city,"method":"heuristic triage; requires human/AI review for semantics","total":len(results),"critical":sum(x["severity"]=="critical" for x in results),"needs_review":sum(x["severity"]=="needs_review" for x in results),"events":results}
         out=ROOT/"events-preview"/"admin"/"data"/f"content-quality-{city}.json"

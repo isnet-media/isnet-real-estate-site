@@ -9,6 +9,7 @@ from PIL import Image
 import requests
 import sync_holon_events as h
 from friends_city_source import collect as collect_friends
+from herzliya_event_quality import reviewed
 ROOT=Path(__file__).resolve().parents[1];C=ROOT/'events-preview/herzliya';D=C/'data'
 h.CITY=C;h.DATA=D
 NOW=h.NOW;TODAY=h.TODAY
@@ -17,7 +18,7 @@ read=h.read;save=h.save;get=h.get;clean=h.clean
 def photo(url,source):
  if not url or not url.startswith('https://') or any(k in url.lower() for k in ['no_pic','logo','no-image','placeholder','icon']):return None
  host=urlsplit(url).hostname or '';origin=urlsplit(source).hostname or ''
- if host.removeprefix('www.')!=origin.removeprefix('www.') and not (host.endswith('smarticket.co.il') or host.endswith('wixstatic.com') or host=='cdn.shopify.com' or host=='images.rest.co.il' and origin=='www.rest.co.il'):return None
+ if host.removeprefix('www.')!=origin.removeprefix('www.') and not (host.endswith('smarticket.co.il') or host.endswith('wixstatic.com') or host=='cdn.shopify.com' or host=='images.rest.co.il' and origin=='www.rest.co.il' or host=='media.getmood.io' and origin in {'www.sebastian.co.il','sebastian.co.il'}):return None
  try:
   dest=C/'assets/events'/(hashlib.sha256(url.encode()).hexdigest()[:20]+'.jpg');dest.parent.mkdir(parents=True,exist_ok=True)
   if not dest.exists():
@@ -75,13 +76,13 @@ def enrich(e):
   image=photo(e.get('image_origin_url'),e['source_url'])
   if image:e.update(image=image,image_role='official_promotional',image_credit='תמונת המקור: עיריית הרצליה')
   e['description']=e['title']+' — '+e['venue']+'. פרטי הפעילות, ההרשמה והתנאים בעמוד העירייה המקושר.'
-  return e
+  return reviewed(e)
  e=h.enrich(e)
  if audiences:e['audiences']=list(set(e.get('audiences',[])+audiences))
  # Do not carry whole ticket-sales documents or boilerplate into cards.
  e['description']=e['description'][:850]
  if re.search(r'גמלא|זהב|ותיק|גיל השלישי|60\+',e['title']+' '+e['description']):e['audiences']=list(set(e.get('audiences',[])+['seniors']))
- return e
+ return reviewed(e)
 
 def enrich_directory(item):
  try:

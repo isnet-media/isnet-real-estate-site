@@ -112,6 +112,16 @@ async function init(){
  try{
   const [data,cms,culture]=await Promise.all([(window.ISNET_PUBLIC_CMS?.loadHub?.()||fetch('data/events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('events');return r.json()})),window.ISNET_PUBLIC_CMS?.publishedEvents?.('ashdod',{hub:true})||Promise.resolve([]),fetch('data/senior-culture.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('culture');return r.json()}).catch(()=>({programs:[]}))]);
   cultureCatalog=culture;
+  // ASHDOD_LOCAL_SENIOR_GUIDE_START
+  // The Ashdod guide belongs to this edition; other cities render their own guide.
+  if(location.pathname.includes('/ashdod/'))fetch('data/senior-guide.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('guide');return r.json()}).then(d=>{
+   const section=document.createElement('section');section.className='snExplore';section.id='senior-local-guide';
+   section.innerHTML='<div class="snSectionHead"><h2>מועדונים ומסגרות קבועות בעיר</h2><p>'+esc(d.note||'')+'</p></div><div class="snExploreGrid">'+(d.links||[]).filter(x=>safeUrl(x.url)).map(x=>'<article class="snExploreLink"><div><h3>'+esc(x.title)+'</h3><p>'+esc(x.description)+'</p><a href="'+esc(safeUrl(x.url))+'" target="_blank" rel="noopener">לפרטים אצל המארגן ↗</a>'+(/^\d{9,10}$/.test(x.phone||'')?'<p><a href="tel:'+esc(x.phone)+'">התקשרו: '+esc(x.phone)+'</a></p>':'')+'</div></article>').join('')+'</div>';
+   root.append(section);
+   root.querySelector('.snWorldNav')?.insertAdjacentHTML('beforeend','<a href="#senior-local-guide"><span aria-hidden="true">⌂</span><strong>מועדונים בעיר</strong><small>מסגרות קבועות ומידע רשמי</small></a>');
+  }).catch(()=>{});
+  // ASHDOD_LOCAL_SENIOR_GUIDE_END
+
   const rows=mergeRows(window.ISNET_EVENT_IDENTITIES?.reconcile?.(data.events||[])||data.events||[],cms).filter(e=>visible(e)).sort((a,b)=>(a.start_date+' '+(a.start_time||'')).localeCompare(b.start_date+' '+(b.start_time||'')));
   const months=[...new Set(rows.map(e=>e.start_date.slice(0,7)))];let active=topics[new URLSearchParams(location.search).get('subcategory')]?new URLSearchParams(location.search).get('subcategory'):'all',savedOnly=false,saved=new Set();
   const storageKey='isnet-events-favorites';try{saved=readSaved(localStorage.getItem(storageKey));const legacy=readSaved(localStorage.getItem('isnet-ashdod-seniors-saved-v1'));for(const id of legacy)saved.add(id);localStorage.setItem(storageKey,JSON.stringify([...saved]));localStorage.removeItem('isnet-ashdod-seniors-saved-v1');}catch{}

@@ -1,6 +1,13 @@
 name: Refresh Herzliya events and culinary guide
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/sync_herzliya_events.py
+      - scripts/herzliya_event_quality.py
+      - scripts/build_herzliya_events.py
+      - .github/workflows/herzliya-events.yml
   schedule:
     - cron: '45 3 * * *'
 permissions:

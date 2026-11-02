@@ -65,6 +65,8 @@ on:
       - "scripts/test-search-metadata.cjs"
       - "scripts/build_event_public_assets.py"
       - "scripts/audit-event-integrity.cjs"
+      - "scripts/audit_network_event_quality.py"
+      - "scripts/test_network_event_quality.py"
       - "scripts/event_source_media.py"
       - "robots.txt"
       - "scripts/test_movie_editorial.py"
@@ -210,6 +212,8 @@ jobs:
           node scripts/test-event-sync.cjs
           node scripts/test-event-integrity.cjs
           node scripts/audit-event-integrity.cjs --apply
+          python scripts/test_network_event_quality.py
+          python scripts/audit_network_event_quality.py
           python scripts/build_event_public_assets.py --with-cms
           python scripts/test_movie_editorial.py
           python scripts/test_search_discovery.py
