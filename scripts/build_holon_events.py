@@ -7,11 +7,27 @@ ROOT=Path(__file__).resolve().parents[1];C=ROOT/'events-preview/holon';D=C/'data
 def read(n):return json.loads((D/(n+'.json')).read_text())
 def save(n,x):(D/(n+'.json')).write_text(json.dumps(x,ensure_ascii=False,indent=2)+'\n')
 def absolute(u):return urljoin(BASE,u)
+def production_identity(e):
+ # Audience/program labels describe a performance slot, not a different production.
+ title=re.sub(r'^(?:בין ערביים|קומדיה על הבוקר)\s*[-–—:]\s*','',e['title']).strip()
+ if e.get('category')!='theatre':return None
+ key=re.sub(r'[^א-תa-zA-Z0-9]+',' ',title).strip().lower()
+ venue=re.sub(r'[^א-תa-zA-Z0-9]+',' ',e.get('venue','')).strip().lower()
+ return title,key,venue
+
 def build():
  raw=read('events');cats=read('categories')['categories'];guides=read('guides')['items'];food=read('restaurants')['items'];events=[]
  submap={'shows':'kids-shows','story':'story-time','workshops':'kids-workshops','live':'live-music','singing':'live-music','meetings':'cinema','screenings':'cinema','lectures':'general-lectures','design':'exhibitions','art':'exhibitions','comics':'exhibitions'}
+ identities={e['id']:production_identity(e) for e in raw['events']}
+ labelled_keys={value[1:] for e in raw['events'] if (value:=identities[e['id']]) and value[0]!=e['title']}
  for e in raw['events']:
   x=dict(e,event_id=e['id'],purchase_url=e['booking_url'],ticket_url=e['source_url'],image_url=e['image'],thumbnail_url=e['image'],thumbnail_ready=True,image_publishable=True,image_verified=True,image_represents_event=e.get('image_role')=='official_promotional',source_image_kind='official_promotional' if e.get('image_role')=='official_promotional' else 'illustration',image_rights_status='official_promotional' if e.get('image_role')=='official_promotional' else 'owned_ai_illustration',price_min_ils=e.get('price'),price_max_ils=e.get('price'),is_free=True if e.get('price')==0 else None,is_active=True,publication_status='published',source_content_authoritative=True,sources=[{'name':e['source_id'],'url':e['source_url']}],subcategory=submap.get(e['subcategory'],e['subcategory']))
+  identity=identities[e['id']]
+  if identity and identity[1:] in labelled_keys:
+   x['series_id']='holon-production-'+hashlib.sha256('|'.join(identity[1:]).encode()).hexdigest()[:16]
+   x['series_title']=identity[0]
+   x['source_title']=e['title']
+   x['production_match_method']='exact title after removing reviewed program prefix; same venue'
   members=[{'category':e['category'],'subcategory':x['subcategory']}]
   for a in e.get('audiences',[]):
    if a in ['seniors','kids'] and a!=e['category']:members.append({'category':a,'subcategory':({'music':'senior-music','lecture':'senior-lectures'}.get(e['category'],'senior-culture')) if a=='seniors' else 'kids-shows'})

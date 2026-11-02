@@ -394,7 +394,7 @@ function scheduleSummary(e){
   const times=[...new Set(occ.map(x=>formatTime(x.start_time)))];
   const upcoming=occ.filter(x=>x.start_date>=iso(today())).sort((a,b)=>(a.start_date+(a.start_time||"")).localeCompare(b.start_date+(b.start_time||"")));
   const first=upcoming[0]||occ.slice().sort((a,b)=>a.start_date.localeCompare(b.start_date))[0];
-  return fmtFull.format(localDate(first.start_date))+' · '+formatTime(first.start_time);
+  const firstDayTimes=[...new Set(occ.filter(x=>x.start_date===first.start_date).map(x=>formatTime(x.start_time)))].sort();return fmtFull.format(localDate(first.start_date))+' · '+firstDayTimes.join(' / ');
 }
 function categoryWithSubtype(e){
   const group=window.publicTaxonomy?.find(c=>c.id===e.category);

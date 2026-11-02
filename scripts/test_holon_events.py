@@ -69,6 +69,19 @@ class HolonRelease(unittest.TestCase):
   self.assertGreaterEqual(len(real),110);self.assertGreaterEqual(len({e['image']for e in real}),95)
   self.assertIn('holonPendingMedia',(C/'pilot/app.js').read_text())
   for e in real:self.assertTrue(e.get('image_source_url') or e.get('image_origin_url') or e['source_id']=='papi-holon')
+ def test_program_prefix_does_not_split_the_same_play(self):
+  sys.path.insert(0,str(R/'scripts'));from build_holon_events import production_identity
+  base={'title':'אור לגויים','category':'theatre','venue':'תיאטרון חולון · אולם 1'}
+  prefixed={**base,'title':'בין ערביים- אור לגויים'}
+  self.assertEqual(production_identity(base),production_identity(prefixed))
+  self.assertNotEqual(production_identity(base),production_identity({**base,'title':'אור אחר'}))
+  self.assertNotEqual(production_identity(base),production_identity({**base,'venue':'תיאטרון חולון · אולם 3'}))
+  events=read('events-public')['events'];play=[e for e in events if 'אור לגויים' in e['title']]
+  if play:
+   self.assertEqual(len({e.get('series_id')for e in play}),1);self.assertTrue(play[0].get('series_id'))
+   self.assertEqual({e.get('series_title')for e in play},{'אור לגויים'})
+   raw=[e for e in read('events')['events'] if 'אור לגויים' in e['title']]
+   self.assertEqual({(e['id'],e['start_date'],e['start_time'],e['booking_url'])for e in raw},{(e['event_id'],e['start_date'],e['start_time'],e['purchase_url'])for e in play})
  def test_parser_does_not_expand_unknown_more_dates(self):
   sys.path.insert(0,str(R/'scripts'));import sync_holon_events as h
   self.assertEqual(h.classify('אורי חזקיה','','hth'),'standup');self.assertEqual(h.classify('אבו סאלי','','cinematheque'),'cinema');self.assertEqual(h.classify('מסעדה בקצה הקוטב - תיאטרון המדיטק','לגילאי 4 ומעלה','mediatheque'),'kids')
