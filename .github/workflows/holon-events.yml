@@ -1,6 +1,13 @@
 name: Refresh Holon events and culinary guide
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/sync_holon_events.py
+      - scripts/build_holon_events.py
+      - scripts/polish_holon_catalog.py
+      - .github/workflows/holon-events.yml
   schedule:
     - cron: '35 3 * * *'
 permissions:
