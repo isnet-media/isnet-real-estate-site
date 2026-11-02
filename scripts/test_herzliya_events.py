@@ -10,6 +10,7 @@ class EditionTests(unittest.TestCase):
   events=read('events')['events'];public=read('events-public')['events']
   self.assertGreaterEqual(len(events),20);self.assertEqual({e['id'] for e in events},{e['id'] for e in public})
   self.assertTrue(all(e['city']=='הרצליה' and e['source_url'].startswith('https://') for e in events))
+  self.assertTrue(all('חולון' not in e['venue'] and 'אשדוד' not in e['venue'] for e in events))
   self.assertEqual(len(events),len({(e['title'],e['start_date'],e['start_time']) for e in events}))
   for e in events:
    date.fromisoformat(e['start_date']);self.assertRegex(e['start_time'],r'^\d{2}:\d{2}$')

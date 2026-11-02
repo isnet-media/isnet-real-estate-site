@@ -128,7 +128,7 @@ def enrich(e):
   age=re.search(r'(?:לגילאי|גילי|גילאי)\s*(\d{1,2})\s*[-–]\s*(\d{1,2})',e['description']+' '+e['title'])
   if age:e['age_text']='גילאי '+age[1]+'–'+age[2]
  except Exception:pass
- if e['source_id']=='friends':
+ if e['source_id']=='friends' and e.get('city')=='חולון':
   cat=classify(e['title'],'','friends')
   if any(t in e['title'] for t in ['זוגות בזיג זג','קומדיה','אור לגויים']):cat='theatre'
   e['category']=cat;e['subcategory']=subcat(cat,e['title'],'friends')
