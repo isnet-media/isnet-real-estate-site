@@ -163,12 +163,15 @@ function eventGroupKey(e){
 function eventDisplayTitle(e){
   return e?.series_title||e?.title||"אירוע";
 }
+let occurrenceIndexEvents=null,occurrenceIndexSports=null,occurrenceIndex=new Map();
 function eventOccurrences(e){
   if(Array.isArray(e?._occurrences)&&e._occurrences.length)return e._occurrences;
-  const key=eventGroupKey(e);
-  return state.events
-    .filter(x=>eventGroupKey(x)===key)
-    .sort((a,b)=>(a.start_date+(a.start_time||"99:99")).localeCompare(b.start_date+(b.start_time||"99:99")));
+  if(occurrenceIndexEvents!==state.events||occurrenceIndexSports!==state.sportsMeta){
+    occurrenceIndexEvents=state.events;occurrenceIndexSports=state.sportsMeta;occurrenceIndex=new Map();
+    for(const item of state.events){const key=eventGroupKey(item);if(!occurrenceIndex.has(key))occurrenceIndex.set(key,[]);occurrenceIndex.get(key).push(item);}
+    for(const group of occurrenceIndex.values())group.sort((a,b)=>(a.start_date+(a.start_time||"99:99")).localeCompare(b.start_date+(b.start_time||"99:99")));
+  }
+  return occurrenceIndex.get(eventGroupKey(e))||[];
 }
 function isPersistentExhibition(e){
   if(e?.category!=="exhibition")return false;
@@ -1280,7 +1283,7 @@ function publishedBoardEvents(base,rows,day){
 }
 
 async function init(){
-  await window.ISNET_EVENT_IDENTITIES?.ready;
+  // Data adapters await verified media themselves; start independent requests together.
   if(location.pathname.includes("/ashdod/")&&["conference","food"].includes(new URLSearchParams(location.search).get("category"))){location.replace("./");return;}
   // Independent sections must not delay the first usable event list.
   state.cinemaLoading=true;
@@ -1339,6 +1342,8 @@ async function init(){
   if(sharedSaved)$("savedListStatus").textContent="רשימה ששיתפו איתך · אינה משנה את המועדפים שלך. להצגת כל האירועים לחצו על חזרה לכל האירועים.";
   boardReady=true;
   render();
+  if($("homeLoading"))$("homeLoading").hidden=true;
+  if(document.body?.dataset)document.body.dataset.homeReadyMs=performance.now().toFixed(1);
   renderCinema();
   if(state.cinemaOpen)requestAnimationFrame(()=>$("cinemaSection")?.scrollIntoView({block:"start"}));
 
@@ -1489,5 +1494,5 @@ window.ISNET_LOAD_FULL_SEARCH=()=>{
  return fullSearchPromise;
 };
 window.ISNET_SEARCH_CATALOG=()=>({events:state.events,movies:state.cinema,taxonomy:window.publicTaxonomy||[]});
-init().catch(err=>{console.error(err);if(state.cinemaLoading&&document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
+init().catch(err=>{console.error(err);if($("homeLoading"))$("homeLoading").hidden=true;if(state.cinemaLoading&&document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
 

@@ -112,3 +112,6 @@ body:not(.cinemaMode) .heroTitle__top,body:not(.cinemaMode) .heroTitle__bottom{d
  .isnetNavDiscovery__secondary .isnetNavSmall strong{font-size:11px!important}
  .isnetNavDiscovery__secondary .isnetNavSmall span{width:28px;height:28px;flex-basis:28px;font-size:17px!important}
 }
+
+/* Visible in the server HTML, before network requests or JavaScript finish. */
+.homeLoading{grid-column:1/-1;flex:0 0 100%;display:flex;justify-content:center;align-items:center;min-height:100px;padding:24px;margin:24px auto;width:min(100%,900px);box-sizing:border-box;border:1px solid #d3b47366;border-radius:18px;background:#1d2028;color:#f7dc9d;font-size:22px;font-weight:800;text-align:center;line-height:1.5}.homeLoading[hidden],body.cinemaMode .homeLoading{display:none!important}

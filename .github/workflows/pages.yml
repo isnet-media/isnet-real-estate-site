@@ -73,6 +73,7 @@ on:
       - "scripts/test-movie-editorial.cjs"
       - "scripts/test-cinema-loading.cjs"
       - "scripts/test-home-loading.cjs"
+      - "scripts/test-home-occurrence-index.cjs"
       - "scripts/test-herzliya-cinema-speed.cjs"
       - "scripts/sync_event_city_views.py"
       - "scripts/cinema_loading.py"
@@ -180,6 +181,7 @@ jobs:
           node scripts/test-ashdod-pilot.cjs
           node scripts/test-yavne-bootstrap.cjs
           node scripts/test-home-loading.cjs
+          node scripts/test-home-occurrence-index.cjs
 
       - name: Verify organizer portals and institution links
         id: institution_audit
