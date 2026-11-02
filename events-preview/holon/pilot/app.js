@@ -209,7 +209,7 @@ function toggleFavorite(id){
   saveFavorites();render();
 }
 
-function hasTrustedSourceImage(e){
+function hasTrustedSourceImage(e){if(e.image_role==="illustration")return false;
   if(window.ISNET_EVENT_IDENTITIES&&!window.ISNET_EVENT_IDENTITIES.safeImage(e))return false;
   return Boolean(!(window.isnetEventDefaultImage?.(e)&&window.isnetEventIllustration?.(e))&&e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
 }

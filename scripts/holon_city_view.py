@@ -20,6 +20,7 @@ def decorate(content,name,suffix):
   content=content.replace('if(state.category&&e.category!==state.category)return false;','if(state.category&&!window.HOLON_EVENTS.matches(e,new Set([state.category])))return false;')
   content=content.replace('ids.has(e.category)','window.HOLON_EVENTS.matches(e,ids)')
  if name.endswith('.js') and Path(name).name=='app.js':
+  content=content.replace('function hasTrustedSourceImage(e){','function hasTrustedSourceImage(e){if(e.image_role==="illustration")return false;')
   content=content.replace('function eventImageHTML(e,mode="card"){', 'function eventImageHTML(e,mode="card"){\n  if(!hasTrustedSourceImage(e))return \'<span class="eventArtStage holonPendingMedia"><small>\'+escapeHtml(catLabels[e.category]||\'בחולון\')+\'</small><strong>\'+escapeHtml(e.title)+\'</strong><span>\'+escapeHtml(e.venue||\'\')+\'</span></span>\';')
  if name.endswith('.js') and Path(name).name=='event.js':
   content=content.replace('function trustedImage(e){','function trustedImage(e){if(e.image_role==="illustration")return false;')

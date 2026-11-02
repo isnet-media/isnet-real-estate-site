@@ -204,7 +204,7 @@ function toggleFavorite(id){
   saveFavorites();render();
 }
 
-function hasTrustedSourceImage(e){
+function hasTrustedSourceImage(e){if(e.image_role==="illustration")return false;
   return Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true);
 }
 function fallbackImage(e){
