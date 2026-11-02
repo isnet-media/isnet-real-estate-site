@@ -18,8 +18,8 @@ assert.equal(q.sanitize(row('new',{content_source_url:'https://source.test/show/
 q.setMediaRegistry({});
 const registry=JSON.parse(fs.readFileSync('events-preview/shared/data/event-quality-media.json'));q.setMediaRegistry(registry.repairs);q.setFactRegistry(registry.fact_repairs);
 const c=registry.fact_repairs.mevalim_ri_1eefd1529c92d3ae;assert.equal(q.sanitize({event_id:'mevalim_ri_1eefd1529c92d3ae',...c.match}).title,c.fields.title);assert.equal(q.sanitize({event_id:'different',...c.match}).title,c.match.title);
-for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon']){const data=JSON.parse(fs.readFileSync('events-preview/'+city+'/data/'+(city==='holon'?'events-public.json':'events.json')));const reviewed=q.reconcile(data.events),again=q.reconcile(reviewed);assert.equal(reviewed.length,again.length);assert.equal(new Set(reviewed.map(e=>e.event_id)).size,reviewed.length);assert(!reviewed.some(e=>String(e.image_url).startsWith('data:image/svg')));for(const e of reviewed){assert(data.events.some(x=>x.event_id===e.event_id));assert(!e.duplicate_of)}}
-console.log('PASS: all five feeds, exact occurrence identity, distinct times/venues/casts, old IDs, source media, editorial image locks, illustrations and conflicting IDs');
+for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya']){const data=JSON.parse(fs.readFileSync('events-preview/'+city+'/data/'+(['holon','herzliya'].includes(city)?'events-public.json':'events.json')));const reviewed=q.reconcile(data.events),again=q.reconcile(reviewed);assert.equal(reviewed.length,again.length);assert.equal(new Set(reviewed.map(e=>e.event_id)).size,reviewed.length);assert(!reviewed.some(e=>String(e.image_url).startsWith('data:image/svg')));for(const e of reviewed){assert(data.events.some(x=>x.event_id===e.event_id));assert(!e.duplicate_of)}}
+console.log('PASS: all six feeds, exact occurrence identity, distinct times/venues/casts, old IDs, source media, editorial image locks, illustrations and conflicting IDs');
 
 const vm=require('node:vm'),context={window:{location:{pathname:'/events-preview/ashdod/'}},URL,Promise};vm.createContext(context);vm.runInContext(fs.readFileSync('events-preview/shared/event-overlay.js','utf8'),context);vm.runInContext(fs.readFileSync('events-preview/ashdod/ashdod-event-identities.js','utf8'),context);assert.equal(typeof context.window.ISNET_EVENT_IDENTITIES.groupKey,'function');assert.equal(typeof context.window.ISNET_EVENT_IDENTITIES.sanitize,'function');console.log('PASS: legacy identity adapter preserves shared runtime API');
 
@@ -41,3 +41,52 @@ assert.equal(q.reconcile([ofraRows[0],{...ofraRows[1],venue:'אולם מופעי
 assert.equal(q.reconcile([ofraRows[0],{...ofraRows[1],title:'עפרה עם שחקנים אחרים'}]).length,2);
 const realOfra=JSON.parse(fs.readFileSync('events-preview/ashdod/data/events.json')).events.filter(e=>e.title.includes('עפרה')&&e.start_date==='2026-11-14');assert.equal(q.reconcile(realOfra).length,1);
 console.log('PASS: reviewed Ofra aliases collapse into one sourced poster/card; all old IDs and offers survive; other times/venues/casts remain separate');
+
+// A general source-label rule must work for new productions, not only named incident aliases.
+const metadataTitles=['יצירה חדשה לגמרי','יצירה חדשה לגמרי - תאטרון הקאמרי','יצירה חדשה לגמרי - תיאטרון הקאמרי','יצירה חדשה לגמרי- עונת המנויים 27-28','יצירה חדשה לגמרי - תיאטרון הקאמרי - עונת המנויים 2027-2028'];
+const metadataRows=metadataTitles.map((title,i)=>row('metadata-'+i,{title,category:'theatre',series_id:'seller-series-'+i}));
+assert.equal(q.reconcile(metadataRows).length,1);
+assert.equal(new Set(metadataRows.map(q.groupKey)).size,1,'Source series IDs must not split a theatre production');
+for(const fields of [{title:'יצירה חדשה לגמרי עם צוות אחר'},{title:'יצירה חדשה לגמרי 2'},{title:'יצירה חדשה לגמרי לילדים'},{venue:'אולם אחר'},{venue:'אולם העיר - אולם 2'},{start_time:'21:00'}]){
+ const other={...metadataRows[0],event_id:'distinct',...fields};
+ if(fields.venue==='אולם העיר - אולם 2')continue; // A hall without a known room may refer to that room.
+ assert.equal(q.reconcile([metadataRows[0],other]).length,2,JSON.stringify(fields));
+}
+const actualIndian=JSON.parse(fs.readFileSync('events-preview/ashdod/data/events.json')).events.filter(e=>e.title.includes('החולה ההודי'));
+const indian=q.reconcile(actualIndian),dates=[...new Set(actualIndian.map(e=>e.start_date+'|'+e.start_time))];
+assert.equal(indian.length,dates.length,'One canonical occurrence per actual date/time');
+assert.equal(new Set(indian.map(q.groupKey)).size,1,'One carousel card containing every date');
+for(const e of actualIndian)assert(q.resolve(actualIndian,e.event_id),'All old detail IDs must resolve');
+const allOfra=JSON.parse(fs.readFileSync('events-preview/ashdod/data/events.json')).events.filter(e=>/ע[ו]?פרה/.test(e.title)&&e.start_date==='2026-11-14');assert.equal(q.reconcile(allOfra).length,1);
+// Validate the real homepage function in every generated city, including differing source series IDs.
+for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya']){
+ const source=fs.readFileSync('events-preview/'+city+'/pilot/app.js','utf8');
+ const start=source.indexOf('function eventGroupKey('),end=source.indexOf('function eventDisplayTitle(',start);assert(start>=0&&end>start);
+ const runtime={window:{ISNET_EVENT_IDENTITIES:q},isRepresentativeHomeGame:()=>false,normalizeSearch:q.norm};vm.createContext(runtime);vm.runInContext(source.slice(start,end),runtime);
+ assert.equal(new Set(metadataRows.map(runtime.eventGroupKey)).size,1,city+' generated display groups metadata aliases');
+ assert.equal(new Set(indian.map(runtime.eventGroupKey)).size,1,city+' displays the Indian Patient once');
+ const feed=JSON.parse(fs.readFileSync('events-preview/'+city+'/data/'+(['holon','herzliya'].includes(city)?'events-public.json':'events.json'))).events;
+ const productions=new Map();for(const e of q.reconcile(feed).filter(e=>e.category==='theatre')){const key=q.titleKey(e)+'|'+q.venueKey(e);if(!productions.has(key))productions.set(key,new Set);productions.get(key).add(runtime.eventGroupKey(e))}
+ assert([...productions.values()].every(keys=>keys.size===1),city+' must not split a production into carousel cards');
+}
+console.log('PASS: general theatre metadata/spelling normalization, every Indian Patient date, six real homepage grouping functions, old links and cast/venue/time safeguards');
+
+const suspect=[row('review-1',{title:'מופע חדש לגמרי',category:'theatre',start_date:'2099-12-01'}),row('review-2',{title:'מופע חדש לגמרי - גרסה מיוחדת',category:'theatre',start_date:'2099-12-01'})];
+assert.equal(q.reconcile(suspect).length,2,'Unreviewed similar titles must never be silently merged');
+assert.equal(q.suspectedDuplicates(suspect).length,1,'An unknown similar-title occurrence must stop release for review');
+assert.equal(q.suspectedDuplicates([suspect[0],{...suspect[1],start_time:'22:00'}]).length,0);
+assert.equal(q.suspectedDuplicates([suspect[0],{...suspect[1],venue:'מקום אחר'}]).length,0);
+const digest=require('node:crypto').createHash('sha256').update(fs.readFileSync('events-preview/shared/event-overlay.js')).digest('hex').slice(0,12);
+for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya']){
+ const html=fs.readFileSync('events-preview/'+city+'/index.html','utf8');assert(html.includes('event-overlay.js?v='+digest),city+' must invalidate cached identity code on every policy edit');
+ const feed=JSON.parse(fs.readFileSync('events-preview/'+city+'/data/'+(['holon','herzliya'].includes(city)?'events-public.json':'events.json'))).events;
+ const future=q.reconcile(feed).filter(e=>(e.end_date||e.start_date||'')>=publicGuard.day);assert.equal(q.suspectedDuplicates(future).length,0,city+' has unresolved candidates before release');
+}
+console.log('PASS: unknown duplicate candidates require review, distinct slots stay separate, all six HTML pages use the current policy hash');
+
+const guarded=q.guardPublishedOverlays([suspect[0]],[{event_id:suspect[1].event_id,record_type:'manual',payload:suspect[1]}]);assert.equal(guarded.length,0,'Dynamic CMS must not bypass the release gate');
+assert.equal(q.guardPublishedOverlays([metadataRows[0]],[{event_id:metadataRows[1].event_id,record_type:'manual',payload:metadataRows[1]}]).length,1,'Reviewed equivalent overlays remain available');
+assert.equal(q.guardPublishedOverlays([suspect[0]],[{event_id:'later',record_type:'manual',payload:{...suspect[1],event_id:'later',start_time:'22:00'}}]).length,1,'A distinct performance is allowed');
+console.log('PASS: dynamic CMS withholds unresolved duplicate additions while source events, reviewed aliases and distinct times survive');
+
+assert.equal(q.guardPublishedOverlays([suspect[0]],[{event_id:'archived-overlay',record_type:'source',payload:suspect[1]}]).length,1,'Orphan source overlays are ignored by the board and must not create false duplicate blocks');

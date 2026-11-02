@@ -44,7 +44,8 @@
     if(!rawRequests.has(city))rawRequests.set(city,readRows(city).catch(error=>{rawRequests.delete(city);throw error;}));
     const [rows,source]=await Promise.all([rawRequests.get(city),hub?loadHub(city):listing?loadCards(city):loadSource(city)]);
     const base=new Map((source.events||[]).map(e=>[String(e.event_id),e]));
-    return rows.map(row=>({...row,payload:integrity?.sanitize(window.ISNET_EVENT_OVERLAY?.merge(base.get(String(row.event_id))||{},row.payload)||row.payload)||(window.ISNET_EVENT_OVERLAY?.merge(base.get(String(row.event_id))||{},row.payload)||row.payload)}));
+    const merged=rows.map(row=>({...row,payload:integrity?.sanitize(window.ISNET_EVENT_OVERLAY?.merge(base.get(String(row.event_id))||{},row.payload)||row.payload)||(window.ISNET_EVENT_OVERLAY?.merge(base.get(String(row.event_id))||{},row.payload)||row.payload)}));
+    return integrity?.guardPublishedOverlays(source.events||[],merged)||merged;
   }
   window.ISNET_PUBLIC_CMS={loadSource,loadCards,loadHub,metrics,
     publishedEvents(city,options={}){

@@ -117,7 +117,7 @@ function purchaseAction(e){
   return null;
 }
 function eventGroupKey(e){
-  if(e?.series_id)return "series:"+String(e.series_id);
+  if(e?.series_id&&e.category!=="theatre"&&!window.ISNET_EVENT_IDENTITIES?.titleKey(e)?.startsWith("production:"))return "series:"+String(e.series_id);
   if(isRepresentativeHomeGame(e)){
     const team=sportTeamConfig(e);
     const teamKey=team?.id||normalizeSearch(e.home_team||e.organizer||"sport-team");

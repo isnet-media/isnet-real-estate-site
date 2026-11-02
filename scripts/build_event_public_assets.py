@@ -61,7 +61,7 @@ def visible(e,day):
 
 def integrity_events(events):
     # The browser and static discovery pages use the same verified identity policy.
-    script="const fs=require('fs'),q=require('./events-preview/shared/event-overlay.js').integrity,r=JSON.parse(fs.readFileSync('events-preview/shared/data/event-quality-media.json'));q.setMediaRegistry(r.repairs);q.setFactRegistry(r.fact_repairs);process.stdout.write(JSON.stringify(q.reconcile(JSON.parse(fs.readFileSync(0,'utf8')))));"
+    script="const fs=require('fs'),q=require('./events-preview/shared/event-overlay.js').integrity,r=JSON.parse(fs.readFileSync('events-preview/shared/data/event-quality-media.json'));q.setMediaRegistry(r.repairs);q.setFactRegistry(r.fact_repairs);const events=q.reconcile(JSON.parse(fs.readFileSync(0,'utf8'))),day=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());const suspects=q.suspectedDuplicates(events.filter(e=>(e.end_date||e.start_date||'')>=day));if(suspects.length)throw Error('Publication blocked: unresolved duplicate candidates after CMS merge '+JSON.stringify(suspects.map(pair=>pair.map(e=>({id:e.event_id,title:e.title,date:e.start_date,time:e.start_time,venue:e.venue})))));process.stdout.write(JSON.stringify(events));"
     result=subprocess.run(['node','-e',script],input=json.dumps(events,ensure_ascii=False),text=True,capture_output=True,cwd=ROOT,check=True)
     return json.loads(result.stdout)
 

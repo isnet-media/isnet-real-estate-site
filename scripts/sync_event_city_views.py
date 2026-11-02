@@ -302,7 +302,8 @@ def fingerprint_master_html(check: bool = False) -> list[str]:
             return filename + "?v=" + digest
 
         expected = re.sub(pattern, version_asset, original)
-        expected = re.sub(r'event-overlay\.js(?:\?v=[^"\s]+)?', 'event-overlay.js?v=20261102-ofra1', expected)
+        expected = re.sub(r'public-cms\.js(?:\?v=[^"\s]+)?', 'public-cms.js?v='+hashlib.sha256((ROOT/'shared/public-cms.js').read_bytes()).hexdigest()[:12], expected)
+        expected = re.sub(r'event-overlay\.js(?:\?v=[^"\s]+)?', 'event-overlay.js?v='+hashlib.sha256((ROOT/'shared/event-overlay.js').read_bytes()).hexdigest()[:12], expected)
         expected = re.sub(r'isnet-top-navigation\.js\?v=[^"\s]+', 'isnet-top-navigation.js?v=20261102-city-shell1', expected)
         expected = re.sub(r'event-tools\.js\?v=[^"\s]+', 'event-tools.js?v=20261102-city-shell1', expected)
         if expected != original:

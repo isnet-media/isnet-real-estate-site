@@ -43,11 +43,29 @@ let mediaRegistry={},factRegistry={};
 function sourceKey(value){try{const u=new URL(value);if(!/^https?:$/.test(u.protocol))return '';u.hash='';for(const k of [...u.searchParams.keys()])if(/^(utm_|fbclid|gclid)/.test(k))u.searchParams.delete(k);if(u.pathname==='/'||/\/(?:events|calendar|tickets-culture)\/?$/.test(u.pathname)&&!u.search)return '';return decodeURIComponent(u.hostname.toLowerCase()+u.pathname.replace(/\/+$/,'')+u.search).toLowerCase()}catch{return ''}}
 // Reviewed aliases: https://www.teatron.org.il/shows/עופרה/ (14.11.2026, 21:00, Ashdod).
 const ofraAliases=new Set(['עפרה','עופרה','עפרה המחזמר על עופרה חזה','עפרה המחזמר על עפרה חזה','עופרה המחזמר על עופרה חזה','עופרה המחזמר על עפרה חזה','עפרה מחזמר התיאטרון העברי','עפרה תיאטרון העברי','עפרה מחזמר מרהיב על עפרה חזה','עפרה מחזמר מרהיב על עופרה חזה']);
-function titleKey(e){if(e.category==='theatre'&&ofraAliases.has(norm(e.title)))return 'production:ofra-hebrew-theatre';return norm(e.title).replace(/^סינדרלה מחזמר חנוכה עם נעמה סופר על$/,'סינדרלה').replace(/^פאטמה הסטנדאפיסטית הבדואית$/,'פאטמה הסטנדאפיסטית').replace(/^מרתון סטנדאפ יום רביעי חגיגה פאצו בר$/,'מרתון סטנדאפ יום רביעי חגיגה').replace(/\s+(?:במופע סטנדאפ|במופע סטנד אפ|מופע סטנדאפ|סטנדאפ|סטנד אפ)$/,'').replace(/\s+(?:התיאטרון העברי|תיאטרון בית ליסין|תיאטרון הקאמרי|חנוכה 2026)$/,'').trim()}
+// Only source metadata is removed. Cast, adaptations, sequels and meaningful subtitles stay intact.
+function theatreTitle(value){
+ let title=norm(value).replace(/תאטרון/g,'תיאטרון');
+ let previous;
+ do{previous=title;title=title.replace(/\s+(?:עונת (?:ה)?מנויים|סדרת (?:ה)?מנויים)(?:\s+\d{2,4}){0,2}$/,'').replace(/\s+(?:(?:תיאטרון|התיאטרון|ת)\s+(?:הקאמרי|קאמרי|בית ליסין|באר שבע|הבימה|חיפה|העברי)|בית ליסין)$/,'').trim()}while(title!==previous);
+ return title||norm(value);
+}
+function baseTitleKey(e){if(e.category==='theatre'&&ofraAliases.has(norm(e.title)))return 'production:ofra-hebrew-theatre';return (e.category==='theatre'?theatreTitle(e.title):norm(e.title)).replace(/\s+לוח הופעות והזמנת כרטיסים$/,'').replace(/^סינדרלה מחזמר חנוכה עם נעמה סופר על$/,'סינדרלה').replace(/^פאטמה הסטנדאפיסטית הבדואית$/,'פאטמה הסטנדאפיסטית').replace(/^מרתון סטנדאפ יום רביעי חגיגה פאצו בר$/,'מרתון סטנדאפ יום רביעי חגיגה').replace(/\s+(?:במופע סטנדאפ|במופע סטנד אפ|מופע סטנדאפ|סטנדאפ|סטנד אפ)(?: חדש)?$/,'').replace(/\s+(?:התיאטרון העברי|תיאטרון בית ליסין|תיאטרון הקאמרי|חנוכה 2026)$/,'').trim()}
+// Exact reviewed alternatives only. These never strip a cast name or guess from image similarity.
+const reviewedProductions=[
+ {id:'dragon-keepers-2026',titles:['שומרי הדרקונים - חנוכה 2026','שומרי הדרקונים - מחזמר הרפתקאות - חנוכה 2026'],source:'https://sababa.events/he/event/khraniteli-drakonov-priklyuchencheskiy-myuzikl-khanuka-2026/ashdod/'},
+ {id:'daniel-styopin-standup',titles:['דניאל סטיופין ("קופה ראשית") - מופע סטנדאפ','דניאל סטיופין במופע סטנדאפ'],source:'https://tickets.mevalim.co.il/event/XWqbBU_QbiHlpJ6'},
+ {id:'imi-generalit-musical',titles:['אמי הגנרלית - התיאטרון העברי','אמי הגנרלית - מחזמר'],source:'https://www.teatron.org.il/shows/אמי-הגנרלית-מחזמר/'},
+ {id:'fiddler-hebrew-theatre',titles:['כנר על הגג - התיאטרון העברי','כנר על הגג - מחזמר תיאטרון העברי'],source:'https://www.teatron.org.il/shows/כנר-על-הגג-המחזמר/'},
+ {id:'voca-people-20',titles:['VOCA PEOPLE ווקה פיפל','voca people - ווקה פיפל - הסנסציה הבינלאומית חוגגת 20'],source:'https://htrl.co.il/show/voca-people-ווקה-פיפל/'},
+ {id:'yonatan-gruber-ze-ma-yesh',titles:['יונתן גרובר - זה מה יש','יונתן גרובר - סטנדאפ'],source:'https://www.heichalbair.co.il/יונתן_גרובר_-_סטנדאפ/?id=3139'}
+];
+const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
+function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
 function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\s*([1-9]\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\s*\d+/g,'').replace(/^(?:אולם|אודיטוריום)\s+/,'');let key=e.venue_institution_id;
 if(!key){for(const [re,id] of [[/שיכוני המזרח|השדרה 50/,'rishon_shikunei'],[/(?:friends|mofet|מופת).*ראשון/,'rishon_friends'],[/פלשתים/,'philisti-museum'],[/מאירהוף/,'ashdod_city_library'],[/היכל.*(?:מאיר ניצן|ראשון)|מאיר ניצן.*היכל/,'htrl'],[/דיונה/,'ironit_diyona'],[/מונארט/,'ironit_monart'],[/משכן.*אשדוד/,'mishkan_ashdod'],[/תיאטרון חולון/,'holon-theatre'],[/שטיינברג/,'holon-steinberg'],[/הוט סינמה|dream stage/,'hot-cinema'],[/סינמטק יבנה/,'yavne-cinema']])if(re.test(v)){key=id;break}}
 return String(key||v.replace(/אשדוד|ראשון לציון|הרצליה|חולון|יבנה|קרית גת|קריית גת/g,'').replace(/\b(?:אולם|מופעים)\b/g,'').trim())+(room?':room'+room[1]:'')}
-function groupKey(e){return (e.series_id?'series:'+e.series_id:'title:'+titleKey(e))+'|venue:'+venueKey(e)}
+function groupKey(e){return (e.series_id&&e.category!=='theatre'&&!titleKey(e).startsWith('production:')?'series:'+e.series_id:'title:'+titleKey(e))+'|venue:'+venueKey(e)}
 function sameProduction(a,b){return titleKey(a)===titleKey(b)&&venueKey(a)===venueKey(b)}
 function safeImage(e){return Boolean(e&&e.image_url&&!BAD.test(e.image_url)&&e.image_verified===true&&e.image_publishable===true&&e.source_image_kind!=='source_placeholder'&&(e.image_represents_event!==false||e.source_image_kind==='illustration'))}
 function sanitize(e){let out={...e};const fact=factRegistry[e.event_id];if(fact&&!e.human_manual_override&&Object.entries(fact.match).every(([k,v])=>e[k]===v)&&!Object.keys(fact.fields).some(k=>(e.locked_fields||[]).includes(k)||e[k+'_manual_override']))out={...out,...fact.fields,_verified_fact_repair:fact.source_url};delete out.duplicate_of;delete out._duplicate_ids;const repair=mediaRegistry[sourceKey(out.content_source_url||out.detail_source_url||out.source_url)];if(repair&&(!safeImage(out)||illustration(out.image_url))&&norm(repair.title)===norm(e.title)&&!e.image_manual_override&&!(e.locked_fields||[]).includes('image_url'))out={...out,...repair.fields};
@@ -57,6 +75,13 @@ if(illustration(out.image_url)){out.image_represents_event=false;out.source_imag
 if(out.image_represents_event===false&&out.source_image_kind!=='illustration'){out.thumbnail_url=null;out.thumbnail_ready=false}
 return out}
 function sameOccurrence(a,b){if(!a.start_date||!a.start_time||a.start_date!==b.start_date||a.start_time!==b.start_time)return false;const av=venueKey(a),bv=venueKey(b),sameVenue=av&&bv&&(av===bv||(av.split(':room')[0]===bv.split(':room')[0]&&(!av.includes(':room')||!bv.includes(':room'))));const sameSource=sourceKey(a.content_source_url||a.detail_source_url)&&sourceKey(a.content_source_url||a.detail_source_url)===sourceKey(b.content_source_url||b.detail_source_url);if(!sameVenue&&!((!av||!bv)&&sameSource))return false;if(titleKey(a)&&titleKey(a)===titleKey(b))return true;const u=sourceKey(a.content_source_url||a.detail_source_url),v=sourceKey(b.content_source_url||b.detail_source_url);return Boolean(u&&u===v&&norm(a.title)===norm(b.title))}
+// A suspicion blocks publication for source review; it is never an automatic fuzzy merge.
+function suspectedDuplicates(events){
+ const slots=new Map(),pairs=[];
+ for(const e of events.filter(e=>root.ISNET_EVENT_OVERLAY.visible(e)&&!e.duplicate_of&&e.start_date&&e.start_time&&venueKey(e)&&['theatre','music','standup','kids'].includes(e.category))){const k=e.start_date+'|'+e.start_time+'|'+venueKey(e);if(!slots.has(k))slots.set(k,[]);slots.get(k).push(e)}
+ for(const group of slots.values())for(let i=0;i<group.length;i++)for(let j=i+1;j<group.length;j++){const a=group[i],b=group[j],x=baseTitleKey(a),y=baseTitleKey(b),short=x.length<y.length?x:y,long=x.length<y.length?y:x;if(titleKey(a)!==titleKey(b)&&(x===y||short.split(' ').length>=2&&long.startsWith(short+' ')))pairs.push([a,b])}
+ return pairs;
+}
 function score(e){return (e.source_content_authoritative?100:0)+(e.image_manual_override?50:0)+(e.description_manual_override?30:0)+(safeImage(e)&&!illustration(e.image_url)?20:0)+(e.purchase_url?5:0)+(e.description?2:0)-(Number(e.source_priority)||10)/100}
 function reconcile(input,options={}){const unique=new Map;for(const raw of input||[]){const e=sanitize(raw),id=e.event_id||e.id,prev=unique.get(id);if(prev){if(!sameOccurrence(prev,e))throw Error('Conflicting event ID: '+id);if(score(e)>score(prev))unique.set(id,e)}else unique.set(id,e)}const all=[...unique.values()],groups=[],slots=new Map;
 for(const e of all){const slot=String(e.start_date)+'|'+String(e.start_time||e.event_id||e.id),peers=slots.get(slot)||[];const g=peers.find(g=>{const known=g.filter(x=>venueKey(x));return venueKey(e)&&known.length?known.every(x=>sameOccurrence(x,e)):g.some(x=>sameOccurrence(x,e))});if(g)g.push(e);else{const fresh=[e];groups.push(fresh);peers.push(fresh);slots.set(slot,peers)}}
@@ -69,5 +94,17 @@ return all.map(e=>canonical.get(e.event_id||e.id)).filter(e=>options.keepDuplica
 function resolve(events,id){const all=reconcile(events,{keepDuplicates:true}),found=all.find(e=>(e.event_id||e.id)===id||(e.source_aliases||[]).some(a=>a.event_id===id));return found?.duplicate_of?all.find(e=>(e.event_id||e.id)===found.duplicate_of):found}
 const matchesCategory=(e,ids)=>ids.has(e.category)||(e.category_memberships||[]).some(m=>ids.has(m.category));
 function imageError(img){let urls=[];try{urls=JSON.parse(img.dataset.mediaAlternatives||'[]')}catch{}const next=urls.find(u=>u&&u!==img.getAttribute('src')&&!BAD.test(u));if(next){img.dataset.mediaAlternatives=JSON.stringify(urls.slice(urls.indexOf(next)+1));img.src=next;return}const fallback=img.ownerDocument.createElement('div');fallback.className='image placeholder fallback';fallback.textContent='תמונה אינה זמינה';img.replaceWith(fallback)}
-const api={imageError,setFactRegistry:r=>{factRegistry=r||{}},matchesCategory,norm,sourceKey,titleKey,venueKey,groupKey,sameProduction,sameOccurrence,safeImage,sanitize,reconcile,resolve,setMediaRegistry:r=>{mediaRegistry=Object.fromEntries(Object.entries(r||{}).map(([k,v])=>[sourceKey(k),v]))}};root.ISNET_EVENT_IDENTITIES=api;api.ready=root.document&&typeof fetch==='function'?fetch(new URL('data/event-quality-media.json',root.document.currentScript.src),{cache:'no-cache',signal:typeof AbortSignal!=='undefined'&&AbortSignal.timeout?AbortSignal.timeout(10000):undefined}).then(r=>r.ok?r.json():{}).then(r=>{api.setMediaRegistry(r.repairs);api.setFactRegistry(r.fact_repairs)}).catch(()=>{}):Promise.resolve();if(typeof module==='object'&&module.exports)module.exports.integrity=api;
+// Dynamic CMS reads must not bypass the build gate. Reject only the suspect overlays;
+// leave the source records intact and expose the rejected IDs for operational review.
+function guardPublishedOverlays(source,rows){
+ const proposed=new Map(source.map(e=>[String(e.event_id||e.id),e]));
+ for(const row of rows)if(proposed.has(String(row.event_id))||row.record_type==='manual')proposed.set(String(row.event_id),{...row.payload,event_id:row.event_id});
+ const day=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+ const suspects=suspectedDuplicates(reconcile([...proposed.values()]).filter(e=>(e.end_date||e.start_date||'')>=day));
+ const ids=new Set(suspects.flatMap(pair=>pair.flatMap(e=>[e.event_id||e.id,...(e._duplicate_ids||[]),...(e.source_aliases||[]).map(a=>a.event_id)])));
+ const blocked=rows.filter(r=>ids.has(r.event_id));
+ if(blocked.length){api.rejectedOverlayIds=[...new Set([...(api.rejectedOverlayIds||[]),...blocked.map(r=>r.event_id)])];if(typeof console!=='undefined')console.warn('ISNET duplicate guard: withheld suspect CMS overlays for review',blocked.map(r=>r.event_id))}
+ return blocked.length?rows.filter(r=>!ids.has(r.event_id)):rows;
+}
+const api={policyVersion:'20261102-production2',theatreTitle,suspectedDuplicates,guardPublishedOverlays,imageError,setFactRegistry:r=>{factRegistry=r||{}},matchesCategory,norm,sourceKey,titleKey,venueKey,groupKey,sameProduction,sameOccurrence,safeImage,sanitize,reconcile,resolve,setMediaRegistry:r=>{mediaRegistry=Object.fromEntries(Object.entries(r||{}).map(([k,v])=>[sourceKey(k),v]))}};root.ISNET_EVENT_IDENTITIES=api;api.ready=root.document&&typeof fetch==='function'?fetch(new URL('data/event-quality-media.json',root.document.currentScript.src),{cache:'no-cache',signal:typeof AbortSignal!=='undefined'&&AbortSignal.timeout?AbortSignal.timeout(10000):undefined}).then(r=>r.ok?r.json():{}).then(r=>{api.setMediaRegistry(r.repairs);api.setFactRegistry(r.fact_repairs)}).catch(()=>{}):Promise.resolve();if(typeof module==='object'&&module.exports)module.exports.integrity=api;
 })(typeof window==='object'?window:globalThis);
