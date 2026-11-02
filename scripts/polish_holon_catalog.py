@@ -53,25 +53,15 @@ def main():
   if re.search(r'על הבוקר|בין ערביים|קלאסיקל|הפוגת זמר|שרים מכל הלב',e['title']):aud.add('seniors')
   if e['category']=='kids' or re.search(r'לכל המשפחה|גילי \d|ילדים',e['title']):aud.update(['kids','families'])
   e['audiences']=sorted(aud);out.append(e)
- # Official editorial pages enrich imagery only. Their dates never override the ticket calendar.
- try:
-  soup=core.get('https://www.hth.co.il/');links=[(core.core.text_norm(a.get_text(' ',strip=True)),urljoin('https://www.hth.co.il/',a['href'])) for a in soup.select('a[href]') if '/events/' in a.get('href','') and a.get_text(' ',strip=True)]
- except Exception:links=[]
- urls={}
- for e in out:
-  if e['source_id']!='hth':continue
-  t=base(e['title']);u=next((u for n,u in links if n==t or n.startswith(t+' ')),None)
-  if u:urls[e['id']]=u
- def picture(u):
-  try:
-   s=core.get(u);m=s.select_one('meta[property="og:image"]');img=core.promo(m.get('content') if m else None,u);return u,img,m.get('content') if m else None
-  except Exception:return u,None,None
- with concurrent.futures.ThreadPoolExecutor(max_workers=4) as ex:pictures={u:(im,origin) for u,im,origin in ex.map(picture,sorted(set(urls.values()))[:30])}
- for e in out:
-  u=urls.get(e['id']);im,origin=pictures.get(u,(None,None))
-  if im:e.update(image=im,image_role='official_promotional',image_origin_url=origin,image_credit='תמונת יח״צ: תיאטרון חולון',image_source_url=u)
+ # Match official content pages, including cinema and Mediatheque; ticket dates remain untouched.
+ from enrich_holon_media import enrich
+ enrich(out)
+ from holon_production_media import enrich as production_media
+ production_media(out)
+ from holon_cinema_metadata import apply_descriptions
+ apply_descriptions(out)
  out.sort(key=lambda e:(e['start_date'],e['start_time']));d['events']=out;core.save('events',d)
- core.save('quality-report',{'checked_at':core.NOW.isoformat(),'events':len(out),'held_duplicates_or_conflicts':held,'event_photos':sum(e.get('image_role')=='official_promotional' for e in out),'note':'All remaining events and all categories/subcategories have labeled local or shared JPG illustrations.'})
+ core.save('quality-report',{'checked_at':core.NOW.isoformat(),'events':len(out),'held_duplicates_or_conflicts':held,'event_photos':sum(e.get('image_role')=='official_promotional' for e in out),'note':'Official content pages and approved same-production artwork are preferred; missing art is shown as a title card.'})
  f=core.read('restaurants')
  for x in f['items']:
   if 'אייסברג' in x['title']:x['subcategory']='dessert';x['image']='../kiryat-gat/assets/food/dessert-illustration.jpg'

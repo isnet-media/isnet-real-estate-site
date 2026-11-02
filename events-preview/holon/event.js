@@ -86,7 +86,7 @@ function groupPurchaseAction(occ){
   }
   return null;
 }
-function trustedImage(e){
+function trustedImage(e){if(e.image_role==="illustration")return false;
   return window.ISNET_EVENT_IDENTITIES?window.ISNET_EVENT_IDENTITIES.safeImage(e):Boolean(e.image_url&&e.image_publishable===true&&e.image_verified===true);
 }
 function bestImageEvent(occ){

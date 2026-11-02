@@ -39,9 +39,12 @@ def build():
  for e in events:
   if e['category']!='cinema':continue
   key=e['title'];m=movies.setdefault(key,dict(id='holon-film-'+hashlib.sha256(key.encode()).hexdigest()[:12],title=key,synopsis=e['description'],poster_url=absolute(e['image_url']),poster_credit=e['image_credit'],poster_verification={'url':absolute(e['image_url']),'kind':e['source_image_kind'],'source':e['source_url']},poster_alt=e['title'] if e['source_image_kind']=='official_promotional' else 'תמונת המחשה — לא כרזה רשמית של הסרט',is_family='kids' in e.get('audiences',[]),venues=[]))
-  vid='hot-cinema' if 'hotcinema.co.il' in e['source_url'] else 'cinema-city';v=next((v for v in m['venues'] if v['id']==vid),None)
-  if v is None:v=dict(id=vid,name='HOT CINEMA DREAM STAGE חולון' if vid=='hot-cinema' else 'סינמטק חולון',article_url=e['source_url'],schedule={},sessions=[]);m['venues'].append(v)
+  vid='hot-cinema' if 'hotcinema.co.il' in e['source_url'] else 'kids-cinema' if e['source_id']=='mediatheque' else 'cinema-city';v=next((v for v in m['venues'] if v['id']==vid),None)
+  if v is None:v=dict(id=vid,name='HOT CINEMA DREAM STAGE חולון' if vid=='hot-cinema' else 'סינמטק הילדים — מדיטק' if vid=='kids-cinema' else 'סינמטק חולון',article_url=e['source_url'],schedule={},sessions=[]);m['venues'].append(v)
   v['schedule'].setdefault(e['start_date'],[]).append(e['start_time']);v['sessions'].append(dict(date=e['start_date'],time=e['start_time'],booking_url=e['purchase_url']))
+ from holon_cinema_metadata import enrich_movies,write_media_report
+ enrich_movies(list(movies.values()),events)
+ write_media_report(events,list(movies.values()))
  save('cinema',{'city':'חולון','source_name':'לוחות המארגנים הרשמיים בחולון','updated_at':raw['generated_at'],'movies':list(movies.values())})
  branding=C/'assets/branding';branding.mkdir(exist_ok=True)
  for old,new in [('what-to-do-kgat-dark.svg','what-to-do-holon-dark.svg'),('kgatnet-dark.svg','holonnet-dark.svg')]:

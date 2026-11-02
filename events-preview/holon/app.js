@@ -238,6 +238,7 @@ const SPECIAL_EVENT_ART={
 function specialEventArt(e){if(e?.source_content_authoritative)return "";return SPECIAL_EVENT_ART[String(e?.title||"").trim()]||""}
 
 function eventImageHTML(e,mode="card"){
+  if(!hasTrustedSourceImage(e))return '<span class="eventArtStage holonPendingMedia"><small>'+escapeHtml(catLabels[e.category]||'בחולון')+'</small><strong>'+escapeHtml(e.title)+'</strong><span>'+escapeHtml(e.venue||'')+'</span></span>';
   const special=specialEventArt(e);
   if(!special&&!hasTrustedSourceImage(e)){
     const fallback=fallbackImage(e);
@@ -1162,7 +1163,7 @@ async function init(){
   state.events=state.events.filter(e=>(e.end_date||e.start_date)>=iso(today())&&e.is_active!==false&&!["hidden","draft","archived","trashed","deleted","cancelled","canceled"].includes(e.status)&&!["draft","unpublished","hidden","archived"].includes(e.publication_status));
   state.fallbacks=fallbacks;
   state.generatedAt=data.generated_at||null;
-  state.cinema=cinema.movies||[];
+  state.cinema=cinema.movies||[];const venueNames=new Map();state.cinema.forEach(m=>(m.venues||[]).forEach(v=>venueNames.set(v.id,v.name)));if($("cinemaFilters"))$("cinemaFilters").innerHTML='<button data-cinema="all" class="is-active">כל בתי הקולנוע</button>'+[...venueNames].map(([id,name])=>'<button data-cinema="'+escapeHtml(id)+'">'+escapeHtml(name)+'</button>').join('');
   state.cinemaUpdatedAt=cinema.updated_at||null;
   state.sportsMeta=sports||{branches:{},teams:[]};
   window.publicTaxonomy=taxonomy.primary_categories||[];

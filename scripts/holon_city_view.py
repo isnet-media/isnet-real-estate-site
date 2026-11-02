@@ -16,9 +16,19 @@ def decorate(content,name,suffix):
  if name.endswith('.js') and Path(name).name=='app.js':
   content=content.replace("'<div class=\"cinemaCard__body\">'+","'<div class=\"cinemaCard__body\"><small class=\"imageCredit\">'+escapeHtml(movie.poster_credit||'')+'</small>'+")
   content=content.replace('fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({}))','Promise.resolve({})')
+  content=content.replace('state.cinema=cinema.movies||[];', '''state.cinema=cinema.movies||[];const venueNames=new Map();state.cinema.forEach(m=>(m.venues||[]).forEach(v=>venueNames.set(v.id,v.name)));if($("cinemaFilters"))$("cinemaFilters").innerHTML='<button data-cinema="all" class="is-active">כל בתי הקולנוע</button>'+[...venueNames].map(([id,name])=>'<button data-cinema="'+escapeHtml(id)+'">'+escapeHtml(name)+'</button>').join('');''')
   content=content.replace('if(state.category&&e.category!==state.category)return false;','if(state.category&&!window.HOLON_EVENTS.matches(e,new Set([state.category])))return false;')
   content=content.replace('ids.has(e.category)','window.HOLON_EVENTS.matches(e,ids)')
+ if name.endswith('.js') and Path(name).name=='app.js':
+  content=content.replace('function eventImageHTML(e,mode="card"){', 'function eventImageHTML(e,mode="card"){\n  if(!hasTrustedSourceImage(e))return \'<span class="eventArtStage holonPendingMedia"><small>\'+escapeHtml(catLabels[e.category]||\'בחולון\')+\'</small><strong>\'+escapeHtml(e.title)+\'</strong><span>\'+escapeHtml(e.venue||\'\')+\'</span></span>\';')
+ if name.endswith('.js') and Path(name).name=='event.js':
+  content=content.replace('function trustedImage(e){','function trustedImage(e){if(e.image_role==="illustration")return false;')
+  content=content.replace('const illustration=window.isnetEventIllustration?.(e);','const illustration=null;')
+ if name=='styles.css':
+  content+='\n/* A missing source photograph is a readable title card, never a repeated unrelated illustration. */\n.holonPendingMedia{position:absolute;inset:0;display:flex!important;flex-direction:column;justify-content:center;align-items:center;gap:14px;padding:24px;text-align:center;background:linear-gradient(135deg,#20252c,#14181e);color:#f2e3c7}.holonPendingMedia strong{font-size:clamp(20px,2vw,28px);line-height:1.35;max-width:26ch}.holonPendingMedia small{color:#e0bb73;font-size:14px}.holonPendingMedia>span{font-size:14px;color:#b7bdc6}\n'
  if name in ['kids-hub.js','seniors-hub.js']:
+  content=content.replace('function picture(e){','function picture(e){if(e.image_role==="illustration")return {url:"",original:false};')
+  content=content.replace("esc(topics[topic(e)])+'</span>'","esc(title(e))+'</span>'")
   content=content.replace('פארקים, ים, תרבות ורעיונות לבילוי משפחתי','פארקים, תרבות ורעיונות לבילוי משפחתי').replace("['חופים וטיילת','חול, אוויר ים וזמן ביחד','places.html?category=beaches','≈']","['פעילויות בקהילה','מפגשים ופעילויות למשפחה','category.html?category=community','◎']").replace("['חופים','ים, אוויר ורגע לעצמכם','places.html?category=beaches','≈']","['מוסדות תרבות','מוזיאונים ומקומות להכיר','places.html?category=culture','◇']")
  if name=='site-search-chat.js':content=content.replace('/meusharim/ashdod/data/classes.json','data/classes.json')
  if name=='index.html':

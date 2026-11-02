@@ -244,6 +244,7 @@ const SPECIAL_EVENT_ART={
 function specialEventArt(e){if(e?.source_content_authoritative)return "";return SPECIAL_EVENT_ART[String(e?.title||"").trim()]||""}
 
 function eventImageHTML(e,mode="card"){
+  if(!hasTrustedSourceImage(e))return '<span class="eventArtStage holonPendingMedia"><small>'+escapeHtml(catLabels[e.category]||'בחולון')+'</small><strong>'+escapeHtml(e.title)+'</strong><span>'+escapeHtml(e.venue||'')+'</span></span>';
   const illustration=!hasTrustedSourceImage(e)&&window.isnetEventIllustration?.(e);
   if(illustration)return '<span class="eventArtStage is-subcategory-illustration"><img class="eventArtMain eventArtFull" src="'+escapeHtml(illustration.src)+'" alt="המחשה: '+escapeHtml(illustration.label)+'" loading="lazy" onerror="this.closest(\'.eventArtStage\').remove()"><span style="position:absolute;bottom:8px;left:8px;padding:3px 7px;background:#171717b8;color:white;font-size:11px;border-radius:4px">המחשה</span></span>';
   if(e?.local_source_refresh&&!hasTrustedSourceImage(e))return '<span class="eventArtStage"><span style="padding:20px;color:#b5bac6">תמונה מתאימה טרם פורסמה</span></span>';
@@ -1263,7 +1264,7 @@ async function init(){
   // Cinema has no dependency on event/CMS responses or editorial enrichment.
   if(location.hash==="#cinema"){state.cinemaOpen=true;if(new URLSearchParams(location.search).get("audience")==="family")state.cinemaAudience="family";}
   cinemaRequest.then(cinema=>{
-    state.cinema=cinema.movies||[];state.cinemaUpdatedAt=cinema.updated_at||null;state.cinemaLoading=false;
+    state.cinema=cinema.movies||[];const venueNames=new Map();state.cinema.forEach(m=>(m.venues||[]).forEach(v=>venueNames.set(v.id,v.name)));if($("cinemaFilters"))$("cinemaFilters").innerHTML='<button data-cinema="all" class="is-active">כל בתי הקולנוע</button>'+[...venueNames].map(([id,name])=>'<button data-cinema="'+escapeHtml(id)+'">'+escapeHtml(name)+'</button>').join('');state.cinemaUpdatedAt=cinema.updated_at||null;state.cinemaLoading=false;
     if(boardReady)render();
     renderCinema();
     window.CinemaEditorial?.ready.then(()=>{

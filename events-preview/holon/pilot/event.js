@@ -95,7 +95,7 @@ function groupPurchaseAction(occ){
   }
   return null;
 }
-function trustedImage(e){
+function trustedImage(e){if(e.image_role==="illustration")return false;
   if(window.ISNET_EVENT_IDENTITIES&&!window.ISNET_EVENT_IDENTITIES.safeImage(e))return false;
   return Boolean(!(window.isnetEventDefaultImage?.(e)&&window.isnetEventIllustration?.(e))&&e.image_url&&e.image_publishable===true&&e.image_verified===true&&e.source_image_kind!=="source_placeholder"&&(e.image_represents_event!==false||e.source_image_kind==="illustration")&&!/microsoft_oauth_logo|no_pic\.png|favicon|\/placeholders\/|\/images\/live\/more\/eventNew\.jpg|\/images\/artists\/artistShadow\.png/i.test(e.image_url));
 }
@@ -323,7 +323,7 @@ function renderHero(e,occ,imageEvent){
     const src=imageEvent.thumbnail_ready&&imageEvent.thumbnail_url?imageEvent.thumbnail_url:imageEvent.image_url;
     $("heroImage").innerHTML='<img data-event-image-id="'+escapeHtml(e.event_id)+'" src="'+escapeHtml(src)+'" data-media-alternatives="'+escapeHtml(JSON.stringify((imageEvent._image_alternatives||[]).filter(u=>u!==src)))+'" onerror="window.ISNET_EVENT_IDENTITIES.imageError(this)" alt="'+escapeHtml(eventDisplayTitle(e))+'">'+(imageEvent.image_caption?'<span class="image-caption" style="position:absolute;bottom:8px;right:8px;padding:4px 8px;background:#171717cc;color:white;font-size:12px">'+escapeHtml(imageEvent.image_caption)+'</span>':'');
   }else{
-    const illustration=window.isnetEventIllustration?.(e);
+    const illustration=null;
     if(illustration){
       $("heroImage").innerHTML='<img src="'+escapeHtml(illustration.src)+'" alt="המחשה: '+escapeHtml(illustration.label)+'"><span class="image-caption" style="position:absolute;bottom:8px;left:8px;padding:4px 8px;background:#171717cc;color:white;font-size:12px">המחשה</span>';
     }else if(e.category==="lecture"){

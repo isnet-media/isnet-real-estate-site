@@ -54,6 +54,21 @@ class HolonRelease(unittest.TestCase):
    if master.select(selector):self.assertEqual(len(master.select(selector)),len(city.select(selector)),selector)
   self.assertIsNotNone(city.select_one('.culinaryHomepageFeature'));self.assertIn('holon-events.js',(C/'event.html').read_text())
   self.assertNotIn('window.HOLON_BOOTSTRAP=',(C/'index.html').read_text())
+ def test_cinema_has_specific_art_and_real_synopses(self):
+  movies=read('cinema')['movies'];self.assertGreaterEqual(len(movies),30)
+  self.assertTrue(all(m['poster_verification']['kind']=='official_promotional' for m in movies))
+  self.assertGreaterEqual(len({m['poster_url'] for m in movies}),30)
+  self.assertTrue(all(m.get('editorial_text') and 'פרטי התוכנית' not in m['synopsis'] for m in movies))
+  self.assertGreaterEqual(sum(bool(m.get('trailer_youtube_id'))for m in movies),10)
+  for m in movies:
+   for v in m['venues']:
+    self.assertIn('חולון' if v['id']=='cinema-city' else 'מדיטק',v['name'])
+    for session in v['sessions']:self.assertIn('smarticket.co.il',session['booking_url'])
+ def test_media_regression_and_honest_missing_art(self):
+  events=read('events')['events'];real=[e for e in events if e.get('image_role')=='official_promotional']
+  self.assertGreaterEqual(len(real),110);self.assertGreaterEqual(len({e['image']for e in real}),95)
+  self.assertIn('holonPendingMedia',(C/'pilot/app.js').read_text())
+  for e in real:self.assertTrue(e.get('image_source_url') or e.get('image_origin_url') or e['source_id']=='papi-holon')
  def test_parser_does_not_expand_unknown_more_dates(self):
   sys.path.insert(0,str(R/'scripts'));import sync_holon_events as h
   self.assertEqual(h.classify('אורי חזקיה','','hth'),'standup');self.assertEqual(h.classify('אבו סאלי','','cinematheque'),'cinema');self.assertEqual(h.classify('מסעדה בקצה הקוטב - תיאטרון המדיטק','לגילאי 4 ומעלה','mediatheque'),'kids')
