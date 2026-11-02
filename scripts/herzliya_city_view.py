@@ -1,0 +1,108 @@
+"""Small Herzliya adaptations to the canonical Ashdod event frontend, never a separate UI."""
+import hashlib,json,re
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]/'events-preview';CITY=ROOT/'herzliya'
+def read(name):return json.loads((CITY/'data'/(name+'.json')).read_text())
+def decorate(content,name,suffix):
+ content=content.replace('הים, התרבות, הטבע והפינות שעוד לא הכרתם.','התרבות, הפארקים והפינות שעוד לא הכרתם.').replace('discover-ashdod','discover-herzliya')
+ content=content.replace('ראשון לציון','הרצליה').replace('לגלות תרבות בראשון','תרבות בהרצליה').replace('סינמה סיטי','סינמטק הרצליה')
+ content=content.replace('https://www.cinema-city.co.il/','https://www.hcinema.org.il/')
+ content=content.replace('location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"ashdod"','"herzliya"')
+ content=content.replace("cityEvents('ashdod')","cityEvents('herzliya')").replace("cityEvents('rishon-lezion')","Promise.resolve({events:[]})")
+ if name=='saturday.js':
+  content=content.replace("fetch('../ashdod/data/cinema.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()})","Promise.resolve({movies:[]})")
+ if name=='category-landing.js':
+  content=content.replace('ids.has(e.category)','window.HERZLIYA_EVENTS.matches(e,ids)')
+ if name.endswith('.js') and Path(name).name=='app.js':
+  content=content.replace("'<div class=\"cinemaCard__body\">'+","'<div class=\"cinemaCard__body\"><small class=\"imageCredit\">'+escapeHtml(movie.poster_credit||'')+'</small>'+")
+  content=content.replace('fetch("category-fallbacks.json?v=20261005-21").then(r=>r.json()).catch(()=>({}))','Promise.resolve({})')
+  content=content.replace('state.cinema=cinema.movies||[];', '''state.cinema=cinema.movies||[];const venueNames=new Map();state.cinema.forEach(m=>(m.venues||[]).forEach(v=>venueNames.set(v.id,v.name)));if($("cinemaFilters"))$("cinemaFilters").innerHTML='<button data-cinema="all" class="is-active">כל בתי הקולנוע</button>'+[...venueNames].map(([id,name])=>'<button data-cinema="'+escapeHtml(id)+'">'+escapeHtml(name)+'</button>').join('');''')
+  content=content.replace('if(state.category&&e.category!==state.category)return false;','if(state.category&&!window.HERZLIYA_EVENTS.matches(e,new Set([state.category])))return false;')
+  content=content.replace('ids.has(e.category)','window.HERZLIYA_EVENTS.matches(e,ids)')
+ if name.endswith('.js') and Path(name).name=='app.js':
+  content=content.replace("return fmtFull.format(localDate(first.start_date))+' · '+formatTime(first.start_time);","const firstDayTimes=[...new Set(occ.filter(x=>x.start_date===first.start_date).map(x=>formatTime(x.start_time)))].sort();return fmtFull.format(localDate(first.start_date))+' · '+firstDayTimes.join(' / ');")
+  content=content.replace('function hasTrustedSourceImage(e){','function hasTrustedSourceImage(e){if(e.image_role==="illustration")return false;')
+  content=content.replace('function eventImageHTML(e,mode="card"){', 'function eventImageHTML(e,mode="card"){\n  if(!hasTrustedSourceImage(e))return \'<span class="eventArtStage herzliyaPendingMedia"><small>\'+escapeHtml(catLabels[e.category]||\'בהרצליה\')+\'</small><strong>\'+escapeHtml(e.title)+\'</strong><span>\'+escapeHtml(e.venue||\'\')+\'</span></span>\';')
+ if name.endswith('.js') and Path(name).name=='event.js':
+  content=content.replace('function trustedImage(e){','function trustedImage(e){if(e.image_role==="illustration")return false;')
+  content=content.replace('const illustration=window.isnetEventIllustration?.(e);','const illustration=null;')
+ if name=='styles.css':
+  content+='\n/* A missing source photograph is a readable title card, never a repeated unrelated illustration. */\n.herzliyaPendingMedia{position:absolute;inset:0;display:flex!important;flex-direction:column;justify-content:center;align-items:center;gap:14px;padding:24px;text-align:center;background:linear-gradient(135deg,#20252c,#14181e);color:#f2e3c7}.herzliyaPendingMedia strong{font-size:clamp(20px,2vw,28px);line-height:1.35;max-width:26ch}.herzliyaPendingMedia small{color:#e0bb73;font-size:14px}.herzliyaPendingMedia>span{font-size:14px;color:#b7bdc6}\n'
+ if name in ['kids-hub.js','seniors-hub.js']:
+  content=content.replace('function picture(e){','function picture(e){if(e.image_role==="illustration")return {url:"",original:false};')
+  content=content.replace("esc(topics[topic(e)])+'</span>'","esc(title(e))+'</span>'")
+  content=content.replace('פארקים, ים, תרבות ורעיונות לבילוי משפחתי','פארקים, תרבות ורעיונות לבילוי משפחתי').replace("['חופים וטיילת','חול, אוויר ים וזמן ביחד','places.html?category=beaches','≈']","['פעילויות בקהילה','מפגשים ופעילויות למשפחה','category.html?category=community','◎']").replace("['חופים','ים, אוויר ורגע לעצמכם','places.html?category=beaches','≈']","['מוסדות תרבות','מוזיאונים ומקומות להכיר','places.html?category=culture','◇']")
+ if name in ['cinema.js','movie.js']:
+  content=content.replace('id==="cinema-city"?"סינמה סיטי":v.name','false?v.name:v.name').replace('function venueLabel(id){return id==="cinema-city"?"סינמה סיטי הרצליה":"HOT Cinema הרצליה"}', 'function venueLabel(id){return "סינמטק הרצליה"}')
+  content=content.replace('const image=m.trailer_youtube_id?', 'const image=m.poster_url|| (m.trailer_youtube_id?').replace('"/hqdefault.jpg":"";','"/hqdefault.jpg":"");') if name=='cinema.js' else content
+ if name in ['cinema.html','index.html']:
+  content=re.sub(r'<button[^>]*data-(?:cinema|venue)="(?:cinema-city|hot-cinema|cinematheque)"[^>]*>.*?</button>', '', content)
+  content=content.replace('סינמה סיטי הרצליה','סינמטק הרצליה').replace('HOT CINEMA DREAM STAGE הרצליה','סינמטק הרצליה')
+ if name=='site-search-chat.js':content=content.replace('/meusharim/ashdod/data/classes.json','data/classes.json')
+ if name=='index.html':
+  # Restore the canonical culinary entry using the existing city's own catalog.
+  src=(ROOT/'ashdod/index.html').read_text()
+  food=re.search(r'<a\b[^>]*class="[^"]*culinaryHomepageFeature[^"]*"[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>',src)
+  if food:
+   card=food[0].replace(' data-ashdod-culinary',' data-herzliya-culinary')
+   content=content.replace('<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה">','<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה">'+card,1)
+  content=content.replace('<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה">','<nav class="isnetNavDiscovery__lifestyle" aria-label="בילויים וקולינריה"><a class="isnetNavSmall" href="health.html"><span aria-hidden="true">✚</span> בריאות וחירום · בית מרקחת פתוח</a>',1)
+  # Herzliya has no beach; do not present another city's coastline as local.
+  # Preserve old shared links while using the same real detail routes as every edition.
+  aliases={x['id']:('restaurants.html?place=' if x.get('category')=='food' else 'attraction.html?id=')+x['id'] for x in [*read('guides')['items'],*read('restaurants')['items']]}
+  code='(()=>{const p=new URLSearchParams(location.search);if(p.get("id"))location.replace("event.html?id="+encodeURIComponent(p.get("id")));const old='+json.dumps(aliases,ensure_ascii=False)+';if(p.get("place")&&old[p.get("place")])location.replace(old[p.get("place")]);})();'
+  content=content.replace('</head>','<script>'+code+'</script></head>')
+ if suffix=='.html':
+  content=re.sub(r'<script[^>]*src="../shared/public-cms.js[^>]*></script>','<script src="herzliya-events.js?v=canonical-20261101"></script>',content)
+  if name in ['index.html','category.html']:
+   data=read('events-public');data['events']=[{k:(v[:180] if k=='description' else v) for k,v in e.items() if k not in {'image_origin_url','image_source_url','additional_sources','source_checked_at','source_name','sources','image','source_url','booking_url'}} for e in data['events']];data['taxonomy']=json.loads((ROOT/'admin/data/taxonomy.json').read_text())
+   packed=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c')
+   content=content.replace('<head>','<head><meta charset="utf-8"><script>window.ISNET_CITY_BOOTSTRAP='+packed+';</script>',1)
+  meta='<meta name="herzliya-layout" content="canonical-ashdod-20261101"><meta property="og:image" content="https://isnet.co.il/events-preview/herzliya/assets/share-card.jpg">'
+  content=content.replace('</head>',meta+'</head>')
+  if name=='index.html':content=content.replace('</head>','<link rel="canonical" href="https://isnet.co.il/events-preview/herzliya/"></head>')
+ # Canonical logo filenames already localized by the shared generator.
+ content=content.replace('assets/branding/rishonet-dark.svg','assets/branding/herzliyanet-dark.svg')
+ content=content.replace('what-to-do-herzliya.svg','what-to-do-herzliya-dark.svg')
+ return content.rstrip()+'\n'
+
+def build_food(check=False):
+ """The established culinary frontend, with Herzliya data substituted before output."""
+ from sync_event_city_views import localize,TARGETS
+ city=TARGETS['herzliya'];items=[x for x in read('restaurants')['items'] if x.get('homepage_featured') is True];cats={x['id']:x['label'] for x in read('categories')['categories']};places=[]
+ mapping={'street':'local','dessert':'dessert','burger':'burger','bar':'bar','cafe':'cafe','asian':'asian','italian':'italian','meat':'meat'}
+ for x in items:
+  k=mapping.get(x['subcategory'],'local');places.append(dict(id=x['id'],name=x['title'],en='',kind=k,kinds=['restaurant',k],label={'local':'אוכל ביתי ואוכל רחוב','dessert':'מאפיות וקינוחים','burger':'המבורגר ובשרים','bar':'ברים ובילוי ערב','cafe':'בתי קפה','asian':'סושי ואסייתי','italian':'איטלקי וים תיכוני','meat':'מסעדות בשרים'}[k],moods=['coffee','family'] if k in ['cafe','dessert'] else ['family','evening'],address=x['address'],description=x['description'],image=x['image'],credit=x['image_credit'],image_alt=x['title'] if x.get('image_role')=='official_promotional' else 'תמונת המחשה — לא צילום מהמסעדה',image_role=x.get('image_role','illustration'),site=x['source_url'],site_label='לפרטי המקום',booking=x.get('booking_url'),menu=x.get('menu_url'),source_url=x['source_url'],source_label='אתר המקום או מערכת ההזמנה',checked_at=(x.get('source_checked_at') or read('restaurants').get('checked_at','2026-11-01'))[:10],kosher='כשרות מצוינת במקור; יש לוודא תעודה עדכנית מול המקום.' if x.get('kosher') else 'יש לבדוק מול המקום.',kosherVerified=x.get('kosher') is True,saturdayVerified=x.get('saturday') is True,saturday_note='פתיחה בשבת מצוינת במקור; יש לוודא שעות לפני היציאה.' if x.get('saturday') else 'פתיחה בשבת לא אומתה.'))
+ # The KG culinary renderer is the shared Ashdod design with generic venue-kind support.
+ outputs={};changed=[]
+ for name in ['restaurants.js','restaurants.css','restaurants.html']:
+  source=(ROOT/'ashdod'/name).read_text()
+  if name=='restaurants.js':source=re.sub(r'^const places=.*?;$','const places=__HERZLIYA_OWN_PLACES__;',source,count=1,flags=re.M)
+  source=source.replace('אשדוד','הרצליה').replace('ashdodnet.com','herzliyanet.co.il').replace('what-to-do-ashdod','what-to-do-herzliya').replace('ashdodnet-dark','herzliyanet-dark').replace('/ashdod/','/herzliya/').replace('isnet-ashdod-','isnet-herzliya-').replace('ASHDOD','HERZLIYA')
+  if name=='restaurants.js':source=source.replace("'sea'","'family'").replace("const kinds={all:","const kinds={dessert:'מאפיות וקינוחים',all:")
+  source=source.replace('קריית גת','הרצליה').replace('בקרית גת','בהרצליה').replace('kiryat-gat','herzliya').replace('kgatnet.co.il','herzliyanet.co.il').replace('what-to-do-kgat','what-to-do-herzliya').replace('kgatnet-dark','herzliyanet-dark').replace('KIRYAT GAT','HERZLIYA')
+  if name=='restaurants.html':
+   source=source.replace('אשדוד','הרצליה').replace('ashdodnet.com','herzliyanet.co.il').replace('what-to-do-ashdod','what-to-do-herzliya').replace('ashdodnet-dark','herzliyanet-dark').replace('/ashdod/','/herzliya/').replace('ASHDOD','HERZLIYA')
+   source=source.replace('assets/restaurants/rooftop.webp','../kiryat-gat/assets/food/cafe-illustration.jpg').replace('צילום: אתר Kira Rooftop','תמונת המחשה — לא צילום מהמסעדה')
+   for old,new in [('עיר של ים.','קרוב לבית.'),('מהדגים של הנמל לקפה של הבוקר, מארוחה טובה לערב שנשארים בו עוד קצת. בואו למצוא את המקום שלכם.','מסעדות, בתי קפה ואוכל מקומי בהרצליה, עם מידע וקישורים למקומות.'),('ים תיכון. שולחן פתוח.','הרצליה. שולחן פתוח.'),('ים אחד.','עיר אחת.'),('דגים וים, מטבחים','מטבחים'),('עם הפנים לים','עם המשפחה'),('נוף, בריזה ושולחן טוב','ארוחה, קפה ושולחן טוב'),('עם נוף לים','ארוחה בעיר'),('data-mood="sea"','data-mood="family"'),('value="sea"','value="family"')]:source=source.replace(old,new)
+  if name=='restaurants.html':source=source.replace('</head>','<meta name="herzliya-layout" content="canonical-ashdod-20261101"></head>')
+  if name=='restaurants.css':source+='\n/* Keep the detail close control above the shared navigation inside its dialog. */\n#foodDetail .close-dialog{z-index:10001}\n'
+  if name=='restaurants.js':
+   source=source.replace("Object.entries(kinds).map", "Object.entries(kinds).filter(([k])=>k==='all'||places.some(p=>p.kind===k)).map")
+   source=source.replace('נבדק ב־19.10.2026.', "נבדק ב־'+esc(p.checked_at)+'.")
+  if name=='restaurants.html':
+   source=source.replace('האווירה בקירה רופטופ בהרצליה','תמונת המחשה של בית קפה — לא צילום ממקום בהרצליה')
+   source=source.replace('נבדק ב־19.10.2026','רשימת המסעדות נערכה ב־02.11.2026')
+  source=source.replace('צילום: '+chr(39)+'+esc(p.credit)',chr(39)+'+esc(p.credit)')
+  source=source.replace('herzliyanet.co.il','isnet.co.il').replace('הרצליה נט','ישראל נט').replace('צילום: \' +esc(p.credit)', '\' +esc(p.credit)')
+  source=source.replace('__HERZLIYA_OWN_PLACES__',json.dumps(places,ensure_ascii=False,separators=(',',':')))
+  if name=='restaurants.html':
+   source=re.sub(r'<script[^>]*src="(?:ashdod-analytics|site-seo|isnet-advertise)\.js[^"]*"[^>]*></script>','',source)
+   cover=next((x for x in items if x.get('image_role')=='official_promotional'),None)
+   if cover:source=source.replace('../kiryat-gat/assets/food/cafe-illustration.jpg',cover['image']).replace('תמונת המחשה — לא צילום מהמסעדה',cover['image_credit']).replace('תמונת המחשה של בית קפה — לא צילום ממקום בהרצליה',cover['title'])
+   for asset,body in outputs.items():source=re.sub(re.escape(asset)+r'(?:\?v=[^"\s]+)?',asset+'?v='+hashlib.sha256(body.encode()).hexdigest()[:12],source)
+  outputs[name]=source
+  if not (CITY/name).exists() or (CITY/name).read_text()!=source:
+   changed.append(name)
+   if not check:(CITY/name).write_text(source)
+ return changed

@@ -1,0 +1,14 @@
+/* ISNET shared layout: edit events-preview/ashdod, not this generated file. */
+/* Homepage category totals stay beside their heading. */
+#eventsGrid .isnetCategoryTop{flex-wrap:wrap;row-gap:8px!important}
+#eventsGrid .isnetCategoryTop>div:first-child{display:flex;align-items:baseline;gap:10px;flex:0 0 auto;max-width:100%}
+#eventsGrid .isnetCategoryTop h3{margin:0!important;white-space:nowrap}
+#eventsGrid .isnetCategoryCount{display:inline-flex;align-items:baseline;white-space:nowrap;color:#aeb4bf;font:500 13px/1.4 Assistant,Arial,sans-serif}
+#eventsGrid .isnetCategoryCount::before{content:"·";margin-inline-end:8px;color:#737b88}
+#eventsGrid .isnetCategoryArrows{margin-inline-start:auto}
+@media(max-width:650px){
+ #eventsGrid .isnetCategoryTop>div:first-child{gap:7px}
+ #eventsGrid .isnetCategoryTop h3{font-size:clamp(16px,4.6vw,20px)!important;line-height:1.3!important;letter-spacing:-.2px}
+ #eventsGrid .isnetCategoryCount{font-size:11px}
+ #eventsGrid .isnetCategoryCount::before{margin-inline-end:5px}
+}

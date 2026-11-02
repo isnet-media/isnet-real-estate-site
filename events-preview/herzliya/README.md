@@ -1,9 +1,13 @@
-# Herzliya health and emergency directory
+# מה עושים בהרצליה
 
-This edition contains health services only. `index.html` leads to `health.html`; it does not advertise a Herzliya events, restaurant or other city application.
+Public URL: https://isnet.co.il/events-preview/herzliya/
 
-Reviewed data is in `data/health.json`. Source URLs and the review date are retained per directory snapshot. Opening status is not live and no source schedule is inferred to be pharmacist availability or today's duty roster. The Marina branch's address conflict is disclosed; the network's current branch address is used for navigation.
+The Ashdod frontend is the canonical presentation source. `sync_event_city_views.py` includes Herzliya; `herzliya_city_view.py` holds the edition adaptations. All dated occurrences, movie sessions, restaurant records, guide entries and source photographs are Herzliya-owned. Existing health content is retained.
 
-Rebuild with `python scripts/build_herzliya_health.py`; validate with `python scripts/test_herzliya_health.py`. The generator reuses the existing Holon health renderer with an explicit target directory; the default Holon output must remain unchanged. Styling and rich sharing reuse existing ISNET assets. Mobile and desktop checks run in `herzliya-health-tests.yml`.
+`herzliya-events.yml` refreshes the sources daily. The collector retains exact dates and source URLs, merges alternate seller links, preserves future records when a source fails, and rejects suspiciously empty replacements. The municipal calendar, hall, cinematheque, FRIENDS and Mevalim are parsed. Institutional and culinary directories without parsed dated entries remain explicit source links; no dates are invented.
 
-Changes to phone numbers, locations or service availability require a fresh review of the linked official sources. Do not advance the review date merely by rebuilding.
+Cinema combines local sessions with film-only editorial metadata; program suffixes such as שלישי זהב and ללא תשלום למנויים do not create separate movie cards. Reviews and audience scores appear only where the shared verified film registry has them. Official trailers are taken from the cinematheque's film page.
+
+Restaurant imports require a structured Herzliya address. Sources include the restaurants, Rest, ROL, Easy and Ontopo. Source photographs retain URLs and credits; missing photography is not presented as a verified venue photograph. Unknown kosher status and Saturday opening remain unknown.
+
+Checks: `python scripts/test_herzliya_events.py`, `python scripts/test_herzliya_health.py`, JavaScript syntax checks, and browser inspection of homepage, cinema, movie, seniors and culinary routes.

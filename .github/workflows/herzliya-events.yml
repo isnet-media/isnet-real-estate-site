@@ -1,0 +1,38 @@
+name: Refresh Herzliya events and culinary guide
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 3 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: isnet-event-data-writes
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4 pillow
+      - run: python -u scripts/sync_herzliya_events.py
+      - run: python -u scripts/enrich_herzliya_cinema.py
+      - run: python -u scripts/enrich_herzliya_food.py
+      - run: python scripts/enrich_herzliya_places.py
+      - run: python scripts/polish_herzliya_catalog.py
+      - run: python scripts/build_herzliya_events.py
+      - run: python scripts/test_herzliya_events.py
+      - name: Save verified local data and pages
+        run: |
+          git config user.name 'isnet-events-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add events-preview/herzliya
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh verified Herzliya events, films and culinary sources'
+          git pull --rebase origin main
+          git push origin HEAD:main

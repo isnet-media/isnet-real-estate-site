@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "events-preview"
 MASTER = ROOT / "ashdod"
 TARGETS = {
+    "herzliya": {"slug":"herzliya","name":"הרצליה","brand":"ישראל נט","website":"https://isnet.co.il/","second_cinema":"סינמטק הרצליה","second_cinema_id":"cinematheque","brand_slug":"herzliya"},
     "holon": {"slug":"holon","name":"חולון","brand":"חולון נט","website":"https://holonnet.co.il/","second_cinema":"HOT CINEMA DREAM STAGE","second_cinema_id":"hot-cinema","brand_slug":"holon"},
     "kiryat-gat": {"slug":"kiryat-gat","name":"קריית גת","brand":"קריית גת נט","website":"https://kgatnet.co.il/","second_cinema":"היכל התרבות","second_cinema_id":"municipal-hall"},
     "yavne": {"slug":"yavne","name":"יבנה","brand":"יבנה נט","website":"https://www.yavnenet.co.il/","second_cinema":"סינמטק יבנה","second_cinema_id":"cinematheque"},
@@ -73,7 +74,7 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     content = re.sub(r'(?<![A-Za-z0-9_./-])assets/(?!branding/)', '../ashdod/assets/', content)
     content = content.replace('assets/branding/what-to-do-ashdod', 'assets/branding/what-to-do-' + city.get('brand_slug',('yavne' if city['slug']=='yavne' else 'rishon')))
     content = content.replace('what-to-do-' + city.get('brand_slug',('yavne' if city['slug']=='yavne' else 'rishon')) + '-dark.svg?v=20261020-logo2', 'what-to-do-' + city.get('brand_slug',('yavne' if city['slug']=='yavne' else 'rishon')) + '-dark.svg?v=20261021-door1')
-    content = content.replace('assets/branding/ashdodnet-dark.svg', 'assets/branding/' + ('holonnet-dark.svg' if city['slug']=='holon' else 'yavnenet-dark.svg' if city['slug']=='yavne' else 'rishonet-dark.svg'))
+    content = content.replace('assets/branding/ashdodnet-dark.svg', 'assets/branding/' + ('herzliyanet-dark.svg' if city['slug']=='herzliya' else 'holonnet-dark.svg' if city['slug']=='holon' else 'yavnenet-dark.svg' if city['slug']=='yavne' else 'rishonet-dark.svg'))
     # Local partner/catalogs never silently load Ashdod content.
     if name == 'site-search-chat.js':
         content = content.replace("if(/חוג|קורס/.test(raw)&&!payload.courses)", "if(false&&/חוג|קורס/.test(raw)&&!payload.courses)")
@@ -245,6 +246,9 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
         if suffix == ".html":
             from apply_yavne_analytics import decorate
             content = decorate(content)
+    if city["slug"] == "herzliya":
+        from herzliya_city_view import decorate
+        content = decorate(content, name, suffix)
     if city["slug"] == "holon":
         from holon_city_view import decorate
         content = decorate(content, name, suffix)
@@ -335,6 +339,9 @@ def run(check: bool = False) -> int:
                 stale.append(f'{slug}/pilot/{src.name}')
                 if not check:
                     path.parent.mkdir(exist_ok=True);path.write_text(expected)
+    if 'herzliya' in TARGETS:
+        from herzliya_city_view import build_food as build_herzliya_food
+        stale.extend('herzliya/'+name for name in build_herzliya_food(check=check))
     if 'holon' in TARGETS:
         from holon_city_view import build_food
         stale.extend('holon/'+name for name in build_food(check=check))

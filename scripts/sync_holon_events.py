@@ -30,7 +30,7 @@ def subcat(cat,title,sid):
 def fallback(cat):return next(c['image'] for c in read('categories')['categories'] if c['id']==cat)
 def promo(url,source_url):
  if not url or not ('/uploads/' in url or '/images/' in url and 'hotcinema.co.il' in urlsplit(url).hostname) or any(w in url.lower() for w in ['no_pic','logo','no-image']):return None
- if urlsplit(url).hostname.removeprefix('www.')!=urlsplit(source_url).hostname.removeprefix('www.'):return None
+ if urlsplit(url).hostname.removeprefix('www.')!=urlsplit(source_url).hostname.removeprefix('www.') and not ('friends-hist.co.il' in source_url and urlsplit(url).hostname=='friends.smarticket.co.il'):return None
  try:
   name=hashlib.sha256(url.encode()).hexdigest()[:20]+'.jpg';p=CITY/'assets/events'/name
   if not p.exists():
@@ -47,7 +47,10 @@ def ingest(spec):
   if 'JavaScript' in text and (len(text)<2000 or 'מושבת' in text):
    report.update(status='interactive_source',note='המקור דורש JavaScript; מוצג קישור ישיר, ללא המצאת אירועים');return [],report
   parser=spec.get('parser')
-  if parser=='hot-events':
+  if parser=='friends':
+   from friends_city_source import collect
+   rows=collect('חולון',get)
+  elif parser=='hot-events':
    rows=[]
    for a in soup.select('a.event-thumb[href]'):
     heading=a.select_one('.event-thumb-name');title=clean(heading.get_text(' ',strip=True)) if heading else ''
@@ -125,6 +128,11 @@ def enrich(e):
   age=re.search(r'(?:לגילאי|גילי|גילאי)\s*(\d{1,2})\s*[-–]\s*(\d{1,2})',e['description']+' '+e['title'])
   if age:e['age_text']='גילאי '+age[1]+'–'+age[2]
  except Exception:pass
+ if e['source_id']=='friends':
+  cat=classify(e['title'],'','friends')
+  if any(t in e['title'] for t in ['זוגות בזיג זג','קומדיה','אור לגויים']):cat='theatre'
+  e['category']=cat;e['subcategory']=subcat(cat,e['title'],'friends')
+  if 'אור לגויים' in e['title']:e['venue']='תיאטרון חולון · אולם 1'
  if not e['description']:e['description']='פרטי התוכנית וההשתתפות באתר המארגן.'
  return e
 
