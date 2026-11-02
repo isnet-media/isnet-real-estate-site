@@ -1,40 +1,52 @@
 {
   "city": "קריית גת",
-  "total_before": 0,
+  "total_before": 121,
   "sources": {
     "kgat_smarticket": {
       "status": "ok",
       "url": "https://matnaskg.smarticket.co.il/",
       "discovered": 99,
-      "valid": 77,
-      "new": 77,
+      "valid": 78,
+      "new": 6,
       "updated": 0,
-      "images_collected": 77
+      "images_collected": 78
     },
     "kgat_community": {
-      "status": "ok",
+      "status": "failed",
       "url": "https://matnaskg.org.il/events/",
-      "discovered": 107,
-      "valid": 82,
-      "new": 5,
-      "updated": 0,
-      "images_collected": 0
-    },
-    "kgat_municipality": {
-      "status": "ok",
-      "url": "https://www.qiryat-gat.muni.il/events/",
-      "discovered": 107,
-      "valid": 82,
+      "discovered": 0,
+      "valid": 0,
       "new": 0,
       "updated": 0,
-      "images_collected": 0
+      "images_collected": 0,
+      "error": "blocked_403"
+    },
+    "kgat_municipality": {
+      "status": "failed",
+      "url": "https://www.qiryat-gat.muni.il/events/",
+      "discovered": 0,
+      "valid": 0,
+      "new": 0,
+      "updated": 0,
+      "images_collected": 0,
+      "error": "blocked_403"
+    },
+    "easy_kgat": {
+      "status": "failed",
+      "url": "https://easy.co.il/list/Events?region=1750",
+      "discovered": 0,
+      "valid": 0,
+      "new": 0,
+      "updated": 0,
+      "images_collected": 0,
+      "error": "blocked_403"
     },
     "mevalim_kgat": {
       "status": "ok",
       "url": "https://www.mevalim.co.il/south/",
-      "discovered": 1,
-      "valid": 1,
-      "new": 1,
+      "discovered": 3,
+      "valid": 3,
+      "new": 3,
       "updated": 0,
       "images_collected": 0
     },
@@ -51,10 +63,10 @@
       "status": "ok",
       "url": "https://www.makore.co.il/browse/city/קריית-גת",
       "discovered": 28,
-      "valid": 21,
-      "new": 21,
+      "valid": 23,
+      "new": 23,
       "updated": 0,
-      "images_collected": 21
+      "images_collected": 23
     },
     "ticketmaster_kgat": {
       "status": "no_parseable_events",
@@ -65,39 +77,33 @@
       "updated": 0,
       "images_collected": 0
     },
-    "easy_kgat": {
-      "url": "https://easy.co.il/list/Events?region=1750",
-      "status": "failed",
-      "error": "blocked_429",
-      "discovered": 0,
-      "valid": 0,
-      "new": 0,
-      "role": "discovery_requires_occurrence_validation"
-    },
     "friends_kgat": {
       "status": "ok",
       "url": "https://friends-hist.co.il/hall/היכל-התרבות-קרית-גת-2/",
-      "discovered": 7,
-      "valid": 7,
+      "discovered": 8,
+      "valid": 6,
       "new": 0,
-      "updated": 7,
+      "updated": 6,
       "images_collected": 0,
       "images_candidates_only": true
     }
   },
-  "new": 104,
+  "new": 32,
   "updated": 0,
   "removed_invalid": 0,
   "removed_duplicates": 0,
   "removed_classes": 0,
   "preserved_class_review_candidates": 0,
   "errors": [
+    "kgat_community:blocked_403",
+    "kgat_municipality:blocked_403",
+    "easy_kgat:blocked_403",
     "ticketmaster_kgat:no_parseable_events"
   ],
   "preserved_invalid_auto_candidates": 0,
   "preserved_duplicate_auto_candidates": 0,
   "repaired_event_ids": 0,
-  "total_after": 104,
-  "public_after_quality": 83,
+  "total_after": 153,
+  "public_after_quality": 153,
   "held_classes": 0
 }
