@@ -197,7 +197,14 @@ def main():
  save('events',{'city':'חולון','generated_at':NOW.isoformat(),'events':events})
  food=read('restaurants');fixed=[r for r in food['items'] if not r['id'].startswith('rest-')];auto=collect_rest();names={core.text_norm(r['title']) for r in fixed}
  old_auto={r['id']:r for r in food['items'] if r['id'].startswith('rest-')}
- old_auto.update({r['id']:r for r in auto})
+ # Directory imports never become homepage recommendations without editorial review.
+ for r in auto:
+  previous=old_auto.get(r['id'],{})
+  r['homepage_featured']=previous.get('homepage_featured') is True
+  if r['homepage_featured']:
+   for field in ['title','subcategory','description','image','image_credit','booking_url']:
+    if field in previous:r[field]=previous[field]
+  old_auto[r['id']]=r
  food['items']=fixed+[r for r in old_auto.values() if core.text_norm(r['title']) not in names];food['checked_at']=NOW.isoformat();save('restaurants',food)
  # Check each authored restaurant at its direct source; a failed fetch does not imply closure.
  def check(item):

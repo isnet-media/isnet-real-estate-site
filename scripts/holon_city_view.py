@@ -52,10 +52,10 @@ def decorate(content,name,suffix):
 def build_food(check=False):
  """The established culinary frontend, with Holon data substituted before output."""
  from sync_event_city_views import localize,TARGETS
- city=TARGETS['holon'];items=read('restaurants')['items'];cats={x['id']:x['label'] for x in read('categories')['categories']};places=[]
- mapping={'street':'local','dessert':'dessert','burger':'burger','bar':'bar','cafe':'cafe','asian':'asian','italian':'italian'}
+ city=TARGETS['holon'];items=[x for x in read('restaurants')['items'] if x.get('homepage_featured') is True];cats={x['id']:x['label'] for x in read('categories')['categories']};places=[]
+ mapping={'street':'local','dessert':'dessert','burger':'burger','bar':'bar','cafe':'cafe','asian':'asian','italian':'italian','meat':'meat'}
  for x in items:
-  k=mapping.get(x['subcategory'],'local');places.append(dict(id=x['id'],name=x['title'],en='',kind=k,kinds=['restaurant',k],label={'local':'אוכל ביתי ואוכל רחוב','dessert':'מאפיות וקינוחים','burger':'המבורגר ובשרים','bar':'ברים ובילוי ערב','cafe':'בתי קפה','asian':'סושי ואסייתי','italian':'איטלקי וים תיכוני'}[k],moods=['coffee','family'] if k in ['cafe','dessert'] else ['family','evening'],address=x['address'],description=x['description'],image=x['image'],credit=x['image_credit'],image_alt='תמונת המחשה — לא צילום מהמסעדה',image_role='illustration',site=x['source_url'],site_label='לפרטי המקום',booking=x.get('booking_url'),menu=x.get('menu_url'),source_url=x['source_url'],source_label='אתר המקום או מערכת ההזמנה',checked_at=read('restaurants').get('checked_at','2026-11-01')[:10],kosher='כשרות מצוינת במקור; יש לוודא תעודה עדכנית מול המקום.' if x.get('kosher') else 'יש לבדוק מול המקום.',kosherVerified=x.get('kosher') is True,saturdayVerified=x.get('saturday') is True,saturday_note='פתיחה בשבת מצוינת במקור; יש לוודא שעות לפני היציאה.' if x.get('saturday') else 'פתיחה בשבת לא אומתה.'))
+  k=mapping.get(x['subcategory'],'local');places.append(dict(id=x['id'],name=x['title'],en='',kind=k,kinds=['restaurant',k],label={'local':'אוכל ביתי ואוכל רחוב','dessert':'מאפיות וקינוחים','burger':'המבורגר ובשרים','bar':'ברים ובילוי ערב','cafe':'בתי קפה','asian':'סושי ואסייתי','italian':'איטלקי וים תיכוני','meat':'מסעדות בשרים'}[k],moods=['coffee','family'] if k in ['cafe','dessert'] else ['family','evening'],address=x['address'],description=x['description'],image=x['image'],credit=x['image_credit'],image_alt='תמונת המחשה — לא צילום מהמסעדה',image_role='illustration',site=x['source_url'],site_label='לפרטי המקום',booking=x.get('booking_url'),menu=x.get('menu_url'),source_url=x['source_url'],source_label='אתר המקום או מערכת ההזמנה',checked_at=(x.get('source_checked_at') or read('restaurants').get('checked_at','2026-11-01'))[:10],kosher='כשרות מצוינת במקור; יש לוודא תעודה עדכנית מול המקום.' if x.get('kosher') else 'יש לבדוק מול המקום.',kosherVerified=x.get('kosher') is True,saturdayVerified=x.get('saturday') is True,saturday_note='פתיחה בשבת מצוינת במקור; יש לוודא שעות לפני היציאה.' if x.get('saturday') else 'פתיחה בשבת לא אומתה.'))
  # The KG culinary renderer is the shared Ashdod design with generic venue-kind support.
  outputs={};changed=[]
  for name in ['restaurants.js','restaurants.css','restaurants.html']:
@@ -70,6 +70,12 @@ def build_food(check=False):
    for old,new in [('עיר של ים.','קרוב לבית.'),('מהדגים של הנמל לקפה של הבוקר, מארוחה טובה לערב שנשארים בו עוד קצת. בואו למצוא את המקום שלכם.','מסעדות, בתי קפה ואוכל מקומי בחולון, עם מידע וקישורים למקומות.'),('ים תיכון. שולחן פתוח.','חולון. שולחן פתוח.'),('ים אחד.','עיר אחת.'),('דגים וים, מטבחים','מטבחים'),('עם הפנים לים','עם המשפחה'),('נוף, בריזה ושולחן טוב','ארוחה, קפה ושולחן טוב'),('עם נוף לים','ארוחה בעיר'),('data-mood="sea"','data-mood="family"'),('value="sea"','value="family"')]:source=source.replace(old,new)
   if name=='restaurants.html':source=source.replace('</head>','<meta name="holon-layout" content="canonical-ashdod-20261101"></head>')
   if name=='restaurants.css':source+='\n/* Keep the detail close control above the shared navigation inside its dialog. */\n#foodDetail .close-dialog{z-index:10001}\n'
+  if name=='restaurants.js':
+   source=source.replace("Object.entries(kinds).map", "Object.entries(kinds).filter(([k])=>k==='all'||places.some(p=>p.kind===k)).map")
+   source=source.replace('נבדק ב־19.10.2026.', "נבדק ב־'+esc(p.checked_at)+'.")
+  if name=='restaurants.html':
+   source=source.replace('האווירה בקירה רופטופ בחולון','תמונת המחשה של בית קפה — לא צילום ממקום בחולון')
+   source=source.replace('נבדק ב־19.10.2026','רשימת המסעדות נערכה ב־02.11.2026')
   source=source.replace('__HOLON_OWN_PLACES__',json.dumps(places,ensure_ascii=False,separators=(',',':')))
   if name=='restaurants.html':
    for asset,body in outputs.items():source=re.sub(re.escape(asset)+r'(?:\?v=[^"\s]+)?',asset+'?v='+hashlib.sha256(body.encode()).hexdigest()[:12],source)
