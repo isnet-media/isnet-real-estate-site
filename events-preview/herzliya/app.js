@@ -421,7 +421,7 @@ function cinemaCard(movie){
     '<div class="cinemaCard__body"><small class="imageCredit">'+escapeHtml(movie.poster_credit||'')+'</small>'+
       '<div class="cinemaVenueBadges">'+
         (movie.is_family?'<span class="family">ילדים ומשפחה</span>':'')+
-        visibleVenues.map(v=>'<span>'+escapeHtml(v.id==="cinema-city"?"סינמטק הרצליה":"סינמטק הרצליה")+'</span>').join("")+
+        visibleVenues.map(v=>'<span>'+escapeHtml(v.name)+'</span>').join("")+
       '</div>'+
       '<h3>'+escapeHtml(movie.title)+'</h3>'+
       '<p>'+escapeHtml(movie.synopsis||"")+'</p>'+

@@ -24,7 +24,11 @@ class EditionTests(unittest.TestCase):
    self.assertTrue(m['synopsis']);self.assertTrue(m['venues'])
    for v in m['venues']:
     self.assertIn('הרצליה',v['name'])
-    for s in v['sessions']:self.assertIn((s['date'],s['time'],s['booking_url']),raw)
+    if v['id']=='cinema-city':
+     source=read('cinema-city-glilot');allowed={(s['date'],s['time'],s['booking_url']) for row in source['movies'] for s in row['sessions']}
+     self.assertIn('גלילות',v['name']);self.assertTrue(v['nearby_city'])
+    else:allowed=raw
+    for s in v['sessions']:self.assertIn((s['date'],s['time'],s['booking_url']),allowed)
  def test_shared_shell_and_routes(self):
   page=(C/'index.html').read_text();self.assertNotIn('http-equiv="refresh"',page);self.assertIn('ISNET shared layout',page);self.assertIn('herzliya-events.js',page);self.assertIn('מה עושים בהרצליה',page)
   for name in ['index.html','cinema.html','restaurants.html','category.html','event.html','movie.html','seniors.html','sources.html','health.html']:
@@ -32,6 +36,13 @@ class EditionTests(unittest.TestCase):
    for tag in s.select('script[src],link[rel="stylesheet"]'):
     u=(tag.get('src') or tag.get('href')).split('?')[0]
     if not u.startswith(('https:','http:','//')):self.assertTrue(((ROOT/u.lstrip('/')) if u.startswith('/') else p.parent/u).is_file(),name+': '+u)
+ def test_direct_senior_catalog(self):
+  catalog=read('senior-catalog');self.assertGreaterEqual(len(catalog['items']),100)
+  self.assertEqual(len({x['id'] for x in catalog['items']}),len(catalog['items']))
+  self.assertGreaterEqual(sum(x['source_name']=='חוגים לגיל השלישי במרכזים הקהילתיים' for x in catalog['items']),70)
+  self.assertTrue(all(x['source_url'].startswith('https://') for x in catalog['items']))
+  self.assertIn('senior-catalog.js',(C/'category.html').read_text())
+  self.assertTrue(any(x['source_url'].startswith('https://www.nde.co.il/') for x in catalog['items']))
  def test_local_directories(self):
   food=read('restaurants')['items'];self.assertGreaterEqual(len(food),6)
   self.assertTrue(all(x['city']=='הרצליה' for x in food))

@@ -5,7 +5,7 @@ const fmtShort=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",mo
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function localDate(s){const [y,m,d]=String(s||"").split("-").map(Number);return new Date(y,m-1,d)}
 function movieUrl(id){return window.CinemaEditorial?.url(id)||"movie.html?id="+encodeURIComponent(id)}
-function venueLabel(id){return id==="cinema-city"?"סינמטק הרצליה הרצליה":"סינמטק הרצליה הרצליה"}
+function venueLabel(id){return id==="cinema-city"?"סינמה סיטי גלילות — סמוך להרצליה":"סינמטק הרצליה"}
 function cinemaToday(){return new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
 function activeMovieVenues(movie){return movie.venues.filter(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=cinemaToday()&&Array.isArray(times)&&times.length))}
 function allDates(movie){
@@ -96,7 +96,7 @@ function renderRelated(movie,all){
     const img=m.poster_url||(m.trailer_youtube_id?"https://i.ytimg.com/vi/"+encodeURIComponent(m.trailer_youtube_id)+"/hqdefault.jpg":"");
     return '<a class="relatedCard" href="'+movieUrl(m.id)+'">'+
       '<div class="relatedCard__media">'+(img?'<img src="'+escapeHtml(img)+'" alt="" onerror="this.remove()">':'<div class="relatedFallback">🎬</div>')+'</div>'+
-      '<div class="relatedCard__body">'+(m.is_family?'<span class="miniBadge">ילדים ומשפחה</span>':'')+'<h3>'+escapeHtml(m.title)+'</h3><span>'+escapeHtml(m.venues.map(v=>v.id==="cinema-city"?"סינמטק הרצליה":"סינמטק הרצליה").join(" · "))+'</span></div>'+
+      '<div class="relatedCard__body">'+(m.is_family?'<span class="miniBadge">ילדים ומשפחה</span>':'')+'<h3>'+escapeHtml(m.title)+'</h3><span>'+escapeHtml(m.venues.map(v=>v.name).join(" · "))+'</span></div>'+
     '</a>';
   }).join("");
 }

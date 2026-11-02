@@ -22,6 +22,9 @@ jobs:
       - run: pip install requests beautifulsoup4 pillow
       - run: python -u scripts/sync_herzliya_events.py
       - run: python -u scripts/enrich_herzliya_cinema.py
+      - run: python -u scripts/refresh_herzliya_city_cinema.py
+        continue-on-error: true
+      - run: python -u scripts/collect_herzliya_seniors.py
       - run: python -u scripts/enrich_herzliya_food.py
       - run: python scripts/enrich_herzliya_places.py
       - run: python scripts/polish_herzliya_catalog.py

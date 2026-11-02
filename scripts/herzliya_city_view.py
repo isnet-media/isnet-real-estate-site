@@ -38,6 +38,15 @@ def decorate(content,name,suffix):
  if name in ['cinema.html','index.html']:
   content=re.sub(r'<button[^>]*data-(?:cinema|venue)="(?:cinema-city|hot-cinema|cinematheque)"[^>]*>.*?</button>', '', content)
   content=content.replace('סינמה סיטי הרצליה','סינמטק הרצליה').replace('HOT CINEMA DREAM STAGE הרצליה','סינמטק הרצליה')
+ if name=='seniors-hub.js':
+  content=content.replace("return e.category==='lecture'?'senior-lectures':", "if(e.senior_subcategory&&topics[e.senior_subcategory])return e.senior_subcategory;return e.category==='lecture'?'senior-lectures':")
+ if name=='category.html':
+  content=content.replace('</head>','<link rel="stylesheet" href="senior-catalog.css?v=20261102-1"><script defer src="senior-catalog.js?v=20261102-1"></script></head>')
+ if name=='movie.js':
+  content=re.sub(r'function venueLabel\(id\)\{[^}]*\}', 'function venueLabel(id){return id==="cinema-city"?"סינמה סיטי גלילות — סמוך להרצליה":"סינמטק הרצליה"}',content)
+ for old in ['v.id==="cinema-city"?"סינמטק הרצליה":"סינמטק הרצליה"','v.id==="cinema-city"?"סינמה סיטי":"סינמטק הרצליה"']:
+  content=content.replace(old,'v.name')
+ if name=='cinema.js':content=re.sub(r'function venueShort\(v\)\{[^}]*\}','function venueShort(v){return v.name}',content)
  if name=='site-search-chat.js':content=content.replace('/meusharim/ashdod/data/classes.json','data/classes.json')
  if name=='index.html':
   # Restore the canonical culinary entry using the existing city's own catalog.

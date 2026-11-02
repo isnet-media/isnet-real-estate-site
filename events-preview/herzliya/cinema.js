@@ -5,7 +5,7 @@ const fmtDate=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",mon
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function todayIso(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
 function localDate(s){const [y,m,d]=String(s).split("-").map(Number);return new Date(y,m-1,d)}
-function venueShort(v){return v.id==="cinema-city"?"סינמטק הרצליה":v.name}
+function venueShort(v){return v.name}
 function nextSchedule(v){
   const day=todayIso(), schedule=v.schedule||{};
   if(Array.isArray(schedule[day])&&schedule[day].length)return {date:day,label:"היום",times:schedule[day]};

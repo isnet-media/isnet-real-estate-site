@@ -46,6 +46,11 @@ def build():
  save('places',{'categories':catdata});save('attractions-guide',{'items':[],'verified_sources':[place(g) for g in guides if g['category']=='attractions']});save('institutions',{'institutions':[place(g) for g in guides if g['category'] in ['theatre','exhibition','cinema']]})
  save('family-guide',{'links':[['',g['title'],g['description'],g['source_url']] for g in guides if g['id'] in ['agada','community','park','apollonia','museum']]})
  save('senior-guide',{'checked_at':raw['generated_at'][:10],'note':'מועדים וזמינות לפי המקור הרשמי.','links':[{'title':g['title'],'description':g['description'],'url':g['source_url']} for g in guides if g['id'] in ['ale','sirkin','gold','community','cinema']]})
+ if (D/'senior-catalog.json').exists():
+  guide=read('senior-guide');existing={x['url'] for x in guide['links']}
+  for source in read('senior-catalog')['sources']:
+   if source['url'] not in existing:guide['links'].append(dict(title=source['name'],description='חוגים, מסגרות ומידע מהמקור. פרטים עדכניים והרשמה באתר המפעיל.',url=source['url']))
+  save('senior-guide',guide)
  save('editorial',{'events':{}});save('senior-culture',{'programs':[]});save('sports',{'branches':{},'teams':[]});save('classes',{'records':[]})
  saturday=[]
  for g in [*guides,*food]:
@@ -62,7 +67,8 @@ def build():
  from herzliya_cinema_metadata import enrich_movies,write_media_report
  enrich_movies(list(movies.values()),events)
  write_media_report(events,list(movies.values()))
- save('cinema',{'city':'הרצליה','source_name':'לוחות המארגנים הרשמיים בהרצליה','updated_at':raw['generated_at'],'movies':list(movies.values())})
+ from refresh_herzliya_city_cinema import merge_into
+ save('cinema',merge_into({'city':'הרצליה','source_name':'לוחות המארגנים הרשמיים בהרצליה','updated_at':raw['generated_at'],'movies':list(movies.values())}))
  from shutil import copyfile
  cover=next((g for g in guides if g['id']=='park' and g.get('image_role')=='official_promotional'),next((g for g in guides if g.get('image_role')=='official_promotional'),None))
  if cover:copyfile(C/cover['image'],C/'assets/share-card.jpg')
