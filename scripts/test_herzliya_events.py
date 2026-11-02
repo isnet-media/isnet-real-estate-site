@@ -51,6 +51,16 @@ class EditionTests(unittest.TestCase):
     image=row.get('image','')
     if image and not image.startswith(('https:','http:','data:')):
      self.assertTrue((C/image.split('?')[0]).is_file(),catalog+': '+image)
+ def test_failed_senior_source_preserves_only_valid_last_known_records(self):
+  from collect_herzliya_seniors import retain_unverified_catalog,SOURCES
+  name=SOURCES['matnas-classes'][0]
+  old=[dict(id='valid',source_name=name,checked_at='2026-11-01',term_end='2027-06-30'),dict(id='expired',source_name=name,checked_at='2026-11-01',term_end='2026-10-31')]
+  reports=[dict(name=name,status='checked',checked_at='2026-11-02')]
+  result=retain_unverified_catalog(old,[],reports,'2026-11-02')
+  self.assertEqual([x['id'] for x in result],['valid']);self.assertEqual(result[0]['checked_at'],'2026-11-01')
+  self.assertEqual(result[0]['last_refresh_status'],'unverified');self.assertEqual(reports[0]['retained_items'],1)
+  fresh={**old[0],'checked_at':'2026-11-02'}
+  self.assertEqual(retain_unverified_catalog(old,[fresh],reports,'2026-11-02'),[fresh])
  def test_direct_senior_catalog(self):
   catalog=read('senior-catalog');self.assertGreaterEqual(len(catalog['items']),100)
   self.assertEqual(len({x['id'] for x in catalog['items']}),len(catalog['items']))

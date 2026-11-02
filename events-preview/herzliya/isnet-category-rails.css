@@ -90,7 +90,14 @@
 .isnetCategoryRail .eventMedia,.isnetCategoryRail .mediaWrap{aspect-ratio:16/11!important;max-height:210px}
 .isnetCategoryRail .eventMedia img,.isnetCategoryRail .mediaWrap img{object-fit:cover}
 .isnetCategoryTabs button:disabled{display:none!important}
-.isnetRailOverlay{display:none!important}
+/* Both directions stay visible over the media, including touch screens. */
+.isnetRailOverlay:not([hidden]){display:grid!important;top:var(--rail-media-center,95px);width:48px;height:48px;border:2px solid #ffe2a0;border-radius:50%;background:#f4cf78;color:#121721;font-size:30px;font-weight:900;opacity:1;box-shadow:0 3px 16px #000b,0 0 0 3px #10121766;touch-action:manipulation}
+.isnetRailOverlay:disabled{background:#18202ded;color:#efd18f;border-color:#efd18f99;opacity:.65;cursor:default}
+.isnetRailOverlay[hidden]{display:none!important}
+.isnetRailOverlay:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.isnetCategoryArrows button:disabled{opacity:.4;cursor:default}
+@media(max-width:650px){.isnetRailOverlay:not([hidden]){width:44px;height:44px;font-size:27px}.isnetRailOverlay--start{right:5px}.isnetRailOverlay--end{left:5px}}
+
 .isnetCategoryArrows{transform:none!important;z-index:2!important}
 .isnetCategoryTop{min-width:0!important}
 .isnetCategoryTop>div:first-child{min-width:0}

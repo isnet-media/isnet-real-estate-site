@@ -24,7 +24,7 @@ def source_coverage(city):
     paths={'ashdod':['admin/data/ashdod-local-report.json','admin/data/ashdod-supplemental-report.json','admin/data/mevalim-ashdod-direct-report.json'],
            'rishon-lezion':['admin/data/rishon-source-report.json','admin/data/rishon-local-source-report.json'],
            'yavne':['admin/data/yavne-source-report.json'],'kiryat-gat':['admin/data/kgat-source-report.json'],
-           'holon':['holon/data/source-report.json'],'herzliya':['herzliya/data/source-report.json']}[city]
+           'holon':['holon/data/source-report.json'],'herzliya':['herzliya/data/source-report.json','herzliya/data/senior-catalog.json']}[city]
     records=[]
     for relative in paths:
         path=ROOT/'events-preview'/relative

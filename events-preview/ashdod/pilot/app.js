@@ -1102,7 +1102,7 @@ function renderResults(){
           const image=poster?'<img src="'+escapeHtml(poster)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'">':'<span class="homeCinemaCard__fallback">🎬</span>';
           return '<a class="homeCinemaCard" href="movie.html?id='+encodeURIComponent(m.id)+'" aria-label="פרטים ושעות הקרנה: '+escapeHtml(m.title)+'"><span class="homeCinemaCard__media">'+image+'</span><span class="homeCinemaCard__title">'+escapeHtml(m.title)+'</span><span class="homeCinemaCard__action">לפרטים והקרנות ←</span></a>';
         }).join("")+screenings.map(eventCard).join("");
-        return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><h3><a href="./#cinema">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים'+(screenings.length?' · '+screenings.length+' הקרנות מיוחדות':'')+'</span></div><a class="cinemaDetails" href="./#cinema">כל הסרטים והשעות ←</a></div><div class="isnetRailWrap"><div class="isnetCategoryRail homeCinemaRail" tabindex="0" aria-label="סרטי הקולנוע באשדוד">'+cards+'</div></div></section>';
+        return '<section class="isnetCategorySection" data-category-section="cinema"><div class="isnetCategoryTop"><div><h3><a href="./#cinema">קולנוע</a></h3><span class="isnetCategoryCount">'+activeCinemaCount+' סרטים'+(screenings.length?' · '+screenings.length+' הקרנות מיוחדות':'')+'</span></div><a class="cinemaDetails" href="./#cinema">כל הסרטים והשעות ←</a></div><div class="isnetRailWrap"><div class="isnetCategoryRail homeCinemaRail" tabindex="0" aria-label="סרטי הקולנוע באשדוד">'+cards+'</div><button type="button" class="isnetRailOverlay isnetRailOverlay--start" data-category-move="start" aria-label="גלילה לסרטים הקודמים">→</button><button type="button" class="isnetRailOverlay isnetRailOverlay--end" data-category-move="end" aria-label="גלילה לסרטים הבאים">←</button></div></section>';
       }
       const items=buckets.get(key);
       const def=taxonomy.find(t=>t.id===key);
@@ -1132,7 +1132,7 @@ function renderResults(){
         rail.scrollTo({left:0,behavior:"instant"});
       }));
       section.querySelectorAll("[data-category-move]").forEach(btn=>btn.addEventListener("click",()=>{
-        const card=rail.querySelector(".eventCard:not([hidden])");
+        const card=rail.querySelector(".eventCard:not([hidden]),.homeCinemaCard");
         const distance=(card?.getBoundingClientRect().width||240)+16;
         rail.scrollBy({left:(btn.dataset.categoryMove==="start"?distance:-distance),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
       }));

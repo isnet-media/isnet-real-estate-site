@@ -268,7 +268,7 @@ def _localize(content: str, name: str, city: dict, suffix: str) -> str:
             digest = hashlib.sha256(localized.encode("utf-8")).hexdigest()[:12]
             return filename + "?v=" + digest
         content = re.sub(
-            r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema|saturday|site-share|seniors-hub)\.js|(?:styles|event|places|movie|cinema|publisher-brand|seniors-hub)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])",
+            r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema|saturday|site-share|seniors-hub|rails)\.js|(?:styles|event|places|movie|cinema|publisher-brand|seniors-hub|isnet-category-rails|home)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])",
             cache_bust, content,
         )
         content = content.replace("<head>", "<head>\n  " + HEAD_MARKER, 1)
@@ -287,7 +287,7 @@ def fingerprint_master_html(check: bool = False) -> list[str]:
     Only local frontend assets are rewritten, and only in the build workspace.
     """
     changed = []
-    pattern = r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema|saturday|site-share|seniors-hub)\.js|(?:styles|event|places|movie|cinema|publisher-brand|seniors-hub)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])"
+    pattern = r"\b((?:pilot/)?(?:(?:app|event|places|movie|cinema|saturday|site-share|seniors-hub|rails)\.js|(?:styles|event|places|movie|cinema|publisher-brand|seniors-hub|isnet-category-rails|home)\.css))(?:\?v=[^\"'& ]+)?(?![A-Za-z0-9._-])"
     for html in sorted(MASTER.glob("*.html")):
         original = html.read_text(encoding="utf-8")
 

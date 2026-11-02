@@ -30,6 +30,28 @@ def page(key):
  return BeautifulSoup(p.read_text(),'html.parser') if p.exists() else c.get(u)
 def record(key,title,description,kind='club',**fields):return dict(id='senior-'+ident(key+'|'+title),title=title,description=description,kind=kind,topic=topic(title),source_name=SOURCES[key][0],source_url=SOURCES[key][1],checked_at=c.NOW.isoformat(),**fields)
 
+def retain_unverified_catalog(previous,current,reports,today):
+ # A failed or unparsed page is not evidence that a current course has closed.
+ # Keep its last source timestamp and expose the failed refresh to the reader.
+ by_name={v[0]:k for k,v in SOURCES.items()};present={x['id'] for x in current};retained=[]
+ for report in reports:
+  name=report['name'];old=[x for x in previous if x.get('source_name')==name];fresh=[x for x in current if x.get('source_name')==name]
+  incomplete=report['status']=='fetch_failed' or (old and len(fresh)<len(old)/2)
+  if not incomplete:continue
+  report['status']='retained_after_failed_or_partial_collection';report['fresh_items']=len(fresh)
+  for item in old:
+   if item['id'] in present:continue
+   end=item.get('term_end')
+   if end and end<today:continue
+   if not end:
+    try:age=(datetime.fromisoformat(today).date()-datetime.fromisoformat(item['checked_at'].replace('Z','+00:00')).date()).days
+    except (ValueError,KeyError):continue
+    if age>30:continue
+   kept=dict(item,last_refresh_status='unverified',last_refresh_attempt=report['checked_at'],availability_note='הפרטים לא אומתו בעדכון האחרון. יש לברר פעילות, שעות ומקום פנוי עם המפעיל.')
+   retained.append(kept);present.add(item['id'])
+  report['retained_items']=sum(x.get('source_name')==name for x in retained)
+ return current+retained
+
 def main():
  catalog=[];incoming=[];reports=[];pages={}
  def load(k):
@@ -118,6 +140,8 @@ def main():
  # A child-only label is never evidence of a senior audience.
  for e in raw['events']:
   if re.search('ילדים|ילדות|תינוק|פעוט|כיתות|גילאי [1-9]|דן דן הנגן',e['title']) and not re.search('ותיק|גמלא|בין.דורי',e['title']):e['audiences']=[a for a in e.get('audiences',[]) if a!='seniors']
+ previous=c.read('senior-catalog').get('items',[]) if (D/'senior-catalog.json').exists() else []
+ catalog=retain_unverified_catalog(previous,catalog,reports,c.TODAY.isoformat())
  c.save('events',raw);c.save('senior-catalog',dict(checked_at=c.NOW.isoformat(),items=catalog,sources=reports))
  source=c.read('sources');existing={x['url'] for x in source['sources']}
  for k,(n,u) in SOURCES.items():
