@@ -17,3 +17,9 @@ Checks: `python scripts/test_herzliya_events.py`, `python scripts/test_herzliya_
 `collect_herzliya_seniors.py` collects the municipal 65+ category and the community centers' senior calendar directly, reconciling occurrences with the existing feed. It also builds a separate recurring catalog from 2026–2027 community classes, reviewed club contacts, the older Beit Hagimlai program and service directories. Older Wix program prices/times are not presented as current; NDE is a directory link, not individually verified center records. Child-only titles do not receive senior audience membership.
 
 `refresh_herzliya_city_cinema.py` verifies the official Glilot branch identity and each session's branch payload through Cinema City's public visitor CMS. The UI labels this venue as Glilot near Herzliya, separately from the local cinematheque. Failure retains the prior successful snapshot and its original verification timestamp.
+
+## Cinema loading performance
+
+The homepage carries a compact cinema bootstrap, excluding full sessions and long editorial detail. The original `cinema.json` remains authoritative for movie details and booking links. Israel-day formatters are reused, redundant cinema draws are skipped, and the hidden event board is not rendered while the cinema panel is open. Twenty-four films paint initially; filters and “more films” retain access to the full catalog. Verified promotional posters are served as same-origin JPEG thumbnails in the listing. Optional shared editorial data no longer blocks the movie detail screen.
+
+`node scripts/test-herzliya-cinema-speed.cjs` checks exact film/schedule parity, a sub-30% compact payload, no network dependency for the inline cinema feed, no hidden event-board rendering and clock-cache refresh.

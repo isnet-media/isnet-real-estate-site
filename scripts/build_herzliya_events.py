@@ -72,6 +72,8 @@ def build():
  from shutil import copyfile
  cover=next((g for g in guides if g['id']=='park' and g.get('image_role')=='official_promotional'),next((g for g in guides if g.get('image_role')=='official_promotional'),None))
  if cover:copyfile(C/cover['image'],C/'assets/share-card.jpg')
+ from herzliya_cinema_loading import build_listing
+ build_listing()
  branding=C/'assets/branding';branding.mkdir(parents=True,exist_ok=True)
  for old,new in [('what-to-do-kgat-dark.svg','what-to-do-herzliya-dark.svg'),('kgatnet-dark.svg','herzliyanet-dark.svg')]:
   text=(ROOT/'events-preview/kiryat-gat/assets/branding'/old).read_text().replace('קריית גת','הרצליה').replace('בקרית גת','בהרצליה');(branding/new).write_text(text.replace('הרצליה נט','ישראל נט'))

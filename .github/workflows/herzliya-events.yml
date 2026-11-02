@@ -29,7 +29,10 @@ jobs:
       - run: python scripts/enrich_herzliya_places.py
       - run: python scripts/polish_herzliya_catalog.py
       - run: python scripts/build_herzliya_events.py
+      - run: python scripts/cache_herzliya_cinema_posters.py
+      - run: python scripts/build_herzliya_events.py
       - run: python scripts/test_herzliya_events.py
+      - run: node scripts/test-herzliya-cinema-speed.cjs
       - name: Save verified local data and pages
         run: |
           git config user.name 'isnet-events-bot'
