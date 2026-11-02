@@ -1,8 +1,15 @@
 name: Refresh Kiryat Gat events
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/sync_kgat_events.py
+      - scripts/sync_kgat_friends.py
+      - scripts/sync_kgat_sports.py
+      - .github/workflows/kgat-events.yml
   schedule:
-    - cron: '15 4 * * 1,4'
+    - cron: '15 4 * * *'
 permissions:
   contents: write
 concurrency:
