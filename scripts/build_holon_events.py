@@ -23,7 +23,7 @@ def build():
  for e in raw['events']:
   x=dict(e,event_id=e['id'],purchase_url=e['booking_url'],ticket_url=e['source_url'],image_url=e['image'],thumbnail_url=e['image'],thumbnail_ready=True,image_publishable=True,image_verified=True,image_represents_event=e.get('image_role')=='official_promotional',source_image_kind='official_promotional' if e.get('image_role')=='official_promotional' else 'illustration',image_rights_status='official_promotional' if e.get('image_role')=='official_promotional' else 'owned_ai_illustration',price_min_ils=e.get('price'),price_max_ils=e.get('price'),is_free=True if e.get('price')==0 else None,is_active=True,publication_status='published',source_content_authoritative=True,sources=[{'name':e['source_id'],'url':e['source_url']}],subcategory=submap.get(e['subcategory'],e['subcategory']))
   identity=identities[e['id']]
-  if identity and identity[1:] in labelled_keys:
+  if identity:
    x['series_id']='holon-production-'+hashlib.sha256('|'.join(identity[1:]).encode()).hexdigest()[:16]
    x['series_title']=identity[0]
    x['source_title']=e['title']

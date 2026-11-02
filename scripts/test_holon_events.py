@@ -54,9 +54,14 @@ class HolonRelease(unittest.TestCase):
    if master.select(selector):self.assertEqual(len(master.select(selector)),len(city.select(selector)),selector)
   self.assertIsNotNone(city.select_one('.culinaryHomepageFeature'));self.assertIn('holon-events.js',(C/'event.html').read_text())
   self.assertNotIn('window.HOLON_BOOTSTRAP=',(C/'index.html').read_text())
+ def test_stage_direction_alone_is_not_a_film(self):
+  from sync_holon_events import classify
+  self.assertEqual(classify('זוגות בזיג זג – קומדיה בקצב גבוה','מחזה מקורי. בימוי: אודי גוטשלק','friends'),'theatre')
+  self.assertEqual(classify('קומדיה למבוגרים','בימוי: במאי התיאטרון','hth'),'theatre')
+  self.assertEqual(classify('סרט חדש','בימוי: במאי הסרט','cinematheque'),'cinema')
  def test_cinema_has_specific_art_and_real_synopses(self):
   movies=read('cinema')['movies'];self.assertGreaterEqual(len(movies),30)
-  self.assertTrue(all(m['poster_verification']['kind']=='official_promotional' for m in movies))
+  self.assertTrue(all(m['poster_verification']['kind']=='official_promotional' for m in movies),[(m['title'],m['poster_verification']) for m in movies if m['poster_verification']['kind']!='official_promotional'])
   self.assertGreaterEqual(len({m['poster_url'] for m in movies}),30)
   self.assertTrue(all(m.get('editorial_text') and 'פרטי התוכנית' not in m['synopsis'] for m in movies))
   self.assertGreaterEqual(sum(bool(m.get('trailer_youtube_id'))for m in movies),10)
