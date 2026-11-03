@@ -146,7 +146,8 @@ def main():
                             best=(total,img,event_url,final)
         if best:
             _,img,event_url,ref=best
-            if verify(img,ref) or any(x in img.lower() for x in SIGNALS):
+            # A filename pattern alone is not evidence that an image loaded. Fail closed.
+            if verify(img,ref):
                 e["image_url"]=img
                 e["image_source"]=event_url
                 e["image_publishable"]=True
