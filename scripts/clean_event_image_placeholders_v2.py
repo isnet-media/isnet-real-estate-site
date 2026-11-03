@@ -56,6 +56,30 @@ for e in data.get("events",[]):
 
 events=data.get("events",[])
 missing=[e for e in events if not(e.get("image_url") and e.get("image_publishable") is True)]
+# An owned category illustration may be safe to display but is not a verified
+# photograph of the advertised event. Keep these separate from source artwork.
+def has_any_image(event):
+    return bool(event.get("image_url") or event.get("thumbnail_url"))
+
+def is_representative(event):
+    return (
+        event.get("image_strategy") == "super_editor_representative_fallback"
+        or event.get("image_represents_event") is False
+    )
+
+verified_event_artwork=sum(
+    1 for e in events
+    if has_any_image(e) and not is_representative(e)
+    and e.get("image_publishable") is True and e.get("image_verified") is True
+)
+representative_illustrations=sum(
+    1 for e in events if has_any_image(e) and is_representative(e)
+)
+unverified_images=sum(
+    1 for e in events
+    if has_any_image(e) and not is_representative(e)
+    and not (e.get("image_publishable") is True and e.get("image_verified") is True)
+)
 source_counts=Counter()
 category_counts=Counter()
 for e in missing:
@@ -67,6 +91,11 @@ report={
     "total_events":len(events),
     "events_with_publishable_images":len(events)-len(missing),
     "events_still_missing_images":len(missing),
+    "events_with_verified_event_artwork":verified_event_artwork,
+    "events_with_representative_illustrations":representative_illustrations,
+    "events_with_unverified_or_unknown_images":unverified_images,
+    "events_needing_verified_event_artwork":len(events)-verified_event_artwork,
+    "coverage_basis":"metadata_only; representative category illustrations are not verified event-specific photographs",
     "stats":{"generic_images_cleared":cleared,"rejected_metadata_flags_revoked":invalid_flags_revoked},
     "missing_by_source":dict(source_counts),
     "missing_by_category":dict(category_counts),
