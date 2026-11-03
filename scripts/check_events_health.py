@@ -2,7 +2,7 @@
 """Bounded public endpoint checks; this is not a browser or load test."""
 import argparse,json,re,subprocess,tempfile,time
 from pathlib import Path
-CITIES=('ashdod','rishon-lezion','yavne','kiryat-gat','holon')
+CITIES=('ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya')
 BASE='https://isnet.co.il/events-preview/'
 def check(url,kind):
     with tempfile.TemporaryDirectory() as folder:
@@ -30,7 +30,7 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',default='/tmp/isnet-health.json');args=parser.parse_args()
     targets=[]
     for city in CITIES:
-        for path,kind in [('', 'html'),('category.html?category=kids','html'),('event.html','html'),('data/events-public.json','feed') if city=='holon' else ('data/events-hubs.json','hub'),('data/cinema.json','cinema')]:targets.append((BASE+city+'/'+path,kind))
+        for path,kind in [('', 'html'),('category.html?category=kids','html'),('event.html','html'),('data/events-public.json','feed') if city in ('holon','herzliya') else ('data/events-hubs.json','hub'),('data/cinema.json','cinema')]:targets.append((BASE+city+'/'+path,kind))
         if city in ('ashdod','rishon-lezion','yavne'):targets.append(('https://qomkxhafrprooekwgsxf.supabase.co/rest/v1/cms_event_records?city_slug=eq.'+city+'&publication_status=eq.published&select=event_id&limit=1','cms'))
     results=[]
     for url,kind in targets:
