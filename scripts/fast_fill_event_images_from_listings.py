@@ -220,6 +220,31 @@ def load_bank_reuse():
         out[p.get("production_key") or norm(p.get("name"))]=m
     return out
 
+def is_non_event_representative_art(event):
+    """Category illustrations are publishable but not reusable as show photos."""
+    return (
+        event.get("image_represents_event") is False
+        or event.get("image_strategy") == "super_editor_representative_fallback"
+        or event.get("image_source") == "ISNET internal representative artwork"
+    )
+
+
+def correct_inherited_representative_metadata(event):
+    """Repair only the false official-source labels on previously copied ISNET art."""
+    if not (
+        event.get("image_strategy") == "same_production_reuse"
+        and event.get("image_source") == "ISNET internal representative artwork"
+        and event.get("image_represents_event") is False
+    ):
+        return False
+    event.update({
+        "image_strategy": "super_editor_representative_fallback",
+        "image_rights_status": "owned_system_asset",
+        "image_represents_category": True,
+    })
+    return True
+
+
 def image_coverage_counts(events):
     """Count event artwork separately from category illustrations and unverified images.
 
@@ -255,6 +280,10 @@ def main():
     bank_reuse=load_bank_reuse()
     stats=Counter();new=[];accepted_title={}
     revoked_assets=[]
+    # Preserve owned category art, but never label it as verified production art.
+    for e in events:
+        if correct_inherited_representative_metadata(e):
+            stats["representative_metadata_corrected"] += 1
     # Reuse an approved network-wide asset before any external source request.
     for e in events:
         if e.get("image_verified") is True:continue
@@ -354,7 +383,7 @@ def main():
     for e in events:
         if e.get("image_verified") is True:continue
         src=accepted_title.get(norm(e.get("title")))
-        if not src:continue
+        if not src or is_non_event_representative_art(src):continue
         for k in ("image_url","image_origin_url","image_source","image_credit"):
             e[k]=src.get(k)
         e.update({"image_publishable":True,"image_verified":True,"image_rights_status":"verified_official_source","image_strategy":"same_production_reuse","thumbnail_ready":False,"thumbnail_url":None})
