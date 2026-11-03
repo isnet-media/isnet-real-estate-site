@@ -39,6 +39,11 @@ assert.equal(ofra[0].source_aliases.length,3);
 assert.equal(q.reconcile([ofraRows[0],{...ofraRows[1],start_time:'18:00'}]).length,2);
 assert.equal(q.reconcile([ofraRows[0],{...ofraRows[1],venue:'אולם מופעים דיונה אשדוד'}]).length,2);
 assert.equal(q.reconcile([ofraRows[0],{...ofraRows[1],title:'עפרה עם שחקנים אחרים'}]).length,2);
+// Reviewed same-day Ashdod musical title aliases must merge only at the exact venue/time.
+const nova= [row('nova-makore',{title:'נוּבָּה חדשה',category:'music',venue:'המשכן לאמנויות הבמה הפיס, אשדוד',start_date:'2026-11-12',start_time:'20:30'}),row('nova-mevalim',{title:'נוֹבָּה חדשה - הדור הבא של המוזיקה האנדלוסית',category:'music',venue:'המשכן לאמנויות הבמה אשדוד',start_date:'2026-11-12',start_time:'20:30'})];
+assert.equal(q.reconcile(nova).length,1,'Reviewed Nova musical aliases share one occurrence');
+assert.equal(q.reconcile([nova[0],{...nova[1],start_time:'21:00'}]).length,2,'Different Nova time remains separate');
+assert.equal(q.reconcile([nova[0],{...nova[1],venue:'אולם דיונה אשדוד'}]).length,2,'Different Nova venue remains separate');
 const realOfra=JSON.parse(fs.readFileSync('events-preview/ashdod/data/events.json')).events.filter(e=>e.title.includes('עפרה')&&e.start_date==='2026-11-14');assert.equal(q.reconcile(realOfra).length,1);
 console.log('PASS: reviewed Ofra aliases collapse into one sourced poster/card; all old IDs and offers survive; other times/venues/casts remain separate');
 

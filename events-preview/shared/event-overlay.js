@@ -58,7 +58,9 @@ const reviewedProductions=[
  {id:'imi-generalit-musical',titles:['אמי הגנרלית - התיאטרון העברי','אמי הגנרלית - מחזמר'],source:'https://www.teatron.org.il/shows/אמי-הגנרלית-מחזמר/'},
  {id:'fiddler-hebrew-theatre',titles:['כנר על הגג - התיאטרון העברי','כנר על הגג - מחזמר תיאטרון העברי'],source:'https://www.teatron.org.il/shows/כנר-על-הגג-המחזמר/'},
  {id:'voca-people-20',titles:['VOCA PEOPLE ווקה פיפל','voca people - ווקה פיפל - הסנסציה הבינלאומית חוגגת 20'],source:'https://htrl.co.il/show/voca-people-ווקה-פיפל/'},
- {id:'yonatan-gruber-ze-ma-yesh',titles:['יונתן גרובר - זה מה יש','יונתן גרובר - סטנדאפ'],source:'https://www.heichalbair.co.il/יונתן_גרובר_-_סטנדאפ/?id=3139'}
+ {id:'yonatan-gruber-ze-ma-yesh',titles:['יונתן גרובר - זה מה יש','יונתן גרובר - סטנדאפ'],source:'https://www.heichalbair.co.il/יונתן_גרובר_-_סטנדאפ/?id=3139'},
+ // Both official listings identify the same Ashdod performance (12 Nov 2026, 20:30, Mishkan).
+ {id:'nova-andalusian-ashdod-2026',titles:['נוּבָּה חדשה','נוֹבָּה חדשה - הדור הבא של המוזיקה האנדלוסית'],source:'https://tickets.mevalim.co.il/event/u7D6qOMHCmG7pOx'}
 ];
 const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
 function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
