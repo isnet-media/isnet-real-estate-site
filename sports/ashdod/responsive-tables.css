@@ -1,0 +1,115 @@
+/* Shared table layout: keep every column, including points, inside mobile cards. */
+.table-heading-short { display: none; }
+
+@media (max-width: 850px) {
+  .table-wrap:has(.sports-table),
+  .table-scroll:has(.standings-table, .stats-table) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .table-wrap table.sports-table,
+  .table-scroll table.standings-table,
+  .table-scroll table.stats-table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    white-space: normal;
+  }
+
+  .table-wrap table.sports-table :is(th, td),
+  .table-scroll table.standings-table :is(th, td),
+  .table-scroll table.stats-table :is(th, td) {
+    min-width: 0;
+    padding: 10px 2px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sports-table .table-heading-full,
+  .standings-table .table-heading-full,
+  .stats-table .table-heading-full { display: none; }
+  .sports-table .table-heading-short,
+  .standings-table .table-heading-short,
+  .stats-table .table-heading-short {
+    display: inline;
+    text-decoration: none;
+    cursor: help;
+  }
+
+  /* Eight-column federation standings: allow full team names to wrap. */
+  .table-wrap .sports-table--table :is(th, td):first-child { width: 7%; }
+  .table-wrap .sports-table--table :is(th, td):nth-child(2) {
+    width: 29%;
+    text-align: right;
+    overflow-wrap: break-word;
+  }
+  .table-wrap .sports-table--table :is(th, td):nth-child(3),
+  .table-wrap .sports-table--table :is(th, td):nth-child(4),
+  .table-wrap .sports-table--table :is(th, td):nth-child(6) { width: 9%; }
+  .table-wrap .sports-table--table :is(th, td):nth-child(5) { width: 7%; }
+  .table-wrap .sports-table--table :is(th, td):nth-child(7) { width: 19%; }
+  .table-wrap .sports-table--table :is(th, td):last-child {
+    width: 11%;
+    font-weight: 800;
+    color: var(--red, #b71d2b);
+  }
+
+  /* The club page separates goals for/against and goal difference. */
+  .table-scroll .standings-table :is(th, td):first-child { width: 6%; }
+  .table-scroll .standings-table :is(th, td):nth-child(2) {
+    width: 28%;
+    min-width: 0;
+    text-align: right;
+    overflow-wrap: break-word;
+  }
+  .table-scroll .standings-table :is(th, td):nth-child(3) { width: 8%; }
+  .table-scroll .standings-table :is(th, td):nth-child(4),
+  .table-scroll .standings-table :is(th, td):nth-child(6) { width: 7%; }
+  .table-scroll .standings-table :is(th, td):nth-child(5) { width: 6%; }
+  .table-scroll .standings-table :is(th, td):nth-child(7),
+  .table-scroll .standings-table :is(th, td):nth-child(8) { width: 8%; }
+  .table-scroll .standings-table :is(th, td):nth-child(9),
+  .table-scroll .standings-table :is(th, td):last-child { width: 11%; }
+  .table-scroll .standings-table .points-cell { font-size: 13px !important; }
+  .table-scroll .standings-table th:nth-child(2) img,
+  .table-scroll .standings-table .table-form { display: none; }
+
+  /* Detailed player stats stay complete; long headings may use multiple lines. */
+  .table-wrap .sports-table--players :is(th, td):first-child,
+  .table-scroll .stats-table :is(th, td):first-child { width: 28%; text-align: right; }
+  .table-wrap .sports-table--players :is(th, td):last-child,
+  .table-scroll .stats-table :is(th, td):nth-child(3) { width: 12%; }
+  .table-scroll .stats-table th:first-child { min-width: 0; position: static; }
+  .table-scroll .stats-table .table-player {
+    width: 100%; min-width: 0; padding: 0; font-size: 12px;
+    text-align: right; white-space: normal; overflow-wrap: break-word;
+  }
+  .table-scroll .stats-table .table-player-photo { display: none; }
+  .table-wrap .sports-table--scorers :is(th, td):first-child { width: 70%; text-align: right; }
+
+  .table-wrap .sports-table--games :is(th, td) { font-size: 12px; }
+  .table-wrap .sports-table--games :is(th, td):nth-last-child(4) { width: 27%; }
+  .table-wrap .sports-table--games :is(th, td):nth-last-child(3) { width: 20%; }
+  .table-wrap .sports-table--games :is(th, td):nth-last-child(2),
+  .table-wrap .sports-table--games :is(th, td):last-child { width: 14%; }
+
+  .match-card .points-table { width: 100%; min-width: 0; table-layout: fixed; }
+  .match-card .points-table :is(th, td) { padding: 10px 3px; font-size: 13px; overflow-wrap: break-word; }
+  .match-card .points-table :is(th, td):first-child { width: 43%; }
+  .match-card .points-table :is(th, td):nth-child(2) { width: 17%; }
+  .match-card .points-table :is(th, td):nth-child(3) { width: 17%; }
+  .match-card .points-table :is(th, td):last-child { width: 23%; }
+}
+
+@media (max-width: 360px) {
+  .table-wrap table.sports-table :is(th, td),
+  .table-scroll table.standings-table :is(th, td),
+  .table-scroll table.stats-table :is(th, td) { font-size: 11px; padding-inline: 1px; }
+  .table-scroll .stats-table .table-player { font-size: 11px; }
+}

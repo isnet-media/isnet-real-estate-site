@@ -2,6 +2,8 @@
 
 Public static site at `/sports/ashdod/`, hosted through the same ISNET GitHub Pages publication as events and enrichment classes. All links and assets are relative. Published sports data is a verified snapshot refreshed through scheduled source scans. It is not a continuous live-score stream.
 
+Mobile tables share `ashdod/responsive-tables.css`, loaded last on every sports template. League points remain inside the viewport without horizontal scrolling; all columns and full team names are retained. The generic renderer tags standings, schedules, scorers and player tables so data refreshes inherit the layout. Compact mobile headings retain full labels in `abbr` titles; desktop headings are unchanged. Run `node scripts/test-sports-mobile-tables.cjs` after template/renderer changes and visually check 320, 360, 390, 430, 768 and desktop widths. Do not restore minimum widths or nowrap rules on mobile standings.
+
 The site includes football adults, football youth, basketball, handball and round results. Logos and licensed Heebo fonts are bundled. The original development source is retained in the Sites source repository.
 
 ## MS Ashdod club hub
