@@ -8,7 +8,9 @@ CITIES={'ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM'}
 def git(*args):
  return subprocess.run(['git',*args],cwd=ROOT,check=True,text=True,capture_output=True).stdout.strip()
 def allowed(now,claim,report):
- if now.hour<6:return False
+ # Respect the publisher's no-collection Saturday rule in Israel time.
+ now=now.astimezone(ZoneInfo('Asia/Jerusalem'))
+ if now.weekday()==5 or now.hour<6:return False
  today=now.date()
  for record,key in ((claim,'started_at'),(report,'checked_at')):
   value=record.get(key)
