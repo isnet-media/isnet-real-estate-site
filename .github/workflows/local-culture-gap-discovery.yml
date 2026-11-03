@@ -29,9 +29,26 @@ jobs:
         run: |
           git config user.name "isnet-events-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add events-preview/admin/data/local-culture-gaps-ashdod-rishon.json
-          if ! git diff --cached --quiet; then
+          # The scraper output is read-only candidate evidence; never modify CMS feeds.
+          # Keep a snapshot while synchronizing with unrelated main-branch writers.
+          report=events-preview/admin/data/local-culture-gaps-ashdod-rishon.json
+          cp "$report" "${RUNNER_TEMP}/local-culture-candidates.json"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp "${RUNNER_TEMP}/local-culture-candidates.json" "$report"
+            git add "$report"
+            if git diff --cached --quiet; then
+              echo "Local candidate report already matches main."
+              exit 0
+            fi
             git commit -m "Update local culture candidate discovery for active cities"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
+            if git push origin HEAD:main; then
+              echo "Local candidate report committed successfully."
+              exit 0
+            fi
+            echo "::warning::Concurrent main update; retrying local candidate report (attempt $attempt)."
+            sleep "$attempt"
+          done
+          echo "::error::Local candidate report was not saved after five safe retries."
+          exit 1
