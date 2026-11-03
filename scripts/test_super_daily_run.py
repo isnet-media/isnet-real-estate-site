@@ -15,6 +15,10 @@ assert d.allowed(now('2026-07-01T03:00:00+00:00'),{}, {})
 assert not d.allowed(now('2026-10-25T09:12:00+00:00'),{'started_at':'2026-10-25T06:00:00+02:00','status':'failed'}, {})
 assert not d.allowed(now('2026-10-25T09:12:00+00:00'),{}, {'checked_at':'2026-10-25T06:30:00+02:00','updated_count':0})
 assert d.allowed(now('2026-10-26T04:00:00+00:00'),{'started_at':'2026-10-25T06:00:00+02:00'}, {})
+# Friday UTC can already be Saturday locally; Sunday must resume collection.
+assert not d.allowed(now('2026-11-07T06:00:00+02:00'),{}, {})
+assert not d.allowed(now('2026-07-03T21:30:00+00:00'),{}, {})
+assert d.allowed(now('2026-11-08T06:00:00+02:00'),{}, {})
 # A non-overlapping push race is retried without replacing another city's data.
 calls=[]
 def git(*args):
