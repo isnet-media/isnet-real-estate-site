@@ -57,7 +57,10 @@ jobs:
           git commit -m "Sync Rishon LeZion UI with Ashdod canonical design"
           for retry in 1 2 3 4; do
             git fetch origin main
-            git rebase origin/main || exit 1
+            # sync_event_city_views.py also refreshes temporary, untracked-by-this-commit
+            # generated cinema snapshots. Preserve them while rebasing instead of
+            # failing on an otherwise safe frontend-only publication.
+            git -c rebase.autoStash=true rebase origin/main || exit 1
             if git push origin HEAD:main; then
               echo "City layout changes synced."
               exit 0
