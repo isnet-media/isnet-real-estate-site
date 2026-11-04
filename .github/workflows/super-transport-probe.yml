@@ -1,0 +1,23 @@
+name: Supermarket official feed transport probe
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/super-transport-probe.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - name: Check official public feed endpoints
+        shell: bash
+        run: |
+          for url in 'https://prices.carrefour.co.il/' 'https://laibcatalog.co.il/webapi/api/getfiles?edi=7290696200003' 'https://laibcatalog.co.il/webapi/api/getfiles?edi=7290661400001' 'https://shop.hazi-hinam.co.il/Prices'; do
+            curl --silent --show-error --location --connect-timeout 10 --max-time 20 --output /dev/null --write-out "$url HTTP=%{http_code} bytes=%{size_download}\n" "$url" || true
+          done
