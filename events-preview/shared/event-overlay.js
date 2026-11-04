@@ -62,6 +62,17 @@ const reviewedProductions=[
  // Both official listings identify the same Ashdod performance (12 Nov 2026, 20:30, Mishkan).
  {id:'nova-andalusian-ashdod-2026',titles:['נוּבָּה חדשה','נוֹבָּה חדשה - הדור הבא של המוזיקה האנדלוסית'],source:'https://tickets.mevalim.co.il/event/u7D6qOMHCmG7pOx'}
 ];
+// Editorially verified aliases: same production, exact original city/venue/date/time in primary show boards.
+// The occurrence matcher still requires identical date, time and venue; source IDs and offers are retained.
+reviewedProductions.push(
+ {id:'dragon-keepers-2026',titles:['שומרי הדרקונים'],source:'https://friends-hist.co.il/show/שומרי-הדרקונים/'}, // Ashdod 2026-11-29 18:30
+ {id:'high-school-drama-2026',titles:['היי סקול דרמה - האקדמיה למדעי היוטיוב - חנוכה 2026','היי סקול דרמה – האקדמיה למדעי היוטיוב – חנוכה 2026 – משפחת טרסוב'],source:'https://friends-hist.co.il/show/היי-סקול-דרמה-האקדמיה-למדעי-היוטיוב-ח/'}, // Ashdod 2026-12-16 17:30
+ {id:'nuclear-marriage-comedy-2026',titles:['נישואים גרעיניים','נישואים גרעיניים - קומדיה זוגית פרועה','נישואים גרעיניים - הצגת הבידור שתחסוך לכם טיפול זוגי'],source:'https://friends-hist.co.il/show/נישואים-גרעיניים/'}, // Ashdod 2026-12-19 21:00
+ {id:'imi-generalit-musical',titles:['אמי הגנרלית – המחזמר! – התיאטרון העברי'],source:'https://friends-hist.co.il/show/אימי-הגנרלית-המחזמר/'}, // Ashdod 2027-01-16 21:00
+ {id:'roni-sasson-comedy-bar',titles:['רוני ששון במופע סטנדאפ','רוני ששון במופע סטנד אפ – קומדי בר'],source:'https://friends-hist.co.il/show/רוני-ששון-במופע-סטנד-אפ-קומדי-בר/'}, // Rishon 2026-11-06 22:00
+ {id:'daniel-cohen-comedy-bar',titles:['דניאל כהן במופע סטנדאפ','דניאל כהן במופע סטנד אפ – קומדי בר'],source:'https://friends-hist.co.il/show/דניאל-כהן-במופע-סטנד-אפ/'}, // Rishon 2026-11-20 22:00
+ {id:'nova-andalusian-rishon-2026',titles:['נובה חדשה התזמורת האנדלוסית','נובה חדשה – התזמורת האנדלוסית אשדוד'],source:'https://friends-hist.co.il/show/נובה-חדשה-התזמורת-האנדלוסית-אשדוד/'} // Rishon 2026-11-22 20:30
+);
 const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
 function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
 function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\s*([1-9]\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\s*\d+/g,'').replace(/^(?:אולם|אודיטוריום)\s+/,'');let key=e.venue_institution_id;
