@@ -103,7 +103,18 @@ def duplicate_keys(events: list[dict]) -> set[str]:
 def evaluate(event: dict, dupes: set[str]) -> dict:
     blockers, warnings = [], []
     image = event.get("thumbnail_url") or event.get("image_url")
-    image_ok = bool(image and event.get("image_publishable") is True and event.get("image_verified") is True)
+    # Image flags are not proof of use rights: ticket-board imports may have
+    # image_verified=True while their explicit rights status is unverified.
+    # Never approve a new CMS publication based on those flags alone.
+    rights_status = str(event.get("image_rights_status") or "").strip().lower()
+    media_rights_ok = rights_status in {
+        "verified_official_source", "owned_system_asset", "owned",
+        "licensed", "rights_cleared", "press_release_authorized"
+    }
+    image_ok = bool(
+        image and event.get("image_publishable") is True
+        and event.get("image_verified") is True and media_rights_ok
+    )
     description = (
         event.get("long_description")
         or event.get("short_pitch")
@@ -135,6 +146,8 @@ def evaluate(event: dict, dupes: set[str]) -> dict:
         blockers.append("missing_image")
     elif not image_ok:
         blockers.append("unverified_image")
+    if image and not media_rights_ok:
+        blockers.append("media_rights_not_verified")
     if not (event.get("purchase_url") or event.get("ticket_url") or event.get("purchase_phone")):
         warnings.append("missing_action")
     if f'{event["_citySlug"]}:{event.get("event_id")}' in dupes:
