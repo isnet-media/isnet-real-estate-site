@@ -47,6 +47,23 @@ assert.equal(q.reconcile([nova[0],{...nova[1],venue:'אולם דיונה אשד�
 const realOfra=JSON.parse(fs.readFileSync('events-preview/ashdod/data/events.json')).events.filter(e=>e.title.includes('עפרה')&&e.start_date==='2026-11-14');assert.equal(q.reconcile(realOfra).length,1);
 console.log('PASS: reviewed Ofra aliases collapse into one sourced poster/card; all old IDs and offers survive; other times/venues/casts remain separate');
 
+// Reviewed identical listing from Mevalim and FRIENDS: Rishon, 22 Jan 2027, 21:30,
+// Heichal Hatarbut / Meir Nitzan. Keep both source IDs and booking links.
+const amiRishon=[
+ row('mevalim_ri_7cf16cc268ef23c0',{title:'אמי הגנרלית - המחזמר',category:'theatre',city:'ראשון לציון',venue:'היכל התרבות ראשון לציון',start_date:'2027-01-22',start_time:'21:30',content_source_url:'https://www.mevalim.co.il/theater/אמי-הגנרלית-מחזמר/'}),
+ row('board_ebd24fa30bfcd149c9',{title:'אמי הגנרלית – המחזמר! – התיאטרון העברי',category:'theatre',city:'ראשון לציון',venue:'היכל התרבות מאיר ניצן ראשון לציון',start_date:'2027-01-22',start_time:'21:30',content_source_url:'https://friends-hist.co.il/show/אימי-הגנרלית-המחזמר/'})
+];
+assert.equal(q.titleKey(amiRishon[0]),q.titleKey(amiRishon[1]));
+assert.equal(q.venueKey(amiRishon[0]),q.venueKey(amiRishon[1]));
+assert.equal(q.reconcile(amiRishon).length,1,'Same reviewed musical at same time and venue is one occurrence');
+assert.equal(q.suspectedDuplicates(q.reconcile(amiRishon,{keepDuplicates:true})).length,0);
+assert.equal(q.resolve(amiRishon,amiRishon[0].event_id).event_id,q.resolve(amiRishon,amiRishon[1].event_id).event_id);
+assert.equal(q.reconcile([amiRishon[0],{...amiRishon[1],start_time:'22:00'}]).length,2,'Different time is not the same occurrence');
+assert.equal(q.reconcile([amiRishon[0],{...amiRishon[1],venue:'היכל התרבות פתח תקווה'}]).length,2,'Different venue must never merge');
+assert.equal(q.reconcile([amiRishon[0],{...amiRishon[1],title:'אמי הגנרלית עם קאסט אחר'}]).length,2,'Different cast must never merge');
+console.log('PASS: Rishon Ami musical reviewed title variant reconciles only exact performance, retaining source IDs');
+
+
 // A general source-label rule must work for new productions, not only named incident aliases.
 const metadataTitles=['יצירה חדשה לגמרי','יצירה חדשה לגמרי - תאטרון הקאמרי','יצירה חדשה לגמרי - תיאטרון הקאמרי','יצירה חדשה לגמרי- עונת המנויים 27-28','יצירה חדשה לגמרי - תיאטרון הקאמרי - עונת המנויים 2027-2028'];
 const metadataRows=metadataTitles.map((title,i)=>row('metadata-'+i,{title,category:'theatre',series_id:'seller-series-'+i}));
