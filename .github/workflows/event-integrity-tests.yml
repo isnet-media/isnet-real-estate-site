@@ -2,9 +2,9 @@ name: Event integrity release checks
 on:
   push:
     branches: [main, 'feature/events-integrity-*']
-    paths: ['events-preview/shared/event-overlay.js', 'events-preview/shared/public-cms.js', 'events-preview/shared/data/event-quality-media.json', 'events-preview/*/data/events*.json', 'scripts/*event*integrity*', 'scripts/event_source_media.py', 'scripts/test_event_source_media.py', 'scripts/build_event_public_assets.py', '.github/workflows/event-integrity-tests.yml']
+    paths: ['events-preview/shared/event-overlay.js', 'events-preview/shared/public-cms.js', 'events-preview/shared/data/event-quality-media.json', 'events-preview/*/data/events*.json', 'events-preview/*/index.html', 'scripts/*event*integrity*', 'scripts/event_source_media.py', 'scripts/test_event_source_media.py', 'scripts/build_event_public_assets.py', '.github/workflows/event-integrity-tests.yml']
   pull_request:
-    paths: ['events-preview/shared/event-overlay.js', 'events-preview/shared/public-cms.js', 'events-preview/shared/data/event-quality-media.json', 'events-preview/*/data/events*.json', 'scripts/*event*integrity*', 'scripts/event_source_media.py', 'scripts/test_event_source_media.py', 'scripts/build_event_public_assets.py', '.github/workflows/event-integrity-tests.yml']
+    paths: ['events-preview/shared/event-overlay.js', 'events-preview/shared/public-cms.js', 'events-preview/shared/data/event-quality-media.json', 'events-preview/*/data/events*.json', 'events-preview/*/index.html', 'scripts/*event*integrity*', 'scripts/event_source_media.py', 'scripts/test_event_source_media.py', 'scripts/build_event_public_assets.py', '.github/workflows/event-integrity-tests.yml']
 permissions:
   contents: read
 jobs:
