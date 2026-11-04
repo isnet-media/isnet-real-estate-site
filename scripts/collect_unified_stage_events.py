@@ -147,9 +147,57 @@ def authentic_description(value):
     if len(value)<100:return None
     if any(t in value for t in ("מחפשים הופעות","באתר מבלים ריכזנו","כרטיסים במחירים מיוחדים","הופעה עם הלהיטים הגדולים!","הזמן עכשיו לפני שיגמרו","כרטיסים במחירים","עוד הופעה בקטגוריית")):return None
     return value
+def friends_show_occurrences(soup,page):
+    """Recover dated performances from FRIENDS show-page listings, never auto-publish.
+
+    FRIENDS pages can show exact dates, cities and venues without Event JSON-LD.
+    Only an explicit city + venue + date + time sequence is a candidate;
+    external artwork remains rights-unverified.
+    """
+    if not re.match(r"^/show/[^/]+/?$",urlparse(page).path):return []
+    heading=soup.find("h1")
+    title=clean(heading.get_text(" ",strip=True)) if heading else ""
+    if len(title)<6 or len(title)>180 or re.search(r"(?:סרט הודי|הקרנת סרט|קולנוע|movie screening)",title,re.I):return []
+    lines=[clean(v) for v in soup.get_text("\n",strip=True).splitlines() if clean(v)]
+    section=next((i for i,v in enumerate(lines) if "כל ההופעות שיש כרגע" in v),None)
+    if section is None:return []
+    lines=lines[section+1:]
+    today=datetime.now(ZoneInfo("Asia/Jerusalem")).date()
+    image=txtmeta(soup,"og:image") or txtmeta(soup,"twitter:image")
+    if image and any(v in image.lower() for v in ("logo","placeholder","default-image","banner bg","big_star.png")):image=None
+    description=authentic_description(txtmeta(soup,"og:description") or txtmeta(soup,"description"))
+    out=[]
+    for i,line in enumerate(lines):
+        city=next((slug for slug,names in CITIES.items() if line in names),None)
+        if city is None or i+3>=len(lines):continue
+        venue=lines[i+1]
+        if len(venue)<4 or len(venue)>140:continue
+        for j in range(i+2,min(i+5,len(lines)-1)):
+            date_match=re.fullmatch(r"(\d{1,2})/(\d{1,2})/(20\d{2}|\d{2})",lines[j])
+            if not date_match:continue
+            year=int(date_match.group(3))
+            year=2000+year if year<100 else year
+            try:day=datetime(year,int(date_match.group(2)),int(date_match.group(1))).date()
+            except ValueError:break
+            if day<today:break
+            clock=next((lines[k] for k in range(j+1,min(j+3,len(lines))) if re.fullmatch(r"(?:[01]?\d|2[0-3]):[0-5]\d",lines[k])),None)
+            if clock:
+                out.append({"title":title,"city":city,"venue":venue,"date_time":f"{day.isoformat()}T{clock}:00",
+                    "end_time":None,"description":description,
+                    "image_url":urljoin(page,image) if image else None,"video_url":None,
+                    "tickets_url":page,"category":None,"subcategory":None,
+                    "source_id":"friends-hist","source_url":page,
+                    "extraction_method":"show_page_visible_schedule","publication_status":"candidate_review",
+                    "image_provenance":"external_ticket_listing_not_license"})
+            break
+    return out
+
 def detail_extract(soup,source,page):
     if source=="mevalim" and (urlparse(page).hostname or "")=="tickets.mevalim.co.il":
         return mevalim_ticket_extract(soup,page)
+    if source=="friends-hist":
+        source_rows=friends_show_occurrences(soup,page)
+        if source_rows:return source_rows
     rows=[]
     for obj in collect_jsonld(soup):
         event=event_from_jsonld(obj,source,page)
