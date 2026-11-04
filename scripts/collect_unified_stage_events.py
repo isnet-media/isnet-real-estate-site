@@ -106,8 +106,13 @@ def detail_links(soup,base,host):
         url=urljoin(base,a.get("href",""))
         title=clean(a.get_text(" ",strip=True))
         if not domain(url,host) or url.rstrip("/")==base.rstrip("/"):continue
-        if not (EVENT_PATH.search(urlparse(url).path) or STAGE_HINT.search(title)):continue
-        if not (7<=len(title)<=125) or EXCLUDE_TITLE.match(title):continue
+        # FRIENDS cards often link their image to a show page without text inside
+        # the anchor. Do not discard a real /show/<slug>/ link for that reason.
+        # The show parser still requires an explicit city, venue, date and time.
+        friends_show=(host.removeprefix("www.")=="friends-hist.co.il" and
+                      re.fullmatch(r"/show/[^/]+/?",urlparse(url).path) is not None)
+        if not (friends_show or EVENT_PATH.search(urlparse(url).path) or STAGE_HINT.search(title)):continue
+        if not friends_show and (not (7<=len(title)<=125) or EXCLUDE_TITLE.match(title)):continue
         if re.fullmatch(r"[\\w\\s]+",title) and any(x in title for x in ("הצג הכול","בחרו עיר","לוח הופעות")):continue
         if any(word in title for word in GENERIC):continue
         if url not in links:links.append(url)
