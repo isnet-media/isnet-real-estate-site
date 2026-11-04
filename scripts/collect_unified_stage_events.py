@@ -10,6 +10,12 @@ from urllib.parse import urljoin,urlparse
 import requests
 from bs4 import BeautifulSoup
 
+# Support both script execution in Actions and package imports in tests.
+if __package__:
+    from .event_source_media import friends_image
+else:
+    from event_source_media import friends_image
+
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/"events-preview/admin/data"
 CFG=DATA/"event-source-priority.json"
@@ -165,6 +171,10 @@ def friends_show_occurrences(soup,page):
     today=datetime.now(ZoneInfo("Asia/Jerusalem")).date()
     image=txtmeta(soup,"og:image") or txtmeta(soup,"twitter:image")
     if image and any(v in image.lower() for v in ("logo","placeholder","default-image","banner bg","big_star.png")):image=None
+    # Prefer event-specific artwork on the show page over generic social metadata.
+    # Source artwork stays a candidate; neither fetching it nor storing its URL grants reuse rights.
+    # The shared helper rejects lazy placeholders, site logos and recommendation-card images.
+    image=friends_image(soup,page,urljoin(page,image) if image else None)
     description=authentic_description(txtmeta(soup,"og:description") or txtmeta(soup,"description"))
     out=[]
     for i,line in enumerate(lines):
