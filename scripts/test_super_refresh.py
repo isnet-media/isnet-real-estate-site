@@ -88,3 +88,50 @@ assert len({id(s) for s,_ in listed})==4
 assert all(s.cookies.get('public')=='session' and e==entries for s,e in listed)
 r._listing_cache.clear();r._listing_locks.clear()
 print('Passed: single directory fetch per retailer and independent download sessions')
+
+# An unavailable directory must not multiply network attempts by branch count.
+# Only the existing recovery pass may retry a transport failure, once per chain.
+from requests import Request,Response
+from requests.exceptions import ConnectTimeout,HTTPError
+r._listing_failures.clear()
+timeout=ConnectTimeout('do not publish URLs or cookies',request=Request('GET','https://example.invalid/secret?token=private').prepare())
+def unavailable(branch):
+ try:r.listing(branch)
+ except ConnectTimeout:return True
+ raise AssertionError('Unavailable source unexpectedly succeeded')
+with patch.object(r,'uncached_listing',side_effect=timeout) as fetch:
+ with ThreadPoolExecutor(max_workers=4) as pool:assert all(pool.map(unavailable,[shared]*12))
+ assert fetch.call_count==1
+ r.reset_transient_listing_failures()
+ with ThreadPoolExecutor(max_workers=4) as pool:assert all(pool.map(unavailable,[shared]*12))
+ assert fetch.call_count==2
+r._listing_failures.clear()
+response=Response();response.status_code=403
+denied=HTTPError('security refusal',response=response,request=timeout.request)
+with patch.object(r,'uncached_listing',side_effect=denied) as fetch:
+ for _ in range(2):
+  try:r.listing(shared)
+  except HTTPError:pass
+  else:raise AssertionError('403 unexpectedly accepted')
+  r.reset_transient_listing_failures()
+ assert fetch.call_count==1
+with tempfile.TemporaryDirectory() as tmp,patch.object(r,'listing',side_effect=denied):
+ old,new,report=r.refresh_branch(dict(branch,chain='test'),Path(tmp),datetime(2026,10,21,20,tzinfo=r.TZ))
+ assert new is None and old['file_date']==branch['file_date']
+ assert report['source_access']=={'kind':'HTTPError','http_status':403,'host':'example.invalid'}
+ assert 'private' not in json.dumps(report)
+r._listing_failures.clear();r._listing_cache.clear();r._listing_locks.clear()
+print('Passed: chain-wide timeout sharing, one recovery retry, no repeated 403 and safe access diagnostics')
+
+# Holon's store-specific official portal must also stop after a 403.
+from refresh_holon_super_prices import collector
+h=collector()
+hatzi={'id':'7290700100008-202','chain':'חצי חינם','chain_id':'7290700100008','store_id':'202','source_url':'https://shop.hazi-hinam.co.il/Prices'}
+with patch.object(h,'request',side_effect=denied) as fetch:
+ for _ in range(2):
+  try:h.listing(hatzi)
+  except HTTPError:pass
+  else:raise AssertionError('Hazi Hinam access refusal unexpectedly accepted')
+  h.reset_transient_listing_failures()
+ assert fetch.call_count==1
+print('Passed: Hazi Hinam access refusal is retained without another HTTP request')

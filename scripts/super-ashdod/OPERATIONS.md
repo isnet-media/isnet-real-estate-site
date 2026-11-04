@@ -110,3 +110,21 @@ unexpected concurrent base-file change and runs its normal checks before commit.
 The monitoring automation now covers all six cities and all 102 registered branches.
 Three complete scheduled daily runs are still required to establish stable daily
 operation; a successful one-off recovery alone does not satisfy that gate.
+
+## 4 November 2026 transport diagnosis
+
+GitHub's official-feed probe (run 41777240461) found connection timeouts to
+Carrefour and Laib (Victory/Machsanei Hashuk) on both Ubuntu and macOS runners,
+and HTTP 403 from Hazi Hinam. Changing runner OS did not restore access.
+The same first three directory URLs answered in the connected workspace;
+that is not evidence of an automatic collection or deployed price recovery.
+Do not route around access controls or substitute a different price source.
+
+Failed retailer directory requests are now shared across branches as well as
+successful ones. Only the existing focused recovery pass resets transient
+connection/HTTP 429/5xx failures, once per directory. HTTP 401/403 refusals
+stay cached for the run (including Holon's store-specific Hazi Hinam listing).
+Reports retain the exception class and add HTTP status/host where available,
+without tokens, cookies, signed URLs or fabricated source dates. This reduces
+repeated requests; it does not remove a network restriction. Daily claims and
+the last verified prices remain unchanged.

@@ -19,23 +19,25 @@ def collector():
      if n.startswith(('Price','Promo')):entries.append({'name':n,'url':base+'Download/'+n})
    return s,list({x['name']:x for x in entries}.values())
   if b['chain']=='חצי חינם':
-   from bs4 import BeautifulSoup
-   from urllib.parse import urlparse,unquote
-   s=c.session();entries=[]
-   for day in (datetime.now(c.TZ).date(),datetime.now(c.TZ).date()-timedelta(days=1)):
-    for page in range(1,31):
-     html=c.request(s,'https://shop.hazi-hinam.co.il/Prices',params={'s':int(b['store_id']),'d':day.isoformat(),'p':page}).text
-     soup=BeautifulSoup(html,'html.parser');batch=[]
-     for a in soup.select('a[href]'):
-      url=a['href']
-      if not url.startswith('https://hazihinamprod01.blob.core.windows.net/regulatories/'):continue
-      name=unquote(urlparse(url).path.rsplit('/',1)[-1])
-      if name.startswith(('Price','Promo')):batch.append({'name':name,'url':url})
-     entries.extend(batch)
-     pages=[int(a.get_text().strip()) for a in soup.select('a[href]') if '?p=' in a['href'] and a.get_text().strip().isdigit()]
-     if not pages or page>=max(pages):break
-    else:raise ValueError('Truncated Hazi Hinam publication listing')
-   return s,list({x['name']:x for x in entries}.values())
+   def fetch():
+    from bs4 import BeautifulSoup
+    from urllib.parse import urlparse,unquote
+    s=c.session();entries=[]
+    for day in (datetime.now(c.TZ).date(),datetime.now(c.TZ).date()-timedelta(days=1)):
+     for page in range(1,31):
+      html=c.request(s,'https://shop.hazi-hinam.co.il/Prices',params={'s':int(b['store_id']),'d':day.isoformat(),'p':page}).text
+      soup=BeautifulSoup(html,'html.parser');batch=[]
+      for a in soup.select('a[href]'):
+       url=a['href']
+       if not url.startswith('https://hazihinamprod01.blob.core.windows.net/regulatories/'):continue
+       name=unquote(urlparse(url).path.rsplit('/',1)[-1])
+       if name.startswith(('Price','Promo')):batch.append({'name':name,'url':url})
+      entries.extend(batch)
+      pages=[int(a.get_text().strip()) for a in soup.select('a[href]') if '?p=' in a['href'] and a.get_text().strip().isdigit()]
+      if not pages or page>=max(pages):break
+     else:raise ValueError('Truncated Hazi Hinam publication listing')
+    return s,list({x['name']:x for x in entries}.values())
+   return c.cached_listing(('חצי חינם',b['chain_id'],b['store_id'],b['source_url']),fetch)
   return base_listing(b)
  c.listing=listing
  return c

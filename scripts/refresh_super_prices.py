@@ -81,20 +81,38 @@ def uncached_listing(b):
 # Fetch each retailer-wide directory once per run. Give downloads independent
 # sessions while preserving public-portal cookies, avoiding concurrent logins.
 _listing_cache={}
+_listing_failures={}
 _listing_locks={}
 _listing_guard=Lock()
-def listing(b):
- shared=b['chain'] in ACCOUNTS or b['chain'] in ('קרפור','ויקטורי')
- if not shared:return uncached_listing(b)
- key=(b['chain'],b['chain_id'],b['source_url'])
+def cached_listing(key,fetch):
  with _listing_guard:lock=_listing_locks.setdefault(key,Lock())
  with lock:
+  # A failed retailer directory is shared too. Otherwise every branch repeats
+  # the same bounded transport retries while holding this retailer's lock.
+  if key in _listing_failures:raise _listing_failures[key]
   if key not in _listing_cache:
-   source,entries=uncached_listing(b)
+   try:source,entries=fetch()
+   except Exception as ex:
+    _listing_failures[key]=ex
+    raise
    _listing_cache[key]=(source.cookies.copy(),entries)
   cookies,entries=_listing_cache[key]
  result=session();result.cookies.update(cookies)
  return result,list(entries)
+
+def reset_transient_listing_failures():
+ # Called once, before the existing focused recovery pass. Access refusals
+ # (401/403) are not retried, and successful listings are never re-fetched.
+ for key,error in list(_listing_failures.items()):
+  response=getattr(error,'response',None)
+  if isinstance(error,(RequestConnectionError,RequestTimeout)) or (response is not None and response.status_code in (429,500,502,503,504)):
+   del _listing_failures[key]
+
+def listing(b):
+ shared=b['chain'] in ACCOUNTS or b['chain'] in ('קרפור','ויקטורי')
+ if not shared:return uncached_listing(b)
+ key=(b['chain'],b['chain_id'],b['source_url'])
+ return cached_listing(key,lambda:uncached_listing(b))
 
 def field(node,key):return next(((c.text or '').strip() for c in node if c.tag.split('}')[-1].casefold()==key.casefold()),'')
 def kg(unit):return bool(re.fullmatch(r'(?:1\s*)?(?:קילוגרמים?|קילוגרם|ק[״\"]?ג)',unit))
@@ -152,10 +170,18 @@ def refresh_branch(b,raw_dir,now):
  except Exception as ex:
   # Avoid leaking signed URLs/cookies through request exception strings.
   report.update(status='retained_previous',error=str(ex) if isinstance(ex,ValueError) else type(ex).__name__)
+  # Record actionable transport evidence without exception strings, cookies,
+  # query strings or signed URLs. A blocked request is not a missing file.
+  if isinstance(ex,requests.exceptions.RequestException):
+   response=ex.response;req=ex.request
+   report['source_access']={'kind':type(ex).__name__}
+   if response is not None:report['source_access']['http_status']=response.status_code
+   if req is not None:report['source_access']['host']=urlparse(req.url).hostname
   print(b['id'],'retained_previous',report['error'],flush=True);return b,None,report
 
 def write(path,obj):path.write_text(json.dumps(obj,ensure_ascii=False,separators=(',',':'))+'\n')
 def recover_branches(results,raw_dir):
+ reset_transient_listing_failures()
  failed=[]
  for index,(_,products,report) in enumerate(results):
   report['attempts']=1
