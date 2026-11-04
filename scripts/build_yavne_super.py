@@ -7,7 +7,8 @@ def build():
  basket=load('build_super_city_basket');catalog=json.loads((SITE/'data/catalog.json').read_text());variants={}
  for name,definition in [('family','city-family-basket.json'),('basic','city-basket-products.json')]:
   spec=json.loads((ROOT/'scripts/super-yavne'/definition).read_text());variants[name]=basket.build_variant(spec,catalog,name)
- (SITE/'data/city-basket.json').write_text(json.dumps(dict(schema_version=1,default_variant='family',variants=variants),ensure_ascii=False,indent=2)+'\n')
+ variants['monthly']=basket.build_monthly_variant(catalog)
+ (SITE/'data/city-basket.json').write_text(json.dumps(dict(schema_version=1,default_variant='monthly',variants=variants),ensure_ascii=False,indent=2)+'\n')
  load('build_super_smart_shopping').build()
  shell=load('super_ashdod_shell')
  for path in shell.pages():

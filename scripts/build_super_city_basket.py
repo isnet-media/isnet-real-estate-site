@@ -41,6 +41,8 @@ def build_variant(definition,catalog,variant):
     if matches:break # Fixed candidate priority, never cheapest-per-product choice.
    assert len({cents(m[2]['price']) for m in matches})<=1,('Conflicting regular prices',branch['id'],item['id'])
    selected=matches[0] if matches else None;pid,p,o,chosen=selected if selected else (None,None,None,None)
+   if chosen and item.get('target_count'):
+    assert chosen['quantity']*chosen.get('package_count',item.get('package_count',0))==item['target_count'],('Unequal item count',item['id'],pid)
    if chosen and item.get('target_grams'):
     assert chosen.get('package_grams') and Decimal(str(chosen['quantity']))*Decimal(str(chosen['package_grams']))==Decimal(str(item['target_grams'])),('Unequal equivalent quantity',item['id'],pid)
    lines.append({'id':item['id'],'product_id':pid,'source_name':p['name'] if p else None,'quantity':chosen['quantity'] if chosen else item['quantity'],'pricing_unit':chosen['pricing_unit'] if chosen else item['pricing_unit'],'match_type':('equivalent' if pid!=item['id'] else 'identical') if pid else None,'equivalence_note':item.get('equivalence_note','אותו סוג וזן ובאותה כמות; ספק, גודל, איכות וכשרות עשויים להשתנות') if pid!=item['id'] else None,'price_cents':cents(o['price']) if o else None,'line_total_cents':cents(Decimal(str(o['price']))*Decimal(str(chosen['quantity']))) if o else None,'package_grams':chosen.get('package_grams') if chosen else None,'total_grams':(chosen['quantity']*chosen['package_grams'] if chosen.get('package_grams') else chosen['quantity']*1000 if chosen['pricing_unit']=='kg' else None) if chosen else None,'source_type':o.get('source_type') if o else None,'kind':o.get('kind') if o else None,'source_url':(o.get('source_url') or branch.get('price_file_url')) if o else None,'price_updated_at':o.get('updated_at') if o else None,'raw_unit':o.get('raw_unit') if o else None,'product_unit':p.get('unit_quantity') if p else None,'raw_price':o.get('raw_price') if o else None})
@@ -68,8 +70,22 @@ def build_variant(definition,catalog,variant):
  print(f'{variant}: {len(products)} lines; {len(complete)}/{len(branches)} complete; min={minimum}, max={maximum}, mean={result["average_cents"]} agorot')
  return result
 
+def build_monthly_variant(catalog):
+ definition=json.loads((ROOT/'scripts/super-ashdod/monthly-family-basket.json').read_text())
+ result=build_variant(definition,catalog,'monthly')
+ result.update(period='month',household_size=[4,5],budget_target_ils=3500,target_budget_ils=[3500,3500],annual_gap_cents=result['gap_cents']*12 if result['gap_cents'] is not None else None,
+  method='Illustrative monthly household basket for 4-5 people, with a 3500 ILS design target, not a statistical average or guaranteed budget. Fixed quantities and candidate priority. Only complete branches are ranked; no missing product is omitted or imputed. Ordinary shelf prices only. Equivalent brands, origin, certification and other disclosed product attributes may differ. Fresh and frozen meat are separate lines. Annual gap is the current monthly gap multiplied by 12, assuming unchanged quantities and price differences; it is not a forecast. File prices do not confirm stock.')
+ for branch in result['branches']:
+  groups={}
+  for item,line in zip(result['products'],branch['lines']):
+   group=groups.setdefault(item['group'],{'total_cents':0,'found':0,'count':0})
+   group['count']+=1
+   if line['line_total_cents'] is not None:group['total_cents']+=line['line_total_cents'];group['found']+=1
+  branch['category_totals']={k:{**v,'total_cents':v['total_cents'] if v['found']==v['count'] else None} for k,v in groups.items()}
+ return result
+
 def build():
  catalog=json.loads((D/'data/catalog.json').read_text());base=json.loads((ROOT/'scripts/super-ashdod/city-basket-products.json').read_text());family=json.loads((ROOT/'scripts/super-ashdod/city-family-basket.json').read_text())
- result={'schema_version':1,'default_variant':'family','variants':{'family':build_variant(family,catalog,'family'),'basic':build_variant(base,catalog,'basic')}}
+ result={'schema_version':1,'default_variant':'monthly','variants':{'monthly':build_monthly_variant(catalog),'family':build_variant(family,catalog,'family'),'basic':build_variant(base,catalog,'basic')}}
  (D/'data/city-basket.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');return result
 if __name__=='__main__':build()

@@ -9,7 +9,8 @@ def build():
   spec=json.loads((ROOT/'scripts/super-holon'/definition).read_text());variants[name]=basket.build_variant(spec,catalog,name)
  for v in variants.values():
   v['method']='Verified physical Holon branches only. Fixed product priority, shelf prices and identical quantities. Family basket: dairy, pantry, canned tomatoes, frozen vegetables and 4 x 700 g prepared chicken schnitzel (2.8 kg). Same barcodes and whole packs except reviewed regular canola 1-litre equivalents. No raw meat, fish or fresh produce in the fixed basket. Price-file data does not guarantee stock.'
- (SITE/'data/city-basket.json').write_text(json.dumps(dict(schema_version=1,default_variant='family',variants=variants),ensure_ascii=False,indent=2)+'\n')
+ variants['monthly']=basket.build_monthly_variant(catalog)
+ (SITE/'data/city-basket.json').write_text(json.dumps(dict(schema_version=1,default_variant='monthly',variants=variants),ensure_ascii=False,indent=2)+'\n')
  load('build_super_smart_shopping','HOLON').build()
  # Reuse the city's size-verified brand groups in search, avoiding duplicate generic cards.
  smart=json.loads((SITE/'data/smart-shopping.json').read_text())

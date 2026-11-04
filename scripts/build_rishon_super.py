@@ -9,7 +9,8 @@ def build():
   spec=json.loads((ROOT/'scripts/super-rishon'/definition).read_text());variants[name]=basket.build_variant(spec,catalog,name)
  for v in variants.values():
   v['method']='Verified physical Rishon LeZion branches only. Fixed product priority, shelf prices and identical quantities. Reviewed frozen salmon portions total 3 kg in whole packs or explicit kg. Basket contains dairy, frozen fish and pantry items, not fresh meat, fruit or vegetables. Price-file data does not guarantee stock.'
- (SITE/'data/city-basket.json').write_text(json.dumps(dict(schema_version=1,default_variant='family',variants=variants),ensure_ascii=False,indent=2)+'\n')
+ variants['monthly']=basket.build_monthly_variant(catalog)
+ (SITE/'data/city-basket.json').write_text(json.dumps(dict(schema_version=1,default_variant='monthly',variants=variants),ensure_ascii=False,indent=2)+'\n')
  load('build_super_smart_shopping','RISHON').build()
  shell=load('super_ashdod_shell','RISHON')
  for path in shell.pages():

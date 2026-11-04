@@ -3,7 +3,7 @@ from pathlib import Path
 from decimal import Decimal
 import json
 from build_super_city_basket import D,kg_unit,cents
-bundle=json.loads((D/'data/city-basket.json').read_text());assert bundle['default_variant']=='family'
+bundle=json.loads((D/'data/city-basket.json').read_text());assert bundle['default_variant']=='monthly'
 for key,data in bundle['variants'].items():
  assert key==data['variant_id'];assert len({p['id'] for p in data['products']})==len(data['products'])
  complete=[];shards={}

@@ -290,6 +290,9 @@ jobs:
           python scripts/test_batyam_super.py --deployment-only
           for script in SUPER.BATYAM/live.js SUPER.BATYAM/assets/*.js; do node --check "$script"; done
 
+      - name: Verify monthly household comparisons in all cities
+        run: python scripts/test_monthly_family_basket.py
+
       - name: Apply and verify Yavne analytics on all generated pages
         run: |
           python scripts/apply_yavne_analytics.py

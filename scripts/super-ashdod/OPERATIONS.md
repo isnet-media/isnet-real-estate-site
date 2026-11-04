@@ -152,3 +152,27 @@ status/counts recorded in the manifest; it must never be relabelled complete.
 A one-off recovery is not proof of reliable future network access. If both the
 normal runner and maintenance environment cannot reach a source, report the
 specific branch/date and preserve its real timestamp.
+
+
+## Monthly household basket, 4 November 2026
+
+The public default is now `monthly`, an illustrative cumulative month of shopping
+for 4-5 people with a 3,500 ILS design target. The 48 fixed lines live in
+`monthly-family-basket.json` and are shared across all six cities. Quantities and
+candidate priority remain fixed as market prices change; no multiplier forces the
+total to match the target. This is not a statistically measured household average.
+The existing small family and identical-barcode basic variants remain available.
+
+Monthly products are NEVER dropped to improve branch coverage. Incomplete branches
+keep all 48 lines and a null total, are visible as partial, and cannot win/lose.
+Category totals are null when any line in that category is missing. Brands and
+explicitly disclosed attributes can vary; fresh/frozen protein lines remain
+separate. Egg alternatives preserve 120 size-L eggs in whole 12/30 packs; two Rami
+Levi product names explicitly identify 12 eggs although source quantity 1 denotes
+the retail package. Powder is one 2.5 kg pack, not a monthly 6 kg purchase.
+
+The annual comparison is exactly twelve times the observed monthly gap, conditional
+on unchanged quantities and price differences; never describe it as a forecast or
+actual annual savings. Ordinary shelf prices exclude club deals, delivery and
+travel. The UI shows source dates and complete-branch coverage. Run
+`test_monthly_family_basket.py` after city builders; Pages enforces it before deploy.
