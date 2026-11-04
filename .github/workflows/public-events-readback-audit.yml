@@ -43,13 +43,29 @@ jobs:
           node-version: '22'
       - name: Normalize expected feeds with the publication integrity policy
         run: node current-main/scripts/audit-event-integrity.cjs --apply
+      - name: Show unresolved identity candidates without changing them
+        if: ${{ always() }}
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path('current-main/events-preview/admin/data/event-integrity-report.json')
+          if p.exists():
+              d = json.loads(p.read_text())
+              for city in ('ashdod', 'rishon-lezion'):
+                  for pair in d.get('cities', {}).get(city, {}).get('suspected_duplicates_for_review', [])[:5]:
+                      print(json.dumps({'city': city, 'unresolved_pair': pair}, ensure_ascii=False))
+          PY
       - name: Compare public JSON with normalized current GitHub feed
+        if: ${{ always() }}
         run: python audit-code/scripts/verify_public_event_readback.py --repo-root current-main --output /tmp/isnet-public-event-readback.json
       - name: Retain read-back evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: public-event-readback-${{ github.run_id }}
-          path: /tmp/isnet-public-event-readback.json
+          path: |
+            /tmp/isnet-public-event-readback.json
+            current-main/events-preview/admin/data/event-integrity-report.json
           retention-days: 14
           if-no-files-found: warn
