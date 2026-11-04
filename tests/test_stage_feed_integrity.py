@@ -118,6 +118,23 @@ class SafeStageMergeTests(unittest.TestCase):
         self.assertEqual(after[0]["description"], original["description"])
         self.assertEqual(after[0]["series_description"], original["series_description"])
 
+
+    def test_generic_ticket_category_copy_is_not_event_description(self):
+        # Category-page marketing copy is not a description of a named show.
+        samples = [
+            "רכזנו עבורכם את כל ההופעות בנושא הופעות והצגות חנוכה. לוח מעודכן נכון לנובמבר 2026, מבצעים, קופונים והנחות. הופעות והצגות ב כרטיסים זמינים",
+            "לוח הופעות 2026 של הופעות חיות - כרטיסים, מבצעים והטבות מיוחדות בשבילך. חיפוש מהיר לפי זמן, עיר ואומני הופעות חיות. כרטיסים זמינים",
+            "הופעות ואירועי תרבות באזור המרכז 2026 | הופעות חיות, סטנדאפ, הצגות ילדים מופעי תיאטרון ועוד. כרטיסים באתר במחירים מיוחדים - הזמינו עכשיו!",
+            "בוא לא נדבר על זה - המופע של יעל בר זוהר וגיא זו ארץ - הזמינו כרטיסים לכל ההופעות בכל המועדים והשעות! " * 2,
+        ]
+        for sample in samples:
+            with self.subTest(sample=sample[:35]):
+                self.assertEqual(swap.good_copy(sample), "")
+        valid = ("מופע מוזיקלי מקורי שמפגיש על הבמה שבעה נגנים, "
+                 "עם עיבודים חדשים לשירים מוכרים, סיפורים מאחורי הקלעים "
+                 "ושילוב של כלי נשיפה, גיטרות ושירה חיה.")
+        self.assertEqual(swap.good_copy(valid), valid)
+
     def test_matching_title_and_date_cannot_overwrite_another_venue(self):
         original = event("auto_a", "Hall A", "agent", description="Keep the original")
         candidate = {
