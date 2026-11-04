@@ -64,6 +64,22 @@ assert.equal(q.reconcile([amiRishon[0],{...amiRishon[1],title:'אמי הגנרל
 console.log('PASS: Rishon Ami musical reviewed title variant reconciles only exact performance, retaining source IDs');
 
 
+// Same 20 Mar 2027, 11:30 FRIENDS Rishon children's show is titled
+// "עמי ותמי - הצגת ילדים" in Mevalim and "עמי ותמי" on the producer's FRIENDS page.
+// Repair only the exact source ID/date/time/venue, not all similarly titled productions.
+const amiTami=[row('mevalim_ri_132151',{title:'עמי ותמי - הצגת ילדים',category:'kids',city:'ראשון לציון',venue:'FRIENDS ראשון לציון',start_date:'2027-03-20',start_time:'11:30',content_source_url:'https://tickets.mevalim.co.il/event/NQm5Uolkhhlq-yX'}),row('board_fe384389fdeacddbea',{title:'עמי ותמי',category:'kids',city:'ראשון לציון',venue:'FRIENDS ראשון לציון',start_date:'2027-03-20',start_time:'11:30',content_source_url:'https://friends-hist.co.il/show/עמי-ותמי/'})];
+assert.equal(q.sanitize(amiTami[0]).title,'עמי ותמי','Only reviewed source listing title is repaired');
+assert.equal(q.reconcile(amiTami).length,1,'Same source-verified show is one occurrence');
+assert.equal(q.suspectedDuplicates(q.reconcile(amiTami,{keepDuplicates:true})).length,0);
+assert.equal(q.resolve(amiTami,amiTami[0].event_id).event_id,q.resolve(amiTami,amiTami[1].event_id).event_id);
+for(const changed of [{start_date:'2027-03-21'},{start_time:'12:30'},{venue:'FRIENDS חולון'},{title:'עמי ותמי - קאסט אחר'}]){
+ assert.equal(q.reconcile([amiTami[0],{...amiTami[1],...changed}]).length,2,'Distinct show remains distinct: '+JSON.stringify(changed));
+}
+for(const changed of [{start_date:'2027-03-21'},{start_time:'12:30'},{venue:'FRIENDS חולון'},{title:'עמי ותמי - קאסט אחר'},{event_id:'some-other-source'}]){
+ assert.equal(q.sanitize({...amiTami[0],...changed}).title,'עמי ותמי - הצגת ילדים','Unverified listing must not be retitled: '+JSON.stringify(changed));
+}
+console.log('PASS: Rishon Hansel and Gretel specific source correction keeps both IDs; different date/time/venue/cast/source untouched');
+
 // A general source-label rule must work for new productions, not only named incident aliases.
 const metadataTitles=['יצירה חדשה לגמרי','יצירה חדשה לגמרי - תאטרון הקאמרי','יצירה חדשה לגמרי - תיאטרון הקאמרי','יצירה חדשה לגמרי- עונת המנויים 27-28','יצירה חדשה לגמרי - תיאטרון הקאמרי - עונת המנויים 2027-2028'];
 const metadataRows=metadataTitles.map((title,i)=>row('metadata-'+i,{title,category:'theatre',series_id:'seller-series-'+i}));
