@@ -59,6 +59,7 @@ on:
       - "scripts/build_super_recipes.py"
       - "scripts/build_movie_editorial.py"
       - "scripts/search_discovery.py"
+      - "scripts/apply_local_search_seo.py"
       - "scripts/event_seo.py"
       - "scripts/notify_search_indexes.py"
       - "scripts/test_search_discovery.py"
@@ -298,6 +299,9 @@ jobs:
           python scripts/apply_yavne_analytics.py
           python scripts/apply_yavne_analytics.py --check
           node scripts/test-yavne-analytics.cjs
+
+      - name: Apply city search metadata and savings guides after all generators
+        run: python scripts/apply_local_search_seo.py
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
