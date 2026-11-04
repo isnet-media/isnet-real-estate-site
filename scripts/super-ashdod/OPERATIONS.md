@@ -128,3 +128,27 @@ Reports retain the exception class and add HTTP status/host where available,
 without tokens, cookies, signed URLs or fabricated source dates. This reduces
 repeated requests; it does not remove a network restriction. Daily claims and
 the last verified prices remain unchanged.
+
+## Official-feed network recovery, 4 November 2026
+
+Direct probes on both Ubuntu (Azure eastus) and macOS (westus) GitHub runners
+confirmed Carrefour and Laib TCP timeouts, and Hazi Hinam HTTP 403. The same
+reviewed official endpoints returned valid listings and files in the connected
+Work environment. More retries on the same hosted-runner network do not fix this.
+
+The existing daily maintenance task is the secondary recovery path. After the
+normal collector finishes, run `scripts/recover_super_sources.py --city CITY
+--raw-dir /tmp/official-CITY` in a connected environment only when source dates
+are stale. This retries stale branches only, refuses Saturday or an active daily
+claim, preserves healthy offers, and keeps the existing promotion selection.
+Run each city's usual builder and deployment checks before publishing. Never
+claim a recovery finished until public refresh-status.json and prices.json agree
+with the candidate. The normal collector and its daily claim remain in place.
+
+Publish a workspace candidate through the hash-checked `.supermarket-repair`
+package and `apply_super_repair.py`: each file carries before/after hashes and
+must reject concurrent updates. Partial recovery is allowed only with its actual
+status/counts recorded in the manifest; it must never be relabelled complete.
+A one-off recovery is not proof of reliable future network access. If both the
+normal runner and maintenance environment cannot reach a source, report the
+specific branch/date and preserve its real timestamp.
