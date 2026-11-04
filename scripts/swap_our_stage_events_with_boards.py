@@ -30,6 +30,25 @@ def normal(x):
 def good_image(x):
     x=str(x or "")
     return x.startswith("https://") and not any(y in x.lower() for y in ("big_star.png","placeholder","default-image","logo"))
+def licensed_board_image(row):
+    """Fail closed: a ticket-page photo is not a publication license.
+
+    Allow a NEW board image only after explicit rights evidence and editorial
+    verification have been recorded; unreviewed image candidates stay in
+    the collector's review report, not in the public feed.
+    """
+    rights = str(row.get("image_rights_status") or "").lower()
+    provenance = str(row.get("image_provenance") or "").lower()
+    proof = row.get("image_rights_evidence_url")
+    return bool(
+        good_image(row.get("image_url"))
+        and rights in {"licensed", "rights_cleared", "owned"}
+        and proof and str(proof).startswith("https://")
+        and row.get("image_verified") is True
+        and row.get("image_publishable") is True
+        and provenance != "external_ticket_listing_not_license"
+    )
+
 def good_copy(s):
     s=html.unescape(str(s or "")).strip()
     return s if len(s)>=100 and not any(w in s for w in ("מחפשים הופעות","באתר מבלים ריכזנו","כרטיסים במחירים מיוחדים","הופעה עם הלהיטים הגדולים","עוד הופעה בקטגוריית")) else ""
@@ -68,7 +87,7 @@ def main():
                 or not e.get("start_time") or selected_time != str(e.get("start_time"))[:5]):
                 kept.append(e);ignored+=1;continue
             copy=good_copy(selected.get("description"))
-            img=selected.get("image_url") if good_image(selected.get("image_url")) else None
+            img=selected.get("image_url") if licensed_board_image(selected) else None
             # Preserve CMS linkage and any editorial metadata not managed here.
             new=dict(e)
             new.update({"event_id":e["event_id"],"title":html.unescape(selected["title"]),"city":e.get("city"),"category":e["category"],
@@ -80,7 +99,7 @@ def main():
                  "image_url":img,"image_origin_url":img,"image_source":selected.get("source_id"),
                  "image_verified":bool(img),"image_publishable":bool(img),
                  "image_represents_event":bool(img),"image_strategy":"national_board_displayed_image",
-                 "image_rights_status":"publisher_directed_reuse_license_unverified" if img else "unknown",
+                 "image_rights_status":selected.get("image_rights_status") if img else "unknown",
                  "content_source_url":selected.get("source_url"),"rich_content_status":"enriched" if copy else "source_copy_unavailable",
                  "source":"national_stage_boards","source_event_id":e["event_id"],"imported_at":e.get("imported_at") or ingestion_time,"last_imported_at":ingestion_time})
             # Board copy/images can be missing or less trustworthy than what
@@ -130,7 +149,7 @@ def main():
                 words=normal(selected["title"]+" "+raw)
                 cat=("standup" if "סטנד" in words else "kids" if any(w in words for w in ("ילדים","משפחה")) else
                      "theatre" if any(w in words for w in ("הצגה","מחזמר","תיאטרון","קומדיה")) else "music")
-                image=selected.get("image_url") if good_image(selected.get("image_url")) else None
+                image=selected.get("image_url") if licensed_board_image(selected) else None
                 desc=good_copy(selected.get("description"))
                 uid=hashlib.sha256(("|".join([city,title,date,tm])).encode()).hexdigest()[:18]
                 new_id="board_"+uid
@@ -147,7 +166,7 @@ def main():
                     "venue":html.unescape(selected["venue"]),"status":"active","description":desc,
                     "series_description":desc,"image_url":image,"image_origin_url":image,
                     "image_source":selected["source_id"],"image_verified":bool(image),
-                    "image_publishable":bool(image),"image_rights_status":"publisher_directed_reuse_license_unverified",
+                    "image_publishable":bool(image),"image_rights_status":selected.get("image_rights_status") if image else "unknown",
                     "image_strategy":"national_board_displayed_image",
                     "ticket_url":selected.get("tickets_url"),"purchase_url":selected.get("tickets_url"),
                     "content_source_url":selected.get("source_url"),"source":"national_stage_boards","imported_at":ingestion_time,"last_imported_at":ingestion_time})
