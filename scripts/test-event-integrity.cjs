@@ -76,7 +76,7 @@ for(const changed of [{start_date:'2027-03-21'},{start_time:'12:30'},{venue:'FRI
  assert.equal(q.reconcile([amiTami[0],{...amiTami[1],...changed}]).length,2,'Distinct show remains distinct: '+JSON.stringify(changed));
 }
 for(const changed of [{start_date:'2027-03-21'},{start_time:'12:30'},{venue:'FRIENDS חולון'},{title:'עמי ותמי - קאסט אחר'},{event_id:'some-other-source'}]){
- assert.equal(q.sanitize({...amiTami[0],...changed}).title,'עמי ותמי - הצגת ילדים','Unverified listing must not be retitled: '+JSON.stringify(changed));
+ assert.equal(q.sanitize({...amiTami[0],...changed}).title,changed.title||amiTami[0].title,'Unverified listing must not be retitled: '+JSON.stringify(changed));
 }
 console.log('PASS: Rishon Hansel and Gretel specific source correction keeps both IDs; different date/time/venue/cast/source untouched');
 
