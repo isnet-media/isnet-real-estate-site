@@ -55,7 +55,7 @@ function baseTitleKey(e){if(e.category==='theatre'&&ofraAliases.has(norm(e.title
 const reviewedProductions=[
  {id:'dragon-keepers-2026',titles:['שומרי הדרקונים - חנוכה 2026','שומרי הדרקונים - מחזמר הרפתקאות - חנוכה 2026'],source:'https://sababa.events/he/event/khraniteli-drakonov-priklyuchencheskiy-myuzikl-khanuka-2026/ashdod/'},
  {id:'daniel-styopin-standup',titles:['דניאל סטיופין ("קופה ראשית") - מופע סטנדאפ','דניאל סטיופין במופע סטנדאפ'],source:'https://tickets.mevalim.co.il/event/XWqbBU_QbiHlpJ6'},
- {id:'imi-generalit-musical',titles:['אמי הגנרלית - התיאטרון העברי','אמי הגנרלית - מחזמר'],source:'https://www.teatron.org.il/shows/אמי-הגנרלית-מחזמר/'},
+ {id:'imi-generalit-musical',titles:['אמי הגנרלית - התיאטרון העברי','אמי הגנרלית - מחזמר','אמי הגנרלית - המחזמר'],source:'https://www.teatron.org.il/shows/אמי-הגנרלית-מחזמר/'},
  {id:'fiddler-hebrew-theatre',titles:['כנר על הגג - התיאטרון העברי','כנר על הגג - מחזמר תיאטרון העברי'],source:'https://www.teatron.org.il/shows/כנר-על-הגג-המחזמר/'},
  {id:'voca-people-20',titles:['VOCA PEOPLE ווקה פיפל','voca people - ווקה פיפל - הסנסציה הבינלאומית חוגגת 20'],source:'https://htrl.co.il/show/voca-people-ווקה-פיפל/'},
  {id:'yonatan-gruber-ze-ma-yesh',titles:['יונתן גרובר - זה מה יש','יונתן גרובר - סטנדאפ'],source:'https://www.heichalbair.co.il/יונתן_גרובר_-_סטנדאפ/?id=3139'},
