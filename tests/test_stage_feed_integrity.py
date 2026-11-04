@@ -102,6 +102,22 @@ class SafeStageMergeTests(unittest.TestCase):
         self.assertEqual(report["new_imported"], 1)
         self.assertEqual(report["id_collisions_skipped"], 0)
 
+    def test_ticket_listing_marketing_copy_cannot_replace_verified_editorial_text(self):
+        original = event("auto_a", "Hall A", "agent",
+                         description="Verified original editorial text",
+                         series_description="Verified original production summary")
+        candidate = {
+            "city": "rishon-lezion", "title": original["title"],
+            "date_time": "2099-11-20T20:00:00", "venue": "Hall A",
+            "source_id": "tickchak-live",
+            "description": "מחפשים מה לעשות באשדוד? כל הופעות הסטנדאפ, המוזיקה והתרבות בעיר במקום אחד. הזמינו כרטיסים בקלות ובמהירות לכל האירועים החמים באתר טיקצ'אק LIVE",
+            "source_url": "https://live.tickchak.co.il/ashdod"
+        }
+        after = self.run_swap([original], [candidate])
+        self.assertEqual(len(after), 1)
+        self.assertEqual(after[0]["description"], original["description"])
+        self.assertEqual(after[0]["series_description"], original["series_description"])
+
     def test_matching_title_and_date_cannot_overwrite_another_venue(self):
         original = event("auto_a", "Hall A", "agent", description="Keep the original")
         candidate = {

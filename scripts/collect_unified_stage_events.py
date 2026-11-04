@@ -145,7 +145,7 @@ def mevalim_ticket_extract(soup,page):
 def authentic_description(value):
     value=clean(value)
     if len(value)<100:return None
-    if any(t in value for t in ("מחפשים הופעות","באתר מבלים ריכזנו","כרטיסים במחירים מיוחדים","הופעה עם הלהיטים הגדולים!","הזמן עכשיו לפני שיגמרו","כרטיסים במחירים","עוד הופעה בקטגוריית")):return None
+    if any(t in value for t in ("כל הופעות הסטנדאפ, המוזיקה והתרבות בעיר","מחפשים הופעות","באתר מבלים ריכזנו","כרטיסים במחירים מיוחדים","הופעה עם הלהיטים הגדולים!","הזמן עכשיו לפני שיגמרו","כרטיסים במחירים","עוד הופעה בקטגוריית")):return None
     return value
 def friends_show_occurrences(soup,page):
     """Recover dated performances from FRIENDS show-page listings, never auto-publish.

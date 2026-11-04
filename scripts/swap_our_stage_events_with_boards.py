@@ -51,7 +51,7 @@ def licensed_board_image(row):
 
 def good_copy(s):
     s=html.unescape(str(s or "")).strip()
-    return s if len(s)>=100 and not any(w in s for w in ("מחפשים הופעות","באתר מבלים ריכזנו","כרטיסים במחירים מיוחדים","הופעה עם הלהיטים הגדולים","עוד הופעה בקטגוריית")) else ""
+    return s if len(s)>=100 and not any(w in s for w in ("כל הופעות הסטנדאפ, המוזיקה והתרבות בעיר","מחפשים הופעות","באתר מבלים ריכזנו","כרטיסים במחירים מיוחדים","הופעה עם הלהיטים הגדולים","עוד הופעה בקטגוריית")) else ""
 def main():
     now=datetime.now(ZoneInfo("Asia/Jerusalem"))
     today=now.date().isoformat()
