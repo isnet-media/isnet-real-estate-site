@@ -1,9 +1,17 @@
 """Read-only verification of deployed supermarket data in every city."""
 import concurrent.futures,json,requests
-from datetime import datetime,date
+from datetime import datetime,date,timedelta
 from zoneinfo import ZoneInfo
 CITIES={'ASHDOD':20,'YAVNE':7,'KGAT':9,'RISHON':24,'HOLON':23,'BATYAM':19}
 now=datetime.now(ZoneInfo('Asia/Jerusalem'))
+def collection_due(checked_at, current):
+ # Allow the 06:00 collection two hours to finish; Saturday has no collection.
+ current=current.astimezone(ZoneInfo('Asia/Jerusalem'))
+ expected=current.date()
+ if current.hour<8:expected-=timedelta(days=1)
+ if expected.weekday()==5:expected-=timedelta(days=1)
+ checked=datetime.fromisoformat(checked_at).astimezone(ZoneInfo('Asia/Jerusalem'))
+ return checked.date()<expected
 def check(city,minimum):
  base=f'https://isnet.co.il/SUPER.{city}/'
  def get(path):
@@ -18,7 +26,7 @@ def check(city,minimum):
   if prices['branch_count']<minimum:errors.append('Connected branch coverage dropped')
   stale=[b['id'] for b in prices['branches'] if not b.get('file_date') or (now.date()-date.fromisoformat(b['file_date'])).days>1]
   if stale:errors.append('Stale branches: '+','.join(stale))
-  if (now-datetime.fromisoformat(refresh['checked_at'])).total_seconds()>30*3600:errors.append('Daily collection overdue')
+  if collection_due(refresh['checked_at'],now):errors.append('Daily collection overdue: last public collection '+refresh['checked_at'])
   failed=[b['branch_id'] for b in refresh['branches'] if b['status']!='updated']
   if failed:errors.append('Sources retaining previous data: '+','.join(failed))
   # Confirm both published data entry points carry the same branch metadata.
