@@ -36,7 +36,7 @@ def main():
     except ValueError:provider_code=None
     code='insufficient_quota' if provider_code in ('insufficient_quota','credit_balance_exhausted') else 'provider_authentication' if response.status_code==401 else 'rate_limit' if response.status_code==429 else 'provider_error'
    else:result=validate_result(json.loads(response.json()['choices'][0]['message']['content']))
-     if agent=='design' and result and not result.get('design'):result=None;code='invalid_design_output'
+   if agent=='design' and result and not result.get('design'):result=None;code='invalid_design_output'
   except (KeyError,ValueError,TypeError):code='invalid_model_output'
   except requests.RequestException:code='provider_timeout_or_network'
   patch={'status':'completed' if result else 'blocked','result':result,'error_code':code,'model':model,'updated_at':datetime.now(timezone.utc).isoformat()}
