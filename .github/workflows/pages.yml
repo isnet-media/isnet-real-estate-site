@@ -139,7 +139,7 @@ permissions:
 
 concurrency:
   group: ${{ (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && ((github.event.workflow_run.name != 'Enrich Ashdod event images' && !contains(github.event.workflow_run.name, 'supermarket prices')) || github.event.workflow_run.head_sha != github.sha))) && 'pages' || format('pages-skipped-{0}', github.run_id) }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
