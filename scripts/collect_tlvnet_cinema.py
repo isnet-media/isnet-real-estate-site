@@ -39,6 +39,8 @@ oldmovies={m['id']:m for m in old.get('movies',[])}
 def metadata(m):
  try:
   page=BeautifulSoup(urllib.request.urlopen(m['source_url'],timeout=12).read(),'html.parser')
+  image=page.select_one('meta[property="og:image"]')
+  if image and image.get('content'):m['poster_candidate_url']=urllib.parse.urljoin(m['source_url'],image['content'])
   txt=page.get_text(' ',strip=True);run=re.search(r'(\d{2,3})\s*דקות',txt)
   if run:m['runtime_minutes']=int(run[1])
   frames=[f.get('src','') for f in page.select('iframe[src]')]
@@ -60,11 +62,22 @@ for source in [lev,ct]:
   # Preserve source verification timestamps; never label a failed source fresh.
   sid='lev-tlv' if source is lev else 'cinematheque-tlv'
   combined.extend(m for m in old.get('movies',[]) if any(v.get('id')==sid for v in m.get('venues',[])))
-for m in combined:
- if m.get('trailer_youtube_id'):
-  m['poster_url']='https://i.ytimg.com/vi/'+m['trailer_youtube_id']+'/hqdefault.jpg';m['poster_credit']='תמונה מקדימון רשמי · YouTube'
- elif m.get('poster_candidate_url') and any(v['id']=='cinematheque-tlv' for v in m['venues']):
-  m['poster_url']=m['poster_candidate_url'];m['poster_credit']='כרזה מטעם סינמטק תל אביב';m['poster_rights_status']='organizer_publicity'
+# Film artwork remains independent from trailer thumbnails.
+def verify_artwork(m):
+ import io
+ from PIL import Image,ImageStat
+ url=m.get('poster_candidate_url')
+ try:
+  if not url or not url.startswith('https://') or re.search(r'logo|no.?pic|placeholder|default',url,re.I):return m
+  req=urllib.request.Request(url,headers={'Referer':m['source_url']})
+  with urllib.request.urlopen(req,timeout=15) as response:blob=response.read()
+  if hashlib.sha256(blob).hexdigest()=='65b9625e0564262d74d6c12c3273b1e37ba2c8fa70885385df06c3e9c117ea28':return m
+  pic=Image.open(io.BytesIO(blob));pic.load()
+  if min(pic.size)<150 or max(ImageStat.Stat(pic.convert('RGB').resize((64,64))).stddev)<10:return m
+  m.update(poster_url=url,poster_verified=True,poster_rights_status='user_confirmed_organizer_publicity',poster_evidence_url=m['source_url'],poster_credit='תמונת יח״צ מטעם '+('לב תל אביב' if m['id'].startswith('lev-') else 'סינמטק תל אביב'))
+ except Exception:pass
+ return m
+with concurrent.futures.ThreadPoolExecutor(max_workers=4) as ex:combined=list(ex.map(verify_artwork,combined))
 if not combined:raise SystemExit('No verified cinema data; refusing replacement')
 result={'city':'tel-aviv','updated_at':stamp,'movies':combined,'sources':[{'name':x['source'],'url':x['source_url'],'checked_at':x['updated_at']} for x in [lev,ct]]}
 temp=oldpath.with_suffix('.tmp');temp.write_text(json.dumps(result,ensure_ascii=False,indent=2));temp.replace(oldpath)
