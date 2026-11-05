@@ -7,7 +7,6 @@ on:
     branches: [main]
     paths:
       - scripts/collect_tlvnet_events.py
-      - scripts/collect_tlvnet_cinema.py
       - .github/workflows/tlvnet-events.yml
 permissions:
   contents: write
@@ -25,16 +24,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install beautifulsoup4==4.14.2
+      - run: python -m pip install beautifulsoup4==4.14.2 requests==2.32.5 Pillow==11.3.0
       - run: python scripts/collect_tlvnet_events.py
-      - name: Refresh local Tel Aviv cinema
-        continue-on-error: true
-        run: python scripts/collect_tlvnet_cinema.py
       - name: Publish only the TLVNET factual feed
         run: |
           git config user.name 'TLVNET event intake'
           git config user.email 'actions@users.noreply.github.com'
-          git add events-preview/tel-aviv/data/events.json events-preview/tel-aviv/data/cinema-local.json
+          git add events-preview/tel-aviv/data/events.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Refresh TLVNET verified future event facts'
           git pull --rebase origin main

@@ -67,6 +67,12 @@ def main():
     events+=rows;reports.append({'name':name,'status':'ok','count':len(rows),'checked_at':STAMP})
    except Exception as e:
     previous=[x for x in old['events'] if x['source']==name and datetime.fromisoformat(x['start'])>NOW and (NOW-datetime.fromisoformat(x['verified_at'])).total_seconds()<172800];events+=previous;reports.append({'name':name,'status':'failed','retained':len(previous),'error':type(e).__name__,'attempted_at':STAMP})
+ from tlvnet_publicity import enrich_events_images
+ previous={e['source_url']:e for e in old.get('events',[]) if e.get('image_rights')=='user_confirmed_organizer_publicity'}
+ for e in events:
+  for key,val in previous.get(e['source_url'],{}).items():
+   if key.startswith('image_'):e[key]=val
+ events=enrich_events_images(events,BASE/'events-preview/tel-aviv/assets/publicity','https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/events-preview/tel-aviv/assets/publicity')
  events=sorted({x['id']:x for x in events}.values(),key=lambda x:x['start'])
  if not events:raise RuntimeError('no verified future events; refusing to replace feed')
  OUT.parent.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps({'city':'tel-aviv','updated_at':STAMP,'sources':reports,'events':events},ensure_ascii=False,indent=2)+'\n');print(json.dumps({'events':len(events),'sources':reports},ensure_ascii=False))
