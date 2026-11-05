@@ -4,7 +4,8 @@ import unittest
 from unittest.mock import patch
 from datetime import date
 from scripts.import_national_board_events import claim_import_identity, extract
-from scripts.collect_unified_stage_events import event_from_jsonld
+from scripts.collect_unified_stage_events import event_from_jsonld, friends_show_occurrences, friends_production_description_for_review
+from bs4 import BeautifulSoup
 
 
 class NationalBoardIdentitySafety(unittest.TestCase):
@@ -47,6 +48,40 @@ class NationalBoardIdentitySafety(unittest.TestCase):
         self.assertIsNone(duplicate_id)
         self.assertEqual(reason, "existing_occurrence")
         self.assertFalse(ids)
+
+
+
+class FriendsDescriptionCandidateSafety(unittest.TestCase):
+    def test_scoped_source_synopsis_only_for_editorial_review(self):
+        show = ("קומדיה שמתארת מפגש מפתיע בין בני זוג בעולם של טכנולוגיה חדשנית, "
+                "כאשר כל אחד מנסה להבין מחדש מה פירוש אמון ואהבה, ומה קורה "
+                "כשהתוכנה מתחילה לקבל החלטות עצמאיות שמשנות את חייהם. "
+                "שחקני ההצגה מציגים סיטואציות מפתיעות ומשעשעות.")
+        html = ('<h1>זוגיות AI – התיאטרון העברי</h1>'
+                '<section><h2>תיאור המופע:</h2><p>' + show + '</p></section>'
+                '<h2>כל ההופעות שיש כרגע</h2>'
+                '<div>אשדוד</div><div>אולם מופעים דיונה אשדוד</div>'
+                '<div>10/11/28</div><div>20:30</div>'
+                '<p>אסור לאסוף טקסט על הזמנת כרטיסים כאן</p>')
+        soup = BeautifulSoup(html, "html.parser")
+        rows = friends_show_occurrences(soup, "https://friends-hist.co.il/show/example/")
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["date_time"], "2028-11-10T20:30:00")
+        self.assertIsNone(rows[0]["description"])
+        self.assertEqual(rows[0]["source_description_for_review"], show)
+        self.assertEqual(rows[0]["source_description_status"], "requires_editorial_rewrite")
+        self.assertNotIn("אסור לאסוף", rows[0]["source_description_for_review"])
+        self.assertEqual(rows[0]["publication_status"], "candidate_review")
+
+    def test_no_show_heading_or_generic_teaser_is_not_a_candidate(self):
+        missing = BeautifulSoup("<h1>מופע בדיקה</h1><p>תוכן כללי שאין בו פרטי מופע.</p>", "html.parser")
+        self.assertIsNone(friends_production_description_for_review(missing))
+        generic = BeautifulSoup(
+            "<h2>תיאור המופע:</h2><p>מחפשים הופעות? כרטיסים במחירים מיוחדים "
+            "לקהל הרחב במגוון מקומות ובשפע אולמות לאורך כל השנה ובכל רחבי הארץ. "
+            "עוד מידע על אירועים והופעות במגוון ערים בישראל.</p>"
+            "<h2>כל ההופעות שיש כרגע</h2>", "html.parser")
+        self.assertIsNone(friends_production_description_for_review(generic))
 
 
 class StageTimezoneSafety(unittest.TestCase):

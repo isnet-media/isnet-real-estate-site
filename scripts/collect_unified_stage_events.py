@@ -8,7 +8,7 @@ from datetime import datetime,timezone
 from zoneinfo import ZoneInfo
 from urllib.parse import urljoin,urlparse
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 
 # Support both script execution in Actions and package imports in tests.
 if __package__:
@@ -163,6 +163,38 @@ def authentic_description(value):
         return None
     if any(t in value for t in ("כל הופעות הסטנדאפ, המוזיקה והתרבות בעיר","מחפשים הופעות","באתר מבלים ריכזנו","כרטיסים במחירים מיוחדים","הופעה עם הלהיטים הגדולים!","הזמן עכשיו לפני שיגמרו","כרטיסים במחירים","עוד הופעה בקטגוריית","רכזנו עבורכם את כל ההופעות בנושא","לוח הופעות 2026 של","הופעות ואירועי תרבות באזור המרכז","הזמינו כרטיסים לכל ההופעות בכל המועדים והשעות")):return None
     return value
+def friends_production_description_for_review(soup):
+    """Read only the labelled show synopsis into an editorial candidate.
+
+    Source wording must be rewritten/cleared before publication. This value
+    never populates the public-description field in the collector.
+    """
+    for label in soup.find_all(("h2", "h3", "h4")):
+        if clean(label.get_text(" ", strip=True)).strip(" :") != "תיאור המופע":
+            continue
+        pieces = []
+        total = 0
+        for element in label.next_elements:
+            if getattr(element, "name", None) in {"h1", "h2", "h3", "h4"}:
+                break
+            if not isinstance(element, NavigableString):
+                continue
+            if element.parent and element.parent.name in {"script", "style", "noscript"}:
+                continue
+            part = clean(str(element))
+            if not part or part.strip(" :") == "תיאור המופע":
+                continue
+            if part.startswith(("כל ההופעות שיש כרגע", "הזמנת כרטיסים")):
+                break
+            pieces.append(part)
+            total += len(part)
+            if total >= 1800:
+                break
+        candidate = authentic_description(" ".join(pieces)[:1800])
+        if candidate:
+            return candidate
+    return None
+
 def friends_show_occurrences(soup,page):
     """Recover dated performances from FRIENDS show-page listings, never auto-publish.
 
@@ -186,6 +218,7 @@ def friends_show_occurrences(soup,page):
     # The shared helper rejects lazy placeholders, site logos and recommendation-card images.
     image=friends_image(soup,page,urljoin(page,image) if image else None)
     description=authentic_description(txtmeta(soup,"og:description") or txtmeta(soup,"description"))
+    source_description_for_review=friends_production_description_for_review(soup)
     out=[]
     for i,line in enumerate(lines):
         city=next((slug for slug,names in CITIES.items() if line in names),None)
@@ -204,6 +237,8 @@ def friends_show_occurrences(soup,page):
             if clock:
                 out.append({"title":title,"city":city,"venue":venue,"date_time":f"{day.isoformat()}T{clock}:00",
                     "end_time":None,"description":description,
+                    "source_description_for_review":source_description_for_review,
+                    "source_description_status":"requires_editorial_rewrite" if source_description_for_review else "not_found",
                     "image_url":urljoin(page,image) if image else None,"video_url":None,
                     "tickets_url":page,"category":None,"subcategory":None,
                     "source_id":"friends-hist","source_url":page,
@@ -330,6 +365,7 @@ def main():
         for key,group in by_occurrence.items() if len(group)>1
     ]
     quality={"with_description":sum(bool(x.get("description")) for x in records),
+              "with_source_description_for_review":sum(bool(x.get("source_description_for_review")) for x in records),
              "with_image":sum(bool(x.get("image_url")) for x in records),
              "with_ticket_url":sum(bool(x.get("tickets_url")) for x in records),
              "with_video_after_cross_show_check":sum(bool(x.get("video_url")) for x in records),
