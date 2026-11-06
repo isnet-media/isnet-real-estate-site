@@ -42,7 +42,9 @@ jobs:
         with:
           node-version: '22'
       - name: Normalize expected feeds with the publication integrity policy
-        run: node current-main/scripts/audit-event-integrity.cjs --apply
+        run: |
+          python current-main/scripts/repair_stage_source_metadata.py --apply
+          node current-main/scripts/audit-event-integrity.cjs --apply
       - name: Show unresolved identity candidates without changing them
         if: ${{ always() }}
         run: |
