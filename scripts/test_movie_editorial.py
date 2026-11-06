@@ -31,9 +31,15 @@ for city in CITIES:
     for key,movies in groups.items():
         url=BASE+city+'/movies/'+key+'/'
         page=ROOT/urlparse(url).path.lstrip('/')/'index.html'
-        soup=BeautifulSoup(page.read_text(),'html.parser');record=registry['movies'].get(key,{'original_text':movies[0].get('synopsis','')})
+        soup=BeautifulSoup(page.read_text(),'html.parser')
+        union=merged(movies)
+        record=registry['movies'].get(key) or {'original_text':union.get('synopsis','')}
+        # New cinema feed entries may lack an editorial record. Verify the exact
+        # source-synopsis/fallback logic used by build_movie_editorial.py rather
+        # than incorrectly requiring an empty synopsis for such entries.
+        expected_synopsis=record.get('original_text') or union.get('synopsis') or 'פרטי הסרט יתעדכנו לאחר אימות המקור.'
         assert soup.find(id='page') and not soup.find(id='page').has_attr('hidden'),url
-        assert soup.find(id='fullSynopsis').get_text()==record['original_text'],url
+        assert soup.find(id='fullSynopsis').get_text()==expected_synopsis,url
         assert soup.find(id='movieEditorial') and soup.h1.get_text(),url
         assert soup.select_one('.movieHero #fullSynopsis') and len(soup.select('#fullSynopsis'))==1
         assert [x.get('id') for x in soup.select('.mainColumn > section')][:4]==['movieEditorial','trailerSection','movieTickets','showtimes']
