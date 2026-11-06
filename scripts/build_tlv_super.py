@@ -50,7 +50,7 @@ def build():
         original = page.read_text(encoding="utf-8")
         updated = shell.decorate(original, page)
         updated = re.sub(
-            r'<script\\b[^>]*src="[^"]*assets/ashdod-analytics\\.js[^"]*"[^>]*>\\s*</script>',
+            r'<script\b[^>]*src="[^"]*assets/ashdod-analytics\.js[^"]*"[^>]*>\s*</script>',
             "", updated)
         if updated != original:
             page.write_text(updated, encoding="utf-8")
