@@ -46,8 +46,8 @@ unreviewed food type to pass the check.
 ## Monitoring and recovery
 
 `super-health.yml` checks public core pages in all six cities daily and after a
-successful Pages deployment, branch age (over one day), last
-collection age (over 30 hours), and partial sources. It is read-only. GitHub Actions
+successful Pages deployment, branch age (over one day), a missing morning
+collection after 08:00 Israel (with the Saturday pause), and partial sources. It is read-only. GitHub Actions
 failure notifications follow the repository owner's notification settings; the
 ChatGPT monitoring task provides a separate user-facing alert path.
 
