@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
-CITIES={'ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM'}
+CITIES={'ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM','TLV'}
 def git(*args):
  return subprocess.run(['git',*args],cwd=ROOT,check=True,text=True,capture_output=True).stdout.strip()
 def allowed(now,claim,report):
