@@ -229,6 +229,9 @@ jobs:
           python scripts/test_network_event_quality.py
           python scripts/audit_network_event_quality.py
           python scripts/build_event_public_assets.py --with-cms
+          # Cinema sources change outside this workflow; regenerate canonical movie pages
+          # and their index from the current feeds before checking every movie URL.
+          python scripts/build_movie_editorial.py
           python scripts/test_movie_editorial.py
           python scripts/test_search_discovery.py
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-search-metadata.cjs
