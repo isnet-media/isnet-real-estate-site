@@ -1,33 +1,35 @@
 {
   "city": "יבנה",
-  "total_before": 115,
+  "total_before": 152,
   "sources": {
     "yavne_municipality": {
-      "status": "ok",
+      "status": "failed",
       "url": "https://www.yavne.muni.il/events/",
-      "discovered": 127,
-      "valid": 105,
-      "new": 35,
+      "discovered": 0,
+      "valid": 0,
+      "new": 0,
       "updated": 0,
-      "images_collected": 105
+      "images_collected": 0,
+      "error": "blocked_403"
     },
     "htyavne": {
       "status": "ok",
       "url": "https://www.htyavne.co.il/",
       "discovered": 69,
       "valid": 58,
-      "new": 0,
+      "new": 1,
       "updated": 0,
       "images_collected": 58
     },
     "yavne_community": {
-      "status": "ok",
+      "status": "failed",
       "url": "https://www.matnasyavne.co.il/events/",
-      "discovered": 55,
-      "valid": 46,
-      "new": 11,
+      "discovered": 0,
+      "valid": 0,
+      "new": 0,
       "updated": 0,
-      "images_collected": 46
+      "images_collected": 0,
+      "error": "blocked_403"
     },
     "friends_yavne": {
       "status": "no_parseable_events",
@@ -46,14 +48,14 @@
       "new": 0,
       "updated": 0,
       "images_collected": 0,
-      "error": "blocked_401"
+      "error": "blocked_403"
     },
     "makore_yavne": {
       "status": "ok",
       "url": "https://www.makore.co.il/browse/city/יבנה",
       "discovered": 28,
       "valid": 24,
-      "new": 2,
+      "new": 5,
       "updated": 0,
       "images_collected": 24
     },
@@ -72,24 +74,26 @@
       "discovered": 14,
       "valid": 13,
       "new": 2,
-      "updated": 0,
+      "updated": 2,
       "images_collected": 13
     }
   },
-  "new": 60,
-  "updated": 0,
+  "new": 18,
+  "updated": 2,
   "removed_invalid": 0,
   "removed_duplicates": 0,
   "removed_classes": 0,
-  "preserved_class_review_candidates": 1,
+  "preserved_class_review_candidates": 2,
   "errors": [
+    "yavne_municipality:blocked_403",
+    "yavne_community:blocked_403",
     "friends_yavne:no_parseable_events",
-    "easy_yavne:blocked_401"
+    "easy_yavne:blocked_403"
   ],
   "preserved_invalid_auto_candidates": 0,
   "preserved_duplicate_auto_candidates": 0,
   "repaired_event_ids": 0,
-  "total_after": 175,
+  "total_after": 170,
   "public_after_quality": 152,
   "excluded_non_events": 2
 }
