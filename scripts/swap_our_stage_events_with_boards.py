@@ -3,6 +3,7 @@
 Only title+date matches; preserve all unrelated events and manual editor locks.
 """
 from apply_ashdod_category_overrides import apply_ashdod_category_overrides
+from repair_stage_source_metadata import board_sources
 import hashlib,html,json,os,re
 from collections import defaultdict
 from datetime import datetime
@@ -143,6 +144,7 @@ def main():
                 tm=str(selected.get("date_time") or "")[11:16]
                 key=(title,date,tm)
                 if key in seen:continue
+                sources=board_sources(selected.get("source_url"), selected.get("source_id"))
                 if not selected.get("title") or not selected.get("venue") or not re.fullmatch(r"\d{2}:\d{2}",tm):
                     skipped+=1;continue
                 raw=str(selected.get("category") or selected.get("source_category") or "מופעי במה").strip()
@@ -169,7 +171,7 @@ def main():
                     "image_publishable":bool(image),"image_rights_status":selected.get("image_rights_status") if image else "unknown",
                     "image_strategy":"national_board_displayed_image",
                     "ticket_url":selected.get("tickets_url"),"purchase_url":selected.get("tickets_url"),
-                    "content_source_url":selected.get("source_url"),"source":"national_stage_boards","imported_at":ingestion_time,"last_imported_at":ingestion_time})
+                    "content_source_url":selected.get("source_url"),"sources":sources,"source":"national_stage_boards","imported_at":ingestion_time,"last_imported_at":ingestion_time})
                 seen.add(key)
         if enabled and new:
             data["events"].extend(new)

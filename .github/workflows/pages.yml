@@ -83,6 +83,8 @@ on:
       - "scripts/test-yavne-analytics.cjs"
       - "scripts/test-event-date-chips.cjs"
       - "scripts/test-institution-ui.cjs"
+      - "scripts/repair_stage_source_metadata.py"
+      - "scripts/test_stage_source_metadata.py"
       - ".github/workflows/pages.yml"
       - "scripts/qa-pricebooks.cjs"
       - "scripts/prepare-pricebook-sync.py"
@@ -183,6 +185,11 @@ jobs:
           node scripts/test-yavne-bootstrap.cjs
           node scripts/test-home-loading.cjs
           node scripts/test-home-occurrence-index.cjs
+
+      - name: Restore recorded stage provenance and verify repair safety
+        run: |
+          python scripts/test_stage_source_metadata.py
+          python scripts/repair_stage_source_metadata.py --apply
 
       - name: Verify organizer portals and institution links
         id: institution_audit
