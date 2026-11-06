@@ -50,7 +50,7 @@ for city in CITIES:
         assert soup.select_one('a.primaryButton')['href']==url+'#showtimes'
         assert nav.find('a',href=url),url
         ld=[json.loads(e.string) for e in soup.select('script[type="application/ld+json"]')]
-        assert any(e['@type'] in ('Movie','CreativeWork') and e['description']==record['original_text'] for e in ld)
+        assert any(e['@type'] in ('Movie','CreativeWork') and e['description']==expected_synopsis for e in ld),url
         assert 'AggregateRating' not in json.dumps(ld) and not any('aggregateRating' in e for e in ld)
         if record.get('audience_rating'):
             r=record['audience_rating'];assert soup.find('a',href=r['url'])
