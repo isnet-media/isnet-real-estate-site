@@ -6,15 +6,7 @@ on:
   workflow_run:
     workflows:
       - 'Publish priceboard'
-      - 'Unified Ashdod and Rishon stage event collection'
-      - 'Refresh Rishon national events and cinema'
-      - 'Daily Ashdod supplemental source publication'
     types: [completed]
-  push:
-    branches: [main, audit/public-stage-feed-readback-20261023]
-    paths:
-      - 'scripts/verify_public_event_readback.py'
-      - '.github/workflows/public-events-readback-audit.yml'
 permissions:
   contents: read
 concurrency:
@@ -26,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
-      - name: Checkout current production data from main
+      - name: Checkout the published input snapshot
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || 'main' }}
           path: current-main
           fetch-depth: 1
       - name: Checkout read-only verification code

@@ -7,9 +7,14 @@ def build_listing(city="herzliya", check=False):
  D=ROOT/"events-preview"/city/"data"
  data=json.loads((D/'cinema.json').read_text());keys={'id','title','synopsis','genres','runtime_minutes','age_rating','poster_url','poster_credit','trailer_youtube_id','trailer_page_url','is_family','family_catalog_source_url','aliases'}
  cache=json.loads((D/'cinema-poster-cache.json').read_text()) if (D/'cinema-poster-cache.json').exists() else {}
+ editorial=json.loads((ROOT/'events-preview/shared/data/movie-editorial.json').read_text())
  movies=[]
  for movie in data['movies']:
   row={k:v for k,v in movie.items() if k in keys}
+  # A foreign-language variant must not win before the optional editorial load.
+  # Preserve existing Hebrew source copy and the compact listing's size budget.
+  record=editorial['movies'].get(editorial['aliases'].get(movie['id'],movie['id']),{})
+  if record.get('original_text') and row.get('synopsis') and not re.search(r'[\u0590-\u05ff]',row['synopsis']):row['synopsis']=record['original_text']
   text=row.get('synopsis','');row['synopsis']=text[:280].rsplit(' ',1)[0]+'…' if len(text)>280 else text
   if movie.get('poster_verification'):row['poster_verification']={'url':movie['poster_verification'].get('url')}
   if movie.get('poster_url') in cache:

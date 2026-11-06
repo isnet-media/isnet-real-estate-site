@@ -73,6 +73,7 @@ on:
       - "scripts/test_movie_editorial.py"
       - "scripts/test-movie-editorial.cjs"
       - "scripts/test-cinema-loading.cjs"
+      - "scripts/test_cinema_listing_editorial.py"
       - "scripts/test-home-loading.cjs"
       - "scripts/test-home-occurrence-index.cjs"
       - "scripts/test-herzliya-cinema-speed.cjs"
@@ -83,6 +84,7 @@ on:
       - "scripts/test-yavne-analytics.cjs"
       - "scripts/test-event-date-chips.cjs"
       - "scripts/test-institution-ui.cjs"
+      - "scripts/test-reviewed-ashdod-lectures.cjs"
       - "scripts/repair_stage_source_metadata.py"
       - "scripts/test_stage_source_metadata.py"
       - ".github/workflows/pages.yml"
@@ -222,6 +224,7 @@ jobs:
           node scripts/test-ga4-view.cjs
           node scripts/test-event-sync.cjs
           node scripts/test-event-integrity.cjs
+          node scripts/test-reviewed-ashdod-lectures.cjs
           node scripts/audit-event-integrity.cjs --apply
           python scripts/test_network_event_quality.py
           python scripts/audit_network_event_quality.py
@@ -232,6 +235,7 @@ jobs:
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-movie-editorial.cjs
           node scripts/test-cinema-loading.cjs
           node scripts/test-herzliya-cinema-speed.cjs
+          python scripts/test_cinema_listing_editorial.py
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-category-listings.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-yavne-quality.cjs
           NODE_PATH="$RUNNER_TEMP/pricebook-qa/node_modules" node scripts/test-hub-listings.cjs

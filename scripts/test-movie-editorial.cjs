@@ -6,6 +6,13 @@ const {window,document}=parseHTML('<html><body><section><p id="fullSynopsis"></p
 const context={window,document,location:{pathname:'/events-preview/ashdod/cinema.html',origin:'https://isnet.co.il'},URL,console,fetch:async url=>({ok:true,json:async()=>url.includes('movie-page-index')?pages:registry})};
 vm.runInNewContext(fs.readFileSync('events-preview/shared/cinema-editorial.js','utf8'),context);
 (async()=>{const api=window.CinemaEditorial;await api.ready;
+for(const id of ['cinema-city-6555','cinema-city-6639']){
+ assert.equal(api.key(id),'matchmaking-3');
+ const film=api.merge([{id,title:'בחורים טובים 3',synopsis:'French source variant',venues:[]}],id);
+ assert.equal(film.editorial_text,registry.movies['matchmaking-3'].original_text);
+ assert(film.synopsis.startsWith('רגע לפני חתונתו'));
+}
+assert.equal(api.key('unreviewed-movie-variant'),'unreviewed-movie-variant');
 for(const city of Object.keys(pages)){
  const feed=JSON.parse(fs.readFileSync('events-preview/'+city+'/data/cinema.json','utf8')).movies;
  const result=api.unique(feed);assert.equal(result.length,new Set(feed.map(m=>api.key(m.id))).size);
