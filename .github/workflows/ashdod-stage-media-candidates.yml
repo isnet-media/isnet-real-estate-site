@@ -33,6 +33,24 @@ jobs:
           git add events-preview/admin/data/stage-content-media-review-ashdod.json
           if ! git diff --cached --quiet; then
             git commit -m "Update Ashdod stage content image and video source candidates"
-            git pull --rebase origin main
-            git push origin HEAD:main
+            # Several event pipelines write main concurrently. Retain the report and
+            # retry only a non-forced, rebased fast-forward push on branch movement.
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "::error::Report changed upstream; cannot safely rebase, leaving report unpublished."
+                exit 1
+              fi
+              if git push origin HEAD:main; then
+                pushed=true
+                break
+              fi
+              sleep $((attempt * 3))
+            done
+            if [ "$pushed" != true ]; then
+              echo "::error::Could not publish the review report after 5 safe attempts."
+              exit 1
+            fi
           fi
