@@ -21,6 +21,7 @@ jobs:
           node-version: '22'
       - run: pip install beautifulsoup4 requests
       - run: |
+          python scripts/sync_event_city_views.py
           find events-preview -maxdepth 2 -name "*.js" -print0 | xargs -0 -n1 node --check
           python scripts/test_event_source_media.py
           node scripts/test-event-integrity.cjs
