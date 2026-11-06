@@ -128,3 +128,17 @@ assert.equal(q.guardPublishedOverlays([suspect[0]],[{event_id:'later',record_typ
 console.log('PASS: dynamic CMS withholds unresolved duplicate additions while source events, reviewed aliases and distinct times survive');
 
 assert.equal(q.guardPublishedOverlays([suspect[0]],[{event_id:'archived-overlay',record_type:'source',payload:suspect[1]}]).length,1,'Orphan source overlays are ignored by the board and must not create false duplicate blocks');
+
+// Repeated publication must not append the same legacy link forever.
+{
+ const legacy={event_id:'legacy-a',title:'שם מקור קודם',url:'https://tickets.example/a'};
+ const other={event_id:'legacy-b',title:'שם מקור נוסף',url:'https://tickets.example/b'};
+ const rows=[row('stable-a',{source_aliases:[legacy,legacy]}),row('stable-b',{source_aliases:[other]})];
+ const once=q.reconcile(rows,{keepDuplicates:true});
+ assert.deepEqual(q.reconcile(once,{keepDuplicates:true}),once,'Full normalized records must be stable across repeated builds');
+ const canonical=once.find(e=>!e.duplicate_of);
+ assert.equal(canonical.source_aliases.filter(a=>a.event_id==='legacy-a').length,1);
+ assert(canonical.source_aliases.some(a=>a.event_id==='legacy-b'),'Keep aliases carried by a secondary source');
+ for(const id of ['legacy-a','legacy-b','stable-a','stable-b'])assert.equal(q.resolve(once,id).event_id,canonical.event_id);
+}
+console.log('PASS: repeated publication keeps exact aliases once and preserves all legacy detail links');
