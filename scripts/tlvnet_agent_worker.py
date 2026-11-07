@@ -72,9 +72,12 @@ def team_job(inp,ai,model):
  result['images']=images;result['editor_notes']+='\n'+'\n'.join(notes);return result
 class ProviderError(Exception):pass
 def provider_error(response):
- try:code=response.json().get('error',{}).get('code')
- except ValueError:code=None
- return 'insufficient_quota' if code in ('insufficient_quota','credit_balance_exhausted') else 'provider_authentication' if response.status_code==401 else 'rate_limit' if response.status_code==429 else 'provider_error'
+ try:
+  error=response.json().get('error',{});code=error.get('code');param=str(error.get('param') or '')
+ except ValueError:code=None;param=''
+ import re
+ detail='provider_http_'+str(response.status_code)+'_'+re.sub(r'[^a-zA-Z0-9_\[\].-]','',str(code or 'unknown'))[:60]+'_'+re.sub(r'[^a-zA-Z0-9_\[\].-]','',param)[:60]
+ return 'insufficient_quota' if code in ('insufficient_quota','credit_balance_exhausted') else 'provider_authentication' if response.status_code==401 else 'rate_limit' if response.status_code==429 else detail
 
 def make_session(key):
  session=requests.Session();session.headers.update({'apikey':key,'Authorization':'Bearer '+key,'Content-Type':'application/json','Prefer':'return=representation'})
