@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '20 4 * * *'
   push:
+    branches: [main]
     paths:
       - 'scripts/discover_friends_events.py'
       - '.github/workflows/friends-discovery.yml'
