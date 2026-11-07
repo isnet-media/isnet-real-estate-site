@@ -23,7 +23,24 @@ for(const city of ["ashdod","rishon-lezion"]){
 }
 const ash=JSON.parse(load("ashdod","data/events.json")).events;
 const ofek=ash.filter(e=>e.operator_id==="ofek_ashdod");
-assert.ok(ofek.length>=20,"Ofek must remain indexed");
+// The calendar changes as dates expire. Verify every current occurrence from
+// the last verified source snapshot, rather than a historical launch count.
+const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const snapshot=JSON.parse(fs.readFileSync(base+'/admin/data/ashdod-local-snapshot.json','utf8'));
+const expectedOfek=snapshot.events.filter(e=>e.local_source_name==='ofek_ashdod'&&e.start_date>=today);
+assert.ok(expectedOfek.length>0,'Ofek verified future snapshot is empty; refresh the source evidence');
+const ofekSourceId=e=>{
+ const u=new URL(e.content_source_url||e.ticket_url);
+ assert.ok(['www.ofek-ashdod.org.il','ofek-ashdod.org.il'].includes(u.hostname));
+ assert.equal(u.searchParams.get('type'),'event');
+ assert.match(u.searchParams.get('id')||'',/^\d+$/);
+ return u.searchParams.get('id');
+};
+for(const expected of expectedOfek){
+ const id=ofekSourceId(expected);
+ assert.ok(ofek.some(e=>ofekSourceId(e)===id&&e.start_date===expected.start_date&&e.start_time===expected.start_time),
+  'Missing verified Ofek occurrence '+id+' '+expected.start_date+' '+expected.start_time);
+}
 assert.ok(ofek.some(e=>e.category==="tour"||e.category==="seniors"&&/סיור|טיול/.test(e.title||"")),"Ofek excursions must remain identifiable as tours, including seniors events");
 assert.ok(ofek.some(e=>e.category==="lecture"||e.category==="seniors"),"Ofek senior programming must remain indexed");
 assert.ok(!ofek.some(e=>e.category==="workshop"||e.category==="classes"),"Workshops and classes must not be published on the event board");
