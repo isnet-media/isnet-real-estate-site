@@ -128,4 +128,11 @@ def main():
  done=sum(x[0] for x in results);blocked=sum(x[1] for x in results)
  print('TLVNET queue:',len(rows),'selected;',done,'completed;',blocked,'blocked; parallel_limit: 3; published: false')
  return max((x[2] for x in results),default=0)
-if __name__=='__main__':sys.exit(main())
+if __name__=='__main__':
+ import argparse,time
+ parser=argparse.ArgumentParser();parser.add_argument('--watch-seconds',type=int,default=0);args=parser.parse_args();deadline=time.monotonic()+min(240,max(0,args.watch_seconds));status=0
+ while True:
+  status=main()
+  if status or time.monotonic()>=deadline:break
+  time.sleep(min(15,max(0,deadline-time.monotonic())))
+ sys.exit(status)
