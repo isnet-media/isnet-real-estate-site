@@ -3,7 +3,7 @@ Run this after any generator and before upload. New HTML pages are included
 without being manually registered. Only checkout-local QA fixtures are excluded.
 """
 from pathlib import Path
-import argparse,os,re
+import argparse,json,os,re
 ROOT=Path(__file__).resolve().parents[1]
 SITE=ROOT/'SUPER.ASHDOD'
 TEMPLATE=SITE/'assets/branding/super-shell.html'
@@ -18,6 +18,13 @@ def render_shell(prefix,category=None,cart_count=False):
 
 def decorate(text,path):
  relative=Path(path).relative_to(SITE)
+ if relative==Path('index.html'):
+  # The HTML is visible before live.js loads, including on slow/failed requests.
+  # Always derive its coverage from this city's existing verified catalogue.
+  catalog=json.loads((SITE/'data/catalog.json').read_text())
+  for key,count in [('introProductCount',len(catalog['rows'])),('introBranchCount',len(catalog['branches']))]:
+   text,n=re.subn(r'(<span id="'+key+r'">)[^<]*(</span>)',lambda m:m[1]+format(count,',')+m[2],text)
+   assert n==1,f'Missing or repeated catalogue count {key}: {path}'
  prefix=os.path.relpath(SITE,Path(path).parent).replace(os.sep,'/')+'/'
  category='home' if relative==Path('index.html') else 'products' if relative.parts[0]=='compare' else 'recipes' if relative.parts[0]=='recipes' else 'smart' if relative.parts[0]=='smart-shopping' else 'deals' if relative.parts[0]=='deals' else None
  shell=render_shell(prefix,category,cart_count=category=='home')
