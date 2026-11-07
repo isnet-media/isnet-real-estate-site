@@ -338,11 +338,16 @@ def main():
                                 if key in seen:continue
                                 seen.add(key);records.append(event);count+=1
                             fetched+=1
-                        except requests.RequestException as exc:errors.append(type(exc).__name__+": "+str(exc)[:80])
+                        except requests.RequestException as exc:
+                            # Keep the public source URL (without query params or fragments)
+                            # so redirect loops can be diagnosed without guessing event identity.
+                            target=urlparse(url)
+                            safe_url=(target.scheme+"://"+target.netloc+target.path)[:200]
+                            errors.append(type(exc).__name__+" at "+safe_url+": "+str(exc)[:80])
                         time.sleep(.4)
                 except Exception as exc:errors.append(type(exc).__name__+": "+str(exc)[:120])
                 time.sleep(.6)
-            reports.append({"source_id":source["id"],"candidates":count,"details_fetched":fetched,"errors":errors[:6]})
+            reports.append({"source_id":source["id"],"candidates":count,"details_fetched":fetched,"errors":errors[:6],"error_count":len(errors)})
     # Detect overlapping listings without discarding evidence from different sites.
     from collections import defaultdict,Counter
     by_occurrence=defaultdict(list)
