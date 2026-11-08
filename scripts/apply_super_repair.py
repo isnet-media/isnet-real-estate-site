@@ -2,12 +2,19 @@
 import argparse,base64,gzip,hashlib,json
 from pathlib import Path
 import bsdiff4
+from datetime import datetime
+from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 CITIES=('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM')
 def digest(data):return hashlib.sha256(data).hexdigest()
 def apply(city):
  folder=ROOT/'.supermarket-repair';manifest=json.loads((folder/'manifest.json').read_text())
  assert city in CITIES and city in manifest['cities']
+ ledger=ROOT/'.supermarket-runs'/f'{city}.json'
+ if ledger.exists():
+  claim=json.loads(ledger.read_text())
+  today=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat()
+  assert not (claim.get('status')=='started' and claim.get('started_at','')[:10]>=today),'Daily collection is active: refusing repair of '+city
  packed=b''.join(base64.b64decode((folder/part).read_text(),validate=True) for part in manifest['parts'] if Path(part).name==part)
  assert digest(packed)==manifest['sha256'],'Collection package hash mismatch'
  changes=json.loads(gzip.decompress(packed));assert len(changes)==manifest['files']

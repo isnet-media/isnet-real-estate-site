@@ -25,7 +25,10 @@ def prepare():
  for i,start in enumerate(range(0,len(packed),30000)):
   name=f'{i:03}.b64';(folder/name).write_text(base64.b64encode(packed[start:start+30000]).decode());parts.append(name)
  cities={}
+ affected={Path(change['path']).parts[0] for change in changes}
+ assert affected,'No verified city changes to package'
  for city in CITIES:
+  if 'SUPER.'+city not in affected:continue
   report=json.loads((ROOT/('SUPER.'+city)/'data/refresh-status.json').read_text())
   cities[city]={k:report[k] for k in ('checked_at','updated_count','branch_count','all_sources_updated')}
  manifest={'sha256':digest(packed),'parts':parts,'files':len(changes),'cities':cities}
