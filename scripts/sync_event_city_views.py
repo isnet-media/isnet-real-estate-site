@@ -254,6 +254,11 @@ def _localize(content: str, name: str, city: dict, suffix: str) -> str:
         if suffix == ".html":
             from apply_yavne_analytics import decorate
             content = decorate(content)
+    if city["slug"] == "rishon-lezion":
+        content = content.replace("window.ashdodAnalytics", "window.rishonAnalytics")
+        if suffix == ".html":
+            from apply_rishon_analytics import decorate
+            content = decorate(content)
     if city["slug"] == "herzliya":
         from herzliya_city_view import decorate
         content = decorate(content, name, suffix)

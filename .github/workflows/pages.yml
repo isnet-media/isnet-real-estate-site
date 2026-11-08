@@ -326,6 +326,12 @@ jobs:
           python scripts/apply_yavne_analytics.py --check
           node scripts/test-yavne-analytics.cjs
 
+      - name: Apply and verify Rishon analytics on all generated pages
+        run: |
+          python scripts/apply_rishon_analytics.py
+          python scripts/apply_rishon_analytics.py --check
+          node scripts/test-rishon-analytics.cjs
+
       - name: Apply city search metadata and savings guides after all generators
         run: python scripts/apply_local_search_seo.py
 
