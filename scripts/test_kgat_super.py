@@ -14,12 +14,11 @@ for p in products.values():
  assert p['offers'] and all(o['branch_id'] in ids and math.isfinite(o['price']) and o['price']>0 for o in p['offers'])
 assert sum(len(p['offers']) for p in products.values())==cat['offer_count']
 basket=json.loads((data/'city-basket.json').read_text())['variants']['family'];branches=basket['branches']
-assert len(branches)==basket['complete_branch_count']==9
-assert all(b['complete'] and b['total_cents']==sum(l['line_total_cents'] for l in b['lines']) for b in branches)
-assert basket['gap_cents']==basket['maximum_cents']-basket['minimum_cents']
-assert round(basket['gap_cents']/basket['minimum_cents']*100,2)==basket['gap_percent_of_cheapest']
+from super_family_checks import verify_fixed_family
+verify_fixed_family(basket,json.loads((ROOT/'scripts/super-kgat/city-family-basket.json').read_text()),ids)
 for b in branches:
  for l in b['lines']:
+  if l['price_cents'] is None:continue
   if l['id']=='7290000000134':assert l['total_grams']==2000
   if l['id']=='7290000104881':assert l['total_grams']==1600
   if l['id']=='7290000104201':assert l['total_grams']==1200

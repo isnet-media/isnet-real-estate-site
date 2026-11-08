@@ -43,11 +43,15 @@ assert {'7290000208329','7290000208428'}<={p['id'] for p in family['products']} 
 print('Verified both baskets: exact source prices, kg metadata, complete-only ranking, ties, mean and percentage gap')
 
 # A family basket must compare every connected branch, with equal quantities.
-assert family['complete_branch_count']==len(family['branches'])==len(json.loads((D/'data/catalog.json').read_text())['branches'])
-assert family['average_cents']>0 # Market changes must not suppress genuine price updates.
+assert len(family['branches'])==len(json.loads((D/'data/catalog.json').read_text())['branches'])
+definition=json.loads((D/'../scripts/super-ashdod/city-family-basket.json').read_text())
+assert [(p['id'],p['quantity']) for p in family['products']]==[(p['id'],p['quantity']) for p in definition]
+assert not family['omitted_products']
+assert (family['average_cents']>0) if family['complete_branch_count'] else family['average_cents'] is None
 for b in family['branches']:
  assert b['equivalent_count']==sum(l['match_type']=='equivalent' for l in b['lines'])
  for p,l in zip(family['products'],b['lines']):
+  if l['price_cents'] is None:continue
   if p.get('target_grams'):
    assert l['quantity']==int(l['quantity']) # Whole packages, never fractional checkout packs
    assert l['total_grams']==p['target_grams']

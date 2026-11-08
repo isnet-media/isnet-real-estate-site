@@ -1,6 +1,6 @@
 """Build fixed grocery comparison baskets from the public official-feed snapshot.
 Approved equivalents preserve food type, preparation and total quantity.
-The family basket requires a verified offer for every line in every connected branch.
+Every basket preserves its reviewed products and quantities in every branch.
 Ambiguous units, absent prices and partial baskets never contribute to rankings.
 """
 from pathlib import Path
@@ -50,19 +50,7 @@ def build_variant(definition,catalog,variant):
   branches.append({**{k:branch.get(k) for k in ['id','chain','name','address','city','file_date','source_url','price_file_url','files_applied']},'lines':lines,'equivalent_count':sum(x.get('match_type')=='equivalent' for x in lines),'found':found,'complete':complete,'total_cents':sum(x['line_total_cents'] for x in lines) if complete else None})
  branches.sort(key=lambda b:(not b['complete'],b['total_cents'] if b['complete'] else -b['found'],b['chain'],b['name']))
  omitted=[]
- if variant=='family' and branches:
-  # Keep every branch and use the same reviewed products/quantities everywhere.
-  # A disappeared reference product must not stop unrelated daily price updates.
-  missing={line['id'] for b in branches for line in b['lines'] if line['line_total_cents'] is None}
-  if missing:
-   omitted=[{'id':p['id'],'name':p['name'],'reason':'No verified price in every connected branch'} for p in products if p['id'] in missing]
-   products=[p for p in products if p['id'] not in missing]
-   for b in branches:
-    b['lines']=[l for l in b['lines'] if l['id'] not in missing]
-    b['found']=len(b['lines']);b['complete']=bool(products)
-    b['equivalent_count']=sum(l['match_type']=='equivalent' for l in b['lines'])
-    b['total_cents']=sum(l['line_total_cents'] for l in b['lines']) if b['complete'] else None
-   branches.sort(key=lambda b:(not b['complete'],b['total_cents'] if b['complete'] else 0,b['chain'],b['name']))
+ # Missing prices remain null. Never shrink a basket to improve coverage.
 
  complete=[b for b in branches if b['complete']];rankable=len(complete)>=2;minimum=complete[0]['total_cents'] if rankable else None;maximum=complete[-1]['total_cents'] if rankable else None
  status=json.loads((D/'data/source-status.json').read_text())
