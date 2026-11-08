@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - scripts/collect_tlvnet_events.py
+      - events-preview/tel-aviv/data/culture-sources.json
       - scripts/collect_tlvnet_cinema.py
       - scripts/collect_tlvnet_children.py
       - scripts/collect_tlvnet_additional_cinema.py
@@ -43,9 +44,10 @@ jobs:
         run: |
           git config user.name 'TLVNET event intake'
           git config user.email 'actions@users.noreply.github.com'
-          git add events-preview/tel-aviv/data/events.json events-preview/tel-aviv/data/cinema-local.json events-preview/tel-aviv/data/children.json events-preview/tel-aviv/data/cinema-additional.json
+          git add events-preview/tel-aviv/data/events.json events-preview/tel-aviv/data/culture-coverage.json events-preview/tel-aviv/data/cinema-local.json events-preview/tel-aviv/data/children.json events-preview/tel-aviv/data/cinema-additional.json
           if [ -d events-preview/tel-aviv/assets/publicity ]; then git add events-preview/tel-aviv/assets/publicity; fi
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Refresh TLVNET verified future events, cinema and producer images'
           git pull --rebase origin main
           git push origin HEAD:main
+
