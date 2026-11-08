@@ -100,6 +100,32 @@ CLASSICAL=re.compile(r'קונצרט|קאמרי|רסיטל|סימפוני|תזמ�
 NOT_MUSIC=re.compile(r'השקת הספר|סדנ[אה]|הרצאה|סטנדאפ|רגע של אמת|רבקה מיכאלי|טייכר|זרחוביץ|פה דה דה|Pas De Deux',re.I)
 def music_kind(title):return 'classical' if CLASSICAL.search(title) else 'live'
 
+def parse_tzavta(schedule,theatre,music):
+ # Official genre membership, never the hall name, determines the category.
+ # A musical listed in both genres remains a theatre production.
+ def productions(page):
+  return {urlparse(a['href']).path:a.get_text(' ',strip=True) for a in page.select('a[href]') if re.fullmatch(r'/event/\d+',urlparse(a['href']).path)}
+ plays,songs=productions(theatre),productions(music);out=[]
+ for row in schedule.select('li.shedule_item'):
+  a=row.select_one('a.shedule_name_txt[href]');date=row.select_one('.shedule_date_txt');time=row.select_one('.shedule_it_block.time')
+  blocks=row.select('.shedule_it_block');hall=blocks[2].get_text(' ',strip=True) if len(blocks)>2 else ''
+  if not all([a,date,time]) or hall not in ['צוותא 1','צוותא 2']:continue
+  path=urlparse(a['href']).path
+  category='theatre' if path in plays else 'music' if path in songs else None
+  if not category:continue
+  ds,ts=date.get_text(strip=True),time.get_text(strip=True)
+  if not re.fullmatch(r'\d{2}\.\d{2}\.\d{4}',ds) or not re.fullmatch(r'\d{2}:\d{2}',ts):continue
+  try:dt=datetime.strptime(ds+' '+ts,'%d.%m.%Y %H:%M').replace(tzinfo=TZ)
+  except ValueError:continue
+  e=item(a.get_text(' ',strip=True),dt,hall,'אבן גבירול 30, תל אביב–יפו',category,'צוותא',urljoin('https://www.tzavta.co.il',path),'מחיר וזמינות באתר צוותא')
+  if e:
+   if category=='music':e['concert_kind']=music_kind(songs[path])
+   out.append(e)
+ return out
+
+def tzavta():
+ return parse_tzavta(fetch('https://www.tzavta.co.il/shows'),fetch('https://www.tzavta.co.il/category/1'),fetch('https://www.tzavta.co.il/category/2'))
+
 def blumental():
  u='https://fbmc.co.il/shows/';b=fetch(u);out=[]
  for month in b.select('.shows-schedule-month-container[data-month]'):
@@ -154,7 +180,7 @@ def hatarbut():
 
 def main():
  old=json.loads(OUT.read_text()) if OUT.exists() else {'events':[]};events=[];reports=[]
- adapters={'בית ליסין':lessin,'בית אריאלה':ariela,'לבונטין 7':levontin,'הקאמרי':cameri,'גשר':gesher,'פליציה בלומנטל':blumental,'היכל התרבות':hatarbut}
+ adapters={'בית ליסין':lessin,'בית אריאלה':ariela,'לבונטין 7':levontin,'הקאמרי':cameri,'גשר':gesher,'פליציה בלומנטל':blumental,'היכל התרבות':hatarbut,'צוותא':tzavta}
  inventory_path=BASE/'events-preview/tel-aviv/data/culture-sources.json'
  requested={v.get('collector') for v in json.loads(inventory_path.read_text())['venues']} if inventory_path.exists() else set(adapters)
  requested.add('בית אריאלה')
@@ -189,9 +215,10 @@ def main():
  coverage=[]
  if inventory.exists():
   for source in json.loads(inventory.read_text())['venues']:
-   rows=[e for e in events if e['source']==source.get('collector') and any(v in e['venue'] for v in source.get('venue_match',[]))]
+   rows=[e for e in events if e['source']==source.get('collector') and e['category']==('music' if source['category']=='concerts' else source['category']) and any(v in e['venue'] for v in source.get('venue_match',[]))]
    report=next((r for r in reports if r['name']==source.get('collector')),None)
-   coverage.append({**source,'status':('active' if report and report['status']=='ok' else 'failed') if source.get('collector') else 'awaiting_adapter','upcoming_events':len(rows),'last_attempt':STAMP if report else None})
+   status='awaiting_adapter' if not source.get('collector') else 'failed' if not report or report['status']!='ok' else 'active' if rows else 'verified_no_upcoming'
+   coverage.append({**source,'status':status,'upcoming_events':len(rows),'last_attempt':STAMP if report else None})
  (OUT.parent/'culture-coverage.json').write_text(json.dumps({'updated_at':STAMP,'requested_venues':len(coverage),'venues':coverage},ensure_ascii=False,indent=2)+'\n')
  if not events:raise RuntimeError('no verified future events; refusing to replace feed')
  OUT.parent.mkdir(parents=True,exist_ok=True);OUT.write_text(json.dumps({'city':'tel-aviv','updated_at':STAMP,'sources':reports,'events':events},ensure_ascii=False,indent=2)+'\n');print(json.dumps({'events':len(events),'sources':reports},ensure_ascii=False))
