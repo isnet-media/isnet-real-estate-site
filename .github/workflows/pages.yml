@@ -47,6 +47,11 @@ on:
       - "scripts/test_super_product_groups.cjs"
       - "scripts/test_super_comparison_page.cjs"
       - "scripts/test_super_city_basket.py"
+      - "scripts/recover_super_sources.py"
+      - "scripts/test_super_source_recovery.py"
+      - "scripts/test_super_recovery_gate.py"
+      - "scripts/test_super_recovery_adapters.py"
+      - "scripts/test_super_daily_run.py"
       - "scripts/build_super_smart_shopping.py"
       - "scripts/test_super_smart_shopping.cjs"
       - "scripts/build_super_deals.py"
@@ -219,6 +224,11 @@ jobs:
       - name: Build compact event listings and canonical sitemap
         run: |
           pip install beautifulsoup4==4.14.2
+          pip install requests==2.32.5
+          python scripts/test_super_source_recovery.py
+          python scripts/test_super_recovery_gate.py
+          python scripts/test_super_recovery_adapters.py
+          python scripts/test_super_daily_run.py
           python scripts/test_public_event_assets.py
           python scripts/test_event_seo.py
           node scripts/test-saved-list.cjs

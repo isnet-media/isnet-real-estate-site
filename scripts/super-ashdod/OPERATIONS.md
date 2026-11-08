@@ -39,9 +39,10 @@ is logged as a warning; the independent public health check flags it as a failur
 
 Do not change basket quantities to force a historical budget. 600–700 ILS is a
 selection target; genuine market movements may change the observed average.
-If a reviewed comparison product disappears, the candidate fails coverage checks
-until its replacement is reviewed. Do not fabricate a price or choose a different
-unreviewed food type to pass the check.
+If a reviewed comparison product disappears, keep its fixed line and quantity,
+show the missing observation and exclude that incomplete branch from rankings.
+A replacement still requires review. Do not fabricate a price or choose a
+different unreviewed food type to pass the check.
 
 ## Monitoring and recovery
 
@@ -152,6 +153,27 @@ status/counts recorded in the manifest; it must never be relabelled complete.
 A one-off recovery is not proof of reliable future network access. If both the
 normal runner and maintenance environment cannot reach a source, report the
 specific branch/date and preserve its real timestamp.
+
+## Workspace recovery allowance, 8 November 2026
+
+Start from current main and confirm no collector or publication is active. The
+workspace recovery now requires today's completed/failed daily claim with its
+finish timestamp, and refuses any started claim (including a previous day's
+unfinished run). A same-day `stale_source_recovery` report also blocks a repeat,
+including reports written before this guard existed. No new source request is
+made when these checks refuse the command.
+
+Before the first request, `data/recovery-attempt.json` records the Israel date,
+selected stale branch IDs and started status. The allowance remains consumed if
+the process fails or is interrupted; changing raw-dir does not reset it. A local
+per-city file lock rejects simultaneous commands in the same checkout. Include
+the attempt journal in the validated repair package alongside the public report
+so later fresh-main checkouts retain the evidence. Local locks do not coordinate
+different uncommitted checkouts; do not start parallel workspace recovery sessions.
+Never remove this evidence just to retry the same sources. The next Israel day
+allows one attempt after that day's normal collector has finished; Saturday is
+still excluded. These safeguards add no schedule and perform no price collection
+in their regression tests or in the Pages validation workflow.
 
 
 ## Monthly household basket, 4 November 2026
