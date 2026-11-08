@@ -1,6 +1,6 @@
 """Regression checks for new nested pages, idempotence and content preservation."""
 from super_ashdod_shell import SITE,decorate,pages,START,VERSION
-import json,re
+import hashlib,json,re
 from super_city_runtime import load
 from html.parser import HTMLParser
 from urllib.parse import urlsplit
@@ -37,7 +37,10 @@ for city in ('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM'):
  shell=load('super_ashdod_shell',city) if city!='ASHDOD' else __import__('super_ashdod_shell')
  home=shell.SITE/'index.html';catalog=json.loads((shell.SITE/'data/catalog.json').read_text())
  stale=re.sub(r'(<span id="intro(?:Product|Branch)Count">)[^<]*(</span>)',r'\g<1>999,999\2',home.read_text())
+ stale=re.sub(r'assets/city-basket\.js\?[^\"\'<>\s]*','assets/city-basket.js?v=stale',stale)
  rendered=shell.decorate(stale,home)
+ digest=hashlib.sha256((shell.SITE/'assets/city-basket.js').read_bytes()).hexdigest()[:12]
+ assert 'assets/city-basket.js?v='+digest in rendered,city
  for key,count in [('introProductCount',len(catalog['rows'])),('introBranchCount',len(catalog['branches']))]:
   assert f'<span id="{key}">{count:,}</span>' in rendered,(city,key)
  assert shell.decorate(rendered,home)==rendered,city

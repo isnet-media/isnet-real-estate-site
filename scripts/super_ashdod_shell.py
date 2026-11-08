@@ -3,7 +3,7 @@ Run this after any generator and before upload. New HTML pages are included
 without being manually registered. Only checkout-local QA fixtures are excluded.
 """
 from pathlib import Path
-import argparse,json,os,re
+import argparse,hashlib,json,os,re
 ROOT=Path(__file__).resolve().parents[1]
 SITE=ROOT/'SUPER.ASHDOD'
 TEMPLATE=SITE/'assets/branding/super-shell.html'
@@ -25,6 +25,11 @@ def decorate(text,path):
   for key,count in [('introProductCount',len(catalog['rows'])),('introBranchCount',len(catalog['branches']))]:
    text,n=re.subn(r'(<span id="'+key+r'">)[^<]*(</span>)',lambda m:m[1]+format(count,',')+m[2],text)
    assert n==1,f'Missing or repeated catalogue count {key}: {path}'
+  # Browsers must load the actual runtime shipped with this city, rather than
+  # retain a previous script under a historical fixed query version.
+  version=hashlib.sha256((SITE/'assets/city-basket.js').read_bytes()).hexdigest()[:12]
+  text,n=re.subn(r'(assets/city-basket\.js)(?:\?[^\"\'<>\s]*)?',lambda m:m[1]+'?v='+version,text)
+  assert n==1,f'Missing or repeated basket runtime: {path}'
  prefix=os.path.relpath(SITE,Path(path).parent).replace(os.sep,'/')+'/'
  category='home' if relative==Path('index.html') else 'products' if relative.parts[0]=='compare' else 'recipes' if relative.parts[0]=='recipes' else 'smart' if relative.parts[0]=='smart-shopping' else 'deals' if relative.parts[0]=='deals' else None
  shell=render_shell(prefix,category,cart_count=category=='home')
