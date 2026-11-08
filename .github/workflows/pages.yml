@@ -97,6 +97,7 @@ on:
     - cron: "30 7,19 * * *"
   workflow_run:
     workflows:
+      - "Refresh TLVNET public events"
       - "Supermarket publication recovery"
       - "Publish verified supermarket repair"
       - "Refresh Ashdod supermarket prices"
