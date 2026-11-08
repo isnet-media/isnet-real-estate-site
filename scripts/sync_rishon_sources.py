@@ -149,8 +149,8 @@ def _official_occurrences_from_detail(page):
     Related-show cards have abbreviated dates; they are never proof of the
     current production's occurrence. Missing schedule/venue means no match.
     """
-    lines = [re.sub(r'\\s+', ' ', line).strip()
-             for line in page.get_text('\\n', strip=True).split('\\n')]
+    lines = [re.sub(r'\s+', ' ', line).strip()
+             for line in page.get_text('\n', strip=True).split('\n')]
     try:
         start = lines.index('מועדי המופע') + 1
     except ValueError:
@@ -160,7 +160,7 @@ def _official_occurrences_from_detail(page):
         line = lines[i]
         if 'רכישת מנוי לסדרות' in line or 'תרבות בעיר' in line:
             break
-        if not re.fullmatch(r'\\d{1,2}[.]\\d{1,2}[.]\\d{2,4}', line):
+        if not re.fullmatch(r'\d{1,2}[.]\d{1,2}[.]\d{2,4}', line):
             continue
         try:
             fmt = '%d.%m.%Y' if len(line.split('.')[-1]) == 4 else '%d.%m.%y'
@@ -169,7 +169,7 @@ def _official_occurrences_from_detail(page):
             continue
         # The source shows weekday, start time and venue on adjacent lines.
         clocks = [j for j in range(i + 1, min(i + 5, len(lines)))
-                  if re.fullmatch(r'\\d{1,2}:\\d{2}', lines[j])]
+                  if re.fullmatch(r'\d{1,2}:\d{2}', lines[j])]
         if not clocks:
             continue
         clock_at = clocks[0]
@@ -203,7 +203,7 @@ def official_review_candidates(src, existing):
         if parsed.hostname not in ('htrl.co.il', 'www.htrl.co.il') or not parsed.path.startswith(prefix):
             continue
         slug = unquote(parsed.path.rstrip('/').split('/')[-1])
-        slug = re.sub(r'-\\d+$', '', slug).replace('-', ' ')
+        slug = re.sub(r'-\d+$', '', slug).replace('-', ' ')
         slug_key = mevalim.norm(slug)
         if slug_key and any(slug_key == key for key in normalized):
             links.add(url)
