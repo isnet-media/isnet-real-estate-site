@@ -199,6 +199,9 @@ def recover_branches(results,raw_dir):
 
 def run(raw_dir):
  now=datetime.now(TZ);catalog=json.loads((D/'catalog.json').read_text());products={}
+ # Search rows are rebuilt below. Retaining the previous rows while loading all
+ # offers needlessly keeps a second large catalog representation in memory.
+ catalog.pop('rows',None)
  # Reviewed official Stores file: chain 7290058156016, store 197, Haorgim 13.
  # Register only this physical Ashdod branch; never substitute the former store.
  if catalog.get('city')=='אשדוד' and not any(b['id']=='7290058156016-197' for b in catalog['branches']):

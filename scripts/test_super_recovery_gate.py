@@ -29,7 +29,7 @@ def blocked(data,root,match):
   run.assert_not_called()
  assert before=={p.name:p.read_bytes() for p in data.glob('*.json')},'Guard changed source data'
 
-with patch.object(recovery,'datetime',Clock):
+with tempfile.TemporaryDirectory() as lockdir,patch.object(recovery,'WORKSPACE_LOCK',Path(lockdir)/'workspace.lock'),patch.object(recovery,'datetime',Clock):
  with tempfile.TemporaryDirectory() as tmp:
   root=Path(tmp);data,ledger=fixture(root)
   # Backward-compatible evidence: today's already-published legacy recovery.
@@ -47,6 +47,10 @@ with patch.object(recovery,'datetime',Clock):
   with (ledger.parent/'ASHDOD.recovery.lock').open('a') as lock:
    fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
    blocked(data,root,'Another workspace recovery is active')
+  with recovery.WORKSPACE_LOCK.open('a') as lock:
+   fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+   blocked(data,root,'run cities sequentially')
+  assert not (data/'recovery-attempt.json').exists(),'Memory-lock refusal consumed the recovery allowance'
   # Crash before the collector publishes anything still consumes the allowance.
   with patch.object(c,'D',data),patch.object(c,'ROOT',root),patch.object(c,'run',side_effect=RuntimeError('simulated crash')):
    try:recovery.recover('ASHDOD',root/'raw')

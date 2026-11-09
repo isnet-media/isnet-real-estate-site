@@ -22,7 +22,7 @@ with tempfile.TemporaryDirectory() as tmp:
  def fetch(b,*_):
   assert b['id']=='bad','Healthy branch fetched twice'
   return dict(b,file_date=now.date().isoformat()),{'22':product('22','bad')},{'branch_id':'bad','status':'updated','file_date':now.date().isoformat()}
- with patch.object(c,'D',data),patch.object(c,'ROOT',Path(tmp)),patch.object(c,'refresh_branch',side_effect=fetch) as call,patch.object(recovery,'datetime',Clock):
+ with patch.object(c,'D',data),patch.object(c,'ROOT',Path(tmp)),patch.object(c,'refresh_branch',side_effect=fetch) as call,patch.object(recovery,'datetime',Clock),patch.object(recovery,'WORKSPACE_LOCK',Path(tmp)/'workspace.lock'):
   result=recovery.recover('ASHDOD',Path(tmp)/'raw')
  assert call.call_count==1
  assert json.loads((data/'offers/11.json').read_text())['11']['offers'][0]['branch_id']=='good'

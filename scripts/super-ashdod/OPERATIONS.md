@@ -165,11 +165,12 @@ made when these checks refuse the command.
 
 Before the first request, `data/recovery-attempt.json` records the Israel date,
 selected stale branch IDs and started status. The allowance remains consumed if
-the process fails or is interrupted; changing raw-dir does not reset it. A local
-per-city file lock rejects simultaneous commands in the same checkout. Include
+the process fails or is interrupted; changing raw-dir does not reset it. A workstation-wide file lock serializes all city recoveries before taking the
+daily allowance; a per-city file lock provides a second checkout-local guard.
+Catalog/offer merges must run one city at a time to avoid memory exhaustion. Include
 the attempt journal in the validated repair package alongside the public report
-so later fresh-main checkouts retain the evidence. Local locks do not coordinate
-different uncommitted checkouts; do not start parallel workspace recovery sessions.
+so later fresh-main checkouts retain the evidence. The workstation lock also covers different checkouts in the same temporary
+filesystem; separate machines still require operator coordination.
 Never remove this evidence just to retry the same sources. The next Israel day
 allows one attempt after that day's normal collector has finished; Saturday is
 still excluded. These safeguards add no schedule and perform no price collection

@@ -2,12 +2,13 @@
 Never re-fetch healthy branches. Keep existing promotions until a full collection.
 Run city builders and publication checks after this script, before publication.
 """
-import argparse,copy,fcntl,importlib,json
+import argparse,copy,fcntl,importlib,json,tempfile
 from datetime import datetime
 from pathlib import Path
 import build_super_deals
 import refresh_super_prices
 CITIES=('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM')
+WORKSPACE_LOCK=Path(tempfile.gettempdir())/'isnet-supermarket-recovery.lock'
 def read(path):return json.loads(path.read_text()) if path.exists() else {}
 def day(value,now):
  stamp=datetime.fromisoformat(value)
@@ -37,6 +38,13 @@ def recover(city,raw_dir):
  c=refresh_super_prices if city=='ASHDOD' else importlib.import_module('refresh_'+city.lower()+'_super_prices').collector()
  now=datetime.now(c.TZ)
  if now.weekday()==5:raise RuntimeError('No Saturday collection')
+ # Catalog/offer merging is memory-intensive. Serialize all cities and checkouts
+ # on this workstation before consuming a city's daily recovery allowance.
+ with WORKSPACE_LOCK.open('a') as budget:
+  try:fcntl.flock(budget,fcntl.LOCK_EX|fcntl.LOCK_NB)
+  except BlockingIOError:raise RuntimeError('Another workspace recovery is active; run cities sequentially')
+  return recover_city(c,city,raw_dir,now)
+def recover_city(c,city,raw_dir,now):
  # File locks cover concurrent processes in this checkout; the published report
  # and journal cover later invocations from a fresh main checkout.
  locks=c.ROOT/'.supermarket-runs';locks.mkdir(exist_ok=True)
@@ -49,6 +57,7 @@ def recover_locked(c,city,raw_dir,now):
  selected={b['branch_id'] for b in old['branches'] if b['status']!='updated'}
  cat=json.loads((c.D/'catalog.json').read_text())
  selected.update(b['id'] for b in cat['branches'] if not b.get('file_date') or b['file_date']<now.date().isoformat())
+ del cat
  if not selected:return print(city,'No stale sources to recover')
  journal,attempt=claim_attempt(c,city,now,old,selected)
  previous={b['branch_id']:b for b in old['branches']}
