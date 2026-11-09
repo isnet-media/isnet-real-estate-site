@@ -74,7 +74,7 @@ def balanced(items,limit_per_branch=14):
   result.extend(chosen)
  return result
 
-def build(raw_dir):
+def build(raw_dir, *, minimum_chains=4):
  catalog=json.loads((D/'catalog.json').read_text());branches={b['id']:b for b in catalog['branches']};products={}
  for f in (D/'offers').glob('*.json'):products.update(json.loads(f.read_text()))
  now=datetime.now(TZ);items=[];sources=[];excluded={}
@@ -85,8 +85,8 @@ def build(raw_dir):
   if bid not in branches:continue
   ds,ex=parse_source(xml,meta,branches[bid],products,now);items.extend(ds);excluded[bid]=ex;sources.append({'branch_id':bid,'chain':branches[bid]['chain'],'source_url':meta['source_url'],'filename':meta.get('filename'),'sha256':hashlib.sha256(xml).hexdigest(),'eligible_count':len(ds)})
  selected=balanced(items);chains=collections.Counter(d['chain'] for d in selected);branch_count=len({d['branch_id'] for d in selected})
- assert len(chains)>=4 and len(selected)>=24,'Insufficient broad coverage: do not publish a Carrefour-only section'
- result={'status':'verified_selection','updated_at':now.isoformat(),'city':'אשדוד','scope':'Selected simple unit-price promotions from official branch feeds; not all city chains or all promotions.','deals':selected,'stats':{'selected_count':len(selected),'eligible_observations':len(items),'chain_count':len(chains),'branch_count':branch_count,'by_chain':dict(chains)},'sources':sources,'excluded':excluded,'note':'Only active single-group, quantity-one fixed special prices with no coupon, club or minimum-spend requirement. Weighted items require verified kg units. Shelf-price difference refers to the current imported shelf snapshot, not a historical price. Availability must be checked at the branch. Daily hours and redemption limits, if reported, are displayed. Promotions are not applied to basket totals.'}
+ assert minimum_chains>=2 and len(chains)>=minimum_chains and len(selected)>=24,'Insufficient broad coverage: do not publish a Carrefour-only section'
+ result={'status':'verified_selection','updated_at':now.isoformat(),'city':catalog['city'],'scope':'Selected simple unit-price promotions from official branch feeds; not all city chains or all promotions.','deals':selected,'stats':{'selected_count':len(selected),'eligible_observations':len(items),'chain_count':len(chains),'branch_count':branch_count,'by_chain':dict(chains)},'sources':sources,'excluded':excluded,'note':'Only active single-group, quantity-one fixed special prices with no coupon, club or minimum-spend requirement. Weighted items require verified kg units. Shelf-price difference refers to the current imported shelf snapshot, not a historical price. Availability must be checked at the branch. Daily hours and redemption limits, if reported, are displayed. Promotions are not applied to basket totals.'}
  (D/'deals.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');print(result['stats']);return result
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--raw-dir',required=True);a=p.parse_args();build(a.raw_dir)

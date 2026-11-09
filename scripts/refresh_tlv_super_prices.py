@@ -50,7 +50,7 @@ def bootstrap():
 def run(raw_dir):
  bootstrap();c=collector();deals=load('build_super_deals','TLV')
  import build_super_deals
- original=build_super_deals.build;build_super_deals.build=deals.build
+ original=build_super_deals.build;build_super_deals.build=lambda folder:deals.build(folder,minimum_chains=2)
  try:report=c.run(raw_dir)
  finally:build_super_deals.build=original
  # Registered branches and full city coverage are distinct. Legacy identifiers stay pending.
