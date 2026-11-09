@@ -2058,6 +2058,27 @@
       "status": "recorded_in_existing_ops_pending_owner_scope",
       "reason": "Apply CRLF fingerprintpatch from failure record after source/ownership reconciliation; publish atomically and readback actual API/catalog/offers.",
       "owner_ledger_updated": false
+    },
+    {
+      "runKey": "tlv-super-work-repair-20261109",
+      "agent_id": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "status": "fixed_live_verified",
+      "reason": "Collector and delivery repaired; Nov9data19/19; search and smart-shopping verified;266promotions visible; handoff updated in existing task. No new schedule or duplicate collection.",
+      "owner_ledger_updated": true
+    },
+    {
+      "runKey": "tlv-super-work-repair-20261109",
+      "agent_id": "6ae8893c6e30819192dd11bddff9e078",
+      "status": "fixed_live_verified",
+      "reason": "Collector and delivery repaired; Nov9data19/19; search and smart-shopping verified;266promotions visible; handoff updated in existing task. No new schedule or duplicate collection.",
+      "owner_ledger_updated": true
+    },
+    {
+      "runKey": "tlv-super-work-repair-20261109",
+      "agent_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "status": "fixed_live_verified",
+      "reason": "Collector and delivery repaired; Nov9data19/19; search and smart-shopping verified;266promotions visible; handoff updated in existing task. No new schedule or duplicate collection.",
+      "owner_ledger_updated": true
     }
   ],
   "failure_repair_verification": [
@@ -2512,23 +2533,26 @@
       "id": "tlv-super-work-repair-20261109",
       "system": "TLVNET supermarket",
       "owner": "user-directed Work repair",
-      "time": "2026-11-09T17:19:00Z",
-      "status": "prices_fixed_verified_promotions_ui_deploy_pending",
+      "time": "2026-11-09T17:23:00Z",
+      "status": "fixed_live_verified",
       "root_cause": "TLV had a Nov6 static snapshot without daily collection; static assets precede Worker data route; Cloudflare rejects redirect:error before network; public snapshot digest differed across CRLF/LF; TLV promotions UI retained four-chain gate.",
       "repair": {
         "collector": "Shared TLV collector and reviewed registry19; official Work run Nov9 completed once; committed data and repair run42655168774 passed",
         "delivery": "/api/super-data/ only; redirect manual, non200 rejected; no forwarded credentials; same public repo fallback",
         "build": "Portable text hashes acrossWindows/Linux; 714 text blobs checked",
         "deployment": "v467 appgdep_6af1feadbf8c81918a7e5322e3231853 succeeded",
-        "promotions": "266 verified deals in publicAPI; isolated two-chain renderer test passes; v468 deployment appgdep_6af200775a788191b42a933348b1b4e0 pending"
+        "promotions": "v468 source001885aaee0657d6e1c0e12b3531f9aca684472d; renderer guard explicitly2verifiedchains/24deals minimum, one-chain fixture rejected. Live UI266activeoffers/2chains/19branches verified"
       },
       "verification": {
         "prices": "HTTP200 product_count17886 offer_count125767 19branches allfile_date2026-11-09",
         "services": "catalog,refresh-status,city-basket,smart-shopping,deals,offers/00 allHTTP200 X-Supermarket-Source:isnet-shared-tlv",
         "browser": "Search milk595options; barcode7290000056845 displays19branchprices11.02–11.03 allNov9",
-        "monthly": "0/19complete,partial,noinventedtotal"
+        "monthly": "0/19complete,partial,noinventedtotal",
+        "browser_home": "17886products,19branchsource_datesNov9; monthly0/19complete truthful no-ranking",
+        "browser_smart": "18groups,19branch choices; populated prices and substitutions withNov9source",
+        "browser_promotions": "266activeproposals,21initialcards,2chains,19branches,filters andexpiry display verified"
       },
-      "remaining": "Finish v468 live promotion renderer verification. Future daily reliability requires followup gate; othercity source gaps unaffected."
+      "remaining": "Future daily reliability requires followup gate; city coverage remains19reviewedbranches; monthlybasket incomplete. Separate pre-existing display issues for followup: generic basket footnote wrongly says Carrefour not included, and some promotion categories are broad (cheddar-flavoredPringles under dairy). Neither changes actual prices. No claim that all city chains are connected."
     }
   ],
   "run_observations": [
