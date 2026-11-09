@@ -27,7 +27,7 @@ def localize(content,name,city,suffix):
  content=re.sub(r'<a\b[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>','',content)
  content=re.sub(r'<section class="cityDiscover"[\s\S]*?</section>','',content)
  if name=='index.html':
-  nav='<nav class="kgat-discover" aria-label="מגלים את קריית גת"><a href="/meusharim/kiryat-gat/">חוגים וקורסים</a><a href="places.html?category=parks">פארקים</a><a href="places.html?category=nature">טבע וטיולים באזור</a><a href="places.html?category=culture">מוסדות תרבות</a><a href="attractions.html">אטרקציות ומשפחה</a><a href="places.html?category=must-see">מקומות להכיר</a></nav>'
+  nav='<nav class="kgat-discover" aria-label="מגלים את קריית גת"><a href="/meusharim/kiryat-gat/">חוגים וקורסים</a><a href="places.html?category=parks">פארקים</a><a href="places.html?category=nature">טבע וטיולים באזור</a></nav>'
   content=content.replace('<main',nav+'<main',1)
   # Keep dining beside the cinema card; never in the compact discovery row.
   content=re.sub(r'(<nav class="isnetNavDiscovery__lifestyle"[^>]*>)([\s\S]*?)(</nav>)',lambda m:m[1]+m[2]+food+m[3],content,count=1)
