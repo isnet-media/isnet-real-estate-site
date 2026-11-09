@@ -3,14 +3,13 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const E=require('./engine.js'),A=require('./approximate.js'),data=require('./data/network.json');
 
-// Regression for the passenger-reported Ashdod Het quarter -> Ashdod Ad Halom
-// station search. It is a timetable snapshot, not a realtime service claim.
-test('Het quarter stop 11931: nearby direct bus must precede an unnecessary transfer',t=>{
- const date='2026-10-30';
- if(data.valid_from>date.replaceAll('-','')||data.valid_until<date.replaceAll('-','')){
-  t.skip('This historical date is no longer within the bundled GTFS feed range');
-  return;
- }
+// Keep the reported Het quarter -> rail regression active after every refresh.
+// Choose an ordinary service weekday inside the current snapshot, not an expired
+// historical date that silently skips the acceptance check forever.
+test('Het quarter stop 11931: nearby direct bus must precede an unnecessary transfer',()=>{
+ let date=data.valid_from.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3');
+ while([5,6].includes(new Date(date+'T12:00:00Z').getUTCDay()))date=E.dayShift(date,1);
+ assert.ok(date.replaceAll('-','')<=data.valid_until,'Snapshot must contain a service weekday');
  const from=E.groups(data).find(g=>g.ids.includes('11931'));
  const to=E.places(data).find(p=>p.id==='place:ashdod-rail');
  assert.ok(from,'GTFS origin stop 11931 must be present');

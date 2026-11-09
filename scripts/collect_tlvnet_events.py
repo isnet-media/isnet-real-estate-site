@@ -126,6 +126,61 @@ def parse_tzavta(schedule,theatre,music):
 def tzavta():
  return parse_tzavta(fetch('https://www.tzavta.co.il/shows'),fetch('https://www.tzavta.co.il/category/1'),fetch('https://www.tzavta.co.il/category/2'))
 
+HABIMA_HALLS={'1':'אולם רובינא','9':'אולם מסקין','356':'אולם ברטונוב','371':'אולם הבימה 4','1869':'אולם רובינא - לא מסומן','1872':'מסקין לא מסומן'}
+def habima_clock(value):
+ # The official calendar JS reads UTC components as Israeli wall-clock values.
+ # Converting the epoch directly to Israel time would incorrectly add 2/3 hours.
+ if isinstance(value,bool) or not isinstance(value,int):raise ValueError('invalid_calendar_clock')
+ return datetime.fromtimestamp(value,ZoneInfo('UTC')).replace(tzinfo=TZ)
+def habima_url(url):
+ p=urlparse(url)
+ return p.scheme=='https' and p.netloc=='www.habima.co.il' and p.path.startswith('/shows/')
+def parse_habima(data,details):
+ shows=data['shows']['he'];venues=data['venues']['he'];out=[]
+ for key,occurrences in data['presentations']['he'].items():
+  show=shows.get(key);page=details.get(key)
+  if not show or page is None or not habima_url(show.get('url','')):continue
+  head=page.select_one('h1');genre=page.select_one('h2.content-title.primary-title')
+  clean=lambda s:re.sub('[\u2066-\u2069]','',s).strip()
+  if not head or clean(head.get_text(' ',strip=True))!=clean(show['title']) or not genre:continue
+  # Explicit production genre only. Concerts, tours, lectures and unclassified
+  # guest events do not become plays merely because they use a Habima hall.
+  if not re.match(r'^(?:דרמה|קומדיה|מחזה|מחזמר|טרגדיה)(?:\s|$)',genre.get_text(' ',strip=True)):continue
+  for row in occurrences:
+   hall=str(row.get('venue_id'));expected=HABIMA_HALLS.get(hall)
+   if not expected or venues.get(hall)!=expected:continue
+   try:dt=habima_clock(row['time'])
+   except (ValueError,KeyError,OverflowError,OSError):continue
+   e=item(clean(show['title']),dt,'הבימה · '+expected,'כיכר הבימה, תל אביב','theatre','הבימה',show['url'],'מועד ואולם לפי לוח הבימה; בחירת ההצגה ומחיר באתר התיאטרון')
+   if e:
+    e['id']=hashlib.sha256(('הבימה'+show['url']+dt.isoformat()+hall).encode()).hexdigest()[:20]
+    e['source_occurrence_id']=row.get('id');out.append(e)
+ return out
+def habima():
+ calendar=fetch('https://www.habima.co.il/presentations/')
+ match=re.search(r'"all_data_file"\s*:\s*"([^"\n]+)"',str(calendar))
+ if not match:raise ValueError('habima_calendar_data_missing')
+ url=json.loads('"'+match[1]+'"');p=urlparse(url)
+ if p.scheme!='https' or p.netloc!='www.habima.co.il' or p.path!='/wp-content/themes/tyco-wp/cache/allData.json':raise ValueError('unexpected_calendar_source')
+ req=urllib.request.Request(url,headers={'User-Agent':'TLVNET public event directory/1.0'})
+ with urllib.request.urlopen(req,timeout=25) as response:data=json.load(response)
+ candidates=[]
+ for key,rows in data['presentations']['he'].items():
+  show=data['shows']['he'].get(key,{})
+  if not habima_url(show.get('url','')):continue
+  for row in rows:
+   try:upcoming=NOW<=habima_clock(row.get('time'))<=NOW+timedelta(days=45)
+   except (ValueError,OverflowError,OSError):continue
+   if str(row.get('venue_id')) in HABIMA_HALLS and upcoming:candidates.append((key,show['url']));break
+ if len(candidates)>60:raise ValueError('unexpected_production_count')
+ details={}
+ with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+  futures={pool.submit(fetch,url):key for key,url in candidates}
+  for f in concurrent.futures.as_completed(futures):
+   try:details[futures[f]]=f.result()
+   except Exception:pass
+ return parse_habima(data,details)
+
 def blumental():
  u='https://fbmc.co.il/shows/';b=fetch(u);out=[]
  for month in b.select('.shows-schedule-month-container[data-month]'):
@@ -180,7 +235,7 @@ def hatarbut():
 
 def main():
  old=json.loads(OUT.read_text()) if OUT.exists() else {'events':[]};events=[];reports=[]
- adapters={'בית ליסין':lessin,'בית אריאלה':ariela,'לבונטין 7':levontin,'הקאמרי':cameri,'גשר':gesher,'פליציה בלומנטל':blumental,'היכל התרבות':hatarbut,'צוותא':tzavta}
+ adapters={'בית ליסין':lessin,'בית אריאלה':ariela,'לבונטין 7':levontin,'הקאמרי':cameri,'גשר':gesher,'פליציה בלומנטל':blumental,'היכל התרבות':hatarbut,'צוותא':tzavta,'הבימה':habima}
  inventory_path=BASE/'events-preview/tel-aviv/data/culture-sources.json'
  requested={v.get('collector') for v in json.loads(inventory_path.read_text())['venues']} if inventory_path.exists() else set(adapters)
  requested.add('בית אריאלה')

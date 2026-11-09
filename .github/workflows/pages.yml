@@ -50,6 +50,8 @@ on:
       - "scripts/recover_super_sources.py"
       - "scripts/test_super_source_recovery.py"
       - "scripts/test_super_recovery_gate.py"
+      - "scripts/refresh_super_prices.py"
+      - "scripts/test_super_transport_budget.py"
       - "scripts/test_super_recovery_adapters.py"
       - "scripts/test_super_daily_run.py"
       - "scripts/build_super_smart_shopping.py"
@@ -227,6 +229,7 @@ jobs:
           pip install requests==2.32.5
           python scripts/test_super_source_recovery.py
           python scripts/test_super_recovery_gate.py
+          python scripts/test_super_transport_budget.py
           python scripts/test_super_recovery_adapters.py
           python scripts/test_super_daily_run.py
           python scripts/test_public_event_assets.py

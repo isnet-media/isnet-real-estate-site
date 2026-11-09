@@ -20,7 +20,10 @@ ROOT=Path(__file__).resolve().parents[1];D=ROOT/'SUPER.ASHDOD/data';TZ=ZoneInfo(
 PUBLIC='https://url.publishedprices.co.il'
 ACCOUNTS={'רמי לוי':'RamiLevi','יוחננוף':'yohananof','אושר עד':'osherad','טיב טעם':'TivTaam','קשת טעמים':'Keshet','פרשמרקט':'freshmarket'}
 def session():
- s=requests.Session();s.mount('https://',HTTPAdapter(max_retries=Retry(total=2,backoff_factor=1,status_forcelist=[429,500,502,503,504],allowed_methods=['GET','HEAD'])));return s
+ # request() owns the three transport attempts for GET and POST. Do not nest
+ # urllib3's connect/read retries inside them (3 x 3 attempts on blocked hosts).
+ # The adapter still handles bounded HTTP 429/5xx retries for idempotent methods.
+ s=requests.Session();s.mount('https://',HTTPAdapter(max_retries=Retry(total=2,connect=0,read=0,other=0,backoff_factor=1,status_forcelist=[429,500,502,503,504],allowed_methods=['GET','HEAD'])));return s
 def request(s,url,**kw):
  method=kw.pop('method','GET')
  # Official price feeds periodically time out. Retry only transport failures,
