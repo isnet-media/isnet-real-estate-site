@@ -2,7 +2,7 @@
 import concurrent.futures,json,requests
 from datetime import datetime,date,timedelta
 from zoneinfo import ZoneInfo
-CITIES={'ASHDOD':20,'YAVNE':7,'KGAT':9,'RISHON':24,'HOLON':23,'BATYAM':19}
+CITIES={'ASHDOD':20,'YAVNE':7,'KGAT':9,'RISHON':24,'HOLON':23,'BATYAM':19,'TLV':19}
 now=datetime.now(ZoneInfo('Asia/Jerusalem'))
 def collection_due(checked_at, current):
  # Allow the 06:00 collection two hours to finish; Saturday has no collection.
@@ -13,7 +13,7 @@ def collection_due(checked_at, current):
  checked=datetime.fromisoformat(checked_at).astimezone(ZoneInfo('Asia/Jerusalem'))
  return checked.date()<expected
 def check(city,minimum):
- base=f'https://isnet.co.il/SUPER.{city}/'
+ base='https://tlvnet.com/super/' if city=='TLV' else f'https://isnet.co.il/SUPER.{city}/'
  def get(path):
   response=requests.get(base+path,timeout=(10,40),headers={'Cache-Control':'no-cache'})
   response.raise_for_status()
