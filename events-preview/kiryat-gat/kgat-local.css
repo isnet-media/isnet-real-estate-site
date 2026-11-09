@@ -1,1 +1,9 @@
 .kgat-discover{display:flex;gap:12px;overflow-x:auto;padding:18px 20px;max-width:1240px;margin:auto;direction:rtl}.kgat-discover a{flex:0 0 auto;color:#f2ddb4;border:1px solid #86724e;border-radius:12px;padding:13px 18px;text-decoration:none;background:#202222;font-weight:700}.kgat-discover a:focus-visible{outline:3px solid #66d8d2}.siteTopbar__events img{object-fit:contain}.siteTopbar__ashdodnet img{object-fit:contain}.card .image{object-fit:contain;background:#171b1b}
+
+/* Kiryat Gat: shared edges and spacing across the discovery menu rows. */
+.kgat-discover{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:min(900px,calc(100% - 34px));max-width:900px;margin:20px auto 16px;padding:0;gap:12px;overflow:visible;box-sizing:border-box}
+.kgat-discover a{display:flex;align-items:center;justify-content:center;min-width:0;min-height:52px;padding:12px 8px;text-align:center;box-sizing:border-box}
+.isnetNavDiscovery .isnetNavDiscovery__primary,.isnetNavDiscovery .isnetNavDiscovery__lifestyle{width:min(100%,900px)!important;max-width:900px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;margin:0 auto 12px!important;gap:12px!important}
+.isnetNavDiscovery .isnetNavDiscovery__secondary{width:min(100%,900px)!important;max-width:900px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;margin:0 auto!important;gap:12px!important}
+.isnetNavDiscovery .isnetNavDiscovery__search{width:min(100%,900px)!important;max-width:900px!important;margin:20px auto 0!important;box-sizing:border-box}
+@media(max-width:650px){.kgat-discover{width:calc(100% - 22px);gap:8px;margin:16px auto 12px}.kgat-discover a{font-size:13px;line-height:1.45;min-height:48px;padding:10px 6px}.isnetNavDiscovery .isnetNavDiscovery__primary,.isnetNavDiscovery .isnetNavDiscovery__lifestyle,.isnetNavDiscovery .isnetNavDiscovery__secondary{gap:8px!important}.isnetNavDiscovery .isnetNavDiscovery__search{margin-top:16px!important}}
