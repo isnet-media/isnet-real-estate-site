@@ -92,6 +92,8 @@ NOTES={
 def build():
  old=json.loads((R/'data/restaurants.json').read_text())
  byid={p['id']:p for p in old['restaurants']}
+ media_path=R/'data/restaurant-media.json'
+ reviewed_media=json.loads(media_path.read_text()).get('by_id',{}) if media_path.exists() else {}
  items=[]
  for id,name,address,kind,source in ROWS:
   source=source if source.startswith('https:') else 'https://easy.co.il/page/'+source
@@ -102,6 +104,8 @@ def build():
   if id=='namisu':p.update(site='https://www.namisu.co.il/',site_label='לאתר המסעדה',phone='088660660',saturday_note='לפי אתר המקום: פתיחה במוצאי שבת, שעה אחרי צאת השבת.')
   if id=='japanika':p.update(site='https://japanika.net/branches/',site_label='לאתר הרשת ולפרטי הסניף',description='סניף ג׳פניקה קוויק בקריית גת, באסתר המלכה 11. מטבח אסייתי וסושי. הסניף מפורסם ככשר; באיזי מצוינת רבנות מקומית.',kosher='כשר — רבנות מקומית, לפי פרסום איזי; באתר הרשת הסניף מסומן ככשר. מומלץ לבדוק תעודה עדכנית במקום.',kosherVerified=True,kosher_verification_basis='published_branch_information',kosher_source_url='https://easy.co.il/page/27392925',official_source_url='https://japanika.net/branches/',saturday_note='לפי אתר הרשת: פתיחה במוצאי שבת, כשעה וחצי לאחר צאת השבת; לא בשבת ביום.',search_aliases=['גפניקה','ג׳פניקה','ג\'פניקה','Japanika','גפניקה קרית גת'])
   if id=='fresh':p.update(booking=source,phone='088500085',description='מסעדה איטלקית במרכז BIG קריית גת, עם ארוחות בוקר, פסטות, פיצות ודגים. תפריט והזמנת שולחן בקישור המקום.')
+  # Preserve reviewed, cuisine-specific media across future guide rebuilds.
+  p.update(reviewed_media.get(p['id'],{}))
   items.append(p)
  result={'city':'kiryat-gat','checked_at':DATE,'restaurants':items,'coverage':{'user_list_count':20,'user_list_included':20,'scope':'Reviewed Easy regional results, Rest local cards and supplied list; not a claim of exhaustive city coverage.'}}
  (R/'data/restaurants.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
