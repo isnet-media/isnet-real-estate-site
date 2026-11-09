@@ -11,6 +11,13 @@ const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'../..');
 const dir=path.join(__dirname,'screenshots');
 const leaflet=path.join(root,'node_modules','leaflet','dist');
+const engine=require('./engine.js'),approximate=require('./approximate.js'),network=require('./data/network.json');
+let serviceDate=network.valid_from.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3');
+while([5,6].includes(new Date(serviceDate+'T12:00:00Z').getUTCDay()))serviceDate=engine.dayShift(serviceDate,1);
+assert.ok(serviceDate.replaceAll('-','')<=network.valid_until);
+const expected=approximate.plan(network,engine,{from:engine.groups(network).find(g=>g.ids.includes('11931')),to:engine.places(network).find(p=>p.id==='place:ashdod-rail'),date:serviceDate,time:'13:00',maxTransfers:0,limit:5,maxBoardMeters:350,maxAlightMeters:500});
+assert.ok(expected.length&&expected[0].trip.transfers===0,'Current GTFS must provide the reviewed direct journey');
+const expectedClock=new Date(expected[0].trip.depart*1000).toISOString().slice(11,16);
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png'};
 const image=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScL/nwAAAABJRU5ErkJggg==','base64');
 async function main(){
@@ -29,23 +36,23 @@ async function main(){
  const port=server.address().port;
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
  const url=new URL('http://127.0.0.1:'+port+'/bus/ashdod/');
- Object.entries({from:'11931',to:'place:ashdod-rail',date:'2026-10-30',time:'13:00',mode:'local',target_kind:'place',transfer:'0'}).forEach(([k,v])=>url.searchParams.set(k,v));
+ Object.entries({from:'11931',to:'place:ashdod-rail',date:serviceDate,time:'13:00',mode:'local',target_kind:'place',transfer:'0'}).forEach(([k,v])=>url.searchParams.set(k,v));
  fs.mkdirSync(dir,{recursive:true});
  try{
   for(const [label,size] of [['mobile',{width:390,height:844}],['desktop',{width:1365,height:768}]]){
    const ctx=await browser.newContext({viewport:size,locale:'he-IL',timezoneId:'Asia/Jerusalem'});
    const page=await ctx.newPage();
-   await page.addInitScript(()=>{
+   await page.addInitScript(serviceDate=>{
     Object.defineProperty(navigator,'share',{configurable:true,value:async data=>{window.__shared=data}});
     Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{window.__copied=text}}});
 
-    const RealDate=Date, fixed=RealDate.parse('2026-10-30T11:00:00Z');
+    const RealDate=Date, fixed=RealDate.parse(serviceDate+'T09:00:00Z');
     class FixedDate extends RealDate{
       constructor(...a){super(...(a.length?a:[fixed]))}
       static now(){return fixed}
     }
     window.Date=FixedDate;
-   });
+   },serviceDate);
    await page.route('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',r=>r.fulfill({path:path.join(leaflet,'leaflet.js'),contentType:'text/javascript'}));
    await page.route('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',r=>r.fulfill({path:path.join(leaflet,'leaflet.css'),contentType:'text/css'}));
    await page.route('https://tile.openstreetmap.org/**',r=>r.fulfill({status:200,body:image,contentType:'image/png'}));
@@ -57,7 +64,7 @@ async function main(){
    assert.ok(badges.length>0,label+': missing bus results');
    assert.ok(badges.every(t=>t==='ללא החלפה'),label+': bus transfers incorrectly prioritized');
    const lines=await page.locator('#results .route-card .line-pill').allInnerTexts();
-   assert.ok(lines.includes('קו 1'),label+': recommended nearby direct line 1 missing');
+   assert.ok(lines.includes('קו '+expected[0].trip.legs[0].route.number),label+': recommended current direct line missing');
    const nav=page.locator('#isnet-public-navigation');
    assert.equal(await nav.locator('[data-isnet-marketing-open]').count(),0);
    assert.equal(await nav.locator('[data-isnet-share-open] svg.share-icon').count(),1);
@@ -105,7 +112,7 @@ async function main(){
    assert.ok(mapExists,label+': Leaflet map failed to render');
    assert.equal(await panel.locator('.leaflet-pane').first().evaluate(el=>getComputedStyle(el).position),'absolute',label+': Leaflet stylesheet was blocked');
    assert.equal(await page.locator('#results .route-card').count(),1,label+': urban search must show one recommendation');
-   assert.match(await page.locator('.route-time').innerText(),/13:14/,label+': next bus must be prominent');
+   assert.ok((await page.locator('.route-time').innerText()).includes(expectedClock),label+': next bus must show its actual current GTFS departure');
    assert.ok(await page.locator('.journey-details').evaluate(el=>!el.open));
    assert.ok(await page.locator('.all-departures').evaluate(el=>!el.open));
    assert.ok(await page.locator('.route-time').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)>=48));
