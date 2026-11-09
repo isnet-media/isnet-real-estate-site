@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """HTRL discovery regression: dated provenance only, no media auto-publication."""
 import unittest
+from datetime import date
 from unittest.mock import patch
 from bs4 import BeautifulSoup
 import sync_rishon_sources as subject
@@ -37,6 +38,12 @@ DETAIL = """
 class OfficialReviewCandidateTests(unittest.TestCase):
     def setUp(self):
         subject.WARNINGS.clear()
+        today = patch.object(subject, 'TODAY', date(2026, 11, 9))
+        limit = patch.object(subject, 'LIMIT', date(2027, 4, 11))
+        today.start()
+        limit.start()
+        self.addCleanup(today.stop)
+        self.addCleanup(limit.stop)
 
     def find(self, listing=LISTING, detail=DETAIL, event=None, src='htrl'):
         def fetch(url):
