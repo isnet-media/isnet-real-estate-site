@@ -180,6 +180,21 @@ def _official_occurrences_from_detail(page):
     return rows
 
 
+
+def _official_venue_key(venue):
+    """Use explicit HTRL auditorium/main-hall aliases, not fuzzy place matching."""
+    normalized = mevalim.norm(venue)
+    if not normalized:
+        return ''
+    # The supplier abbreviates the town and venue in its programme pages.
+    # Never equate the main hall with the auditorium.
+    if 'אודיטוריום' in normalized and ('היכל' in normalized or normalized == 'אודיטוריום'):
+        return 'htrl_auditorium'
+    if 'היכלהתרבות' in normalized or 'היכלמאירניצן' in normalized:
+        return 'htrl_main'
+    return normalized.replace('ראשוןלציון', '').replace('ראשלצ', '')
+
+
 def official_review_candidates(src, existing):
     """Recover HTRL evidence without importing/approving unlicensed media.
 
@@ -226,12 +241,9 @@ def official_review_candidates(src, existing):
                 for day, clock, venue in occurrences:
                     if e['start_date'] != day or str(e.get('start_time') or '')[:5] != clock:
                         continue
-                    a = venue_key(e.get('venue'))
-                    b = venue_key(venue)
+                    a = _official_venue_key(e.get('venue'))
+                    b = _official_venue_key(venue)
                     if not a or not b or a != b:
-                        continue
-                    # The auditorium and main hall must not be conflated.
-                    if ('אודיטוריום' in e.get('venue', '')) != ('אודיטוריום' in venue):
                         continue
                     found.append({
                         'event_id': e.get('event_id'), 'title': e.get('title'),
