@@ -1,3 +1,6 @@
+> **Publisher instruction — 2026-11-09: real-estate automation is paused in every city.**
+> This includes Yavne, Karmi Gat, other ISNET editions and TLVNET real-estate writers. Do not collect property data, rebuild property models, synchronize pricebooks or resume real-estate schedules without a new explicit publisher instruction. The 12 engine workflows are manual-only and the three related ChatGPT tasks are paused. Existing code, data and published pages are retained. Supermarket, events and sports operations remain active. The operational instructions below are historical while this pause is in force.
+
 # Authorized continuous data publication
 
 Collection and model generation run in private repository `ebs-hue/isnet-real-estate`. Publication runs in `ebs-hue/isnet-real-estate-site`.
