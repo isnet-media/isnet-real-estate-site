@@ -23,7 +23,7 @@ function renderHero(cat){
   $("placesEyebrow").textContent=cat.eyebrow||"";
   $("placesIntro").textContent=cat.intro||"";
   $("heroBackdrop").style.backgroundImage='url("'+String(cat.hero_image||"").replace(/"/g,"%22")+'")';
-  $("heroCredit").textContent=cat.hero_credit||"";
+  $("heroCredit").innerHTML=esc(cat.hero_credit||"")+(cat.hero_source_url?'<a href="'+esc(cat.hero_source_url)+'" target="_blank" rel="noopener"> · מקור הצילום</a>':'')+(cat.hero_license_url?'<a href="'+esc(cat.hero_license_url)+'" target="_blank" rel="noopener"> · רישיון</a>':'');
   $("placesStats").innerHTML=(cat.stats||[]).map(x=>
     '<div class="stat"><b>'+esc(x.value)+'</b><span>'+esc(x.label)+'</span></div>'
   ).join("");
@@ -39,7 +39,7 @@ function placeCard(item){
     '<div class="placeMedia">'+
       (item.image?'<img src="'+esc(item.image)+'" alt="'+esc(item.name)+'" loading="lazy" onerror="this.closest(\'.placeMedia\').classList.add(\'imageFailed\');this.remove()">':'<span class="placeMediaIcon" aria-hidden="true">'+esc(item.icon||'✧')+'</span>')+
       '<div class="placeBadges">'+tags+'</div>'+
-      (item.image_credit?'<small class="imageCredit">'+esc(item.image_credit)+'</small>':'')+
+      (item.image_credit?'<small class="imageCredit">'+esc(item.image_credit)+(item.image_source_url?' · <a href="'+esc(item.image_source_url)+'" target="_blank" rel="noopener">מקור הצילום</a>':'')+(item.image_license_url?' · <a href="'+esc(item.image_license_url)+'" target="_blank" rel="noopener">רישיון</a>':'')+'</small>':'')+
     '</div>'+
     '<div class="placeBody">'+
       '<span class="placeType">'+esc(state.cat?.item_label||(state.category==="beaches"?"חוף בקריית גת":"מקום בקריית גת"))+'</span>'+
@@ -51,7 +51,7 @@ function placeCard(item){
       (state.category==='kids-attractions'&&item.notice?'<p class="kidsAttractionNotice">'+esc(item.notice)+'</p>':'')+
       '<div class="placeActions">'+
         (state.category==='kids-attractions'?'<a class="primaryAction" href="attraction.html?id='+encodeURIComponent(item.id)+'">לפרטי האטרקציה ←</a>'+ (item.phone?'<a class="primaryAction" href="tel:'+esc(String(item.phone).replace(/[^+0-9]/g,''))+'">☎ '+esc(item.phone)+'</a>':'')+(item.booking_url?'<a class="primaryAction" href="'+esc(item.booking_url)+'" target="_blank" rel="noopener">הזמנה ישירה ↗</a>':'')+(!item.booking_url&&item.operator_website_url?'<a class="primaryAction" href="'+esc(item.operator_website_url)+'" target="_blank" rel="noopener">אתר המקום ↗</a>':''):'')+
-        (item.museum_url?'<a class="primaryAction" href="'+esc(item.museum_url)+'" target="_blank" rel="noopener">פעילויות המוזיאון ←</a>':'')+
+        (item.museum_url?'<a class="primaryAction" href="'+esc(item.museum_url)+'" target="_blank" rel="noopener">לפרטים באתר הרשמי ←</a>':'')+
         '<a class="primaryAction" href="'+mapsUrl(item.map_query||item.name+" קריית גת")+'" target="_blank" rel="noopener">איך מגיעים ←</a>'+
       '</div>'+
     '</div>'+

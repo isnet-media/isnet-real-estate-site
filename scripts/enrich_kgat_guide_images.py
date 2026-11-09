@@ -10,6 +10,7 @@ def event_image(e):
  if not name:return
  e.update(image_url='assets/illustrations/'+name+'.jpg',image_source=BASE+name+'.jpg',image_credit=CREDIT,image_publishable=True,image_verified=True,image_represents_event=False,source_image_kind='illustration',image_rights_status='ai_generated_activity_illustration')
 def place_image(p,category='culture'):
+ if p.get('suppress_generic_image'):return
  if p.get('image') and p.get('image_role')!='illustration':return
  id=p.get('id','')
  name='pool' if id=='kgat-country' else 'park' if id=='kgat-paz' else 'nature' if category in ['nature','parks'] or id in ['kgat-archaeology','kgat-lachish','kgat-angels','kgat-beit-guvrin','kgat-lachish-saturday'] else 'book-club' if id=='kgat-library' else 'live-music' if id=='kgat-amphi' else 'theatre-stage'
@@ -24,7 +25,7 @@ def run():
   if not cat.get('hero_image') or cat.get('hero_image_role')=='illustration':
    cat['hero_image']=BASE+('park' if key=='parks' else 'nature' if key=='nature' else 'theatre-stage')+'.jpg'
    cat['hero_image_role']='illustration'
-  if 'תמונות המחשה' not in cat.get('intro',''):cat['intro']=cat.get('intro','')+' התמונות המסומנות הן תמונות המחשה.'
+  if any(x.get('image_role')=='illustration' for x in cat.get('items',[])) and 'תמונות המחשה' not in cat.get('intro',''):cat['intro']=cat.get('intro','')+' התמונות המסומנות הן תמונות המחשה.'
   for item in cat.get('items',[]):place_image(item,key)
  save(file,d)
  for filename,key in [('institutions','institutions'),('attractions-guide','verified_sources'),('saturday-guide','items')]:

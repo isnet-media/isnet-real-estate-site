@@ -11,6 +11,7 @@ import sync_events_from_sources as core
 from kgat_sport_rules import sport_kind,repair,SENIOR
 CITY='kiryat-gat'; LABEL='קריית גת'; ROOT=core.BASE/CITY
 SOURCES=[
+ {'name':'kgat_cinema_category','url':'https://matnaskg.smarticket.co.il/סרטים_page_39','parser':'smarticket','venue':'היכל התרבות קריית גת','source_type':'official'},
  {'name':'easy_kgat','url':'https://easy.co.il/list/Events?region=1750','parser':'generic','venue':LABEL,'source_type':'secondary'},
  {'name':'friends_kgat','url':'https://friends-hist.co.il/hall/היכל-התרבות-קרית-גת-2/','parser':'friends','venue':LABEL,'source_type':'secondary'},
  {'name':'kgat_smarticket','url':'https://matnaskg.smarticket.co.il/','parser':'smarticket','venue':'היכל התרבות קריית גת','source_type':'official'},

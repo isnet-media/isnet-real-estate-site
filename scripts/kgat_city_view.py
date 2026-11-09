@@ -27,7 +27,7 @@ def localize(content,name,city,suffix):
  content=re.sub(r'<a\b[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>','',content)
  content=re.sub(r'<section class="cityDiscover"[\s\S]*?</section>','',content)
  if name=='index.html':
-  nav='<nav class="kgat-discover" aria-label="מגלים את קריית גת"><a href="/meusharim/kiryat-gat/">חוגים וקורסים</a><a href="places.html?category=parks">פארקים</a><a href="places.html?category=nature">טבע וטיולים באזור</a></nav>'
+  nav='<nav class="kgat-discover" aria-label="מגלים את קריית גת"><a href="/meusharim/kiryat-gat/">חוגים וקורסים</a><a href="attractions.html">טיולים ואטרקציות באזור</a></nav>'
   content=content.replace('<main',nav+'<main',1)
   # Keep dining beside the cinema card; never in the compact discovery row.
   content=re.sub(r'(<nav class="isnetNavDiscovery__lifestyle"[^>]*>)([\s\S]*?)(</nav>)',lambda m:m[1]+m[2]+food+m[3],content,count=1)
@@ -55,6 +55,13 @@ def localize(content,name,city,suffix):
   content=content.replace('entries=[...normalizePlaces(places),...(extra.verified_sources||[]).map(x=>({...x,local:false,area:"kiryat-gat"}))];render()', 'entries=[...new Map([...normalizePlaces(places),...(extra.verified_sources||[]).map(x=>({...x,kind:assignKind(x),local:false,area:"kiryat-gat"}))].map(x=>[x.id,x])).values()];document.querySelectorAll("[data-kind]").forEach(b=>{if(b.dataset.kind!=="all"&&!entries.some(x=>x.kind===b.dataset.kind))b.remove()});render()')
   content=content.replace('alt="\'+esc(x.name)+\'"','alt="\'+esc(x.image_alt||x.name)+\'"')
   content=content.replace('</div><div class="body"><div class="tags">','</div><div class="body">\'+(x.image_credit?\'<small class="imageCredit">\'+esc(x.image_credit)+\'</small>\':\'\')+\'<div class="tags">')
+ if name=='attractions.html':
+  content=re.sub(r'<script>\s*const esc=[\s\S]*?</script>', '<script src="kgat-regional.js?v=20261109-1"></script>',content,count=1)
+  content=content.replace('אטרקציות בקריית גת והסביבה','טיולים ואטרקציות בקריית גת והסביבה')
+ if name=='places.js':
+  content=content.replace('פעילויות המוזיאון ←','לפרטים באתר הרשמי ←')
+  content=content.replace("esc(item.image_credit)+'</small>'", "esc(item.image_credit)+(item.image_source_url?' · <a href=\"'+esc(item.image_source_url)+'\" target=\"_blank\" rel=\"noopener\">מקור הצילום</a>':'')+(item.image_license_url?' · <a href=\"'+esc(item.image_license_url)+'\" target=\"_blank\" rel=\"noopener\">רישיון</a>':'')+'</small>'")
+  content=content.replace('$("heroCredit").textContent=cat.hero_credit||"";','$("heroCredit").innerHTML=esc(cat.hero_credit||"")+(cat.hero_source_url?\'<a href="\'+esc(cat.hero_source_url)+\'" target="_blank" rel="noopener"> · מקור הצילום</a>\':\'\')+(cat.hero_license_url?\'<a href="\'+esc(cat.hero_license_url)+\'" target="_blank" rel="noopener"> · רישיון</a>\':\'\');')
  if name in ('kids-hub.js','seniors-hub.js'):
   content=content.replace('[e.source_description,e.description,e.series_description]','[e.editorial_description,e.description,e.series_description,e.source_description]')
   content=content.replace("e.category==='seniors'||adultLecture(e)","e.category==='seniors'||e.audiences?.includes('seniors')||adultLecture(e)")

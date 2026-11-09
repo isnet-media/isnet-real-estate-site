@@ -13,8 +13,13 @@ nature=[p('lachish','גן לאומי תל לכיש','מרכז מבקרים, שר
 attractions=[p('country','קאנטרי ארבע העונות','מתחם בריכות ושחייה בעיר. שעות, מסלולי כניסה ורחצה נפרדת יש לברר אצל המפעיל.',tour),*parks]
 for key,items in [('parks',parks),('culture',culture),('nature',nature),('attractions',attractions),('must-see',[parks[0],culture[0],culture[-1],nature[0]])]:
  places['categories'][key]['items']=items
+# Keep the independently reviewed regional inventory across recurring rebuilds.
+regional=json.loads((D/'regional-guide.json').read_text())['items']
+nature=[x for x in regional if x['kind']=='nature']
+places['categories']['nature'].update(title='טבע וטיולים בחבל לכיש',intro='מסלולי טבע, תצפיות ומערות בחבל לכיש, בשפלת יהודה ובצפון הנגב. היעדים מחוץ לעיר מסומנים בנפרד.',items=nature,hero_image=nature[0]['image'],hero_image_role='photograph',hero_credit=nature[0]['image_credit'],hero_source_url=nature[0]['image_source_url'],hero_license_url=nature[0]['image_license_url'],stats=[{'value':str(len(nature)),'label':'מסלולים ויעדי טבע'}],filters=[{'id':'all','label':'הכול'}])
+places['categories']['attractions']['items']=[*attractions,*regional]
 save('places',places)
-save('attractions-guide',{'items':[],'verified_sources':[dict(x,kind='outdoor' if x in parks else 'water',audiences=['families','kids','adults']) for x in attractions]})
+save('attractions-guide',{'items':[],'verified_sources':[dict(x,kind='nature' if x in parks else 'water',audiences=['kids','adults'],area='kiryat-gat') for x in attractions]+regional})
 save('institutions',{'institutions':culture})
 # Opening hours are verified on the park operator's current page, not assumed.
 save('saturday-guide',{'items':[{'id':'kgat-lachish-saturday','title':'גן לאומי תל לכיש','kind':'nature','area':'nearby','city':'חבל לכיש — מחוץ לקריית גת','venue':'גן לאומי תל לכיש','description':'שרידי העיר הקדומה, תצפית ומרכז מבקרים. הכניסה למרכז המבקרים בהזמנה מראש.','family':True,'saturday_hours':'08:00–16:00 (שעון חורף)','saturday_verified':True,'source_url':'https://www.parks.org.il/reserve-park/lachish/','checked_on':today,'recheck_on':today,'booking_url':'https://www.parks.org.il/reserve-park/lachish/','price':None,'note':'שעות ומגבלות עשויות להשתנות; יש לבדוק במקור לפני יציאה.'}]})
