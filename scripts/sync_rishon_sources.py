@@ -143,20 +143,34 @@ def official_details(src,existing):
  with ThreadPoolExecutor(max_workers=4)as pool:return [e for rows in pool.map(read,candidates)for e in rows]
 
 
-def _official_occurrences_from_detail(page):
-    """Strictly dated, timed rows under the production's own schedule heading.
+def _official_occurrences_from_detail(page, *, allow_headingless=False):
+    """Return only exact occurrence rows from the current production.
 
-    Related-show cards have abbreviated dates; they are never proof of the
-    current production's occurrence. Missing schedule/venue means no match.
+    Main HTRL detail pages have a 'מועדי המופע' heading. Senior-calendar
+    /show-culture/ pages can omit it (confirmed against the 9 Nov 2026 live
+    page). In that case, limit the scan from the primary H1 to the FIRST
+    'רכישה' ticket button. Related-show cards appear after that button;
+    their dates must never be accepted as current-show occurrences.
     """
     lines = [re.sub(r'\s+', ' ', line).strip()
              for line in page.get_text('\n', strip=True).split('\n')]
     try:
         start = lines.index('מועדי המופע') + 1
+        end = len(lines)
     except ValueError:
-        return []
+        if not allow_headingless:
+            return []
+        heading = page.find('h1')
+        if not heading:
+            return []
+        try:
+            start = lines.index(heading.get_text(' ', strip=True)) + 1
+            end = next(i for i in range(start, len(lines))
+                       if lines[i] == 'רכישה')
+        except (ValueError, StopIteration):
+            return []
     rows = []
-    for i in range(start, len(lines)):
+    for i in range(start, end):
         line = lines[i]
         if 'רכישת מנוי לסדרות' in line or 'תרבות בעיר' in line:
             break
@@ -167,13 +181,12 @@ def _official_occurrences_from_detail(page):
             day = datetime.strptime(line, fmt).date().isoformat()
         except ValueError:
             continue
-        # The source shows weekday, start time and venue on adjacent lines.
-        clocks = [j for j in range(i + 1, min(i + 5, len(lines)))
+        clocks = [j for j in range(i + 1, min(i + 5, end))
                   if re.fullmatch(r'\d{1,2}:\d{2}', lines[j])]
         if not clocks:
             continue
         clock_at = clocks[0]
-        venue = next((lines[j] for j in range(clock_at + 1, min(clock_at + 4, len(lines)))
+        venue = next((lines[j] for j in range(clock_at + 1, min(clock_at + 4, end))
                       if lines[j] and not re.search(r'לרכישה|רכישה', lines[j])), '')
         if horizon(day) and venue:
             rows.append((day, lines[clock_at].zfill(5), venue))
@@ -229,7 +242,7 @@ def official_review_candidates(src, existing):
             title = mevalim.norm(heading.get_text(' ', strip=True)) if heading else ''
             if title not in normalized:
                 return []
-            occurrences = _official_occurrences_from_detail(detail)
+            occurrences = _official_occurrences_from_detail(detail, allow_headingless=(src == 'htrl_adults'))
             meta = detail.find('meta', property='og:image')
             image_candidate = urljoin(url, meta.get('content')) if meta and meta.get('content') else None
             text = detail.get_text(' ', strip=True)
