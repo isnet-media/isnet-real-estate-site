@@ -3,10 +3,10 @@
   "kind": "daily-audit",
   "local_date": "2026-11-09",
   "timezone": "Asia/Jerusalem",
-  "runKey": "ops-controller-2026-11-09-19:58",
+  "runKey": "ops-controller-2026-11-09-20:58",
   "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
-  "started_at": "2026-11-09T17:54:25.286817Z",
-  "checked_at": "2026-11-09T18:00:58.826Z",
+  "started_at": "2026-11-09T19:00:28.020450Z",
+  "checked_at": "2026-11-09T19:07:22.882Z",
   "status": "partial",
   "daily_audit_completed": false,
   "record_write_scope": "Controller-owned existing daily-audit file only, conditional GitHub blob SHA update. Separate tested maintenance patch confined to Holon release test; GitHub existing workflow/concurrency owns collection and publishing.",
@@ -15,7 +15,7 @@
       "/root"
     ],
     "cross_environment_work_ownership": "not_observable; available tools expose no shared Work lease or other-environment active-run inspection",
-    "same_domain_automation": "Current controller df451c40 active. Main b4aa3410 re-observed in_progress with changed start; do not duplicate. Other Work environments remain unobservable.",
+    "same_domain_automation": "Current controller55add63b active; main01bb76d8 andcultureb319failed on latest observation. No competing owner execution started.",
     "repository_action_observation": "Before test patch: no active or queued Holon refresh/release job; Pages already active and preserved. Holon refresh uses existing concurrency=isnet-event-data-writes, cancel-in-progress=false. Test patch changes no source data. No manual dispatch or second collection issued.",
     "global_collection_lock": "No cross-environment Work lease inspection available; writer-owned files unchanged",
     "content_mutations_performed": false,
@@ -28,7 +28,7 @@
       "result": "203verified dated event records and29films published; no direct TLV/CMS content mutation"
     },
     "record_write_scope": "CAS update of controller-owned existing daily-audit only",
-    "current_source_commit": "3bfbcf72848ed6a510a582905195ee7b369783b2",
+    "current_source_commit": "41859d9c7256ef90ccd637df0b8dca0942eec961",
     "local_patch_only": "No local source modifications this cycle; previously prepared patch now present in owner's deployed source"
   },
   "agents": [
@@ -40,18 +40,18 @@
       "enabled": true,
       "classification": "skipped_active_run",
       "last_run": {
-        "id": "df451c40-1b78-8330-b6c8-e16b96520c61",
+        "id": "55add63b-62bc-8330-8e13-e21ace44f02b",
         "recorded_status": "in_progress",
-        "scheduled_for": "2026-11-09T17:58:00Z",
-        "started_at": "2026-11-09T17:54:25.286817Z",
+        "scheduled_for": "2026-11-09T18:58:00Z",
+        "started_at": "2026-11-09T19:00:28.020450Z",
         "completed_at": null,
         "chat_ref": null
       },
-      "result_run_id": "8609eb20-1028-8330-ab40-4199a628ed17",
-      "result_created_at": "2026-11-09T17:01:25.759650Z",
+      "result_run_id": "df451c40-1b78-8330-b6c8-e16b96520c61",
+      "result_created_at": "2026-11-09T18:02:04.236830Z",
       "result_matches_run": false,
-      "result_summary": "אייל, נמצא כשל פרסום מדויק: גרסאות TLVNET האחרונות נעצרו בבדיקת קבצים. הכנתי תיקון להבדלי Windows/Linux; בדיקות התשתית והבדיקות לתיקון עברו מקומית. **טרם נפרס**, משום שלא ניתן לאמת בלעדיות מול עבודות Work אחרות.\n\nבאתר החי:\n\n- מקור הסופר החדש תקין: **19/19 סניפים מתאריך 9.11**. TLVNET עדיין מגיש נתוני 6.11.\n- החדשות והספורט השלימו מחזור מאומת, אך ההרצה שאחריו נכשלה שוב בתוך כחמש שניות.\n- האתר, המסד, האחסון וחסימות הגישה תקינים.\n\n[התיקון, הראיות והמשך הטיפול נשמרו ביומן](https://github.com/isnet-media/isnet-real-estate-site/blob/main/ops/daily-audit/2026-11-09.json). לא בוצע איסוף סופר נוסף; הבדיקה היומית עדיין חלקית.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "result_summary": "אומת שהתיקון בסופר תל אביב עלה: **19 סניפים עם מקור מ־9.11, 17,886 מוצרים ו־266 מבצעים**. לא בוצע איסוף נוסף.\n\nנמצאו שני חסמים:\n- איסוף Analytics נכשל כי חסר הסוד `GA4_SERVICE_ACCOUNT_JSON` בהגדרות GitHub Actions.\n- הרצת חדשות התרבות נכשלה; נדרשים יומני הרצת Work כדי לאבחן את הסיבה.\n\nעמוד הילדים ביבנה, שהחזיר 503, חזר להגיב תקין.\n\n[הראיות והמשך הטיפול נשמרו ואומתו ביומן](https://github.com/isnet-media/isnet-real-estate-site/blob/main/ops/daily-audit/2026-11-09.json). הבדיקה היומית עדיין חלקית.",
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "6acfdcf595cc8191b87ea3bdf3b1c44d",
@@ -75,7 +75,7 @@
       "result_created_at": "2026-11-09T12:26:09.521957Z",
       "result_matches_run": true,
       "result_summary": "משימת עדכון נתוני הספורט הושהתה: מנגנון הנעילות המשותף עדיין אינו נגיש, ולכן אי אפשר לשלול איסוף מתחרה כנדרש.\n\nלא בוצעה סריקה חדשה ולא שונו נתונים או תאריכי אימות. שלושת הקבצים הציבוריים תואמים ל־`main`, והפרסום האחרון הצליח. לחידוש העדכונים נדרשת גישה לבדיקת הבעלות והנעילות.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_e467e9cca2d8819183f1d37b533a347c",
@@ -99,7 +99,7 @@
       "result_created_at": "2026-11-09T17:13:47.291190Z",
       "result_matches_run": true,
       "result_summary": "לא פורסם תוכן חדש. [מדור הלילה](https://tlvnet.com/night/) זמין, 41 הרשומות תואמות למקור ובדיקת `validate-night.py` עברה.\n\nהאיסוף חסום: אין ממשק נגיש לאימות נעילה ובעלות מול עבודות Work מקבילות. לכן לא הופעלו חמשת המומחים, ולא שונו התוכן או יומני המקור. משימת העדכון הושהתה עד להסדרת הגישה למנגנון הנעילות הקיים.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_845f7ef0033c8191b7490e0dc5748754",
@@ -109,21 +109,21 @@
       "enabled": true,
       "classification": "blocked_or_partial_verification",
       "last_run": {
-        "id": "840e6272-a464-8324-a525-d3139e082923",
+        "id": "2611dcd9-8ae0-8324-94f8-10f5a8942c0a",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-09T17:05:00Z",
-        "started_at": "2026-11-09T17:08:12.364712Z",
-        "completed_at": "2026-11-09T17:19:27.332155Z",
+        "scheduled_for": "2026-11-09T18:05:00Z",
+        "started_at": "2026-11-09T18:09:42.067481Z",
+        "completed_at": "2026-11-09T18:18:09.346896Z",
         "chat_ref": {
           "type": "chatgpt",
           "id": "6af1499f-5d74-83eb-a557-2a130db79dbd"
         }
       },
-      "result_run_id": "840e6272-a464-8324-a525-d3139e082923",
-      "result_created_at": "2026-11-09T17:19:26.341938Z",
+      "result_run_id": "2611dcd9-8ae0-8324-94f8-10f5a8942c0a",
+      "result_created_at": "2026-11-09T18:18:08.658825Z",
       "result_matches_run": true,
-      "result_summary": "**הרצליה נט — 9 בנובמבר 2026:** פענחתי את דוח Scooper שהתקבל בשעה 19:03 ובו 161 תוצאות. לאחר סינון אזכורים לא רלוונטיים, בדקתי שבעה מקורות ומסלולי מידע, 80 פרסומים ו־40 טיוטות באדמין. **התקדמות משמעותית:** הצלחתי לקרוא במלואם שני דיווחים של N12 על אורי ליאור דוד, בן 22 מהרצליה, שנפצע קשה בתאונת אופנוע בתאילנד, וכן דיווח מקומי נוסף. הכנתי כתבה מקורית עם כותרות משנה. היא מחייבת בדיקת עורך אנושי משום שהיא עוסקת במצב רפואי של אדם מזוהה; אין גם צילום עם הרשאת שימוש מאומתת. לכן לא פורסמה. כתבה 810924 על ריץ־קרלטון נבדקה ונמצאה תקינה באתר החי. שתי ראשיות עדיין מתוארכות ל־1 בנובמבר. **תוצאה: כתבה אחת הוכנה, אפס פורסמו, אפס ראשיות הוחלפו.** citeturn763661search0turn763661search1turn763661search2 [יומן הרצליה](sandbox:/mnt/data/isnet_editor_logs/herzliya-2026-11-09-19.json).\n\n**רעננה נט — 9 בנובמבר 2026:** בדקתי שמונה מקורות ומסלולי מידע, 70 פרסומים ואת כל 32 הטיוטות המופיעות באדמין. אימתתי מחדש את הודעת העירייה על הפסקת המענה הטלפוני באגף ההנדסה ב־11 בנובמבר, ושיפרתי את נוסח הכתבה המוכן. בנוסף אומתו מחדש פרטי אירוע הנשים ״רצות לשינוי״ ב־27 בנובמבר. הודעת Gmail המלאה על בית הקוסם נבדקה מול כתבה 810923, ונמצא שהכתבה הקיימת כבר מציגה את מועדי ההזמנה המעודכנים. ארבע הראשיות עדיין מציגות ידיעות מאפריל–יוני. **תוצאה: שני נוסחי כתבות מוכנים ומאומתים, אפס פרסומים חדשים, אפס החלפות ראשיות.** citeturn559945search2turn784704search0turn288278view0 [יומן רעננה](sandbox:/mnt/data/isnet_editor_logs/raanana-2026-11-09-19.json).\n\n**החסמים שנותרו:** בדיקות `get_post` שוב החזירו אובייקטים ריקים בשני האתרים. בדקתי גם את פרויקט Supabase של ISNET, אך לא נמצא בו ממשק שמאפשר לאמת את נעילות עורכי Work. חיבור האדמין עדיין אינו חושף פעולות לניהול הראשיות. לא ביצעתי כתיבה שעלולה להתנגש בעבודת עורכים אחרים.\n\n[שלושת נוסחי הכתבות והערות העריכה](sandbox:/mnt/data/isnet_editor_logs/editorial-copy-2026-11-09-19.md)\n\nהמשימה השעתית נשארת פעילה. **כדי להשלים פרסום אוטומטי והחלפת ראשיות נדרש להרחיב את חיבור ISNET Admin לניהול בלוקים ולבדיקת נעילות משותפת.** עד אז לא אסמן את החסמים כפתורים ולא אדרוס עבודה קיימת.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "result_summary": "**הרצליה נט — 9.11.2026:** פענחתי את דוח Scooper שהתקבל ב־20:02, ובו 170 תוצאות, רבות מהן לא רלוונטיות להרצליה. בדקתי שישה מקורות ומסלולי מידע, 80 רשומות פרסום, 40 טיוטות ו־31 קטגוריות. איתרתי ידיעה מקומית חדשה: **ביום חמישי, 12 בנובמבר, בשעה 18:00, מתוכנן טקס חנוכת כיכר הרוקדים לזכר נרצחי הנובה ואורי דנינו ז״ל.** אימתתי את ההחלטה על ההנצחה מול עיריית הרצליה ואת פרטי הטקס מול דיווח מקומי מ־9 בנובמבר. הכנתי כתבה מקורית, מוכנה לבדיקת עורך. לא העליתי אותה לאדמין משום שלא ניתן לאמת את נעילת עורך Work, את אישור הפרסום ואת זכויות התמונה. **תוצאה: כתבה אחת הוכנה; 0 פורסמו; 0 ראשיות הוחלפו.** שתיים מארבע הראשיות עדיין מ־1 בנובמבר. citeturn512572search5turn562349view1turn502463view0 [יומן הרצליה](sandbox:/mnt/data/isnet_editor_logs/herzliya-2026-11-09-20.json).\n\n**רעננה נט — 9.11.2026:** בדקתי שבעה מקורות ומסלולי מידע, 100 רשומות פרסום מתוך 513, את כל 32 הטיוטות ו־23 קטגוריות. אימתתי בשני מקורות עירוניים את אירוע **״רצות לשינוי״**, שיתקיים ב־27 בנובמבר בשעה 08:30 בספורטק נווה זמר. הכנתי כתבה מקורית עם פרטי הפעילות, ההרשמה והעלות. לא נמצא דוח Scooper ייעודי לרעננה. **תוצאה: כתבה אחת הוכנה; 0 פורסמו; 0 ראשיות הוחלפו.** ארבע הראשיות עדיין מציגות כתבות מאפריל–יוני, למרות פרסומים חדשים מנובמבר. citeturn805514search0turn805514search4turn502463view1 [יומן רעננה](sandbox:/mnt/data/isnet_editor_logs/raanana-2026-11-09-20.json).\n\n[שתי הכתבות המוכנות לעריכה ולפרסום](sandbox:/mnt/data/isnet_editor_logs/editorial-copy-2026-11-09-20.md)\n\n**החסמים הטכניים עדיין פתוחים:** `get_post` מחזיר `{}` בשני האתרים, אין גישה מאומתת לנעילות Work, וחיבור ISNET Admin אינו חושף API לניהול הראשיות. זיהיתי שוב גם את רכיב פיקוד העורף המציג בשני האתרים טקסט שגוי על ״אשדוד 271״ — אין לראות בכך התרעה אמיתית. ניסיון לשמור את היומנים בספריית הקבצים הקבועה נכשל ב־`AccessDeny`, ולכן הם מצורפים כאן.\n\nלא ביצעתי פרסום ללא אישור או שינוי שעלול לדרוס עבודה מקבילה. **המשימה נשארת פעילה**, והכתבות והחסמים מתועדים להמשך טיפול.",
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_4c9b538f29d081918b3cbb12595b0989",
@@ -146,7 +146,7 @@
       "result_run_id": "3a392e5e-b844-832f-b327-7b27320f7b97",
       "result_created_at": "2026-11-09T16:22:33.735371Z",
       "result_matches_run": true,
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below.",
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below",
       "result_summary": "העדכון נשמר ואומת בקריאה חוזרת: **187 רשומות, ללא כפילויות**.\n\n| קטלוג | רשומות | מצב |\n|---|---:|---|\n| מוזיאון תל אביב — קורסים | 23 | עודכן |\n| מוזיאון תל אביב — סדנאות | 11 | עודכן |\n| אוניברסיטת תל אביב — אמנויות | 100 | עודכן |\n| CRAFTED | 13 | חזר לפעול ועודכן |\n| מנשר | 8 | עודכן |\n| סטודיו אתנה | 5 | עודכן |\n| Ceramics Collective | 2 | עודכן |\n| גל קרמיקה | 1 | עודכן |\n| דן גורמה | 24 | נכשל — HTTP 500 |\n\nשמונת הקטלוגים המצליחים אומתו ב־9.11 בשעה 18:20. בדן גורמה נשמרו הרשומות הקודמות וזמן האימות המקורי: **7.11 בשעה 10:13**.\n\nהקטלוג העירוני לא נכלל. לא שונו תמונות ולא פורסם האתר מחדש."
     },
     {
@@ -171,7 +171,7 @@
       "result_created_at": "2026-11-09T07:45:31.464472Z",
       "result_matches_run": true,
       "result_summary": "הפעולה הושלמה בטור, ללא כפילויות וללא יצירת תזמון נוסף.\n\n| מדור | סטטוס | תוצאה |\n|---|---|---|\n| החיים של המחר | `published` | [החולצה עומדת להתחיל לדבר: הדרכון הדיגיטלי נכנס לארון](https://tlvnet.com/future/article-daily-2026-11-09) |\n| תרבות נט | `published` | [הלילה הספרים עולים לשטיח האדום: הבוקר מחפש זוכה, הקהל כבר בחר אחרת](https://tlvnet.com/culture/article-daily-2026-11-09) |\n| נשים | `blocked` | נמצאה קטגוריית „נשים” באשדוד נט, אך לא נמצאו הוראות סוכן ויומן יומי מאושרים. לא פורסמה כתבה ולא בוצע ערבוב עם TLVNET. |\n\nגרסה 437 נפרסה בהצלחה. שתי הכתבות אומתו במדורים, בעמוד הבית וביומני הכתבים החיים. תמונת „המחר” מסומנת כהמחשת AI; בתרבות נעשה שימוש בתמונת מדיה רשמית של קרן פרס הבוקר עם קרדיט מלא.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_2bd8b730a03081918fd587754ee03429",
@@ -195,7 +195,7 @@
       "result_created_at": "2026-11-09T06:17:36.499778Z",
       "result_matches_run": true,
       "result_summary": "הכנתי ואימתתי 3 מפגשי ״מועדון של זהב״ בבית דניאל: 10, 17 ו־24 בנובמבר, כולל שעות, כתובת, מחירים וגרפיקת המועדון הרשמית. [מקור המארגן](https://www.beit-daniel.org.il/event/golden-club/).\n\nבפועל פורסמו 0: בדיקות התוכן עברו, אך בניית האתר נעצרה בשגיאת משאבים (137), גם לאחר ניסיונות התאוששות. התוספות מוכנות במקור העבודה; האתר החי לא שונה.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "6ae8893c6e30819192dd11bddff9e078",
@@ -216,7 +216,7 @@
       "result_created_at": "2026-11-08T08:54:25.701597Z",
       "result_matches_run": false,
       "result_summary": "פורסם תיקון נוסף: מנגנון ההתאוששות חוסם ניסיון חוזר באותו יום, הרצה מקבילה וניסיון לאחר קריסה. הבדיקות והפריסה עברו, והקוד הציבורי תואם לגרסה שנבדקה. [ראיות לפרסום](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42464627499).\n\nבאימות החי:\n\n- 99 מתוך 102 סניפים מציגים מקור מ־8.11; נתוני שש הערים תואמים לגרסה המאומתת.\n- 33 נקודות בדיקה באירועים עברו.\n- ב־[TLVNET](https://tlvnet.com/guide/) אומתו 62 אירועי צוותא: 59 הצגות ו־3 אירועי מוזיקה. הכיסוי המאומת הוא 8 מתוך 38 מקורות.\n\nההתאוששות עדיין לא הושלמה בשלושה סניפי שופרסל בבת ים: בלפור 25, אורט ישראל 25 והחשמונאים 41 — כולם עם מקור אמיתי מ־6.11. גם 19 סניפי תל אביב נשארו מ־6.11 ומצריכים מסלול התאוששות ייעודי.\n\nבדיקת מובייל מלאה נותרה חסומה משום שהדפדפן המקומי לא נפתח. התחזוקה היומית הקיימת פעילה; לא בוצע איסוף מחירים נוסף היום.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "6acb0ab1c1988191a700f8fb4287c8e0",
@@ -240,7 +240,7 @@
       "result_created_at": "2026-11-09T06:58:35.787425Z",
       "result_matches_run": true,
       "result_summary": "# דוח בקרת אירועים ISNET — 9 בנובמבר 2026\n\n**בוצע היום תיקון בפועל במערכת האירועים של אשדוד, והשפעתו אומתה לאחר הרצת מנגנון הקליטה.** בדקתי גם את ראשון לציון, את מקורות האירועים, את Supabase ואת תקינות הנתונים באתר החי.\n\n## תיקון שבוצע ואומת: שיוך מוסדות באשדוד\n\nזיהיתי שבאירועים רבים המערכת אינה מזהה את המקום שבו הם מתקיימים, אף שהמוסד מוכר.\n\nתיקנתי את מאגר המוסדות ב־GitHub: הוספתי את **המוזאון לתרבות הפלשתים ע״ש קורין ממן**, עם כתובתו ופרטי ההתקשרות המאומתים, והוספתי כינוי חסר למשכן לאמנויות הבמה.\n\nלאחר מכן הופעל בהצלחה מנגנון הקליטה והשיוך האוטומטי.\n\n| מדד | לפני התיקון | אחרי התיקון |\n|---|---:|---:|\n| מוסדות מזוהים באשדוד | 15 | **16** |\n| אירועים המשויכים למקום מזוהה | 666 | **743** |\n| כלל האירועים במאגר | 964 | 969 |\n\n**הרצת האימות אישרה עדכון של 73 רשומות אירועים באשדוד.** הגידול הכולל בשיוכים הוא 77, כאשר במקביל גדל גם מספר האירועים במאגר.\n\nהתיקון שומר על פרטים קיימים ואינו מחליף עריכות אנושיות או תמונות.\n\nurlהתיקון שבוצע ב־GitHubhttps://github.com/isnet-media/isnet-real-estate-site/commit/d68eae2d6d231d5253f9dff42e19057f3d05e628\n\nurlהרצת הקליטה והשיוך שהסתיימה בהצלחהhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42576112065\n\n## תוצאות קליטה ופרסום\n\n| מדד | אשדוד | ראשון לציון |\n|---|---:|---:|\n| אירועים במאגר המעודכן | 969 | 2,157 |\n| טיוטות קיימות ב־Supabase | 6 | 12 |\n| טיוטות חדשות שנוצרו בריצה זו | **0** | **0** |\n| פרסומים חדשים דרך ה־CMS | **0** | **0** |\n| פרסומים חדשים שאומתו בכרטיסי האתר | **0** | **0** |\n\nבדיקת Supabase אישרה שלא נוצרו ולא פורסמו היום רשומות CMS חדשות בשתי הערים.\n\nבבדיקת שבעת מקורות הגילוי הארציים נעזרתי בדוח האחרון שנשמר במערכת. בהרצת המקורות העירוניים היום נסרקו גם לוחות טיקצ'אק, היכל התרבות, לגלות תרבות, מוזיאון אגם וכותר ראשון. לא נוספו בהרצה זו אירועים חדשים; המועמדים שנמצאו לא הצדיקו יצירת רשומות נוספות לאחר בדיקת הכיסוי והכפילויות. לא הושלמה סריקה עצמאית חדשה של כל קטלוגי שבעת המקורות הארציים.\n\n## בקרת איכות: אופק, לגלות תרבות והרצאות\n\nבדקתי את שיוך המפעילים ואת דוח איכות המוסדות.\n\n**אופק אשדוד:** 19 אירועים משויכים למפעיל. המערכת שומרת על ההפרדה בין כתובת המשרד של אופק לבין מקום הפעילות או נקודת היציאה לטיול.\n\n**לגלות תרבות בראשון לציון:** 128 אירועים משויכים למפעיל. בנוסף קיימים 209 אירועים המשויכים להיכל התרבות ו־97 לרשת כותר ראשון.\n\n**הרצאות:** באשדוד יש שלוש הרצאות ללא תמונת אירוע מאומתת; בראשון לציון 32. לא יצרתי תמונות ולא החלפתי תמונות קיימות ללא הרשאה.\n\n## חסמי פרסום שנותרו\n\nבדקתי את ריצת הפרסום האוטומטי האחרונה.\n\nמתוך **1,859 אירועים שנבדקו**, 111 כבר היו מפורסמים במסלול ו־**1,748 נחסמו**. לא פורסם אירוע חדש.\n\nהחסמים המרכזיים הם בקרת תוכן ועריכה, זכויות מדיה שאינן מאומתות, תוכן הסברי חסר וחשדות לכפילויות.\n\nבנוסף, הרשאת סוכן ה־AI אינה כוללת פרסום עצמאי, וכל 36 נכסי המדיה הרשומים ב־Supabase עדיין מסומנים בזכויות שימוש שאינן מאומתות.\n\nurlדוח הפרסום האוטומטיhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42552295260\n\nבקליטת המקורות נמצאו גם שלושה חסמים נקודתיים: אתר הבמה לא החזיר אירועים שניתן לפענח, RIZONE+ לא סיפק אירועים שניתן לפענח, ו־Eventim החזיר שגיאת זמן המתנה. לא מחקתי אירועים קיימים בעקבות הכשלים האלה.\n\n## אימות האתר החי\n\nבדיקת הקריאה החוזרת שהושלמה הבוקר אישרה התאמה מלאה בין GitHub לקובצי האירועים הציבוריים שנבדקו: 969 רשומות באשדוד ו־2,156 בראשון לציון.\n\nלאחר מכן התעדכן מאגר ראשון לציון ל־2,157 רשומות. **הרשומה הנוספת טרם אומתה בקריאה חוזרת מהאתר החי**, ולכן אינני מציג אותה כפרסום שאומת.\n\nשני עמודי האירועים והקבצים הציבוריים החזירו HTTP 200. עם זאת, לא הושלם אימות חזותי של כרטיסי האירועים לאחר טעינת JavaScript.\n\nurlדוח אימות הנתונים הציבורייםhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42573268437\n\n---\n\n**סיכום:** היום בוצע תיקון ממשי ומאומת בשיוך מוסדות באשדוד, ו־73 רשומות אירועים עודכנו בעקבותיו. לא נוצרו טיוטות CMS חדשות ולא בוצעו פרסומים חדשים. חסם הפרסום העיקרי נותר אישור תוכן וזכויות תמונה; לא עקפתי אותו ולא שיניתי נתונים שלא אומתו.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "6ad8fab91ca48191ac06928a99f7c8d9",
@@ -250,21 +250,21 @@
       "enabled": true,
       "classification": "verified_live_partial_coverage",
       "last_run": {
-        "id": "29926fc6-18c4-8326-b80b-945f46445624",
+        "id": "ea51e824-f2ec-8331-890e-b1c8b3de85d9",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-09T17:35:00Z",
-        "started_at": "2026-11-09T17:37:52.794656Z",
-        "completed_at": "2026-11-09T17:45:24.612437Z",
+        "scheduled_for": "2026-11-09T18:35:00Z",
+        "started_at": "2026-11-09T18:39:45.785701Z",
+        "completed_at": "2026-11-09T18:43:15.269470Z",
         "chat_ref": {
           "type": "chatgpt",
           "id": "6ad99c27-0530-83ed-859e-4b0af322cdc3"
         }
       },
-      "result_run_id": "29926fc6-18c4-8326-b80b-945f46445624",
-      "result_created_at": "2026-11-09T17:45:23.903598Z",
+      "result_run_id": "ea51e824-f2ec-8331-890e-b1c8b3de85d9",
+      "result_created_at": "2026-11-09T18:43:13.450667Z",
       "result_matches_run": true,
-      "result_summary": "לא נמצא שינוי מהותי: אומתו בציבור 106/121 סניפים ממקור 9.11 ו־15 ממקור 8.11; מדגם מחיר מכל 121 הסניפים תאם למאגר. חיפוש ומבצעים בתל אביב פועלים. לא הופעל איסוף נוסף משום שהניסיונות היומיים כבר נוצלו.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "result_summary": "בדיקת 9.11.2026 בשעה 20:42 הושלמה ללא תקלה חדשה. הכיסוי הציבורי נשאר 106/121 סניפים ממקור 9.11: אשדוד 16/20, יבנה 7/7, קריית גת 9/9, ראשון לציון 24/24, חולון 16/23, בת ים 15/19 ותל אביב 19/19. מדגם של מחיר אחד מכל סניף תאם למאגר בכל 121 הסניפים.\n\n[הפרסום האחרון](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42670037686) הצליח. [בדיקת הבריאות האחרונה](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42670671242) מאמתת כעת גם את תל אביב; הכשל הכולל נובע מאותם 15 סניפים ששומרים מחירים ממקור 8.11. בתל אביב אומתו בציבור 17,886 מוצרים, 125,767 מחירים ו־266 מבצעים. הסל החודשי נותר ללא סניף שלם וללא דירוג.\n\nהחסמים שנותרו ללא שינוי: קרפור 060,353 וויקטורי 008,037 באשדוד; קרפור 067,329,345, ויקטורי 039,060 וחצי חינם 202,204 בחולון; קרפור 183,221,256 וויקטורי 076 בבת ים. תאריך המקור בכולם 8.11.2026; היומנים מציינים ConnectTimeout בקרפור ובוויקטורי וסירוב HTTP בחצי חינם. הגולשים ממשיכים לראות את המחירים הקודמים ותאריכיהם האמיתיים.\n\nלא נמצאו ריצות פעילות או בתור. יומני ההתאוששות מאשרים שהניסיון היומי כבר נוצל בכל שש הערים, והאיסוף בתל אביב הושלם היום. לכן לא הופעל איסוף נוסף, לא שוחררו נעילות ולא שונו מחירים או קוד. טרם הוכחה יציבות במשך שלושה ימים.",
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "6aca152667488191b0f6541e44d0cf8e",
@@ -272,20 +272,23 @@
       "system": "ISNET",
       "domain": "השלמת קליטת אירועים",
       "enabled": true,
-      "classification": "skipped_active_run",
+      "classification": "blocked_or_partial_verification",
       "last_run": {
-        "id": "789fc296-780c-8332-bf0c-591c9b9bd23e",
-        "recorded_status": "in_progress",
-        "scheduled_for": "2026-11-09T17:45:00Z",
-        "started_at": "2026-11-09T17:52:57.735395Z",
-        "completed_at": null,
-        "chat_ref": null
+        "id": "bca41ff2-71d8-8329-97a1-aa66b4d8f667",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-09T18:45:00Z",
+        "started_at": "2026-11-09T18:48:18.792927Z",
+        "completed_at": "2026-11-09T18:50:51.588031Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6af0a4f3-0bf8-83eb-9402-761e8c1947e7"
+        }
       },
-      "result_run_id": "9389e3c7-f0a8-8327-bd23-42e636f2a673",
-      "result_created_at": "2026-11-09T16:59:10.189029Z",
-      "result_matches_run": false,
-      "result_summary": "בדיקת 9 בנובמבר 2026, בשעה 18:54 בישראל: נבדקו מחדש ריצות GitHub, דוחות כיסוי הבמה, משיכת תמונות ותיאורים, נתוני הפרסום ב־Supabase והאתרים הציבוריים באשדוד ובראשון לציון. לא אומתה התקדמות משמעותית נוספת בכיסוי מופעי הבמה.\n\n**איסוף והעשרת תוכן:** ריצה 42658911475 הצליחה ואיתרה 55 אירועי במה באשדוד עם מועמדים לתיאורים ולתמונות מדפי המקור. הדוח נשמר ב־GitHub, אך `cms_modified=false` ו־`public_site_modified=false`. ריצה 42657950986 יצרה מאגר של 238 מועמדי הפקות ו־291 קישורי מקור, לצורכי בדיקה בלבד, ללא פרסום. ריצת תיקון האיכות 42658890100 הסתיימה עם אפס תיקונים חדשים ו־707 ממצאים פתוחים.\n\n**כיסוי:** דוח המוכנות האחרון עדיין מציג 356 מופעי במה עתידיים באשדוד מול 169 מועמדים ארציים, ו־558 מול 110 בראשון לציון. רק 41 ושישה מהמועמדים, בהתאמה, כוללים תיאורי הפקות לפי הגדרת הדוח. בשתי הערים `ready_for_full_replace=false`. בקשת השינוי #65 עדיין פתוחה כטיוטה.\n\n**פרסום:** בדיקת SQL ישירה אישרה שלא התבצע פרסום CMS חדש בשתי הערים במהלך אחר הצהריים. נותרו שש טיוטות ממתינות באשדוד ו־12 בראשון לציון. כל 36 נכסי המדיה הרשומים ב־Supabase עדיין מסומנים כבעלי זכויות לא ידועות, ללא קובץ מאוחסן.\n\n**קריאה חוזרת:** ריצה 42658314470 הצליחה ואימתה התאמה מלאה בין גרסת הנתונים שנבדקה לקובצי JSON הציבוריים: 980 רשומות באשדוד ו־2,170 בראשון לציון, ללא הבדלי תוכן או מזהים כפולים. בדיקת הבריאות 42658314338 הצליחה, ושני עמודי הבית נגישים. עם זאת, ריצת הקריאה החוזרת קדמה לשינויי GitHub האחרונים, ולא אומתה חזותית הצגת הכרטיסיות בדפדפן.\n\n**חסמים:** מקור Makore בראשון לציון עדיין מחזיר HTTP 404, ומקורות היכל התרבות דורשים העשרת פרטים נוספת. לא בוצעה כתיבה עצמאית מכיוון שלא ניתן היה לאמת באופן מלא היעדר ריצות מקבילות של סוכני Work באמצעות מנגנון הנעילות. לא הופעל איסוף כפול, לא בוצעו מחיקות או מיזוגים ולא נעקפו בקרות זכויות ואישורים. אין ראיות לכיסוי מלא, ואין חסם חדש המחייב כעת התערבות מצדך.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "result_run_id": "bca41ff2-71d8-8329-97a1-aa66b4d8f667",
+      "result_created_at": "2026-11-09T18:50:50.049307Z",
+      "result_matches_run": true,
+      "result_summary": "נבדקו מחדש GitHub Actions, דוחות הכיסוי, איסוף התמונות והתיאורים, נתוני הפרסום ב־Supabase והאתרים הציבוריים באשדוד ובראשון לציון.\n\n**קריאה חוזרת:** ריצת GitHub מספר 42670671348 הסתיימה בהצלחה ב־9 בנובמבר 2026 בשעה 20:06 בישראל. אומתה התאמה מלאה בין נתוני המאגר לקובצי JSON הציבוריים: 980 אירועים באשדוד ו־2,170 בראשון לציון, ללא הבדלי תוכן או מזהי אירועים כפולים. ריצת הבריאות 42670671135 הצליחה אף היא. האימות אינו מוכיח שכל הכרטיסיות מוצגות כראוי בדפדפן.\n\n**כיסוי במה:** דוח המוכנות האחרון עדיין מציג 356 מופעי במה עתידיים באשדוד מול 169 מועמדים ארציים, ו־558 מול 110 בראשון לציון. רק 41 ושישה מהמועמדים, בהתאמה, כוללים תיאורי הפקות לפי הגדרת הדוח. בשתי הערים `ready_for_full_replace=false`. לא נמצא דוח חדש המוכיח שיפור בכיסוי.\n\n**תמונות ותוכן:** דוח התמונות המעודכן באשדוד מציג 702 אירועים עם תמונת מופע מאומתת ברמת המקור, אך גם 155 אירועים ללא תמונה שניתן לפרסם לפי מדיניות המערכת. בראשון לציון דוח המוכנות מציג 970 תמונות מקור, 117 תמונות המחשה ו־24 אירועים ללא תמונה. אלה מדדי כיסוי שונים ואין להסיק מהם אישור זכויות שימוש. בקשת השינוי #65 נותרה פתוחה כטיוטה.\n\n**פרסום:** בדיקת SQL ישירה אישרה כי לא נוספו פרסומים חדשים ב־CMS מאז 19 האירועים שקודמו באשדוד בבוקר. עדיין ממתינות שש טיוטות באשדוד ו־12 בראשון לציון. כל 36 נכסי המדיה הרשומים ב־Supabase נותרו ללא זכויות מאומתות וללא קובץ מאוחסן.\n\n**אבחון טכני:** בקוד איסוף Makore בראשון לציון אותר מנגנון שבו כישלון בבקשת עמוד המשך מפיל את איסוף המקור כולו. דוח המקור האחרון מצביע על שגיאת HTTP 404 בעמוד `pages=28`, בעוד עמוד המקור הראשי נגיש. זהו כיוון תיקון ממוקד: טיפול בכשל עמוד בודד תוך שמירת הנתונים התקינים, ללא מחיקה או פרסום אוטומטי של רשומות שלא אומתו. לא הוחל תיקון בייצור מכיוון שלא ניתן לאמת בלעדיות מול סוכני Work מקבילים באמצעות מנגנון נעילה משותף. בדיקת GitHub לא מצאה ריצות Actions פעילות באותו רגע, אך אינה מספיקה לאימות בעלות חוצת־מערכות.\n\nלא בוצעו מחיקות, מיזוגים, כתיבה מתחרה או עקיפת בקרות זכויות. לא נוצר runKey חדש לפעולת כתיבה. לא אומתה התקדמות משמעותית נוספת או השלמת כיסוי, ולא זוהה חסם חדש המחייב התערבות מצד המשתמש.",
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_547bb40a554c819184ab07a7de64a4b2",
@@ -298,15 +301,15 @@
         "id": "b319e741-7a64-832c-9e6b-1a6749ab6d36",
         "recorded_status": "failed",
         "scheduled_for": "2026-11-09T17:50:00Z",
-        "started_at": "2026-11-09T17:56:49.116935Z",
-        "completed_at": "2026-11-09T17:56:52.944050Z",
+        "started_at": "2026-11-09T18:59:13.629348Z",
+        "completed_at": "2026-11-09T18:59:17.829339Z",
         "chat_ref": null
       },
-      "result_run_id": "0980e1a5-1858-832c-932b-22e56b11071b",
-      "result_created_at": "2026-11-09T17:07:03.019835Z",
-      "result_matches_run": false,
-      "result_summary": "המחזור `culture-news-2026-11-09-18:00` נחסם לפני השלמת הפרסום:\n\n- `enabled` ראשי ומומחה: תקינים; בעל המשימה הייעודי מאומת.\n- נקראו 12 מקורות מלאים ונבדקו כל מאגרי הכפילויות.\n- לא נמצאה ידיעת תרבות חדשה המצדיקה פרסום: 0 פורסמו.\n- מועמד השתתפותי אחד אותר להעברה לקהילה.\n- השילוב הראשון נעצר עקב עדכון מרוחק מקביל; המקור נפתח מחדש ושולב ללא דריסה.\n- לאחר הבנייה והבדיקות סביבת העבודה נותקה לפני הדחיפה. לכן היומן וה־handoff לא נשמרו במקור המרוחק ולא סומנו כ־published.\n- TLVNET נותר פעיל בגרסה 465. האוטומציה לא הושבתה משום שמדובר בחסם תשתית זמני.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "result_run_id": "b319e741-7a64-832c-9e6b-1a6749ab6d36",
+      "result_created_at": "2026-11-09T18:59:19.028500Z",
+      "result_matches_run": true,
+      "result_summary": "There was a problem with your scheduled task.",
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_e2f02000cdf4819190022b85f4391076",
@@ -330,7 +333,7 @@
       "result_created_at": "2026-11-09T15:36:39.741108Z",
       "result_matches_run": true,
       "result_summary": "בדיקת הצרכנות נחסמה: ההגדרות פעילות, אך אין גישה לאימות נעילה מול עבודות מקבילות; ממשק הבקרה מחזיר 403 ודורש הרשאת מנהל.\n\nלא נאסף תוכן חדש, לא פורסמו ידיעות ולא שונה האתר. השהיתי את משימת הצרכנות עד שתתאפשר בדיקת בלעדיות מוסמכת. התוצאה היא חסם, לא מחזור שהושלם בהצלחה.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_851de24df7448191a034009b74fc236f",
@@ -354,7 +357,7 @@
       "result_created_at": "2026-11-09T15:45:31.484290Z",
       "result_matches_run": true,
       "result_summary": "בדיקת הנדל״ן נחסמה: ההגדרות פעילות, אך אין גישה לאימות נעילה משותפת מול עבודות מקבילות; ממשק הבקרה מחזיר 403 ודורש הרשאת מנהל.\n\nלא החל איסוף חדשותי, לא פורסמו כתבות ולא שונה היומן המשותף. השהיתי את המשימה עד להסדרת אימות הבלעדיות — בשל החסם הנוכחי, ולא בשל הוראת ביטול הנדל״ן הישנה.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_f60537c642048191b85552af9e6c1cfe",
@@ -362,20 +365,20 @@
       "system": "TLVNET",
       "domain": "כתבי TLVNET + כתב ספורט משותף",
       "enabled": true,
-      "classification": "skipped_active_run",
+      "classification": "blocked_or_partial_verification",
       "last_run": {
-        "id": "b4aa3410-d5e8-832b-bad1-961d95f473b0",
-        "recorded_status": "in_progress",
-        "scheduled_for": "2026-11-09T17:00:00Z",
-        "started_at": "2026-11-09T17:59:11.544577Z",
-        "completed_at": null,
+        "id": "01bb76d8-8f64-832b-8b68-e496e69a51a8",
+        "recorded_status": "failed",
+        "scheduled_for": "2026-11-09T18:00:00Z",
+        "started_at": "2026-11-09T19:02:16.614752Z",
+        "completed_at": "2026-11-09T19:02:21.470067Z",
         "chat_ref": null
       },
-      "result_run_id": "fcdec106-bd68-832b-b849-18ff31a0693f",
-      "result_created_at": "2026-11-09T16:51:25.464766Z",
-      "result_matches_run": false,
-      "result_summary": "המחזור הנוכחי כבר הושלם, ולכן הופעלו שני המומחים ברצף לצורך אימות ומניעת כפילות בלבד.\n\n- **news:** המחזור נמצא במצב `published`. הידיעה [המשטרה חוקרת עלונים עם קוד QR מאיים בצפון תל אביב](https://tlvnet.com/news/north-tel-aviv-threatening-qr-leaflets-investigation-20261109) קיימת פעם אחת בלבד, ללא קישורים יוצאים, והעמוד והיומן הציבורי אומתו.\n- **sports — TLVNET:** המחזור נמצא במצב `no_update`; לא נמצאה ידיעה חדשה ולא בוצע איסוף או פרסום חוזר. מדור הספורט והיומן זמינים ותקינים.\n- **sports — ISNET/אשדוד:** המחזור נמצא במצב `no_update`; לא נוצרה ידיעה ולא שונו טבלאות, תוצאות או סטטיסטיקות. היומן נשמר במאגר הנפרד ומדור ספורט אשדוד זמין.\n\nבדיקת התשתית עברה בהצלחה. לא נוצרו runKeys כפולים, לא שונו תאריכי תוכן ולא הופעלו כתבים או משימות מחוץ לתחום.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "result_run_id": "01bb76d8-8f64-832b-8b68-e496e69a51a8",
+      "result_created_at": "2026-11-09T19:02:23.030946Z",
+      "result_matches_run": true,
+      "result_summary": "There was a problem with your scheduled task.",
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_e03d80ff914c8191a790fc66e7447826",
@@ -399,7 +402,7 @@
       "result_created_at": "2026-11-09T14:08:31.139902Z",
       "result_matches_run": true,
       "result_summary": "מחזור הקהילה חסום: ההגדרות פעילות, אך אין בגישה הקיימת אפשרות לאמת נעילה משותפת ובעלות בלעדית מול ריצות ענן אחרות.\n\nלא התחלתי איסוף, לא שיניתי יומן ולא פרסמתי כתבות. השהיתי את משימת הקהילה ואימתתי את ההשהיה. להמשך נדרשת גישה למנגנון הנעילות הקיים של הפרויקט.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_20ca7f765cf88191af46487bf3ef8063",
@@ -423,7 +426,7 @@
       "result_created_at": "2026-11-09T13:29:07.667116Z",
       "result_matches_run": true,
       "result_summary": "המחזור נחסם לפני איסוף וכתיבה: ההגדרות פעילות, אך לא ניתן לאמת בעלות בלעדית מול ריצות Work מקבילות באמצעות מנגנון נעילה משותף נגיש.\n\nלא פורסמו ידיעות ולא שונה היומן המשותף. השהיתי את משימת הכלכלה וההייטק עד להסדרת אימות הבעלות. ידיעת מאנדיי מהמחזור הקודם עדיין זמינה באתר.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     },
     {
       "id": "Automation_39a1ff0103088191a654a694e58c7bd8",
@@ -447,7 +450,7 @@
       "result_created_at": "2026-11-09T13:25:47.036913Z",
       "result_matches_run": true,
       "result_summary": "לא נוספו תמונות. המאגר החי כולל 119 נכסים, ובתור ממתינות 117 בקשות.\n\n**החסם:** לא נמצא ממשק נגיש לנעילה משותפת ולאימות ריצות Work מקבילות. בהתאם להוראתך, לא שונו המאגר, הכתבות או יומן המקור.\n\nמשימת האיסוף הושהתה. לחידושה נדרשת גישה למנגנון הבעלות והנעילות הקיים, עם תפיסה ושחרור לפי `runKey`.",
-      "evidence": "Fresh individual peek during2026-11-09T17:54–18:00Z; run/start/result attribution checked. Current live/source findings below."
+      "evidence": "Fresh individual peek 2026-11-09T19:00–19:04Z; exact run/start/result attribution; independent live/source checks below"
     }
   ],
   "separately_paused": [
@@ -1614,76 +1617,328 @@
       "super_operations_sha": "f3d18a6a619d188da6c17ce71ab95807cb1a32f2",
       "super_operations_read": "Current includes Windowsmsvcrt/Unixflock and actual/api/super-data/ policy;121targets; no recollection",
       "Work_ownership": "Onlycurrentrootlocal; no cross-environment active lease inspection interface available"
+    },
+    {
+      "checked_at": "2026-11-09T19:01:43.242Z",
+      "system": "TLVNET",
+      "type": "availability21h",
+      "routes": {
+        "/": 200,
+        "/night/": 200,
+        "/news/": 200,
+        "/api/site-health": 200,
+        "/api/public-articles": 200,
+        "/editorial-sitemap.xml": 200
+      },
+      "services": {
+        "database": "ok",
+        "mediaStorage": "ok",
+        "publicationStorage": "ok"
+      },
+      "audience": "public",
+      "latest_version": 473
+    },
+    {
+      "checked_at": "2026-11-09T19:06:58.884Z",
+      "system": "TLVNET",
+      "type": "private_denials21h",
+      "routes": {
+        "/api/workspace": 401,
+        "/api/editorial-team": 403,
+        "/api/team-chat": 403,
+        "/api/editorial-backup": 403,
+        "/api/editorial-publish": 405
+      },
+      "scope": "GETonly;405is methodguard, not a claim of POST-auth check"
+    },
+    {
+      "checked_at": "2026-11-09T19:06:58.884Z",
+      "system": "TLVNET",
+      "type": "writer_completion21h",
+      "completions": [
+        {
+          "topic": "news",
+          "completedAt": "2026-11-09T18:20:00Z",
+          "runKey": "news-2026-11-09-20:00",
+          "status": "published",
+          "source_count": 9,
+          "articleIds": [
+            "yehuda-maccabi-weizmann-night-bus-diversions-20261109"
+          ],
+          "updatedArticleIds": [],
+          "age_hours": 0.76
+        },
+        {
+          "topic": "sports",
+          "completedAt": "2026-11-09T18:35:00Z",
+          "runKey": "sports-2026-11-09-20:00",
+          "status": "published",
+          "source_count": 11,
+          "articleIds": [],
+          "updatedArticleIds": [
+            "hapoel-tlv-winner-cup-foreign-roster-20261109"
+          ],
+          "age_hours": 0.51
+        },
+        {
+          "topic": "culture-news",
+          "completedAt": "2026-11-09T15:05:25Z",
+          "runKey": "culture-news-2026-11-09-17:00",
+          "status": "no_update",
+          "source_count": 12,
+          "articleIds": [],
+          "updatedArticleIds": [],
+          "age_hours": 4.01
+        },
+        {
+          "topic": "real-estate",
+          "completedAt": "2026-11-08T21:30:42.888293+00:00",
+          "runKey": "real-estate-2026-11-08-23:00",
+          "status": "no_update",
+          "source_count": 65,
+          "articleIds": [],
+          "updatedArticleIds": [],
+          "age_hours": 21.58
+        },
+        {
+          "topic": "economy-tech",
+          "completedAt": "2026-11-09T12:56:08.755Z",
+          "runKey": "economy-tech-2026-11-09-14:00",
+          "status": "published",
+          "source_count": 11,
+          "articleIds": [
+            "monday-q3-2026-results-tlv-20261109"
+          ],
+          "updatedArticleIds": [],
+          "age_hours": 6.16
+        },
+        {
+          "topic": "consumer",
+          "completedAt": "2026-11-09T09:48:00Z",
+          "runKey": "consumer-2026-11-09-11:00",
+          "status": "published",
+          "source_count": 13,
+          "articleIds": [
+            "isracard-november-online-cashback-terms-20261106"
+          ],
+          "updatedArticleIds": [],
+          "age_hours": 9.3
+        },
+        {
+          "topic": "community",
+          "completedAt": "2026-11-09T13:11:29.644Z",
+          "runKey": "community-2026-11-09-15:00",
+          "status": "no_update",
+          "source_count": 15,
+          "articleIds": [],
+          "updatedArticleIds": [],
+          "age_hours": 5.91
+        }
+      ],
+      "retry_read": "2026-11-09T19:02–19:03Z",
+      "source_live_match": true,
+      "source_commit": "41859d9c7256ef90ccd637df0b8dca0942eec961",
+      "culture_new_over3h_alert": true,
+      "news_live": {
+        "id": "yehuda-maccabi-weizmann-night-bus-diversions-20261109",
+        "status": 200
+      },
+      "sports_live": {
+        "updated_id": "hapoel-tlv-winner-cup-foreign-roster-20261109",
+        "status": 200,
+        "new_article_count": 0,
+        "updated_article_count": 1
+      },
+      "note": "Empty sports.articleIds is not a false publication: updatedArticleIds contains one preserved identity and the updated page is live. Actual20hproducts predate latestfailed replay and are not used to cover that new execution."
+    },
+    {
+      "checked_at": "2026-11-09T19:06:58.884Z",
+      "system": "ISNET",
+      "type": "home_slots21h",
+      "list_websites_first": true,
+      "full_post_bodies_read": [
+        810924,
+        810923
+      ],
+      "herzliya_first4": [
+        "810849",
+        "809992",
+        "810767",
+        "809998"
+      ],
+      "raanana_first4": [
+        "789719",
+        "788821",
+        "789394",
+        "784838"
+      ],
+      "home_status": 200,
+      "slot_changes": 0,
+      "blocker": "Existing authorized block/positions interface and shared Work ownership still not exposed; human selections preserved"
+    },
+    {
+      "checked_at": "2026-11-09T19:06:58.884Z",
+      "system": "ISNET",
+      "type": "Scooper21h",
+      "id": "1a1c1b090f4bbb9c",
+      "full_body_read": true,
+      "report_count": "175 Results",
+      "herz_mentions": 81,
+      "ashdod_mentions": 5,
+      "result": "175result report decoded/read in full; mixed5Ashdod mentions. No content assignment from subject alone; no publishing."
+    },
+    {
+      "checked_at": "2026-11-09T19:06:58.884Z",
+      "system": "ISNET+TLVNET",
+      "type": "supermarket21h",
+      "current": 106,
+      "total": 121,
+      "stale": 15,
+      "source_today": "2026-11-09",
+      "retained_source_date": "2026-11-08",
+      "city_counts": {
+        "ASHDOD": "16/20",
+        "HOLON": "16/23",
+        "BATYAM": "15/19",
+        "KGAT": "9/9",
+        "YAVNE": "7/7",
+        "RISHON": "24/24",
+        "TLV": "19/19"
+      },
+      "all_public_refresh_status_http200": true,
+      "tlv_client_endpoint": "https://tlvnet.com/api/super-data/refresh-status.json",
+      "deals": {
+        "selected_count": 266,
+        "eligible_observations": 19537,
+        "chain_count": 2,
+        "branch_count": 19,
+        "by_chain": {
+          "קרפור": 154,
+          "ויקטורי": 112
+        }
+      },
+      "collections": 0,
+      "known_daily_claims_consumed": true,
+      "monthly_complete": 0,
+      "monthly_total": 19,
+      "monthly_ranked": false
+    },
+    {
+      "checked_at": "2026-11-09T19:06:58.884Z",
+      "system": "ISNET",
+      "type": "event_health_recovered21h",
+      "old_failed_run": 42668061644,
+      "old_endpoint_failure": "Yavne kids503",
+      "new_run": 42670671135,
+      "job_id": 129346065470,
+      "result": "success",
+      "steps": {
+        "public_endpoints": "success",
+        "live_identity_media_cache_all6cities": "success"
+      },
+      "event_readback_run": 42670671348,
+      "event_readback_result": "success",
+      "latest_completed_pages": 42670037686,
+      "latest_pages_active": 42677923501,
+      "publication_action": "No competing deploy, cancellation or rerun"
+    },
+    {
+      "checked_at": "2026-11-09T19:06:58.884Z",
+      "type": "source_and_access21h",
+      "source_commit": "41859d9c7256ef90ccd637df0b8dca0942eec961",
+      "source_git_clean": true,
+      "writer_instructions": "No changes vs previous audited source; current diff inspected",
+      "super_operations_sha": "f3d18a6a619d188da6c17ce71ab95807cb1a32f2",
+      "super_operations": "Same previously read instructions;121targets,dailyclaims,Windows/Unixlocks,actual/APIroute",
+      "AGENTS_md": "Still not present in Site source; rootGitHubnotfound in preceding audits",
+      "tool_discovery": "No Work host exception/provisioning/globallease inspection, authorized ISNET blocks, or GitHubsecretwrite tools exposed",
+      "pages_audit_write_scope": "Pages push paths inspected; ops/daily-audit is excluded. Own audit update does not require/trigger competing Site publication."
     }
   ],
   "writer_completions": [
     {
       "topic": "news",
-      "completedAt": "2026-11-09T17:26:00Z",
+      "completedAt": "2026-11-09T18:20:00Z",
+      "runKey": "news-2026-11-09-20:00",
       "status": "published",
-      "runKey": "news-2026-11-09-19:00",
-      "source_count": 10,
+      "source_count": 9,
       "articleIds": [
-        "hariri-suspects-arrested-south-tel-aviv-20261109"
-      ]
+        "yehuda-maccabi-weizmann-night-bus-diversions-20261109"
+      ],
+      "updatedArticleIds": [],
+      "age_hours": 0.76
     },
     {
       "topic": "sports",
-      "completedAt": "2026-11-09T17:46:00Z",
-      "status": "no_update",
-      "runKey": "sports-2026-11-09-19:00",
-      "source_count": 12,
-      "articleIds": []
+      "completedAt": "2026-11-09T18:35:00Z",
+      "runKey": "sports-2026-11-09-20:00",
+      "status": "published",
+      "source_count": 11,
+      "articleIds": [],
+      "updatedArticleIds": [
+        "hapoel-tlv-winner-cup-foreign-roster-20261109"
+      ],
+      "age_hours": 0.51
     },
     {
       "topic": "culture-news",
       "completedAt": "2026-11-09T15:05:25Z",
-      "status": "no_update",
       "runKey": "culture-news-2026-11-09-17:00",
-      "source_count": 12,
-      "articleIds": []
-    },
-    {
-      "topic": "community",
-      "completedAt": "2026-11-09T13:11:29.644Z",
       "status": "no_update",
-      "runKey": "community-2026-11-09-15:00",
-      "source_count": 15,
-      "articleIds": []
-    },
-    {
-      "topic": "consumer",
-      "completedAt": "2026-11-09T09:48:00Z",
-      "status": "published",
-      "runKey": "consumer-2026-11-09-11:00",
-      "source_count": 13,
-      "articleIds": [
-        "isracard-november-online-cashback-terms-20261106"
-      ]
-    },
-    {
-      "topic": "economy-tech",
-      "completedAt": "2026-11-09T12:56:08.755Z",
-      "status": "published",
-      "runKey": "economy-tech-2026-11-09-14:00",
-      "source_count": 11,
-      "articleIds": [
-        "monday-q3-2026-results-tlv-20261109"
-      ]
+      "source_count": 12,
+      "articleIds": [],
+      "updatedArticleIds": [],
+      "age_hours": 4.01
     },
     {
       "topic": "real-estate",
       "completedAt": "2026-11-08T21:30:42.888293+00:00",
-      "status": "no_update",
       "runKey": "real-estate-2026-11-08-23:00",
+      "status": "no_update",
       "source_count": 65,
-      "articleIds": []
+      "articleIds": [],
+      "updatedArticleIds": [],
+      "age_hours": 21.58
+    },
+    {
+      "topic": "economy-tech",
+      "completedAt": "2026-11-09T12:56:08.755Z",
+      "runKey": "economy-tech-2026-11-09-14:00",
+      "status": "published",
+      "source_count": 11,
+      "articleIds": [
+        "monday-q3-2026-results-tlv-20261109"
+      ],
+      "updatedArticleIds": [],
+      "age_hours": 6.16
+    },
+    {
+      "topic": "consumer",
+      "completedAt": "2026-11-09T09:48:00Z",
+      "runKey": "consumer-2026-11-09-11:00",
+      "status": "published",
+      "source_count": 13,
+      "articleIds": [
+        "isracard-november-online-cashback-terms-20261106"
+      ],
+      "updatedArticleIds": [],
+      "age_hours": 9.3
+    },
+    {
+      "topic": "community",
+      "completedAt": "2026-11-09T13:11:29.644Z",
+      "runKey": "community-2026-11-09-15:00",
+      "status": "no_update",
+      "source_count": 15,
+      "articleIds": [],
+      "updatedArticleIds": [],
+      "age_hours": 5.91
     }
   ],
   "blockers": [
     {
       "domain": "automation_execution",
-      "detail": "Main19hactualnews/sports completions verified; main runIDb4aa3410status/starttimeschanged andcurrentlyin_progress, latest_resultold. NewcultureIDb319e741failed, its latest_resultbelongstoprior0980run. Nohostexceptioninterface; sitehealthnormal."
+      "detail": "Newmain01bb76d8failedwithmatchinggenericresult; cultureb319failedagainunderupdatedmetadata withmatchinggenericresult. Actual20hnews/sports arelive, culturelastsourcecompletion17:05Israelnowover3h. Hostexception/provisioninglogs unavailable; do notclaimcontent-writingbug."
     },
     {
       "domain": "shared_leases",
@@ -1727,12 +1982,13 @@
     }
   ],
   "next_actions": [
-    "RestoreexistingapprovedGA4Actionssecretthroughauthorizedrepositoryinterface;verifyactualanalyticsfetch",
-    "Inspectactualcultureb319Workexceptionandnextownercompletion",
-    "Preservemainactiveattemptandinspectmismatchedrun/resultmetadatawithoutduplicateexecution",
-    "ObserveYavnekidsnexthealthincludingdownstreammedia;do notclaimwholefailedworkflowpassed",
-    "Maintain121branchtargets,current106,15retainedandmonthly0/19;nonewcollectiontoday",
-    "Continueincompletedailysource/editor/mediaauditandexistingper-agenthandoffs"
+    "Inspect exact Work execution/provisioning errors for cultureb319 andmain01bb76d8 before any blindrestart",
+    "Verify next culture source-backed completion; current lastcompletion17:05Israelexceeds3h",
+    "Preserve consumed supermarket dailyclaims and0/19monthlybasket; continue121targetmonitoring",
+    "Restore approved existingGA4secret viaauthorizedrepo interface; unchangedblocker retained",
+    "Resolve authorized homepage block and sharedWorklease interfaces; preserve humanchoices",
+    "Coordinate Makore pagination repair with existing sourceowner; no unverified partial-source success",
+    "Continue daily source/editor/media audit; no completed claim"
   ],
   "corrections_this_run": [
     {
@@ -1764,6 +2020,10 @@
     {
       "runKey": "ops-controller-2026-11-09-19:58",
       "result": "IndependentlyclosedTLVdeliveryandCRLFfaultsafterownerdeployment; no sourcecode/content/deployment mutations by controller. Recordednewanalyticsconfigurationfaultandcultureexecutionfailure, preservedallpriorfailedhistories."
+    },
+    {
+      "runKey": "ops-controller-2026-11-09-20:58",
+      "result": "Closed Yavnekids incident after nextfullhealthpass; independently verified20hnews publication andsportsupdate. No newcode/data/deploymentorcollection. Recorded newculturestaleness and mainfailedattempt."
     }
   ],
   "audit_history": [
@@ -2363,6 +2623,27 @@
       "status": "recorded_in_existing_ops_pending_owner_scope",
       "reason": "Restore existingapprovedGA4_SERVICE_ACCOUNT_JSON viaauthorizedGitHubsettings; currentconnectorcannotconfiguresecrets. Do not createcredentialsorbroadenroles.",
       "owner_ledger_updated": false
+    },
+    {
+      "runKey": "ops-controller-2026-11-09-20:58",
+      "agent_id": "Automation_f60537c642048191b85552af9e6c1cfe",
+      "status": "recorded_in_existing_ops_pending_owner_scope",
+      "reason": "New01bb76d8failed in current repeatedobservation; matchinggenericerror. Earlier20hnews/sports confirmedlive but cannot cover this attempt; needactualWorkexception.",
+      "owner_ledger_updated": false
+    },
+    {
+      "runKey": "ops-controller-2026-11-09-20:58",
+      "agent_id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+      "status": "recorded_in_existing_ops_pending_owner_scope",
+      "reason": "Newover3hcompletionalertconfirmed by repeatedAPI/source. Matching b319genericfailure, no new successful ledger. Existing Work exception/ownership interface needed.",
+      "owner_ledger_updated": false
+    },
+    {
+      "runKey": "ops-controller-2026-11-09-20:58",
+      "agent_id": "6aca152667488191b0f6541e44d0cf8e",
+      "status": "recorded_in_existing_ops_pending_owner_scope",
+      "reason": "Nextfull eventhealth42670671135passed includingmedia/identity. Makore root checked in current sync_rishon_sources.py lines120–121: laterpageexception drops entire source; no competing production edit made.",
+      "owner_ledger_updated": false
     }
   ],
   "failure_repair_verification": [
@@ -2882,7 +3163,7 @@
       "system": "ISNET",
       "owner": "existing Pages/edge delivery",
       "time": "2026-11-09T18:00:58.826Z",
-      "status": "recovered_endpoint_only",
+      "status": "closed_verified_following_cycle",
       "failure": {
         "run_id": 42668061644,
         "job_id": 129336931359,
@@ -2896,10 +3177,20 @@
         "result": "HTTP200text/html"
       },
       "verification": {
-        "entire_workflow_passed": false,
-        "downstream_media_step": "skippedinfailedrun"
+        "time": "2026-11-09T19:06:58.884Z",
+        "next_run": 42670671135,
+        "job": 129346065470,
+        "endpoints": "passed",
+        "downstream_media_identity_cache": "passed",
+        "reason": "Endpoint recovered and next complete native health cycle passed; original503history retained"
       },
-      "prevention": "Retain specificURL/status/time; next native health cycle must exercise downstream checks"
+      "prevention": "Retain specificURL/status/time; next native health cycle must exercise downstream checks",
+      "history": [
+        {
+          "status": "recovered_endpoint_only",
+          "at": "2026-11-09T19:06:58.884Z"
+        }
+      ]
     },
     {
       "id": "tlv-culture-b319e741-20261109-20",
@@ -2928,6 +3219,62 @@
         "Nextcycleworks",
         "Persist verified source-backed no_update or live product"
       ]
+    },
+    {
+      "id": "tlv-culture-completion-over3h-20261109-21",
+      "system": "TLVNET",
+      "owner": "Automation_547bb40a554c819184ab07a7de64a4b2",
+      "time": "2026-11-09T19:06:58.884Z",
+      "status": "blocked",
+      "failure": {
+        "last_live_completion": "2026-11-09T15:05:25Z",
+        "age_hours_at_repeat": 4.01,
+        "threshold_hours": 3,
+        "run_id": "b319e741-7a64-832c-9e6b-1a6749ab6d36",
+        "latest_start": "2026-11-09T18:59:13.629348Z",
+        "latest_end": "2026-11-09T18:59:17.829339Z",
+        "result": "There was a problem with your scheduled task.",
+        "result_matches_run": true
+      },
+      "root_cause": "Current host exception unknown; generic scheduled-task error. Prior18hresult described Work disconnection beforepush, but is not treated as cause/log of current failure. Production Site, storage and source access verified healthy.",
+      "repair": {
+        "attempt": "Fresh task peek and repeat, liveAPI and one repeat, current source ledger comparison, available execution/lease tool search",
+        "result": "Same17hcompletion in source/live; no false freshstamp, duplicate research, blindtoggle or prompt-onlyfix"
+      },
+      "required_interface": "Existing Work execution host/provisioning/exception logs and cross-environment active lease inspection",
+      "verification": {
+        "source_commit": "41859d9c7256ef90ccd637df0b8dca0942eec961",
+        "pass": false
+      },
+      "pass_criteria": [
+        "Find actual execution exception",
+        "Safely repair in existing owner context",
+        "Observe nextcycle",
+        "Verify persisted source-backed no_update or live output"
+      ]
+    },
+    {
+      "id": "tlv-main-01bb76d8-failed-20261109-21",
+      "system": "TLVNET",
+      "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+      "time": "2026-11-09T19:06:58.884Z",
+      "status": "blocked",
+      "failure": {
+        "run_id": "01bb76d8-8f64-832b-8b68-e496e69a51a8",
+        "first_start": "2026-11-09T18:45:56.983386Z",
+        "first_end": "2026-11-09T18:46:04.242019Z",
+        "repeat_start": "2026-11-09T19:02:16.614752Z",
+        "repeat_end": "2026-11-09T19:02:21.470067Z",
+        "repeat_result_matches_run": true,
+        "message": "There was a problem with your scheduled task."
+      },
+      "root_cause": "Unknown current host exception. Multiple retries under one ID update its start/end metadata; retain observations rather than count them as separate independently identified runs. Main/culture both fastfail while Site/source services healthy, supporting infrastructure investigation but not proving a specific cause.",
+      "repair": {
+        "attempt": "Compare exact task/result IDs and creation times, verify actual20hnews/sports ownerproducts, search supported hostlog tools; no competing execution",
+        "result": "Products exist but do not constitute successful completion of failed19:02attempt. No missing Work exception interface exposed."
+      },
+      "required_interface": "Existing scheduled Work execution/provisioning exception logs",
+      "prevention": "Never attribute old fcdec106 result or earlier sourcecompletion to a new run/retry"
     }
   ],
   "run_observations": [
@@ -4486,6 +4833,303 @@
             "scheduled_for": "2026-11-09T17:00:00Z",
             "started_at": "2026-11-09T16:58:50.979576Z",
             "completed_at": "2026-11-09T16:58:55.436040Z",
+            "chat_ref": null
+          },
+          "result_run_id": "fcdec106-bd68-832b-b849-18ff31a0693f",
+          "result_created_at": "2026-11-09T16:51:25.464766Z"
+        },
+        {
+          "id": "Automation_e03d80ff914c8191a790fc66e7447826",
+          "enabled": false,
+          "last_run": {
+            "id": "c97beaad-cd30-8330-9df3-7b461ec8f43d",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T13:30:00Z",
+            "started_at": "2026-11-09T14:04:05.744988Z",
+            "completed_at": "2026-11-09T14:08:31.742271Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aefca53-37bc-83eb-95c2-1ee0d1d63c94"
+            }
+          },
+          "result_run_id": "c97beaad-cd30-8330-9df3-7b461ec8f43d",
+          "result_created_at": "2026-11-09T14:08:31.139902Z"
+        },
+        {
+          "id": "Automation_20ca7f765cf88191af46487bf3ef8063",
+          "enabled": false,
+          "last_run": {
+            "id": "07d1a7d6-35dc-832e-9f50-ed9c0b6f553e",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T13:20:00Z",
+            "started_at": "2026-11-09T13:25:49.672747Z",
+            "completed_at": "2026-11-09T13:29:07.869069Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aefca4a-5db0-83ed-9bf6-2738aed86760"
+            }
+          },
+          "result_run_id": "07d1a7d6-35dc-832e-9f50-ed9c0b6f553e",
+          "result_created_at": "2026-11-09T13:29:07.667116Z"
+        },
+        {
+          "id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+          "enabled": false,
+          "last_run": {
+            "id": "e0647bd4-fc3c-8328-b34c-22899c2cd62e",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T12:55:00Z",
+            "started_at": "2026-11-09T13:23:03.288557Z",
+            "completed_at": "2026-11-09T13:25:47.176891Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af18193-be64-83ed-962c-67ac8d1e8626"
+            }
+          },
+          "result_run_id": "e0647bd4-fc3c-8328-b34c-22899c2cd62e",
+          "result_created_at": "2026-11-09T13:25:47.036913Z"
+        }
+      ]
+    },
+    {
+      "observed_at": "2026-11-09T18:00:58.826Z",
+      "runKey": "ops-controller-2026-11-09-19:58",
+      "agents": [
+        {
+          "id": "Automation_b38091754d888191abf21a150dc4ed62",
+          "enabled": true,
+          "last_run": {
+            "id": "df451c40-1b78-8330-b6c8-e16b96520c61",
+            "recorded_status": "in_progress",
+            "scheduled_for": "2026-11-09T17:58:00Z",
+            "started_at": "2026-11-09T17:54:25.286817Z",
+            "completed_at": null,
+            "chat_ref": null
+          },
+          "result_run_id": "8609eb20-1028-8330-ab40-4199a628ed17",
+          "result_created_at": "2026-11-09T17:01:25.759650Z"
+        },
+        {
+          "id": "6acfdcf595cc8191b87ea3bdf3b1c44d",
+          "enabled": true,
+          "last_run": {
+            "id": "6238d4ed-8b4c-832c-925b-08c9c9e211d6",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T12:25:00Z",
+            "started_at": "2026-11-09T12:23:41.974158Z",
+            "completed_at": "2026-11-09T12:26:09.739268Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6ad04f9d-c490-83eb-b682-b7773ad6fe67"
+            }
+          },
+          "result_run_id": "6238d4ed-8b4c-832c-925b-08c9c9e211d6",
+          "result_created_at": "2026-11-09T12:26:09.521957Z"
+        },
+        {
+          "id": "Automation_e467e9cca2d8819183f1d37b533a347c",
+          "enabled": false,
+          "last_run": {
+            "id": "33d4c46d-55ac-8320-a795-de9a55c98966",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T17:15:00Z",
+            "started_at": "2026-11-09T17:10:37.741145Z",
+            "completed_at": "2026-11-09T17:13:47.524689Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af1ba0d-3dbc-83ed-8fbc-6c25528ecddc"
+            }
+          },
+          "result_run_id": "33d4c46d-55ac-8320-a795-de9a55c98966",
+          "result_created_at": "2026-11-09T17:13:47.291190Z"
+        },
+        {
+          "id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+          "enabled": true,
+          "last_run": {
+            "id": "840e6272-a464-8324-a525-d3139e082923",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T17:05:00Z",
+            "started_at": "2026-11-09T17:08:12.364712Z",
+            "completed_at": "2026-11-09T17:19:27.332155Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af1499f-5d74-83eb-a557-2a130db79dbd"
+            }
+          },
+          "result_run_id": "840e6272-a464-8324-a525-d3139e082923",
+          "result_created_at": "2026-11-09T17:19:26.341938Z"
+        },
+        {
+          "id": "Automation_4c9b538f29d081918b3cbb12595b0989",
+          "enabled": true,
+          "last_run": {
+            "id": "3a392e5e-b844-832f-b327-7b27320f7b97",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T16:20:00Z",
+            "started_at": "2026-11-09T16:19:49.304034Z",
+            "completed_at": "2026-11-09T16:22:38.222690Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af1f2a7-7f88-83eb-9311-4f83ac0964cb"
+            }
+          },
+          "result_run_id": "3a392e5e-b844-832f-b327-7b27320f7b97",
+          "result_created_at": "2026-11-09T16:22:33.735371Z"
+        },
+        {
+          "id": "Automation_09c630803fe481919ccd2f476f0d6916",
+          "enabled": true,
+          "last_run": {
+            "id": "91188bf1-ba6c-832d-a672-7bb5a61d1fbc",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T07:15:00Z",
+            "started_at": "2026-11-09T07:19:42.953128Z",
+            "completed_at": "2026-11-09T07:45:31.638709Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aed7da7-acdc-83eb-a2ce-ab27bfac8cc0"
+            }
+          },
+          "result_run_id": "91188bf1-ba6c-832d-a672-7bb5a61d1fbc",
+          "result_created_at": "2026-11-09T07:45:31.464472Z"
+        },
+        {
+          "id": "Automation_2bd8b730a03081918fd587754ee03429",
+          "enabled": true,
+          "last_run": {
+            "id": "1faedb8c-ff58-8330-8c5c-234aae2db499",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T06:00:51Z",
+            "started_at": "2026-11-09T06:09:00.877585Z",
+            "completed_at": "2026-11-09T06:17:36.786342Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aed7546-1614-83eb-bbbe-f57a38324134"
+            }
+          },
+          "result_run_id": "1faedb8c-ff58-8330-8c5c-234aae2db499",
+          "result_created_at": "2026-11-09T06:17:36.499778Z"
+        },
+        {
+          "id": "6ae8893c6e30819192dd11bddff9e078",
+          "enabled": true,
+          "last_run": {
+            "id": "a324b662-7134-8330-b93b-bab2a2ce38f5",
+            "recorded_status": "failed",
+            "scheduled_for": "2026-11-09T07:00:00Z",
+            "started_at": "2026-11-09T07:12:53.481756Z",
+            "completed_at": "2026-11-09T07:42:57.571594Z",
+            "chat_ref": null
+          },
+          "result_run_id": "6c63d03f-7434-832a-9309-f11536d56fe9",
+          "result_created_at": "2026-11-08T08:54:25.701597Z"
+        },
+        {
+          "id": "6acb0ab1c1988191a700f8fb4287c8e0",
+          "enabled": true,
+          "last_run": {
+            "id": "52ed9198-f030-8322-b9dc-221de15a58ab",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T06:00:00Z",
+            "started_at": "2026-11-09T06:50:45.705038Z",
+            "completed_at": "2026-11-09T06:58:36.672186Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6acc7496-2300-83ed-83a9-41931180687b"
+            }
+          },
+          "result_run_id": "52ed9198-f030-8322-b9dc-221de15a58ab",
+          "result_created_at": "2026-11-09T06:58:35.787425Z"
+        },
+        {
+          "id": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "enabled": true,
+          "last_run": {
+            "id": "29926fc6-18c4-8326-b80b-945f46445624",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T17:35:00Z",
+            "started_at": "2026-11-09T17:37:52.794656Z",
+            "completed_at": "2026-11-09T17:45:24.612437Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6ad99c27-0530-83ed-859e-4b0af322cdc3"
+            }
+          },
+          "result_run_id": "29926fc6-18c4-8326-b80b-945f46445624",
+          "result_created_at": "2026-11-09T17:45:23.903598Z"
+        },
+        {
+          "id": "6aca152667488191b0f6541e44d0cf8e",
+          "enabled": true,
+          "last_run": {
+            "id": "789fc296-780c-8332-bf0c-591c9b9bd23e",
+            "recorded_status": "in_progress",
+            "scheduled_for": "2026-11-09T17:45:00Z",
+            "started_at": "2026-11-09T17:52:57.735395Z",
+            "completed_at": null,
+            "chat_ref": null
+          },
+          "result_run_id": "9389e3c7-f0a8-8327-bd23-42e636f2a673",
+          "result_created_at": "2026-11-09T16:59:10.189029Z"
+        },
+        {
+          "id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+          "enabled": true,
+          "last_run": {
+            "id": "b319e741-7a64-832c-9e6b-1a6749ab6d36",
+            "recorded_status": "failed",
+            "scheduled_for": "2026-11-09T17:50:00Z",
+            "started_at": "2026-11-09T17:56:49.116935Z",
+            "completed_at": "2026-11-09T17:56:52.944050Z",
+            "chat_ref": null
+          },
+          "result_run_id": "0980e1a5-1858-832c-932b-22e56b11071b",
+          "result_created_at": "2026-11-09T17:07:03.019835Z"
+        },
+        {
+          "id": "Automation_e2f02000cdf4819190022b85f4391076",
+          "enabled": false,
+          "last_run": {
+            "id": "b59793ab-11a8-8328-8646-77716a7657ec",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T14:40:00Z",
+            "started_at": "2026-11-09T15:32:34.725030Z",
+            "completed_at": "2026-11-09T15:36:40.379968Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af000ed-40f8-83ed-ab86-7baf8280349f"
+            }
+          },
+          "result_run_id": "b59793ab-11a8-8328-8646-77716a7657ec",
+          "result_created_at": "2026-11-09T15:36:39.741108Z"
+        },
+        {
+          "id": "Automation_851de24df7448191a034009b74fc236f",
+          "enabled": false,
+          "last_run": {
+            "id": "d49aa356-72f4-832f-a02a-c68c94af06da",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T14:10:00Z",
+            "started_at": "2026-11-09T15:43:20.415587Z",
+            "completed_at": "2026-11-09T15:45:31.729481Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aefdb39-abc0-83eb-8456-ece124ccedbf"
+            }
+          },
+          "result_run_id": "d49aa356-72f4-832f-a02a-c68c94af06da",
+          "result_created_at": "2026-11-09T15:45:31.484290Z"
+        },
+        {
+          "id": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "enabled": true,
+          "last_run": {
+            "id": "b4aa3410-d5e8-832b-bad1-961d95f473b0",
+            "recorded_status": "in_progress",
+            "scheduled_for": "2026-11-09T17:00:00Z",
+            "started_at": "2026-11-09T17:59:11.544577Z",
+            "completed_at": null,
             "chat_ref": null
           },
           "result_run_id": "fcdec106-bd68-832b-b849-18ff31a0693f",
