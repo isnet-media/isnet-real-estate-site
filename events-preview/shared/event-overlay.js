@@ -53,6 +53,9 @@ function theatreTitle(value){
 function baseTitleKey(e){if(e.category==='theatre'&&ofraAliases.has(norm(e.title)))return 'production:ofra-hebrew-theatre';return (e.category==='theatre'?theatreTitle(e.title):norm(e.title)).replace(/\s+לוח הופעות והזמנת כרטיסים$/,'').replace(/^סינדרלה מחזמר חנוכה עם נעמה סופר על$/,'סינדרלה').replace(/^פאטמה הסטנדאפיסטית הבדואית$/,'פאטמה הסטנדאפיסטית').replace(/^מרתון סטנדאפ יום רביעי חגיגה פאצו בר$/,'מרתון סטנדאפ יום רביעי חגיגה').replace(/\s+(?:במופע סטנדאפ|במופע סטנד אפ|מופע סטנדאפ|סטנדאפ|סטנד אפ)(?: חדש)?$/,'').replace(/\s+(?:התיאטרון העברי|תיאטרון בית ליסין|תיאטרון הקאמרי|חנוכה 2026)$/,'').trim()}
 // Exact reviewed alternatives only. These never strip a cast name or guess from image similarity.
 const reviewedProductions=[
+ // Official Mishkan booking confirms 7 Dec 2026, 17:30. The second title only
+ // repeats the venue after a separator; preserve both source IDs and offers.
+ {id:'hipazon-sipur-hanes-2026',titles:['משכן אומנויות הבמה אשדוד - סיפור הנס חיפזון וזהירון חנוכה','משכן אומנויות הבמה אשדוד - סיפור הנס חיפזון וזהירון חנוכה | המשכן לאמנויות הבמה אשדוד'],source:'https://mishkan-ashdod.smarticket.co.il/סיפור_הנס/?id=8223'},
  {id:'dragon-keepers-2026',titles:['שומרי הדרקונים - חנוכה 2026','שומרי הדרקונים - מחזמר הרפתקאות - חנוכה 2026'],source:'https://sababa.events/he/event/khraniteli-drakonov-priklyuchencheskiy-myuzikl-khanuka-2026/ashdod/'},
  {id:'daniel-styopin-standup',titles:['דניאל סטיופין ("קופה ראשית") - מופע סטנדאפ','דניאל סטיופין במופע סטנדאפ'],source:'https://tickets.mevalim.co.il/event/XWqbBU_QbiHlpJ6'},
  {id:'imi-generalit-musical',titles:['אמי הגנרלית - התיאטרון העברי','אמי הגנרלית - מחזמר','אמי הגנרלית - המחזמר'],source:'https://www.teatron.org.il/shows/אמי-הגנרלית-מחזמר/'},

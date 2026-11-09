@@ -114,6 +114,11 @@ assert.equal(q.reconcile(suspect).length,2,'Unreviewed similar titles must never
 assert.equal(q.suspectedDuplicates(suspect).length,1,'An unknown similar-title occurrence must stop release for review');
 assert.equal(q.suspectedDuplicates([suspect[0],{...suspect[1],start_time:'22:00'}]).length,0);
 assert.equal(q.suspectedDuplicates([suspect[0],{...suspect[1],venue:'מקום אחר'}]).length,0);
+const nesTitles=['משכן אומנויות הבמה אשדוד - סיפור הנס חיפזון וזהירון חנוכה','משכן אומנויות הבמה אשדוד - סיפור הנס חיפזון וזהירון חנוכה | המשכן לאמנויות הבמה אשדוד'];
+const nes=nesTitles.map((title,i)=>row('nes-'+i,{title,category:'kids',start_date:'2026-12-07',start_time:'17:30',venue:'המשכן לאמנויות הבמה אשדוד'}));
+const nesMerged=q.reconcile(nes);assert.equal(nesMerged.length,1);assert.ok(q.resolve(nes,'nes-0'));assert.ok(q.resolve(nes,'nes-1'));
+for(const different of [{start_time:'19:30'},{venue:'אולם אחר'},{title:nesTitles[0]+' עם צוות אחר'}])assert.equal(q.reconcile([nes[0],{...nes[1],...different}]).length,2);
+console.log('PASS: reviewed Mishkan duplicate title preserves IDs, distinct times, venues and cast titles');
 const digest=require('node:crypto').createHash('sha256').update(fs.readFileSync('events-preview/shared/event-overlay.js')).digest('hex').slice(0,12);
 for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya']){
  const html=fs.readFileSync('events-preview/'+city+'/index.html','utf8');assert(html.includes('event-overlay.js?v='+digest),city+' must invalidate cached identity code on every policy edit');
