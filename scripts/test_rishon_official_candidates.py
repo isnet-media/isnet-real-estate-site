@@ -76,6 +76,42 @@ class OfficialReviewCandidateTests(unittest.TestCase):
         detail = '<h1>לנקות את הראש</h1><p>11.11.26 20:30 היכל התרבות</p>'
         self.assertEqual(self.find(detail=detail), [])
 
+    def test_headingless_live_seniors_detail_stops_before_related_cards(self):
+        # Live /show-culture/ detail on 2026-11-09 has no 'מועדי המופע'
+        # and displays similar related-show dates after the ticket button.
+        listing = '<a href="/show-culture/מופע-מוזיקלי-3/">רכישה</a>'
+        detail = ('<h1>מופע מוזיקלי</h1><p>להקת צלילי הבלקן</p>'
+                  '<h1>מופע מוזיקלי</h1><p>תיאור תוכנית המופע</p>'
+                  '<span>10.11.26</span><span>שלישי</span><span>11:00</span>'
+                  '<span>אודיטוריום היכל התרבות</span><a>רכישה</a>'
+                  '<h3>צלילי הכליזמר</h3><span>14.11.26</span>'
+                  '<span>שבת</span><span>19:00</span><span>אודיטוריום</span>'
+                  '<a>לרכישה</a>')
+        actual = self.find(listing=listing, detail=detail,
+                           event=existing(title='מופע מוזיקלי', time='11:00',
+                                          venue='אודיטוריום היכל התרבות ראשון לציון'),
+                           src='htrl_adults')
+        self.assertEqual(len(actual), 1)
+        self.assertEqual(actual[0]['start_date'], '2026-11-10')
+        self.assertEqual(actual[0]['publication_status'], 'review_required')
+        # The related 14.11.26 date must never become a current-show match.
+        unrelated = self.find(listing=listing, detail=detail,
+                              event=existing(title='מופע מוזיקלי',
+                                             date='2026-11-14', time='19:00',
+                                             venue='אודיטוריום היכל התרבות ראשון לציון'),
+                              src='htrl_adults')
+        self.assertEqual(unrelated, [])
+
+    def test_headingless_seniors_without_ticket_button_is_not_proof(self):
+        listing = '<a href="/show-culture/מופע-מוזיקלי-3/">רכישה</a>'
+        detail = ('<h1>מופע מוזיקלי</h1><span>10.11.26</span>'
+                  '<span>11:00</span><span>אודיטוריום היכל התרבות</span>')
+        self.assertEqual(self.find(listing=listing, detail=detail,
+                                   event=existing(title='מופע מוזיקלי',
+                                                  time='11:00',
+                                                  venue='אודיטוריום היכל התרבות ראשון לציון'),
+                                   src='htrl_adults'), [])
+
     def test_adults_show_culture_route_supported_without_auto_import(self):
         listing = '<a href="/show-culture/מופע-מוזיקלי-3/">רכישה</a>'
         detail = ('<h1>מופע מוזיקלי</h1><h3>מועדי המופע</h3>'
