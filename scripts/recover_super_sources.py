@@ -2,7 +2,23 @@
 Never re-fetch healthy branches. Keep existing promotions until a full collection.
 Run city builders and publication checks after this script, before publication.
 """
-import argparse,copy,fcntl,importlib,json,tempfile
+import argparse,copy,importlib,json,tempfile
+try:
+ import fcntl
+except ImportError:
+ # Windows Work must retain the same non-blocking, process-wide file lock.
+ import msvcrt
+ class _FileLock:
+  LOCK_EX=1
+  LOCK_NB=2
+  @staticmethod
+  def flock(handle,flags):
+   handle.seek(0,2)
+   if handle.tell()==0:handle.write('0');handle.flush()
+   handle.seek(0)
+   try:msvcrt.locking(handle.fileno(),msvcrt.LK_NBLCK,1)
+   except OSError as error:raise BlockingIOError('Workspace recovery lock is held') from error
+ fcntl=_FileLock()
 from datetime import datetime
 from pathlib import Path
 import build_super_deals
