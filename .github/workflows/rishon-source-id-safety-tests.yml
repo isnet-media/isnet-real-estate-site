@@ -32,3 +32,24 @@ jobs:
           python -m py_compile scripts/sync_rishon_sources.py
           python scripts/test_rishon_source_identity.py
           python scripts/test_rishon_official_candidates.py
+      - name: Read-only HTRL live production candidate smoke test
+        if: github.event_name == 'pull_request'
+        run: |
+          python - <<'PY'
+          import sys, json, hashlib
+          sys.path.insert(0, 'scripts')
+          import sync_rishon_sources as collector
+          records = json.loads(collector.DATA.read_text(encoding='utf-8'))['events']
+          digest = lambda: hashlib.sha256(json.dumps(records, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+          before = digest()
+          for source in ('htrl', 'htrl_adults'):
+              rows = collector.official_review_candidates(source, records)
+              assert all(r['publication_status'] == 'review_required'
+                         and r['image_rights_status'] == 'unknown'
+                         and not r.get('image_url') and not r.get('description')
+                         for r in rows), 'Unsafe publication-ready candidate'
+              print(json.dumps({'source': source, 'review_candidates': len(rows),
+                                'with_image_candidate': sum(bool(r.get('image_candidate_url')) for r in rows),
+                                'warnings': collector.WARNINGS.get(source, [])}, ensure_ascii=False))
+          assert digest() == before, 'Source collector modified event records'
+          PY
