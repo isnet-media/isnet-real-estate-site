@@ -15,7 +15,8 @@ def collection_due(checked_at, current):
 def check(city,minimum):
  base='https://tlvnet.com/super/' if city=='TLV' else f'https://isnet.co.il/SUPER.{city}/'
  def get(path):
-  response=requests.get(base+path,timeout=(10,40),headers={'Cache-Control':'no-cache'})
+  url=('https://tlvnet.com/api/super-data/'+path[len('data/'):]) if city=='TLV' and path.startswith('data/') else base+path
+  response=requests.get(url,timeout=(10,40),headers={'Cache-Control':'no-cache'})
   response.raise_for_status()
   return path,response
  paths=['','deals/','recipes/','smart-shopping/','data/prices.json','data/refresh-status.json']
