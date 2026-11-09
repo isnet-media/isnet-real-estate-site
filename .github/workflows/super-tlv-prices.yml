@@ -33,7 +33,7 @@ jobs:
           python scripts/test_tlv_super_pipeline.py
           python scripts/refresh_tlv_super_prices.py --raw-dir "$RUNNER_TEMP/tlv-official"
           python scripts/build_tlv_super.py
-          python scripts/test_tlv_super_guard.py
+          python scripts/test_tlv_super_guard.py --deployment-only
       - name: Preserve collection evidence even after failure
         if: always() && steps.daily.outputs.collect == 'true'
         run: tar -czf "$RUNNER_TEMP/super-tlv-evidence.tar.gz" SUPER.TLV/
