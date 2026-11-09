@@ -5,6 +5,33 @@ from urllib.parse import urlsplit
 from datetime import date
 R=Path(__file__).resolve().parents[1];C=R/'events-preview/holon';D=C/'data'
 def read(n):return json.loads((D/(n+'.json')).read_text())
+def validate_cinema_projection(events,movies):
+ """Check the exact owned screening feed, not a quota of films that may expire."""
+ expected={(e['title'],e['start_date'],e['start_time'],e['booking_url']) for e in events if e['category']=='cinema'}
+ actual=[(m['title'],s['date'],s['time'],s['booking_url']) for m in movies for v in m['venues'] for s in v['sessions']]
+ if not expected:raise ValueError('No owned cinema screenings; investigate source coverage')
+ if len(movies)!=len({m['title'] for m in movies}):raise ValueError('Duplicate film cards')
+ if len(actual)!=len(set(actual)):raise ValueError('Duplicate screening sessions')
+ if set(actual)!=expected:raise ValueError('Cinema cards do not match the owned screening feed')
+ if len({m['poster_url'] for m in movies})!=len(movies):raise ValueError('Films must have distinct artwork')
+
+class CinemaProjectionRegression(unittest.TestCase):
+ def setUp(self):
+  self.events=[dict(title=f'Film {i}',category='cinema',start_date='2026-11-09',start_time='18:00',booking_url=f'https://cinema.example/{i}') for i in range(29)]
+  self.movies=[dict(title=e['title'],poster_url=f'https://cinema.example/{i}.jpg',venues=[dict(sessions=[dict(date=e['start_date'],time=e['start_time'],booking_url=e['booking_url'])])]) for i,e in enumerate(self.events)]
+ def test_29_real_films_are_valid(self):validate_cinema_projection(self.events,self.movies)
+ def test_missing_film_is_rejected(self):
+  with self.assertRaisesRegex(ValueError,'do not match'):validate_cinema_projection(self.events,self.movies[:-1])
+ def test_unlisted_screening_is_rejected(self):
+  self.movies[0]['venues'][0]['sessions'][0]['date']='2026-11-10'
+  with self.assertRaisesRegex(ValueError,'do not match'):validate_cinema_projection(self.events,self.movies)
+ def test_duplicate_screening_is_rejected(self):
+  self.movies[0]['venues'][0]['sessions']*=2
+  with self.assertRaisesRegex(ValueError,'Duplicate screening'):validate_cinema_projection(self.events,self.movies)
+ def test_reused_art_is_rejected(self):
+  self.movies[0]['poster_url']=self.movies[1]['poster_url']
+  with self.assertRaisesRegex(ValueError,'distinct artwork'):validate_cinema_projection(self.events,self.movies)
+
 class HolonRelease(unittest.TestCase):
  def test_dated_local_occurrences(self):
   events=read('events')['events'];self.assertGreater(len(events),100);ids=[];keys=[]
@@ -60,9 +87,8 @@ class HolonRelease(unittest.TestCase):
   self.assertEqual(classify('קומדיה למבוגרים','בימוי: במאי התיאטרון','hth'),'theatre')
   self.assertEqual(classify('סרט חדש','בימוי: במאי הסרט','cinematheque'),'cinema')
  def test_cinema_has_specific_art_and_real_synopses(self):
-  movies=read('cinema')['movies'];self.assertGreaterEqual(len(movies),30)
+  movies=read('cinema')['movies'];validate_cinema_projection(read('events')['events'],movies)
   self.assertTrue(all(m['poster_verification']['kind']=='official_promotional' for m in movies),[(m['title'],m['poster_verification']) for m in movies if m['poster_verification']['kind']!='official_promotional'])
-  self.assertGreaterEqual(len({m['poster_url'] for m in movies}),30)
   self.assertTrue(all(m.get('editorial_text') and 'פרטי התוכנית' not in m['synopsis'] for m in movies))
   self.assertGreaterEqual(sum(bool(m.get('trailer_youtube_id'))for m in movies),10)
   for m in movies:
