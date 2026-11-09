@@ -6,7 +6,7 @@ import base64,gzip,hashlib,json,subprocess
 from pathlib import Path
 import bsdiff4
 ROOT=Path(__file__).resolve().parents[1]
-CITIES=('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM')
+CITIES=('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM','TLV')
 def digest(b):return hashlib.sha256(b).hexdigest()
 def prepare():
  scopes=['SUPER.'+c+'/'+suffix for c in CITIES for suffix in ('data','index.html','assets/product-groups.js')]

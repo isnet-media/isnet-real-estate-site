@@ -5,7 +5,7 @@ import bsdiff4
 from datetime import datetime
 from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
-CITIES=('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM')
+CITIES=('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM','TLV')
 def digest(data):return hashlib.sha256(data).hexdigest()
 def apply(city):
  folder=ROOT/'.supermarket-repair';manifest=json.loads((folder/'manifest.json').read_text())

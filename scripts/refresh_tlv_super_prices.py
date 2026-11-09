@@ -58,6 +58,7 @@ def run(raw_dir):
  report['registered_branch_count']=len(reviewed());report['pending_branch_count']=len(status.get('pending',[]));report['coverage_note']='19 reviewed physical branches; other sources remain unverified'
  for name in ('catalog.json','prices.json'):
   value=json.loads((c.D/name).read_text(encoding='utf-8'));value['coverage_complete']=False;c.write(c.D/name,value)
+ deals=json.loads((c.D/'deals.json').read_text(encoding='utf-8'));deals['city']='תל אביב-יפו';c.write(c.D/'deals.json',deals)
  c.write(c.D/'refresh-status.json',report);validate(c.D);return report
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--raw-dir',type=Path);p.add_argument('--bootstrap-only',action='store_true');a=p.parse_args()

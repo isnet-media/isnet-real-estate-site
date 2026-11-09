@@ -31,7 +31,7 @@ jobs:
           python scripts/test_super_repair_scope.py
       - name: Apply and verify each city without collecting a second time
         run: |
-          for city in ASHDOD YAVNE KGAT RISHON HOLON BATYAM; do
+          for city in ASHDOD YAVNE KGAT RISHON HOLON BATYAM TLV; do
             # Partial repair must never publish or complete another city's claim.
             if ! python -c 'import json,sys; sys.exit(0 if sys.argv[1] in json.load(open(".supermarket-repair/manifest.json"))["cities"] else 1)' "$city"; then continue; fi
             python scripts/apply_super_repair.py --city "$city"
@@ -42,6 +42,10 @@ jobs:
               node scripts/test_super_deals.cjs
               python scripts/test_super_homepage.py
               python scripts/audit_super_site.py
+            elif [ "$city" = TLV ]; then
+              python scripts/test_tlv_super_pipeline.py
+              python scripts/build_tlv_super.py
+              python scripts/test_tlv_super_guard.py
             else
               script_city=$(echo "$city" | tr '[:upper:]' '[:lower:]')
               python "scripts/test_${script_city}_super.py" --deployment-only

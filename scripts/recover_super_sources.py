@@ -7,7 +7,7 @@ from datetime import datetime
 from pathlib import Path
 import build_super_deals
 import refresh_super_prices
-CITIES=('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM')
+CITIES=('ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM','TLV')
 WORKSPACE_LOCK=Path(tempfile.gettempdir())/'isnet-supermarket-recovery.lock'
 def read(path):return json.loads(path.read_text()) if path.exists() else {}
 def day(value,now):
