@@ -18,9 +18,8 @@ def localize(content,name,city,suffix):
  content=re.sub(r'([\"\'])ashdod\1',lambda m:m[1]+'kiryat-gat'+m[1],content)
  content=content.replace('location.pathname.includes("/rishon-lezion/")?"rishon-lezion":"kiryat-gat"','"kiryat-gat"')
  if name=='index.html':
-  food='<a class="isnetNavFeature isnetNavFeature--gold culinaryHomepageFeature" href="restaurants.html"><span aria-hidden="true" class="isnetNavFeature__icon">♨</span><span class="isnetNavFeature__copy"><strong>מסעדות וקולינריה</strong><small>מסעדות, בתי קפה ואוכל רחוב</small></span><span aria-hidden="true" class="isnetNavFeature__arrow">←</span></a>'
+  food='<a class="isnetNavFeature isnetNavFeature--gold culinaryHomepageFeature" href="restaurants.html"><span aria-hidden="true" class="isnetNavFeature__icon">♨</span><span class="isnetNavFeature__copy"><strong>מסעדות ובתי קפה</strong><small>מסעדות, בתי קפה ואוכל רחוב</small></span><span aria-hidden="true" class="isnetNavFeature__arrow">←</span></a>'
   cinema='<a class="isnetNavFeature cinemaHomepageFeature" href="cinema.html"><span aria-hidden="true" class="isnetNavFeature__icon">▣</span><span class="isnetNavFeature__copy"><strong>קולנוע בהיכל התרבות</strong><small>הסרטים וההקרנות הקרובות בהיכל</small></span><span aria-hidden="true" class="isnetNavFeature__arrow">←</span></a>'
-  content=re.sub(r'<a class="isnetNavFeature isnetNavFeature--blue" href="cinema.html">[\s\S]*?</a>',lambda _:food,content,count=1)
   # The canonical page has both a menu link and a lifestyle card. Replace the card explicitly.
   content=re.sub(r'<a class="isnetNavFeature culinaryHomepageFeature"[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>',lambda _:cinema,content,count=1)
   content=content.replace('<a href="cinema.html">קולנוע וסרטים</a>','<a href="restaurants.html">מסעדות וקולינריה</a>')
@@ -28,8 +27,10 @@ def localize(content,name,city,suffix):
  content=re.sub(r'<a\b[^>]*data-ashdod-culinary[^>]*>[\s\S]*?</a>','',content)
  content=re.sub(r'<section class="cityDiscover"[\s\S]*?</section>','',content)
  if name=='index.html':
-  nav='<nav class="kgat-discover" aria-label="מגלים את קריית גת"><a href="/meusharim/kiryat-gat/">חוגים וקורסים</a><a href="restaurants.html">מסעדות ובתי קפה</a><a href="places.html?category=parks">פארקים</a><a href="places.html?category=nature">טבע וטיולים באזור</a><a href="places.html?category=culture">מוסדות תרבות</a><a href="attractions.html">אטרקציות ומשפחה</a><a href="places.html?category=must-see">מקומות להכיר</a></nav>'
+  nav='<nav class="kgat-discover" aria-label="מגלים את קריית גת"><a href="/meusharim/kiryat-gat/">חוגים וקורסים</a><a href="places.html?category=parks">פארקים</a><a href="places.html?category=nature">טבע וטיולים באזור</a><a href="places.html?category=culture">מוסדות תרבות</a><a href="attractions.html">אטרקציות ומשפחה</a><a href="places.html?category=must-see">מקומות להכיר</a></nav>'
   content=content.replace('<main',nav+'<main',1)
+  # Keep dining beside the cinema card; never in the compact discovery row.
+  content=re.sub(r'(<nav class="isnetNavDiscovery__lifestyle"[^>]*>)([\s\S]*?)(</nav>)',lambda m:m[1]+m[2]+food+m[3],content,count=1)
   content=content.replace('<a class="isnetNavSmall" href="places.html?category=beaches">','<a class="isnetNavSmall" href="places.html?category=nature">').replace('<strong>חופים</strong>','<strong>טיולים בסביבה</strong>')
  if suffix=='.js':
   content=content.replace('if(e.price_min_ils==null)return "מחיר לא פורסם";', 'if(e.price_min_ils==null)return e.friends_offer?.regular_price_ils!=null?"מחיר רגיל ב־FRIENDS: "+currency.format(e.friends_offer.regular_price_ils):"מחיר לא פורסם";')
