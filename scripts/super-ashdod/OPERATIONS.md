@@ -199,3 +199,11 @@ on unchanged quantities and price differences; never describe it as a forecast o
 actual annual savings. Ordinary shelf prices exclude club deals, delivery and
 travel. The UI shows source dates and complete-branch coverage. Run
 `test_monthly_family_basket.py` after city builders; Pages enforces it before deploy.
+
+## Tel Aviv shared pipeline, 9 November 2026
+
+TLV uses the same official-feed collector via `refresh_tlv_super_prices.py`, with its own `.supermarket-runs/TLV.json` and `super-tlv-prices.yml` daily claim. The reviewed registry contains 19 physical branches (11 Carrefour and 8 Victory); ten legacy Carrefour IDs failed XML identity verification and are pending, not registered sources. Ramat Efal is excluded. The initial connected Work collection verified all 19 source dates as 2026-11-09, 17,886 products and 125,767 branch offers. This one collection is not the three-day stable-operation gate.
+
+Canonical published data lives at `isnet.co.il/SUPER.TLV/data/`. TLVNET's `/super/data/` delivery bridge reads this data instead of requiring a full TLVNET build for each price refresh. Verify actual bridge deployment/read-back before claiming completion. Daily collection never uses the old bootstrap again once committed data exists. Preserve actual source dates and fail closed on offer/catalog delivery failures; do not combine current catalog rows with bundled Nov6 offers. The 3,500 ILS monthly basket remains incomplete (0/19) and must not be ranked or filled with invented prices. Family/basic baskets and smart comparisons are rebuilt from shared fixed definitions. Recipe references remain separately dated.
+
+The existing hash-checked `.supermarket-repair` mechanism and city recovery adapters accept TLV. Do not rescan after a daily claim or recovery allowance is consumed. Work on Windows needs Python UTF-8 mode; the generic recovery locking code uses POSIX fcntl and requires a compatible connected environment. HTTP 401/403 must not be retried around. Public health now includes the actual TLVNET `/super/` URL and 19 reviewed branches, for 121 physical branches across seven city editions.
