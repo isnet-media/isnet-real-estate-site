@@ -22,6 +22,10 @@ on:
       - "SUPER.RISHON/**"
       - "SUPER.HOLON/**"
       - "SUPER.BATYAM/**"
+      - "SUPER.TLV/**"
+      - "scripts/*tlv_super*.py"
+      - "scripts/refresh_tlv_super_prices.py"
+      - "scripts/super-tlv/**"
       - "scripts/*batyam_super*.py"
       - "scripts/refresh_batyam_super_prices.py"
       - "scripts/super-batyam/**"
@@ -113,6 +117,7 @@ on:
       - "Refresh Rishon supermarket prices"
       - "Refresh Holon supermarket prices"
       - "Refresh Bat Yam supermarket prices"
+      - "Refresh Tel Aviv supermarket prices"
       - "Import reviewed Ashdod supermarket site"
       - "Normalize event provenance and audit purchase links"
       - "Repair Rishon public quality"
@@ -319,6 +324,13 @@ jobs:
           python scripts/build_batyam_super.py
           python scripts/test_batyam_super.py --deployment-only
           for script in SUPER.BATYAM/live.js SUPER.BATYAM/assets/*.js; do node --check "$script"; done
+
+      - name: Validate the shared Tel Aviv supermarket data
+        if: hashFiles('SUPER.TLV/data/catalog.json') != ''
+        run: |
+          python scripts/test_tlv_super_pipeline.py
+          python scripts/build_tlv_super.py
+          python scripts/test_tlv_super_guard.py
 
       - name: Verify monthly household comparisons in all cities
         run: python scripts/test_monthly_family_basket.py

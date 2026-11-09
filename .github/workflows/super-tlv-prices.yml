@@ -1,0 +1,51 @@
+name: Refresh Tel Aviv supermarket prices
+on:
+  schedule:
+    - cron: '0 3,4 * * *'
+    - cron: '17 5,8,11,14,17,20 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/super-tlv-prices.yml
+permissions:
+  contents: write
+concurrency:
+  group: tlv-supermarket-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Claim one daily collection after 06:00 Israel
+        id: daily
+        run: python scripts/super_daily_run.py claim --city TLV
+      - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
+        if: steps.daily.outputs.collect == 'true'
+      - name: Collect only reviewed TLV branches with shared adapters
+        if: steps.daily.outputs.collect == 'true'
+        run: |
+          python scripts/test_tlv_super_pipeline.py
+          python scripts/refresh_tlv_super_prices.py --raw-dir "$RUNNER_TEMP/tlv-official"
+          python scripts/build_tlv_super.py
+          python scripts/test_tlv_super_guard.py
+      - name: Preserve collection evidence even after failure
+        if: always() && steps.daily.outputs.collect == 'true'
+        run: tar -czf "$RUNNER_TEMP/super-tlv-evidence.tar.gz" SUPER.TLV/
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.daily.outputs.collect == 'true'
+        with:
+          name: tlv-supermarket-${{ github.run_id }}
+          path: ${{ runner.temp }}/super-tlv-evidence.tar.gz
+          retention-days: 30
+      - name: Publish validated TLV data
+        if: steps.daily.outputs.collect == 'true'
+        run: python scripts/super_daily_run.py publish --city TLV
+      - name: Record failure and retain previous verified prices
+        if: failure() && steps.daily.outputs.collect == 'true'
+        run: python scripts/super_daily_run.py failed --city TLV
