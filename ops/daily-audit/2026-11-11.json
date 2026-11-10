@@ -741,6 +741,136 @@
         "task_or_schedule": 0,
         "operational_journal_only_remote_write": true
       }
+    },
+    {
+      "runKey": "photo-bank-2026-11-11-01:00",
+      "run_id": "51b0f635-4d70-8322-8cee-b9eb94c393fa",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-10T23:59:01Z",
+      "status": "pending",
+      "queue": {
+        "source_audit_rerun": true,
+        "pages": 383,
+        "candidates": 222,
+        "closed": 0,
+        "manual_article_reviews": 2
+      },
+      "source_base": "af020af2a4381502fa8668071e24f50f68f6f437",
+      "live": {
+        "site_version": 538,
+        "collector_enabled": true,
+        "photo_bank_http": 200,
+        "home_http": 200,
+        "both_article_http": 200
+      },
+      "inspections": [
+        {
+          "id": "tmuna-festival-before-new-home-20261124",
+          "url": "https://tlvnet.com/news/tmuna-festival-before-new-home-20261124",
+          "status": "pending",
+          "read_full_text": true,
+          "body_sha256": "52bdba63ed873d53a015f26b1bbbd3af646b7a032b766ba7849a96f6f3465785",
+          "body_matches_live": true,
+          "message": "Five-day Tmu-na festival at current Soncino8 venue before future move; new venue opening/address not announced.",
+          "people": [],
+          "operator": "תיאטרון תמונע",
+          "location": "שונצינו8 תל אביב",
+          "stage": "announced_future_festival_before_move",
+          "displayed_src": "/photo-bank/assets/habima-exterior-2024.jpg",
+          "original_visual": true,
+          "finding": "Original unmistakably shows Habima sign/building, a different named theatre; not Tmu-na venue or festival. Same image also used for unrelated LUMAGICA story.",
+          "replacement": {
+            "status": "pending_download_blocked",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Tmu-na_Theater-Tel-Aviv.jpg",
+            "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Tmu-na_Theater-Tel-Aviv.jpg",
+            "creator": "Yair Haklai",
+            "license": "CC BY-SA 4.0",
+            "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "photo_date": "2018-05-04",
+            "reported_dimensions": [
+              4128,
+              2322
+            ],
+            "individual_license_page_read": true,
+            "source_revision": "1143316491",
+            "planned_credit": "צילום: Yair Haklai · CC BY-SA 4.0 · ארכיון2018",
+            "restrictions": "Archive venue only; not festival2026 documentation or completed relocation. Retain attribution/license and disclose actual transformations, share-alike where required.",
+            "download_attempts": 1,
+            "download_result": "HTTP403 from original URL; no retry or alternate bypass",
+            "downloaded": false,
+            "visual_verified": false,
+            "local_jpg_or_checksum": null
+          }
+        },
+        {
+          "id": "lumagica-yarkon-light-festival-20261112",
+          "url": "https://tlvnet.com/news/lumagica-yarkon-light-festival-20261112",
+          "status": "pending",
+          "read_full_text": true,
+          "body_sha256": "36ca07c0b954f8c8a3642081d79d37291b9ab9cbc8df646bbfdeee74a85ebab7",
+          "body_matches_live": true,
+          "message": "Announced LUMAGICA light-art festival with light installations, water screen and video art at Yarkon Park amphitheatre; not theatre production or past-event image.",
+          "people": [],
+          "operator": "קופת תל אביב; גני יהושע",
+          "location": "אמפי תל אביב פארק הירקון",
+          "stage": "announced_future_event",
+          "displayed_src": "/photo-bank/assets/habima-exterior-2024.jpg",
+          "original_visual": true,
+          "finding": "Habima facade is unrelated to light-art event and wrong venue; same original as adjacent culture story.",
+          "replacement": null,
+          "rights_search": {
+            "official_url": "https://park.co.il/events/lumagica/",
+            "official_page_read": true,
+            "explicit_reuse_archive_permission_found": false,
+            "search_query": "site:lumagica.com \"media\" \"press\" photos Tel Aviv",
+            "result": "No usable explicit release found in returned results. No news-site/producer photo copied; no image from another festival reattributed."
+          }
+        }
+      ],
+      "shared_asset": {
+        "id": "habima-exterior-2024",
+        "sha256": "7803470e3f35f7aa725ae6d0bbca0669311d0ac4816d7500fdc80d6fe6d31c08",
+        "width": 852,
+        "height": 1800,
+        "original_visual_this_run": true,
+        "desktop_site_visual": false,
+        "mobile_site_visual": false
+      },
+      "mechanism": {
+        "signature": "TLVNET|culture legacy cards|subject and duplicates|Habima for unrelated festivals",
+        "evidence": "Both current body hashes match frozen legacy entries mapping to habima-exterior-2024; actual live article markup still uses that src. Existing approval gate is not a new proof of semantic approval of legacy choices.",
+        "snapshot_modified": false
+      },
+      "search_evidence": [
+        {
+          "url": "https://www.tmu-na.org.il/?CategoryID=76",
+          "result": "Official festival description read; no explicit broad photo archive license observed."
+        },
+        {
+          "url": "https://commons.wikimedia.org/wiki/Category:Tmona_Theatre",
+          "result": "Category used for discovery only, then individual Tmu-na file page read.2013Seagull production photos not chosen as2026festival documentation."
+        },
+        {
+          "url": "https://commons.wikimedia.org/wiki/File:Tmu-na_Theater-Tel-Aviv.jpg",
+          "result": "Individual own-work creator/date/CCBY-SA4.0 read; actual original download403 prevents verified asset."
+        }
+      ],
+      "blockers": {
+        "shared_source_write": "Exclusive project/parallel Work ownership remains unverified; no source write or deploy.",
+        "browser": "Prior client block unchanged; no desktop/mobile site visual pass or bypass.",
+        "download": {
+          "signature": "Commons|Tmu-na_Theater-Tel-Aviv.jpg|download|HTTP403",
+          "owner": "photo-desk",
+          "next_attempt_at": "2026-11-11T05:59:01Z",
+          "earlier_condition": "Documented source/access change only; do not loop retries."
+        }
+      },
+      "next_cursor": "Culture pair context-reviewed; pending exact Tmu-na file and event-specific LUMAGICA asset or focused marked illustration after permitted path. Continue unreviewed kids/seniors/rental duplicate groups next; do not restart completed reviews.",
+      "added_assets": 0,
+      "source_mutations": 0,
+      "builds": 0,
+      "deployments": [],
+      "fixed_and_verified": []
     }
   ]
 }
