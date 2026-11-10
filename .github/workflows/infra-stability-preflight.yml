@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'scripts/audit_public_payload.py'
+      - 'scripts/safe_http_probe.py'
       - 'tests/test_audit_public_payload.py'
       - '.github/workflows/pages.yml'
       - '.github/workflows/infra-stability-preflight.yml'
@@ -22,3 +23,13 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_audit_public_payload.py'
       - name: Compile diagnostic script
         run: python -m py_compile scripts/audit_public_payload.py
+  external-http-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Measure existing public sites at no more than one request per second per host
+        run: python scripts/safe_http_probe.py --samples 6 --pause 1.0
