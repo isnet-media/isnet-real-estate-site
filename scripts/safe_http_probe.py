@@ -12,7 +12,7 @@ from urllib.error import HTTPError, URLError
 
 TARGETS = {
     "tlvnet_home": "https://tlvnet.com/",
-    "isnet_events": "https://isnet.co.il/events-preview/tel-aviv/",
+    "isnet_events": "https://isnet.co.il/events-preview/ashdod/",
     "isnet_super": "https://isnet.co.il/SUPER.TLV/",
 }
 def sample(url, timeout):
