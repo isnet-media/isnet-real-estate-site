@@ -21288,6 +21288,121 @@
       "public_deployment_repeated": false,
       "daily_audit_completed": false,
       "scope": "ExistingoperationaljournalCAS only. New owner reports and changed workflow signatures reviewed; no repeated121sourcechecks or editing/mail/draftscans. No task/schedule/storage/server/account/billing/permission mutation."
+    },
+    {
+      "runKey": "photo-bank-2026-11-10-21:00",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "run_id": "937fc4d0-9910-8326-8735-f3584f3d979a",
+      "started_at": "2026-11-10T19:57:26.935252Z",
+      "checked_at": "2026-11-10T20:01:06Z",
+      "domain": "TLVNET photo quality",
+      "status": "inspected_pending_rendered_verification_blocked",
+      "progress_from": "photo-bank-2026-11-10-20:00 dynamiccinema rail candidate; not restarting whole-site audit",
+      "queue": {
+        "command": "python scripts/audit-image-quality.py",
+        "pages": 383,
+        "candidates": 222,
+        "summary": {
+          "duplicate_asset_in_section": 9,
+          "explicit_photo_approval_pending": 115,
+          "portrait_or_poster_needs_framing_review": 7,
+          "rendered_visual_review_pending": 3,
+          "specific_subject_photo_pending": 88
+        },
+        "changed": false,
+        "candidates_closed": 0
+      },
+      "inspections": [
+        {
+          "id": "herzliya-film-896aa32b1c4b",
+          "title": "סוס פרא תשע",
+          "page": "https://tlvnet.com/",
+          "section": "קולנוע בתל אביב",
+          "asset": "/guide/assets/posters/8e53c9ec9001b2507718.jpg",
+          "asset_sha256": "7a2542250b5accc15263e1f781d9ca440320dabe0f3a0a8440518a534d246452",
+          "source": "https://www.cinema-city.co.il/movie/6534",
+          "source_asset_visual": true,
+          "status": "inspected",
+          "observation": "Viewed full original576x828poster. Bottom carries director line/cinema-release text and Searchlight logo. Complete artwork needs protection from captionoverlay. Source title and currentAPI filmidentity match.",
+          "rendered_current_cycle_visual": false,
+          "rendered_prior_observation": "photo-bank-2026-11-10-20:00 screenshot liveposterrail showed attribution over bottom of poster",
+          "repair_status": "pending",
+          "selected_asset_changed": false
+        },
+        {
+          "id": "herzliya-film-cff36aacd018",
+          "title": "הסתברות לאהבה",
+          "page": "https://tlvnet.com/",
+          "asset": "/guide/assets/posters/4a919d817594958626a4.jpg",
+          "asset_sha256": "66afc5dddf83c6d533c10c44418dd21a95713dc46f4f9a77e2bef57d1c88d380",
+          "source": "https://www.cinema-city.co.il/movie/6085",
+          "source_asset_visual": false,
+          "status": "pending",
+          "observation": "Current API metadata/asset source identified; no renewed visual approval or rights grant made.",
+          "selected_asset_changed": false
+        }
+      ],
+      "live_code_evidence": {
+        "api_public_cinema": 200,
+        "api_photo_bank": {
+          "http": 200,
+          "collector_enabled": true,
+          "returned_verified": 122
+        },
+        "css": {
+          "url": "https://tlvnet.com/home-cinema.css",
+          "http": 200,
+          "sha256": "f431e450ca6fd43a427894f1cc9105a449b1e4754f6532bc0f892738e1799fbc",
+          "equals_opened_source": true
+        },
+        "js": {
+          "url": "https://tlvnet.com/home-cinema.js",
+          "http": 200,
+          "sha256": "87ec15befa66a13616443f459b4f6600217376388047197b5e8a666ec9d6742e",
+          "equals_opened_source": true
+        },
+        "mechanism": "home-cinema.js fetches /api/public-cinema, constructs poster/caption inside div.photo, then rail.replaceChildren. It does notapply stored per-source presentation markers on dynamic nodes. CSS forcespostercontain, while normal photo caption remains overlay. Static source audit alone cannot review dynamic currentposters. No assertion of a new rights violation or livecroppingfailure based onmetadata alone."
+      },
+      "browser": {
+        "attempts": 2,
+        "result": "createBrowserTab timedout waitingtab278navigation; binding same278 then Page.getFrameTree timedout",
+        "desktop_current_visual_performed": false,
+        "mobile_visual_performed": false,
+        "bot_detection_claimed": false,
+        "retries_after_two": 0
+      },
+      "ownership": {
+        "photo_run": "937fc4d0-9910-8326-8735-f3584f3d979a",
+        "other_active_project_owners": [
+          {
+            "id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+            "run": "5f09b9dc-a6bc-832a-b387-74538d63f30b"
+          },
+          {
+            "id": "Automation_b38091754d888191abf21a150dc4ed62",
+            "run": "34aef500-117c-832e-aaca-093a932199c7"
+          }
+        ],
+        "exclusive_source_write_verified": false,
+        "no_competing_source_write": true
+      },
+      "proposed_followup": {
+        "status": "pending_not_implemented",
+        "files": [
+          "public/home-cinema.js",
+          "public/home-cinema.css"
+        ],
+        "change": "Move dynamic movie attribution into a separate normal-flow row outside div.photo; preserve current poster/source/credits and existing contain framing. Carry individual source/hash presentation decision into dynamic renderer when applicable. Do not edit generated HTML or change movie sessions.",
+        "prevention": "Rebuild/rerender must preserve fullposter and attribution row; exact asset fixture8e53... with bottomlogo must not intersectcaption at desktop/mobile widths. Check original, livecard and moviepage after correctsourcelease and actualdeployment. Mobilegeometry is not a visualpass.",
+        "required_next": "Verify current remoteHEAD and activewriters, inspect live rendering whenbrowserrecovers; implement bounded sourcechange only under existingownership then tests/prepare/checkbank and one atomicpublication with readback.",
+        "next_attempt_at": "2026-11-10T20:55:00Z"
+      },
+      "source_mutations": 0,
+      "new_assets": 0,
+      "deployed_versions": [],
+      "publication_dates_changed": false,
+      "legacy_snapshot_changed": false,
+      "scope": "Existing operational daily-audit append only. Controller two-field draft left untouched. No Site build/install/commit/push/deploy or schedule/task changes. Photo scan read-only continued despite writeblock."
     }
   ],
   "corrections_this_run": [
@@ -22198,6 +22313,18 @@
       "remaining": "PR67 explicitlyphase1/artifact-only. No independent hosting origin, existingURL readback/cutover, capacity, redirect or rollback test established by these logs. Preserve current sites. No storagequota/ClubVPS inference.",
       "controller_actions": "Read failure/success logs and exact source compare; no rerun, dispatch, cleanup, merge, hosting change or competing collection.",
       "next_attempt_at": "2026-11-11T06:00:00Z"
+    },
+    {
+      "signature": "TLVNET|home dynamic cinema cards|presentation|caption overlays poster",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "status": "pending_rendered_verification",
+      "observed_at": "2026-11-10T20:01:06Z",
+      "observation_runKey": "photo-bank-2026-11-10-21:00",
+      "code_mechanism_verified": true,
+      "live_visual_this_cycle": false,
+      "source_change_implemented": false,
+      "next_attempt_at": "2026-11-10T20:55:00Z",
+      "note": "Candidate retained from previous live screenshot; current originalposter and liveCSS/JS samehashverified. Currentbrowserfailed; no fakefixedstatus."
     }
   ],
   "active_escalation": {
