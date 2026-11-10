@@ -4,6 +4,8 @@ on:
     paths:
       - 'scripts/audit_public_payload.py'
       - 'scripts/safe_http_probe.py'
+      - 'scripts/optimize_public_price_json.py'
+      - 'tests/test_optimize_public_price_json.py'
       - 'tests/test_audit_public_payload.py'
       - '.github/workflows/pages.yml'
       - '.github/workflows/infra-stability-preflight.yml'
@@ -21,6 +23,8 @@ jobs:
           python-version: '3.12'
       - name: Run read-only payload audit unit tests
         run: python -m unittest discover -s tests -p 'test_audit_public_payload.py'
+      - name: Verify JSON pricebook optimizer
+        run: python -m unittest discover -s tests -p 'test_optimize_public_price_json.py'
       - name: Compile diagnostic script
         run: python -m py_compile scripts/audit_public_payload.py
   external-http-probe:
@@ -33,3 +37,14 @@ jobs:
           python-version: '3.12'
       - name: Measure existing public sites at no more than one request per second per host
         run: python scripts/safe_http_probe.py --samples 6 --pause 1.0
+  staging-optimization-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Measure savings on a full public staging copy (no deploy)
+        run: |
+          python scripts/prepare_pages_public.py --output "$RUNNER_TEMP/isnet-preview"
+          python scripts/audit_public_payload.py --root "$RUNNER_TEMP/isnet-preview"
+          python scripts/optimize_public_price_json.py --root "$RUNNER_TEMP/isnet-preview"
+          python scripts/audit_public_payload.py --root "$RUNNER_TEMP/isnet-preview"
