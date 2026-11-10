@@ -6,7 +6,7 @@
   "before_current_sources": 75,
   "candidate_current_sources": 95,
   "total_branches": 121,
-  "publication_status": "validated_package_pending_apply",
+  "publication_status": "published_and_public_json_verified",
   "source_failure_signature": "github-hosted/retailer-directory/ConnectTimeout-or-HTTP403",
   "recovery_failure_signature": "Work/recovery/process/SIGKILL-exit--9",
   "recovery_root_cause": "unverified; kernel log access unavailable; no inferred OOM claim",
@@ -303,5 +303,92 @@
   "package_sha256": "bd8ffd7966a5b788a45e51ae7c035515ad952c117a9a741518537b72981b464f",
   "package_files": 542,
   "package_parts": 64,
-  "validation": "All city builders, deployment checks, monthly basket, recovery gate, repair scope and adapter checks passed; all patches round-trip exactly"
+  "validation": "All city builders, deployment checks, monthly basket, recovery gate, repair scope and adapter checks passed; all patches round-trip exactly",
+  "verified_at": "2026-11-10T09:01:19.182532+00:00",
+  "repair_run_id": "42786124583",
+  "pages_run_id": "42786398614",
+  "public_source_commit": "820f9236bb0815dc842d8b635f3d0f163335ff9c",
+  "current_source_count": 95,
+  "retained_source_count": 26,
+  "public_readback": {
+    "ASHDOD": {
+      "sourceHash": 1606614872,
+      "count": 20,
+      "current": 20,
+      "checked": "2026-11-10T10:41:52.204284+02:00"
+    },
+    "YAVNE": {
+      "sourceHash": 325865227,
+      "count": 7,
+      "current": 7,
+      "checked": "2026-11-10T10:40:34.858582+02:00"
+    },
+    "KGAT": {
+      "sourceHash": 1183208113,
+      "count": 9,
+      "current": 9,
+      "checked": "2026-11-10T10:42:53.508070+02:00"
+    },
+    "RISHON": {
+      "sourceHash": 1872726177,
+      "count": 24,
+      "current": 17,
+      "checked": "2026-11-10T09:32:53.380274+02:00"
+    },
+    "HOLON": {
+      "sourceHash": 3077903620,
+      "count": 23,
+      "current": 23,
+      "checked": "2026-11-10T10:44:40.463723+02:00"
+    },
+    "BATYAM": {
+      "sourceHash": 393758667,
+      "count": 19,
+      "current": 19,
+      "checked": "2026-11-10T10:45:21.841600+02:00"
+    },
+    "TLV": {
+      "sourceHash": 3045777471,
+      "count": 19,
+      "current": 0,
+      "checked": "2026-11-10T09:33:10.974956+02:00"
+    }
+  },
+  "tlv_bridge_verified": {
+    "canonical": "https://isnet.co.il/SUPER.TLV/data/",
+    "client": "https://tlvnet.com/api/super-data/",
+    "source_hash": 3045777471,
+    "branches": 19,
+    "source_date": "2026-11-09"
+  },
+  "sample_verification": {
+    "branches": 121,
+    "repaired_city_samples_reverified_after_deploy": 78,
+    "unchanged_RISHON_TLV_samples_verified_earlier_this_cycle": 43,
+    "all_match_repository": true,
+    "shard": "offers/00.json"
+  },
+  "claims": "All seven remain completed; no claim released; all seven recovery attempts consumed and published",
+  "operational_handoff": {
+    "owner": "general operational controller",
+    "status": "blocked",
+    "signature": "Work/supermarket-recovery/process/SIGKILL--9",
+    "cities": [
+      "RISHON",
+      "TLV"
+    ],
+    "missing_interface": "Kernel termination/OOM diagnostics unavailable: dmesg Operation not permitted; root cause unverified",
+    "action_needed": "Investigate Work process termination before next permitted daily recovery; do not repeat source requests today",
+    "publication_blocked": false
+  },
+  "ui_verification_limit": "JSON read-back passed in browser; additional homepage snapshot hit browser protocol timeout after initial render; no site-failure claim",
+  "next_check_policy": "Compare run IDs, public source metadata signatures and publication version first. Do not re-download catalogs/offers if unchanged. No further source recovery today.",
+  "artifact_repair_evidence": {
+    "run_id": "42775926553",
+    "artifact_id": "13744530583",
+    "name": "supermarket-refresh-42775926553",
+    "size_in_bytes": 12180208,
+    "expired": false,
+    "result": "Upload succeeded today; no claim of three-day stability or runner network recovery"
+  }
 }
