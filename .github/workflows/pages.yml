@@ -361,6 +361,11 @@ jobs:
           python scripts/test_prepare_pages_public.py
           python scripts/prepare_pages_public.py --output "$RUNNER_TEMP/isnet-pages-public"
 
+      - name: Optimize JSON payload without changing source or price values
+        run: |
+          python -m unittest discover -s tests -p 'test_optimize_public_price_json.py'
+          python scripts/optimize_public_price_json.py --root "$RUNNER_TEMP/isnet-pages-public"
+
       - name: Report public payload size by directory
         run: |
           python -m unittest discover -s tests -p 'test_audit_public_payload.py'
