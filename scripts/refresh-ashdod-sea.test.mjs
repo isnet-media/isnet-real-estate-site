@@ -7,3 +7,5 @@ test('extracts wave centimetres, not sea-state code',()=>assert.deepEqual(parseS
 test('rejects other regions and malformed or reversed ranges',()=>{for(const xml of [fixture('40 / 50-30'),fixture('unavailable'),fixture('40 / 30-50','210')])assert.throws(()=>parseSea(xml,now));});
 test('does not publish expired forecast',()=>assert.throws(()=>parseSea(fixture(),new Date('2026-11-02T10:00:00Z'))));
 test('uses Israel local time, including summer time',()=>{assert.equal(localTime(now),'2026-11-01T12:00');assert.equal(localTime(new Date('2026-07-01T10:00:00Z')),'2026-07-01T13:00');});
+
+test('central coast requires its own identity and valid dates',()=>{const xml=fixture('40 / 40-80','210').replace('Southern Coast','Central Coast');assert.equal(parseSea(xml,now,210).regionId,210);assert.equal(parseSea(xml,now,210).periods[0].maxCm,80);assert.throws(()=>parseSea(fixture(),now,210));assert.throws(()=>parseSea(xml,new Date('2026-11-02T10:00:00Z'),210));});

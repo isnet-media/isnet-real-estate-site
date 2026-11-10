@@ -10,9 +10,10 @@ export function localTime(date=new Date()) {
 }
 function value(xml,tag){const m=xml.match(new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`));if(!m)throw new Error(`Missing ${tag}`);return m[1].trim();}
 function time(s){if(!/^\d{4}-\d\d-\d\d \d\d:\d\d$/.test(s))throw new Error('Invalid forecast time');return s.replace(' ','T');}
-export function parseSea(xml,now=new Date()) {
-  const region=[...xml.matchAll(/<Location>([\s\S]*?)<\/Location>/g)].map(m=>m[1]).find(s=>value(s,'LocationId')==='213');
-  if(!region||value(region,'LocationNameEng')!=='Southern Coast')throw new Error('Missing Southern Coast forecast');
+export function parseSea(xml,now=new Date(),regionId=213) {
+  const region=[...xml.matchAll(/<Location>([\s\S]*?)<\/Location>/g)].map(m=>m[1]).find(s=>value(s,'LocationId')===String(regionId));
+  const names={213:['Southern Coast','החוף הדרומי'],210:['Central Coast','החוף המרכזי']};
+  if(!names[regionId]||!region||value(region,'LocationNameEng')!==names[regionId][0])throw new Error('Missing expected coast forecast');
   const periods=[...region.matchAll(/<TimeUnitData>([\s\S]*?)<\/TimeUnitData>/g)].map(m=>{
     const s=m[1],elements=[...s.matchAll(/<Element>([\s\S]*?)<\/Element>/g)].map(m=>[value(m[1],'ElementName'),value(m[1],'ElementValue')]);
     const fields=Object.fromEntries(elements),wave=fields['Sea status and waves height']?.match(/^\d+\s*\/\s*(\d+)-(\d+)$/);
@@ -23,7 +24,7 @@ export function parseSea(xml,now=new Date()) {
   });
   const localNow=localTime(now);
   if(!periods.some(p=>p.from<=localNow&&localNow<p.to))throw new Error('No currently valid forecast; retaining last good file');
-  return {schema:1,city:'אשדוד',regionId:213,region:'החוף הדרומי',source:'השירות המטאורולוגי הישראלי',sourceUrl:SOURCE,timeZone:'Asia/Jerusalem',issuedAtLocal:time(value(xml,'IssueDateTime')),fetchedAt:now.toISOString(),periods};
+  return {schema:1,city:regionId===213?'אשדוד':null,regionId,region:names[regionId][1],source:'השירות המטאורולוגי הישראלי',sourceUrl:SOURCE,timeZone:'Asia/Jerusalem',issuedAtLocal:time(value(xml,'IssueDateTime')),fetchedAt:now.toISOString(),periods};
 }
 async function main(){
   let bytes,lastError;
@@ -32,8 +33,11 @@ async function main(){
   }
   if(!bytes)throw lastError;
   const xml=new TextDecoder('iso-8859-8').decode(bytes),data=parseSea(xml);
+  const central=parseSea(xml,new Date(),210);
   const output=process.argv[2]||'weather/ashdod/sea.json';
   await mkdir(resolve(output,'..'),{recursive:true});await writeFile(output,JSON.stringify(data,null,2)+'\n');
+  const centralOutput=resolve(output,'../central.json');
+  await writeFile(centralOutput,JSON.stringify(central,null,2)+'\n');
   console.log(JSON.stringify({region:data.region,periods:data.periods,issuedAt:data.issuedAtLocal}));
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url))await main();
