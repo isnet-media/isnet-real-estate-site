@@ -6499,6 +6499,36 @@
       "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
       "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
       "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ui-maintenance-2026-11-10-10:44",
+      "agent_id": "6ae8893c6e30819192dd11bddff9e078",
+      "to": "Automation_b38091754d888191abf21a150dc4ed62",
+      "signature": "ISNET+TLVNET|UI audit|public HTTP reader|403",
+      "status": "blocked_observability",
+      "checked_at": "2026-11-10T08:51:43.000Z",
+      "reason": "15 public HTML probes were refused from this environment; current independent GitHub health passed. Need a permitted public HTTP reading surface; do not bypass 403.",
+      "site_outage_claim": false,
+      "repair_attempts": 0,
+      "duplicate_source_or_deploy_attempts": 0,
+      "next_probe_at": "2026-11-10T14:51:43.000Z",
+      "earlier_probe_only_if": "Verified change in access/tool state/code/ownership; no repeated same-input diagnosis.",
+      "recorded_in": "Existing controller daily-audit only; no site deployment"
+    },
+    {
+      "runKey": "ui-maintenance-2026-11-10-10:44",
+      "agent_id": "6ae8893c6e30819192dd11bddff9e078",
+      "to": "Automation_b38091754d888191abf21a150dc4ed62",
+      "signature": "ISNET+TLVNET|UI audit|browser runtime|unavailable",
+      "status": "blocked_observability",
+      "checked_at": "2026-11-10T08:51:43.000Z",
+      "reason": "Browser app js unknown tool and cloud CDP tab unavailable. Need working authorized Browser/CDP target for fresh desktop/mobile, RTL, client errors, search and map interaction.",
+      "site_outage_claim": false,
+      "repair_attempts": 0,
+      "duplicate_source_or_deploy_attempts": 0,
+      "next_probe_at": "2026-11-10T14:51:43.000Z",
+      "earlier_probe_only_if": "Verified change in access/tool state/code/ownership; no repeated same-input diagnosis.",
+      "recorded_in": "Existing controller daily-audit only; no site deployment"
     }
   ],
   "next_actions": [
@@ -13821,6 +13851,89 @@
           "metric_rule": "Only label actual entry events לחיצות, never unique readers or confirmed reading; no synthetic metric claim."
         }
       ]
+    },
+    {
+      "runKey": "ui-maintenance-2026-11-10-10:44",
+      "domain": "UI maintenance only",
+      "checked_at": "2026-11-10T08:51:43.000Z",
+      "status": "partial_read_only_verified_direct_visual_blocked",
+      "authorization": "Publisher10Nov scoped UI maintenance and existing journal handoff; ops-only CAS append. No shared-content or deployment exclusivity asserted.",
+      "instruction_sources": [
+        "main recursive tree: no AGENTS.md",
+        "scripts/super-ashdod/OPERATIONS.md",
+        "ops/REPAIR_2026-11-10.md",
+        "ops/daily-audit/2026-11-10.json",
+        "publisher10Nov scope split"
+      ],
+      "source_commit_read": "fc24325e908b62230c99f94428c5541763eb35d4",
+      "owners_reviewed": {
+        "supermarkets": {
+          "id": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "run_id": "4d12cc3a-756c-832c-af43-543a741254ae",
+          "status": "in_progress",
+          "previous_result_not_attributed_to_current_run": true
+        },
+        "events": {
+          "id": "6acb0ab1c1988191a700f8fb4287c8e0",
+          "latest_completed_run": "52ed9198-f030-8322-b9dc-221de15a58ab",
+          "result_date": "2026-11-09",
+          "not_claimed_today": true
+        },
+        "controller": {
+          "id": "Automation_b38091754d888191abf21a150dc4ed62",
+          "latest_completed_run": "45c1acdc-af40-8332-9088-12fe676376a6"
+        }
+      },
+      "verified_by_existing_evidence": {
+        "pages_run": 42778875884,
+        "public_events_health_run": 42779544888,
+        "event_readback_run": 42779544440,
+        "backup_run": 42596051320,
+        "backup_success_at": "2026-11-09T09:49:03Z",
+        "backup_under48h": true,
+        "successful_health_within3h": true,
+        "latest_pages_ui_validation_steps": "Passed JavaScript/layout, date previews, local links, basket/comparison/list/promotion/header and seven-city validation. Existing CI evidence reused; not rerun.",
+        "pr42": {
+          "state": "open",
+          "merged": false,
+          "head": "e216bc93cdfa073254d71c0cb7b9b1ad7740c94f",
+          "not_redeployed": true
+        }
+      },
+      "direct_probes": {
+        "public_html_attempts": 15,
+        "public_html_results": "All returned HTTP403 from this environment; no bypass, alternate headers, repeat or outage inference.",
+        "targets": [
+          "SUPER.ASHDOD",
+          "SUPER.YAVNE",
+          "SUPER.KGAT",
+          "SUPER.RISHON",
+          "SUPER.HOLON",
+          "SUPER.BATYAM",
+          "tlvnet.com/super/",
+          "events-preview/ashdod/",
+          "events-preview/rishon-lezion/",
+          "events-preview/yavne/",
+          "events-preview/kiryat-gat/",
+          "events-preview/holon/",
+          "events-preview/herzliya/",
+          "tlvnet.com/guide/",
+          "bus/ashdod/"
+        ],
+        "browser_app": "Unknown tool browser.js",
+        "cloud_browser": "Unknown CDP tab73",
+        "fresh_DOM_console_mobile_RTL_search_navigation_validation": "blocked; not claimed completed"
+      },
+      "source_collection_attempts": 0,
+      "source_recovery_attempts": 0,
+      "content_mutations": 0,
+      "builds": 0,
+      "deploys": 0,
+      "schedule_changes": 0,
+      "real_estate_actions": 0,
+      "ui_bug_verified": false,
+      "write_scope": "Append only to existing ops/daily-audit with expected blob SHA; preserve controller status/history and all source data.",
+      "notification": "no_update; known access limitations and recovered publication, no new verified website defect"
     }
   ],
   "corrections_this_run": [
