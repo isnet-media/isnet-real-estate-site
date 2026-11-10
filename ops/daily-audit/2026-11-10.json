@@ -21403,6 +21403,118 @@
       "publication_dates_changed": false,
       "legacy_snapshot_changed": false,
       "scope": "Existing operational daily-audit append only. Controller two-field draft left untouched. No Site build/install/commit/push/deploy or schedule/task changes. Photo scan read-only continued despite writeblock."
+    },
+    {
+      "runKey": "photo-bank-2026-11-10-22:00",
+      "run_id": "2a26dcd4-db68-8322-9538-74aefee721e1",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-10T21:05:28Z",
+      "status": "inspected_pending_rendered_verification_blocked",
+      "queue": {
+        "script_rerun": true,
+        "pages": 383,
+        "candidates": 222,
+        "closed": 0
+      },
+      "source": {
+        "local": "af9e1aad2bf61b767bc2512edb283350b5fe70de",
+        "remote": "79d3102e454f61a7927c254e56aa50167e92ce39",
+        "diff": "Only culture and real-estate ledgers changed; audit/code/assets unchanged.",
+        "opening_error": "Remote Site source advanced while local edits are present. Preserve and reconcile those edits before retrying.",
+        "preserved_draft": "public/news/briefs-writer-profile.json"
+      },
+      "live": {
+        "version": 538,
+        "photo_bank_http": 200,
+        "items": 122,
+        "collector_enabled": true,
+        "cinema_api_http": 200,
+        "cinema_js_sha256": "87ec15befa66a13616443f459b4f6600217376388047197b5e8a666ec9d6742e",
+        "cinema_css_sha256": "f431e450ca6fd43a427894f1cc9105a449b1e4754f6532bc0f892738e1799fbc"
+      },
+      "inspections": [
+        {
+          "url": "https://tlvnet.com/culture/article-daily-2026-11-05",
+          "location": "homepage culture card and article candidate",
+          "status": "inspected",
+          "asset": "/culture/assets/daily-2026-11-05-substance.jpg",
+          "sha256": "02a7e5c6391558315b77f1c0f36264964a0e289b1cad1dbdd6a421f770e575c4",
+          "article_html_sha256": "9f29f289ec73603eb23dfbe1bef450a12872e28db33cf7ffb7a8e5b5791a7f7b",
+          "read_full_article": true,
+          "original_visual": true,
+          "message": "Retrospective on The Substance (2024), beauty-industry self-upgrade pressure and critical reception; not a new release or personal viewing report.",
+          "findings": "Poster context matches film. Cast/title/Cannes award top, release/distributor logos bottom; full frame needs protection and separate credit. Existing promotional credit does not establish fresh reuse rights.",
+          "desktop_visual": false,
+          "mobile_visual": false,
+          "rendered_status": "pending"
+        }
+      ],
+      "blockers": [
+        {
+          "signature": "TLVNET|photo-bank|browser|ERR_BLOCKED_BY_CLIENT",
+          "evidence": "Native screenshot shows tlvnet.com/ops/MONITOR.md blocked by Chromium. Extension js Unknown tool; native navigation unavailable AT-SPI provider. No bypass or site visual verification.",
+          "root_cause": "Client block observed; policy/config cause unavailable.",
+          "owner": "operational-controller",
+          "next_attempt_at": "2026-11-10T21:55:00Z"
+        },
+        {
+          "signature": "TLVNET|source|open|remote advanced with local edits",
+          "owner": "operational-controller",
+          "next_attempt_at": "2026-11-10T21:55:00Z"
+        }
+      ],
+      "source_mutations": 0,
+      "new_assets": 0,
+      "deployments": [],
+      "next_cursor": "Dynamic cinema credit overlay remains pending current rendered view; Substance original inspected, framing candidate not closed."
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-22:58",
+      "run_id": "34e2f17a-7ef0-832a-acba-2f9e69b6ac66",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "checked_at": "2026-11-10T21:05:28Z",
+      "status": "partial",
+      "daily_audit_completed": false,
+      "scope": "New run/result evidence only; no supermarket source rescans or editorial duplicate work.",
+      "observations": [
+        {
+          "signature": "TLVNET|culture-news|execution|environment allocation",
+          "status": "one_actual_run_recovered",
+          "run_id": "8fc7f815-2858-8326-8a38-b76da975f366",
+          "completed_at": "2026-11-10T20:50:46.315310Z",
+          "result": "culture-news-2026-11-10-22:00 no_update",
+          "source_commit": "79d3102e454f61a7927c254e56aa50167e92ce39",
+          "evidence": "Dedicated culture task latest_result matches its run; fresh source ledger records six concrete source reads 20:45:50–20:47:55Z. Not proof of permanent allocation/routing fix."
+        },
+        {
+          "signature": "TLVNET|main news sports|result routing|real estate report",
+          "status": "open_unchanged",
+          "latest_result_run": "43e7b780-8af4-8325-9923-afb3f45f6f14",
+          "latest_result_domain": "real-estate",
+          "active_run": "0d67f4d5-ee14-8325-8021-de530598d7ef",
+          "owner": "operational-controller",
+          "next_attempt_at": "2026-11-10T21:58:00Z",
+          "reason": "Previous result not attributed to active new run; underlying routing logs unavailable. Culture source ownership draft remains unpublished."
+        },
+        {
+          "signature": "TLVNET|services|health",
+          "status": "verified",
+          "url": "https://tlvnet.com/api/site-health",
+          "http": 200,
+          "checked_at": "2026-11-10T21:03:53.740Z",
+          "database": "ok",
+          "mediaStorage": "ok",
+          "publicationStorage": "ok"
+        }
+      ],
+      "photo_current_run": "2a26dcd4-db68-8322-9538-74aefee721e1",
+      "photo_evidence_runKey": "photo-bank-2026-11-10-22:00",
+      "limitations": [
+        "Daily audit incomplete; no live desktop/mobile visual pass.",
+        "Publisher owner identifiers not accessible as automation IDs; no deletion inferred.",
+        "Source draft preserved; active main run; no competing write/build/deploy."
+      ],
+      "mutations": "Existing operational daily audit only; no source content/task/schedule changes."
     }
   ],
   "corrections_this_run": [
