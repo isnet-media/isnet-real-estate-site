@@ -2,8 +2,8 @@ name: Refresh Ashdod sea forecast
 on:
   workflow_dispatch:
   schedule:
-    # Bounded scheduled refresh; stale upstream forecasts remain explicit failures.
-    - cron: '17 0,6,12,18 * * *'
+    # Morning and noon in Israel (08:17/12:17 winter; 09:17/13:17 summer).
+    - cron: '17 6,10 * * *'
   push:
     branches: [main]
     paths:

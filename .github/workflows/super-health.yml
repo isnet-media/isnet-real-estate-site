@@ -1,8 +1,8 @@
 name: All cities supermarket public health
 on:
   schedule:
-    # Morning/evening full checks (UTC). Hourly owner monitors data changes.
-    - cron: '30 6,16 * * *'
+    # Morning full check only (UTC). Hourly owner monitors changes, not full scans.
+    - cron: '30 6 * * *'
   workflow_dispatch:
   push:
     branches: [main]
