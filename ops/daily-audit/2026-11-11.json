@@ -485,5 +485,108 @@
     "deployment": 0,
     "task_state": 0,
     "schedule": 0
-  }
+  },
+  "run_observations": [
+    {
+      "runKey": "photo-bank-2026-11-11-00:00",
+      "run_id": "55ba269a-53dc-8322-bb2c-732a809763b9",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-10T22:54:00Z",
+      "status": "pending",
+      "scope": "Photo queue/source behavior only. No source choices or website images published.",
+      "queue": {
+        "audit_script_rerun": true,
+        "source_pages": 383,
+        "candidates": 222,
+        "closed": 0,
+        "manual_new_article_reviews": 0
+      },
+      "live": {
+        "latest_version": 538,
+        "photo_bank_http": 200,
+        "collector_enabled": true,
+        "returned_verified_items": 122,
+        "blockedIds": "Not exposed in response; no new asset selected or blocked asset reused."
+      },
+      "candidate": {
+        "signature": "TLVNET|legacy community image|review withdrawal|same frozen asset persists",
+        "related_urls": [
+          "https://tlvnet.com/news/polish-speaking-community-walk-tlv-20261113",
+          "https://tlvnet.com/news/nahal-mordechai-tlv-memorial-run-20261106"
+        ],
+        "prior_full_text_review_run": "photo-bank-2026-11-10-23:00",
+        "target": "scripts/news_images.py::resolve_article_media",
+        "status": "prepared_not_applied",
+        "baseline": "Original resolver returns legacy square even when fixture supplies current full-text rejected review. This is current frozen preservation behavior; no new-asset approval bypass is claimed.",
+        "patch": {
+          "insert_after": "Legacy body hash and compatible previous-photo validation; before materialized-cache comment and return old['media'].",
+          "line": "if context_current(a) and review.get('status')=='rejected' and review.get('rejected_bank_id')==old.get('photo_bank_id'):return None",
+          "review_shape": {
+            "status": "rejected",
+            "rejected_bank_id": "dizengoff-square-2024",
+            "read_full_text": true,
+            "body_sha256": "Must recompute from current fully read body_html before any actual source write.",
+            "selection_reason": "Exact legacy image is not the article subject; keep text-only pending an appropriate approved asset."
+          },
+          "legacy_snapshot_mutation": false,
+          "body_or_publication_date_mutation": false
+        },
+        "validation": {
+          "mode": "compile modified module in memory; no source file writes or installer/build",
+          "passed": 5,
+          "cases": [
+            "Current full-text rejection of exact legacy ID suppresses that image.",
+            "Missing full-text proof cannot withdraw an unrelated legacy choice.",
+            "Rejection naming another asset does not withdraw current image.",
+            "Current correctly approved explicit assignment still renders.",
+            "Removing pending image keeps headline and body text readable."
+          ],
+          "baseline_reproduced": true,
+          "existing_full_prepare_public_run": false
+        },
+        "preconditions_before_application": [
+          "Open/reconcile latest Sites source preserving controller profile draft.",
+          "Verify exclusive ownership and no active project write/deploy through accessible project mechanism.",
+          "Reread current full article and record matching rejection hash; no blanket rejection of legacy208.",
+          "Run full applicable photo regression/check-photo-bank/prepare-public and supported deployment.",
+          "Verify live home and article plus actual desktop/mobile view before fixed_and_verified."
+        ]
+      },
+      "ownership": {
+        "main_last_run": "f518292d-e108-8325-b570-b6a13251e716",
+        "main_status": "completed",
+        "real_estate_last_run": "c0ca26b1-17e8-8329-8928-c3530dc1b089",
+        "real_estate_status": "completed",
+        "culture_last_run": "a024772a-9464-8326-8329-a340a3226f2f",
+        "culture_status": "completed",
+        "exclusive_Work_or_project_write_verification": "Unavailable; completed cloud runs alone do not prove absence of parallel Work writes.",
+        "source_draft_preserved": "public/news/briefs-writer-profile.json, two semantic changes; untouched",
+        "source_base_used": "af9e1aad2bf61b767bc2512edb283350b5fe70de",
+        "fresh_source_reconciliation": "Not retried with unchanged blocker; candidate must be rebased/revalidated before application."
+      },
+      "blockers": [
+        {
+          "signature": "TLVNET|source|open|remote advanced with local edits",
+          "status": "blocked_unchanged",
+          "owner": "operational-controller",
+          "next_attempt_at": "2026-11-11T03:02:00Z",
+          "earlier_condition": "Evidence of source ownership/access/code change permits earlier reconciliation."
+        },
+        {
+          "signature": "TLVNET|photo-bank|browser|ERR_BLOCKED_BY_CLIENT",
+          "status": "blocked_unchanged_no_retry",
+          "owner": "operational-controller",
+          "next_attempt_at": "2026-11-11T03:02:00Z",
+          "underlying_policy_cause": "Unknown; no bypass attempted."
+        }
+      ],
+      "desktop_visual": false,
+      "mobile_visual": false,
+      "source_files_written": 0,
+      "new_assets": 0,
+      "builds": 0,
+      "deployments": [],
+      "next_cursor": "Apply tested explicit legacy rejection only after ownership/source reconciliation; otherwise continue unreviewed duplicate/framing candidates."
+    }
+  ]
 }
