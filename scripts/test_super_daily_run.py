@@ -34,7 +34,10 @@ for p in (d.ROOT/'.github/workflows').glob('super*-prices.yml'):
  t=p.read_text()
  assert 'super_daily_run.py claim' in t and 'super_daily_run.py publish' in t,p
  assert "local_hour" not in t,p
- assert '0 3,4 * * *' in t,p
+ import re
+ crons=re.findall(r"cron: '([^']+)'",t)
+ assert len(crons)==1 and crons[0].split()[1:]==['3,4,5,6','*','*','*'],p
+ assert 0<int(crons[0].split()[0])<60,p
  if p.name!='super-prices.yml':assert '--deployment-only' in t,p
  assert '  refresh:' in t and '    steps:' in t,p
 print('Passed: DST, delayed runners, once-daily failed/successful attempts, concurrent publication retry and six workflow guards')

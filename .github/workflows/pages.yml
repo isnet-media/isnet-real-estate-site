@@ -99,6 +99,7 @@ on:
       - "scripts/repair_stage_source_metadata.py"
       - "scripts/test_stage_source_metadata.py"
       - ".github/workflows/pages.yml"
+      - "scripts/prepare_pages_public.py"
       - "scripts/qa-pricebooks.cjs"
       - "scripts/prepare-pricebook-sync.py"
       - "scripts/test-pricebook-sync.py"
@@ -355,10 +356,15 @@ jobs:
         with:
           enablement: true
 
+      - name: Stage public assets without collector source and evidence
+        run: |
+          python scripts/test_prepare_pages_public.py
+          python scripts/prepare_pages_public.py --output "$RUNNER_TEMP/isnet-pages-public"
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ${{ runner.temp }}/isnet-pages-public
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Deploy
@@ -366,6 +372,8 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+          # Slow syncing must not be cancelled at the previous ten-minute boundary.
+          timeout: 1200000
 
 
 

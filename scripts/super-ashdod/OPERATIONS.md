@@ -7,7 +7,10 @@ it does not run inside the Ashdodnet CMS. Browser shopping lists remain local.
 ## Collection and publication
 
 `super-prices.yml` claims one collection per Israel calendar day, starting at
-06:00 local time (summer/winter UTC wake-ups plus delayed-scheduler recovery).
+after 06:00 local time. Morning wake-ups use separate minutes for each city at
+03,04,05,06 UTC; the durable gate rejects the pre-06:00 winter wake-up.
+Do not require a completed daily claim before starting a normal missing daily
+collection; that prerequisite applies only to the separate stale-source recovery.
 Later wake-ups skip a day already claimed, including failed attempts. Only registered branch IDs from the
 catalogue are collected. `refresh_super_prices.py` uses official public file
 portals; publishedprices accounts are retailer-provided public users with empty
@@ -46,8 +49,7 @@ different unreviewed food type to pass the check.
 
 ## Monitoring and recovery
 
-`super-health.yml` checks public core pages in all six cities daily and after a
-successful Pages deployment, branch age (over one day), a missing morning
+`super-health.yml` checks public core pages across seven destinations once each morning, branch age (over one day), a missing morning
 collection after 08:00 Israel (with the Saturday pause), and partial sources. It is read-only. GitHub Actions
 failure notifications follow the repository owner's notification settings; the
 ChatGPT monitoring task provides a separate user-facing alert path.

@@ -1,10 +1,8 @@
 name: Refresh Holon supermarket prices
 on:
   schedule:
-    # 06:00 Israel in summer/winter; later wake-ups recover scheduler delays.
-    # The durable daily claim prevents any additional collection that day.
-    - cron: '0 3,4 * * *'
-    - cron: '17 5,8,11,14,17,20 * * *'
+    # Stagger cities away from top-of-hour load; daily claim still permits one scan only.
+    - cron: '23 3,4,5,6 * * *'
   workflow_dispatch:
   push:
     branches: [main]
