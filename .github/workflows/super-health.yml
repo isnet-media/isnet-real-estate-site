@@ -1,20 +1,19 @@
 name: All cities supermarket public health
 on:
   schedule:
-    # One daily verification after the morning collection (UTC).
-    - cron: '30 6 * * *'
+    # Morning/evening full checks (UTC). Hourly owner monitors data changes.
+    - cron: '30 6,16 * * *'
   workflow_dispatch:
   push:
     branches: [main]
     paths: ['scripts/check_super_public.py', 'scripts/test_super_public_freshness.py', '.github/workflows/super-health.yml']
-  workflow_run:
-    workflows: ["Publish priceboard"]
-    types: [completed]
 permissions:
   contents: read
+concurrency:
+  group: supermarket-public-health
+  cancel-in-progress: false
 jobs:
   check:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

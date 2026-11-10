@@ -1,14 +1,9 @@
 name: Update event analytics
 
+# Automatic polling paused: GA4_SERVICE_ACCOUNT_JSON is missing (verified 2026-11-10).
+# Restore scheduling only after a successful authorized manual configuration check.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "scripts/fetch_event_analytics.py"
-      - ".github/workflows/update-event-analytics.yml"
-  schedule:
-    - cron: "17 * * * *"
 
 permissions:
   contents: write
