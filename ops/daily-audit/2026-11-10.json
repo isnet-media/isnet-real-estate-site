@@ -9178,6 +9178,16 @@
       "recorded_in": "Existing unified daily-audit",
       "next_attempt_at": "2026-11-10T16:58:00Z",
       "reason": "Freshrun/results and changedproductevidence recorded; no duplicateownerwork."
+    },
+    {
+      "runKey": "enrichment-2026-11-10-18:20",
+      "agent_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "from_agent": "Automation_4c9b538f29d081918b3cbb12595b0989",
+      "status": "new_local_runtime_blocker_enrichment_data_unchanged",
+      "recorded_in": "Existing daily-audit",
+      "owner_ledger_updated": false,
+      "signature": "Work|scratch filesystem|mkdir|ENOSPC",
+      "next_attempt_at": "2026-11-10T16:58:00Z"
     }
   ],
   "next_actions": [
@@ -18532,6 +18542,93 @@
         }
       ],
       "culture_source_repair_status": "repair_prepared_wait_active_owners_remote_build_fallback_verified"
+    },
+    {
+      "runKey": "enrichment-2026-11-10-18:20",
+      "domain": "Meusharim TLV independent provider catalog",
+      "owner": "Automation_4c9b538f29d081918b3cbb12595b0989",
+      "run_id": "9fee56fe-4de8-832d-9aaa-0d6317729da7",
+      "started_at": "2026-11-10T16:21:15.678978Z",
+      "checked_at": "2026-11-10T16:23:03.295Z",
+      "status": "no_update_verified_already_fresh",
+      "authorization": "Publisher requested existing public-enrichment cache warmer/readback only. Same enabled owner/currentrun verified. No otherdomain agent activated or inventorywide/controller audit repeated.",
+      "mechanism": {
+        "url": "https://tlvnet.com/api/public-enrichment?refresh=1",
+        "http": 200,
+        "performed": false,
+        "reason": "already_fresh",
+        "readback_url": "https://tlvnet.com/api/public-enrichment",
+        "readback_http": 200,
+        "records": 187,
+        "unique_ids": 187,
+        "duplicate_ids": 0,
+        "refresh_and_separate_readback_records_equal": true,
+        "refresh_and_readback_source_states_equal": true,
+        "records_sha256": "583e94dbb4eb395f4407c36c02be58cd9dde9fc278440a436c0d47af0c339cfb",
+        "coverage": "partial",
+        "successful_sources": 8,
+        "total_sources": 9,
+        "last_successful_sources_verified_at": "2026-11-10T12:50:21.833Z",
+        "last_attempted_at": "2026-11-10T12:50:21.833Z",
+        "collection_attempts_started_by_current_explicit_refresh": 0
+      },
+      "sources": [
+        {
+          "id": "museum-courses",
+          "records": 23,
+          "status": "ok"
+        },
+        {
+          "id": "museum-workshops",
+          "records": 11,
+          "status": "ok"
+        },
+        {
+          "id": "tau-arts",
+          "records": 100,
+          "status": "ok"
+        },
+        {
+          "id": "crafted",
+          "records": 13,
+          "status": "ok"
+        },
+        {
+          "id": "minshar",
+          "records": 8,
+          "status": "ok"
+        },
+        {
+          "id": "athena",
+          "records": 5,
+          "status": "ok"
+        },
+        {
+          "id": "collective",
+          "records": 2,
+          "status": "ok"
+        },
+        {
+          "id": "gal",
+          "records": 1,
+          "status": "ok"
+        },
+        {
+          "id": "dangourmet",
+          "records": 24,
+          "status": "failed",
+          "error": "http_500",
+          "verified_at": "2026-11-07T08:13:34.061Z",
+          "attempted_at": "2026-11-10T12:50:21.833Z",
+          "all24_prior_records_exactly_preserved": true,
+          "verified_time_unchanged": true
+        }
+      ],
+      "ownership_and_locks": "Existing enrichment-source-v1 settings namespace and enrichment-refresh-lock-v1 CAS lease read in established local project implementation/docs:120s lease,30min retrygate,6h sourceTTL, tokencheckedrelease. This path serializes public/Work callers; no manual lockrelease or bypass. Current explicit endpoint correctlyrefused freshrepeat. Fresh source opening was not completed due localENOSPC, so no claim code reverified at536HEAD.",
+      "next_eligible_source_attempt_at": "2026-11-10T18:50:21.834Z",
+      "retry_policy": "This is earliest existing6h gate eligibility, not newtask/timer. Do not force DanGourmet or resetattempts before gate. Failedsource remains failed, not allsourcesupdated.",
+      "excluded": "Municipal catalog not refreshed; no mailbox fetch, sourcecode/content/media edit, image attribution, new key, permissions or schedulechange, build/deploy/cleanup.",
+      "handoff": "Existing controller daily-audit appended only. Known DanGourmet signature unchanged; newlocalENOSPC below. No direct messages."
     }
   ],
   "corrections_this_run": [
@@ -18997,6 +19094,21 @@
       "safe_attempt": "Read exact failing job and current workflow/script; missing-secret guard preserves honest blocked status and existing catalog. No retry with same emptyinput, no weakening or schedule change.",
       "verification_required": "Configure authorized existing repository secret through allowed interface, run once only without active same job, review candidates for official channel/artist/embeddability/rights; pending queue is not public catalog.",
       "next_attempt_at": "2026-11-10T15:58:00Z"
+    },
+    {
+      "runKey": "enrichment-2026-11-10-18:20",
+      "signature": "Work|scratch filesystem|mkdir|ENOSPC",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "execution_owner": "Automation_4c9b538f29d081918b3cbb12595b0989",
+      "status": "blocked_local_source_preparation",
+      "observed_between": "2026-11-10T16:22:11Z/2026-11-10T16:23:10Z",
+      "root_cause": "Verified localfilesystem mkdir failed with No space left on device. Diskbytes vs inode/executor quota cause not distinguished; no ClubVPS/server/account/storagequota inference.",
+      "evidence": "mkdir -p /workspace/scratch/ce864cad63b5/enrichment-source returned exit1: No space left on device.",
+      "impact": "Prevented optional fresh Sites source checkout; existingpubliccachewarmer/readback succeeded200 and no new collection due. Enrichment records unaffected by this observation.",
+      "safe_attempt": "Continued bounded API checks and existing operationaljournal CAS without local source checkout, build or cleanup. No deletion or storagepurchase.",
+      "missing_interface": "Existing controller must inspect current Work scratch filesystem capacity/inodes and task ownership before targeted authorizedcleanup or alternative workspace. Do notdelete active/shared source/evidence or infer hostedwebsite storagefull.",
+      "next_attempt_at": "2026-11-10T16:58:00Z",
+      "earlier_only_if": "New verified workspace capacity/permission evidence; no repeated mkdir or build loop."
     }
   ],
   "active_escalation": {
