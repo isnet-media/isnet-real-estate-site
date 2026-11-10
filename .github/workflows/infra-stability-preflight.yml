@@ -6,6 +6,8 @@ on:
       - 'scripts/safe_http_probe.py'
       - 'scripts/optimize_public_price_json.py'
       - 'scripts/optimize_public_jpegs.py'
+      - 'scripts/check_source_backup_freshness.py'
+      - '.github/workflows/infrastructure-watchdog.yml'
       - 'tests/test_optimize_public_price_json.py'
       - 'tests/test_audit_public_payload.py'
       - '.github/workflows/pages.yml'
@@ -13,6 +15,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
 jobs:
   audit-tests:
     runs-on: ubuntu-latest
@@ -51,3 +54,12 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq libjpeg-turbo-progs
           python scripts/optimize_public_jpegs.py --root "$RUNNER_TEMP/isnet-preview" --limit 2500
           python scripts/audit_public_payload.py --root "$RUNNER_TEMP/isnet-preview"
+  backup-artifact-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify latest source backup is retained (read-only)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/check_source_backup_freshness.py
