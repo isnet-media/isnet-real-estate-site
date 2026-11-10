@@ -21515,6 +21515,103 @@
         "Source draft preserved; active main run; no competing write/build/deploy."
       ],
       "mutations": "Existing operational daily audit only; no source content/task/schedule changes."
+    },
+    {
+      "runKey": "photo-bank-2026-11-10-23:00",
+      "run_id": "eff9af5e-58ec-8322-95de-1c6fa82bc7aa",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-10T21:58:00Z",
+      "status": "inspected_pending_source_repair",
+      "scope": "Photo work only; do not interpret controller/culture details in previous task result as a completed photo repair.",
+      "queue": {
+        "rerun": true,
+        "source_pages": 383,
+        "candidates": 222,
+        "closed": 0
+      },
+      "live": {
+        "version": 538,
+        "photo_bank_http": 200,
+        "collector_enabled": true,
+        "returned_items": 122,
+        "homepage_http": 200,
+        "both_articles_http": 200
+      },
+      "inspections": [
+        {
+          "url": "https://tlvnet.com/news/polish-speaking-community-walk-tlv-20261113",
+          "location": "homepage local-community card and article HTML",
+          "status": "pending",
+          "read_full_text": true,
+          "body_sha256": "a475669cc46c18c677a0fd45220a822be6641df3f621b918d249be72ab79d2d5",
+          "source_body_matches_live": true,
+          "message": "Upcoming Polish-language neighbourhood walk and community meeting, meeting at Psagot Tower Rothschild3; not a completed gathering.",
+          "people": [
+            "יאן קירשנבאום"
+          ],
+          "operator": "המכון הפולני ושגרירות פולין",
+          "place": "בית פסגות, רוטשילד3",
+          "stage": "future_event",
+          "previous_asset": "/photo-bank/assets/dizengoff-square-2024.jpg",
+          "original_visual": true,
+          "issue": "Original shows Dizengoff Square, neither the specified meeting point nor the Polish community walk. Exact same src as memorial story on homepage.",
+          "replacement_candidate": {
+            "source": "https://commons.wikimedia.org/wiki/File:Rothschild_3_tower.jpg",
+            "author": "DGtal",
+            "license": "CC BY-SA 4.0",
+            "photo_date": "2024-09-22",
+            "official_context": "https://instytutpolski.pl/telaviv/2026/11/02/מפגש-פולני-8/",
+            "rights_page_read": true,
+            "scope": "Archive image of exact meeting venue; never portray future participants/event.",
+            "downloaded": false,
+            "visually_verified": false,
+            "status": "pending_existing_download_block_no_new_verified_asset"
+          },
+          "desktop_visual": false,
+          "mobile_visual": false
+        },
+        {
+          "url": "https://tlvnet.com/news/nahal-mordechai-tlv-memorial-run-20261106",
+          "location": "homepage local-community card and article HTML",
+          "status": "pending",
+          "read_full_text": true,
+          "body_sha256": "4b73efd5897afbf007e39007b12125c7cb198c72583d68051898251880245c85",
+          "source_body_matches_live": true,
+          "message": "Nahal recruits' memorial run for Lt.Col.Roi Yohai Yosef Mordechai, a TelAviv resident; run location unspecified, not an open future event.",
+          "people": [
+            "רועי יוחאי יוסף מרדכי"
+          ],
+          "kind": "community_memorial_run",
+          "stage": "past_event_reported_2026-11-05",
+          "previous_asset": "/photo-bank/assets/dizengoff-square-2024.jpg",
+          "original_visual": true,
+          "issue": "Square photograph does not depict run, person or documented venue; same src as neighbouring community card. Do not infer run occurred in TelAviv from subject residence.",
+          "replacement_candidate": null,
+          "rights": "Existing story explicitly withholds family photo absent concrete permission; no family/portrait rights invented.",
+          "desktop_visual": false,
+          "mobile_visual": false
+        }
+      ],
+      "root_cause": {
+        "signature": "TLVNET|community legacy images|subject and duplicates|frozen square assignments",
+        "verified_mechanism": "Both current body hashes exactly match frozen legacy entries mapping to dizengoff-square-2024. resolve_article_media returns old media when no new approved assignment. Gate intentionally preserves unchanged legacy choices; this is not evidence that new-asset approval gate was bypassed.",
+        "asset_sha256": "975a59d43f3256c1fc8ce5cd1e5ebf0e589504641f94166a7c12d98278128103",
+        "snapshot_expanded": false,
+        "proposed_repair": "Prefer exact venue archive with full current approval and presentation for walk once actual JPG saved/visually checked. Memorial: verified exact permitted photo or marked focused illustration after research; permit text-only pending instead of approving unrelated square. Do not edit generated HTML or frozen snapshot to bypass review.",
+        "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+        "next_attempt_at": "2026-11-10T22:55:00Z"
+      },
+      "write_status": "blocked_pending_exclusive_source_ownership_and_supported_reconciliation",
+      "blockers": [
+        "Current source checkout retains unpublished controller draft; prior supported open rejected remote advancement with local edits. Draft not overwritten, same-input helper/build not retried.",
+        "Current site browser visual pass unavailable from prior client block; no retry without changed access evidence. No mobile visual performed."
+      ],
+      "prevention": "After authorized fix require current article photo_bank_id, approved selected_bank_id and body hash; individual presentation choice; registry regression and live article/home readback, desktop/mobile actual visual. Do not close candidates on source-only data changes.",
+      "source_mutations": 0,
+      "added_assets": 0,
+      "deployments": [],
+      "review_count": 2,
+      "next_cursor": "Two community candidates semantically inspected; preserve pending exact-asset research, then continue remaining duplicate/framing candidates."
     }
   ],
   "corrections_this_run": [
