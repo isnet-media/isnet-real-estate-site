@@ -2,7 +2,7 @@ name: ISNET infrastructure watchdog (read only)
 on:
   workflow_dispatch:
   schedule:
-    - cron: '37 4 * * *'
+    - cron: '37 * * * *'
 permissions:
   contents: read
   actions: read
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Check public websites safely
-        run: python scripts/safe_http_probe.py --samples 6 --pause 1
+        run: python scripts/safe_http_probe.py --samples 3 --pause 1
   source-backup-health:
     runs-on: ubuntu-latest
     timeout-minutes: 4
