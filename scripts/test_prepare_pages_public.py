@@ -29,3 +29,12 @@ with tempfile.TemporaryDirectory() as tmp:
         except ValueError:
             pass
 print('Public paths and bytes preserved; operational evidence excluded; unsafe outputs refused')
+
+from prepare_pages_public import check_capacity, PAGES_LIMIT
+check_capacity(803_380_493)
+try:
+    check_capacity(PAGES_LIMIT)
+    raise AssertionError('Oversized Pages upload allowed')
+except ValueError:
+    pass
+print('Capacity limit guard passed')
