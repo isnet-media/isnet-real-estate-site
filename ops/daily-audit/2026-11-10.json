@@ -3,10 +3,10 @@
   "kind": "daily-audit",
   "local_date": "2026-11-10",
   "timezone": "Asia/Jerusalem",
-  "runKey": "ops-controller-2026-11-10-10:58",
+  "runKey": "ops-controller-2026-11-10-11:58",
   "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
-  "started_at": "2026-11-10T08:57:10.159101Z",
-  "checked_at": "2026-11-10T09:00:18Z",
+  "started_at": "2026-11-10T09:55:27.658918Z",
+  "checked_at": "2026-11-10T09:58:21Z",
   "status": "partial",
   "daily_audit_completed": false,
   "previous_audit": {
@@ -14,7 +14,7 @@
     "sha": "34c23a665eba8c94531e2d35ac66ac48b1c9cfba",
     "history_preserved": true
   },
-  "record_write_scope": "CAS existing daily-audit only; no new cleanup, source/content edit, collector, build, deployment, schedule, permission, billing, offload or server action",
+  "record_write_scope": "CAS existing daily-audit only; fresh source opened read-only; no content, scanner, build, deploy, billing, permissions or schedule mutation",
   "ownership_checks": {
     "local_work_tree_agents": [
       "/root"
@@ -22,14 +22,14 @@
     "cross_environment_Work_lease": "No global lease asserted. The newly authorized Sites source path uses remote HEAD, version/deployment reconciliation, non-forced push and documented ownership. Existing identity-admin routes remain protected.",
     "content_mutations_performed": false,
     "maintenance_code_mutations": [],
-    "source_commit": "7d9ca409fe08b84f18467b912c185ede57843d11",
-    "current_controller_run": "5c9d9e13-72f4-8332-984c-3475889de7e8",
+    "source_commit": "c28087441d512c1fad1c82e9ff457f6d892f4b30",
+    "current_controller_run": "c5c83824-77a0-8332-884c-73a417927f5c",
     "source_git_clean": true,
-    "record_write_scope": "CAS existing daily-audit only; no new cleanup, source/content edit, collector, build, deployment, schedule, permission, billing, offload or server action",
-    "active_pipeline": "Super owner and main/culture active; existing supermarket repair deploy succeeded and public marker verified. No duplicate work.",
+    "record_write_scope": "CAS existing daily-audit only; fresh source opened read-only; no content, scanner, build, deploy, billing, permissions or schedule mutation",
+    "active_pipeline": "Main active; no duplicate writer/build. Recovery budget consumed all7cities; no restart.",
     "worker_runtime_logs": "Expected identityless denials, one favicon404; not scheduled host logs",
     "new_supported_diagnostic": "Read-only Sites DB overview and complete settings pages. Exact enrichment CAS lock observed; no shared deployment lease demonstrated.",
-    "current_main_run": "b256c446-eac4-832d-bc14-ce256469b0b7"
+    "current_main_run": "40d024f8-6abc-8329-820d-d1df6cafa6fa"
   },
   "automation_inventory": {
     "total": 25,
@@ -46,18 +46,18 @@
       "enabled": true,
       "classification": "skipped_active_run",
       "last_run": {
-        "id": "5c9d9e13-72f4-8332-984c-3475889de7e8",
+        "id": "c5c83824-77a0-8332-884c-73a417927f5c",
         "recorded_status": "in_progress",
-        "scheduled_for": "2026-11-10T08:58:00Z",
-        "started_at": "2026-11-10T08:57:10.159101Z",
+        "scheduled_for": "2026-11-10T09:58:00Z",
+        "started_at": "2026-11-10T09:55:27.658918Z",
         "completed_at": null,
         "chat_ref": null
       },
-      "result_run_id": "45c1acdc-af40-8332-9088-12fe676376a6",
-      "result_created_at": "2026-11-10T08:08:26.781884Z",
+      "result_run_id": "5c9d9e13-72f4-8332-984c-3475889de7e8",
+      "result_created_at": "2026-11-10T09:01:27.367877Z",
       "result_matches_run": false,
-      "result_summary": "אומתה התאוששות בפריסת ISNET: ריצה **42778875884** הצליחה, ומזהה הפריסה הציבורי תואם. אומתו גם ארבעת רכיבי הים מול המקור הישיר וכתבת הנדל״ן החיה ב־TLVNET.\n\nשבע ריצות האיסוף הסתיימו; אימות תאריכי המקור נשאר באחריות בקר הסופרים. המתזמן הראשי עדיין פעיל, ולכן חזרתו ל־news ול־sports טרם אומתה.\n\nנמצא שהמתנת הפריסה שהוגדרה ל־20 דקות מוגבלת בפועל ל־10; התיעוד תוקן. [יומן הבקרה נשמר ונקרא בחזרה](https://github.com/isnet-media/isnet-real-estate-site/blob/main/ops/daily-audit/2026-11-10.json). הבדיקה היומית נותרה חלקית.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "result_summary": "אומתו הגנות השימור ותוצאות ניקוי האחסון הקיים, ללא ניקוי נוסף. פריסה 42786398614 הצליחה ומזהה המקור הציבורי תואם. בקר הסופרים עדיין פעיל; לא נטען שכל תאריכי המקור עודכנו. הפער ביומני news ו־sports נשאר פתוח במקור ובאתר, והמתזמן הראשי פעיל ללא הרצה כפולה. יומן הבקרה עודכן ונקרא בחזרה; הבדיקה היומית נותרה חלקית.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "דולג עקב ריצה פעילה"
     },
     {
@@ -82,7 +82,7 @@
       "result_created_at": "2026-11-09T19:24:10.628446Z",
       "result_matches_run": true,
       "result_summary": "החסם לא הוסר: בדיקת הנעילות והבעלות מול סוכני Work אחרים עדיין אינה זמינה. לכן לא התחלתי איסוף, לא הרצתי את האספן ולא שיניתי נתונים או תאריכי אימות. משימת העדכון הושהתה שוב. בבדיקה הנוכחית שלושת קובצי הנתונים הציבוריים תואמים ל־main, והפרסום האחרון הצליח. לחידוש האיסוף נדרשת גישה למנגנון התיאום הקיים.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -107,7 +107,7 @@
       "result_created_at": "2026-11-09T17:13:47.291190Z",
       "result_matches_run": true,
       "result_summary": "לא פורסם תוכן חדש. [מדור הלילה](https://tlvnet.com/night/) זמין, 41 הרשומות תואמות למקור ובדיקת `validate-night.py` עברה.\n\nהאיסוף חסום: אין ממשק נגיש לאימות נעילה ובעלות מול עבודות Work מקבילות. לכן לא הופעלו חמשת המומחים, ולא שונו התוכן או יומני המקור. משימת העדכון הושהתה עד להסדרת הגישה למנגנון הנעילות הקיים.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -118,21 +118,21 @@
       "enabled": true,
       "classification": "owner_reviewed_two_candidates_editorial_blocked",
       "last_run": {
-        "id": "71b7207d-c5d4-8326-b055-2c2e14f0330d",
+        "id": "4561c445-6580-8326-8067-044607294c01",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-10T08:05:00Z",
-        "started_at": "2026-11-10T08:03:07.216069Z",
-        "completed_at": "2026-11-10T08:07:46.932936Z",
+        "scheduled_for": "2026-11-10T09:05:00Z",
+        "started_at": "2026-11-10T09:06:13.505698Z",
+        "completed_at": "2026-11-10T09:13:41.567302Z",
         "chat_ref": {
           "type": "chatgpt",
           "id": "6af1499f-5d74-83eb-a557-2a130db79dbd"
         }
       },
-      "result_run_id": "71b7207d-c5d4-8326-b055-2c2e14f0330d",
-      "result_created_at": "2026-11-10T08:07:46.417289Z",
+      "result_run_id": "4561c445-6580-8326-8067-044607294c01",
+      "result_created_at": "2026-11-10T09:13:38.625129Z",
       "result_matches_run": true,
-      "result_summary": "**הרצליה נט — 10.11.2026:** נבדק דוח Scooper חדש שהתקבל בשעה 10:03, ובו 192 אזכורים. גוף הדוח פוענח מתוך הודעת MIME; הכותרת הפנימית עדיין מציינת בטעות אשדוד. נבדקו שישה מקורות ומסלולי מידע ושני מועמדים משמעותיים. **התקדמות חדשה:** אומת מול דיווחים מלאים ב־N12 ובישראל היום כי צעיר בן 22 מהרצליה נפצע קשה בתאילנד ומשפחתו פועלת למימון הטיפול ולהשבתו לארץ. בנוסף נבדק אירוע בחטיבת אלתרמן, שבו הופסקה עבודתה של עובדת ניקיון בעקבות תלונות תלמידות. הוכנו שתי כתבות מקוריות לבקרת עורך, תוך שמירה על פרטיות המעורבים וללא שימוש בתמונות שזכויותיהן לא אומתו. citeturn534538search2turn534538search0turn534538view0 באדמין נבדקו 40 פרסומים, רשימת הטיוטות והקטגוריות; לא נמצאה כפילות בנושאים החדשים. **תוצאה: שתי כתבות הוכנו מחוץ לאדמין; אפס פרסומים ואפס החלפות ראשיות.** ארבע הראשיות עדיין מתוארכות ל־1 ול־8 בנובמבר. החסמים: אישור עריכה, זכויות תמונה, אימות נעילות Work ו**היעדר API לניהול ראשיות**. [שתי הכתבות לבקרת עריכה](sandbox:/mnt/data/isnet_editor_logs/herzliya-2026-11-10-10-editorial.md) · [יומן הרצליה](sandbox:/mnt/data/isnet_editor_logs/herzliya-2026-11-10-10.json).\n\n**רעננה נט — 10.11.2026:** לאחר השלמת מחזור הרצליה נבדקו שישה מקורות ומסלולי מידע ושלושה נושאים מועמדים. חיפוש Gmail לא העלה הודעה מקומית חדשה; ההודעה על בית הקוסם כבר טופלה בפרסום 810923. נבדקו 50 פרסומים, 32 טיוטות ו־23 קטגוריות. הידיעות על היעדר מענה טלפוני באגף ההנדסה ב־11 בנובמבר ועל אירוע הנשים ב־27 בנובמבר כבר הוכנו בעבר. הדיווח מ־9 בנובמבר על מיזם ״עם אחד״ עדיין חסר אימות ישיר ממקור עירוני ראשוני. citeturn144407view2turn268459search0 **תוצאה: no_update — אפס כתבות חדשות, אפס פרסומים ואפס החלפות ראשיות.** ארבע הראשיות בעמוד הבית עדיין מאפריל–יוני 2026. החסמים הם אישורי עריכה, נעילות Work ו**היעדר API לניהול ראשיות**. [יומן רעננה](sandbox:/mnt/data/isnet_editor_logs/raanana-2026-11-10-10.json).\n\nבשני האתרים לא בוצעו כתיבה למערכת או פריסה ללא אימות בלעדיות. תקלות `get_post` ומנגנון הראשיות נשארו בתקופת ההמתנה שנקבעה עד 14:17, ולכן לא בוצעו ניסיונות תיקון חוזרים עם אותם קלטים. התקלות תועדו לטיפול הבקר התפעולי, אך לא אומתה העברה בפועל. המשימה נשארת פעילה.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "result_summary": "**הרצליה נט — 10.11.2026:** בדקתי שישה מקורות ציבוריים ואת דוח Scooper החדש שהתקבל ב־11:03, ובו 200 אזכורים. הדוח פוענח מתוך MIME מלא; הכותרת הפנימית עדיין מציינת בטעות אשדוד. איתרתי נושא מקומי חדש ואימתתי אותו בשתי הודעות עירוניות: ב־9 בנובמבר עיריית הרצליה ריעננה את כללי פינוי הגזם והפסולת הגושית, לרבות שעות ההוצאה, מגבלת הכמות והקנס של 730 שקל על הוצאה במועד אסור. citeturn666801view0turn762967view0 הכנתי כתבה עיתונאית מקורית, ובדיקת כפילות באדמין מצאה רק כתבה ישנה ממרץ בנושא אחר. **תוצאה: כתבה חדשה אחת הוכנה מחוץ לאדמין; אפס פרסומים ואפס החלפות ראשיות.** ארבע הראשיות בעמוד הבית עדיין מתאריכות ל־1 ול־8 בנובמבר, אף שכתבה 810924 פורסמה ב־9 בנובמבר. citeturn516600view0 [הכתבה לבקרת עריכה](sandbox:/mnt/data/isnet_editor_logs/herzliya-2026-11-10-11-editorial.md) · [יומן הרצליה](sandbox:/mnt/data/isnet_editor_logs/herzliya-2026-11-10-11.json).\n\n**רעננה נט — 10.11.2026:** לאחר השלמת מחזור הרצליה בדקתי ארבעה מקורות ושלושה נושאים מועמדים, לצד חיפוש ממוקד ב־Gmail. לא נמצאה הודעה מקומית חדשה שאינה כפולה לפרסום קיים. הידיעות על השבתת המענה הטלפוני באגף ההנדסה ב־11 בנובמבר ועל אירוע הנשים ב־27 בנובמבר כבר הוכנו במחזורים קודמים. הדיווח מ־9 בנובמבר על בחירת רעננה לפיילוט ״עם אחד״ נקרא במלואו, אך עדיין חסר אימות ישיר ממקור ראשוני. citeturn998778search0turn751205view1 **תוצאה: no_update — אפס כתבות חדשות, אפס פרסומים ואפס החלפות ראשיות.** ארבע הראשיות נותרו מאפריל–יוני 2026, למרות פרסומים חדשים מנובמבר. citeturn751205view0 [יומן רעננה](sandbox:/mnt/data/isnet_editor_logs/raanana-2026-11-10-11.json).\n\nבשני האתרים נשמרה ההמתנה הקיימת עד 14:17 לפני ניסיון אבחון חוזר של `get_post`. **חסום: אין API מאומת לניהול ראשיות**, ולא קיימת גישה מאומתת למנגנון נעילות Work. לא בוצעו כתיבה למערכת, פריסה או שינוי הרשאות. החסמים תועדו בנפרד, אך לא אותר ערוץ מורשה להעברה מאומתת לבקר התפעולי. התזמונים נשארו ללא שינוי.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -157,7 +157,7 @@
       "result_created_at": "2026-11-10T04:25:59.234460Z",
       "result_matches_run": true,
       "result_summary": "הרענון בוצע דרך המנגנון הקיים. [קריאה חוזרת](https://tlvnet.com/api/public-enrichment) אימתה שמירה זהה: **187 רשומות ייחודיות; 8 מתוך 9 קטלוגים עודכנו**.\n\n| קטלוג | רשומות | תוצאה |\n|---|---:|---|\n| מוזיאון תל אביב — קורסים | 23 | עודכן |\n| מוזיאון תל אביב — סדנאות | 11 | עודכן |\n| אוניברסיטת תל אביב — אמנויות | 100 | עודכן |\n| CRAFTED | 13 | עודכן בהצלחה |\n| מנשר | 8 | עודכן |\n| סטודיו אתנה | 5 | עודכן |\n| Ceramics Collective | 2 | עודכן |\n| גל קרמיקה | 1 | עודכן |\n| דן גורמה | 24 | נכשל — HTTP 500 |\n\nשמונת הקטלוגים המצליחים אומתו ב־**10.11.2026 בשעה 06:25 בישראל**. בדן גורמה נשמרו הנתונים הקודמים וזמן האימות **7.11 בשעה 10:13**.\n\nהקטלוג העירוני לא נכלל. לא נמשכו מיילים, לא שונו תמונות ולא בוצעה פריסה מחדש.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -182,7 +182,7 @@
       "result_created_at": "2026-11-10T07:22:35.035743Z",
       "result_matches_run": true,
       "result_summary": "{\"skip_notification\":true}",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -207,7 +207,7 @@
       "result_created_at": "2026-11-10T06:29:39.846761Z",
       "result_matches_run": true,
       "result_summary": "פורסמו 0 פריטים. מקור האתר העדכני נבדק, אך אין גישה למנגנון הנעילות המשותף שמאפשר לאמת שאין כתיבה מקבילה. לפי הוראתך, לא שיניתי תוכן או פריסה.\n\nאומתו מחדש במקור המארגן שלושת מפגשי בית דניאל ל־10, 17 ו־24 בנובמבר; הם עדיין חסרים בנתוני המדור. genui{\"citation\":{\"ref\":\"turn247view0\"}}\n\nמשימת ההעשרה הושהתה עד להסדרת הגישה לנעילות. בדיקת האתר החי הוגבלה בתשובת 403 מסביבת הבדיקה; אין בכך הוכחה שהאתר מושבת.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -232,7 +232,7 @@
       "result_created_at": "2026-11-10T08:52:21.621327Z",
       "result_matches_run": true,
       "result_summary": "נקראו דוחות הבעלים וההנחיות העדכניות. הפרסום ובדיקות האירועים האחרונות עברו, והגיבוי בתוך חלון 48 השעות. לא אומתה תקלה חדשה באתר.\n\nבדיקת הממשק הישירה נותרה חלקית: 15 קריאות ציבוריות סורבו ב־403 וחיבור הדפדפן לא היה זמין. אלה חסמי בדיקה, ולא הוכחה להשבתת האתרים; בדיקת מובייל ו־RTL חדשה לא הושלמה.\n\nהחסמים תועדו לבקר ביומן הקיים, והתיעוד אומת בקריאה חוזרת. לא הופעלו איסוף, התאוששות, בנייה, פריסה או שינוי תזמונים. [תיעוד הבדיקה וההעברה](https://github.com/isnet-media/isnet-real-estate-site/commit/78f44f8443c415989a24db166e62b9c6727ae6c3).",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -257,7 +257,7 @@
       "result_created_at": "2026-11-09T06:58:35.787425Z",
       "result_matches_run": true,
       "result_summary": "# דוח בקרת אירועים ISNET — 9 בנובמבר 2026\n\n**בוצע היום תיקון בפועל במערכת האירועים של אשדוד, והשפעתו אומתה לאחר הרצת מנגנון הקליטה.** בדקתי גם את ראשון לציון, את מקורות האירועים, את Supabase ואת תקינות הנתונים באתר החי.\n\n## תיקון שבוצע ואומת: שיוך מוסדות באשדוד\n\nזיהיתי שבאירועים רבים המערכת אינה מזהה את המקום שבו הם מתקיימים, אף שהמוסד מוכר.\n\nתיקנתי את מאגר המוסדות ב־GitHub: הוספתי את **המוזאון לתרבות הפלשתים ע״ש קורין ממן**, עם כתובתו ופרטי ההתקשרות המאומתים, והוספתי כינוי חסר למשכן לאמנויות הבמה.\n\nלאחר מכן הופעל בהצלחה מנגנון הקליטה והשיוך האוטומטי.\n\n| מדד | לפני התיקון | אחרי התיקון |\n|---|---:|---:|\n| מוסדות מזוהים באשדוד | 15 | **16** |\n| אירועים המשויכים למקום מזוהה | 666 | **743** |\n| כלל האירועים במאגר | 964 | 969 |\n\n**הרצת האימות אישרה עדכון של 73 רשומות אירועים באשדוד.** הגידול הכולל בשיוכים הוא 77, כאשר במקביל גדל גם מספר האירועים במאגר.\n\nהתיקון שומר על פרטים קיימים ואינו מחליף עריכות אנושיות או תמונות.\n\nurlהתיקון שבוצע ב־GitHubhttps://github.com/isnet-media/isnet-real-estate-site/commit/d68eae2d6d231d5253f9dff42e19057f3d05e628\n\nurlהרצת הקליטה והשיוך שהסתיימה בהצלחהhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42576112065\n\n## תוצאות קליטה ופרסום\n\n| מדד | אשדוד | ראשון לציון |\n|---|---:|---:|\n| אירועים במאגר המעודכן | 969 | 2,157 |\n| טיוטות קיימות ב־Supabase | 6 | 12 |\n| טיוטות חדשות שנוצרו בריצה זו | **0** | **0** |\n| פרסומים חדשים דרך ה־CMS | **0** | **0** |\n| פרסומים חדשים שאומתו בכרטיסי האתר | **0** | **0** |\n\nבדיקת Supabase אישרה שלא נוצרו ולא פורסמו היום רשומות CMS חדשות בשתי הערים.\n\nבבדיקת שבעת מקורות הגילוי הארציים נעזרתי בדוח האחרון שנשמר במערכת. בהרצת המקורות העירוניים היום נסרקו גם לוחות טיקצ'אק, היכל התרבות, לגלות תרבות, מוזיאון אגם וכותר ראשון. לא נוספו בהרצה זו אירועים חדשים; המועמדים שנמצאו לא הצדיקו יצירת רשומות נוספות לאחר בדיקת הכיסוי והכפילויות. לא הושלמה סריקה עצמאית חדשה של כל קטלוגי שבעת המקורות הארציים.\n\n## בקרת איכות: אופק, לגלות תרבות והרצאות\n\nבדקתי את שיוך המפעילים ואת דוח איכות המוסדות.\n\n**אופק אשדוד:** 19 אירועים משויכים למפעיל. המערכת שומרת על ההפרדה בין כתובת המשרד של אופק לבין מקום הפעילות או נקודת היציאה לטיול.\n\n**לגלות תרבות בראשון לציון:** 128 אירועים משויכים למפעיל. בנוסף קיימים 209 אירועים המשויכים להיכל התרבות ו־97 לרשת כותר ראשון.\n\n**הרצאות:** באשדוד יש שלוש הרצאות ללא תמונת אירוע מאומתת; בראשון לציון 32. לא יצרתי תמונות ולא החלפתי תמונות קיימות ללא הרשאה.\n\n## חסמי פרסום שנותרו\n\nבדקתי את ריצת הפרסום האוטומטי האחרונה.\n\nמתוך **1,859 אירועים שנבדקו**, 111 כבר היו מפורסמים במסלול ו־**1,748 נחסמו**. לא פורסם אירוע חדש.\n\nהחסמים המרכזיים הם בקרת תוכן ועריכה, זכויות מדיה שאינן מאומתות, תוכן הסברי חסר וחשדות לכפילויות.\n\nבנוסף, הרשאת סוכן ה־AI אינה כוללת פרסום עצמאי, וכל 36 נכסי המדיה הרשומים ב־Supabase עדיין מסומנים בזכויות שימוש שאינן מאומתות.\n\nurlדוח הפרסום האוטומטיhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42552295260\n\nבקליטת המקורות נמצאו גם שלושה חסמים נקודתיים: אתר הבמה לא החזיר אירועים שניתן לפענח, RIZONE+ לא סיפק אירועים שניתן לפענח, ו־Eventim החזיר שגיאת זמן המתנה. לא מחקתי אירועים קיימים בעקבות הכשלים האלה.\n\n## אימות האתר החי\n\nבדיקת הקריאה החוזרת שהושלמה הבוקר אישרה התאמה מלאה בין GitHub לקובצי האירועים הציבוריים שנבדקו: 969 רשומות באשדוד ו־2,156 בראשון לציון.\n\nלאחר מכן התעדכן מאגר ראשון לציון ל־2,157 רשומות. **הרשומה הנוספת טרם אומתה בקריאה חוזרת מהאתר החי**, ולכן אינני מציג אותה כפרסום שאומת.\n\nשני עמודי האירועים והקבצים הציבוריים החזירו HTTP 200. עם זאת, לא הושלם אימות חזותי של כרטיסי האירועים לאחר טעינת JavaScript.\n\nurlדוח אימות הנתונים הציבורייםhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42573268437\n\n---\n\n**סיכום:** היום בוצע תיקון ממשי ומאומת בשיוך מוסדות באשדוד, ו־73 רשומות אירועים עודכנו בעקבותיו. לא נוצרו טיוטות CMS חדשות ולא בוצעו פרסומים חדשים. חסם הפרסום העיקרי נותר אישור תוכן וזכויות תמונה; לא עקפתי אותו ולא שיניתי נתונים שלא אומתו.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -266,21 +266,21 @@
       "system": "ISNET+TLVNET",
       "domain": "תקינות מחירי הסופר בכל הערים",
       "enabled": true,
-      "classification": "skipped_active_run",
+      "classification": "partial_recovery95of121_verified_host_result_missing",
       "last_run": {
-        "id": "4d12cc3a-756c-832c-af43-543a741254ae",
-        "recorded_status": "in_progress",
-        "scheduled_for": "2026-11-10T08:35:00Z",
-        "started_at": "2026-11-10T08:36:09.661365Z",
-        "completed_at": null,
+        "id": "0c899d44-37f8-8323-a419-101e3a61ce8a",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-10T09:35:00Z",
+        "started_at": "2026-11-10T09:38:20.296434Z",
+        "completed_at": "2026-11-10T09:41:02.730268Z",
         "chat_ref": null
       },
-      "result_run_id": "98dba2e4-63bc-8321-afa2-c1d1bec97b08",
-      "result_created_at": "2026-11-10T07:34:37.545239Z",
+      "result_run_id": null,
+      "result_created_at": null,
       "result_matches_run": false,
-      "result_summary": "איסוף הבוקר **התחיל בפועל בכל שבעת היעדים סביב 09:32**. אומתו נעילות יומיות חדשות ושלב איסוף פעיל — אלה אינן ריצות דילוג. לדוגמה: [אשדוד](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42775926553), [תל אביב](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42775926942).\n\nהאיסוף והפרסום עדיין פועלים, ולכן טרם ניתן לאשר כיסוי חדש או התאוששות מלאה. לא הופעל ניסיון נוסף ולא הורדו שוב קטלוגים או offers. חסם הפריסה המשותף כבר מתועד אצל הבקר הכללי; הנתונים יאומתו לאחר פרסום מוצלח.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
-      "display_status": "דולג עקב ריצה פעילה"
+      "result_summary": null,
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
+      "display_status": "חסום"
     },
     {
       "id": "6aca152667488191b0f6541e44d0cf8e",
@@ -304,7 +304,7 @@
       "result_created_at": "2026-11-10T06:30:22.187923Z",
       "result_matches_run": true,
       "result_summary": "בדיקת 10 בנובמבר 2026, בסביבות 08:25 בישראל: נבדקו ריצות GitHub Actions, דוחות כיסוי הבמה, משיכת תמונות ותיאורים, נתוני Supabase והעמודים הציבוריים באשדוד ובראשון לציון. **לא אומתה התקדמות משמעותית חדשה בהשלמת המערכת.**\n\n**איסוף וכיסוי:** ריצת האיסוף המאוחדת האחרונה שאומתה היא 42628679161 מ־9 בנובמבר. הריצה המתוזמנת ל־10 בנובמבר בשעה 07:05 טרם הופיעה ברשימת הריצות עד מועד הבדיקה; לא ניתן לקבוע אם מדובר בעיכוב GitHub או בתקלה במתזמן. דוח המוכנות האחרון, מ־9 בנובמבר, מציג 356 מופעי במה עתידיים באשדוד מול 169 מועמדים ארציים, ו־558 בראשון לציון מול 110 מועמדים. מתוכם רק 41 ושישה, בהתאמה, כוללים תיאורי הפקות. בשתי הערים `ready_for_full_replace=false`. בקשת השינוי #65 עדיין פתוחה כטיוטה.\n\n**תמונות ותיאורים:** בדוח האיסוף המאוחד קיימים 285 מועמדים, מהם 256 עם קישור לתמונה ורק 53 עם תיאור לפי מדד הדוח. נמצאו ארבע שגיאות הפניה חוזרת במקור Tickchak. דוח נוסף מציג 55 מועמדים להעשרת מופעים באשדוד, ללא שינוי ב־CMS או באתר הציבורי ובלי אישור זכויות חדש. בראשון לציון דוח המקור עדיין מתעד כישלון Makore בעמוד המשך 28, אך לא ניתן היה לאמת מחדש את קוד ה־HTTP של העמוד. מקור Makore הראשי ועמוד ההמשך השני נגישים. קוד האיסוף עדיין עלול להפסיק את איסוף המקור כולו בעקבות כישלון של עמוד המשך.\n\n**פרסום וקריאה חוזרת:** ריצת האימות 42763524746 אישרה התאמה מלאה בין קובצי GitHub לנתונים הציבוריים: 980 אירועים באשדוד ו־2,170 בראשון לציון, ללא מזהי אירועים כפולים. שני עמודי הבית ועמודי קטגוריית מופעי הבמה נגישים, ובעמודי הקטגוריה מופיעים מופעים עם מועדים ותיאורים; לא בוצע אימות חזותי מלא בדפדפן. בדיקת SQL ישירה אישרה שאין פרסומים חדשים ב־CMS: שש טיוטות ממתינות באשדוד ו־12 בראשון לציון. כל 36 נכסי המדיה במאגר עדיין בעלי זכויות לא ידועות וללא קובץ מאוחסן.\n\n**אבחון תשתית:** ריצת הפריסה 42763381493 נכשלה לאחר ש־GitHub Pages נשאר במצב `syncing_files` עד לפקיעת זמן ההמתנה; ריצת הפריסה הקודמת 42763263084 הצליחה. השוואת ארבעת הקומיטים האחרונים לא מצאה שינוי בקובצי האירועים, אלא רק בקובץ בקרה ובנתוני ספורט. לכן לא הוכח אובדן עדכון של מופעי הבמה בעקבות כישלון הפריסה. לא ניתן היה לאמת בעלות ונעילה משותפת מול סוכני Work מקבילים, ולכן לא בוצעה כתיבה מתחרה, לא הופעל איסוף כפול ולא נוצר runKey חדש. לא בוצעו מחיקות, מיזוגים או עקיפת אישורי זכויות.\n\nהכיסוי עדיין חלקי. אין ראיות לכיסוי של 100% ואין חסם חדש המחייב כרגע התערבות מצדך. המעקב נשאר פעיל לבדיקת ריצת האיסוף היומית הבאה והפריסה הציבורית.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -313,21 +313,21 @@
       "system": "TLVNET",
       "domain": "כתב חדשות תרבות — TLVNET",
       "enabled": true,
-      "classification": "skipped_active_run",
+      "classification": "blocked_result_observability",
       "last_run": {
-        "id": "1e75951c-31ec-832e-a384-06b4e5968956",
-        "recorded_status": "in_progress",
-        "scheduled_for": "2026-11-10T08:50:00Z",
-        "started_at": "2026-11-10T08:51:08.713335Z",
-        "completed_at": null,
+        "id": "eb0b986d-db24-832e-8085-d177e502a082",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-10T09:50:00Z",
+        "started_at": "2026-11-10T09:45:04.544360Z",
+        "completed_at": "2026-11-10T09:52:08.051237Z",
         "chat_ref": null
       },
       "result_run_id": null,
       "result_created_at": null,
       "result_matches_run": false,
       "result_summary": null,
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
-      "display_status": "דולג עקב ריצה פעילה"
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_e2f02000cdf4819190022b85f4391076",
@@ -351,7 +351,7 @@
       "result_created_at": "2026-11-09T15:36:39.741108Z",
       "result_matches_run": true,
       "result_summary": "בדיקת הצרכנות נחסמה: ההגדרות פעילות, אך אין גישה לאימות נעילה מול עבודות מקבילות; ממשק הבקרה מחזיר 403 ודורש הרשאת מנהל.\n\nלא נאסף תוכן חדש, לא פורסמו ידיעות ולא שונה האתר. השהיתי את משימת הצרכנות עד שתתאפשר בדיקת בלעדיות מוסמכת. התוצאה היא חסם, לא מחזור שהושלם בהצלחה.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -362,18 +362,18 @@
       "enabled": true,
       "classification": "blocked_result_observability",
       "last_run": {
-        "id": "3d9fce94-3fd4-8331-8385-7f5b9f14f638",
+        "id": "fbc81a3b-7490-8331-b8c4-6190d6ac10e4",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-10T08:10:00Z",
-        "started_at": "2026-11-10T08:11:43.948905Z",
-        "completed_at": "2026-11-10T08:15:34.047821Z",
+        "scheduled_for": "2026-11-10T09:10:00Z",
+        "started_at": "2026-11-10T09:05:47.770447Z",
+        "completed_at": "2026-11-10T09:10:26.787711Z",
         "chat_ref": null
       },
       "result_run_id": null,
       "result_created_at": null,
       "result_matches_run": false,
       "result_summary": null,
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -384,10 +384,10 @@
       "enabled": true,
       "classification": "skipped_active_run",
       "last_run": {
-        "id": "b256c446-eac4-832d-bc14-ce256469b0b7",
+        "id": "40d024f8-6abc-8329-820d-d1df6cafa6fa",
         "recorded_status": "in_progress",
-        "scheduled_for": "2026-11-10T09:00:00Z",
-        "started_at": "2026-11-10T08:56:44.644538Z",
+        "scheduled_for": "2026-11-10T10:00:00Z",
+        "started_at": "2026-11-10T09:56:27.963972Z",
         "completed_at": null,
         "chat_ref": null
       },
@@ -395,7 +395,7 @@
       "result_created_at": null,
       "result_matches_run": false,
       "result_summary": null,
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "דולג עקב ריצה פעילה"
     },
     {
@@ -420,7 +420,7 @@
       "result_created_at": "2026-11-09T14:08:31.139902Z",
       "result_matches_run": true,
       "result_summary": "מחזור הקהילה חסום: ההגדרות פעילות, אך אין בגישה הקיימת אפשרות לאמת נעילה משותפת ובעלות בלעדית מול ריצות ענן אחרות.\n\nלא התחלתי איסוף, לא שיניתי יומן ולא פרסמתי כתבות. השהיתי את משימת הקהילה ואימתתי את ההשהיה. להמשך נדרשת גישה למנגנון הנעילות הקיים של הפרויקט.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -445,7 +445,7 @@
       "result_created_at": "2026-11-09T13:29:07.667116Z",
       "result_matches_run": true,
       "result_summary": "המחזור נחסם לפני איסוף וכתיבה: ההגדרות פעילות, אך לא ניתן לאמת בעלות בלעדית מול ריצות Work מקבילות באמצעות מנגנון נעילה משותף נגיש.\n\nלא פורסמו ידיעות ולא שונה היומן המשותף. השהיתי את משימת הכלכלה וההייטק עד להסדרת אימות הבעלות. ידיעת מאנדיי מהמחזור הקודם עדיין זמינה באתר.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     },
     {
@@ -470,7 +470,7 @@
       "result_created_at": "2026-11-09T13:25:47.036913Z",
       "result_matches_run": true,
       "result_summary": "לא נוספו תמונות. המאגר החי כולל 119 נכסים, ובתור ממתינות 117 בקשות.\n\n**החסם:** לא נמצא ממשק נגיש לנעילה משותפת ולאימות ריצות Work מקבילות. בהתאם להוראתך, לא שונו המאגר, הכתבות או יומן המקור.\n\nמשימת האיסוף הושהתה. לחידושה נדרשת גישה למנגנון הבעלות והנעילות הקיים, עם תפיסה ושחרור לפי `runKey`.",
-      "evidence": "Fresh individual peek; run_id/time matched independently from current source and public-product evidence. No repeated owner scans.",
+      "evidence": "Fresh peek, run_id/time matching; changed source/public evidence below. completed without latest_result is not agent success proof.",
       "display_status": "חסום"
     }
   ],
@@ -4624,6 +4624,129 @@
         "blockers": "Editorial approval, image rights, ownership and no homepage blocks API. Existing14:17local cooldown respected."
       },
       "tests": "TLVNET health200ok database/media/publication storage; Site version5047d9ca409 succeeded. No repeat Gmail/Scooper/draft/121branch or visual scans."
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "domain": "Supermarket owner repair",
+      "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "status": "partial_recovery_verified",
+      "owner_run_id": "0c899d44-37f8-8323-a419-101e3a61ce8a",
+      "host_status": "completed",
+      "latest_result": null,
+      "source_journal": "ops/SUPER_MAINTENANCE_2026-11-10.json",
+      "source_journal_sha": "e5a153880d43687563d608f2dbcf3aad29a253c0",
+      "baseline_current": 75,
+      "after_current": 95,
+      "total": 121,
+      "retained_prior_sources": 26,
+      "cities": {
+        "ASHDOD": [
+          20,
+          20
+        ],
+        "YAVNE": [
+          7,
+          7
+        ],
+        "KGAT": [
+          9,
+          9
+        ],
+        "RISHON": [
+          17,
+          24
+        ],
+        "HOLON": [
+          23,
+          23
+        ],
+        "BATYAM": [
+          19,
+          19
+        ],
+        "TLV": [
+          0,
+          19
+        ]
+      },
+      "source_date": "2026-11-10",
+      "retained_date_per_verified_owner_report": "2026-11-09",
+      "public_metadata_check": "Seven existing public refresh-status metadata files200; current source counts match owner95. Failed branch report file_date=null is not a newly verified date; retained prices/dates come from owner's catalog/offer readback, not an invented report timestamp.",
+      "pages_run": 42786398614,
+      "public_version_url": "https://isnet.co.il/deployment-version.json",
+      "public_source_commit": "820f9236bb0815dc842d8b635f3d0f163335ff9c",
+      "tests": "Owner validated builders/adapters/repair hashes and121 public samples; controller did not repeat catalogs/offers/retailer requests. Publication marker exact. No three-day stability claim.",
+      "controller_source_collections": 0
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "signature": "Work/supermarket-recovery/process/SIGKILL--9",
+      "domain": "Work recovery process",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "execution_owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "status": "blocked_termination_diagnostics",
+      "cities": [
+        "RISHON",
+        "TLV"
+      ],
+      "failure_observed_at": "2026-11-10T08:48:14.873042Z",
+      "observed_exit_code": -9,
+      "root_cause": "Unverified. SIGKILL is proven in owner journal; OOM, timeout, external cancellation and host limit not distinguished.",
+      "diagnostic_attempt": "Read existing recovery implementation01afe1cb9ed10f05237787fd4438474a623b7119. It holds nonblocking workspace file lock across recover_city and consumes durable allowance before requests. Attempted independent cgroup memory.events/max/current/peak/swap inspection: files absent; /proc/self/cgroup=0::/ with no cgroup mount exposed. CPU/address-space rlimits unlimited; this is not proof host memory unlimited or noOOM.",
+      "additional_evidence": "Owner attempt timestamps show RISHON interval overlaps HOLON/BATYAM/TLV; environment/host/shared-temp identity absent, so cannot establish one-host lock violation or infer memory cause from overlap.",
+      "missing_interface": "Termination/kill reason with timestamp, PID and matching owner executor/cgroup; kernel or supervisor logs and cross-executor lock identity.",
+      "safe_repair_attempt": "No process restart or source recollection: all seven daily recovery allowances are consumed. Existing serialization guard reviewed, not weakened. No safe cause-specific code patch established without executor evidence.",
+      "prevention_test": "Next permitted daily run must demonstrate single-city catalog/offer merge ownership in the actual executor, capture durable exit/termination evidence, preserve failed claims and old dates, then successful public readback. No test source requests today.",
+      "failed_processes_observed": 2,
+      "controller_repair_restarts": 0,
+      "next_attempt_at": "2026-11-10T14:48:14Z",
+      "earlier_only_if": "New kernel/supervisor/executor/lock evidence; no same-input restart.",
+      "next_source_attempt": "Only next permitted daily allowance under OPERATIONS; diagnostics cooldown never resets consumed collection allowance."
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "domain": "TLVNET news partial recovery",
+      "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+      "status": "news_publication_verified_sports_completion_missing",
+      "source_commit": "c28087441d512c1fad1c82e9ff457f6d892f4b30",
+      "news_runKey": "news-2026-11-10-10:00",
+      "news_completedAt": "2026-11-10T09:05:00Z",
+      "articleIds": [
+        "center-tlv-driver-bus-windows-arrest-20261110",
+        "ben-zvi-3948-traffic-change-green-line-20261110"
+      ],
+      "urls": [
+        "https://tlvnet.com/news/center-tlv-driver-bus-windows-arrest-20261110.html",
+        "https://tlvnet.com/news/ben-zvi-3948-traffic-change-green-line-20261110.html"
+      ],
+      "tests": "Both articlesHTTP200 exact bytes equal fresh source; both linked from home and news. Source news note explicitly says sports untouched.",
+      "sports_runKey": "sports-2026-11-10-07:00",
+      "sports_completedAt": "2026-11-10T05:22:56Z",
+      "limitation": "No proof both main domains recovered. Host completed previousb256c446 resultnull, current40d024f8-6abc-8329-820d-d1df6cafa6fa active. No current result attributed from another run, no duplicate writer run or shared source edit.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "domain": "Independent source journals and health",
+      "status": "read_only_verified_partial",
+      "culture_source": {
+        "runKey": "culture-news-2026-11-10-11:00",
+        "completedAt": "2026-11-10T09:52:00Z",
+        "status": "no_update",
+        "publication_policy": "Source-only no_update, no deployment solely for journal. Public09cycle lag not a publicationfailure."
+      },
+      "real_estate_source_and_live": {
+        "runKey": "real-estate-2026-11-10-11:00",
+        "completedAt": "2026-11-10T09:08:22+00:00",
+        "status": "no_update"
+      },
+      "site_health": "HTTP200ok; database/mediaStorage/publicationStorageok",
+      "ISNET_backup_run": 42793878188,
+      "ISNET_backup_status": "success",
+      "event_health_run": 42786839729,
+      "event_readback_run": 42786839666,
+      "event_checks_status": "success",
+      "maintenance": "No repeated cleanup, account quota/ClubVPS claim, schedule change or resumed paused task."
     }
   ],
   "writer_completions": [
@@ -5248,6 +5371,106 @@
       "repair_attempt": "Read-only fresh source opened via authorized helper; no prompt edit/restart/source/content mutation while owner active.",
       "prevention_test": "Next actual completed main run must record separate news and sports outcomes with sources and matching run/result IDs, plus public article or verified no_update. enabled/prompt/completed alone insufficient.",
       "next_attempt_at": "2026-11-10T09:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "domain": "Supermarket owner repair",
+      "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "status": "partial_recovery_verified",
+      "owner_run_id": "0c899d44-37f8-8323-a419-101e3a61ce8a",
+      "host_status": "completed",
+      "latest_result": null,
+      "source_journal": "ops/SUPER_MAINTENANCE_2026-11-10.json",
+      "source_journal_sha": "e5a153880d43687563d608f2dbcf3aad29a253c0",
+      "baseline_current": 75,
+      "after_current": 95,
+      "total": 121,
+      "retained_prior_sources": 26,
+      "cities": {
+        "ASHDOD": [
+          20,
+          20
+        ],
+        "YAVNE": [
+          7,
+          7
+        ],
+        "KGAT": [
+          9,
+          9
+        ],
+        "RISHON": [
+          17,
+          24
+        ],
+        "HOLON": [
+          23,
+          23
+        ],
+        "BATYAM": [
+          19,
+          19
+        ],
+        "TLV": [
+          0,
+          19
+        ]
+      },
+      "source_date": "2026-11-10",
+      "retained_date_per_verified_owner_report": "2026-11-09",
+      "public_metadata_check": "Seven existing public refresh-status metadata files200; current source counts match owner95. Failed branch report file_date=null is not a newly verified date; retained prices/dates come from owner's catalog/offer readback, not an invented report timestamp.",
+      "pages_run": 42786398614,
+      "public_version_url": "https://isnet.co.il/deployment-version.json",
+      "public_source_commit": "820f9236bb0815dc842d8b635f3d0f163335ff9c",
+      "tests": "Owner validated builders/adapters/repair hashes and121 public samples; controller did not repeat catalogs/offers/retailer requests. Publication marker exact. No three-day stability claim.",
+      "controller_source_collections": 0
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "signature": "Work/supermarket-recovery/process/SIGKILL--9",
+      "domain": "Work recovery process",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "execution_owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "status": "blocked_termination_diagnostics",
+      "cities": [
+        "RISHON",
+        "TLV"
+      ],
+      "failure_observed_at": "2026-11-10T08:48:14.873042Z",
+      "observed_exit_code": -9,
+      "root_cause": "Unverified. SIGKILL is proven in owner journal; OOM, timeout, external cancellation and host limit not distinguished.",
+      "diagnostic_attempt": "Read existing recovery implementation01afe1cb9ed10f05237787fd4438474a623b7119. It holds nonblocking workspace file lock across recover_city and consumes durable allowance before requests. Attempted independent cgroup memory.events/max/current/peak/swap inspection: files absent; /proc/self/cgroup=0::/ with no cgroup mount exposed. CPU/address-space rlimits unlimited; this is not proof host memory unlimited or noOOM.",
+      "additional_evidence": "Owner attempt timestamps show RISHON interval overlaps HOLON/BATYAM/TLV; environment/host/shared-temp identity absent, so cannot establish one-host lock violation or infer memory cause from overlap.",
+      "missing_interface": "Termination/kill reason with timestamp, PID and matching owner executor/cgroup; kernel or supervisor logs and cross-executor lock identity.",
+      "safe_repair_attempt": "No process restart or source recollection: all seven daily recovery allowances are consumed. Existing serialization guard reviewed, not weakened. No safe cause-specific code patch established without executor evidence.",
+      "prevention_test": "Next permitted daily run must demonstrate single-city catalog/offer merge ownership in the actual executor, capture durable exit/termination evidence, preserve failed claims and old dates, then successful public readback. No test source requests today.",
+      "failed_processes_observed": 2,
+      "controller_repair_restarts": 0,
+      "next_attempt_at": "2026-11-10T14:48:14Z",
+      "earlier_only_if": "New kernel/supervisor/executor/lock evidence; no same-input restart.",
+      "next_source_attempt": "Only next permitted daily allowance under OPERATIONS; diagnostics cooldown never resets consumed collection allowance."
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "domain": "TLVNET news partial recovery",
+      "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+      "status": "news_publication_verified_sports_completion_missing",
+      "source_commit": "c28087441d512c1fad1c82e9ff457f6d892f4b30",
+      "news_runKey": "news-2026-11-10-10:00",
+      "news_completedAt": "2026-11-10T09:05:00Z",
+      "articleIds": [
+        "center-tlv-driver-bus-windows-arrest-20261110",
+        "ben-zvi-3948-traffic-change-green-line-20261110"
+      ],
+      "urls": [
+        "https://tlvnet.com/news/center-tlv-driver-bus-windows-arrest-20261110.html",
+        "https://tlvnet.com/news/ben-zvi-3948-traffic-change-green-line-20261110.html"
+      ],
+      "tests": "Both articlesHTTP200 exact bytes equal fresh source; both linked from home and news. Source news note explicitly says sports untouched.",
+      "sports_runKey": "sports-2026-11-10-07:00",
+      "sports_completedAt": "2026-11-10T05:22:56Z",
+      "limitation": "No proof both main domains recovered. Host completed previousb256c446 resultnull, current40d024f8-6abc-8329-820d-d1df6cafa6fa active. No current result attributed from another run, no duplicate writer run or shared source edit.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
     }
   ],
   "carried_open_incidents": [
@@ -6873,18 +7096,180 @@
       "recorded_in": "Existing shared controller daily-audit unified handoff",
       "reason": "Fresh run/result attribution and scoped changes above; other owners' files/locks untouched.",
       "next_attempt_at": "2026-11-10T09:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "status": "skipped_active_run",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "6acfdcf595cc8191b87ea3bdf3b1c44d",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_e467e9cca2d8819183f1d37b533a347c",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "status": "owner_reviewed_two_candidates_editorial_blocked",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_4c9b538f29d081918b3cbb12595b0989",
+      "status": "owner_report_reviewed_verification_partial",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+      "status": "owner_report_reviewed_verification_partial",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_2bd8b730a03081918fd587754ee03429",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "6ae8893c6e30819192dd11bddff9e078",
+      "status": "blocked_visual_verification_not_site_outage",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "6acb0ab1c1988191a700f8fb4287c8e0",
+      "status": "owner_report_reviewed_verification_partial",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "status": "partial_recovery95of121_verified_host_result_missing",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T14:48:14Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "6aca152667488191b0f6541e44d0cf8e",
+      "status": "paused_merged_into_intake",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+      "status": "blocked_result_observability",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_851de24df7448191a034009b74fc236f",
+      "status": "blocked_result_observability",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_f60537c642048191b85552af9e6c1cfe",
+      "status": "skipped_active_run",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_20ca7f765cf88191af46487bf3ef8063",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "agent_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller daily-audit unified operational handoff",
+      "reason": "Current run/result mapping and scoped verification above; owners' source and locks untouched.",
+      "next_attempt_at": "2026-11-10T10:58:00Z"
     }
   ],
   "next_actions": [
     {
       "owner": "Automation_b38091754d888191abf21a150dc4ed62",
-      "next_attempt_at": "2026-11-10T09:58:00Z",
-      "action": "Check completed main news+sports outcome and changed incident signatures; no competing work while main/super/culture active."
+      "next_attempt_at": "2026-11-10T14:48:14Z",
+      "action": "Require correlated kernel/supervisor/executor evidence for SIGKILL; no guessingOOM or retrying spent collection allowance."
     },
     {
-      "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
-      "next_attempt_at": "2026-11-10T09:58:00Z",
-      "action": "Finish current source-date and public-readback verification; current publication42786398614 succeeded. No extra collection or cleanup."
+      "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+      "next_attempt_at": "2026-11-10T10:58:00Z",
+      "action": "Verify current main records separate news+sports outcomes; news recovery alone not fullmainrepair."
     }
   ],
   "audit_history": [
@@ -11394,6 +11779,122 @@
           "classification": "blocked_paused_by_own_task"
         }
       ]
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-10:58",
+      "checked_at": "2026-11-10T09:00:18Z",
+      "status": "partial",
+      "daily_audit_completed": false,
+      "agents": [
+        {
+          "id": "Automation_b38091754d888191abf21a150dc4ed62",
+          "last_run_id": "5c9d9e13-72f4-8332-984c-3475889de7e8",
+          "result_run_id": "45c1acdc-af40-8332-9088-12fe676376a6",
+          "classification": "skipped_active_run"
+        },
+        {
+          "id": "6acfdcf595cc8191b87ea3bdf3b1c44d",
+          "last_run_id": "329515f6-521c-8329-85b4-40c8549aff63",
+          "result_run_id": "329515f6-521c-8329-85b4-40c8549aff63",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_e467e9cca2d8819183f1d37b533a347c",
+          "last_run_id": "33d4c46d-55ac-8320-a795-de9a55c98966",
+          "result_run_id": "33d4c46d-55ac-8320-a795-de9a55c98966",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+          "last_run_id": "71b7207d-c5d4-8326-b055-2c2e14f0330d",
+          "result_run_id": "71b7207d-c5d4-8326-b055-2c2e14f0330d",
+          "classification": "owner_reviewed_two_candidates_editorial_blocked"
+        },
+        {
+          "id": "Automation_4c9b538f29d081918b3cbb12595b0989",
+          "last_run_id": "758f9469-f804-8331-82de-73ea64211814",
+          "result_run_id": "758f9469-f804-8331-82de-73ea64211814",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "Automation_09c630803fe481919ccd2f476f0d6916",
+          "last_run_id": "278b81a7-d93c-832b-a6ba-5d668bbf8b27",
+          "result_run_id": "278b81a7-d93c-832b-a6ba-5d668bbf8b27",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "Automation_2bd8b730a03081918fd587754ee03429",
+          "last_run_id": "c057dfef-6dec-832d-bf1e-5b1070259d77",
+          "result_run_id": "c057dfef-6dec-832d-bf1e-5b1070259d77",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "6ae8893c6e30819192dd11bddff9e078",
+          "last_run_id": "3fce2e53-12e4-8329-b8b8-f0a45583b9bc",
+          "result_run_id": "3fce2e53-12e4-8329-b8b8-f0a45583b9bc",
+          "classification": "blocked_visual_verification_not_site_outage"
+        },
+        {
+          "id": "6acb0ab1c1988191a700f8fb4287c8e0",
+          "last_run_id": "52ed9198-f030-8322-b9dc-221de15a58ab",
+          "result_run_id": "52ed9198-f030-8322-b9dc-221de15a58ab",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "last_run_id": "4d12cc3a-756c-832c-af43-543a741254ae",
+          "result_run_id": "98dba2e4-63bc-8321-afa2-c1d1bec97b08",
+          "classification": "skipped_active_run"
+        },
+        {
+          "id": "6aca152667488191b0f6541e44d0cf8e",
+          "last_run_id": "076ead7a-4dc8-8322-9737-774b85db1a5f",
+          "result_run_id": "076ead7a-4dc8-8322-9737-774b85db1a5f",
+          "classification": "paused_merged_into_intake"
+        },
+        {
+          "id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+          "last_run_id": "1e75951c-31ec-832e-a384-06b4e5968956",
+          "result_run_id": null,
+          "classification": "skipped_active_run"
+        },
+        {
+          "id": "Automation_e2f02000cdf4819190022b85f4391076",
+          "last_run_id": "b59793ab-11a8-8328-8646-77716a7657ec",
+          "result_run_id": "b59793ab-11a8-8328-8646-77716a7657ec",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_851de24df7448191a034009b74fc236f",
+          "last_run_id": "3d9fce94-3fd4-8331-8385-7f5b9f14f638",
+          "result_run_id": null,
+          "classification": "blocked_result_observability"
+        },
+        {
+          "id": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "last_run_id": "b256c446-eac4-832d-bc14-ce256469b0b7",
+          "result_run_id": null,
+          "classification": "skipped_active_run"
+        },
+        {
+          "id": "Automation_e03d80ff914c8191a790fc66e7447826",
+          "last_run_id": "c97beaad-cd30-8330-9df3-7b461ec8f43d",
+          "result_run_id": "c97beaad-cd30-8330-9df3-7b461ec8f43d",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_20ca7f765cf88191af46487bf3ef8063",
+          "last_run_id": "07d1a7d6-35dc-832e-9f50-ed9c0b6f553e",
+          "result_run_id": "07d1a7d6-35dc-832e-9f50-ed9c0b6f553e",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+          "last_run_id": "e0647bd4-fc3c-8328-b34c-22899c2cd62e",
+          "result_run_id": "e0647bd4-fc3c-8328-b34c-22899c2cd62e",
+          "classification": "blocked_paused_by_own_task"
+        }
+      ]
     }
   ],
   "run_observations": [
@@ -14527,6 +15028,135 @@
           "tests": "TLVNET health200ok database/media/publication storage; Site version5047d9ca409 succeeded. No repeat Gmail/Scooper/draft/121branch or visual scans."
         }
       ]
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "checked_at": "2026-11-10T09:58:21Z",
+      "evidence": [
+        {
+          "runKey": "ops-controller-2026-11-10-11:58",
+          "domain": "Supermarket owner repair",
+          "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "status": "partial_recovery_verified",
+          "owner_run_id": "0c899d44-37f8-8323-a419-101e3a61ce8a",
+          "host_status": "completed",
+          "latest_result": null,
+          "source_journal": "ops/SUPER_MAINTENANCE_2026-11-10.json",
+          "source_journal_sha": "e5a153880d43687563d608f2dbcf3aad29a253c0",
+          "baseline_current": 75,
+          "after_current": 95,
+          "total": 121,
+          "retained_prior_sources": 26,
+          "cities": {
+            "ASHDOD": [
+              20,
+              20
+            ],
+            "YAVNE": [
+              7,
+              7
+            ],
+            "KGAT": [
+              9,
+              9
+            ],
+            "RISHON": [
+              17,
+              24
+            ],
+            "HOLON": [
+              23,
+              23
+            ],
+            "BATYAM": [
+              19,
+              19
+            ],
+            "TLV": [
+              0,
+              19
+            ]
+          },
+          "source_date": "2026-11-10",
+          "retained_date_per_verified_owner_report": "2026-11-09",
+          "public_metadata_check": "Seven existing public refresh-status metadata files200; current source counts match owner95. Failed branch report file_date=null is not a newly verified date; retained prices/dates come from owner's catalog/offer readback, not an invented report timestamp.",
+          "pages_run": 42786398614,
+          "public_version_url": "https://isnet.co.il/deployment-version.json",
+          "public_source_commit": "820f9236bb0815dc842d8b635f3d0f163335ff9c",
+          "tests": "Owner validated builders/adapters/repair hashes and121 public samples; controller did not repeat catalogs/offers/retailer requests. Publication marker exact. No three-day stability claim.",
+          "controller_source_collections": 0
+        },
+        {
+          "runKey": "ops-controller-2026-11-10-11:58",
+          "signature": "Work/supermarket-recovery/process/SIGKILL--9",
+          "domain": "Work recovery process",
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "execution_owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "status": "blocked_termination_diagnostics",
+          "cities": [
+            "RISHON",
+            "TLV"
+          ],
+          "failure_observed_at": "2026-11-10T08:48:14.873042Z",
+          "observed_exit_code": -9,
+          "root_cause": "Unverified. SIGKILL is proven in owner journal; OOM, timeout, external cancellation and host limit not distinguished.",
+          "diagnostic_attempt": "Read existing recovery implementation01afe1cb9ed10f05237787fd4438474a623b7119. It holds nonblocking workspace file lock across recover_city and consumes durable allowance before requests. Attempted independent cgroup memory.events/max/current/peak/swap inspection: files absent; /proc/self/cgroup=0::/ with no cgroup mount exposed. CPU/address-space rlimits unlimited; this is not proof host memory unlimited or noOOM.",
+          "additional_evidence": "Owner attempt timestamps show RISHON interval overlaps HOLON/BATYAM/TLV; environment/host/shared-temp identity absent, so cannot establish one-host lock violation or infer memory cause from overlap.",
+          "missing_interface": "Termination/kill reason with timestamp, PID and matching owner executor/cgroup; kernel or supervisor logs and cross-executor lock identity.",
+          "safe_repair_attempt": "No process restart or source recollection: all seven daily recovery allowances are consumed. Existing serialization guard reviewed, not weakened. No safe cause-specific code patch established without executor evidence.",
+          "prevention_test": "Next permitted daily run must demonstrate single-city catalog/offer merge ownership in the actual executor, capture durable exit/termination evidence, preserve failed claims and old dates, then successful public readback. No test source requests today.",
+          "failed_processes_observed": 2,
+          "controller_repair_restarts": 0,
+          "next_attempt_at": "2026-11-10T14:48:14Z",
+          "earlier_only_if": "New kernel/supervisor/executor/lock evidence; no same-input restart.",
+          "next_source_attempt": "Only next permitted daily allowance under OPERATIONS; diagnostics cooldown never resets consumed collection allowance."
+        },
+        {
+          "runKey": "ops-controller-2026-11-10-11:58",
+          "domain": "TLVNET news partial recovery",
+          "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "status": "news_publication_verified_sports_completion_missing",
+          "source_commit": "c28087441d512c1fad1c82e9ff457f6d892f4b30",
+          "news_runKey": "news-2026-11-10-10:00",
+          "news_completedAt": "2026-11-10T09:05:00Z",
+          "articleIds": [
+            "center-tlv-driver-bus-windows-arrest-20261110",
+            "ben-zvi-3948-traffic-change-green-line-20261110"
+          ],
+          "urls": [
+            "https://tlvnet.com/news/center-tlv-driver-bus-windows-arrest-20261110.html",
+            "https://tlvnet.com/news/ben-zvi-3948-traffic-change-green-line-20261110.html"
+          ],
+          "tests": "Both articlesHTTP200 exact bytes equal fresh source; both linked from home and news. Source news note explicitly says sports untouched.",
+          "sports_runKey": "sports-2026-11-10-07:00",
+          "sports_completedAt": "2026-11-10T05:22:56Z",
+          "limitation": "No proof both main domains recovered. Host completed previousb256c446 resultnull, current40d024f8-6abc-8329-820d-d1df6cafa6fa active. No current result attributed from another run, no duplicate writer run or shared source edit.",
+          "next_attempt_at": "2026-11-10T10:58:00Z"
+        },
+        {
+          "runKey": "ops-controller-2026-11-10-11:58",
+          "domain": "Independent source journals and health",
+          "status": "read_only_verified_partial",
+          "culture_source": {
+            "runKey": "culture-news-2026-11-10-11:00",
+            "completedAt": "2026-11-10T09:52:00Z",
+            "status": "no_update",
+            "publication_policy": "Source-only no_update, no deployment solely for journal. Public09cycle lag not a publicationfailure."
+          },
+          "real_estate_source_and_live": {
+            "runKey": "real-estate-2026-11-10-11:00",
+            "completedAt": "2026-11-10T09:08:22+00:00",
+            "status": "no_update"
+          },
+          "site_health": "HTTP200ok; database/mediaStorage/publicationStorageok",
+          "ISNET_backup_run": 42793878188,
+          "ISNET_backup_status": "success",
+          "event_health_run": 42786839729,
+          "event_readback_run": 42786839666,
+          "event_checks_status": "success",
+          "maintenance": "No repeated cleanup, account quota/ClubVPS claim, schedule change or resumed paused task."
+        }
+      ]
     }
   ],
   "corrections_this_run": [
@@ -14630,21 +15260,50 @@
       "root_cause": "Not established. Current source and public API both lack newer news/sports completions, so not merely a public propagation lag. Actual running owner outcome required; scheduled-host exception history interface unavailable.",
       "repair_attempt": "Read-only fresh source opened via authorized helper; no prompt edit/restart/source/content mutation while owner active.",
       "prevention_test": "Next actual completed main run must record separate news and sports outcomes with sources and matching run/result IDs, plus public article or verified no_update. enabled/prompt/completed alone insufficient.",
-      "next_attempt_at": "2026-11-10T09:58:00Z"
+      "next_attempt_at": "2026-11-10T10:58:00Z",
+      "last_reviewed_at": "2026-11-10T09:58:21Z",
+      "status": "partially_recovered_news_verified_sports_pending",
+      "news_recovered_at": "2026-11-10T09:05:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-11:58",
+      "signature": "Work/supermarket-recovery/process/SIGKILL--9",
+      "domain": "Work recovery process",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "execution_owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "status": "blocked_termination_diagnostics",
+      "cities": [
+        "RISHON",
+        "TLV"
+      ],
+      "failure_observed_at": "2026-11-10T08:48:14.873042Z",
+      "observed_exit_code": -9,
+      "root_cause": "Unverified. SIGKILL is proven in owner journal; OOM, timeout, external cancellation and host limit not distinguished.",
+      "diagnostic_attempt": "Read existing recovery implementation01afe1cb9ed10f05237787fd4438474a623b7119. It holds nonblocking workspace file lock across recover_city and consumes durable allowance before requests. Attempted independent cgroup memory.events/max/current/peak/swap inspection: files absent; /proc/self/cgroup=0::/ with no cgroup mount exposed. CPU/address-space rlimits unlimited; this is not proof host memory unlimited or noOOM.",
+      "additional_evidence": "Owner attempt timestamps show RISHON interval overlaps HOLON/BATYAM/TLV; environment/host/shared-temp identity absent, so cannot establish one-host lock violation or infer memory cause from overlap.",
+      "missing_interface": "Termination/kill reason with timestamp, PID and matching owner executor/cgroup; kernel or supervisor logs and cross-executor lock identity.",
+      "safe_repair_attempt": "No process restart or source recollection: all seven daily recovery allowances are consumed. Existing serialization guard reviewed, not weakened. No safe cause-specific code patch established without executor evidence.",
+      "prevention_test": "Next permitted daily run must demonstrate single-city catalog/offer merge ownership in the actual executor, capture durable exit/termination evidence, preserve failed claims and old dates, then successful public readback. No test source requests today.",
+      "failed_processes_observed": 2,
+      "controller_repair_restarts": 0,
+      "next_attempt_at": "2026-11-10T14:48:14Z",
+      "earlier_only_if": "New kernel/supervisor/executor/lock evidence; no same-input restart.",
+      "next_source_attempt": "Only next permitted daily allowance under OPERATIONS; diagnostics cooldown never resets consumed collection allowance."
     }
   ],
   "active_escalation": {
-    "signature": "TLVNET|main news+sports|completion ledger|last completed07local",
+    "signature": "Work/supermarket-recovery/process/SIGKILL--9",
     "owner": "Automation_b38091754d888191abf21a150dc4ed62",
-    "execution_owner": "Automation_f60537c642048191b85552af9e6c1cfe",
-    "status": "waiting_active_owner_no_competing_write",
-    "next_attempt_at": "2026-11-10T09:58:00Z",
+    "execution_owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+    "status": "blocked_termination_diagnostics",
+    "next_attempt_at": "2026-11-10T14:48:14Z",
+    "earlier_only_if": "New kernel/supervisor/executor/lock evidence; no same-input restart.",
     "parallel_repairs_started": 0
   },
   "consolidated_alert": {
-    "runKey": "ops-controller-2026-11-10-10:58",
-    "type": "no_new_user_action",
-    "summary": "Existing cleanup independently verified; subsequent publication success exactreadback. Main news/sports completion gap persists in source andlive while owner active; next actual result required. No newly established host rootcause or121branch recovery claim.",
-    "notify_once": false
+    "runKey": "ops-controller-2026-11-10-11:58",
+    "type": "partial_recovery_and_new_process_escalation",
+    "summary": "Super public source recovery75→95/121;26retainedNov9 and twoSIGKILLs with rootcause unverified. Two TLVNET news articles verified; sports completion stillmissing, currentmainactive. No additional collection.",
+    "notify_once": true
   }
 }
