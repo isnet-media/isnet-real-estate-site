@@ -3,10 +3,10 @@
   "kind": "daily-audit",
   "local_date": "2026-11-10",
   "timezone": "Asia/Jerusalem",
-  "runKey": "ops-controller-2026-11-10-08:58",
+  "runKey": "ops-controller-2026-11-10-09:58",
   "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
-  "started_at": "2026-11-10T06:55:13.589994Z",
-  "checked_at": "2026-11-10T06:59:45Z",
+  "started_at": "2026-11-10T07:53:38.101471Z",
+  "checked_at": "2026-11-10T08:07:00Z",
   "status": "partial",
   "daily_audit_completed": false,
   "previous_audit": {
@@ -14,26 +14,27 @@
     "sha": "34c23a665eba8c94531e2d35ac66ac48b1c9cfba",
     "history_preserved": true
   },
-  "record_write_scope": "CASexistingcontrollerdaily-auditonly; noownercontent/sourcepush/build/deploy/collection",
+  "record_write_scope": "CAS existing ops/REPAIR and controller daily-audit only; no collector, CMS, build, deploy, schedule or private API writes",
   "ownership_checks": {
     "local_work_tree_agents": [
       "/root"
     ],
-    "cross_environment_Work_lease": "not_observable",
+    "cross_environment_Work_lease": "No global lease asserted. The newly authorized Sites source path uses remote HEAD, version/deployment reconciliation, non-forced push and documented ownership. Existing identity-admin routes remain protected.",
     "content_mutations_performed": false,
     "maintenance_code_mutations": [],
-    "source_commit": "e5135b88e472b47a7e2878d69d49c09243e89fa8",
-    "current_controller_run": "149f609a-202c-8332-b36d-fa5ea7d61edd",
+    "source_commit": "a0e74c1e03d4b910414ea396ffac1a10d24dff47",
+    "current_controller_run": "45c1acdc-af40-8332-9088-12fe676376a6",
     "source_git_clean": true,
-    "record_write_scope": "CAS existing controller daily-audit only; source/build/deploy/collector unchanged",
-    "active_pipeline": "Main a7bbc634 matching completed. Latest Pages failed; shared publication lease unavailable, no duplicate retry.",
+    "record_write_scope": "CAS existing ops/REPAIR and controller daily-audit only; no collector, CMS, build, deploy, schedule or private API writes",
+    "active_pipeline": "Main news/sports active, no restart. GitHub Pages latest 42778875884 succeeded with exact public readback. Seven collectors complete; no extra collection.",
     "worker_runtime_logs": "Expected identityless denials, one favicon404; not scheduled host logs",
-    "new_supported_diagnostic": "Read-only Sites DB overview and complete settings pages. Exact enrichment CAS lock observed; no shared deployment lease demonstrated."
+    "new_supported_diagnostic": "Read-only Sites DB overview and complete settings pages. Exact enrichment CAS lock observed; no shared deployment lease demonstrated.",
+    "current_main_run": "356721c4-cacc-832d-80f8-96866d670ffa"
   },
   "automation_inventory": {
     "total": 25,
-    "enabled": 9,
-    "disabled": 16,
+    "enabled": 10,
+    "disabled": 15,
     "observed_active_and_recently_paused": 18
   },
   "agents": [
@@ -45,18 +46,19 @@
       "enabled": true,
       "classification": "skipped_active_run",
       "last_run": {
-        "id": "149f609a-202c-8332-b36d-fa5ea7d61edd",
+        "id": "45c1acdc-af40-8332-9088-12fe676376a6",
         "recorded_status": "in_progress",
-        "scheduled_for": "2026-11-10T06:58:00Z",
-        "started_at": "2026-11-10T06:55:13.589994Z",
+        "scheduled_for": "2026-11-10T07:58:00Z",
+        "started_at": "2026-11-10T07:53:38.101471Z",
         "completed_at": null,
         "chat_ref": null
       },
-      "result_run_id": "fb94b7ba-e7ec-8332-a085-7d093070bf57",
-      "result_created_at": "2026-11-10T06:00:12.095327Z",
+      "result_run_id": "149f609a-202c-8332-b36d-fa5ea7d61edd",
+      "result_created_at": "2026-11-10T07:00:07.212885Z",
       "result_matches_run": false,
-      "result_summary": "אומתה התאוששות חלקית בהפצת ספורט אשדוד: מחזור 06:00 הגיע במלואו; במחזור 07:00 מופיעות **13 מתוך 15 רשומות**, ושתי רשומות הסיום עדיין חסרות.\n\n[פריסה מאוחרת יותר נכשלה שוב](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42763381493) ב־`syncing_files`. הכשל נשאר פתוח; אין גישה לאימות נעילת פריסה משותפת לצורך ניסיון תיקון בטוח.\n\n[יומן הבקרה עודכן ואומת](https://github.com/isnet-media/isnet-real-estate-site/blob/main/ops/daily-audit/2026-11-10.json). הבדיקה היומית עדיין חלקית.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "result_summary": "נמצא פער פרסום חדש: תחזית ים תקפה ל־10.11 נשמרה במאגר, אך [הקובץ הציבורי](https://isnet.co.il/weather/ashdod/sea.json) עדיין מציג תחזית שפג תוקפה ב־08:00. הגדרת הפריסה אינה כוללת את עדכון קובץ התחזית כטריגר.\n\nהתיקון תועד תחת הסלמת הפרסום ונשאר חסום עד אימות נעילה משותפת. [יומן הבקרה עודכן ואומת](https://github.com/isnet-media/isnet-real-estate-site/blob/main/ops/daily-audit/2026-11-10.json), כולל בעל אחריות ומועד ניסיון הבא. הבדיקה היומית עדיין חלקית.",
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "דולג עקב ריצה פעילה"
     },
     {
       "id": "6acfdcf595cc8191b87ea3bdf3b1c44d",
@@ -80,7 +82,8 @@
       "result_created_at": "2026-11-09T19:24:10.628446Z",
       "result_matches_run": true,
       "result_summary": "החסם לא הוסר: בדיקת הנעילות והבעלות מול סוכני Work אחרים עדיין אינה זמינה. לכן לא התחלתי איסוף, לא הרצתי את האספן ולא שיניתי נתונים או תאריכי אימות. משימת העדכון הושהתה שוב. בבדיקה הנוכחית שלושת קובצי הנתונים הציבוריים תואמים ל־main, והפרסום האחרון הצליח. לחידוש האיסוף נדרשת גישה למנגנון התיאום הקיים.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_e467e9cca2d8819183f1d37b533a347c",
@@ -104,7 +107,8 @@
       "result_created_at": "2026-11-09T17:13:47.291190Z",
       "result_matches_run": true,
       "result_summary": "לא פורסם תוכן חדש. [מדור הלילה](https://tlvnet.com/night/) זמין, 41 הרשומות תואמות למקור ובדיקת `validate-night.py` עברה.\n\nהאיסוף חסום: אין ממשק נגיש לאימות נעילה ובעלות מול עבודות Work מקבילות. לכן לא הופעלו חמשת המומחים, ולא שונו התוכן או יומני המקור. משימת העדכון הושהתה עד להסדרת הגישה למנגנון הנעילות הקיים.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_845f7ef0033c8191b7490e0dc5748754",
@@ -114,21 +118,22 @@
       "enabled": true,
       "classification": "owner_report_reviewed_verification_partial",
       "last_run": {
-        "id": "d2dbab04-c360-8326-8ee2-d7400abc970a",
+        "id": "25db09c2-a968-8326-adf5-c42d1801f269",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-10T06:05:00Z",
-        "started_at": "2026-11-10T06:08:16.995795Z",
-        "completed_at": "2026-11-10T06:18:18.954293Z",
+        "scheduled_for": "2026-11-10T07:05:00Z",
+        "started_at": "2026-11-10T07:12:45.807675Z",
+        "completed_at": "2026-11-10T07:19:39.833000Z",
         "chat_ref": {
           "type": "chatgpt",
           "id": "6af1499f-5d74-83eb-a557-2a130db79dbd"
         }
       },
-      "result_run_id": "d2dbab04-c360-8326-8ee2-d7400abc970a",
-      "result_created_at": "2026-11-10T06:18:17.616292Z",
+      "result_run_id": "25db09c2-a968-8326-adf5-c42d1801f269",
+      "result_created_at": "2026-11-10T07:19:38.362182Z",
       "result_matches_run": true,
-      "result_summary": "**הרצליה נט — 10.11.2026, מחזור הבוקר:** בדקתי שבעה מקורות ומסלולי מידע ושלוש ידיעות מועמדות. פענחתי את דוח Scooper החדש שהתקבל בשעה 08:10, ובו 187 אזכורים. גם הפעם הכותרת הפנימית מציינת בטעות אשדוד. בדקתי מול ynet וישראל היום את אירוע האלימות בתיכון חנה סנש ואת ביטול שעת הלימודים הראשונה היום; הכתבה כבר הוכנה במחזור קודם, ולכן לא יצרתי כפילות. אימתתי גם את הודעת העירייה על הסדרי התנועה הצפויים ב־11 בנובמבר. citeturn581338search11turn581338search2turn328862search1 באדמין נבדקו 50 פרסומים, 64 טיוטות ו־31 קטגוריות. שלוש קריאות `get_post` החזירו `{}`. **תוצאה: no_update — אפס כתבות חדשות, אפס פרסומים ואפס החלפות ראשיות.** ארבע הראשיות שנצפו עדיין מתוארכות ל־1 ול־8 בנובמבר, אף שכתבה 810924 פורסמה ב־9 בנובמבר. לא ניתן לאמת נעילות Work או אישור עריכה. **חסום: אין API מאומת לניהול ראשיות.** [יומן הרצליה](sandbox:/mnt/data/isnet_editor_logs/herzliya-2026-11-10-08.json).\n\n**רעננה נט — לאחר השלמת מחזור הרצליה:** בדקתי שבעה מקורות וחמש ידיעות מועמדות. חיפוש ממוקד ב־Gmail לא העלה הודעת מערכת חדשה ורלוונטית שאינה Scooper. הודעת המארגן בנושא בית הקוסם נקראה במלואה ואומתה מול הכתבה שכבר פורסמה, 810923; לא נוצר עותק נוסף. נבדקו גם הודעת העירייה על היעדר מענה טלפוני באגף ההנדסה ב־11 בנובמבר והדיווח על מיזם ״עם אחד״, שעדיין חסר לו אימות ישיר מהמקור הראשוני. citeturn481640search6turn481640search5 באדמין נבדקו 60 פרסומים, כל 32 הטיוטות ו־23 קטגוריות. ארבע קריאות `get_post` החזירו `{}`. **תוצאה: no_update — אפס כתבות חדשות, אפס פרסומים ואפס החלפות ראשיות.** ארבע הראשיות שנצפו עדיין מאפריל–יוני 2026, למרות פרסומים חדשים מנובמבר. חסומים אימות נעילות Work, אישורי עריכה ו**גישה למנגנון ניהול הראשיות**. [יומן רעננה](sandbox:/mnt/data/isnet_editor_logs/raanana-2026-11-10-08.json).\n\nלא בוצעה כתיבה שעלולה להתנגש בעורכים האחרים. שני יומני הבדיקה נשמרו בנפרד, והחסמים לא סומנו כמתוקנים. המשימה נשארת פעילה.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "result_summary": "**הרצליה נט — 10.11.2026:** נבדקו שישה מקורות ומסלולי מידע וארבע ידיעות מועמדות. דוח Scooper החדש, שהתקבל ב־09:06, פוענח מתוך הודעת MIME מלאה ומכיל 188 אזכורים. הכותרת הפנימית עדיין מציינת בטעות אשדוד. נבדקו גם הודעת דוברות עיריית הרצליה על טקס ההנצחה ב־12 בנובמבר וההודעה הרשמית על הסדרי התנועה ב־11 בנובמבר. שני הנושאים כבר הוכנו לכתבות במחזורים קודמים, ולכן נמנעה כפילות. בעמוד הבית אומתו ארבע ראשיות מתאריכי 1 ו־8 בנובמבר, אף שכתבה 810924 פורסמה ב־9 בנובמבר. **תוצאה: no_update — אפס כתבות חדשות, אפס פרסומים ואפס החלפות ראשיות.** citeturn204843view0turn204843view2 [יומן הרצליה](sandbox:/mnt/data/isnet_editor_logs/herzliya-2026-11-10-09.json).\n\n**רעננה נט — 10.11.2026:** נבדקו שישה מקורות ומסלולי מידע וארבע ידיעות מועמדות. בחיפוש Gmail לא נמצאה הודעה מקומית חדשה; ההודעה הקיימת על בית הקוסם כבר טופלה בכתבה 810923. אומתה הודעת העירייה על היעדר מענה טלפוני באגף ההנדסה ב־11 בנובמבר. הדיווח מ־9 בנובמבר על מיזם ״עם אחד״ עדיין חסר אימות ממקור ראשוני. ארבע הראשיות בעמוד הבית מתוארכות לאפריל–יוני 2026, למרות פרסומים חדשים מנובמבר. **תוצאה: no_update — אפס כתבות חדשות, אפס פרסומים ואפס החלפות ראשיות.** citeturn665936view0turn168507search2turn168507view0 [יומן רעננה](sandbox:/mnt/data/isnet_editor_logs/raanana-2026-11-10-09.json).\n\n**חסמים קיימים:** בשני האתרים טרם אומתו נעילות Work ואישורי העריכה, וחסום: אין API מאומת לניהול ראשיות. תקלת `get_post` בעלת חתימה זהה לניסיונות הקודמים, ולכן לא בוצע ניסיון חוזר במהלך תקופת ההמתנה בת שש השעות, עד 14:17, אלא אם יזוהה שינוי בתשתית. החסמים תועדו ביומנים לטיפול הבקר התפעולי; לא אומתה העברה בפועל למערכת הבקר. לא בוצעו כתיבה מתחרה או שינויי פריסה. לא נוצרה תקלה חדשה המחייבת התראה.",
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_4c9b538f29d081918b3cbb12595b0989",
@@ -152,7 +157,8 @@
       "result_created_at": "2026-11-10T04:25:59.234460Z",
       "result_matches_run": true,
       "result_summary": "הרענון בוצע דרך המנגנון הקיים. [קריאה חוזרת](https://tlvnet.com/api/public-enrichment) אימתה שמירה זהה: **187 רשומות ייחודיות; 8 מתוך 9 קטלוגים עודכנו**.\n\n| קטלוג | רשומות | תוצאה |\n|---|---:|---|\n| מוזיאון תל אביב — קורסים | 23 | עודכן |\n| מוזיאון תל אביב — סדנאות | 11 | עודכן |\n| אוניברסיטת תל אביב — אמנויות | 100 | עודכן |\n| CRAFTED | 13 | עודכן בהצלחה |\n| מנשר | 8 | עודכן |\n| סטודיו אתנה | 5 | עודכן |\n| Ceramics Collective | 2 | עודכן |\n| גל קרמיקה | 1 | עודכן |\n| דן גורמה | 24 | נכשל — HTTP 500 |\n\nשמונת הקטלוגים המצליחים אומתו ב־**10.11.2026 בשעה 06:25 בישראל**. בדן גורמה נשמרו הנתונים הקודמים וזמן האימות **7.11 בשעה 10:13**.\n\nהקטלוג העירוני לא נכלל. לא נמשכו מיילים, לא שונו תמונות ולא בוצעה פריסה מחדש.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_09c630803fe481919ccd2f476f0d6916",
@@ -162,21 +168,22 @@
       "enabled": true,
       "classification": "owner_report_reviewed_verification_partial",
       "last_run": {
-        "id": "91188bf1-ba6c-832d-a672-7bb5a61d1fbc",
+        "id": "278b81a7-d93c-832b-a6ba-5d668bbf8b27",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-09T07:15:00Z",
-        "started_at": "2026-11-09T07:19:42.953128Z",
-        "completed_at": "2026-11-09T07:45:31.638709Z",
+        "scheduled_for": "2026-11-10T07:15:00Z",
+        "started_at": "2026-11-10T07:16:10.051229Z",
+        "completed_at": "2026-11-10T07:22:35.249676Z",
         "chat_ref": {
           "type": "chatgpt",
           "id": "6aed7da7-acdc-83eb-a2ce-ab27bfac8cc0"
         }
       },
-      "result_run_id": "91188bf1-ba6c-832d-a672-7bb5a61d1fbc",
-      "result_created_at": "2026-11-09T07:45:31.464472Z",
+      "result_run_id": "278b81a7-d93c-832b-a6ba-5d668bbf8b27",
+      "result_created_at": "2026-11-10T07:22:35.035743Z",
       "result_matches_run": true,
-      "result_summary": "הפעולה הושלמה בטור, ללא כפילויות וללא יצירת תזמון נוסף.\n\n| מדור | סטטוס | תוצאה |\n|---|---|---|\n| החיים של המחר | `published` | [החולצה עומדת להתחיל לדבר: הדרכון הדיגיטלי נכנס לארון](https://tlvnet.com/future/article-daily-2026-11-09) |\n| תרבות נט | `published` | [הלילה הספרים עולים לשטיח האדום: הבוקר מחפש זוכה, הקהל כבר בחר אחרת](https://tlvnet.com/culture/article-daily-2026-11-09) |\n| נשים | `blocked` | נמצאה קטגוריית „נשים” באשדוד נט, אך לא נמצאו הוראות סוכן ויומן יומי מאושרים. לא פורסמה כתבה ולא בוצע ערבוב עם TLVNET. |\n\nגרסה 437 נפרסה בהצלחה. שתי הכתבות אומתו במדורים, בעמוד הבית וביומני הכתבים החיים. תמונת „המחר” מסומנת כהמחשת AI; בתרבות נעשה שימוש בתמונת מדיה רשמית של קרן פרס הבוקר עם קרדיט מלא.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "result_summary": "{\"skip_notification\":true}",
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_2bd8b730a03081918fd587754ee03429",
@@ -200,7 +207,8 @@
       "result_created_at": "2026-11-10T06:29:39.846761Z",
       "result_matches_run": true,
       "result_summary": "פורסמו 0 פריטים. מקור האתר העדכני נבדק, אך אין גישה למנגנון הנעילות המשותף שמאפשר לאמת שאין כתיבה מקבילה. לפי הוראתך, לא שיניתי תוכן או פריסה.\n\nאומתו מחדש במקור המארגן שלושת מפגשי בית דניאל ל־10, 17 ו־24 בנובמבר; הם עדיין חסרים בנתוני המדור. genui{\"citation\":{\"ref\":\"turn247view0\"}}\n\nמשימת ההעשרה הושהתה עד להסדרת הגישה לנעילות. בדיקת האתר החי הוגבלה בתשובת 403 מסביבת הבדיקה; אין בכך הוכחה שהאתר מושבת.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "6ae8893c6e30819192dd11bddff9e078",
@@ -208,7 +216,7 @@
       "system": "ISNET",
       "domain": "בדיקה ותיקון סופרים ואירועים",
       "enabled": true,
-      "classification": "blocked_failed_run",
+      "classification": "blocked_result_observability",
       "last_run": {
         "id": "a324b662-7134-8330-b93b-bab2a2ce38f5",
         "recorded_status": "failed",
@@ -221,7 +229,8 @@
       "result_created_at": "2026-11-08T08:54:25.701597Z",
       "result_matches_run": false,
       "result_summary": "פורסם תיקון נוסף: מנגנון ההתאוששות חוסם ניסיון חוזר באותו יום, הרצה מקבילה וניסיון לאחר קריסה. הבדיקות והפריסה עברו, והקוד הציבורי תואם לגרסה שנבדקה. [ראיות לפרסום](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42464627499).\n\nבאימות החי:\n\n- 99 מתוך 102 סניפים מציגים מקור מ־8.11; נתוני שש הערים תואמים לגרסה המאומתת.\n- 33 נקודות בדיקה באירועים עברו.\n- ב־[TLVNET](https://tlvnet.com/guide/) אומתו 62 אירועי צוותא: 59 הצגות ו־3 אירועי מוזיקה. הכיסוי המאומת הוא 8 מתוך 38 מקורות.\n\nההתאוששות עדיין לא הושלמה בשלושה סניפי שופרסל בבת ים: בלפור 25, אורט ישראל 25 והחשמונאים 41 — כולם עם מקור אמיתי מ־6.11. גם 19 סניפי תל אביב נשארו מ־6.11 ומצריכים מסלול התאוששות ייעודי.\n\nבדיקת מובייל מלאה נותרה חסומה משום שהדפדפן המקומי לא נפתח. התחזוקה היומית הקיימת פעילה; לא בוצע איסוף מחירים נוסף היום.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "6acb0ab1c1988191a700f8fb4287c8e0",
@@ -245,7 +254,8 @@
       "result_created_at": "2026-11-09T06:58:35.787425Z",
       "result_matches_run": true,
       "result_summary": "# דוח בקרת אירועים ISNET — 9 בנובמבר 2026\n\n**בוצע היום תיקון בפועל במערכת האירועים של אשדוד, והשפעתו אומתה לאחר הרצת מנגנון הקליטה.** בדקתי גם את ראשון לציון, את מקורות האירועים, את Supabase ואת תקינות הנתונים באתר החי.\n\n## תיקון שבוצע ואומת: שיוך מוסדות באשדוד\n\nזיהיתי שבאירועים רבים המערכת אינה מזהה את המקום שבו הם מתקיימים, אף שהמוסד מוכר.\n\nתיקנתי את מאגר המוסדות ב־GitHub: הוספתי את **המוזאון לתרבות הפלשתים ע״ש קורין ממן**, עם כתובתו ופרטי ההתקשרות המאומתים, והוספתי כינוי חסר למשכן לאמנויות הבמה.\n\nלאחר מכן הופעל בהצלחה מנגנון הקליטה והשיוך האוטומטי.\n\n| מדד | לפני התיקון | אחרי התיקון |\n|---|---:|---:|\n| מוסדות מזוהים באשדוד | 15 | **16** |\n| אירועים המשויכים למקום מזוהה | 666 | **743** |\n| כלל האירועים במאגר | 964 | 969 |\n\n**הרצת האימות אישרה עדכון של 73 רשומות אירועים באשדוד.** הגידול הכולל בשיוכים הוא 77, כאשר במקביל גדל גם מספר האירועים במאגר.\n\nהתיקון שומר על פרטים קיימים ואינו מחליף עריכות אנושיות או תמונות.\n\nurlהתיקון שבוצע ב־GitHubhttps://github.com/isnet-media/isnet-real-estate-site/commit/d68eae2d6d231d5253f9dff42e19057f3d05e628\n\nurlהרצת הקליטה והשיוך שהסתיימה בהצלחהhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42576112065\n\n## תוצאות קליטה ופרסום\n\n| מדד | אשדוד | ראשון לציון |\n|---|---:|---:|\n| אירועים במאגר המעודכן | 969 | 2,157 |\n| טיוטות קיימות ב־Supabase | 6 | 12 |\n| טיוטות חדשות שנוצרו בריצה זו | **0** | **0** |\n| פרסומים חדשים דרך ה־CMS | **0** | **0** |\n| פרסומים חדשים שאומתו בכרטיסי האתר | **0** | **0** |\n\nבדיקת Supabase אישרה שלא נוצרו ולא פורסמו היום רשומות CMS חדשות בשתי הערים.\n\nבבדיקת שבעת מקורות הגילוי הארציים נעזרתי בדוח האחרון שנשמר במערכת. בהרצת המקורות העירוניים היום נסרקו גם לוחות טיקצ'אק, היכל התרבות, לגלות תרבות, מוזיאון אגם וכותר ראשון. לא נוספו בהרצה זו אירועים חדשים; המועמדים שנמצאו לא הצדיקו יצירת רשומות נוספות לאחר בדיקת הכיסוי והכפילויות. לא הושלמה סריקה עצמאית חדשה של כל קטלוגי שבעת המקורות הארציים.\n\n## בקרת איכות: אופק, לגלות תרבות והרצאות\n\nבדקתי את שיוך המפעילים ואת דוח איכות המוסדות.\n\n**אופק אשדוד:** 19 אירועים משויכים למפעיל. המערכת שומרת על ההפרדה בין כתובת המשרד של אופק לבין מקום הפעילות או נקודת היציאה לטיול.\n\n**לגלות תרבות בראשון לציון:** 128 אירועים משויכים למפעיל. בנוסף קיימים 209 אירועים המשויכים להיכל התרבות ו־97 לרשת כותר ראשון.\n\n**הרצאות:** באשדוד יש שלוש הרצאות ללא תמונת אירוע מאומתת; בראשון לציון 32. לא יצרתי תמונות ולא החלפתי תמונות קיימות ללא הרשאה.\n\n## חסמי פרסום שנותרו\n\nבדקתי את ריצת הפרסום האוטומטי האחרונה.\n\nמתוך **1,859 אירועים שנבדקו**, 111 כבר היו מפורסמים במסלול ו־**1,748 נחסמו**. לא פורסם אירוע חדש.\n\nהחסמים המרכזיים הם בקרת תוכן ועריכה, זכויות מדיה שאינן מאומתות, תוכן הסברי חסר וחשדות לכפילויות.\n\nבנוסף, הרשאת סוכן ה־AI אינה כוללת פרסום עצמאי, וכל 36 נכסי המדיה הרשומים ב־Supabase עדיין מסומנים בזכויות שימוש שאינן מאומתות.\n\nurlדוח הפרסום האוטומטיhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42552295260\n\nבקליטת המקורות נמצאו גם שלושה חסמים נקודתיים: אתר הבמה לא החזיר אירועים שניתן לפענח, RIZONE+ לא סיפק אירועים שניתן לפענח, ו־Eventim החזיר שגיאת זמן המתנה. לא מחקתי אירועים קיימים בעקבות הכשלים האלה.\n\n## אימות האתר החי\n\nבדיקת הקריאה החוזרת שהושלמה הבוקר אישרה התאמה מלאה בין GitHub לקובצי האירועים הציבוריים שנבדקו: 969 רשומות באשדוד ו־2,156 בראשון לציון.\n\nלאחר מכן התעדכן מאגר ראשון לציון ל־2,157 רשומות. **הרשומה הנוספת טרם אומתה בקריאה חוזרת מהאתר החי**, ולכן אינני מציג אותה כפרסום שאומת.\n\nשני עמודי האירועים והקבצים הציבוריים החזירו HTTP 200. עם זאת, לא הושלם אימות חזותי של כרטיסי האירועים לאחר טעינת JavaScript.\n\nurlדוח אימות הנתונים הציבורייםhttps://github.com/isnet-media/isnet-real-estate-site/actions/runs/42573268437\n\n---\n\n**סיכום:** היום בוצע תיקון ממשי ומאומת בשיוך מוסדות באשדוד, ו־73 רשומות אירועים עודכנו בעקבותיו. לא נוצרו טיוטות CMS חדשות ולא בוצעו פרסומים חדשים. חסם הפרסום העיקרי נותר אישור תוכן וזכויות תמונה; לא עקפתי אותו ולא שיניתי נתונים שלא אומתו.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "6ad8fab91ca48191ac06928a99f7c8d9",
@@ -253,23 +263,24 @@
       "system": "ISNET+TLVNET",
       "domain": "תקינות מחירי הסופר בכל הערים",
       "enabled": true,
-      "classification": "owner_report_reviewed_verification_partial",
+      "classification": "owner_collection_completed_source_date_verification_pending",
       "last_run": {
-        "id": "defc6e94-e15c-832a-bdf1-a8c6a4ede358",
+        "id": "98dba2e4-63bc-8321-afa2-c1d1bec97b08",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-10T06:35:00Z",
-        "started_at": "2026-11-10T06:36:38.500772Z",
-        "completed_at": "2026-11-10T06:39:56.385216Z",
+        "scheduled_for": "2026-11-10T07:35:00Z",
+        "started_at": "2026-11-10T07:33:08.351526Z",
+        "completed_at": "2026-11-10T07:34:37.761644Z",
         "chat_ref": {
           "type": "chatgpt",
           "id": "6ad99c27-0530-83ed-859e-4b0af322cdc3"
         }
       },
-      "result_run_id": "defc6e94-e15c-832a-bdf1-a8c6a4ede358",
-      "result_created_at": "2026-11-10T06:39:56.060195Z",
+      "result_run_id": "98dba2e4-63bc-8321-afa2-c1d1bec97b08",
+      "result_created_at": "2026-11-10T07:34:37.545239Z",
       "result_matches_run": true,
-      "result_summary": "**איסוף הבוקר מתעכב מעבר לחלון שנקבע.** נכון ל־10.11 בשעה 08:39, לא נמצאה ריצת איסוף להיום או נעילה יומית חדשה באף אחד משבעת היעדים; אין אספן פעיל או בתור.\n\nבאתרים הציבוריים אומתו עדיין **106 סניפים ממקור 9.11 ו־15 ממקור 8.11**. אין עדיין נתוני מקור מ־10.11. מדגם מחיר מכל 121 הסניפים תאם למאגר, כך שהגולשים מקבלים את הנתונים השמורים עם תאריכיהם האמיתיים.\n\nגם [הפרסום האחרון](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42763381493) נכשל שוב בסנכרון GitHub Pages, לאחר פרסום מוצלח שקדם לו. התקלה בפרסום לא גרמה לאובדן המחירים שנבדקו.\n\nהטיפול נותר חסום בשני תנאים מחייבים: התאוששות מותרת רק לאחר השלמת האיסוף היומי, ולפרסום מתחרה חסר אימות נעילה משותפת מול עבודות Work אחרות. לכן לא הופעל איסוף נוסף, לא שוחררה נעילה ולא הוצגו נתונים ישנים כחדשים.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "result_summary": "איסוף הבוקר **התחיל בפועל בכל שבעת היעדים סביב 09:32**. אומתו נעילות יומיות חדשות ושלב איסוף פעיל — אלה אינן ריצות דילוג. לדוגמה: [אשדוד](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42775926553), [תל אביב](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42775926942).\n\nהאיסוף והפרסום עדיין פועלים, ולכן טרם ניתן לאשר כיסוי חדש או התאוששות מלאה. לא הופעל ניסיון נוסף ולא הורדו שוב קטלוגים או offers. חסם הפריסה המשותף כבר מתועד אצל הבקר הכללי; הנתונים יאומתו לאחר פרסום מוצלח.",
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "6aca152667488191b0f6541e44d0cf8e",
@@ -293,7 +304,8 @@
       "result_created_at": "2026-11-10T06:30:22.187923Z",
       "result_matches_run": true,
       "result_summary": "בדיקת 10 בנובמבר 2026, בסביבות 08:25 בישראל: נבדקו ריצות GitHub Actions, דוחות כיסוי הבמה, משיכת תמונות ותיאורים, נתוני Supabase והעמודים הציבוריים באשדוד ובראשון לציון. **לא אומתה התקדמות משמעותית חדשה בהשלמת המערכת.**\n\n**איסוף וכיסוי:** ריצת האיסוף המאוחדת האחרונה שאומתה היא 42628679161 מ־9 בנובמבר. הריצה המתוזמנת ל־10 בנובמבר בשעה 07:05 טרם הופיעה ברשימת הריצות עד מועד הבדיקה; לא ניתן לקבוע אם מדובר בעיכוב GitHub או בתקלה במתזמן. דוח המוכנות האחרון, מ־9 בנובמבר, מציג 356 מופעי במה עתידיים באשדוד מול 169 מועמדים ארציים, ו־558 בראשון לציון מול 110 מועמדים. מתוכם רק 41 ושישה, בהתאמה, כוללים תיאורי הפקות. בשתי הערים `ready_for_full_replace=false`. בקשת השינוי #65 עדיין פתוחה כטיוטה.\n\n**תמונות ותיאורים:** בדוח האיסוף המאוחד קיימים 285 מועמדים, מהם 256 עם קישור לתמונה ורק 53 עם תיאור לפי מדד הדוח. נמצאו ארבע שגיאות הפניה חוזרת במקור Tickchak. דוח נוסף מציג 55 מועמדים להעשרת מופעים באשדוד, ללא שינוי ב־CMS או באתר הציבורי ובלי אישור זכויות חדש. בראשון לציון דוח המקור עדיין מתעד כישלון Makore בעמוד המשך 28, אך לא ניתן היה לאמת מחדש את קוד ה־HTTP של העמוד. מקור Makore הראשי ועמוד ההמשך השני נגישים. קוד האיסוף עדיין עלול להפסיק את איסוף המקור כולו בעקבות כישלון של עמוד המשך.\n\n**פרסום וקריאה חוזרת:** ריצת האימות 42763524746 אישרה התאמה מלאה בין קובצי GitHub לנתונים הציבוריים: 980 אירועים באשדוד ו־2,170 בראשון לציון, ללא מזהי אירועים כפולים. שני עמודי הבית ועמודי קטגוריית מופעי הבמה נגישים, ובעמודי הקטגוריה מופיעים מופעים עם מועדים ותיאורים; לא בוצע אימות חזותי מלא בדפדפן. בדיקת SQL ישירה אישרה שאין פרסומים חדשים ב־CMS: שש טיוטות ממתינות באשדוד ו־12 בראשון לציון. כל 36 נכסי המדיה במאגר עדיין בעלי זכויות לא ידועות וללא קובץ מאוחסן.\n\n**אבחון תשתית:** ריצת הפריסה 42763381493 נכשלה לאחר ש־GitHub Pages נשאר במצב `syncing_files` עד לפקיעת זמן ההמתנה; ריצת הפריסה הקודמת 42763263084 הצליחה. השוואת ארבעת הקומיטים האחרונים לא מצאה שינוי בקובצי האירועים, אלא רק בקובץ בקרה ובנתוני ספורט. לכן לא הוכח אובדן עדכון של מופעי הבמה בעקבות כישלון הפריסה. לא ניתן היה לאמת בעלות ונעילה משותפת מול סוכני Work מקבילים, ולכן לא בוצעה כתיבה מתחרה, לא הופעל איסוף כפול ולא נוצר runKey חדש. לא בוצעו מחיקות, מיזוגים או עקיפת אישורי זכויות.\n\nהכיסוי עדיין חלקי. אין ראיות לכיסוי של 100% ואין חסם חדש המחייב כרגע התערבות מצדך. המעקב נשאר פעיל לבדיקת ריצת האיסוף היומית הבאה והפריסה הציבורית.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_547bb40a554c819184ab07a7de64a4b2",
@@ -301,20 +313,21 @@
       "system": "TLVNET",
       "domain": "כתב חדשות תרבות — TLVNET",
       "enabled": true,
-      "classification": "owner_report_reviewed_verification_partial",
+      "classification": "source_no_update_verified_host_result_missing",
       "last_run": {
-        "id": "dc27b39b-f12c-832e-8166-2608c4299381",
+        "id": "56311bf6-6ac4-832e-ba2f-b0b2d66df98d",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-10T06:50:00Z",
-        "started_at": "2026-11-10T06:48:37.716922Z",
-        "completed_at": "2026-11-10T06:49:52.225223Z",
+        "scheduled_for": "2026-11-10T07:50:00Z",
+        "started_at": "2026-11-10T07:47:42.421947Z",
+        "completed_at": "2026-11-10T07:57:54.061807Z",
         "chat_ref": null
       },
       "result_run_id": null,
       "result_created_at": null,
       "result_matches_run": false,
-      "result_summary": "No latest_result available; completed status alone not output proof",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "result_summary": null,
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_e2f02000cdf4819190022b85f4391076",
@@ -338,31 +351,33 @@
       "result_created_at": "2026-11-09T15:36:39.741108Z",
       "result_matches_run": true,
       "result_summary": "בדיקת הצרכנות נחסמה: ההגדרות פעילות, אך אין גישה לאימות נעילה מול עבודות מקבילות; ממשק הבקרה מחזיר 403 ודורש הרשאת מנהל.\n\nלא נאסף תוכן חדש, לא פורסמו ידיעות ולא שונה האתר. השהיתי את משימת הצרכנות עד שתתאפשר בדיקת בלעדיות מוסמכת. התוצאה היא חסם, לא מחזור שהושלם בהצלחה.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_851de24df7448191a034009b74fc236f",
       "title": "כתב נדל״ן, דירות ושכירות — TLVNET",
       "system": "TLVNET",
       "domain": "כתב נדל״ן, דירות ושכירות — TLVNET",
-      "enabled": false,
-      "classification": "blocked_paused_by_own_task",
+      "enabled": true,
+      "classification": "repaired_verified_publication_next_owner_cycle_pending",
       "last_run": {
-        "id": "d49aa356-72f4-832f-a02a-c68c94af06da",
+        "id": "f3a8a6d4-71e4-8331-9179-2517f9c8c67f",
         "recorded_status": "completed",
-        "scheduled_for": "2026-11-09T14:10:00Z",
-        "started_at": "2026-11-09T15:43:20.415587Z",
-        "completed_at": "2026-11-09T15:45:31.729481Z",
+        "scheduled_for": "2026-11-10T07:10:00Z",
+        "started_at": "2026-11-10T07:11:29.930740Z",
+        "completed_at": "2026-11-10T07:19:21.710816Z",
         "chat_ref": {
           "type": "chatgpt",
           "id": "6aefdb39-abc0-83eb-8456-ece124ccedbf"
         }
       },
-      "result_run_id": "d49aa356-72f4-832f-a02a-c68c94af06da",
-      "result_created_at": "2026-11-09T15:45:31.484290Z",
+      "result_run_id": "f3a8a6d4-71e4-8331-9179-2517f9c8c67f",
+      "result_created_at": "2026-11-10T07:19:21.428115Z",
       "result_matches_run": true,
-      "result_summary": "בדיקת הנדל״ן נחסמה: ההגדרות פעילות, אך אין גישה לאימות נעילה משותפת מול עבודות מקבילות; ממשק הבקרה מחזיר 403 ודורש הרשאת מנהל.\n\nלא החל איסוף חדשותי, לא פורסמו כתבות ולא שונה היומן המשותף. השהיתי את המשימה עד להסדרת אימות הבלעדיות — בשל החסם הנוכחי, ולא בשל הוראת ביטול הנדל״ן הישנה.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "result_summary": "מחזור המחקר `real-estate-2026-11-10-09:00` הושלם.\n\n- `enabled`: ראשי ו־real-estate פעילים.\n- `publication_blocked: true` — בלעדיות הכתיבה והנעילה טרם אומתו.\n- לא בוצעו כתיבה למאגרים משותפים, build, פריסה או פרסום.\n- מערכת הנדל״ן של יבנה וכרמי גת לא הופעלה ולא שונתה.\n\nמועמד מאומת אחד:\n\n- **תא/5500: טענות לפגיעה בשמיעת מתנגדים לקראת המשך הדיונים**\n  \n  גלובס דיווח כי עו״ד רון צין טוען ש־118 מתנגדים לצפון העיר זומנו ל־4 בנובמבר בשעה 10:15, וחלקם עזבו לאחר המתנה ממושכת בלי שטענותיהם נשמעו. הטענות מוצגות כטענות במכתב — לא כעובדות שקבעה העירייה. genui{\"citation\":{\"ref\":\"turn2273view0\"}}\n  \n  העירייה מאשרת שהדיון במזרח העיר נקבע ל־11 בנובמבר, ולאחריו דרום העיר ויפו ב־17 בנובמבר ומרכז העיר ב־18 בנובמבר. העירייה גם מבהירה שהוועדה המקומית מגבשת עמדה, אך ההכרעה בהתנגדויות וסמכות אישור התוכנית הן של הוועדה המחוזית. genui{\"citation\":{\"refs\":[\"turn2272search0\",\"turn2272search1\",\"turn2272search2\"]}}\n  \n  לפני פרסום נדרשת תגובת העירייה לטענות על אופן הזימון והשמיעה.\n\nלא נמצא מועמד שני שעומד ברף האימות:\n\n- עסקת פארק TLV ב־2.55 מיליון שקל כבר קיימת ב־`articles.json` ולכן נפסלה ככפילות.\n- פרויקט הצנחנים 2–6 הושהה: הדיווחים החדשים טוענים ל־80 דירות בעשר קומות, ואילו מאגר משני המבוסס על נתוני העירייה מציג בקשה 20240937 והיתר ל־64 דירות; מקור נוסף מציג 12 קומות. ללא מסמך ההיתר המפורט אין בסיס לפרסום המספרים. genui{\"citation\":{\"refs\":[\"turn2268view0\",\"turn2268view1\",\"turn2269view2\"]}}\n- לא נמצאה במחזור עסקת מכירה חדשה שאינה כפולה או שכירות שנסגרה עם מחיר חוזה ומועד מאומתים.",
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "תוקן ואומת"
     },
     {
       "id": "Automation_f60537c642048191b85552af9e6c1cfe",
@@ -370,23 +385,21 @@
       "system": "ISNET+TLVNET",
       "domain": "כתבי TLVNET + כתב ספורט משותף",
       "enabled": true,
-      "classification": "owner_report_reviewed_verification_partial",
+      "classification": "skipped_active_run",
       "last_run": {
-        "id": "73a5a5bc-ce20-832d-8f14-b60325adbd86",
-        "recorded_status": "completed",
-        "scheduled_for": "2026-11-10T06:00:00Z",
-        "started_at": "2026-11-10T05:57:42.429468Z",
-        "completed_at": "2026-11-10T06:02:51.282099Z",
-        "chat_ref": {
-          "type": "chatgpt",
-          "id": "6af1f825-1264-83ed-a08e-0c71aefbbd21"
-        }
+        "id": "356721c4-cacc-832d-80f8-96866d670ffa",
+        "recorded_status": "in_progress",
+        "scheduled_for": "2026-11-10T08:00:00Z",
+        "started_at": "2026-11-10T08:02:30.960521Z",
+        "completed_at": null,
+        "chat_ref": null
       },
-      "result_run_id": "73a5a5bc-ce20-832d-8f14-b60325adbd86",
-      "result_created_at": "2026-11-10T06:02:50.577279Z",
-      "result_matches_run": true,
-      "result_summary": "בדיקת הכפילות החוזרת הושלמה ללא שינוי: `news` ו־`sports` ב־TLVNET כבר הושלמו ואומתו, ולכן לא בוצעו איסוף, נעילה או פרסום חוזר. ב־ISNET המקור מכיל 15/15 רשומות למחזור 07:00, אך הקובץ הציבורי עדיין מציג רק 13/15 וחסרות שתי רשומות הסיום; הסטטוס נשאר `blocked_public_propagation`. מדור הספורט והידיעה האחרונה זמינים לציבור.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "result_run_id": "293c90cb-15ac-832d-b70b-3065dc7f9bcc",
+      "result_created_at": "2026-11-10T07:19:20.444390Z",
+      "result_matches_run": false,
+      "result_summary": "מחזור המחקר `real-estate-2026-11-10-09:00` הושלם.\n\n- `enabled`: ראשי ו־real-estate פעילים.\n- `publication_blocked: true` — בלעדיות הכתיבה והנעילה טרם אומתו.\n- לא בוצעו כתיבה למאגרים משותפים, build, פריסה או פרסום.\n- מערכת הנדל״ן של יבנה וכרמי גת לא הופעלה ולא שונתה.\n\nמועמד מאומת אחד:\n\n- **תא/5500: טענות לפגיעה בשמיעת מתנגדים לקראת המשך הדיונים**\n  \n  גלובס דיווח כי עו״ד רון צין טוען ש־118 מתנגדים לצפון העיר זומנו ל־4 בנובמבר בשעה 10:15, וחלקם עזבו לאחר המתנה ממושכת בלי שטענותיהם נשמעו. הטענות מוצגות כטענות במכתב — לא כעובדות שקבעה העירייה. genui{\"citation\":{\"ref\":\"turn2273view0\"}}\n  \n  העירייה מאשרת שהדיון במזרח העיר נקבע ל־11 בנובמבר, ולאחריו דרום העיר ויפו ב־17 בנובמבר ומרכז העיר ב־18 בנובמבר. העירייה גם מבהירה שהוועדה המקומית מגבשת עמדה, אך ההכרעה בהתנגדויות וסמכות אישור התוכנית הן של הוועדה המחוזית. genui{\"citation\":{\"refs\":[\"turn2272search0\",\"turn2272search1\",\"turn2272search2\"]}}\n  \n  לפני פרסום נדרשת תגובת העירייה לטענות על אופן הזימון והשמיעה.\n\nלא נמצא מועמד שני שעומד ברף האימות:\n\n- עסקת פארק TLV ב־2.55 מיליון שקל כבר קיימת ב־`articles.json` ולכן נפסלה ככפילות.\n- פרויקט הצנחנים 2–6 הושהה: הדיווחים החדשים טוענים ל־80 דירות בעשר קומות, ואילו מאגר משני המבוסס על נתוני העירייה מציג בקשה 20240937 והיתר ל־64 דירות; מקור נוסף מציג 12 קומות. ללא מסמך ההיתר המפורט אין בסיס לפרסום המספרים. genui{\"citation\":{\"refs\":[\"turn2268view0\",\"turn2268view1\",\"turn2269view2\"]}}\n- לא נמצאה במחזור עסקת מכירה חדשה שאינה כפולה או שכירות שנסגרה עם מחיר חוזה ומועד מאומתים.",
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "דולג עקב ריצה פעילה"
     },
     {
       "id": "Automation_e03d80ff914c8191a790fc66e7447826",
@@ -410,7 +423,8 @@
       "result_created_at": "2026-11-09T14:08:31.139902Z",
       "result_matches_run": true,
       "result_summary": "מחזור הקהילה חסום: ההגדרות פעילות, אך אין בגישה הקיימת אפשרות לאמת נעילה משותפת ובעלות בלעדית מול ריצות ענן אחרות.\n\nלא התחלתי איסוף, לא שיניתי יומן ולא פרסמתי כתבות. השהיתי את משימת הקהילה ואימתתי את ההשהיה. להמשך נדרשת גישה למנגנון הנעילות הקיים של הפרויקט.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_20ca7f765cf88191af46487bf3ef8063",
@@ -434,7 +448,8 @@
       "result_created_at": "2026-11-09T13:29:07.667116Z",
       "result_matches_run": true,
       "result_summary": "המחזור נחסם לפני איסוף וכתיבה: ההגדרות פעילות, אך לא ניתן לאמת בעלות בלעדית מול ריצות Work מקבילות באמצעות מנגנון נעילה משותף נגיש.\n\nלא פורסמו ידיעות ולא שונה היומן המשותף. השהיתי את משימת הכלכלה וההייטק עד להסדרת אימות הבעלות. ידיעת מאנדיי מהמחזור הקודם עדיין זמינה באתר.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     },
     {
       "id": "Automation_39a1ff0103088191a654a694e58c7bd8",
@@ -458,7 +473,8 @@
       "result_created_at": "2026-11-09T13:25:47.036913Z",
       "result_matches_run": true,
       "result_summary": "לא נוספו תמונות. המאגר החי כולל 119 נכסים, ובתור ממתינות 117 בקשות.\n\n**החסם:** לא נמצא ממשק נגיש לנעילה משותפת ולאימות ריצות Work מקבילות. בהתאם להוראתך, לא שונו המאגר, הכתבות או יומן המקור.\n\nמשימת האיסוף הושהתה. לחידושה נדרשת גישה למנגנון הבעלות והנעילות הקיים, עם תפיסה ושחרור לפי `runKey`.",
-      "evidence": "Fresh individual peek/status/result and owner summary; no duplicate source/catalog/editor scan"
+      "evidence": "Fresh individual peek; result matched by run_id and timestamp before attribution; independent recovery evidence below. No repeated owner source/mail/draft/121-branch scan.",
+      "display_status": "חסום"
     }
   ],
   "separately_paused": [
@@ -4356,6 +4372,152 @@
         42771714239
       ],
       "queued_old_workflow_possible": true
+    },
+    {
+      "domain": "ISNET Pages",
+      "classification": "recovered_publication_verified",
+      "before": {
+        "failed_runs": [
+          42763381493,
+          42776520402
+        ],
+        "stage": "Deploy",
+        "error": "syncing_files timeout"
+      },
+      "after": {
+        "run_id": 42778875884,
+        "head": "635795a8bf1c96d74f370a8fa17b676f0cc30f4b",
+        "status": "success",
+        "public_url": "https://isnet.co.il/deployment-version.json",
+        "public_run_id": "42778875884",
+        "public_source_commit": "635795a8bf1c96d74f370a8fa17b676f0cc30f4b",
+        "http": 200
+      },
+      "tests": "Latest build/staging/upload/deploy passed; version marker exact read-back. Prior failure retained.",
+      "root_cause": "Provider syncing failure observed; permanent provider root cause not established.",
+      "prevention": "Existing serialized Pages concurrency, reviewed public staging, capacity guard and version marker; no extra deployment by controller.",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "domain": "Pages timeout setting",
+      "classification": "configuration_limit_verified",
+      "signature": "ISNET|Pages deploy configuration|timeout input|clamped600000",
+      "root_cause": "actions/deploy-pages@v4 src/internal/deployment.js MAX_TIMEOUT=600000; logs 129701078553 and 129696173011 explicitly clamp configured1200000.",
+      "repair": "Corrected operational handoff to distinguish configured20min from actual10min; did not launch a new deploy to change an inert setting.",
+      "tests": "Official action source and both actual job warnings agree.",
+      "public_product": "Latest deployment succeeded under the effective ten-minute cap.",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "domain": "Coastal weather widgets",
+      "classification": "repaired_code_and_data_verified_visual_partial",
+      "before": "Old public sea file expired and was assumed to block weather updates.",
+      "after": "All four live CMS homepages fetch raw GitHub only on expansion; Ashdod sea=213, BatYam/Rishon/Herzliya central=210. Both current raw files issued2026-11-10T00:03, retrieved07:09Z; period08:00-20:00Israel,30-100cm.",
+      "public_urls": [
+        "https://ashdodnet.com/",
+        "https://batyamnet.co.il/",
+        "https://rishonet.com/",
+        "https://herzliyanet.co.il/",
+        "https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/weather/ashdod/sea.json",
+        "https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/weather/ashdod/central.json"
+      ],
+      "tests": "Each extracted live script tested in isolated JS: current period rendered, expired/wrong coast hidden, collapsed0requests, expansion1request, one-hour cache reused. Native sea run42773230625 success and regression tests passed.",
+      "root_cause": "The old Pages-based consumption was replaced by direct tiny raw data reads; no Pages rebuild dependency for current widgets.",
+      "limitation": "Cloud browser DOM and screenshot timed out; no mobile visual completion claimed.",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "domain": "TLVNET real-estate source recovery",
+      "classification": "repaired_verified",
+      "before": "Research-only/blocked source publication attributed to admin403 or unavailable global lease.",
+      "after": {
+        "site_version": 500,
+        "source_commit": "db01bd5a3fc9608e686b11445bacadc5d7ddb86e",
+        "deployment_id": "appgdep_6af2c46ab3f88191a1dec688f5c6c411",
+        "deployment_status": "succeeded",
+        "later_version": 501,
+        "later_deployment_status": "succeeded",
+        "public_url": "https://tlvnet.com/news/neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+        "http": 200,
+        "source_live_bytes_equal": true,
+        "sha256": "9e05b1f5e68bc06cbc5dd16b45869a62408d4fdb24ff355fafbc370bf856b141",
+        "home_and_news_linked": true
+      },
+      "root_cause": "Admin identity API is separate from the now-documented authorized Sites source publication path.",
+      "repair": "Recovery was already implemented by owner/publisher; controller verified fresh source and public article, did not republish.",
+      "prevention": "Remote HEAD/version reconciliation; wait active deployments; keep audience; no force; source+archive from same commit; identity403 not bypassed.",
+      "owner": "Automation_851de24df7448191a034009b74fc236f",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "domain": "Supermarket new runs",
+      "classification": "execution_complete_freshness_pending_owner",
+      "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "runs": [
+        42775926553,
+        42775926613,
+        42775926884,
+        42775926542,
+        42775926834,
+        42775926720,
+        42775926942
+      ],
+      "status": "All seven completed success, same initial9e5f5ee source; no skip/duplicate claim invented.",
+      "limitation": "No assertion of all121 branch dates or three-day stability. No repeated catalogs/offers or branch source samples. Owner retains public-price/date readback.",
+      "next_attempt_at": "2026-11-10T08:35:00Z"
+    },
+    {
+      "domain": "TLVNET runtime/access",
+      "classification": "verified_read_only",
+      "health": {
+        "status": "ok",
+        "database": "ok",
+        "mediaStorage": "ok",
+        "publicationStorage": "ok"
+      },
+      "public_routes": "/,/news/,/night/,/api/public-articles,/editorial-sitemap.xml all200 expectedtypes",
+      "identityless": {
+        "/api/workspace": 401,
+        "/api/editorial-team": 403,
+        "/api/editorial-backup": 403,
+        "/api/agent-health": 403,
+        "/api/agents GET": 405,
+        "/api/editorial-publish GET": 405
+      },
+      "limitation": "405 verifies method refusal only; publish authorization independently inspected in current POST source, not exercised. Empty public-articles/CMS sitemap do not prove source articles absent."
+    },
+    {
+      "domain": "Main task identity",
+      "classification": "skipped_active_run",
+      "run_id": "356721c4-cacc-832d-80f8-96866d670ffa",
+      "prior_run_id": "293c90cb-15ac-832d-b70b-3065dc7f9bcc",
+      "prior_result": "real-estate report belongs to prior run, not current. Main prompt explicitly news+sports now; actual behavioral verification pending.",
+      "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "domain": "Culture",
+      "classification": "source_no_update_verified_host_result_missing",
+      "run_id": "56311bf6-6ac4-832e-ba2f-b0b2d66df98d",
+      "recorded_status": "completed",
+      "latest_result": null,
+      "source_runKey": "culture-news-2026-11-10-09:00",
+      "source_completedAt": "2026-11-10T07:52:39Z",
+      "source_status": "no_update",
+      "public_latest_observed": "culture-news-2026-11-10-08:00",
+      "limitation": "No claim scheduler exception fixed; no deployment solely for no_update journal."
+    },
+    {
+      "domain": "Analytics policy and click discovery",
+      "classification": "GA4_import_retired_by_publisher",
+      "repair_scope": "No GA4 credential repair or schedule restoration; existing browser measurement unchanged.",
+      "discovery": "Searched current TLVNET application, DB schema already inspected, public scripts and ISNET analytics files. No independently persisted article-entry click counter established by evidence.",
+      "counter_implemented": false,
+      "real_click_event_tested": false,
+      "metric_rule": "Only label actual entry events לחיצות, never unique readers or confirmed reading; no synthetic metric claim."
     }
   ],
   "writer_completions": [
@@ -4437,19 +4599,23 @@
   "blockers": [
     {
       "domain": "daily_audit",
-      "detail": "All18state/resultchecksread; exhaustiveprovenance/editor/media/visualchecksremainpartial. Newdayrecordmustnotbeinterpretedasdailycompletion."
-    },
-    {
-      "domain": "Work_ownership",
-      "detail": "Sevenownerdesksremainselfpaused; no supportedcross-environmentleaseinspection. Existingcontrollerdocumentationandreadonlyverificationstillavailable."
+      "detail": "18current/recent agent states reviewed; source/editor/media/visual verification remains partial. No daily completion."
     },
     {
       "domain": "ISNET_home_slots",
-      "detail": "Needexistingauthorizedhomepageblock/positionAPI andmanualselectionprovenance; nofakeheadlinereplacement."
+      "detail": "Owner's new09h report still shows unchanged4heads per city; no authorized blocks/position API or manual-selection provenance. No duplicate owner CMS/mail/draft scans."
+    },
+    {
+      "domain": "paused_owner_tasks",
+      "detail": "Other intentionally paused or self-paused tasks unchanged; no resumption. Verified Sites recovery applies to its documented path, not automatic task reactivation."
+    },
+    {
+      "domain": "Pages_effective_timeout",
+      "detail": "Configured20min is capped to10by officialaction; factual handoff corrected. Published recovery verified, permanent service cause unresolved."
     },
     {
       "domain": "other_known_open_issues",
-      "detail": "Seniorsbuild137, Makorepagination404, eventeditor/mediaapprovals andexistingGA4_SERVICE_ACCOUNT_JSONstillopen; seepriorauditandexistingownerhandoffs."
+      "detail": "Seniors137, Makore pagination404, editorial/media approval cases remain with existing owners. GA4 import is retired by publisher, not open credential repair."
     }
   ],
   "failure_repair_verification": [
@@ -4817,6 +4983,89 @@
         "Nextmatchingruncompletes",
         "Liveoutputorsource-readno_update"
       ]
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "domain": "ISNET Pages",
+      "classification": "recovered_publication_verified",
+      "before": {
+        "failed_runs": [
+          42763381493,
+          42776520402
+        ],
+        "stage": "Deploy",
+        "error": "syncing_files timeout"
+      },
+      "after": {
+        "run_id": 42778875884,
+        "head": "635795a8bf1c96d74f370a8fa17b676f0cc30f4b",
+        "status": "success",
+        "public_url": "https://isnet.co.il/deployment-version.json",
+        "public_run_id": "42778875884",
+        "public_source_commit": "635795a8bf1c96d74f370a8fa17b676f0cc30f4b",
+        "http": 200
+      },
+      "tests": "Latest build/staging/upload/deploy passed; version marker exact read-back. Prior failure retained.",
+      "root_cause": "Provider syncing failure observed; permanent provider root cause not established.",
+      "prevention": "Existing serialized Pages concurrency, reviewed public staging, capacity guard and version marker; no extra deployment by controller.",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "domain": "Pages timeout setting",
+      "classification": "configuration_limit_verified",
+      "signature": "ISNET|Pages deploy configuration|timeout input|clamped600000",
+      "root_cause": "actions/deploy-pages@v4 src/internal/deployment.js MAX_TIMEOUT=600000; logs 129701078553 and 129696173011 explicitly clamp configured1200000.",
+      "repair": "Corrected operational handoff to distinguish configured20min from actual10min; did not launch a new deploy to change an inert setting.",
+      "tests": "Official action source and both actual job warnings agree.",
+      "public_product": "Latest deployment succeeded under the effective ten-minute cap.",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "domain": "Coastal weather widgets",
+      "classification": "repaired_code_and_data_verified_visual_partial",
+      "before": "Old public sea file expired and was assumed to block weather updates.",
+      "after": "All four live CMS homepages fetch raw GitHub only on expansion; Ashdod sea=213, BatYam/Rishon/Herzliya central=210. Both current raw files issued2026-11-10T00:03, retrieved07:09Z; period08:00-20:00Israel,30-100cm.",
+      "public_urls": [
+        "https://ashdodnet.com/",
+        "https://batyamnet.co.il/",
+        "https://rishonet.com/",
+        "https://herzliyanet.co.il/",
+        "https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/weather/ashdod/sea.json",
+        "https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/weather/ashdod/central.json"
+      ],
+      "tests": "Each extracted live script tested in isolated JS: current period rendered, expired/wrong coast hidden, collapsed0requests, expansion1request, one-hour cache reused. Native sea run42773230625 success and regression tests passed.",
+      "root_cause": "The old Pages-based consumption was replaced by direct tiny raw data reads; no Pages rebuild dependency for current widgets.",
+      "limitation": "Cloud browser DOM and screenshot timed out; no mobile visual completion claimed.",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "domain": "TLVNET real-estate source recovery",
+      "classification": "repaired_verified",
+      "before": "Research-only/blocked source publication attributed to admin403 or unavailable global lease.",
+      "after": {
+        "site_version": 500,
+        "source_commit": "db01bd5a3fc9608e686b11445bacadc5d7ddb86e",
+        "deployment_id": "appgdep_6af2c46ab3f88191a1dec688f5c6c411",
+        "deployment_status": "succeeded",
+        "later_version": 501,
+        "later_deployment_status": "succeeded",
+        "public_url": "https://tlvnet.com/news/neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+        "http": 200,
+        "source_live_bytes_equal": true,
+        "sha256": "9e05b1f5e68bc06cbc5dd16b45869a62408d4fdb24ff355fafbc370bf856b141",
+        "home_and_news_linked": true
+      },
+      "root_cause": "Admin identity API is separate from the now-documented authorized Sites source publication path.",
+      "repair": "Recovery was already implemented by owner/publisher; controller verified fresh source and public article, did not republish.",
+      "prevention": "Remote HEAD/version reconciliation; wait active deployments; keep audience; no force; source+archive from same commit; identity403 not bypassed.",
+      "owner": "Automation_851de24df7448191a034009b74fc236f",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
     }
   ],
   "carried_open_incidents": [
@@ -6088,34 +6337,181 @@
       "owner_ledger_updated": false,
       "recorded_in": "Existingcentraldaily-audit",
       "reason": "Oneownershipescalation;next_attempt_at12:58Z;newseapublicationmismatchandtriggerfixproposal recorded. No competingpublication."
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "status": "skipped_active_run",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "6acfdcf595cc8191b87ea3bdf3b1c44d",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_e467e9cca2d8819183f1d37b533a347c",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "status": "owner_report_reviewed_verification_partial",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_4c9b538f29d081918b3cbb12595b0989",
+      "status": "owner_report_reviewed_verification_partial",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+      "status": "owner_report_reviewed_verification_partial",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_2bd8b730a03081918fd587754ee03429",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "6ae8893c6e30819192dd11bddff9e078",
+      "status": "blocked_result_observability",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "6acb0ab1c1988191a700f8fb4287c8e0",
+      "status": "owner_report_reviewed_verification_partial",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "status": "owner_collection_completed_source_date_verification_pending",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "6aca152667488191b0f6541e44d0cf8e",
+      "status": "paused_merged_into_intake",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+      "status": "source_no_update_verified_host_result_missing",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_851de24df7448191a034009b74fc236f",
+      "status": "repaired_verified_publication_next_owner_cycle_pending",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_f60537c642048191b85552af9e6c1cfe",
+      "status": "skipped_active_run",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_20ca7f765cf88191af46487bf3ef8063",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "agent_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "status": "blocked_paused_by_own_task",
+      "owner_ledger_updated": false,
+      "recorded_in": "Existing controller ops/daily-audit unified operational handoff",
+      "reason": "New run/status/result attribution and verified recovery evidence above; no owner source overwritten.",
+      "next_attempt_at": "2026-11-10T08:58:00Z"
     }
   ],
   "next_actions": [
     {
-      "owner": "Existingnews/sportsowners",
-      "action": "Reconcileactualversion480liveverificationintoownledgersonlywithverifiableownership; preservefaileddeploymenthistory; no duplicatearticles."
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "next_attempt_at": "2026-11-10T08:58:00Z",
+      "action": "Only changed completed runs/products/signatures; verify main news+sports when its current run finishes. No repeated deployments or121source samples."
     },
     {
-      "owner": "ExistingWorkexecutionoperator",
-      "action": "Inspecta1a9ebee/41a2ebffexacthostexceptions; enableflagsandoldresultsarenotrepairproof."
-    },
-    {
-      "owner": "ExistingsharedWorkownershipinterface",
-      "action": "Provideauthorizedactive-run/leaseinspectionforsevenpauseddomains; do notunlockactiveleases."
-    },
-    {
-      "owner": "Existingsea-forecastowner",
-      "action": "Observeexistingnormalcycleand08:00validityboundary; preservecurrentlastgoodforecastandactualtimestamp. No manualduplicateorweakeningcurrentperiodguard."
-    },
-    {
-      "owner": "Existingsupermarketowners",
-      "action": "Nov10collectionnotyetdue; normal06:00claims/runlocks govern. Monitor15retainedNov8sources; do nottakeanotherNov9claimorrelabelNov9asNov10."
-    },
-    "Observe next scheduled Main/Culture cycle with exact run IDs; repair requires scheduled host exception interface and shared Work lease access.",
-    "Keep existing06:00 local supermarket collectors; no duplicate collection; inspect normal completed claims before any permitted focused recovery.",
-    "Authorized ISNET block/positions interface needed to review four homepage slots per city without overriding manual choices.",
-    "Seniors exit137 remains blocked on attributable build resource diagnostics and shared ownership; no competing build.",
-    "Full daily audit remains partial; central record saved, per-owner ledger mutation still pending verifiable ownership."
+      "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "next_attempt_at": "2026-11-10T08:35:00Z",
+      "action": "Verify seven completed daily collector claims, true source dates and public output; focused recovery only under OPERATIONS allowance."
+    }
   ],
   "audit_history": [
     {
@@ -10148,6 +10544,348 @@
         "active_pipeline": "Main a7bbc634 matching completed. Latest Pages failed; shared publication lease unavailable, no duplicate retry.",
         "worker_runtime_logs": "Expected identityless denials, one favicon404; not scheduled host logs"
       }
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-08:58",
+      "checked_at": "2026-11-10T06:59:45Z",
+      "status": "partial",
+      "daily_audit_completed": false,
+      "agents": [
+        {
+          "id": "Automation_b38091754d888191abf21a150dc4ed62",
+          "last_run": {
+            "id": "149f609a-202c-8332-b36d-fa5ea7d61edd",
+            "recorded_status": "in_progress",
+            "scheduled_for": "2026-11-10T06:58:00Z",
+            "started_at": "2026-11-10T06:55:13.589994Z",
+            "completed_at": null,
+            "chat_ref": null
+          },
+          "result_run_id": "fb94b7ba-e7ec-8332-a085-7d093070bf57",
+          "classification": "skipped_active_run"
+        },
+        {
+          "id": "6acfdcf595cc8191b87ea3bdf3b1c44d",
+          "last_run": {
+            "id": "329515f6-521c-8329-85b4-40c8549aff63",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T19:25:00Z",
+            "started_at": "2026-11-09T19:21:19.042807Z",
+            "completed_at": "2026-11-09T19:24:11.395236Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6ad04f9d-c490-83eb-b682-b7773ad6fe67"
+            }
+          },
+          "result_run_id": "329515f6-521c-8329-85b4-40c8549aff63",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_e467e9cca2d8819183f1d37b533a347c",
+          "last_run": {
+            "id": "33d4c46d-55ac-8320-a795-de9a55c98966",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T17:15:00Z",
+            "started_at": "2026-11-09T17:10:37.741145Z",
+            "completed_at": "2026-11-09T17:13:47.524689Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af1ba0d-3dbc-83ed-8fbc-6c25528ecddc"
+            }
+          },
+          "result_run_id": "33d4c46d-55ac-8320-a795-de9a55c98966",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+          "last_run": {
+            "id": "d2dbab04-c360-8326-8ee2-d7400abc970a",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-10T06:05:00Z",
+            "started_at": "2026-11-10T06:08:16.995795Z",
+            "completed_at": "2026-11-10T06:18:18.954293Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af1499f-5d74-83eb-a557-2a130db79dbd"
+            }
+          },
+          "result_run_id": "d2dbab04-c360-8326-8ee2-d7400abc970a",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "Automation_4c9b538f29d081918b3cbb12595b0989",
+          "last_run": {
+            "id": "758f9469-f804-8331-82de-73ea64211814",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-10T04:20:00Z",
+            "started_at": "2026-11-10T04:24:03.823935Z",
+            "completed_at": "2026-11-10T04:25:59.354109Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af1f2a7-7f88-83eb-9311-4f83ac0964cb"
+            }
+          },
+          "result_run_id": "758f9469-f804-8331-82de-73ea64211814",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "Automation_09c630803fe481919ccd2f476f0d6916",
+          "last_run": {
+            "id": "91188bf1-ba6c-832d-a672-7bb5a61d1fbc",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T07:15:00Z",
+            "started_at": "2026-11-09T07:19:42.953128Z",
+            "completed_at": "2026-11-09T07:45:31.638709Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aed7da7-acdc-83eb-a2ce-ab27bfac8cc0"
+            }
+          },
+          "result_run_id": "91188bf1-ba6c-832d-a672-7bb5a61d1fbc",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "Automation_2bd8b730a03081918fd587754ee03429",
+          "last_run": {
+            "id": "c057dfef-6dec-832d-bf1e-5b1070259d77",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-10T06:25:00Z",
+            "started_at": "2026-11-10T06:25:42.628747Z",
+            "completed_at": "2026-11-10T06:29:40.098413Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aed7546-1614-83eb-bbbe-f57a38324134"
+            }
+          },
+          "result_run_id": "c057dfef-6dec-832d-bf1e-5b1070259d77",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "6ae8893c6e30819192dd11bddff9e078",
+          "last_run": {
+            "id": "a324b662-7134-8330-b93b-bab2a2ce38f5",
+            "recorded_status": "failed",
+            "scheduled_for": "2026-11-09T07:00:00Z",
+            "started_at": "2026-11-09T07:12:53.481756Z",
+            "completed_at": "2026-11-09T07:42:57.571594Z",
+            "chat_ref": null
+          },
+          "result_run_id": "6c63d03f-7434-832a-9309-f11536d56fe9",
+          "classification": "blocked_failed_run"
+        },
+        {
+          "id": "6acb0ab1c1988191a700f8fb4287c8e0",
+          "last_run": {
+            "id": "52ed9198-f030-8322-b9dc-221de15a58ab",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T06:00:00Z",
+            "started_at": "2026-11-09T06:50:45.705038Z",
+            "completed_at": "2026-11-09T06:58:36.672186Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6acc7496-2300-83ed-83a9-41931180687b"
+            }
+          },
+          "result_run_id": "52ed9198-f030-8322-b9dc-221de15a58ab",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "last_run": {
+            "id": "defc6e94-e15c-832a-bdf1-a8c6a4ede358",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-10T06:35:00Z",
+            "started_at": "2026-11-10T06:36:38.500772Z",
+            "completed_at": "2026-11-10T06:39:56.385216Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6ad99c27-0530-83ed-859e-4b0af322cdc3"
+            }
+          },
+          "result_run_id": "defc6e94-e15c-832a-bdf1-a8c6a4ede358",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "6aca152667488191b0f6541e44d0cf8e",
+          "last_run": {
+            "id": "076ead7a-4dc8-8322-9737-774b85db1a5f",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-10T06:45:00Z",
+            "started_at": "2026-11-10T06:25:22.972585Z",
+            "completed_at": "2026-11-10T06:30:24.245386Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af0a4f3-0bf8-83eb-9402-761e8c1947e7"
+            }
+          },
+          "result_run_id": "076ead7a-4dc8-8322-9737-774b85db1a5f",
+          "classification": "paused_merged_into_intake"
+        },
+        {
+          "id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+          "last_run": {
+            "id": "dc27b39b-f12c-832e-8166-2608c4299381",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-10T06:50:00Z",
+            "started_at": "2026-11-10T06:48:37.716922Z",
+            "completed_at": "2026-11-10T06:49:52.225223Z",
+            "chat_ref": null
+          },
+          "result_run_id": null,
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "Automation_e2f02000cdf4819190022b85f4391076",
+          "last_run": {
+            "id": "b59793ab-11a8-8328-8646-77716a7657ec",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T14:40:00Z",
+            "started_at": "2026-11-09T15:32:34.725030Z",
+            "completed_at": "2026-11-09T15:36:40.379968Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af000ed-40f8-83ed-ab86-7baf8280349f"
+            }
+          },
+          "result_run_id": "b59793ab-11a8-8328-8646-77716a7657ec",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_851de24df7448191a034009b74fc236f",
+          "last_run": {
+            "id": "d49aa356-72f4-832f-a02a-c68c94af06da",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T14:10:00Z",
+            "started_at": "2026-11-09T15:43:20.415587Z",
+            "completed_at": "2026-11-09T15:45:31.729481Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aefdb39-abc0-83eb-8456-ece124ccedbf"
+            }
+          },
+          "result_run_id": "d49aa356-72f4-832f-a02a-c68c94af06da",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "last_run": {
+            "id": "73a5a5bc-ce20-832d-8f14-b60325adbd86",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-10T06:00:00Z",
+            "started_at": "2026-11-10T05:57:42.429468Z",
+            "completed_at": "2026-11-10T06:02:51.282099Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af1f825-1264-83ed-a08e-0c71aefbbd21"
+            }
+          },
+          "result_run_id": "73a5a5bc-ce20-832d-8f14-b60325adbd86",
+          "classification": "owner_report_reviewed_verification_partial"
+        },
+        {
+          "id": "Automation_e03d80ff914c8191a790fc66e7447826",
+          "last_run": {
+            "id": "c97beaad-cd30-8330-9df3-7b461ec8f43d",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T13:30:00Z",
+            "started_at": "2026-11-09T14:04:05.744988Z",
+            "completed_at": "2026-11-09T14:08:31.742271Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aefca53-37bc-83eb-95c2-1ee0d1d63c94"
+            }
+          },
+          "result_run_id": "c97beaad-cd30-8330-9df3-7b461ec8f43d",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_20ca7f765cf88191af46487bf3ef8063",
+          "last_run": {
+            "id": "07d1a7d6-35dc-832e-9f50-ed9c0b6f553e",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T13:20:00Z",
+            "started_at": "2026-11-09T13:25:49.672747Z",
+            "completed_at": "2026-11-09T13:29:07.869069Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6aefca4a-5db0-83ed-9bf6-2738aed86760"
+            }
+          },
+          "result_run_id": "07d1a7d6-35dc-832e-9f50-ed9c0b6f553e",
+          "classification": "blocked_paused_by_own_task"
+        },
+        {
+          "id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+          "last_run": {
+            "id": "e0647bd4-fc3c-8328-b34c-22899c2cd62e",
+            "recorded_status": "completed",
+            "scheduled_for": "2026-11-09T12:55:00Z",
+            "started_at": "2026-11-09T13:23:03.288557Z",
+            "completed_at": "2026-11-09T13:25:47.176891Z",
+            "chat_ref": {
+              "type": "chatgpt",
+              "id": "6af18193-be64-83ed-962c-67ac8d1e8626"
+            }
+          },
+          "result_run_id": "e0647bd4-fc3c-8328-b34c-22899c2cd62e",
+          "classification": "blocked_paused_by_own_task"
+        }
+      ],
+      "incident_snapshot": [
+        {
+          "signature": "ISNET+TLVNET|project ownership|shared publication lease|unverified",
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "status": "partially_resolved_authorized_Sites_path_verified",
+          "last_observed_at": "2026-11-10T06:59:45Z",
+          "diagnostic_change": "New supported native D1 read path checked; only enrichment-scoped CAS lease found, no project deployment lease demonstrated.",
+          "repair_attempts": 0,
+          "next_attempt_at": "2026-11-10T08:58:00Z",
+          "earlier_retry_only_if": "New authorized lease interface/identity/code/ownership evidence",
+          "required_interface": "Existing shared Work/project lease inspect/acquire/renew/release byrunKey; cannot substitute scoped cache lock.",
+          "last_reviewed_at": "2026-11-10T08:07:00Z",
+          "resolution": "Fresh source instructions and successful versions500/501 verify supported Sites HEAD/version reconciliation path. No blanket globallease dependency asserted. Other paused scopes unchanged."
+        },
+        {
+          "signature": "ISNET|Pages deploy|syncing_files|timeout",
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "status": "recovered_current_publication_stability_unproven",
+          "last_failed_run": 42763381493,
+          "attempts_observed": 2,
+          "controller_extra_attempts": 0,
+          "recovery_attempt_limit_reached_for_same_inputs": true,
+          "next_attempt_at": "2026-11-10T08:58:00Z",
+          "earlier_retry_only_if": "Verified changed code/source/permissions/ownership, with no active deploy; no blind repeat",
+          "impact": "Sports07 journal partial and current sea source not delivered; no whole-site outage claim",
+          "last_reviewed_at": "2026-11-10T08:07:00Z",
+          "recovered_run": 42778875884,
+          "recovered_source_commit": "635795a8bf1c96d74f370a8fa17b676f0cc30f4b",
+          "public_readback": "https://isnet.co.il/deployment-version.json"
+        },
+        {
+          "signature": "ISNET|weather/ashdod/sea.json publication|trigger wiring|source/public mismatch",
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "parent_escalation": "ISNET+TLVNET|project ownership|shared publication lease|unverified",
+          "status": "superseded_by_verified_direct_raw_widgets",
+          "last_observed_at": "2026-11-10T06:59:45Z",
+          "source_retrieval_status": "recovered",
+          "public_status": "expired",
+          "root_cause": "Validated source updates are committed but existing Pages trigger does not include the weather path or sea workflow completion; separate Pages timeout also remains open.",
+          "repair_attempts": 0,
+          "next_attempt_at": "2026-11-10T08:58:00Z",
+          "required_change": "Existing Pages trigger wiring correction after exclusive authorized lease; no new schedule or collector",
+          "last_reviewed_at": "2026-11-10T08:07:00Z",
+          "resolution": "No change to Pages trigger needed for the new widgets. Exact raw213/210 endpoints and all4live scripts verified. Mobile visual partial."
+        },
+        {
+          "signature": "ISNET|Pages deploy configuration|timeout input|clamped600000",
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "status": "documented_effective_limit_no_extra_deploy",
+          "root_cause": "Official action hard cap plus two actual job warnings",
+          "repair": "Corrected current repair handoff; no unsupported20min recovery claim",
+          "repair_attempts": 0,
+          "next_attempt_at": "2026-11-10T08:58:00Z"
+        }
+      ]
     }
   ],
   "run_observations": [
@@ -12931,6 +13669,158 @@
       },
       "result_run_id": "e0647bd4-fc3c-8328-b34c-22899c2cd62e",
       "result_created_at": "2026-11-09T13:25:47.036913Z"
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "checked_at": "2026-11-10T08:07:00Z",
+      "observations": [
+        {
+          "domain": "ISNET Pages",
+          "classification": "recovered_publication_verified",
+          "before": {
+            "failed_runs": [
+              42763381493,
+              42776520402
+            ],
+            "stage": "Deploy",
+            "error": "syncing_files timeout"
+          },
+          "after": {
+            "run_id": 42778875884,
+            "head": "635795a8bf1c96d74f370a8fa17b676f0cc30f4b",
+            "status": "success",
+            "public_url": "https://isnet.co.il/deployment-version.json",
+            "public_run_id": "42778875884",
+            "public_source_commit": "635795a8bf1c96d74f370a8fa17b676f0cc30f4b",
+            "http": 200
+          },
+          "tests": "Latest build/staging/upload/deploy passed; version marker exact read-back. Prior failure retained.",
+          "root_cause": "Provider syncing failure observed; permanent provider root cause not established.",
+          "prevention": "Existing serialized Pages concurrency, reviewed public staging, capacity guard and version marker; no extra deployment by controller.",
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "next_attempt_at": "2026-11-10T08:58:00Z"
+        },
+        {
+          "domain": "Pages timeout setting",
+          "classification": "configuration_limit_verified",
+          "signature": "ISNET|Pages deploy configuration|timeout input|clamped600000",
+          "root_cause": "actions/deploy-pages@v4 src/internal/deployment.js MAX_TIMEOUT=600000; logs 129701078553 and 129696173011 explicitly clamp configured1200000.",
+          "repair": "Corrected operational handoff to distinguish configured20min from actual10min; did not launch a new deploy to change an inert setting.",
+          "tests": "Official action source and both actual job warnings agree.",
+          "public_product": "Latest deployment succeeded under the effective ten-minute cap.",
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "next_attempt_at": "2026-11-10T08:58:00Z"
+        },
+        {
+          "domain": "Coastal weather widgets",
+          "classification": "repaired_code_and_data_verified_visual_partial",
+          "before": "Old public sea file expired and was assumed to block weather updates.",
+          "after": "All four live CMS homepages fetch raw GitHub only on expansion; Ashdod sea=213, BatYam/Rishon/Herzliya central=210. Both current raw files issued2026-11-10T00:03, retrieved07:09Z; period08:00-20:00Israel,30-100cm.",
+          "public_urls": [
+            "https://ashdodnet.com/",
+            "https://batyamnet.co.il/",
+            "https://rishonet.com/",
+            "https://herzliyanet.co.il/",
+            "https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/weather/ashdod/sea.json",
+            "https://raw.githubusercontent.com/isnet-media/isnet-real-estate-site/main/weather/ashdod/central.json"
+          ],
+          "tests": "Each extracted live script tested in isolated JS: current period rendered, expired/wrong coast hidden, collapsed0requests, expansion1request, one-hour cache reused. Native sea run42773230625 success and regression tests passed.",
+          "root_cause": "The old Pages-based consumption was replaced by direct tiny raw data reads; no Pages rebuild dependency for current widgets.",
+          "limitation": "Cloud browser DOM and screenshot timed out; no mobile visual completion claimed.",
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "next_attempt_at": "2026-11-10T08:58:00Z"
+        },
+        {
+          "domain": "TLVNET real-estate source recovery",
+          "classification": "repaired_verified",
+          "before": "Research-only/blocked source publication attributed to admin403 or unavailable global lease.",
+          "after": {
+            "site_version": 500,
+            "source_commit": "db01bd5a3fc9608e686b11445bacadc5d7ddb86e",
+            "deployment_id": "appgdep_6af2c46ab3f88191a1dec688f5c6c411",
+            "deployment_status": "succeeded",
+            "later_version": 501,
+            "later_deployment_status": "succeeded",
+            "public_url": "https://tlvnet.com/news/neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+            "http": 200,
+            "source_live_bytes_equal": true,
+            "sha256": "9e05b1f5e68bc06cbc5dd16b45869a62408d4fdb24ff355fafbc370bf856b141",
+            "home_and_news_linked": true
+          },
+          "root_cause": "Admin identity API is separate from the now-documented authorized Sites source publication path.",
+          "repair": "Recovery was already implemented by owner/publisher; controller verified fresh source and public article, did not republish.",
+          "prevention": "Remote HEAD/version reconciliation; wait active deployments; keep audience; no force; source+archive from same commit; identity403 not bypassed.",
+          "owner": "Automation_851de24df7448191a034009b74fc236f",
+          "next_attempt_at": "2026-11-10T08:58:00Z"
+        },
+        {
+          "domain": "Supermarket new runs",
+          "classification": "execution_complete_freshness_pending_owner",
+          "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "runs": [
+            42775926553,
+            42775926613,
+            42775926884,
+            42775926542,
+            42775926834,
+            42775926720,
+            42775926942
+          ],
+          "status": "All seven completed success, same initial9e5f5ee source; no skip/duplicate claim invented.",
+          "limitation": "No assertion of all121 branch dates or three-day stability. No repeated catalogs/offers or branch source samples. Owner retains public-price/date readback.",
+          "next_attempt_at": "2026-11-10T08:35:00Z"
+        },
+        {
+          "domain": "TLVNET runtime/access",
+          "classification": "verified_read_only",
+          "health": {
+            "status": "ok",
+            "database": "ok",
+            "mediaStorage": "ok",
+            "publicationStorage": "ok"
+          },
+          "public_routes": "/,/news/,/night/,/api/public-articles,/editorial-sitemap.xml all200 expectedtypes",
+          "identityless": {
+            "/api/workspace": 401,
+            "/api/editorial-team": 403,
+            "/api/editorial-backup": 403,
+            "/api/agent-health": 403,
+            "/api/agents GET": 405,
+            "/api/editorial-publish GET": 405
+          },
+          "limitation": "405 verifies method refusal only; publish authorization independently inspected in current POST source, not exercised. Empty public-articles/CMS sitemap do not prove source articles absent."
+        },
+        {
+          "domain": "Main task identity",
+          "classification": "skipped_active_run",
+          "run_id": "356721c4-cacc-832d-80f8-96866d670ffa",
+          "prior_run_id": "293c90cb-15ac-832d-b70b-3065dc7f9bcc",
+          "prior_result": "real-estate report belongs to prior run, not current. Main prompt explicitly news+sports now; actual behavioral verification pending.",
+          "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "next_attempt_at": "2026-11-10T08:58:00Z"
+        },
+        {
+          "domain": "Culture",
+          "classification": "source_no_update_verified_host_result_missing",
+          "run_id": "56311bf6-6ac4-832e-ba2f-b0b2d66df98d",
+          "recorded_status": "completed",
+          "latest_result": null,
+          "source_runKey": "culture-news-2026-11-10-09:00",
+          "source_completedAt": "2026-11-10T07:52:39Z",
+          "source_status": "no_update",
+          "public_latest_observed": "culture-news-2026-11-10-08:00",
+          "limitation": "No claim scheduler exception fixed; no deployment solely for no_update journal."
+        },
+        {
+          "domain": "Analytics policy and click discovery",
+          "classification": "GA4_import_retired_by_publisher",
+          "repair_scope": "No GA4 credential repair or schedule restoration; existing browser measurement unchanged.",
+          "discovery": "Searched current TLVNET application, DB schema already inspected, public scripts and ISNET analytics files. No independently persisted article-entry click counter established by evidence.",
+          "counter_implemented": false,
+          "real_click_event_tested": false,
+          "metric_rule": "Only label actual entry events לחיצות, never unique readers or confirmed reading; no synthetic metric claim."
+        }
+      ]
     }
   ],
   "corrections_this_run": [
@@ -12945,62 +13835,89 @@
     {
       "type": "sea collection vs publication",
       "detail": "Current source nowvalid, publicstillNov9expired; do not claim source recovery equals live recovery."
+    },
+    {
+      "runKey": "ops-controller-2026-11-10-09:58",
+      "corrections": [
+        "Sea old-public-file alert superseded by actual raw source consumed in all4livewidgets.",
+        "Observed Pages recovery is not permanent provider stability.",
+        "1200000ms is configured only; deploy-pages hardcaps600000ms.",
+        "Sites realestate source path verified; admin403/globallease must not be assumed a blanket block.",
+        "GA4 import retired, missing secret no longer a requested repair target."
+      ]
     }
   ],
   "incident_register": [
     {
       "signature": "ISNET+TLVNET|project ownership|shared publication lease|unverified",
       "owner": "Automation_b38091754d888191abf21a150dc4ed62",
-      "status": "blocked",
+      "status": "partially_resolved_authorized_Sites_path_verified",
       "last_observed_at": "2026-11-10T06:59:45Z",
       "diagnostic_change": "New supported native D1 read path checked; only enrichment-scoped CAS lease found, no project deployment lease demonstrated.",
       "repair_attempts": 0,
-      "next_attempt_at": "2026-11-10T12:58:00Z",
+      "next_attempt_at": "2026-11-10T08:58:00Z",
       "earlier_retry_only_if": "New authorized lease interface/identity/code/ownership evidence",
-      "required_interface": "Existing shared Work/project lease inspect/acquire/renew/release byrunKey; cannot substitute scoped cache lock."
+      "required_interface": "Existing shared Work/project lease inspect/acquire/renew/release byrunKey; cannot substitute scoped cache lock.",
+      "last_reviewed_at": "2026-11-10T08:07:00Z",
+      "resolution": "Fresh source instructions and successful versions500/501 verify supported Sites HEAD/version reconciliation path. No blanket globallease dependency asserted. Other paused scopes unchanged."
     },
     {
       "signature": "ISNET|Pages deploy|syncing_files|timeout",
       "owner": "Automation_b38091754d888191abf21a150dc4ed62",
-      "status": "blocked_cooldown",
+      "status": "recovered_current_publication_stability_unproven",
       "last_failed_run": 42763381493,
       "attempts_observed": 2,
       "controller_extra_attempts": 0,
       "recovery_attempt_limit_reached_for_same_inputs": true,
-      "next_attempt_at": "2026-11-10T11:52:11Z",
+      "next_attempt_at": "2026-11-10T08:58:00Z",
       "earlier_retry_only_if": "Verified changed code/source/permissions/ownership, with no active deploy; no blind repeat",
-      "impact": "Sports07 journal partial and current sea source not delivered; no whole-site outage claim"
+      "impact": "Sports07 journal partial and current sea source not delivered; no whole-site outage claim",
+      "last_reviewed_at": "2026-11-10T08:07:00Z",
+      "recovered_run": 42778875884,
+      "recovered_source_commit": "635795a8bf1c96d74f370a8fa17b676f0cc30f4b",
+      "public_readback": "https://isnet.co.il/deployment-version.json"
     },
     {
       "signature": "ISNET|weather/ashdod/sea.json publication|trigger wiring|source/public mismatch",
       "owner": "Automation_b38091754d888191abf21a150dc4ed62",
       "parent_escalation": "ISNET+TLVNET|project ownership|shared publication lease|unverified",
-      "status": "blocked_shared_lease",
+      "status": "superseded_by_verified_direct_raw_widgets",
       "last_observed_at": "2026-11-10T06:59:45Z",
       "source_retrieval_status": "recovered",
       "public_status": "expired",
       "root_cause": "Validated source updates are committed but existing Pages trigger does not include the weather path or sea workflow completion; separate Pages timeout also remains open.",
       "repair_attempts": 0,
-      "next_attempt_at": "2026-11-10T11:52:11Z",
-      "required_change": "Existing Pages trigger wiring correction after exclusive authorized lease; no new schedule or collector"
+      "next_attempt_at": "2026-11-10T08:58:00Z",
+      "required_change": "Existing Pages trigger wiring correction after exclusive authorized lease; no new schedule or collector",
+      "last_reviewed_at": "2026-11-10T08:07:00Z",
+      "resolution": "No change to Pages trigger needed for the new widgets. Exact raw213/210 endpoints and all4live scripts verified. Mobile visual partial."
+    },
+    {
+      "signature": "ISNET|Pages deploy configuration|timeout input|clamped600000",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "status": "documented_effective_limit_no_extra_deploy",
+      "root_cause": "Official action hard cap plus two actual job warnings",
+      "repair": "Corrected current repair handoff; no unsupported20min recovery claim",
+      "repair_attempts": 0,
+      "next_attempt_at": "2026-11-10T08:58:00Z"
     }
   ],
   "active_escalation": {
-    "signature": "ISNET+TLVNET|project ownership|shared publication lease|unverified",
+    "signature": "ISNET|Pages deploy|syncing_files|timeout",
     "owner": "Automation_b38091754d888191abf21a150dc4ed62",
-    "status": "blocked",
-    "next_attempt_at": "2026-11-10T12:58:00Z",
+    "status": "recovered_current_publication_under_observation",
+    "next_attempt_at": "2026-11-10T08:58:00Z",
     "dependent_incidents": [
-      "ISNET|Pages deploy|syncing_files|timeout",
-      "ISNET|weather/ashdod/sea.json publication|trigger wiring|source/public mismatch"
+      "Effective action cap600000ms; no permanent provider rootcause fix claimed"
     ],
-    "parallel_repairs_started": 0
+    "parallel_repairs_started": 0,
+    "controller_deploy_attempts": 0
   },
   "consolidated_alert": {
-    "updated_at": "2026-11-10T06:59:45Z",
-    "owner": "Automation_b38091754d888191abf21a150dc4ed62",
-    "new_material_change": "Sea source retrieval succeeded but public forecast expired; missing publication trigger verified. Shared deployment ownership integration remains blocker.",
-    "known_repeated_failures": "Do not issue duplicate per-run notices for unchanged syncing_files, missingGA4 or retained supermarket dates.",
-    "notification_claim": "No claim to controlling or stopping GitHub emails"
+    "runKey": "ops-controller-2026-11-10-09:58",
+    "type": "recovery_with_limit",
+    "checked_at": "2026-11-10T08:07:00Z",
+    "summary": "Pages latest success and exact public marker; all4sea widget raw consumers verified; TLVRE article+links+source equality verified. Seven actual collectors complete but owner date/readback pending; main active pending news+sports proof; configured20min capped10min.",
+    "notify_once": true
   }
 }
