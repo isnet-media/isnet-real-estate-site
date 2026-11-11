@@ -1,0 +1,117 @@
+name: Stage coherent RISHON current-main site privately (SHA256 pilot; no cutover)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - '.github/workflows/super-current-rishon-private-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: isnet-super-single-current-rishon-private-pilot
+  cancel-in-progress: false
+jobs:
+  stage-private-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      PINNED_MAIN_SHA: a71740f51803673d96367a8fa88c011e43e691f8
+      SUPABASE_URL: ${{ secrets.CMS_SUPABASE_URL || secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - name: Checkout PR-only read-only review and immutable private-stage tooling
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout exact previously reviewed committed main source
+        uses: actions/checkout@v4
+        with:
+          ref: a71740f51803673d96367a8fa88c011e43e691f8
+          path: current-source
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Checkout latest main for city-tree freshness guard
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: latest-main
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fail closed if main RISHON city tree advanced or source pin changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C current-source rev-parse HEAD)" = "$PINNED_MAIN_SHA"
+          OLD_TREE="$(git -C current-source rev-parse HEAD:SUPER.RISHON)"
+          NEW_TREE="$(git -C latest-main rev-parse HEAD:SUPER.RISHON)"
+          test "$OLD_TREE" = "$NEW_TREE" || { echo "::error::RISHON has newer source; refuse to stage out-of-date full-site files"; exit 1; }
+          echo "Exact current source Git tree: $OLD_TREE"
+      - name: Verify price timestamps and branch identities and package complete source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_super_full_source_candidate.py' -v
+          python -m scripts.verify_super_full_source_candidate \
+            --source current-source --source-sha "$PINNED_MAIN_SHA" \
+            --city RISHON --output "$RUNNER_TEMP/rishon-current-private-candidate"
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          base=pathlib.Path(os.environ["RUNNER_TEMP"])/"rishon-current-private-candidate"
+          review=json.loads((base/"PRIVATE-REVIEW-ONLY.json").read_bytes())
+          manifest=json.loads((base/"release-manifest.json").read_bytes())
+          assert review["city"]=="RISHON" and review["committed_main_sha"]==os.environ["PINNED_MAIN_SHA"]
+          assert review["approved_for_public"] is False and review["collector_invoked"] is False
+          assert review["public_cutover"] is False and review["all_sources_updated"] is False
+          assert manifest["city"]=="RISHON" and 150<=len(manifest["files"])<=250
+          assert review["source_file_count"]==len(manifest["files"])
+          for obj in manifest["files"]:
+              raw=(base/obj["path"]).read_bytes()
+              assert len(raw)==obj["bytes"] and hashlib.sha256(raw).hexdigest()==obj["sha256"]
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as out:
+              out.write(f"RISHON pinned source: {review['committed_main_sha']}; refreshed {review['updated_count']}/{review['branch_count']}; retained old data {review['retained_previous_count']}. Public approval FALSE.\n")
+          PY
+      - name: Privately upload original RISHON files to NEW immutable release and verify SHA256 of every readback
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os,pathlib
+          from scripts import stage_super_private_storage as private
+          private.ROOT=pathlib.Path("current-source").resolve()
+          private.publish("RISHON",os.environ["PINNED_MAIN_SHA"])
+          PY
+      - name: Independently verify real object paths, Git SHA256 rollback copy, price provenance, anonymous denial
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os,pathlib
+          from scripts import verify_super_private_restoration as proof
+          proof.ROOT=pathlib.Path("current-source").resolve()
+          proof.RELEASES["RISHON"]=os.environ["PINNED_MAIN_SHA"]
+          proof.audit("RISHON")
+          PY
+      - name: Ensure RISHON source still matches main after private staging
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: post-stage-main
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Fail if main changed during private pilot
+        shell: bash
+        run: |
+          set -euo pipefail
+          OLD_TREE="$(git -C current-source rev-parse HEAD:SUPER.RISHON)"
+          NEW_TREE="$(git -C post-stage-main rev-parse HEAD:SUPER.RISHON)"
+          test "$OLD_TREE" = "$NEW_TREE" || { echo "::error::Source advanced during pilot; staged files stay private and are NOT considered latest"; exit 1; }
+      - name: Save offline restore evidence as private CI artifact only
+        uses: actions/upload-artifact@v4
+        with:
+          name: isnet-rishon-current-main-private-restore-proof-${{ github.run_id }}
+          path: ${{ runner.temp }}/super-verify-RISHON.json
+          retention-days: 7
+          if-no-files-found: error
