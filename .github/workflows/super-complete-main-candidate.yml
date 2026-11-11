@@ -21,15 +21,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: main
+          fetch-depth: 1
           persist-credentials: false
       - name: Pin one immutable committed source revision (never invoke collectors)
         id: pin
         shell: bash
         run: |
           set -euo pipefail
-          git fetch --quiet origin refs/heads/main:refs/remotes/origin/main
-          SHA="$(git rev-parse 'refs/remotes/origin/main^{commit}')"
+          SHA="$(git rev-parse HEAD)"
           [[ "$SHA" =~ ^[0-9a-f]{40}$ ]]
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
           echo "Source commit: $SHA"
