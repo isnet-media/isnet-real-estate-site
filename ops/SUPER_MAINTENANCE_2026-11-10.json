@@ -406,5 +406,61 @@
     "all_recovery_allowances_consumed": true,
     "action": "Existing controller handoff updated with terminal result; no source rescan, no deployment retry, no claim release",
     "public_readback": "No new independent public readback in this cycle; preserve earlier verified source/date evidence. Browser diagnostic unchanged."
+  },
+  "next_day_collection_incident": {
+    "runKey": "super-maintenance-2026-11-11-0838-IL",
+    "observed_at": "2026-11-11T06:41:22Z",
+    "signature": "ISNET|seven supermarket daily collectors|missing daily start|2026-11-11",
+    "status": "blocked_normal_daily_start_after_morning_window",
+    "cities": [
+      "ASHDOD",
+      "YAVNE",
+      "KGAT",
+      "RISHON",
+      "HOLON",
+      "BATYAM",
+      "TLV"
+    ],
+    "evidence": {
+      "all_daily_claims_date": "2026-11-10",
+      "all_claims_status": "completed",
+      "new_claims_2026_11_11": 0,
+      "active_actions": 0,
+      "queued_actions": 0,
+      "source_data_unchanged_in_all_seven_cities": true,
+      "verified_baseline": "820f9236bb0815dc842d8b635f3d0f163335ff9c",
+      "operations_sha": "a9c113cc3b9eaa28092c04e5ef2198fd0700e09a",
+      "repair_handoff_sha": "a03d36520cf0028d98581d2dc87623ba97072788"
+    },
+    "public_readback": {
+      "url": "https://isnet.co.il/deployment-version.json",
+      "run_id": "42966357268",
+      "source_commit": "c10f5269f7626c230bc57910ac9359ce94140bc6",
+      "method": "live browser rendered JSON",
+      "all_seven_data_directories_match_verified_baseline": true,
+      "source_dates": {
+        "2026-11-10": 95,
+        "2026-11-09": 26
+      },
+      "new_price_sample_downloads": 0
+    },
+    "root_cause": "No current daily collection invocation or claim observed. Schedule-delivery/enablement/queue infrastructure root cause unverified; not a failed retailer request or failed collection run.",
+    "safe_action_and_blocker": "Existing normal missing daily collection is authorized; it does NOT require a completed daily claim today. No workflow-dispatch tool is exposed in this connected GitHub surface. Source/project ownership across manual parallel Work and the existing global write lease cannot be verified through exposed interfaces. Automatic scheduled collection remains unchanged; do not infer exclusivity only from empty Actions queue.",
+    "ownership": {
+      "execution_owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+      "escalation_owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "local_agent_inventory": "Only root running",
+      "migration_owner": "Automation_36083f64426c81919c88c38e441128b7",
+      "migration_last_completed_run": "4466213f-77d4-832c-b2ff-a51f81871896",
+      "migration_result": "Seven private snapshots and restore checks succeeded; production cutover not completed; no collection"
+    },
+    "next_action": "Controller: verify the existing project/parallel Work lease and use the current-main authorized normal daily workflow_dispatch for each missing city once, rechecking claims/active runs before each. Do not rerun old repair packages or old data candidates. Observe claims and official source dates, then existing publication and public readback.",
+    "collection_attempts_this_cycle": 0,
+    "recovery_attempts_this_cycle": 0,
+    "claims_released": 0,
+    "code_or_schedule_changes": 0,
+    "price_changes": 0,
+    "deployments_started": 0,
+    "record_scope": "Existing owner operational report only, compare-and-swap main and exact scoped tree; ops path is excluded from Pages push triggers."
   }
 }
