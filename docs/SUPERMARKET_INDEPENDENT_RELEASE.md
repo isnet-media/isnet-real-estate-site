@@ -327,3 +327,58 @@ reproducible analytics checks, finish TLV's standalone site, clear photo/font
 rights, verify complete browser/mobile site loading and client JSON retrieval
 on an isolated origin, then test reversible same-URL routing and **actual**
 production rollback. Keep draft PR and existing Pages publication unchanged.
+
+
+## 2026-11-11 — Yavne shared-root analytics dependency staged and exercised (no public cutover)
+
+**Completed (artifact only; no DNS or public service changes):** The independent
+city-bundle builder now includes the first-party, repo-owned
+`assets/yavne-analytics.js` at the **artifact root**, alongside
+`SUPER.YAVNE/`. This preserves all **30 existing root-relative script
+references** to `/assets/yavne-analytics.js?v=20261022-1`, without
+rewriting the live HTML, analytics measurement ID, price JSON or source files.
+Only this narrowly scoped JS dependency is copied; it is not a blanket
+permission to package external media/fonts or to serve unlicensed assets.
+The city-root URL prefix **must** stay `/SUPER.YAVNE/`, because the original
+script's `super_yavne` content-group routing matches that prefix.
+
+- Builder and tests modified only on the draft PR branch:
+  `scripts/stage_super_city_release.py`,
+  `tests/test_stage_super_city_release.py`, and
+  `.github/workflows/supermarket-city-release.yml`.
+- Fail-closed regression tests cover the first-party asset missing or symlinked,
+  original bytes preserved and SHA-256 manifest inclusion.
+- Full CI [run 43045503387](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43045503387)
+  **PASSED all 7/7 city package jobs**, producing seven independent artifacts.
+  Yavne package includes **193 files / 33,907,483 source-and-dependency bytes**,
+  including **one additional first-party root script**.
+- A **loopback-only** HTTP test, bound to `127.0.0.1` inside the CI runner,
+  served `/SUPER.YAVNE/index.html` and
+  `/assets/yavne-analytics.js?v=20261022-1`. It found all 30 existing HTML
+  references, received HTTP 200 for both files, and compared the script's exact
+  bytes against repository source: SHA-256
+  `5999e8344f763bc32f6809dc68c6ab5e1d9e7d95301cd217e071ddac405b6b44`.
+  **This is NOT external public hosting or full JS analytics/browser testing**.
+- SQL rechecked `isnet-super-staging`: `public=false`; original seven pinned
+  full-site releases and six-city immutable private JSON deltas remain intact.
+  No object from this new Yavne artifact has been promoted to public Storage.
+
+**Important new source-divergence finding:** Comparing fresh Git `main` to
+the draft PR source trees shows that **all seven** `SUPER.*` trees now differ.
+Six non-TLV cities have updated `prices.json`, `refresh-status.json`,
+`source-status.json`, and many more catalogue/offers files on `main`
+than the older draft branch snapshot. TLV's `prices.json` matches but
+its status files differ and still report **0/19** refreshed branches.
+Therefore no pinned branch artifact or three-JSON delta may be labeled a
+complete current public site. The previously staged six private data-only
+deltas are intentionally separate and do not update all catalogue/offers
+shards. Reconcile coherent source revisions before any public launch,
+preserving partial supplier coverage and older branch dates.
+
+**Hard gates still open:** complete current-source parity and provenance,
+permission-cleared media/fonts, full browser/mobile behavior and GA4
+verification, working standalone TLV site, same-URL proxy cutover with
+**actual production rollback**, independent failure-domain/capacity proof.
+The existing public host and collectors remain authoritative; PR #67 stays
+draft. This run did not run collectors, buy hosting, modify DNS/public URLs,
+open Storage ACLs, merge a PR or bypass CI/publication controls.
