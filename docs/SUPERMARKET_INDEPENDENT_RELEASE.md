@@ -158,3 +158,52 @@ was exercised and then disabled to prevent continued public serving or egress.
 4. Keep PR #67 draft, Pages and current public site folders untouched until the
    production routing/rollback acceptance tests pass. No paid upgrade or DNS
    change was required for the shadow canary.
+
+
+## Committed-source private JSON delta canary — 2026-11-11, 13:01 Israel
+
+**New operational step completed (no publication/cutover).** The original seven
+immutable private full-site releases and existing public Pages deployment remain
+unchanged. Source collectors were **not** invoked by this release workflow.
+
+- Inspected PR #67, seven independently built artifacts from run
+  [42999910325](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42999910325),
+  private bucket `isnet-super-staging` (`public=false`), and the live
+  `main` supermarket data committed by the **existing** collectors.
+- Live `main` now differs from the pinned private full-site releases in
+  **ASHDOD, KGAT, YAVNE**. Read-only, seven-city source delta audit accepted
+  these as *private candidates*, with no blocked cities; other four cities
+  remain unchanged. Candidate commit:
+  `155398161b347485831e41aec7cc4f081e099037`.
+- Introduced `scripts/stage_super_committed_delta.py`, seven fail-closed unit
+  tests, and `.github/workflows/super-committed-private-delta-canary.yml`.
+  Workflow run
+  [43008349721](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43008349721)
+  **PASSED**, including seven safety tests and per-object private SHA-256 and
+  exact-byte readback. The source-audit artifact is retained for seven days.
+- Only **three critical committed JSON files** per changed city
+  (`prices.json`, `refresh-status.json`, `source-status.json`) and a
+  delta-manifest per city were saved under a separate, immutable
+  `previews/committed-deltas/<city>/<source-commit>/` prefix. Storage SQL
+  confirmed **4 objects per city / 12 total / 68,848 bytes**.
+  This is a **data-only private delta**, not a complete site release, not a
+  replacement for any of the seven pinned public-preview editions, and not
+  permission to publish.
+- The new source metadata explicitly reports **partial** coverage:
+  ASHDOD **16/20** branches refreshed (Carrefour and Victory timeouts);
+  KGAT **7/9** (Victory and Mahsanei Hashuk timeouts);
+  YAVNE **4/7** (Carrefour and Victory timeouts). Older prices were retained
+  for those branches, as documented in the original collector output.
+  Every delta-manifest records the pinned baseline, exact committed Git SHA,
+  original `checked_at`, coverage counts, `private=true`,
+  `approved_for_public=false`, `public_cutover=false`, and
+  `collector_invoked=false`.
+- There were **no DNS changes, no purchases, no duplicate collection, no
+  newly exposed media/fonts, and no change to live URLs**.
+  The deliberately disabled public shadow canary remains disabled.
+
+**Still blocked before public release:** full independent browser hosting and
+media licensing, complete site-level cutover/rollback acceptance, safe and
+validated production integration of *newer committed* prices, and a complete TLV
+site (its committed index is a service-unavailable redirect). PR #67 remains
+draft and must not be merged as a substitute for those proofs.
