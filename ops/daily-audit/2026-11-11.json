@@ -4616,6 +4616,137 @@
         "messages_to_others": false
       },
       "new_failure": true
+    },
+    {
+      "runKey": "photo-2026-11-11-13:55",
+      "run_id": "e6381be1-6340-8332-b883-9fe08214747b",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-11T12:08:18Z",
+      "status": "inspected_local_rendered_candidate_pending_shared_write",
+      "scope": "Photo desk only; bounded review of existing Jabotinsky80 permit illustration. Four rendered checks, zero new assets, no production mutation.",
+      "source": {
+        "commit": "86cfa71874eaaf936dd550cc9819d684396a7634",
+        "latest_saved_site_version": 553,
+        "working_tree": "clean after moving own review-only fixtures outside public; official Sites managed dev preview stopped"
+      },
+      "queue": {
+        "pages_scanned": 386,
+        "overlapping_candidates": 218,
+        "summary": {
+          "duplicate_asset_in_section": 6,
+          "explicit_photo_approval_pending": 114,
+          "portrait_or_poster_needs_framing_review": 7,
+          "rendered_visual_review_pending": 2,
+          "specific_subject_photo_pending": 89
+        },
+        "scope": "Source audit candidates, not proven defects or full visual coverage",
+        "pending_draft_requests": [
+          "tlv-beaches-routine-charles-clore-pollution-20261111",
+          "lehi-minibus-13-arrested-20261111",
+          "beit-romano-district-approval-240-apartments-20261111",
+          "jabotinsky-80-permit-nine-apartments-20261111"
+        ]
+      },
+      "live_bank": {
+        "url": "https://tlvnet.com/api/photo-bank",
+        "http": 200,
+        "collector_enabled": true,
+        "assets": 146,
+        "blockedIds": "not exposed; no inference empty",
+        "service_identity": "fresh get_site same-Site bearer; not admin identity"
+      },
+      "inspected": [
+        {
+          "surface": "card",
+          "width_css_px": 1200,
+          "status": "inspected",
+          "evidence": "p57-permit-card-1200.png",
+          "sha256": "ba3820f79d6618ffa9b411c0635950eaa465d43819afd47561dbd0a56903f500",
+          "finding": "Complete image and external AI disclosure visible; no stretching or clipping observed"
+        },
+        {
+          "surface": "article",
+          "width_css_px": 1200,
+          "status": "inspected",
+          "evidence": "p57-permit-article-1200.png",
+          "sha256": "5d12c61f2ecd3d244b866a6703b393c904d9f95e877c41d65d3c352da023e2ae",
+          "finding": "Complete illustration and honest caption visible"
+        },
+        {
+          "surface": "card",
+          "width_css_px": 390,
+          "status": "inspected",
+          "evidence": "p57-permit-card-390.png",
+          "sha256": "2452998fd44b92fdb868d75a080be6ba5e7db23094cb6b2b2fcb9257c2578efc",
+          "finding": "Complete image; narrow retained source-grid card; embedded AI mark small, separate AI credit remains visible"
+        },
+        {
+          "surface": "article",
+          "width_css_px": 390,
+          "status": "inspected",
+          "evidence": "p57-permit-article-390.png",
+          "sha256": "4a569c4c52d4bcb709b1eb5596e4eb4bbfdfc8babdfe845d39f5661a82005db7",
+          "finding": "Image and caption fully visible after ordinary scroll; no stretching or clipping observed"
+        }
+      ],
+      "inspection_limits": "Actual CUA screenshots of isolated fixtures cloned from source home card and published article template with the full unchanged draft body. 390 is a responsive iframe, not physical mobile. No actual generated assigned article, live page, publisher review or publication verification.",
+      "candidate": {
+        "id": "residential-permit-planning-ai-20261111",
+        "article_id": "jabotinsky-80-permit-nine-apartments-20261111",
+        "status": "pending_bank_registration_shared_write_and_live_verification",
+        "body_sha256": "96e971923763681bb42020a2a67f0399f35b73845e48ac711bc0632b424204ab",
+        "full_text_read": true,
+        "jpg_sha256": "22fcc79de7ebd0d049e485c3481d6a50248414e45f62de7f9da1ff49590efbd9",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "fit": "contain",
+        "position": "50% 50%",
+        "caption": "המחשה לתכנון ורישוי בנייה; אינה מציגה את הבניין בז׳בוטינסקי 80 או עבודות בו. אילוסטרציה – AI",
+        "selected_bank_id": null,
+        "bank_registered": false,
+        "article_assigned": false,
+        "image_review_approved": false,
+        "published": false,
+        "search_and_prompt_provenance": "Preserved in photo run b58f010c-c850-8332-9812-2753a77b3c79 and existing staged candidate JSON; no new duplicate generation."
+      },
+      "evidence_directory": "/workspace/scratch/85cf17fdab9c/ops-runtime-tmp/p57-visual-review",
+      "checks": {
+        "audit_image_quality": "completed; unchanged candidate queue",
+        "full_body_sha256": "matches current source draft",
+        "local_rendered_review": "four views inspected",
+        "check_photo_bank": "not rerun; no shared bank change and known unchanged pending checker repair",
+        "prepare_public": "not run; no production change",
+        "frozen_baselines": "untouched",
+        "published_at": "untouched/null",
+        "fixture_publication": "fixtures removed from public and archived outside checkout; no source changes"
+      },
+      "fixed_and_verified": [],
+      "pending": [
+        {
+          "article_id": "jabotinsky-80-permit-nine-apartments-20261111",
+          "reason": "Local visual review complete; shared bank/assignment gate and live verification still pending"
+        }
+      ],
+      "blocked": [
+        {
+          "signature": "tlvnet/photo-bank/shared-write/project-work-lease-unavailable",
+          "root_cause": "Required cross-environment ownership/lease verification interface is unavailable in exposed tools; get_site owner role alone is insufficient.",
+          "owner": "operational controller",
+          "action": "No push, build or deployment; operational journal only",
+          "next_attempt_at": "2026-11-11T12:55:00Z",
+          "early_retry_condition": "Evidence that required project/Work ownership and existing lease interface has become available"
+        }
+      ],
+      "candidate_assets_created": 0,
+      "verified_assets_added": 0,
+      "source_push": false,
+      "build": false,
+      "deployments": 0,
+      "actions_outside_photo_domain": [],
+      "new_failure": false,
+      "next_cursor": "Prioritize new beach and Lehi pending news-photo requests, then Beit Romano; retain completed candidate review and reuse it only while body/image hashes match."
     }
   ],
   "incident_register": [
