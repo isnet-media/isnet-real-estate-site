@@ -1,10 +1,5 @@
 name: Stage full TLV supermarket in private storage (no public cutover)
 on:
-  push:
-    branches: [infra/supermarket-isolation-20261110]
-    paths:
-      - "scripts/stage_super_private_storage.py"
-      - ".github/workflows/super-full-private-stage.yml"
   workflow_dispatch:
 permissions:
   contents: read
