@@ -4542,6 +4542,80 @@
         "notifications_to_others": false
       },
       "notification": "no_update; no new material failure, verified image publication or access recovery."
+    },
+    {
+      "runKey": "ops-controller-2026-11-11-13:58",
+      "run_id": "4932446a-7f9c-8326-b2db-8054ab42511f",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "checked_at": "2026-11-11T11:59:00Z",
+      "status": "new_culture_execution_failure_confirmed_diagnosis_blocked_missing_same_run_logs",
+      "scope": "One escalation: failed culture automation. No broad source collections, supermarket, event or repeated photo QA.",
+      "failure": {
+        "signature": "TLVNET|culture-news|automation execution|failed without same-run result",
+        "owner": "operational controller for execution-log access; existing culture-news owner for content",
+        "status": "blocked_execution_diagnosis_missing_logs",
+        "first_observed_at": "2026-11-11T11:58:33Z",
+        "failed_run_id": "0b4af1b1-b07c-8322-b833-f5f45fd16bb0",
+        "scheduled_for": "2026-11-11T10:50:00Z",
+        "recorded_started_at": "2026-11-11T11:24:00.102794Z",
+        "completed_at": "2026-11-11T11:54:04.016186Z",
+        "root_cause": "unknown; peek records failed but exposes no same-run result/exception. Do not infer content bug, memory limit, timeout, permission or scheduler cause.",
+        "evidence": {
+          "recorded_status": "failed",
+          "latest_result_run_id": "ea23e719-0a74-8326-94d9-682f4133d472",
+          "latest_result_created_at": "2026-11-11T09:57:45.213555Z",
+          "public_ledger_url": "https://tlvnet.com/news/agents/culture-news/ledger.json",
+          "public_ledger_http": 200,
+          "entry_count": 71,
+          "last_entry_observed": "culture-news-2026-11-11-11:00",
+          "last_entry_completed_at": "2026-11-11T09:55:18Z",
+          "public_ledger_exact_runtime_run_id": "not supplied in observed entries; cannot attribute them to failed run"
+        },
+        "missing_interface": "Automation execution trace/exception and retry history; no task-execution log or Work inventory/lease interface exposed in callable tools. Site Worker request logs would not diagnose the automation process.",
+        "attempts": {
+          "read_status_and_result": true,
+          "authorized_public_ledger_read": true,
+          "mutation_retries": 0,
+          "run_now": 0,
+          "source_changes": 0
+        },
+        "next_attempt_at": "2026-11-11T12:58:00Z",
+        "pass_criteria": "Same-run execution cause obtained; repair only that verified cause under current permissions; subsequent scheduled run produces run-matched ledger plus public output or verified no_update.",
+        "notification": "Report this newly observed failed execution once; prior result is not a current success."
+      },
+      "other_results": [
+        {
+          "automation": "Automation_39a1ff0103088191a654a694e58c7bd8",
+          "recorded_run_id": "b58f010c-c850-8332-9812-2753a77b3c79",
+          "latest_result_run_id": "b58f010c-c850-8332-9812-2753a77b3c79",
+          "changed_since_prior_review": false,
+          "action": "Accepted previous bounded photo artifact evidence; no repeat asset checks or new success claim."
+        },
+        {
+          "automation": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "active_run_id": "adca8483-74a0-8321-9901-0be5a8efba5f",
+          "recorded_status": "in_progress",
+          "started_at": "2026-11-11T11:28:50.433874Z",
+          "latest_result_run_id": "64141c58-aa48-8321-9ccb-31940a9375cc",
+          "latest_result_domain": "real-estate",
+          "action": "Prior domain-mismatched result remains no proof of current news/sports execution; no competing action started."
+        }
+      ],
+      "site_access": {
+        "role": "owner",
+        "latest_saved_version": 553,
+        "missing_shared_interface": "Project/Work cross-environment lease ownership still unverified; no push/build/deploy.",
+        "service_access": "fresh get_site bearer used only for authorized same-Site public ledger read; no admin impersonation"
+      },
+      "daily_audit_completed": false,
+      "fixed_and_verified": [],
+      "mutations": {
+        "journal_only": true,
+        "automations": false,
+        "site": false,
+        "messages_to_others": false
+      },
+      "new_failure": true
     }
   ],
   "incident_register": [
@@ -4798,6 +4872,39 @@
         "children_request_present": false,
         "status": "same_root_cause_pending_shared_repair"
       }
+    },
+    {
+      "signature": "TLVNET|culture-news|automation execution|failed without same-run result",
+      "owner": "operational controller for execution-log access; existing culture-news owner for content",
+      "status": "blocked_execution_diagnosis_missing_logs",
+      "first_observed_at": "2026-11-11T11:58:33Z",
+      "failed_run_id": "0b4af1b1-b07c-8322-b833-f5f45fd16bb0",
+      "scheduled_for": "2026-11-11T10:50:00Z",
+      "recorded_started_at": "2026-11-11T11:24:00.102794Z",
+      "completed_at": "2026-11-11T11:54:04.016186Z",
+      "root_cause": "unknown; peek records failed but exposes no same-run result/exception. Do not infer content bug, memory limit, timeout, permission or scheduler cause.",
+      "evidence": {
+        "recorded_status": "failed",
+        "latest_result_run_id": "ea23e719-0a74-8326-94d9-682f4133d472",
+        "latest_result_created_at": "2026-11-11T09:57:45.213555Z",
+        "public_ledger_url": "https://tlvnet.com/news/agents/culture-news/ledger.json",
+        "public_ledger_http": 200,
+        "entry_count": 71,
+        "last_entry_observed": "culture-news-2026-11-11-11:00",
+        "last_entry_completed_at": "2026-11-11T09:55:18Z",
+        "public_ledger_exact_runtime_run_id": "not supplied in observed entries; cannot attribute them to failed run"
+      },
+      "missing_interface": "Automation execution trace/exception and retry history; no task-execution log or Work inventory/lease interface exposed in callable tools. Site Worker request logs would not diagnose the automation process.",
+      "attempts": {
+        "read_status_and_result": true,
+        "authorized_public_ledger_read": true,
+        "mutation_retries": 0,
+        "run_now": 0,
+        "source_changes": 0
+      },
+      "next_attempt_at": "2026-11-11T12:58:00Z",
+      "pass_criteria": "Same-run execution cause obtained; repair only that verified cause under current permissions; subsequent scheduled run produces run-matched ledger plus public output or verified no_update.",
+      "notification": "Report this newly observed failed execution once; prior result is not a current success."
     }
   ]
 }
