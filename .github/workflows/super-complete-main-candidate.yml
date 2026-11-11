@@ -1,0 +1,135 @@
+name: Review complete six-city supermarket trees from pinned main (private artifacts only)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - 'scripts/verify_super_full_source_candidate.py'
+      - 'tests/test_super_full_source_candidate.py'
+      - '.github/workflows/super-complete-main-candidate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: super-pinned-current-main-review-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  pin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      source_sha: ${{ steps.pin.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Pin one immutable committed source revision (never invoke collectors)
+        id: pin
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin refs/heads/main:refs/remotes/origin/main
+          SHA="$(git rev-parse 'refs/remotes/origin/main^{commit}')"
+          [[ "$SHA" =~ ^[0-9a-f]{40}$ ]]
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Source commit: $SHA"
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test fail-closed source and branch provenance gates
+        run: python -m unittest discover -s tests -p 'test_super_full_source_candidate.py' -v
+  city-review:
+    needs: [pin, test]
+    strategy:
+      fail-fast: false
+      matrix:
+        city: [ASHDOD, BATYAM, HOLON, KGAT, RISHON, YAVNE]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout PRIVATE review tooling, no source collectors
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout exact pinned committed main revision separately
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.pin.outputs.source_sha }}
+          path: current-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate current complete city source and stage exact bytes privately
+        run: |
+          python -m scripts.verify_super_full_source_candidate \
+            --source current-source \
+            --source-sha "${{ needs.pin.outputs.source_sha }}" \
+            --city "${{ matrix.city }}" \
+            --output "$RUNNER_TEMP/super-current-review"
+      - name: Verify every byte and sha256 in private candidate
+        run: |
+          python - <<'PY'
+          import json,hashlib,os,pathlib
+          root=pathlib.Path(os.environ["RUNNER_TEMP"])/"super-current-review"
+          manifest=json.loads((root/"release-manifest.json").read_text())
+          review=json.loads((root/"PRIVATE-REVIEW-ONLY.json").read_text())
+          assert review["approved_for_public"] is False
+          assert review["source_file_count"]==len(manifest["files"])
+          assert hashlib.sha256((root/"release-manifest.json").read_bytes()).hexdigest()==review["manifest_sha256"]
+          for entry in manifest["files"]:
+              raw=(root/entry["path"]).read_bytes()
+              assert len(raw)==entry["bytes"] and hashlib.sha256(raw).hexdigest()==entry["sha256"]
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+              f.write(f'### {review["city"]} — private, current-main review ONLY\n')
+              f.write(f'Pinned main: {review["committed_main_sha"]}\n\n')
+              f.write(f'Source branches updated: {review["updated_count"]}/{review["branch_count"]}; retained old: {review["retained_previous_count"]}. Source checked_at: {review["source_checked_at"]}.\n\n')
+              f.write(f'{review["source_file_count"]} byte-identical tracked files; all SHA256 passed. **Not approved for public**; rights, browser and same-URL rollback unverified.\n')
+          PY
+      - name: Archive private candidate without changing live hosting or private Storage
+        run: |
+          tar -czf "$RUNNER_TEMP/private-${{ matrix.city }}.tar.gz" -C "$RUNNER_TEMP/super-current-review" .
+          tar -tzf "$RUNNER_TEMP/private-${{ matrix.city }}.tar.gz" >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: super-private-current-main-${{ matrix.city }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/private-${{ matrix.city }}.tar.gz
+          retention-days: 7
+          if-no-files-found: error
+  tlv-block:
+    needs: [pin, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.pin.outputs.source_sha }}
+          path: current-source
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Produce explicit TLV blocker evidence (never package placeholder as live-ready)
+        run: |
+          python -m scripts.verify_super_full_source_candidate \
+            --source current-source \
+            --source-sha "${{ needs.pin.outputs.source_sha }}" \
+            --city TLV --output "$RUNNER_TEMP/tlv-not-ready.json"
+          cat "$RUNNER_TEMP/tlv-not-ready.json" >> "$GITHUB_STEP_SUMMARY"
+          printf '\nTLV is NOT a verified independent supermarket site; NO CUTOVER.\n' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: super-TLV-blocker-${{ github.run_id }}
+          path: ${{ runner.temp }}/tlv-not-ready.json
+          retention-days: 7
+          if-no-files-found: error
