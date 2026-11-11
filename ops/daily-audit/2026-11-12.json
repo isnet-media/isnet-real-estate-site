@@ -396,7 +396,7 @@
       "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
       "runKey": "ops-controller-2026-11-12-00:58",
       "run_id": "feddf10f-971c-8322-a7bb-2ef2621a6819",
-      "status": "publication_in_progress_handoff_to_photo_QA",
+      "status": "initial_release_failed_recovered_by_photo_handoff",
       "source": "07fcd9b809f56b212ad93620e2905522aca31d17",
       "routing": [
         {
@@ -435,9 +435,11 @@
         "version": 569,
         "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_aff2e05d9e0c8191b94ec6f4fc5b91fb",
         "deployment_id": "appgdep_6af4f2c51ae081918e2d015846f7adfe",
-        "status": "building",
+        "status": "failed",
         "fallback_reason": "Prior local build exit137 documented. No repeated unchanged local full build or stale build-output archive; native source fallback used with exact fresh remote HEAD.",
-        "deployment_attempts": 1
+        "deployment_attempts": 1,
+        "failure_observed_by_runKey": "photo-bank-2026-11-12-00:55",
+        "failure_message": "Stale prepared snapshot hash: public/news/agents/economy-tech/ledger.json"
       },
       "scope_change": "Following explicit new photo-task instruction, no further controller mutations except documenting already launched release. Photo run owns visual QA of existing repair.",
       "draft": {
@@ -460,15 +462,22 @@
         "real_estate": 2,
         "basis": "current published source entries; not new publications in this run"
       },
-      "new_publications": 0
+      "new_publications": 0,
+      "recovery_reference": {
+        "task_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+        "runKey": "photo-bank-2026-11-12-00:55",
+        "version": 570,
+        "deployment_id": "appgdep_6af4f413db608191af85bcda29c1b1e3",
+        "status": "succeeded"
+      }
     },
     {
       "owner_automation_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
       "runKey": "photo-bank-2026-11-12-00:55",
       "run_id": "5e0eac6f-4cdc-832e-bd64-9824dd6868fe",
       "started_at": "2026-11-11T22:57:20.161270Z",
-      "checked_at": "2026-11-11 23:03:25 UTC",
-      "status": "image_framing_release_recovery_in_progress",
+      "checked_at": "2026-11-11 23:10:56 UTC",
+      "status": "fixed_and_verified",
       "scope": "Photo desk only; no writer content publication or news research.",
       "source_opened": "07fcd9b809f56b212ad93620e2905522aca31d17",
       "source_recovery": "480ac95100782d05a328d289bd4255efc7ffb8ff",
@@ -489,9 +498,12 @@
       "retry": {
         "version": 570,
         "deployment_id": "appgdep_6af4f413db608191af85bcda29c1b1e3",
-        "status": "pending",
+        "status": "succeeded",
         "attempt_count_including_original": 2,
-        "max_additional_attempts": 0
+        "max_additional_attempts": 0,
+        "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_3a91f80ce5f48191aa80cc11fc8a8376",
+        "terminal_at": "2026-11-11T23:06:55.510791Z",
+        "source": "480ac95100782d05a328d289bd4255efc7ffb8ff"
       },
       "queue": {
         "new_pending_image_requests": 0,
@@ -499,7 +511,9 @@
         "body_sha256": "9ff2767f2cc7640a045e1fc2ef55c242c3062e86a6801a90d2e1048f8b13d9c8",
         "selected_bank_id": "startup-workspace-concept-ai-20261111",
         "status": "image_approved_ready_to_publish",
-        "next_action": "Writer publishes after shared framing release succeeds; no duplicate image request/reapproval."
+        "next_action": "Economy writer may resume its normal authorized publication flow from latest source, preserving approvals and checking real ownership. Draft remains unpublished; photo run did not change article status.",
+        "publication_dependency": "Shared framing change now successfully released and live verified. Original professional image approval remains valid for unchanged draft body.",
+        "writer_owner": "Automation_20ca7f765cf88191af46487bf3ef8063"
       },
       "audit": {
         "pages": 396,
@@ -527,7 +541,55 @@
       "new_professional_approvals": 0,
       "new_articles_published": 0,
       "article_dates_changed": false,
-      "remaining_action": "Observe retry terminal status; only close section framing finding after real live desktop/mobile card verification."
+      "remaining_action": "Continue existing quality queue next cycle. Cinema gateway mobile view remains uninspected; no whole-site-clean claim. Writer owns publishing the ready startup draft.",
+      "live_verification": {
+        "url": "https://tlvnet.com/news/",
+        "desktop_viewed": true,
+        "desktop_viewport_width": 1348,
+        "mobile390_viewed": true,
+        "mobile_type": "390 CSS px responsive iframe; not physical handset",
+        "result": "Both actual live newsroom-support images contain the complete illustration, without stretching; separate visible AI captions preserved.",
+        "assets": [
+          {
+            "article_id": "south-tlv-bus-diversions-extended-night-20261111",
+            "selected_bank_id": "bus-diversion-planning-ai-20261111",
+            "sha256": "a76c1deb7677d35890cb3c82c3b6e49b5eaab18d91d9f23e94bbbc6478de0d3f",
+            "body_sha256": "ef3da8b5939b1141edb42d42458c1d96ef4981595d6eeae0d34ddaed79b3b2e8"
+          },
+          {
+            "article_id": "tlv-infrastructure-water-roadworks-november-20261111",
+            "selected_bank_id": "planned-water-maintenance-ai-2026",
+            "sha256": "5552c9d6154bcb5878f9f060e9d6654896f4399a4e81db9c551a1fe958a95229",
+            "body_sha256": "533ff720f45ff8c063845503c4aec4047aaee9a2c942cb5054936e989bb9f194"
+          }
+        ],
+        "before": "115x100 mobile support frame used cover50%50%, ignoring approved per-asset contain.",
+        "after": "Existing hash-verified contain50%50% applied inline to newsroom support images; 115x100 mobile and322x195 desktop frames preserved.",
+        "new_image_approvals": 0
+      },
+      "post_release_http": {
+        "started_at": "2026-11-11T23:09:32.721322Z",
+        "completed_by": "2026-11-11 23:10:56 UTC",
+        "verified_existing_articles": 3,
+        "article_ids": [
+          "south-tlv-bus-diversions-extended-night-20261111",
+          "tlv-infrastructure-water-roadworks-november-20261111",
+          "tel-aviv-children-film-festival-20261204"
+        ],
+        "all_http_200": true,
+        "all_body_blocks_match_source": true,
+        "all_image_review_body_hashes_current": true,
+        "all_jpg_hashes_match_source": true,
+        "all_credits_present": true,
+        "all_home_and_section_links": true,
+        "photo_bank": {
+          "http": 200,
+          "collector_enabled": true,
+          "items": 151,
+          "blockedIds": "not returned; no IDs inferred unblocked"
+        },
+        "new_article_publications": 0
+      }
     }
   ],
   "incident_register": [
@@ -572,6 +634,61 @@
       "first_blocked_at": null,
       "last_attempt_at": "2026-11-11 22:59:23 UTC",
       "wait_rule": "Existing repeated signature, no restart/prompt loop; continue independent publication repair."
+    },
+    {
+      "signature": "TLVNET|newsroom support card framing|approved asset presentation ignored",
+      "status": "fixed_and_verified",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "runKey": "photo-bank-2026-11-12-00:55",
+      "article_ids": [
+        "south-tlv-bus-diversions-extended-night-20261111",
+        "tlv-infrastructure-water-roadworks-november-20261111"
+      ],
+      "domain": "photo-bank",
+      "first_blocked_at": null,
+      "first_blocked_at_note": "Exact initial defect timestamp not recorded here; prior Nov11 photo23:55 observation preserved.",
+      "last_attempt_at": "2026-11-11 23:10:56 UTC",
+      "root_cause": "image_presentation helper matched home card markup only, and polish-public did not apply existing per-asset reviews to newsroom section card markup.",
+      "repair": "Extend hash-verified reviewed presentation to newsroom cards; regression verifies actual prepared section output. Assets and article dates unchanged.",
+      "repair_commits": [
+        "6cbd7d962de8c2eda305b4fb7a58e61fc4c60440",
+        "39df73694b0b8a7306177a7b031efa7b24b9e8b9"
+      ],
+      "release_source": "480ac95100782d05a328d289bd4255efc7ffb8ff",
+      "deployment_id": "appgdep_6af4f413db608191af85bcda29c1b1e3",
+      "version": 570,
+      "evidence": {
+        "url": "https://tlvnet.com/news/",
+        "desktop_viewed": true,
+        "desktop_viewport_width": 1348,
+        "mobile390_viewed": true,
+        "mobile_type": "390 CSS px responsive iframe; not physical handset",
+        "result": "Both actual live newsroom-support images contain the complete illustration, without stretching; separate visible AI captions preserved.",
+        "assets": [
+          {
+            "article_id": "south-tlv-bus-diversions-extended-night-20261111",
+            "selected_bank_id": "bus-diversion-planning-ai-20261111",
+            "sha256": "a76c1deb7677d35890cb3c82c3b6e49b5eaab18d91d9f23e94bbbc6478de0d3f",
+            "body_sha256": "ef3da8b5939b1141edb42d42458c1d96ef4981595d6eeae0d34ddaed79b3b2e8"
+          },
+          {
+            "article_id": "tlv-infrastructure-water-roadworks-november-20261111",
+            "selected_bank_id": "planned-water-maintenance-ai-2026",
+            "sha256": "5552c9d6154bcb5878f9f060e9d6654896f4399a4e81db9c551a1fe958a95229",
+            "body_sha256": "533ff720f45ff8c063845503c4aec4047aaee9a2c942cb5054936e989bb9f194"
+          }
+        ],
+        "before": "115x100 mobile support frame used cover50%50%, ignoring approved per-asset contain.",
+        "after": "Existing hash-verified contain50%50% applied inline to newsroom support images; 115x100 mobile and322x195 desktop frames preserved.",
+        "new_image_approvals": 0
+      },
+      "checks": {
+        "check-photo-bank": "passed150JPGs",
+        "prepare-public": "passed including actual section framing regression, image gates and rights checks",
+        "manifest_hashes": "1583/1583 match before push",
+        "git_diff_check": "passed"
+      },
+      "next_action": "Closed. Continue incremental quality queue; writer can publish approved unchanged draft using normal source flow."
     }
   ]
 }
