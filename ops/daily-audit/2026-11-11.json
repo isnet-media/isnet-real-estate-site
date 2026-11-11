@@ -6522,6 +6522,193 @@
         "operational_journal": true
       },
       "next_attempt_at": "2026-11-11T16:58:00Z"
+    },
+    {
+      "runKey": "enrichment-2026-11-11-18:20",
+      "run_id": "93a4f715-328c-8325-a686-0ef9a342ba23",
+      "owner": "Automation_4c9b538f29d081918b3cbb12595b0989",
+      "started_at": "2026-11-11T16:15:28.982640Z",
+      "checked_at": "2026-11-11T16:19:04Z",
+      "status": "already_fresh_readback_verified_public_count_delta_pending",
+      "scope": "Existing public-enrichment mechanism only. No source build, deployment, images, email or other task execution.",
+      "site_version_observed": 558,
+      "ownership_and_lock": {
+        "owner_enabled": true,
+        "own_run_matches": true,
+        "mechanism": "Existing enrichment-refresh-lock-v1 D1 CAS lease and per-source attempt TTL previously documented. Explicit refresh returned already_fresh; no collector override, lease release, new source write or competing refresh was attempted.",
+        "site_source_or_deployment_lock_needed": false
+      },
+      "calls": [
+        {
+          "mode": "before",
+          "url": "https://tlvnet.com/api/public-enrichment",
+          "server_now": "2026-11-11T16:16:43.938Z",
+          "http": 200,
+          "raw_sha256": "803db4808cbbb0982a9589a7fdecdb610d49154037bb2811b26d02b0f56b45fe"
+        },
+        {
+          "mode": "refresh",
+          "url": "https://tlvnet.com/api/public-enrichment?refresh=1",
+          "server_now": "2026-11-11T16:17:13.648Z",
+          "http": 200,
+          "raw_sha256": "d06306045bf74e307ecb4a88ec6fc70528cedcd4d3c0801a59f68e56860072b5"
+        },
+        {
+          "mode": "after",
+          "url": "https://tlvnet.com/api/public-enrichment",
+          "server_now": "2026-11-11T16:17:47.593Z",
+          "http": 200,
+          "raw_sha256": "4f6eb134e40c899d3692a68ea13eb22974e4094a019a6467befc3ec9a4947211"
+        }
+      ],
+      "refresh": {
+        "performed": false,
+        "reason": "already_fresh"
+      },
+      "verification": {
+        "public_records": 185,
+        "unique_provider_id_and_record_id": 185,
+        "records_exactly_equal_across_three_reads": true,
+        "source_states_exactly_equal_across_three_reads": true,
+        "failed_records_exactly_equal": true,
+        "records_sha256": "09f6b67bf819e5ea2f7eeb09a225ae54aaa8c461ca6e3725fcc009180f55def7",
+        "source_states_sha256": "72949bc0ffbb58861ffd5e552d245578111bacde6794305cfc9334b6fbddced4",
+        "dangourmet_sha256": "f37af35f6a52dc7ccb969332a5cfade5062b47bd20e5823503966f6d4f970061"
+      },
+      "sources": [
+        {
+          "id": "museum-courses",
+          "name": "מוזיאון תל אביב לאמנות",
+          "status": "ok",
+          "error_code": null,
+          "verified_at": "2026-11-11T12:37:05.328Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 23,
+          "public_records": 23
+        },
+        {
+          "id": "museum-workshops",
+          "name": "מוזיאון תל אביב לאמנות",
+          "status": "ok",
+          "error_code": null,
+          "verified_at": "2026-11-11T12:37:05.328Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 11,
+          "public_records": 11
+        },
+        {
+          "id": "tau-arts",
+          "name": "אוניברסיטת תל אביב · העשרה באמנויות",
+          "status": "ok",
+          "error_code": null,
+          "verified_at": "2026-11-11T12:37:05.328Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 100,
+          "public_records": 100
+        },
+        {
+          "id": "dangourmet",
+          "name": "אורט דן גורמה",
+          "status": "failed",
+          "error_code": "http_500",
+          "verified_at": "2026-11-07T08:13:34.061Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 24,
+          "public_records": 24
+        },
+        {
+          "id": "crafted",
+          "name": "CRAFTED · סטודיו למלאכות יד",
+          "status": "ok",
+          "error_code": null,
+          "verified_at": "2026-11-11T12:37:05.328Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 12,
+          "public_records": 11
+        },
+        {
+          "id": "minshar",
+          "name": "מנשר לאמנות",
+          "status": "ok",
+          "error_code": null,
+          "verified_at": "2026-11-11T12:37:05.328Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 8,
+          "public_records": 8
+        },
+        {
+          "id": "athena",
+          "name": "סטודיו אתנה",
+          "status": "ok",
+          "error_code": null,
+          "verified_at": "2026-11-11T12:37:05.328Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 5,
+          "public_records": 5
+        },
+        {
+          "id": "collective",
+          "name": "Ceramics Collective",
+          "status": "ok",
+          "error_code": null,
+          "verified_at": "2026-11-11T12:37:05.328Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 2,
+          "public_records": 2
+        },
+        {
+          "id": "gal",
+          "name": "גל קרמיקה",
+          "status": "ok",
+          "error_code": null,
+          "verified_at": "2026-11-11T12:37:05.328Z",
+          "attempted_at": "2026-11-11T12:37:05.328Z",
+          "source_cached_count": 1,
+          "public_records": 1
+        }
+      ],
+      "changes_since_last_own_verified_result": {
+        "previous_public_records": 186,
+        "current_public_records": 185,
+        "last_prior_run_id": "49219996-4fe0-8329-897e-6c9a2613b313",
+        "successful_sources_verified_at": "2026-11-11T12:37:05.328Z",
+        "verification_time_updated_by_prior_server_refresh_not_by_this_run": true
+      },
+      "incidents": [
+        {
+          "signature": "TLVNET|enrichment|dangourmet fetch|http_500",
+          "status": "existing_failure_unchanged",
+          "root_cause": "Source state reports providerHTTP500; underlying upstream cause remains unverified.",
+          "safe_behavior": "24 old public records remain exactly equal across before/refresh/readback; original verified_at2026-11-07T08:13:34.061Z retained. Server attempted_at12:37:05.328Z not mislabeled as successful verification.",
+          "owner": "operational-controller with enrichment adapter owner",
+          "next_attempt_at": "2026-11-11T18:37:05.328Z",
+          "attempt_policy": "Honor existing6hour per-source TTL; no manual same-input retry."
+        },
+        {
+          "signature": "TLVNET|enrichment|CRAFTED public inventory|cached12 public11",
+          "status": "pending_count_delta_review",
+          "source_cached_count": 12,
+          "public_records": 11,
+          "evidence": "Stable across initial GET, explicit refresh and readback. Prior own morning snapshot had12 public CRAFTED records; exact missing record not established from retained old row-level data.",
+          "root_cause": "Unverified: source cache, API visibility/expiry filtering or data change. Count mismatch alone is not proof of lost data, cancellation or parser bug.",
+          "owner": "operational-controller/enrichment adapter",
+          "next_action": "Compare retained cache rows with API visibility rules and fresh source only when access/code evidence is available. Do not restore a stale row or label a workshop canceled.",
+          "next_attempt_at": "2026-11-11T18:37:05.328Z"
+        }
+      ],
+      "mutations": {
+        "existing_refresh_endpoint_called": true,
+        "server_refresh_performed": false,
+        "source_edit": false,
+        "Site_build": false,
+        "Site_deploy": false,
+        "images": false,
+        "email": false,
+        "new_keys": false,
+        "task_or_schedule_changes": false,
+        "municipal_catalog": false
+      },
+      "handoff": "Existing daily-audit operational handoff, no external messages."
     }
   ],
   "incident_register": [
@@ -7016,6 +7203,19 @@
       "next_action": "When executor recovery is actually evidenced, first resume session22318 or inspect process state; do not start another build. Preserve local edits, fetch/reconcile remote HEAD, restore draft if abandoning the local candidate, finish checks and supported packaging/fallback before any one publication. Renew actual publication timestamp on release if needed; no fake live claim.",
       "next_attempt_at": "2026-11-11T16:58:00Z",
       "early_retry_condition": "Verified execution environment recovery, with existing build/process status inspected before resuming. No repeated same-input restart."
+    },
+    {
+      "signature": "TLVNET|enrichment|CRAFTED public inventory|cached12 public11",
+      "status": "pending_count_delta_review",
+      "source_cached_count": 12,
+      "public_records": 11,
+      "evidence": "Stable across initial GET, explicit refresh and readback. Prior own morning snapshot had12 public CRAFTED records; exact missing record not established from retained old row-level data.",
+      "root_cause": "Unverified: source cache, API visibility/expiry filtering or data change. Count mismatch alone is not proof of lost data, cancellation or parser bug.",
+      "owner": "operational-controller/enrichment adapter",
+      "next_action": "Compare retained cache rows with API visibility rules and fresh source only when access/code evidence is available. Do not restore a stale row or label a workshop canceled.",
+      "next_attempt_at": "2026-11-11T18:37:05.328Z",
+      "first_observed_at": "2026-11-11T16:19:04Z",
+      "run_id": "93a4f715-328c-8325-a686-0ef9a342ba23"
     }
   ]
 }
