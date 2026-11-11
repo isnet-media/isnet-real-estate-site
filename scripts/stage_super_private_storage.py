@@ -110,7 +110,11 @@ def publish(city, release_override=None):
     url=base+"/storage/v1/object/"+BUCKET+"/"+quote(destination,safe="/")
     try:call(url,"POST",token,raw,"application/json")
     except HTTPError as ex:
-        if ex.code!=409:raise RuntimeError("Manifest upload failed") from None
+        # Supabase may return 400 (already exists) or 409 for immutable
+        # manifest collisions. Accept neither without exact authenticated
+        # readback below. Unexpected policy/network errors remain fatal.
+        if ex.code not in (400,409):
+            raise RuntimeError("Manifest upload failed") from None
     _,actual=call(base+"/storage/v1/object/authenticated/"+BUCKET+"/"+quote(destination,safe="/"),"GET",token)
     if actual!=raw:raise RuntimeError("Manifest verification failed")
     print(json.dumps({k:v for k,v in report.items() if k!="files"},ensure_ascii=False))
