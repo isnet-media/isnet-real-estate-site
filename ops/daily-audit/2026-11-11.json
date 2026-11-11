@@ -4258,6 +4258,56 @@
       "deployments": [],
       "actions_outside_photo_domain": [],
       "next_cursor": "Reconcile this queue-preservation repair plus earlier pending photo fixes with authorized shared owner; test prepare-public and actual card/article renditions before release. Continue pending Jabotinsky80/children requests without duplication."
+    },
+    {
+      "runKey": "ops-controller-2026-11-11-11:58",
+      "run_id": "ad73cf2b-eb30-832a-9eff-ba584ec6e2c0",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "checked_at": "2026-11-11T10:00:00Z",
+      "status": "photo_escalation_evidence_matched_existing_publication_access_blocker",
+      "scope": "One photo queue escalation; no repeated supermarket/events/UX/source collection",
+      "owner_results": [
+        {
+          "automation_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+          "recorded_run_id": "b1cb8d85-c874-8322-93c2-6f064005f67c",
+          "latest_result_run_id": "b1cb8d85-c874-8322-93c2-6f064005f67c",
+          "completed_at": "2026-11-11T09:57:33.263597Z",
+          "same_run_and_domain": true,
+          "evidence_match": "Run-specific journal and actual retained local patch SHA256 match; local tests accepted from owner's evidence, not rerun. No published-image success inferred.",
+          "result": "Concrete newly diagnosed draft request erasure; tested local 5-file fix, no source push or deployment."
+        },
+        {
+          "automation_id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+          "recorded_run_id": "ea23e719-0a74-8326-94d9-682f4133d472",
+          "latest_result_run_id": "ea23e719-0a74-8326-94d9-682f4133d472",
+          "completed_at": "2026-11-11T09:57:45.309251Z",
+          "result": "Writer reports children request restored at90342a417a738904faa4ec45d6673838391868bc. Claim not independently read back here; do not confuse single request restoration with generator repair or image approval."
+        }
+      ],
+      "escalation": {
+        "signature": "tlvnet/photo-bank/queue-generation/draft-requests-erased",
+        "owner": "existing photo desk; operational controller owns access blocker",
+        "next_attempt_at": "2026-11-11T10:55:00Z",
+        "patch_reference_run": "b1cb8d85-c874-8322-93c2-6f064005f67c",
+        "retained_patch_sha256": "24c67df600077d5f22f2ae747ba82fef49c3473aaee94ee270fb4d9e7e4e18ef",
+        "duplicate_implementation": false,
+        "source_changes_made": false
+      },
+      "access": {
+        "site_role": "owner",
+        "audience": "public",
+        "latest_saved_version_observed": 549,
+        "version549_deployment_status": "not checked in this bounded review; no claim about publication",
+        "missing_interface": "No exposed Work/cloud-threads inventory or project shared lease/lock API in callable tool registry. Cannot establish cross-environment exclusivity; no invented lease, lock release, competing push/build/deploy."
+      },
+      "daily_audit_completed": false,
+      "mutations": {
+        "journal_only": true,
+        "site": false,
+        "automations": false,
+        "notifications_to_others": false
+      },
+      "notification": "no_update; concrete queue failure was already reported once by photo owner. No new recovery or published fix."
     }
   ],
   "incident_register": [
@@ -4489,6 +4539,24 @@
       "status": "local_repair_passed_shared_write_blocked",
       "next_attempt_at": "2026-11-11T08:55:00Z",
       "run_id": "51635aa8-c4f4-8322-aff4-8a4424fcc867"
+    },
+    {
+      "signature": "tlvnet/photo-bank/queue-generation/draft-requests-erased",
+      "first_observed_at": "2026-11-11T09:57:00Z",
+      "owner": "photo desk for queue repair; operational controller for shared ownership interface",
+      "status": "local_repair_passed_shared_write_blocked",
+      "root_cause": "scripts/apply-news-images.py initializes requests=[] and rewrites news-requests.json using only published articles; prepare-public runs it. git history shows both pending requests in8dfbde33 and removal in0f44a7a9. No draft request remained upstream (140published requests).",
+      "repair_evidence": {
+        "run_id": "b1cb8d85-c874-8322-93c2-6f064005f67c",
+        "patch_sha256": "24c67df600077d5f22f2ae747ba82fef49c3473aaee94ee270fb4d9e7e4e18ef",
+        "local_queue_before": 140,
+        "local_queue_after": 142,
+        "pending_drafts_restored": 2
+      },
+      "public_verified": false,
+      "source_push": false,
+      "next_attempt_at": "2026-11-11T10:55:00Z",
+      "notification": "Already reported by photo run; do not repeat unchanged alert."
     }
   ]
 }
