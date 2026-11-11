@@ -284,8 +284,9 @@ jobs:
           node scripts/test_super_deals.cjs
           node --check SUPER.ASHDOD/assets/city-basket.js
 
-      - name: Verify committed supermarket header
+      - name: Apply lightweight supermarket header (no data rebuild)
         run: |
+          python scripts/super_ashdod_shell.py
           python scripts/super_ashdod_shell.py --check
           python scripts/test_super_shell.py
 
