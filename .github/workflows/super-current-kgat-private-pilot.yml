@@ -82,21 +82,21 @@ jobs:
           private.ROOT=pathlib.Path("current-source").resolve()
           private.publish("KGAT", os.environ["PINNED_MAIN_SHA"])
           PY
-      - name: Prove anonymous object URL does not serve the private price blob
+      - name: Independently verify real full-path private objects, source SHA256, local Git restoration and anonymous denial
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY'
-          import os,urllib.error,urllib.request
-          project="qomkxhafrprooekwgsxf"
-          assert os.environ["SUPABASE_URL"].rstrip("/")=="https://"+project+".supabase.co"
-          obj="releases/KGAT/"+os.environ["PINNED_MAIN_SHA"]+"/data/prices.json"
-          endpoint=os.environ["SUPABASE_URL"].rstrip("/")+"/storage/v1/object/public/isnet-super-staging/"+obj
-          try:
-              with urllib.request.urlopen(urllib.request.Request(endpoint,headers={"User-Agent":"ISNET-private-canary"}),timeout=15) as r:
-                  raise RuntimeError("SECURITY STOP: private price object served anonymously: "+str(r.status))
-          except urllib.error.HTTPError as error:
-              if error.code not in (400,401,403,404):
-                  raise
-              print("Anonymous direct public Storage read blocked, HTTP",error.code)
+          import os,pathlib
+          from scripts import verify_super_private_restoration as proof
+          proof.ROOT=pathlib.Path("current-source").resolve()
+          proof.RELEASES["KGAT"]=os.environ["PINNED_MAIN_SHA"]
+          proof.audit("KGAT")
           PY
+      - name: Retain exact source and restoration proof (private CI artifact only)
+        uses: actions/upload-artifact@v4
+        with:
+          name: isnet-kgat-current-main-private-restore-proof-${{ github.run_id }}
+          path: ${{ runner.temp }}/super-verify-KGAT.json
+          retention-days: 7
+          if-no-files-found: error
