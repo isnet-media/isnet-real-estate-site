@@ -461,6 +461,73 @@
         "basis": "current published source entries; not new publications in this run"
       },
       "new_publications": 0
+    },
+    {
+      "owner_automation_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "runKey": "photo-bank-2026-11-12-00:55",
+      "run_id": "5e0eac6f-4cdc-832e-bd64-9824dd6868fe",
+      "started_at": "2026-11-11T22:57:20.161270Z",
+      "checked_at": "2026-11-11 23:03:25 UTC",
+      "status": "image_framing_release_recovery_in_progress",
+      "scope": "Photo desk only; no writer content publication or news research.",
+      "source_opened": "07fcd9b809f56b212ad93620e2905522aca31d17",
+      "source_recovery": "480ac95100782d05a328d289bd4255efc7ffb8ff",
+      "native_initial": {
+        "version": 569,
+        "deployment_id": "appgdep_6af4f2c51ae081918e2d015846f7adfe",
+        "status": "failed",
+        "root_cause": "Native build has no Python/bs4 preparation runtime and checks committed snapshot; writer ledger update after previous prepare invalidated public/news/agents/economy-tech/ledger.json hash.",
+        "DB_binding_failure": false
+      },
+      "repair": "Full prepare-public against fresh07fcd source; all1583 manifest hashes independently verified, article data/bodies/status/dates unchanged, ordinary nonforce source push with remote-head guard verified. No stale compiled archive reused. Source-only native fallback retained for prior local137 limitation.",
+      "checks": {
+        "check-photo-bank": "passed150JPGs",
+        "prepare-public": "passed including actual section framing regression, image gates and rights checks",
+        "manifest_hashes": "1583/1583 match before push",
+        "git_diff_check": "passed"
+      },
+      "retry": {
+        "version": 570,
+        "deployment_id": "appgdep_6af4f413db608191af85bcda29c1b1e3",
+        "status": "pending",
+        "attempt_count_including_original": 2,
+        "max_additional_attempts": 0
+      },
+      "queue": {
+        "new_pending_image_requests": 0,
+        "unchanged_ready_article": "tlv-startup-workspaces-hamigdal-haratzif-service-20261111",
+        "body_sha256": "9ff2767f2cc7640a045e1fc2ef55c242c3062e86a6801a90d2e1048f8b13d9c8",
+        "selected_bank_id": "startup-workspace-concept-ai-20261111",
+        "status": "image_approved_ready_to_publish",
+        "next_action": "Writer publishes after shared framing release succeeds; no duplicate image request/reapproval."
+      },
+      "audit": {
+        "pages": 396,
+        "candidates": 216,
+        "confirmed_defect_claim": false
+      },
+      "archive_inspected": [
+        {
+          "review_id": "beit-lessin-stage-portrait-full-face",
+          "url": "https://tlvnet.com/#guide-title",
+          "desktop_viewed": true,
+          "mobile390_viewed": true,
+          "mobile_type": "responsive iframe not handset",
+          "result": "Complete face and head visible; top focus preserved."
+        },
+        {
+          "review_id": "cinema-gateway-complete-poster",
+          "url": "https://tlvnet.com/#guide-title",
+          "desktop_viewed": true,
+          "mobile_viewed": false,
+          "result": "Whole poster visible on desktop; mobile poster not inspected in this cycle."
+        }
+      ],
+      "new_assets": 0,
+      "new_professional_approvals": 0,
+      "new_articles_published": 0,
+      "article_dates_changed": false,
+      "remaining_action": "Observe retry terminal status; only close section framing finding after real live desktop/mobile card verification."
     }
   ],
   "incident_register": [
