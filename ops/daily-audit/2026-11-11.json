@@ -7,7 +7,7 @@
   "run_id": "63c0c639-8134-832a-983a-77226dfbbfc2",
   "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
   "started_at": "2026-11-10T21:59:40.411774Z",
-  "checked_at": "2026-11-11T04:20:04.120Z",
+  "checked_at": "2026-11-11T05:04:46Z",
   "status": "partial",
   "daily_audit_completed": false,
   "previous_audit": {
@@ -2193,6 +2193,258 @@
         "task_or_schedule_changes": 0
       },
       "handoff": "Recorded in existing daily-audit; no external messages."
+    },
+    {
+      "runKey": "ops-controller-2026-11-11-06:58",
+      "run_id": "87125de0-7a10-832a-8dac-23ea0e8a63df",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "checked_at": "2026-11-11T05:04:46Z",
+      "status": "new_private_staging_failure_recovery_failed",
+      "daily_audit_completed": false,
+      "inventory": {
+        "total": 25,
+        "enabled": 12,
+        "paused": 13
+      },
+      "owner_results": {
+        "Herzliya_Raanana": {
+          "run": "abee5ad5-67ac-8332-8c1d-5739eee47016",
+          "recorded_status": "completed",
+          "latest_result": null,
+          "no_success_or_failure_inferred": true
+        },
+        "supermarkets": {
+          "run": "50e5f2e4-0c20-832e-9ca3-8c27539c0e3e",
+          "status": "Owner morning read95branches10Nov,26branches9Nov; own daily collection window not yet closed. No controller collection or repeated121branch scans."
+        },
+        "enrichment": {
+          "run": "49219996-4fe0-8329-897e-6c9a2613b313",
+          "journal_read": true,
+          "result_run_matches": true,
+          "verified_records": 186,
+          "successful_sources": 8,
+          "failed_source": "dangourmet http_500 retained24old records",
+          "next_attempt_at": "2026-11-11T10:19:09.880Z",
+          "no_refresh_by_controller": true
+        },
+        "culture": {
+          "run": "61c273e6-4bdc-8326-8ee6-b90e93c210cc",
+          "result_domain": "culture-news",
+          "fresh_source_ledger_read": true,
+          "source_commit": "dc26a620cd5755c8755e13279092e0022bdfae0c",
+          "ledger_runKey": "culture-news-2026-11-11-06:00",
+          "completedAt": "2026-11-11T04:48:55Z",
+          "status": "verified_source_no_update"
+        },
+        "main": {
+          "completed_run": "8c36c82d-56bc-8325-a1f5-d6aa53664b41",
+          "result": "Byte-identical real-estate report to ebdd520d, not a news/sports completion report.",
+          "fresh_source_evidence": {
+            "news_runKey": "news-2026-11-11-05:00",
+            "completedAt": "2026-11-11T04:07:29Z",
+            "article": "sah-street-violence-serious-injury-20261110",
+            "source_status": "published",
+            "source_note_claims_build_and_deploy": true,
+            "contradiction": "539 has no archive/deployment; source publication claim not a verified live publication. Actual news work occurred despite wrong-domain final result.",
+            "sports_last": "sports-2026-11-10-23:00",
+            "sports_completedAt": "2026-11-10T22:07:00Z",
+            "sports_status": "blocked",
+            "sports_current_cycle_evidence": false
+          },
+          "current_run": "310463cd-bfac-8325-83ec-c018c0def2ac",
+          "current_status": "in_progress",
+          "root_cause": "Result association fault still observed; sports omission also has ledger evidence. Backend task/session assignment logs remain unavailable; no prompt-only fix claimed."
+        }
+      },
+      "Site": {
+        "latest_saved_version": 539,
+        "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_b489038eb42081918eac836d5255c4c3",
+        "saved_source": "cfe13324dc65fa0d2ff85d7683d21c8c316aa3a5",
+        "archive_storage": null,
+        "deployment_id": null,
+        "interpretation": "Saved source-only539 is not a deployment or recovery; complete matching Worker artifact required. Existing BeitLessin404 incident remains open; no unnecessary HTTP re-probe.",
+        "last_verified_public_version": 538,
+        "controller_builds": 0,
+        "controller_deploys": 0
+      },
+      "escalation": {
+        "signature": "ISNET|private supermarket staging|BATYAM storage write|HTTP520 then HTTP400",
+        "workflow_run": 42959059460,
+        "branch": "infra/supermarket-isolation-20261110",
+        "original_source": "5958cfaca9a61eacfdb1aa216635c3d3ff810850",
+        "PR": 67,
+        "PR_head": "02887ad7fc8055083e45533a0a4618ee29fd8b7e",
+        "stage_script_same_at_PR_head": true,
+        "initial_job": 130320982340,
+        "initial_error": "Storage write failed HTTP520 at2026-11-11T04:33:38Z",
+        "other_cities_passed": [
+          "YAVNE",
+          "KGAT",
+          "HOLON",
+          "RISHON",
+          "ASHDOD"
+        ],
+        "ownership_and_safety": {
+          "active_actions_before_retry": 0,
+          "queued_actions_before_retry": 0,
+          "existing_concurrency_group": "isnet-super-remaining-private-stage",
+          "cancel_in_progress": false,
+          "immutable_private_paths": true,
+          "no_upsert_or_overwrite": true,
+          "existing_object409_requires_hash_readback": true,
+          "user_authorized_existing_private_staging": true,
+          "controller_scope": "One bounded escalation for failed job; existing migration owner retained. No deployment/collection."
+        },
+        "recovery": {
+          "action": "GitHub rerun_workflow_job only failed BATYAM130320982340",
+          "tool_success": true,
+          "retry_job": 130331639320,
+          "conclusion": "failure",
+          "failure_time": "2026-11-11T04:56:08Z",
+          "error": "Storage write failed HTTP400",
+          "other_successful_jobs_not_rerun": true,
+          "additional_retries": 0
+        },
+        "root_cause": "Verified private Storage POST failure, then400 on single retry. Script discards error response body and file context; specific400 cause unverified. Do not label duplicate, permission, quota or MIME as established without response details.",
+        "alternative_investigated": "Current script source and official Storage error-code documentation read.400 covers multiple distinct errors. Next safe diagnostic: sanitized structured error code/message plus object path; consider read-existing/hash-first handling without overwrite. No broad400 suppression or permission/RLS change.",
+        "docs": "https://supabase.com/docs/guides/storage/debugging/error-codes",
+        "owner": "operational-controller; migration owner Automation_36083f64426c81919c88c38e441128b7",
+        "status": "blocked_after_bounded_recovery",
+        "next_attempt_at": "2026-11-11T10:56:08Z",
+        "early_condition": "New code/source/access evidence that diagnoses and changes failing input; no blind rerun.",
+        "public_cutover": false,
+        "public_site_data_removed": false,
+        "new_charges_or_DNS_changes": false
+      },
+      "source_access": {
+        "old_path": "/workspace/scratch/7454cd01510e/ops-runtime-tmp/w15/source/.sites-checkout",
+        "old_path_unavailable": true,
+        "executor_in_tmp_works": true,
+        "supported_fresh_open": "dc26a620cd5755c8755e13279092e0022bdfae0c",
+        "no_claim_137_root_fixed": true
+      },
+      "mutations": {
+        "single_failed_job_retry": true,
+        "operational_journal": true,
+        "shared_Site_source_push": 0,
+        "Site_build": 0,
+        "Site_deploy": 0,
+        "CMS": 0,
+        "schedules": 0
+      },
+      "notification": "New staging failure changed520to400 after bounded retry; not successful migration."
+    },
+    {
+      "runKey": "photo-bank-2026-11-11-06:55",
+      "run_id": "3efec139-b04c-8322-8526-46076095dfd2",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-11T05:04:46Z",
+      "status": "local_cinema_fix_implemented_and_regression_passed_not_published",
+      "source_base": "dc26a620cd5755c8755e13279092e0022bdfae0c",
+      "source_open": {
+        "supported_helper": true,
+        "first_nonempty_cwd_attempt_failed": true,
+        "changed_to_new_empty_directory": true,
+        "second_open_succeeded": true,
+        "checkout": "/workspace/scratch/85cf17fdab9c/ops-runtime-tmp/p43-source/.sites-checkout",
+        "old_controller_draft": "Old unavailable checkout did not get overwritten;2field candidate retained in earlier journal, remote profile basehash964435... unchanged.",
+        "publish_on_push": false
+      },
+      "local_environment": {
+        "initial_audit_failure": "ModuleNotFoundError: bs4",
+        "repair": "beautifulsoup4==4.14.2 installed into /tmp/tlvnet-photo-audit-deps only; source package/dependencies unchanged.",
+        "audit_after_repair": "223 overlapping candidates from384pages;115approval,89specificsubject,9duplicate,7framing,3rendered pending",
+        "not_same_input_137_retry": true
+      },
+      "queue": {
+        "pages": 384,
+        "candidates": 223,
+        "closed": 0,
+        "new_assets": 0,
+        "article_reviews": 1,
+        "new_source_candidate": "sah-street-violence-serious-injury-20261110"
+      },
+      "local_fix": {
+        "scope": "Three cinema-specific source files in new isolated local checkout only; no shared remote mutation. Credit moved from photo overlay to card-copy before title in runtime and generated fallback. Poster contain and attribution text preserved.",
+        "files": {
+          "public/home-cinema.js": "0d9cb563739156b3d2f9dcfc16f1efe5071a1e6aa9f93b059053e329323d6e82",
+          "public/home-cinema.css": "7ebc1e9475d1c7052b8800601c35a700552d62f79bb0503aa1b04ee0e39fb84c",
+          "scripts/home_section_navigation.py": "a866eef96987e79cce5ba5540752941a9d5a3562c184523a8ab3b425449ce59a"
+        },
+        "patch": "diff --git a/public/home-cinema.css b/public/home-cinema.css\nindex 48c6d030..63038bae 100644\n--- a/public/home-cinema.css\n+++ b/public/home-cinema.css\n@@ -1 +1 @@\n-.cinema-home .photo{background:#102b38;height:auto;aspect-ratio:2/3}.cinema-home .photo img{object-fit:contain!important}.cinema-home .card{flex:0 0 230px;min-width:0}.cinema-home .card-copy p{font-size:13px;line-height:1.5}.cinema-home .photo small{background:#071b2acc;color:#fff}.cinema-home .cinema-home-empty{padding:24px;font-size:17px}@media(max-width:760px){.cinema-home .card{flex-basis:65vw;max-width:280px}}\n+.cinema-home .photo{background:#102b38;height:auto;aspect-ratio:2/3}.cinema-home .photo img{object-fit:contain!important}.cinema-home .card{flex:0 0 230px;min-width:0}.cinema-home .card-copy p{font-size:13px;line-height:1.5}.cinema-home .cinema-poster-credit{display:block;position:static;font-size:.75rem;line-height:1.45;color:var(--muted);margin:0 0 10px;overflow-wrap:anywhere}.cinema-home .cinema-home-empty{padding:24px;font-size:17px}@media(max-width:760px){.cinema-home .card{flex-basis:65vw;max-width:280px}}\ndiff --git a/public/home-cinema.js b/public/home-cinema.js\nindex 82c7be5a..9b967ea4 100644\n--- a/public/home-cinema.js\n+++ b/public/home-cinema.js\n@@ -11,8 +11,8 @@ fetch('/api/public-cinema',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('ci\n  const fragment=document.createDocumentFragment();\n  movies.forEach((m,i)=>{\n   const a=node('a','card');a.href='/guide/movie.html?id='+encodeURIComponent(m.id);a.dataset.movieId=m.id;\n-  const photo=node('div','photo'),img=node('img');img.src=m.poster_url;img.alt='כרזת הסרט '+m.title;img.loading='lazy';photo.append(img,node('span','number',String(i+1).padStart(2,'0')),node('small','',m.poster_credit||'כרזה: המקור הרשמי של הסרט'));\n-  const copy=node('div','card-copy');copy.append(node('h3','',m.title),node('p','',[...new Set(m.venues.map(v=>v.name))].join(' · ')),node('span','card-link','לפרטים והקרנות ←'));a.append(photo,copy);fragment.append(a);\n+  const photo=node('div','photo'),img=node('img');img.src=m.poster_url;img.alt='כרזת הסרט '+m.title;img.loading='lazy';photo.append(img,node('span','number',String(i+1).padStart(2,'0')));\n+  const copy=node('div','card-copy');copy.append(node('small','cinema-poster-credit',m.poster_credit||'כרזה: המקור הרשמי של הסרט'),node('h3','',m.title),node('p','',[...new Set(m.venues.map(v=>v.name))].join(' · ')),node('span','card-link','לפרטים והקרנות ←'));a.append(photo,copy);fragment.append(a);\n  });\n  rail.replaceChildren(fragment);\n  const section=rail.closest('section'),total=section.querySelector('.rail-total');total.textContent=String(movies.length).padStart(2,'0');\ndiff --git a/scripts/home_section_navigation.py b/scripts/home_section_navigation.py\nindex 99d32879..a3edcc47 100644\n--- a/scripts/home_section_navigation.py\n+++ b/scripts/home_section_navigation.py\n@@ -74,6 +74,7 @@ def normalize_home(home=None):\n   rail.clear();rail['aria-label']='סרטים בקולנוע בתל אביב ובקרבתה'\n   for i,(film,poster,venues) in enumerate(films[:16]):\n    tile=card(film['title'],'/guide/movie.html?id='+film['id'],poster['image_url'],poster.get('credit'),i,' · '.join(v['name'] for v in venues))\n+   credit=tile.select_one('.photo small').extract();credit['class']=['cinema-poster-credit'];tile.select_one('.card-copy').insert(0,credit)\n    tile['data-movie-id']=film['id'];tile.select_one('.card-link').clear();tile.select_one('.card-link').string='לפרטים והקרנות ←';rail.append(tile)\n   section=rail.find_parent('section');swipe=section.select_one('.swipe')\n   if swipe:swipe.string='גללו ובחרו סרט'\n",
+        "pushed": false,
+        "commit": null,
+        "version": null,
+        "live_verified": false
+      },
+      "checks": {
+        "node_syntax": true,
+        "image_presentation": "PASS",
+        "news_image_registry": "PASS",
+        "news_photos_mjs": "PASS",
+        "check_photo_bank": "PASS121localJPGs, licenses/categories/usage/evidence/checksums",
+        "fallback_regression": {
+          "actual_source_movies": 11,
+          "old_generator_overlay_credits": 11,
+          "new_generator_overlay_credits": 0,
+          "new_separate_credit_rows": 11,
+          "output": "Temporary HTML only; did not overwrite public/home.html.",
+          "pass": true
+        },
+        "git_diff_check": true,
+        "prepare_public": "Not run: shared publication/build ownership unverified; fullcheck and browser verification required before deployment."
+      },
+      "live_bank": {
+        "http": 200,
+        "items": 122,
+        "collector_enabled": true,
+        "blockedIds": "not exposed"
+      },
+      "mobile_access": {
+        "attempted": true,
+        "visual_review_completed": false,
+        "method": "Native Chromium device-emulation UI attempt",
+        "result": "Organization policy dialog: DevTools not allowed on this page. Notice dismissed, restriction not bypassed; no mobile screenshot or visual pass claimed.",
+        "native_desktop_observed": true,
+        "desktop_scope": "Homepage entry rendered; no all-site check."
+      },
+      "article_inspection": {
+        "id": "sah-street-violence-serious-injury-20261110",
+        "url": "https://tlvnet.com/news/sah-street-violence-serious-injury-20261110",
+        "read_full_title_lead_body": true,
+        "computed_body_sha256": "f025a155b38e08a68902fe4e0c03cc08f1856c3a36ab52f2738ef36893530d42",
+        "body_hash_matches_current_review": true,
+        "subject": {
+          "message": "Initial medical report of seriously injured man about30 on Sah Street; no suspect, motive or identified scene photo established.",
+          "people": [],
+          "location": "רחוב ס״ה, תל אביב",
+          "operator": "מגן דוד אדום",
+          "stage": "initial_medical_report"
+        },
+        "status": "pending_exact_asset",
+        "exact_source_bank_candidates": 0,
+        "source_attempt": {
+          "url": "https://t.me/mdaisrael/26725",
+          "result": "Public page unavailable in web reader; no picture or rights verified, no retry/bypass."
+        },
+        "no_news_requests_entry": true,
+        "present_in_existing_quality_queue": true,
+        "photo_bank_id": null,
+        "image_url": null,
+        "new_approval": false,
+        "text_not_blocked_for_image": true,
+        "published_live": "Not claimed:539notdeployed."
+      },
+      "blockers": {
+        "shared_write": "Main310463cd active; cross-environment Work/project exclusivity not verified. Local isolated draft allowed; no shared source push/build/deploy.",
+        "mobile": "Browser organization's DevTools restriction; needs permitted mobile viewport surface, not a bypass.",
+        "publishing": "Current source-only539has no artifact or deployment; local fix not in saved version."
+      },
+      "verified_assets_added": 0,
+      "fixed_and_verified": 0,
+      "builds": 0,
+      "deployments": [],
+      "next_cursor": "Reconcile and publish tested3filecinema fix when ownership/build path verified, then actual desktop/mobile. Keep new incident photo pending without blocking text; existing rental/semantic/kids/seniors backlog retained."
     }
   ],
   "incident_register": [
@@ -2246,14 +2498,66 @@
         "Previous installer/build137 history remains; no same-input retry."
       ],
       "prevention": "After generators, assert every published news-card href resolves to a source file or valid dynamic route; validate packaged inclusion and liveHTTP200 before published status. Preserve text/photo dates, current image approval and full snapshot.",
-      "next_attempt_at": "2026-11-11T03:58:00Z",
+      "next_attempt_at": "2026-11-11T05:58:00Z",
       "controller_build_or_recovery_attempts": 0,
       "deployments": [],
-      "last_controller_observation_at": "2026-11-11T03:00:42Z",
+      "last_controller_observation_at": "2026-11-11T05:04:46Z",
       "latest_owner_runs": {
         "culture": "920b1aea-c530-8326-9263-e9b8e907a400",
         "main": "fa23dfcc-72c0-8325-90b2-111883081dde"
-      }
+      },
+      "latest_saved_version": 539,
+      "saved_version_has_archive": false,
+      "saved_version_deployment": null
+    },
+    {
+      "signature": "ISNET|private supermarket staging|BATYAM storage write|HTTP520 then HTTP400",
+      "workflow_run": 42959059460,
+      "branch": "infra/supermarket-isolation-20261110",
+      "original_source": "5958cfaca9a61eacfdb1aa216635c3d3ff810850",
+      "PR": 67,
+      "PR_head": "02887ad7fc8055083e45533a0a4618ee29fd8b7e",
+      "stage_script_same_at_PR_head": true,
+      "initial_job": 130320982340,
+      "initial_error": "Storage write failed HTTP520 at2026-11-11T04:33:38Z",
+      "other_cities_passed": [
+        "YAVNE",
+        "KGAT",
+        "HOLON",
+        "RISHON",
+        "ASHDOD"
+      ],
+      "ownership_and_safety": {
+        "active_actions_before_retry": 0,
+        "queued_actions_before_retry": 0,
+        "existing_concurrency_group": "isnet-super-remaining-private-stage",
+        "cancel_in_progress": false,
+        "immutable_private_paths": true,
+        "no_upsert_or_overwrite": true,
+        "existing_object409_requires_hash_readback": true,
+        "user_authorized_existing_private_staging": true,
+        "controller_scope": "One bounded escalation for failed job; existing migration owner retained. No deployment/collection."
+      },
+      "recovery": {
+        "action": "GitHub rerun_workflow_job only failed BATYAM130320982340",
+        "tool_success": true,
+        "retry_job": 130331639320,
+        "conclusion": "failure",
+        "failure_time": "2026-11-11T04:56:08Z",
+        "error": "Storage write failed HTTP400",
+        "other_successful_jobs_not_rerun": true,
+        "additional_retries": 0
+      },
+      "root_cause": "Verified private Storage POST failure, then400 on single retry. Script discards error response body and file context; specific400 cause unverified. Do not label duplicate, permission, quota or MIME as established without response details.",
+      "alternative_investigated": "Current script source and official Storage error-code documentation read.400 covers multiple distinct errors. Next safe diagnostic: sanitized structured error code/message plus object path; consider read-existing/hash-first handling without overwrite. No broad400 suppression or permission/RLS change.",
+      "docs": "https://supabase.com/docs/guides/storage/debugging/error-codes",
+      "owner": "operational-controller; migration owner Automation_36083f64426c81919c88c38e441128b7",
+      "status": "blocked_after_bounded_recovery",
+      "next_attempt_at": "2026-11-11T10:56:08Z",
+      "early_condition": "New code/source/access evidence that diagnoses and changes failing input; no blind rerun.",
+      "public_cutover": false,
+      "public_site_data_removed": false,
+      "new_charges_or_DNS_changes": false
     }
   ]
 }
