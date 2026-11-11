@@ -1,0 +1,52 @@
+name: Rehearse six private supermarket delta overlays and data-only rollback
+on:
+  workflow_dispatch:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - "scripts/verify_super_private_delta_overlay.py"
+      - "tests/test_verify_super_private_delta_overlay.py"
+      - ".github/workflows/super-private-delta-overlay-rehearsal.yml"
+permissions:
+  contents: read
+concurrency:
+  group: isnet-super-private-delta-overlay-rehearsal
+  cancel-in-progress: false
+jobs:
+  rehearse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    env:
+      SUPABASE_URL: ${{ secrets.CMS_SUPABASE_URL || secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify fail-closed delta validation rules without network or collectors
+        run: python -m unittest discover -s tests -p 'test_verify_super_private_delta_overlay.py' -v
+      - name: Verify both historical releases are available before rehearsal
+        run: |
+          git cat-file -e 5958cfaca9a61eacfdb1aa216635c3d3ff810850^{commit}
+          git cat-file -e 8133619b2d37ba514c0a801cb0b998a9b69bd631^{commit}
+      - name: Read back six authenticated private delta sets and rehearse data-only overlay plus rollback
+        run: python scripts/verify_super_private_delta_overlay.py
+      - name: Verify anonymous shadow canary remains shut off (no production traffic)
+        shell: bash
+        run: |
+          status=$(curl -sS --max-time 20 -o "$RUNNER_TEMP/isnet-canary-disabled.txt" -w "%{http_code}" \
+            "https://qomkxhafrprooekwgsxf.supabase.co/functions/v1/isnet-super-public-canary?city=YAVNE&file=prices.json&release=5958cfaca9a61eacfdb1aa216635c3d3ff810850")
+          test "$status" = "503" || { echo "Canary was not fail-closed: $status"; exit 1; }
+          echo "Verified public shadow route remains disabled (HTTP 503)."
+      - name: Record safety boundary in CI summary
+        if: success()
+        shell: bash
+        run: |
+          echo "Six original pinned private snapshots and committed price deltas verified by SHA256 + exact-byte Git comparison." >> "$GITHUB_STEP_SUMMARY"
+          echo "Six data-only candidate overlays were tested on disposable local copies and reversed without changes to Supabase." >> "$GITHUB_STEP_SUMMARY"
+          echo "The public shadow canary remains OFF (HTTP 503)." >> "$GITHUB_STEP_SUMMARY"
+          echo "**No collector runs, storage writes, publication, public reverse-proxy cutover, DNS, or billing changes.**" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Real production rollback and full browser/CSS/media checks are STILL NOT proven.**" >> "$GITHUB_STEP_SUMMARY"
