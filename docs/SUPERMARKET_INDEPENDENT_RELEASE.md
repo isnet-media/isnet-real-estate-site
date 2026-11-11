@@ -270,8 +270,8 @@ Pages supermarket build until those gates pass.
 ## 2026-11-11 16:10 Israel — read-only independent-site dependency audit
 
 **New, verified diagnostic step; NO cutover or new hosting origin.** Added
-\`scripts/audit_super_independent_site.py\`, its fail-closed safety tests and
-\`.github/workflows/super-independent-site-readiness.yml\` on PR #67 only.
+`scripts/audit_super_independent_site.py`, its fail-closed safety tests and
+`.github/workflows/super-independent-site-readiness.yml` on PR #67 only.
 Read-only workflow report: https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43035779173
 It passed initial offline tests and created a downloadable JSON audit artifact.
 The output is an **inventory of source-tree HTML/CSS dependencies**, NOT a
@@ -279,46 +279,46 @@ real browser, network, media-license, security-penetration or production rollbac
 
 - **7 / 7 city directories** accounted for, **1,292 tracked files**, **187 HTML
   files** in the pinned source editions (31 per non-TLV city, one TLV placeholder).
-- After correcting for the unpublished \`assets/branding/super-shell.html\`
-  \`{{ROOT}}\` generator template and distinguishing SEO canonical links from
+- After correcting for the unpublished `assets/branding/super-shell.html`
+  `{{ROOT}}` generator template and distinguishing SEO canonical links from
   downloadable assets, **0 missing local static links** were found by the
   HTML/CSS parser. This only covers statically discoverable URLs and does NOT
-  prove dynamic JS \`fetch()\`, CSS/media rights, mobile rendering, or serving
+  prove dynamic JS `fetch()`, CSS/media rights, mobile rendering, or serving
   the site on a standalone origin.
 - **YAVNE has 30 HTML references to root URL
-  \`/assets/yavne-analytics.js?v=20261022-1\`**. Its actual source is in the
-  repository's global \`assets/yavne-analytics.js\`, NOT under
-  \`SUPER.YAVNE/assets/\`. Therefore standalone supermarket hosting MUST
+  `/assets/yavne-analytics.js?v=20261022-1`**. Its actual source is in the
+  repository's global `assets/yavne-analytics.js`, NOT under
+  `SUPER.YAVNE/assets/`. Therefore standalone supermarket hosting MUST
   explicitly map/copy this shared root resource or otherwise safely serve
   its exact committed bytes. The analytics script itself groups page views
-  using \`/^\/SUPER\.YAVNE/\`, so a moved URL prefix could silently lose
+  using `/^\/SUPER\.YAVNE/`, so a moved URL prefix could silently lose
   analytics; preserve same-URL routing and validate events. **No live link,
   analytics or source code was changed here.**
-- The six full cities use the existing \`isnet.co.il/SUPER.CITY/\` canonical
+- The six full cities use the existing `isnet.co.il/SUPER.CITY/` canonical
   identity (some pages have their own absolute canonical). These are not
   third-party media fetches; migration needs to retain canonical identities,
   rather than casually changing SEO URLs.
-- **TLV is NOT a complete site**: \`SUPER.TLV/index.html\` performs an immediate
-  meta-refresh to \`https://tlvnet.com/super/\` and displays an unavailable
+- **TLV is NOT a complete site**: `SUPER.TLV/index.html` performs an immediate
+  meta-refresh to `https://tlvnet.com/super/` and displays an unavailable
   service message, despite its separate price data files.
 - The six full cities include image and font assets; **their publication
   licenses have NOT been validated**. The current private delivery service
   deliberately blocks these types. No asset is approved for anonymous serving
   merely because it is in a release bundle.
 - A source-site workflow issue was independently observed: the existing
-  \`Publish priceboard\` run
+  `Publish priceboard` run
   https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43026800941
   failed in the **event integrity** stage before Pages publication:
-  \`ashdod has unresolved candidates before release\` (2 unresolved). This
+  `ashdod has unresolved candidates before release` (2 unresolved). This
   is not caused by PR #67 and MUST NOT be bypassed to force a supermarket
   hosting cutover; it is a separate production deployment blocker.
 
-**Safety boundary:** private bucket stays \`public=false\`; previous staged
+**Safety boundary:** private bucket stays `public=false`; previous staged
 SHA-256 proofs, 7/7 artifact builds and 6/6 data-only rollback rehearsals
 remain valid for their pinned inputs. This new audit does not upload storage
 files, run collectors, serve new public URLs, merge PR #67, change DNS, or
 alter prices/dates. The existing Supabase bucket provides *logical*
-storage segregation **within the shared \`isnet-ai-cms\` project**;
+storage segregation **within the shared `isnet-ai-cms` project**;
 it does not create a separate billing project or an independent failure
 domain. Treat true hosting separation as outstanding until proven.
 
