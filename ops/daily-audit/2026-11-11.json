@@ -3979,6 +3979,153 @@
       "fixed_and_verified": 0,
       "published": [],
       "daily_audit_completed": false
+    },
+    {
+      "runKey": "photo-bank-2026-11-11-10:55",
+      "run_id": "56bb01c2-e45c-8322-83a1-de05e4c24aeb",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-11T09:05:00Z",
+      "status": "inspected_pending_shared_publication_blocked",
+      "scope": "Photo domain only; 4 reviews, 0 new assets; no other domain work.",
+      "source": {
+        "commit": "3e279518392df588273c7d3b340867e12f374cdd",
+        "checkout": "/workspace/scratch/85cf17fdab9c/ops-runtime-tmp/p50-source/.sites-checkout",
+        "policy_read": "public/photo-bank/PUBLICATION_POLICY.md; COLLECTOR.md; scripts/news_photo_gate.py; scripts/audit-image-quality.py",
+        "source_changed_since_previous": "Only intervening real-estate run log; pending photo repairs not present upstream."
+      },
+      "queue": {
+        "pages_scanned": 386,
+        "candidates": 219,
+        "summary": {
+          "duplicate_asset_in_section": 7,
+          "explicit_photo_approval_pending": 114,
+          "portrait_or_poster_needs_framing_review": 7,
+          "rendered_visual_review_pending": 2,
+          "specific_subject_photo_pending": 89
+        },
+        "scope": "Source candidates only, not 219 defective images or complete live site clearance."
+      },
+      "live_bank": {
+        "url": "https://tlvnet.com/api/photo-bank",
+        "anonymous_http": 403,
+        "authorized_same_site_http": 200,
+        "credential_source": "fresh get_site only; service access is not admin identity",
+        "collector_enabled": true,
+        "items": 146,
+        "blockedIds": "not_exposed; no assets added/re-enabled",
+        "local_jpg_count": 145
+      },
+      "inspections": [
+        {
+          "status": "pending",
+          "article_id": "tel-aviv-children-film-festival-20261204",
+          "url": "https://tlvnet.com/news/tel-aviv-children-film-festival-20261204",
+          "location": "writer ledger draft, not published",
+          "full_article_path": "public/news/agents/culture-news/ledger.json#culture-news-2026-11-11-09:00",
+          "read_full_text": true,
+          "body_sha256": "1f5c390e60c270c063befa6477460c05304aeb241e3682432ee5934261127205",
+          "candidate": "flash90-F260603MA011",
+          "source": "https://www.flash90.net/item/en/1/813571",
+          "original_visually_viewed": true,
+          "original_sha256": "f08ea681eec92405ed884971954802aee04e6d51fff5801040c12724ba58e267",
+          "original_dimensions": [
+            799,
+            533
+          ],
+          "finding": "Venue recognizable; Docaviv signs visible. Only honest venue archive with explicit different-event caption; not a photo of the children's festival. Current source uses this asset in 0 news articles.",
+          "proposed_caption": "סינמטק תל אביב בזמן פסטיבל דוקאביב, 3.6.2026. צילום ארכיון של המקום; אינו מהאירוע המדווח. מרים אלסטר/פלאש 90",
+          "proposed_fit": "contain",
+          "position": "50% 50%",
+          "rendered_card": "pending",
+          "rendered_article": "pending",
+          "approval": "not_granted; selected_bank_id not set; draft retained"
+        },
+        {
+          "status": "inspected",
+          "url": "https://tlvnet.com/culture/article-daily-2026-11-05",
+          "location": "article poster and caption",
+          "desktop_visual": true,
+          "desktop_viewport": "1348-wide browser screenshot",
+          "finding": "Top and bottom of full poster inspected after scroll; footer not obscured, caption is separate below. Reconfirms previous desktop result.",
+          "mobile_visual": false
+        },
+        {
+          "status": "inspected",
+          "url": "https://tlvnet.com/responsive-preview",
+          "embedded_page": "https://tlvnet.com/",
+          "location": "What to do gateway / הופעות במה / Beit Lessin portrait",
+          "responsive_visual": true,
+          "iframe_width": 390,
+          "iframe_height": 812,
+          "physical_mobile": false,
+          "finding": "Actually viewed complete face/head inside card and readable credit. Narrow responsive check completed through the site's existing preview UI, not DevTools or device emulation.",
+          "source_credit": "בית ליסין · צילום: ניר סלקמן"
+        },
+        {
+          "status": "pending",
+          "url": "https://tlvnet.com/responsive-preview",
+          "embedded_page": "https://tlvnet.com/",
+          "location": "Cinema strip / הסתברות לאהבה card 02",
+          "responsive_visual": true,
+          "iframe_width": 390,
+          "physical_mobile": false,
+          "finding": "Whole poster frame visible but dark credit overlay covers the lower poster/footer. Existing cinema-credit defect remains open on narrow view.",
+          "current_credit": "כרזה: המקור הרשמי של הסרט · סינמה סיטי",
+          "replacement": "No new asset; move attribution to separate row using previously saved source repair",
+          "fixed_and_verified": false
+        }
+      ],
+      "local_draft": {
+        "action": "Reapplied prior 5-file repair cleanly onto current isolated source; no shared push.",
+        "patch_reference": {
+          "run_id": "51635aa8-c4f4-8322-aff4-8a4424fcc867",
+          "field": "local_draft.patch",
+          "patch_sha256": "7bb84a954f419e6385347d8b4aa1719c0249f02f6c6bd2f17e5b2ba834d7fa10"
+        },
+        "files": [
+          "scripts/check-photo-bank.py",
+          "data/photo-bank.json",
+          "data/photo-bank/presentation.json",
+          "data/photo-bank/news-requests.json",
+          "data/photo-bank/runs.json"
+        ],
+        "tests": [
+          "check-photo-bank: PASS 145 local JPGs technical/evidence checks",
+          "image-presentation: PASS",
+          "news-image-registry: PASS",
+          "news-photos.mjs: PASS",
+          "news_photo_gate: PASS",
+          "git diff --check: PASS"
+        ],
+        "rights_scope": "No rights approvals, authors, image dates, asset IDs/checksums or article publication dates newly invented/changed.",
+        "prepare_public": "not run; shared write/publication exclusivity unverified",
+        "build": false,
+        "push": false,
+        "deploy": false
+      },
+      "frozen_baselines": {
+        "unchanged": true,
+        "text_only_sha256": "605dfdb596b6a41cc5553c1c3f305000564255d3c01c2f46a1f54905d40e9c31",
+        "legacy_sha256": "5a18740d1527233e84e6b60da8f4cb902e8965538130cbf1302efe7bcab6215c"
+      },
+      "blockers": {
+        "shared_site_write": "Existing cross-environment Work/project ownership and lease interface is not exposed; no verified write exclusivity. No competing source push/build/deploy.",
+        "culture_run": "c5cd63f0-6434-8326-b2c6-bfc3ee8ce02f completed at 08:59:29.999099Z; latest_result null, no inferred outcome.",
+        "new_story": "Actual candidate render in its own draft card/article still pending. Existing preview can inspect published pages but cannot supply the unpublished candidate."
+      },
+      "mobile_access_resolution": {
+        "status": "permitted_narrow_responsive_review_available",
+        "route": "Existing live /responsive-preview page, default 390x812 iframe; actual screenshot inspected.",
+        "limits": "Not a physical handset, not touch/OS/browser emulation. Other cards/articles not viewed at 390 remain pending.",
+        "native_input_limit": "Sky type_text reports AT-SPI provider unavailable; Alt+F5 did not change 1363x1023 window. Native window unchanged. No DevTools/security bypass attempted."
+      },
+      "fixed_and_verified": [],
+      "verified_assets_added": [],
+      "deployments": [],
+      "new_failure": false,
+      "actions_outside_photo_domain": [],
+      "next_cursor": "Complete candidate card+article render for children's festival using authorized project preview when available; then Baldwin exact candidate and existing cinema attribution repair. Preserve all prior pending patches.",
+      "next_attempt_at": "2026-11-11T09:55:00Z"
     }
   ],
   "incident_register": [
