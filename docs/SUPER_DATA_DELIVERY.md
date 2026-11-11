@@ -2,7 +2,7 @@
 
 Independent public read-only Worker origin: https://isnetsuper.ebs987449.chatgpt.site .
 Native Site project appgprj_6ad8879811688191bdaaf7e7fa024a14, source commit
-49acf1dfd4ba94657c61952abd5b1daa63b52c21. The service streams and caches public
+9c673f1ac6d032d9aefa6cf2fb732e3793f0164f (Site version14). The service streams and caches public
 committed supermarket snapshots from the existing collector repository. It runs
 no collectors, accepts no writes and holds no CMS or database credentials.
 
@@ -56,3 +56,32 @@ the independent origin before offloading SUPER.TLV/data from Pages. Do not redir
 the Tel Aviv frontend back to the placeholder source index.
 
 No new billing account, purchased server or public database bucket is required.
+
+## Live pilot and recovery evidence
+
+- PR68 removed duplicated data builds from the news publisher; collector jobs retained.
+- PR69 stopped before public deployment on a fragment-without-head guard.
+- PR70 corrected fragment handling. Cutover run 43085505677 succeeded: KGAT
+  data_bytes_offloaded=36,897,871, html_pages_routed=31. Public original comparison
+  URL returned nine rice offers with source dates 10–11 November; one item was
+  added to the isolated browser list for post-rollback persistence verification.
+- TLVNET public Site version563 (source d3f2ff7e6b1cc6fa9b2997c3080d60ae10249ef7)
+  now prefers the independent origin. Public response X-Supermarket-Delivery
+  confirms that origin. Browser shows 17,886 products/19 branches, source 9 November;
+  the migration does not claim these prices are fresh today.
+- The public release pointer is .supermarket-delivery/release.json. The publisher
+  runs on successful collector workflow_run events as well as direct data pushes;
+  it checks committed JSON through the independent origin and commits only the
+  pointer. No API branch lookup is needed. GitHub raw delivery is still a service
+  dependency. Each browser page resolves the release once and keeps that immutable
+  commit for its requests, with its build release as fallback during lookup failure.
+
+- PR71 release publisher ran successfully as workflow43086525028/job130752239885;
+  all seven city samples verified before publishing the immutable pointer. Worker
+  /release subsequently returned b516ff99f5113c342dc13c03b5ad8e7629b10024,
+  demonstrating automatic release discovery without a separate Site deployment.
+- Full rollout must only merge after public rollback workflow43086524902 succeeds
+  and the original catalog and browser shopping-list item are verified. The full
+  selector includes all seven cities; retains only UI/static assets on Pages and
+  moves the data delivery bytes. Baseline is already retained for30days, so
+  subsequent cutovers reuse it instead of uploading redundant backup copies.
