@@ -3,6 +3,12 @@ on:
   pull_request:
     paths:
       - '.github/workflows/pages.yml'
+      - 'scripts/prepare_pages_public.py'
+      - 'scripts/test_prepare_pages_public.py'
+      - 'scripts/super_delivery.json'
+      - 'scripts/verify_super_delivery.py'
+      - 'scripts/test_super_delivery_routing.cjs'
+      - '.github/workflows/super-delivery-cutover.yml'
       - '.github/workflows/super-committed-snapshot-tests.yml'
 permissions:
   contents: read
@@ -21,6 +27,9 @@ jobs:
       - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
       - name: Verify committed output after lightweight header preparation
         run: |
+          python scripts/test_prepare_pages_public.py
+          node scripts/test_super_delivery_routing.cjs
+          python scripts/verify_super_delivery.py
           python scripts/test_super_homepage.py
           node scripts/test_super_live_loading.cjs
           node scripts/test_super_city_lists.cjs
