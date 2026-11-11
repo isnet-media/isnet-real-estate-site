@@ -4,6 +4,8 @@ on:
     branches: [infra/supermarket-isolation-20261110]
     paths:
       - '.github/workflows/super-current-rishon-private-pilot.yml'
+      - 'scripts/stage_super_private_storage.py'
+      - 'tests/test_super_private_storage_retry.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -54,6 +56,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m unittest discover -s tests -p 'test_super_full_source_candidate.py' -v
+          python -m unittest discover -s tests -p 'test_super_private_storage_retry.py' -v
           python -m scripts.verify_super_full_source_candidate \
             --source current-source --source-sha "$PINNED_MAIN_SHA" \
             --city RISHON --output "$RUNNER_TEMP/rishon-current-private-candidate"
