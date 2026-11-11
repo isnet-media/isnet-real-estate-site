@@ -7950,6 +7950,319 @@
         "data/photo-bank/runs.json",
         "data/photo-bank/quality-issues.json"
       ]
+    },
+    {
+      "owner_automation_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "runKey": "photo-bank-2026-11-11-23:55",
+      "run_id": "aaff441c-92c8-832e-8b32-7e3242b6669c",
+      "run_identity_evidence": {
+        "source": "targeted automation peek",
+        "last_run_id": "aaff441c-92c8-832e-8b32-7e3242b6669c",
+        "scheduled_for": "2026-11-11T21:55:00Z",
+        "started_at": "2026-11-11T21:55:04.464000Z",
+        "is_self_owned_automation": false,
+        "note": "Targeted run is observed in_progress. Self attribution to this shared session is not established by peek; this is a scoped work/evidence record, not a claim that completed means published."
+      },
+      "checked_at": "2026-11-11T22:16:48Z",
+      "status": "partial_live_verification_and_source_framing_repair_pending_deployment",
+      "scope": "Photos and visual QA only; no news research or writer publication performed.",
+      "source_opened_commit": "2cd2676a26c552495182a665e28243a74c054bec",
+      "source_commit": "39df73694b0b8a7306177a7b031efa7b24b9e8b9",
+      "source_remote_head_verified": true,
+      "documentation_read": [
+        "public/news/AGENT_OPERATIONS.md",
+        "public/photo-bank/COLLECTOR.md",
+        "public/photo-bank/PUBLICATION_POLICY.md",
+        "public/news/agents/real-estate/WRITER.md recovery only",
+        "data/photo-bank.json",
+        "data/photo-bank/news-requests.json",
+        "data/photo-bank/runs.json",
+        "data/photo-bank/sources.json",
+        "data/photo-bank/categories.json",
+        "data/photo-bank/presentation.json",
+        "scripts/audit-image-quality.py",
+        "data/photo-bank/quality-issues.json"
+      ],
+      "documentation_limitations": [
+        "AGENTS.md not present in selected source root; no permissions or lock rules invented."
+      ],
+      "desk_read": {
+        "url": "https://tlvnet.com/api/briefs-writer?view=desk",
+        "http": 200,
+        "role": "Compact operational view only; stale waiting_image entries not treated as current approval state."
+      },
+      "live_collector": {
+        "http": 200,
+        "keys": [
+          "items",
+          "categories",
+          "facets",
+          "checked_at",
+          "collector",
+          "usage"
+        ],
+        "collector": {
+          "enabled": true,
+          "cadence": "daily",
+          "instructions": "/photo-bank/COLLECTOR.md"
+        },
+        "blockedIds": null,
+        "count": 151
+      },
+      "existing_publications_verified": [
+        {
+          "id": "south-tlv-bus-diversions-extended-night-20261111",
+          "status": "published",
+          "section": "news",
+          "published_at": "2026-11-11T20:59:00Z",
+          "photo_bank_id": "bus-diversion-planning-ai-20261111",
+          "url": "https://tlvnet.com/news/south-tlv-bus-diversions-extended-night-20261111",
+          "http": 200,
+          "content_type": "text/html",
+          "home_link": true,
+          "section_link": true,
+          "body_blocks_match": true,
+          "body_sha256": "ef3da8b5939b1141edb42d42458c1d96ef4981595d6eeae0d34ddaed79b3b2e8",
+          "image_review_status": "approved",
+          "review_current": true,
+          "image_src": "/photo-bank/assets/bus-diversion-planning-ai-20261111.jpg",
+          "image_http": 200,
+          "image_content_type": "image/jpeg",
+          "image_present": true,
+          "image_sha256": "a76c1deb7677d35890cb3c82c3b6e49b5eaab18d91d9f23e94bbbc6478de0d3f",
+          "image_matches_source": true,
+          "credit_present": true,
+          "credit": "אילוסטרציה – AI",
+          "publication_state": "published_verified",
+          "photo_quality_state": "pending_section_framing_fix",
+          "desktop_article_viewed": true,
+          "mobile_article_viewed": true,
+          "desktop_section_card_viewed": true,
+          "mobile_section_card_viewed": true
+        },
+        {
+          "id": "tlv-infrastructure-water-roadworks-november-20261111",
+          "status": "published",
+          "section": "news",
+          "published_at": "2026-11-11T20:59:00Z",
+          "photo_bank_id": "planned-water-maintenance-ai-2026",
+          "url": "https://tlvnet.com/news/tlv-infrastructure-water-roadworks-november-20261111",
+          "http": 200,
+          "content_type": "text/html",
+          "home_link": true,
+          "section_link": true,
+          "body_blocks_match": true,
+          "body_sha256": "533ff720f45ff8c063845503c4aec4047aaee9a2c942cb5054936e989bb9f194",
+          "image_review_status": "approved",
+          "review_current": true,
+          "image_src": "/photo-bank/assets/planned-water-maintenance-ai-2026.jpg",
+          "image_http": 200,
+          "image_content_type": "image/jpeg",
+          "image_present": true,
+          "image_sha256": "5552c9d6154bcb5878f9f060e9d6654896f4399a4e81db9c551a1fe958a95229",
+          "image_matches_source": true,
+          "credit_present": true,
+          "credit": "אילוסטרציה – AI",
+          "publication_state": "published_verified",
+          "photo_quality_state": "pending_section_framing_fix",
+          "desktop_article_viewed": true,
+          "mobile_article_viewed": true,
+          "desktop_section_card_viewed": true,
+          "mobile_section_card_viewed": true
+        },
+        {
+          "id": "tel-aviv-children-film-festival-20261204",
+          "status": "published",
+          "section": "culture-news",
+          "published_at": "2026-11-11T16:55:00Z",
+          "photo_bank_id": "flash90-F260603MA011",
+          "url": "https://tlvnet.com/news/tel-aviv-children-film-festival-20261204",
+          "http": 200,
+          "content_type": "text/html",
+          "home_link": true,
+          "section_link": true,
+          "body_blocks_match": true,
+          "body_sha256": "8693cd307c4dd04119b414de7567517ee83b5279bd5f4a0b5185732e183cadbe",
+          "image_review_status": "approved",
+          "review_current": true,
+          "image_src": "/photo-bank/assets/flash90-F260603MA011.jpg",
+          "image_http": 200,
+          "image_content_type": "image/jpeg",
+          "image_present": true,
+          "image_sha256": "f08ea681eec92405ed884971954802aee04e6d51fff5801040c12724ba58e267",
+          "image_matches_source": true,
+          "credit_present": true,
+          "credit": "מרים אלסטר/פלאש 90",
+          "publication_state": "published_verified",
+          "photo_quality_state": "fixed_and_verified",
+          "desktop_article_viewed": true,
+          "mobile_article_viewed": true,
+          "desktop_section_card_viewed": true,
+          "mobile_section_card_viewed": true
+        }
+      ],
+      "publication_evidence": {
+        "new_publications_by_photo_desk": 0,
+        "previous_writer_publications_verified": 2,
+        "existing_article_correction_verified": 1,
+        "version568": {
+          "id": "appgdep_6af4e55f811081918b355c0088db9d58",
+          "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+          "title": "תל אביב נט — חדר המערכת",
+          "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_245ae8a0d7f08191981b9e0b2a271c22",
+          "type": "publish",
+          "status": "succeeded",
+          "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+          "has_mcp": false,
+          "screenshot_asset_pointer": null,
+          "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+          "failure_message": null,
+          "env_set_revision": 1,
+          "updated_at": "2026-11-11T22:00:16.941593+00:00"
+        },
+        "version567": {
+          "id": "appgdep_6af4e1d6d4dc819198f2e6e5feed09c2",
+          "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+          "title": "תל אביב נט — חדר המערכת",
+          "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_eab57079dad88191acd1bb62a459ff28",
+          "type": "publish",
+          "status": "succeeded",
+          "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+          "has_mcp": false,
+          "screenshot_asset_pointer": "sediment://file_00000000f4b88212b9a29f70ed7d4180",
+          "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+          "failure_message": null,
+          "env_set_revision": 1,
+          "updated_at": "2026-11-11T21:45:22.375807+00:00"
+        },
+        "original_festival_published_at_preserved": "2026-11-11T16:55:00Z"
+      },
+      "ready_unchanged_draft": {
+        "article_id": "tlv-startup-workspaces-hamigdal-haratzif-service-20261111",
+        "domain": "economy-tech",
+        "status": "image_approved_ready_to_publish",
+        "owner": "Automation_20ca7f765cf88191af46487bf3ef8063",
+        "body_sha256": "9ff2767f2cc7640a045e1fc2ef55c242c3062e86a6801a90d2e1048f8b13d9c8",
+        "selected_bank_id": "startup-workspace-concept-ai-20261111",
+        "first_blocked_at": "2026-11-11T20:22:36Z",
+        "approved_at": "2026-11-11T21:05:44.360823+00:00",
+        "last_attempt_at": "2026-11-11T22:16:48Z",
+        "approval_and_evidence_hashes_match": true,
+        "waiting_since_first_block_minutes": 114,
+        "ready_minutes": 71,
+        "threshold90minutesExceeded": true,
+        "threshold60minutesExceeded": true,
+        "next_action": "Writer consumes unchanged exact-body approval; coordinate publication with controller. No new photo request or reapproval needed.",
+        "note": "Existing writer release block recorded in desk; photo desk does not take over writer publication."
+      },
+      "visual_scope": {
+        "unique_renderings_inspected": 16,
+        "live_article_views": 6,
+        "live_section_card_views": 6,
+        "local_repair_preview_views": 4,
+        "desktop_live_viewport": 1348,
+        "desktop_preview_iframe": 1200,
+        "mobile_width": 390,
+        "mobile_type": "Responsive iframe, not physical handset",
+        "whole_site_clean_claimed": false
+      },
+      "audit": {
+        "pages_scanned": 396,
+        "overlapping_candidates": 216,
+        "summary": {
+          "duplicate_asset_in_section": 4,
+          "explicit_photo_approval_pending": 114,
+          "portrait_or_poster_needs_framing_review": 7,
+          "rendered_visual_review_pending": 2,
+          "specific_subject_photo_pending": 89
+        },
+        "scope": "Source candidates, not216confirmed defects"
+      },
+      "repair": {
+        "owner_automation_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+        "runKey": "photo-bank-2026-11-11-23:55",
+        "run_id": "aaff441c-92c8-832e-8b32-7e3242b6669c",
+        "signature": "TLVNET|photo-bank|newsroom section cards|reviewed framing not applied",
+        "status": "source_fixed_prepared_tests_passed_pending_coordinated_deployment",
+        "article_ids": [
+          "south-tlv-bus-diversions-extended-night-20261111",
+          "tlv-infrastructure-water-roadworks-november-20261111"
+        ],
+        "domain": "photo-bank / section-card presentation",
+        "owner": "Photo desk owns framing repair; active operations controller owns release coordination",
+        "first_blocked_at": "2026-11-11T22:16:48Z",
+        "first_blocked_at_note": "First recorded release block for this new finding; production onset and exact earlier screenshot capture time unknown.",
+        "last_attempt_at": "2026-11-11T22:16:48Z",
+        "next_attempt_at": null,
+        "evidence": {
+          "url": "https://tlvnet.com/news/",
+          "live_version": 568,
+          "live_frame": {
+            "viewport": 390,
+            "box": [
+              115,
+              100
+            ],
+            "object_fit": "cover",
+            "object_position": "50% 50%",
+            "review_attribute": null
+          },
+          "expected": "Existing hash-matched contain decisions for bus and water images; complete frame must survive section support-card crop",
+          "source_before": "2cd2676a26c552495182a665e28243a74c054bec"
+        },
+        "root_cause": "build-editorial emits newsroom-card-photo/lead-photo markup. Existing image_presentation applied only .card .photo img and polish invoked it only on home pages. Responsive section CSS consequently center-covered reviewed assets.",
+        "repair": "Apply only existing hash-validated asset decisions to newsroom lead/card images, preserving responsive frame dimensions, unrelated inline styles, separate credits and unreviewed images. Invoke during news-page final polish. Add idempotence/isolation and actual prepared-section-output regression checks.",
+        "source_commit": "39df73694b0b8a7306177a7b031efa7b24b9e8b9",
+        "preliminary_helper_commit": "6cbd7d962de8c2eda305b4fb7a58e61fc4c60440",
+        "tests": {
+          "old_behavior_reproduced": true,
+          "check-photo-bank": "passed150JPGs",
+          "image-presentation": "passed incl actual prepared section markup",
+          "news-image-registry": "passed",
+          "news-photos": "passed",
+          "prepare-public": "passed final full run after polish wiring",
+          "git_diff_check": "passed",
+          "preview": "Actually viewed both bus/water section cards at1200 and390; complete images and exact AI credits; computed contain in115x100 mobile frames"
+        },
+        "deployment": {
+          "requested_by_photo_desk": false,
+          "status": "pending_release_coordination",
+          "active_controller": {
+            "id": "6fe1820b-03bc-8322-9321-81f022617f83",
+            "recorded_status": "in_progress",
+            "scheduled_for": "2026-11-11T21:58:00Z",
+            "started_at": "2026-11-11T21:54:20.796481Z",
+            "completed_at": null,
+            "chat_ref": null
+          },
+          "active_run_is_not_a_git_lock": true,
+          "reason": "Existing operations-controller release coordination is in progress; source repair and prepared snapshot handed off in this canonical operational journal. No parallel Site deployment started."
+        },
+        "next_action": "Controller integrates current remote39df7369 (or successor preserving repair), checks active deployment/ownership, publishes one coordinated version and verifies actual newsroom cards at390/desktop, article images/credits and home/section links. Do not mark framing fixed_and_verified before that.",
+        "professional_image_approvals_preserved": true,
+        "new_asset_count": 0,
+        "author_text_status_publication_dates_changed": false
+      },
+      "checks": {
+        "old_behavior_reproduced": true,
+        "check-photo-bank": "passed150JPGs",
+        "image-presentation": "passed incl actual prepared section markup",
+        "news-image-registry": "passed",
+        "news-photos": "passed",
+        "prepare-public": "passed final full run after polish wiring",
+        "git_diff_check": "passed",
+        "preview": "Actually viewed both bus/water section cards at1200 and390; complete images and exact AI credits; computed contain in115x100 mobile frames"
+      },
+      "transient_source_access": {
+        "initial_fetch": "HTTP503 before commit or push",
+        "retry": "One normal retry succeeded; remote HEAD verified. No retry loop or deployment attempt."
+      },
+      "new_image_approvals": 0,
+      "new_assets": 0,
+      "duplicate_requests_created": 0,
+      "deployment_requested": false,
+      "schedules_or_enablement_changed": false,
+      "daily_audit_completed": false
     }
   ],
   "incident_register": [
@@ -8501,7 +8814,7 @@
       "runKey": "ops-controller-2026-11-11-20:58",
       "run_id": "dff3dab6-0844-8326-94db-2c2eaeb307c6",
       "signature": "TLVNET|photo-bank|queue-generation|pending-correction-request-erased",
-      "status": "source_fixed_request_restored_pending_professional_review",
+      "status": "closed_corrected_body_published_verified",
       "article_id": "tel-aviv-children-film-festival-20261204",
       "domain": "culture-news correction queue",
       "owner": "Operational controller owns queue repair; photo editor owns approval; culture writer owns publication",
@@ -8535,7 +8848,109 @@
         "owner": "Automation_547bb40a554c819184ab07a7de64a4b2",
         "next_action": "Culture writer integrates corrected lead/body and this matching approval, preserves original published_at, runs generators/gates and verifies live article/image/credit/card/home.",
         "checked_at": "2026-11-11T20:02:52.898690+00:00"
+      },
+      "publication_followup": {
+        "owner_automation_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+        "runKey": "photo-bank-2026-11-11-23:55",
+        "run_id": "aaff441c-92c8-832e-8b32-7e3242b6669c",
+        "checked_at": "2026-11-11T22:16:48Z",
+        "status": "fixed_and_verified",
+        "version": 568,
+        "deployment_id": "appgdep_6af4e55f811081918b355c0088db9d58",
+        "body_sha256": "8693cd307c4dd04119b414de7567517ee83b5279bd5f4a0b5185732e183cadbe",
+        "source_commit": "2cd2676a26c552495182a665e28243a74c054bec",
+        "verification": {
+          "id": "tel-aviv-children-film-festival-20261204",
+          "status": "published",
+          "section": "culture-news",
+          "published_at": "2026-11-11T16:55:00Z",
+          "photo_bank_id": "flash90-F260603MA011",
+          "url": "https://tlvnet.com/news/tel-aviv-children-film-festival-20261204",
+          "http": 200,
+          "content_type": "text/html",
+          "home_link": true,
+          "section_link": true,
+          "body_blocks_match": true,
+          "body_sha256": "8693cd307c4dd04119b414de7567517ee83b5279bd5f4a0b5185732e183cadbe",
+          "image_review_status": "approved",
+          "review_current": true,
+          "image_src": "/photo-bank/assets/flash90-F260603MA011.jpg",
+          "image_http": 200,
+          "image_content_type": "image/jpeg",
+          "image_present": true,
+          "image_sha256": "f08ea681eec92405ed884971954802aee04e6d51fff5801040c12724ba58e267",
+          "image_matches_source": true,
+          "credit_present": true,
+          "credit": "מרים אלסטר/פלאש 90"
+        },
+        "visual_review": "Actual live card/article desktop and390; full frame and archive/photographer attribution visible.",
+        "new_publication_by_photo_desk": false
       }
+    },
+    {
+      "owner_automation_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "runKey": "photo-bank-2026-11-11-23:55",
+      "run_id": "aaff441c-92c8-832e-8b32-7e3242b6669c",
+      "signature": "TLVNET|photo-bank|newsroom section cards|reviewed framing not applied",
+      "status": "source_fixed_prepared_tests_passed_pending_coordinated_deployment",
+      "article_ids": [
+        "south-tlv-bus-diversions-extended-night-20261111",
+        "tlv-infrastructure-water-roadworks-november-20261111"
+      ],
+      "domain": "photo-bank / section-card presentation",
+      "owner": "Photo desk owns framing repair; active operations controller owns release coordination",
+      "first_blocked_at": "2026-11-11T22:16:48Z",
+      "first_blocked_at_note": "First recorded release block for this new finding; production onset and exact earlier screenshot capture time unknown.",
+      "last_attempt_at": "2026-11-11T22:16:48Z",
+      "next_attempt_at": null,
+      "evidence": {
+        "url": "https://tlvnet.com/news/",
+        "live_version": 568,
+        "live_frame": {
+          "viewport": 390,
+          "box": [
+            115,
+            100
+          ],
+          "object_fit": "cover",
+          "object_position": "50% 50%",
+          "review_attribute": null
+        },
+        "expected": "Existing hash-matched contain decisions for bus and water images; complete frame must survive section support-card crop",
+        "source_before": "2cd2676a26c552495182a665e28243a74c054bec"
+      },
+      "root_cause": "build-editorial emits newsroom-card-photo/lead-photo markup. Existing image_presentation applied only .card .photo img and polish invoked it only on home pages. Responsive section CSS consequently center-covered reviewed assets.",
+      "repair": "Apply only existing hash-validated asset decisions to newsroom lead/card images, preserving responsive frame dimensions, unrelated inline styles, separate credits and unreviewed images. Invoke during news-page final polish. Add idempotence/isolation and actual prepared-section-output regression checks.",
+      "source_commit": "39df73694b0b8a7306177a7b031efa7b24b9e8b9",
+      "preliminary_helper_commit": "6cbd7d962de8c2eda305b4fb7a58e61fc4c60440",
+      "tests": {
+        "old_behavior_reproduced": true,
+        "check-photo-bank": "passed150JPGs",
+        "image-presentation": "passed incl actual prepared section markup",
+        "news-image-registry": "passed",
+        "news-photos": "passed",
+        "prepare-public": "passed final full run after polish wiring",
+        "git_diff_check": "passed",
+        "preview": "Actually viewed both bus/water section cards at1200 and390; complete images and exact AI credits; computed contain in115x100 mobile frames"
+      },
+      "deployment": {
+        "requested_by_photo_desk": false,
+        "status": "pending_release_coordination",
+        "active_controller": {
+          "id": "6fe1820b-03bc-8322-9321-81f022617f83",
+          "recorded_status": "in_progress",
+          "scheduled_for": "2026-11-11T21:58:00Z",
+          "started_at": "2026-11-11T21:54:20.796481Z",
+          "completed_at": null,
+          "chat_ref": null
+        },
+        "active_run_is_not_a_git_lock": true,
+        "reason": "Existing operations-controller release coordination is in progress; source repair and prepared snapshot handed off in this canonical operational journal. No parallel Site deployment started."
+      },
+      "next_action": "Controller integrates current remote39df7369 (or successor preserving repair), checks active deployment/ownership, publishes one coordinated version and verifies actual newsroom cards at390/desktop, article images/credits and home/section links. Do not mark framing fixed_and_verified before that.",
+      "professional_image_approvals_preserved": true,
+      "new_asset_count": 0,
+      "author_text_status_publication_dates_changed": false
     }
   ],
   "agent_efficiency": {
