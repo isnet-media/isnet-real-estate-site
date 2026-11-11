@@ -27,7 +27,7 @@ def call(url, method, secret, body=None, content_type=None):
     with urlopen(req, timeout=45) as response:
         return response.status, response.read()
 
-def publish(city):
+def publish(city, release_override=None):
     if city not in ALLOWED_CITIES: raise ValueError("City not yet approved for full-stage pilot")
     base=os.getenv("SUPABASE_URL","").rstrip("/")
     token=os.getenv("SUPABASE_SERVICE_ROLE_KEY","")
@@ -38,7 +38,18 @@ def publish(city):
     paths=sorted(p for p in root.rglob("*") if p.is_file())
     if not 100<=len(paths)<=250: raise RuntimeError("Unexpected city file count")
     if any(p.is_symlink() for p in root.rglob("*")): raise RuntimeError("Symlink in city source")
-    release=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
+    head=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
+    release=release_override or head
+    if release_override:
+        if len(release)!=40 or any(ch not in "0123456789abcdef" for ch in release):
+            raise RuntimeError("Invalid release SHA")
+        def tree(commit):
+            return subprocess.check_output(
+                ["git","rev-parse",commit+":SUPER."+city],cwd=ROOT,text=True
+            ).strip()
+        if tree(head)!=tree(release):
+            raise RuntimeError("City sources changed since requested release; refusing reuse")
+
     manifest=[]
     for p in paths:
         data=p.read_bytes()
@@ -56,15 +67,30 @@ def publish(city):
         url=base+"/storage/v1/object/"+BUCKET+"/"+quote(object_name,safe="/")
         content_type=mime
         checksum=hashlib.sha256(data).hexdigest()
-        try:
-            result,_=call(url,"POST",token,data,content_type)
-            if result not in (200,201): raise RuntimeError("Storage write returned unexpected status")
-        except HTTPError as ex:
-            if ex.code != 409: raise RuntimeError("Storage write failed HTTP "+str(ex.code)) from None
         read_url=base+"/storage/v1/object/authenticated/"+BUCKET+"/"+quote(object_name,safe="/")
-        status,got=call(read_url,"GET",token)
-        if status!=200 or hashlib.sha256(got).hexdigest()!=checksum:
-            raise RuntimeError("Read-back mismatch: "+relative)
+        def verified_existing():
+            try:
+                status,existing=call(read_url,"GET",token)
+            except HTTPError as ex:
+                if ex.code==404: return False
+                raise RuntimeError("Private read failed for "+relative+" HTTP "+str(ex.code)) from None
+            if status!=200 or hashlib.sha256(existing).hexdigest()!=checksum:
+                raise RuntimeError("Immutable object mismatch; refusing overwrite: "+relative)
+            return True
+        if not verified_existing():
+            try:
+                result,_=call(url,"POST",token,data,content_type)
+                if result not in (200,201):
+                    raise RuntimeError("Unexpected upload status for "+relative)
+            except HTTPError as ex:
+                body=ex.read().decode("utf-8","replace")[:350]
+                # Storage sometimes reports an already-existing object as HTTP 400.
+                # Accept an ambiguous conflict ONLY after a read-back SHA256 match.
+                if ex.code not in (400,409) or not verified_existing():
+                    raise RuntimeError("Upload failed "+relative+" HTTP "+
+                                       str(ex.code)+" "+body) from None
+            if not verified_existing():
+                raise RuntimeError("Upload missing after success: "+relative)
         manifest.append({"path":relative,"sha256":checksum,"bytes":len(data)})
     report={"city":city,"release":release,"files_verified":len(manifest),
             "bytes_verified":sum(x["bytes"] for x in manifest),
@@ -82,4 +108,6 @@ def publish(city):
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
     parser.add_argument("--city",required=True,choices=ALLOWED_CITIES)
-    publish(parser.parse_args().city)
+    parser.add_argument("--release",help="Reuse private release only if city Git tree is identical")
+    options=parser.parse_args()
+    publish(options.city, options.release)
