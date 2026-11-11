@@ -13,6 +13,10 @@ from pathlib import Path
 
 CITIES = ("ASHDOD", "YAVNE", "KGAT", "RISHON", "HOLON", "BATYAM", "TLV")
 REQUIRED = ("data/catalog.json", "data/prices.json", "data/refresh-status.json")
+# Shared repo-owned JavaScript explicitly referenced by /SUPER.YAVNE/*.html as
+# /assets/yavne-analytics.js. Keep the canonical /SUPER.YAVNE/ route intact.
+# Do NOT automatically bundle third-party images, fonts or unreviewed assets.
+ROOT_SCRIPT_DEPENDENCIES = {"YAVNE": ("assets/yavne-analytics.js",)}
 
 def stage_city(root: Path, output: Path, city: str):
     if city not in CITIES:
@@ -32,8 +36,21 @@ def stage_city(root: Path, output: Path, city: str):
             raise ValueError("Missing required data: " + name)
         with p.open(encoding="utf-8") as handle:
             json.load(handle)  # validation only; original bytes preserved
+    dependencies = ROOT_SCRIPT_DEPENDENCIES.get(city, ())
+    for rel in dependencies:
+        shared = root / rel
+        if not shared.is_file() or shared.is_symlink() or shared.parent.is_symlink():
+            raise ValueError("Missing or unsafe first-party script dependency: " + rel)
     output.mkdir(parents=True)
     shutil.copytree(source, destination)
+    # Only in the disposable release artifact, never in the source tree.
+    # The archive root must be served with /SUPER.YAVNE/ and /assets/ paths.
+    for rel in dependencies:
+        target = output / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if target.exists():
+            raise ValueError("Refusing to overwrite a staged first-party dependency")
+        shutil.copyfile(root / rel, target)
     manifest = []
     for path in sorted(destination.rglob("*")):
         if not path.is_file():
@@ -49,6 +66,9 @@ def stage_city(root: Path, output: Path, city: str):
         "file_count": len(manifest),
         "payload_bytes": sum(x["bytes"] for x in manifest),
         "price_data_preserved": True,
+        "first_party_root_scripts": list(dependencies),
+        "required_site_prefix": "/SUPER.YAVNE/" if city == "YAVNE" else None,
+        "asset_rights_and_browser_acceptance_unverified": True,
         "standalone_artifact_not_production_deployment": True,
         "files": manifest,
     }
