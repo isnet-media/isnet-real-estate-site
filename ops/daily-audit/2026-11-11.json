@@ -7,7 +7,7 @@
   "run_id": "63c0c639-8134-832a-983a-77226dfbbfc2",
   "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
   "started_at": "2026-11-10T21:59:40.411774Z",
-  "checked_at": "2026-11-10T22:01:40Z",
+  "checked_at": "2026-11-11T02:03:08Z",
   "status": "partial",
   "daily_audit_completed": false,
   "previous_audit": {
@@ -1214,6 +1214,255 @@
           "notification": "no_update"
         }
       ]
+    },
+    {
+      "runKey": "photo-bank-2026-11-11-03:55",
+      "run_id": "f118464f-9728-8322-bbec-88b413be947e",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "started_at": "2026-11-11T01:54:41.012512Z",
+      "checked_at": "2026-11-11T02:03:08Z",
+      "status": "inspected_pending_duplicate_repair",
+      "source_base": "6ca068c084c719e2f6788a7abdb615904a14659a",
+      "queue": {
+        "audit_rerun": true,
+        "pages": 384,
+        "overlapping_candidates": 222,
+        "summary": {
+          "duplicate_asset_in_section": 9,
+          "explicit_photo_approval_pending": 115,
+          "portrait_or_poster_needs_framing_review": 7,
+          "rendered_visual_review_pending": 3,
+          "specific_subject_photo_pending": 88
+        },
+        "closed": 0,
+        "card_reviews": 2,
+        "new_assets": 0
+      },
+      "inspections": [
+        {
+          "url": "https://tlvnet.com/",
+          "section": "מה עושים עם הילדים?",
+          "cards": [
+            {
+              "title": "מופעים ופעילויות",
+              "href": "/guide/category?category=kids#cards"
+            },
+            {
+              "title": "מוזיאונים וחוויות",
+              "href": "/guide/category?category=kids&activity=discovery#kidsAttractions"
+            }
+          ],
+          "asset": "/guide/assets/attractions/illusions.jpg",
+          "asset_sha256": "1efb59c2aca3cd975fe2d5f5334231ca0e08a190cb307bbd8966d75c1c43c9ba",
+          "dimensions": [
+            1280,
+            853
+          ],
+          "original_visual_review": true,
+          "original_observation": "Actually viewed blue walk-in kaleidoscope scene with person/reflections. Local JPEG intact; no newly observed facial clipping in original. This does not establish card framing.",
+          "live_HTML_duplicate_verified": true,
+          "credit_in_live_HTML": "צילום/תמונת קידום: מוזיאון האשליות",
+          "source_record": "public/guide/data/kids-places.json#kids-illusions",
+          "recorded_rights": "user_confirmed_organizer_publicity (existing record, not a new license approval)",
+          "source_URL": "https://museumofillusions.co.il/wp-content/uploads/2026/03/Walk-in-Kaleidoscope-4200x2800-compressed.jpg",
+          "cause": "scripts/home_section_navigation.py explicitly assigns byid['kids-illusions'] to both card01 and03, lines89/91. Regenerating HTML retains duplicate.",
+          "subject_assessment": "Museum image fits museum/experience navigation. Broad shows/activity navigation not proven a specific event mismatch. Duplicate confirmed by asset/hash and live markup; no fabricated event-image assignment.",
+          "status": "pending",
+          "proposed_action": "Keep museum photograph for museums/experiences; select and review a distinct authorized shows/activity asset at source generator, then verify desktop/mobile before closure.",
+          "rendered_desktop_visual": false,
+          "rendered_mobile_visual": false
+        }
+      ],
+      "live_reads": [
+        {
+          "url": "https://tlvnet.com/api/photo-bank",
+          "http": 200,
+          "items": 122,
+          "collector_enabled": true,
+          "blockedIds": "not exposed in this API result"
+        },
+        {
+          "url": "https://tlvnet.com/home.html",
+          "http": 200
+        },
+        {
+          "url": "https://tlvnet.com/guide/category?category=kids",
+          "http": 200,
+          "note": "Read server HTML only; dynamic cards are client-loaded, not counted as rendered visual inspection."
+        }
+      ],
+      "blockers": {
+        "source_write": "Parallel main and culture runs active; cross-environment Work/project write exclusivity not verified. No shared source changes or build.",
+        "rendering": "Known browser ERR_BLOCKED_BY_CLIENT unchanged; cooldown until2026-11-11T03:02:00Z respected, no identical retry."
+      },
+      "previous_candidate": {
+        "id": "rental-offers-keys-ai-20261111",
+        "status": "pending_prepared_not_published",
+        "new_generation": false
+      },
+      "source_mutations": 0,
+      "verified_assets_added": 0,
+      "builds": 0,
+      "deployments": [],
+      "next_cursor": "Kids duplicate diagnosed; choose distinct authorized shows/activity asset after ownership access. Continue seniors duplicate group next; retain rental candidate and prior culture/community pending work."
+    },
+    {
+      "runKey": "ops-controller-2026-11-11-03:58",
+      "run_id": "b876550b-c060-832a-9856-3c4ddf865a5d",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "started_at": "2026-11-11T01:56:37.526659Z",
+      "checked_at": "2026-11-11T02:03:08Z",
+      "status": "partial_changed_runs_reconciled",
+      "daily_audit_completed": false,
+      "inventory": {
+        "total": 25,
+        "enabled": 12,
+        "paused": 13,
+        "source": "Fresh peek metadata; no arbitrary17-task cap. No paused task changed."
+      },
+      "routing": {
+        "signature": "TLVNET|main+safe culture task results|wrong-domain identical real-estate text",
+        "status": "open_recurrence_same_signature",
+        "result_text_exact_equal": true,
+        "results": [
+          {
+            "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+            "current_run": {
+              "id": "fa23dfcc-72c0-8325-90b2-111883081dde",
+              "recorded_status": "in_progress",
+              "scheduled_for": "2026-11-11T02:00:00Z",
+              "started_at": "2026-11-11T01:55:22.958927Z",
+              "completed_at": null,
+              "chat_ref": null
+            },
+            "latest_result_run": "cfb3a7c5-5a80-8325-90ad-c86bdf37946e",
+            "result_created_at": "2026-11-11T01:14:16.997745Z",
+            "result_completed_at": "2026-11-11T01:14:18.609433Z"
+          },
+          {
+            "owner": "Automation_547bb40a554c819184ab07a7de64a4b2",
+            "current_run": {
+              "id": "8fbcf08c-bb20-8326-9f2a-56af9c2dd7f8",
+              "recorded_status": "in_progress",
+              "scheduled_for": "2026-11-11T01:50:00Z",
+              "started_at": "2026-11-11T01:51:26.765020Z",
+              "completed_at": null,
+              "chat_ref": null
+            },
+            "latest_result_run": "6e661f30-8b54-8326-8f7e-a3f959dd23e2",
+            "result_created_at": "2026-11-11T01:14:18.152801Z",
+            "result_completed_at": "2026-11-11T01:14:19.081794Z"
+          },
+          {
+            "owner": "Automation_851de24df7448191a034009b74fc236f",
+            "current_run": {
+              "id": "37ac449b-8ea0-8329-b39b-76a6caf314a7",
+              "recorded_status": "completed",
+              "scheduled_for": "2026-11-11T01:10:00Z",
+              "started_at": "2026-11-11T01:09:43.739670Z",
+              "completed_at": "2026-11-11T01:14:18.646705Z",
+              "chat_ref": {
+                "type": "chatgpt",
+                "id": "6aefdb39-abc0-83eb-8456-ece124ccedbf"
+              }
+            },
+            "latest_result_run": "37ac449b-8ea0-8329-b39b-76a6caf314a7",
+            "result_created_at": "2026-11-11T01:14:17.159126Z",
+            "result_completed_at": "2026-11-11T01:14:18.646705Z"
+          }
+        ],
+        "interpretation": "Main cfb3 and culture6e661 prior completed results are byte-identical to real-estate37ac. Their newer fa23/8fbc runs are active; old result is not their outcome. No completed news/sports/culture claimed.",
+        "root_cause": "Cross-task result association observed; backend task/session assignment cause remains unverified. Worker logs are now accessible but are Site HTTP logs, not task-routing infrastructure logs.",
+        "safe_repair": "No prompt/enablement/environment mutation presented as a repair. Need supported routing/assignment inspection and exclusive write verification; no duplicate run invoked.",
+        "owner": "operational-controller",
+        "next_attempt_at": "2026-11-11T02:58:00Z",
+        "early_condition": "Changed source/access/ownership or own newly completed readable domain results."
+      },
+      "photo_handoff": {
+        "run_id": "f118464f-9728-8322-bbec-88b413be947e",
+        "status": "in_progress_concrete_inspection_checkpoint_saved",
+        "evidence_runKey": "photo-bank-2026-11-11-03:55",
+        "inspected_cards": 2,
+        "fixed_and_verified": 0,
+        "latest_result_run": "427fbf10-6834-8322-962d-3ae80325eaa2",
+        "interpretation": "Earlier correct photo result retained as prior result, not substituted for active run. Photo checkpoint has URLs/original image/hash/root generator evidence."
+      },
+      "Herzliya_Raanana": {
+        "owner_run": "5da901d9-9cb8-8332-9feb-14be23a46d31",
+        "status": "owner_no_update_with_blockers_received",
+        "owner_sources_checked": 4,
+        "owner_topics_per_city": 3,
+        "new_publications": 0,
+        "headline_replacements": 0,
+        "reported_live_heads": {
+          "website62": "1and8November",
+          "website59": "April–June2026"
+        },
+        "reported_admin_get_post": "empty after cooldown",
+        "prior_independent_admin_get_post_reads": "811092/811093 read successfully in prior controller checkpoint; owner-specific empty results remain an access/context issue, not proof all admin get_post calls fail.",
+        "controller_repeated_editorial_source_scan": false,
+        "handoff_receipt": "Recorded here in existing operational journal; not a CMS/headline repair.",
+        "next_attempt_at": "2026-11-11T07:05:00Z",
+        "missing_interfaces": [
+          "Owner's working get_post context",
+          "authorized homepage block administration",
+          "parallel Work lock/exclusivity"
+        ]
+      },
+      "workflows": {
+        "new_failed_created_after_2026_11_11_01UTC": 0,
+        "completed_health": [
+          42938123848,
+          42929640633,
+          42929640583,
+          42928168347,
+          42928168137
+        ],
+        "latest_observed_publish": {
+          "id": 42929364086,
+          "status": "completed",
+          "conclusion": "success",
+          "source_commit": "742fd764e6150092f6d8264f8e1accbe20cca4fb",
+          "controller_public_readback_this_cycle": false
+        },
+        "no_dispatch": true
+      },
+      "Site": {
+        "latest_version": 538,
+        "deployment_id": "appgdep_6af3637b05308191a8b50065f051b191",
+        "terminal_status": "succeeded",
+        "new_deployment": false,
+        "existing_Beit_Lessin_gap": "Open; no new published version. No repeated articleHTTP probe.",
+        "worker_logs": {
+          "read": true,
+          "observed_article_404_times": [
+            "2026-11-11T00:05:01.587Z",
+            "2026-11-11T00:06:03.777Z"
+          ],
+          "invocation_outcome": "ok",
+          "interpretation": "Worker observed404 without crash outcome; consistent with missing published static article, not proof of fixed route.",
+          "new_identityless_requests": "01:57UTC: workspace401; team/publication/database-backup404. 404 is not evidence these nonexistent paths enforce authorization; no security pass claimed from them."
+        }
+      },
+      "source": {
+        "local_base": "6ca068c084c719e2f6788a7abdb615904a14659a",
+        "fresh_remote_HEAD_this_cycle": false,
+        "controller_draft_sha256": "bddffbb9f18bfd0174347407c9252598618c278f54b8089d4d19604d2510a3f3",
+        "draft_unchanged": true,
+        "AGENTS_OPERATIONS": "Absent in local source/root and GitHub operational root(404); exact missing documentation recorded. REPAIR and EFFICIENCY documents reread; no new build attempted."
+      },
+      "mutations": {
+        "operational_journal_only": true,
+        "CMS": 0,
+        "shared_source": 0,
+        "source_push": 0,
+        "collection": 0,
+        "build": 0,
+        "deploy": 0,
+        "task_state": 0,
+        "schedule": 0
+      },
+      "notification": "no_new_repair_or_new_signature; existing blockers remain open"
     }
   ],
   "incident_register": [
@@ -1239,7 +1488,8 @@
         "source_file_existed_before": false,
         "source_restored": "6ca068c084c719e2f6788a7abdb615904a14659a",
         "source_file_sha256": "0bcc13efd55e2dd94faf8dfd30051e0d21576f15e29c859ee180f394e07b82eb",
-        "site_version": 538
+        "site_version": 538,
+        "worker_HTTP_404_observed_without_crash": true
       },
       "root_cause": "Verified source/deployment gap: linked article HTML missing in prior source snapshot, restored by culture owner but not deployed. Why it was originally omitted/deleted is not yet established. Do not infer137 was caused by disk without kill/OOM logs.",
       "repair": "Culture owner restored HTML in remote6ca; controller synchronized exact remote via supported Sites helper and verified restored source text/title, image/body hash and selected ID. Existing controller draft preserved byte-for-byte. No publication claimed.",
@@ -1266,9 +1516,14 @@
         "Previous installer/build137 history remains; no same-input retry."
       ],
       "prevention": "After generators, assert every published news-card href resolves to a source file or valid dynamic route; validate packaged inclusion and liveHTTP200 before published status. Preserve text/photo dates, current image approval and full snapshot.",
-      "next_attempt_at": "2026-11-11T00:58:00Z",
+      "next_attempt_at": "2026-11-11T02:58:00Z",
       "controller_build_or_recovery_attempts": 0,
-      "deployments": []
+      "deployments": [],
+      "last_controller_observation_at": "2026-11-11T02:03:08Z",
+      "latest_owner_runs": {
+        "culture": "8fbcf08c-bb20-8326-9f2a-56af9c2dd7f8",
+        "main": "fa23dfcc-72c0-8325-90b2-111883081dde"
+      }
     }
   ]
 }
