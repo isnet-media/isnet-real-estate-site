@@ -97,3 +97,64 @@ collector commits before any eventual public traffic switchover.
 
 No paid upgrade, DNS change, collection replay or live route modification was
 performed to achieve this checkpoint.
+
+## Anonymous read-only shadow canary and verified rollback — 2026-11-11
+
+**This is not production cutover. The public city pages, collectors, DNS and
+published price routing were NOT changed.** A tightly scoped shadow HTTPS route
+was exercised and then disabled to prevent continued public serving or egress.
+
+- On 2026-11-11, all seven `SUPER.*` Git trees on `main` were equal to their
+  copies on PR #67's staging branch. This is a source-tree comparison, **not**
+  a claim that suppliers delivered today's prices.
+- A separate Edge Function `isnet-super-public-canary`, with
+  `verify_jwt=false`, was deployed to the existing `isnet-ai-cms` project.
+  Its live-data version exposed **only**
+  `city=YAVNE&file=prices.json&release=5958cfaca9a61eacfdb1aa216635c3d3ff810850`
+  from private Storage at the separate Supabase HTTPS URL, never via ISNET
+  production city URLs. It had no media paths, asset directories, directory
+  listing, user-selected Storage paths, or public service-role keys.
+- The canary required the pinned manifest and checked **SHA-256
+  `d0b3ffc01047f89bc08d34f652dc61de27cb16e4356db689594b2f824223072c`**,
+  exact source byte length, JSON validity, and the original retrieved timestamp
+  **2026-11-10T10:40:34.858582+02:00**; it returned explicit
+  `X-Isnet-Preview-Only`, `X-Isnet-Snapshot-At`, `X-Robots-Tag: noindex`,
+  and `Cache-Control: no-store` headers. It never labeled this snapshot as
+  newly collected data.
+- A real no-auth HTTPS test downloaded the Yavne JSON and verified `cmp`
+  and SHA-256 against the committed original. The CI also confirmed CORS
+  preflight, other cities/files/releases denied, POST denied, and anonymous
+  Storage bucket reads still blocked. **CI PASS:**
+  https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42984674737
+- The fail-closed service variant was deployed and tested *before* the public
+  probe (HTTP 503):
+  https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42984602491
+- **Immediately after the successful limited anonymous read, the Edge Function
+  was rolled back to the fail-closed variant (version 3).** Verified externally
+  by CI as **HTTP 503, no price bytes returned**:
+  https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42984762002
+  The private Storage bucket remains `public=false`. This proves a
+  *shadow-route emergency shutoff*, **not** a production reverse-proxy rollback.
+- The canary and shutoff sources are in
+  `supabase/functions/isnet-super-public-canary/{index.ts,rollback.ts}`.
+  The proof workflows are
+  `.github/workflows/super-public-canary-check.yml` and
+  `.github/workflows/super-public-canary-disable-proof.yml`.
+  Do not interpret a past public-probe PASS as current availability:
+  **the canary is intentionally disabled now**.
+
+### Outstanding production gates
+
+1. Serve **complete seven-city HTML/CSS/JS/fonts and permission-reviewed media**
+   through a separately capacity-bounded public origin/proxy, resolving all
+   existing relative URLs and ensuring TLS, CORS and mobile view parity.
+   Media without confirmed publication rights must not be served.
+2. Verify the incremental export of **only committed, approved collector output**
+   from `main` to private Storage, preserving source age and skipping any
+   unverified/failed source. Never introduce a second collection run.
+3. Document and execute the real same-URL traffic cutover and immediate rollback
+   for a low-risk city with a clean public baseline and asset checks. The
+   shadow-route HTTP 503 drill alone is insufficient.
+4. Keep PR #67 draft, Pages and current public site folders untouched until the
+   production routing/rollback acceptance tests pass. No paid upgrade or DNS
+   change was required for the shadow canary.
