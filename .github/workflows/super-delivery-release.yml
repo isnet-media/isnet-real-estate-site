@@ -1,0 +1,46 @@
+name: Publish validated independent supermarket release
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/super-delivery-release.yml'
+      - 'scripts/publish_super_delivery_release.py'
+      - 'SUPER.*/data/**'
+  workflow_run:
+    workflows:
+      - Refresh Ashdod supermarket prices
+      - Refresh Yavne supermarket prices
+      - Refresh Kiryat Gat supermarket prices
+      - Refresh Rishon supermarket prices
+      - Refresh Holon supermarket prices
+      - Refresh Bat Yam supermarket prices
+      - Refresh Tel Aviv supermarket prices
+      - Supermarket publication recovery
+      - Publish verified supermarket repair
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: supermarket-independent-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify existing read paths and city isolation
+        run: |
+          node scripts/test_super_live_loading.cjs
+          node scripts/test_super_city_lists.cjs
+          node scripts/test_super_comparison_page.cjs
+      - name: Verify all city releases and publish only the immutable pointer
+        run: python scripts/publish_super_delivery_release.py
