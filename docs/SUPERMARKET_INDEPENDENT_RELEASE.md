@@ -382,3 +382,57 @@ verification, working standalone TLV site, same-URL proxy cutover with
 The existing public host and collectors remain authoritative; PR #67 stays
 draft. This run did not run collectors, buy hosting, modify DNS/public URLs,
 open Storage ACLs, merge a PR or bypass CI/publication controls.
+
+
+## 2026-11-11 18:25 Israel — Pinned coherent KGAT current-main complete private storage pilot
+
+**Actual private staging completed; NOT a live/public release.** Chosen pilot:
+**KGAT** (six-city current-main candidates were already available; TLV remains
+an explicit blocker). New one-city, fail-closed workflow:
+`.github/workflows/super-current-kgat-private-pilot.yml`.
+Its target is the **existing** private `isnet-ai-cms` project and bucket
+`isnet-super-staging`, not a new hosting/billing project.
+
+- The pin is exact committed `main` SHA
+  `a71740f51803673d96367a8fa88c011e43e691f8`. One coherent city
+  source tree, including catalog and offer shards, was verified before staging;
+  the workflow checks its tree is still identical to current `main` and
+  refuses to upload if the source changes. Source provenance remains
+  `checked_at=2026-11-11T12:49:38.924043+02:00`; only **7/9** KGAT
+  branches refreshed; **2/9** retain their old prices. No age inflation.
+- [First full private pilot run 43056253982](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43056253982)
+  **SUCCEEDED**. It staged and authenticated-readback-SHA256-checked **all
+  200 original source files / 42,215,824 bytes**, plus an immutable signed-by-
+  hash inventory manifest. Private Storage SQL confirmed **201 objects /
+  42,250,379 bytes** (manifest 34,555 bytes) at
+  `releases/KGAT/a71740f51803673d96367a8fa88c011e43e691f8/`.
+  The baseline private KGAT version
+  `releases/KGAT/5958cfaca9a61eacfdb1aa216635c3d3ff810850/`
+  remains untouched (**201 objects**); it remains an available recovery
+  snapshot, **not evidence of production cutover rollback**.
+- [Idempotent readback rerun 43056513653](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43056513653)
+  also **SUCCEEDED**. The uploader now handles Storage 400/409 existing-manifest
+  conflicts *only if the authenticated manifest readback is byte-exact*.
+  Unexpected errors or mismatches still fail closed. No collector run.
+- **Security-test correction:** The very first pilot's isolated anonymous
+  probe erroneously omitted the actual `SUPER.KGAT/` subdirectory of the
+  private object path. That 400 response alone must **not** be treated as
+  sufficient proof of secure object blocking. The bucket is independently
+  verified `public=false`. A subsequent workflow version uses the existing
+  `verify_super_private_restoration.audit` to test the **correct**
+  `.../SUPER.KGAT/data/prices.json` path, verify authenticated critical
+  Storage readback, compare full-site manifest hashes with a disposable
+  Git-archive restoration, and save the result as a private CI artifact.
+  **At this note's creation that corrected independent audit is pending:**
+  [run 43057645887](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43057645887).
+  Do not call that last audit passed until its result is inspected.
+
+**Open production gates:** original private storage is in the shared CMS
+Supabase project (not an independent compute/failure domain); other five
+current complete city candidates remain CI-only, TLV is a nonfunctional
+redirect, media/font rights and full browser/mobile parity are unverified,
+a collector-owner-safe continual sync to a separately hosted public origin is
+not established, and same-URL production cutover/rollback has not been proven.
+The old public host remains authoritative. No DNS switch, traffic cutover,
+prices rewrite, duplicate collection, paid upgrade, or publication of
+unlicensed images was performed. PR #67 stays DRAFT.
