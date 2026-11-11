@@ -30,6 +30,13 @@ jobs:
           path: current-source
           fetch-depth: 1
           persist-credentials: false
+      - name: Checkout latest main separately for immutable city-tree comparison
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: latest-main
+          fetch-depth: 1
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -38,9 +45,8 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git -C current-source rev-parse HEAD)" = "$PINNED_MAIN_SHA"
-          git -C current-source fetch --quiet --depth=1 origin main
           OLD_TREE="$(git -C current-source rev-parse HEAD:SUPER.KGAT)"
-          NEW_TREE="$(git -C current-source rev-parse FETCH_HEAD:SUPER.KGAT)"
+          NEW_TREE="$(git -C latest-main rev-parse HEAD:SUPER.KGAT)"
           test "$OLD_TREE" = "$NEW_TREE" || { echo "::error::KGAT advanced since the approved immutable candidate; do not upload stale full-site files"; exit 1; }
           echo "Verified pinned main city tree: $OLD_TREE"
       - name: Validate original price-source provenance and build exact complete candidate
