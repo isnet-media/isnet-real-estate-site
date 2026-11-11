@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import subprocess
+import time
 from pathlib import Path
 from urllib.error import HTTPError
 from urllib.parse import quote
@@ -24,8 +25,47 @@ def call(url, method, secret, body=None, content_type=None):
                "User-Agent":"ISNET-private-super-release/1.0"}
     if content_type: headers["Content-Type"] = content_type
     req = Request(url, method=method, headers=headers, data=body)
-    with urlopen(req, timeout=45) as response:
-        return response.status, response.read()
+    # Retrying authenticated GETs is read-only. Never retry an upload here:
+    # a timeout/5xx can mean the object was actually created remotely.
+    for attempt in range(4 if method == "GET" else 1):
+        try:
+            with urlopen(req, timeout=45) as response:
+                return response.status, response.read()
+        except HTTPError as ex:
+            if method != "GET" or ex.code not in (429, 500, 502, 503, 504, 520, 522, 524) or attempt == 3:
+                raise
+            time.sleep(2 ** attempt)
+
+# Ambiguous transient server-side failures must be resolved by SHA-256
+# readback before another create-only POST. No UPSERT or existing-object edits.
+TRANSIENT_UPLOAD_CODES = (429, 500, 502, 503, 504, 520, 522, 524)
+
+def upload_immutable_verified(url, token, data, content_type, relative, verified_existing):
+    if verified_existing():
+        return
+    for attempt in range(4):
+        try:
+            result, _ = call(url, "POST", token, data, content_type)
+        except HTTPError as ex:
+            body = ex.read().decode("utf-8", "replace")[:350]
+            # Supabase create-only conflicts can be HTTP 400 or 409. A
+            # transient 520 may also hide a successful write. Both require
+            # a full authenticated checksum read before we may accept them.
+            if ex.code in (400, 409) or ex.code in TRANSIENT_UPLOAD_CODES:
+                if verified_existing():
+                    return
+                if ex.code in TRANSIENT_UPLOAD_CODES and attempt < 3:
+                    time.sleep(2 ** attempt)
+                    continue
+            raise RuntimeError(
+                "Upload failed " + relative + " HTTP " + str(ex.code) + " " + body
+            ) from None
+        if result not in (200, 201):
+            raise RuntimeError("Unexpected upload status for " + relative)
+        if verified_existing():
+            return
+        raise RuntimeError("Upload missing or unverifiable after success: " + relative)
+    raise RuntimeError("Retry budget exhausted for " + relative)
 
 def publish(city, release_override=None):
     if city not in ALLOWED_CITIES: raise ValueError("City not yet approved for full-stage pilot")
@@ -86,20 +126,8 @@ def publish(city, release_override=None):
             if status!=200 or hashlib.sha256(existing).hexdigest()!=checksum:
                 raise RuntimeError("Immutable object mismatch; refusing overwrite: "+relative)
             return True
-        if not verified_existing():
-            try:
-                result,_=call(url,"POST",token,data,content_type)
-                if result not in (200,201):
-                    raise RuntimeError("Unexpected upload status for "+relative)
-            except HTTPError as ex:
-                body=ex.read().decode("utf-8","replace")[:350]
-                # Storage sometimes reports an already-existing object as HTTP 400.
-                # Accept an ambiguous conflict ONLY after a read-back SHA256 match.
-                if ex.code not in (400,409) or not verified_existing():
-                    raise RuntimeError("Upload failed "+relative+" HTTP "+
-                                       str(ex.code)+" "+body) from None
-            if not verified_existing():
-                raise RuntimeError("Upload missing after success: "+relative)
+        upload_immutable_verified(url, token, data, content_type,
+                                  relative, verified_existing)
         manifest.append({"path":relative,"sha256":checksum,"bytes":len(data)})
     report={"city":city,"release":release,"files_verified":len(manifest),
             "bytes_verified":sum(x["bytes"] for x in manifest),
