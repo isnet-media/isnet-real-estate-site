@@ -7,7 +7,7 @@
   "run_id": "63c0c639-8134-832a-983a-77226dfbbfc2",
   "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
   "started_at": "2026-11-10T21:59:40.411774Z",
-  "checked_at": "2026-11-11T04:05:06Z",
+  "checked_at": "2026-11-11T04:20:04.120Z",
   "status": "partial",
   "daily_audit_completed": false,
   "previous_audit": {
@@ -2028,6 +2028,171 @@
       },
       "next_attempt_at": "2026-11-11T04:58:00Z",
       "mutations": "Operational journal only; no Site/CMS/source/task/schedule changes."
+    },
+    {
+      "runKey": "enrichment-2026-11-11-06:20",
+      "run_id": "49219996-4fe0-8329-897e-6c9a2613b313",
+      "owner": "Automation_4c9b538f29d081918b3cbb12595b0989",
+      "checked_at": "2026-11-11T04:20:04.120Z",
+      "status": "refreshed_and_readback_verified_one_source_failed",
+      "scope": "Independent enrichment providers only; municipal catalog excluded.",
+      "site_version_observed": 539,
+      "ownership_and_lock": {
+        "owner_enabled": true,
+        "own_run_matches": true,
+        "mechanism": "Existing enrichment-refresh-lock-v1 D1 CAS lease,2minute lease,30minute global start throttle,6hour per-source attempt TTL. Normal GET can queue due refresh; refresh=1 joined while it ran and returned refresh_in_progress_or_throttled. Did not release lock, force refresh, or dispatch competing collector.",
+        "exclusive_Site_deployment": "Not needed for existing public cache warmer; no source edit/build/deploy."
+      },
+      "calls": [
+        {
+          "url": "https://tlvnet.com/api/public-enrichment",
+          "http": 200,
+          "stage": "initial",
+          "server_now": "2026-11-11T04:19:10.866Z",
+          "records": 187,
+          "source_states": "Old verified times retained in initial snapshot; normalGET queues due cache warm."
+        },
+        {
+          "url": "https://tlvnet.com/api/public-enrichment?refresh=1",
+          "http": 200,
+          "stage": "explicit_refresh",
+          "server_now": "2026-11-11T04:19:16.082Z",
+          "result": {
+            "performed": false,
+            "reason": "refresh_in_progress_or_throttled"
+          },
+          "records": 187,
+          "note": "Partial in-progress source state; not final outcome."
+        },
+        {
+          "url": "https://tlvnet.com/api/public-enrichment",
+          "http": 200,
+          "stage": "readback",
+          "server_now": "2026-11-11T04:19:22.122Z",
+          "records": 186
+        },
+        {
+          "url": "https://tlvnet.com/api/public-enrichment",
+          "http": 200,
+          "stage": "final_readback",
+          "server_now": "2026-11-11T04:20:04.120Z",
+          "records": 186
+        }
+      ],
+      "verification": {
+        "stable_records_exact_equal": true,
+        "stable_source_states_exact_equal": true,
+        "unique_provider_id_and_record_id": 186,
+        "records": 186,
+        "sources": 9,
+        "successful": 8,
+        "failed": 1,
+        "records_sha256": "aaf4559c1545455ab3ba188c51bc98037910f0486157de5c315322677dab43fe",
+        "source_states_sha256": "cb0b237cf614f0d20add71ac6f077017beb8207a919b6dc418b8aafbb68bf692"
+      },
+      "sources": [
+        {
+          "id": "museum-courses",
+          "records": 23,
+          "status": "ok",
+          "verified_at": "2026-11-11T04:19:09.880Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z"
+        },
+        {
+          "id": "museum-workshops",
+          "records": 11,
+          "status": "ok",
+          "verified_at": "2026-11-11T04:19:09.880Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z"
+        },
+        {
+          "id": "tau-arts",
+          "records": 100,
+          "status": "ok",
+          "verified_at": "2026-11-11T04:19:09.880Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z"
+        },
+        {
+          "id": "crafted",
+          "records": 12,
+          "status": "ok",
+          "verified_at": "2026-11-11T04:19:09.880Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z"
+        },
+        {
+          "id": "minshar",
+          "records": 8,
+          "status": "ok",
+          "verified_at": "2026-11-11T04:19:09.880Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z"
+        },
+        {
+          "id": "athena",
+          "records": 5,
+          "status": "ok",
+          "verified_at": "2026-11-11T04:19:09.880Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z"
+        },
+        {
+          "id": "collective",
+          "records": 2,
+          "status": "ok",
+          "verified_at": "2026-11-11T04:19:09.880Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z"
+        },
+        {
+          "id": "gal",
+          "records": 1,
+          "status": "ok",
+          "verified_at": "2026-11-11T04:19:09.880Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z"
+        },
+        {
+          "id": "dangourmet",
+          "records": 24,
+          "status": "failed",
+          "error_code": "http_500",
+          "verified_at": "2026-11-07T08:13:34.061Z",
+          "attempted_at": "2026-11-11T04:19:09.880Z",
+          "old_records_exact_equal": true
+        }
+      ],
+      "incidents": [
+        {
+          "signature": "TLVNET|enrichment|dangourmet fetch|http_500",
+          "status": "existing_failure_unchanged",
+          "root_cause": "Provider's server returnedHTTP500 to existing adapter; deeper upstream cause unverified.",
+          "safe_behavior": "Failed refresh retained all24 prior records byte-equivalent and original verified_at. No further same-input retry this cycle.",
+          "owner": "operational-controller with provider adapter owner",
+          "next_attempt_at": "2026-11-11T10:19:09.880Z"
+        },
+        {
+          "signature": "TLVNET|enrichment|CRAFTED inventory|future felting item absent after successful refresh",
+          "status": "pending_source_delta_review",
+          "before_count": 13,
+          "after_count": 12,
+          "missing_id": "ext-crafted-96281a41f33dd3386686",
+          "name": "סדנת ליבוד להורים וילדים – עם עדי שמולביץ",
+          "source_url": "https://craftedstudio.co.il/event/felting-2/",
+          "old_start": "2026-11-13T11:00:00+02:00",
+          "evidence": "Existing adapter retained12 source-listed records. Cached web-rendered source still shows event; cached pages dated yesterday/last week are insufficient to prove current source. Fresh direct public month-page read returned403; no bypass or retry. Do not call removed workshop canceled or expired, and do not restore stale inventory manually.",
+          "root_cause": "Unverified source/structured-data change; no parser defect established from cached page.",
+          "owner": "operational-controller/enrichment adapter",
+          "next_attempt_at": "2026-11-11T10:19:09.880Z",
+          "early_condition": "Changed source/access/code evidence."
+        }
+      ],
+      "mutations": {
+        "existing_public_cache_warmer_only": true,
+        "source_edit": 0,
+        "Site_build": 0,
+        "Site_deploy": 0,
+        "images": 0,
+        "email": 0,
+        "new_keys": 0,
+        "task_or_schedule_changes": 0
+      },
+      "handoff": "Recorded in existing daily-audit; no external messages."
     }
   ],
   "incident_register": [
