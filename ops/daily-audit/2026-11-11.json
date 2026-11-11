@@ -7,7 +7,7 @@
   "run_id": "63c0c639-8134-832a-983a-77226dfbbfc2",
   "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
   "started_at": "2026-11-10T21:59:40.411774Z",
-  "checked_at": "2026-11-11T03:00:42Z",
+  "checked_at": "2026-11-11T04:05:06Z",
   "status": "partial",
   "daily_audit_completed": false,
   "previous_audit": {
@@ -1834,6 +1834,200 @@
       "builds": 0,
       "deployments": [],
       "next_cursor": "Seniors duplicate inspected; kids and seniors generator repairs pending authorized source write and actual card rendering. Continue remaining duplicate groups after these priorities."
+    },
+    {
+      "runKey": "photo-bank-2026-11-11-05:55",
+      "run_id": "9b9bdef4-023c-8322-9f73-da4144c9f00b",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-11T04:05:06Z",
+      "status": "desktop_inspected_defect_verified_repair_prepared",
+      "source_base": "6ca068c084c719e2f6788a7abdb615904a14659a",
+      "fresh_remote_source": false,
+      "queue": {
+        "audit_rerun": true,
+        "pages": 384,
+        "candidates": 222,
+        "closed": 0,
+        "rendered_card_reviews": 5,
+        "new_assets": 0
+      },
+      "live": {
+        "version": 538,
+        "bank_http": 200,
+        "bank_items": 122,
+        "collector_enabled": true,
+        "blockedIds": "not exposed"
+      },
+      "inspections": [
+        {
+          "url": "https://tlvnet.com/home.html",
+          "section": "קולנוע בתל אביב",
+          "desktop_visual": true,
+          "mobile_visual": false,
+          "viewport": {
+            "width": 1348,
+            "height": 921
+          },
+          "cards": [
+            "סוס פרא תשע",
+            "הסתברות לאהבה",
+            "פרלה",
+            "בעל בהזמנה",
+            "איך לשדוד בנק"
+          ],
+          "observation": "Actual cloud-browser screenshots inspected. All five visible posters use tall contain framing; dark credit bars overlay lower poster content. Confirmed specifically against previously viewed original סוס פרא תשע: lower poster lettering/footer is covered by credit bar. Not a new image approval or proof every poster is cropped.",
+          "first_asset": "/guide/assets/posters/8e53c9ec9001b2507718.jpg",
+          "first_image_computed": {
+            "fit": "contain",
+            "position": "50% 50%",
+            "width": 228,
+            "height": 342
+          },
+          "status": "pending_fix",
+          "root_cause": "home-cinema.js inserts small credit inside div.photo; existing absolute-position credit styling overlays the poster bottom. Source generator fallback also puts small inside photo. contain preserves bounds but cannot prevent text overlay.",
+          "live_source_parity": {
+            "JS": "87ec15befa66a13616443f459b4f6600217376388047197b5e8a666ec9d6742e",
+            "CSS": "f431e450ca6fd43a427894f1cc9105a449b1e4754f6532bc0f892738e1799fbc",
+            "both_HTTP200": true,
+            "hashes_equal_local": true
+          },
+          "original_review": "Original סוס פרא תשע reviewed in prior checkpoint; this cycle newly inspected actual rendered desktop cards. Other four viewed as cards only; original/full-article review not claimed.",
+          "rights": "No asset copied, reassigned or newly approved.",
+          "next_action": "Move credit into card-copy before title for runtime and fallback cinema cards; preserve contain per poster; apply prepared patch to refreshed source only after ownership check, then regression + build + same-audience Sites deployment and actual desktop/mobile verification."
+        }
+      ],
+      "prepared_patch": {
+        "patch": "--- a/public/home-cinema.js\n+++ b/public/home-cinema.js\n@@ -11,8 +11,8 @@\n  const fragment=document.createDocumentFragment();\n  movies.forEach((m,i)=>{\n   const a=node('a','card');a.href='/guide/movie.html?id='+encodeURIComponent(m.id);a.dataset.movieId=m.id;\n-  const photo=node('div','photo'),img=node('img');img.src=m.poster_url;img.alt='כרזת הסרט '+m.title;img.loading='lazy';photo.append(img,node('span','number',String(i+1).padStart(2,'0')),node('small','',m.poster_credit||'כרזה: המקור הרשמי של הסרט'));\n-  const copy=node('div','card-copy');copy.append(node('h3','',m.title),node('p','',[...new Set(m.venues.map(v=>v.name))].join(' · ')),node('span','card-link','לפרטים והקרנות ←'));a.append(photo,copy);fragment.append(a);\n+  const photo=node('div','photo'),img=node('img');img.src=m.poster_url;img.alt='כרזת הסרט '+m.title;img.loading='lazy';photo.append(img,node('span','number',String(i+1).padStart(2,'0')));\n+  const copy=node('div','card-copy');copy.append(node('small','cinema-poster-credit',m.poster_credit||'כרזה: המקור הרשמי של הסרט'),node('h3','',m.title),node('p','',[...new Set(m.venues.map(v=>v.name))].join(' · ')),node('span','card-link','לפרטים והקרנות ←'));a.append(photo,copy);fragment.append(a);\n  });\n  rail.replaceChildren(fragment);\n  const section=rail.closest('section'),total=section.querySelector('.rail-total');total.textContent=String(movies.length).padStart(2,'0');\n--- a/scripts/home_section_navigation.py\n+++ b/scripts/home_section_navigation.py\n@@ -74,6 +74,7 @@\n   rail.clear();rail['aria-label']='סרטים בקולנוע בתל אביב ובקרבתה'\n   for i,(film,poster,venues) in enumerate(films[:16]):\n    tile=card(film['title'],'/guide/movie.html?id='+film['id'],poster['image_url'],poster.get('credit'),i,' · '.join(v['name'] for v in venues))\n+   credit=tile.select_one('.photo small').extract();credit['class']=['cinema-poster-credit'];tile.select_one('.card-copy').insert(0,credit)\n    tile['data-movie-id']=film['id'];tile.select_one('.card-link').clear();tile.select_one('.card-link').string='לפרטים והקרנות ←';rail.append(tile)\n   section=rail.find_parent('section');swipe=section.select_one('.swipe')\n   if swipe:swipe.string='גללו ובחרו סרט'\n--- a/public/home-cinema.css\n+++ b/public/home-cinema.css\n@@ -1 +1 @@\n-.cinema-home .photo{background:#102b38;height:auto;aspect-ratio:2/3}.cinema-home .photo img{object-fit:contain!important}.cinema-home .card{flex:0 0 230px;min-width:0}.cinema-home .card-copy p{font-size:13px;line-height:1.5}.cinema-home .photo small{background:#071b2acc;color:#fff}.cinema-home .cinema-home-empty{padding:24px;font-size:17px}@media(max-width:760px){.cinema-home .card{flex-basis:65vw;max-width:280px}}\n+.cinema-home .photo{background:#102b38;height:auto;aspect-ratio:2/3}.cinema-home .photo img{object-fit:contain!important}.cinema-home .card{flex:0 0 230px;min-width:0}.cinema-home .card-copy p{font-size:13px;line-height:1.5}.cinema-home .cinema-poster-credit{display:block;position:static;font-size:.75rem;line-height:1.45;color:var(--muted);margin:0 0 10px;overflow-wrap:anywhere}.cinema-home .cinema-home-empty{padding:24px;font-size:17px}@media(max-width:760px){.cinema-home .card{flex-basis:65vw;max-width:280px}}\n",
+        "base_hashes": {
+          "public/home-cinema.js": "87ec15befa66a13616443f459b4f6600217376388047197b5e8a666ec9d6742e",
+          "public/home-cinema.css": "f431e450ca6fd43a427894f1cc9105a449b1e4754f6532bc0f892738e1799fbc",
+          "scripts/home_section_navigation.py": "5faec347eb802032b86d5a4c7ec0e0d8bc6950be9c783abce67f594ed0fef597"
+        },
+        "syntax": {
+          "python_compile": true,
+          "JS_node_check_exit": 0
+        },
+        "applied": false,
+        "scope": "Runtime and generated fallback cinema cards only; no global crop/credit rule."
+      },
+      "rendering_access": {
+        "desktop": "Recovered: public home loaded in cloud browser without credentials, inspected DOM and actual screenshots after cinema rail navigation; useful tab kept.",
+        "local_browser": "Previously unknown-tool; not retried this cycle.",
+        "mobile": "Not tested; available cloud Tab API exposes no viewport/emulation control. No desktop resizing represented as mobile.",
+        "scope": "Only cinema card views counted; full homepage DOM snapshot is not a full visual audit."
+      },
+      "blockers": {
+        "publication": "Main8c36c82d-56bc-8325-a1f5-d6aa53664b41 and cultureb7134748-21c8-8326-84dc-fc6bf6d9182d active; cross-environment Work/project exclusivity not verified. No shared source changes, build or deployment.",
+        "source": "Local base is older than culture owner's reported source commit b1ba83a1; candidate patch is explicitly unapplied and must be reconciled first."
+      },
+      "source_mutations": 0,
+      "verified_assets_added": 0,
+      "builds": 0,
+      "deployments": [],
+      "fixed_and_verified": 0,
+      "next_cursor": "Apply/reconcile scoped cinema credit patch when authorized; verify actual mobile framing. Retain kids/seniors/semantic duplicate backlog and rental candidate."
+    },
+    {
+      "runKey": "ops-controller-2026-11-11-05:58",
+      "run_id": "d35f35d4-fa04-832a-af21-4a4205587681",
+      "owner": "operational-controller",
+      "checked_at": "2026-11-11T04:05:06Z",
+      "status": "partial_new_domain_results_and_desktop_access_change",
+      "daily_audit_completed": false,
+      "scope": "Only changed relevant owner runs and concrete photo handoff; no repeated collector/editorial source scans.",
+      "main": {
+        "current_run": {
+          "id": "8c36c82d-56bc-8325-a1f5-d6aa53664b41",
+          "recorded_status": "in_progress",
+          "scheduled_for": "2026-11-11T04:00:00Z",
+          "started_at": "2026-11-11T03:58:12.242653Z",
+          "completed_at": null,
+          "chat_ref": null
+        },
+        "prior_result": {
+          "run_id": "52e4724a-3528-8325-a492-b539f2fc9814",
+          "created_at": "2026-11-11T03:19:36.445223Z",
+          "scheduled_for": "2026-11-11T03:00:00Z",
+          "completed_at": "2026-11-11T03:19:38.715347Z",
+          "content_text": "real-estate-2026-11-11-05:00: no_update. לא נמצא מידע חדש ומאומת לפרסום. היומן עודכן ב-commit 0273b1cfe97455b1d1ef7737e868a4815c2256a3. לא בוצעו שיוך תמונה, build, גרסת Sites או פריסה; יבנה וכרמי גת לא הופעלו.",
+          "content_truncated": false,
+          "chat_ref": {
+            "type": "chatgpt",
+            "id": "6af1f825-1264-83ed-a08e-0c71aefbbd21"
+          },
+          "requires_user_action": false,
+          "is_failure_message": false
+        },
+        "status": "Prior52e472 result still real-estate, current8c36 active; news/sports execution not verified."
+      },
+      "culture": {
+        "current_run": {
+          "id": "b7134748-21c8-8326-84dc-fc6bf6d9182d",
+          "recorded_status": "in_progress",
+          "scheduled_for": "2026-11-11T03:50:00Z",
+          "started_at": "2026-11-11T03:53:36.997978Z",
+          "completed_at": null,
+          "chat_ref": null
+        },
+        "prior_result": {
+          "run_id": "920b1aea-c530-8326-9263-e9b8e907a400",
+          "created_at": "2026-11-11T02:59:51.418252Z",
+          "scheduled_for": "2026-11-11T02:50:00Z",
+          "completed_at": "2026-11-11T02:59:52.750757Z",
+          "content_text": "culture-news-2026-11-11-04:00 הסתיים ב-no_update. לא נמצא חידוש מאומת שאינו כפול; היומן נדחף ב-commit b1ba83a1f10b86f6b3f7a56424138b4ba83c0ab3. לא בוצעו תמונה, build או פריסה; ניסיון ההתאוששות נדחה עד חלון הבטיחות המתועד.",
+          "content_truncated": false,
+          "chat_ref": {
+            "type": "chatgpt",
+            "id": "6af18685-0348-83eb-9517-bb0b7bedc054"
+          },
+          "requires_user_action": false,
+          "is_failure_message": false
+        },
+        "status": "Prior920b result is now culture-specific, reports no_update and source commitb1ba83a1f10b86f6b3f7a56424138b4ba83c0ab3. Attributed owner evidence only; source-ledger readback not completed here, currentb713 active."
+      },
+      "cities": {
+        "run": {
+          "id": "abee5ad5-67ac-8332-8c1d-5739eee47016",
+          "recorded_status": "in_progress",
+          "scheduled_for": "2026-11-11T04:05:00Z",
+          "started_at": "2026-11-11T04:00:54.241232Z",
+          "completed_at": null,
+          "chat_ref": null
+        },
+        "latest_result": null,
+        "status": "Active with no readable latest_result; no failure/success inferred, no duplicate city editorial audit."
+      },
+      "photo_handoff": {
+        "actual_run": "9b9bdef4-023c-8322-9f73-da4144c9f00b",
+        "evidence_runKey": "photo-bank-2026-11-11-05:55",
+        "status": "desktop_inspected_defect_verified_repair_prepared",
+        "desktop_access_recovered": true,
+        "mobile_verified": false,
+        "concrete_defect": "Cinema credit overlays poster footer; scoped3filepatch prepared but not applied."
+      },
+      "GitHub": {
+        "failed_created_after_2026_11_11_03UTC": 0,
+        "no_dispatch": true
+      },
+      "Site": {
+        "version": 538,
+        "new_deployment": false,
+        "existing_404_gap": "Open; no changed publication evidence, no duplicate article probe/build."
+      },
+      "routing": {
+        "status": "main result association still open; culture new domain-correct prior result does not close main incident",
+        "backend_task_assignment_logs": "not exposed",
+        "no_prompt_or_environment_mutation": true
+      },
+      "ownership": {
+        "active_main_and_culture": true,
+        "parallel_Work_exclusivity_interface": "not accessible",
+        "source_push": false,
+        "build": false,
+        "deploy": false
+      },
+      "next_attempt_at": "2026-11-11T04:58:00Z",
+      "mutations": "Operational journal only; no Site/CMS/source/task/schedule changes."
     }
   ],
   "incident_register": [
