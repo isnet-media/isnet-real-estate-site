@@ -1,0 +1,80 @@
+"""Stage a complete, immutable city edition in PRIVATE Supabase Storage.
+
+This script never modifies prices, triggers collection, edits DNS, or exposes files
+to unauthenticated users. It refuses unexpected projects and verifies every file.
+"""
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+from pathlib import Path
+from urllib.error import HTTPError
+from urllib.parse import quote
+from urllib.request import Request, urlopen
+
+REF = "qomkxhafrprooekwgsxf"
+BUCKET = "isnet-super-staging"
+ALLOWED_CITIES = ("TLV",)  # increase only after a complete TLV canary succeeds
+ROOT = Path(__file__).resolve().parents[1]
+MAX_FILE_SIZE = 20 * 1024 * 1024
+
+def call(url, method, secret, body=None, content_type=None):
+    headers = {"apikey":secret, "Authorization":"Bearer "+secret,
+               "User-Agent":"ISNET-private-super-release/1.0"}
+    if content_type: headers["Content-Type"] = content_type
+    req = Request(url, method=method, headers=headers, data=body)
+    with urlopen(req, timeout=45) as response:
+        return response.status, response.read()
+
+def publish(city):
+    if city not in ALLOWED_CITIES: raise ValueError("City not yet approved for full-stage pilot")
+    base=os.getenv("SUPABASE_URL","").rstrip("/")
+    token=os.getenv("SUPABASE_SERVICE_ROLE_KEY","")
+    if base != "https://"+REF+".supabase.co" or not token:
+        raise RuntimeError("Private storage not configured for expected project")
+    root = ROOT/("SUPER."+city)
+    if not root.is_dir(): raise RuntimeError("City source not found")
+    paths=sorted(p for p in root.rglob("*") if p.is_file())
+    if not 100<=len(paths)<=250: raise RuntimeError("Unexpected city file count")
+    if any(p.is_symlink() for p in root.rglob("*")): raise RuntimeError("Symlink in city source")
+    release=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
+    manifest=[]
+    for p in paths:
+        data=p.read_bytes()
+        if len(data)>MAX_FILE_SIZE: raise RuntimeError("File too large for staging bucket")
+        if p.suffix.lower()==".json": json.loads(data.decode("utf-8"))
+        if p.suffix.lower() not in (".json",".html"):
+            raise RuntimeError("Unexpected file extension in TLV stage")
+        relative=p.relative_to(ROOT).as_posix()
+        object_name=f"releases/{city}/{release}/{relative}"
+        url=base+"/storage/v1/object/"+BUCKET+"/"+quote(object_name,safe="/")
+        content_type="application/json" if p.suffix.lower()==".json" else "text/html"
+        checksum=hashlib.sha256(data).hexdigest()
+        try:
+            result,_=call(url,"POST",token,data,content_type)
+            if result not in (200,201): raise RuntimeError("Storage write returned unexpected status")
+        except HTTPError as ex:
+            if ex.code != 409: raise RuntimeError("Storage write failed HTTP "+str(ex.code)) from None
+        read_url=base+"/storage/v1/object/authenticated/"+BUCKET+"/"+quote(object_name,safe="/")
+        status,got=call(read_url,"GET",token)
+        if status!=200 or hashlib.sha256(got).hexdigest()!=checksum:
+            raise RuntimeError("Read-back mismatch: "+relative)
+        manifest.append({"path":relative,"sha256":checksum,"bytes":len(data)})
+    report={"city":city,"release":release,"files_verified":len(manifest),
+            "bytes_verified":sum(x["bytes"] for x in manifest),
+            "private":True,"public_cutover":False,"files":manifest}
+    # Store a manifest that is self-contained, immutable, and verified too.
+    raw=json.dumps(report,ensure_ascii=False,sort_keys=True,indent=2).encode("utf-8")
+    destination=f"releases/{city}/{release}/release-manifest.json"
+    url=base+"/storage/v1/object/"+BUCKET+"/"+quote(destination,safe="/")
+    try:call(url,"POST",token,raw,"application/json")
+    except HTTPError as ex:
+        if ex.code!=409:raise RuntimeError("Manifest upload failed") from None
+    _,actual=call(base+"/storage/v1/object/authenticated/"+BUCKET+"/"+quote(destination,safe="/"),"GET",token)
+    if actual!=raw:raise RuntimeError("Manifest verification failed")
+    print(json.dumps({k:v for k,v in report.items() if k!="files"},ensure_ascii=False))
+if __name__=="__main__":
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--city",required=True,choices=ALLOWED_CITIES)
+    publish(parser.parse_args().city)
