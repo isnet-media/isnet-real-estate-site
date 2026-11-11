@@ -85,3 +85,61 @@ No new billing account, purchased server or public database bucket is required.
   selector includes all seven cities; retains only UI/static assets on Pages and
   moves the data delivery bytes. Baseline is already retained for30days, so
   subsequent cutovers reuse it instead of uploading redundant backup copies.
+
+## Verified actual public rollback, 11 November 19:25 UTC
+
+Workflow43086524902/job130752238395 completed successfully. Public
+super-delivery-status.json returned cities=[], data_bytes_offloaded=0 and
+html_pages_routed=0. The original KGAT/data/catalog.json again returned31,293
+products, nine branches and original retrieved_at2026-11-11T12:49:38.924043+02:00.
+The original comparison HTML contained no data-super-delivery marker. After a
+browser reload the rice comparison still showed all nine branches and the saved
+item remained at quantity1. Source news release e1e49572ca718c2d8c3837ac72ba93fb191e72b6
+and original run43023085987 were retained throughout pilot and rollback.
+
+## All seven cities deployed, 11 November 19:30 UTC
+
+PR72 merged as e79a747f410e15f4e7791194c47c9accb1f2b008. Workflow43087366998,
+job130755161326, completed successfully. Public status independently confirms:
+- data_bytes_offloaded:402,719,569; html_pages_routed:187.
+- Pages artifact:405,262,258bytes, leaving594,737,742bytes below the1GB limit.
+- Unrelated public files compared without editorial regeneration:7,782.
+- Original news release marker remains e1e49572ca718c2d8c3837ac72ba93fb191e72b6,
+  source run43023085987; supermarket migration run recorded separately.
+
+The deployed native Worker is Site version14, commit9c673f1ac6d032d9aefa6cf2fb732e3793f0164f.
+No full source-repository deletion or physical server migration is claimed.
+
+## TLVNET build payload cleanup
+
+The TLVNET source snapshot remains for reproducible preparation and recovery, but
+scripts/strip-bundled-super-data.mjs now runs after every build and removes only
+dist/client/super/data. The source public/super/data snapshot is untouched. Both
+/super/data and/api/super-data routes continue through the independently hosted
+service, with the existing public GitHub fallback. Build removal verified locally:
+107files,45,481,796bytes. The release gate, frontend assets and reader lists remain
+intact. A concurrent source-only economy/real-estate ledger update was preserved
+by rebasing our packaging commit and rebuilding; no force push was used.
+
+## TLVNET unbundling deployed and verified
+
+Site version564 deployed successfully as appgdep_6af4c36436d08191a74167cc8d0add53,
+source bd6f8039f61af70ddd1523ca519b9a0c1159dbf2. Its deployment archive contains
+zero /super/data/ files, while the source snapshot remains present. Public
+https://tlvnet.com/super-delivery-build.json independently confirms107files and
+45,481,796bytes removed. Public/super/data/catalog.json returnsHTTP200 through
+the Worker with X-Supermarket-Delivery:isnetsuper.ebs987449.chatgpt.site;
+17,886products/19branches, original9November source date preserved. The
+independent delivery does not mean every chain supplied fresh prices today.
+
+Original public city roots for all seven cities returned the final migration
+script and release lookup after deployment. Browser checks passed for KGAT
+product comparison and list persistence across migration/rollback/full rollout,
+Ashdod monthly basket/20branches, and TLVNET catalog/19branches. The added test
+item was removed from the isolated browser at the end.
+
+Remaining operational limits: source repository and original Git history are
+shared; GitHub raw delivery remains an origin dependency; this migration did
+not purchase or move to a new physical server. Existing daily GitHub collection
+runners are separate from news delivery. The unrelated events integrity gate
+still requires its own editorial resolution and was not disabled or bypassed.
