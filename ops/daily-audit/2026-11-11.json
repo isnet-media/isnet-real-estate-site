@@ -4308,6 +4308,181 @@
         "notifications_to_others": false
       },
       "notification": "no_update; concrete queue failure was already reported once by photo owner. No new recovery or published fix."
+    },
+    {
+      "runKey": "photo-bank-2026-11-11-12:55",
+      "run_id": "b58f010c-c850-8332-9812-2753a77b3c79",
+      "owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "checked_at": "2026-11-11T10:55:38Z",
+      "status": "inspected_new_illustration_candidate_pending_rendering_and_shared_write",
+      "scope": "Photos only; one full article and one new generated candidate; 0 verified/public bank additions",
+      "source": {
+        "commit": "127733d9f5fe969fa06ef121bafb23f37d37b919",
+        "latest_saved_version_observed": 553,
+        "role": "owner",
+        "audience": "public",
+        "policy_read": "public/photo-bank/PUBLICATION_POLICY.md",
+        "checkout": "/workspace/scratch/85cf17fdab9c/ops-runtime-tmp/p53-source/.sites-checkout"
+      },
+      "queue": {
+        "pages_scanned": 386,
+        "candidates": 218,
+        "summary": {
+          "duplicate_asset_in_section": 6,
+          "explicit_photo_approval_pending": 114,
+          "portrait_or_poster_needs_framing_review": 7,
+          "rendered_visual_review_pending": 2,
+          "specific_subject_photo_pending": 89
+        },
+        "request_count": 142,
+        "unpublished_requests": [
+          "beit-romano-district-approval-240-apartments-20261111",
+          "jabotinsky-80-permit-nine-apartments-20261111"
+        ],
+        "scope": "Candidates, not confirmed defective images; no whole-site cleanliness claim"
+      },
+      "live_bank": {
+        "url": "https://tlvnet.com/api/photo-bank",
+        "http": 200,
+        "collector_enabled": true,
+        "items": 146,
+        "local_items": 145,
+        "blockedIds": "not_exposed",
+        "auth": "Fresh get_site token, same Site only, no administrator identity; no blocked assets revived"
+      },
+      "inspection": {
+        "status": "pending",
+        "article_id": "jabotinsky-80-permit-nine-apartments-20261111",
+        "full_article_path": "public/news/articles.json#jabotinsky-80-permit-nine-apartments-20261111",
+        "read_full_text": true,
+        "body_sha256": "96e971923763681bb42020a2a67f0399f35b73845e48ac711bc0632b424204ab",
+        "image_subject": {
+          "message": "Building permit for 2.5 floors/9 apartments and expansion of16existing apartments; no construction start date.",
+          "people": [],
+          "location": "Jabotinsky80 / EmmanuelHaromi25,TelAviv",
+          "operator": "TelAviv municipality",
+          "stage": "permit_issued_no_construction_start_date",
+          "sport": null
+        },
+        "article_status": "draft",
+        "selected_bank_id": null,
+        "search": [
+          {
+            "url": "https://rova4tlv.com/project/jabotinsky-80",
+            "result": "Exact project informational page; no reusable exact project media grant established."
+          },
+          {
+            "url": "https://commons.wikimedia.org/wiki/File:20161020_111400_October_2016_in_Tel_Aviv.jpg",
+            "result": "CC0 archival street photo, Rakoon,20Oct2016; location Namir/Jabotinsky, not the specific building; not selected."
+          },
+          {
+            "query": "site:flash90.net Jabotinsky Tel Aviv",
+            "result": "No exact target asset established in indexed search; no claim full subscriber archive searched."
+          },
+          {
+            "query": "site:my-town.co.il זבוטינסקי80",
+            "result": "No indexed exact project photo result; no reuse permission assumed."
+          },
+          {
+            "bank_candidate": "residential-construction-ai-2026",
+            "result": "Rejected: portrays construction stage and already used in same section; not a permit-only story."
+          }
+        ],
+        "search_limit": "Flash90 indexed search performed; no claim full paid subscriber archive was searched. No external photo reuse permission invented."
+      },
+      "candidate": {
+        "id": "residential-permit-planning-ai-20261111",
+        "status": "pending_rendered_review",
+        "article_id": "jabotinsky-80-permit-nine-apartments-20261111",
+        "body_sha256": "96e971923763681bb42020a2a67f0399f35b73845e48ac711bc0632b424204ab",
+        "read_full_text": true,
+        "selected_bank_id": null,
+        "creator": "OpenAI image generation tool",
+        "ai_generated": true,
+        "prompt": "Use case: photorealistic-natural. Asset type: horizontal 16:9 editorial OBJECT ILLUSTRATION for a local news article about a residential building permit, NOT construction started. Create a high-quality realistic tabletop still-life: rolled and partly unfolded architectural floor-plan sheets with fine abstract unreadable drafting marks, a small simple unpainted wooden house/block model, a mechanical pencil and scale ruler, on a light warm wooden architect's desk by soft daylight. Balanced editorial composition, all meaningful objects in the central 70 percent so both wide cards and article display retain them. Sharp tactile paper grain and natural shadows, sophisticated neutral palette. No people, no real building exterior, no identifiable skyline, no construction work, cranes, workers, tools on site, no official stamps/seals/signatures, addresses, numbers, municipal emblems or fabricated official documents. No logos or watermarks. Clearly concept illustration rather than evidence of the actual Jabotinsky80 project. Small neat visible Hebrew label in a quiet lower corner exactly: אילוסטרציה – AI . Do not add other readable text.",
+        "source_path": "/workspace/scratch/85cf17fdab9c/generated_images/exec-63c7c86b-79c4-404f-9b2b-225dcdf4dd62.png",
+        "source_sha256": "261b9e8d78ecff70f2c3d1e3717c348d531f4e767d2c6d6bac9d9f772401c9f6",
+        "jpg_path": "/workspace/scratch/85cf17fdab9c/ops-runtime-tmp/photo-staging/residential-permit-planning-ai-20261111.jpg",
+        "jpg_sha256": "22fcc79de7ebd0d049e485c3481d6a50248414e45f62de7f9da1ff49590efbd9",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "bytes": 378741,
+        "photo_date": null,
+        "subject_kind": "object_illustration",
+        "visual_review": {
+          "original": true,
+          "converted_jpg": true,
+          "findings": "Unfolded generic plans, wooden model, pencil, ruler, daylight; no real project/site or started works. Embedded AI label visible. No official authorization seal, address or identified person.",
+          "rendered_desktop_card": "pending",
+          "rendered_desktop_article": "pending",
+          "rendered_mobile_card": "pending",
+          "rendered_mobile_article": "pending"
+        },
+        "proposed_presentation": {
+          "fit": "contain",
+          "position": "50% 50%",
+          "reason": "Keep complete object arrangement and visible AI label; no stretching."
+        },
+        "caption": "המחשה לתכנון ורישוי בנייה; אינה מציגה את הבניין בז׳בוטינסקי 80 או עבודות בו. אילוסטרציה – AI",
+        "bank_registered": false,
+        "article_assigned": false,
+        "published": false,
+        "search_evidence": [
+          {
+            "url": "https://rova4tlv.com/project/jabotinsky-80",
+            "result": "Exact project informational page; no reusable exact project media grant established."
+          },
+          {
+            "url": "https://commons.wikimedia.org/wiki/File:20161020_111400_October_2016_in_Tel_Aviv.jpg",
+            "result": "CC0 archival street photo, Rakoon,20Oct2016; location Namir/Jabotinsky, not the specific building; not selected."
+          },
+          {
+            "query": "site:flash90.net Jabotinsky Tel Aviv",
+            "result": "No exact target asset established in indexed search; no claim full subscriber archive searched."
+          },
+          {
+            "query": "site:my-town.co.il זבוטינסקי80",
+            "result": "No indexed exact project photo result; no reuse permission assumed."
+          },
+          {
+            "bank_candidate": "residential-construction-ai-2026",
+            "result": "Rejected: portrays construction stage and already used in same section; not a permit-only story."
+          }
+        ],
+        "source_permission": "Generated editorial illustration candidate; no third-party photograph or blanket paid-license permission used."
+      },
+      "checks": [
+        "Generated original and converted1672x941JPG actually visually inspected",
+        "JPEG format/dimensions/byte count and source/JPG SHA256 recorded",
+        "No exact JPG hash duplicate in current145bank records",
+        "news_photo_gate PASS; new/changed story without approved image remains blocked",
+        "Frozen text-only and legacy baseline SHA256 unchanged"
+      ],
+      "candidate_assets_created": 1,
+      "verified_assets_added": [],
+      "fixed_and_verified": [],
+      "source_push": false,
+      "build": false,
+      "prepare_public": "Not run; no shared source writes or deployment; pending candidate alone cannot pass publication policy.",
+      "deployments": [],
+      "existing_incident": {
+        "signature": "tlvnet/photo-bank/queue-generation/draft-requests-erased",
+        "status": "still_open_same_root_cause",
+        "source_evidence": "Current generator still lacks photo_request_queue.py; children film draft request absent again despite culture owner restoration report. Same diagnosed generator behavior, not a new failure or new retry.",
+        "repair_reference_run": "b1cb8d85-c874-8322-93c2-6f064005f67c",
+        "repeat_notification": false
+      },
+      "blockers": {
+        "shared_write": "Cross-environment project/Work lease interface still not exposed; no verified exclusive shared write permission, no push/build/competing deployment.",
+        "rendering": "Candidate needs actual card and article desktop+narrow responsive/mobile view. Original-only visual review is insufficient for approved image.",
+        "other_drafts": "New BeitRomano request remains unreviewed in this bounded cycle; no approval inferred."
+      },
+      "next_cursor": "Complete rendered draft image review for Jabotinsky80 and children festival; then newest BeitRomano request. Reconcile preserved queue, Depositphotos checker and cinema attribution repairs only under verified shared ownership.",
+      "next_attempt_at": "2026-11-11T11:55:00Z",
+      "actions_outside_photo_domain": [],
+      "new_failure": false
     }
   ],
   "incident_register": [
@@ -4556,7 +4731,14 @@
       "public_verified": false,
       "source_push": false,
       "next_attempt_at": "2026-11-11T10:55:00Z",
-      "notification": "Already reported by photo run; do not repeat unchanged alert."
+      "notification": "Already reported by photo run; do not repeat unchanged alert.",
+      "latest_observation": {
+        "run_id": "b58f010c-c850-8332-9812-2753a77b3c79",
+        "source": "127733d9f5fe969fa06ef121bafb23f37d37b919",
+        "checked_at": "2026-11-11T10:55:38Z",
+        "children_request_present": false,
+        "status": "same_root_cause_pending_shared_repair"
+      }
     }
   ]
 }
