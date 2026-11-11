@@ -1,0 +1,75 @@
+name: Move published supermarket data to independent delivery
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/super-delivery-cutover.yml'
+      - 'scripts/super_delivery.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  cutover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify routing and exact rollback behavior
+        run: |
+          python scripts/test_prepare_pages_public.py
+          node scripts/test_super_delivery_routing.cjs
+      - name: Verify independent release bytes before removing data
+        run: python scripts/verify_super_delivery.py
+      - name: Read verified baseline configuration
+        id: baseline
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          c=json.load(open('scripts/super_delivery.json'))
+          print('run_id='+str(c['baseline_artifact_run_id']))
+          print('artifact_name='+c['baseline_artifact_name'])
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.baseline.outputs.artifact_name }}
+          run-id: ${{ steps.baseline.outputs.run_id }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/super-baseline-artifact
+      - name: Keep the exact published baseline recoverable
+        uses: actions/upload-artifact@v4
+        with:
+          name: super-cutover-baseline
+          path: ${{ runner.temp }}/super-baseline-artifact/artifact.tar
+          retention-days: 30
+      - name: Verify the currently published release and extract safely
+        env:
+          SUPER_BASELINE_ARTIFACT: ${{ runner.temp }}/super-baseline-artifact
+          SUPER_BASELINE_ROOT: ${{ runner.temp }}/super-baseline-public
+        run: python scripts/prepare_super_cutover.py
+      - name: Route supermarket data without rebuilding news or events
+        run: |
+          python scripts/prepare_pages_public.py --source-root "$RUNNER_TEMP/super-baseline-public" --preserve-news-release --output "$RUNNER_TEMP/isnet-pages-public"
+          python scripts/verify_super_cutover.py "$RUNNER_TEMP/super-baseline-public" "$RUNNER_TEMP/isnet-pages-public"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/isnet-pages-public
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Deploy only the verified storage migration
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+          timeout: 1200000
