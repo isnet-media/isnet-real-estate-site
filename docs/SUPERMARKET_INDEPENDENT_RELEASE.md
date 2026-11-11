@@ -207,3 +207,61 @@ media licensing, complete site-level cutover/rollback acceptance, safe and
 validated production integration of *newer committed* prices, and a complete TLV
 site (its committed index is a service-unavailable redirect). PR #67 remains
 draft and must not be merged as a substitute for those proofs.
+
+## Read-only committed-delta overlay and rollback rehearsal — 2026-11-11 15:06 Israel
+
+This is a **successful, isolated, data-only rollback rehearsal**, NOT a live
+independent hosting cutover, a browser acceptance test, or a production
+reverse-proxy rollback. The seven original immutable private releases are
+unchanged; PR #67 remains **draft**.
+
+- New read-only verifier:
+  `scripts/verify_super_private_delta_overlay.py`, six safety unit tests,
+  and `.github/workflows/super-private-delta-overlay-rehearsal.yml`.
+- CI run [43025900178](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43025900178)
+  **PASS**: 6/6 manifest validation tests, authenticated private storage
+  readback, SHA-256 and byte-for-byte Git validation of the three
+  `data/{prices,refresh-status,source-status}.json` files in **each of six**
+  staged city deltas (18 changed files). Baseline file manifests and baseline
+  Git blobs were verified before applying the delta.
+- On throwaway **local** copies only, all six three-file overlays were tested
+  and restored to the immutable baseline, with exact SHA-256 checks after
+  both operations. **6/6 data-only overlay rehearsals and 6/6 local restore
+  rehearsals passed.**
+- Anonymous direct reads of each of the six private price objects were
+  rejected. A separate public shadow canary remains disabled, and an
+  external no-auth probe returned **HTTP 503**.
+- No new storage object or price was written; no collection job was started;
+  no public pages, DNS, hosting, service keys, network routing or purchasing
+  were altered. The verified source commit is
+  `8133619b2d37ba514c0a801cb0b998a9b69bd631`.
+- Read-only comparison of the **21 critical Git blobs** in the seven city
+  `data/` directories found that live `main` at
+  `4a2a1539d6502cd55b52af33ccf804f89646740e` retained the same price
+  and source-status contents as that staged commit. This **does not imply**
+  that every supplier delivered fresh prices.
+- The seven city release artifacts' PR checks were **8/8 green** at the
+  previous PR head (GitHub workflow
+  [43016517087](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43016517087)).
+  New verifier CI is independently green at its own commit.
+
+### Source freshness and blocks (2026-11-11 committed collector output)
+
+| City | Updated / total branches | Remaining issue |
+| --- | ---: | --- |
+| ASHDOD | 16/20 | Carrefour/Victory connection timeouts |
+| BATYAM | 15/19 | Victory/Carrefour connection timeouts |
+| HOLON | 16/23 | Victory/Carrefour timeouts, Hatzi Hinam HTTP errors |
+| KGAT | 7/9 | Victory/Mahsanei Hashuk timeouts |
+| RISHON | 17/24 | Carrefour/Victory/Mahsanei Hashuk timeouts |
+| YAVNE | 4/7 | Carrefour/Victory timeouts |
+| TLV | 0/19 | All retained; **not** approved for private delta overlay |
+
+All seven statuses report partial or retained-previous coverage; do not
+promote these to fully up-to-date retail prices. TLV's current
+`index.html` is still a service-unavailable meta-redirect, **not** an
+independent usable site. Rights of images/fonts and full-site browser
+loading are not validated. **Actual same-URL public cutover and production
+rollback have NOT been tested**, and remain hard blockers. The old live
+host remains authoritative; do not merge this PR or disable the news
+Pages supermarket build until those gates pass.
