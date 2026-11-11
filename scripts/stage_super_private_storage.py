@@ -72,8 +72,17 @@ def publish(city, release_override=None):
             try:
                 status,existing=call(read_url,"GET",token)
             except HTTPError as ex:
-                if ex.code==404: return False
-                raise RuntimeError("Private read failed for "+relative+" HTTP "+str(ex.code)) from None
+                body=ex.read().decode("utf-8","replace")[:600]
+                try: parsed=json.loads(body)
+                except ValueError: parsed={}
+                reason=str(parsed.get("error",""))+" "+str(parsed.get("message",""))
+                # Supabase Storage can encode a missing object in an HTTP 400
+                # response. Never treat other 400s as permission to overwrite.
+                if ex.code==404 or (ex.code==400 and
+                     ("not found" in reason.lower() or "does not exist" in reason.lower())):
+                    return False
+                raise RuntimeError("Private read failed for "+relative+" HTTP "+
+                                   str(ex.code)+" "+body) from None
             if status!=200 or hashlib.sha256(existing).hexdigest()!=checksum:
                 raise RuntimeError("Immutable object mismatch; refusing overwrite: "+relative)
             return True
