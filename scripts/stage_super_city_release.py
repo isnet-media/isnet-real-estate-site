@@ -52,7 +52,7 @@ def stage_city(root: Path, output: Path, city: str):
             raise ValueError("Refusing to overwrite a staged first-party dependency")
         shutil.copyfile(root / rel, target)
     manifest = []
-    for path in sorted(destination.rglob("*")):
+    for path in sorted(output.rglob("*")):
         if not path.is_file():
             continue
         data = path.read_bytes()
