@@ -871,6 +871,142 @@
       "builds": 0,
       "deployments": [],
       "fixed_and_verified": []
+    },
+    {
+      "runKey": "ops-controller-2026-11-11-01:58",
+      "run_id": "8602c532-8ab8-832a-bcd4-5568aa852930",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "checked_at": "2026-11-11T00:06:00Z",
+      "status": "partial_new_publication_gap_verified",
+      "daily_audit_completed": false,
+      "inventory": {
+        "total": 25,
+        "enabled": 12
+      },
+      "escalation_signature": "TLVNET|culture-news|public article route|404 beit-lessin-taut-balihuk-returns-20270122",
+      "source_reconciliation": {
+        "from": "af020af2a4381502fa8668071e24f50f68f6f437",
+        "to": "6ca068c084c719e2f6788a7abdb615904a14659a",
+        "supported_helper_exit": 0,
+        "only_pending_diff": "public/news/briefs-writer-profile.json2semanticfields",
+        "draft_sha256": "bddffbb9f18bfd0174347407c9252598618c278f54b8089d4d19604d2510a3f3",
+        "restored_identically": true,
+        "new_source_code_edit": false,
+        "remote_push": false
+      },
+      "owner_results": [
+        {
+          "id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+          "run": "51b0f635-4d70-8322-8cee-b9eb94c393fa",
+          "status": "completed_matching_photo_result",
+          "evidence": "Two full culture articles and original Habima photograph inspected; live markup/body comparison. Pending exact asset; no fixed_and_verified or new mobile/desktop claim."
+        },
+        {
+          "id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+          "run": "5c42c7a9-c818-8326-b5e9-f973b0e666c2",
+          "status": "blocked_partial_actual_source_repair",
+          "source_commit": "6ca068c084c719e2f6788a7abdb615904a14659a"
+        },
+        {
+          "id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+          "run": "9dc099ed-15fc-8332-8e1f-8d72bcb6fa11",
+          "status": "completed_result_unreadable_not_inferred_success"
+        },
+        {
+          "id": "Automation_851de24df7448191a034009b74fc236f",
+          "run": "7a91d234-c0c0-8329-a087-4e3b7c1a8db7",
+          "status": "completed_result_unreadable_not_inferred_success"
+        },
+        {
+          "id": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "run": "44d4eb6c-c758-8325-a654-b75add5bfbff",
+          "status": "in_progress_latest_result_null",
+          "interpretation": "Do not close or reopen result-routing incident without readable current result."
+        }
+      ],
+      "GitHub": {
+        "failed_runs_created_after_2026_11_10_23UTC": 0,
+        "latest_publish": 42927528008,
+        "latest_publish_status": "success",
+        "post_publish_health_runs_in_progress": [
+          42928168347,
+          42928168137
+        ],
+        "no_duplicate_workflow_dispatched": true
+      },
+      "capability_discovery": {
+        "isnet_admin": "Available tools cover posts/categories/files/website configuration, no dedicated homepage block or shared Work lock tool exposed. Did not mutate website configuration as a substitute.",
+        "execution_routing": "No backend task/session binding log or repair tool exposed; peek only provides run/result metadata."
+      },
+      "mutations": {
+        "operational_journal_only_remote": true,
+        "local_source_fast_forward": true,
+        "draft_preserved": true,
+        "new_content_edits": 0,
+        "build": 0,
+        "publish": 0,
+        "schedule_or_enablement": 0
+      },
+      "no_source_rescans": [
+        "supermarkets",
+        "Herzliya/Raanana editorial source lists",
+        "event collector sources"
+      ]
+    }
+  ],
+  "incident_register": [
+    {
+      "signature": "TLVNET|culture-news|public article route|404 beit-lessin-taut-balihuk-returns-20270122",
+      "status": "blocked_source_restored_not_published",
+      "site": "TLVNET",
+      "owner": "operational-controller",
+      "domain_owner": "Automation_547bb40a554c819184ab07a7de64a4b2",
+      "detected_at": "2026-11-11T00:03:00Z",
+      "url": "https://tlvnet.com/news/beit-lessin-taut-balihuk-returns-20270122",
+      "evidence": {
+        "article_http": [
+          404,
+          404
+        ],
+        "news_http": 200,
+        "home_http": 200,
+        "link_in_live_news": true,
+        "link_in_live_home": false,
+        "domain_run": "5c42c7a9-c818-8326-b5e9-f973b0e666c2",
+        "source_before": "af020af2a4381502fa8668071e24f50f68f6f437",
+        "source_file_existed_before": false,
+        "source_restored": "6ca068c084c719e2f6788a7abdb615904a14659a",
+        "source_file_sha256": "0bcc13efd55e2dd94faf8dfd30051e0d21576f15e29c859ee180f394e07b82eb",
+        "site_version": 538
+      },
+      "root_cause": "Verified source/deployment gap: linked article HTML missing in prior source snapshot, restored by culture owner but not deployed. Why it was originally omitted/deleted is not yet established. Do not infer137 was caused by disk without kill/OOM logs.",
+      "repair": "Culture owner restored HTML in remote6ca; controller synchronized exact remote via supported Sites helper and verified restored source text/title, image/body hash and selected ID. Existing controller draft preserved byte-for-byte. No publication claimed.",
+      "validation": {
+        "restored_source_title_and_body_pass": true,
+        "body_sha256": "70670ece1253a40c3772d6a567db81687ae3e3f091c724fc21ba6109798c53d2",
+        "image_review_body_hash_matches": true,
+        "image_selected_id_matches": true,
+        "live_pass": false
+      },
+      "resources": {
+        "project_filesystem_free_mb": 41,
+        "tmp_filesystem_free_gb": 2,
+        "dependencies_present": false,
+        "worker_build_present": false,
+        "visible_running_builds": false,
+        "cgroup_memory_kill_logs": "Not exposed at checked standard paths",
+        "alternative_investigated": "A fresh supported checkout/build in /tmp could address project-filesystem ENOSPC, but has not been attempted or validated. Does not prove137 cause or publication readiness.",
+        "fallback": "Current supported Sites docs require complete matching Worker artifact; no source-only deploy or partial dist substitution performed."
+      },
+      "blockers": [
+        "Exclusive project/parallel Work write ownership not verified; main task44d4eb6c-c758-8325-a654-b75add5bfbff active.",
+        "No installed dependencies or complete Worker output in current checkout; no atomic matching artifact available.",
+        "Previous installer/build137 history remains; no same-input retry."
+      ],
+      "prevention": "After generators, assert every published news-card href resolves to a source file or valid dynamic route; validate packaged inclusion and liveHTTP200 before published status. Preserve text/photo dates, current image approval and full snapshot.",
+      "next_attempt_at": "2026-11-11T00:58:00Z",
+      "controller_build_or_recovery_attempts": 0,
+      "deployments": []
     }
   ]
 }
