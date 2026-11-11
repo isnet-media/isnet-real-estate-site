@@ -1,0 +1,45 @@
+name: Verify supermarket committed snapshots
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/pages.yml'
+      - '.github/workflows/super-committed-snapshot-tests.yml'
+permissions:
+  contents: read
+jobs:
+  snapshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
+      - name: Verify committed output after lightweight header preparation
+        run: |
+          python scripts/test_super_homepage.py
+          node scripts/test_super_live_loading.cjs
+          node scripts/test_super_city_lists.cjs
+          node scripts/test_super_product_groups.cjs
+          node scripts/test_super_comparison_page.cjs
+          python scripts/test_super_city_basket.py
+          python scripts/test_super_basket_missing.py
+          node scripts/test_super_smart_shopping.cjs
+          python scripts/test_super_deals.py
+          node scripts/test_super_deals.cjs
+          python scripts/super_ashdod_shell.py
+          python scripts/super_ashdod_shell.py --check
+          python scripts/test_super_shell.py
+          python scripts/test_yavne_super.py --deployment-only
+          python scripts/test_kgat_super.py --deployment-only
+          python scripts/test_rishon_super.py --deployment-only
+          python scripts/test_holon_super.py --deployment-only
+          node scripts/test_holon_deals.cjs
+          python scripts/test_batyam_super.py --deployment-only
+          python scripts/test_tlv_super_pipeline.py
+          python scripts/test_tlv_super_guard.py
+          python scripts/test_monthly_family_basket.py

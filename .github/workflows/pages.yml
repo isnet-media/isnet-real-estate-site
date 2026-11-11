@@ -268,33 +268,31 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: python scripts/build_event_source_history.py
 
-      - name: Rebuild and verify the fixed supermarket comparison baskets
+      # Collectors own generation and validation; news publishing serves their committed output.
+      # Keep public paths and read-only safety tests until independent hosting is verified.
+      - name: Verify committed supermarket comparison baskets (no collection or rebuild)
         run: |
           python scripts/test_super_homepage.py
           node scripts/test_super_live_loading.cjs
           node scripts/test_super_city_lists.cjs
           node scripts/test_super_product_groups.cjs
           node scripts/test_super_comparison_page.cjs
-          python scripts/import_super_shufersal.py
-          python scripts/build_super_city_basket.py
           python scripts/test_super_city_basket.py
           python scripts/test_super_basket_missing.py
-          python scripts/build_super_smart_shopping.py
           node scripts/test_super_smart_shopping.cjs
           python scripts/test_super_deals.py
           node scripts/test_super_deals.cjs
           node --check SUPER.ASHDOD/assets/city-basket.js
 
-      - name: Apply shared supermarket header to all current and future pages
+      - name: Apply lightweight supermarket header (no data rebuild)
         run: |
           python scripts/super_ashdod_shell.py
           python scripts/super_ashdod_shell.py --check
           python scripts/test_super_shell.py
 
-      - name: Build and verify the independent Yavne supermarket edition
+      - name: Verify committed Yavne supermarket edition
         run: |
           pip install beautifulsoup4==4.14.2
-          python scripts/build_yavne_super.py
           # Frontend deployment still enforces local links, IDs and data integrity,
           # while stale official Yavne feeds stay reported in site-health.json.
           # The dedicated supermarket refresh keeps strict freshness checks.
@@ -303,26 +301,22 @@ jobs:
 
       - name: Verify Kiryat Gat supermarket edition
         run: |
-          python scripts/build_kgat_super.py
           python scripts/test_kgat_super.py --deployment-only
           for script in SUPER.KGAT/live.js SUPER.KGAT/assets/*.js; do node --check "$script"; done
 
       - name: Verify Rishon supermarket edition
         run: |
-          python scripts/build_rishon_super.py
           python scripts/test_rishon_super.py --deployment-only
           for script in SUPER.RISHON/live.js SUPER.RISHON/assets/*.js; do node --check "$script"; done
 
       - name: Verify Holon supermarket edition
         run: |
-          python scripts/build_holon_super.py
           python scripts/test_holon_super.py --deployment-only
           node scripts/test_holon_deals.cjs
           for script in SUPER.HOLON/live.js SUPER.HOLON/assets/*.js; do node --check "$script"; done
 
       - name: Verify Bat Yam supermarket edition
         run: |
-          python scripts/build_batyam_super.py
           python scripts/test_batyam_super.py --deployment-only
           for script in SUPER.BATYAM/live.js SUPER.BATYAM/assets/*.js; do node --check "$script"; done
 
@@ -330,7 +324,6 @@ jobs:
         if: hashFiles('SUPER.TLV/data/catalog.json') != ''
         run: |
           python scripts/test_tlv_super_pipeline.py
-          python scripts/build_tlv_super.py
           python scripts/test_tlv_super_guard.py
 
       - name: Verify monthly household comparisons in all cities
