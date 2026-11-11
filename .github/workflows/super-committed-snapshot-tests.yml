@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '24'
       - run: pip install requests==2.32.5 beautifulsoup4==4.14.2
-      - name: Verify committed output without generators or source collection
+      - name: Verify committed output after lightweight header preparation
         run: |
           python scripts/test_super_homepage.py
           node scripts/test_super_live_loading.cjs
@@ -31,6 +31,7 @@ jobs:
           node scripts/test_super_smart_shopping.cjs
           python scripts/test_super_deals.py
           node scripts/test_super_deals.cjs
+          python scripts/super_ashdod_shell.py
           python scripts/super_ashdod_shell.py --check
           python scripts/test_super_shell.py
           python scripts/test_yavne_super.py --deployment-only
