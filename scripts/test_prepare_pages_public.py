@@ -47,6 +47,7 @@ with tempfile.TemporaryDirectory() as tmp:
     for name, body in {'index.html':'<head></head>news',
       'SUPER.KGAT/index.html':'<html><head></head><body>unchanged</body></html>',
       'SUPER.KGAT/compare/index.html':'<html><head></head><body>compare</body></html>',
+      'SUPER.KGAT/assets/branding/super-shell.html':'<header>fragment</header>',
       'SUPER.KGAT/assets/app.js':'fetch("../data/catalog.json")',
       'SUPER.KGAT/data/catalog.json':'{"rows":[]}',
       'SUPER.KGAT/data/offers/00.json':'{}',

@@ -44,11 +44,12 @@ def delivery_script(cities, commit):
                            'prefixes': ['/SUPER.' + c + '/data/' for c in sorted(cities)]})
     return '<script data-super-delivery="' + commit + '">' + """(()=>{
 const settings=SETTINGS, original=window.fetch;
-function target(value){const u=new URL(value,document.baseURI);
+const currentRelease=original.call(window,settings.origin+'/release',{credentials:'omit',cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('release unavailable');return r.json()}).then(r=>/^[a-f0-9]{40}$/.test(r.source_commit)?r.source_commit:settings.release).catch(()=>settings.release);
+function target(value,release=settings.release){const u=new URL(value,document.baseURI);
 if(u.origin===location.origin&&settings.prefixes.some(p=>u.pathname.startsWith(p))){
-u.host=new URL(settings.origin).host;u.protocol='https:';u.searchParams.set('__release',settings.release);return u.href}return null}
+u.host=new URL(settings.origin).host;u.protocol='https:';u.searchParams.set('__release',release);return u.href}return null}
 window.fetch=function(input,init){try{const url=target(input instanceof Request?input.url:String(input));
-if(url){if(input instanceof Request)return original.call(this,new Request(url,input),init);return original.call(this,url,init)}}catch(error){return Promise.reject(error)}
+if(url)return currentRelease.then(release=>{const pinned=target(input instanceof Request?input.url:String(input),release);if(input instanceof Request)return original.call(this,new Request(pinned,input),init);return original.call(this,pinned,init)})}catch(error){return Promise.reject(error)}
 return original.call(this,input,init)};
 document.addEventListener('click',event=>{const a=event.target.closest?.('a[href]');if(!a)return;
 const url=target(a.href);if(url)a.href=url},true);
@@ -89,7 +90,7 @@ def stage(root, output, *, cities=None, source_commit=None, preserve_news_releas
         dest = output / path.relative_to(root)
         dest.parent.mkdir(parents=True, exist_ok=True)
         city = path.relative_to(root).parts[0]
-        if path.suffix == '.html' and city in {'SUPER.'+c for c in cities}:
+        if path.suffix == '.html' and city in {'SUPER.'+c for c in cities} and 'assets' not in path.relative_to(root).parts:
             html = path.read_text()
             if not re.search(r'<head\b[^>]*>', html, re.I):
                 raise ValueError('Missing HTML head: ' + str(path))
