@@ -1,7 +1,7 @@
-"""Small immutable private delta canary from committed supermarket collector output.
+"""Immutable private delta canary for six verified committed supermarket editions.
 
 This DOES NOT invoke collectors, replace pinned releases, alter production, or
-approve/publicly serve partial data. 3 critical JSON files per changed city only.
+approve/publicly serve partial data. 3 critical JSON files per validated city only; TLV is intentionally skipped.
 """
 import hashlib
 import json
@@ -17,8 +17,8 @@ from super_committed_delta_preflight import PINNED, REQUIRED, validate_status, b
 PROJECT = "qomkxhafrprooekwgsxf"
 BUCKET = "isnet-super-staging"
 BASE = f"https://{PROJECT}.supabase.co"
-# Explicit canary scope: do not expand without reviewing committed-source gates.
-CITIES = ("ASHDOD", "KGAT", "YAVNE")
+# Six validated collector-backed cities; exclude TLV (0/19 updated, prices JSON unchanged).
+CITIES = ("ASHDOD", "BATYAM", "HOLON", "KGAT", "RISHON", "YAVNE")
 MAX_JSON = 256 * 1024
 
 def validate_delta(city, source_sha, now=None):
@@ -95,6 +95,8 @@ def main():
     main_sha=git("rev-parse","origin/main").decode().strip()
     if not re.fullmatch("[a-f0-9]{40}",main_sha):raise RuntimeError("Bad origin/main ref")
     summary=[]
+    # Only carry already committed, timestamp-consistent private snapshots.
+    # No source collection, live publish, or modifications to existing releases.
     for city in CITIES:
         files,status=validate_delta(city,main_sha)
         prefix=f"previews/committed-deltas/{city}/{main_sha}/"
