@@ -1976,5 +1976,59 @@
       "gate_bypasses": 0
     },
     "next_action": "Controller coordinates event owner and existing publisher. Recheck actual successful publication; verify changed supermarket data only if source hashes change. Preserve current75/121 source11Nov and retained dates."
+  },
+  "delivery_verification": {
+    "observed_at": "2026-11-11T19:39:35Z",
+    "status": "public_independent_data_delivery_verified",
+    "origin": "https://isnetsuper.ebs987449.chatgpt.site",
+    "release_commit": "b516ff99f5113c342dc13c03b5ad8e7629b10024",
+    "cutover_run_id": 43087366998,
+    "cutover_source": "e79a747f410e15f4e7791194c47c9accb1f2b008",
+    "cutover_job_id": 130755161326,
+    "cities": [
+      "ASHDOD",
+      "YAVNE",
+      "KGAT",
+      "RISHON",
+      "HOLON",
+      "BATYAM",
+      "TLV"
+    ],
+    "live_deployment_marker": {
+      "url": "https://isnet.co.il/deployment-version.json",
+      "source_commit": "e1e49572ca718c2d8c3837ac72ba93fb191e72b6",
+      "run_id": "43023085987",
+      "super_delivery_commit": "e79a747f410e15f4e7791194c47c9accb1f2b008",
+      "super_delivery_run_id": "43087366998"
+    },
+    "public_status_hashes": {
+      "ASHDOD": 1080522601,
+      "YAVNE": 3575203653,
+      "KGAT": 2729095097,
+      "RISHON": 1229971514,
+      "HOLON": 3514764598,
+      "BATYAM": 1276427415,
+      "TLV": 267895576
+    },
+    "hash_method": "FNV1a over JSON.stringify parsed JSON; all seven independent-origin refresh-status match prior fully verified repository snapshot",
+    "tlvnet_status_hash": 267895576,
+    "tlvnet_url": "https://tlvnet.com/api/super-data/refresh-status.json",
+    "browser_functional_evidence": {
+      "url": "https://isnet.co.il/SUPER.KGAT/compare/?product=7290108509700",
+      "product": "אורז פרסי 1 ק״ג",
+      "branches": 9,
+      "prices": 31,
+      "min_price": 6.9,
+      "max_price": 12.9,
+      "source_dates": [
+        "2026-11-10",
+        "2026-11-11"
+      ],
+      "old_dates_visible": true,
+      "homepage_basket_loaded": true
+    },
+    "limits": "No new collection, freshness gain or source-recovery claim. No duplicate full prices/catalog/offers download. Same75source11Nov,20source10Nov,26source9Nov. GitHub remains data source dependency; collector jobs unchanged. Legacy direct ISNET data URLs no longer authoritative after cutover; read independent origin and TLVNET proxy.",
+    "normal_pages_incident": "Still blocked at event-integrity gate; successful storage-only cutover preserves previous news release and does not close that separate failure.",
+    "writes": "Only scoped operational verification report; no source migration/deployment/recovery started by maintenance owner."
   }
 }
