@@ -15,7 +15,7 @@ from urllib.request import Request, urlopen
 
 REF = "qomkxhafrprooekwgsxf"
 BUCKET = "isnet-super-staging"
-ALLOWED_CITIES = ("TLV",)  # increase only after a complete TLV canary succeeds
+ALLOWED_CITIES = ("ASHDOD","YAVNE","KGAT","RISHON","HOLON","BATYAM","TLV")  # TLV private canary passed
 ROOT = Path(__file__).resolve().parents[1]
 MAX_FILE_SIZE = 20 * 1024 * 1024
 
@@ -44,12 +44,17 @@ def publish(city):
         data=p.read_bytes()
         if len(data)>MAX_FILE_SIZE: raise RuntimeError("File too large for staging bucket")
         if p.suffix.lower()==".json": json.loads(data.decode("utf-8"))
-        if p.suffix.lower() not in (".json",".html"):
-            raise RuntimeError("Unexpected file extension in TLV stage")
+        mime = {
+            ".json":"application/json", ".html":"text/html", ".css":"text/css",
+            ".js":"application/javascript", ".webp":"image/webp", ".jpg":"image/jpeg",
+            ".jpeg":"image/jpeg", ".png":"image/png", ".svg":"image/svg+xml",
+            ".ttf":"font/ttf", ".txt":"text/plain"
+        }.get(p.suffix.lower())
+        if mime is None: raise RuntimeError("Unexpected file extension: "+p.suffix)
         relative=p.relative_to(ROOT).as_posix()
         object_name=f"releases/{city}/{release}/{relative}"
         url=base+"/storage/v1/object/"+BUCKET+"/"+quote(object_name,safe="/")
-        content_type="application/json" if p.suffix.lower()==".json" else "text/html"
+        content_type=mime
         checksum=hashlib.sha256(data).hexdigest()
         try:
             result,_=call(url,"POST",token,data,content_type)
