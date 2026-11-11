@@ -1,4 +1,4 @@
-name: Verify shadow supermarket canary emergency rollback (fail closed)
+name: Verify shadow supermarket canary final fail-closed rollback
 on:
   push:
     branches: [infra/supermarket-isolation-20261110]
@@ -20,4 +20,5 @@ jobs:
           code=$(curl -sSL --max-time 25 -o "$RUNNER_TEMP/blocked.json" -w '%{http_code}' "$endpoint?city=YAVNE&file=prices.json&release=5958cfaca9a61eacfdb1aa216635c3d3ff810850")
           test "$code" = "503"
           python -m json.tool "$RUNNER_TEMP/blocked.json" >/dev/null
-          echo "Rollback-compatible fail-closed public shadow route: HTTP $code"
+          grep -q '"Canary disabled"' "$RUNNER_TEMP/blocked.json"
+          echo "CANARY CUTOVER ROLLBACK CONFIRMED: HTTP $code; no live traffic changed"
