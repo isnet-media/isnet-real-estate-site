@@ -19,7 +19,7 @@ STATIC_EXT = {".css", ".js", ".png", ".jpg", ".jpeg", ".webp", ".svg",
 MEDIA_EXT = {".png", ".jpg", ".jpeg", ".webp", ".svg", ".gif", ".ico"}
 FONT_EXT = {".woff", ".woff2", ".ttf", ".otf"}
 CSS_URL = re.compile(r"url\(\s*['\"]?([^'\")]+)", re.I)
-REDIRECT = re.compile(r'http-equiv\s*=\s*["\']?refresh|window\.location\b|location\.replace\s*\(', re.I)
+REDIRECT = re.compile(r'<meta\\b[^>]*http-equiv\\s*=\\s*["\\\']?refresh', re.I)
 
 class ResourceParser(HTMLParser):
     def __init__(self):
