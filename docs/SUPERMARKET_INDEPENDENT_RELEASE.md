@@ -423,9 +423,16 @@ Its target is the **existing** private `isnet-ai-cms` project and bucket
   `.../SUPER.KGAT/data/prices.json` path, verify authenticated critical
   Storage readback, compare full-site manifest hashes with a disposable
   Git-archive restoration, and save the result as a private CI artifact.
-  **At this note's creation that corrected independent audit is pending:**
+  **Corrected independent audit completed SUCCESS:**
   [run 43057645887](https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43057645887).
-  Do not call that last audit passed until its result is inspected.
+  Its logs and preserved `isnet-kgat-current-main-private-restore-proof-43057645887`
+  CI artifact explicitly report **200/200 restored source files and 42,215,824
+  bytes verified by original SHA-256**, **3 authenticated critical private
+  JSON readbacks**, `anonymous_public_storage_read_denied=true` using the
+  real `SUPER.KGAT/data/prices.json` object path, and
+  `restore_dry_run_verified=true`. This is a disposable local restore,
+  **not** a production website reversal. The full run concluded successfully
+  at 2026-11-11 16:27:36 UTC, without changing published traffic.
 
 **Open production gates:** original private storage is in the shared CMS
 Supabase project (not an independent compute/failure domain); other five
