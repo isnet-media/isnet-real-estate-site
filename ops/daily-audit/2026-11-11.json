@@ -8288,5 +8288,68 @@
       },
       "next_attempt_at": "2026-11-11T19:58:00Z"
     }
-  ]
+  ],
+  "agent_efficiency": {
+    "checked_at": "2026-11-11T20:00:44.382Z",
+    "kind": "verified_operational_improvements",
+    "scope": "TLVNET runtime and eight existing editorial/control task instructions; no article publication",
+    "site": {
+      "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+      "version": 565,
+      "source_commit": "c1a04171267371f1157396392c56e7db5e001894",
+      "deployment_id": "appgdep_6af4c82fa50c8191978c4e6a60d490f3",
+      "deployment_status": "succeeded"
+    },
+    "findings": {
+      "routing_profile_swapped_news_culture": true,
+      "latest_automation_results_with_foreign_task_identity": [
+        "Automation_547bb40a554c819184ab07a7de64a4b2",
+        "Automation_f60537c642048191b85552af9e6c1cfe"
+      ],
+      "runtime_cross_task_result_routing_fixed": false
+    },
+    "verified_changes": [
+      "news -> main news/sports owner at :00",
+      "culture-news -> dedicated culture owner at :50",
+      "community/consumer scheduler observation paused; editorial enabled unchanged",
+      "bounded dispatch/desk views with complete default history retained",
+      "backlog excludes articles later recorded published/verified",
+      "unique recorded publication IDs separated from verification",
+      "conditional ETag invalidation and 304",
+      "unknown topic returns 400",
+      "eight task prompts updated without schedule or enablement changes"
+    ],
+    "http_evidence": {
+      "legacy_full_bytes": 7541852,
+      "dispatch_news_bytes": 4424,
+      "dispatch_culture_bytes": 4052,
+      "desk_bytes": 32605,
+      "unchanged_dispatch_status": 304,
+      "unchanged_dispatch_body_bytes": 0,
+      "invalid_topic_status": 400
+    },
+    "updated_task_ids": [
+      "Automation_f60537c642048191b85552af9e6c1cfe",
+      "Automation_547bb40a554c819184ab07a7de64a4b2",
+      "Automation_20ca7f765cf88191af46487bf3ef8063",
+      "Automation_851de24df7448191a034009b74fc236f",
+      "Automation_b38091754d888191abf21a150dc4ed62",
+      "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "Automation_09c630803fe481919ccd2f476f0d6916"
+    ],
+    "completed_migration_task_paused": "Automation_36083f64426c81919c88c38e441128b7",
+    "unchanged": [
+      "image approval and full-body gates",
+      "CMS original approvals and active ownership",
+      "social posting automation",
+      "paused editorial tasks",
+      "AI models, credits and billing",
+      "DB/R2 schema and security settings"
+    ],
+    "followup": {
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "instruction": "Check original scheduled task IDs against result text for next two actual runs. Prompt/profile correction is not proof of execution-engine routing recovery; retain incident if mismatches recur."
+    }
+  }
 }
