@@ -1948,5 +1948,33 @@
     "schedule_changes": 0,
     "deployments_started": 0
   },
-  "next_check_policy": "Compare current run IDs, source dates, blob hashes and public deployment first. Full prices/offers verification already completed today for this source snapshot; do not repeat if unchanged."
+  "next_check_policy": "Compare current run IDs, source dates, blob hashes and public deployment first. Full prices/offers verification already completed today for this source snapshot; do not repeat if unchanged.",
+  "shared_publication_incident": {
+    "signature": "ISNET|shared Pages publication|event-integrity gate|ashdod unresolved candidates 2",
+    "status": "blocked_shared_event_build_handed_to_operational_controller",
+    "observed_at": "2026-11-11T13:42:00Z",
+    "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+    "domain_owner": "existing ISNET event-maintenance owner",
+    "run_id": 43026800941,
+    "job_id": 130543673589,
+    "source_commit": "3b4b3723261543da57e792a8486c13b490b78e92",
+    "phase": "Build compact event listings and canonical sitemap",
+    "error": "AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release; actual2 expected0; scripts/test-event-integrity.cjs:126:99",
+    "root_cause_limit": "Release gate observes two unresolved Ashdod event candidates. Specific event reconciliation defect not diagnosed in supermarket scope. Deploy, upload and later supermarket build steps were skipped; not a supermarket collection failure or Pages syncing_files outage.",
+    "latest_success_in_actions": {
+      "run_id": 43023085987,
+      "source_commit": "e1e49572ca718c2d8c3837ac72ba93fb191e72b6",
+      "public_readback_this_cycle": false
+    },
+    "supermarket_data_unchanged_since_commit": "45dc7352100a803bdf6296a4238f386d5da69a7d",
+    "last_actual_supermarket_public_verification_preserved": true,
+    "actions": {
+      "controller_handoff": "Recorded in existing supermarket operations report for general controller; no external message.",
+      "source_fix": "Existing event owner must resolve reviewed event candidates under current ownership, then existing shared publisher validates.",
+      "supermarket_collection_or_recovery": 0,
+      "deployment_retries": 0,
+      "gate_bypasses": 0
+    },
+    "next_action": "Controller coordinates event owner and existing publisher. Recheck actual successful publication; verify changed supermarket data only if source hashes change. Preserve current75/121 source11Nov and retained dates."
+  }
 }
