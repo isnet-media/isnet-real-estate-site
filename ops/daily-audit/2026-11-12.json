@@ -1878,7 +1878,13 @@
         "build_or_deploy_started": false,
         "release_reason": "Operational status correction only. Preserve publisher instruction against a deployment merely for status/journal, and avoid competing with active culture owner. Include in next genuine content release.",
         "publication_gates_changed": false,
-        "articles_or_reviews_changed": false
+        "articles_or_reviews_changed": false,
+        "followup_release": {
+          "version": 576,
+          "deployment_id": "appgdep_6af583806b5081918218ee8744c5d892",
+          "status": "fixed_and_verified",
+          "verified_at": "2026-11-12T09:21:47.585Z"
+        }
       },
       "live_publication": {
         "checked_at": "2026-11-12T09:00:27.016589+00:00",
@@ -2019,7 +2025,7 @@
       "runKey": "ops-controller-dependency-repair-20261112T0914Z",
       "invocation": "publisher_explicit_repair_request",
       "observed_at": "2026-11-12T09:15:52.248Z",
-      "status": "deployment_in_progress",
+      "status": "fixed_and_verified",
       "signature": "TLVNET|briefs-writer desk dispatch|stale ledger image blocker",
       "source_commit": "0cac09b5a6b58d66c84784bdc108ec62a09cad2c",
       "repair_commit": "23b2921de8af33b975cc807e199b3df672c47b15",
@@ -2052,7 +2058,76 @@
       "new_publications": 0,
       "editorial_or_photo_approvals_added": 0,
       "automation_changes": 0,
-      "next_action": "Continue only this deployment ID to terminal status, verify live desk/dispatch correct source state and ETag behavior. Do not start another deployment or writer run."
+      "next_action": "Closed for stale ledger dependency and live writer editorial-authority policy. News owner still running9f7d4ff6 must perform its own factual/editorial check and publication transition for Jaffa; Jabotinsky still needs its own image review. Existing current approvals preserved. No duplicate run started.",
+      "completed_at": "2026-11-12T09:21:47.585Z",
+      "deployment_status": "succeeded",
+      "deployment_succeeded_at": "2026-11-12T09:19:15.997306+00:00",
+      "live_verification": {
+        "checked_at": "2026-11-12T09:20:19.808509+00:00",
+        "checks": {
+          "writer_editor_authority_live": true,
+          "desk": {
+            "http": 200,
+            "jaffa": {
+              "articleId": "jaffa-tziatli-shooting-serious-injury-20261111",
+              "status": "image_approved_ready_to_publish",
+              "observedAt": "2026-11-12T00:32:23Z",
+              "runKey": "news-2026-11-12-08:00",
+              "ledgerStatus": "draft_waiting_image",
+              "sourceStatus": "draft",
+              "sourcePublicationState": "image_approved_ready_to_publish",
+              "imageReviewCurrent": true,
+              "editorReviewStatus": "content_ready_waiting_image",
+              "liveVerificationRequired": true
+            },
+            "jabotinsky": {
+              "articleId": "jabotinsky-car-drug-trafficking-arrest-20261111",
+              "status": "draft_waiting_image",
+              "observedAt": "2026-11-12T07:06:13Z",
+              "runKey": "news-2026-11-12-08:00",
+              "ledgerStatus": "draft_waiting_image",
+              "sourceStatus": "draft",
+              "sourcePublicationState": "draft_waiting_image",
+              "imageReviewCurrent": false,
+              "editorReviewStatus": "content_ready_waiting_image",
+              "liveVerificationRequired": true
+            },
+            "statistics": {
+              "recordedPublishedToday": 0,
+              "recordedPublishedTotal": 185,
+              "verifiedArticlesToday": 3,
+              "publicationEntriesWithoutIds": 4,
+              "localDate": "2026-11-12",
+              "scope": "unique explicit article IDs in recorded published entries; verification is not new publication"
+            }
+          },
+          "etag_unchanged_304": true,
+          "dispatch": {
+            "http": 200,
+            "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+            "correct_queue": true,
+            "no_body_or_review_details_leaked": true
+          },
+          "invalid_topic_rejected": true,
+          "health": {
+            "status": "ok",
+            "checkedAt": "2026-11-12T09:20:50.897Z",
+            "checks": {
+              "database": "ok",
+              "mediaStorage": "ok",
+              "publicationStorage": "ok"
+            }
+          }
+        },
+        "article_http": {
+          "jaffa-tziatli-shooting-serious-injury-20261111": 404,
+          "jabotinsky-car-drug-trafficking-arrest-20261111": 404,
+          "tel-aviv-museum-bezalel-120-years-500-works-20261127": 200
+        },
+        "new_publications": 0
+      },
+      "actual_route_test": "PASS actual TypeScript API GET, source-vs-ledger approval, live bank block simulation, bank unavailable503, invalid topic400 and identityless POST403; source unchanged by test.",
+      "unresolved_separate_issue": "Scheduler task/result identity mapping remains unverified and open; this release does not fix or prove repair of routing_identity_mismatch."
     }
   ],
   "incident_register": [
@@ -2253,12 +2328,12 @@
     },
     {
       "signature": "TLVNET|briefs-writer desk dispatch|stale ledger image blocker",
-      "status": "deployment_in_progress",
+      "status": "fixed_and_verified",
       "owner": "Automation_b38091754d888191abf21a150dc4ed62",
       "runKey": "ops-controller-2026-11-12-10:58",
       "first_blocked_at": null,
       "first_blocked_at_note": "Exact original onset unknown; historical ledgers retained.",
-      "last_attempt_at": "2026-11-12T09:15:52.248Z",
+      "last_attempt_at": "2026-11-12T09:21:47.585Z",
       "root_cause": "queueFor projected historical writer ledgers only and ignored current article/image approval state. Latest news ledger marks Jaffa waiting for image despite approved matching current body and asset.",
       "repair": {
         "signature": "TLVNET|briefs-writer desk dispatch|stale ledger image blocker",
@@ -2285,10 +2360,77 @@
         "release": {
           "version": 576,
           "deployment_id": "appgdep_6af583806b5081918218ee8744c5d892",
-          "source_commit": "0cac09b5a6b58d66c84784bdc108ec62a09cad2c"
+          "source_commit": "0cac09b5a6b58d66c84784bdc108ec62a09cad2c",
+          "deployment_status": "succeeded",
+          "succeeded_at": "2026-11-12T09:19:15.997306+00:00"
         }
       },
-      "next_action": "Continue only this deployment ID to terminal status, verify live desk/dispatch correct source state and ETag behavior. Do not start another deployment or writer run."
+      "next_action": "Closed. Continue owner publications with current source queue; do not reinterpret this infrastructure release as a new article publication or a runtime routing fix.",
+      "verified_at": "2026-11-12T09:21:47.585Z",
+      "live_evidence": {
+        "checked_at": "2026-11-12T09:20:19.808509+00:00",
+        "checks": {
+          "writer_editor_authority_live": true,
+          "desk": {
+            "http": 200,
+            "jaffa": {
+              "articleId": "jaffa-tziatli-shooting-serious-injury-20261111",
+              "status": "image_approved_ready_to_publish",
+              "observedAt": "2026-11-12T00:32:23Z",
+              "runKey": "news-2026-11-12-08:00",
+              "ledgerStatus": "draft_waiting_image",
+              "sourceStatus": "draft",
+              "sourcePublicationState": "image_approved_ready_to_publish",
+              "imageReviewCurrent": true,
+              "editorReviewStatus": "content_ready_waiting_image",
+              "liveVerificationRequired": true
+            },
+            "jabotinsky": {
+              "articleId": "jabotinsky-car-drug-trafficking-arrest-20261111",
+              "status": "draft_waiting_image",
+              "observedAt": "2026-11-12T07:06:13Z",
+              "runKey": "news-2026-11-12-08:00",
+              "ledgerStatus": "draft_waiting_image",
+              "sourceStatus": "draft",
+              "sourcePublicationState": "draft_waiting_image",
+              "imageReviewCurrent": false,
+              "editorReviewStatus": "content_ready_waiting_image",
+              "liveVerificationRequired": true
+            },
+            "statistics": {
+              "recordedPublishedToday": 0,
+              "recordedPublishedTotal": 185,
+              "verifiedArticlesToday": 3,
+              "publicationEntriesWithoutIds": 4,
+              "localDate": "2026-11-12",
+              "scope": "unique explicit article IDs in recorded published entries; verification is not new publication"
+            }
+          },
+          "etag_unchanged_304": true,
+          "dispatch": {
+            "http": 200,
+            "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+            "correct_queue": true,
+            "no_body_or_review_details_leaked": true
+          },
+          "invalid_topic_rejected": true,
+          "health": {
+            "status": "ok",
+            "checkedAt": "2026-11-12T09:20:50.897Z",
+            "checks": {
+              "database": "ok",
+              "mediaStorage": "ok",
+              "publicationStorage": "ok"
+            }
+          }
+        },
+        "article_http": {
+          "jaffa-tziatli-shooting-serious-injury-20261111": 404,
+          "jabotinsky-car-drug-trafficking-arrest-20261111": 404,
+          "tel-aviv-museum-bezalel-120-years-500-works-20261127": 200
+        },
+        "new_publications": 0
+      }
     }
   ]
 }
