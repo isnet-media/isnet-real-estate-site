@@ -1616,6 +1616,125 @@
       "fixed_and_verified": 0,
       "published": [],
       "daily_audit_completed": false
+    },
+    {
+      "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "runKey": "ops-manual-editor-authority-2026-11-12T08:53:08.636Z",
+      "status": "writer_editor_authority_applied_and_verified",
+      "checked_at": "2026-11-12T08:53:08.636Z",
+      "authorization": "Explicit publisher request to cancel separate editor dependency and grant each writer editorial authority in its subject.",
+      "inventory_finding": "No standalone active TLVNET editor automation exists in current25-task inventory. Separate Herzliya/Raanana editor is paused and out of scope; not modified.",
+      "automation_updates": [
+        {
+          "id": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_20ca7f765cf88191af46487bf3ef8063",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_851de24df7448191a034009b74fc236f",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_09c630803fe481919ccd2f476f0d6916",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_e2f02000cdf4819190022b85f4391076",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_e03d80ff914c8191a790fc66e7447826",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_e467e9cca2d8819183f1d37b533a347c",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_2bd8b730a03081918fd587754ee03429",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_4c9b538f29d081918b3cbb12595b0989",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_db72d3aae7a0819189fe52d3243d658a",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        },
+        {
+          "id": "Automation_b38091754d888191abf21a150dc4ed62",
+          "success": true,
+          "enabled_unchanged": true,
+          "schedule_unchanged": true,
+          "authority_saved": true
+        }
+      ],
+      "source_commit": "edddf49e31079ac4ed2bdf4b565bea1dd3b9fc68",
+      "remote_head_verified": true,
+      "source_base": "b6fd9480874ca513811d52fd5b3fc3f4442a3011",
+      "source_documents_updated": 25,
+      "profile_standard_updated": true,
+      "security_or_admin_role_changes": false,
+      "editorial_gates_removed": false,
+      "new_publications": 0,
+      "build_or_deploy_started": false,
+      "checks": [
+        "All12 automation update responses confirm editorial-authority prefix saved, enable state and cadence unchanged",
+        "Fresh task readback confirms news/sports, culture, economy and real-estate authority",
+        "Photo automation remains disabled",
+        "news_photo_gate passed",
+        "news-photo-publication regression passed",
+        "git diff --check passed",
+        "Git push and exact remote HEAD verified"
+      ],
+      "draft_diagnosis": {
+        "source_read": "b6fd9480874ca513811d52fd5b3fc3f4442a3011",
+        "jaffa": "Image approved with matching body, but status stilldraft and editor_review stillcontent_ready_waiting_image; build-news.py only selects statuspublished. Existing latest news ledger uses stale image-pending evidence from base dbb360e4; no publication build/deploy was attempted for these drafts.",
+        "jabotinsky": "No selected photo; pending_exact_asset is a valid unresolved image requirement.",
+        "scheduler": "Latest recorded news run566c88ca failed after about30minutes, while latest_result199ea4d8 is a prior-day culture result. No scheduler failure trace exposed; root cause unverified. Latest Site deployment575 succeeded; not a current D1/deployment failure."
+      },
+      "publication_scope_note": "Professional content approval now belongs to each writer. This authority/configuration change alone does not publish drafts or prove runtime routing repaired. Existing body/photo approval gates and explicit human decisions preserved."
     }
   ],
   "incident_register": [
