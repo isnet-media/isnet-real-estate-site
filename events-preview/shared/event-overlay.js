@@ -76,6 +76,9 @@ reviewedProductions.push(
  {id:'daniel-cohen-comedy-bar',titles:['דניאל כהן במופע סטנדאפ','דניאל כהן במופע סטנד אפ – קומדי בר'],source:'https://friends-hist.co.il/show/דניאל-כהן-במופע-סטנד-אפ/'}, // Rishon 2026-11-20 22:00
  {id:'nova-andalusian-rishon-2026',titles:['נובה חדשה התזמורת האנדלוסית','נובה חדשה – התזמורת האנדלוסית אשדוד'],source:'https://friends-hist.co.il/show/נובה-חדשה-התזמורת-האנדלוסית-אשדוד/'} // Rishon 2026-11-22 20:30
 );
+// FRIENDS, the official Mishkan board and the linked booking listing were read on 12 Nov 2026.
+// Exact same production/cast at Mishkan Ashdod, 26 Dec 2026 21:00; retain both booking IDs.
+reviewedProductions.push({id:'toc-toc-tomix-2026',titles:['טוק טוק – קומדיה אובססיבית','טוק טוק – קומדיה אובססיבית – Toc-toc'],source:'https://friends-hist.co.il/show/טוק-טוק-קומדיה-אובססיבית/'});
 const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
 function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
 function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\s*([1-9]\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\s*\d+/g,'').replace(/^(?:אולם|אודיטוריום)\s+/,'');let key=e.venue_institution_id;

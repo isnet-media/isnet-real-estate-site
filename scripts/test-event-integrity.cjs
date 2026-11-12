@@ -119,6 +119,15 @@ const nes=nesTitles.map((title,i)=>row('nes-'+i,{title,category:'kids',start_dat
 const nesMerged=q.reconcile(nes);assert.equal(nesMerged.length,1);assert.ok(q.resolve(nes,'nes-0'));assert.ok(q.resolve(nes,'nes-1'));
 for(const different of [{start_time:'19:30'},{venue:'אולם אחר'},{title:nesTitles[0]+' עם צוות אחר'}])assert.equal(q.reconcile([nes[0],{...nes[1],...different}]).length,2);
 console.log('PASS: reviewed Mishkan duplicate title preserves IDs, distinct times, venues and cast titles');
+// Verified Toc-toc aliases: exact Ashdod occurrence; preserve both IDs and offers.
+const toc=[row('toc-friends',{title:'טוק טוק – קומדיה אובססיבית',category:'theatre',venue:'המשכן לאומניות הבמה – אשדוד',start_date:'2026-12-26',start_time:'21:00',purchase_url:'https://booking.test/friends'}),row('toc-sababa',{title:'טוק טוק – קומדיה אובססיבית – Toc-toc',category:'theatre',venue:'המשכן לאמנויות הבמה אשדוד',start_date:'2026-12-26',start_time:'21:00',purchase_url:'https://booking.test/bravo'})];
+assert.equal(q.reconcile(toc).length,1);
+assert.equal(q.suspectedDuplicates(q.reconcile(toc)).length,0);
+for(const e of toc)assert.equal(q.resolve(toc,e.event_id).event_id,q.reconcile(toc)[0].event_id);
+const tocMerged=q.reconcile(toc)[0];assert.deepEqual(new Set([tocMerged.purchase_url,...tocMerged.source_aliases.map(a=>a.url)]),new Set(toc.map(a=>a.purchase_url)));
+for(const other of [{start_time:'20:30'},{start_date:'2026-12-27'},{venue:'אולם דיונה אשדוד'},{title:toc[1].title+' עם צוות אחר'}])assert.equal(q.reconcile([toc[0],{...toc[1],...other}]).length,2);
+console.log('PASS: verified Toc-toc aliases retain both booking IDs; other times, days, venues and casts remain separate');
+
 const digest=require('node:crypto').createHash('sha256').update(fs.readFileSync('events-preview/shared/event-overlay.js')).digest('hex').slice(0,12);
 for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya']){
  const html=fs.readFileSync('events-preview/'+city+'/index.html','utf8');assert(html.includes('event-overlay.js?v='+digest),city+' must invalidate cached identity code on every policy edit');
