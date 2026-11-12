@@ -1,14 +1,10 @@
 name: Refresh Ashdod supermarket prices
 on:
   schedule:
-    # Stagger cities away from top-of-hour load; daily claim still permits one scan only.
-    - cron: '7 3,4,5,6 * * *'
+    # Once Sunday-Friday, after shops open (07:30-07:54 winter, 08:30-08:54 summer Israel time).
+    # GitHub cron uses UTC; Saturday is excluded and claim guard also forbids Saturday.
+    - cron: '30 5 * * 0-5'
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/super-prices.yml
-      - scripts/super_daily_run.py
 permissions:
   contents: write
 concurrency:
