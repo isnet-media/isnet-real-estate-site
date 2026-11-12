@@ -1,9 +1,9 @@
 name: Refresh Rishon supermarket prices
 on:
   schedule:
-    # Once Sunday-Friday, after shops open (07:30-07:54 winter, 08:30-08:54 summer Israel time).
-    # GitHub cron uses UTC; Saturday is excluded and claim guard also forbids Saturday.
-    - cron: '42 5 * * 0-5'
+    # Sun/Tue/Thu: 08:00-08:24 winter, 09:00-09:24 summer (Israel).
+    # The durable claim also rejects delayed afternoon and wrong-day starts.
+    - cron: '12 6 * * 0,2,4'
   workflow_dispatch:
 permissions:
   contents: write
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Claim one daily collection after 06:00 Israel
+      - name: Claim collection only Sun/Tue/Thu 08:00-11:00 Israel
         id: daily
         run: python scripts/super_daily_run.py claim --city RISHON
       - run: pip install requests==2.32.5 beautifulsoup4==4.14.2

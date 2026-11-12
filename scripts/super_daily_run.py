@@ -3,14 +3,15 @@ import argparse,json,os,subprocess,time
 from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from super_schedule import in_window
 ROOT=Path(__file__).resolve().parents[1]
 CITIES={'ASHDOD','YAVNE','KGAT','RISHON','HOLON','BATYAM','TLV'}
 def git(*args):
  return subprocess.run(['git',*args],cwd=ROOT,check=True,text=True,capture_output=True).stdout.strip()
 def allowed(now,claim,report):
- # Respect the publisher's no-collection Saturday rule in Israel time.
+ # Check actual execution time, not the scheduled event timestamp.
  now=now.astimezone(ZoneInfo('Asia/Jerusalem'))
- if now.weekday()==5 or now.hour<6:return False
+ if not in_window(now):return False
  today=now.date()
  for record,key in ((claim,'started_at'),(report,'checked_at')):
   value=record.get(key)
@@ -41,7 +42,7 @@ def main():
    ledger.parent.mkdir(exist_ok=True);ledger.write_text(json.dumps({'city':a.city,'started_at':now.isoformat(),'status':'started','run_id':os.environ.get('GITHUB_RUN_ID')},indent=2)+'\n')
    publish([str(ledger.relative_to(ROOT))],f'Claim daily {a.city} supermarket collection {now.date()}')
   with open(os.environ['GITHUB_OUTPUT'],'a') as out:out.write('collect='+str(collect).lower()+'\n')
-  print('Daily collection claimed' if collect else 'No collection: before 06:00 or already attempted today')
+  print('Daily collection claimed' if collect else 'No collection: outside Sun/Tue/Thu 08:00-11:00 Israel or already attempted today')
  else:
   claim=read(ledger);claim.update(status='completed' if a.action=='publish' else 'failed',finished_at=now.isoformat())
   if a.action=='publish':claim['result']=read(report).get('updated_count')

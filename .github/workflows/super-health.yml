@@ -1,8 +1,8 @@
 name: All cities supermarket public health
 on:
   schedule:
-    # Morning full check only (UTC). Hourly owner monitors changes, not full scans.
-    - cron: '30 6 * * *'
+    # Sun/Tue/Thu only; actual Israel execution time is checked before HTTP reads.
+    - cron: '0 8 * * 0,2,4'
   workflow_dispatch:
   push:
     branches: [main]
@@ -21,6 +21,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Check actual Israel morning window
+        id: window
+        run: python scripts/super_schedule.py >> "$GITHUB_OUTPUT"
       - run: pip install requests==2.32.5
+        if: steps.window.outputs.allowed == 'true'
       - run: python scripts/test_super_public_freshness.py
+        if: steps.window.outputs.allowed == 'true'
       - run: python scripts/check_super_public.py
+        if: steps.window.outputs.allowed == 'true'

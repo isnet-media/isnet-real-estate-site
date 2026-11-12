@@ -2,14 +2,11 @@
 import concurrent.futures,json,requests
 from datetime import datetime,date,timedelta
 from zoneinfo import ZoneInfo
+from super_schedule import in_window, expected_collection_day
 CITIES={'ASHDOD':20,'YAVNE':7,'KGAT':9,'RISHON':24,'HOLON':23,'BATYAM':19,'TLV':19}
 now=datetime.now(ZoneInfo('Asia/Jerusalem'))
 def collection_due(checked_at, current):
- # Allow the 06:00 collection two hours to finish; Saturday has no collection.
- current=current.astimezone(ZoneInfo('Asia/Jerusalem'))
- expected=current.date()
- if current.hour<8:expected-=timedelta(days=1)
- if expected.weekday()==5:expected-=timedelta(days=1)
+ expected=expected_collection_day(current)
  checked=datetime.fromisoformat(checked_at).astimezone(ZoneInfo('Asia/Jerusalem'))
  return checked.date()<expected
 def check(city,minimum):
@@ -25,9 +22,9 @@ def check(city,minimum):
   prices=responses['data/prices.json'].json();refresh=responses['data/refresh-status.json'].json()
   errors=[]
   if prices['branch_count']<minimum:errors.append('Connected branch coverage dropped')
-  stale=[b['id'] for b in prices['branches'] if not b.get('file_date') or (now.date()-date.fromisoformat(b['file_date'])).days>1]
+  stale=[b['id'] for b in prices['branches'] if not b.get('file_date') or (expected_collection_day(now)-date.fromisoformat(b['file_date'])).days>1]
   if stale:errors.append('Stale branches: '+','.join(stale))
-  if collection_due(refresh['checked_at'],now):errors.append('Daily collection overdue: last public collection '+refresh['checked_at'])
+  if collection_due(refresh['checked_at'],now):errors.append('Scheduled collection overdue: last public collection '+refresh['checked_at'])
   failed=[b['branch_id'] for b in refresh['branches'] if b['status']!='updated']
   if failed:errors.append('Sources retaining previous data: '+','.join(failed))
   # Confirm both published data entry points carry the same branch metadata.
@@ -36,6 +33,9 @@ def check(city,minimum):
   return city,errors
  except Exception as error:return city,[type(error).__name__+': public read-back failed']
 def main():
+ if not in_window(now,health=True):
+  print("Skipped: supermarket health checks only Sun/Tue/Thu mornings in Israel")
+  return
  with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
   results=list(pool.map(lambda item:check(*item),CITIES.items()))
  for city,errors in results:
