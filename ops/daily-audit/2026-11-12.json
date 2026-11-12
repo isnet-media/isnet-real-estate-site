@@ -1350,6 +1350,116 @@
         "No claim of autonomous Meta connection or new social post",
         "Tasks already running may retain their prior instruction snapshot; saved instructions verified for subsequent work"
       ]
+    },
+    {
+      "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "runKey": "ops-manual-publication-check-2026-11-12T08:33:47.016780+00:00",
+      "trigger": "Publisher requested verification after image responsibility transfer",
+      "status": "partial_publication_verified_two_drafts_remain",
+      "source_head": "e2a0a70fa3b4d07d0b93266240d8eaa5aea3166b",
+      "checked_at": "2026-11-12T08:33:47.016780+00:00",
+      "deployment": {
+        "version": 575,
+        "source": "e2a0a70fa3b4d07d0b93266240d8eaa5aea3166b",
+        "id": "appgdep_6af574764910819195e227c141ee7c18",
+        "status": "succeeded"
+      },
+      "article_readbacks": [
+        {
+          "id": "jabotinsky-car-drug-trafficking-arrest-20261111",
+          "title": "רכב חסם מדרכה בז׳בוטינסקי; הנהג נעצר בחשד לסחר בסמים",
+          "source_status": "draft",
+          "publication_state": "draft_waiting_image",
+          "published_at": null,
+          "review_status": "pending_exact_asset",
+          "review_current": true,
+          "photo_bank_id": null,
+          "url": "https://tlvnet.com/news/jabotinsky-car-drug-trafficking-arrest-20261111",
+          "http": 404,
+          "title_matches": false,
+          "body_matches": false,
+          "image": null,
+          "credit_visible": false,
+          "home_link": false,
+          "section_http": 200,
+          "section_link": false
+        },
+        {
+          "id": "jaffa-tziatli-shooting-serious-injury-20261111",
+          "title": "גבר נפצע קשה בירי ביפו; המשטרה פתחה בסריקות",
+          "source_status": "draft",
+          "publication_state": "image_approved_ready_to_publish",
+          "published_at": null,
+          "review_status": "approved",
+          "review_current": true,
+          "photo_bank_id": "injury-investigation-concept-ai-20261112",
+          "url": "https://tlvnet.com/news/jaffa-tziatli-shooting-serious-injury-20261111",
+          "http": 404,
+          "title_matches": false,
+          "body_matches": false,
+          "image": {
+            "http": 200,
+            "type": "image/jpeg",
+            "rendered": false,
+            "sha256": "97e6e510e5f8ad84be1a4687742e1f65b13afeb96f326bf2c8ce5c3fc469f226",
+            "matches_source": true
+          },
+          "credit_visible": false,
+          "home_link": false,
+          "section_http": 200,
+          "section_link": false
+        },
+        {
+          "id": "tel-aviv-museum-bezalel-120-years-500-works-20261127",
+          "title": "500 יצירות ו־120 שנה: תערוכת בצלאל תיפתח במוזיאון תל אביב",
+          "source_status": "published",
+          "publication_state": "publication_pending_live_verification",
+          "published_at": "2026-11-12T07:35:00Z",
+          "review_status": "approved",
+          "review_current": true,
+          "photo_bank_id": "historical-art-craft-concept-ai-20261112",
+          "url": "https://tlvnet.com/news/tel-aviv-museum-bezalel-120-years-500-works-20261127",
+          "http": 200,
+          "title_matches": true,
+          "body_matches": true,
+          "image": {
+            "http": 200,
+            "type": "image/jpeg",
+            "rendered": true,
+            "sha256": "53f789aff6e63a4d40072fbdeeeeed1630e497c4b9abf68272426859e11bf167",
+            "matches_source": true
+          },
+          "credit_visible": true,
+          "home_link": true,
+          "section_http": 200,
+          "section_link": true
+        }
+      ],
+      "new_publications_by_this_check": 0,
+      "existing_publications_verified": 1,
+      "build_or_deploy_started": false,
+      "blockers": [
+        {
+          "article_id": "jaffa-tziatli-shooting-serious-injury-20261111",
+          "domain": "news",
+          "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "first_blocked_at": "2026-11-12T00:32:23Z",
+          "last_attempt_at": "2026-11-12T08:33:47.016780+00:00",
+          "reason": "Approved matching image exists; source remains draft and live article404",
+          "next_action": "Owner completes factual freshness review and authorized publication; do not recreate image or request. Latest recorded news run566c88ca failed; no diagnostic root cause exposed by peek."
+        },
+        {
+          "article_id": "jabotinsky-car-drug-trafficking-arrest-20261111",
+          "domain": "news",
+          "owner": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "first_blocked_at": "2026-11-12T07:06:13Z",
+          "last_attempt_at": "2026-11-12T08:33:47.016780+00:00",
+          "reason": "pending_exact_asset; no photo_bank_id; draft and404",
+          "next_action": "Content owner performs licensed image search or dedicated illustration and actual review, then publication through normal workflow."
+        }
+      ],
+      "routing_note": "News latest_result199ea4d8 declares culture task547bb4 and is from previous day, while latest recorded run566c88ca failed. Not treated as current news success or as a newly diagnosed root cause.",
+      "scope_note": "Museum was already live before responsibility transfer; verified here as an existing publication, not attributed to transfer or newly published by this check."
     }
   ],
   "incident_register": [
