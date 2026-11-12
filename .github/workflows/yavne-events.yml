@@ -1,16 +1,8 @@
 name: Refresh Yavne events
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - scripts/sync_yavne_events.py
-      - scripts/yavne_event_quality.py
-      - scripts/cache_yavne_images.py
-      - scripts/audit_yavne_event_media.py
-      - .github/workflows/yavne-events.yml
   schedule:
-    - cron: '25 5 * * *'
+    - cron: '40 5 * * 0'
 permissions:
   contents: write
 concurrency:
