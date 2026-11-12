@@ -590,6 +590,370 @@
         },
         "new_article_publications": 0
       }
+    },
+    {
+      "owner_automation_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+      "runKey": "photo-bank-2026-11-12-01:55",
+      "run_id": "77eddea6-d620-832e-8ab5-2df3354c47df",
+      "started_at": "2026-11-11T23:53:08.449377Z",
+      "checked_at": "2026-11-12T00:00:33.259101+00:00",
+      "status": "image_approved_ready_to_publish",
+      "article_id": "tel-aviv-museum-bezalel-120-years-500-works-20261127",
+      "body_sha256": "86b3d410cbd5da637871e9ce3c96f9af50082145b26a2354c95bc2923e0b7381",
+      "selected_bank_id": "historical-art-craft-concept-ai-20261112",
+      "added_ids": [
+        "historical-art-craft-concept-ai-20261112"
+      ],
+      "new_assets": 1,
+      "preview_review": {
+        "performed": true,
+        "reviewed_at": "2026-11-12T00:00:33.259101+00:00",
+        "desktop_width": 1200,
+        "mobile_width": 390,
+        "mobile_test_type": "responsive iframe, not physical handset",
+        "views": [
+          "card",
+          "article"
+        ],
+        "result": "Four local source-template renderings actually viewed; full frame and exact separate AI caption visible. Current root CSS copied into isolated review fixture.",
+        "browser_tab": "60"
+      },
+      "search_evidence": [
+        {
+          "source": "Local latest bank and live /api/photo-bank",
+          "result": "HTTP200 collector enabled151assets; duplicate museum archive F160316MA008 already used in culture; other bank photos depict Noma Bar/Alex Levac exhibitions, rejected."
+        },
+        {
+          "source": "Flash90 public targeted searches Tel Aviv Museum / Bezalel and https://www.flash90.net/item/en/1/216547",
+          "result": "No usable exact exhibition result; public item reader unavailable. No authenticated subscriber catalogue session exposed or exhaustive subscriber search claimed."
+        },
+        {
+          "source": "https://tamuseum.org.il/he/exhibition/moment-birth-120-years-bezalel-arts-craft-school/",
+          "result": "Full official exhibition page read for image context; rights reserved and no explicit per-file reuse/storage permission. Official artwork image not copied."
+        },
+        {
+          "source": "https://commons.wikimedia.org/wiki/File:Herta_and_Paul_Amir_Building-Tel_Aviv_Museum_of_Art-3.jpg",
+          "result": "CCBYSA3 authorYairHaklai verified; actually viewed and rejected for pronounced grain/reflection. Direct download returned403; no bypass."
+        },
+        {
+          "source": "https://commons.wikimedia.org/wiki/File:Tel_Aviv_Museum_of_Art_-_Israel,_March_2024_01.jpg",
+          "result": "CCBYSA4 authorChenspec verified; metadata identifies hostage-square flags/ribbons, not chosen for exhibition context."
+        },
+        {
+          "source": "Built-in imagegen",
+          "result": "Dedicated conceptual art/craft tools, blank paper, no named museum, real works or fake exhibit documentation. Original actually viewed."
+        }
+      ],
+      "first_blocked_at": "2026-11-11T22:56:00Z",
+      "last_attempt_at": "2026-11-12T00:00:33.259101+00:00",
+      "owner": "Automation_547bb40a554c819184ab07a7de64a4b2",
+      "next_action": "Culture writer publishes unchanged approved draft after current-source integration and relevant gates; verify live article/JPG/AIcredit/card/home.",
+      "article_text_and_dates_unchanged": true,
+      "deployment_requested": false,
+      "checks": "check-photo-bank passed151localJPGs; prepare-public passed including image gates/regressions",
+      "audit": {
+        "duplicate_asset_in_section": 4,
+        "explicit_photo_approval_pending": 114,
+        "portrait_or_poster_needs_framing_review": 7,
+        "rendered_visual_review_pending": 2,
+        "specific_subject_photo_pending": 89
+      },
+      "source_handoff": "Only8photo-owned source files committed; generated preparation outputs retained locally and excluded from approval-only source handoff. Writer must prepare fresh latest source before publishing.",
+      "source_commit": "e61e0b2766fff304b4bc3775f93607e617252af6",
+      "remote_head_verified": true,
+      "source_base": "ef7da5f2f97c0f5854c5a05a12f15861756b570b",
+      "new_articles_published": 0,
+      "live_verification": "pending_writer_publication",
+      "handoff": "Culture writer active180a2759; do not publish in parallel. Consume exact-body approval from latest source and run fresh prepare-public before publishing. Generated local preparation output deliberately not committed as part of approval-only source handoff."
+    },
+    {
+      "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "runKey": "ops-controller-2026-11-12-01:58",
+      "run_id": "cbe7d13f-c7e4-8322-8d89-918d9a323148",
+      "started_at": "2026-11-11T23:59:10.216620Z",
+      "checked_at": "2026-11-12 00:03:50 UTC",
+      "status": "partial_with_routing_and_readback_access_block",
+      "routing": [
+        {
+          "requested_task_id": "Automation_b38091754d888191abf21a150dc4ed62",
+          "result_run_id": "feddf10f-971c-8322-a7bb-2ef2621a6819",
+          "result_created_at": "2026-11-11T23:11:14.785238Z",
+          "declared_task_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+          "declared_runKey": "photo-bank-2026-11-12-00:55",
+          "active_run_id": "cbe7d13f-c7e4-8322-8d89-918d9a323148",
+          "status": "routing_identity_mismatch",
+          "not_current_active_result": true
+        },
+        {
+          "requested_task_id": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "result_run_id": "199ea4d8-f988-8331-9c19-7dbcfd367d77",
+          "result_created_at": "2026-11-11T23:08:30.267410Z",
+          "declared_task_id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+          "declared_runKey": "culture-news-2026-11-12-00:00",
+          "active_run_id": "9b3ef034-79b8-8331-bcd7-45b7aa922564",
+          "status": "routing_identity_mismatch",
+          "not_current_active_result": true
+        }
+      ],
+      "inventory": {
+        "total": 25,
+        "enabled": 13,
+        "paused": 12,
+        "items": [
+          {
+            "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+            "title": "כתב מדורי צבע — המחר, תרבות נט, נשים",
+            "system": "cloud",
+            "last_run": {
+              "id": "3e476264-7724-8323-b5db-0caea5df804a",
+              "recorded_status": "completed",
+              "scheduled_for": "2026-11-11T07:15:00Z",
+              "started_at": "2026-11-11T07:14:44.744154Z",
+              "completed_at": "2026-11-11T07:19:11.321529Z",
+              "chat_ref": {
+                "type": "chatgpt",
+                "id": "6aed7da7-acdc-83eb-a2ce-ab27bfac8cc0"
+              }
+            },
+            "latest_result_run_id": "3e476264-7724-8323-b5db-0caea5df804a",
+            "result_read": true,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+            "title": "עורך משותף — הרצליה ורעננה",
+            "system": "cloud",
+            "last_run": {
+              "id": "abe98f88-5678-832a-8c58-102e15421761",
+              "recorded_status": "in_progress",
+              "scheduled_for": "2026-11-12T00:05:00Z",
+              "started_at": "2026-11-12T00:02:02.054646Z",
+              "completed_at": null,
+              "chat_ref": null
+            },
+            "latest_result_run_id": null,
+            "result_read": false,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+            "title": "עורך תמונות ובקרת איכות — TLVNET",
+            "system": "cloud",
+            "last_run": null,
+            "latest_result_run_id": null,
+            "result_read": false,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_b38091754d888191abf21a150dc4ed62",
+            "title": "בקרה ותיקון סוכני הרשת",
+            "system": "cloud",
+            "last_run": null,
+            "latest_result_run_id": null,
+            "result_read": false,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_851de24df7448191a034009b74fc236f",
+            "title": "כתב נדל״ן, דירות ושכירות — TLVNET",
+            "system": "cloud",
+            "last_run": {
+              "id": "707c7076-016c-8321-84ff-06efd68506bf",
+              "recorded_status": "completed",
+              "scheduled_for": "2026-11-11T23:10:00Z",
+              "started_at": "2026-11-11T23:14:09.359596Z",
+              "completed_at": "2026-11-11T23:18:21.571890Z",
+              "chat_ref": {
+                "type": "chatgpt",
+                "id": "6aefdb39-abc0-83eb-8456-ece124ccedbf"
+              }
+            },
+            "latest_result_run_id": "707c7076-016c-8321-84ff-06efd68506bf",
+            "result_read": true,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_20ca7f765cf88191af46487bf3ef8063",
+            "title": "כתב כלכלה והייטק — TLVNET",
+            "system": "cloud",
+            "last_run": {
+              "id": "e448ce30-2c64-8320-971e-fe44e5042cae",
+              "recorded_status": "completed",
+              "scheduled_for": "2026-11-11T23:20:00Z",
+              "started_at": "2026-11-11T23:18:41.608758Z",
+              "completed_at": "2026-11-11T23:26:53.889177Z",
+              "chat_ref": {
+                "type": "chatgpt",
+                "id": "6aefca4a-5db0-83ed-9bf6-2738aed86760"
+              }
+            },
+            "latest_result_run_id": "e448ce30-2c64-8320-971e-fe44e5042cae",
+            "result_read": true,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+            "title": "כתב חדשות תרבות — TLVNET",
+            "system": "cloud",
+            "last_run": {
+              "id": "180a2759-48b0-8332-a50e-3348c1b5d302",
+              "recorded_status": "in_progress",
+              "scheduled_for": "2026-11-11T23:50:00Z",
+              "started_at": "2026-11-11T23:55:00.335654Z",
+              "completed_at": null,
+              "chat_ref": null
+            },
+            "latest_result_run_id": "1780dbd7-514c-8332-b89c-abfcb14fdb53",
+            "result_read": true,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_f60537c642048191b85552af9e6c1cfe",
+            "title": "כתבי TLVNET + כתב ספורט משותף",
+            "system": "cloud",
+            "last_run": {
+              "id": "9b3ef034-79b8-8331-bcd7-45b7aa922564",
+              "recorded_status": "in_progress",
+              "scheduled_for": "2026-11-12T00:00:00Z",
+              "started_at": "2026-11-11T23:56:03.130292Z",
+              "completed_at": null,
+              "chat_ref": null
+            },
+            "latest_result_run_id": "199ea4d8-f988-8331-9c19-7dbcfd367d77",
+            "result_read": true,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_db72d3aae7a0819189fe52d3243d658a",
+            "title": "פרסום שעתי — תל אביב נט ברשתות",
+            "system": "cloud",
+            "last_run": null,
+            "latest_result_run_id": null,
+            "result_read": false,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "6ad8fab91ca48191ac06928a99f7c8d9",
+            "title": "תקינות מחירי הסופר בכל הערים",
+            "system": "cloud",
+            "last_run": {
+              "id": "96326033-d6c8-8325-aed0-9602f86ab18e",
+              "recorded_status": "completed",
+              "scheduled_for": "2026-11-11T21:35:00Z",
+              "started_at": "2026-11-11T21:39:42.499392Z",
+              "completed_at": "2026-11-11T21:40:14.150302Z",
+              "chat_ref": null
+            },
+            "latest_result_run_id": null,
+            "result_read": false,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "6acb0ab1c1988191a700f8fb4287c8e0",
+            "title": "קליטת אירועים יומית ISNET",
+            "system": "cloud",
+            "last_run": {
+              "id": "0008da4e-7c0c-832a-9400-a7f90cdee4f9",
+              "recorded_status": "completed",
+              "scheduled_for": "2026-11-11T06:05:00Z",
+              "started_at": "2026-11-11T06:25:50.262353Z",
+              "completed_at": "2026-11-11T06:32:49.699684Z",
+              "chat_ref": {
+                "type": "chatgpt",
+                "id": "6acc7496-2300-83ed-83a9-41931180687b"
+              }
+            },
+            "latest_result_run_id": "0008da4e-7c0c-832a-9400-a7f90cdee4f9",
+            "result_read": true,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "Automation_4c9b538f29d081918b3cbb12595b0989",
+            "title": "עדכון מעושרים בתל אביב",
+            "system": "cloud",
+            "last_run": {
+              "id": "93a4f715-328c-8325-a686-0ef9a342ba23",
+              "recorded_status": "completed",
+              "scheduled_for": "2026-11-11T16:20:00Z",
+              "started_at": "2026-11-11T16:15:28.982640Z",
+              "completed_at": "2026-11-11T16:19:25.428188Z",
+              "chat_ref": {
+                "type": "chatgpt",
+                "id": "6af1f2a7-7f88-83eb-9311-4f83ac0964cb"
+              }
+            },
+            "latest_result_run_id": "93a4f715-328c-8325-a686-0ef9a342ba23",
+            "result_read": true,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          },
+          {
+            "task_id": "6ae8893c6e30819192dd11bddff9e078",
+            "title": "בדיקה ותיקון סופרים ואירועים",
+            "system": "cloud",
+            "last_run": {
+              "id": "01259049-f734-832f-aa15-33ba4d600742",
+              "recorded_status": "completed",
+              "scheduled_for": "2026-11-11T08:05:00Z",
+              "started_at": "2026-11-11T08:21:43.203865Z",
+              "completed_at": "2026-11-11T08:40:30.890997Z",
+              "chat_ref": {
+                "type": "chatgpt",
+                "id": "6ae887f1-5a58-83eb-a003-420f328da443"
+              }
+            },
+            "latest_result_run_id": "01259049-f734-832f-aa15-33ba4d600742",
+            "result_read": true,
+            "verification": "Owner summary only; no independent public-product verification in this run"
+          }
+        ]
+      },
+      "source_read": "ef7da5f2f97c0f5854c5a05a12f15861756b570b",
+      "photo_handoff_source": "e61e0b2766fff304b4bc3775f93607e617252af6",
+      "daily_audit_completed": false,
+      "scope_limits": [
+        "Existing source AGENT_OPERATIONS/COLLECTOR/PUBLICATION_POLICY and real-estate source recovery path read.",
+        "AGENTS.md and OPERATIONS.md not present in selected source file discovery and GitHub root returned404; ops/REPAIR_2026-11-10.md read.",
+        "Herzliya/Raanana owner runabe98f88 active; no competing CMS write or headline replacement claimed.",
+        "Supermarket/event/UX prior-day summaries read; no duplicate source scans, no new Nov12 comprehensive public verification claimed.",
+        "No local Work scheduler/session tracing interface exposed; no exact routing root cause or infrastructure repair claimed."
+      ],
+      "economy": {
+        "owner": "Automation_20ca7f765cf88191af46487bf3ef8063",
+        "run_id": "e448ce30-2c64-8320-971e-fe44e5042cae",
+        "article_id": "tlv-startup-workspaces-hamigdal-haratzif-service-20261111",
+        "reported_status": "published_verified",
+        "source_status": "published",
+        "body_sha256": "9ff2767f2cc7640a045e1fc2ef55c242c3062e86a6801a90d2e1048f8b13d9c8",
+        "version": 571,
+        "deployment_id": "appgdep_6af4f94022dc8191a19bc3c7120ce9c7",
+        "deployment_terminal_status": "succeeded",
+        "deployment_terminal_at": "2026-11-11T23:25:02.930319Z",
+        "independent_live_readback": "blocked_by_automatic_approval_review; not verified or counted by controller",
+        "readback_rejection": "Review classified credentialed economy article readback as outside active photo scope despite subsequent controller instruction; action not retried or bypassed."
+      },
+      "real_estate": {
+        "owner": "Automation_851de24df7448191a034009b74fc236f",
+        "run_id": "707c7076-016c-8321-84ff-06efd68506bf",
+        "reported_result": "no_publication; TELAVIVA and20/80 candidates lack unit-price/credit detail; planning table not loaded",
+        "source_ledger_commit": "23b4f364",
+        "not_new_controller_research": true
+      },
+      "culture": {
+        "owner": "Automation_547bb40a554c819184ab07a7de64a4b2",
+        "active_run": "180a2759-48b0-8332-a50e-3348c1b5d302",
+        "article_id": "tel-aviv-museum-bezalel-120-years-500-works-20261127",
+        "status": "image_approved_ready_to_publish",
+        "approval_owner": "Automation_39a1ff0103088191a654a694e58c7bd8",
+        "approval_runKey": "photo-bank-2026-11-12-01:55",
+        "body_sha256": "86b3d410cbd5da637871e9ce3c96f9af50082145b26a2354c95bc2923e0b7381",
+        "first_blocked_at": "2026-11-11T22:56:00Z",
+        "last_attempt_at": "2026-11-12T00:00:33.259101+00:00",
+        "next_action": "Culture writer active180a2759; do not publish in parallel. Consume exact-body approval from latest source and run fresh prepare-public before publishing. Generated local preparation output deliberately not committed as part of approval-only source handoff.",
+        "new_parallel_deployment": false
+      },
+      "new_articles_published_by_controller": 0,
+      "independently_verified_existing_articles": 0,
+      "deployments_started": 0
     }
   ],
   "incident_register": [
@@ -627,13 +991,35 @@
           "active_last_run": "6401f346-9f60-8331-a889-ea446f1b7ac6",
           "not_attributed_to_current_active_run": false,
           "status": "routing_identity_mismatch"
+        },
+        {
+          "requested_task_id": "Automation_b38091754d888191abf21a150dc4ed62",
+          "result_run_id": "feddf10f-971c-8322-a7bb-2ef2621a6819",
+          "result_created_at": "2026-11-11T23:11:14.785238Z",
+          "declared_task_id": "Automation_39a1ff0103088191a654a694e58c7bd8",
+          "declared_runKey": "photo-bank-2026-11-12-00:55",
+          "active_run_id": "cbe7d13f-c7e4-8322-8d89-918d9a323148",
+          "status": "routing_identity_mismatch",
+          "not_current_active_result": true
+        },
+        {
+          "requested_task_id": "Automation_f60537c642048191b85552af9e6c1cfe",
+          "result_run_id": "199ea4d8-f988-8331-9c19-7dbcfd367d77",
+          "result_created_at": "2026-11-11T23:08:30.267410Z",
+          "declared_task_id": "Automation_547bb40a554c819184ab07a7de64a4b2",
+          "declared_runKey": "culture-news-2026-11-12-00:00",
+          "active_run_id": "9b3ef034-79b8-8331-bcd7-45b7aa922564",
+          "status": "routing_identity_mismatch",
+          "not_current_active_result": true
         }
       ],
       "root_cause": "Distinct recorded result runs contain another task identity; exact scheduler/session routing cause unverified without runtime mapping traces.",
       "next_action": "Inspect immutable task/run/session/result mapping in scheduler infrastructure; current connector exposes peek and task configuration only. Do not treat prompt edits as a fix.",
       "first_blocked_at": null,
-      "last_attempt_at": "2026-11-11 22:59:23 UTC",
-      "wait_rule": "Existing repeated signature, no restart/prompt loop; continue independent publication repair."
+      "last_attempt_at": "2026-11-12 00:03:50 UTC",
+      "wait_rule": "Existing repeated signature, no restart/prompt loop; continue independent publication repair.",
+      "followup_checks_after_map565": 2,
+      "latest_assessment": "Persists across both subsequent controller checks; culture latest own report now matches, but news/sports and controller previous-result identities still mismatch. Never apply prior result to current active run."
     },
     {
       "signature": "TLVNET|newsroom support card framing|approved asset presentation ignored",
@@ -689,6 +1075,19 @@
         "git_diff_check": "passed"
       },
       "next_action": "Closed. Continue incremental quality queue; writer can publish approved unchanged draft using normal source flow."
+    },
+    {
+      "signature": "TLVNET|controller credentialed publication readback|scope approval rejection",
+      "status": "blocked",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "article_id": "tlv-startup-workspaces-hamigdal-haratzif-service-20261111",
+      "domain": "operations",
+      "first_blocked_at": "2026-11-12 00:03:50 UTC",
+      "last_attempt_at": "2026-11-12 00:03:50 UTC",
+      "first_blocked_at_basis": "Time this incident was recorded after actual review rejection; precise earlier rejection timestamp not provided.",
+      "evidence": "write_stdin result denied by automatic approval review as outside active photo-desk scope; no workaround attempted.",
+      "root_cause": "Approval scope attribution differs from later explicit controller task; exact runtime mapping cause unverified.",
+      "next_action": "Controller runtime with matching scope must perform independent live article/image/credit/home/section readback; preserve writer evidence and succeeded571 without treating them as this readback."
     }
   ]
 }
