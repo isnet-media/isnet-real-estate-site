@@ -2814,5 +2814,76 @@
       "next_action": "Restore authorised workflow-state/dispatch interface, verify intended active owners and no current-day claim/run, then run each missing normal daily collection once. Do not rerun yesterday or fabricate a recovery prerequisite; do not resume cancelled/paused tasks.",
       "last_observed_at": "2026-11-12T09:46:56.493Z"
     }
+  ],
+  "cinema_cycle_reports": [
+    {
+      "task_id": "Automation_f54c7428b898819199ebd8595d71aa14",
+      "runKey": "cinema-2026-11-12-17:00-1d8ef0e7",
+      "run_id": "1d8ef0e7-fba8-8332-a1a2-581e907ab8c2",
+      "started_at": "2026-11-12T15:15:52.356448Z",
+      "checked_at": "2026-11-12T15:19:21.850Z",
+      "scope": "Existing ISNET and TLVNET cinema sections only",
+      "status": "blocked",
+      "automation_enabled": false,
+      "sources_read": [
+        "docs/ashdod-cinema-refresh.md",
+        ".github/workflows/collect-cinema.yml",
+        ".github/workflows/pages.yml",
+        "events-preview/ashdod/data/cinema-refresh-status.json",
+        "events-preview/ashdod/data/cinema-publication-status.json",
+        "scripts/collect_tlvnet_cinema.py",
+        "Sites current source public/guide/data/cinema-local.json and cinema-additional.json (metadata only)"
+      ],
+      "source_head": "855334c233169045f2dcbb2460200ba3229523ed",
+      "previous_collection": {
+        "run_id": 43229968378,
+        "status": "completed",
+        "conclusion": "success",
+        "source_checked_at": "2026-11-12T15:43:59+02:00",
+        "cinema_city_sessions": 515,
+        "hot_cinema_status": "failed",
+        "hot_cinema_reason": "Session movie missing from official catalog",
+        "policy": "Do not duplicate same-day intake; prior verified failed-source data preserved."
+      },
+      "publication_blocker": {
+        "run_id": 43235671501,
+        "job_id": 131242247867,
+        "conclusion": "failure",
+        "failed_step": "Build compact event listings and canonical sitemap",
+        "error": "AssertionError [ERR_ASSERTION]: rishon-lezion has unresolved candidates before release",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43235671501",
+        "assessment": "Shared publication validation prevents confirming the new cinema snapshot as published. Not a cinema acquisition success or live release; underlying candidate conflict not diagnosed or modified outside cinema scope."
+      },
+      "execution_checks": {
+        "task_identity_matches": true,
+        "previous_automation_result": null,
+        "in_progress_github_runs": 0,
+        "collector_restarted": false,
+        "new_source_intake": false,
+        "new_content": false,
+        "new_image_approval": false,
+        "build": false,
+        "deploy": false,
+        "public_verification": false,
+        "full_network_coverage": false
+      },
+      "source_inventory_only": {
+        "isnet_cinema_data_cities": [
+          "ashdod",
+          "herzliya",
+          "holon",
+          "kiryat-gat",
+          "rishon-lezion",
+          "yavne"
+        ],
+        "tlvnet_project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+        "tlvnet_source_head": "7a793acdf26761edf45f15340d6c51bb5e63b6d6",
+        "tlvnet_latest_version": 577,
+        "notice": "Inventory of source paths and timestamps is not a fresh screening audit or a claim that each city was verified."
+      },
+      "next_action": "Authorised events/publication maintainer must resolve Rishon event integrity candidates through actual source review, retain validation gates, complete one normal publication and verify public cinema data. Resume this task only after repair and publisher approval.",
+      "history_preserved": true,
+      "log_only": true
+    }
   ]
 }
