@@ -142,6 +142,139 @@ def official_details(src,existing):
   except Exception as ex:WARNINGS.setdefault(src,[]).append(str(ex)[:200]);return []
  with ThreadPoolExecutor(max_workers=4)as pool:return [e for rows in pool.map(read,candidates)for e in rows]
 
+
+def _official_occurrences_from_detail(page, *, allow_headingless=False):
+    """Return only exact occurrence rows from the current production.
+
+    Main HTRL detail pages have a 'מועדי המופע' heading. Senior-calendar
+    /show-culture/ pages can omit it (confirmed against the 9 Nov 2026 live
+    page). In that case, limit the scan from the primary H1 to the FIRST
+    'רכישה' ticket button. Related-show cards appear after that button;
+    their dates must never be accepted as current-show occurrences.
+    """
+    lines = [re.sub(r'\s+', ' ', line).strip()
+             for line in page.get_text('\n', strip=True).split('\n')]
+    try:
+        start = lines.index('מועדי המופע') + 1
+        end = len(lines)
+    except ValueError:
+        if not allow_headingless:
+            return []
+        heading = page.find('h1')
+        if not heading:
+            return []
+        try:
+            start = lines.index(heading.get_text(' ', strip=True)) + 1
+            end = next(i for i in range(start, len(lines))
+                       if lines[i] == 'רכישה')
+        except (ValueError, StopIteration):
+            return []
+    rows = []
+    for i in range(start, end):
+        line = lines[i]
+        if 'רכישת מנוי לסדרות' in line or 'תרבות בעיר' in line:
+            break
+        if not re.fullmatch(r'\d{1,2}[.]\d{1,2}[.]\d{2,4}', line):
+            continue
+        try:
+            fmt = '%d.%m.%Y' if len(line.split('.')[-1]) == 4 else '%d.%m.%y'
+            day = datetime.strptime(line, fmt).date().isoformat()
+        except ValueError:
+            continue
+        clocks = [j for j in range(i + 1, min(i + 5, end))
+                  if re.fullmatch(r'\d{1,2}:\d{2}', lines[j])]
+        if not clocks:
+            continue
+        clock_at = clocks[0]
+        venue = next((lines[j] for j in range(clock_at + 1, min(clock_at + 4, end))
+                      if lines[j] and not re.search(r'לרכישה|רכישה', lines[j])), '')
+        if horizon(day) and venue:
+            rows.append((day, lines[clock_at].zfill(5), venue))
+    return rows
+
+
+
+def _official_venue_key(venue):
+    """Use explicit HTRL auditorium/main-hall aliases, not fuzzy place matching."""
+    normalized = mevalim.norm(venue)
+    if not normalized:
+        return ''
+    # The supplier abbreviates the town and venue in its programme pages.
+    # Never equate the main hall with the auditorium.
+    if 'אודיטוריום' in normalized and ('היכל' in normalized or normalized == 'אודיטוריום'):
+        return 'htrl_auditorium'
+    if 'היכלהתרבות' in normalized or 'היכלמאירניצן' in normalized:
+        return 'htrl_main'
+    return normalized.replace('ראשוןלציון', '').replace('ראשלצ', '')
+
+
+def official_review_candidates(src, existing):
+    """Recover HTRL evidence without importing/approving unlicensed media.
+
+    Calendar links are labelled 'רכישה', not by production name. Match an
+    exact detail-page H1 and a dated/time/venue row before proposing a link.
+    The result is review-only; it does NOT reach merge() or the public feed.
+    """
+    if src not in ('htrl', 'htrl_adults'):
+        return []
+    listing = shared.page(SOURCES[src])
+    prefix = '/show/' if src == 'htrl' else '/show-culture/'
+    normalized = {}
+    for e in existing:
+        title = mevalim.norm(e.get('title'))
+        if title and len(title) >= 7 and horizon(e.get('start_date', '')):
+            normalized.setdefault(title, []).append(e)
+    links = set()
+    for a in listing.select('a[href]'):
+        url = urljoin(SOURCES[src], a['href'])
+        parsed = urlparse(url)
+        if parsed.hostname not in ('htrl.co.il', 'www.htrl.co.il') or not parsed.path.startswith(prefix):
+            continue
+        slug = unquote(parsed.path.rstrip('/').split('/')[-1])
+        slug = re.sub(r'-\d+$', '', slug).replace('-', ' ')
+        slug_key = mevalim.norm(slug)
+        if slug_key and any(slug_key == key for key in normalized):
+            links.add(url)
+    def read(url):
+        try:
+            detail = shared.page(url)
+            heading = detail.find('h1')
+            title = mevalim.norm(heading.get_text(' ', strip=True)) if heading else ''
+            if title not in normalized:
+                return []
+            occurrences = _official_occurrences_from_detail(detail, allow_headingless=(src == 'htrl_adults'))
+            meta = detail.find('meta', property='og:image')
+            image_candidate = urljoin(url, meta.get('content')) if meta and meta.get('content') else None
+            text = detail.get_text(' ', strip=True)
+            # Availability of source copy is NOT editorial/license approval.
+            detail_before_dates = text.split('מועדי המופע', 1)[0]
+            description_available = len(detail_before_dates.split(heading.get_text(' ', strip=True))[-1].strip()) > 70
+            found = []
+            for e in normalized[title]:
+                for day, clock, venue in occurrences:
+                    if e['start_date'] != day or str(e.get('start_time') or '')[:5] != clock:
+                        continue
+                    a = _official_venue_key(e.get('venue'))
+                    b = _official_venue_key(venue)
+                    if not a or not b or a != b:
+                        continue
+                    found.append({
+                        'event_id': e.get('event_id'), 'title': e.get('title'),
+                        'start_date': day, 'start_time': clock, 'venue': venue,
+                        'source_url': url, 'description_available': description_available,
+                        'image_candidate_url': image_candidate,
+                        'image_rights_status': 'unknown',
+                        'publication_status': 'review_required',
+                    })
+            return found
+        except Exception as ex:
+            WARNINGS.setdefault(src, []).append(str(ex)[:200])
+            return []
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        candidates = [row for batch in pool.map(read, sorted(links)) for row in batch]
+    return list({(row['event_id'], row['source_url']): row for row in candidates}.values())
+
+
 def venue_key(value):
  text=mevalim.norm(value)
  if 'מאיר ניצנ' in text or 'היכל התרבות' in text:return 'htrl'
@@ -257,8 +390,14 @@ def main():
  else:
   for src in args.sources:
    try:
-    rows=collect_mevalim()if src=='mevalim'else collect_friends()if src=='friends'else official_details(src,data['events'])if src in ['htrl','htrl_adults','kotar']else collect_bravo()if src=='bravo'else collect_structured(src)
-    rows=list({e['event_id']:e for e in rows if horizon(e['start_date'])}.values());new.extend(rows);report['sources'][src]={'status':'ok'if rows else'no_detail_enrichment'if src in ['htrl','htrl_adults','kotar']else'no_parseable_occurrences','occurrences':len(rows),'images':sum(bool(e.get('image_url'))for e in rows)}
+    if src in ('htrl','htrl_adults'):
+     leads=official_review_candidates(src,data['events'])
+     report.setdefault('official_review_candidates',{})[src]=leads
+     rows=[]  # These candidates require image rights and editorial review before import.
+     report['sources'][src]={'status':'review_candidates' if leads else 'no_verified_match', 'occurrences':0,'images':0,'review_candidates':len(leads)}
+    else:
+     rows=collect_mevalim()if src=='mevalim'else collect_friends()if src=='friends'else official_details(src,data['events'])if src=='kotar'else collect_bravo()if src=='bravo'else collect_structured(src)
+     rows=list({e['event_id']:e for e in rows if horizon(e['start_date'])}.values());new.extend(rows);report['sources'][src]={'status':'ok'if rows else'no_detail_enrichment'if src=='kotar'else'no_parseable_occurrences','occurrences':len(rows),'images':sum(bool(e.get('image_url'))for e in rows)}
    except Exception as ex:report['sources'][src]={'status':'failed','error':str(ex)[:300]}
    print(src,report['sources'][src],flush=True)
   OUT.mkdir(exist_ok=True);(OUT/'rishon-source-snapshot.json').write_text(json.dumps({'events':new,'report':report},ensure_ascii=False,indent=2)+'\n')
