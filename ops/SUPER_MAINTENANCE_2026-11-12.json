@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "runKey": "super-maintenance-2026-11-12-0944-IL",
+  "observed_at": "2026-11-12T07:44:00Z",
+  "status": "blocked_missing_normal_daily_execution",
+  "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+  "daily_collection_status": "no_12Nov_claim_or_collector_observed",
+  "total_branches": 121,
+  "source_date_counts": {
+    "2026-11-11": 75,
+    "2026-11-10": 20,
+    "2026-11-09": 26
+  },
+  "current_day_source_count": 0,
+  "previous_verified_report": "ops/SUPER_MAINTENANCE_2026-11-11.json",
+  "previous_report_blob_sha": "ef96c3f7e437fe07b8fad22d3233e04190e9f234",
+  "daily_claims": [
+    {
+      "city": "ASHDOD",
+      "started_at": "2026-11-11T12:44:51.009297+02:00",
+      "status": "completed",
+      "run_id": "43006094796",
+      "finished_at": "2026-11-11T12:49:14.661542+02:00",
+      "result": 16
+    },
+    {
+      "city": "YAVNE",
+      "started_at": "2026-11-11T12:45:53.816159+02:00",
+      "status": "completed",
+      "run_id": "43006297713",
+      "finished_at": "2026-11-11T12:49:34.168843+02:00",
+      "result": 4
+    },
+    {
+      "city": "KGAT",
+      "started_at": "2026-11-11T12:49:31.939559+02:00",
+      "status": "completed",
+      "run_id": "43006763788",
+      "finished_at": "2026-11-11T12:53:17.774321+02:00",
+      "result": 7
+    },
+    {
+      "city": "RISHON",
+      "started_at": "2026-11-11T13:13:27.880373+02:00",
+      "status": "completed",
+      "run_id": "43010010218",
+      "finished_at": "2026-11-11T13:20:31.879888+02:00",
+      "result": 17
+    },
+    {
+      "city": "HOLON",
+      "started_at": "2026-11-11T13:09:34.727622+02:00",
+      "status": "completed",
+      "run_id": "43009523923",
+      "finished_at": "2026-11-11T13:13:41.700995+02:00",
+      "result": 16
+    },
+    {
+      "city": "BATYAM",
+      "started_at": "2026-11-11T13:21:02.844046+02:00",
+      "status": "completed",
+      "run_id": "43011069147",
+      "finished_at": "2026-11-11T13:25:14.605455+02:00",
+      "result": 15
+    },
+    {
+      "city": "TLV",
+      "started_at": "2026-11-11T13:20:09.872091+02:00",
+      "status": "completed",
+      "run_id": "43010947777",
+      "finished_at": "2026-11-11T13:26:53.815840+02:00",
+      "result": 0
+    }
+  ],
+  "incident": {
+    "signature": "ISNET|seven supermarket daily collectors|missing daily start|2026-11-12",
+    "status": "blocked_handed_to_operational_controller",
+    "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+    "evidence": "No active or queued Actions; latest100returned runs contain no12Nov supermarket collector. All7current durable claims still completed11Nov. No supermarket source-data changes since last verified snapshot.",
+    "root_cause": "Normal execution absent at observation time; scheduler delay versus intentional workflow-state change not established. Do not call source connectivity failure before collection runs.",
+    "workflow_source_observation": "Current Ashdod YAML has one Sun-Fri05:30UTC schedule, after shop opening, with daily/Saturday guards retained. No schedules changed by maintenance owner.",
+    "missing_interface": "GitHub connector exposes no workflow_dispatch. Fetch of workflow state endpoint was rejected as unsupported, not a website403 or proof workflow disabled. Required existing cross-Work/project write ownership not verified. Publisher cancellation of old news-coupled system must not be reversed.",
+    "normal_vs_recovery": "Missing normal collection does not require a completed claim today. Focused stale-source recovery does require today's finished normal claim; none today, so not eligible. No rerun of yesterday repurposed.",
+    "next_action": "Controller verifies intended active collector owner and existing workflow state/dispatch path following publisher's12Nov cancellation/separation instruction, then permits the one normal collection if missing. Do not resume cancelled task, alter schedule, releaseclaim or start parallelcollector."
+  },
+  "public_delivery": {
+    "status": "available_unchanged_release",
+    "origin": "https://isnetsuper.ebs987449.chatgpt.site",
+    "release_url": "https://isnetsuper.ebs987449.chatgpt.site/release",
+    "source_commit": "b516ff99f5113c342dc13c03b5ad8e7629b10024",
+    "method": "Live browser release and7refresh-statusJSON; same parsed-object FNV hashes as prior verified snapshot",
+    "status_hashes": {
+      "ASHDOD": 1080522601,
+      "YAVNE": 3575203653,
+      "KGAT": 2729095097,
+      "RISHON": 1229971514,
+      "HOLON": 3514764598,
+      "BATYAM": 1276427415,
+      "TLV": 267895576
+    },
+    "all_checked_at_still_11Nov": true,
+    "full_price_offer_catalog_redownload": false
+  },
+  "safety": {
+    "collections_started": 0,
+    "recovery_started": 0,
+    "claims_released": 0,
+    "schedule_changes": 0,
+    "deployments": 0,
+    "source_dates_changed": 0
+  },
+  "next_check": "Read current run IDs/claims/release first; full price verification only after actual source-data change. Existing continuous maintenance retained."
+}
