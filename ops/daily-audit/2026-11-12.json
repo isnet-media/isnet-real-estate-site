@@ -1460,6 +1460,162 @@
       ],
       "routing_note": "News latest_result199ea4d8 declares culture task547bb4 and is from previous day, while latest recorded run566c88ca failed. Not treated as current news success or as a newly diagnosed root cause.",
       "scope_note": "Museum was already live before responsibility transfer; verified here as an existing publication, not attributed to transfer or newly published by this check."
+    },
+    {
+      "runKey": "ui-maintenance-2026-11-12-10:05",
+      "run_id": "f3677536-cda8-8321-9830-75a470033d12",
+      "owner": "6ae8893c6e30819192dd11bddff9e078",
+      "checked_at": "2026-11-12T08:46:35Z",
+      "status": "scoped_ui_pass_shared_publication_regression_handed_off",
+      "source_base": "48aaa3eee746c6305c4f17e4fcbbd3a4fef1aa51",
+      "instructions_read": [
+        "Complete main tree(no AGENTS.md present)",
+        "ops/AUTOMATION_EFFICIENCY_2026-11-10.md",
+        "ops/REPAIR_2026-11-10.md",
+        "seven city OPERATIONS.md",
+        "ops/SUPER_MAINTENANCE_2026-11-12.json",
+        "current daily journal",
+        "pages.yml",
+        "super-prices.yml",
+        "test_super_daily_run.py"
+      ],
+      "owner_reports": [
+        {
+          "owner": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "run_id": "0654aa74-a2b0-8324-8610-ee52dafc8a98",
+          "result": "Completed metadata; latest_result absent. Read owner's committed12Nov report instead: missing normal collection, handed to controller; no duplicate recovery."
+        },
+        {
+          "owner": "6acb0ab1c1988191a700f8fb4287c8e0",
+          "run_id": "b8cb37c9-c580-8330-91d6-ec1d70d3f9f0",
+          "result": "Source-date/title conflict Cinderella versusBackToLight already reported by owner; no event content edits or duplicate source research."
+        },
+        {
+          "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+          "run_id": "22f17a81-8b20-8322-b9ea-585a3607dc81",
+          "result": "Image-owner transfer read and respected; standalone photo task remains paused. No task changes by this run."
+        }
+      ],
+      "ui": {
+        "supermarket_urls": [
+          "https://isnet.co.il/SUPER.ASHDOD/",
+          "https://isnet.co.il/SUPER.YAVNE/",
+          "https://isnet.co.il/SUPER.KGAT/",
+          "https://isnet.co.il/SUPER.RISHON/",
+          "https://isnet.co.il/SUPER.HOLON/",
+          "https://isnet.co.il/SUPER.BATYAM/",
+          "https://tlvnet.com/super/compare/?q=7290000056845"
+        ],
+        "event_urls": [
+          "https://isnet.co.il/events-preview/ashdod/",
+          "https://isnet.co.il/events-preview/rishon-lezion/",
+          "https://isnet.co.il/events-preview/yavne/",
+          "https://isnet.co.il/events-preview/kiryat-gat/",
+          "https://isnet.co.il/events-preview/holon/",
+          "https://isnet.co.il/events-preview/herzliya/",
+          "https://tlvnet.com/guide/"
+        ],
+        "desktop": "Six supermarket and six event home shells rendered at1363px, RTL, city-specific home/logo hrefs checked, no visible broken images in inspected top viewports. TLV guide/compare/deals/concert category rendered.",
+        "narrow": "Native browser zoom produced340CSSpx with337px document width. All six ISNET event homes and all six supermarket homes checked (BatYam initial screenshot; final loop entry was duplicateHolon, not anotherBatYam pass). TLV deals also337/340. Super inputs16px. No horizontal overflow observed; not physical-device/touch emulation. Zoom restored.",
+        "functional": [
+          "TLV barcode7290000056845 search yielded one product labelled19branches. Offer-detail loading was started but not counted as a completed price-card pass.",
+          "TLV deals Victory filter returned81 matching offers,21rendered; category select worked.",
+          "TLV classical concert filter returned6articles.",
+          "Bus central station11866 toAssuta returnedline1 towardרכבת עד הלום,10:51,next11:11/11:31/11:51,~6min, explicitly scheduled not realtime. Map expanded/zoomed; actual OSM tiles visible at340px; one newly requested tile still pending, not a failed tile."
+        ],
+        "bus_url": "https://isnet.co.il/bus/ashdod/?from=43370&to=28671&date=2026-11-12&time=10%3A44&mode=local&target_kind=stop&transfer=0",
+        "pr42": {
+          "state": "open",
+          "merged": false,
+          "head": "e216bc93cdfa073254d71c0cb7b9b1ad7740c94f",
+          "deployment_repeated": false
+        },
+        "console": "No first-party error/warn returned in inspected tab log. Extension errors excluded.",
+        "limits": [
+          "TLV free searchקרנפים remained in loading state at readback; no completed search pass claimed and no root-cause diagnosis from that state alone.",
+          "Not all ticket, cinema, culinary, seniors, basket and smart-shopping detail flows tested in this cycle.",
+          "No physical mobile test; known browser custom-protocol block means WhatsApp end-to-end not retried without changed access evidence.",
+          "Browser app tool still unavailable; supported cloud browser used for independently requested UI inspection. No HTTP403 workaround."
+        ]
+      },
+      "known_findings": [
+        {
+          "signature": "TLVNET|guide|hero-counter-render|white-on-light",
+          "status": "unchanged_open",
+          "evidence": "Actual screenshot and computed#heroStats b stillwhite rgb255/255/255 on pale background; count223. Same defect asNov11, no failed repair attempt or duplicate user alert.",
+          "repair_attempts": 0
+        },
+        {
+          "signature": "TLVNET|super-deals|product-category|Pringles-cheddar-in-dairy",
+          "status": "unchanged_owner_handoff",
+          "evidence": "Same Victory158g Pringles cheddar offer underחלב וביצים; no product/source/category edits."
+        }
+      ],
+      "monitoring": {
+        "public_events_health": {
+          "run_id": 43151479067,
+          "conclusion": "success",
+          "updated_at": "2026-11-12T03:57:30Z",
+          "over3h": true,
+          "latest_followup": 43152569385,
+          "latest_followup_conclusion": "skipped",
+          "note": "No new health run dispatched; current rendered pages available. Stale monitoring is not proof of outage."
+        },
+        "publish_priceboard": {
+          "run_id": 43152429864,
+          "conclusion": "failure",
+          "updated_at": "2026-11-12T04:06:17Z",
+          "job_id": 130964538765,
+          "stage": "Build compact event listings and canonical sitemap",
+          "reason": "AssertionError scripts/test_super_daily_run.py:39; old regression requires hours3,4,5,6 daily while approved current super-prices.yml cron is30 5 * * 0-5. Failed before publication, not a new syncing_files failure.",
+          "latest_main_test_sha": "f3a8f04a26c7a2a03280c4fdd88cd7d170a66ece",
+          "latest_main_workflow_sha": "9058019c48f185eb5324b3e239b7bb0e1accdf26"
+        },
+        "backup": {
+          "run_id": 42994990814,
+          "conclusion": "success",
+          "updated_at": "2026-11-11T09:26:34Z",
+          "within48h": true
+        }
+      },
+      "handoffs": [
+        {
+          "to": "Automation_b38091754d888191abf21a150dc4ed62",
+          "signature": "ISNET|Publish priceboard|validation|obsolete-super-cron-assertion",
+          "status": "blocked_owner_handoff",
+          "evidence": "Fresh failed job logs plus current main test/workflow prove schedule-test mismatch. No matching signature in today's journal at read time.",
+          "next_action": "General controller updates stale schedule regression to verify publisher-approved morning/Saturday policy and durable gates, retaining meaningful safety coverage. Do not revert approved schedule or re-enable legacy news-coupled collection. Reconcile all source changes and ownership before one normal publication attempt; no competing deployment by UX owner."
+        },
+        {
+          "to": "Automation_b38091754d888191abf21a150dc4ed62",
+          "signature": "ISNET|public-events-health|monitoring|no-success-over3h",
+          "status": "threshold_exceeded",
+          "next_action": "Reconcile hourly workflow execution and latest actual results; do not call skipped health success. No extra scanner/source collection needed."
+        },
+        {
+          "to": "6ad8fab91ca48191ac06928a99f7c8d9",
+          "signature": "TLVNET|super-deals|product-category|Pringles-cheddar-in-dairy",
+          "status": "unchanged_handoff",
+          "next_action": "Existing category finding preserved; no duplicate price collection or source scans."
+        }
+      ],
+      "write_ownership": {
+        "frontend": "blocked: project-wide cross-Work write exclusivity not verifiable in exposed interfaces/current owner reports; no source/content/build/deployment mutation",
+        "journal": "Existing ops-only channel, fresh blob SHA compare-and-swap append, excluded from Pages triggers. Preserve all controller observations and top-level audit status."
+      },
+      "mutations": {
+        "journal_only": true,
+        "source_content": 0,
+        "collection": 0,
+        "recovery": 0,
+        "build": 0,
+        "deployment": 0,
+        "task_state": 0,
+        "schedule": 0
+      },
+      "fixed_and_verified": 0,
+      "published": [],
+      "daily_audit_completed": false
     }
   ],
   "incident_register": [
@@ -1604,6 +1760,18 @@
       "evidence": "write_stdin result denied by automatic approval review as outside active photo-desk scope; no workaround attempted.",
       "root_cause": "Approval scope attribution differs from later explicit controller task; exact runtime mapping cause unverified.",
       "next_action": "Controller runtime with matching scope must perform independent live article/image/credit/home/section readback; preserve writer evidence and succeeded571 without treating them as this readback."
+    },
+    {
+      "signature": "ISNET|Publish priceboard|validation|obsolete-super-cron-assertion",
+      "status": "blocked_owner_handoff",
+      "owner": "Automation_b38091754d888191abf21a150dc4ed62",
+      "first_observed_at": "2026-11-12T08:46:35Z",
+      "last_attempt_at": null,
+      "repair_attempts": 0,
+      "run_id": 43152429864,
+      "job_id": 130964538765,
+      "root_cause": "AssertionError scripts/test_super_daily_run.py:39; old regression requires hours3,4,5,6 daily while approved current super-prices.yml cron is30 5 * * 0-5. Failed before publication, not a new syncing_files failure.",
+      "next_action": "General controller updates stale schedule regression to verify publisher-approved morning/Saturday policy and durable gates, retaining meaningful safety coverage. Do not revert approved schedule or re-enable legacy news-coupled collection. Reconcile all source changes and ownership before one normal publication attempt; no competing deployment by UX owner."
     }
   ]
 }
