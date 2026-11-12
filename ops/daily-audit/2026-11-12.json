@@ -2012,6 +2012,47 @@
         "editorial_sitemap_bytes": 107,
         "note": "DB public-article API and sitemap return minimal bodies; these200s are not proof that source-backed news articles were published."
       }
+    },
+    {
+      "task_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "owner_automation_id": "Automation_b38091754d888191abf21a150dc4ed62",
+      "runKey": "ops-controller-dependency-repair-20261112T0914Z",
+      "invocation": "publisher_explicit_repair_request",
+      "observed_at": "2026-11-12T09:15:52.248Z",
+      "status": "deployment_in_progress",
+      "signature": "TLVNET|briefs-writer desk dispatch|stale ledger image blocker",
+      "source_commit": "0cac09b5a6b58d66c84784bdc108ec62a09cad2c",
+      "repair_commit": "23b2921de8af33b975cc807e199b3df672c47b15",
+      "version": 576,
+      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_761f874b948c8191a917cee50b6bd2dc",
+      "deployment_id": "appgdep_6af583806b5081918218ee8744c5d892",
+      "deployment_started_at": "2026-11-12T09:14:40.692713+00:00",
+      "root_cause": "Operational queues depended solely on historical writer entries and could preserve a removed image blocker or present an already live source publication as image-pending.",
+      "repair": "Current draft/image/body/rights state now reconciles queue entries; original ledger status retained, blocked bank IDs respected. Source publication state remains separate from live verification; no approval or publication is automatic.",
+      "release_authorization": "Publisher explicitly requested fixing the dependency after the prior source-only repair report. Publishing this functional API repair now, not a timestamp/journal-only release.",
+      "ownership_checks": {
+        "latest_site_deployment_before_release": "appgdep_6af574764910819195e227c141ee7c18:succeeded",
+        "no_nonterminal_site_deployment_found": true,
+        "remote_head_matches_before_push": true,
+        "parallel_news_owner_run": "9f7d4ff6-8c30-8331-ab3e-e6b840c17f0b",
+        "parallel_culture_owner_run": "838da17a-cd1c-8332-8b8e-231956d68b84",
+        "content_ownership_respected": "Only controller-owned infrastructure repair and verified derived preparation snapshot; no authored article/photo approvals, dates or status changed."
+      },
+      "checks": [
+        "Source helper opened latest checkout",
+        "agent-dispatch tests pass",
+        "news_photo_gate passes",
+        "prepare-public and its content, provenance, presentation, sales, topic, SEO and snapshot checks pass",
+        "Every prepared manifest hash verified before commit",
+        "All222 source article records unchanged",
+        "Bank, photo queue, approvals, frozen baseline/legacy unchanged",
+        "Normal Git push and exact remote HEAD verified"
+      ],
+      "local_build_note": "Framework dependencies/output unavailable locally (only prior partial-OOM dependency directory). Prior unchanged full build137 was not retried. Current public snapshot prepared and verified for supported native build fallback.",
+      "new_publications": 0,
+      "editorial_or_photo_approvals_added": 0,
+      "automation_changes": 0,
+      "next_action": "Continue only this deployment ID to terminal status, verify live desk/dispatch correct source state and ETag behavior. Do not start another deployment or writer run."
     }
   ],
   "incident_register": [
@@ -2212,12 +2253,12 @@
     },
     {
       "signature": "TLVNET|briefs-writer desk dispatch|stale ledger image blocker",
-      "status": "repair_committed_pending_next_content_release",
+      "status": "deployment_in_progress",
       "owner": "Automation_b38091754d888191abf21a150dc4ed62",
       "runKey": "ops-controller-2026-11-12-10:58",
       "first_blocked_at": null,
       "first_blocked_at_note": "Exact original onset unknown; historical ledgers retained.",
-      "last_attempt_at": "2026-11-12T09:08:07.768Z",
+      "last_attempt_at": "2026-11-12T09:15:52.248Z",
       "root_cause": "queueFor projected historical writer ledgers only and ignored current article/image approval state. Latest news ledger marks Jaffa waiting for image despite approved matching current body and asset.",
       "repair": {
         "signature": "TLVNET|briefs-writer desk dispatch|stale ledger image blocker",
@@ -2240,9 +2281,14 @@
         "build_or_deploy_started": false,
         "release_reason": "Operational status correction only. Preserve publisher instruction against a deployment merely for status/journal, and avoid competing with active culture owner. Include in next genuine content release.",
         "publication_gates_changed": false,
-        "articles_or_reviews_changed": false
+        "articles_or_reviews_changed": false,
+        "release": {
+          "version": 576,
+          "deployment_id": "appgdep_6af583806b5081918218ee8744c5d892",
+          "source_commit": "0cac09b5a6b58d66c84784bdc108ec62a09cad2c"
+        }
       },
-      "next_action": "Content owner includes commit23b2921d in next genuine publication; controller verifies live projection afterward. Do not count as live fix before deployment."
+      "next_action": "Continue only this deployment ID to terminal status, verify live desk/dispatch correct source state and ETag behavior. Do not start another deployment or writer run."
     }
   ]
 }
