@@ -29,15 +29,18 @@ def git(*args):
 with patch.object(d,'git',side_effect=git),patch.object(d.time,'sleep'):
  d.publish(['SUPER.YAVNE'],'test')
 assert sum(x[0]=='push' for x in calls)==2
-# All six workflows use a durable daily claim; stale prices cannot block valid city output.
-for p in (d.ROOT/'.github/workflows').glob('super*-prices.yml'):
+# All seven collectors retain one publisher-approved morning wake-up and a durable daily claim.
+# These are UTC schedules: 07:30–07:54 in winter, 08:30–08:54 in summer, Sunday–Friday.
+expected_minutes={"super-prices.yml":30,"super-yavne-prices.yml":34,"super-kgat-prices.yml":38,"super-rishon-prices.yml":42,"super-holon-prices.yml":46,"super-batyam-prices.yml":50,"super-tlv-prices.yml":54}
+workflows={p.name:p for p in (d.ROOT/'.github/workflows').glob('super*-prices.yml')}
+assert workflows.keys()==expected_minutes.keys(), 'Missing or unexpected city collector workflow'
+for name,p in workflows.items():
  t=p.read_text()
  assert 'super_daily_run.py claim' in t and 'super_daily_run.py publish' in t,p
  assert "local_hour" not in t,p
  import re
  crons=re.findall(r"cron: '([^']+)'",t)
- assert len(crons)==1 and crons[0].split()[1:]==['3,4,5,6','*','*','*'],p
- assert 0<int(crons[0].split()[0])<60,p
+ assert len(crons)==1 and crons[0].split()==[str(expected_minutes[name]),'5','*','*','0-5'],p
  if p.name!='super-prices.yml':assert '--deployment-only' in t,p
  assert '  refresh:' in t and '    steps:' in t,p
-print('Passed: DST, delayed runners, once-daily failed/successful attempts, concurrent publication retry and six workflow guards')
+print('Passed: DST, delayed runners, once-daily failed/successful attempts, concurrent publication retry and seven morning/Saturday workflow guards')
