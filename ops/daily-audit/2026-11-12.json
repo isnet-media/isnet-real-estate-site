@@ -1958,14 +1958,18 @@
           {
             "topic": "real-estate",
             "article_id": "beit-romano-district-approval-240-apartments-20261111",
-            "status": "already_covered_in_source",
-            "next_action": "Verify existing live result; do not republish as new."
+            "status": "already_covered_live_page_200",
+            "next_action": "Verify existing live result; do not republish as new.",
+            "live_http": 200,
+            "verification_scope": "Live page availability only in this read, not a new full image/credit/display approval."
           },
           {
             "topic": "culture-news",
             "article_id": "photoisrael-cinematheque-festival-20261106",
-            "status": "already_covered_in_source",
-            "next_action": "Check for actual factual changes before any update; competitor Nov11 date is not proof of new event."
+            "status": "already_covered_live_page_200",
+            "next_action": "Check for actual factual changes before any update; competitor Nov11 date is not proof of new event.",
+            "live_http": 200,
+            "verification_scope": "Live page availability only in this read, not a new full image/credit/display approval."
           }
         ],
         "discovery_gap": {
@@ -1986,6 +1990,27 @@
         "no_system_permission_change": true,
         "no_restart_or_duplicate_run": true,
         "no_messages_to_others": true
+      },
+      "desk_live_readback": {
+        "checked_at": "2026-11-12T09:06:48.830319+00:00",
+        "http": 200,
+        "news_jaffa_status": "draft_waiting_image",
+        "news_jaffa_source_current_status": "image_approved_ready_to_publish",
+        "culture_museum_status": "draft_waiting_image",
+        "culture_museum_live_http": 200,
+        "result": "Actual current API confirms stale historical blockers. Source fix is committed only; live API still runs version575 and has not been claimed repaired."
+      },
+      "health_readback": {
+        "http": 200,
+        "database": "ok",
+        "mediaStorage": "ok",
+        "publicationStorage": "ok",
+        "night_http": 200,
+        "public_articles_http": 200,
+        "public_articles_bytes": 15,
+        "editorial_sitemap_http": 200,
+        "editorial_sitemap_bytes": 107,
+        "note": "DB public-article API and sitemap return minimal bodies; these200s are not proof that source-backed news articles were published."
       }
     }
   ],
