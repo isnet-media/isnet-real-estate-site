@@ -2,26 +2,9 @@ name: Daily city event intake
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - "scripts/sync_events_from_sources.py"
-      - "scripts/test_smarticket_details.py"
-      - "scripts/enrich_smarticket_event_details.py"
-      - "scripts/enrich_events_institutions.py"
-      - "scripts/audit_events_institutions.py"
-      - "scripts/test_institution_enrichment.py"
-      - "events-preview/ashdod/data/institutions.json"
-      - "events-preview/rishon-lezion/data/institutions.json"
-      - "scripts/ofek_event_source.py"
-      - "scripts/test_ofek_event_source.py"
-      - "scripts/test_city_event_intake.py"
-      - "scripts/check_preexisting_event_id_collisions.py"
-      - "scripts/test_preexisting_event_id_collisions.py"
-      - ".github/workflows/sync-city-events.yml"
   schedule:
     # Scan configured source calendars daily and audit both complete city datasets.
-    - cron: "10 5 * * *"
+    - cron: "10 5 * * 0"
 
 permissions:
   contents: write
