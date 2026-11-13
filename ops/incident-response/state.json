@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T11:23:00.196Z",
+  "updated_at": "2026-11-13T12:13:20.668Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-13T11:19:05Z",
+  "last_processed_run_created_at": "2026-11-13T12:11:20Z",
   "initial_history": {
     "status": "partial_metadata_review",
     "days": 7,
@@ -444,244 +444,86 @@
   "last_verified_public_readback_run": 43362615900,
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "2e372326-a498-8322-bf8a-6dc91e15f942",
-    "runKey": "ops-2026-11-13-2e372326-a498-8322-bf8a-6dc91e15f942",
-    "started_at": "2026-11-13T11:20:06.575337Z",
-    "observed_at": "2026-11-13T11:23:00.196Z",
-    "source_sha": "aa25b2a5f45cc0fc66cace99a08b92b08be21cac",
-    "new_failures": 0,
-    "new_actions": [
-      {
-        "run_id": 43416079213,
-        "workflow": "Publish priceboard",
-        "path": ".github/workflows/pages.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T11:19:05Z",
-        "status": "in_progress",
-        "conclusion": null,
-        "source_commit": "aa25b2a5f45cc0fc66cace99a08b92b08be21cac",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43416079213"
-      },
-      {
-        "run_id": 43416079272,
-        "workflow": "Record operation failures",
-        "path": ".github/workflows/operation-failure-inbox.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T11:19:05Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "source_commit": "aa25b2a5f45cc0fc66cace99a08b92b08be21cac",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43416079272"
-      },
-      {
-        "run_id": 43415799674,
-        "workflow": "Refresh Kiryat Gat bus and rail schedules",
-        "path": ".github/workflows/kiryat-gat-bus.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T11:16:58Z",
-        "status": "completed",
-        "conclusion": "success",
-        "source_commit": "2ca6abbb685b523741508fde8b9d550117362b12",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43415799674"
-      },
-      {
-        "run_id": 43415626681,
-        "workflow": "Record operation failures",
-        "path": ".github/workflows/operation-failure-inbox.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T11:15:38Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "source_commit": "2ca6abbb685b523741508fde8b9d550117362b12",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43415626681"
-      },
-      {
-        "run_id": 43415532569,
-        "workflow": "Audit expired Ashdod event occurrences",
-        "path": ".github/workflows/expired-event-audit.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T11:14:59Z",
-        "status": "completed",
-        "conclusion": "success",
-        "source_commit": "4212bc8dbcd80cc40d07e473226becd695413f94",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43415532569"
-      },
-      {
-        "run_id": 43415483921,
-        "workflow": "Record operation failures",
-        "path": ".github/workflows/operation-failure-inbox.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T11:14:36Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "source_commit": "4212bc8dbcd80cc40d07e473226becd695413f94",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43415483921"
-      },
-      {
-        "run_id": 43415412661,
-        "workflow": "Audit Ashdod public editorial copy",
-        "path": ".github/workflows/audit-ashdod-editorial.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T11:14:05Z",
-        "status": "completed",
-        "conclusion": "success",
-        "source_commit": "317bfdb2870c02c9d35f63b13fb8b204db44b022",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43415412661"
-      },
-      {
-        "run_id": 43412977146,
-        "workflow": "Record operation failures",
-        "path": ".github/workflows/operation-failure-inbox.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T10:56:14Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "source_commit": "317bfdb2870c02c9d35f63b13fb8b204db44b022",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43412977146"
-      },
-      {
-        "run_id": 43412954723,
-        "workflow": "Record operation failures",
-        "path": ".github/workflows/operation-failure-inbox.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T10:56:04Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "source_commit": "317bfdb2870c02c9d35f63b13fb8b204db44b022",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43412954723"
-      },
-      {
-        "run_id": 43412861876,
-        "workflow": "Verify public event feed read-back",
-        "path": ".github/workflows/public-events-readback-audit.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T10:55:22Z",
-        "status": "completed",
-        "conclusion": "success",
-        "source_commit": "317bfdb2870c02c9d35f63b13fb8b204db44b022",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43412861876"
-      },
-      {
-        "run_id": 43412861777,
-        "workflow": "Public events health checks",
-        "path": ".github/workflows/events-public-health.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T10:55:22Z",
-        "status": "completed",
-        "conclusion": "success",
-        "source_commit": "317bfdb2870c02c9d35f63b13fb8b204db44b022",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43412861777"
-      },
-      {
-        "run_id": 43412861989,
-        "workflow": "Record operation failures",
-        "path": ".github/workflows/operation-failure-inbox.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T10:55:22Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "source_commit": "317bfdb2870c02c9d35f63b13fb8b204db44b022",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43412861989"
-      },
-      {
-        "run_id": 43412573051,
-        "workflow": "Record operation failures",
-        "path": ".github/workflows/operation-failure-inbox.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T10:53:13Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "source_commit": "b662c454b6993bffb3e9b150c21e16fbb94bd1f1",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43412573051"
-      },
-      {
-        "run_id": 43412573104,
-        "workflow": "Publish priceboard",
-        "path": ".github/workflows/pages.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T10:53:13Z",
-        "status": "completed",
-        "conclusion": "success",
-        "source_commit": "b662c454b6993bffb3e9b150c21e16fbb94bd1f1",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43412573104"
-      },
-      {
-        "run_id": 43412306539,
-        "workflow": "Refresh Ashdod bus schedules",
-        "path": ".github/workflows/ashdod-bus.yml",
-        "attempt": 1,
-        "created_at": "2026-11-13T10:51:11Z",
-        "status": "completed",
-        "conclusion": "success",
-        "source_commit": "3062680ab9d5c35cf6d4d9092d75b5a7ffeb639a",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43412306539"
-      }
+    "run_id": "dbea2a00-6628-8322-b61b-4570f97b61ba",
+    "runKey": "ops-2026-11-13-dbea2a00-6628-8322-b61b-4570f97b61ba",
+    "policy_version": "2026-11-13/1.0",
+    "started_at": "2026-11-13T12:10:52.306566Z",
+    "observed_at": "2026-11-13T12:13:20.668Z",
+    "source_sha": "9481b14f5fca459429882afc36f23f21bd974f3b",
+    "targets_reviewed": [
+      "ISNET GitHub Actions",
+      "TLVNET Sites deployment",
+      "TLVNET publication lease",
+      "Five TLVNET news task records"
     ],
-    "new_inbox_entries": 0,
-    "sites": {
-      "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
-      "version_number": 590,
-      "deployment_id": "appgdep_6af6ebd82848819180d55193fdc8d96d",
-      "status": "succeeded",
-      "published_source": "af5440978cb80c1d4a77baa9576942480960c75a",
-      "observed_at": "2026-11-13T11:23:00.196Z",
-      "other_observed_versions": [
-        {
-          "version": 587,
-          "status": "succeeded"
-        },
-        {
-          "version": 588,
-          "status": "succeeded"
-        }
-      ],
-      "new_deployments_started": false,
-      "public_content_check": "Economy writer reports Bay article/body/image/credit/cards verified in run aebb15d7-f410-832f-bda0-94048c2599d9. Controller independently checked deployment result only; no live GET/visual claim."
+    "new_actions": 93,
+    "new_failed_runs": 1,
+    "new_root_signatures": 1,
+    "new_inbox_entries": [
+      "43417323807-1.json",
+      "news-community-20261113T120421Z-binding-check-1.json"
+    ],
+    "pending_prior_run": {
+      "run_id": 43416079213,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "publication_pending_existing_writer": {
+      "target": "TLVNET-site",
+      "owner": "manual-policy-migration-20261113",
+      "run_key": "policy-migration-20261113-9fcecaa2",
+      "lease_until": "2026-11-13T12:41:04.833675+00:00",
+      "state": "publication_pending_existing_writer",
+      "observed_at": "2026-11-13T12:13:20.668Z",
+      "lease_blob_sha": "9ca26c39afc06b7cd8d4d8453e15db7a549aa789",
+      "pending_bundle": "ops/incident-response/release-plans/tlvnet-coordinated-coverage-and-portability-20261113.json",
+      "controller_acquisition_attempts": 0,
+      "controller_source_edits": 0
+    },
+    "new_binding_incident": "tlvnet-news-execution-binding-unverified",
+    "known_holon_signature": {
+      "run_id": 43417323807,
+      "job_id": 131858410930,
+      "changed": false,
+      "retry": false
     },
     "history": {
-      "metadata_added": 99,
-      "through": "2026-11-10T19:05:58Z",
-      "logs_read": [
-        130070081547,
-        130121602949
-      ],
-      "remaining": "Earlier metadata through2026-11-06 and three new historical step groups remain. Seven-day review incomplete."
+      "checkpoint_preserved": {
+        "created_at_before": "2026-11-10T19:05:58Z",
+        "also_resume_equal_timestamp_with_id": 42881842268,
+        "query": "created=<=2026-11-10T19:05:58Z",
+        "remaining": "Earlier metadata through2026-11-06 and three new historical step groups remain. Seven-day review incomplete."
+      },
+      "reason": "New failure and writer handoff take priority; no new historical page this cycle."
     },
-    "mobile_reconciliation": {
-      "observed_at": "2026-11-13T11:23:00.196Z",
-      "source_conversation": "c945806072",
-      "repair_reported_at": "2026-11-13T11:03:23Z",
-      "publisher_confirmed_at": "2026-11-13T11:07:09Z",
-      "controller_performed_repair": false,
-      "independent_mobile_visual_verified": false,
-      "app_recovery_verified": false,
-      "adsense_causality": "Not established; prior desktop AdSense error retained as separate evidence.",
-      "remaining": "Desktop thumbnail/blur reported after mobile mitigation; existing emergency thread owns active investigation. No parallel CMS mutation."
-    },
+    "task_result_qualification": "Matched latest results by actual task/run/time; no new controller live GET/body/image/credit/visual verification.",
     "build_or_deploy": false,
-    "changes": [
-      "Reconcile already performed emergency mobile mitigation without claiming controller repair",
-      "Advance historical review and distinguish retired artifact-path failure from provider sync timeout",
-      "Record economy result with matching run ID and succeeded Sites590"
+    "automation_changes": false,
+    "cost_measurement": "No dollar/API-provider billing meter available; no financial ceiling claimed.",
+    "remaining_queue": [
+      "Pending TLVNET tested release bundle after current lease owner releases",
+      "Community explainer image review and authoritative execution binding",
+      "Historical groups remain"
     ],
-    "unchanged_blockers": "Existing release bundle remains unmodified; no new ownership/rights evidence justified a retry.",
-    "pending_github_run_ids": [
-      43416079213
+    "limitations": [
+      "No controller runtime binding fix",
+      "No image review approval or article release",
+      "Current migration lease respected; no takeover or retry"
     ]
   },
   "concurrent_controller_observation": {
-    "run_id": "2e372326-a498-8322-bf8a-6dc91e15f942",
+    "run_id": "dbea2a00-6628-8322-b61b-4570f97b61ba",
     "status": "current scheduled cycle"
   },
   "task_results_watermark": {
     "Automation_b3345c399b988191a1ba9848e3e3668b": {
       "enabled": true,
-      "last_run_id": "ef60759f-874c-8332-aabc-d09b34980c0b",
-      "started_at": "2026-11-13T06:04:32.332850Z",
-      "completed_at": "2026-11-13T06:29:10.470086Z",
+      "last_run_id": "c8f6132a-7e38-832e-9d67-a790a2ad66c4",
+      "started_at": "2026-11-13T11:55:13.290428Z",
+      "completed_at": "2026-11-13T12:06:15.668385Z",
       "recorded_status": "completed",
-      "result": "פורסם ואומת באתר החי: [חשד להתחזות לשוטר ושוד במרכז תל אביב](https://tlvnet.com/news/center-tlv-police-impersonation-robbery-arrest-20261112), כולל גוף מלא, תמונה, קרדיט והפניות במדור ובבית.\n\nבקהילה הושלמה תמונה ב[כתבת ההתנדבות הקיימת](https://tlvnet.com/news/south-tlv-grab-bars-volunteering-20261106), בלי פרסום כפול או שינוי תאריך.\n\nבדיקות התצוגה במחשב עברו. בדיקת מובייל וכרטיס הבית עדיין ממתינות ומתועדות. פער במפת הבעלות של הקהילה נרשם בתור הבקר לטיפול.\n\n`task_id: Automation_b3345c399b988191a1ba9848e3e3668b`\n`runKey: news-community-2026-11-13-08:00-ef60759f`",
-      "result_run_id": "ef60759f-874c-8332-aabc-d09b34980c0b"
+      "result": "לא פורסמו כתבות חדשות במחזור הזה. בחדשות ובקהילה אין כרגע טיוטות מוכנות; נשמרו טקסט לכתבת התנדבות ומחקר להמשך בנושא תחבורה.\n\nהפרסום עוכב כי שיוך הריצה והבעלות לא ניתנו לאימות. הראיות והחומר נשמרו בתור הבקר הקיים. המשימה נשארה פעילה.\n\ntask_id: `Automation_b3345c399b988191a1ba9848e3e3668b`  \nrunKey: `news-community-2026-11-13T120421Z-binding-check`",
+      "result_run_id": "c8f6132a-7e38-832e-9d67-a790a2ad66c4"
     },
     "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
       "enabled": true,
@@ -726,7 +568,7 @@
     "deployment_id": "appgdep_6af6ebd82848819180d55193fdc8d96d",
     "status": "succeeded",
     "published_source": "af5440978cb80c1d4a77baa9576942480960c75a",
-    "observed_at": "2026-11-13T11:23:00.196Z",
+    "observed_at": "2026-11-13T12:13:20.668Z",
     "other_observed_versions": [
       {
         "version": 587,
@@ -756,7 +598,8 @@
     "tlvnet-legacy-event-cadence-divergence",
     "tlvnet-remaining-editorial-projection-caps",
     "tlvnet-windows-stay-sitemap-backslashes",
-    "ashdod-mobile-banners-app-stall-reported"
+    "ashdod-mobile-banners-app-stall-reported",
+    "tlvnet-news-execution-binding-unverified"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -764,10 +607,13 @@
     "01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
     "01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json",
     "786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json",
-    "c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json"
+    "c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json",
+    "43417323807-1.json",
+    "news-community-20261113T120421Z-binding-check-1.json"
   ],
   "pending_github_run_ids": [
-    43416079213
+    43422998753,
+    43422820701
   ],
   "cycle_history": [
     {
@@ -804,6 +650,11 @@
       "runKey": "ops-2026-11-13-f86ab906-8780-8322-9b4e-36de33003327",
       "observed_at": "2026-11-13T10:52:14.092Z",
       "source_commit": "dde84e51e9adf7304db57b8c520206c7031b42f2"
+    },
+    {
+      "runKey": "ops-2026-11-13-2e372326-a498-8322-bf8a-6dc91e15f942",
+      "observed_at": "2026-11-13T11:23:00.196Z",
+      "source_commit": "fcede4b391526697e0f438258ea68a862b99684c"
     }
   ],
   "photo_controls_checkpoint": {
@@ -832,5 +683,18 @@
       "reported_result": "נבדקו במדגם שמונה מקומות במדריכים הקיימים. בשבעה נמצאה התאמה לפרטים שבמקורות המסעדה או ההזמנה, ולא נמצא שינוי שמצריך פרסום. אתר WHITE ביבנה החזיר 403; המגבלה תועדה, ופרטיו ותאריך האימות הקודם נשמרו. בתל אביב אומתה התאמת הקטלוג החי למקור ונבדקה טעינת שתי תמונות JPG עם קרדיט. הבדיקה חלקית; לא בוצעה פריסה.",
       "qualification": "Matched task/run result, not independent controller publication verification"
     }
-  }
+  },
+  "publication_pending_existing_writer": {
+    "target": "TLVNET-site",
+    "owner": "manual-policy-migration-20261113",
+    "run_key": "policy-migration-20261113-9fcecaa2",
+    "lease_until": "2026-11-13T12:41:04.833675+00:00",
+    "state": "publication_pending_existing_writer",
+    "observed_at": "2026-11-13T12:13:20.668Z",
+    "lease_blob_sha": "9ca26c39afc06b7cd8d4d8453e15db7a549aa789",
+    "pending_bundle": "ops/incident-response/release-plans/tlvnet-coordinated-coverage-and-portability-20261113.json",
+    "controller_acquisition_attempts": 0,
+    "controller_source_edits": 0
+  },
+  "policy_version": "2026-11-13/1.0"
 }
