@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "manual_audit_handoff",
+  "thread_id": "01a1d3fd-dc9b-7622-91a6-fd0834fae599",
+  "attempt": 1,
+  "created_at": "2026-11-13T08:51:14.961Z",
+  "signature": "tlvnet/editorial-coverage/legacy-caps-and-cancelled-owners",
+  "related_incident_ids": [
+    "tlvnet-community-cancelled-owner-routing",
+    "tlvnet-sports-image-control-read-path"
+  ],
+  "site": "https://tlvnet.com",
+  "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+  "status": "awaiting_coordinated_release",
+  "patch": "ops/incident-response/patches/tlvnet-coverage-budget-e6232ae2.patch",
+  "source_base": "501067ea62189963b1de2a355849bfbfbb4690df",
+  "latest_source_merged_locally": "406b4d91735b61d27fd241ef58a86f8137cf4284",
+  "local_fix_commit": "e6232ae2",
+  "changes": [
+    "All seven specialist maxPerRun values null; technical provider budgets unchanged",
+    "Community routes to active news owner; consumer routes to active economy-tech owner; original cancelled schedules retained",
+    "Disabled or absent coverage owner does not fall back to cancelled task",
+    "All pending articles exposed beyond former twelve-item projection cap",
+    "Current owner/cadence and no article quota prepended to seven historical writer instructions"
+  ],
+  "tests": {
+    "foundation": "PASS including auth, CAS, deduplication, publication, image gates, topic isolation and source-vs-ledger projection",
+    "new_regressions": "PASS:30 waiting articles retained; assigned owners resolve correctly; disabled owner blocked; cancelled schedules preserved; no fake ownership proof",
+    "python_photo_gates": "PASS after restoring original Git evidence bytes unchanged and enabling UTF8",
+    "full_release_build": "BLOCKED: build-seo.py emits Windows backslash URL https://tlvnet.com/stay\\\\day-fun/; check-seo.py correctly rejects canonical mismatch. Do not bypass gate."
+  },
+  "observations": {
+    "source_articles_by_topic": {
+      "news": {
+        "published": 72,
+        "draft": 0
+      },
+      "real-estate": {
+        "published": 25,
+        "draft": 0
+      },
+      "economy-tech": {
+        "published": 27,
+        "draft": 0
+      },
+      "community": {
+        "published": 24,
+        "draft": 0
+      },
+      "consumer": {
+        "published": 9,
+        "draft": 0
+      },
+      "sports": {
+        "published": 26,
+        "draft": 1
+      },
+      "culture-news": {
+        "published": 41,
+        "draft": 0
+      }
+    },
+    "scope": "Source counts, not 224 independently live-verified automatic publications",
+    "supabase_queue": {
+      "completed": 8,
+      "blocked": 3,
+      "queued": 0,
+      "running": 0,
+      "last_updated": "2026-11-07T05:20:57Z",
+      "publishes": false
+    },
+    "active_hosted_tasks_observed": 12,
+    "live_pages_read": [
+      "https://tlvnet.com/news/center-tlv-police-impersonation-robbery-arrest-20261112",
+      "https://tlvnet.com/news/beit-romano-district-approval-240-apartments-20261111",
+      "https://tlvnet.com/news/tlv-startup-workspaces-hamigdal-haratzif-service-20261111",
+      "https://tlvnet.com/news/south-tlv-grab-bars-volunteering-20261106",
+      "https://tlvnet.com/news/city-museum-troubled-waters-opening-20261106"
+    ],
+    "live_scope": "Existing articles read with body/image/credit; not new publications by this audit"
+  },
+  "blockers": [
+    "No actual shared publication lease verified; do not equate schedule/CAS/previous succeeded deployment with a lock",
+    "Full server-independent discovery-to-publication migration remains unimplemented; existing bounded API queue produces drafts only",
+    "Full monetary budget enforcement and cross-system publication locking remain unverified",
+    "Sports existing draft still waits for current asset approval; no fabricated approval"
+  ],
+  "next_action": "Existing release owner should reconcile with the older community-only patch, take valid publication ownership, apply this superset once to fresh Sites source, fix portable URL generation without weakening the canonical gate, run release checks, then publish and verify both dispatch owners and article limits. Preserve other agents, old cancellations and API limits; do not create services, keys, paid capacity or permission grants."
+}
