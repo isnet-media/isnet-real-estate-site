@@ -2,7 +2,7 @@ name: Build event enrichment candidates from all sources
 on:
   workflow_dispatch:
   schedule:
-    - cron: '15 6 * * *'
+    - cron: '15 6 * * 0'
   push:
     paths:
       - 'scripts/build_event_enrichment_candidates.py'
@@ -14,6 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -1,0 +1,95 @@
+{
+  "policy_version": "2026-11-13/1.0",
+  "changes": [
+    {
+      "file": ".github/workflows/ashdod-local.yml",
+      "before": "20 6 * * *",
+      "after": "20 6 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/ashdod-supplemental.yml",
+      "before": "40 5 * * *",
+      "after": "40 5 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/local-culture-gap-discovery.yml",
+      "before": "45 5 * * *",
+      "after": "45 5 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/unified-stage-collector.yml",
+      "before": "05 5 * * *",
+      "after": "05 5 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/shared-stage-productions.yml",
+      "before": "35 6 * * *",
+      "after": "35 6 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/friends-discovery.yml",
+      "before": "20 4 * * *",
+      "after": "20 4 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/mevalim-ashdod-direct.yml",
+      "before": "45 4 * * *",
+      "after": "45 4 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/national-event-board-discovery.yml",
+      "before": "50 4 * * *",
+      "after": "50 4 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/event-enrichment-candidates.yml",
+      "before": "15 6 * * *",
+      "after": "15 6 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/holon-events.yml",
+      "before": "35 3 * * *",
+      "after": "35 3 * * 0",
+      "push_collection": "disabled"
+    },
+    {
+      "file": ".github/workflows/collect-cinema.yml",
+      "before": "15 5 * * *",
+      "after": "15 5 * * 4"
+    },
+    {
+      "file": ".github/workflows/cinema-ashdod-unfiltered-experiment.yml",
+      "after": "manual_only",
+      "reason": "experimental second writer of Ashdod cinema; no duplicate scheduled collection"
+    },
+    {
+      "file": ".github/workflows/kgat-classes.yml",
+      "before": "monthly",
+      "after": "quarterly"
+    },
+    {
+      "file": ".github/workflows/tlvnet-events.yml",
+      "before": "twice_daily_mixed",
+      "after": "events_Sunday_cinema_Thursday",
+      "push_collection": "disabled"
+    }
+  ],
+  "unresolved_coupled_workflows": [
+    "herzliya-events.yml (events+cinema+food in collector)",
+    "sync-rishon-national.yml (events+cinema)"
+  ],
+  "unchanged": [
+    "supermarket schedules and claims",
+    "health/audit/source backup schedules",
+    "tlvnet-agents bounded manual-draft queue"
+  ]
+}

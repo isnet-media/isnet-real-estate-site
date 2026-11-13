@@ -2,7 +2,7 @@ name: Daily Ashdod local source publication
 on:
   workflow_dispatch:
   schedule:
-    - cron: '20 6 * * *'
+    - cron: '20 6 * * 0'
 permissions:
   contents: write
 concurrency:
@@ -10,6 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   collect:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

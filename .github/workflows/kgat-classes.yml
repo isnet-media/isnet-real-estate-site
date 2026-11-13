@@ -2,7 +2,7 @@ name: Monitor Kiryat Gat classes sources
 on:
   workflow_dispatch:
   schedule:
-    - cron: '20 6 1 * *'
+    - cron: '20 6 1 1,4,7,10 *'
   push:
     branches: [main]
     paths: ['scripts/monitor_kgat_classes.py', 'scripts/test_kgat_classes.py', '.github/workflows/kgat-classes.yml']
@@ -13,6 +13,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   check:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:

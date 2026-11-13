@@ -3,7 +3,7 @@ name: Refresh verified Ashdod cinema
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 5 * * *"
+    - cron: "15 5 * * 4"
   push:
     branches: [main]
     paths:
@@ -20,6 +20,7 @@ concurrency:
 
 jobs:
   refresh:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:

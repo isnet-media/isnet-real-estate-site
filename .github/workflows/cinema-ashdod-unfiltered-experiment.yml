@@ -1,8 +1,6 @@
 name: Cinema Ashdod unfiltered intake experiment
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '40 5 * * *'
   push:
     paths:
       - "scripts/experiment_ashdod_cinema_unfiltered.py"
@@ -11,6 +9,7 @@ permissions:
   contents: write
 jobs:
   inspect:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

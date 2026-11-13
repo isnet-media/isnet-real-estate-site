@@ -2,7 +2,7 @@ name: Discover supplementary local cultural events
 on:
   workflow_dispatch:
   schedule:
-    - cron: '45 5 * * *'
+    - cron: '45 5 * * 0'
   push:
     paths:
       - 'scripts/discover_local_culture_gaps.py'
@@ -14,6 +14,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   discover:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
