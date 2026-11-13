@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "classes_cycle_handoff",
+  "task_id": "Automation_6f7ebf4f01148191b17ce098a1061217",
+  "run_id": "786c310e-a5ec-832c-8d7d-5ca6e75ac986",
+  "runKey": "classes-2026-11-13-quarterly-786c310e",
+  "attempt": 1,
+  "created_at": "2026-11-13 08:59:39 UTC",
+  "status": "partial_review",
+  "signature": "classes/source-detail-read/web-retrieval-unavailable",
+  "source_origin_outage_claimed": false,
+  "automation_state_changed": false,
+  "verified_fix": {
+    "site": "https://tlvnet.com/meusharim/",
+    "version": 586,
+    "commit": "373066ad45f3a3180b3feddad55cfe581ae5fcdb",
+    "deployment_id": "appgdep_6af6d0f4b3ac81918379e195783a693c",
+    "status": "succeeded",
+    "result": "Exact non-course contact row absent from live184-record JSON; seven genuine Minshar courses and legitimate course route retained"
+  },
+  "remaining": [
+    {
+      "city": "yavne",
+      "id": "yavne-1854495",
+      "status": "blocked_source_read",
+      "action": "Existing authorized collector/browser source read required before factual refresh; no origin outage inferred"
+    },
+    {
+      "city": "tel-aviv",
+      "id": "tlv-BZ17202703933",
+      "status": "blocked_source_read",
+      "action": "Use documented public rendered municipal route when available; do not relabel old snapshot as fresh"
+    },
+    {
+      "city": "tel-aviv",
+      "provider": "museum-courses",
+      "status": "blocked_source_read",
+      "action": "Verify actual detail before changing schedule/registration; prior cached facts are not fresh detail verification"
+    },
+    {
+      "cities": [
+        "ashdod",
+        "rishon-lezion",
+        "kiryat-gat"
+      ],
+      "status": "partial_review",
+      "action": "Continue remaining existing rows with cached/conditional collectors; samples do not establish full-city freshness"
+    }
+  ],
+  "evidence": "Some primary detail reads returned tool Internal Error without an HTTP status. This limits those samples only, not source-host availability or independent catalogue work. Original source facts/dates retained; current documentation already records municipal unattended-access limitation.",
+  "journal": "ops/daily-audit/2026-11-13.json",
+  "next_action": "Keep scoped checkpoint; cheaply check access changes on the existing saved cycle. No blind retry, new schedule/agent or deployment for this handoff.",
+  "log_only": true
+}
