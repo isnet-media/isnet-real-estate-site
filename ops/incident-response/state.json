@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T14:31:37.188Z",
+  "updated_at": "2026-11-13T15:30:33.102Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-13T13:23:38Z",
+  "last_processed_run_created_at": "2026-11-13T15:10:15Z",
   "initial_history": {
     "status": "partial_metadata_review",
     "days": 7,
@@ -10,17 +10,18 @@
     "window_end": "2026-11-13T04:26:25Z",
     "seed_history_is_partial": true,
     "metadata_runs_this_cycle": 99,
-    "metadata_from": "2026-11-10T13:29:24Z",
-    "metadata_through": "2026-11-10T19:05:48Z",
+    "metadata_from": "2026-11-10T11:24:19Z",
+    "metadata_through": "2026-11-10T13:29:24Z",
     "continuation": {
-      "created_at_before": "2026-11-10T13:29:24Z",
-      "also_resume_equal_timestamp_with_id": 42824963516,
-      "query": "created=<=2026-11-10T13:29:24Z",
-      "remaining": "Earlier metadata through2026-11-06 and unclassified historical failure groups remain; seven-day audit incomplete."
+      "created_at_before": "2026-11-10T11:24:19Z",
+      "also_resume_equal_timestamp_with_id": 42807189800,
+      "query": "created=<=2026-11-10T11:24:19Z",
+      "remaining": "Earlier metadata through2026-11-06 and saved unclassified historical groups remain; seven-day review not complete."
     },
     "full_logs_read_this_cycle": [
-      42884774150,
-      42899565900
+      42821155637,
+      42818066603,
+      42807647929
     ],
     "unconfirmed_publish_failure_ids": [
       43357968256,
@@ -51,7 +52,7 @@
       43227176668,
       43226978272
     ],
-    "metadata_runs_total": 794,
+    "metadata_runs_total": 893,
     "untriaged_workflow_groups": {
       ".github/workflows/pages.yml": [
         {
@@ -508,6 +509,20 @@
             }
           ]
         }
+      ],
+      ".github/workflows/holon-events.yml": [
+        {
+          "run_id": 42809472860,
+          "workflow": "Refresh Holon events and culinary guide",
+          "path": ".github/workflows/holon-events.yml",
+          "attempt": 1,
+          "created_at": "2026-11-10T11:41:07Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "f38210223a88d03b3f1d22a32cb0600399fa0182",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42809472860",
+          "classification": "Historical metadata only; signature unconfirmed. Do not count as new current incident."
+        }
       ]
     }
   },
@@ -516,80 +531,60 @@
   "last_verified_public_readback_run": 43362615900,
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
-    "runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
+    "run_id": "4c2b665e-2dfc-8322-aa66-e689aff05aef",
+    "runKey": "ops-2026-11-13-4c2b665e-2dfc-8322-aa66-e689aff05aef",
     "policy_version": "2026-11-13/1.0",
-    "started_at": "2026-11-13T14:27:57.555006Z",
-    "observed_at": "2026-11-13T14:31:37.188Z",
-    "source_sha": "1e1d192b6deca751ba7ea2250494a4470fa0ed46",
+    "started_at": "2026-11-13T15:23:00.914065Z",
+    "observed_at": "2026-11-13T15:30:33.102Z",
+    "source_sha": "864553b4da1c91350dbdccda33dc2dc7683f96a4",
     "targets_reviewed": [
-      "Original Herzliya/Raanana runtime access",
-      "Accessible automation inventory and seven TLVNET writers",
-      "Sites593 deployment",
-      "DB.social_runs metadata",
-      "GitHub new runs/inbox"
+      "GitHub new runs and historical checkpoint",
+      "TLVNET Sites593 deployment",
+      "Seven writer task run records",
+      "DB.social_runs new-result filter",
+      "Existing self-reported ownership handoff"
     ],
     "new_workflow_failures": 0,
+    "new_social_runs": 0,
+    "new_task_results": 0,
+    "new_site_versions": 0,
     "new_inbox": [
-      "122b42e1-c6bc-8325-9797-95a2377b76c0-1.json",
-      "20261113-city-writer-runtime-policy11.json"
+      "b8641b1e-3cec-8322-a6e7-5c6f1e11a895-1.json"
     ],
-    "new_incidents": [
-      "herzliya-raanana-original-runtime-access",
-      "tlvnet-legacy-work-activity-unverifiable",
-      "tlvnet-policy11-owner-overlap"
+    "new_inbox_classification": "Prior controller handoff already represented by tlvnet-policy11-owner-overlap; mark consumed without duplicate alert.",
+    "history_added": 99,
+    "history_logs_read": [
+      42821155637,
+      42818066603,
+      42807647929
     ],
-    "actions": [
-      {
-        "run_id": 43433252433,
-        "workflow": "Record operation failures",
-        "created_at": "2026-11-13T13:23:38Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43433252433"
+    "history_group": "Three confirmed old Pages syncing_files timeouts grouped under existing root; one Holon metadata entry deferred.",
+    "new_queue_worker": {
+      "workflow_run": 43449784353,
+      "source": "864553b4da1c91350dbdccda33dc2dc7683f96a4",
+      "workflow": ".github/workflows/tlvnet-agents.yml",
+      "code": "scripts/tlvnet_agent_worker.py",
+      "job": 131968612059,
+      "conclusion": "success",
+      "qualification": "Code inspected, not executed by controller. Worker processes supplied queue tasks and explicitly never publishes; green result does not prove a queue item existed, new article publication, or removal of legacy Work blocker.",
+      "technical_budget": {
+        "max_jobs": 2,
+        "provider_calls_per_invocation": 3,
+        "monetary_cap_proven": false
       },
-      {
-        "run_id": 43433190954,
-        "workflow": "Audit event illustration coverage",
-        "created_at": "2026-11-13T13:23:13Z",
-        "status": "completed",
-        "conclusion": "success",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43433190954"
-      },
-      {
-        "run_id": 43430739370,
-        "workflow": "Record operation failures",
-        "created_at": "2026-11-13T13:06:08Z",
-        "status": "completed",
-        "conclusion": "skipped",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43430739370"
-      }
-    ],
-    "office_prompt_updates": 0,
-    "original_city_prompt_readbacks": 0,
-    "publications_verified": 0,
-    "build_or_deploy": false,
-    "social_retries": 0,
-    "claims_or_settings_writes": false,
-    "automation_schedule_or_enabled_edits": false,
-    "history_checkpoint": {
-      "created_at_before": "2026-11-10T13:29:24Z",
-      "also_resume_equal_timestamp_with_id": 42824963516,
-      "query": "created=<=2026-11-10T13:29:24Z",
-      "remaining": "Earlier metadata through2026-11-06 and unclassified historical failure groups remain; seven-day audit incomplete."
+      "claims": "Atomic queued->running storage claim is scoped to this queue, not a CMS/Sites publication lease.",
+      "legacy_editorial_text": "Non-team legacy SYSTEM says human editorial review; this is not evidence the independent scheduled city/news writers have received a restrictive instruction. No shared-role source change without authoritative task path."
     },
-    "history_review": "No new page: new runtime blockers prioritized.",
-    "remaining": [
-      "Original office Work access; prompt replacement/readback and actual publication still unverified",
-      "Old Work producer activity proof",
-      "Current v1.1 topic ownership reconciliation",
-      "Meta verified reconnection",
-      "Existing Windows fix and historical backlog"
-    ],
-    "cost": "No measured dollars/API billing; no financial cap claimed"
+    "unchanged_blockers": "Office source runtime access, v1.1 ownership overlap, old Work activity proof and Meta auth not retried; no source/permission/input change authorizes retry.",
+    "build_or_deploy": false,
+    "automation_changes": false,
+    "publications_verified": 0,
+    "visual_review": "Not performed",
+    "remaining": "Earlier metadata through2026-11-06 and saved unclassified historical groups remain; seven-day review not complete.",
+    "cost": "No measured dollar/provider billing data; no financial ceiling claimed."
   },
   "concurrent_controller_observation": {
-    "run_id": "b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
+    "run_id": "4c2b665e-2dfc-8322-aa66-e689aff05aef",
     "status": "current scheduled cycle"
   },
   "task_results_watermark": {
@@ -665,7 +660,7 @@
     "deployment_id": "appgdep_6af7198359108191ab682db3469d0c25",
     "status": "succeeded",
     "published_source": "cd5af6c3a251d8681877e3390c1e1296d28309e4",
-    "observed_at": "2026-11-13T14:31:37.188Z",
+    "observed_at": "2026-11-13T15:30:33.102Z",
     "other_observed_versions": [
       {
         "version": 587,
@@ -711,7 +706,8 @@
     "manual-policy-completion-20261113-1.json",
     "manual-policy-rollout-20261113-1.json",
     "122b42e1-c6bc-8325-9797-95a2377b76c0-1.json",
-    "20261113-city-writer-runtime-policy11.json"
+    "20261113-city-writer-runtime-policy11.json",
+    "b8641b1e-3cec-8322-a6e7-5c6f1e11a895-1.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -764,6 +760,11 @@
       "runKey": "ops-2026-11-13-064e67b6-3b00-8322-9738-0875a255ac30",
       "observed_at": "2026-11-13T13:13:35.258Z",
       "source_commit": "37db6571b5540f002ec634a6836997d24607cbdc"
+    },
+    {
+      "runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
+      "observed_at": "2026-11-13T14:31:37.188Z",
+      "source_commit": "a1ed8ad2154d0b5af9c1c047e89aacfe3c1e68ad"
     }
   ],
   "photo_controls_checkpoint": {
@@ -826,7 +827,8 @@
       "2026-11-13T09",
       "2026-11-13T10"
     ],
-    "observed_at": "2026-11-13T14:31:37.188Z",
-    "evidence": "ops/incident-response/evidence/social-runs-b8641b1e-3cec-8322-a6e7-5c6f1e11a895.json"
+    "observed_at": "2026-11-13T15:30:33.102Z",
+    "evidence": "ops/incident-response/evidence/social-runs-b8641b1e-3cec-8322-a6e7-5c6f1e11a895.json",
+    "new_rows_this_cycle": 0
   }
 }
