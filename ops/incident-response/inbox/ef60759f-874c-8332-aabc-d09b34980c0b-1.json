@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "sites_writer_handoff",
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "run_id": "ef60759f-874c-8332-aabc-d09b34980c0b",
+  "runKey": "news-community-2026-11-13-08:00-ef60759f",
+  "attempt": 1,
+  "created_at": "2026-11-13T06:27:12.427Z",
+  "site": "https://tlvnet.com",
+  "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+  "signature": "tlvnet/community/dispatch-owner/cancelled-owner-after-transfer",
+  "status": "open",
+  "evidence": {
+    "endpoint": "/api/briefs-writer?view=dispatch&topic=community",
+    "ownerAutomationId": "Automation_e03d80ff914c8191a790fc66e7447826",
+    "schedule_state": "cancelled",
+    "publisher_instruction": "13Nov assigns news and community to Automation_b3345c399b988191a1ba9848e3e3668b",
+    "ownershipProof": false,
+    "qualification": "Map mismatch observed; not proof of a runtime task/result routing mismatch. Not treated as a lock or authority change."
+  },
+  "impact": "Community map still names the cancelled owner. Content publication via current authorized writer succeeded; no technical access expansion or task restart.",
+  "next_action": "Existing controller should reconcile the existing community ownership map against the explicit13Nov transfer, preserving cancelled tasks and schedules; verify actual task/run identity before claiming routing repaired.",
+  "publication": {
+    "version": 581,
+    "commit_sha": "a3ab86dfc03df6634f54c4abcd8be55861e0ef11",
+    "deployment_id": "appgdep_6af6ac303f20819181ed947059a12e4c",
+    "status": "succeeded",
+    "new_publication": [
+      "https://tlvnet.com/news/center-tlv-police-impersonation-robbery-arrest-20261112"
+    ],
+    "existing_image_correction": [
+      "https://tlvnet.com/news/south-tlv-grab-bars-volunteering-20261106"
+    ]
+  },
+  "visual_review": {
+    "desktop_articles_and_section_cards": "actually_viewed_after_publication",
+    "mobile": "pending",
+    "home_link": "GET_verified",
+    "queue": "data/photo-bank/quality-issues.json",
+    "preview_exception": "13Nov publisher instruction; previous runner-worker error retained in history, no new preview retry claimed."
+  }
+}
