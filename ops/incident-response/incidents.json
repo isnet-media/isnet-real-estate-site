@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T20:06:40.073Z",
+  "updated_at": "2026-11-13T20:41:28.529Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1059,6 +1059,20 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42776520402",
           "job_id": 129696173011,
           "classification": "Historical exact signature confirmed from full log; not new recurrence"
+        },
+        {
+          "run_id": 42629152649,
+          "workflow": "Publish priceboard",
+          "path": ".github/workflows/pages.yml",
+          "attempt": 1,
+          "created_at": "2026-11-09T13:51:28Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "a8decf379cab9550fca787cfaafa72deda70e0c0",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42629152649",
+          "classification": "Full log read: Pages Deploy syncing_files timeout; historical occurrence added to existing root, not present recurrence.",
+          "job_id": 129200617858,
+          "signature": "pages/Deploy/syncing_files/timeout"
         }
       ],
       "evidence": {
@@ -1072,9 +1086,10 @@
       "next_action": "No rerun of old deployment. Reopen on fresh failure signature; retain bounded duration and deploy provenance.",
       "controller_retry": false,
       "latest_historical_reconciliation": {
-        "observed_at": "2026-11-13T15:30:33.102Z",
-        "evidence": "ops/incident-response/evidence/history-4c2b665e-2dfc-8322-aa66-e689aff05aef.json",
-        "occurrences_added": 3,
+        "observed_at": "2026-11-13T20:41:28.529Z",
+        "runKey": "ops-2026-11-13-1dfe8836-8e24-8332-8252-44e22e01ea3b",
+        "evidence": "ops/incident-response/evidence/actions-history-1dfe8836-8e24-8332-8252-44e22e01ea3b.json",
+        "occurrences_added": 1,
         "current_failure": false,
         "controller_retry": false
       }
@@ -1357,7 +1372,7 @@
       "reported_runKey": "ops-2026-11-13-a2aa0629-3158-8322-adc0-c25e2fa87f28"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-115553d8-22f4-8322-843b-4691e048ee60",
+  "last_review_runKey": "ops-2026-11-13-1dfe8836-8e24-8332-8252-44e22e01ea3b",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
