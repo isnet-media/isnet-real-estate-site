@@ -23,6 +23,7 @@ jobs:
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
       TLVNET_OPENAI_MODEL: ${{ vars.TLVNET_OPENAI_MODEL || 'gpt-4.1-mini' }}
       TLVNET_MAX_JOBS_PER_RUN: '2'
+      TLVNET_MAX_PROVIDER_CALLS_PER_RUN: '3'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
