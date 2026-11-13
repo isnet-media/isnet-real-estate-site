@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T21:57:57.292Z",
+  "updated_at": "2026-11-13T22:11:56.441Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1410,9 +1410,61 @@
       "prevention": "Keep unit, rendered and public checks distinct; retain exact selector failure. A future tested change can capture error state before success-only screenshot points.",
       "observed_at": "2026-11-13T21:57:57.292Z",
       "reported_runKey": "ops-2026-11-13-1292cc63-7694-8332-9c13-1491a8bdf8c0"
+    },
+    {
+      "id": "historical-rishon-official-candidate-parser-tests",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "rishon-source-id-safety/OfficialReviewCandidateTests/two-missing-candidates-0-vs1",
+      "root_cause": "Immediate historical failure was candidate extraction returning no row for adult ShowCulture route and generic purchase strict-detail fixtures; underlying parser/fixture mismatch not fully diagnosed. Seven identity-collision tests passed before the separate candidate suite failed.",
+      "occurrences": [
+        {
+          "run_id": 42538094000,
+          "workflow": "Test Rishon source event-ID safety",
+          "path": ".github/workflows/rishon-source-id-safety-tests.yml",
+          "attempt": 1,
+          "created_at": "2026-11-09T00:03:10Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "e1978749dfef5ef06971bfde0c28739d73bcf154",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42538094000",
+          "classification": "Full log confirms7 identity safety tests passed; two of5 separate OfficialReviewCandidateTests failed with0 candidates instead of1. Not a collision-safety test failure.",
+          "job_id": 128906778347
+        }
+      ],
+      "evidence": {
+        "log_read_full": true,
+        "failed_test_file": "scripts/test_rishon_official_candidates.py",
+        "failed_tests": [
+          "test_adults_show_culture_route_supported_without_auto_import",
+          "test_generic_purchase_links_resolve_from_strict_detail_identity"
+        ],
+        "actual_candidates": 0,
+        "expected_candidates": 1,
+        "identity_suite": {
+          "tests": 7,
+          "status": "passed"
+        },
+        "candidate_suite": {
+          "tests": 5,
+          "failures": 2
+        },
+        "current_workflow_blob": "4be8ceb44adf20ba57784ea21044c931ee018c7e",
+        "current_source_identity_test_blob": "05fb1adcf158968c6d7999184619e8b3deb87040",
+        "current_sync_script_blob": "f73f4ab68449f111f104b10d7e6ecb863959ec03",
+        "current_workflow_command": "python scripts/test_rishon_source_identity.py",
+        "current_workflow_has_separate_candidate_test_command": false,
+        "current_test_execution": false,
+        "current_public_verification": false
+      },
+      "resolution": "Historical cause separated from working identity protection. No code, source-ID/rights gate, timer, baseline or import changes. Current narrower workflow is observed, not claimed as a repair.",
+      "next_action": "If candidate extraction is still in the authorized current source path or a fresh failure occurs, read candidate parser and exact fixtures, reconcile intended manual-review scope and restore/test coverage only with evidence. Do not weaken identity safety or auto-import unreviewed candidates merely to pass tests.",
+      "prevention": "Group by actual test/step signature, not workflow title. Preserve passing identity controls and separate candidate discovery from publication.",
+      "observed_at": "2026-11-13T22:11:56.441Z",
+      "reported_runKey": "ops-2026-11-14-48802a2a-4c84-8332-8f69-8d761ecc508f"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-1292cc63-7694-8332-9c13-1491a8bdf8c0",
+  "last_review_runKey": "ops-2026-11-14-48802a2a-4c84-8332-8f69-8d761ecc508f",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
