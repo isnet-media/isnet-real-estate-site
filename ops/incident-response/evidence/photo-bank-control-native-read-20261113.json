@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171",
+  "observed_at": "2026-11-13T08:07:58.359Z",
+  "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+  "method": "Sites native read_database_overview + bounded read_database_table_rows; read-only, no public HTTP retry or permission change",
+  "binding_name": "DB",
+  "table_name": "settings",
+  "pages": [
+    {
+      "offset": 0,
+      "returned_rows": 9,
+      "next_offset": 9
+    },
+    {
+      "offset": 9,
+      "returned_rows": 2,
+      "next_offset": null
+    }
+  ],
+  "control_row_id": "photo-bank-control-v1",
+  "control_row_present": false,
+  "coverage": "All returned row IDs on both pages checked; no omitted columns. Unrelated long values truncated, but target row was absent. No unrelated values stored.",
+  "deployed_source": {
+    "version": 582,
+    "commit": "f741b600f20ac729a302e5fa2728da1b81efc830",
+    "deployment_id": "appgdep_6af6c1f7ac388191ad7a0721c0bd0cbf",
+    "status": "succeeded",
+    "file": "app/api/photo-bank/route.ts"
+  },
+  "effective_control": {
+    "enabled": true,
+    "blockedIds": [],
+    "version": 0
+  },
+  "derivation": "Actual deployed control() uses value={} when row absent, enabled is value.enabled!==false, blockedIds defaults to[], version defaults to0.",
+  "tests": [
+    "Extracted exact deployed control() with read-only null-row fixture: enabled true / blockedIds[] / version0",
+    "Explicit enabled=false and blockedIds fixture retained; no gate weakening"
+  ],
+  "limits": [
+    "Point-in-time control verification, not durable permission or image approval.",
+    "Does not verify original photo rights, body/asset match, API HTTP health, visual review, or a publication lock.",
+    "Do not use unrelated enrichment-refresh-lock-v1 as a publication lease."
+  ],
+  "database_mutations": 0
+}

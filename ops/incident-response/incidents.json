@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T06:55:15.131Z",
+  "updated_at": "2026-11-13T08:07:58.359Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -640,7 +640,27 @@
       "impact": "News publication continued through authorized news owner; operational routing remains stale until patch is released.",
       "next_action": "Existing TLVNET release owner must take its valid publication lock, rebase this tested patch onto current source, run existing checks, include it in one authorized release, and verify live community dispatch owner. Do not create or resume any task or change schedule. Keep controller incident open until actual live result.",
       "reported_runKey": "ops-2026-11-13-2b4d4313-dc9c-8326-9bbe-e53d28b9e74d"
+    },
+    {
+      "id": "tlvnet-sports-image-control-read-path",
+      "status": "mitigated",
+      "fingerprint": "tlvnet/sports/photo-control-read-unavailable/no-publication-lock-proof",
+      "root_cause": "Public fetch surface could not read writer control API; this did not prove a bank outage. Existing authorized native Sites D1 reads provide bounded live control evidence.",
+      "occurrences": [
+        {
+          "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+          "run_id": "56a526f7-4760-8320-a519-595bd865e651",
+          "inbox": "ops/incident-response/inbox/56a526f7-4760-8320-a519-595bd865e651-1.json"
+        }
+      ],
+      "article_id": "maccabi-hapoel-euroleague-derby-win-20261112",
+      "body_sha256": "816d9d45e8f18a379c2c7e9297e05a8129e430bd0e0f53646e189c4f6f8c046b",
+      "evidence_path": "ops/incident-response/evidence/photo-bank-control-native-read-20261113.json",
+      "mitigation": "Verified read-only effective runtime controls enabled=true, blockedIds=[], version0 via absent row plus exact deployed source defaults. Documented authorized read path in RUNBOOK; no rights gate/DB/access changes.",
+      "remaining": "Draft source remains status=draft, image_review=pending. Runtime controls are only one condition; actual asset approval and valid publication ownership still required.",
+      "next_action": "Sports owner resumes existing draft first, uses native live control reads if public fetch cannot read it, verifies exact JPG rights and body/asset match, acquires an existing valid publication lease and publishes once. Controller does not approve the editorial image or operate the writer.",
+      "reported_runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-2b4d4313-dc9c-8326-9bbe-e53d28b9e74d"
+  "last_review_runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171"
 }
