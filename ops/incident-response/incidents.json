@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T22:11:56.441Z",
+  "updated_at": "2026-11-13T23:34:52.371Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1462,9 +1462,60 @@
       "prevention": "Group by actual test/step signature, not workflow title. Preserve passing identity controls and separate candidate discovery from publication.",
       "observed_at": "2026-11-13T22:11:56.441Z",
       "reported_runKey": "ops-2026-11-14-48802a2a-4c84-8332-8f69-8d761ecc508f"
+    },
+    {
+      "id": "historical-batyam-three-retained-source-feeds",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "super-health/check_super_public/BATYAM/three-stale-retained-feeds@435854a6258dc0487c16a65604cd50e55f0d327d",
+      "root_cause": "On2026-11-08 the public freshness validator reported three Bat Yam branches stale and retaining prior source data. Exact upstream cause not established. This was not an all-city HTTP outage: five other tested editions passed.",
+      "occurrences": [
+        {
+          "run_id": 42486574914,
+          "workflow": "All cities supermarket public health",
+          "path": ".github/workflows/super-health.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T13:46:52Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "435854a6258dc0487c16a65604cd50e55f0d327d",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42486574914",
+          "classification": "Full log confirmed3 BATYAM stale branches retaining previous source data; five other cities passed. Historical signature distinct from six-city HTTP errors/TLV stale branches.",
+          "job_id": 128749651396
+        }
+      ],
+      "evidence": {
+        "log_read_full": true,
+        "failed_step": "Run python scripts/check_super_public.py",
+        "freshness_unit_tests": "passed",
+        "city": "BATYAM",
+        "branch_ids": [
+          "7290027600007-199",
+          "7290027600007-124",
+          "7290027600007-372"
+        ],
+        "other_passed_cities": [
+          "ASHDOD",
+          "YAVNE",
+          "KGAT",
+          "RISHON",
+          "HOLON"
+        ],
+        "current_collection_or_public_scan": false,
+        "current_branch_freshness_verified": false
+      },
+      "resolution": "Historical signature classified only; no off-window supermarket HTTP scan, collection, claim release, source-date change or invented freshness.",
+      "next_action": "At next authorized Sunday/Tuesday/Thursday morning cycle, reconcile these exact branch source IDs with current owner checkpoint and real source timestamps. Diagnose only if still stale or an actual new event warrants it; preserve valid old data and true dates. Historical Nov8 log is not present-state proof.",
+      "prevention": "Separate stale upstream retention from HTTP delivery errors and scheduling. Keep freshness gate and last-good data; never relabel old data current.",
+      "related_incident_ids": [
+        "supermarket-public-http-and-stale-branches",
+        "supermarket-out-of-window-start"
+      ],
+      "observed_at": "2026-11-13T23:34:52.371Z",
+      "reported_runKey": "ops-2026-11-14-be1b3fb2-4da4-8332-9618-7dcd391a4880"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-48802a2a-4c84-8332-8f69-8d761ecc508f",
+  "last_review_runKey": "ops-2026-11-14-be1b3fb2-4da4-8332-9618-7dcd391a4880",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
