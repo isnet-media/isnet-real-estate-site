@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "sports_writer_handoff",
+  "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "run_id": "56a526f7-4760-8320-a519-595bd865e651",
+  "runKey": "sports-2026-11-13-09-56a526f7-4760-8320-a519-595bd865e651",
+  "attempt": 1,
+  "created_at": "2026-11-13T07:14:09.539Z",
+  "site": "https://tlvnet.com",
+  "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+  "signature": "tlvnet/sports/photo-control-read-unavailable/no-publication-lock-proof",
+  "status": "draft_waiting_image",
+  "article_id": "maccabi-hapoel-euroleague-derby-win-20261112",
+  "body_sha256": "816d9d45e8f18a379c2c7e9297e05a8129e430bd0e0f53646e189c4f6f8c046b",
+  "source_commit": "7c7975e1bae50447168359b15bb232a4b782db76",
+  "source_paths": [
+    "public/news/articles.json",
+    "public/news/agents/sports/ledger.json",
+    "data/photo-bank/news-requests.json"
+  ],
+  "evidence": {
+    "runtime_task_identity_matched": true,
+    "sports_owner_map_matched": true,
+    "dispatch_url": "https://tlvnet.com/api/briefs-writer?view=dispatch&topic=sports",
+    "dispatch_read": "Public fetch tool returned not accessible; no HTTP status supplied. Do not attribute earlier controller403 to this sports request.",
+    "current_photo_controls": "collector.enabled and blockedIds not verified; cannot approve asset",
+    "publication_ownership": "Schedule map explicitly isExecutionLock=false; no actual deployment lock verified",
+    "latest_deployment": {
+      "id": "appgdep_6af6ac303f20819181ed947059a12e4c",
+      "status": "succeeded"
+    },
+    "source_write": "Explicit source-only optimistic lease: main matched b5b1977 immediately before ordinary fast-forward push. No deployment lock claimed."
+  },
+  "editorial_progress": {
+    "draft_created": 1,
+    "new_publications": 0,
+    "competition": "EuroLeague regular season round11, senior men",
+    "match_date": "2026-11-12",
+    "teams": [
+      "Maccabi Tel Aviv",
+      "Hapoel Tel Aviv"
+    ],
+    "result": {
+      "Maccabi": 80,
+      "Hapoel": 73
+    },
+    "primary_full_source": "https://maccabi.co.il/games/hapoel-ibi-tel-aviv-12-11-2026/",
+    "secondary_full_source": "https://www.ynet.co.il/sport/israelibasketball/article/bndhnkifj",
+    "duplicate_check": "All current source articles; no same game result. Existing Winner Cup result and Limassol move are different developments."
+  },
+  "image": {
+    "candidate_bank_id": "spyros-kyprianou-arena-2014",
+    "image_itself_viewed": true,
+    "selected": false,
+    "approved": false,
+    "reason": "Archive exterior viewed, original page unavailable; existing verified registry not substituted for live bank-control checks. No Flash90 reuse in ISNET, no AI charge incurred."
+  },
+  "checks": [
+    "one draft / one article_id-body_sha256 request",
+    "matching body hash",
+    "original articles, requests and ledger history unchanged",
+    "no fake image approval or publication timestamp"
+  ],
+  "build": false,
+  "deploy": false,
+  "next_action": "Restore/read live photo-bank controls through existing authorized route, confirm valid existing publication ownership, then sports owner resumes this exact draft first, approves an exact rights-verified JPG, and completes normal publication/GET checks. Do not start any agent, create automation, expand permissions, bypass access or disable sports."
+}
