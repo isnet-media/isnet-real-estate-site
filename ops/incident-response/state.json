@@ -1,27 +1,27 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T04:35:47.754Z",
+  "updated_at": "2026-11-13T05:59:01.105Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-13T04:00:14Z",
+  "last_processed_run_created_at": "2026-11-13T04:34:35Z",
   "initial_history": {
     "status": "partial_metadata_review",
     "days": 7,
     "window_start": "2026-11-06T04:26:25Z",
     "window_end": "2026-11-13T04:26:25Z",
     "seed_history_is_partial": true,
-    "metadata_runs_this_cycle": 200,
-    "metadata_from": "2026-11-12T12:53:30Z",
+    "metadata_runs_this_cycle": 99,
+    "metadata_from": "2026-11-11T19:20:17Z",
     "metadata_through": "2026-11-13T04:00:14Z",
     "continuation": {
-      "created_at_before": "2026-11-12T12:53:30Z",
-      "query": "created=<2026-11-12T12:53:30Z",
-      "also_resume_equal_timestamp_with_id": 43222076395,
-      "remaining": "Earlier metadata through 2026-11-06 plus unconfirmed per-run signatures; not all seven days reviewed."
+      "created_at_before": "2026-11-11T19:20:17Z",
+      "also_resume_equal_timestamp_with_id": 43086252698,
+      "query": "created=<=2026-11-11T19:20:17Z",
+      "remaining": "Earlier metadata through 2026-11-06 and unconfirmed per-run signatures. Seven-day review remains partial."
     },
     "full_logs_read_this_cycle": [
-      43231513869,
-      43254658536,
-      43248037267
+      43211876204,
+      43192017498,
+      43103151669
     ],
     "unconfirmed_publish_failure_ids": [
       43357968256,
@@ -51,38 +51,56 @@
       43230171105,
       43227176668,
       43226978272
-    ]
+    ],
+    "metadata_runs_total": 299
   },
   "inbox_path": "ops/incident-response/inbox/",
   "last_verified_publish_run": 43362366874,
   "last_verified_public_readback_run": 43362615900,
   "last_cycle": {
-    "runKey": "ops-manual-2026-11-13T04-33-57-638Z-568ec413",
-    "invocation": "interactive setup/reconciliation; not the concurrent scheduled automation run",
-    "observed_at": "2026-11-13T04:33:57.638Z",
+    "runKey": "ops-2026-11-13-3d23c9a8-b114-8326-8682-369823a0770a",
+    "run_id": "3d23c9a8-b114-8326-8682-369823a0770a",
     "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "source_sha": "568ec413cdd0a57ca8a69d9eccf11657f3c83e7f",
+    "started_at": "2026-11-13T05:53:45.058701Z",
+    "observed_at": "2026-11-13T05:59:01.105Z",
+    "source_sha": "0df5d0089ea795548cd3fdab568ed58f0c260643",
+    "new_actions": [
+      {
+        "run_id": 43366415399,
+        "attempt": 1,
+        "workflow": "Record operation failures",
+        "source_commit": "a6420b1b64cfe59bb003b5360db871c38da90faf",
+        "created_at": "2026-11-13T04:34:35Z",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43366415399"
+      },
+      {
+        "run_id": 43362615900,
+        "attempt": 1,
+        "workflow": "Verify public event feed read-back",
+        "source_commit": "568ec413cdd0a57ca8a69d9eccf11657f3c83e7f",
+        "created_at": "2026-11-13T04:00:14Z",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43362615900"
+      }
+    ],
+    "new_failures": 0,
+    "inbox_entries": 0,
     "active_github_runs": [],
-    "inbox_status": "Remote directory verified; no captured event entries yet (README only). No synthetic production failure created.",
+    "queued_github_runs": [],
+    "publication_owner": "No active/queued GitHub publisher at pre-write check; no TLVNET source or deployment mutation.",
     "build_or_deploy": false,
-    "source_commit": "a6420b1b64cfe59bb003b5360db871c38da90faf",
-    "bootstrap_verified": {
-      "commit": "https://github.com/isnet-media/isnet-real-estate-site/commit/a6420b1b64cfe59bb003b5360db871c38da90faf",
-      "run": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43366415399",
-      "test_job_id": 131691759027,
-      "conclusion": "success",
-      "step": "Run node scripts/test-operation-failure-inbox.cjs",
-      "actual_failure_event_path": "not yet observed in production; mock integration tests passed",
-      "public_deployment": "none triggered by setup commit",
-      "verified_at": "2026-11-13T04:35:47.754Z"
-    }
+    "changes": [
+      "Thursday-only existing cinema trailer audit timer",
+      "Historical evidence and incremental watermarks"
+    ],
+    "limitations": [
+      "Failure event inbox still awaits a real failure event; no synthetic failure injected.",
+      "Workflow-specific run-list API not exposed by connector; used repository-wide metadata and run/job IDs."
+    ]
   },
   "concurrent_controller_observation": {
-    "run_id": "2c39ea4e-4e98-8326-a686-eab4e58026c7",
-    "started_at": "2026-11-13T04:26:25.107698Z",
-    "status": "in_progress",
-    "self_owned": false,
-    "note": "First scheduled run began during bootstrap, before files reached main. Do not attribute this interactive setup to that run or assume it completed."
+    "run_id": "3d23c9a8-b114-8326-8682-369823a0770a",
+    "status": "current scheduled cycle",
+    "note": "Recorded runtime ID from controller task; previous cycle completed per task result."
   },
   "task_results_watermark": {
     "Automation_b3345c399b988191a1ba9848e3e3668b": {
@@ -123,12 +141,17 @@
   },
   "sites": {
     "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
-    "version_number": 578,
-    "deployment_id": "appgdep_6af5edb88c808191943106234369c1f5",
+    "observed_at": "2026-11-13T05:59:01.105Z",
+    "version_number": 580,
+    "deployment_id": "appgdep_6af6a130b44081918065495f4eafe68f",
     "status": "succeeded",
-    "deployment_updated_at": "2026-11-12T16:48:22.350714+00:00",
-    "observed_at": "2026-11-13T04:33:57.638Z",
-    "latest_three_versions_checked": true,
+    "deployment_updated_at": "2026-11-13T05:34:02.408590+00:00",
+    "previous_new_deployment": {
+      "version_number": 579,
+      "status": "succeeded",
+      "id": "appgdep_6af69eb358b48191a02543734bce8e07"
+    },
+    "public_content_check": "No new content published by this controller; deployment metadata verified, not visual article approval.",
     "new_deployments_started": false
   },
   "open_incident_ids": [
@@ -138,8 +161,17 @@
     "github-notifications-mailbox-mismatch",
     "tlvnet-social-publication-not-verified",
     "ashdod-cinema-four-missing-trailers",
-    "supermarket-public-http-and-stale-branches"
+    "supermarket-public-http-and-stale-branches",
+    "holon-new-screening-unverified-poster",
+    "historical-publication-duplicate-gate-pre-repair"
   ],
   "processed_inbox_entries": [],
-  "pending_github_run_ids": []
+  "pending_github_run_ids": [],
+  "cycle_history": [
+    {
+      "runKey": "ops-manual-2026-11-13T04-33-57-638Z-568ec413",
+      "source_commit": "a6420b1b64cfe59bb003b5360db871c38da90faf",
+      "observed_at": "2026-11-13T04:33:57.638Z"
+    }
+  ]
 }
