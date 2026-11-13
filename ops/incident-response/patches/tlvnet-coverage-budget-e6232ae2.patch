@@ -1,0 +1,310 @@
+diff --git a/lib/agent-dispatch.mjs b/lib/agent-dispatch.mjs
+index 8144d98e..7c2dbb6d 100644
+--- a/lib/agent-dispatch.mjs
++++ b/lib/agent-dispatch.mjs
+@@ -21,7 +21,7 @@ export function queueFor(entries,topic,source){const latest=new Map();for(const
+    latest.set(a.id,{...previous,status:a.status==='published'?'source_published_pending_verification':'source_state_changed',ledgerStatus:previous.status,sourceStatus:a.status||null,liveVerificationRequired:true});
+   }
+  }
+- return [...latest.values()].filter(e=>!CLOSED.has(e.status)).sort((a,b)=>Number(/ready/.test(b.status))-Number(/ready/.test(a.status))).slice(0,12);}
++ return [...latest.values()].filter(e=>!CLOSED.has(e.status)).sort((a,b)=>Number(/ready/.test(b.status))-Number(/ready/.test(a.status)));}
+ export function recordedStats(entries,day=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Jerusalem'}).format(new Date())){const all=new Set(),today=new Set(),verified=new Set();let missing=0;
+  for(const e of entries){const keys=ids(e).map(id=>(e.category||'')+':'+id);if(e.status==='published'){if(!keys.length)missing++;for(const k of keys){all.add(k);if(e.localDate===day)today.add(k)}}else if(e.status==='published_verified'&&e.localDate===day){for(const k of keys)verified.add(k)}}
+  return {recordedPublishedToday:today.size,recordedPublishedTotal:all.size,verifiedArticlesToday:verified.size,publicationEntriesWithoutIds:missing,localDate:day,scope:'unique explicit article IDs in recorded published entries; verification is not new publication'};}
+@@ -30,7 +30,10 @@ export function projectWriterView(data,view,topic,source){
+  if(view==='desk')return {...data,statistics:recordedStats(entries),entries:entries.slice(0,20).map(compactEntry),history:{totalEntries:entries.length,returnedEntries:Math.min(20,entries.length),fullHistory:'/api/briefs-writer'},workQueues:Object.fromEntries(specialists.map(s=>[s.id,queueFor(entries,s.id,source)]))};
+  const specialist=specialists.find(s=>s.id===topic);if(view!=='dispatch'||!specialist)throw new RangeError('Unknown writer topic');
+  const own=entries.filter(e=>e.category===topic);
+- return {view:'dispatch',topic,version:data.version,mainEnabled:data.profile.enabled,specialistEnabled:specialist.enabled,ownerAutomationId:specialist.schedule?.automationId||null,schedule:specialist.schedule,editorialFiles:{instructions:specialist.writerFile,sources:specialist.sourcesFile,ledger:specialist.ledgerFile,policy:'public/news/AGENT_OPERATIONS.md'},recentEntries:own.slice(0,5).map(compactEntry),workQueue:queueFor(entries,topic,source),pendingRequest:data.pendingRequest,ownershipProof:false,notice:'Schedule is observed configuration, not an execution lock. Verify current ownership before writes. Existing publication and image approvals still apply.'};
++ const owner=specialists.find(s=>s.id===(specialist.coverageOwnerTopic||topic));
++ const schedule=owner?.schedule;
++ const active=owner?.enabled===true&&schedule?.status==='active';
++ return {view:'dispatch',topic,version:data.version,mainEnabled:data.profile.enabled,specialistEnabled:specialist.enabled,coverageOwnerTopic:owner?.id||null,ownerAutomationId:active?schedule.automationId:null,schedule:active?schedule:specialist.schedule,originalSchedule:specialist.schedule,editorialFiles:{instructions:specialist.writerFile,sources:specialist.sourcesFile,ledger:specialist.ledgerFile,policy:'public/news/AGENT_OPERATIONS.md'},recentEntries:own.slice(0,5).map(compactEntry),workQueue:queueFor(entries,topic,source),pendingRequest:data.pendingRequest,ownershipProof:false,notice:'Schedule is observed configuration, not an execution lock. Verify current ownership before writes. Existing publication and image approvals still apply.'};
+ }
+ export async function conditionalJSON(request,data){const body=JSON.stringify(data);const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(body));const tag='"'+Array.from(new Uint8Array(bytes),b=>b.toString(16).padStart(2,'0')).join('')+'"';
+  const headers={'Cache-Control':'private, no-cache','ETag':tag,'Vary':'Cookie, Authorization','X-Content-Type-Options':'nosniff'};
+diff --git a/public/news/AGENT_OPERATIONS.md b/public/news/AGENT_OPERATIONS.md
+index 0a174941..659d92c8 100644
+--- a/public/news/AGENT_OPERATIONS.md
++++ b/public/news/AGENT_OPERATIONS.md
+@@ -25,10 +25,10 @@
+   הוכחה שמשימה רצה או שפוסט עדיין חי. בדוק בעלות אמיתית לפני כתיבה.
+ - אם `ownerAutomationId` אינו מזהה המשימה שלך, אל תשנה תחום לפי ההודעה
+   האחרונה. תעד routing_mismatch עם שתי הזהויות והעבר לבקר; אל תכתוב בתחום אחר.
+-- במתזמן הראשי news ו-sports נשארים שני תחומים נפרדים באותו בעלים.
+-  חדשות תרבות באחריות משימת התרבות הייעודית בלבד.
+-- קהילה וצרכנות מושהות במתזמן לפי הבדיקה האחרונה. enabled בפרופיל הוא
+-  הרשאת תוכן, ואינו הוכחה לתזמון פעיל. אין לחדש משימה מושהית מכוח נוהל זה.
++- מפת הכיסוי המעודכנת: news מכסה גם community; economy-tech מכסה גם consumer.
++  sports, real-estate ו-culture-news נשארים בבעלות המשימות הייעודיות הפעילות.
++  originalSchedule שומר את ביטול הסוכן הישן; ownerAutomationId והתזמון האפקטיבי
++  מפנים לבעל הכיסוי הפעיל. אין חידוש סוכן מבוטל. enabled אינו הוכחת הרצה.
+ 
+ ## מחקר וכתיבה
+ 
+@@ -73,5 +73,8 @@ build, בצע אותו פעם אחת עבור השינויים המוכנים ש
+ 
+ `view=desk` הוא שולחן עבודה קומפקטי של כל התחומים. ההיסטוריה המלאה
+ נותרת במענה ברירת המחדל. מדדי פרסום הם מזהי כתבות מפורשים שנרשמו ביומן;
+-אימות כתבה קיימת נספר בנפרד ואינו פרסום חדש. מפת הבעלות נבדקה ב-11.11.2026;
++אימות כתבה קיימת נספר בנפרד ואינו פרסום חדש. מפת הבעלות עודכנה ב-13.11.2026 לפי הוראות המשימות הפעילות שנקראו;
+ שינוי תזמון עתידי מחייב רענון המפה ממערכת האוטומציות המורשית.
++
++## היקף ותור — 13.11.2026
++אין תקרת כתבות בכל שבעת המדורים. מחזור מטפל בכל החידושים המשמעותיים והמאומתים, ללא מילוי כמות. מגבלת השרת של שתי משימות ושלוש קריאות API היא תקציב טכני למסלול הטיוטות בלבד. כשהתקציב מסתיים שמור מזהה יציב, בעלים, מקורות, מצב, הפעולה הבאה וחסם בתור הקיים; המחזור הבא מתחיל בפריטים המוכנים. workQueue מחזיר את כל הפריטים הממתינים ואינו קוטע אחרי 12. זהו מבט בלבד, לא נעילה, תור ביצוע או הרשאת פרסום.
+diff --git a/public/news/agents/community/WRITER.md b/public/news/agents/community/WRITER.md
+index daed7ba9..4f81165c 100644
+--- a/public/news/agents/community/WRITER.md
++++ b/public/news/agents/community/WRITER.md
+@@ -1,3 +1,8 @@
++> עדכון תיאום מחייב — 13.11.2026
++> מדור community מכוסה על ידי news, זהות Automation_b3345c399b988191a1ba9848e3e3668b. התזמון המאושר של הבעלים: 08:00, 14:00, 19:00 לפי Asia/Jerusalem. אין לחדש סוכן מבוטל או סריקה שעתית מכוח היסטוריה בהמשך המסמך.
++> בכל מדור אין מכסת כתבות, מקורות או אורך מלאכותית. טפל בכל הידיעות המשמעותיות והרלוונטיות שניתן לאמת, ללא חומר חלש או כפול. תקציב טכני מגביל זמן וקריאות, לא כתבות: כשנגמר התקציב שמור בתור הקיים מזהה יציב, בעלים, מקורות, checkpoint, הפעולה הבאה וחסם; אל תסמן השלמה ואל תתחיל לולאה. מקור חסום או פריט פגום אינם עוצרים פריט עצמאי. הכתב מטפל במחקר, כתיבה, עריכה, תמונה, פרסום ואימות ציבורי בתחום שלו.
++> כתב news מכסה גם community; כתב economy-tech מכסה גם consumer. החיפוש מקומי וארצי בזיקה אמיתית לעיר. פלאש 90 רק ב-TLVNET לפי רישיון, לעולם לא ב-ISNET. שתי משימות ושלוש קריאות API במחזור הן הגנת מסלול הטיוטות, שאינה מכסת ידיעות ואינה מסלול פרסום עצמאי. לכל פעולה ניסיון ראשוני ועוד תיקון ממוקד אחד לכל היותר ורק לאחר שינוי ממשי. שמור נעילות ובעלות קיימות; אין פריסה מתחרה, עקיפת הרשאה, אישור פיקטיבי או דריסת עריכה. העדכון גובר על הוראות תדירות, מכסה ובעלות ישנות בלבד; כל שערי האיכות והזכויות נשמרים.
++
+ # כתב קהילה ושכונות — TLVNET
+ 
+ ## הכתב הוא גם העורך בתחומו — 12.11.2026
+diff --git a/public/news/agents/consumer/WRITER.md b/public/news/agents/consumer/WRITER.md
+index 080eb52d..5d72b8d1 100644
+--- a/public/news/agents/consumer/WRITER.md
++++ b/public/news/agents/consumer/WRITER.md
+@@ -1,3 +1,8 @@
++> עדכון תיאום מחייב — 13.11.2026
++> מדור consumer מכוסה על ידי economy-tech, זהות Automation_a32c48a7ae848191a5769078a5c74a09. התזמון המאושר של הבעלים: 12:00 לפי Asia/Jerusalem. אין לחדש סוכן מבוטל או סריקה שעתית מכוח היסטוריה בהמשך המסמך.
++> בכל מדור אין מכסת כתבות, מקורות או אורך מלאכותית. טפל בכל הידיעות המשמעותיות והרלוונטיות שניתן לאמת, ללא חומר חלש או כפול. תקציב טכני מגביל זמן וקריאות, לא כתבות: כשנגמר התקציב שמור בתור הקיים מזהה יציב, בעלים, מקורות, checkpoint, הפעולה הבאה וחסם; אל תסמן השלמה ואל תתחיל לולאה. מקור חסום או פריט פגום אינם עוצרים פריט עצמאי. הכתב מטפל במחקר, כתיבה, עריכה, תמונה, פרסום ואימות ציבורי בתחום שלו.
++> כתב news מכסה גם community; כתב economy-tech מכסה גם consumer. החיפוש מקומי וארצי בזיקה אמיתית לעיר. פלאש 90 רק ב-TLVNET לפי רישיון, לעולם לא ב-ISNET. שתי משימות ושלוש קריאות API במחזור הן הגנת מסלול הטיוטות, שאינה מכסת ידיעות ואינה מסלול פרסום עצמאי. לכל פעולה ניסיון ראשוני ועוד תיקון ממוקד אחד לכל היותר ורק לאחר שינוי ממשי. שמור נעילות ובעלות קיימות; אין פריסה מתחרה, עקיפת הרשאה, אישור פיקטיבי או דריסת עריכה. העדכון גובר על הוראות תדירות, מכסה ובעלות ישנות בלבד; כל שערי האיכות והזכויות נשמרים.
++
+ # כתב צרכנות — TLVNET
+ 
+ ## הכתב הוא גם העורך בתחומו — 12.11.2026
+diff --git a/public/news/agents/culture-news/WRITER.md b/public/news/agents/culture-news/WRITER.md
+index 17846029..7b10f23a 100644
+--- a/public/news/agents/culture-news/WRITER.md
++++ b/public/news/agents/culture-news/WRITER.md
+@@ -1,3 +1,8 @@
++> עדכון תיאום מחייב — 13.11.2026
++> מדור culture-news מכוסה על ידי culture-news, זהות Automation_53543605ce188191ba90f3f1979203dc. התזמון המאושר של הבעלים: 09:00 לפי Asia/Jerusalem. אין לחדש סוכן מבוטל או סריקה שעתית מכוח היסטוריה בהמשך המסמך.
++> בכל מדור אין מכסת כתבות, מקורות או אורך מלאכותית. טפל בכל הידיעות המשמעותיות והרלוונטיות שניתן לאמת, ללא חומר חלש או כפול. תקציב טכני מגביל זמן וקריאות, לא כתבות: כשנגמר התקציב שמור בתור הקיים מזהה יציב, בעלים, מקורות, checkpoint, הפעולה הבאה וחסם; אל תסמן השלמה ואל תתחיל לולאה. מקור חסום או פריט פגום אינם עוצרים פריט עצמאי. הכתב מטפל במחקר, כתיבה, עריכה, תמונה, פרסום ואימות ציבורי בתחום שלו.
++> כתב news מכסה גם community; כתב economy-tech מכסה גם consumer. החיפוש מקומי וארצי בזיקה אמיתית לעיר. פלאש 90 רק ב-TLVNET לפי רישיון, לעולם לא ב-ISNET. שתי משימות ושלוש קריאות API במחזור הן הגנת מסלול הטיוטות, שאינה מכסת ידיעות ואינה מסלול פרסום עצמאי. לכל פעולה ניסיון ראשוני ועוד תיקון ממוקד אחד לכל היותר ורק לאחר שינוי ממשי. שמור נעילות ובעלות קיימות; אין פריסה מתחרה, עקיפת הרשאה, אישור פיקטיבי או דריסת עריכה. העדכון גובר על הוראות תדירות, מכסה ובעלות ישנות בלבד; כל שערי האיכות והזכויות נשמרים.
++
+ # כתב חדשות תרבות — TLVNET
+ 
+ ## הכתב הוא גם העורך בתחומו — 12.11.2026
+diff --git a/public/news/agents/economy-tech/WRITER.md b/public/news/agents/economy-tech/WRITER.md
+index 4db2c917..b31a3c12 100644
+--- a/public/news/agents/economy-tech/WRITER.md
++++ b/public/news/agents/economy-tech/WRITER.md
+@@ -1,3 +1,8 @@
++> עדכון תיאום מחייב — 13.11.2026
++> מדור economy-tech מכוסה על ידי economy-tech, זהות Automation_a32c48a7ae848191a5769078a5c74a09. התזמון המאושר של הבעלים: 12:00 לפי Asia/Jerusalem. אין לחדש סוכן מבוטל או סריקה שעתית מכוח היסטוריה בהמשך המסמך.
++> בכל מדור אין מכסת כתבות, מקורות או אורך מלאכותית. טפל בכל הידיעות המשמעותיות והרלוונטיות שניתן לאמת, ללא חומר חלש או כפול. תקציב טכני מגביל זמן וקריאות, לא כתבות: כשנגמר התקציב שמור בתור הקיים מזהה יציב, בעלים, מקורות, checkpoint, הפעולה הבאה וחסם; אל תסמן השלמה ואל תתחיל לולאה. מקור חסום או פריט פגום אינם עוצרים פריט עצמאי. הכתב מטפל במחקר, כתיבה, עריכה, תמונה, פרסום ואימות ציבורי בתחום שלו.
++> כתב news מכסה גם community; כתב economy-tech מכסה גם consumer. החיפוש מקומי וארצי בזיקה אמיתית לעיר. פלאש 90 רק ב-TLVNET לפי רישיון, לעולם לא ב-ISNET. שתי משימות ושלוש קריאות API במחזור הן הגנת מסלול הטיוטות, שאינה מכסת ידיעות ואינה מסלול פרסום עצמאי. לכל פעולה ניסיון ראשוני ועוד תיקון ממוקד אחד לכל היותר ורק לאחר שינוי ממשי. שמור נעילות ובעלות קיימות; אין פריסה מתחרה, עקיפת הרשאה, אישור פיקטיבי או דריסת עריכה. העדכון גובר על הוראות תדירות, מכסה ובעלות ישנות בלבד; כל שערי האיכות והזכויות נשמרים.
++
+ # כתב כלכלה והייטק — TLVNET
+ 
+ ## הכתב הוא גם העורך בתחומו — 12.11.2026
+diff --git a/public/news/agents/news/WRITER.md b/public/news/agents/news/WRITER.md
+index a02db1a9..be8fd847 100644
+--- a/public/news/agents/news/WRITER.md
++++ b/public/news/agents/news/WRITER.md
+@@ -1,3 +1,8 @@
++> עדכון תיאום מחייב — 13.11.2026
++> מדור news מכוסה על ידי news, זהות Automation_b3345c399b988191a1ba9848e3e3668b. התזמון המאושר של הבעלים: 08:00, 14:00, 19:00 לפי Asia/Jerusalem. אין לחדש סוכן מבוטל או סריקה שעתית מכוח היסטוריה בהמשך המסמך.
++> בכל מדור אין מכסת כתבות, מקורות או אורך מלאכותית. טפל בכל הידיעות המשמעותיות והרלוונטיות שניתן לאמת, ללא חומר חלש או כפול. תקציב טכני מגביל זמן וקריאות, לא כתבות: כשנגמר התקציב שמור בתור הקיים מזהה יציב, בעלים, מקורות, checkpoint, הפעולה הבאה וחסם; אל תסמן השלמה ואל תתחיל לולאה. מקור חסום או פריט פגום אינם עוצרים פריט עצמאי. הכתב מטפל במחקר, כתיבה, עריכה, תמונה, פרסום ואימות ציבורי בתחום שלו.
++> כתב news מכסה גם community; כתב economy-tech מכסה גם consumer. החיפוש מקומי וארצי בזיקה אמיתית לעיר. פלאש 90 רק ב-TLVNET לפי רישיון, לעולם לא ב-ISNET. שתי משימות ושלוש קריאות API במחזור הן הגנת מסלול הטיוטות, שאינה מכסת ידיעות ואינה מסלול פרסום עצמאי. לכל פעולה ניסיון ראשוני ועוד תיקון ממוקד אחד לכל היותר ורק לאחר שינוי ממשי. שמור נעילות ובעלות קיימות; אין פריסה מתחרה, עקיפת הרשאה, אישור פיקטיבי או דריסת עריכה. העדכון גובר על הוראות תדירות, מכסה ובעלות ישנות בלבד; כל שערי האיכות והזכויות נשמרים.
++
+ # כתב חדשות העיר — TLVNET
+ 
+ ## הכתב הוא גם העורך בתחומו — 12.11.2026
+diff --git a/public/news/agents/real-estate/WRITER.md b/public/news/agents/real-estate/WRITER.md
+index 9365dbfc..57b1d076 100644
+--- a/public/news/agents/real-estate/WRITER.md
++++ b/public/news/agents/real-estate/WRITER.md
+@@ -1,3 +1,8 @@
++> עדכון תיאום מחייב — 13.11.2026
++> מדור real-estate מכוסה על ידי real-estate, זהות Automation_82add5edecd8819197814e83bac85a75. התזמון המאושר של הבעלים: 16:00 לפי Asia/Jerusalem. אין לחדש סוכן מבוטל או סריקה שעתית מכוח היסטוריה בהמשך המסמך.
++> בכל מדור אין מכסת כתבות, מקורות או אורך מלאכותית. טפל בכל הידיעות המשמעותיות והרלוונטיות שניתן לאמת, ללא חומר חלש או כפול. תקציב טכני מגביל זמן וקריאות, לא כתבות: כשנגמר התקציב שמור בתור הקיים מזהה יציב, בעלים, מקורות, checkpoint, הפעולה הבאה וחסם; אל תסמן השלמה ואל תתחיל לולאה. מקור חסום או פריט פגום אינם עוצרים פריט עצמאי. הכתב מטפל במחקר, כתיבה, עריכה, תמונה, פרסום ואימות ציבורי בתחום שלו.
++> כתב news מכסה גם community; כתב economy-tech מכסה גם consumer. החיפוש מקומי וארצי בזיקה אמיתית לעיר. פלאש 90 רק ב-TLVNET לפי רישיון, לעולם לא ב-ISNET. שתי משימות ושלוש קריאות API במחזור הן הגנת מסלול הטיוטות, שאינה מכסת ידיעות ואינה מסלול פרסום עצמאי. לכל פעולה ניסיון ראשוני ועוד תיקון ממוקד אחד לכל היותר ורק לאחר שינוי ממשי. שמור נעילות ובעלות קיימות; אין פריסה מתחרה, עקיפת הרשאה, אישור פיקטיבי או דריסת עריכה. העדכון גובר על הוראות תדירות, מכסה ובעלות ישנות בלבד; כל שערי האיכות והזכויות נשמרים.
++
+ # כתב נדל״ן, דירות ושכירות — TLVNET
+ 
+ ## הכתב הוא גם העורך בתחומו — 12.11.2026
+diff --git a/public/news/agents/sports/WRITER.md b/public/news/agents/sports/WRITER.md
+index 04fc524c..2178ab6f 100644
+--- a/public/news/agents/sports/WRITER.md
++++ b/public/news/agents/sports/WRITER.md
+@@ -1,3 +1,8 @@
++> עדכון תיאום מחייב — 13.11.2026
++> מדור sports מכוסה על ידי sports, זהות Automation_499e6c8b36648191a9f8f102b0d5d6fe. התזמון המאושר של הבעלים: 09:00, 21:00 לפי Asia/Jerusalem. אין לחדש סוכן מבוטל או סריקה שעתית מכוח היסטוריה בהמשך המסמך.
++> בכל מדור אין מכסת כתבות, מקורות או אורך מלאכותית. טפל בכל הידיעות המשמעותיות והרלוונטיות שניתן לאמת, ללא חומר חלש או כפול. תקציב טכני מגביל זמן וקריאות, לא כתבות: כשנגמר התקציב שמור בתור הקיים מזהה יציב, בעלים, מקורות, checkpoint, הפעולה הבאה וחסם; אל תסמן השלמה ואל תתחיל לולאה. מקור חסום או פריט פגום אינם עוצרים פריט עצמאי. הכתב מטפל במחקר, כתיבה, עריכה, תמונה, פרסום ואימות ציבורי בתחום שלו.
++> כתב news מכסה גם community; כתב economy-tech מכסה גם consumer. החיפוש מקומי וארצי בזיקה אמיתית לעיר. פלאש 90 רק ב-TLVNET לפי רישיון, לעולם לא ב-ISNET. שתי משימות ושלוש קריאות API במחזור הן הגנת מסלול הטיוטות, שאינה מכסת ידיעות ואינה מסלול פרסום עצמאי. לכל פעולה ניסיון ראשוני ועוד תיקון ממוקד אחד לכל היותר ורק לאחר שינוי ממשי. שמור נעילות ובעלות קיימות; אין פריסה מתחרה, עקיפת הרשאה, אישור פיקטיבי או דריסת עריכה. העדכון גובר על הוראות תדירות, מכסה ובעלות ישנות בלבד; כל שערי האיכות והזכויות נשמרים.
++
+ # כתב ספורט קבוצות — TLVNET
+ 
+ ## הכתב הוא גם העורך בתחומו — 12.11.2026
+diff --git a/public/news/briefs-writer-profile.json b/public/news/briefs-writer-profile.json
+index 5dab18a4..a7982bb1 100644
+--- a/public/news/briefs-writer-profile.json
++++ b/public/news/briefs-writer-profile.json
+@@ -17,6 +17,7 @@
+   "lookbackHours": 72,
+   "voice": "לכתב news חלה מדיניות NEWS_STYLE.md: כתיבה מקורית, מרתקת ורהוטה, השוואת סיקורים ארציים לפני פרסום, אורך לפי חשיבות ומקורות ללא תקרת מבזק. בספורט חלה הוראת הכתיבה המעמיקה ב-WRITER.md של sports; בשאר התחומים נשמרות הוראותיהם. אין ניפוח, העתקה או המצאת פרטים.",
+   "standards": [
++    "13.11.2026: בכל שבעת מדורי החדשות אין תקרת מספר כתבות. קהילה מכוסה על ידי כתב החדשות, צרכנות על ידי כתב הכלכלה; הסוכנים הישנים נשארים מבוטלים. מגבלת 2 משימות ו-3 קריאות API במסלול הטיוטות אינה מגבלת כתבות. בתקציב שנגמר שומרים תור ו-checkpoint ללא ניסיונות חוזרים ללא שינוי, דריסה או פריסה מתחרה.",
+     "הוראת המו״ל 12.11.2026: החדשות בעדיפות ראשונה, לצד שמירת משימות שאר המדורים בתדירותן. לכתב news אין מכסת ידיעות או מקורות במחזור; maxPerRun=null פירושו ללא תקרה מספרית. אין להסיק מכסה מברירת מחדל ישנה. פרסם כל התפתחות חדשה, רלוונטית ומאומתת לאחר בקרת תוכן ותמונה; אין חובת מינימום ואין כפילות. תדירות אינה מכסת כתבות.",
+     "11.11.2026: לכתב sports חלות ההנחיות המעודכנות public/news/agents/sports/WRITER.md, פרק ספורט חי, יוזם ומעמיק. הן גוברות על ברירת מחדל של 60–120 מילים ועל voice ישן המחריג רק news. סיפור מרכזי מקבל כתבה מלאה ופרשנות מקורית מבוססת: דמויות, מקצוע, יריבות, טבלה והשלכות להמשך. אורך לפי הסיפור, לא מכסה. עובדות ופרשנות מובחנות; אין המצאת תגובות או רכש. סמן מועמד לראשית ותעד ביומן; אין שינוי תזמון או סמכות קידום אוטומטית.",
+     "11.11.2026: לפני כל פרסום קרא public/photo-bank/PUBLICATION_POLICY.md. תמונה רלוונטית ומאושרת מול הגוף המלא היא תנאי לשחרור ידיעה חדשה. כשאין תמונה הכתבה נשארת draft. אין להרחיב baseline או להסיר את שער הבנייה.",
+@@ -102,7 +103,8 @@
+           "isExecutionLock": false
+         }
+       ],
+-      "articleLimit": "ללא מכסה מספרית; לפי חומר חדשותי חדש ומאומת"
++      "articleLimit": "ללא מכסה מספרית; תקציב טכני אינו מכסת כתבות. פריטים שלא הושלמו נשמרים בתור וב-checkpoint.",
++      "coverageOwnerTopic": "news"
+     },
+     {
+       "id": "real-estate",
+@@ -112,7 +114,7 @@
+       "sourcesFile": "public/news/agents/real-estate/sources.json",
+       "writerFile": "public/news/agents/real-estate/WRITER.md",
+       "ledgerFile": "public/news/agents/real-estate/ledger.json",
+-      "maxPerRun": 2,
++      "maxPerRun": null,
+       "schedule": {
+         "status": "active",
+         "automationId": "Automation_82add5edecd8819197814e83bac85a75",
+@@ -146,7 +148,9 @@
+           "observationSource": "authorized automation inventory",
+           "isExecutionLock": false
+         }
+-      ]
++      ],
++      "articleLimit": "ללא מכסה מספרית; תקציב טכני אינו מכסת כתבות. פריטים שלא הושלמו נשמרים בתור וב-checkpoint.",
++      "coverageOwnerTopic": "real-estate"
+     },
+     {
+       "id": "economy-tech",
+@@ -156,7 +160,7 @@
+       "sourcesFile": "public/news/agents/economy-tech/sources.json",
+       "writerFile": "public/news/agents/economy-tech/WRITER.md",
+       "ledgerFile": "public/news/agents/economy-tech/ledger.json",
+-      "maxPerRun": 2,
++      "maxPerRun": null,
+       "schedule": {
+         "status": "active",
+         "automationId": "Automation_a32c48a7ae848191a5769078a5c74a09",
+@@ -190,7 +194,9 @@
+           "observationSource": "authorized automation inventory",
+           "isExecutionLock": false
+         }
+-      ]
++      ],
++      "articleLimit": "ללא מכסה מספרית; תקציב טכני אינו מכסת כתבות. פריטים שלא הושלמו נשמרים בתור וב-checkpoint.",
++      "coverageOwnerTopic": "economy-tech"
+     },
+     {
+       "id": "community",
+@@ -200,7 +206,7 @@
+       "sourcesFile": "public/news/agents/community/sources.json",
+       "writerFile": "public/news/agents/community/WRITER.md",
+       "ledgerFile": "public/news/agents/community/ledger.json",
+-      "maxPerRun": 2,
++      "maxPerRun": null,
+       "schedule": {
+         "status": "cancelled",
+         "label": "בוטל בהוראת המו״ל; אין הרצות עתידיות",
+@@ -228,7 +234,9 @@
+           "observationSource": "authorized automation inventory",
+           "isExecutionLock": false
+         }
+-      ]
++      ],
++      "articleLimit": "ללא מכסה מספרית; תקציב טכני אינו מכסת כתבות. פריטים שלא הושלמו נשמרים בתור וב-checkpoint.",
++      "coverageOwnerTopic": "news"
+     },
+     {
+       "id": "consumer",
+@@ -238,7 +246,7 @@
+       "sourcesFile": "public/news/agents/consumer/sources.json",
+       "writerFile": "public/news/agents/consumer/WRITER.md",
+       "ledgerFile": "public/news/agents/consumer/ledger.json",
+-      "maxPerRun": 2,
++      "maxPerRun": null,
+       "schedule": {
+         "status": "cancelled",
+         "label": "בוטל בהוראת המו״ל; אין הרצות עתידיות",
+@@ -266,7 +274,9 @@
+           "observationSource": "authorized automation inventory",
+           "isExecutionLock": false
+         }
+-      ]
++      ],
++      "articleLimit": "ללא מכסה מספרית; תקציב טכני אינו מכסת כתבות. פריטים שלא הושלמו נשמרים בתור וב-checkpoint.",
++      "coverageOwnerTopic": "economy-tech"
+     },
+     {
+       "id": "sports",
+@@ -276,7 +286,7 @@
+       "sourcesFile": "public/news/agents/sports/sources.json",
+       "writerFile": "public/news/agents/sports/WRITER.md",
+       "ledgerFile": "public/news/agents/sports/ledger.json",
+-      "maxPerRun": 2,
++      "maxPerRun": null,
+       "schedule": {
+         "status": "active",
+         "automationId": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+@@ -313,7 +323,9 @@
+           "observationSource": "authorized automation inventory",
+           "isExecutionLock": false
+         }
+-      ]
++      ],
++      "articleLimit": "ללא מכסה מספרית; תקציב טכני אינו מכסת כתבות. פריטים שלא הושלמו נשמרים בתור וב-checkpoint.",
++      "coverageOwnerTopic": "sports"
+     },
+     {
+       "id": "culture-news",
+@@ -323,7 +335,7 @@
+       "sourcesFile": "public/news/agents/culture-news/sources.json",
+       "writerFile": "public/news/agents/culture-news/WRITER.md",
+       "ledgerFile": "public/news/agents/culture-news/ledger.json",
+-      "maxPerRun": 2,
++      "maxPerRun": null,
+       "schedule": {
+         "status": "active",
+         "automationId": "Automation_53543605ce188191ba90f3f1979203dc",
+@@ -357,7 +369,9 @@
+           "observationSource": "authorized automation inventory",
+           "isExecutionLock": false
+         }
+-      ]
++      ],
++      "articleLimit": "ללא מכסה מספרית; תקציב טכני אינו מכסת כתבות. פריטים שלא הושלמו נשמרים בתור וב-checkpoint.",
++      "coverageOwnerTopic": "culture-news"
+     }
+   ]
+ }
+diff --git a/tests/agent-dispatch.mjs b/tests/agent-dispatch.mjs
+index 41fb2a29..b87d805f 100644
+--- a/tests/agent-dispatch.mjs
++++ b/tests/agent-dispatch.mjs
+@@ -6,6 +6,18 @@ const own=Object.fromEntries(profile.specialists.map(s=>[s.id,s]));
+ assert.equal(own.news.schedule.automationId,'Automation_b3345c399b988191a1ba9848e3e3668b');assert.equal(own.news.minute,0);
+ assert.equal(own['culture-news'].schedule.automationId,'Automation_53543605ce188191ba90f3f1979203dc');assert.equal(own['culture-news'].minute,0);
+ for(const id of ['community','consumer']){assert.equal(own[id].schedule.status,'cancelled');assert.equal(own[id].enabled,true)}
++for(const s of profile.specialists)assert.equal(s.maxPerRun,null,'A technical work budget must not become an article cap');
++for(const [topic,owner] of [['community','news'],['consumer','economy-tech']]){
++ const routed=projectWriterView({profile,entries:[]},'dispatch',topic);
++ assert.equal(routed.ownerAutomationId,own[owner].schedule.automationId);
++ assert.equal(routed.schedule.status,'active');
++ assert.equal(routed.originalSchedule.status,'cancelled','Old automation stays cancelled');
++ assert.equal(routed.ownershipProof,false,'Routing never grants a publication lock');
++ const disabled=structuredClone(profile);disabled.specialists.find(s=>s.id===owner).enabled=false;
++ assert.equal(projectWriterView({profile:disabled,entries:[]},'dispatch',topic).ownerAutomationId,null,'Disabled owner must not fall back to cancelled automation');
++}
++const backlog=Array.from({length:30},(_,i)=>({category:'news',status:'draft_waiting_image',articleIds:['backlog-'+i],completedAt:'2026-11-13T08:00:00Z'}));
++assert.equal(queueFor(backlog,'news').length,30,'All waiting articles must remain visible beyond the old 12-item projection');
+ const entries=[{category:'news',status:'draft_waiting_image',articleIds:['done','waiting'],completedAt:'2026-11-11T10:00:00Z',body_html:'DO NOT EXPOSE',sources_checked:[{body:'PRIVATE'}]},
+ {category:'news',status:'published_verified',articleIds:['done'],completedAt:'2026-11-11T11:00:00Z',localDate:'2026-11-11'},
+ {category:'economy-tech',status:'published',articleIds:['other'],completedAt:'2026-11-11T12:00:00Z',localDate:'2026-11-11'},
