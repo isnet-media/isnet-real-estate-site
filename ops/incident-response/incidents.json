@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T12:13:20.668Z",
+  "updated_at": "2026-11-13T13:13:35.258Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -359,9 +359,17 @@
     },
     {
       "id": "tlvnet-social-publication-not-verified",
-      "status": "open",
+      "status": "awaiting_external_action",
       "root_cause": "Prior interactive Facebook guide promotion succeeded; recurring FB/Instagram release and Instagram image upload were not verified.",
-      "next_action": "Inspect actual task/config and current supported connector/session; do not claim automatic posting from a manual Facebook post. No paid promotion or external contact without its authorization."
+      "next_action": "Renew the valid Page connection through the existing social admin, then verify one actual post. Do not blindly retry with expired credentials or change permissions under this controller mandate.",
+      "latest_handoff": {
+        "evidence": "ops/agent-harmony/releases/20261113-completion.json",
+        "last_reported_success_post": "1520426491146188_122103423777545268",
+        "blocked_reason": "meta_error_190_463",
+        "reconnect_code_reported_tested": true,
+        "credentials_modified": false,
+        "controller_live_post_verified": false
+      }
     },
     {
       "id": "ashdod-cinema-four-missing-trailers",
@@ -632,7 +640,7 @@
     },
     {
       "id": "tlvnet-community-cancelled-owner-routing",
-      "status": "awaiting_external_action",
+      "status": "fixed_verified",
       "fingerprint": "tlvnet/community/dispatch-owner/cancelled-owner-after-transfer",
       "root_cause": "Dispatch projects ownership only from specialist.schedule.automationId, so the cancelled standalone community task remains the owner even after explicit publisher transfer to the active news writer.",
       "occurrences": [
@@ -688,6 +696,17 @@
         "legacy_schedule_cancelled": true,
         "owner_still_cancelled_task": true,
         "status": "unchanged; isolated patch retained, no repeated deployment attempt"
+      },
+      "verification": {
+        "observed_at": "2026-11-13T13:13:35.258Z",
+        "source": "73e585f50cb4f833506c6b0dd6444fe755c47817",
+        "site_version": 592,
+        "evidence": "ops/incident-response/evidence/coverage-readback-064e67b6-3b00-8322-9738-0875a255ac30.json",
+        "regression": "PASS node tests/agent-dispatch.mjs",
+        "public_readback": "Community/consumer owner IDs and all seven maxPerRun=null independently read from live API",
+        "controller_applied_fix": false,
+        "fix_origin": "Publisher-authorized manual rollout; controller independently verified code and live configuration",
+        "scope": "Routing/cap configuration only; not proof of new content publication or global lock enforcement"
       }
     },
     {
@@ -776,7 +795,7 @@
     },
     {
       "id": "tlvnet-remaining-editorial-projection-caps",
-      "status": "awaiting_external_action",
+      "status": "fixed_verified",
       "fingerprint": "briefs-writer-profile/maxPerRun2+agent-dispatch/pending-slice12",
       "root_cause": "Source still has maxPerRun=2 in six specialist records despite current no-quota instruction; dispatch limits pending projection to12 entries. Existing prompts do not remove these source values.",
       "source_evidence": {
@@ -814,7 +833,18 @@
         }
       ],
       "next_action": "Apply one coordinated bundle through existing valid release ownership, then verify live uncapped queue and source profile without weakening technical cost or rights gates.",
-      "reported_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988"
+      "reported_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988",
+      "verification": {
+        "observed_at": "2026-11-13T13:13:35.258Z",
+        "source": "73e585f50cb4f833506c6b0dd6444fe755c47817",
+        "site_version": 592,
+        "evidence": "ops/incident-response/evidence/coverage-readback-064e67b6-3b00-8322-9738-0875a255ac30.json",
+        "regression": "PASS node tests/agent-dispatch.mjs",
+        "public_readback": "Community/consumer owner IDs and all seven maxPerRun=null independently read from live API",
+        "controller_applied_fix": false,
+        "fix_origin": "Publisher-authorized manual rollout; controller independently verified code and live configuration",
+        "scope": "Routing/cap configuration only; not proof of new content publication or global lock enforcement"
+      }
     },
     {
       "id": "tlvnet-windows-stay-sitemap-backslashes",
@@ -845,8 +875,15 @@
         }
       ],
       "impact": "Reported Windows release-build blocker. Latest native Sites deployments succeeded; no current live-site outage asserted.",
-      "next_action": "Release owner to use bundle, preserve canonical gate, run normal full release build, then verify slash-only live sitemap URLs. No retry of unchanged Windows network/approval denial.",
-      "reported_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988"
+      "next_action": "Apply only portability patch after normal source refresh, valid publication ownership, full release checks and one verified release. Do not replay coverage bundle or superseded community-only patch.",
+      "reported_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988",
+      "current_source_review": {
+        "source": "73e585f50cb4f833506c6b0dd6444fe755c47817",
+        "observed_at": "2026-11-13T13:13:35.258Z",
+        "expression": "str(p.parent.relative_to(PUBLIC))",
+        "still_present": true,
+        "retry": false
+      }
     },
     {
       "id": "ashdod-mobile-banners-app-stall-reported",
@@ -983,7 +1020,7 @@
       "reported_runKey": "ops-2026-11-13-dbea2a00-6628-8322-b61b-4570f97b61ba"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-dbea2a00-6628-8322-b61b-4570f97b61ba",
+  "last_review_runKey": "ops-2026-11-13-064e67b6-3b00-8322-9738-0875a255ac30",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",

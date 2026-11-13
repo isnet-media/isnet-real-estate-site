@@ -3,14 +3,13 @@
   "id": "tlvnet-coordinated-coverage-and-portability-20261113",
   "task_id": "Automation_9776808c73848191a9d748dd09315960",
   "runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988",
-  "status": "tested_isolated_not_applied",
+  "status": "coverage_fixed_verified_portability_pending",
   "reviewed_at": "2026-11-13T10:03:27.567Z",
   "site": "https://tlvnet.com",
   "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
   "tested_source": "d457d11f30c73ab92f8f806525852b8a5e8e2878",
   "tested_site_version": 589,
   "ordered_patches": [
-    "ops/incident-response/patches/tlvnet-coverage-budget-e6232ae2.patch",
     "ops/incident-response/patches/tlvnet-stay-sitemap-portable-20261113.patch"
   ],
   "supersedes": [
@@ -42,15 +41,25 @@
     "No editorial/image approval or news publication"
   ],
   "release_owner_requirements": [
-    "Refresh source and verify actual publication ownership/lease; a schedule/CAS/old succeeded deployment is not a lease",
-    "Apply each ordered patch once; skip the superseded community-only patch",
-    "Preserve concurrent source and run full normal foundation, image, content, SEO and build checks",
-    "Publish once through existing authorized Sites route; verify succeeded and live community/consumer dispatch owners, uncapped pending queue and canonical URLs",
-    "Do not publish sports draft until exact image rights/body/asset review is approved"
+    "Refresh source and acquire valid shared TLVNET-site lease after checking prior owner/deployments",
+    "Apply portability patch only; keep already corrected coverage/caps and concurrent work",
+    "Run normal full build/content/image/SEO checks, release once and verify live canonical URLs",
+    "Never turn controller into substitute writer or approve pending image content"
   ],
   "source_access_qualification": "Controller normal authenticated Git read succeeded in this authorized managed environment. This does not repair or bypass the separate manual Windows environment's network/approval failure.",
   "incoming_handoffs": [
     "01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
     "01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json"
-  ]
+  ],
+  "previous_ordered_patches": [
+    "ops/incident-response/patches/tlvnet-coverage-budget-e6232ae2.patch",
+    "ops/incident-response/patches/tlvnet-stay-sitemap-portable-20261113.patch"
+  ],
+  "already_applied_do_not_reapply": [
+    "ops/incident-response/patches/tlvnet-coverage-budget-e6232ae2.patch",
+    "ops/incident-response/patches/community-dispatch-owner.patch"
+  ],
+  "controller_reconciled_at": "2026-11-13T13:13:35.258Z",
+  "controller_reconciliation_runKey": "ops-2026-11-13-064e67b6-3b00-8322-9738-0875a255ac30",
+  "coverage_verification": "ops/incident-response/evidence/coverage-readback-064e67b6-3b00-8322-9738-0875a255ac30.json"
 }

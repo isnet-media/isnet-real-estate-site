@@ -1,0 +1,70 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "ops-2026-11-13-064e67b6-3b00-8322-9738-0875a255ac30",
+  "policy_version": "2026-11-13/1.0",
+  "observed_at": "2026-11-13T13:13:35.258Z",
+  "published_source": "73e585f50cb4f833506c6b0dd6444fe755c47817",
+  "site_version": 592,
+  "deployment": {
+    "id": "appgdep_6af708c9781c81918a7744d70aab66d7",
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "title": "תל אביב נט — חדר המערכת",
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_d9f395ff8c0081919a417dcdf6fbfc0e",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_000000003a2c81f89fdbd1a5bce7c3d4",
+    "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-11-13T12:56:02.540741+00:00"
+  },
+  "source_read": "Authenticated read-only Git FETCH_HEAD exactly matches Sites592; no source push",
+  "regression": {
+    "command": "node tests/agent-dispatch.mjs",
+    "exit": 0,
+    "passed": [
+      "active community and consumer owners",
+      "cancelled standalone tasks remain cancelled",
+      "all seven maxPerRun null",
+      "30-entry backlog survives old12-item cap",
+      "body/rights/blocked asset gates remain intact"
+    ]
+  },
+  "live": [
+    {
+      "url": "https://tlvnet.com/api/briefs-writer?view=dispatch&topic=community",
+      "http": 200,
+      "ownerAutomationId": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "coverageOwnerTopic": "news"
+    },
+    {
+      "url": "https://tlvnet.com/api/briefs-writer?view=dispatch&topic=consumer",
+      "http": 200,
+      "ownerAutomationId": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "coverageOwnerTopic": "economy-tech",
+      "ownershipProof": false
+    },
+    {
+      "url": "https://tlvnet.com/api/briefs-writer?view=desk",
+      "http": 200,
+      "maxPerRun": {
+        "news": null,
+        "real-estate": null,
+        "economy-tech": null,
+        "community": null,
+        "consumer": null,
+        "sports": null,
+        "culture-news": null
+      }
+    }
+  ],
+  "not_claimed": [
+    "No new article published by controller",
+    "No content/image/credit or desktop/mobile visual verification",
+    "No enforcement across every external writer",
+    "No Windows portability fix"
+  ],
+  "windows_source_check": "scripts/build-stay.py still uses str(p.parent.relative_to(PUBLIC)) at line187; separate prepared patch remains unapplied."
+}
