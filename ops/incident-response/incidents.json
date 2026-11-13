@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T18:15:58.748Z",
+  "updated_at": "2026-11-13T20:06:40.073Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -758,7 +758,18 @@
         "image_review": "pending",
         "selected_photo_bank_id": null,
         "note": "No changed input justifies another public API/photo approval or publication retry. Prior native control evidence retained as point-in-time only."
-      }
+      },
+      "latest_sports_checkpoint": {
+        "inbox": "ops/incident-response/inbox/8a03b756-2764-8330-a302-b024f7ab97db-1.json",
+        "article_id": "maccabi-hapoel-euroleague-derby-win-20261112",
+        "last_recorded_body_sha256": "816d9d45e8f18a379c2c7e9297e05a8129e430bd0e0f53646e189c4f6f8c046b",
+        "current_body_or_asset_not_revalidated": true,
+        "image_review": "pending per saved checkpoint, no new approval",
+        "publication_ownership_block": "tlvnet-legacy-work-activity-unverifiable",
+        "source_open": "Not completed; initial nonempty directory failure corrected once, then progressing full Git fetch stopped at cycle budget. No site/network outage inferred.",
+        "observed_at": "2026-11-13T20:06:40.073Z"
+      },
+      "prevention_note": "Read cheap current ownership/activity checkpoint before opening a large Git source. If source opening is justified, use the existing correct Site checkout or an empty directory, preserve cache/checkpoint and parallel work; do not repeat large incomplete fetch when publication prerequisite is unchanged."
     },
     {
       "id": "event-collector-concurrent-main-push",
@@ -1170,12 +1181,25 @@
           "writer_runKey": "news-community-2026-11-13-19:00-1b1c98bb",
           "new_publications": 0,
           "task_enabled_after": false
+        },
+        {
+          "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+          "run_id": "8a03b756-2764-8330-a302-b024f7ab97db",
+          "writer_runKey": "sports-2026-11-13-evening-8a03b756-2764-8330-a302-b024f7ab97db",
+          "inbox": "ops/incident-response/inbox/8a03b756-2764-8330-a302-b024f7ab97db-1.json",
+          "started_at": "2026-11-13T18:55:31.561342Z",
+          "completed_at": "2026-11-13T19:02:11.692298Z",
+          "result_run_id": "8a03b756-2764-8330-a302-b024f7ab97db",
+          "task_enabled_after": false,
+          "new_publications": 0,
+          "controller_task_state_readback": true
         }
       ],
-      "impact": "Real-estate publication remains deferred; 19:00 news/community run also published nothing and its exact task is now disabled. No active competing writer has been proved. Saved items independently still require primary/image checks.",
+      "impact": "News and sports tasks now paused after zero-publication evening runs; real-estate publication deferred. Authoritative legacy Work producer activity/approval verification remains unavailable. No live competing publisher proved.",
       "next_action": "Existing source Work owner must reconcile current old task/approval/activity state and confirm the old producer inactive through its authoritative interface; retain GitHub CAS. No controller editor substitute, gate removal or forced unlock.",
-      "observed_at": "2026-11-13T18:09:33.193Z",
-      "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524"
+      "observed_at": "2026-11-13T20:06:40.073Z",
+      "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524",
+      "last_review_runKey": "ops-2026-11-13-115553d8-22f4-8322-843b-4691e048ee60"
     },
     {
       "id": "tlvnet-policy11-owner-overlap",
@@ -1233,7 +1257,7 @@
       "id": "tlvnet-news-runtime-paused-on-shared-blocker",
       "status": "awaiting_external_action",
       "fingerprint": "TLVNET/news/runtime-auto-pause/shared-legacy-Work-activity-precondition",
-      "root_cause": "The 19:00 writer reports an automation-runtime requirement to pause a fully blocked task. Its shared publication precondition (authoritative old Work publisher activity/approval verification) remained unavailable. Independent current task readback confirms disabled state despite publisher keep-active policy.",
+      "root_cause": "News and sports writers report a runtime requirement to pause fully blocked tasks after the shared legacy Work publication precondition cannot be verified. Both current task readbacks independently confirm disabled state; these are grouped occurrences of one operational root, not separate per-email incidents.",
       "evidence": {
         "inbox": "ops/incident-response/inbox/1b1c98bb-0cec-832e-a20b-b2f45dcd4958-1.json",
         "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
@@ -1251,16 +1275,59 @@
         "source_activity_unverified": true,
         "no_competing_writer_proved": true
       },
-      "impact": "No articles published by the 19:00 news/community run; news task paused, so future scheduled news publication is interrupted until authorized recovery.",
-      "next_action": "Authoritative source Work owner must verify/document old producer activity and pending approvals or complete its authorized retirement, preserving shared CAS/content/rights gates; after the precondition is resolved, an authorized runtime owner must resume this exact news task. Runtime owner must also reconcile auto-pause behavior with publisher continuity policy. Current controller mandate forbids is_enabled edits; no alternate writer, access bypass or invented inactivity proof.",
+      "impact": "Two paused publisher tasks (news and sports), with saved unready checkpoints and no new evening publications; continuity is interrupted until authorized recovery.",
+      "next_action": "Authoritative source Work owner must verify/document old producer activity and pending approvals or complete authorized retirement, retaining CAS/content/rights checks. After resolution, authorized runtime owner must resume the exact affected news and sports tasks and reconcile runtime pause behavior with publisher continuity policy. Controller's current mandate forbids is_enabled/prompt changes except narrow original office-writer prompt access.",
       "controller_action": "Recorded and escalated new pause; no task/prompt/schedule/permission mutation, publication retry, forced unlock or deployment.",
       "prevention": "Expose authoritative legacy producer/approval state to the permitted publication path and reconcile runtime pause behavior at its owner; item-specific failures must remain checkpointed without false success or removed gates.",
       "related_incident_ids": [
         "tlvnet-legacy-work-activity-unverifiable",
         "news-preview-failure-self-disable"
       ],
-      "observed_at": "2026-11-13T18:09:33.193Z",
-      "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524"
+      "observed_at": "2026-11-13T20:06:40.073Z",
+      "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524",
+      "occurrences": [
+        {
+          "inbox": "ops/incident-response/inbox/1b1c98bb-0cec-832e-a20b-b2f45dcd4958-1.json",
+          "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+          "run_id": "1b1c98bb-0cec-832e-a20b-b2f45dcd4958",
+          "started_at": "2026-11-13T17:02:45.604961Z",
+          "completed_at": "2026-11-13T17:06:42.469185Z",
+          "result_run_id": "1b1c98bb-0cec-832e-a20b-b2f45dcd4958",
+          "task_enabled": false,
+          "task_readback_verified": true,
+          "source_journal_commit": "15bd2ed3f863dec8a515d031cf9dd0a7f8e15638",
+          "lease_state": "free",
+          "lease_blob": "a12d830b717d7bb512c4857ce661c3b9d9fe4fb5",
+          "deployment_id": "appgdep_6af7198359108191ab682db3469d0c25",
+          "deployment_status": "succeeded",
+          "source_activity_unverified": true,
+          "no_competing_writer_proved": true
+        },
+        {
+          "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+          "run_id": "8a03b756-2764-8330-a302-b024f7ab97db",
+          "writer_runKey": "sports-2026-11-13-evening-8a03b756-2764-8330-a302-b024f7ab97db",
+          "inbox": "ops/incident-response/inbox/8a03b756-2764-8330-a302-b024f7ab97db-1.json",
+          "started_at": "2026-11-13T18:55:31.561342Z",
+          "completed_at": "2026-11-13T19:02:11.692298Z",
+          "result_run_id": "8a03b756-2764-8330-a302-b024f7ab97db",
+          "task_enabled_after": false,
+          "new_publications": 0,
+          "controller_task_state_readback": true
+        }
+      ],
+      "affected_task_ids": [
+        "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "Automation_499e6c8b36648191a9f8f102b0d5d6fe"
+      ],
+      "last_review_runKey": "ops-2026-11-13-115553d8-22f4-8322-843b-4691e048ee60",
+      "latest_notification_evidence": {
+        "run_id": "8a03b756-2764-8330-a302-b024f7ab97db",
+        "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+        "writer_result_created_at": "2026-11-13T19:02:11.440147Z",
+        "publisher_notified_by_writer": true,
+        "controller_repeat_notification": false
+      }
     },
     {
       "id": "historical-events-health-yavne-kids-503",
@@ -1290,7 +1357,7 @@
       "reported_runKey": "ops-2026-11-13-a2aa0629-3158-8322-adc0-c25e2fa87f28"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-a2aa0629-3158-8322-adc0-c25e2fa87f28",
+  "last_review_runKey": "ops-2026-11-13-115553d8-22f4-8322-843b-4691e048ee60",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
