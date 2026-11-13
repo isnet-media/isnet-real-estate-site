@@ -19,7 +19,7 @@ The controller runs once per hour around the clock. GitHub `Record operation fai
 
 ## Work cycle
 
-Read state.json and incidents.json, then inbox entries and only results after the saved watermark. Reconcile actual run ID, attempt, source SHA, failed job/step, source mode and current status. No inference of live success from completed or green skipped work. On the initial retrospective review, investigate the preceding seven days in bounded pages; checkpoint the remaining backlog instead of claiming full coverage.
+Read state.json and incidents.json, then inbox entries and results after the saved watermark. Retain pending run IDs and revisit their completion regardless of creation-time watermark; paginate new metadata until the prior boundary and retain an overlap for same timestamps or delayed completions. A first page alone is not a complete backlog check. Reconcile actual run ID, attempt, source SHA, failed job/step, source mode and current status. No inference of live success from completed or green skipped work. On the initial retrospective review, investigate the preceding seven days in bounded pages; checkpoint the remaining backlog instead of claiming full coverage.
 
 Group identical failures by subsystem + workflow/step + normalized cause + relevant source fingerprint, retaining every occurrence/run link. Read full logs only for new or changed fingerprints, redact credentials and personal data, and store minimal evidence. Skip unchanged known blockers after reporting them once; re-open only with changed inputs, access, source or a genuine recurrence after a verified fix.
 

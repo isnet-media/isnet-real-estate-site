@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T04:33:57.638Z",
+  "updated_at": "2026-11-13T04:35:47.754Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-13T04:00:14Z",
   "initial_history": {
@@ -63,8 +63,19 @@
     "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
     "source_sha": "568ec413cdd0a57ca8a69d9eccf11657f3c83e7f",
     "active_github_runs": [],
-    "inbox_status": "bootstrap: remote path absent at initial read; queue directory and runbook being finalized in this source-only commit",
-    "build_or_deploy": false
+    "inbox_status": "Remote directory verified; no captured event entries yet (README only). No synthetic production failure created.",
+    "build_or_deploy": false,
+    "source_commit": "a6420b1b64cfe59bb003b5360db871c38da90faf",
+    "bootstrap_verified": {
+      "commit": "https://github.com/isnet-media/isnet-real-estate-site/commit/a6420b1b64cfe59bb003b5360db871c38da90faf",
+      "run": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43366415399",
+      "test_job_id": 131691759027,
+      "conclusion": "success",
+      "step": "Run node scripts/test-operation-failure-inbox.cjs",
+      "actual_failure_event_path": "not yet observed in production; mock integration tests passed",
+      "public_deployment": "none triggered by setup commit",
+      "verified_at": "2026-11-13T04:35:47.754Z"
+    }
   },
   "concurrent_controller_observation": {
     "run_id": "2c39ea4e-4e98-8326-a686-eab4e58026c7",
@@ -129,5 +140,6 @@
     "ashdod-cinema-four-missing-trailers",
     "supermarket-public-http-and-stale-branches"
   ],
-  "processed_inbox_entries": []
+  "processed_inbox_entries": [],
+  "pending_github_run_ids": []
 }
