@@ -130,24 +130,25 @@ def main():
  if not all([url,key,ai]):print('CONFIGURATION_BLOCKED: missing existing runner secrets');return 2
  model=os.getenv('TLVNET_OPENAI_MODEL','gpt-4.1-mini');endpoint=url+'/rest/v1/tlvnet_agent_runs'
  session=make_session(key)
- r=session.get(endpoint,params={'status':'eq.queued','select':'task_id,agent_id,input','order':'created_at.asc','limit':'3'},timeout=20)
+ max_jobs=max(1,min(3,int(os.getenv('TLVNET_MAX_JOBS_PER_RUN','2'))))
+ r=session.get(endpoint,params={'status':'eq.queued','select':'task_id,agent_id,input','order':'created_at.asc','limit':str(max_jobs)},timeout=20)
  if not r.ok:print('QUEUE_READ_FAILED',r.status_code);return 2
  rows=r.json();stop=Event()
- # Three independent sessions, atomic status claims, one workflow concurrency group.
- with ThreadPoolExecutor(max_workers=3) as pool:
+ # Serialize AI calls for fail-fast handling of quota/authentication errors.
+ # Claims remain atomic, and each scheduled invocation processes at most max_jobs.
+ with ThreadPoolExecutor(max_workers=1) as pool:
   futures=[pool.submit(process_job,job,endpoint,key,ai,model,stop) for job in rows]
   results=[]
   for future in futures:
    try:results.append(future.result())
    except requests.RequestException:print('WORKER_NETWORK_FAILED');results.append((0,0,2))
  done=sum(x[0] for x in results);blocked=sum(x[1] for x in results)
- print('TLVNET queue:',len(rows),'selected;',done,'completed;',blocked,'blocked; parallel_limit: 3; published: false')
+ print('TLVNET queue:',len(rows),'selected;',done,'completed;',blocked,'blocked; parallel_limit: 1; max_jobs:',max_jobs,'; published: false')
  return max((x[2] for x in results),default=0)
 if __name__=='__main__':
  import argparse,time
- parser=argparse.ArgumentParser();parser.add_argument('--watch-seconds',type=int,default=0);args=parser.parse_args();deadline=time.monotonic()+min(180,max(0,args.watch_seconds));status=0
- while True:
-  status=main()
-  if status or time.monotonic()>=deadline:break
-  time.sleep(min(15,max(0,deadline-time.monotonic())))
- sys.exit(status)
+ parser=argparse.ArgumentParser();parser.add_argument('--watch-seconds',type=int,default=0);args=parser.parse_args()
+ # Backward-compatible CLI: no polling loop even if an old workflow passes --watch-seconds.
+ # A single bounded queue sweep reduces repeated reads and prevents same-cycle retries.
+ if args.watch_seconds:print('TLVNET: legacy watch mode disabled; single bounded sweep only')
+ sys.exit(main())
