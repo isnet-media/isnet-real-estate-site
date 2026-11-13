@@ -79,6 +79,9 @@ reviewedProductions.push(
 // FRIENDS, the official Mishkan board and the linked booking listing were read on 12 Nov 2026.
 // Exact same production/cast at Mishkan Ashdod, 26 Dec 2026 21:00; retain both booking IDs.
 reviewedProductions.push({id:'toc-toc-tomix-2026',titles:['טוק טוק – קומדיה אובססיבית','טוק טוק – קומדיה אובססיבית – Toc-toc'],source:'https://friends-hist.co.il/show/טוק-טוק-קומדיה-אובססיבית/'});
+// Primary venue page reviewed 13 Nov 2026: same named cast, 3 Dec 2026,
+// 21:00 at Heichal Rishon. Keep both original IDs, source titles and offers.
+reviewedProductions.push({id:'lets-not-talk-yael-guy-2026',titles:['בוא לא נדבר על זה','בוא לא נדבר על זה - המופע של יעל בר זוהר וגיא זו ארץ | בוא לא נדבר על זה-יעל בר זהר וגיא זוארץ • חמישי 03/12/2026'],source:'https://htrl.co.il/show/בוא-לא-נדבר-על-זה-2/'});
 const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
 function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
 function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\s*([1-9]\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\s*\d+/g,'').replace(/^(?:אולם|אודיטוריום)\s+/,'');let key=e.venue_institution_id;

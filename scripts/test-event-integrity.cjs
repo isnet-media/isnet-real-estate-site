@@ -128,6 +128,12 @@ const tocMerged=q.reconcile(toc)[0];assert.deepEqual(new Set([tocMerged.purchase
 for(const other of [{start_time:'20:30'},{start_date:'2026-12-27'},{venue:'אולם דיונה אשדוד'},{title:toc[1].title+' עם צוות אחר'}])assert.equal(q.reconcile([toc[0],{...toc[1],...other}]).length,2);
 console.log('PASS: verified Toc-toc aliases retain both booking IDs; other times, days, venues and casts remain separate');
 
+// An explicitly reviewed long board title and official title identify one slot.
+const letsTalkTitles=['בוא לא נדבר על זה','בוא לא נדבר על זה - המופע של יעל בר זוהר וגיא זו ארץ | בוא לא נדבר על זה-יעל בר זהר וגיא זוארץ • חמישי 03/12/2026'];
+const letsTalk=letsTalkTitles.map((title,i)=>row('talk-'+i,{title,category:i?'music':'theatre',venue:i?'היכל התרבות ראשון לציון':'היכל התרבות מאיר ניצן',start_date:'2026-12-03',start_time:'21:00'}));
+assert.equal(q.reconcile(letsTalk).length,1);
+for(const e of letsTalk)assert.ok(q.resolve(letsTalk,e.event_id));
+for(const different of [{start_time:'20:30'},{start_date:'2026-12-04'},{venue:'אולם אחר'},{title:'בוא לא נדבר על זה עם צוות אחר'}])assert.equal(q.reconcile([letsTalk[0],{...letsTalk[1],...different}]).length,2);
 const digest=require('node:crypto').createHash('sha256').update(fs.readFileSync('events-preview/shared/event-overlay.js')).digest('hex').slice(0,12);
 for(const city of ['ashdod','rishon-lezion','yavne','kiryat-gat','holon','herzliya']){
  const html=fs.readFileSync('events-preview/'+city+'/index.html','utf8');assert(html.includes('event-overlay.js?v='+digest),city+' must invalidate cached identity code on every policy edit');
