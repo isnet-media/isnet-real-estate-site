@@ -300,5 +300,201 @@
       "coverage_status": "partial_review",
       "finished_at": "2026-11-13 08:59:39 UTC"
     }
+  ],
+  "restaurant_cycle_reports": [
+    {
+      "task_id": "Automation_1db28c66207881918ef57966330dca21",
+      "run_id": "c4f8d5ba-1d64-8320-9f67-18b831a8ff4a",
+      "runKey": "restaurants-2026-11-13-monthly-c4f8d5ba",
+      "started_at": "2026-11-13T09:22:24.358009Z",
+      "checked_at": "2026-11-13T09:27:47Z",
+      "status": "inspected_no_content_change",
+      "scope": "Existing restaurant/cafe guides only; partial sampled review, not a complete city/network refresh",
+      "identity_verified": true,
+      "previous_result": null,
+      "previous_result_note": "Null result history is not evidence this task never ran",
+      "inventory": [
+        {
+          "city": "ashdod",
+          "records": 52,
+          "source_path": "events-preview/ashdod/data/restaurants.json",
+          "source_blob": "59fb1cc4f1f85a227d49a90fed6dd1c6b9a7ac2d"
+        },
+        {
+          "city": "yavne",
+          "records": 108,
+          "source_path": "events-preview/yavne/data/restaurants.json",
+          "source_blob": "465c39bf11e94ea6541e0da484c428e7bdf77602"
+        },
+        {
+          "city": "holon",
+          "records": 119,
+          "source_path": "events-preview/holon/data/restaurants.json",
+          "source_blob": "154073a21f2164d8ac21287c0a3ea6fc8ab60eaf"
+        },
+        {
+          "city": "herzliya",
+          "records": 21,
+          "source_path": "events-preview/herzliya/data/restaurants.json",
+          "source_blob": "d35667daf5a1f48046ef2f70b1865c3ddf115909"
+        },
+        {
+          "city": "rishon-lezion",
+          "records": 50,
+          "source_path": "events-preview/rishon-lezion/data/restaurants.json",
+          "source_blob": "3fe7226a3581ac12b0ad9f1b48295a73bbe704de"
+        },
+        {
+          "city": "kiryat-gat",
+          "records": 68,
+          "source_path": "events-preview/kiryat-gat/data/restaurants.json",
+          "source_blob": "de0ebbc95002c981cc31f82c7bdc5fda62a964bb"
+        },
+        {
+          "city": "tel-aviv",
+          "records": 120,
+          "record_note": "Category entries; not a count of unique restaurants",
+          "source_path": "public/guide/data/food-guides.json",
+          "source_commit": "d457d11f30c73ab92f8f806525852b8a5e8e2878",
+          "source_equals_public": true
+        }
+      ],
+      "sources_read": [
+        {
+          "city": "ashdod",
+          "id": "pescado",
+          "url": "https://pescado.co.il/",
+          "result": "Published restaurant address Martin Buber1/12, phone088523063 and fish cuisine match. Explicit kosher claim in official text; not an independently checked certificate. Official hours noted internally; no claim Saturday daytime is open."
+        },
+        {
+          "city": "herzliya",
+          "id": "sebastian",
+          "url": "https://www.sebastian.co.il/",
+          "result": "Maskit33 and brasserie cuisine match; official Fri/Sat11:30–00:00 supports existing Saturday flag."
+        },
+        {
+          "city": "holon",
+          "id": "silo",
+          "url": "https://silo.co.il/",
+          "result": "Jerusalem210 and Italian/Mediterranean identity match; official Saturday09:00–23:00 supports existing Saturday flag."
+        },
+        {
+          "city": "kiryat-gat",
+          "id": "kgat-namisu",
+          "url": "https://www.namisu.co.il/",
+          "result": "Avnei Hachoshen1 and088660660 match. Official Sunday–Thursday11:30–23:00 and post-Shabbat opening agree with current caution. Official kosher label is not a certificate inspection; existing conservative certificate caveat retained."
+        },
+        {
+          "city": "rishon-lezion",
+          "id": "38755865",
+          "url": "https://ontopo.com/he/il/rishon_lezion/page/38755865",
+          "result": "Soho booking page, Moshe Becker15 and039658395 match; no reservation was submitted."
+        },
+        {
+          "city": "yavne",
+          "id": "yavne-dc3ff0fa83d3da",
+          "url": "https://easy.co.il/page/2664253",
+          "result": "Directory matches WHITE at Shidlovsky1, Yavne. Directory is discovery/corroboration only, not fresh primary verification."
+        },
+        {
+          "city": "yavne",
+          "id": "yavne-dc3ff0fa83d3da",
+          "url": "https://whitesushibar.co.il/",
+          "result": "Primary source web retrieval returned403; no bypass/retry, no new hours/kosher/price/accessibility claims.",
+          "status": "blocked_source_access"
+        },
+        {
+          "city": "tel-aviv",
+          "id": "food-hudson",
+          "url": "https://hudson-tlv.com/ramat-hahayal/",
+          "result": "Official Ramat Hahayal restaurant and meat cuisine match; retained branch-specific identity."
+        },
+        {
+          "city": "tel-aviv",
+          "id": "food-dixie",
+          "url": "https://ontopo.com/he/il/page/43930324",
+          "result": "Booking page identifies Dixie, Yigal Alon120 and American grill/Haim Cohen; address and cuisine match. No personal tasting claimed."
+        }
+      ],
+      "procedures_read": [
+        "docs/culinary-editorial-policy.md (fresh TLVNET source)",
+        "events-preview/herzliya/README.md",
+        "events-preview/holon/README.md",
+        "events-preview/kiryat-gat/OPERATIONS.md",
+        "scripts/collect_yavne_food.py (collector source and city gate)",
+        "events-preview/admin/data/yavne-food-source-report.json (prior source outcomes)",
+        "ops/incident-response/RUNBOOK.md (handoff/evidence guidance)"
+      ],
+      "access": {
+        "tlvnet_source_opened": true,
+        "tlvnet_version_checked": 589,
+        "prior_deployment_id": "appgdep_6af6d66aba308191b17f01bda7dfaf32",
+        "prior_deployment_status": "succeeded",
+        "initial_source_open_attempt": "Local destination was absent; corrected destination then supported helper opened source successfully. No technical blocker remains from that initial attempt.",
+        "isnet_active_workflow_runs_observed": 0,
+        "publication_lock_acquired": false,
+        "shared_content_write_attempted": false
+      },
+      "public_checks": [
+        {
+          "url": "https://tlvnet.com/guide/data/food-guides.json",
+          "http": 200,
+          "source_snapshot_matches": true,
+          "records": 120
+        },
+        {
+          "url": "https://tlvnet.com/guide/restaurants",
+          "http": 200,
+          "food_loader_present": true
+        },
+        {
+          "id": "food-hudson",
+          "url": "https://tlvnet.com/guide/assets/food/eaf499d3cbead7d4a3fa.jpg",
+          "http": 200,
+          "jpeg_signature": true,
+          "existing_credit_present": true
+        },
+        {
+          "id": "food-dixie",
+          "url": "https://tlvnet.com/guide/assets/food/b094a0fe19cfab89e212.jpg",
+          "http": 200,
+          "jpeg_signature": true,
+          "existing_credit_present": true
+        }
+      ],
+      "limitations": [
+        "Seven sampled places corroborated; WHITE only corroborated in directory, primary unavailable.",
+        "Source listing/booking page does not prove an on-site visit, current stock or actual available reservation.",
+        "No new image selection, image-rights grant or desktop/mobile visual approval performed.",
+        "Web tool could not retrieve two public guide URLs; direct TLVNET requests succeeded. No general site outage inferred."
+      ],
+      "changes": [],
+      "counts": {
+        "sampled_places": 8,
+        "primary_or_booking_sources_corroborated": 7,
+        "new_places": 0,
+        "publications": 0,
+        "builds": 0,
+        "deployments": 0,
+        "new_agents": 0,
+        "new_schedules": 0
+      },
+      "checkpoint": {
+        "complete_network_review": false,
+        "next_action": "Continue remaining existing records incrementally in the next saved cycle; inspect next unchecked entries per city. Recheck WHITE access cheaply only after evidence of change; retain authentic dates, historical source failures and unknown-status caveats.",
+        "blocked_items": [
+          {
+            "city": "yavne",
+            "id": "yavne-dc3ff0fa83d3da",
+            "status": "blocked_source_access",
+            "evidence": "Primary website403 via web retrieval",
+            "action": "Authorized ordinary source access needed before factual changes; do not infer closure or bypass403."
+          }
+        ]
+      },
+      "history_preserved": true,
+      "log_only": true,
+      "automation_state_changed": false
+    }
   ]
 }
