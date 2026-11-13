@@ -146,6 +146,33 @@ def process_job(job,endpoint,key,ai,model,stop,budget):
  if code in ('insufficient_quota','provider_authentication'):
   stop.set()
  return (int(bool(result)),int(not result),2 if stop.is_set() else 0)
+def estimate_provider_calls(job):
+    """Reserve a worst-case bounded number of API calls before claiming a queued job."""
+    inp = job.get('input') or {}
+    if not inp.get('team_chat'):
+        return 1
+    try:
+        ctx = json.loads(inp.get('source_notes') or '{}')
+        options = ctx.get('options') or {}
+        if options.get('imageOnly'):
+            return 0
+        return 3 if options.get('search', True) else 1
+    except (TypeError, ValueError, AttributeError):
+        return 3
+
+
+def select_jobs_for_budget(rows, max_calls):
+    selected = []
+    reserved = 0
+    for job in rows:
+        needed = estimate_provider_calls(job)
+        if reserved + needed > max_calls:
+            break  # Leave the original queued row unclaimed for the next scheduled sweep.
+        selected.append(job)
+        reserved += needed
+    return selected
+
+
 def main():
  url=os.getenv('SUPABASE_URL','').rstrip('/');key=os.getenv('SUPABASE_SERVICE_ROLE_KEY','');ai=os.getenv('OPENAI_API_KEY','')
  if not all([url,key,ai]):print('CONFIGURATION_BLOCKED: missing existing runner secrets');return 2
@@ -154,8 +181,10 @@ def main():
  max_jobs=max(1,min(3,int(os.getenv('TLVNET_MAX_JOBS_PER_RUN','2'))))
  r=session.get(endpoint,params={'status':'eq.queued','select':'task_id,agent_id,input','order':'created_at.asc','limit':str(max_jobs)},timeout=20)
  if not r.ok:print('QUEUE_READ_FAILED',r.status_code);return 2
- rows=r.json();stop=Event()
+ pending_rows=r.json();stop=Event()
  budget=ProviderCallBudget(os.getenv('TLVNET_MAX_PROVIDER_CALLS_PER_RUN','3'))
+ rows=select_jobs_for_budget(pending_rows,budget.max_calls)
+ if len(rows)<len(pending_rows):print('TLVNET: deferred',len(pending_rows)-len(rows),'queued tasks by provider-call budget')
  # Serialize AI calls for fail-fast handling of quota/authentication errors.
  # Claims remain atomic, and each scheduled invocation processes at most max_jobs.
  with ThreadPoolExecutor(max_workers=1) as pool:
