@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T18:09:33.193Z",
+  "updated_at": "2026-11-13T18:15:58.748Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1261,9 +1261,36 @@
       ],
       "observed_at": "2026-11-13T18:09:33.193Z",
       "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524"
+    },
+    {
+      "id": "historical-events-health-yavne-kids-503",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "events-public-health/Check public city endpoints/Yavne-kids-HTTP503@ba7a7c1",
+      "root_cause": "Observed immediate failure: one Yavne children-category endpoint returned HTTP503 on2026-11-09; public health script correctly exited1. Upstream cause and present availability are not established.",
+      "evidence": {
+        "run_id": 42668061644,
+        "attempt": 1,
+        "job_id": 129336931359,
+        "created_at": "2026-11-09T17:47:38Z",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42668061644",
+        "source_commit": "ba7a7c1c1fec2ed31688c6e7745e4a08656d2056",
+        "log_read_full": true,
+        "failed_step": "Check public city endpoints without generating load",
+        "endpoint": "https://isnet.co.il/events-preview/yavne/category.html?category=kids",
+        "http_status": 503,
+        "other_endpoints_ok": 32,
+        "subsequent_integrity_step": "skipped",
+        "current_workflow_blob": "f274a9627ca395d6d095d8000e09ed889ef000fb"
+      },
+      "resolution": "Historical signature classified only. No live endpoint/DB scan, collection, workflow retry, gate change or source repair performed.",
+      "next_action": "Reconcile against later saved successful results or a new same-endpoint failure. If it recurs, inspect response/CDN/origin evidence before one justified repair. Do not mask503 or infer all-city outage.",
+      "prevention": "Group this exact endpoint/step signature; retain HTTP evidence and skipped-step distinction. Current workflow already uses weekly Sunday timer plus relevant source/deployment events; no schedule change authorized.",
+      "observed_at": "2026-11-13T18:15:58.748Z",
+      "reported_runKey": "ops-2026-11-13-a2aa0629-3158-8322-adc0-c25e2fa87f28"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-548c5169-77bc-8322-a4d1-e9148367a9d4",
+  "last_review_runKey": "ops-2026-11-13-a2aa0629-3158-8322-adc0-c25e2fa87f28",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
