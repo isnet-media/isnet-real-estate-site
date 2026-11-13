@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+  "run_id": "122b42e1-c6bc-8325-9797-95a2377b76c0",
+  "runKey": "real-estate-2026-11-13-16:00-122b42e1",
+  "policy_version": "2026-11-13/1.0",
+  "recorded_at": "2026-11-13T14:17:36.368375+00:00",
+  "target": "TLVNET-site",
+  "section": "real-estate",
+  "status": "checkpoint_saved_publication_blocked",
+  "source_commit": "cd5af6c3a251d8681877e3390c1e1296d28309e4",
+  "review": {
+    "published_article_count": 25,
+    "pending_draft_count": 0,
+    "last_publication_at": "2026-11-11T13:17:18.374295+00:00",
+    "latest_deployment": {
+      "version": 593,
+      "id": "appgdep_6af7198359108191ab682db3469d0c25",
+      "status": "succeeded"
+    },
+    "lease_observed": {
+      "state": "free",
+      "sha": "a12d830b717d7bb512c4857ce661c3b9d9fe4fb5",
+      "previous_owner": "manual-social-policy-20261113",
+      "previous_deployment_status": "succeeded"
+    },
+    "lease_acquired": false,
+    "no_duplicate_bareket_story_in_current_articles": true,
+    "existing_approved_image_requests_preserved": true
+  },
+  "incident": {
+    "fingerprint": "tlvnet/site/publication/legacy-work-activity-unverifiable",
+    "root_cause": "No authoritative current Work execution/approval/lock inventory is available in the connected automation and Sites tools. This does not prove a live competing worker. The current mandatory CAS protocol explicitly requires verification that the old path is inactive before lease acquisition.",
+    "evidence": [
+      "ops/agent-harmony/PUBLISH_LEASE.md: old Work pending approvals are not released by this lease; inability to verify old path inactivity requires checkpoint and target block",
+      "ops/agent-harmony/ROLLOUT.md remains marked NOT DEPLOYED / NOT ENFORCED; it is not an execution-state proof",
+      "Latest Sites source opened successfully and prior deployment succeeded; no deployment failure or preview blocker claimed"
+    ],
+    "next_action": "Existing controller/owner to provide current authoritative Work task/approval/active-writer state for TLVNET and fence or reconcile the old producer under existing authority. Writer can then acquire/read back existing GitHub CAS lease and resume saved item; do not create another runner or broaden permissions."
+  },
+  "sources_checked": [
+    {
+      "url": "https://funder.co.il/article/214347",
+      "source_date": "2026-11-11",
+      "read_full_text": true,
+      "finding": "145m credit is within joint up-to325m credit+guarantees; project value475m,62apartments; no verified occupancy timetable"
+    },
+    {
+      "url": "https://realestatepeople.online/articles-finance-42/",
+      "read_full_text": true,
+      "finding": "Matching financing structure; secondary reporting, not independent signed-finance document"
+    },
+    {
+      "url": "https://www.israelhayom.co.il/business/real-estate/article/21822296",
+      "source_date": "2026-11-11",
+      "read_full_text": true,
+      "finding": "Full article returned in search extraction; same325m total and145m component"
+    },
+    {
+      "url": "https://reshuthayachid.co.il/news/m9f755",
+      "source_date": "2026-11-12",
+      "read_full_text": true,
+      "finding": "470m headline conflicts with other sources; not adopted or added to325m"
+    },
+    {
+      "url": "https://bareketc.com/",
+      "read_full_text": true,
+      "finding": "Company identity/services only; not current deal verification"
+    },
+    {
+      "url": "https://bareketc.com/דיווחי-חברה/",
+      "read_full_text": true,
+      "finding": "No current transaction document displayed in report index"
+    },
+    {
+      "url": "https://bareketc.com/gallery/פרוייקט-אייזק-שטרן/",
+      "read_full_text": true,
+      "source_date": null,
+      "finding": "31-unit project, undated page. Not evidence that this is the current62-unit financing or new building permit"
+    },
+    {
+      "url": "https://www.cbs.gov.il/he/mediarelease/Pages/2026/דירות-בעסקאות-נדלן-יולי-ספטמבר-2026.aspx",
+      "read_full_text": false,
+      "finding": "Reader unavailable; existing city-statistical checkpoint retained, no substituted district statistic"
+    },
+    {
+      "url": "https://tlvonline.co.il/ארבעה-פרויקטים-בנווה-שאנן/",
+      "read_full_text": false,
+      "finding": "HTTP429, no retry or bypass; retained primary-plan checkpoint"
+    },
+    {
+      "url": "https://www.tel-aviv.gov.il/Residents/Development/Pages/default.aspx",
+      "read_full_text": false,
+      "finding": "Discovery/background index, no new dated plan verified"
+    }
+  ],
+  "checkpoint": {
+    "article_id": "isaac-stern-two-projects-financing-20261113",
+    "source_fingerprint": "c8a440aeee372cb63444c72803cc64e23a46fd5b8945c9794479088be1556b12",
+    "title": "שני בניינים, 62 דירות: הסכמי המימון ברחוב אייזק שטרן",
+    "lead": "ברקת ושלמה ביטוח צפויות להעמיד יחד עד 325 מיליון שקל בהלוואות וערבויות. מסגרת ברקת, כ־145 מיליון שקל, היא חלק מהסכום הכולל.",
+    "body_html": "<p>שני בנייני מגורים ברחוב אייזק שטרן, פינת יהודה עמיחי בצפון תל אביב, עומדים במרכז הסכמי מימון שעליהם דווח ב־11 בנובמבר. ברקת ושלמה ביטוח אמורות להעמיד יחד מסגרות הלוואות וערבויות של עד כ־325 מיליון שקל. הדיווחים מתארים שני בניינים בני 11 קומות, עם 62 דירות וכ־216 מ״ר שטחי מסחר מעל חניון משותף.</p><p><strong>שלושה סכומים, שלוש משמעויות</strong></p><p>לפי פרטי העסקה שפורסמו, חלקה של ברקת במסגרות ההלוואה הוא כ־145 מיליון שקל. סכום זה נכלל במסגרת המשותפת של עד 325 מיליון שקל; אין לחבר בין שני המספרים. שווי הפרויקטים, שהוערך בכ־475 מיליון שקל, הוא נתון נפרד מהיקף האשראי והערבויות.</p><p><strong>שני מסלולים באותו מתחם</strong></p><p>אחד הפרויקטים מקודם עבור קבוצת בעלי קרקע היסטוריים, והשני במתווה יזמי הכולל עסקת קומבינציה ושירותי בנייה. על פי הדיווחים, אשכול פרויקטים אמורה לבצע את שני הבניינים במקביל, ושלמה ביטוח תעמיד ערבויות לבעלי הקרקע ופוליסות מכר לרוכשים בפרויקט היזמי.</p><p>המשמעות לקורא היא התקדמות במימון המתחם, ולא הוכחה שכל הכסף כבר הועבר או שהדירות מוכנות. לא אומתו במסגרת הבדיקה מועד תחילת עבודה, לוח אכלוס או מחיר דירה. לפני החלטה על רכישה נדרשת בדיקה של הפרויקט המסוים ושל מסמכיו; אין להסיק ממסגרת מימון אחת על מחירי השכונה כולה.</p>",
+    "body_sha256": "4d0b1aab4b1de4356b805fe2fc1be9f24ca3dfb96e89fd1cd20571f4d050ade2",
+    "content_stage": "draft_text_not_publication_ready",
+    "editor_review": {
+      "status": "pending",
+      "read_full_text": true,
+      "owner_automation_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "runKey": "real-estate-2026-11-13-16:00-122b42e1",
+      "reason": "Draft fact distinctions reviewed against full secondary coverage; current primary transaction document and actual project stage remain unverified."
+    },
+    "image_review": {
+      "status": "pending",
+      "reason": "No suitable specific existing financing asset found in bank metadata; copyrighted Arceffect project rendering not reused without permission. No image generated/requested while publication path is blocked."
+    },
+    "remaining_actions": [
+      "Obtain current primary company/TASE finance document or attributable company confirmation and verify geography/project identity",
+      "Complete actual image search/rights/file/visual review; no duplicate request exists",
+      "Verify legacy Work inactivity, acquire/readback CAS lease, refresh source and duplicate check",
+      "Only after actual approvals build-news,prepare-public,check-photo-bank,build,one deploy and public readback"
+    ]
+  },
+  "remaining_prior_candidates": [
+    "CBS city-level July–September2026 release, not district figures",
+    "Landmark sales: full source and quarterly company report",
+    "NeveShaanan: full local source and primary plan status"
+  ],
+  "newPublishedArticleIds": [],
+  "verifiedExistingArticleIds": [],
+  "build": false,
+  "deploy": false,
+  "source_ledger_updated": false,
+  "source_ledger_block_reason": "TLVNET shared-source write requires same unresolved ownership verification. This exact report and draft are saved instead in the authorized existing ops inbox.",
+  "is_enabled_changed": false,
+  "cost": "Not measured; no monetary limit claimed",
+  "note": "One bounded discovery/research cycle; no borrowed result, old success or HTTP200 counted as new publication."
+}
