@@ -52,13 +52,20 @@ def retain_unverified_catalog(previous,current,reports,today):
   report['retained_items']=sum(x.get('source_name')==name for x in retained)
  return current+retained
 
-def main():
+def scoped_sources(scope):
+ if scope=='all':return list(SOURCES)
+ if scope=='events':return ['matnas-events','municipal24']
+ if scope=='catalog':return [k for k in SOURCES if k not in ('matnas-events','municipal24')]
+ raise ValueError('invalid senior collection scope')
+
+def main(scope='all'):
+ selected=scoped_sources(scope)
  catalog=[];incoming=[];reports=[];pages={}
  def load(k):
   try:return k,page(k),None
   except Exception as e:return k,None,str(e)[:160]
  with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
-  for k,s,error in ex.map(load,SOURCES):
+  for k,s,error in ex.map(load,selected):
    reports.append(dict(id=k,name=SOURCES[k][0],url=SOURCES[k][1],status='checked' if s else 'fetch_failed',error=error,checked_at=c.NOW.isoformat()))
    if s:pages[k]=s
  # Current school-year classes: actual source days, times, location and registration destination.
@@ -100,7 +107,7 @@ def main():
    local=c.photo(urljoin(SOURCES[k][1],image),SOURCES[k][1])
    if local:x.update(image=local,image_credit='צילום: ע.ל.ה הרצליה')
   catalog.append(x)
- catalog.extend([record('gold-info','זמן זהב — זכויות, שירותים ופנאי','שער המידע העירוני לוותיקים: תרבות והעשרה, זכויות והטבות, סיוע וחוברת הפעילויות.','service'),record('nde','מרכזי יום ומועדונים חברתיים','מדריך לאיתור מסגרות בהרצליה ופרטי קשר. זהו מקור מידע חיצוני; יש לברר ישירות מול המסגרת פעילות, התאמה ותנאי הצטרפות.','service',availability_note='פרטי המדריך לא אומתו מול כל מרכז בנפרד.')])
+ if scope!='events':catalog.extend([record('gold-info','זמן זהב — זכויות, שירותים ופנאי','שער המידע העירוני לוותיקים: תרבות והעשרה, זכויות והטבות, סיוע וחוברת הפעילויות.','service'),record('nde','מרכזי יום ומועדונים חברתיים','מדריך לאיתור מסגרות בהרצליה ופרטי קשר. זהו מקור מידע חיצוני; יש לברר ישירות מול המסגרת פעילות, התאמה ותנאי הצטרפות.','service',availability_note='פרטי המדריך לא אומתו מול כל מרכז בנפרד.')])
  # Dated source events: a course interval is not turned into invented daily occurrences.
  s=pages.get('matnas-events')
  if s:
@@ -140,11 +147,23 @@ def main():
  # A child-only label is never evidence of a senior audience.
  for e in raw['events']:
   if re.search('ילדים|ילדות|תינוק|פעוט|כיתות|גילאי [1-9]|דן דן הנגן',e['title']) and not re.search('ותיק|גמלא|בין.דורי',e['title']):e['audiences']=[a for a in e.get('audiences',[]) if a!='seniors']
- previous=c.read('senior-catalog').get('items',[]) if (D/'senior-catalog.json').exists() else []
+ previous_container=c.read('senior-catalog') if (D/'senior-catalog.json').exists() else {}
+ previous=previous_container.get('items',[])
  catalog=retain_unverified_catalog(previous,catalog,reports,c.TODAY.isoformat())
- c.save('events',raw);c.save('senior-catalog',dict(checked_at=c.NOW.isoformat(),items=catalog,sources=reports))
+ if scope!='all':
+  touched={SOURCES[k][0] for k in selected};seen={x['id'] for x in catalog}
+  # Untouched classes/services keep their source timestamps, even if older than
+  # a retention window for failed sources. No request or verification occurred.
+  catalog.extend(dict(x) for x in previous if x.get('source_name') not in touched and x['id'] not in seen)
+  reports.extend(x for x in previous_container.get('sources',[]) if x.get('name') not in touched)
+ if scope!='catalog':c.save('events',raw)
+ stamp=c.NOW.isoformat() if scope=='all' else previous_container.get('checked_at')
+ c.save('senior-catalog',dict(checked_at=stamp,partial_checked_at=c.NOW.isoformat() if scope!='all' else None,refresh_scope=scope,items=catalog,sources=reports))
  source=c.read('sources');existing={x['url'] for x in source['sources']}
  for k,(n,u) in SOURCES.items():
   if u not in existing:source['sources'].append(dict(id='senior-'+k,name=n,url=u,parser='directory',venue=n,kind='official' if k!='nde' else 'directory'))
  c.save('sources',source);print('Senior catalog',len(catalog),'dated source occurrences',len(incoming),'new',added,'matched',matched,flush=True)
-if __name__=='__main__':main()
+if __name__=='__main__':
+ import argparse
+ ap=argparse.ArgumentParser();ap.add_argument('--scope',choices=['all','events','catalog'],default='all')
+ main(ap.parse_args().scope)

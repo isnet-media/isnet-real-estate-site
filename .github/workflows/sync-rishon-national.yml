@@ -2,7 +2,8 @@ name: Refresh Rishon national events and cinema
 on:
   workflow_dispatch:
   schedule:
-    - cron: '35 5 * * *'
+    - cron: '35 5 * * 0'
+    - cron: '35 5 * * 4'
   push:
     branches: [main]
     paths:
@@ -36,23 +37,29 @@ jobs:
           python scripts/test_planet_rishon_source.py
           python scripts/test_ashdod_cinema_refresh.py
       - name: Read national boards and official local descriptions
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '35 5 * * 0'
         run: python -u scripts/sync_rishon_sources.py --collect-only
       - name: Merge on latest city data
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '35 5 * * 0'
         run: |
           cp events-preview/admin/data/rishon-source-snapshot.json /tmp/rishon-source-snapshot.json
           git fetch origin main
           git merge --ff-only origin/main
           python scripts/sync_rishon_sources.py --snapshot /tmp/rishon-source-snapshot.json
       - name: Read exact official program details
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '35 5 * * 0'
         run: python -u scripts/rishon_editorial_sources.py
       - name: Apply source-bound editorial quality
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '35 5 * * 0'
         run: |
           python scripts/test_rishon_editorial.py
           python -u scripts/apply_rishon_editorial.py
           python scripts/finalize_rishon_quality.py
       - name: Refresh verified cinema sessions
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '35 5 * * 4'
         run: python -u scripts/refresh_rishon_cinema.py
       - name: Publish only Rishon data and source report
+        if: github.event_name != 'push'
         run: |
           git config user.name isnet-events-bot
           git config user.email actions@users.noreply.github.com

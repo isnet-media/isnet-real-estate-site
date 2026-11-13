@@ -99,10 +99,21 @@ def enrich_directory(item):
   return item
  except Exception:return item
 
-def main():
+def refresh_directories():
+ for name in ['guides','restaurants']:
+  obj=read(name)
+  with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:obj['items']=[x for x in ex.map(enrich_directory,obj['items']) if x]
+  obj['checked_at']=NOW.isoformat();save(name,obj)
+
+def main(scope='all'):
+ if scope not in ('all','events','directories'):raise ValueError('invalid collection scope')
+ if scope=='directories':
+  refresh_directories()
+  print(json.dumps({'scope':scope,'directories':2}))
+  return
  events=[];reports=[]
  with concurrent.futures.ThreadPoolExecutor(max_workers=7) as ex:
-  for rows,report in ex.map(ingest,read('sources')['sources']):events.extend(rows);reports.append(report)
+  for rows,report in ex.map(ingest,[x for x in read('sources')['sources'] if x.get('parser') in ('municipal','friends','smarticket','mevalim')]):events.extend(rows);reports.append(report)
  # Source priority and exact title/date/time first; alternate URLs stay attached.
  events.sort(key=lambda e:0 if e['source_id']=='cinematheque' else 1 if e['source_id']=='hall' else 2)
  unique={}
@@ -117,10 +128,10 @@ def main():
  if len(events)<20:raise SystemExit('Refusing to replace the feed: fewer than 20 dated local occurrences')
  events.sort(key=lambda e:(e['start_date'],e['start_time'],e['title']))
  save('events',dict(city='הרצליה',generated_at=NOW.isoformat(),events=events))
- for name in ['guides','restaurants']:
-  obj=read(name)
-  with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:obj['items']=[x for x in ex.map(enrich_directory,obj['items']) if x]
-  obj['checked_at']=NOW.isoformat();save(name,obj)
+ if scope=='all':refresh_directories()
  save('source-report',dict(checked_at=NOW.isoformat(),sources=reports,events=len(events),note='Only exact source dates; directories without parsed dates remain source links. No neighboring-city sessions.'))
  print(json.dumps({'events':len(events),'photos':sum(e.get('image_role')=='official_promotional' for e in events),'sources':reports},ensure_ascii=False))
-if __name__=='__main__':main()
+if __name__=='__main__':
+ import argparse
+ ap=argparse.ArgumentParser();ap.add_argument('--scope',choices=['all','events','directories'],default='all')
+ main(ap.parse_args().scope)

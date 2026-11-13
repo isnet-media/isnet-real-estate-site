@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - scripts/test_collector_scopes.py
       - scripts/sync_herzliya_events.py
       - scripts/herzliya_event_quality.py
       - scripts/collect_herzliya_seniors.py
@@ -11,7 +12,10 @@ on:
       - scripts/build_herzliya_events.py
       - .github/workflows/herzliya-events.yml
   schedule:
-    - cron: '45 3 * * *'
+    - cron: '45 3 * * 0'
+    - cron: '45 5 * * 4'
+    - cron: '45 6 13 * *'
+    - cron: '45 7 13 1,4,7,10 *'
 permissions:
   contents: write
 concurrency:
@@ -29,20 +33,36 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests beautifulsoup4 pillow
-      - run: python -u scripts/sync_herzliya_events.py
-      - run: python -u scripts/enrich_herzliya_cinema.py
-      - run: python -u scripts/refresh_herzliya_city_cinema.py
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 3 * * 0'
+        run: python -u scripts/sync_herzliya_events.py --scope events
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 6 13 * *'
+        run: python -u scripts/sync_herzliya_events.py --scope directories
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 5 * * 4'
+        run: python -u scripts/enrich_herzliya_cinema.py
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 5 * * 4'
+        run: python -u scripts/refresh_herzliya_city_cinema.py
         continue-on-error: true
-      - run: python -u scripts/collect_herzliya_seniors.py
-      - run: python -u scripts/enrich_herzliya_food.py
-      - run: python scripts/enrich_herzliya_places.py
-      - run: python scripts/polish_herzliya_catalog.py
-      - run: python scripts/build_herzliya_events.py
-      - run: python scripts/cache_herzliya_cinema_posters.py
-      - run: python scripts/build_herzliya_events.py
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 3 * * 0'
+        run: python -u scripts/collect_herzliya_seniors.py --scope events
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 7 13 1,4,7,10 *'
+        run: python -u scripts/collect_herzliya_seniors.py --scope catalog
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 6 13 * *'
+        run: python -u scripts/enrich_herzliya_food.py
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 6 13 * *'
+        run: python scripts/enrich_herzliya_places.py
+      - if: github.event_name != 'push'
+        run: python scripts/polish_herzliya_catalog.py
+      - if: github.event_name != 'push'
+        run: python scripts/build_herzliya_events.py
+      - if: github.event_name == 'workflow_dispatch' || github.event.schedule == '45 5 * * 4'
+        run: python scripts/cache_herzliya_cinema_posters.py
+      - if: github.event_name != 'push'
+        run: python scripts/build_herzliya_events.py
       - run: python scripts/test_herzliya_events.py
+      - run: python scripts/test_collector_scopes.py
       - run: node scripts/test-herzliya-cinema-speed.cjs herzliya
       - name: Save verified local data and pages
+        if: github.event_name != 'push'
         run: |
           git config user.name 'isnet-events-bot'
           git config user.email 'actions@users.noreply.github.com'
