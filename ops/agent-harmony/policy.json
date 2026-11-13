@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "policy_version": "2026-11-13",
+  "deployment_state": "proposal_not_enforced",
+  "separation": {
+    "TLVNET": {
+      "publisher": "TLVNET Sites",
+      "flash90": "license_required_tlvnet_only",
+      "image_banks": [
+        "tlvnet_authorized"
+      ]
+    },
+    "ISNET": {
+      "publisher": "ISNET CMS",
+      "flash90": "prohibited",
+      "image_banks": [
+        "per_website_authorized"
+      ]
+    }
+  },
+  "execution": {
+    "max_attempts_per_operation": 2,
+    "retry_only_if_cause_changed": true,
+    "one_discovery_pass_per_cycle": true,
+    "checkpoint_on_failure": true,
+    "disable_agent_on_item_failure": false,
+    "max_parallel_publishers_per_target": 1,
+    "stop_on_security_or_rights_failure": true,
+    "no_new_task_creation": true,
+    "no_unbounded_loops": true
+  },
+  "reporting": {
+    "success_requires": "public_readback",
+    "fields": [
+      "agent_id",
+      "run_key",
+      "target",
+      "post_id",
+      "public_url",
+      "source_verified",
+      "image_rights_verified",
+      "credits_if_available",
+      "failure_fingerprint"
+    ]
+  },
+  "roles": [
+    {
+      "id": "tlv-news",
+      "mode": "writer_editor_image_publisher",
+      "system": "TLVNET",
+      "scope": "tel_aviv_yafo",
+      "cadence": "three_daily",
+      "global_sources": "city_relevance_only"
+    },
+    {
+      "id": "tlv-sports",
+      "mode": "writer_editor_image_publisher",
+      "system": "TLVNET",
+      "scope": "tel_aviv_sport",
+      "cadence": "twice_daily"
+    },
+    {
+      "id": "tlv-real-estate",
+      "mode": "writer_editor_image_publisher",
+      "system": "TLVNET",
+      "scope": "tel_aviv_real_estate",
+      "cadence": "daily"
+    },
+    {
+      "id": "tlv-economy",
+      "mode": "writer_editor_image_publisher",
+      "system": "TLVNET",
+      "scope": "tel_aviv_economy",
+      "cadence": "daily"
+    },
+    {
+      "id": "tlv-culture-news",
+      "mode": "writer_editor_image_publisher",
+      "system": "TLVNET",
+      "scope": "local_culture_news",
+      "cadence": "daily"
+    },
+    {
+      "id": "network-culture",
+      "mode": "writer_editor_image_publisher",
+      "system": "TLVNET+ISNET",
+      "scope": "culture_magazine",
+      "cadence": "alternate_days",
+      "rights_per_destination": true,
+      "foreign_languages": true
+    },
+    {
+      "id": "network-future",
+      "mode": "writer_editor_image_publisher",
+      "system": "TLVNET+ISNET",
+      "scope": "future_magazine",
+      "cadence": "alternate_days",
+      "rights_per_destination": true,
+      "foreign_languages": true
+    },
+    {
+      "id": "events",
+      "mode": "dataset_curator",
+      "system": "TLVNET+ISNET",
+      "scope": "city_specific",
+      "cadence": "weekly"
+    },
+    {
+      "id": "courses",
+      "mode": "dataset_curator",
+      "system": "TLVNET+ISNET",
+      "scope": "city_specific",
+      "cadence": "quarterly"
+    },
+    {
+      "id": "dining",
+      "mode": "dataset_curator",
+      "system": "TLVNET+ISNET",
+      "scope": "city_specific",
+      "cadence": "monthly"
+    },
+    {
+      "id": "supermarket",
+      "mode": "source_data_collector",
+      "system": "ISNET",
+      "scope": "seven_cities",
+      "cadence": "sunday_tuesday_thursday_0800_israel"
+    },
+    {
+      "id": "incident-controller",
+      "mode": "operations_only",
+      "system": "TLVNET+ISNET",
+      "scope": "infra_bugs",
+      "cadence": "hourly",
+      "may_write_editorial_content": false
+    },
+    {
+      "id": "herzliya-editor",
+      "mode": "city_editor_all_local_sections",
+      "system": "ISNET",
+      "website_id": 62,
+      "scope": "herzliya",
+      "activation": "do_not_auto_enable"
+    },
+    {
+      "id": "raanana-editor",
+      "mode": "city_editor_all_local_sections",
+      "system": "ISNET",
+      "website_id": 59,
+      "scope": "raanana",
+      "activation": "do_not_auto_enable"
+    }
+  ]
+}
