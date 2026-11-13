@@ -2,8 +2,8 @@ name: Discover stand-up videos
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "15 6 * * *"
+  # Automatic discovery paused: YOUTUBE_API_KEY is not configured.
+  # Retain explicit dispatch for use after the credential is supplied and verified.
 
 permissions:
   contents: read
