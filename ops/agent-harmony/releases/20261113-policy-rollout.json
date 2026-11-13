@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "manual_policy_migration",
+  "policy_version": "2026-11-13/1.0",
+  "status": "partial_verified",
+  "automation_prompts_replaced": 12,
+  "role_documents": 20,
+  "source_commit": "b6d8509ef26ee996ea88534324f2508425bfe935",
+  "site": {
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "version": 591,
+    "commit": "cc2d1954891d4f53342ccbc470bef7be3c982d4d",
+    "deployment_id": "appgdep_6af6fef89260819186b277f9b95d37bc",
+    "status": "succeeded",
+    "live_readback": {
+      "community_owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "consumer_owner": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "magazines": "alternate_days",
+      "existing_articles_verified": 2,
+      "new_articles_published": 0,
+      "live_visual_review": "not_performed"
+    }
+  },
+  "lease_test": {
+    "acquire": true,
+    "readback": true,
+    "stale_blob_rejected_409": true,
+    "released": true,
+    "enforcement_scope": "cooperating configured agents; not global CMS/Sites API enforcement"
+  },
+  "cadence_corrections": 14,
+  "remaining": [
+    "Office Work root ownership for Herzliya/Raanana and pending approvals not resolved",
+    "Sports statistics publisher not mapped; cancelled task not resumed",
+    "herzliya-events.yml mixed daily event/cinema/directory collector not split",
+    "sync-rishon-national.yml mixed daily event/cinema collector not split",
+    "Night publisher not mapped",
+    "Supabase facebook hourly cron found; end-to-end publishing not verified",
+    "Global monetary spend enforcement and all server crons not verified"
+  ],
+  "pilot": {
+    "mode": "run_now_inline",
+    "status": "no_update",
+    "new_article_test": "not_passed_no_new_article"
+  },
+  "rollback": {
+    "automation_backup_library_file_id": "libfile_9c617555c7548191b4cdf9d3ccaf4214",
+    "previous_site_version": 590
+  },
+  "cancelled_tasks_reactivated": 0
+}
