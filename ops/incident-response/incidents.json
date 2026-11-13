@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T08:07:58.359Z",
+  "updated_at": "2026-11-13T08:49:03.752Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -487,6 +487,18 @@
           "job_id": 130799519570,
           "stage": "build_event_public_assets.py",
           "evidence": "CalledProcessError in integrity_events; child stderr omitted by Python exception, exact city/pair not proved in captured traceback"
+        },
+        {
+          "run_id": 43023965783,
+          "attempt": 1,
+          "created_at": "2026-11-11T12:51:28Z",
+          "source_commit": "9207714e1f3ecb7274a8567f47cba31fc91ab562",
+          "workflow": "Refresh Yavne events",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43023965783",
+          "job_id": 130533844812,
+          "stage": "sync_event_city_views.py -> build_event_public_assets.py/integrity_events",
+          "evidence": "CalledProcessError from global duplicate-candidate gate; exact underlying city/pair not proved because child stderr is omitted.",
+          "no_retry": true
         }
       ],
       "unclassified_same_workflow_occurrences": [
@@ -639,7 +651,15 @@
       },
       "impact": "News publication continued through authorized news owner; operational routing remains stale until patch is released.",
       "next_action": "Existing TLVNET release owner must take its valid publication lock, rebase this tested patch onto current source, run existing checks, include it in one authorized release, and verify live community dispatch owner. Do not create or resume any task or change schedule. Keep controller incident open until actual live result.",
-      "reported_runKey": "ops-2026-11-13-2b4d4313-dc9c-8326-9bbe-e53d28b9e74d"
+      "reported_runKey": "ops-2026-11-13-2b4d4313-dc9c-8326-9bbe-e53d28b9e74d",
+      "latest_source_check": {
+        "commit": "406b4d91735b61d27fd241ef58a86f8137cf4284",
+        "observed_at": "2026-11-13T08:49:03.752Z",
+        "contentAssignment": null,
+        "legacy_schedule_cancelled": true,
+        "owner_still_cancelled_task": true,
+        "status": "unchanged; isolated patch retained, no repeated deployment attempt"
+      }
     },
     {
       "id": "tlvnet-sports-image-control-read-path",
@@ -659,8 +679,72 @@
       "mitigation": "Verified read-only effective runtime controls enabled=true, blockedIds=[], version0 via absent row plus exact deployed source defaults. Documented authorized read path in RUNBOOK; no rights gate/DB/access changes.",
       "remaining": "Draft source remains status=draft, image_review=pending. Runtime controls are only one condition; actual asset approval and valid publication ownership still required.",
       "next_action": "Sports owner resumes existing draft first, uses native live control reads if public fetch cannot read it, verifies exact JPG rights and body/asset match, acquires an existing valid publication lease and publishes once. Controller does not approve the editorial image or operate the writer.",
-      "reported_runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171"
+      "reported_runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171",
+      "latest_source_check": {
+        "commit": "406b4d91735b61d27fd241ef58a86f8137cf4284",
+        "observed_at": "2026-11-13T08:49:03.752Z",
+        "status": "draft",
+        "image_review": "pending",
+        "selected_photo_bank_id": null,
+        "note": "No changed input justifies another public API/photo approval or publication retry. Prior native control evidence retained as point-in-time only."
+      }
+    },
+    {
+      "id": "event-collector-concurrent-main-push",
+      "status": "awaiting_external_action",
+      "fingerprint": "tlvnet-events/Publish only factual feeds/git-push-fetch-first-after-rebase",
+      "root_cause": "Historical TLVNET event collector failed after another writer advanced main between rebase and push. Its current concurrency group is private to that workflow, unlike an existing shared event-data group.",
+      "occurrences": [
+        {
+          "run_id": 43022560691,
+          "attempt": 1,
+          "created_at": "2026-11-11T12:41:47Z",
+          "source_commit": "d6b03eb44f94a9dbc23f1d4d8dd1c35f234d70dc",
+          "workflow": "Refresh TLVNET public events",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43022560691",
+          "job_id": 130529101150,
+          "evidence": "! [rejected] HEAD -> main (fetch first); log confirms git pull --rebase preceded git push"
+        }
+      ],
+      "current_source": {
+        "repository": "isnet-media/isnet-real-estate-site",
+        "commit": "75c1ba6862a3a7f7a9943b7dd7fadafd841fcac6",
+        "workflow": ".github/workflows/tlvnet-events.yml",
+        "current_group": "tlvnet-public-events",
+        "existing_shared_group": "isnet-event-data-writes",
+        "shared_group_example": ".github/workflows/holon-events.yml"
+      },
+      "repair": {
+        "status": "isolated_patch_tested_not_applied",
+        "path": "ops/incident-response/patches/tlvnet-event-writer-shared-group.patch",
+        "tests": [
+          "YAML semantic comparison: concurrency group only changes",
+          "cancel-in-progress remains false",
+          "git apply --check passes against current workflow"
+        ],
+        "limits": "Shared group coordinates only participating workflows; inventory other writers before claiming global serialization. Workflow own-path push trigger would launch collection if directly applied; source-only patch does not trigger it."
+      },
+      "next_action": "Existing event-release owner should include this minimal group alignment in a coordinated rollout, align remaining participating writers, and verify a subsequent genuine source-change run without overlapping pushes. No force push, no collector retry merely for this old failure.",
+      "prevention": "One implemented shared writer gate per common Git publication target; keep source lease checks as a final safeguard.",
+      "discovery_scope": "Historical incident11Nov, not a new failure today.",
+      "reported_runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b"
+    },
+    {
+      "id": "tlvnet-legacy-event-cadence-divergence",
+      "status": "awaiting_external_action",
+      "fingerprint": "tlvnet-events.yml/legacy-combined-events-cinema/two-daily-timer",
+      "root_cause": "Existing GitHub legacy event workflow still has a twice-daily timer and runs multiple event/children/cinema collectors, whereas publisher policy specifies weekly events and Thursday cinema.",
+      "evidence": {
+        "source_commit": "75c1ba6862a3a7f7a9943b7dd7fadafd841fcac6",
+        "workflow": ".github/workflows/tlvnet-events.yml",
+        "cron": "17 5,15 * * *",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/blob/75c1ba6862a3a7f7a9943b7dd7fadafd841fcac6/.github/workflows/tlvnet-events.yml",
+        "qualification": "Configuration mismatch observed; no collection launched or current off-policy execution claimed."
+      },
+      "next_action": "Publisher/rollout owner must decide whether this legacy combined path is retired or re-scoped under the approved event and cinema owners. This controller mandate prohibits changing frequency, so no timer modification or task reactivation was made.",
+      "prevention": "Inventory all legacy GitHub timers alongside ChatGPT tasks; changing one scheduler does not update another.",
+      "reported_runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171"
+  "last_review_runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b"
 }
