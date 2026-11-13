@@ -1,0 +1,54 @@
+diff --git a/scripts/build-stay.py b/scripts/build-stay.py
+index feecca42..84419f38 100644
+--- a/scripts/build-stay.py
++++ b/scripts/build-stay.py
+@@ -184,6 +184,6 @@ for path in [PUBLIC/'home.html',PUBLIC/'index.html',PUBLIC/'night/index.html']:
+  path.write_text(str(soup))
+ # Index only concrete pages, never filter combinations.
+ sitemap=PUBLIC/'sitemap.xml'; xml=sitemap.read_text();xml=re.sub(r'<url>\s*<loc>https://tlvnet\.com/stay/.*?</url>','',xml,flags=re.S)
+-urls=['https://tlvnet.com/'+str(p.parent.relative_to(PUBLIC))+'/' for p in OUT.rglob('index.html')]
++urls=['https://tlvnet.com/'+p.parent.relative_to(PUBLIC).as_posix()+'/' for p in OUT.rglob('index.html')]
+ xml=xml.replace('</urlset>',''.join('<url><loc>'+u+'</loc><lastmod>'+TODAY.isoformat()+'</lastmod></url>' for u in sorted(urls))+'</urlset>');sitemap.write_text(xml)
+ print(f'Stay magazine: {len(P)} properties, {len(DATA["day_use"])} day packages, {len(GUIDES)} guides, {len(urls)} pages')
+diff --git a/tests/stay-sitemap-portable.py b/tests/stay-sitemap-portable.py
+new file mode 100644
+index 00000000..385a9381
+--- /dev/null
++++ b/tests/stay-sitemap-portable.py
+@@ -0,0 +1,36 @@
++"""Exercise the actual sitemap URL expression with Windows and POSIX paths."""
++import ast
++from pathlib import Path, PureWindowsPath, PurePosixPath
++import unittest
++
++ROOT = Path(__file__).resolve().parents[1]
++TREE = ast.parse((ROOT / 'scripts/build-stay.py').read_text(encoding='utf-8'))
++URLS = next(node.value for node in ast.walk(TREE)
++            if isinstance(node, ast.Assign)
++            and any(isinstance(t, ast.Name) and t.id == 'urls' for t in node.targets))
++CODE = compile(ast.Expression(URLS), 'build-stay.py:sitemap', 'eval')
++
++class Listing:
++    def __init__(self, pages):
++        self.pages = pages
++
++    def rglob(self, pattern):
++        assert pattern == 'index.html'
++        return iter(self.pages)
++
++class StaySitemapPortability(unittest.TestCase):
++    def test_real_url_expression_is_platform_independent(self):
++        for cls, root in [(PureWindowsPath, 'C:/site/public'),
++                          (PurePosixPath, '/site/public')]:
++            with self.subTest(platform=cls.__name__):
++                public = cls(root)
++                pages = [public / 'stay/day-fun/index.html',
++                         public / 'stay/places/the-norman/index.html']
++                urls = eval(CODE, {'PUBLIC': public, 'OUT': Listing(pages)})
++                self.assertEqual(urls, [
++                    'https://tlvnet.com/stay/day-fun/',
++                    'https://tlvnet.com/stay/places/the-norman/'])
++                self.assertTrue(all('\\' not in url for url in urls))
++
++if __name__ == '__main__':
++    unittest.main()
