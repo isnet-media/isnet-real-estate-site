@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "ops-2026-11-13-2b4d4313-dc9c-8326-9bbe-e53d28b9e74d",
+  "run_id": "2b4d4313-dc9c-8326-9bbe-e53d28b9e74d",
+  "started_at": "2026-11-13T06:47:14.216811Z",
+  "source_commit": "59a59585d2d644a44e494c2fadf1faf415b302ca",
+  "result": "isolated_patch_tested; awaiting existing TLVNET publication owner lock and live readback",
+  "incident": "tlvnet-community-cancelled-owner-routing",
+  "tests": [
+    "node tests/agent-dispatch.mjs: PASS",
+    "semantic profile comparison: only community contentAssignment added; all schedules, quotas and permissions preserved",
+    "community routes to news while cancelled standalone schedule stays cancelled; consumer retains fallback; no fake ownership proof"
+  ],
+  "publication_evidence": {
+    "run_id": "ef60759f-874c-8332-aabc-d09b34980c0b",
+    "runKey": "news-community-2026-11-13-08:00-ef60759f",
+    "deployment_id": "appgdep_6af6ac303f20819181ed947059a12e4c",
+    "status": "succeeded",
+    "version": 581,
+    "reported_new_article": "https://tlvnet.com/news/center-tlv-police-impersonation-robbery-arrest-20261112",
+    "evidence_scope": "Writer result matches actual new run and Sites succeeded status. Controller direct live GET got403, no independent body/asset/credit or visual verification claimed.",
+    "visual_pending": "pending",
+    "technical_preview_error_fixed": false
+  },
+  "actions_after_watermark": 0,
+  "news_agents_enabled": true,
+  "supermarket_collection": false,
+  "source_site_mutated": false,
+  "history_checkpoint_preserved": true,
+  "recorded_at": "2026-11-13T06:55:15.131Z"
+}

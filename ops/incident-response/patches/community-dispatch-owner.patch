@@ -1,0 +1,45 @@
+--- a/lib/agent-dispatch.mjs
++++ b/lib/agent-dispatch.mjs
+@@ -30,7 +30,7 @@
+  if(view==='desk')return {...data,statistics:recordedStats(entries),entries:entries.slice(0,20).map(compactEntry),history:{totalEntries:entries.length,returnedEntries:Math.min(20,entries.length),fullHistory:'/api/briefs-writer'},workQueues:Object.fromEntries(specialists.map(s=>[s.id,queueFor(entries,s.id,source)]))};
+  const specialist=specialists.find(s=>s.id===topic);if(view!=='dispatch'||!specialist)throw new RangeError('Unknown writer topic');
+  const own=entries.filter(e=>e.category===topic);
+- return {view:'dispatch',topic,version:data.version,mainEnabled:data.profile.enabled,specialistEnabled:specialist.enabled,ownerAutomationId:specialist.schedule?.automationId||null,schedule:specialist.schedule,editorialFiles:{instructions:specialist.writerFile,sources:specialist.sourcesFile,ledger:specialist.ledgerFile,policy:'public/news/AGENT_OPERATIONS.md'},recentEntries:own.slice(0,5).map(compactEntry),workQueue:queueFor(entries,topic,source),pendingRequest:data.pendingRequest,ownershipProof:false,notice:'Schedule is observed configuration, not an execution lock. Verify current ownership before writes. Existing publication and image approvals still apply.'};
++ return {view:'dispatch',topic,version:data.version,mainEnabled:data.profile.enabled,specialistEnabled:specialist.enabled,ownerAutomationId:specialist.contentAssignment?.ownerAutomationId||specialist.schedule?.automationId||null,schedule:specialist.schedule,editorialFiles:{instructions:specialist.writerFile,sources:specialist.sourcesFile,ledger:specialist.ledgerFile,policy:'public/news/AGENT_OPERATIONS.md'},recentEntries:own.slice(0,5).map(compactEntry),workQueue:queueFor(entries,topic,source),pendingRequest:data.pendingRequest,ownershipProof:false,notice:'Schedule is observed configuration, not an execution lock. Verify current ownership before writes. Existing publication and image approvals still apply.'};
+ }
+ export async function conditionalJSON(request,data){const body=JSON.stringify(data);const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(body));const tag='"'+Array.from(new Uint8Array(bytes),b=>b.toString(16).padStart(2,'0')).join('')+'"';
+  const headers={'Cache-Control':'private, no-cache','ETag':tag,'Vary':'Cookie, Authorization','X-Content-Type-Options':'nosniff'};
+--- a/public/news/briefs-writer-profile.json
++++ b/public/news/briefs-writer-profile.json
+@@ -194,6 +194,11 @@
+     },
+     {
+       "id": "community",
++      "contentAssignment": {
++        "ownerAutomationId": "Automation_b3345c399b988191a1ba9848e3e3668b",
++        "authority": "publisher_2026-11-13_news_and_community_transfer",
++        "isExecutionLock": false
++      },
+       "name": "כתב קהילה ושכונות",
+       "enabled": true,
+       "mission": "חיי שכונות, יוזמות תושבים, התנדבות, קהילה ופעילות הפתוחה לציבור. כאן בלבד ספורט עממי: מרתון, מרוצים, הליכות, רכיבה, אימונים פתוחים ופעילות משפחתית. הספורטאי החובב והמשתתף הם הקהל. בדוק מועד, מקום, הרשמה, עלות, נגישות ומגבלות גיל/קהל במקור המארגן. אין לפרסם תוצאות קבוצות מקצועיות.",
+--- a/tests/agent-dispatch.mjs
++++ b/tests/agent-dispatch.mjs
+@@ -11,6 +11,17 @@
+ {category:'economy-tech',status:'published',articleIds:['other'],completedAt:'2026-11-11T12:00:00Z',localDate:'2026-11-11'},
+ {category:'news',status:'published',articleIds:['old'],completedAt:'2026-11-10T09:00:00Z',localDate:'2026-11-10'},
+ {category:'news',status:'published',articleIds:['old'],completedAt:'2026-11-10T10:00:00Z',localDate:'2026-11-10'}];
++
++// Content assignment transfers routing without restarting the cancelled dedicated task.
++const community=projectWriterView({profile,version:4,entries:[],pendingRequest:false},'dispatch','community');
++assert.equal(community.ownerAutomationId,own.news.schedule.automationId);
++assert.equal(community.schedule.status,'cancelled');
++assert.equal(community.schedule.automationId,'Automation_e03d80ff914c8191a790fc66e7447826');
++assert.equal(community.ownershipProof,false);
++assert.equal(own.community.contentAssignment.isExecutionLock,false);
++const consumer=projectWriterView({profile,version:4,entries:[],pendingRequest:false},'dispatch','consumer');
++assert.equal(consumer.ownerAutomationId,own.consumer.schedule.automationId);
++
+ const data={profile,version:4,entries,pendingRequest:false};
+ const dispatch=projectWriterView(data,'dispatch','news');assert.equal(dispatch.ownerAutomationId,own.news.schedule.automationId);assert.deepEqual(dispatch.workQueue.map(x=>x.articleId),['waiting']);assert(dispatch.recentEntries.every(e=>e.category==='news'));assert.equal(dispatch.ownershipProof,false);assert(!JSON.stringify(dispatch).includes('DO NOT EXPOSE'));assert(!JSON.stringify(dispatch).includes('PRIVATE'));assert(!dispatch.recentEntries.some(e=>e.articleIds.includes('other')));assert.throws(()=>projectWriterView(data,'dispatch','unknown'),RangeError);
+ const stats=recordedStats(entries,'2026-11-11');assert.equal(stats.recordedPublishedTotal,2);assert.equal(stats.recordedPublishedToday,1);assert.equal(stats.verifiedArticlesToday,1);
