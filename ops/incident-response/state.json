@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T08:49:03.752Z",
+  "updated_at": "2026-11-13T10:03:27.567Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-13T08:12:49Z",
+  "last_processed_run_created_at": "2026-11-13T09:31:55Z",
   "initial_history": {
     "status": "partial_metadata_review",
     "days": 7,
@@ -353,68 +353,46 @@
   "last_verified_publish_run": 43362366874,
   "last_verified_public_readback_run": 43362615900,
   "last_cycle": {
-    "runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b",
-    "run_id": "5bef5ed5-5978-8326-9a05-76384d909f0b",
+    "runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988",
+    "run_id": "52cbcb9a-07e0-8326-b584-676dff736988",
     "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "started_at": "2026-11-13T08:41:28.259989Z",
-    "observed_at": "2026-11-13T08:49:03.752Z",
-    "source_sha": "75c1ba6862a3a7f7a9943b7dd7fadafd841fcac6",
+    "started_at": "2026-11-13T09:52:57.526899Z",
+    "observed_at": "2026-11-13T10:03:27.567Z",
+    "source_sha": "2669564e25489ec38033f115059cc8befc45ede2",
     "new_failures": 0,
-    "new_inbox_entries": 0,
-    "active_github_runs": [],
+    "new_inbox_entries": 4,
     "build_or_deploy": false,
     "changes": [
-      "Classified two historical failed run signatures",
-      "Tested isolated event-writer shared-group patch; not applied",
-      "Flagged legacy event timer divergence without changing cadence",
-      "Advanced partial history checkpoint"
+      "Independently tested received coverage and portability patches against fresh source589",
+      "Unified two related manual handoffs into one release manifest; superseded old community-only patch",
+      "Classified classes/restaurant handoffs as item-scoped log-only source limits"
     ],
-    "unchanged_blockers_not_retried": [
-      "community-owner-mapping",
-      "sports-image-approval-and-publication-lock"
+    "historical_review": "Existing checkpoint preserved: new release handoffs prioritized over another historical page.",
+    "limitations": [
+      "No full release build on current source",
+      "No Sites main-branch edit or source push",
+      "No deployment or live dispatch/limit verification",
+      "No editorial/image approval or news publication"
     ],
     "new_actions": [
       {
-        "run_id": 43391457294,
-        "attempt": 1,
-        "created_at": "2026-11-13T08:12:49Z",
-        "source_commit": "75c1ba6862a3a7f7a9943b7dd7fadafd841fcac6",
+        "run_id": 43402087741,
         "workflow": "Record operation failures",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43391457294",
-        "conclusion": "skipped"
+        "created_at": "2026-11-13T09:31:55Z",
+        "conclusion": "skipped",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43402087741"
       },
       {
-        "run_id": 43391404536,
-        "attempt": 1,
-        "created_at": "2026-11-13T08:12:23Z",
-        "source_commit": "75c1ba6862a3a7f7a9943b7dd7fadafd841fcac6",
-        "workflow": "TLVNET dedicated newsroom agents",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43391404536",
-        "conclusion": "success"
-      },
-      {
-        "run_id": 43391350142,
-        "attempt": 1,
-        "created_at": "2026-11-13T08:11:59Z",
-        "source_commit": "0371292c89cc356aeca09e4d660ee3bb2291300a",
-        "workflow": "Record operation failures",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43391350142",
-        "conclusion": "skipped"
-      },
-      {
-        "run_id": 43391286285,
-        "attempt": 1,
-        "created_at": "2026-11-13T08:11:30Z",
-        "source_commit": "d1f80bb29b93357436b444f553688127be764440",
-        "workflow": "Agent harmony budget tests",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43391286285",
-        "conclusion": "success"
+        "run_id": 43401861049,
+        "workflow": "Daily ISNET source backup",
+        "created_at": "2026-11-13T09:30:20Z",
+        "conclusion": "success",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43401861049"
       }
-    ],
-    "live_verification": "Deployment statuses verified; no new controller publication or article visual approval."
+    ]
   },
   "concurrent_controller_observation": {
-    "run_id": "5bef5ed5-5978-8326-9a05-76384d909f0b",
+    "run_id": "52cbcb9a-07e0-8326-b584-676dff736988",
     "status": "current scheduled cycle"
   },
   "task_results_watermark": {
@@ -456,25 +434,23 @@
   },
   "sites": {
     "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
-    "version_number": 585,
-    "deployment_id": "appgdep_6af6cdaa02108191aed788b8ad069e75",
+    "version_number": 589,
+    "deployment_id": "appgdep_6af6d66aba308191b17f01bda7dfaf32",
     "status": "succeeded",
-    "published_source": "406b4d91735b61d27fd241ef58a86f8137cf4284",
-    "observed_at": "2026-11-13T08:49:03.752Z",
-    "other_new_deployments": [
+    "published_source": "d457d11f30c73ab92f8f806525852b8a5e8e2878",
+    "observed_at": "2026-11-13T10:03:27.567Z",
+    "other_observed_versions": [
       {
-        "version": 583,
-        "status": "succeeded",
-        "id": "appgdep_6af6c7eec58c8191957cc3cf2271dbd6"
+        "version": 587,
+        "status": "succeeded"
       },
       {
-        "version": 584,
-        "status": "succeeded",
-        "id": "appgdep_6af6cb8f62708191b12a945fa327ba03"
+        "version": 588,
+        "status": "succeeded"
       }
     ],
     "new_deployments_started": false,
-    "public_content_check": "No new content verification claimed from status or source alone."
+    "public_content_check": "No controller public GET/image/credit/visual verification claimed; patches remain isolated."
   },
   "open_incident_ids": [
     "news-preview-failure-self-disable",
@@ -489,11 +465,17 @@
     "tlvnet-community-cancelled-owner-routing",
     "tlvnet-sports-image-control-read-path",
     "event-collector-concurrent-main-push",
-    "tlvnet-legacy-event-cadence-divergence"
+    "tlvnet-legacy-event-cadence-divergence",
+    "tlvnet-remaining-editorial-projection-caps",
+    "tlvnet-windows-stay-sitemap-backslashes"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
-    "56a526f7-4760-8320-a519-595bd865e651-1.json"
+    "56a526f7-4760-8320-a519-595bd865e651-1.json",
+    "01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
+    "01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json",
+    "786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json",
+    "c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -516,6 +498,11 @@
       "runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171",
       "observed_at": "2026-11-13T08:07:58.359Z",
       "source_commit": "0371292c89cc356aeca09e4d660ee3bb2291300a"
+    },
+    {
+      "runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b",
+      "observed_at": "2026-11-13T08:49:03.752Z",
+      "source_commit": "8d6ff4333d4df1ae82715889280fb7cffa44fca8"
     }
   ],
   "photo_controls_checkpoint": {
@@ -527,5 +514,22 @@
     },
     "evidence_path": "ops/incident-response/evidence/photo-bank-control-native-read-20261113.json",
     "must_recheck_before_publication": true
+  },
+  "pending_release_bundle": "ops/incident-response/release-plans/tlvnet-coordinated-coverage-and-portability-20261113.json",
+  "related_task_results": {
+    "Automation_6f7ebf4f01148191b17ce098a1061217": {
+      "enabled": true,
+      "run_id": "786c310e-a5ec-832c-8d7d-5ca6e75ac986",
+      "completed_at": "2026-11-13T09:00:38.869838Z",
+      "reported_result": "פורסם ואומת תיקון ב[מעושרים בתל אביב](https://tlvnet.com/meusharim/), גרסה 586: הרשומה „צור קשר” הוסרה מהקורסים, ושבע רשומות הקורסים של מנשר נשמרו.\n\nהסקירה הייתה חלקית. מקורות שלא נפתחו ביבנה ובתל אביב תועדו להמשך, ללא שינוי בתאריכי האימות שלהם.",
+      "qualification": "Matched task/run result, not independent controller publication verification"
+    },
+    "Automation_1db28c66207881918ef57966330dca21": {
+      "enabled": true,
+      "run_id": "c4f8d5ba-1d64-8320-9f67-18b831a8ff4a",
+      "completed_at": "2026-11-13T09:29:20.465345Z",
+      "reported_result": "נבדקו במדגם שמונה מקומות במדריכים הקיימים. בשבעה נמצאה התאמה לפרטים שבמקורות המסעדה או ההזמנה, ולא נמצא שינוי שמצריך פרסום. אתר WHITE ביבנה החזיר 403; המגבלה תועדה, ופרטיו ותאריך האימות הקודם נשמרו. בתל אביב אומתה התאמת הקטלוג החי למקור ונבדקה טעינת שתי תמונות JPG עם קרדיט. הבדיקה חלקית; לא בוצעה פריסה.",
+      "qualification": "Matched task/run result, not independent controller publication verification"
+    }
   }
 }

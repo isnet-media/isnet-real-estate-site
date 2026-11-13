@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "tlvnet-coordinated-coverage-and-portability-20261113",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988",
+  "status": "tested_isolated_not_applied",
+  "reviewed_at": "2026-11-13T10:03:27.567Z",
+  "site": "https://tlvnet.com",
+  "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+  "tested_source": "d457d11f30c73ab92f8f806525852b8a5e8e2878",
+  "tested_site_version": 589,
+  "ordered_patches": [
+    "ops/incident-response/patches/tlvnet-coverage-budget-e6232ae2.patch",
+    "ops/incident-response/patches/tlvnet-stay-sitemap-portable-20261113.patch"
+  ],
+  "supersedes": [
+    "ops/incident-response/patches/community-dispatch-owner.patch"
+  ],
+  "do_not_apply_superseded_patch": true,
+  "changes": [
+    "Community resolves to active news owner; consumer to active economy-tech owner; cancelled standalone schedules retained",
+    "Remove remaining per-specialist article caps and12-item pending projection cap; technical API budgets unchanged",
+    "Use as_posix for stay sitemap URL serialization without weakening canonical checks"
+  ],
+  "authority_checks": {
+    "news_community_transfer": "Verified current active news task prompt",
+    "economy_consumer_transfer": "Verified current active economy-tech task prompt",
+    "no_article_quota": "Current publisher instruction",
+    "schedule_objects": "All seven specialist schedule objects compared equal before/after patch"
+  },
+  "controller_checks": [
+    "Both patches apply cleanly to freshly fetched source589",
+    "Original production AST expression reproduced backslash URL with PureWindowsPath",
+    "node tests/agent-dispatch.mjs PASS with coverage changes",
+    "python tests/stay-sitemap-portable.py PASS (Windows and POSIX)",
+    "Seven schedule objects byte-semantically unchanged; previous cancelled tasks remain cancelled"
+  ],
+  "not_performed": [
+    "No full release build on current source",
+    "No Sites main-branch edit or source push",
+    "No deployment or live dispatch/limit verification",
+    "No editorial/image approval or news publication"
+  ],
+  "release_owner_requirements": [
+    "Refresh source and verify actual publication ownership/lease; a schedule/CAS/old succeeded deployment is not a lease",
+    "Apply each ordered patch once; skip the superseded community-only patch",
+    "Preserve concurrent source and run full normal foundation, image, content, SEO and build checks",
+    "Publish once through existing authorized Sites route; verify succeeded and live community/consumer dispatch owners, uncapped pending queue and canonical URLs",
+    "Do not publish sports draft until exact image rights/body/asset review is approved"
+  ],
+  "source_access_qualification": "Controller normal authenticated Git read succeeded in this authorized managed environment. This does not repair or bypass the separate manual Windows environment's network/approval failure.",
+  "incoming_handoffs": [
+    "01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
+    "01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json"
+  ]
+}

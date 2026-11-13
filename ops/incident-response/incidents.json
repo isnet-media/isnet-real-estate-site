@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T08:49:03.752Z",
+  "updated_at": "2026-11-13T10:03:27.567Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -635,14 +635,16 @@
         "qualification": "Source confirms mapping defect; no cross-task runtime result misattribution proved."
       },
       "repair": {
-        "status": "isolated_patch_tested_not_applied",
+        "status": "superseded_by_tested_bundle_not_applied",
         "path": "ops/incident-response/patches/community-dispatch-owner.patch",
         "approach": "Separate contentAssignment owner from cancelled standalone execution schedule; projection prefers explicit assignment. Preserve history, enabled flags, schedule, permissions, rights gates and ownershipProof=false.",
         "tests": [
           "node tests/agent-dispatch.mjs: PASS",
           "semantic profile comparison: only community contentAssignment added; all schedules, quotas and permissions preserved",
           "community routes to news while cancelled standalone schedule stays cancelled; consumer retains fallback; no fake ownership proof"
-        ]
+        ],
+        "superseded_by": "ops/incident-response/release-plans/tlvnet-coordinated-coverage-and-portability-20261113.json",
+        "note": "Original patch kept for history only. Do not apply both ownership implementations."
       },
       "blocker": {
         "release_ownership": "No actual execution/publication lock verified for controller. Dispatch is explicitly not proof.",
@@ -650,7 +652,7 @@
         "source_open": "Source helper failed generically; one justified ordinary authenticated Git fetch succeeded. Source read only; source main untouched."
       },
       "impact": "News publication continued through authorized news owner; operational routing remains stale until patch is released.",
-      "next_action": "Existing TLVNET release owner must take its valid publication lock, rebase this tested patch onto current source, run existing checks, include it in one authorized release, and verify live community dispatch owner. Do not create or resume any task or change schedule. Keep controller incident open until actual live result.",
+      "next_action": "Existing release owner to use coordinated coverage+portability bundle after valid lease and current-source checks; old community-only patch is superseded. Verify live owner after release.",
       "reported_runKey": "ops-2026-11-13-2b4d4313-dc9c-8326-9bbe-e53d28b9e74d",
       "latest_source_check": {
         "commit": "406b4d91735b61d27fd241ef58a86f8137cf4284",
@@ -744,7 +746,117 @@
       "next_action": "Publisher/rollout owner must decide whether this legacy combined path is retired or re-scoped under the approved event and cinema owners. This controller mandate prohibits changing frequency, so no timer modification or task reactivation was made.",
       "prevention": "Inventory all legacy GitHub timers alongside ChatGPT tasks; changing one scheduler does not update another.",
       "reported_runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b"
+    },
+    {
+      "id": "tlvnet-remaining-editorial-projection-caps",
+      "status": "awaiting_external_action",
+      "fingerprint": "briefs-writer-profile/maxPerRun2+agent-dispatch/pending-slice12",
+      "root_cause": "Source still has maxPerRun=2 in six specialist records despite current no-quota instruction; dispatch limits pending projection to12 entries. Existing prompts do not remove these source values.",
+      "source_evidence": {
+        "commit": "d457d11f30c73ab92f8f806525852b8a5e8e2878",
+        "old_limits": {
+          "news": null,
+          "real-estate": 2,
+          "economy-tech": 2,
+          "community": 2,
+          "consumer": 2,
+          "sports": 2,
+          "culture-news": 2
+        },
+        "qualification": "Observed source configuration, not proof every runtime stops at2 articles."
+      },
+      "repair": {
+        "status": "tested_isolated_not_applied",
+        "bundle": "ops/incident-response/release-plans/tlvnet-coordinated-coverage-and-portability-20261113.json",
+        "patch": "ops/incident-response/patches/tlvnet-coverage-budget-e6232ae2.patch",
+        "tests": [
+          "Both patches apply cleanly to freshly fetched source589",
+          "node tests/agent-dispatch.mjs PASS with coverage changes"
+        ],
+        "technical_budgets_changed": false,
+        "schedules_changed": false
+      },
+      "occurrences": [
+        {
+          "inbox": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
+          "thread_id": "01a1d3fd-dc9b-7622-91a6-fd0834fae599"
+        },
+        {
+          "inbox": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json",
+          "thread_id": "01a1d3fd-dc9b-7622-91a6-fd0834fae599"
+        }
+      ],
+      "next_action": "Apply one coordinated bundle through existing valid release ownership, then verify live uncapped queue and source profile without weakening technical cost or rights gates.",
+      "reported_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988"
+    },
+    {
+      "id": "tlvnet-windows-stay-sitemap-backslashes",
+      "status": "awaiting_external_action",
+      "fingerprint": "scripts/build-stay.py/str(Path.relative_to)/Windows-backslash-canonical",
+      "root_cause": "Actual stay sitemap URL expression uses str(Path), yielding backslashes under Windows; canonical gate correctly rejects the mismatch.",
+      "evidence": {
+        "source_commit": "d457d11f30c73ab92f8f806525852b8a5e8e2878",
+        "file": "scripts/build-stay.py",
+        "reproduced_old_expression": true,
+        "reported_bad_url": "https://tlvnet.com/stay\\day-fun/",
+        "controller_environment_source_read": "succeeded; no escalated access used"
+      },
+      "repair": {
+        "status": "tested_isolated_not_applied",
+        "patch": "ops/incident-response/patches/tlvnet-stay-sitemap-portable-20261113.patch",
+        "bundle": "ops/incident-response/release-plans/tlvnet-coordinated-coverage-and-portability-20261113.json",
+        "change": "Path.as_posix()",
+        "tests": [
+          "Old actual AST expression reproduces Windows backslash",
+          "Existing portability regression passes Windows and POSIX after patch"
+        ],
+        "check_seo_gate_preserved": true
+      },
+      "occurrences": [
+        {
+          "inbox": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json"
+        }
+      ],
+      "impact": "Reported Windows release-build blocker. Latest native Sites deployments succeeded; no current live-site outage asserted.",
+      "next_action": "Release owner to use bundle, preserve canonical gate, run normal full release build, then verify slash-only live sitemap URLs. No retry of unchanged Windows network/approval denial.",
+      "reported_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b"
+  "last_review_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988",
+  "external_source_checkpoints": [
+    {
+      "signature": "classes/source-detail-read/web-retrieval-unavailable",
+      "status": "item_scoped_checkpoint",
+      "inbox": "ops/incident-response/inbox/786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json",
+      "task_id": "Automation_6f7ebf4f01148191b17ce098a1061217",
+      "run_id": "786c310e-a5ec-832c-8d7d-5ca6e75ac986",
+      "runKey": "classes-2026-11-13-quarterly-786c310e",
+      "log_only": true,
+      "classification": "Bounded source-read limit; no origin outage or global infrastructure failure claimed",
+      "evidence": "Some primary detail reads returned tool Internal Error without an HTTP status. This limits those samples only, not source-host availability or independent catalogue work. Original source facts/dates retained; current documentation already records municipal unattended-access limitation.",
+      "next_action": "Keep scoped checkpoint; cheaply check access changes on the existing saved cycle. No blind retry, new schedule/agent or deployment for this handoff.",
+      "controller_retry": false,
+      "controller_seen_at": "2026-11-13T10:03:27.567Z"
+    },
+    {
+      "signature": "yavne/WHITE/primary-source/web-retrieval-http403",
+      "status": "item_scoped_checkpoint",
+      "inbox": "ops/incident-response/inbox/c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json",
+      "task_id": "Automation_1db28c66207881918ef57966330dca21",
+      "run_id": "c4f8d5ba-1d64-8320-9f67-18b831a8ff4a",
+      "runKey": "restaurants-2026-11-13-monthly-c4f8d5ba",
+      "log_only": true,
+      "classification": "Bounded source-read limit; no origin outage or global infrastructure failure claimed",
+      "evidence": {
+        "url": "https://whitesushibar.co.il/",
+        "http": 403,
+        "channel": "web retrieval",
+        "directory_corroboration": "WHITE at Shidlovsky1 in Yavne; not substituted for primary verification",
+        "origin_outage_or_closure_claimed": false
+      },
+      "next_action": "Retain facts and dates; cheaply recheck permitted source access on the next saved cycle when changed conditions justify it. No bypass, blind retry, new task or schedule change.",
+      "controller_retry": false,
+      "controller_seen_at": "2026-11-13T10:03:27.567Z"
+    }
+  ]
 }

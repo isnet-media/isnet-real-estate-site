@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988",
+  "run_id": "52cbcb9a-07e0-8326-b584-676dff736988",
+  "started_at": "2026-11-13T09:52:57.526899Z",
+  "observed_at": "2026-11-13T10:03:27.567Z",
+  "source_commit": "2669564e25489ec38033f115059cc8befc45ede2",
+  "outcome": "Four handoffs triaged; existing patch bundle independently verified, not deployed",
+  "bundle": "ops/incident-response/release-plans/tlvnet-coordinated-coverage-and-portability-20261113.json",
+  "tests": [
+    "Both patches apply cleanly to freshly fetched source589",
+    "Original production AST expression reproduced backslash URL with PureWindowsPath",
+    "node tests/agent-dispatch.mjs PASS with coverage changes",
+    "python tests/stay-sitemap-portable.py PASS (Windows and POSIX)",
+    "Seven schedule objects byte-semantically unchanged; previous cancelled tasks remain cancelled"
+  ],
+  "news_agents_enabled": true,
+  "supermarket_collection": false,
+  "db_mutations": 0,
+  "public_deployment": false,
+  "history_checkpoint_preserved": true
+}
