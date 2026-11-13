@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T13:13:35.258Z",
+  "updated_at": "2026-11-13T14:31:37.188Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -369,6 +369,14 @@
         "reconnect_code_reported_tested": true,
         "credentials_modified": false,
         "controller_live_post_verified": false
+      },
+      "latest_controller_read": {
+        "observed_at": "2026-11-13T14:31:37.188Z",
+        "evidence": "ops/incident-response/evidence/social-runs-b8641b1e-3cec-8322-a6e7-5c6f1e11a895.json",
+        "auth_error": "meta_error_190_463",
+        "attempt_count": "unknown legacy record",
+        "retry": false,
+        "public_post_checked": false
       }
     },
     {
@@ -1018,9 +1026,78 @@
       "next_action": "Existing execution platform/release owner must provide authoritative task/run binding to the writer. Do not treat nonself/null metadata alone as routing mismatch. After valid binding and release ownership, same authorized writer resumes saved checkpoint, completes exact image/rights review and applies publication CAS protocol. No permission expansion, new task, enable/schedule edit or controller substitute article.",
       "controller_repair": "No platform binding mutation available or attempted; no competing TLVNET release",
       "reported_runKey": "ops-2026-11-13-dbea2a00-6628-8322-b61b-4570f97b61ba"
+    },
+    {
+      "id": "herzliya-raanana-original-runtime-access",
+      "status": "awaiting_external_action",
+      "operational_state": "awaiting_source_runtime_access",
+      "fingerprint": "ISNET/Herzliya-Raanana/original-writer-runtime/not-in-accessible-inventory",
+      "root_cause": "Current complete accessible automation inventory has no original city writer tasks. Cancelled shared editor and read-only one-time audit are distinct roles and cannot substitute for missing originals.",
+      "evidence": {
+        "inventory_count": 25,
+        "cursor": null,
+        "source_role_versions": "Both city source files read at v1.2, independent publication authority explicit",
+        "source_files": [
+          "ops/agent-harmony/instructions/agents/01_herzliya_editor.md",
+          "ops/agent-harmony/instructions/agents/02_raanana_editor.md"
+        ],
+        "cancelled_shared_editor": "Automation_845f7ef0033c8191a654a694e58c7bd8",
+        "audit_only": "Automation_cac013a7bd60819180284794207f472b",
+        "historical_ids_not_retried": [
+          "automation-11",
+          "automation-12"
+        ],
+        "handoff": "ops/incident-response/inbox/20261113-city-writer-runtime-policy11.json",
+        "known_browser_restriction": "Handoff reports host-security block; controller did not retry or bypass."
+      },
+      "missing_interface": "Authorized read/update/readback interface to the two original city Work tasks in their source environment",
+      "next_action": "Open the two original city writer task settings in the Work environment where they were created and make those exact tasks accessible to the controller, or replace their complete prompts there with current master plus v1.2 city role and return effective prompt readback. Preserve schedule and technical approval state.",
+      "completion_checks": {
+        "effective_prompts_read_back": false,
+        "actual_writer_runs_verified": false,
+        "new_live_city_articles_verified": false
+      },
+      "controller_changes": "No update to absent tasks, cancelled editor or one-time audit; no claim that delivery occurred.",
+      "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
+      "observed_at": "2026-11-13T14:31:37.188Z"
+    },
+    {
+      "id": "tlvnet-legacy-work-activity-unverifiable",
+      "status": "awaiting_external_action",
+      "fingerprint": "tlvnet/site/publication/legacy-work-activity-unverifiable",
+      "root_cause": "Shared lease policy requires checking old Work producer inactivity before acquisition; no authoritative current Work execution/approval inventory is exposed. Free lease and succeeded deployment are not that proof.",
+      "occurrences": [
+        {
+          "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+          "run_id": "122b42e1-c6bc-8325-9797-95a2377b76c0",
+          "inbox": "ops/incident-response/inbox/122b42e1-c6bc-8325-9797-95a2377b76c0-1.json"
+        }
+      ],
+      "impact": "Real-estate source write/publication deferred; primary transaction verification and image review also pending independently.",
+      "next_action": "Existing source Work owner must reconcile current old task/approval/activity state and confirm the old producer inactive through its authoritative interface; retain GitHub CAS. No controller editor substitute, gate removal or forced unlock.",
+      "observed_at": "2026-11-13T14:31:37.188Z",
+      "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895"
+    },
+    {
+      "id": "tlvnet-policy11-owner-overlap",
+      "status": "awaiting_external_action",
+      "fingerprint": "tlvnet/ownership/policy1.1-restored-specialists-vs1.0-exclusive-parent",
+      "root_cause": "Two restored daily specialist prompts explicitly supersede cancellation at v1.1 while parent news/economy v1.0 prompts still claim sole community/consumer ownership and state standalone consumer must not resume.",
+      "evidence": {
+        "restored_community": "Automation_e03d80ff914c8191a790fc66e7447826",
+        "restored_consumer": "Automation_e2f02000cdf4819190022b85f4391076",
+        "parent_news": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "parent_economy": "Automation_a32c48a7ae848191a5769078a5c74a09",
+        "readback": "Actual four prompt texts and enabled state inspected, no new specialist result after v1.1 yet",
+        "live_dispatch_probe": "Both public dispatch GETs returned403; no retry/bypass or claim of current API owner"
+      },
+      "next_action": "Authorized rollout owner should replace superseded ownership clauses in parent prompts/source dispatch with one current owner per topic under v1.1, preserve all approved schedules and current enabled states, and read back effective prompts/live routing. Controller's narrow prompt-edit exception covers only original Herzliya/Raanana writers.",
+      "qualification": "New policy-version inconsistency, not evidence prior v1.0 routing repair failed or actual duplicate publication occurred.",
+      "observed_at": "2026-11-13T14:31:37.188Z",
+      "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-064e67b6-3b00-8322-9738-0875a255ac30",
+  "last_review_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
