@@ -1,0 +1,304 @@
+{
+  "date": "2026-11-13",
+  "scope_note": "Individual scoped task reports; not a completed network daily audit.",
+  "classes_cycle_reports": [
+    {
+      "task_id": "Automation_6f7ebf4f01148191b17ce098a1061217",
+      "run_id": "786c310e-a5ec-832c-8d7d-5ca6e75ac986",
+      "runKey": "classes-2026-11-13-quarterly-786c310e",
+      "started_at": "2026-11-13T08:38:26.806189Z",
+      "scope": "Existing recurring-classes catalogues only; inventory is not a full city/course audit",
+      "status": "published_verified",
+      "identity": {
+        "peek_matched": true,
+        "previous_result": null,
+        "history_absence_not_proof_of_no_prior_execution": true
+      },
+      "source_heads": {
+        "isnet": "4f7dc95c1aec6b34d0f239213050ea26928e5019",
+        "tlvnet_opened": "db0d8d24c2c7a3a54b2671e4afe1c1a003e4a852",
+        "tlvnet_merged_before_edit": "406b4d91735b61d27fd241ef58a86f8137cf4284",
+        "tlvnet_fix": "373066ad45f3a3180b3feddad55cfe581ae5fcdb"
+      },
+      "inventory": [
+        {
+          "city": "ashdod",
+          "existing_records": 1105,
+          "retrieved_on": "2026-10-14",
+          "checked_ids": [
+            "ironit-20792"
+          ],
+          "result": "sample unchanged; enrollment not confirmed; no full inventory recollection"
+        },
+        {
+          "city": "yavne",
+          "existing_records": 696,
+          "retrieved_on": "2026-10-20",
+          "checked_ids": [
+            "yavne-1854495"
+          ],
+          "result": "source read blocked in web retrieval; retained original facts and dates"
+        },
+        {
+          "city": "rishon-lezion",
+          "existing_records": 410,
+          "season": "2026-2027",
+          "checked_ids": [
+            "rishon-vrun-332954ee7e8d"
+          ],
+          "result": "booklet sample agrees; registration availability unconfirmed"
+        },
+        {
+          "city": "kiryat-gat",
+          "existing_records": 120,
+          "season": "2026-2027",
+          "checked_source_page": 23,
+          "result": "five singing groups sampled against full booklet page; no changed facts found; not a full booklet/hash verification"
+        },
+        {
+          "city": "tel-aviv",
+          "municipal_source_records": 118,
+          "independent_seed_before": 193,
+          "independent_seed_after": 192,
+          "result": "Three Athena child groups agree; Minshar navigation entry confirmed as non-course in source and live feed"
+        }
+      ],
+      "sources_read": [
+        {
+          "url": "https://www.ironit.org.il/events/תיאטרון-26/",
+          "read": "full detail",
+          "result": "Wednesday17:30–19:00, instructor and group match; no published price/open-space claim"
+        },
+        {
+          "url": "https://www.matnasyavne.co.il/hugim/1854495/",
+          "read": "unavailable",
+          "result": "Web tool Internal Error, no HTTP status supplied; not proof origin is down"
+        },
+        {
+          "url": "https://fliphtml5.com/msxll/vrun/",
+          "read": "full relevant page5 text",
+          "result": "Current2026-27 brochure; sampled preparation group matches"
+        },
+        {
+          "url": "https://fliphtml5.com/oecuv/kiryat-gat26_27-booklet68p_42/23/",
+          "read": "full relevant page23 text",
+          "result": "Five sampled singing groups match stored rows"
+        },
+        {
+          "url": "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/CommunityClasses.aspx?ActCode=BZ17202703933",
+          "read": "unavailable",
+          "result": "Web retrieval Internal Error; documented unattended municipal collection limitation retained"
+        },
+        {
+          "url": "https://tickets.tamuseum.org.il/יום_ב____Art_101__מבוא_לשפת_האמנות",
+          "read": "unavailable",
+          "result": "Web retrieval Internal Error; existing source-listed unknown availability retained"
+        },
+        {
+          "url": "https://www.minshar.org.il/courses/",
+          "read": "full listing",
+          "result": "Current2026-27 courses plus contact navigation; contact is not a course"
+        },
+        {
+          "url": "https://studia-athena.com/",
+          "read": "full source",
+          "result": "Three child-group days/times/monthly prices and address match"
+        },
+        {
+          "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site/api/public-enrichment",
+          "read": "live JSON",
+          "http": 200,
+          "result": "185 public records; exact Minshar contact ID present before fix; nine source states read without administrative writes"
+        },
+        {
+          "url": "https://isnet.co.il/meusharim/rishon-lezion/",
+          "read": "public page",
+          "result": "Existing current-season catalogue entrance and availability caveat visible"
+        }
+      ],
+      "change": {
+        "signature": "TLVNET|classes|Minshar contact navigation ingested as course",
+        "removed_id": "ext-minshar-487d1bc4328478ea5120",
+        "reason": "Minshar parser accepted contact anchor pointing to catalogue root as a course",
+        "repair": "Shared predicate rejects root/navigation in parser and previously persisted public projections; remove exact fallback row only",
+        "retained_course_dates": true,
+        "live_database_admin_edits": false,
+        "images_changed": false,
+        "source_retention": true,
+        "files": [
+          "lib/enrichment-sources.mjs",
+          "lib/enrichment-cache.mjs",
+          "tests/enrichment-sources.mjs",
+          "public/meusharim/data/independent.json",
+          "data/prepared-public.json",
+          "docs/enrichment.md"
+        ]
+      },
+      "checks": [
+        "Existing enrichment-source regression plus new real-course retention / cached-navigation exclusion passed",
+        "Municipal mapping/audience/unknown availability/expiry/dedup regression passed",
+        "Foundation release checks passed after supported dependency installation",
+        "Normal prepare-public and full build passed; generated out-of-scope changes were inspected and restored to exact version585 source",
+        "Scoped current snapshot fingerprint updated only for changed class JSON; foundation checks and framework production build passed again",
+        "Original news source, approval records and pending quality queue preserved",
+        "Normal fast-forward Git push with exact remote HEAD verification succeeded; no force, permission or schedule changes",
+        "No new images, registration claims, invented course facts or source-verification timestamp renewal"
+      ],
+      "checkpoint": {
+        "full_network_verified": false,
+        "next_action": "Preserve published fix; recheck failed source accessibility cheaply at next saved cycle, then resume exact existing groups, without blind retries or duplicated full collection",
+        "remaining": [
+          {
+            "city": "yavne",
+            "id": "yavne-1854495",
+            "status": "blocked_source_read",
+            "action": "Existing authorized collector/browser source read required before factual refresh; no origin outage inferred"
+          },
+          {
+            "city": "tel-aviv",
+            "id": "tlv-BZ17202703933",
+            "status": "blocked_source_read",
+            "action": "Use documented public rendered municipal route when available; do not relabel old snapshot as fresh"
+          },
+          {
+            "city": "tel-aviv",
+            "provider": "museum-courses",
+            "status": "blocked_source_read",
+            "action": "Verify actual detail before changing schedule/registration; prior cached facts are not fresh detail verification"
+          },
+          {
+            "cities": [
+              "ashdod",
+              "rishon-lezion",
+              "kiryat-gat"
+            ],
+            "status": "partial_review",
+            "action": "Continue remaining existing rows with cached/conditional collectors; samples do not establish full-city freshness"
+          }
+        ]
+      },
+      "counts": {
+        "new_courses": 0,
+        "new_articles": 0,
+        "new_schedules": 0,
+        "new_agents": 0,
+        "full_city_audits": 0
+      },
+      "publication": {
+        "id": "appgdep_6af6d0f4b3ac81918379e195783a693c",
+        "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+        "title": "תל אביב נט — חדר המערכת",
+        "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_2793d035ded08191a7ad80b8c338caa3",
+        "type": "publish",
+        "status": "succeeded",
+        "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+        "has_mcp": false,
+        "screenshot_asset_pointer": null,
+        "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+        "failure_message": null,
+        "env_set_revision": 3,
+        "updated_at": "2026-11-13T08:57:38.187617+00:00",
+        "version_number": 586,
+        "commit": "373066ad45f3a3180b3feddad55cfe581ae5fcdb",
+        "public_checks": {
+          "checked_at": "2026-11-13T08:58:04.709160+00:00",
+          "targets": [
+            {
+              "origin": "https://tlvnet.com",
+              "routes": [
+                {
+                  "path": "/api/public-enrichment",
+                  "http": 200,
+                  "records": 184,
+                  "minshar_count": 7,
+                  "minshar_names": [
+                    "צילום למתחילים – מבוא לצילום",
+                    "איור",
+                    "יסודות רישום וציור",
+                    "יסודות תסריט",
+                    "יסודות בימוי קולנוע, צילום ועריכה בפרמייר",
+                    "יסודות שירה",
+                    "סדנת כתיבה יוצרת"
+                  ],
+                  "bad_id_present": false,
+                  "legitimate_sample_present": true
+                },
+                {
+                  "path": "/meusharim/",
+                  "http": 200,
+                  "catalogue_loader_present": true
+                },
+                {
+                  "path": "/meusharim/course.html?id=ext-minshar-7cab151b72f302aa22bb",
+                  "http": 307
+                },
+                {
+                  "path": "/meusharim/data/independent.json",
+                  "http": 200,
+                  "minshar_count": 7,
+                  "seed_updated_at": "2026-11-07T08:13:34.061Z"
+                }
+              ]
+            },
+            {
+              "origin": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+              "routes": [
+                {
+                  "path": "/api/public-enrichment",
+                  "http": 200,
+                  "records": 184,
+                  "minshar_count": 7,
+                  "minshar_names": [
+                    "צילום למתחילים – מבוא לצילום",
+                    "איור",
+                    "יסודות רישום וציור",
+                    "יסודות תסריט",
+                    "יסודות בימוי קולנוע, צילום ועריכה בפרמייר",
+                    "יסודות שירה",
+                    "סדנת כתיבה יוצרת"
+                  ],
+                  "bad_id_present": false,
+                  "legitimate_sample_present": true
+                },
+                {
+                  "path": "/meusharim/",
+                  "http": 200,
+                  "catalogue_loader_present": true
+                },
+                {
+                  "path": "/meusharim/course.html?id=ext-minshar-7cab151b72f302aa22bb",
+                  "http": 307
+                },
+                {
+                  "path": "/meusharim/data/independent.json",
+                  "http": 200,
+                  "minshar_count": 7,
+                  "seed_updated_at": "2026-11-07T08:13:34.061Z"
+                }
+              ]
+            }
+          ],
+          "legitimate_course_route": {
+            "redirect_chain": [
+              {
+                "url": "https://tlvnet.com/meusharim/course.html?id=ext-minshar-7cab151b72f302aa22bb",
+                "http": 307
+              },
+              {
+                "url": "https://tlvnet.com/meusharim/course?id=ext-minshar-7cab151b72f302aa22bb",
+                "http": 200
+              }
+            ],
+            "final_course_loader_present": true,
+            "visual_review": "not performed; no layout or image changes"
+          }
+        },
+        "new_publication_type": "existing_catalogue_correction",
+        "new_content_items": 0,
+        "course_navigation_row_removed": 1
+      },
+      "coverage_status": "partial_review",
+      "finished_at": "2026-11-13 08:59:39 UTC"
+    }
+  ]
+}
