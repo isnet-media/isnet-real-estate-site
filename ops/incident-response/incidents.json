@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T20:41:28.529Z",
+  "updated_at": "2026-11-13T21:57:57.292Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1370,9 +1370,49 @@
       "prevention": "Group this exact endpoint/step signature; retain HTTP evidence and skipped-step distinction. Current workflow already uses weekly Sunday timer plus relevant source/deployment events; no schedule change authorized.",
       "observed_at": "2026-11-13T18:15:58.748Z",
       "reported_runKey": "ops-2026-11-13-a2aa0629-3158-8322-adc0-c25e2fa87f28"
+    },
+    {
+      "id": "historical-ashdod-bus-browser-route-timeout",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "ashdod-bus/browser-smoke/#results .route-card visible/30000ms-timeout",
+      "root_cause": "Immediate cause: browser smoke did not see a route card within30000ms on2026-11-09. Underlying application/data/date cause and present public behavior unestablished.",
+      "occurrences": [
+        {
+          "run_id": 42580176040,
+          "workflow": "Ashdod direct-first bus release checks",
+          "path": ".github/workflows/ashdod-bus-tests.yml",
+          "attempt": 1,
+          "created_at": "2026-11-09T07:34:20Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "c8b6eb5dcb518bcc15454f89e2ae15dcc8937e9c",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42580176040",
+          "classification": "Full browser-smoke log confirmed30000ms timeout waiting for visible #results .route-card; unit tests passed, live smoke skipped. Historical only.",
+          "job_id": 129037060275
+        }
+      ],
+      "evidence": {
+        "log_read_full": true,
+        "failed_step": "Test direct bus and map on mobile and desktop",
+        "locator": "#results .route-card",
+        "timeout_ms": 30000,
+        "node_tests": "passed",
+        "live_smoke": "skipped",
+        "screenshots": "Upload step ran but no files existed",
+        "current_test_blob": "de1fa95d3f0d582d3df327e9671a9c62053e76e3",
+        "current_workflow_blob": "d019f3eef882cb8fc43cf303f2663a3b90c9f131",
+        "current_test_uses_service_date_and_fixed_clock": true,
+        "current_live_verified": false
+      },
+      "resolution": "Historical diagnosis only; no code patch, test weakening, retry, live transit scan or deployment.",
+      "next_action": "If source/input changes or a new same-signature failure occurs, inspect browser console/network and dated GTFS input, then focused regression. Current fixed-clock/service-date source is not proof of repair or public behavior.",
+      "prevention": "Keep unit, rendered and public checks distinct; retain exact selector failure. A future tested change can capture error state before success-only screenshot points.",
+      "observed_at": "2026-11-13T21:57:57.292Z",
+      "reported_runKey": "ops-2026-11-13-1292cc63-7694-8332-9c13-1491a8bdf8c0"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-1dfe8836-8e24-8332-8252-44e22e01ea3b",
+  "last_review_runKey": "ops-2026-11-13-1292cc63-7694-8332-9c13-1491a8bdf8c0",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
