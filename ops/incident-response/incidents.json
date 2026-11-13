@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T10:52:14.092Z",
+  "updated_at": "2026-11-13T11:23:00.196Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -835,8 +835,8 @@
     },
     {
       "id": "ashdod-mobile-banners-app-stall-reported",
-      "status": "open",
-      "root_cause": "Unconfirmed. Publisher reports mobile banners missing, slow mobile entry and stalled app; current desktop load renders banners. Desktop AdSense initialization error observed but causal link is not established.",
+      "status": "mitigated",
+      "root_cause": "Emergency repair thread reports two mobile mechanisms alternated the same image src between full and thumbnail URLs, producing1,001 replacements. Conflicting image upgrade snippet removed there; publisher confirmed mobile recovery. Controller did not independently reproduce mobile/app.",
       "fingerprint": "ashdodnet/mobile/banner-app-performance/reported-unconfirmed",
       "reported_at": "2026-11-13T12:43:00+02:00",
       "observed_at": "2026-11-13T10:52:14.092Z",
@@ -854,12 +854,85 @@
         "app_verified": false,
         "causal_link_to_agent_changes": false
       },
-      "next_action": "Existing CMS/hosting owner should capture a real mobile/app console and request trace and compare today's mobile layout/Pixel script changes with prior version; inspect server/CDN logs from 12:43 Israel. Identify Kiryat Gat article ID and actual writer/category audit before attribution. Do not blanket rollback templates, alter permissions or kill agents.",
+      "next_action": "Existing emergency owner to finish desktop image resolution fix with separate desktop/mobile regression checks. Before enabling any src observer, use one URL owner, idempotent normalization and bounded fallback; verify src settles after native thumbnail script and after image-error fallback.",
       "controller_changes": "Read-only browser diagnosis; no CMS/site mutation or rollback",
-      "reported_runKey": "ops-2026-11-13-f86ab906-8780-8322-9b4e-36de33003327"
+      "reported_runKey": "ops-2026-11-13-f86ab906-8780-8322-9b4e-36de33003327",
+      "reconciliation": {
+        "observed_at": "2026-11-13T11:23:00.196Z",
+        "source_conversation": "c945806072",
+        "repair_reported_at": "2026-11-13T11:03:23Z",
+        "publisher_confirmed_at": "2026-11-13T11:07:09Z",
+        "controller_performed_repair": false,
+        "independent_mobile_visual_verified": false,
+        "app_recovery_verified": false,
+        "adsense_causality": "Not established; prior desktop AdSense error retained as separate evidence.",
+        "remaining": "Desktop thumbnail/blur reported after mobile mitigation; existing emergency thread owns active investigation. No parallel CMS mutation."
+      },
+      "prevention": "Image src observers must not fight native sizing or error fallback. Test both viewport/UA paths; desktop success does not verify mobile."
+    },
+    {
+      "id": "historical-artifact-colon-path-rejection",
+      "status": "mitigated",
+      "fingerprint": "supermarket-city-release/upload-artifact/invalid-colon-path",
+      "root_cause": "On2026-11-10 upload-artifact rejected SUPER.ASHDOD/data/offers/:2.json for colon in file path after local integrity passed.",
+      "occurrences": [
+        {
+          "run_id": 42884774150,
+          "workflow": "Independent supermarket city release (artifact only)",
+          "path": ".github/workflows/supermarket-city-release.yml",
+          "attempt": 1,
+          "created_at": "2026-11-10T19:23:25Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "38739b0a9af6f737ebd35059e7112be98251afb1",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42884774150"
+        }
+      ],
+      "evidence": {
+        "job_id": 130070081547,
+        "error": "The path for one of the files in artifact is not valid: /SUPER.ASHDOD/data/offers/:2.json. Contains the following character: Colon :",
+        "at": "2026-11-10T19:23:41.1258497Z"
+      },
+      "current_source": {
+        "commit": "aa25b2a5f45cc0fc66cace99a08b92b08be21cac",
+        "workflow_read": "404 Not Found",
+        "stage_script_read": "404 Not Found",
+        "qualification": "Historical workflow/script absent at current ref; no current recurrence or repaired artifact claimed. No alternate-route access retry."
+      },
+      "next_action": "Retain as retired-workflow history; if artifact path reintroduced, package unchanged city files in a tar with manifest and test portable outer filename before upload. Do not rename source price URLs or re-run retired workflow.",
+      "controller_retry": false
+    },
+    {
+      "id": "historical-pages-sync-files-timeout",
+      "status": "mitigated",
+      "fingerprint": "pages/Deploy/syncing_files/timeout",
+      "root_cause": "Historical Pages deployment remained syncing_files until action timeout; underlying provider cause not established.",
+      "occurrences": [
+        {
+          "run_id": 42899565900,
+          "workflow": "Publish priceboard",
+          "path": ".github/workflows/pages.yml",
+          "attempt": 1,
+          "created_at": "2026-11-10T20:52:53Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "f68005d191d5e6222dfcb499755fe2a5d6c18d06",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42899565900"
+        }
+      ],
+      "evidence": {
+        "job_id": 130121602949,
+        "last_status": "syncing_files",
+        "failure_at": "2026-11-10T21:04:33.9403853Z",
+        "error": "Timeout reached, aborting!",
+        "deployment_cancelled_by_action": true
+      },
+      "current_state": "Newer pages run43412573104 succeeded. No present outage or independent public repair verification claimed.",
+      "next_action": "No rerun of old deployment. Reopen on fresh failure signature; retain bounded duration and deploy provenance.",
+      "controller_retry": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-f86ab906-8780-8322-9b4e-36de33003327",
+  "last_review_runKey": "ops-2026-11-13-2e372326-a498-8322-bf8a-6dc91e15f942",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
