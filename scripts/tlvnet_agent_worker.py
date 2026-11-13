@@ -128,7 +128,7 @@ def process_job(job,endpoint,key,ai,model,stop,budget):
   if agent not in PROMPTS or not isinstance(inp.get('source_notes'),str) or not 80<=len(inp['source_notes'])<=30000 or not isinstance(inp.get('instruction'),str) or len(inp['instruction'])>12000:raise ValueError('invalid_input')
   if inp.get('team_chat'):result=team_job(inp,ai,model,budget)
   else:
-   response=requests.post('https://api.openai.com/v1/chat/completions',headers={'Authorization':'Bearer '+ai,'Content-Type':'application/json'},json={'model':model,'temperature':0.25,'max_completion_tokens':3500,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':SYSTEM+PROMPTS[agent]},{'role':'user','content':json.dumps(inp,ensure_ascii=False)}]},timeout=60)
+   response=budget.post('https://api.openai.com/v1/chat/completions',headers={'Authorization':'Bearer '+ai,'Content-Type':'application/json'},json={'model':model,'temperature':0.25,'max_completion_tokens':3500,'response_format':{'type':'json_object'},'messages':[{'role':'system','content':SYSTEM+PROMPTS[agent]},{'role':'user','content':json.dumps(inp,ensure_ascii=False)}]},timeout=60)
    if not response.ok:
     try:provider_code=response.json().get('error',{}).get('code')
     except ValueError:provider_code=None
