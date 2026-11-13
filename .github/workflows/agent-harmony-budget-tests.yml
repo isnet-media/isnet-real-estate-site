@@ -1,0 +1,25 @@
+name: Agent harmony budget tests
+on:
+  pull_request:
+    paths:
+      - 'scripts/tlvnet_agent_worker.py'
+      - 'scripts/test_tlvnet_worker_budget.py'
+      - '.github/workflows/tlvnet-agents.yml'
+      - '.github/workflows/agent-harmony-budget-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  bounded-worker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests==2.32.5
+      - name: Validate worker code compiles
+        run: python -m py_compile scripts/tlvnet_agent_worker.py scripts/test_tlvnet_worker_budget.py
+      - name: Verify bounded execution without external services
+        run: python -m unittest discover -s scripts -p 'test_tlvnet_worker_budget.py' -v
