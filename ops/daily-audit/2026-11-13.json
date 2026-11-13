@@ -731,5 +731,43 @@
       },
       "journal_note": "Domain source-ledger write deferred because execution/publication ownership is unverified; durable checkpoint stored in existing authorized operations journal+inbox."
     }
+  ],
+  "real_estate_cycle_reports": [
+    {
+      "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "run_id": "122b42e1-c6bc-8325-9797-95a2377b76c0",
+      "runKey": "real-estate-2026-11-13-16:00-122b42e1",
+      "policy_version": "2026-11-13/1.0",
+      "recorded_at": "2026-11-13T14:17:36.368375+00:00",
+      "status": "checkpoint_saved_publication_blocked",
+      "sections_reviewed": [
+        "real-estate"
+      ],
+      "source_commit": "cd5af6c3a251d8681877e3390c1e1296d28309e4",
+      "published_article_count": 25,
+      "pending_draft_count": 0,
+      "newPublishedArticleIds": [],
+      "verifiedExistingArticleIds": [],
+      "checkpoint": {
+        "article_id": "isaac-stern-two-projects-financing-20261113",
+        "body_sha256": "4d0b1aab4b1de4356b805fe2fc1be9f24ca3dfb96e89fd1cd20571f4d050ade2",
+        "stage": "draft_text_not_publication_ready"
+      },
+      "blocker": {
+        "fingerprint": "tlvnet/site/publication/legacy-work-activity-unverifiable",
+        "root_cause": "No authoritative current Work execution/approval/lock inventory is available in the connected automation and Sites tools. This does not prove a live competing worker. The current mandatory CAS protocol explicitly requires verification that the old path is inactive before lease acquisition.",
+        "evidence": [
+          "ops/agent-harmony/PUBLISH_LEASE.md: old Work pending approvals are not released by this lease; inability to verify old path inactivity requires checkpoint and target block",
+          "ops/agent-harmony/ROLLOUT.md remains marked NOT DEPLOYED / NOT ENFORCED; it is not an execution-state proof",
+          "Latest Sites source opened successfully and prior deployment succeeded; no deployment failure or preview blocker claimed"
+        ],
+        "next_action": "Existing controller/owner to provide current authoritative Work task/approval/active-writer state for TLVNET and fence or reconcile the old producer under existing authority. Writer can then acquire/read back existing GitHub CAS lease and resume saved item; do not create another runner or broaden permissions."
+      },
+      "inbox": "ops/incident-response/inbox/122b42e1-c6bc-8325-9797-95a2377b76c0-1.json",
+      "build": false,
+      "deploy": false,
+      "source_ledger_updated": false,
+      "is_enabled_changed": false
+    }
   ]
 }
