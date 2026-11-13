@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "kind": "manual_audit_followup",
+  "thread_id": "01a1d3fd-dc9b-7622-91a6-fd0834fae599",
+  "attempt": 2,
+  "created_at": "2026-11-13T09:01:49.767Z",
+  "signature": "tlvnet/release/windows-stay-sitemap-and-source-access",
+  "related_handoff": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
+  "status": "awaiting_existing_release_owner",
+  "fix": {
+    "local_commit": "2df6835e",
+    "patch": "ops/incident-response/patches/tlvnet-stay-sitemap-portable-20261113.patch",
+    "root_cause": "scripts/build-stay.py line187 serialized a Path with str(), producing backslashes under Windows. build-seo.py already uses as_posix; do not patch or weaken check-seo.py.",
+    "change": "Use Path.as_posix() for sitemap URL path, retaining canonical validation.",
+    "tests": [
+      "tests/stay-sitemap-portable.py PASS: actual production URL expression evaluated with both PureWindowsPath and PurePosixPath",
+      "node tests/agent-dispatch.mjs PASS",
+      "git apply --reverse --check --cached PASS for portability patch"
+    ]
+  },
+  "source_access": {
+    "site_version_observed": 586,
+    "default_network_attempt": "failed connection to git.chatgpt-team.site:443",
+    "approval_attempt": "automatically rejected by execution permission policy; no escalated command ran",
+    "credentials": "Existing source connection refreshed; no new persistent API key or permission grant",
+    "deployment": "not attempted; current remote source could not be synchronized"
+  },
+  "coordination_readback": {
+    "scope": "Read-only complete ID pagination of Sites DB settings table",
+    "publication_lease_setting_found": false,
+    "qualification": "Only enrichment refresh lock observed; it does not prove publication ownership. No global absence claim for other systems or tables."
+  },
+  "next_action": "When source access is permitted, existing release owner should take valid publication ownership, synchronize current source, reconcile the earlier coverage patch and this portable-path fix, run the full existing build without bypassing gates, publish one version and verify runtime dispatch plus real queued content. Do not trigger unchanged retries or add competing tasks."
+}
