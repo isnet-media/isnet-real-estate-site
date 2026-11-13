@@ -1,6 +1,6 @@
 {
   "policy_version": "2026-11-13/1.0",
-  "state": "prompts_replaced_source_release_pending",
+  "state": "partial_deployed_verified",
   "runtime_lock_enforcement": "not_verified",
   "monetary_cap": "not_verified",
   "roles": [
@@ -51,7 +51,7 @@
       "title": "כתב חדשות תרבות מקומית",
       "owner_automation_id": "Automation_53543605ce188191ba90f3f1979203dc",
       "activation": "existing_enabled_task",
-      "prompt_sha256": "2868884b3cff147476e24e2312f490fecb39c8f2af60f1e574677b0ff52c71be"
+      "prompt_sha256": "b18ab69d501ae8fd702371a0509cc842830ccb6500ef810c2f616a91673e8b0b"
     },
     {
       "file": "08_tlv_community.md",
@@ -99,8 +99,14 @@
       "file": "14_cinema.md",
       "title": "קולנוע וסרטים",
       "owner_automation_id": null,
-      "activation": "blocked_until_owner_and_path_verified",
-      "prompt_sha256": null
+      "activation": "existing_deterministic_collectors_scope_verified_not_all_city_runs_verified",
+      "prompt_sha256": null,
+      "owner_runtime": [
+        "github:collect-cinema.yml",
+        "github:tlvnet-events.yml",
+        "github:herzliya-events.yml",
+        "github:sync-rishon-national.yml"
+      ]
     },
     {
       "file": "15_courses.md",
@@ -126,16 +132,18 @@
     {
       "file": "18_tlv_night.md",
       "title": "תל אביב בלילה",
-      "owner_automation_id": null,
-      "activation": "blocked_until_owner_and_path_verified",
-      "prompt_sha256": null
+      "owner_automation_id": "Automation_53543605ce188191ba90f3f1979203dc",
+      "activation": "scope_of_existing_enabled_culture_news_task",
+      "prompt_sha256": "b18ab69d501ae8fd702371a0509cc842830ccb6500ef810c2f616a91673e8b0b"
     },
     {
       "file": "19_social.md",
       "title": "מפיץ פייסבוק ואינסטגרם",
       "owner_automation_id": null,
-      "activation": "blocked_until_owner_and_path_verified",
-      "prompt_sha256": null
+      "activation": "existing_deterministic_scheduler_blocked_on_meta_auth",
+      "prompt_sha256": null,
+      "owner_runtime": "supabase-cron:1/tlvnet-facebook-hourly-v1",
+      "last_observed_error": "meta_error_190_463"
     },
     {
       "file": "20_incident_controller.md",
@@ -144,5 +152,7 @@
       "activation": "existing_enabled_task",
       "prompt_sha256": "4746f302e352ab11bad94e41fd32ac91903da3c662d13694c82bfd08f3fa94a0"
     }
-  ]
+  ],
+  "coverage_revision": 2,
+  "deployment_evidence": "ops/agent-harmony/releases/20261113-completion.json"
 }
