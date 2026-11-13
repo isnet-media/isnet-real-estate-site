@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T10:03:27.567Z",
+  "updated_at": "2026-11-13T10:52:14.092Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -441,6 +441,18 @@
           "source_commit": "4fa63e52194eedff272f5c0e4927da43ea57e919",
           "created_at": "2026-11-12T11:45:28Z",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43211876204"
+        },
+        {
+          "run_id": 43011673847,
+          "workflow": "Refresh Holon events and culinary guide",
+          "path": ".github/workflows/holon-events.yml",
+          "attempt": 1,
+          "created_at": "2026-11-11T11:24:21Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "34e03e07809887e30c92c3688eefb39e2ab5d894",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43011673847",
+          "classification": "Same exact title, illustration URL and official_promotional gate confirmed from full job log; historical occurrence, not new regression"
         }
       ],
       "evidence": {
@@ -820,9 +832,34 @@
       "impact": "Reported Windows release-build blocker. Latest native Sites deployments succeeded; no current live-site outage asserted.",
       "next_action": "Release owner to use bundle, preserve canonical gate, run normal full release build, then verify slash-only live sitemap URLs. No retry of unchanged Windows network/approval denial.",
       "reported_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988"
+    },
+    {
+      "id": "ashdod-mobile-banners-app-stall-reported",
+      "status": "open",
+      "root_cause": "Unconfirmed. Publisher reports mobile banners missing, slow mobile entry and stalled app; current desktop load renders banners. Desktop AdSense initialization error observed but causal link is not established.",
+      "fingerprint": "ashdodnet/mobile/banner-app-performance/reported-unconfirmed",
+      "reported_at": "2026-11-13T12:43:00+02:00",
+      "observed_at": "2026-11-13T10:52:14.092Z",
+      "evidence": {
+        "url": "https://ashdodnet.com/",
+        "desktop_browser": "Cloud Chrome, desktop; no mobile emulation capability used",
+        "desktop_banners": "Top and sidebar creatives visibly rendered",
+        "console": {
+          "timestamp": "2026-11-13T10:50:14.402Z",
+          "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+          "message": "Uncaught TagError: adsbygoogle.push() error: All 'ins' elements in the DOM with class=adsbygoogle already have ads in them."
+        },
+        "mobile_attempt": "Observed /mobile/ route in live scripts; navigation returned https://ashdodnet.com/ desktop view. Does not reproduce real mobile user agent or app.",
+        "dom": "Observed mobile-specific banner arrangement and magazine/image-upgrade scripts. Presence alone does not establish regression or writer cause.",
+        "app_verified": false,
+        "causal_link_to_agent_changes": false
+      },
+      "next_action": "Existing CMS/hosting owner should capture a real mobile/app console and request trace and compare today's mobile layout/Pixel script changes with prior version; inspect server/CDN logs from 12:43 Israel. Identify Kiryat Gat article ID and actual writer/category audit before attribution. Do not blanket rollback templates, alter permissions or kill agents.",
+      "controller_changes": "Read-only browser diagnosis; no CMS/site mutation or rollback",
+      "reported_runKey": "ops-2026-11-13-f86ab906-8780-8322-9b4e-36de33003327"
     }
   ],
-  "last_review_runKey": "ops-2026-11-13-52cbcb9a-07e0-8326-b584-676dff736988",
+  "last_review_runKey": "ops-2026-11-13-f86ab906-8780-8322-9b4e-36de33003327",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
