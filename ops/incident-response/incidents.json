@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T16:10:03.155Z",
+  "updated_at": "2026-11-13T18:09:33.193Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1136,7 +1136,21 @@
       },
       "controller_changes": "No update to absent tasks, cancelled editor or one-time audit; no claim that delivery occurred.",
       "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
-      "observed_at": "2026-11-13T14:31:37.188Z"
+      "observed_at": "2026-11-13T18:09:33.193Z",
+      "latest_independent_audit": {
+        "task_id": "Automation_cac013a7bd60819180284794207f472b",
+        "run_id": "efc430fb-e2d0-8322-89ce-916f2f6293e9",
+        "completed_at": "2026-11-13T16:31:54.209143Z",
+        "herzliya_cms_candidate": {
+          "article_id": 811460,
+          "title": "היתרון ברח: בני הרצליה הפסידה 34:31 לרמת השרון",
+          "reported_published_at": "2026-11-13T17:55:00+02:00",
+          "url": "https://herzliyanet.co.il/ספורט/היתרון-ברח-בני-הרצליה-הפסידה-34-31-לרמת-השרון-811460",
+          "public_readback": "Audit reports public open failed; controller did not independently verify"
+        },
+        "raanana": "Audit reports no new local article since afternoon; last observed local item Nov11.",
+        "qualification": "Audit is read-only separate role; no original runtime prompt readback, writer attribution or controller public verification. Existing source-runtime-access incident remains open."
+      }
     },
     {
       "id": "tlvnet-legacy-work-activity-unverifiable",
@@ -1148,12 +1162,20 @@
           "task_id": "Automation_82add5edecd8819197814e83bac85a75",
           "run_id": "122b42e1-c6bc-8325-9797-95a2377b76c0",
           "inbox": "ops/incident-response/inbox/122b42e1-c6bc-8325-9797-95a2377b76c0-1.json"
+        },
+        {
+          "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+          "run_id": "1b1c98bb-0cec-832e-a20b-b2f45dcd4958",
+          "inbox": "ops/incident-response/inbox/1b1c98bb-0cec-832e-a20b-b2f45dcd4958-1.json",
+          "writer_runKey": "news-community-2026-11-13-19:00-1b1c98bb",
+          "new_publications": 0,
+          "task_enabled_after": false
         }
       ],
-      "impact": "Real-estate source write/publication deferred; primary transaction verification and image review also pending independently.",
+      "impact": "Real-estate publication remains deferred; 19:00 news/community run also published nothing and its exact task is now disabled. No active competing writer has been proved. Saved items independently still require primary/image checks.",
       "next_action": "Existing source Work owner must reconcile current old task/approval/activity state and confirm the old producer inactive through its authoritative interface; retain GitHub CAS. No controller editor substitute, gate removal or forced unlock.",
-      "observed_at": "2026-11-13T14:31:37.188Z",
-      "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895"
+      "observed_at": "2026-11-13T18:09:33.193Z",
+      "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524"
     },
     {
       "id": "tlvnet-policy11-owner-overlap",
@@ -1206,6 +1228,39 @@
       "next_action": "No automatic retry or schedule edit. If analytics restoration is requested, existing credential owner must configure authorized GA4 service-account access in the existing secret path and complete a manual check before any separately authorized scheduling change.",
       "controller_changes": false,
       "reported_runKey": "ops-2026-11-13-548c5169-77bc-8322-a4d1-e9148367a9d4"
+    },
+    {
+      "id": "tlvnet-news-runtime-paused-on-shared-blocker",
+      "status": "awaiting_external_action",
+      "fingerprint": "TLVNET/news/runtime-auto-pause/shared-legacy-Work-activity-precondition",
+      "root_cause": "The 19:00 writer reports an automation-runtime requirement to pause a fully blocked task. Its shared publication precondition (authoritative old Work publisher activity/approval verification) remained unavailable. Independent current task readback confirms disabled state despite publisher keep-active policy.",
+      "evidence": {
+        "inbox": "ops/incident-response/inbox/1b1c98bb-0cec-832e-a20b-b2f45dcd4958-1.json",
+        "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "run_id": "1b1c98bb-0cec-832e-a20b-b2f45dcd4958",
+        "started_at": "2026-11-13T17:02:45.604961Z",
+        "completed_at": "2026-11-13T17:06:42.469185Z",
+        "result_run_id": "1b1c98bb-0cec-832e-a20b-b2f45dcd4958",
+        "task_enabled": false,
+        "task_readback_verified": true,
+        "source_journal_commit": "15bd2ed3f863dec8a515d031cf9dd0a7f8e15638",
+        "lease_state": "free",
+        "lease_blob": "a12d830b717d7bb512c4857ce661c3b9d9fe4fb5",
+        "deployment_id": "appgdep_6af7198359108191ab682db3469d0c25",
+        "deployment_status": "succeeded",
+        "source_activity_unverified": true,
+        "no_competing_writer_proved": true
+      },
+      "impact": "No articles published by the 19:00 news/community run; news task paused, so future scheduled news publication is interrupted until authorized recovery.",
+      "next_action": "Authoritative source Work owner must verify/document old producer activity and pending approvals or complete its authorized retirement, preserving shared CAS/content/rights gates; after the precondition is resolved, an authorized runtime owner must resume this exact news task. Runtime owner must also reconcile auto-pause behavior with publisher continuity policy. Current controller mandate forbids is_enabled edits; no alternate writer, access bypass or invented inactivity proof.",
+      "controller_action": "Recorded and escalated new pause; no task/prompt/schedule/permission mutation, publication retry, forced unlock or deployment.",
+      "prevention": "Expose authoritative legacy producer/approval state to the permitted publication path and reconcile runtime pause behavior at its owner; item-specific failures must remain checkpointed without false success or removed gates.",
+      "related_incident_ids": [
+        "tlvnet-legacy-work-activity-unverifiable",
+        "news-preview-failure-self-disable"
+      ],
+      "observed_at": "2026-11-13T18:09:33.193Z",
+      "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524"
     }
   ],
   "last_review_runKey": "ops-2026-11-13-548c5169-77bc-8322-a4d1-e9148367a9d4",
