@@ -1,0 +1,218 @@
+{
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "runKey": "news-community-2026-11-13T120421Z-binding-check",
+  "recorded_at": "2026-11-13T12:05:13.895179+00:00",
+  "execution_context": {
+    "assignment": "Explicit current publisher news+community mandate",
+    "runtime_run_id": null,
+    "observed_scheduler_run": {
+      "id": "c8f6132a-7e38-832e-9d67-a790a2ad66c4",
+      "recorded_status": "in_progress",
+      "scheduled_for": "2026-11-13T12:00:00Z",
+      "started_at": "2026-11-13T11:55:13.290428Z",
+      "completed_at": null,
+      "chat_ref": null
+    },
+    "is_self_owned_automation": false,
+    "qualification": "Observed scheduled run is not claimed as this executor's run. Start-minute proximity alone does not bind executor identity; in_progress alone does not prove another live worker.",
+    "first_verified_clock_at": "2026-11-13T11:58:07Z",
+    "runKey_basis": "Clock at checkpoint creation, not adopted from scheduled run"
+  },
+  "status": "blocked_publication_ownership_unverified",
+  "sections_reviewed": [
+    {
+      "section": "news",
+      "published_records": 72,
+      "drafts": 0,
+      "last_publication": "center-tlv-police-impersonation-robbery-arrest-20261112",
+      "new_published": 0,
+      "reason": "No ready draft. Bus-priority candidate researched; publication cannot be assigned safely while current scheduled execution binding is unverified."
+    },
+    {
+      "section": "community",
+      "published_records": 24,
+      "drafts": 0,
+      "last_publication": "sigd-hadar-afeka-community-celebration-20261109",
+      "new_published": 0,
+      "reason": "No ready draft. Prepared existing-service explainer checkpoint below; no claim of newly launched volunteer intake."
+    }
+  ],
+  "source_commit": "d9f349c305b71918a0d491a05f48af7273e16ddf",
+  "previous_deployment": {
+    "version": 590,
+    "id": "appgdep_6af6ebd82848819180d55193fdc8d96d",
+    "status": "succeeded"
+  },
+  "fingerprint": "tlvnet/news/publication/execution-binding-nonself-inprogress",
+  "root_cause": "Not established. Automation peek reports the requested task active but is_self_owned_automation=false and last_run.chat_ref=null. No authoritative mapping of this executor to that run or verified exclusive publication ownership is available. This is not proof of routing_identity_mismatch, a live competing worker or a deployment lock.",
+  "next_action": "Existing controller/release owner to reconcile the scheduled run's executor binding and current publication ownership. Resume the saved checkpoints through the same authorized writer after identity/ownership is verified; preserve enabled state, schedule, source approvals and history.",
+  "sources_checked": [
+    {
+      "url": "https://www.google.com/search?q=%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91&tbs=qdr%3Ad&tbm=nws",
+      "status": "unavailable",
+      "read_full_text": false
+    },
+    {
+      "url": "https://tlvonline.co.il/",
+      "status": "index_read",
+      "read_full_text": false
+    },
+    {
+      "url": "https://telavivi.news/",
+      "status": "http_520",
+      "read_full_text": false
+    },
+    {
+      "url": "https://t.me/s/Israel_Police_100",
+      "status": "http_200_no_message_body",
+      "read_full_text": false
+    },
+    {
+      "url": "https://tlvonline.co.il/תוכנית-העדפת-האוטובוסים/",
+      "status": "full_secondary_read",
+      "source_date": "2026-11-12",
+      "read_full_text": true
+    },
+    {
+      "url": "https://tlvonline.co.il/למידה-שווה-לצוותי-ההוראה/",
+      "status": "full_secondary_read_duplicate_existing",
+      "source_date": "2026-11-11",
+      "read_full_text": true,
+      "existing_article_id": "equal-learning-gender-aware-education-20261110"
+    },
+    {
+      "url": "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/Volunteering.aspx",
+      "status": "full_primary_service_read_via_web_reader_direct_473",
+      "source_date": null,
+      "read_full_text": true
+    },
+    {
+      "url": "https://www.dorldor.org.il/activities",
+      "status": "full_primary_read",
+      "source_date": null,
+      "read_full_text": true
+    },
+    {
+      "url": "https://www.dorldor.org.il/tel-aviv",
+      "status": "full_primary_read",
+      "source_date": null,
+      "read_full_text": true
+    },
+    {
+      "url": "https://www.dorldor.org.il/join-us",
+      "status": "full_primary_read",
+      "source_date": null,
+      "read_full_text": true
+    },
+    {
+      "url": "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/PublicTransportation.aspx",
+      "status": "primary_background_page_opened_no_dated_program_confirmed",
+      "source_date": null,
+      "read_full_text": false
+    }
+  ],
+  "checkpoint": {
+    "article_id": "tlv-neighborhood-volunteering-regular-commitment-explainer-20261113",
+    "section": "community",
+    "content_kind": "explainer",
+    "status": "text_prepared_image_review_pending_publication_ownership_unverified",
+    "title": "להתנדב ליד הבית: איך בוחרים מסגרת שאפשר להתמיד בה",
+    "lead": "חונכות, ביקורי בית וקשר בין דורות: סקירת המסלולים הקיימים בתל אביב, והבירורים שכדאי לעשות לפני שמתחייבים.",
+    "body_html": "<p>התנדבות בעיר יכולה להתחיל קרוב לבית, אבל ההבדל בין רצון לעזור לבין מסגרת מתאימה נמצא בפרטים: למי מסייעים, באיזו תדירות ומה נדרש לפני המפגש הראשון. מסלולי ההתנדבות העירוניים ותוכנית דורות מציעים דרכים שונות לבנות קשר בקהילה. זו סקירת מסלולים קיימים, ולא הודעה על פתיחת מחזור חדש.</p><p><strong>לבחור גם תחום וגם אזור</strong></p><p>היחידה העירונית להתנדבות מפרטת אפשרויות לפי אזורים. במרכז ובצפון נכללים קשר עם אזרחים ותיקים, חונכות לימודית וסיוע למשפחות. בדרום וביפו מופיעים בין היתר ביקורי בית וקשר טלפוני להפגת בדידות; במזרח העיר נכללים גם שינוע וחלוקת מזון. הרשימה עוזרת למקד פנייה, אך אינה מבטיחה שיבוץ מיידי בתפקיד מסוים.</p><p><strong>מה קורה אחרי הפנייה</strong></p><p>במסלול העירוני, רכזת מציגה צרכים ומסגרות ובהמשך מתקיים ריאיון אישי. לפי הצורך אפשר לבקר במקומות התנדבות לפני הבחירה, ונלווים לתהליך הכשרה והדרכה. כדאי לברר מראש את תדירות המפגשים, מקום הפעילות ודרישות התפקיד, ואת התאמתם לזמן וליכולת שלכם.</p><p><strong>קשר בין דורות אינו מפגש חד־פעמי</strong></p><p>עמותת דור לדור מתארת את תוכנית דורות כקשר אישי בין צעירים לאזרחים ותיקים, עם מפגש לפחות פעם בשבוע. העמותה מציינת פעילות בתל אביב ושיתוף פעולה עם השירותים החברתיים בעיר. למי שמחפש קשר מתמשך, זו אפשרות שונה מהתנדבות באירוע בודד; מי שיכול להגיע רק לעיתים צריך לבדוק התאמה לפני התחייבות.</p><p>אין במקורות שנבדקו מועד חדש לקליטה, הבטחת מקום או תנאים אחידים לכל התפקידים. תיאום עם הגוף המפעיל נדרש גם בנוגע לגיל, לנגישות ולמיקום המפגש. כתובת משרד של עמותה אינה בהכרח כתובת הפעילות. בחירה טובה מתחילה במסגרת שאפשר להתמיד בה, ובציפיות ברורות של שני הצדדים.</p>",
+    "source_date": null,
+    "published_at": null,
+    "owner_automation_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+    "editor_review": {
+      "status": "text_checked_not_publication_approved",
+      "read_full_text": true,
+      "sources": [
+        "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/Volunteering.aspx",
+        "https://www.dorldor.org.il/activities",
+        "https://www.dorldor.org.il/tel-aviv",
+        "https://www.dorldor.org.il/join-us"
+      ]
+    },
+    "image_review": {
+      "status": "pending",
+      "reason": "No new image created, requested or approved while execution/publication ownership is unresolved. Existing intergenerational illustration identified for later actual visual and rights review."
+    },
+    "duplicate_check": "Compared all published news/community titles and bodies and existing domain ledgers. No existing dorldor explainer; food-parcel/Elifelet/event stories remain distinct. Recheck latest source before promotion.",
+    "body_sha256": "c20136af06c345c0c889c2da3887ac30bee6d4a02052f2450b4bf938007293ef"
+  },
+  "news_checkpoint": {
+    "topic": "bus-priority-program",
+    "source_url": "https://tlvonline.co.il/תוכנית-העדפת-האוטובוסים/",
+    "source_date": "2026-11-12",
+    "status": "research_checkpoint_not_ready",
+    "facts": "Secondary report: two-year targets 25% speed improvement,50% reliability,30% ridership; small terminals and bus-priority arrangements. Targets are not achieved results; no published changed line numbers or timetable verified.",
+    "next_action": "Find/read dated primary municipal program and any accessible independent coverage, then write original bounded article; do not infer current line changes or reuse source photo."
+  },
+  "newPublishedArticleIds": [],
+  "verifiedExistingArticleIds": [],
+  "existing_article_inspections": [
+    {
+      "article_id": "center-tlv-police-impersonation-robbery-arrest-20261112",
+      "http": 200,
+      "body_matches": true,
+      "title_matches": true,
+      "section_link": true,
+      "home_link": true,
+      "image_review": "not renewed this cycle"
+    },
+    {
+      "article_id": "sigd-hadar-afeka-community-celebration-20261109",
+      "http": 200,
+      "body_matches": true,
+      "title_matches": true,
+      "section_link": true,
+      "home_link": false,
+      "image_review": "not renewed this cycle"
+    }
+  ],
+  "writes": {
+    "tlv_source": false,
+    "build": false,
+    "deploy": false,
+    "enabled_or_schedule_changes": false,
+    "reason": "Existing domain-ledger source write deferred with the same publication ownership uncertainty; report+checkpoint stored in authorized operations journal/inbox without public build."
+  },
+  "not_claimed": [
+    "No new published article",
+    "No image or rendered visual approval",
+    "No routing defect fixed",
+    "No proof of another worker's liveness",
+    "No new wholesale network audit"
+  ],
+  "live_inspection": {
+    "checked_at": "2026-11-13T12:02:26.552219+00:00",
+    "items": [
+      {
+        "article_id": "center-tlv-police-impersonation-robbery-arrest-20261112",
+        "url": "https://tlvnet.com/news/center-tlv-police-impersonation-robbery-arrest-20261112",
+        "status": 200,
+        "body_matches": true,
+        "title_matches": true,
+        "section": "news",
+        "section_link": true,
+        "home_link": true,
+        "body_sha256": "cd0050f38fa7c08ab9864d44a79a55dbbc775914c8bad30502acd9026f8674e8",
+        "image_url": null,
+        "published_at": "2026-11-13T06:17:16.110128+00:00"
+      },
+      {
+        "article_id": "sigd-hadar-afeka-community-celebration-20261109",
+        "url": "https://tlvnet.com/news/sigd-hadar-afeka-community-celebration-20261109",
+        "status": 200,
+        "body_matches": true,
+        "title_matches": true,
+        "section": "community",
+        "section_link": true,
+        "home_link": false,
+        "body_sha256": "d51adf0e2cd7bdc7431db09adcf6eb1b08ccba4754e2f292b5fd0fecbe823a3f",
+        "image_url": null,
+        "published_at": "2026-11-09T09:35:00Z"
+      }
+    ],
+    "homepage_http": 200
+  }
+}
