@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T18:53:41.892Z",
+  "updated_at": "2026-11-14T19:54:20Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2322,9 +2322,65 @@
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7.json",
       "observed_at": "2026-11-14T18:53:41.892Z",
       "reported_runKey": "ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7"
+    },
+    {
+      "id": "tlvnet-local-parallel-public-prepare",
+      "status": "mitigated",
+      "root_cause": "Original sports writer reports overlapping local public generation transiently removed /about canonical metadata during SEO check; subsequent serial public preparation and actual framework build passed408canonicalchecks. Race reported by original owner; controller did not reproduce or modify code.",
+      "occurrences": [
+        {
+          "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+          "run_id": "47abf9a3-eae0-8328-9c3a-36c7c86fcaf5",
+          "source_commit": "0fafa8dc1f8410d118bd633af6db05017265d610",
+          "inbox": "ops/incident-response/inbox/47abf9a3-eae0-8328-9c3a-36c7c86fcaf5-sports.json",
+          "observed_at": "2026-11-14T19:54:20Z"
+        }
+      ],
+      "observed_at": "2026-11-14T19:54:20Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-e328787f-1650-832e-a10b-035d8dc48d4e.json",
+      "prevention": "Use one sequential prepare-public/build pipeline per checkout; preserve exact canonical gate and public release checks.",
+      "change": "No controller code/configuration/deployment; original owner's successful release retained.",
+      "tests": {
+        "owner": "Build/photo/fullbody/hash/SEO checks reported passed",
+        "controller": "Terminal603deployment and two complete publicarticle/image/credit/section/home/desktop verified",
+        "mobile": "pending"
+      },
+      "public_proof": [
+        "https://tlvnet.com/news/fenerbahce-tel-aviv-games-munich-20261114",
+        "https://tlvnet.com/news/hapoel-herzliya-home-win-20261114"
+      ],
+      "resolution": "Immediate publishing mitigated; no independently proven permanent prevention fix."
+    },
+    {
+      "id": "tlvnet-image-pinned-pnpm-unavailable",
+      "status": "mitigated",
+      "root_cause": "Original sports writer could not use image-pinnedpnpm in current environment. Exact package.json andpnpm-lock hashes matched local existing dependencies; regular framework build and release succeeded. Image provisioning cause not established.",
+      "occurrences": [
+        {
+          "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+          "run_id": "47abf9a3-eae0-8328-9c3a-36c7c86fcaf5",
+          "source_commit": "0fafa8dc1f8410d118bd633af6db05017265d610",
+          "inbox": "ops/incident-response/inbox/47abf9a3-eae0-8328-9c3a-36c7c86fcaf5-sports.json",
+          "observed_at": "2026-11-14T19:54:20Z"
+        }
+      ],
+      "observed_at": "2026-11-14T19:54:20Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-e328787f-1650-832e-a10b-035d8dc48d4e.json",
+      "prevention": "Use documented Sites dependency installer; verify selected runtime/pinnedpnpm before build and retain lockfile identity. Cacheddependencyfallback is not proof image runtime was permanently fixed.",
+      "change": "No controller code/configuration/deployment; original owner's successful release retained.",
+      "tests": {
+        "owner": "Build/photo/fullbody/hash/SEO checks reported passed",
+        "controller": "Terminal603deployment and two complete publicarticle/image/credit/section/home/desktop verified",
+        "mobile": "pending"
+      },
+      "public_proof": [
+        "https://tlvnet.com/news/fenerbahce-tel-aviv-games-munich-20261114",
+        "https://tlvnet.com/news/hapoel-herzliya-home-win-20261114"
+      ],
+      "resolution": "Immediate publishing mitigated; no independently proven permanent prevention fix."
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7",
+  "last_review_runKey": "ops-2026-11-14-e328787f-1650-832e-a10b-035d8dc48d4e",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
