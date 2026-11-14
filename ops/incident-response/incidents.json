@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T23:05:49Z",
+  "updated_at": "2026-11-14T23:16:03Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2293,6 +2293,23 @@
           "assertion": "Shared brand/category shell is missing or stale: SUPER.ASHDOD/compare/index.html",
           "log_read_full": true,
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43079925682"
+        },
+        {
+          "workflow": ".github/workflows/super-committed-snapshot-tests.yml",
+          "run_id": 43079758693,
+          "attempt": 1,
+          "created_at": "2026-11-11T18:38:53Z",
+          "source_commit": "b5b3a30fc89438e51cb96d51fe6b707c45c5a1f4",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43079758693",
+          "classification": "full_log_confirmed_historical_only",
+          "log_read_full": true,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100.json",
+          "observed_at": "2026-11-14T23:16:03Z",
+          "job_id": 130728898872,
+          "failed_step": "Verify committed output without generators or source collection",
+          "failed_command": "python scripts/super_ashdod_shell.py --check",
+          "assertion": "Shared brand/category shell is missing or stale: SUPER.ASHDOD/compare/index.html",
+          "root_id": "historical-super-ashdod-generated-shell-drift"
         }
       ],
       "observed_at": "2026-11-14T10:23:29.404Z",
@@ -2326,7 +2343,8 @@
           "git_apply_exact_expected": true
         },
         "scope": "Canonicalizes asset tag order in compare HTML only; body, prices and all four managed asset URLs/counts unchanged. Exact release gate retained."
-      }
+      },
+      "last_review_runKey": "ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100"
     },
     {
       "id": "historical-preflight-tlv-event-route-404",
@@ -2452,9 +2470,98 @@
         "https://tlvnet.com/news/hapoel-herzliya-home-win-20261114"
       ],
       "resolution": "Immediate publishing mitigated; no independently proven permanent prevention fix."
+    },
+    {
+      "id": "historical-super-cutover-html-fragment-head",
+      "status": "mitigated",
+      "temporal_scope": "historical_only",
+      "fingerprint": "super-delivery-cutover/prepare_pages_public.stage/MissingHTMLhead/SUPER.KGAT-assets-branding-super-shell",
+      "root_cause": "11Nov cutover attempted head injection into an HTML fragment under assets, which has no document head. Staging stopped before public deploy.",
+      "occurrences": [
+        {
+          "workflow": ".github/workflows/super-delivery-cutover.yml",
+          "run_id": 43084295391,
+          "attempt": 1,
+          "created_at": "2026-11-11T19:07:54Z",
+          "source_commit": "d86da0c48a78997f5434bb83cca6afee72bcde14",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43084295391",
+          "classification": "full_log_confirmed_historical_only",
+          "log_read_full": true,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100.json",
+          "observed_at": "2026-11-14T23:16:03Z",
+          "job_id": 130744541830,
+          "failed_step": "Route supermarket data without rebuilding news or events",
+          "failed_command": "scripts/prepare_pages_public.py",
+          "assertion": "ValueError: Missing HTML head: SUPER.KGAT/assets/branding/super-shell.html",
+          "publication_step": "skipped"
+        }
+      ],
+      "current_source_observation": {
+        "script_path": "scripts/prepare_pages_public.py",
+        "script_blob": "db2c267e697361968f7015f10073f98fbfa5f88b",
+        "test_path": "scripts/test_prepare_pages_public.py",
+        "test_blob": "3e4386fb97c2a795b8fdd020b9139482b5467c31",
+        "workflow_blob": "aae04bded838b4996b3fe33e4a38f039ef143003",
+        "guard": "HTML under assets is copied unchanged rather than injected as a full page",
+        "controller_changed_code": false
+      },
+      "regression": {
+        "current_existing_fixture": "passed, exit0",
+        "counterfactual_remove_only_assets_exclusion": "expected failure reproduces exact Missing HTML head / SUPER.KGAT/assets/branding/super-shell.html",
+        "network_requests": 0,
+        "catalog_reads": 0,
+        "public_writes": 0,
+        "scope": "isolated synthetic fixture and byte-exact rollback; no whole-site build or cutover"
+      },
+      "resolution": "Existing code mitigation and regression validated locally. No terminal deployment/current affected public bytes verified, so not fixed_verified.",
+      "next_action": "Retain fragment exclusion and regression. Existing authorized delivery owner validates exact public artifact on a genuine future release; do not rerun historical cutover or modify R2/DNS.",
+      "prevention": "Separate full-document HTML transformation from static HTML fragments and retain byte-exact rollback checks.",
+      "observed_at": "2026-11-14T23:16:03Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100.json",
+      "last_review_runKey": "ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100"
+    },
+    {
+      "id": "historical-super-rishon-private-upload-http520",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "super-current-rishon-private-pilot/stage_super_private_storage.publish/SUPER.RISHON-data-offers81/HTTP520",
+      "root_cause": "11Nov private immutable-upload attempt received HTTP520 for offers/81.json and raised before completed staging. Underlying origin/provider cause and present recurrence unestablished; no inference of quota/auth/R2 configuration failure.",
+      "occurrences": [
+        {
+          "workflow": ".github/workflows/super-current-rishon-private-pilot.yml",
+          "run_id": 43083983299,
+          "attempt": 1,
+          "created_at": "2026-11-11T19:05:57Z",
+          "source_commit": "be08a07c70fbb59efd5e140ec565c6b0d039e617",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43083983299",
+          "classification": "full_log_confirmed_historical_only",
+          "log_read_full": true,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100.json",
+          "observed_at": "2026-11-14T23:16:03Z",
+          "job_id": 130743469449,
+          "failed_step": "Privately upload original RISHON files to NEW immutable release and verify SHA256 of every readback",
+          "failed_command": "scripts/stage_super_private_storage.py:99",
+          "assertion": "RuntimeError: Upload failed SUPER.RISHON/data/offers/81.json HTTP520 error code520",
+          "private_stage_completed": false,
+          "public_cutover": false
+        }
+      ],
+      "current_source_observation": {
+        "workflow_path": ".github/workflows/super-current-rishon-private-pilot.yml",
+        "workflow_lookup": "404 at current main; not retried",
+        "script_path": "scripts/stage_super_private_storage.py",
+        "script_lookup": "404 at current main; not retried",
+        "qualification": "Absent current paths do not prove all historical routes retired or public service repaired."
+      },
+      "resolution": "Historical evidence preserved only. No private storage upload, migration, credential read, configuration change or collector invoked.",
+      "next_action": "Do not resurrect historical pilot. If the existing delivery owner observes a new corresponding failure on its current route, correlate exact request/release and provider response before one justified retry; preserve immutable-release and SHA readback checks.",
+      "prevention": "Keep private staging success separate from public publication; never publish a partial staged manifest or bypass exact bytes verification.",
+      "observed_at": "2026-11-14T23:16:03Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100.json",
+      "last_review_runKey": "ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-2eb45d4f-892c-832a-ab3d-ade0da32a84e",
+  "last_review_runKey": "ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
