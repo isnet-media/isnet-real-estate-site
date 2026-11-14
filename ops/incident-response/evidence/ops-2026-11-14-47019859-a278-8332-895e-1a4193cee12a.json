@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "47019859-a278-8332-895e-1a4193cee12a",
+  "runKey": "ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a",
+  "policy_version": "2026-11-14/1.1",
+  "started_at": "2026-11-14T09:07:06.438477Z",
+  "scheduled_for": "2026-11-14T09:35:00Z",
+  "observed_at": "2026-11-14T09:11:12.935Z",
+  "source_sha": "507e70976ffe9a8e84504acc4af158cfa7153799",
+  "targets_reviewed": [
+    "New Actions and pending runs",
+    "Incident inbox",
+    "10 original writer runtime/result pairs",
+    "TLVNET Sites597 terminal deployment and publication lease",
+    "Bounded DB.social_runs page",
+    "Herzliya CMS811483 and category2181",
+    "Bounded public article/home fetches and one historical snapshot check log"
+  ],
+  "new_workflow_runs": 2,
+  "new_workflow_failures": 0,
+  "new_task_results": 1,
+  "new_inbox": {
+    "schema_version": 1,
+    "observed_at": "2026-11-14T08:58:37.888Z",
+    "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+    "run_id": null,
+    "runKey": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-14T10-22-58+02-00",
+    "kind": "isnet_cms_create_post_optional_field_validation",
+    "status": "mitigated_published_verified",
+    "policy_version": "2026-11-14/1.0",
+    "signature": "ISNET-CMS/future/create_post/INVALID_ARGUMENT",
+    "evidence": "The first batched create_post request was rejected with INVALID_ARGUMENT on all ten targets while category, image and article content were already validated.",
+    "correction": "One materially targeted retry removed unsupported optional createDate/subTitle-style fields and used the minimal documented create payload. All ten posts were created once, then read back through CMS and verified on their public article and category pages.",
+    "impact": "No duplicate posts and no missing target. TLVNET publication was unaffected.",
+    "resulting_post_ids": [
+      811479,
+      811480,
+      811481,
+      811482,
+      811483,
+      811484,
+      811486,
+      811485,
+      811488,
+      811487
+    ],
+    "remaining": "Five ISNET homepages do not render the current future article card; the article and section card are live. No homepage-template change was attempted by this writer.",
+    "no_public_deploy": true,
+    "controller_action": "Classify the rejected optional-field combination and document the accepted create_post payload; separately inspect homepage module configuration for Bat Yam, Gedera, Herzliya, Holon and Kiryat Gat."
+  },
+  "new_social_runs": 0,
+  "new_site_versions": 1,
+  "original_writer_reported_publications": 11,
+  "publications_verified_this_cycle": 0,
+  "history_added": 0,
+  "history_full_logs": [
+    43079925682
+  ],
+  "history_remaining": "Metadata covered; retained unconfirmed root groups remain, no historical rescan.",
+  "build_or_deploy": false,
+  "unchanged_blocker_retries": 0,
+  "automation_or_permission_changes": false,
+  "social_attempts": 0,
+  "claims_or_settings_changes": false,
+  "supermarket_collection": false,
+  "supermarket_public_scan": false,
+  "visual_review": "Not performed; original desktop report retained, mobile pending.",
+  "api_billing_measured": false,
+  "cost": null,
+  "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json",
+  "conclusion": "Reconciled pending original future writer completion, terminal597 and proper lease release. Optional-payload CMS failure mitigated by writer; exact invalid field unproved. New five-city homepage gap awaits authorized module/template read access. Historical shell drift classified, not a current price failure. No independent public publication proof from inaccessible fetch paths.",
+  "original_writer_result": {
+    "last_run": {
+      "id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-14T08:00:00Z",
+      "started_at": "2026-11-14T08:55:38.235186Z",
+      "completed_at": "2026-11-14T08:59:58.940500Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6aed7da7-acdc-83eb-a2ce-ab27bfac8cc0"
+      }
+    },
+    "latest_result": {
+      "run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
+      "created_at": "2026-11-14T08:59:58.823818Z",
+      "scheduled_for": "2026-11-14T08:00:00Z",
+      "completed_at": "2026-11-14T08:59:58.940500Z",
+      "content_text": "המחזור הושלם עם כתבה מקורית אחת בלבד — `published_verified`:\n\n### הכתבה\n\n[החלון הבא לא יחכה שתדליקו מזגן: הוא יחליט לבד מתי להחשיך](https://tlvnet.com/future/article-daily-2026-11-14)\n\nאומתו ב־TLVNET: גוף מלא, תמונת JPG, קרדיט „אילוסטרציה – AI”, כרטיס המדור והופעה בעמוד הבית.\n\n### הפצת הרשת\n\nהכתבה המלאה, התמונה והקרדיט אומתו גם ב־[אשדוד נט](https://ashdodnet.com/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811479), [בת ים נט](https://batyamnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811480), [גדרה נט](https://gederanet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811481), [גן יבנה נט](https://www.ganyavne.net/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811482), [הרצליה נט](https://herzliyanet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811483), [חולון נט](https://holonnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811484), [יבנה נט](https://www.yavnenet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811486), [ישובניק נט](https://www.yeshuvnik.net/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811485), [קריית גת נט](https://kgatnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811488) וב־[ראשון נט](https://www.rishonet.com/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811487).\n\nכרטיס המדור אומת בכל עשרת האתרים. כרטיס עמוד הבית הופיע בחמישה מהם; בבת ים, גדרה, הרצליה, חולון וקריית גת עמוד הבית אינו מציג כרגע את הכתבה החדשה, אף שהיא חיה ומופיעה בראש המדור. הפער הועבר לתור התפעולי יחד עם תקלת אימות CMS שנפתרה, ללא כפילויות. בדיקת מובייל חזותית נותרה ממתינה; בדיקת הדסקטופ עברה.",
+      "content_truncated": false,
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6aed7da7-acdc-83eb-a2ce-ab27bfac8cc0"
+      },
+      "requires_user_action": false,
+      "is_failure_message": false
+    },
+    "delivery_status": "unknown"
+  },
+  "public_urls": [
+    "https://tlvnet.com/future/article-daily-2026-11-14",
+    "https://ashdodnet.com/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811479",
+    "https://batyamnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811480",
+    "https://gederanet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811481",
+    "https://www.ganyavne.net/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811482",
+    "https://herzliyanet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811483",
+    "https://holonnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811484",
+    "https://www.yavnenet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811486",
+    "https://www.yeshuvnik.net/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811485",
+    "https://kgatnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811488",
+    "https://www.rishonet.com/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811487"
+  ],
+  "deployment": {
+    "id": "appgdep_6af81ebf3144819195ef7dbb948159c8",
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "title": "תל אביב נט — חדר המערכת",
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_2a38f9f907a081919b491accab99af7e",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_00000000f4a881f58e59f2b26622510f",
+    "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-11-14T08:41:49.227001+00:00"
+  },
+  "lease_release": {
+    "owner": "Automation_09c630803fe481919ccd2f476f0d6916",
+    "run_key": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-14T10-22-58+02-00",
+    "released_at": "2026-11-14T08:57:07.217Z",
+    "source_commit": "544ea1ff49a87fdedfb6c5d843ee82bd33e2d26d",
+    "verification_commit": "544ea1ff49a87fdedfb6c5d843ee82bd33e2d26d",
+    "deployment_id": "appgdep_6af81ebf3144819195ef7dbb948159c8",
+    "status": "succeeded",
+    "published_verified": 1,
+    "public_readback": true,
+    "desktop_visual_review": "passed",
+    "mobile_visual_review": "pending",
+    "policy_version": "2026-11-14/1.0"
+  },
+  "cms_herzliya": {
+    "id": 811483,
+    "categoryId": 2181,
+    "template": false,
+    "hide": false,
+    "defaultImageId": 850822,
+    "body_read_full": true
+  },
+  "public_fetch_limits": {
+    "web": "TLVNET article, provider host article and Herzliya article inaccessible; homepages returned dated13Nov text.",
+    "direct_get": "403 on TLVNET and5homepages; initial local requests dependency absent corrected once via standard urllib; no site-outage inference."
+  },
+  "historical_diagnosis": {
+    "id": "historical-super-ashdod-generated-shell-drift",
+    "status": "open",
+    "temporal_scope": "historical_only",
+    "fingerprint": "super-committed-snapshot-tests/super_ashdod_shell.py--check/SUPER.ASHDOD-compare-shell-stale",
+    "root_cause": "11Nov committed snapshot check found compare/index.html differs from expected shared brand/category shell. Check-only generator assertion failed; preceding basket/data checks passed. No collection or price source failure established.",
+    "occurrences": [
+      {
+        "run_id": 43079925682,
+        "attempt": 1,
+        "job_id": 130729495484,
+        "created_at": "2026-11-11T18:40:00Z",
+        "source_commit": "28f34ad3e352d455dcb745d6db88d6718db56578",
+        "failed_step": "Verify committed output without generators or source collection",
+        "failed_command": "python scripts/super_ashdod_shell.py --check",
+        "assertion": "Shared brand/category shell is missing or stale: SUPER.ASHDOD/compare/index.html",
+        "log_read_full": true,
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43079925682"
+      }
+    ],
+    "observed_at": "2026-11-14T09:11:12.935Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json",
+    "change": "Diagnosis only, no generator execution, collection, code edit, deploy or current outage claim.",
+    "next_action": "Review current generated shell correspondence in original source before proposing isolated correction. Preserve checks; no outside-window catalog/public supermarket scan.",
+    "prevention": "Commit generator and its generated pages atomically and run --check on exact committed output."
+  },
+  "source_files": [
+    {
+      "path": "ops/incident-response/state.json",
+      "sha": "64e02a929f214ffa1d7886c8b9136ab504869dc1"
+    },
+    {
+      "path": "ops/incident-response/incidents.json",
+      "sha": "a59be653900aec8c77134d371fe932974d9ac9ff"
+    }
+  ],
+  "social": {
+    "new_rows": 0,
+    "rows_seen": 2,
+    "next_offset": null,
+    "settings_read": false
+  },
+  "homepage_write_capability": "No layout/module read or write in current CMS connector; category share/hide is not homepage binding."
+}

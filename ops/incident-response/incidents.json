@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T08:29:54.014Z",
+  "updated_at": "2026-11-14T09:11:12.935Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1948,6 +1948,83 @@
       "next_action": "Continue bounded triage from saved root groups; inspect recorded field differences/source provenance when this signature next needs work. Preserve exact comparison and existing identity/media gates; do not retry old workflow or weaken gate.",
       "prevention": "Record actual differing fields and source/deploy hashes in audit artifacts so non-priority drift can be distinguished from availability and identity errors.",
       "reported_runKey": "ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4"
+    },
+    {
+      "id": "future-cms-create-post-optional-payload-validation",
+      "status": "mitigated",
+      "root_cause": "First batched create_post payload returned INVALID_ARGUMENT on10 targets. Original writer reports one changed-payload retry omitted optional createDate/subTitle-style fields and all10 posts succeeded. Exact invalid field/value combination not retained; current tool schema explicitly accepts both fields, so unsupported-field root cause is not established.",
+      "occurrences": [
+        {
+          "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+          "run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
+          "runKey": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-14T10-22-58+02-00",
+          "observed_at": "2026-11-14T08:58:37.888Z",
+          "inbox": "ops/incident-response/inbox/20261114-future-cms-create-post-validation.json"
+        }
+      ],
+      "change": "Original writer used minimal documented create payload; no controller repost or schema change.",
+      "tests": {
+        "original_writer": "Reported CMS and public full body/image/credit/category verification on10 destinations.",
+        "controller": "CMS Herzliya811483 readback template=false, hide=false, category2181, full body, image850822 and tags; no independent public body/image verification due read access."
+      },
+      "prevention": "Use required title/categoryId/defaultImageId/tags plus content/description/creatorName/publish as appropriate; tags is comma-separated string. Add optional fields only as needed with schema-valid values. Keep existing post IDs and dedup before retry; never recreate published posts.",
+      "resolution": "Mitigated through original-owner changed payload, not independently fixed_verified.",
+      "observed_at": "2026-11-14T09:11:12.935Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json"
+    },
+    {
+      "id": "future-magazine-five-city-homepage-card-gap",
+      "status": "awaiting_external_action",
+      "root_cause": "Original writer reports future article public in all10 city sections, but missing homepage card in Bat Yam55, Gedera51, Herzliya62, Holon60 and Kiryat Gat61. Exact renderer/module/cache cause not established.",
+      "occurrences": [
+        {
+          "run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
+          "post_ids": [
+            811480,
+            811481,
+            811483,
+            811484,
+            811488
+          ],
+          "source_inbox": "ops/incident-response/inbox/20261114-future-cms-create-post-validation.json"
+        }
+      ],
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json",
+      "observed_at": "2026-11-14T09:11:12.935Z",
+      "change": "No article recreation, post promotion, category or template mutation.",
+      "tests": {
+        "cms_herzliya": "Post811483 is live, correct category2181, body and image set. Category2181 hide=false.",
+        "public_home_read": "Search fetches of Herzliya/Holon show dated13Nov pages; not conclusive current card evidence. Direct GETs return403 from current environment. No new visual signoff.",
+        "all_five_public": "Original writer report only; not independently reverified."
+      },
+      "next_action": "Existing CMS/template operator must expose/read the five homepage future-category module bindings and refresh/cache status in the authorized layout interface or provide that template source route. Current connector exposes post/category/website metadata only, no homepage module configuration API. Do not toggle share/hide/order or recreate article to guess a fix.",
+      "prevention": "Include each destination homepage module/category binding in network-distribution acceptance checks, separate from article and section success."
+    },
+    {
+      "id": "historical-super-ashdod-generated-shell-drift",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "super-committed-snapshot-tests/super_ashdod_shell.py--check/SUPER.ASHDOD-compare-shell-stale",
+      "root_cause": "11Nov committed snapshot check found compare/index.html differs from expected shared brand/category shell. Check-only generator assertion failed; preceding basket/data checks passed. No collection or price source failure established.",
+      "occurrences": [
+        {
+          "run_id": 43079925682,
+          "attempt": 1,
+          "job_id": 130729495484,
+          "created_at": "2026-11-11T18:40:00Z",
+          "source_commit": "28f34ad3e352d455dcb745d6db88d6718db56578",
+          "failed_step": "Verify committed output without generators or source collection",
+          "failed_command": "python scripts/super_ashdod_shell.py --check",
+          "assertion": "Shared brand/category shell is missing or stale: SUPER.ASHDOD/compare/index.html",
+          "log_read_full": true,
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43079925682"
+        }
+      ],
+      "observed_at": "2026-11-14T09:11:12.935Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json",
+      "change": "Diagnosis only, no generator execution, collection, code edit, deploy or current outage claim.",
+      "next_action": "Review current generated shell correspondence in original source before proposing isolated correction. Preserve checks; no outside-window catalog/public supermarket scan.",
+      "prevention": "Commit generator and its generated pages atomically and run --check on exact committed output."
     }
   ],
   "last_review_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79",

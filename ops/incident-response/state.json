@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T08:30:56.110Z",
+  "updated_at": "2026-11-14T09:11:12.935Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-14T08:14:42Z",
+  "last_processed_run_created_at": "2026-11-14T08:59:19Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
     "window_start": "2026-11-06T04:26:25Z",
     "window_end": "2026-11-13T04:26:25Z",
     "seed_history_is_partial": true,
-    "metadata_runs_this_cycle": 43,
+    "metadata_runs_this_cycle": 0,
     "metadata_from": "2026-11-06T08:01:14Z",
     "metadata_through": "2026-11-06T04:26:25Z",
     "continuation": {
@@ -21,7 +21,7 @@
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4.json"
     },
     "full_logs_read_this_cycle": [
-      42183298017
+      43079925682
     ],
     "unconfirmed_publish_failure_ids": [
       43357968256,
@@ -977,7 +977,7 @@
           "created_at": "2026-11-11T18:40:00Z",
           "source_commit": "28f34ad3e352d455dcb745d6db88d6718db56578",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43079925682",
-          "classification": "historical metadata only; root signature not confirmed in this cycle"
+          "classification": "Full log read and linked to historical-super-ashdod-generated-shell-drift. No current regression check."
         },
         {
           "run_id": 43079758693,
@@ -3330,7 +3330,7 @@
         }
       ]
     },
-    "metadata_rows_inspected_this_cycle": 100,
+    "metadata_rows_inspected_this_cycle": 0,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z"
   },
   "inbox_path": "ops/incident-response/inbox/",
@@ -3358,54 +3358,47 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "9590c5dd-ba6c-8332-86c4-985b56f032b4",
-    "runKey": "ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4",
+    "run_id": "47019859-a278-8332-895e-1a4193cee12a",
+    "runKey": "ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a",
     "policy_version": "2026-11-14/1.1",
-    "scheduled_for": "2026-11-14T08:35:00Z",
-    "started_at": "2026-11-14T08:24:22.109766Z",
-    "observed_at": "2026-11-14T08:30:56.110Z",
-    "source_sha": "e43933bc911e6a94de2d7c206a10e8b26336f43d",
+    "started_at": "2026-11-14T09:07:06.438477Z",
+    "scheduled_for": "2026-11-14T09:35:00Z",
+    "observed_at": "2026-11-14T09:11:12.935Z",
+    "source_sha": "507e70976ffe9a8e84504acc4af158cfa7153799",
     "targets_reviewed": [
-      "Actions after saved watermark and pending IDs",
-      "Existing incident inbox",
-      "10 writer last-run/result pairs",
-      "Latest TLVNET Sites versions596/595",
-      "TLVNET DB.social_runs bounded page25 offset0 next=null",
-      "Original seven-day history final metadata page and one new historical signature log"
+      "New Actions and pending runs",
+      "Incident inbox",
+      "10 original writer runtime/result pairs",
+      "TLVNET Sites597 terminal deployment and publication lease",
+      "Bounded DB.social_runs page",
+      "Herzliya CMS811483 and category2181",
+      "Bounded public article/home fetches and one historical snapshot check log"
     ],
     "new_workflow_runs": 2,
     "new_workflow_failures": 0,
-    "new_inbox": 0,
+    "new_task_results": 1,
+    "new_inbox": 1,
     "new_social_runs": 0,
-    "new_site_versions": 0,
-    "new_completed_task_results": 0,
-    "new_in_progress_task_runs": [
-      {
-        "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
-        "run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
-        "started_at": "2026-11-14T08:22:56.421498Z",
-        "recorded_status": "in_progress"
-      }
-    ],
+    "new_site_versions": 1,
+    "original_writer_reported_publications": 11,
     "publications_verified_this_cycle": 0,
-    "history_added": 43,
+    "history_added": 0,
     "history_full_logs": [
-      42183298017
+      43079925682
     ],
-    "history_remaining": "Original seven-day metadata window fully covered; root triage remains partial. Continue saved untriaged_workflow_groups and unconfirmed_publish_failure_ids; do not rescan covered metadata.",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4.json",
+    "history_remaining": "Metadata covered; retained unconfirmed root groups remain, no historical rescan.",
     "build_or_deploy": false,
-    "visual_review": "Not performed; previously pending mobile checks remain pending.",
     "unchanged_blocker_retries": 0,
     "automation_or_permission_changes": false,
     "social_attempts": 0,
     "claims_or_settings_changes": false,
     "supermarket_collection": false,
     "supermarket_public_scan": false,
-    "cost": null,
+    "visual_review": "Not performed; original desktop report retained, mobile pending.",
     "api_billing_measured": false,
-    "conclusion": "No new current Actions failure, inbox, social row or Site version. Future-magazine original writer in progress; older latest result not attributed to it. Successful bounded GitHub queue processor is not proof of live publication. Original retrospective metadata window covered; retained root triage incomplete. Historical exact-feed parity mismatch documented without current-outage or fixed_verified claim.",
-    "checkpoint_retry": "One focused Git CAS retry after fresh read of concurrent owner lease commit; ops blobs unchanged. Lease preserved."
+    "cost": null,
+    "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json",
+    "conclusion": "Reconciled pending original future writer completion, terminal597 and proper lease release. Optional-payload CMS failure mitigated by writer; exact invalid field unproved. New five-city homepage gap awaits authorized module/template read access. Historical shell drift classified, not a current price failure. No independent public publication proof from inaccessible fetch paths."
   },
   "concurrent_controller_observation": {
     "run_id": "716eaf32-dc10-8332-928d-981dd3ccd2e6",
@@ -3420,11 +3413,11 @@
       "recorded_status": "completed",
       "result": "פורסמה ואומתה [הידיעה על מציאת הגופה ברחוב בן יהודה](https://tlvnet.com/news/ben-yehuda-construction-site-body-found-20261114), כולל גוף מלא, תמונה מורשית, קרדיט וקישורים מהבית ומהמדור.\n\nאומתו גם שתי כתבות התחבורה שכבר פורסמו הבוקר; הן לא נספרו כפרסומים חדשים.\n\nארבעה פריטים נשמרו להשלמת אימות, ובהם קו 171. תצוגת המחשב נבדקה; בדיקת המובייל עדיין ממתינה.",
       "result_run_id": "cf7874b1-48a4-832a-b3fc-af7c8de865e9",
-      "observed_at": "2026-11-14T08:29:54.014Z",
+      "observed_at": "2026-11-14T09:11:12.935Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T06:18:10.998988Z",
-      "qualification": "Exact runtime/result matched; public proof only where explicitly recorded.",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
       "effective_policy": "2026-11-14/1.0"
     },
     "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
@@ -3435,11 +3428,11 @@
       "recorded_status": "completed",
       "result": "פורסמה ואומתה [הכתבה על הפועל תל אביב מול בני הרצליה הערב](https://tlvnet.com/news/hapoel-herzliya-home-preview-20261114), כולל גוף מלא, צילום מורשה, קרדיט והפניות מהבית וממדור הספורט.\n\nסיכום הדרבי וההכנה למכבי–ירושלים כבר פורסמו הבוקר ולא שוכפלו. בדיקת המובייל עדיין ממתינה.",
       "result_run_id": "4401da0c-8cb4-832c-b423-c2d8e4ddb5c0",
-      "observed_at": "2026-11-14T08:29:54.014Z",
+      "observed_at": "2026-11-14T09:11:12.935Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T07:21:05.121794Z",
-      "qualification": "Exact runtime/result matched; public proof only where explicitly recorded.",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
       "effective_policy": "2026-11-14/1.3"
     },
     "Automation_82add5edecd8819197814e83bac85a75": {
@@ -3450,11 +3443,11 @@
       "recorded_status": "completed",
       "result": "לא פורסמה כתבת נדל״ן חדשה. אין טיוטות מוכנות; נשמרו טיוטת מחקר ומקורות על מימון שני בניינים בצפון תל אביב, להשלמת אימות ותמונה.\n\nהפרסום חסום עד לאימות שמסלול Work הישן אינו פעיל, כנדרש בנוהל הנעילה. החסם והפעולה הנדרשת נרשמו בתור הבקר הקיים. לא בוצעה פריסה ולא שונו תזמונים.",
       "result_run_id": "122b42e1-c6bc-8325-9797-95a2377b76c0",
-      "observed_at": "2026-11-14T08:29:54.014Z",
+      "observed_at": "2026-11-14T09:11:12.935Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-13T14:18:37.959363Z",
-      "qualification": "Exact runtime/result matched; public proof only where explicitly recorded.",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
       "effective_policy": "2026-11-14/1.0"
     },
     "Automation_a32c48a7ae848191a5769078a5c74a09": {
@@ -3465,11 +3458,11 @@
       "recorded_status": "completed",
       "result": "פורסמה ואומתה [הכתבה החדשה על Bay התל אביבית](https://tlvnet.com/news/bay-ai-agent-security-series-a-tlv-20261113), כולל תמונה מסומנת, קרדיט וקישורים במדור ובעמוד הבית. נבדקה גם התצוגה במחשב וברוחב מובייל.\n\nבצרכנות לא נמצא חידוש מאומת שמצדיק פרסום נוסף.",
       "result_run_id": "aebb15d7-f410-832f-bda0-94048c2599d9",
-      "observed_at": "2026-11-14T08:29:54.014Z",
+      "observed_at": "2026-11-14T09:11:12.935Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-13T10:55:35.947526Z",
-      "qualification": "Exact runtime/result matched; public proof only where explicitly recorded.",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
       "effective_policy": "2026-11-14/1.0"
     },
     "Automation_53543605ce188191ba90f3f1979203dc": {
@@ -3480,11 +3473,11 @@
       "recorded_status": "completed",
       "result": "לא פורסמו שינויים: קיימת נעילת פרסום תקפה של כתב הספורט.\n\nנשמרו בתור הבקרה שני תיקונים להמשך:\n\n- הסרת הניסוח שהתיישן ״נפתחת היום״ מכתבת מוזיאון העיר.\n- עדכון Mozaik Ses מהוצאה מתוכננת להוצאה שיצאה; נדרשת גם תמונה מאושרת.\n\nנשמרו גם שני מועמדים נוספים להשלמת אימות. לא בוצעה פריסה מתחרה.",
       "result_run_id": "e6d4b4b3-779c-8321-850a-cd86b3554385",
-      "observed_at": "2026-11-14T08:29:54.014Z",
+      "observed_at": "2026-11-14T09:11:12.935Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T07:16:27.543470Z",
-      "qualification": "Exact runtime/result matched; public proof only where explicitly recorded.",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
       "effective_policy": "2026-11-14/1.0"
     },
     "Automation_e03d80ff914c8191a790fc66e7447826": {
@@ -3495,8 +3488,8 @@
       "recorded_status": "completed",
       "result": "מחזור הקהילה חסום: ההגדרות פעילות, אך אין בגישה הקיימת אפשרות לאמת נעילה משותפת ובעלות בלעדית מול ריצות ענן אחרות.\n\nלא התחלתי איסוף, לא שיניתי יומן ולא פרסמתי כתבות. השהיתי את משימת הקהילה ואימתתי את ההשהיה. להמשך נדרשת גישה למנגנון הנעילות הקיים של הפרויקט.",
       "result_run_id": "c97beaad-cd30-8330-9df3-7b461ec8f43d",
-      "qualification": "Exact runtime/result matched; public proof only where explicitly recorded.",
-      "observed_at": "2026-11-14T08:29:54.014Z",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
+      "observed_at": "2026-11-14T09:11:12.935Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-09T14:08:31.139902Z",
@@ -3510,8 +3503,8 @@
       "recorded_status": "completed",
       "result": "בדיקת הצרכנות נחסמה: ההגדרות פעילות, אך אין גישה לאימות נעילה מול עבודות מקבילות; ממשק הבקרה מחזיר 403 ודורש הרשאת מנהל.\n\nלא נאסף תוכן חדש, לא פורסמו ידיעות ולא שונה האתר. השהיתי את משימת הצרכנות עד שתתאפשר בדיקת בלעדיות מוסמכת. התוצאה היא חסם, לא מחזור שהושלם בהצלחה.",
       "result_run_id": "b59793ab-11a8-8328-8646-77716a7657ec",
-      "qualification": "Exact runtime/result matched; public proof only where explicitly recorded.",
-      "observed_at": "2026-11-14T08:29:54.014Z",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
+      "observed_at": "2026-11-14T09:11:12.935Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-09T15:36:39.741108Z",
@@ -3526,24 +3519,22 @@
       "result": "פורסמה היום כתבה אחת בלבד בתרבות נט:\n\n[״שש שעות, 800 עמודים וסופרת אחת שנכנסת לבמה בלי לדפוק״](https://tlvnet.com/culture/article-daily-2026-11-08)\n\nהכתבה המלאה עלתה עם צילום הפקה רשמי של ה־RSC וקרדיט ל־Johan Persson. אומתו באתר החי:\n\n- הכתבה ועמוד מדור תרבות נט\n- הכרטיסייה בגלריית עמוד הבית\n- רישום הפרסום ביומן הכתב ל־8 בנובמבר\n- מניעת כתבה יומית שנייה\n- תקינות בנייה, SEO והרשאות הפרסום",
       "result_run_id": "50641e69-2620-8330-9faa-3ad049e05402",
       "result_created_at": "2026-11-08T06:19:35.954596Z",
-      "observed_at": "2026-11-14T08:29:54.014Z",
-      "qualification": "Latest result belongs to an earlier run; not evidence of current-run success or failure.",
+      "observed_at": "2026-11-14T09:11:12.935Z",
+      "qualification": "Latest result is from an older run; no current-success attribution.",
       "effective_policy": "2026-11-14/1.0"
     },
     "Automation_09c630803fe481919ccd2f476f0d6916": {
       "enabled": true,
       "last_run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
-      "started_at": "2026-11-14T08:22:56.421498Z",
-      "completed_at": null,
-      "recorded_status": "in_progress",
-      "result": "הפרסום הושלם בהצלחה בשני המדורים.\n\n- **תרבות נט — published:** [ג׳ודי היומן לא באה לעורר השראה](https://tlvnet.com/culture/article-daily-2026-11-12)\n- **החיים של המחר — published:** [האפליקציה של בית הספר העירה ילד בחצות](https://tlvnet.com/future/article-daily-2026-11-12)\n\nשתיהן מופיעות במדורים ובעמוד הבית של TLVNET. כל כתבה הופצה גם לעשרת אתרי הרשת: אשדוד, בת ים, גדרה, גן יבנה, הרצליה, חולון, יבנה, יישובניק, קריית גת וראשון.\n\nבסך הכול אומתו:\n\n- 20 פרסומי רשת עם גוף מלא.\n- קטגוריה ותמונה נכונות בכל יעד.\n- תמונות עם קרדיט וזכויות מתועדות.\n- מניעת כפילויות לפי המדור והתאריך הישראלי.\n- יומן ההפצה הציבורי עודכן ונפרס בגרסה 575.\n- השינויים המקבילים של מערכת החדשות נשמרו ולא נדרסו.\n\nאין כרגע פערי הפצה או חסמים פתוחים בשני המדורים.",
-      "result_run_id": "f79190ca-9dbc-832f-bba6-ce60c1364879",
-      "result_created_at": "2026-11-12T08:11:41.662773Z",
-      "observed_at": "2026-11-14T08:29:54.014Z",
-      "qualification": "Latest result belongs to an earlier run; not evidence of current-run success or failure.",
-      "effective_policy": "2026-11-14/1.0",
-      "pending_run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
-      "pending_reason": "Revisit terminal status/result next cycle regardless of creation watermark. Give original writer priority; no dispatch or competing publication."
+      "started_at": "2026-11-14T08:55:38.235186Z",
+      "completed_at": "2026-11-14T08:59:58.940500Z",
+      "recorded_status": "completed",
+      "result": "המחזור הושלם עם כתבה מקורית אחת בלבד — `published_verified`:\n\n### הכתבה\n\n[החלון הבא לא יחכה שתדליקו מזגן: הוא יחליט לבד מתי להחשיך](https://tlvnet.com/future/article-daily-2026-11-14)\n\nאומתו ב־TLVNET: גוף מלא, תמונת JPG, קרדיט „אילוסטרציה – AI”, כרטיס המדור והופעה בעמוד הבית.\n\n### הפצת הרשת\n\nהכתבה המלאה, התמונה והקרדיט אומתו גם ב־[אשדוד נט](https://ashdodnet.com/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811479), [בת ים נט](https://batyamnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811480), [גדרה נט](https://gederanet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811481), [גן יבנה נט](https://www.ganyavne.net/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811482), [הרצליה נט](https://herzliyanet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811483), [חולון נט](https://holonnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811484), [יבנה נט](https://www.yavnenet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811486), [ישובניק נט](https://www.yeshuvnik.net/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811485), [קריית גת נט](https://kgatnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811488) וב־[ראשון נט](https://www.rishonet.com/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811487).\n\nכרטיס המדור אומת בכל עשרת האתרים. כרטיס עמוד הבית הופיע בחמישה מהם; בבת ים, גדרה, הרצליה, חולון וקריית גת עמוד הבית אינו מציג כרגע את הכתבה החדשה, אף שהיא חיה ומופיעה בראש המדור. הפער הועבר לתור התפעולי יחד עם תקלת אימות CMS שנפתרה, ללא כפילויות. בדיקת מובייל חזותית נותרה ממתינה; בדיקת הדסקטופ עברה.",
+      "result_run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
+      "result_created_at": "2026-11-14T08:59:58.823818Z",
+      "observed_at": "2026-11-14T09:11:12.935Z",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
+      "effective_policy": "2026-11-14/1.0"
     },
     "Automation_845f7ef0033c8191b7490e0dc5748754": {
       "enabled": true,
@@ -3554,18 +3545,18 @@
       "result": "**עדכון מערכת החדשות — 14 בנובמבר 2026, מחזור בוקר**\n\n**רעננה נט:** נוצרה ופורסמה באדמין כתבה חדשה, מספר **811468**, בנושא היערכות לרעידת אדמה בעקבות האירוע באזור אילת ב־11 בנובמבר. נקרא המקור העירוני המלא, והכתבה מבהירה שלא הייתה התרעה ברעננה. צורפה תמונה ממשית של תרגיל בטיחות משנת 2019, ברישיון CC BY 2.0, עם קרדיט והבהרה שאינה צילום מהאירוע. הפרסום אומת במערכת כ־`template=false`, במדור חדשות רעננה. **אימות הדף הציבורי עדיין חסר**: ממשק הקריאה לא הצליח לקבל גרסה עדכנית של האתר. לכן התוצאה היא פרסום מאומת ב־CMS, אך עדיין לא `published_verified`. <Link url=\"https://www.raanana.muni.il/59471-2/\" title=\"המקור העירוני המלא\"/>.\n\n**הרצליה נט:** נבדקו הפרסומים, המקורות העירוניים ודוח Scooper שהתקבל הבוקר וכלל 200 אזכורים. רוב האזכורים אינם ידיעות מקומיות מאומתות. נמנעה כפילות בנושא אזהרת הרחצה: כתבה 810000 כבר עודכנה באתר הציבורי עם הסרת האזהרה ב־12 בנובמבר ולוח המצילים החדש. <Cite ref=\"turn260763view1\"/> לא נוצרה כתבה נוספת בנושא.\n\n<text color=\"secondary\" size=\"sm\">מדדי המחזור: הרצליה — 0 פרסומים חדשים; רעננה — פרסום CMS אחד, 0 פרסומים עם אימות ציבורי מלא. נעילת CAS של רעננה נרכשה, אומתה ושוחררה בהצלחה. לא שונו תזמונים, הרשאות או פריסות.</text>\n\nנותרה משימת אימות ציבורי אחת ברעננה: פתיחת הכתבה החיה, בדיקת הגוף, התמונה, הקרדיט וההפניה מהמדור. לא אציג אותה כהצלחה עד שיתקבל אישור מהאתר הציבורי.\n\n<text color=\"secondary\" size=\"xs\">Automation_845f7ef0033c8191b7490e0dc5748754 · policy_version=2026-11-14/1.1 · runKey=isnet-localnews-20261114T060240Z · run_id לא נחשף</text>",
       "result_run_id": "578aa8c6-47e0-8329-ac1a-14c9b28e35af",
       "result_created_at": "2026-11-14T06:09:17.666283Z",
-      "observed_at": "2026-11-14T08:29:54.014Z",
-      "qualification": "Exact runtime/result matched; public proof only where explicitly recorded.",
+      "observed_at": "2026-11-14T09:11:12.935Z",
+      "qualification": "Matched runtime/result; reported publication is not independent controller verification.",
       "effective_policy": "2026-11-14/1.1"
     }
   },
   "sites": {
     "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
-    "version_number": 596,
-    "deployment_id": "appgdep_6af80aae835481919f2b781a552572c0",
+    "version_number": 597,
+    "deployment_id": "appgdep_6af81ebf3144819195ef7dbb948159c8",
     "status": "succeeded",
-    "published_source": "69b6103efad9540260cb1ccb4cef4b94693bc299",
-    "observed_at": "2026-11-14T08:29:54.014Z",
+    "published_source": "f8afcf525105e8fba1b31a65b546f46aea71ec13",
+    "observed_at": "2026-11-14T09:11:12.935Z",
     "other_observed_versions": [
       {
         "version": 587,
@@ -3577,8 +3568,8 @@
       }
     ],
     "new_deployments_started": false,
-    "public_content_check": "Latest versions596/595 unchanged. No new deployment/publication or browser pass checked this cycle; previous exact-run596 evidence retained. Future original writer is in progress.",
-    "recorded_public_evidence": "ops/incident-response/evidence/ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79.json"
+    "public_content_check": "Exact original future writer reports full public verification TLVNET+10CMS. Controller verifies terminal597 and one CMS post; independent public fetch unavailable. Mobile pending.",
+    "recorded_public_evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json"
   },
   "open_incident_ids": [
     "news-preview-failure-self-disable",
@@ -3609,7 +3600,10 @@
     "isnet-sports-existing-writer-owner-unverified",
     "culture-magazine-runtime-failure-without-result",
     "historical-events-cache-policy-hash-mismatch",
-    "historical-public-events-full-record-parity-mismatch"
+    "historical-public-events-full-record-parity-mismatch",
+    "future-cms-create-post-optional-payload-validation",
+    "future-magazine-five-city-homepage-card-gap",
+    "historical-super-ashdod-generated-shell-drift"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -3631,7 +3625,8 @@
     "20261114-sports-existing-city-owner-correction.json",
     "491a159f-33f8-8322-a053-5453bcb6312d-1.json",
     "cf7874b1-48a4-832a-b3fc-af7c8de865e9-1.json",
-    "e6d4b4b3-779c-8321-850a-cd86b3554385-1.json"
+    "e6d4b4b3-779c-8321-850a-cd86b3554385-1.json",
+    "20261114-future-cms-create-post-validation.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -3813,6 +3808,57 @@
       "cost": null,
       "api_billing_measured": false,
       "conclusion": "Reconciled original sports596 success and own-token release; culture respected actual competing writer and saved ready factual corrections plus incomplete media/research checkpoints. Existing queue retained after release without controller publishing or dispatch. Known sports draft blocker closed against prior full regression/public evidence, not counted as new publication or new repair. Historical cache-hash assertion separated from JS syntax; current Ashdod static hash matches. No new active Actions/social incident; historical review incomplete."
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "9590c5dd-ba6c-8332-86c4-985b56f032b4",
+      "runKey": "ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4",
+      "policy_version": "2026-11-14/1.1",
+      "scheduled_for": "2026-11-14T08:35:00Z",
+      "started_at": "2026-11-14T08:24:22.109766Z",
+      "observed_at": "2026-11-14T08:30:56.110Z",
+      "source_sha": "e43933bc911e6a94de2d7c206a10e8b26336f43d",
+      "targets_reviewed": [
+        "Actions after saved watermark and pending IDs",
+        "Existing incident inbox",
+        "10 writer last-run/result pairs",
+        "Latest TLVNET Sites versions596/595",
+        "TLVNET DB.social_runs bounded page25 offset0 next=null",
+        "Original seven-day history final metadata page and one new historical signature log"
+      ],
+      "new_workflow_runs": 2,
+      "new_workflow_failures": 0,
+      "new_inbox": 0,
+      "new_social_runs": 0,
+      "new_site_versions": 0,
+      "new_completed_task_results": 0,
+      "new_in_progress_task_runs": [
+        {
+          "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+          "run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
+          "started_at": "2026-11-14T08:22:56.421498Z",
+          "recorded_status": "in_progress"
+        }
+      ],
+      "publications_verified_this_cycle": 0,
+      "history_added": 43,
+      "history_full_logs": [
+        42183298017
+      ],
+      "history_remaining": "Original seven-day metadata window fully covered; root triage remains partial. Continue saved untriaged_workflow_groups and unconfirmed_publish_failure_ids; do not rescan covered metadata.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4.json",
+      "build_or_deploy": false,
+      "visual_review": "Not performed; previously pending mobile checks remain pending.",
+      "unchanged_blocker_retries": 0,
+      "automation_or_permission_changes": false,
+      "social_attempts": 0,
+      "claims_or_settings_changes": false,
+      "supermarket_collection": false,
+      "supermarket_public_scan": false,
+      "cost": null,
+      "api_billing_measured": false,
+      "conclusion": "No new current Actions failure, inbox, social row or Site version. Future-magazine original writer in progress; older latest result not attributed to it. Successful bounded GitHub queue processor is not proof of live publication. Original retrospective metadata window covered; retained root triage incomplete. Historical exact-feed parity mismatch documented without current-outage or fixed_verified claim.",
+      "checkpoint_retry": "One focused Git CAS retry after fresh read of concurrent owner lease commit; ops blobs unchanged. Lease preserved."
     }
   ],
   "photo_controls_checkpoint": {
@@ -3844,31 +3890,31 @@
   },
   "publication_pending_existing_writer": {
     "target": "TLVNET-site",
-    "state": "held",
-    "owner": "Automation_09c630803fe481919ccd2f476f0d6916",
-    "observed_at": "2026-11-14T08:30:56.110Z",
+    "state": "free",
+    "owner": null,
+    "observed_at": "2026-11-14T09:11:12.935Z",
     "last_release": {
-      "owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
-      "run_key": "sports-20261114-morning-4401da0c-8cb4-832c-b423-c2d8e4ddb5c0",
-      "released_at": "2026-11-14T07:20:39.457Z",
-      "source_commit": "69b6103efad9540260cb1ccb4cef4b94693bc299",
-      "verification_commit": "0d4692dd3f435796e8e6dd9bd84d1e3df5bef518",
-      "deployment_id": "appgdep_6af80aae835481919f2b781a552572c0",
+      "owner": "Automation_09c630803fe481919ccd2f476f0d6916",
+      "run_key": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-14T10-22-58+02-00",
+      "released_at": "2026-11-14T08:57:07.217Z",
+      "source_commit": "544ea1ff49a87fdedfb6c5d843ee82bd33e2d26d",
+      "verification_commit": "544ea1ff49a87fdedfb6c5d843ee82bd33e2d26d",
+      "deployment_id": "appgdep_6af81ebf3144819195ef7dbb948159c8",
       "status": "succeeded",
       "published_verified": 1,
       "public_readback": true,
       "desktop_visual_review": "passed",
       "mobile_visual_review": "pending",
-      "policy_version": "2026-11-14/1.3"
+      "policy_version": "2026-11-14/1.0"
     },
     "controller_acquisition_attempts": 0,
-    "qualification": "Original future-magazine writer acquired actual TLVNET lease08:29:20Z. Controller preserves lease and defers all publication; earlier culture items stay in existing inbox.",
+    "qualification": "Original future writer released its own lease08:57:07Z following terminal597 publication; prior culture queue preserved, no controller publication.",
     "pending_items_reference": "ops/incident-response/inbox/e6d4b4b3-779c-8321-850a-cd86b3554385-1.json",
     "pending_items": [
       {
         "article_id": "city-museum-troubled-waters-opening-20261106",
         "status": "publication_pending_existing_writer",
-        "target_currently_free": false,
+        "target_currently_free": true,
         "remaining": [
           "Body-hash image reapproval, required checks and original-owner publication"
         ],
@@ -3877,7 +3923,7 @@
       {
         "article_id": "mozaik-ses-last-shootout-wormhole-preview-20261107",
         "status": "publication_pending_existing_writer",
-        "target_currently_free": false,
+        "target_currently_free": true,
         "remaining": [
           "Relevant licensed or marked AI image: existing story image_url=null; no artwork reuse license found (all rights reserved).",
           "Actual file/rights/body-linked image review and build checks before publication."
@@ -3885,9 +3931,9 @@
         "qualification": "Saved checkpoint status records earlier contention; free target alone is not content/image approval."
       }
     ],
-    "lease_until": "2026-11-14T08:59:20.700Z",
-    "owner_run_key": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-14T10-22-58+02-00",
-    "lease_blob_sha": "a0df13f8fe277e7f1fee0c4d71be719b8c190b25"
+    "lease_until": null,
+    "owner_run_key": null,
+    "lease_blob_sha": "c956c89c28a7b2a18dd61fdd9e44da3e66b0c81d"
   },
   "policy_version": "2026-11-14/1.1",
   "rollout_remaining": {
@@ -3907,7 +3953,7 @@
       "2026-11-13T09",
       "2026-11-13T10"
     ],
-    "observed_at": "2026-11-14T08:29:54.014Z",
+    "observed_at": "2026-11-14T09:11:12.935Z",
     "evidence": "ops/incident-response/evidence/social-runs-b8641b1e-3cec-8322-a6e7-5c6f1e11a895.json",
     "new_rows_this_cycle": 0
   },
