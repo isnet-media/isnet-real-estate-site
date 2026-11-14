@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T17:17:44.132Z",
+  "updated_at": "2026-11-14T18:53:41.892Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2283,9 +2283,48 @@
       "prevention": "Keep endpoint ownership/canonical-route registry distinct for TLVNET and ISNET and record non-success HTTP separately from latency.",
       "observed_at": "2026-11-14T12:11:54.194Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
+    },
+    {
+      "id": "historical-holon-search-smoke-no-match",
+      "status": "open",
+      "classification": "historical diagnostic; current behavior unverified",
+      "fingerprint": "holon-events-tests/test-holon-events-browser.cjs/siteSearchChat-card-timeout/no-match",
+      "root_cause": "Historical searchsmoke query אור לגויים produced no eligible catalog matches and timed out after30000ms waiting for siteSearchChat event link. Diagnostic bootstrap/catalog total191 butqueryevents[]; exact filtering/exclusioncause not proved.",
+      "occurrences": [
+        {
+          "run_id": 42514309947,
+          "attempt": 1,
+          "job_id": 128833879959,
+          "created_at": "2026-11-08T19:17:48Z",
+          "source_commit": "d059bd8192e3e0f82b1ce8d61e59c0a47d81b04e",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42514309947",
+          "diagnostic_clock": "2026-11-07T08:00:00.000Z",
+          "query": "אור לגויים",
+          "raw": 191,
+          "total": 191,
+          "matched_events": 0,
+          "failed_locator": ".siteSearchChat__card a[href^=\"event.html?id=\"]",
+          "live_job": "skipped"
+        }
+      ],
+      "current_source": {
+        "test": "scripts/test-holon-events-browser.cjs",
+        "test_sha": "e52635f153b4f8d24bd7a4020130a4f9543c06f6",
+        "workflow": ".github/workflows/holon-events-tests.yml",
+        "workflow_sha": "e37336ac2ed9d71e99b77ad69fb1483cd0976b64",
+        "observed": "Currenttest derives bookabletheatre searchFixture from ownedfeed rather than historical literal query; uses firstfeeddatefixedtime. Sourcechange alone not a regression pass.",
+        "test_executed": false
+      },
+      "next_action": "On next relevant ownedsourcechange, run current isolated snapshot search smoke and verify matchedoccurrence eligibility at fixtureclock plus public search. Do not weaken occurrence/date/visibility guards, reruncollector, or repeat this historical log.",
+      "prevention": "Bind search fixture, clock and sanitized eligibility to same owned snapshot; keep no-match diagnosis and public route check separate.",
+      "current_outage_verified": false,
+      "fixed_verified": false,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7.json",
+      "observed_at": "2026-11-14T18:53:41.892Z",
+      "reported_runKey": "ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-b566499d-9660-832e-8629-bddddd544a1b",
+  "last_review_runKey": "ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
