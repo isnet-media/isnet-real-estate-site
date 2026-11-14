@@ -1,0 +1,692 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "9590c5dd-ba6c-8332-86c4-985b56f032b4",
+  "runKey": "ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4",
+  "policy_version": "2026-11-14/1.1",
+  "scheduled_for": "2026-11-14T08:35:00Z",
+  "started_at": "2026-11-14T08:24:22.109766Z",
+  "observed_at": "2026-11-14T08:29:54.014Z",
+  "source_sha": "e43933bc911e6a94de2d7c206a10e8b26336f43d",
+  "targets_reviewed": [
+    "Actions after saved watermark and pending IDs",
+    "Existing incident inbox",
+    "10 writer last-run/result pairs",
+    "Latest TLVNET Sites versions596/595",
+    "TLVNET DB.social_runs bounded page25 offset0 next=null",
+    "Original seven-day history final metadata page and one new historical signature log"
+  ],
+  "new_workflow_runs": 2,
+  "new_workflow_failures": 0,
+  "new_inbox": 0,
+  "new_social_runs": 0,
+  "new_site_versions": 0,
+  "new_completed_task_results": 0,
+  "new_in_progress_task_runs": [
+    {
+      "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+      "run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
+      "started_at": "2026-11-14T08:22:56.421498Z",
+      "recorded_status": "in_progress"
+    }
+  ],
+  "publications_verified_this_cycle": 0,
+  "history_added": 43,
+  "history_full_logs": [
+    42183298017
+  ],
+  "history_remaining": "Original seven-day metadata window fully covered; root triage remains partial. Continue saved untriaged_workflow_groups and unconfirmed_publish_failure_ids; do not rescan covered metadata.",
+  "evidence": "ops/incident-response/evidence/ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4.json",
+  "build_or_deploy": false,
+  "visual_review": "Not performed; previously pending mobile checks remain pending.",
+  "unchanged_blocker_retries": 0,
+  "automation_or_permission_changes": false,
+  "social_attempts": 0,
+  "claims_or_settings_changes": false,
+  "supermarket_collection": false,
+  "supermarket_public_scan": false,
+  "cost": null,
+  "api_billing_measured": false,
+  "conclusion": "No new current Actions failure, inbox, social row or Site version. Future-magazine original writer in progress; older latest result not attributed to it. Successful bounded GitHub queue processor is not proof of live publication. Original retrospective metadata window covered; retained root triage incomplete. Historical exact-feed parity mismatch documented without current-outage or fixed_verified claim.",
+  "actions": [
+    {
+      "run_id": 43574867081,
+      "attempt": 1,
+      "created_at": "2026-11-14T08:14:42Z",
+      "workflow": "Record operation failures",
+      "path": ".github/workflows/operation-failure-inbox.yml",
+      "status": "completed",
+      "conclusion": "skipped",
+      "source_commit": "4fb1499bf1097b75fe20c150cde6044794916e09",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43574867081"
+    },
+    {
+      "run_id": 43574837204,
+      "attempt": 1,
+      "created_at": "2026-11-14T08:14:16Z",
+      "workflow": "TLVNET dedicated newsroom agents",
+      "path": ".github/workflows/tlvnet-agents.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "4fb1499bf1097b75fe20c150cde6044794916e09",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43574837204"
+    }
+  ],
+  "historical_metadata": [
+    {
+      "run_id": 42184707243,
+      "attempt": 1,
+      "created_at": "2026-11-06T08:01:14Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "skipped",
+      "source_commit": "baaae83249733795c5679ffd63c98a0bc059e701",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42184707243"
+    },
+    {
+      "run_id": 42184707155,
+      "attempt": 1,
+      "created_at": "2026-11-06T08:01:14Z",
+      "workflow": "Public events health checks",
+      "path": ".github/workflows/events-public-health.yml",
+      "status": "completed",
+      "conclusion": "skipped",
+      "source_commit": "baaae83249733795c5679ffd63c98a0bc059e701",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42184707155"
+    },
+    {
+      "run_id": 42184707180,
+      "attempt": 1,
+      "created_at": "2026-11-06T08:01:14Z",
+      "workflow": "All cities supermarket public health",
+      "path": ".github/workflows/super-health.yml",
+      "status": "completed",
+      "conclusion": "skipped",
+      "source_commit": "baaae83249733795c5679ffd63c98a0bc059e701",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42184707180"
+    },
+    {
+      "run_id": 42184152057,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:56:17Z",
+      "workflow": "Refresh Ashdod sea forecast",
+      "path": ".github/workflows/ashdod-sea.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "bb66d922611f7a40acd8d4e870f96ae289762264",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42184152057"
+    },
+    {
+      "run_id": 42183298032,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:48:29Z",
+      "workflow": "Publish priceboard",
+      "path": ".github/workflows/pages.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "bb66d922611f7a40acd8d4e870f96ae289762264",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42183298032"
+    },
+    {
+      "run_id": 42183298017,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:48:29Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "bb66d922611f7a40acd8d4e870f96ae289762264",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42183298017"
+    },
+    {
+      "run_id": 42183152565,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:47:09Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "50d7190555f6332ce67d3c46112285f7d0021406",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42183152565"
+    },
+    {
+      "run_id": 42182796585,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:43:58Z",
+      "workflow": "All cities supermarket public health",
+      "path": ".github/workflows/super-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "07dbb9c49addead493b29c5a6fb3e531757b765a",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182796585"
+    },
+    {
+      "run_id": 42182796555,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:43:58Z",
+      "workflow": "Public events health checks",
+      "path": ".github/workflows/events-public-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "07dbb9c49addead493b29c5a6fb3e531757b765a",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182796555"
+    },
+    {
+      "run_id": 42182796562,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:43:58Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "07dbb9c49addead493b29c5a6fb3e531757b765a",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182796562"
+    },
+    {
+      "run_id": 42182491170,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:41:09Z",
+      "workflow": "Publish priceboard",
+      "path": ".github/workflows/pages.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "07dbb9c49addead493b29c5a6fb3e531757b765a",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182491170"
+    },
+    {
+      "run_id": 42182491188,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:41:09Z",
+      "workflow": "Unified Ashdod and Rishon stage event collection",
+      "path": ".github/workflows/unified-stage-collector.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "07dbb9c49addead493b29c5a6fb3e531757b765a",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182491188"
+    },
+    {
+      "run_id": 42182491047,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:41:09Z",
+      "workflow": "Validate stage event identity safety",
+      "path": ".github/workflows/stage-feed-integrity-tests.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "07dbb9c49addead493b29c5a6fb3e531757b765a",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182491047"
+    },
+    {
+      "run_id": 42182001093,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:36:34Z",
+      "workflow": "All cities supermarket public health",
+      "path": ".github/workflows/super-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "875a5a34535c894b4dd84911c9e9087d9bf86fd9",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182001093"
+    },
+    {
+      "run_id": 42182001099,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:36:34Z",
+      "workflow": "Public events health checks",
+      "path": ".github/workflows/events-public-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "875a5a34535c894b4dd84911c9e9087d9bf86fd9",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182001099"
+    },
+    {
+      "run_id": 42182001150,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:36:34Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "875a5a34535c894b4dd84911c9e9087d9bf86fd9",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182001150"
+    },
+    {
+      "run_id": 42181670603,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:33:39Z",
+      "workflow": "Public events health checks",
+      "path": ".github/workflows/events-public-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "875a5a34535c894b4dd84911c9e9087d9bf86fd9",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42181670603"
+    },
+    {
+      "run_id": 42181670554,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:33:39Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "875a5a34535c894b4dd84911c9e9087d9bf86fd9",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42181670554"
+    },
+    {
+      "run_id": 42181670595,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:33:39Z",
+      "workflow": "All cities supermarket public health",
+      "path": ".github/workflows/super-health.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "875a5a34535c894b4dd84911c9e9087d9bf86fd9",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42181670595"
+    },
+    {
+      "run_id": 42181575021,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:32:47Z",
+      "workflow": "Publish priceboard",
+      "path": ".github/workflows/pages.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "875a5a34535c894b4dd84911c9e9087d9bf86fd9",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42181575021"
+    },
+    {
+      "run_id": 42181347610,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:30:44Z",
+      "workflow": "Publish verified supermarket repair",
+      "path": ".github/workflows/super-repair.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "211bff9efb26de9e142f1210cf3cace2f985ffb5",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42181347610"
+    },
+    {
+      "run_id": 42181347553,
+      "attempt": 1,
+      "created_at": "2026-11-06T07:30:44Z",
+      "workflow": "Publish priceboard",
+      "path": ".github/workflows/pages.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "211bff9efb26de9e142f1210cf3cace2f985ffb5",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42181347553"
+    },
+    {
+      "run_id": 42177933507,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:59:42Z",
+      "workflow": "All cities supermarket public health",
+      "path": ".github/workflows/super-health.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "2be6a4c9f9f5299196fdb23f00cca27f1772d874",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177933507"
+    },
+    {
+      "run_id": 42177933282,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:59:41Z",
+      "workflow": "Public events health checks",
+      "path": ".github/workflows/events-public-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "2be6a4c9f9f5299196fdb23f00cca27f1772d874",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177933282"
+    },
+    {
+      "run_id": 42177933212,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:59:41Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "2be6a4c9f9f5299196fdb23f00cca27f1772d874",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177933212"
+    },
+    {
+      "run_id": 42177656602,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:56:54Z",
+      "workflow": "All cities supermarket public health",
+      "path": ".github/workflows/super-health.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "2be6a4c9f9f5299196fdb23f00cca27f1772d874",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177656602"
+    },
+    {
+      "run_id": 42177656334,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:56:53Z",
+      "workflow": "Public events health checks",
+      "path": ".github/workflows/events-public-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "2be6a4c9f9f5299196fdb23f00cca27f1772d874",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177656334"
+    },
+    {
+      "run_id": 42177656390,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:56:53Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "2be6a4c9f9f5299196fdb23f00cca27f1772d874",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177656390"
+    },
+    {
+      "run_id": 42177387899,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:54:16Z",
+      "workflow": "Publish priceboard",
+      "path": ".github/workflows/pages.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "2be6a4c9f9f5299196fdb23f00cca27f1772d874",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177387899"
+    },
+    {
+      "run_id": 42177387895,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:54:16Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "2be6a4c9f9f5299196fdb23f00cca27f1772d874",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177387895"
+    },
+    {
+      "run_id": 42177371633,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:54:07Z",
+      "workflow": "Public events health checks",
+      "path": ".github/workflows/events-public-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "9148c122d12933061f166ffb42929c15265a097f",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177371633"
+    },
+    {
+      "run_id": 42177371685,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:54:07Z",
+      "workflow": "All cities supermarket public health",
+      "path": ".github/workflows/super-health.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "9148c122d12933061f166ffb42929c15265a097f",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177371685"
+    },
+    {
+      "run_id": 42177371654,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:54:07Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "9148c122d12933061f166ffb42929c15265a097f",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177371654"
+    },
+    {
+      "run_id": 42177089459,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:51:25Z",
+      "workflow": "Publish priceboard",
+      "path": ".github/workflows/pages.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "9148c122d12933061f166ffb42929c15265a097f",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177089459"
+    },
+    {
+      "run_id": 42176978904,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:50:22Z",
+      "workflow": "Publish priceboard",
+      "path": ".github/workflows/pages.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "b23b9dc774aec5fcff19bbb4e6c6ee9e8bc8fbe1",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42176978904"
+    },
+    {
+      "run_id": 42176978963,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:50:22Z",
+      "workflow": "Build central media bank",
+      "path": ".github/workflows/build-media-bank.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "b23b9dc774aec5fcff19bbb4e6c6ee9e8bc8fbe1",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42176978963"
+    },
+    {
+      "run_id": 42176978974,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:50:22Z",
+      "workflow": "Audit event illustration coverage",
+      "path": ".github/workflows/audit-event-images.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "b23b9dc774aec5fcff19bbb4e6c6ee9e8bc8fbe1",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42176978974"
+    },
+    {
+      "run_id": 42176978954,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:50:22Z",
+      "workflow": "Auto-publish events after media QA",
+      "path": ".github/workflows/auto-publish-events-after-media.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "b23b9dc774aec5fcff19bbb4e6c6ee9e8bc8fbe1",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42176978954"
+    },
+    {
+      "run_id": 42176907135,
+      "attempt": 1,
+      "created_at": "2026-11-06T06:49:42Z",
+      "workflow": "Enrich Ashdod event images",
+      "path": ".github/workflows/enrich-events-images.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "1f0402b9b06c0418fd5b5107a17b7cb67dfb22de",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42176907135"
+    },
+    {
+      "run_id": 42166739159,
+      "attempt": 1,
+      "created_at": "2026-11-06T05:09:46Z",
+      "workflow": "All cities supermarket public health",
+      "path": ".github/workflows/super-health.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "source_commit": "1f0402b9b06c0418fd5b5107a17b7cb67dfb22de",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42166739159"
+    },
+    {
+      "run_id": 42166739120,
+      "attempt": 1,
+      "created_at": "2026-11-06T05:09:46Z",
+      "workflow": "Public events health checks",
+      "path": ".github/workflows/events-public-health.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "1f0402b9b06c0418fd5b5107a17b7cb67dfb22de",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42166739120"
+    },
+    {
+      "run_id": 42166739012,
+      "attempt": 1,
+      "created_at": "2026-11-06T05:09:45Z",
+      "workflow": "Verify public event feed read-back",
+      "path": ".github/workflows/public-events-readback-audit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "1f0402b9b06c0418fd5b5107a17b7cb67dfb22de",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42166739012"
+    },
+    {
+      "run_id": 42166447982,
+      "attempt": 1,
+      "created_at": "2026-11-06T05:06:48Z",
+      "workflow": "Publish priceboard",
+      "path": ".github/workflows/pages.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "source_commit": "1f0402b9b06c0418fd5b5107a17b7cb67dfb22de",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42166447982"
+    }
+  ],
+  "historical_diagnosis": {
+    "run_id": 42183298017,
+    "attempt": 1,
+    "job_id": 127777848555,
+    "created_at": "2026-11-06T07:48:29Z",
+    "source_commit": "bb66d922611f7a40acd8d4e870f96ae289762264",
+    "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42183298017",
+    "failed_step": "Compare public JSON with normalized current GitHub feed",
+    "exit_code": 2,
+    "log_read_full": true,
+    "report_checked_at": "2026-11-06T07:50:05Z",
+    "cities": [
+      {
+        "city": "Ashdod",
+        "http": 200,
+        "github_count": 955,
+        "public_count": 955,
+        "common_ids": 955,
+        "missing_ids": 0,
+        "extra_ids": 0,
+        "different_records": 13,
+        "different_priority_field_counts": {},
+        "exact_feed_match": false
+      },
+      {
+        "city": "Rishon",
+        "http": 200,
+        "github_count": 2116,
+        "public_count": 2116,
+        "common_ids": 2116,
+        "missing_ids": 0,
+        "extra_ids": 0,
+        "different_records": 3,
+        "different_priority_field_counts": {},
+        "exact_feed_match": false
+      }
+    ]
+  },
+  "queue_worker": {
+    "run_id": 43574837204,
+    "job_id": 132386732559,
+    "status": "completed",
+    "conclusion": "success",
+    "workflow_sha": "44a571df540c60ef9bc1dcb8af7421c67f095001",
+    "source": ".github/workflows/tlvnet-agents.yml",
+    "configured_max_jobs": 2,
+    "configured_max_provider_calls": 3,
+    "qualification": "Green queue consumer does not establish a processed item or public article. Limits are technical call/task limits, not journalism quotas or measured dollars; no workflow changed."
+  },
+  "pending_original_writer": {
+    "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+    "title": "החיים של המחר — יום כן יום לא",
+    "last_run": {
+      "id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
+      "recorded_status": "in_progress",
+      "scheduled_for": "2026-11-14T08:00:00Z",
+      "started_at": "2026-11-14T08:22:56.421498Z",
+      "completed_at": null,
+      "chat_ref": null
+    },
+    "latest_result_run_id": "f79190ca-9dbc-832f-bba6-ce60c1364879",
+    "latest_result_created_at": "2026-11-12T08:11:41.662773Z",
+    "matched": false
+  },
+  "social": {
+    "table": "social_runs",
+    "limit": 25,
+    "offset": 0,
+    "next_offset": null,
+    "rows_seen": 2,
+    "new_rows": 0,
+    "latest_finished_at": "2026-11-13T10:00:03.313Z",
+    "qualification": "Only same two old rows; no settings read or attempt change."
+  },
+  "site_versions": [
+    596,
+    595
+  ],
+  "current_incident_alerts": 0,
+  "source_inputs": [
+    {
+      "path": "ops/incident-response/state.json",
+      "blob_sha": "898ef319cf63623bc2e6e9d1537c9f8b19d91601"
+    },
+    {
+      "path": "ops/incident-response/incidents.json",
+      "blob_sha": "178ba93527f88fad9f69f9004d68f52e24cc80eb"
+    }
+  ],
+  "inbox_write": "No new current failure to append; historical occurrence classified directly in incident ledger and evidence under controller RUNBOOK. Existing immutable inbox entries preserved.",
+  "remaining_unchanged_incident_ids": [
+    "news-preview-failure-self-disable",
+    "youtube-discovery-missing-api-key",
+    "ims-no-valid-current-period",
+    "github-notifications-mailbox-mismatch",
+    "tlvnet-social-publication-not-verified",
+    "ashdod-cinema-four-missing-trailers",
+    "supermarket-public-http-and-stale-branches",
+    "holon-new-screening-unverified-poster",
+    "historical-publication-duplicate-gate-pre-repair",
+    "event-collector-concurrent-main-push",
+    "tlvnet-legacy-event-cadence-divergence",
+    "tlvnet-windows-stay-sitemap-backslashes",
+    "ashdod-mobile-banners-app-stall-reported",
+    "historical-artifact-colon-path-rejection",
+    "historical-pages-sync-files-timeout",
+    "tlvnet-news-execution-binding-unverified",
+    "herzliya-raanana-original-runtime-access",
+    "tlvnet-policy11-owner-overlap",
+    "historical-event-analytics-missing-ga4-service-account",
+    "historical-events-health-yavne-kids-503",
+    "historical-ashdod-bus-browser-route-timeout",
+    "historical-rishon-official-candidate-parser-tests",
+    "historical-batyam-three-retained-source-feeds",
+    "historical-holon-cinema-fixed-count-gate",
+    "historical-ashdod-family-basket-missing-groups",
+    "isnet-sports-existing-writer-owner-unverified",
+    "culture-magazine-runtime-failure-without-result",
+    "historical-events-cache-policy-hash-mismatch"
+  ],
+  "concurrent_source_update": {
+    "commit": "e43933bc911e6a94de2d7c206a10e8b26336f43d",
+    "change": "Original future magazine writer acquired its TLVNET-site lease",
+    "preserved": true
+  },
+  "checkpoint_CAS": {
+    "initial_base": "4fb1499bf1097b75fe20c150cde6044794916e09",
+    "first_update_result": "GitHub GraphQL error; readback showed concurrent owner lease commit, no checkpoint advance",
+    "focused_retry_base": "e43933bc911e6a94de2d7c206a10e8b26336f43d",
+    "reason": "Material source/head change; ops files independently confirmed unchanged",
+    "force": false
+  },
+  "actual_active_publication_lease": {
+    "target": "TLVNET-site",
+    "state": "held",
+    "owner": "Automation_09c630803fe481919ccd2f476f0d6916",
+    "run_key": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-14T10-22-58+02-00",
+    "acquired_at": "2026-11-14T08:29:20.700Z",
+    "lease_until": "2026-11-14T08:59:20.700Z",
+    "observed_at": "2026-11-14T08:30:56.110Z",
+    "blob_sha": "a0df13f8fe277e7f1fee0c4d71be719b8c190b25"
+  }
+}

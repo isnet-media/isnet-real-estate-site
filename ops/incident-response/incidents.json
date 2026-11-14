@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T07:38:24.275Z",
+  "updated_at": "2026-11-14T08:29:54.014Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1888,6 +1888,66 @@
       "prevention": "Classify actual failed command/assertion within multi-command steps; regenerate cache refs alongside policy source and retain last-good output.",
       "observed_at": "2026-11-14T07:38:24.275Z",
       "reported_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79"
+    },
+    {
+      "id": "historical-public-events-full-record-parity-mismatch",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "public-events-readback-audit/normalized-current-feed/exact-record-parity-mismatch",
+      "root_cause": "Exact full-record equality failed for13 Ashdod and3 Rishon records on6Nov. IDs/counts/HTTP were normal and priority-field differences empty. Differing non-priority fields and upstream cause remain unestablished; no current outage inferred.",
+      "occurrences": [
+        {
+          "run_id": 42183298017,
+          "attempt": 1,
+          "job_id": 127777848555,
+          "created_at": "2026-11-06T07:48:29Z",
+          "source_commit": "bb66d922611f7a40acd8d4e870f96ae289762264",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42183298017",
+          "failed_step": "Compare public JSON with normalized current GitHub feed",
+          "exit_code": 2,
+          "log_read_full": true,
+          "report_checked_at": "2026-11-06T07:50:05Z",
+          "cities": [
+            {
+              "city": "Ashdod",
+              "http": 200,
+              "github_count": 955,
+              "public_count": 955,
+              "common_ids": 955,
+              "missing_ids": 0,
+              "extra_ids": 0,
+              "different_records": 13,
+              "different_priority_field_counts": {},
+              "exact_feed_match": false
+            },
+            {
+              "city": "Rishon",
+              "http": 200,
+              "github_count": 2116,
+              "public_count": 2116,
+              "common_ids": 2116,
+              "missing_ids": 0,
+              "extra_ids": 0,
+              "different_records": 3,
+              "different_priority_field_counts": {},
+              "exact_feed_match": false
+            }
+          ]
+        }
+      ],
+      "observed_at": "2026-11-14T08:29:54.014Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4.json",
+      "change": "No code or gate changes; historical signature separated from missing/duplicate-ID and HTTP failures.",
+      "tests": {
+        "historical_readback": "failed exact full-record parity",
+        "current_regression": "not performed",
+        "public_visual": "not performed"
+      },
+      "deployment": null,
+      "public_proof": null,
+      "next_action": "Continue bounded triage from saved root groups; inspect recorded field differences/source provenance when this signature next needs work. Preserve exact comparison and existing identity/media gates; do not retry old workflow or weaken gate.",
+      "prevention": "Record actual differing fields and source/deploy hashes in audit artifacts so non-priority drift can be distinguished from availability and identity errors.",
+      "reported_runKey": "ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4"
     }
   ],
   "last_review_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79",
