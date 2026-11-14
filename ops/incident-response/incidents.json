@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T00:50:44.473Z",
+  "updated_at": "2026-11-14T01:16:25.324Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1561,9 +1561,60 @@
       ],
       "observed_at": "2026-11-14T00:50:44.473Z",
       "reported_runKey": "ops-2026-11-14-8325906e-29c8-8332-ad4c-a882d5b7c58e"
+    },
+    {
+      "id": "historical-ashdod-family-basket-missing-groups",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "super-prices/Validate publication candidate/family-products-required-groups",
+      "root_cause": "The historical collected candidate's family basket failed the required fruit/vegetable/poultry-fish product-group coverage assertion in test_super_city_basket.py. Which exact groups were absent and the deeper definition/build cause are not established from the assertion. This was not collection or deploy failure.",
+      "occurrences": [
+        {
+          "run_id": 42426208546,
+          "workflow": "Refresh Ashdod supermarket prices",
+          "path": ".github/workflows/super-prices.yml",
+          "attempt": 2,
+          "created_at": "2026-11-07T23:39:07Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "dd5a5a259eb9577b023180885cd10a980c304365",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42426208546",
+          "classification": "Full log: collection passed; family basket group-coverage assertion failed; candidate not committed; evidence retained. Historical only.",
+          "job_id": 128666531923,
+          "actual_execution_date": "2026-11-08",
+          "qualification": "Run created Nov7; collection/validation executed Nov8. Do not substitute creation time for execution."
+        }
+      ],
+      "evidence": {
+        "log_read_full": true,
+        "collector_step": "success",
+        "validation_step": "failure",
+        "failed_file": "scripts/test_super_city_basket.py",
+        "failed_assertion": "required product groups subset of family products groups",
+        "required_groups": [
+          "פירות",
+          "ירקות",
+          "עוף ודגים"
+        ],
+        "reported_family_lines": 13,
+        "publish_commit_step": "skipped",
+        "evidence_artifact_preserved": true,
+        "artifact_id": 13608884801,
+        "current_test_blob": "33f2e2bbd2ac1f1acbeb5658cd9201e2bfe85f54",
+        "current_required_group_gate_retained": true,
+        "current_data_or_test_execution": false
+      },
+      "resolution": "Historical validation signature classified. No catalogue download, price collection, claim release, candidate rebuild, date changes, weakening of required groups, code patch or deployment.",
+      "next_action": "At next authorized collection cycle, existing owner reconciles family-basket definition/build mapping against retained candidate evidence and required groups, then focused offline/source-price validation. Preserve last-good public data. Reopen this root only with current candidate or source change; historical failure alone is not proof of current missing groups.",
+      "prevention": "Separate collection, candidate validation, evidence preservation and published output. A successful collector cannot make an incomplete family basket publishable; retain exact product-group gate.",
+      "related_incident_ids": [
+        "supermarket-out-of-window-start"
+      ],
+      "observed_at": "2026-11-14T01:16:25.324Z",
+      "reported_runKey": "ops-2026-11-14-716eaf32-dc10-8332-928d-981dd3ccd2e6"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-8325906e-29c8-8332-ad4c-a882d5b7c58e",
+  "last_review_runKey": "ops-2026-11-14-716eaf32-dc10-8332-928d-981dd3ccd2e6",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
