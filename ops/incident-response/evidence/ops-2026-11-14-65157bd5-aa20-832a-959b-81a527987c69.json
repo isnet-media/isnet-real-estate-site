@@ -1,0 +1,180 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
+  "runKey": "ops-2026-11-14-65157bd5-aa20-832a-959b-81a527987c69",
+  "policy_version": "2026-11-14/1.1",
+  "started_at": "2026-11-14T21:38:41.206547Z",
+  "scheduled_for": "2026-11-14T21:35:00Z",
+  "observed_at": "2026-11-14T21:40:42Z",
+  "targets_reviewed": [
+    "Actions/inbox since watermark19:59:41Z with equal-time overlap",
+    "10exacttaskruntime/resultpairs",
+    "TLVNET603terminaldeployment/freelease",
+    "social_runs complete bounded page",
+    "one historicalPagesfull log and exacttestsource then/main",
+    "five already-triaged historical queue entries reconciled to existingfull-log evidence"
+  ],
+  "new_workflow_runs": 0,
+  "new_workflow_failures": 0,
+  "new_inbox": 0,
+  "new_task_results": 0,
+  "new_social_runs": 0,
+  "new_site_versions": 0,
+  "publications_verified_this_cycle": 0,
+  "new_fixed_verified_incidents": [],
+  "historical_roots_added": [],
+  "historical_occurrences_grouped": 1,
+  "history_full_logs": [
+    43085505908
+  ],
+  "historical_duplicate_queue_entries_removed": 5,
+  "history_remaining": "Seven-day metadata already complete; root triage partial. One historicalPagesoccurrence classified, five previously fully-triaged rows removed only with incident proof; all other groups remain. No historical completion claimed.",
+  "build_or_deploy": false,
+  "visual_review": "No fresh publicUIscan of unchanged verified products; existing desktop proof retained, mobile/cards pending.",
+  "unchanged_blocker_retries": 0,
+  "automation_or_permission_changes": false,
+  "social_attempts": 0,
+  "claims_or_settings_changes": false,
+  "supermarket_collection": false,
+  "supermarket_public_scan": false,
+  "api_billing_measured": false,
+  "cost": null,
+  "evidence": "ops/incident-response/evidence/ops-2026-11-14-65157bd5-aa20-832a-959b-81a527987c69.json",
+  "conclusion": "No new current failure. Historical11NovPagesfailure is unresolvedduplicate-candidate gate (Ashdod1 vs0), not syntax/cache failure. Exacteventpair remains unknown; no forced merge or gate change. Ongoing controller not complete.",
+  "historical": {
+    "run_id": 43085505908,
+    "attempt": 1,
+    "created_at": "2026-11-11T19:15:31Z",
+    "source_commit": "209b74bb17045f200dd2bde10f4e12a74ab8b7fd",
+    "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43085505908",
+    "classification": "historical metadata only; root signature not confirmed in this cycle",
+    "job_id": 130749982758,
+    "failed_step": "Build compact event listings and canonical sitemap",
+    "failed_command": "scripts/test-event-integrity.cjs:126",
+    "assertion": "ashdod has unresolved candidates before release",
+    "actual": 1,
+    "expected": 0,
+    "deploy_step": "skipped",
+    "full_log_read": true,
+    "root_id": "historical-publication-duplicate-gate-pre-repair",
+    "exact_pair": "not printed in log; not inferred",
+    "historical_test_blob": "166ad3c6753e52f6e8a8700ea3201ea6ebc49a16",
+    "current_test_blob": "2e71e077a4cf6cd071466c6a8c83cb2d2d5f4e1e",
+    "current_gate": "same unresolvedcandidate assertion retained",
+    "current_regression_test": false,
+    "public_verification": false
+  },
+  "normalized_log_excerpt": [
+    "2026-11-11T19:19:17.6484353Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release",
+    "2026-11-11T19:19:17.6487024Z     at Object.<anonymous> (/home/runner/work/isnet-real-estate-site/isnet-real-estate-site/scripts/test-event-integrity.cjs:126:99)",
+    "2026-11-11T19:19:17.6494595Z   actual: 1,",
+    "2026-11-11T19:19:17.6494921Z   expected: 0,",
+    "2026-11-11T19:19:17.6753005Z ##[error]Process completed with exit code 1."
+  ],
+  "historical_checkpoint_reconciliation": [
+    {
+      "group": ".github/workflows/super-committed-snapshot-tests.yml",
+      "run_id": 43079925682,
+      "proof": [
+        {
+          "root": "historical-super-ashdod-generated-shell-drift",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-14-e6ecb652-07a4-832e-8b79-23adbb2a242a.json"
+        }
+      ]
+    },
+    {
+      "group": ".github/workflows/infra-stability-preflight.yml",
+      "run_id": 42881842268,
+      "proof": [
+        {
+          "root": "historical-preflight-tlv-event-route-404",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
+        }
+      ]
+    },
+    {
+      "group": ".github/workflows/build-media-bank.yml",
+      "run_id": 42460287417,
+      "proof": [
+        {
+          "root": "event-collector-concurrent-main-push"
+        }
+      ]
+    },
+    {
+      "group": ".github/workflows/ashdod-stage-media-candidates.yml",
+      "run_id": 42235466927,
+      "proof": [
+        {
+          "root": "event-collector-concurrent-main-push"
+        }
+      ]
+    },
+    {
+      "group": ".github/workflows/event-integrity-tests.yml",
+      "run_id": 42188270572,
+      "proof": [
+        {
+          "root": "historical-events-cache-policy-hash-mismatch"
+        }
+      ]
+    }
+  ],
+  "actions_overlap": [
+    {
+      "id": 43635059580,
+      "created_at": "2026-11-14T19:59:41Z",
+      "status": "completed",
+      "conclusion": "skipped"
+    }
+  ],
+  "pending_github_run_ids": [],
+  "social": {
+    "new_rows": 0,
+    "rows_total": 2,
+    "has_more": false,
+    "watermark": "2026-11-13T10:00:03.313Z",
+    "settings_reads": 0,
+    "attempts": 0
+  },
+  "deployment": {
+    "id": "appgdep_6af8b21267bc8191a5a4045e66220318",
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "title": "תל אביב נט — חדר המערכת",
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_7362b2888e5c8191a793fd71a8c735b0",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_00000000855081f7b856cff76290d030",
+    "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-11-14T19:10:24.463576+00:00"
+  },
+  "lease_state": "free",
+  "lease_sha": "27c488be64a668beacd8ea1bfcced3f94b209c8b",
+  "remaining_publication_queue": [
+    {
+      "article_id": "city-museum-troubled-waters-opening-20261106",
+      "status": "publication_pending_existing_writer",
+      "target_currently_free": true,
+      "remaining": [
+        "Body-hash image reapproval, required checks and original-owner publication"
+      ],
+      "qualification": "Saved checkpoint status records earlier contention; free target alone is not content/image approval."
+    },
+    {
+      "article_id": "mozaik-ses-last-shootout-wormhole-preview-20261107",
+      "status": "publication_pending_existing_writer",
+      "target_currently_free": true,
+      "remaining": [
+        "Relevant licensed or marked AI image: existing story image_url=null; no artwork reuse license found (all rights reserved).",
+        "Actual file/rights/body-linked image review and build checks before publication."
+      ],
+      "qualification": "Saved checkpoint status records earlier contention; free target alone is not content/image approval."
+    }
+  ],
+  "previous_public_evidence": "ops/incident-response/evidence/ops-2026-11-14-e328787f-1650-832e-a10b-035d8dc48d4e.json",
+  "cost_measured": false
+}
