@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+  "run_id": "491a159f-33f8-8322-a053-5453bcb6312d",
+  "runKey": "culture-observation-491a159f-33f8-8322-a053-5453bcb6312d",
+  "runKey_scope": "Derived observation key for the actual failed source run; not a newly launched task or reporter run.",
+  "policy_version": "2026-11-13/1.0",
+  "recorded_at": "2026-11-14T04:21:48.078Z",
+  "target": "TLVNET-site and authorized culture syndication destinations",
+  "section": "culture",
+  "status": "failed_run_observed_root_cause_unavailable",
+  "attempt": null,
+  "report_sequence": 1,
+  "incident": {
+    "fingerprint": "culture-magazine/runtime/failed-without-matching-result/491a159f-33f8-8322-a053-5453bcb6312d",
+    "root_cause": "Not established: exact run is recorded failed; available latest_result belongs to a different older run. No per-run diagnostic log API exposed.",
+    "evidence": {
+      "recorded_status": "failed",
+      "started_at": "2026-11-13T08:33:50.760480Z",
+      "completed_at": "2026-11-13T09:03:54.327778Z",
+      "current_enabled": true,
+      "latest_result_run_id": "50641e69-2620-8330-9faa-3ad049e05402",
+      "latest_result_date": "2026-11-08T06:19:35.954596Z"
+    },
+    "impact": "No evidence this13Nov run produced a verified publication. Separate12Nov cross-magazine success report cannot establish its success.",
+    "next_action": "Existing source-runtime owner must inspect this exact failed execution diagnostics and checkpoint; classify cause before one justified correction. Include culture-magazine task in controller result-watermark coverage. Do not retry old run or infer publisher outcome from older latest_result."
+  },
+  "source_commit": "9226da9b0c4344ac92b2d1cedf716a327afb0edb",
+  "build": false,
+  "deploy": false,
+  "task_or_schedule_changes": false
+}
