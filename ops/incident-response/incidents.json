@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-13T23:34:52.371Z",
+  "updated_at": "2026-11-14T00:50:44.473Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1513,9 +1513,57 @@
       ],
       "observed_at": "2026-11-13T23:34:52.371Z",
       "reported_runKey": "ops-2026-11-14-be1b3fb2-4da4-8332-9618-7dcd391a4880"
+    },
+    {
+      "id": "historical-holon-cinema-fixed-count-gate",
+      "status": "mitigated",
+      "temporal_scope": "historical_only",
+      "fingerprint": "holon-events/test_cinema_has_specific_art_and_real_synopses/29-lt30",
+      "root_cause": "Historical Holon refresh had29 films and failed a fixed minimum30 assertion before reaching image-rights assertions; publication step skipped.",
+      "occurrences": [
+        {
+          "run_id": 42472604642,
+          "workflow": "Refresh Holon events and culinary guide",
+          "path": ".github/workflows/holon-events.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T10:43:10Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "1e43364f4af84a64969671002afa7bdfead9ccb4",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42472604642",
+          "classification": "Full log confirmed fixed30-film assertion failed at29. Distinct from later official-poster gate failure in the same test method. Historical only.",
+          "job_id": 128706688692
+        }
+      ],
+      "evidence": {
+        "log_read_full": true,
+        "failed_test": "test_cinema_has_specific_art_and_real_synopses",
+        "failed_assertion": "29 not greater than or equal to30",
+        "tests_run": 15,
+        "failures": 1,
+        "publish_step": "skipped"
+      },
+      "current_source_observation": {
+        "source_commit": "75c05f66d1f8e49e4083e73ef585ebd4a4c7039a",
+        "path": "scripts/test_holon_events.py",
+        "blob_sha": "bdbd06abfbb279004cb92e9da4ff8cf9ab6b39c0",
+        "fixed_minimum_replaced": true,
+        "current_check": "validate_cinema_projection compares exact owned screening tuples, rejects empty source, duplicate films/sessions/artwork and feed mismatch; official_promotional checks retained",
+        "controller_changed_code": false,
+        "regression_executed": false,
+        "current_public_result_verified": false
+      },
+      "resolution": "Historical fixed-count signature is absent from current test source, replaced by source-projection integrity. Source-level mitigation observed only; no fixed_verified or refreshed-publication claim. Separate poster-rights incident remains open.",
+      "next_action": "Retain source-projection and rights checks. On next authorized source change, existing Holon owner runs targeted release validation and proves the actual public catalog; do not pad catalog with expired films or retry old refresh.",
+      "prevention": "Classify exact assertion, not workflow/test name alone. Valid source shrinkage differs from missing/unlicensed artwork; never weaken rights gates to meet a count.",
+      "related_incident_ids": [
+        "holon-new-screening-unverified-poster"
+      ],
+      "observed_at": "2026-11-14T00:50:44.473Z",
+      "reported_runKey": "ops-2026-11-14-8325906e-29c8-8332-ad4c-a882d5b7c58e"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-be1b3fb2-4da4-8332-9618-7dcd391a4880",
+  "last_review_runKey": "ops-2026-11-14-8325906e-29c8-8332-ad4c-a882d5b7c58e",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
