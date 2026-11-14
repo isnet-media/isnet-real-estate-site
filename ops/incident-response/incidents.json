@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T02:42:16.701Z",
+  "updated_at": "2026-11-14T03:56:08.095Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -812,6 +812,26 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43022560691",
           "job_id": 130529101150,
           "evidence": "! [rejected] HEAD -> main (fetch first); log confirms git pull --rebase preceded git push"
+        },
+        {
+          "run_id": 42235466927,
+          "workflow": "Fetch Ashdod stage content and media candidates",
+          "path": ".github/workflows/ashdod-stage-media-candidates.yml",
+          "attempt": 1,
+          "created_at": "2026-11-06T14:36:41Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "278a44f0db60edbe79966529b50051fcd97bad97",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42235466927",
+          "job_id": 127951781335,
+          "log_read_full": true,
+          "source_fetch_step": "success",
+          "failed_step": "Save review report without publishing",
+          "failure_time": "2026-11-06T14:38:04Z",
+          "normalized_cause": "remote main changed during push; ref compare-and-set rejected",
+          "actual_remote_sha": "88347602e70a29cc5d98166de68413b9a409ae69",
+          "expected_remote_sha": "ba9196c133f014d779078cb5eb77387a423a5421",
+          "qualification": "Historical report-save failure, not source fetch failure or current public outage."
         }
       ],
       "current_source": {
@@ -835,7 +855,20 @@
       "next_action": "Existing event-release owner should include this minimal group alignment in a coordinated rollout, align remaining participating writers, and verify a subsequent genuine source-change run without overlapping pushes. No force push, no collector retry merely for this old failure.",
       "prevention": "One implemented shared writer gate per common Git publication target; keep source lease checks as a final safeguard.",
       "discovery_scope": "Historical incident11Nov, not a new failure today.",
-      "reported_runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b"
+      "reported_runKey": "ops-2026-11-13-5bef5ed5-5978-8326-9a05-76384d909f0b",
+      "related_workflow_observations": [
+        {
+          "observed_at": "2026-11-14T03:56:08.095Z",
+          "workflow": ".github/workflows/ashdod-stage-media-candidates.yml",
+          "source_commit": "92af7fcaa596cae898a0e66df35315f0287a1719",
+          "blob_sha": "a3e1354897cf882234f82c35a7beb3bfb289417d",
+          "concurrency_group": "ashdod-stage-media-candidates",
+          "current_code": "Current source has non-forced fetch/rebase/push loop of up to5 attempts; subsequent successful genuine report save not verified here.",
+          "policy_gap": "Generic five-attempt loop does not enforce current initial+one-materially-changed-cause retry ceiling.",
+          "action": "Existing coordinated event-release owner should align participating writer gates and bounded reason-aware retry logic without triggering a duplicate collector; no schedule or workflow change made in this controller cycle.",
+          "qualification": "Later source mitigation alone is not fixed_verified; do not replay historical collection."
+        }
+      ]
     },
     {
       "id": "tlvnet-legacy-event-cadence-divergence",
@@ -1640,7 +1673,7 @@
       "reported_runKey": "ops-2026-11-14-716eaf32-dc10-8332-928d-981dd3ccd2e6"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-1020a95d-e5f8-8332-a9f5-9bbae300eefb",
+  "last_review_runKey": "ops-2026-11-14-c4bd0400-c62c-8332-b32f-36544f613711",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
