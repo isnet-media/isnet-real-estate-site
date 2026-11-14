@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T05:12:11.416Z",
+  "updated_at": "2026-11-14T05:27:31.407Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1703,6 +1703,26 @@
       ],
       "observed_at": "2026-11-14T01:16:25.324Z",
       "reported_runKey": "ops-2026-11-14-716eaf32-dc10-8332-928d-981dd3ccd2e6"
+    },
+    {
+      "id": "isnet-sports-existing-writer-owner-unverified",
+      "status": "open",
+      "fingerprint": "isnet/sports/existing-city-writer-runtime-owner-unverified",
+      "observed_at": "2026-11-14T05:27:31.407Z",
+      "root_cause": "Existingcitysportswriterisconfirmedbypublisherbutidentity/currentexecutioninterfacehasnotbeenverified. ErroneousduplicateassignmenttoTLVremoved.",
+      "evidence": "ops/incident-response/evidence/sports-existing-city-owner-correction-20261114.json",
+      "next_action": "LocateexistingISNETsportswriterthroughitssourceWork/queue/runtimeandattributeexact13NovCMS811461/811462toexecutionevidence. Do notreassigncities toTLV,reviveretiredf605task,orclaimwriterworkedbecausebylineisמערכת.",
+      "scope": {
+        "websiteIds": [
+          28,
+          41,
+          61,
+          60,
+          55
+        ],
+        "do_not_assign_to_tlv": true
+      },
+      "published_verified": 0
     }
   ],
   "last_review_runKey": "ops-2026-11-14-c4bd0400-c62c-8332-b32f-36544f613711",
