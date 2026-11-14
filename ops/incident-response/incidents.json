@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T05:27:31.407Z",
+  "updated_at": "2026-11-14T05:46:49.373Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -454,7 +454,36 @@
           "log_read_full": true,
           "qualification": "Earlier coverage snapshot, not recurrence after repair and not today's film coverage. Current source/enrichment not rerun."
         }
-      ]
+      ],
+      "occurrences": [
+        {
+          "run_id": 42222539769,
+          "job_id": 127907847194,
+          "created_at": "2026-11-06T13:04:23Z",
+          "source_commit": "cc32a48eba4b358820fb2c700756ba36f189693f",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42222539769",
+          "classification": "Historical full log:44active,42embedded,2missing; not current coverage. Grouped with known incomplete-trailer root."
+        }
+      ],
+      "historical_evidence_20261106": {
+        "active_movies": 44,
+        "embedded_trailers": 42,
+        "missing": [
+          {
+            "id": "hot-cinema-3973",
+            "title": "סינמה נוסטלגיה - ברבור שחור",
+            "official_trailer_page": null
+          },
+          {
+            "id": "hot-cinema-3995",
+            "title": "טד החוקר ומנורת הקסמים עברית",
+            "official_trailer_page": null
+          }
+        ],
+        "artifact_id": 13503702860,
+        "source_date": "2026-11-06",
+        "scope": "Historical only; no current source scan or repair."
+      }
     },
     {
       "id": "supermarket-public-http-and-stale-branches",
@@ -1253,7 +1282,9 @@
         "controller_readback": true,
         "evidence": "ops/incident-response/evidence/herzliya-raanana-single-writer-20261114.json"
       },
-      "resolution": "14Nov publisher clarified one shared autonomous city news writer. Existing former shared editor task was explicitly reassigned as full writer, backup made, complete prompt replaced, recurring08/14/19 schedule explicitly selected, enabled and full configuration read back. No added task, external editor or claim of new public article."
+      "resolution": "14Nov publisher clarified one shared autonomous city news writer. Existing former shared editor task was explicitly reassigned as full writer, backup made, complete prompt replaced, recurring08/14/19 schedule explicitly selected, enabled and full configuration read back. No added task, external editor or claim of new public article.",
+      "last_review_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
+      "controller_seen_at": "2026-11-14T05:46:49.373Z"
     },
     {
       "id": "tlvnet-legacy-work-activity-unverifiable",
@@ -1291,11 +1322,12 @@
       "next_action": "Original enabled tasks continue existing schedules with actual CAS and facts/rights checks; do not restore obsolete historical-Work proof or self-pause. Next autonomous cycles still require real result verification.",
       "observed_at": "2026-11-13T20:06:40.073Z",
       "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524",
-      "last_review_runKey": "ops-2026-11-13-115553d8-22f4-8322-843b-4691e048ee60",
+      "last_review_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
       "resolved_at": "2026-11-14T04:55:32.725Z",
       "resolution": "Publisher14Nov explicitly removed speculative legacy Work inactivity prerequisite. All15 original active task prompts backed up/replaced/read back with schedules unchanged; news/sports resumed. Actual CAS acquired/read back, one deployment succeeded, four public articles full body/images/credits/section/home verified. Own lease released.",
       "recovery_evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json",
-      "prevention": "Only observed valid foreign lease, active deployment, actual access/security, facts/rights/build failures can block relevant target/item. No speculative global veto."
+      "prevention": "Only observed valid foreign lease, active deployment, actual access/security, facts/rights/build failures can block relevant target/item. No speculative global veto.",
+      "controller_seen_at": "2026-11-14T05:46:49.373Z"
     },
     {
       "id": "tlvnet-policy11-owner-overlap",
@@ -1423,7 +1455,7 @@
         "Automation_b3345c399b988191a1ba9848e3e3668b",
         "Automation_499e6c8b36648191a9f8f102b0d5d6fe"
       ],
-      "last_review_runKey": "ops-2026-11-13-115553d8-22f4-8322-843b-4691e048ee60",
+      "last_review_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
       "latest_notification_evidence": {
         "run_id": "8a03b756-2764-8330-a302-b024f7ab97db",
         "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
@@ -1433,7 +1465,8 @@
       },
       "resolved_at": "2026-11-14T04:55:32.725Z",
       "resolution": "Publisher14Nov explicitly removed speculative legacy Work inactivity prerequisite. All15 original active task prompts backed up/replaced/read back with schedules unchanged; news/sports resumed. Actual CAS acquired/read back, one deployment succeeded, four public articles full body/images/credits/section/home verified. Own lease released.",
-      "recovery_evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json"
+      "recovery_evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json",
+      "controller_seen_at": "2026-11-14T05:46:49.373Z"
     },
     {
       "id": "historical-events-health-yavne-kids-503",
@@ -1722,10 +1755,38 @@
         ],
         "do_not_assign_to_tlv": true
       },
-      "published_verified": 0
+      "published_verified": 0,
+      "last_review_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
+      "controller_seen_at": "2026-11-14T05:46:49.373Z"
+    },
+    {
+      "id": "culture-magazine-runtime-failure-without-result",
+      "status": "awaiting_external_action",
+      "fingerprint": "culture-magazine/runtime/failed-without-matching-result",
+      "root_cause": "Not established: failed13Nov runtime has no matching latest_result; exposed task read API provides no per-run diagnostic trace.",
+      "occurrences": [
+        {
+          "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+          "run_id": "491a159f-33f8-8322-a053-5453bcb6312d",
+          "started_at": "2026-11-13T08:33:50.760480Z",
+          "completed_at": "2026-11-13T09:03:54.327778Z",
+          "inbox": "ops/incident-response/inbox/491a159f-33f8-8322-a053-5453bcb6312d-1.json"
+        }
+      ],
+      "evidence": {
+        "recorded_status": "failed",
+        "latest_result_run_id": "50641e69-2620-8330-9faa-3ad049e05402",
+        "latest_result_created_at": "2026-11-08T06:19:35.954596Z",
+        "enabled": true
+      },
+      "qualification": "Runtime failure is verified, absence of public publication is not. Existing public culture items cannot be attributed to this failed execution without provenance. Old8Nov result is not13Nov success.",
+      "next_action": "Existing source-runtime operator obtains diagnostic trace/checkpoint for exact491a159f-33f8-8322-a053-5453bcb6312d, classifies cause, then one focused correction only if conditions changed. No old-run retry or competing writer.",
+      "observed_at": "2026-11-14T05:46:49.373Z",
+      "reported_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
+      "notification": "Already reported in interactive morning review; no duplicate alert."
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-c4bd0400-c62c-8332-b32f-36544f613711",
+  "last_review_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
