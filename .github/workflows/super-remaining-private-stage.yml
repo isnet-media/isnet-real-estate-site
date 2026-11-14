@@ -1,0 +1,31 @@
+name: Stage remaining six supermarket cities in private storage (no public cutover)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - ".github/workflows/super-remaining-private-stage.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: isnet-super-remaining-private-stage
+  cancel-in-progress: false
+jobs:
+  stage:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        city: [YAVNE, KGAT, HOLON, BATYAM, RISHON, ASHDOD]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      SUPABASE_URL: ${{ secrets.CMS_SUPABASE_URL || secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Stage unchanged city files privately and verify each download by SHA256
+        run: python scripts/stage_super_private_storage.py --city "${{ matrix.city }}"

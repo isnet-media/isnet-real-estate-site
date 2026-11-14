@@ -1,0 +1,74 @@
+name: Check authenticated private supermarket site shadow (no public cutover)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - ".github/workflows/super-private-site-shadow-check.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: isnet-super-private-site-shadow-check
+  cancel-in-progress: false
+jobs:
+  readback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      BASE_URL: https://qomkxhafrprooekwgsxf.supabase.co
+      SERVER_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify seven pinned private city shells, price/provenance files and six sets of site CSS/JS
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$SERVER_KEY"
+          endpoint="$BASE_URL/functions/v1/isnet-super-private-site-preview"
+          verified=0
+          for city in ASHDOD YAVNE KGAT RISHON HOLON BATYAM TLV; do
+            files=(index.html data/prices.json data/refresh-status.json data/source-status.json)
+            if [ "$city" != "TLV" ]; then
+              files+=(assets/design-system.css live.js)
+            fi
+            for f in "${files[@]}"; do
+              output="$RUNNER_TEMP/isnet-private-shadow-$city-$(basename "$f")"
+              headers="$RUNNER_TEMP/isnet-private-shadow-$city-headers.txt"
+              curl --fail-with-body -sS --max-time 50 --connect-timeout 10 --retry 2 \
+                -H "apikey: $SERVER_KEY" \
+                -H "Authorization: Bearer $SERVER_KEY" \
+                -G --data-urlencode "city=$city" --data-urlencode "path=$f" \
+                -D "$headers" -o "$output" "$endpoint"
+              cmp "SUPER.$city/$f" "$output"
+              grep -Eqi '^x-isnet-preview-only: true' "$headers"
+              grep -Eqi '^content-disposition: attachment' "$headers"
+              if [[ "$f" == *.json ]]; then python -m json.tool "$output" >/dev/null; fi
+              printf '%s  %s\n' "$(sha256sum "$output" | cut -d' ' -f1)" "$city/$f"
+              verified=$((verified+1))
+            done
+          done
+          status=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 15 \
+            -G --data-urlencode city=YAVNE --data-urlencode path=index.html "$endpoint")
+          [[ "$status" == 401 || "$status" == 403 ]] || { echo "Anonymous HTML exposure: HTTP $status"; exit 1; }
+          for bad in "assets/categories.webp" "../index.html"; do
+            status=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 15 \
+              -H "apikey: $SERVER_KEY" -H "Authorization: Bearer $SERVER_KEY" \
+              -G --data-urlencode city=YAVNE --data-urlencode "path=$bad" "$endpoint")
+            [[ "$status" == 400 ]] || { echo "Unsafe path not denied ($bad): HTTP $status"; exit 1; }
+          done
+          status=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 15 \
+            -H "apikey: $SERVER_KEY" -H "Authorization: Bearer $SERVER_KEY" \
+            -G --data-urlencode city=UNKNOWN --data-urlencode path=index.html "$endpoint")
+          [[ "$status" == 400 ]] || { echo "Unknown city not denied: HTTP $status"; exit 1; }
+          status=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 15 -X POST \
+            -H "apikey: $SERVER_KEY" -H "Authorization: Bearer $SERVER_KEY" \
+            "$endpoint?city=YAVNE&path=index.html")
+          [[ "$status" == 405 ]] || { echo "Write method not denied: HTTP $status"; exit 1; }
+          printf 'Verified private shadow file responses: %s; no anonymous access, no media, no writes\n' "$verified"
+          echo "### Private shadow file probe: $verified files byte-identical (seven cities)" >> "$GITHUB_STEP_SUMMARY"
+          echo "All reads are authenticated, sha256-checked and attachment-only. Media/font delivery is BLOCKED pending licensing review." >> "$GITHUB_STEP_SUMMARY"
+          if grep -Eqi 'http-equiv="refresh"' SUPER.TLV/index.html; then
+            echo "::warning title=TLV site blocker::TLV index.html is a meta-redirect/service-state placeholder, NOT a full independent site."
+            echo "**Public cutover BLOCKED**: TLV index.html is a redirect/service-state placeholder." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "**No DNS, GitHub Pages, live URL, source data, price collection, or publication has changed.**" >> "$GITHUB_STEP_SUMMARY"

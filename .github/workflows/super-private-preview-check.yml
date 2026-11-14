@@ -1,0 +1,47 @@
+name: Validate private supermarket data preview (no live cutover)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - ".github/workflows/super-private-preview-check.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: isnet-private-super-preview-check
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PROJECT_URL: https://qomkxhafrprooekwgsxf.supabase.co
+      SERVER_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check private delivery, immutable SHA256, and anonymous denial
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$SERVER_KEY"
+          endpoint="$PROJECT_URL/functions/v1/isnet-super-private-preview"
+          for city in ASHDOD BATYAM HOLON KGAT RISHON TLV YAVNE; do
+            for file in prices.json refresh-status.json source-status.json; do
+              dest="$RUNNER_TEMP/$city-$file"
+              curl --fail-with-body --silent --show-error --connect-timeout 10 --max-time 45 \
+                -H "apikey: $SERVER_KEY" -H "Authorization: Bearer $SERVER_KEY" \
+                "$endpoint?city=$city&file=$file" -o "$dest"
+              cmp "SUPER.$city/data/$file" "$dest"
+              sha256sum "$dest" | cut -d' ' -f1
+              python -m json.tool "$dest" > /dev/null
+              echo "PRIVATE PREVIEW VERIFIED $city $file unchanged"
+            done
+          done
+          unauth=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 \
+            "$endpoint?city=YAVNE&file=prices.json")
+          case "$unauth" in 401|403) echo "Anonymous denial verified: HTTP $unauth";; *) echo "Unexpected anonymous read status $unauth"; exit 1;; esac
+          invalid=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 \
+            -H "apikey: $SERVER_KEY" -H "Authorization: Bearer $SERVER_KEY" \
+            "$endpoint?city=INVALID&file=prices.json")
+          test "$invalid" = "400"
+          echo "Strict city allowlist verified. Public live URLs untouched."

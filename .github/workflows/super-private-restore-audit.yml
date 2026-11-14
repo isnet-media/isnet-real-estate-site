@@ -1,0 +1,39 @@
+name: Verify private supermarket snapshots and rollback (no cutover)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - ".github/workflows/super-private-restore-audit.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: isnet-super-private-readonly-restore
+  cancel-in-progress: false
+jobs:
+  readback-and-restore:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        city: [ASHDOD, BATYAM, HOLON, KGAT, RISHON, TLV, YAVNE]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SUPABASE_URL: ${{ secrets.CMS_SUPABASE_URL || secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify private manifest, price readback, no anonymous access, and restore to temp
+        run: python scripts/verify_super_private_restoration.py --city "${{ matrix.city }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: super-private-restore-proof-${{ matrix.city }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/super-verify-${{ matrix.city }}.json
+          retention-days: 7
+          if-no-files-found: error

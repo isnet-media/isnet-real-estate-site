@@ -1,0 +1,32 @@
+name: Resume BATYAM private storage staging (no production cutover)
+# Retry only incomplete BATYAM; preserve existing private release SHA and verify every object.
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - ".github/workflows/super-batyam-resume.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: isnet-super-batyam-private-resume
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SUPABASE_URL: ${{ secrets.CMS_SUPABASE_URL || secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify BATYAM Git source tree against original staged snapshot
+        run: |
+          test "$(git rev-parse HEAD:SUPER.BATYAM)" = "$(git rev-parse 5958cfaca9a61eacfdb1aa216635c3d3ff810850:SUPER.BATYAM)"
+      - name: Resume private immutable BATYAM release using existing verified files
+        run: python scripts/stage_super_private_storage.py --city BATYAM --release 5958cfaca9a61eacfdb1aa216635c3d3ff810850
