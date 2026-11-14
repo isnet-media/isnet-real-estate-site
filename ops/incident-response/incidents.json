@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T04:55:32.725Z",
+  "updated_at": "2026-11-14T05:12:11.416Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1198,8 +1198,8 @@
     },
     {
       "id": "herzliya-raanana-original-runtime-access",
-      "status": "awaiting_external_action",
-      "operational_state": "awaiting_source_runtime_access",
+      "status": "mitigated",
+      "operational_state": "single_shared_writer_configured_awaiting_first_live_run",
       "fingerprint": "ISNET/Herzliya-Raanana/original-writer-runtime/not-in-accessible-inventory",
       "root_cause": "Current complete accessible automation inventory has no original city writer tasks. Cancelled shared editor and read-only one-time audit are distinct roles and cannot substitute for missing originals.",
       "evidence": {
@@ -1219,10 +1219,10 @@
         "handoff": "ops/incident-response/inbox/20261113-city-writer-runtime-policy11.json",
         "known_browser_restriction": "Handoff reports host-security block; controller did not retry or bypass."
       },
-      "missing_interface": "Authorized read/update/readback interface to the two original city Work tasks in their source environment",
-      "next_action": "Open the two original city writer task settings in the Work environment where they were created and make those exact tasks accessible to the controller, or replace their complete prompts there with current master plus v1.2 city role and return effective prompt readback. Preserve schedule and technical approval state.",
+      "missing_interface": "No missing historical original-task interface blocks this new publisher-authorized shared owner. Existing CAS and CMS tools are available; actual write permissions and source/material still require normal per-item verification.",
+      "next_action": "Existing shared writer runs08/14/19 Israel and independently publishes validated local material in both cities. Controller verifies exact run/results and real public article/body/photo/credit/section for each city before fixed_verified. Historical absence of two separate writer tasks is no longer a gating condition; do not ask publisher again for those tasks.",
       "completion_checks": {
-        "effective_prompts_read_back": false,
+        "effective_prompts_read_back": true,
         "actual_writer_runs_verified": false,
         "new_live_city_articles_verified": false
       },
@@ -1242,7 +1242,18 @@
         },
         "raanana": "Audit reports no new local article since afternoon; last observed local item Nov11.",
         "qualification": "Audit is read-only separate role; no original runtime prompt readback, writer attribution or controller public verification. Existing source-runtime-access incident remains open."
-      }
+      },
+      "current_authority": {
+        "observed_at": "2026-11-14T05:12:11.416Z",
+        "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+        "title": "כתב חדשות — הרצליה ורעננה",
+        "enabled": true,
+        "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Jerusalem:20261114T080000\nRRULE:FREQ=DAILY;BYHOUR=8,14,19;BYMINUTE=0;BYSECOND=0\nEND:VEVENT",
+        "full_prompt_readback": true,
+        "controller_readback": true,
+        "evidence": "ops/incident-response/evidence/herzliya-raanana-single-writer-20261114.json"
+      },
+      "resolution": "14Nov publisher clarified one shared autonomous city news writer. Existing former shared editor task was explicitly reassigned as full writer, backup made, complete prompt replaced, recurring08/14/19 schedule explicitly selected, enabled and full configuration read back. No added task, external editor or claim of new public article."
     },
     {
       "id": "tlvnet-legacy-work-activity-unverifiable",

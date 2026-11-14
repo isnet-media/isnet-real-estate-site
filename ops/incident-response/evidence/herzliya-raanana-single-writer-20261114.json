@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-14T05:12:11.416Z",
+  "policy_version": "2026-11-14/1.1",
+  "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "run_id": null,
+  "runKey": null,
+  "record_type": "configuration_change_and_readback_not_writer_execution",
+  "publisher_authority": "Eyal14Nov:one shared autonomous news writer for Herzliya/Raanana, full research-to-live-publication, no separate editor. Selected08:00,14:00,19:00 Israel explicitly in scheduling question.",
+  "former_title": "עורך משותף — הרצליה ורעננה",
+  "current_title": "כתב חדשות — הרצליה ורעננה",
+  "same_existing_task": true,
+  "new_tasks_created": 0,
+  "enabled": true,
+  "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Jerusalem:20261114T080000\nRRULE:FREQ=DAILY;BYHOUR=8,14,19;BYMINUTE=0;BYSECOND=0\nEND:VEVENT",
+  "timezone": "Asia/Jerusalem",
+  "next_run_time": "2026-11-14T08:00:00+02:00",
+  "effective_prompt_exact_readback": true,
+  "controller_prompt_exact_readback": true,
+  "controller_schedule_unchanged": true,
+  "policy_commit": "85b9bba2b86366909a0d5355b199817ba3c39aed",
+  "backup": "ops/agent-harmony/backups/2026-11-14-city-writer/Automation_845f7ef0033c8191b7490e0dc5748754.json",
+  "instruction": "ops/agent-harmony/instructions/agents/01_02_herzliya_raanana_writer.md",
+  "targets": [
+    {
+      "websiteId": 62,
+      "city": "הרצליה",
+      "lease": "ISNET-CMS-62",
+      "lease_observed": "free"
+    },
+    {
+      "websiteId": 59,
+      "city": "רעננה",
+      "lease": "ISNET-CMS-59",
+      "lease_observed": "free"
+    }
+  ],
+  "ownership": "Single writer handles both cities with separate CAS. No old historical city runtime prompt-readback requirement; no external editorial/image gate. Actual facts/rights/security/permission checks retained.",
+  "remaining": {
+    "first_autonomous_run": "pending08:00",
+    "published_verified_in_this_configuration_change": 0,
+    "public_result_from_each_city": "not_yet_verified",
+    "current_source_or_cms_writes": false
+  },
+  "ops_only_no_deploy": true
+}
