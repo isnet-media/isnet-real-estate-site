@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T01:16:25.324Z",
+  "updated_at": "2026-11-14T02:42:16.701Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -428,7 +428,33 @@
         "tests": "YAML semantic comparison confirms schedule-only change; push/manual triggers, validation gate, retention and permissions unchanged",
         "note": "No audit/import retry. The four missing trailers remain unresolved; timer alignment is not content repair.",
         "commit": "https://github.com/isnet-media/isnet-real-estate-site/commit/ce07d4b3e8294d5857f49a9a05e6db1a1a1b8bd5"
-      }
+      },
+      "historical_occurrences": [
+        {
+          "run_id": 42369806115,
+          "workflow": "Audit Ashdod cinema trailer coverage",
+          "path": ".github/workflows/audit-cinema-trailers.yml",
+          "attempt": 1,
+          "created_at": "2026-11-07T11:49:37Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "38461d04825246b5c2df78418c535cebad29cb90",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42369806115",
+          "job_id": 128395395815,
+          "execution_date": "2026-11-07",
+          "active_movies": 44,
+          "embedded_trailers": 42,
+          "missing_movie_ids": [
+            "hot-cinema-3973",
+            "hot-cinema-3995"
+          ],
+          "gate_message": "Do not call this a complete automatic import.",
+          "exit_code": 1,
+          "diagnostic_artifact_id": 13572827665,
+          "log_read_full": true,
+          "qualification": "Earlier coverage snapshot, not recurrence after repair and not today's film coverage. Current source/enrichment not rerun."
+        }
+      ]
     },
     {
       "id": "supermarket-public-http-and-stale-branches",
@@ -1614,7 +1640,7 @@
       "reported_runKey": "ops-2026-11-14-716eaf32-dc10-8332-928d-981dd3ccd2e6"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-716eaf32-dc10-8332-928d-981dd3ccd2e6",
+  "last_review_runKey": "ops-2026-11-14-1020a95d-e5f8-8332-a9f5-9bbae300eefb",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
