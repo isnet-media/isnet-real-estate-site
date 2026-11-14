@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T09:11:12.935Z",
+  "updated_at": "2026-11-14T10:23:29.404Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -916,6 +916,21 @@
           "actual_remote_sha": "88347602e70a29cc5d98166de68413b9a409ae69",
           "expected_remote_sha": "ba9196c133f014d779078cb5eb77387a423a5421",
           "qualification": "Historical report-save failure, not source fetch failure or current public outage."
+        },
+        {
+          "run_id": 42460287417,
+          "attempt": 1,
+          "job_id": 128667916212,
+          "created_at": "2026-11-08T07:48:34Z",
+          "source_commit": "78012eaaf43dc45fdd5000b8eabf59385f4abbe1",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42460287417",
+          "workflow": "Build central media bank",
+          "failed_step": "Commit media bank index",
+          "normalized_cause": "Remote main changed during non-forced push; ref CAS rejected",
+          "actual_remote_sha": "148732ecd67dadd9c797c70a9129ac16b2c824f9",
+          "expected_remote_sha": "78012eaaf43dc45fdd5000b8eabf59385f4abbe1",
+          "log_read_full": true,
+          "qualification": "Media build and thumbnail steps passed; index save failed. Historical only, no new runtime failure or present image outage."
         }
       ],
       "current_source": {
@@ -1947,7 +1962,15 @@
       "public_proof": null,
       "next_action": "Continue bounded triage from saved root groups; inspect recorded field differences/source provenance when this signature next needs work. Preserve exact comparison and existing identity/media gates; do not retry old workflow or weaken gate.",
       "prevention": "Record actual differing fields and source/deploy hashes in audit artifacts so non-priority drift can be distinguished from availability and identity errors.",
-      "reported_runKey": "ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4"
+      "reported_runKey": "ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4",
+      "current_evidence": {
+        "observed_at": "2026-11-14T10:23:29.404Z",
+        "run_id": 43584601106,
+        "job_id": 132416298641,
+        "source_commit": "9af4b06a5858b20ca5b61688ed85da18176eb543",
+        "readback_comparison_step": "success",
+        "qualification": "Current original audit job compared public JSON successfully. Full success logs not read; current root mitigation evidence, not field-level reconstruction or controller fixed_verified."
+      }
     },
     {
       "id": "future-cms-create-post-optional-payload-validation",
@@ -2005,7 +2028,7 @@
       "status": "open",
       "temporal_scope": "historical_only",
       "fingerprint": "super-committed-snapshot-tests/super_ashdod_shell.py--check/SUPER.ASHDOD-compare-shell-stale",
-      "root_cause": "11Nov committed snapshot check found compare/index.html differs from expected shared brand/category shell. Check-only generator assertion failed; preceding basket/data checks passed. No collection or price source failure established.",
+      "root_cause": "Historical11Nov --check rejected exact source equality. Current targeted reproduction narrows the continuing source mismatch to263bytes of four managed asset tags moved across inline style within head; body and asset identities/counts unchanged. No visual or price-data regression established.",
       "occurrences": [
         {
           "run_id": 43079925682,
@@ -2020,11 +2043,38 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43079925682"
         }
       ],
-      "observed_at": "2026-11-14T09:11:12.935Z",
-      "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json",
-      "change": "Diagnosis only, no generator execution, collection, code edit, deploy or current outage claim.",
-      "next_action": "Review current generated shell correspondence in original source before proposing isolated correction. Preserve checks; no outside-window catalog/public supermarket scan.",
-      "prevention": "Commit generator and its generated pages atomically and run --check on exact committed output."
+      "observed_at": "2026-11-14T10:23:29.404Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-e6ecb652-07a4-832e-8b79-23adbb2a242a.json",
+      "change": "Prepared source patch only in ops directory; no public source mutation or deployment.",
+      "next_action": "Existing supermarket release owner can apply patch against matching HTML blob alongside next genuine source release; rerun exact shell checks after all generators, retain concurrent changes and verify live desktop/mobile result. Controller does not claim live fix or run collector.",
+      "prevention": "Commit generator and its generated pages atomically and run --check on exact committed output.",
+      "current_source_check": {
+        "source_commit": "9af4b06a5858b20ca5b61688ed85da18176eb543",
+        "script_blob": "d4c99b2b879b79b8dbd0da1ff9778a373e669161",
+        "html_blob": "b43fec719c4efd03c5c67b64f06be9e21bfcddbf",
+        "template_blob": "7510cf068b3cf9de9cc4d89679474be81f66daed",
+        "exact_match": false,
+        "transformation_idempotent": true,
+        "catalog_reads": 0,
+        "public_requests": 0
+      },
+      "repair": {
+        "status": "isolated_patch_tested_not_applied",
+        "path": "ops/incident-response/patches/super-ashdod-compare-shell-order.patch",
+        "expected_source_blob": "b43fec719c4efd03c5c67b64f06be9e21bfcddbf",
+        "tests": {
+          "current_exact_check": false,
+          "patched_exact_check": true,
+          "body_unchanged": true,
+          "four_managed_assets_each_once": true,
+          "catalog_reads": 0,
+          "public_requests": 0,
+          "source_mutation": false,
+          "git_apply_check": true,
+          "git_apply_exact_expected": true
+        },
+        "scope": "Canonicalizes asset tag order in compare HTML only; body, prices and all four managed asset URLs/counts unchanged. Exact release gate retained."
+      }
     }
   ],
   "last_review_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79",
