@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T03:56:08.095Z",
+  "updated_at": "2026-11-14T04:55:32.725Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1155,7 +1155,7 @@
     },
     {
       "id": "tlvnet-news-execution-binding-unverified",
-      "status": "awaiting_external_action",
+      "status": "mitigated",
       "fingerprint": "tlvnet/news/publication/execution-binding-nonself-inprogress",
       "root_cause": "Writer deferred publication because executor-to-scheduled-run binding was not established at execution time. is_self_owned_automation=false and null chat_ref are not proof of wrong routing or live competition.",
       "occurrences": [
@@ -1185,9 +1185,16 @@
         }
       },
       "impact": "No new midday news/community publication; community explainer and transport research checkpoint preserved in immutable inbox. Image review still pending.",
-      "next_action": "Existing execution platform/release owner must provide authoritative task/run binding to the writer. Do not treat nonself/null metadata alone as routing mismatch. After valid binding and release ownership, same authorized writer resumes saved checkpoint, completes exact image/rights review and applies publication CAS protocol. No permission expansion, new task, enable/schedule edit or controller substitute article.",
+      "next_action": "Manual original-task inline execution now has verified public release. Verify next saved scheduled run binding/results separately; never invent runtime run ID.",
       "controller_repair": "No platform binding mutation available or attempted; no competing TLVNET release",
-      "reported_runKey": "ops-2026-11-13-dbea2a00-6628-8322-b61b-4570f97b61ba"
+      "reported_runKey": "ops-2026-11-13-dbea2a00-6628-8322-b61b-4570f97b61ba",
+      "manual_recovery": {
+        "observed_at": "2026-11-14T04:55:32.725Z",
+        "run_id": null,
+        "runKey": "manual-recovery-20261114T044022Z-633cab7f",
+        "evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json",
+        "published_verified": 4
+      }
     },
     {
       "id": "herzliya-raanana-original-runtime-access",
@@ -1239,7 +1246,7 @@
     },
     {
       "id": "tlvnet-legacy-work-activity-unverifiable",
-      "status": "awaiting_external_action",
+      "status": "fixed_verified",
       "fingerprint": "tlvnet/site/publication/legacy-work-activity-unverifiable",
       "root_cause": "Shared lease policy requires checking old Work producer inactivity before acquisition; no authoritative current Work execution/approval inventory is exposed. Free lease and succeeded deployment are not that proof.",
       "occurrences": [
@@ -1270,14 +1277,18 @@
         }
       ],
       "impact": "News and sports tasks now paused after zero-publication evening runs; real-estate publication deferred. Authoritative legacy Work producer activity/approval verification remains unavailable. No live competing publisher proved.",
-      "next_action": "Existing source Work owner must reconcile current old task/approval/activity state and confirm the old producer inactive through its authoritative interface; retain GitHub CAS. No controller editor substitute, gate removal or forced unlock.",
+      "next_action": "Original enabled tasks continue existing schedules with actual CAS and facts/rights checks; do not restore obsolete historical-Work proof or self-pause. Next autonomous cycles still require real result verification.",
       "observed_at": "2026-11-13T20:06:40.073Z",
       "reported_runKey": "ops-2026-11-13-a35b2057-8098-8322-b467-7fec5fb94524",
-      "last_review_runKey": "ops-2026-11-13-115553d8-22f4-8322-843b-4691e048ee60"
+      "last_review_runKey": "ops-2026-11-13-115553d8-22f4-8322-843b-4691e048ee60",
+      "resolved_at": "2026-11-14T04:55:32.725Z",
+      "resolution": "Publisher14Nov explicitly removed speculative legacy Work inactivity prerequisite. All15 original active task prompts backed up/replaced/read back with schedules unchanged; news/sports resumed. Actual CAS acquired/read back, one deployment succeeded, four public articles full body/images/credits/section/home verified. Own lease released.",
+      "recovery_evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json",
+      "prevention": "Only observed valid foreign lease, active deployment, actual access/security, facts/rights/build failures can block relevant target/item. No speculative global veto."
     },
     {
       "id": "tlvnet-policy11-owner-overlap",
-      "status": "awaiting_external_action",
+      "status": "mitigated",
       "fingerprint": "tlvnet/ownership/policy1.1-restored-specialists-vs1.0-exclusive-parent",
       "root_cause": "Two restored daily specialist prompts explicitly supersede cancellation at v1.1 while parent news/economy v1.0 prompts still claim sole community/consumer ownership and state standalone consumer must not resume.",
       "evidence": {
@@ -1288,10 +1299,17 @@
         "readback": "Actual four prompt texts and enabled state inspected, no new specialist result after v1.1 yet",
         "live_dispatch_probe": "Both public dispatch GETs returned403; no retry/bypass or claim of current API owner"
       },
-      "next_action": "Authorized rollout owner should replace superseded ownership clauses in parent prompts/source dispatch with one current owner per topic under v1.1, preserve all approved schedules and current enabled states, and read back effective prompts/live routing. Controller's narrow prompt-edit exception covers only original Herzliya/Raanana writers.",
+      "next_action": "Current parent prompts no longer claim community/consumer exclusivity; specialist ownership read back. Reconcile source dispatch on a relevant owned source change, preserving schedules/CAS; no duplicate publish observed.",
       "qualification": "New policy-version inconsistency, not evidence prior v1.0 routing repair failed or actual duplicate publication occurred.",
       "observed_at": "2026-11-13T14:31:37.188Z",
-      "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895"
+      "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
+      "prompt_repair": {
+        "observed_at": "2026-11-14T04:55:32.725Z",
+        "policy_version": "2026-11-14/1.0",
+        "parents_readback": true,
+        "source_dispatch_verified": false,
+        "evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json"
+      }
     },
     {
       "id": "historical-event-analytics-missing-ga4-service-account",
@@ -1329,7 +1347,7 @@
     },
     {
       "id": "tlvnet-news-runtime-paused-on-shared-blocker",
-      "status": "awaiting_external_action",
+      "status": "fixed_verified",
       "fingerprint": "TLVNET/news/runtime-auto-pause/shared-legacy-Work-activity-precondition",
       "root_cause": "News and sports writers report a runtime requirement to pause fully blocked tasks after the shared legacy Work publication precondition cannot be verified. Both current task readbacks independently confirm disabled state; these are grouped occurrences of one operational root, not separate per-email incidents.",
       "evidence": {
@@ -1350,9 +1368,9 @@
         "no_competing_writer_proved": true
       },
       "impact": "Two paused publisher tasks (news and sports), with saved unready checkpoints and no new evening publications; continuity is interrupted until authorized recovery.",
-      "next_action": "Authoritative source Work owner must verify/document old producer activity and pending approvals or complete authorized retirement, retaining CAS/content/rights checks. After resolution, authorized runtime owner must resume the exact affected news and sports tasks and reconcile runtime pause behavior with publisher continuity policy. Controller's current mandate forbids is_enabled/prompt changes except narrow original office-writer prompt access.",
+      "next_action": "Original enabled tasks continue existing schedules with actual CAS and facts/rights checks; do not restore obsolete historical-Work proof or self-pause. Next autonomous cycles still require real result verification.",
       "controller_action": "Recorded and escalated new pause; no task/prompt/schedule/permission mutation, publication retry, forced unlock or deployment.",
-      "prevention": "Expose authoritative legacy producer/approval state to the permitted publication path and reconcile runtime pause behavior at its owner; item-specific failures must remain checkpointed without false success or removed gates.",
+      "prevention": "Only observed valid foreign lease, active deployment, actual access/security, facts/rights/build failures can block relevant target/item. No speculative global veto.",
       "related_incident_ids": [
         "tlvnet-legacy-work-activity-unverifiable",
         "news-preview-failure-self-disable"
@@ -1401,7 +1419,10 @@
         "writer_result_created_at": "2026-11-13T19:02:11.440147Z",
         "publisher_notified_by_writer": true,
         "controller_repeat_notification": false
-      }
+      },
+      "resolved_at": "2026-11-14T04:55:32.725Z",
+      "resolution": "Publisher14Nov explicitly removed speculative legacy Work inactivity prerequisite. All15 original active task prompts backed up/replaced/read back with schedules unchanged; news/sports resumed. Actual CAS acquired/read back, one deployment succeeded, four public articles full body/images/credits/section/home verified. Own lease released.",
+      "recovery_evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json"
     },
     {
       "id": "historical-events-health-yavne-kids-503",
