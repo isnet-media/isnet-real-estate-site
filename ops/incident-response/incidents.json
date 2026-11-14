@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T12:11:54.194Z",
+  "updated_at": "2026-11-14T13:37:41.382Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -337,7 +337,18 @@
         "mobile": "pending",
         "qualification": "Independent writer publication succeeds despite preview unavailability and remains enabled. No preview-runner repair or mobile pass claimed."
       },
-      "next_action": "Preserve independent publishing with truthful preview-unavailable and pending mobile flags. Live desktop verification works through current cloud browser; no supported viewport/emulation capability exposed for mobile review. Do not retry article publication or disable writer."
+      "next_action": "Preserve independent publishing with truthful preview-unavailable and pending mobile flags. Live desktop verification works through current cloud browser; no supported viewport/emulation capability exposed for mobile review. Do not retry article publication or disable writer.",
+      "latest_consumer_occurrence": {
+        "run_id": "1daaa184-3e88-8322-a39d-bd3a83c3255d",
+        "inbox": "ops/incident-response/inbox/20261114-consumer-preview-and-source-identity.json",
+        "signature": "preview startup UND_ERR_SOCKET other side closed",
+        "attempts": 1,
+        "publication_continued": true,
+        "deployment": 600,
+        "mobile_review": "pending",
+        "runner_repair_verified": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449.json"
+      }
     },
     {
       "id": "youtube-discovery-missing-api-key",
@@ -1439,7 +1450,7 @@
         "readback": "Actual four prompt texts and enabled state inspected, no new specialist result after v1.1 yet",
         "live_dispatch_probe": "Both public dispatch GETs returned403; no retry/bypass or claim of current API owner"
       },
-      "next_action": "Current parent prompts no longer claim community/consumer exclusivity; specialist ownership read back. Reconcile source dispatch on a relevant owned source change, preserving schedules/CAS; no duplicate publish observed.",
+      "next_action": "Refresh/apply/read back isolated consumer WRITER replacement through existing authorized source connection; preserve current runtime specialist ownership and schedules. No new credentials or speculative historical Work gate.",
       "qualification": "New policy-version inconsistency, not evidence prior v1.0 routing repair failed or actual duplicate publication occurred.",
       "observed_at": "2026-11-13T14:31:37.188Z",
       "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
@@ -1449,6 +1460,33 @@
         "parents_readback": true,
         "source_dispatch_verified": false,
         "evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json"
+      },
+      "source_writer_repair": {
+        "observed_at": "2026-11-14T13:37:41.382Z",
+        "path": "public/news/agents/consumer/WRITER.md",
+        "source_commit": "77b7f03aa5c0b7eb93320982802c1ba24be108ef",
+        "current_effective_runtime_owner": "Automation_e2f02000cdf4819190022b85f4391076",
+        "stale_source_owner": "Automation_a32c48a7ae848191a5769078a5c74a09",
+        "patch": "ops/incident-response/patches/tlvnet-consumer-writer-identity-20261114.patch",
+        "backup": "ops/incident-response/backups/consumer-WRITER-77b7f03aa5c0.md",
+        "tests": {
+          "old_sha256": "a9e22594322418e7a9cac7f6bf8bc68a36d61a29847691e0f80c816acddc366e",
+          "new_sha256": "18a3a178200249377bf5d0ef0151ee4f46b532a7a335bd1be72080106f0dd6d4",
+          "git_apply_check": true,
+          "single_file_only": true,
+          "old_identity_removed": true,
+          "legacy_work_condition_removed": true,
+          "source_changed": false
+        },
+        "status": "isolated_patch_prepared_not_applied",
+        "fresh_source_fetch": {
+          "attempts": 1,
+          "result": "fatal: could not read Username for https://git.chatgpt-team.site: No such device or address",
+          "new_credentials_created": false
+        },
+        "minimal_action": "Existing authorized Sites source owner must refresh current main, review/apply this one-file replacement preserving concurrent changes, then read back source identity. Do not deploy just for instructions.",
+        "publication_effect": "Effective consumer runtime is correct and original owner reports live publication; stale source has not blocked this run.",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449.json"
       }
     },
     {
@@ -2119,7 +2157,7 @@
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79",
+  "last_review_runKey": "ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",

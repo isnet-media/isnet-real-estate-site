@@ -1,0 +1,109 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "f4a89fe4-2388-832e-a89b-6caa25891449",
+  "runKey": "ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449",
+  "policy_version": "2026-11-14/1.1",
+  "started_at": "2026-11-14T13:29:09.604392Z",
+  "scheduled_for": "2026-11-14T13:35:00Z",
+  "observed_at": "2026-11-14T13:37:41.382Z",
+  "source_sha": "6a72be5d79bc9dd94ac2b9c5ff86db1ffc00bb12",
+  "targets_reviewed": [
+    "New Actions after watermark/pending IDs",
+    "Two new immutable inbox entries",
+    "10 original runtime/result pairs",
+    "TLVNET600 deployment/lease",
+    "Bounded social_runs page",
+    "Consumer stale source WRITER identity; cached verification commit and isolated patch"
+  ],
+  "new_workflow_runs": 6,
+  "new_workflow_failures": 0,
+  "new_inbox": 2,
+  "new_task_results": 2,
+  "new_in_progress_task_runs": [],
+  "new_social_runs": 0,
+  "new_site_versions": 1,
+  "publications_verified_this_cycle": 0,
+  "writer_reported_publications": 1,
+  "new_fixed_verified_incidents": [],
+  "history_added": 0,
+  "history_full_logs": [],
+  "history_remaining": "Seven-day metadata covered; saved historical root triage groups and unconfirmed publish failures retained without rescan.",
+  "build_or_deploy": false,
+  "visual_review": "Original consumer desktop review reported passed; controller independent consumer live read unavailable; mobile pending.",
+  "unchanged_blocker_retries": 0,
+  "automation_or_permission_changes": false,
+  "social_attempts": 0,
+  "claims_or_settings_changes": false,
+  "supermarket_collection": false,
+  "supermarket_public_scan": false,
+  "api_billing_measured": false,
+  "cost": null,
+  "evidence": "ops/incident-response/evidence/ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449.json",
+  "conclusion": "Consumer600 terminal deployment and exact original publication report reconciled. News171/NTA retained in existing inbox; actual lease now released. Stale consumer source identity grouped with existing ownership root; complete isolated replacement backed up and git-apply-tested, not applied because fresh source fetch lacked existing credentials. No new credentials, dispatch, substitute writing or deploy.",
+  "source_evidence": {
+    "runbook_sha": "a417b9b103a0290d0710e1ddeb882861ad741ac8",
+    "state_read_sha": "06fcd66843378b27452e4d53d9379dc69cb8d237",
+    "incidents_read_sha": "9af73b6d949cd30cad2baf76d29d929ef74e34fc",
+    "new_inbox": [
+      "20261114-consumer-preview-and-source-identity.json",
+      "dd4d9e0b-6858-8326-a56e-4365bd312654-1.json"
+    ],
+    "task_completion": [
+      {
+        "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "run_id": "dd4d9e0b-6858-8326-a56e-4365bd312654",
+        "completed_at": "2026-11-14T12:08:40.593367Z"
+      },
+      {
+        "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+        "run_id": "1daaa184-3e88-8322-a39d-bd3a83c3255d",
+        "completed_at": "2026-11-14T12:14:29.284557Z"
+      }
+    ]
+  },
+  "actions": [
+    43599986395,
+    43599915501,
+    43594929815,
+    43594898580,
+    43593516969,
+    43593447228
+  ],
+  "consumer_publication": {
+    "url": "https://tlvnet.com/news/mei-avivim-leak-reduced-tariff-guide-20261114",
+    "source": "original matched runtime and source ledger; terminal native deployment",
+    "independent_controller_public_verified": false,
+    "mobile_visual_review": "pending"
+  },
+  "source_identity": {
+    "observed_at": "2026-11-14T13:37:41.382Z",
+    "path": "public/news/agents/consumer/WRITER.md",
+    "source_commit": "77b7f03aa5c0b7eb93320982802c1ba24be108ef",
+    "current_effective_runtime_owner": "Automation_e2f02000cdf4819190022b85f4391076",
+    "stale_source_owner": "Automation_a32c48a7ae848191a5769078a5c74a09",
+    "patch": "ops/incident-response/patches/tlvnet-consumer-writer-identity-20261114.patch",
+    "backup": "ops/incident-response/backups/consumer-WRITER-77b7f03aa5c0.md",
+    "tests": {
+      "old_sha256": "a9e22594322418e7a9cac7f6bf8bc68a36d61a29847691e0f80c816acddc366e",
+      "new_sha256": "18a3a178200249377bf5d0ef0151ee4f46b532a7a335bd1be72080106f0dd6d4",
+      "git_apply_check": true,
+      "single_file_only": true,
+      "old_identity_removed": true,
+      "legacy_work_condition_removed": true,
+      "source_changed": false
+    },
+    "status": "isolated_patch_prepared_not_applied",
+    "fresh_source_fetch": {
+      "attempts": 1,
+      "result": "fatal: could not read Username for https://git.chatgpt-team.site: No such device or address",
+      "new_credentials_created": false
+    },
+    "minimal_action": "Existing authorized Sites source owner must refresh current main, review/apply this one-file replacement preserving concurrent changes, then read back source identity. Do not deploy just for instructions.",
+    "publication_effect": "Effective consumer runtime is correct and original owner reports live publication; stale source has not blocked this run.",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449.json"
+  },
+  "queue_references": [
+    "ops/incident-response/inbox/e6d4b4b3-779c-8321-850a-cd86b3554385-1.json",
+    "ops/incident-response/inbox/dd4d9e0b-6858-8326-a56e-4365bd312654-1.json"
+  ]
+}
