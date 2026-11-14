@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T15:50:08.439Z",
+  "updated_at": "2026-11-14T16:29:03.265Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1002,6 +1002,26 @@
           "expected_remote_sha": "78012eaaf43dc45fdd5000b8eabf59385f4abbe1",
           "log_read_full": true,
           "qualification": "Media build and thumbnail steps passed; index save failed. Historical only, no new runtime failure or present image outage."
+        },
+        {
+          "run_id": 42569990123,
+          "attempt": 1,
+          "created_at": "2026-11-09T05:55:00Z",
+          "workflow": "Refresh Kiryat Gat events",
+          "source_commit": "c89b8972aabf7da176fd4fe40479a1e1d3f029aa",
+          "job_id": 129004905623,
+          "failed_stage": "commit/rebase to main",
+          "signature": "rebase/content-conflict/generated-city-HTML",
+          "evidence": "Collection and build passed;141event safety checks passed. Rebase of local1991a0a1 againstadvancedfdba9471 conflicted in category.html,event.html,index.html. Push never reached; no public update inferred.",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42569990123",
+          "current_source_observation": {
+            "workflow_sha": "ae83a1ad0130ed06fd24127afcfbc5515e388859",
+            "concurrency_group": "isnet-event-data-writes",
+            "cancel_in_progress": false,
+            "staging_scope": "city data/assets and kgat admin JSON only; generated HTML excluded",
+            "qualification": "Current source mitigates exact historical HTML ownership collision. No genuine current collector run/public regression checked; do not mark fixed_verified."
+          },
+          "evidence_path": "ops/incident-response/evidence/ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d.json"
         }
       ],
       "current_source": {
@@ -1037,8 +1057,19 @@
           "policy_gap": "Generic five-attempt loop does not enforce current initial+one-materially-changed-cause retry ceiling.",
           "action": "Existing coordinated event-release owner should align participating writer gates and bounded reason-aware retry logic without triggering a duplicate collector; no schedule or workflow change made in this controller cycle.",
           "qualification": "Later source mitigation alone is not fixed_verified; do not replay historical collection."
+        },
+        {
+          "workflow": ".github/workflows/kgat-events.yml",
+          "observed_at": "2026-11-14T16:29:03.265Z",
+          "workflow_sha": "ae83a1ad0130ed06fd24127afcfbc5515e388859",
+          "concurrency_group": "isnet-event-data-writes",
+          "cancel_in_progress": false,
+          "staging_scope": "city data/assets and kgat admin JSON only; generated HTML excluded",
+          "qualification": "Current source mitigates exact historical HTML ownership collision. No genuine current collector run/public regression checked; do not mark fixed_verified.",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d.json"
         }
-      ]
+      ],
+      "last_review_runKey": "ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d"
     },
     {
       "id": "tlvnet-legacy-event-cadence-divergence",
@@ -2240,7 +2271,7 @@
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-34d0ddfe-7224-832e-91ec-1042b9e91471",
+  "last_review_runKey": "ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
