@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T11:55:05.065Z",
+  "updated_at": "2026-11-14T12:11:54.194Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1309,10 +1309,10 @@
     },
     {
       "id": "herzliya-raanana-original-runtime-access",
-      "status": "mitigated",
-      "operational_state": "shared_writer_first_run_verified_raanana_live_herzliya_no_new_article",
+      "status": "fixed_verified",
+      "operational_state": "shared_autonomous_writer_verified_live_in_both_cities",
       "fingerprint": "ISNET/Herzliya-Raanana/original-writer-runtime/not-in-accessible-inventory",
-      "root_cause": "Historical missing-two-writer inventory restriction was superseded by publisher14Nov single shared owner. Current owner executed and published Raanana811468; no current access block inferred.",
+      "root_cause": "Historical missing-two-writer inventory and research-only restriction superseded by publisher-authorized shared autonomous writer. Both city routes now have genuine current-owner public publication proof.",
       "evidence": {
         "inventory_count": 25,
         "cursor": null,
@@ -1331,17 +1331,17 @@
         "known_browser_restriction": "Handoff reports host-security block; controller did not retry or bypass."
       },
       "missing_interface": "No missing historical original-task interface blocks this new publisher-authorized shared owner. Existing CAS and CMS tools are available; actual write permissions and source/material still require normal per-item verification.",
-      "next_action": "Existing shared writer continues saved14:00/19:00 cycles; preserve independent publication authority and separate city CAS. Keep combined recovery mitigated until a new genuine Herzliya public publication is verified. No legacy-task readback or extra editorial approval required.",
+      "next_action": "Maintain current original shared autonomous owner and approved schedule; continue independent per-item fact/media/rights/CAS checks. Do not revive historical writers or require old runtime inventory.",
       "completion_checks": {
         "effective_prompts_read_back": true,
         "actual_writer_runs_verified": true,
-        "new_live_city_articles_verified": false,
+        "new_live_city_articles_verified": true,
         "raanana_new_live_verified": true,
-        "herzliya_new_live_verified": false
+        "herzliya_new_live_verified": true
       },
       "controller_changes": "No update to absent tasks, cancelled editor or one-time audit; no claim that delivery occurred.",
       "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
-      "observed_at": "2026-11-13T18:09:33.193Z",
+      "observed_at": "2026-11-14T12:11:54.194Z",
       "latest_independent_audit": {
         "task_id": "Automation_cac013a7bd60819180284794207f472b",
         "run_id": "efc430fb-e2d0-8322-89ce-916f2f6293e9",
@@ -1366,22 +1366,22 @@
         "controller_readback": true,
         "evidence": "ops/incident-response/evidence/herzliya-raanana-single-writer-20261114.json"
       },
-      "resolution": "14Nov publisher clarified one shared autonomous city news writer. Existing former shared editor task was explicitly reassigned as full writer, backup made, complete prompt replaced, recurring08/14/19 schedule explicitly selected, enabled and full configuration read back. No added task, external editor or claim of new public article.",
-      "last_review_runKey": "ops-2026-11-14-f6f889e7-3294-8332-8368-4c7027714816",
-      "controller_seen_at": "2026-11-14T07:00:20Z",
+      "resolution": "Current shared owner full prompt independently read back, completed morning and14:00 runs, published Raanana811468 and Herzliya811495 using separate existing CAS leases. Controller verified actual public body/image/credit/section/home in both routes across recorded cycles. Original runtime-access blocker closed; ongoing editorial coverage and mobile reviews remain tracked separately.",
+      "last_review_runKey": "ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387",
+      "controller_seen_at": "2026-11-14T12:11:54.194Z",
       "latest_writer_run": {
         "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
-        "run_id": "578aa8c6-47e0-8329-ac1a-14c9b28e35af",
-        "started_at": "2026-11-14T05:59:17.380551Z",
-        "completed_at": "2026-11-14T06:09:18.315782Z",
-        "writer_runKey": "isnet-localnews-20261114T060240Z",
-        "raanana_post": 811468,
-        "raanana_public_url": "https://raanananet.co.il/%d7%97%d7%93%d7%a9%d7%95%d7%aa/%d7%94%d7%a8%d7%a2%d7%99%d7%93%d7%94-%d7%94%d7%99%d7%99%d7%aa%d7%94-%d7%91%d7%90%d7%99%d7%9c%d7%aa-%d7%94%d7%94%d7%99%d7%a2%d7%a8%d7%9b%d7%95%d7%aa-%d7%9e%d7%aa%d7%97%d7%99%d7%9c%d7%94-%d7%91%d7%a8%d7%a2%d7%a0%d7%a0%d7%94-%d7%9e%d7%94-%d7%a2%d7%95%d7%a9%d7%99%d7%9d-%d7%9b%d7%a9%d7%94%d7%90%d7%93%d7%9e%d7%94-%d7%a8%d7%95%d7%a2%d7%93%d7%aa-811468",
-        "raanana_public_status": "published_verified",
-        "herzliya_new_publications": 0,
-        "herzliya_qualification": "Writer scanned sources; bathing candidate duplicate of existing810000. No new independent publication proof in Herzliya; not a failed execution."
+        "run_id": "0352721c-5284-8325-9b05-725191b53ac2",
+        "started_at": "2026-11-14T11:55:58.004542Z",
+        "completed_at": "2026-11-14T12:07:21.506643Z",
+        "writer_runKey": "Automation_845f7ef0033c8191b7490e0dc5748754:2026-11-14T12-00-38-380Z",
+        "herzliya_post": 811495,
+        "herzliya_public_status": "published_verified",
+        "herzliya_public_url": "https://herzliyanet.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/%D7%9E%D7%9B%D7%99%D7%9B%D7%A8-%D7%A9%D7%9C-%D7%AA%D7%A7%D7%95%D7%95%D7%94-%D7%9C%D7%90%D7%AA%D7%A8-%D7%94%D7%A0%D7%A6%D7%97%D7%94-%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94-%D7%97%D7%A0%D7%9B%D7%94-%D7%90%D7%AA-%D7%9B%D7%99%D7%9B%D7%A8-%D7%94%D7%A8%D7%95%D7%A7%D7%93%D7%99%D7%9D-%D7%9C%D7%96%D7%9B%D7%A8-%D7%A0%D7%A8%D7%A6%D7%97%D7%99-%D7%94%D7%A0%D7%95%D7%91%D7%94-%D7%95%D7%90%D7%95%D7%A8%D7%99-%D7%93%D7%A0%D7%99%D7%A0%D7%95-811495",
+        "raanana_new_publications": 0,
+        "raanana_qualification": "Current run found no new local source beyond morning811468; no duplicate published. Morning public proof retained."
       },
-      "public_evidence": "ops/incident-response/evidence/ops-2026-11-14-f6f889e7-3294-8332-8368-4c7027714816.json"
+      "public_evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
     },
     {
       "id": "tlvnet-legacy-work-activity-unverifiable",
@@ -2087,6 +2087,36 @@
         },
         "scope": "Canonicalizes asset tag order in compare HTML only; body, prices and all four managed asset URLs/counts unchanged. Exact release gate retained."
       }
+    },
+    {
+      "id": "historical-preflight-tlv-event-route-404",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "infra-stability-preflight/safe_http_probe.py/isnet-events-preview-tel-aviv/http404",
+      "root_cause": "10Nov check failed because https://isnet.co.il/events-preview/tel-aviv/ returned404 in6/6 probes. TLVNET homepage and existing ISNET SUPER.TLV route each returned200 in6/6 at that time. Canonical event target / route ownership not established here; not proof of general latency or network outage.",
+      "occurrences": [
+        {
+          "run_id": 42881842268,
+          "attempt": 1,
+          "job_id": 130059837651,
+          "source_commit": "0e20e62597bd4d277bd14c56c4955fac39100036",
+          "created_at": "2026-11-10T19:05:58Z",
+          "failed_command": "python scripts/safe_http_probe.py --samples 6 --pause 1.0",
+          "failed_step": "Measure existing public sites at no more than one request per second per host",
+          "log_read_full": true,
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42881842268"
+        }
+      ],
+      "current_source": {
+        "path": ".github/workflows/infra-stability-preflight.yml",
+        "ref": "main",
+        "read_result": "404 NOT_FOUND"
+      },
+      "change": "No probe, collector or workflow rerun; no current supermarket public request or route edit.",
+      "next_action": "If original owner restores this probe, bind an actual authorized canonical events endpoint before enabling it. Do not revive an absent legacy workflow or infer current outage from historical404.",
+      "prevention": "Keep endpoint ownership/canonical-route registry distinct for TLVNET and ISNET and record non-success HTTP separately from latency.",
+      "observed_at": "2026-11-14T12:11:54.194Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
     }
   ],
   "last_review_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79",
