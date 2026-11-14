@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T05:46:49.373Z",
+  "updated_at": "2026-11-14T07:00:20Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -612,6 +612,18 @@
           "stage": "sync_event_city_views.py -> build_event_public_assets.py/integrity_events",
           "evidence": "CalledProcessError from global duplicate-candidate gate; exact underlying city/pair not proved because child stderr is omitted.",
           "no_retry": true
+        },
+        {
+          "run_id": 42218813372,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "39738c84dd40f44d8f3cce1c15ecb7bbaff8c27e",
+          "created_at": "2026-11-06T12:35:16Z",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42218813372",
+          "job_id": 127895424648,
+          "stage": "Build compact event listings and canonical sitemap",
+          "evidence": "AssertionError: ashdod has unresolved candidates before release; actual1 expected0. Deploy skipped; historical only.",
+          "additional_nonblocking_warning": "Ofek must remain indexed in organizer UI check; warning step was allowed to continue."
         }
       ],
       "unclassified_same_workflow_occurrences": [
@@ -714,7 +726,8 @@
       ],
       "current_state": "Later Pages/public read-back runs already succeeded; no fresh failure in this cycle. Do not label all historical failures as the Rishon repair.",
       "next_action": "Continue bounded historical signature classification. If the nested-stage signature recurs with new input, expose redacted child diagnostic stderr while retaining the gate; do not re-run content collection for historical logs.",
-      "prevention": "Separate workflow metadata grouping from confirmed root cause. Preserve exact identity, times, venue and source evidence."
+      "prevention": "Separate workflow metadata grouping from confirmed root cause. Preserve exact identity, times, venue and source evidence.",
+      "last_review_runKey": "ops-2026-11-14-f6f889e7-3294-8332-8368-4c7027714816"
     },
     {
       "id": "tlvnet-community-cancelled-owner-routing",
@@ -1228,9 +1241,9 @@
     {
       "id": "herzliya-raanana-original-runtime-access",
       "status": "mitigated",
-      "operational_state": "single_shared_writer_configured_awaiting_first_live_run",
+      "operational_state": "shared_writer_first_run_verified_raanana_live_herzliya_no_new_article",
       "fingerprint": "ISNET/Herzliya-Raanana/original-writer-runtime/not-in-accessible-inventory",
-      "root_cause": "Current complete accessible automation inventory has no original city writer tasks. Cancelled shared editor and read-only one-time audit are distinct roles and cannot substitute for missing originals.",
+      "root_cause": "Historical missing-two-writer inventory restriction was superseded by publisher14Nov single shared owner. Current owner executed and published Raanana811468; no current access block inferred.",
       "evidence": {
         "inventory_count": 25,
         "cursor": null,
@@ -1249,11 +1262,13 @@
         "known_browser_restriction": "Handoff reports host-security block; controller did not retry or bypass."
       },
       "missing_interface": "No missing historical original-task interface blocks this new publisher-authorized shared owner. Existing CAS and CMS tools are available; actual write permissions and source/material still require normal per-item verification.",
-      "next_action": "Existing shared writer runs08/14/19 Israel and independently publishes validated local material in both cities. Controller verifies exact run/results and real public article/body/photo/credit/section for each city before fixed_verified. Historical absence of two separate writer tasks is no longer a gating condition; do not ask publisher again for those tasks.",
+      "next_action": "Existing shared writer continues saved14:00/19:00 cycles; preserve independent publication authority and separate city CAS. Keep combined recovery mitigated until a new genuine Herzliya public publication is verified. No legacy-task readback or extra editorial approval required.",
       "completion_checks": {
         "effective_prompts_read_back": true,
-        "actual_writer_runs_verified": false,
-        "new_live_city_articles_verified": false
+        "actual_writer_runs_verified": true,
+        "new_live_city_articles_verified": false,
+        "raanana_new_live_verified": true,
+        "herzliya_new_live_verified": false
       },
       "controller_changes": "No update to absent tasks, cancelled editor or one-time audit; no claim that delivery occurred.",
       "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
@@ -1283,8 +1298,21 @@
         "evidence": "ops/incident-response/evidence/herzliya-raanana-single-writer-20261114.json"
       },
       "resolution": "14Nov publisher clarified one shared autonomous city news writer. Existing former shared editor task was explicitly reassigned as full writer, backup made, complete prompt replaced, recurring08/14/19 schedule explicitly selected, enabled and full configuration read back. No added task, external editor or claim of new public article.",
-      "last_review_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
-      "controller_seen_at": "2026-11-14T05:46:49.373Z"
+      "last_review_runKey": "ops-2026-11-14-f6f889e7-3294-8332-8368-4c7027714816",
+      "controller_seen_at": "2026-11-14T07:00:20Z",
+      "latest_writer_run": {
+        "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+        "run_id": "578aa8c6-47e0-8329-ac1a-14c9b28e35af",
+        "started_at": "2026-11-14T05:59:17.380551Z",
+        "completed_at": "2026-11-14T06:09:18.315782Z",
+        "writer_runKey": "isnet-localnews-20261114T060240Z",
+        "raanana_post": 811468,
+        "raanana_public_url": "https://raanananet.co.il/%d7%97%d7%93%d7%a9%d7%95%d7%aa/%d7%94%d7%a8%d7%a2%d7%99%d7%93%d7%94-%d7%94%d7%99%d7%99%d7%aa%d7%94-%d7%91%d7%90%d7%99%d7%9c%d7%aa-%d7%94%d7%94%d7%99%d7%a2%d7%a8%d7%9b%d7%95%d7%aa-%d7%9e%d7%aa%d7%97%d7%99%d7%9c%d7%94-%d7%91%d7%a8%d7%a2%d7%a0%d7%a0%d7%94-%d7%9e%d7%94-%d7%a2%d7%95%d7%a9%d7%99%d7%9d-%d7%9b%d7%a9%d7%94%d7%90%d7%93%d7%9e%d7%94-%d7%a8%d7%95%d7%a2%d7%93%d7%aa-811468",
+        "raanana_public_status": "published_verified",
+        "herzliya_new_publications": 0,
+        "herzliya_qualification": "Writer scanned sources; bathing candidate duplicate of existing810000. No new independent publication proof in Herzliya; not a failed execution."
+      },
+      "public_evidence": "ops/incident-response/evidence/ops-2026-11-14-f6f889e7-3294-8332-8368-4c7027714816.json"
     },
     {
       "id": "tlvnet-legacy-work-activity-unverifiable",
@@ -1786,7 +1814,7 @@
       "notification": "Already reported in interactive morning review; no duplicate alert."
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
+  "last_review_runKey": "ops-2026-11-14-f6f889e7-3294-8332-8368-4c7027714816",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
@@ -1821,6 +1849,31 @@
       "next_action": "Retain facts and dates; cheaply recheck permitted source access on the next saved cycle when changed conditions justify it. No bypass, blind retry, new task or schedule change.",
       "controller_retry": false,
       "controller_seen_at": "2026-11-13T10:03:27.567Z"
+    },
+    {
+      "signature": "TLVNET/news/primary-source-read/timeout-and-inaccessible-query",
+      "status": "item_scoped_checkpoint",
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "run_id": "cf7874b1-48a4-832a-b3fc-af7c8de865e9",
+      "inbox": "ops/incident-response/inbox/cf7874b1-48a4-832a-b3fc-af7c8de865e9-1.json",
+      "source_failures": [
+        {
+          "url": "https://superbus.co.il/inner.asp?page=news",
+          "result": "Full primary page open timed out on initial and www variation; two attempts exhausted; secondary full article read; no current timetable claimed."
+        },
+        {
+          "url": "https://t.me/s/Israel_Police_100?q=%D7%94%D7%97%D7%99%D7%9C",
+          "result": "Exact primary archive query inaccessible via search tool; full channel accessible and used for independent Ben Yehuda story."
+        },
+        {
+          "url": "https://t.me/s/Israel_Police_100?q=%D7%A9%D7%9E%D7%A9%D7%AA",
+          "result": "Exact primary archive query inaccessible; older minor case retained as research checkpoint."
+        }
+      ],
+      "root_cause": "Not established; observed source retrieval limitations only. No claim that publication, Site or entire agent failed.",
+      "next_action": "On next normal cycle make one cheap changed-state check for saved operator announcement; complete full primary verification before any new timetable claim. Complete mobile visual review of published article when a supported viewport is available.",
+      "controller_retry": false,
+      "controller_seen_at": "2026-11-14T07:00:20Z"
     }
   ]
 }
