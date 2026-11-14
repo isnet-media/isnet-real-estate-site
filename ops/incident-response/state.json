@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T13:37:41.382Z",
+  "updated_at": "2026-11-14T14:31:54.725Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-14T13:29:12Z",
+  "last_processed_run_created_at": "2026-11-14T14:30:14Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -20,9 +20,10 @@
       "remaining": "Original seven-day metadata window fully covered; root triage remains partial. Continue saved untriaged_workflow_groups and unconfirmed_publish_failure_ids; do not rescan covered metadata.",
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4.json"
     },
-    "full_logs_read_this_cycle": [],
+    "full_logs_read_this_cycle": [
+      43357968256
+    ],
     "unconfirmed_publish_failure_ids": [
-      43357968256,
       43357854397,
       43338632547,
       43332809246,
@@ -3379,36 +3380,39 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "f4a89fe4-2388-832e-a89b-6caa25891449",
-    "runKey": "ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449",
+    "run_id": "85f97988-37c4-832e-9780-7199c479887f",
+    "runKey": "ops-2026-11-14-85f97988-37c4-832e-9780-7199c479887f",
     "policy_version": "2026-11-14/1.1",
-    "started_at": "2026-11-14T13:29:09.604392Z",
-    "scheduled_for": "2026-11-14T13:35:00Z",
-    "observed_at": "2026-11-14T13:37:41.382Z",
-    "source_sha": "6a72be5d79bc9dd94ac2b9c5ff86db1ffc00bb12",
+    "started_at": "2026-11-14T14:29:08.006814Z",
+    "scheduled_for": "2026-11-14T14:35:00Z",
+    "observed_at": "2026-11-14T14:31:54.725Z",
+    "source_sha": "42664ef6a73d0eff2435401914045020f71208ff",
     "targets_reviewed": [
-      "New Actions after watermark/pending IDs",
-      "Two new immutable inbox entries",
-      "10 original runtime/result pairs",
-      "TLVNET600 deployment/lease",
-      "Bounded social_runs page",
-      "Consumer stale source WRITER identity; cached verification commit and isolated patch"
+      "Actions new/pending run metadata through prior13:29:12Z boundary",
+      "Immutable incident inbox listing",
+      "10 original writer runtime/result pairs",
+      "TLVNET600 native deployment and real released lease",
+      "DB.social_runs bounded complete page",
+      "One saved historical Pages failure full log"
     ],
-    "new_workflow_runs": 6,
+    "new_workflow_runs": 19,
     "new_workflow_failures": 0,
-    "new_inbox": 2,
-    "new_task_results": 2,
-    "new_in_progress_task_runs": [],
+    "pending_workflow_runs": [
+      43605183001
+    ],
+    "new_inbox": 0,
+    "new_task_results": 0,
     "new_social_runs": 0,
-    "new_site_versions": 1,
+    "new_site_versions": 0,
     "publications_verified_this_cycle": 0,
-    "writer_reported_publications": 1,
     "new_fixed_verified_incidents": [],
     "history_added": 0,
-    "history_full_logs": [],
-    "history_remaining": "Seven-day metadata covered; saved historical root triage groups and unconfirmed publish failures retained without rescan.",
+    "history_full_logs": [
+      43357968256
+    ],
+    "history_remaining": "Seven-day metadata complete; one unconfirmed publish failure removed after signature diagnosis; other saved root triage groups retained. No rescan.",
     "build_or_deploy": false,
-    "visual_review": "Original consumer desktop review reported passed; controller independent consumer live read unavailable; mobile pending.",
+    "visual_review": "No new visual review. Previously pending mobile checks remain pending.",
     "unchanged_blocker_retries": 0,
     "automation_or_permission_changes": false,
     "social_attempts": 0,
@@ -3417,8 +3421,8 @@
     "supermarket_public_scan": false,
     "api_billing_measured": false,
     "cost": null,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449.json",
-    "conclusion": "Consumer600 terminal deployment and exact original publication report reconciled. News171/NTA retained in existing inbox; actual lease now released. Stale consumer source identity grouped with existing ownership root; complete isolated replacement backed up and git-apply-tested, not applied because fresh source fetch lacked existing credentials. No new credentials, dispatch, substitute writing or deploy."
+    "evidence": "ops/incident-response/evidence/ops-2026-11-14-85f97988-37c4-832e-9780-7199c479887f.json",
+    "conclusion": "No new root failure or changed writer result; TLVNET600 remains terminal successful and lease released. Classified one historical Pages duplicate gate under existing root without bypass/retry or claiming current repair. Ready news/culture queues and isolated consumer source patch preserved. One currently queued GitHub run retained for next cycle."
   },
   "concurrent_controller_observation": {
     "run_id": "716eaf32-dc10-8332-928d-981dd3ccd2e6",
@@ -3433,7 +3437,7 @@
       "recorded_status": "completed",
       "result": "לא פורסמה כתבה חדשה במחזור הזה: כתב הצרכנות מחזיק בנעילת פרסום פעילה עד 14:33, ולכן לא בוצעה פריסה מתחרה.\n\nנשמרו כתבת קו 171, ראיות לתמונה מורשית ותוספת לכתבת הסדרי התנועה, [בתור הקיים להמשך](https://github.com/isnet-media/isnet-real-estate-site/blob/main/ops/incident-response/inbox/dd4d9e0b-6858-8326-a56e-4365bd312654-1.json). נותרו שילוב במקור, בדיקות בנייה ופרסום לאחר שחרור הנעילה.",
       "result_run_id": "dd4d9e0b-6858-8326-a56e-4365bd312654",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T12:08:40.314979Z",
@@ -3448,7 +3452,7 @@
       "recorded_status": "completed",
       "result": "פורסמה ואומתה [הכתבה על הפועל תל אביב מול בני הרצליה הערב](https://tlvnet.com/news/hapoel-herzliya-home-preview-20261114), כולל גוף מלא, צילום מורשה, קרדיט והפניות מהבית וממדור הספורט.\n\nסיכום הדרבי וההכנה למכבי–ירושלים כבר פורסמו הבוקר ולא שוכפלו. בדיקת המובייל עדיין ממתינה.",
       "result_run_id": "4401da0c-8cb4-832c-b423-c2d8e4ddb5c0",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T07:21:05.121794Z",
@@ -3463,7 +3467,7 @@
       "recorded_status": "completed",
       "result": "לא פורסמה כתבת נדל״ן חדשה. אין טיוטות מוכנות; נשמרו טיוטת מחקר ומקורות על מימון שני בניינים בצפון תל אביב, להשלמת אימות ותמונה.\n\nהפרסום חסום עד לאימות שמסלול Work הישן אינו פעיל, כנדרש בנוהל הנעילה. החסם והפעולה הנדרשת נרשמו בתור הבקר הקיים. לא בוצעה פריסה ולא שונו תזמונים.",
       "result_run_id": "122b42e1-c6bc-8325-9797-95a2377b76c0",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-13T14:18:37.959363Z",
@@ -3478,7 +3482,7 @@
       "recorded_status": "completed",
       "result": "פורסמה ואומתה [כתבה חדשה על Dreeze מתל אביב](https://tlvnet.com/news/dreeze-tlv-cloud-application-recovery-seed-20261114), עם גוף מלא, המחשה מסומנת וכיתוב תקין, וקישורים מהבית וממדור הכלכלה.\n\nתצוגת המחשב נבדקה בפועל. בדיקת המובייל עדיין ממתינה ומתועדת.",
       "result_run_id": "be1bbf37-d410-8327-a142-2c1c170f14dd",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T10:31:46.441554Z",
@@ -3493,7 +3497,7 @@
       "recorded_status": "completed",
       "result": "לא פורסמו שינויים: קיימת נעילת פרסום תקפה של כתב הספורט.\n\nנשמרו בתור הבקרה שני תיקונים להמשך:\n\n- הסרת הניסוח שהתיישן ״נפתחת היום״ מכתבת מוזיאון העיר.\n- עדכון Mozaik Ses מהוצאה מתוכננת להוצאה שיצאה; נדרשת גם תמונה מאושרת.\n\nנשמרו גם שני מועמדים נוספים להשלמת אימות. לא בוצעה פריסה מתחרה.",
       "result_run_id": "e6d4b4b3-779c-8321-850a-cd86b3554385",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T07:16:27.543470Z",
@@ -3509,7 +3513,7 @@
       "result": "פורסם ואומת [מדריך ההתנדבות של לשובע בתל אביב](https://tlvnet.com/news/lasova-tlv-day-evening-volunteering-guide-20261114), עם תמונה מסומנת, קרדיט והופעה במדור ובעמוד הבית.\n\nכפילויות לא פורסמו. מועמדים עם מקור חסום, השלמת כיסוי המקורות ובדיקת המובייל נשמרו להמשך; הסריקה טרם הושלמה במלואה.",
       "result_run_id": "5453cbc2-bec0-8328-8b7b-e5eb73db04a5",
       "qualification": "Exact runtime/result matched; public proof only as separately recorded.",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T11:20:15.997580Z",
@@ -3524,7 +3528,7 @@
       "result": "פורסם ואומת [המדריך לבקשת תעריף מים מופחת לאחר תיקון נזילה](https://tlvnet.com/news/mei-avivim-leak-reduced-tariff-guide-20261114), עם תמונה מורשית, קרדיט והופעה במדור ובבית.\n\nנבדקו 59 כתובות מקור. כפילויות לא פורסמו; מקורות שלא נקראו במלואם ובדיקת המובייל נשמרו להמשך. כשל התצוגה המקדימה דווח לבקר.",
       "result_run_id": "1daaa184-3e88-8322-a39d-bd3a83c3255d",
       "qualification": "Exact runtime/result matched; public proof only as separately recorded.",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "current_configuration_observed_at": "2026-11-14T04:55:32.725Z",
       "current_policy_version": "2026-11-14/1.0",
       "result_created_at": "2026-11-14T12:14:28.859694Z",
@@ -3539,7 +3543,7 @@
       "result": "פורסמה היום כתבה אחת בלבד בתרבות נט:\n\n[״שש שעות, 800 עמודים וסופרת אחת שנכנסת לבמה בלי לדפוק״](https://tlvnet.com/culture/article-daily-2026-11-08)\n\nהכתבה המלאה עלתה עם צילום הפקה רשמי של ה־RSC וקרדיט ל־Johan Persson. אומתו באתר החי:\n\n- הכתבה ועמוד מדור תרבות נט\n- הכרטיסייה בגלריית עמוד הבית\n- רישום הפרסום ביומן הכתב ל־8 בנובמבר\n- מניעת כתבה יומית שנייה\n- תקינות בנייה, SEO והרשאות הפרסום",
       "result_run_id": "50641e69-2620-8330-9faa-3ad049e05402",
       "result_created_at": "2026-11-08T06:19:35.954596Z",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "qualification": "Latest result belongs to an earlier run; not evidence of current attempt success.",
       "effective_policy": "2026-11-14/1.0"
     },
@@ -3552,7 +3556,7 @@
       "result": "המחזור הושלם עם כתבה מקורית אחת בלבד — `published_verified`:\n\n### הכתבה\n\n[החלון הבא לא יחכה שתדליקו מזגן: הוא יחליט לבד מתי להחשיך](https://tlvnet.com/future/article-daily-2026-11-14)\n\nאומתו ב־TLVNET: גוף מלא, תמונת JPG, קרדיט „אילוסטרציה – AI”, כרטיס המדור והופעה בעמוד הבית.\n\n### הפצת הרשת\n\nהכתבה המלאה, התמונה והקרדיט אומתו גם ב־[אשדוד נט](https://ashdodnet.com/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811479), [בת ים נט](https://batyamnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811480), [גדרה נט](https://gederanet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811481), [גן יבנה נט](https://www.ganyavne.net/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811482), [הרצליה נט](https://herzliyanet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811483), [חולון נט](https://holonnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811484), [יבנה נט](https://www.yavnenet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811486), [ישובניק נט](https://www.yeshuvnik.net/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811485), [קריית גת נט](https://kgatnet.co.il/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811488) וב־[ראשון נט](https://www.rishonet.com/%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9E%D7%97%D7%A8/%D7%94%D7%97%D7%9C%D7%95%D7%9F-%D7%94%D7%91%D7%90-%D7%9C%D7%90-%D7%99%D7%97%D7%9B%D7%94-%D7%A9%D7%AA%D7%93%D7%9C%D7%99%D7%A7%D7%95-%D7%9E%D7%96%D7%92%D7%9F-%D7%94%D7%95%D7%90-%D7%99%D7%97%D7%9C%D7%99%D7%98-%D7%9C%D7%91%D7%93-%D7%9E%D7%AA%D7%99-%D7%9C%D7%94%D7%97%D7%A9%D7%99%D7%9A-811487).\n\nכרטיס המדור אומת בכל עשרת האתרים. כרטיס עמוד הבית הופיע בחמישה מהם; בבת ים, גדרה, הרצליה, חולון וקריית גת עמוד הבית אינו מציג כרגע את הכתבה החדשה, אף שהיא חיה ומופיעה בראש המדור. הפער הועבר לתור התפעולי יחד עם תקלת אימות CMS שנפתרה, ללא כפילויות. בדיקת מובייל חזותית נותרה ממתינה; בדיקת הדסקטופ עברה.",
       "result_run_id": "0c4e3007-e724-8330-a4a5-3e9639036adf",
       "result_created_at": "2026-11-14T08:59:58.823818Z",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "qualification": "Exact runtime/result matched; public proof only as separately recorded.",
       "effective_policy": "2026-11-14/1.0"
     },
@@ -3565,7 +3569,7 @@
       "result": "**הרצליה נט:** פרסמתי במערכת הניהול כתבה מקומית חדשה, מספר **811495**, על חנוכת ״כיכר הרוקדים״ ב־12 בנובמבר, לזכר נרצחי הנובה ואורי דנינו ז״ל. הכתבה מבוססת על הודעת העירייה ועל האישור הרשמי שהטקס התקיים. <Cite refs={[\"turn804577view0\",\"turn892015view0\"]}/> צורפה תמונת נרות זיכרון ברישיון Pexels, עם קרדיט והבהרה שאינה צילום מהאירוע. <Cite ref=\"turn804577view2\"/> הפרסום אומת באדמין כ־`template=false`, במדור חדשות, עם תמונה 850834. **אימות הדף הציבורי החדש עדיין ממתין** משום שקריאתו נכשלה; לכן איני מסמן אותו עדיין `published_verified`. נעילת הפרסום נרכשה ושוחררה בהצלחה.\n\n**רעננה נט:** נבדקו הפרסומים והודעות העירייה. לא נמצאה ידיעה חדשה המצדיקה פרסום נוסף מעבר לכתבת רעידת האדמה 811468 שפורסמה בבוקר. לא נוצרה כפילות. ברשימת ההודעות העירוניות העדכנית, ההודעה האחרונה שנמצאה היא מ־11 בנובמבר. <Cite ref=\"turn715068view0\"/>\n\n<text color=\"secondary\" size=\"sm\">תוצאות המחזור: הרצליה — כתבה חדשה אחת באדמין, 0 באימות ציבורי מלא; רעננה — 0 כתבות חדשות. לא שונו ראשיות או תזמונים, ולא בוצעה פריסת אתר.</text>\n\nיומני המחזור: [הרצליה](sandbox:/mnt/data/isnet-run-2026-11-14-1400/herzliya.json) · [רעננה](sandbox:/mnt/data/isnet-run-2026-11-14-1400/raanana.json).\n\n<text color=\"secondary\" size=\"xs\">Automation_845f7ef0033c8191b7490e0dc5748754 · policy_version=2026-11-14/1.1 · runKey=Automation_845f7ef0033c8191b7490e0dc5748754:2026-11-14T12-00-38-380Z · run_id לא נמסר</text>",
       "result_run_id": "0352721c-5284-8325-9b05-725191b53ac2",
       "result_created_at": "2026-11-14T12:07:20.078419Z",
-      "observed_at": "2026-11-14T13:37:41.382Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
       "qualification": "Exact runtime/result matched; public proof only as separately recorded.",
       "effective_policy": "2026-11-14/1.1"
     }
@@ -3576,7 +3580,7 @@
     "deployment_id": "appgdep_6af84ff8f5b48191affc455c6d850f01",
     "status": "succeeded",
     "published_source": "b796c82e9bfa1da86e3bcd3861eac2437ca5bc13",
-    "observed_at": "2026-11-14T13:37:41.382Z",
+    "observed_at": "2026-11-14T14:31:54.725Z",
     "other_observed_versions": [
       {
         "version": 587,
@@ -3653,7 +3657,9 @@
     "dd4d9e0b-6858-8326-a56e-4365bd312654-1.json",
     "f4a89fe4-2388-832e-a89b-6caa25891449-source-identity.json"
   ],
-  "pending_github_run_ids": [],
+  "pending_github_run_ids": [
+    43605183001
+  ],
   "cycle_history": [
     {
       "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -4068,6 +4074,52 @@
       "cost": null,
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449.json",
       "conclusion": "Consumer600 terminal deployment and exact original publication report reconciled. News171/NTA retained in existing inbox; actual lease now released. Stale consumer source identity grouped with existing ownership root; complete isolated replacement backed up and git-apply-tested, not applied because fresh source fetch lacked existing credentials. No new credentials, dispatch, substitute writing or deploy."
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "85f97988-37c4-832e-9780-7199c479887f",
+      "runKey": "ops-2026-11-14-85f97988-37c4-832e-9780-7199c479887f",
+      "policy_version": "2026-11-14/1.1",
+      "started_at": "2026-11-14T14:29:08.006814Z",
+      "scheduled_for": "2026-11-14T14:35:00Z",
+      "observed_at": "2026-11-14T14:31:54.725Z",
+      "source_sha": "42664ef6a73d0eff2435401914045020f71208ff",
+      "targets_reviewed": [
+        "Actions new/pending run metadata through prior13:29:12Z boundary",
+        "Immutable incident inbox listing",
+        "10 original writer runtime/result pairs",
+        "TLVNET600 native deployment and real released lease",
+        "DB.social_runs bounded complete page",
+        "One saved historical Pages failure full log"
+      ],
+      "new_workflow_runs": 19,
+      "new_workflow_failures": 0,
+      "pending_workflow_runs": [
+        43605183001
+      ],
+      "new_inbox": 0,
+      "new_task_results": 0,
+      "new_social_runs": 0,
+      "new_site_versions": 0,
+      "publications_verified_this_cycle": 0,
+      "new_fixed_verified_incidents": [],
+      "history_added": 0,
+      "history_full_logs": [
+        43357968256
+      ],
+      "history_remaining": "Seven-day metadata complete; one unconfirmed publish failure removed after signature diagnosis; other saved root triage groups retained. No rescan.",
+      "build_or_deploy": false,
+      "visual_review": "No new visual review. Previously pending mobile checks remain pending.",
+      "unchanged_blocker_retries": 0,
+      "automation_or_permission_changes": false,
+      "social_attempts": 0,
+      "claims_or_settings_changes": false,
+      "supermarket_collection": false,
+      "supermarket_public_scan": false,
+      "api_billing_measured": false,
+      "cost": null,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-85f97988-37c4-832e-9780-7199c479887f.json",
+      "conclusion": "No new root failure or changed writer result; TLVNET600 remains terminal successful and lease released. Classified one historical Pages duplicate gate under existing root without bypass/retry or claiming current repair. Ready news/culture queues and isolated consumer source patch preserved. One currently queued GitHub run retained for next cycle."
     }
   ],
   "photo_controls_checkpoint": {
@@ -4101,7 +4153,7 @@
     "target": "TLVNET-site",
     "state": "released",
     "owner": null,
-    "observed_at": "2026-11-14T13:37:41.382Z",
+    "observed_at": "2026-11-14T14:31:54.725Z",
     "last_release": {
       "owner": "Automation_e2f02000cdf4819190022b85f4391076",
       "run_key": "consumer-2026-11-14-daily",
@@ -4191,7 +4243,7 @@
       "2026-11-13T09",
       "2026-11-13T10"
     ],
-    "observed_at": "2026-11-14T13:37:41.382Z",
+    "observed_at": "2026-11-14T14:31:54.725Z",
     "evidence": "ops/incident-response/evidence/social-runs-b8641b1e-3cec-8322-a6e7-5c6f1e11a895.json",
     "new_rows_this_cycle": 0
   },
@@ -4207,12 +4259,11 @@
     "scope": "TLVNET news and sports;15 runtime prompt readbacks;not full network scan"
   },
   "latest_isnet_pipeline_observation": {
-    "observed_at": "2026-11-14T11:55:05.065Z",
-    "publish_run_id": 43591231035,
-    "publish_job_id": 132436183930,
+    "observed_at": "2026-11-14T14:31:54.725Z",
+    "publish_run_id": 43601611482,
     "status": "success",
-    "public_readback_run_id": 43591386996,
-    "health_run_id": 43591387023,
-    "qualification": "Terminal run metadata and deploy job inspected; no independent ISNET public scan or article-publication inference. Two cancelled Pages runs are terminal, one had no jobs; later successful runs recorded without guessing cancellation cause."
+    "public_readback_run_id": 43601862921,
+    "health_run_id": 43601862906,
+    "qualification": "Terminal metadata only; no controller public scan or article-publication inference. workflow_run deployments relate to event collector work; controller did not build/deploy."
   }
 }

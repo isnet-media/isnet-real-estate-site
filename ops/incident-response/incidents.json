@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T13:37:41.382Z",
+  "updated_at": "2026-11-14T14:31:54.725Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -600,7 +600,7 @@
       "id": "historical-publication-duplicate-gate-pre-repair",
       "status": "open",
       "root_cause": "Earlier releases failed duplicate-identity gates in stages distinct from the reviewed Rishon incident. Historical failures need separate identity/source review; no present recurrence observed.",
-      "fingerprint": "build_event_public_assets.py/integrity_events/unresolved-duplicate-after-CMS;test-event-integrity/unresolved-Ashdod",
+      "fingerprint": "build_event_public_assets.py/integrity_events/unresolved-duplicate-after-CMS;test-event-integrity/unresolved-Ashdod;test-event-integrity/unresolved-Rishon",
       "confirmed_occurrences": [
         {
           "run_id": 43192017498,
@@ -647,6 +647,18 @@
           "stage": "Build compact event listings and canonical sitemap",
           "evidence": "AssertionError: ashdod has unresolved candidates before release; actual1 expected0. Deploy skipped; historical only.",
           "additional_nonblocking_warning": "Ofek must remain indexed in organizer UI check; warning step was allowed to continue."
+        },
+        {
+          "run_id": 43357968256,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "9102c7c49d659d49224993c78c811e44dac59910",
+          "created_at": "2026-11-13T03:17:31Z",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43357968256",
+          "job_id": 131664425535,
+          "stage": "Build compact event listings and canonical sitemap",
+          "evidence": "test-event-integrity.cjs:135 AssertionError: rishon-lezion has unresolved candidates before release; actual1 expected0. Deploy skipped.",
+          "qualification": "Historical pre-repair signature; exact event pair is not printed in this log. No new outage/recurrence or fixed_verified inference."
         }
       ],
       "unclassified_same_workflow_occurrences": [
@@ -747,10 +759,10 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43086524968"
         }
       ],
-      "current_state": "Later Pages/public read-back runs already succeeded; no fresh failure in this cycle. Do not label all historical failures as the Rishon repair.",
+      "current_state": "Historical13Nov03:17 run now classified. Current14Nov Pages43601534164/43601611482 and event readbacks succeeded; no new failure observed. Exact historical pair unproved; existing Rishon fixed_verified root unchanged.",
       "next_action": "Continue bounded historical signature classification. If the nested-stage signature recurs with new input, expose redacted child diagnostic stderr while retaining the gate; do not re-run content collection for historical logs.",
       "prevention": "Separate workflow metadata grouping from confirmed root cause. Preserve exact identity, times, venue and source evidence.",
-      "last_review_runKey": "ops-2026-11-14-f6f889e7-3294-8332-8368-4c7027714816"
+      "last_review_runKey": "ops-2026-11-14-85f97988-37c4-832e-9780-7199c479887f"
     },
     {
       "id": "tlvnet-community-cancelled-owner-routing",
@@ -2157,7 +2169,7 @@
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449",
+  "last_review_runKey": "ops-2026-11-14-85f97988-37c4-832e-9780-7199c479887f",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
