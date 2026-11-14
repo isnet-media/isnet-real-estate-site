@@ -1,0 +1,202 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "1513978a-4cd0-832a-81d9-6bac2faab63f",
+  "runKey": "ops-2026-11-14-1513978a-4cd0-832a-81d9-6bac2faab63f",
+  "policy_version": "2026-11-14/1.1",
+  "started_at": "2026-11-14T20:52:41.388699Z",
+  "scheduled_for": "2026-11-14T20:35:00Z",
+  "observed_at": "2026-11-14T20:55:36Z",
+  "targets_reviewed": [
+    "Actions after saved watermark with equal timestamp overlap",
+    "inbox JSON set",
+    "10exactruntime/resultpairs",
+    "TLVNET603terminaldeployment and freelease",
+    "social_runs complete bounded page",
+    "one historical IMS sea failure log"
+  ],
+  "new_workflow_runs": 2,
+  "new_workflow_failures": 0,
+  "new_inbox": 0,
+  "new_task_results": 0,
+  "new_social_runs": 0,
+  "new_site_versions": 0,
+  "publications_verified_this_cycle": 0,
+  "new_fixed_verified_incidents": [],
+  "historical_roots_added": [],
+  "historical_occurrences_grouped": 1,
+  "history_full_logs": [
+    43036929335
+  ],
+  "history_remaining": "Seven-day metadata complete; IMS occurrence43036929335 grouped into known root. Eight sea occurrences and other saved groups remain for bounded root triage; no full historical completion claimed.",
+  "build_or_deploy": false,
+  "visual_review": "No repeated public scan of unchanged verified products. Previous desktop evidence retained; mobile/cards still pending.",
+  "unchanged_blocker_retries": 0,
+  "automation_or_permission_changes": false,
+  "social_attempts": 0,
+  "claims_or_settings_changes": false,
+  "supermarket_collection": false,
+  "supermarket_public_scan": false,
+  "api_billing_measured": false,
+  "cost": null,
+  "evidence": "ops/incident-response/evidence/ops-2026-11-14-1513978a-4cd0-832a-81d9-6bac2faab63f.json",
+  "conclusion": "No new current failure. New TLVNET Actions queue run succeeded but is draft-only, not publication proof. Historical IMS source rejected invalid-time forecast while preserving last-good file; unchanged known source blocker.",
+  "actions": [
+    {
+      "run_id": 43635059580,
+      "path": ".github/workflows/operation-failure-inbox.yml",
+      "status": "completed",
+      "conclusion": "skipped",
+      "created_at": "2026-11-14T19:59:41Z",
+      "source_commit": "24084814c09f14178ab193f724e715985ce86fd0",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43635059580"
+    },
+    {
+      "run_id": 43635012197,
+      "path": ".github/workflows/tlvnet-agents.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-14T19:59:07Z",
+      "source_commit": "24084814c09f14178ab193f724e715985ce86fd0",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43635012197"
+    }
+  ],
+  "queue_worker": {
+    "run_id": 43635012197,
+    "job_id": 132569805191,
+    "step": "Process only the TLVNET queue, at most three tasks",
+    "status": "success",
+    "workflow_blob": "44a571df540c60ef9bc1dcb8af7421c67f095001",
+    "worker_blob": "5b52efbd2525cc9568cedd0c32f2876672507894",
+    "publication": false,
+    "provider_call_cap": 3,
+    "job_cap": 2,
+    "budget_qualification": "Technical job/call caps only; no monetary enforcement or actual provider usage measured. No success log read; actual processed row count not inferred."
+  },
+  "social": {
+    "rows_total": 2,
+    "new_rows": 0,
+    "has_more": false,
+    "latest_finished_at": "2026-11-13T10:00:03.313Z",
+    "settings_reads": 0,
+    "meta_retry": false
+  },
+  "deployment": {
+    "id": "appgdep_6af8b21267bc8191a5a4045e66220318",
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "title": "תל אביב נט — חדר המערכת",
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_7362b2888e5c8191a793fd71a8c735b0",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_00000000855081f7b856cff76290d030",
+    "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-11-14T19:10:24.463576+00:00"
+  },
+  "lease": {
+    "schema_version": 1,
+    "target": "TLVNET-site",
+    "owner": null,
+    "run_key": null,
+    "token": null,
+    "acquired_at": null,
+    "lease_until": null,
+    "state": "free",
+    "last_release": {
+      "owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+      "run_key": "sports-2026-11-14-21:00-47abf9a3",
+      "released_at": "2026-11-14T19:13:52Z",
+      "source_commit": "0fafa8dc1f8410d118bd633af6db05017265d610",
+      "verification_commit": "a1415e126437a07411212ca48386a7b599e3c662",
+      "deployment_id": "appgdep_6af8b21267bc8191a5a4045e66220318",
+      "status": "succeeded",
+      "published_verified": 2,
+      "public_readback": true,
+      "desktop_visual_review": "passed_live_articles",
+      "mobile_visual_review": "pending",
+      "card_visual_review": "pending",
+      "policy_version": "2026-11-14/1.3"
+    },
+    "previous_release": {
+      "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "run_key": "news-2026-11-14-19:00-ffbd13a4",
+      "released_at": "2026-11-14T17:16:21Z",
+      "source_commit": "b9c6ef285b682a770336672eef9e539502bea1dc",
+      "verification_commit": "c1f76fc225e42fe0a6348656ccdaecf731994e98",
+      "deployment_id": "appgdep_6af89633a1c0819181ad011b649bf00a",
+      "status": "succeeded",
+      "published_verified": 1,
+      "updated_existing_verified": 1,
+      "public_readback": true,
+      "desktop_visual_review": "passed_live_articles",
+      "mobile_visual_review": "pending",
+      "card_visual_review": "pending",
+      "policy_version": "2026-11-14/1.0"
+    }
+  },
+  "historical": {
+    "run_id": 43036929335,
+    "attempt": 1,
+    "created_at": "2026-11-11T14:16:42Z",
+    "source_commit": "7ba166b0a40f9a004b3d58b9ae59b577256cb209",
+    "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43036929335",
+    "classification": "historical metadata only; root signature not confirmed in this cycle",
+    "job_id": 130578091070,
+    "failed_step": "Run node scripts/refresh-ashdod-sea.mjs",
+    "assertion": "No currently valid forecast; retaining last good file",
+    "exit_code": 1,
+    "tests": {
+      "passed": 5,
+      "failed": 0
+    },
+    "save_validated_forecast_step": "skipped",
+    "root_id": "ims-no-valid-current-period",
+    "full_log_read": true,
+    "normalized_log_excerpt": [
+      "2026-11-11T14:17:30.4458738Z ✔ extracts wave centimetres, not sea-state code (47.175347ms)",
+      "2026-11-11T14:17:30.4460374Z ✔ rejects other regions and malformed or reversed ranges (0.532115ms)",
+      "2026-11-11T14:17:30.4461600Z ✔ does not publish expired forecast (0.362618ms)",
+      "2026-11-11T14:17:30.4462487Z ✔ uses Israel local time, including summer time (0.412641ms)",
+      "2026-11-11T14:17:30.4463364Z ✔ central coast requires its own identity and valid dates (0.748079ms)",
+      "2026-11-11T14:17:30.4579210Z ℹ tests 5",
+      "2026-11-11T14:17:30.4580837Z ℹ pass 5",
+      "2026-11-11T14:17:30.4586387Z ℹ fail 0",
+      "2026-11-11T14:17:31.2952014Z Error: No currently valid forecast; retaining last good file",
+      "2026-11-11T14:17:31.3029026Z ##[error]Process completed with exit code 1."
+    ],
+    "current_forecast_or_public_visual_check": false
+  },
+  "remaining_queue": {
+    "pending_runtime_ids": [],
+    "publication_queue": [
+      {
+        "article_id": "city-museum-troubled-waters-opening-20261106",
+        "status": "publication_pending_existing_writer",
+        "target_currently_free": true,
+        "remaining": [
+          "Body-hash image reapproval, required checks and original-owner publication"
+        ],
+        "qualification": "Saved checkpoint status records earlier contention; free target alone is not content/image approval."
+      },
+      {
+        "article_id": "mozaik-ses-last-shootout-wormhole-preview-20261107",
+        "status": "publication_pending_existing_writer",
+        "target_currently_free": true,
+        "remaining": [
+          "Relevant licensed or marked AI image: existing story image_url=null; no artwork reuse license found (all rights reserved).",
+          "Actual file/rights/body-linked image review and build checks before publication."
+        ],
+        "qualification": "Saved checkpoint status records earlier contention; free target alone is not content/image approval."
+      }
+    ],
+    "history_partial": true,
+    "known_blockers_unchanged": true
+  },
+  "public_urls": [
+    "https://tlvnet.com/news/fenerbahce-tel-aviv-games-munich-20261114",
+    "https://tlvnet.com/news/hapoel-herzliya-home-win-20261114"
+  ],
+  "scope": "No fresh networkwide publication verification; existing city and sports evidence retained only."
+}
