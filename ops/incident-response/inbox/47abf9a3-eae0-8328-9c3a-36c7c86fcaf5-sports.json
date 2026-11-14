@@ -1,0 +1,146 @@
+{
+  "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "runtime_run_id": "47abf9a3-eae0-8328-9c3a-36c7c86fcaf5",
+  "runKey": "sports-2026-11-14-21:00-47abf9a3",
+  "policy_version": "2026-11-14/1.3",
+  "startedAt": "2026-11-14T18:55:16.443597Z",
+  "preparedAt": "2026-11-14T19:05:26.610943+00:00",
+  "status": "published_verified",
+  "articleIds": [
+    "hapoel-herzliya-home-win-20261114",
+    "fenerbahce-tel-aviv-games-munich-20261114"
+  ],
+  "publishedCount": 2,
+  "source_base_sha": "c1f76fc225e42fe0a6348656ccdaecf731994e98",
+  "sources_read": [
+    "https://bsl.org.il/game-zone.asp?GameId=26683",
+    "https://hapoelbc.com/",
+    "https://isport.co.il/היורוליג-הודיעה-פנרבחצה-תארח-את-מכבי/",
+    "https://www.haberturk.com/spor/fenerbahce-tarfin-2-macini-almanya-da-oynayacak-3927360",
+    "https://sports.walla.co.il/item/3876045"
+  ],
+  "backlog_review": "13Novderby andJerusalempreview already published14Nov; no unpublisheddrafts remaining. Old fine report full read12Nov17:35 but officialdecision unverified; retaincheckpoint.",
+  "duplicates_prevented": [
+    "maccabi-hapoel-euroleague-derby-win-20261112",
+    "maccabi-jerusalem-saturday-preview-20261114"
+  ],
+  "bank_controls": {
+    "native_settings_id_coverage": "complete11rows",
+    "photo-bank-control-v1": "absent",
+    "deployed_default_enabled": true,
+    "blockedIds": [],
+    "changed": false,
+    "public_api": "Browser GET verified collector.enabled=true and both selected assets verified/unblocked; coach hash matches"
+  },
+  "remaining_queue": [
+    {
+      "source_url": "https://sports.walla.co.il/item/3876045",
+      "status": "research_checkpoint_official_decision_unverified"
+    },
+    {
+      "source": "Maccabi–Jerusalem14Nov20:55",
+      "status": "game_in_progress_no_final_result_claimed"
+    }
+  ],
+  "visual_review": {
+    "desktop_preview": "unavailable",
+    "mobile_preview": "unavailable",
+    "desktop_public": "passed_full_article_screenshots",
+    "mobile_public": "pending",
+    "card_visual": "pending",
+    "home_and_section_links": "passed_live_DOM"
+  },
+  "schedule_changed": false,
+  "enabled_changed": false,
+  "ISNET_writes": 0,
+  "cost_measured": false,
+  "cost": null,
+  "completedAt": "2026-11-14T19:12:06.119786+00:00",
+  "urls": [
+    "https://tlvnet.com/news/hapoel-herzliya-home-win-20261114",
+    "https://tlvnet.com/news/fenerbahce-tel-aviv-games-munich-20261114"
+  ],
+  "source_commit": "0fafa8dc1f8410d118bd633af6db05017265d610",
+  "version_number": 603,
+  "deployment_id": "appgdep_6af8b21267bc8191a5a4045e66220318",
+  "deployment_status": "succeeded",
+  "validation": [
+    "build-news.py",
+    "prepare-public serial completion",
+    "check-photo-bank159assets/evidence/checksums",
+    "fulltext/body/imagehashchecks",
+    "foundationreleasechecks",
+    "Vinextproductionbuild",
+    "408canonicalpagesSEO",
+    "livebody/image/credit/section/home"
+  ],
+  "retries": {
+    "source_open": 1,
+    "credential_expiry_refresh": 1,
+    "deployment": 0
+  },
+  "operational_notes": [
+    "Initial parallel preparation caused transient about canonical failure; subsequent single preparation in actual build passed408canonicalpages without code/gate changes.",
+    "Image-pinnedpnpm unavailable; reused local dependency cache only after exact package.json andlockfile SHA256 equality; regular frameworkbuild passed.",
+    "Short-lived source credential expired before push; one refresh with same scope succeeded."
+  ],
+  "api_calls": null,
+  "publication_evidence": [
+    {
+      "article_id": "fenerbahce-tel-aviv-games-munich-20261114",
+      "url": "https://tlvnet.com/news/fenerbahce-tel-aviv-games-munich-20261114",
+      "body_sha256": "d1971ed3064fff5a260e8a063936fa0b83ad6e9330161b1e38e04e79266e3563",
+      "asset_sha256": "426741153f9bbeb11c04f42e52deea36d259c5736ab63a39891f5580d79e5059",
+      "photo_bank_id": "maccabi-club-partizan-20261106-1",
+      "rights": "existing TLVNET-only license/permission",
+      "live_full_body": true,
+      "live_image_loaded": true,
+      "live_credit": true,
+      "desktop_visual": "passed",
+      "mobile_visual": "pending",
+      "home_link": true,
+      "section_link": true,
+      "verified_at": "2026-11-14T19:12:06.119786+00:00"
+    },
+    {
+      "article_id": "hapoel-herzliya-home-win-20261114",
+      "url": "https://tlvnet.com/news/hapoel-herzliya-home-win-20261114",
+      "body_sha256": "a6f6c049f8d70cee25b488d830846577a1cd9286a661cea043c99bf1f8727d17",
+      "asset_sha256": "1d6d24fc4dfc52ce7cb92146c9c13ecf9a25e1e38fa5b64065b3e54912b513f8",
+      "photo_bank_id": "flash90-F260623OBH13",
+      "rights": "existing TLVNET-only license/permission",
+      "live_full_body": true,
+      "live_image_loaded": true,
+      "live_credit": true,
+      "desktop_visual": "passed",
+      "mobile_visual": "pending",
+      "home_link": true,
+      "section_link": true,
+      "verified_at": "2026-11-14T19:12:06.119786+00:00"
+    }
+  ],
+  "verification_commit": "a1415e126437a07411212ca48386a7b599e3c662",
+  "target": "TLVNET-site",
+  "subsystem": "TLVNET sports publication",
+  "event_type": "publication_checkpoint_with_recovered_operational_failures",
+  "incident_observations": [
+    {
+      "signature": "sites_source_credential_expired",
+      "status": "recovered",
+      "evidence": "First publishing helper rejected expired repo-scopedcredential beforepush; same-scope refresh succeeded; one publicdeployverified.",
+      "action_required": false
+    },
+    {
+      "signature": "local_parallel_public_prepare_seo_canonical",
+      "status": "recovered",
+      "evidence": "aboutcanonical temporarily absent during overlapping preparation; subsequent serial actual build passed408canonicalchecks and livearticles.",
+      "prevention": "Run public preparation and framework builds sequentially."
+    },
+    {
+      "signature": "sites_image_pinned_pnpm_unavailable",
+      "status": "mitigated",
+      "evidence": "No image-pinnedpnpm; exact existingpackage andlockfile hashes matched independentcacheddependencies; standardframeworkbuild passed.",
+      "prevention": "Inspect designatedpnpmavailability before install; reuse only exactlockfilecache."
+    }
+  ]
+}
