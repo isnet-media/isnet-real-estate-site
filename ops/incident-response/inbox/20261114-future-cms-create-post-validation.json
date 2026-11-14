@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-14T08:58:37.888Z",
+  "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+  "run_id": null,
+  "runKey": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-14T10-22-58+02-00",
+  "kind": "isnet_cms_create_post_optional_field_validation",
+  "status": "mitigated_published_verified",
+  "policy_version": "2026-11-14/1.0",
+  "signature": "ISNET-CMS/future/create_post/INVALID_ARGUMENT",
+  "evidence": "The first batched create_post request was rejected with INVALID_ARGUMENT on all ten targets while category, image and article content were already validated.",
+  "correction": "One materially targeted retry removed unsupported optional createDate/subTitle-style fields and used the minimal documented create payload. All ten posts were created once, then read back through CMS and verified on their public article and category pages.",
+  "impact": "No duplicate posts and no missing target. TLVNET publication was unaffected.",
+  "resulting_post_ids": [
+    811479,
+    811480,
+    811481,
+    811482,
+    811483,
+    811484,
+    811486,
+    811485,
+    811488,
+    811487
+  ],
+  "remaining": "Five ISNET homepages do not render the current future article card; the article and section card are live. No homepage-template change was attempted by this writer.",
+  "no_public_deploy": true,
+  "controller_action": "Classify the rejected optional-field combination and document the accepted create_post payload; separately inspect homepage module configuration for Bat Yam, Gedera, Herzliya, Holon and Kiryat Gat."
+}
