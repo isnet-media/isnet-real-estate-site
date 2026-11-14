@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T07:00:20Z",
+  "updated_at": "2026-11-14T07:38:24.275Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -802,7 +802,7 @@
     },
     {
       "id": "tlvnet-sports-image-control-read-path",
-      "status": "mitigated",
+      "status": "fixed_verified",
       "fingerprint": "tlvnet/sports/photo-control-read-unavailable/no-publication-lock-proof",
       "root_cause": "Public fetch surface could not read writer control API; this did not prove a bank outage. Existing authorized native Sites D1 reads provide bounded live control evidence.",
       "occurrences": [
@@ -816,7 +816,7 @@
       "body_sha256": "816d9d45e8f18a379c2c7e9297e05a8129e430bd0e0f53646e189c4f6f8c046b",
       "evidence_path": "ops/incident-response/evidence/photo-bank-control-native-read-20261113.json",
       "mitigation": "Verified read-only effective runtime controls enabled=true, blockedIds=[], version0 via absent row plus exact deployed source defaults. Documented authorized read path in RUNBOOK; no rights gate/DB/access changes.",
-      "remaining": "Draft source remains status=draft, image_review=pending. Runtime controls are only one condition; actual asset approval and valid publication ownership still required.",
+      "remaining": "Mobile visual review remains pending; this is a quality follow-up, not an unpublished draft or ownership blockade.",
       "next_action": "Sports owner resumes existing draft first, uses native live control reads if public fetch cannot read it, verifies exact JPG rights and body/asset match, acquires an existing valid publication lease and publishes once. Controller does not approve the editorial image or operate the writer.",
       "reported_runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171",
       "latest_source_check": {
@@ -837,7 +837,49 @@
         "source_open": "Not completed; initial nonempty directory failure corrected once, then progressing full Git fetch stopped at cycle budget. No site/network outage inferred.",
         "observed_at": "2026-11-13T20:06:40.073Z"
       },
-      "prevention_note": "Read cheap current ownership/activity checkpoint before opening a large Git source. If source opening is justified, use the existing correct Site checkout or an empty directory, preserve cache/checkpoint and parallel work; do not repeat large incomplete fetch when publication prerequisite is unchanged."
+      "prevention_note": "Read cheap current ownership/activity checkpoint before opening a large Git source. If source opening is justified, use the existing correct Site checkout or an empty directory, preserve cache/checkpoint and parallel work; do not repeat large incomplete fetch when publication prerequisite is unchanged.",
+      "resolved_at": "2026-11-14T04:55:32.725Z",
+      "controller_reconciled_at": "2026-11-14T07:38:24.275Z",
+      "last_review_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79",
+      "resolution": {
+        "basis": "Reconciled already-recorded original-writer recovery evidence, not a new repair this cycle",
+        "evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json",
+        "source_commit": "b00eb4125a4233aa83ae8faee199eb8395ad5cdb",
+        "version": 594,
+        "deployment_id": "appgdep_6af7e83e335c8191b074fddacd81e5fb",
+        "article_id": "maccabi-hapoel-euroleague-derby-win-20261112",
+        "public_url": "https://tlvnet.com/news/maccabi-hapoel-euroleague-derby-win-20261112",
+        "body_sha256": "4a9762b8a663aac3b4447482d0b927bef524c5c2121dc645515e63bb59fea34d",
+        "asset_sha256": "02eae97b55735b8898d0b2a44c4a558abc55db9a1a1502607a5dd52423aa072d",
+        "checks": {
+          "observed_at": "2026-11-14T04:55:32.725Z",
+          "heading": true,
+          "full_body": true,
+          "image": true,
+          "credit": true,
+          "section_link": true,
+          "section_listing": true,
+          "homepage_listing": true,
+          "desktop_screenshot_review": "passed",
+          "mobile_visual_review": "pending"
+        },
+        "regression": [
+          "check-photo-bank:156 JPG/rights/provenance/hash passed",
+          "news-photo-publication regression passed including exact game-date photo labeling and changed-body gate",
+          "image-presentation regression passed",
+          "build-news:229 articles/7 hubs passed",
+          "prepare-public and full Sites framework packaging build passed",
+          "native deployment succeeded",
+          "public browser verified four full article pages, photos/credits, two section hubs and homepage"
+        ],
+        "scheduled_continuity": {
+          "run_id": "4401da0c-8cb4-832c-b423-c2d8e4ddb5c0",
+          "version": 596,
+          "new_article": "hapoel-herzliya-home-preview-20261114",
+          "runtime_result_matched": true
+        },
+        "notification": "Previously announced sports publication; suppress repeat alert."
+      }
     },
     {
       "id": "event-collector-concurrent-main-push",
@@ -1812,9 +1854,43 @@
       "observed_at": "2026-11-14T05:46:49.373Z",
       "reported_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
       "notification": "Already reported in interactive morning review; no duplicate alert."
+    },
+    {
+      "id": "historical-events-cache-policy-hash-mismatch",
+      "status": "mitigated",
+      "temporal_scope": "historical_only",
+      "fingerprint": "event-integrity/test-event-integrity.cjs/Ashdod-cached-policy-hash-mismatch",
+      "root_cause": "Historical6Nov gate rejected Ashdod HTML not carrying the exact current event-overlay.js SHA256 prefix. Deeper source/generator race not established. This was an assertion after passing media/identity checks, not JavaScript syntax failure.",
+      "occurrences": [
+        {
+          "run_id": 42188270572,
+          "attempt": 1,
+          "job_id": 127793717441,
+          "created_at": "2026-11-06T08:31:19Z",
+          "source_commit": "c26e2f02aa0a8ff7f430bfb2bfb43323e75e9822",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42188270572",
+          "log_read_full": true
+        }
+      ],
+      "current_evidence": {
+        "source_ref": "main",
+        "source_commit": "3d755dca4d538165f0ea5b9789c782030e500ebb",
+        "test_blob": "2e71e077a4cf6cd071466c6a8c83cb2d2d5f4e1e",
+        "html_blob": "8f0482fe9991aeefd179472e64d14ca2f12beaca",
+        "overlay_blob": "efc10e4183f182ce2ecd0a205c2932b9d5505d9a",
+        "overlay_sha256_prefix": "7d30d2722a6d",
+        "ashdod_html_reference": "event-overlay.js?v=7d30d2722a6d",
+        "targeted_static_hash_check": "passed",
+        "other_cities_or_browser": "not checked"
+      },
+      "resolution": "Current Ashdod source correspondence passes; source-level mitigation only. No code/gate changes, collection, deploy or claim of fixed_verified.",
+      "next_action": "Retain versioned identity code and gate. If new policy/source change recurs, original pipeline validates all six generated references and public browser cache behavior before fixed_verified; no retry of historical run.",
+      "prevention": "Classify actual failed command/assertion within multi-command steps; regenerate cache refs alongside policy source and retain last-good output.",
+      "observed_at": "2026-11-14T07:38:24.275Z",
+      "reported_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-f6f889e7-3294-8332-8368-4c7027714816",
+  "last_review_runKey": "ops-2026-11-14-1baca5f8-c370-8332-be5f-cce72c591a79",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
