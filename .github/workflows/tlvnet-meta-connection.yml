@@ -1,0 +1,15 @@
+name: TLVNET Meta connection check (no publishing)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check-meta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check official Meta connection (read-only)
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.TLVNET_META_PAGE_ACCESS_TOKEN }}
+        run: python3 scripts/tlvnet_meta_connection_check.py
