@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_50ecabf864448191ac5bee0edaecca74",
+  "runKey": "events-seniors-2026-11-15-weekly-5a385977",
+  "automation_run_id": "5a385977-ca7c-8322-af47-4efed6bfbc13",
+  "policy_version": "2026-11-14/1.0",
+  "started_at": "2026-11-15T08:56:43.331222Z",
+  "observed_at": "2026-11-15 09:06:16 UTC",
+  "status": "blocked_partial",
+  "target": "TLVNET and existing ISNET events feeds",
+  "source_commit": "b9a919660ec6e5758d119fa555cd6648c695d9f9",
+  "incident": {
+    "signature": "tlvnet-senior-events-expired-verification-feed-empty",
+    "status": "open",
+    "root_cause": "64 saved senior event records retain verification dates from7Nov; public-events includes seniorEvents only when verified_at is within172800000ms. Actual liveGET15Nov returns406rawrecords,0seniors. Do not expand expiry or fake verification timestamps.",
+    "evidence": [
+      "app/api/public-events/route.ts seniorEvents filter",
+      "public/guide/data/senior-events.json updated_at2026-11-07T16:20:00Z,64events",
+      "Actual native Sites liveGET/api/public-events HTTP200,server_now2026-11-15T09:03:08.298Z,total406,seniors0"
+    ],
+    "impact": "Dated senior activities are absent from live API; raw406 is not verifiedvisibleUIcount.",
+    "required_action": "Existing authorized collector owner needs supported invocation under its real data-write concurrency group, and readable/rendered primary municipal event details before refreshing only verified records. Preserve cinema/course isolation, existinglastgood dates and gate."
+  },
+  "known_blocker": {
+    "id": "github-actions-dispatch-current-session-unavailable",
+    "status": "awaiting_external_action",
+    "unchanged": true,
+    "evidence": "Current GitHub tools expose Actions reads and failed-job reruns, not workflow_dispatch. Same obstacle already recorded in incidents.json; no blind rerun or attempt to substitute rerun of oldjobs. Legacy TLV workflow dispatch also mixes cinema collection outside this scope.",
+    "no_duplicate_alert": true
+  },
+  "scope_discovered": [
+    "ashdod",
+    "rishon-lezion",
+    "yavne",
+    "kiryat-gat",
+    "holon",
+    "herzliya",
+    "tel-aviv"
+  ],
+  "scope_inspected": {
+    "isnet": "Existing repo tree, source adapters, operation procedures and reports; no freshcitycatalogcollection; not a network-wide public verification.",
+    "tlvnet": "Fresh authorized source and livepublic API; focused primary checks forBoaz,Reich,UP60,BeitAriela."
+  },
+  "previous_reports": {
+    "city_sync": "2026-11-11T12:41:40Z",
+    "tlv_culture": "2026-11-12T23:50:54.647576+02:00",
+    "herzliya": "2026-11-13T13:33:19.933230+02:00",
+    "holon": "2026-11-09T15:04:49.058286+02:00"
+  },
+  "ownership_checks": {
+    "github_in_progress_runs": 0,
+    "github_queued_runs": 0,
+    "timestamp": "2026-11-15 current cycle",
+    "tlv_publish_lease": "free; last_release15Nov08:55:06Z,607succeeded. Not acquired: no release-ready data change. This publicationlease is not substituted for existingISNETcollector concurrency.",
+    "data_write_groups": [
+      "isnet-event-data-writes",
+      "tlvnet-public-events"
+    ],
+    "collection_claim_acquired": false,
+    "collector_invoked": false,
+    "qualification": "Absence of active deployment is not a data collectionclaim. No historicalWorkproof requirement imposed."
+  },
+  "primary_checks": [
+    {
+      "url": "https://www.tel-aviv.gov.il/Pages/MainItemPage.aspx?WebID=3af57d92-807c-43c5-8d5f-6fd455eb2776&ListID=969f7de3-0ac9-4a30-88f0-2e1a7281f3d0&ItemID=49917",
+      "status": "dynamic_template_missing_current_detail_values",
+      "candidate_id": "senior-tlv-20261118-boaz-digestive-system",
+      "action": "retain oldverified_at; candidate blocked factual revalidation"
+    },
+    {
+      "url": "https://www.tel-aviv.gov.il/Pages/MainItemPage.aspx?WebID=3af57d92-807c-43c5-8d5f-6fd455eb2776&ListID=d7edbd99-5ed2-48be-b4cd-990641ad5f1e&ItemID=41785",
+      "status": "dynamic_template_missing_current_detail_values",
+      "candidate_id": "senior-tlv-reich-41785",
+      "action": "retain oldverified_at; not refreshed from searchtitle"
+    },
+    {
+      "url": "https://www.tel-aviv.gov.il/Residents/HealthAndSocial/Pages/Up60.aspx?IccID=153",
+      "status": "centre_page_read_no_2026_dated_occurrence_established",
+      "action": "no centre converted into invented event; classes not collected"
+    },
+    {
+      "url": "https://ariela.today/events",
+      "status": "readable_current15-16Novlisting"
+    },
+    {
+      "url": "https://ariela.today/workshops-and-series/series/semester-a/shsh-nshym-shzyhv-at-mpt-hamnvt",
+      "status": "full_primary_detail_read",
+      "occurrence": "2026-11-16T17:00:00+02:00",
+      "end_time": "18:30",
+      "venue": "בית אריאלה,שדרותשאולהמלך25",
+      "speaker": "רעות ברנע",
+      "subject": "ג׳ני סאביל",
+      "price_qualification": "450/360/315/517ILS are series subscription tiers, not individualmeeting price. Singlemeeting linkexists; price not inferred.",
+      "dedup": "Existing event87d7cbbd5d662e95560e same sourcefamily,date,venue. No duplicateadded."
+    }
+  ],
+  "live_verification": {
+    "url": "https://tlvnet.com/api/public-events",
+    "method": "GET via authorized sameSite platformorigin",
+    "http": 200,
+    "raw_events": 406,
+    "seniors": 0,
+    "source_at": "2026-11-12T23:50:54.647576+02:00",
+    "existing_event_fact_check": {
+      "id": "87d7cbbd5d662e95560e",
+      "title": "שש נשים ששינו את העולם עם רעות ברנע 2026/7",
+      "start": "2026-11-16T17:00:00+02:00",
+      "venue": "בית אריאלה",
+      "image_publishable_api_flag": true,
+      "credit": "חומר קידום: בית אריאלה ועיריית תל אביב-יפו · צילום: אורית פניני",
+      "image_actually_viewed_this_run": false,
+      "qualification": "Factual existing-record verification only; not newpublication or fullpublished_verified."
+    }
+  },
+  "metrics": {
+    "new_published_verified": 0,
+    "updated_published_verified": 0,
+    "existing_event_facts_verified": 1,
+    "duplicates_prevented": 1,
+    "source_discovery_passes": 1,
+    "catalog_collectors_run": 0,
+    "builds": 0,
+    "deployments": 0,
+    "AI_images": 0,
+    "cost": "unmeasured; no dollar assertion"
+  },
+  "checkpoint": {
+    "ready_to_publish": [],
+    "pending": [
+      "Boaz49917 readablecurrentdate/time/price and licensedJPG required",
+      "Reich41785 readablecurrentdate/time/price andcurrentassetcheck required",
+      "Other64seniorseedrows retainlastgood; no blanket timestamprefresh",
+      "ISNET currentcollector invocation underexistingrealclaim unavailable inthisconnection; othercities publicoutcome unverified"
+    ],
+    "preserve": [
+      "all source records,IDs,dates,prices,media,parallel607work",
+      "No automation/schedule/is_enabled/permissions/DB/R2/DNS changes"
+    ]
+  },
+  "visual_review": {
+    "desktop": "notperformed",
+    "mobile": "notperformed",
+    "qualification": "No publishattempt; no invented visualapproval. Live structuredAPIdata was read."
+  },
+  "notes": [
+    "Source helperopenedcurrentSite successfully usingcleanexistingcheckoutcache; incomplete coldclonewasstopped toavoidduplicatedrepositorytransfer.",
+    "GitHub file-nameworkflow-run URL andworkflowlist URL rejected by toolvalidator; supported actions/runs reads established active/queued0. No accesscontrol bypass. No newscan triggered."
+  ]
+}
