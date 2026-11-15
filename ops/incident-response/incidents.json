@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T09:56:41.751Z",
+  "updated_at": "2026-11-15T10:13:19.274Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -646,7 +646,29 @@
       "resolution": "No off-window public scan or price collection performed on Friday. Existing data retained; no freshness claim.",
       "next_action": "At next authorized Sunday/Tuesday/Thursday morning cycle, examine exact HTTP response causes and authorized source state before one justified recovery; distinguish public delivery from upstream stale feeds.",
       "prevention": "Keep schedule correction and actual public/data recovery as distinct evidence.",
-      "reported_runKey": "ops-manual-2026-11-13T04-33-57-638Z-568ec413"
+      "reported_runKey": "ops-manual-2026-11-13T04-33-57-638Z-568ec413",
+      "occurrences": [
+        {
+          "run_id": 43040005387,
+          "job_id": 130588937621,
+          "attempt": 1,
+          "created_at": "2026-11-11T14:35:52Z",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43040005387",
+          "source_commit": "0132527323f50b98bf8c4b669a2b52701656a0e6",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-15-47c3a058-30a4-8326-a2a9-41f9d751c10f.json",
+          "signature": "super-public-health/retained-old-source/RISHON7-TLV19",
+          "qualification": "Additional historical occurrence of retained-source data failures; not a current HTTP outage or current source recovery. Deeper supplier cause unestablished."
+        }
+      ],
+      "latest_historical_triage": {
+        "observed_at": "2026-11-15T10:12:56.081Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-47c3a058-30a4-8326-a2a9-41f9d751c10f.json",
+        "run_id": 43040005387,
+        "rishon_stale": 7,
+        "tlv_stale": 19,
+        "current_public_check": false,
+        "repair_performed": false
+      }
     },
     {
       "id": "holon-new-screening-unverified-poster",
@@ -3115,7 +3137,7 @@
       ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-77bd6113-7a88-832a-a3ee-e0a7b3ef1a7a",
+  "last_review_runKey": "ops-2026-11-15-47c3a058-30a4-8326-a2a9-41f9d751c10f",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
