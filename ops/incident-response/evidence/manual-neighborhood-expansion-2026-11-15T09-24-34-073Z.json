@@ -1,0 +1,133 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "manual-neighborhood-expansion-2026-11-15T09-24-34-073Z",
+  "run_id": null,
+  "execution_type": "publisher_authorized_manual_site_expansion",
+  "policy_version": "2026-11-15/1.2",
+  "recorded_at": "2026-11-15T09:48:51.098Z",
+  "scope": {
+    "site": "https://tlvnet.com",
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "sections": [
+      "city-hub",
+      "neighborhood directory",
+      "local boards"
+    ],
+    "other_network_sites_reviewed": false
+  },
+  "source_inventory": {
+    "primary_url": "https://www.tel-aviv.gov.il/Pages/NeighborhoodLobby.aspx",
+    "checked_at": "2026-11-15",
+    "source_date": null,
+    "municipal_service_directory_areas": 67,
+    "municipal_areas_mapped": 67,
+    "registry_before": 21,
+    "registry_after": 73,
+    "rich_standalone_pages": 9,
+    "local_boards_remaining_for_enrichment": 64,
+    "matched_existing_records_before": 188,
+    "matched_existing_records_after": 219,
+    "new_news_articles_authored": 0,
+    "additional_reviewed_services": 3,
+    "notes": "Service directory areas and known local names are not represented as identical official statistical boundaries. Source dates remain authentic."
+  },
+  "changes": [
+    "Complete searchable directory and chooser for 73 neighborhoods/areas, including every municipal service-directory area and unmentioned gaps.",
+    "Specific name matching prevents prefix contamination between Ramat Aviv sub-neighborhoods, Neot Afeka subdivisions, North Jaffa and broader hubs.",
+    "Sparse neighborhoods expose actual matched existing content and four resident utility links; rich page threshold remains six items and three kinds.",
+    "Existing community writer owns bounded coverage plan and ongoing enrichment, without duplicate event/class collection."
+  ],
+  "publication": {
+    "owner": "Automation_9776808c73848191a9d748dd09315960",
+    "run_key": "manual-neighborhood-expansion-2026-11-15T09-24-34-073Z",
+    "released_at": "2026-11-15T09:48:09.253Z",
+    "source_commit": "15cb2dad3067dbb93e4bd8df17a8c7129ae258d2",
+    "saved_version": 609,
+    "saved_version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_e527b87f10f481918932a7f61225d88d",
+    "deployment_id": "appgdep_6af97eac8a748191980f35b7931504d7",
+    "deployment_status": "succeeded",
+    "status": "published_verified",
+    "scope": "Citywide neighborhood directory and precise local boards",
+    "public_verification": "Live city-hub: 73 directory links, 74 selector options, 9 rich pages. Ramat Aviv, Montefiore, Neve Avivim navigation verified; 4 resident utility links per local board.",
+    "desktop_visual_review": "passed; live directory/search/navigation",
+    "mobile_visual_review": "passed; Neve Avivim local board at 390x844, no horizontal document overflow"
+  },
+  "regression_checks": {
+    "municipal_mapping": "67/67 pass",
+    "registry_chooser": "73 areas plus placeholder pass",
+    "specific_name_isolation": "pass",
+    "existing_rich_page_gate": "pass; 9 pages",
+    "news_freshness": "pass",
+    "prepare_public": "pass",
+    "photo_bank": "pass; 162 local JPGs with evidence/checksums",
+    "production_build": "pass",
+    "existing_news_articles": "byte-for-byte unchanged from v608 base",
+    "parallel_source": "Preserved Culture Net owner's c09ae4531be9a0c6ebff38ccccf092458d0afb4f journals; integrated after first stale source CAS rejection; one focused retry; no force push."
+  },
+  "live_readback": {
+    "public_url": "https://tlvnet.com/city-hub/",
+    "directory_links": 73,
+    "chooser_options": 74,
+    "rich_tiles": 9,
+    "search_query": "רמת אביב",
+    "search_results": [
+      "רמת אביב",
+      "רמת אביב ג'",
+      "רמת אביב החדשה"
+    ],
+    "navigation_checked": [
+      "רמת אביב",
+      "מונטיפיורי",
+      "נווה אביבים"
+    ],
+    "local_tools": 4,
+    "desktop": "passed",
+    "mobile": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "selected_neighborhood": "נווה אביבים",
+      "document_scroll_width": 375,
+      "cards": [
+        "בית השחמט — חוגים וספרייה",
+        "בא־לגן בנווה אביבים — נפגשים בגינת אושה"
+      ],
+      "visual_review": "passed",
+      "screenshot_observed": true
+    },
+    "viewport_reset": true
+  },
+  "ongoing_owner": {
+    "ok": true,
+    "policy_version": "2026-11-15/1.2",
+    "id": "Automation_e03d80ff914c8191a790fc66e7447826",
+    "schedule": "BEGIN:VEVENT\nDTSTART:20261114T130000\nRRULE:FREQ=DAILY\nEND:VEVENT",
+    "enabled": true,
+    "canonical_path": "ops/agent-harmony/instructions/agents/08_tlv_community.md",
+    "backup_path": "ops/agent-harmony/backups/manual-neighborhood-expansion-2026-11-15T09-24-34-073Z-community.json",
+    "schedule_changed": false,
+    "enabled_changed": false,
+    "permissions_changed": false,
+    "new_task_created": false,
+    "dispatch_performed": false,
+    "coverage_plan_path": "data/neighborhoods/coverage-plan.json",
+    "protocol_path": "data/neighborhoods/WRITER.md"
+  },
+  "remaining_queue": {
+    "scope": "64 local boards have not yet reached rich standalone-page threshold",
+    "owner": "Automation_e03d80ff914c8191a790fc66e7447826",
+    "action": "Prioritize ready queue, then rotate through coverage-plan entries with cursor; verify facts and rights before publication.",
+    "all_areas_have_fresh_news": false
+  },
+  "publication_lease": {
+    "target": "TLVNET-site",
+    "own_token_readback_verified": true,
+    "released": true,
+    "release_readback": "free; owner null"
+  },
+  "new_blockers": [],
+  "scheduled_watermarks_advanced": false,
+  "ai_api_cost": null,
+  "api_call_cost_measured": false
+}
