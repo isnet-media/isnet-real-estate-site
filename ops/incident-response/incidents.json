@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T13:27:43.278Z",
+  "updated_at": "2026-11-15T14:22:46.049Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2437,7 +2437,15 @@
         "qualification": "Current original audit job compared public JSON successfully. Full success logs not read; current root mitigation evidence, not field-level reconstruction or controller fixed_verified."
       },
       "latest_variant": "Ashdod/subcategory/1record",
-      "latest_observed_at": "2026-11-15T13:27:43.278Z"
+      "latest_observed_at": "2026-11-15T13:27:43.278Z",
+      "latest_successful_comparison": {
+        "run_id": 43723242290,
+        "source_commit": "9538850d2f992bbd8c9cdbf263ecd8249fb79d73",
+        "step": "Compare public JSON with normalized current GitHub feed",
+        "conclusion": "success",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json",
+        "qualification": "Different snapshot; historical mismatch cause not proved fixed. No re-read of unchanged failure log."
+      }
     },
     {
       "id": "future-cms-create-post-optional-payload-validation",
@@ -3510,9 +3518,38 @@
         "coverage_candidates": "Existing research queues require original owner verification; no alternative writer triggered"
       },
       "verified_at": "2026-11-15T13:25:34.266Z"
+    },
+    {
+      "id": "pages-artifact-metadata-transient-missing",
+      "fingerprint": "pages/deploy-pages/artifact-metadata-not-found",
+      "status": "mitigated",
+      "root_cause": "Artifact retrieval failure observed. Underlying GitHub service/consistency cause unestablished.",
+      "occurrences": [
+        {
+          "run_id": 43715219054,
+          "attempt": 1,
+          "job_id": 132815164805,
+          "failed_step": "Deploy",
+          "created_at": "2026-11-15T12:42:36Z",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43715219054",
+          "error": "Fetching artifact metadata failed; no artifacts named github-pages-43715219054-1 found"
+        }
+      ],
+      "recovery": {
+        "later_run_id": 43723605312,
+        "upload_step": "success",
+        "deploy_step": "success",
+        "automatic": true,
+        "source_changed": true,
+        "controller_rerun": false,
+        "public_verification": "not independently performed; no fixed_verified claim"
+      },
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json",
+      "next_action": "Observe pending regular deployments. Do not retry unchanged transient failure or weaken artifact validation.",
+      "reported_runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19"
     }
   ],
-  "last_review_runKey": "continuity-repair-20261115T130716Z",
+  "last_review_runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
