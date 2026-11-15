@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "publication_verified_and_quality_checkpoint",
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "runKey": "news-2026-11-15-08:00-a54ff66b",
+  "run_id": "a54ff66b-def8-8322-8f51-13ea81f38301",
+  "policy_version": "2026-11-14/1.0",
+  "startedAt": "2026-11-15T06:03:05.502027Z",
+  "recorded_at": "2026-11-15T06:19:53.658871+00:00",
+  "status": "published_verified",
+  "sections_reviewed": [
+    "news"
+  ],
+  "articleIds": [
+    "ntt-833-einstein-ramat-aviv-20261115"
+  ],
+  "sources_read": [
+    "https://ntt-buses.com/הודעות-חשובות/",
+    "https://tlvonline.co.il/קו-833-איינשטיין-רמת-אביב/",
+    "https://www.tel-aviv.gov.il/Pages/HomePage.aspx",
+    "https://t.me/s/Israel_Police_100",
+    "https://www.be106.net/255",
+    "https://www.mdais.org/",
+    "https://newzim.co.il/merkaz/?p=81201"
+  ],
+  "checkpoint_consumed": "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
+  "drafts_found": 0,
+  "duplicates_prevented": [
+    "policeimpersonation",
+    "BenYehudabody",
+    "buspriorityplan",
+    "existingnightworks"
+  ],
+  "source_limitations": [
+    "GoogleNews inaccessible; one focusedalternativesearchused",
+    "MDAindexno readablelines",
+    "No currentmedicaloutcome for14NovShaulHaMelech injury; not presentedascurrentseverity",
+    "Grazianibodyreport secondaryread; causeunverified, not characterizedascrime/neglect"
+  ],
+  "remaining_queue": [
+    {
+      "content_id": "graziani-body-found-20261114",
+      "source_url": "https://newzim.co.il/merkaz/?p=81201",
+      "state": "research_checkpoint",
+      "next_action": "Check primary Zaka/police confirmation before causalreport; no unverifiedcrimeclaim"
+    },
+    {
+      "content_id": "shaul-hamelech-injury-20261114",
+      "source_url": "https://www.be106.net/255/164904",
+      "state": "research_checkpoint",
+      "next_action": "Fresh primary medical information needed; distinguish14Nov04:48event fromcurrentstate"
+    }
+  ],
+  "previous_remaining_queue": "Three12Novpolicecheckpoints unchanged, retainedin priorledger withoutblindretry",
+  "cost": "not measured",
+  "publishedVerifiedCount": 1,
+  "preview": "knownunavailable_notretried",
+  "completedAt": "2026-11-15T06:19:53.658871+00:00",
+  "newPublishedArticleIds": [
+    "ntt-833-einstein-ramat-aviv-20261115"
+  ],
+  "source_commit": "e1cee1eb56f130a6fb95e850fd1cb4ee51a4279b",
+  "deployment_id": "appgdep_6af94e9baf2c81918ce8036b00b76b70",
+  "version_number": 604,
+  "public_verification": [
+    {
+      "article_id": "ntt-833-einstein-ramat-aviv-20261115",
+      "url": "https://tlvnet.com/news/ntt-833-einstein-ramat-aviv-20261115",
+      "article_http": 200,
+      "image_http": 200,
+      "full_body": true,
+      "title": true,
+      "image_hash": true,
+      "JPG": true,
+      "credit": true,
+      "section_link": true,
+      "home_link": true,
+      "body_sha256": "aa5ed847972ba2e117d08f16cf153da220e756a05d708095a6a72617e8ad4647",
+      "asset_sha256": "5eddb74d0903bb63abfd4655392bae99204822e1e5ff4ede136224ff7d69c60d"
+    }
+  ],
+  "desktop_viewed": [
+    "ntt-833-einstein-ramat-aviv-20261115"
+  ],
+  "mobile": "pending",
+  "card_visual_review": "pending",
+  "build_checks": [
+    "build-news",
+    "check-photo-bank160JPG",
+    "prepare-public",
+    "foundation",
+    "image-presentation",
+    "framework build",
+    "stripbundleddata"
+  ],
+  "image_gate_resolution": "Campusarchive rejected; one focusedreplacement withdedicatedbuilt-inAI1536x1024realJPEG. Existingcompatibilitygate unchanged. SourcePNG/JPGactuallyviewed; fullcreditAIvisible.",
+  "site": "TLVNET",
+  "target": "TLVNET-site",
+  "verification_commit": "9849af922fb48422adf14f24e8b3767f88a11bca",
+  "deployment_status": "succeeded",
+  "deployment_succeeded_at": "2026-11-15T06:18:18.649958+00:00",
+  "source_dates": {
+    "operator_notice": "9Nov displayed notice start; effective15Nov2026; readfull15Nov",
+    "local_report": "10Nov2026, fullread15Nov",
+    "medical_report": "14Nov2026, no currentseverity asserted"
+  },
+  "quality_queue": "data/photo-bank/quality-issues.json:article desktop actual passed; mobile/card pending with article/body/asset/task IDs",
+  "known_preview_issue": {
+    "signature": "managed-preview/UND_ERR_SOCKET",
+    "status": "unchanged_known_issue",
+    "retried_this_cycle": false,
+    "publisher_exception": true
+  },
+  "new_gate_block": {
+    "status": "resolved_before_publication",
+    "cause": "Transport article paired with campus archive failed existing compatibility gate",
+    "fix": "Dedicated conceptual image generated and actually inspected; PNG→JPGhash verified; explicit subject_topic=transport on new asset",
+    "gate_changes": false
+  },
+  "source_open": {
+    "first_attempt": "Failed local path preparation; no remote change",
+    "correction": "Opened fresh empty checkout successfully; remote HEADa1415e.. preserved; no forcepush"
+  },
+  "no_build_or_deploy_for_logs": true,
+  "schedules_permissions_billing_changed": false
+}
