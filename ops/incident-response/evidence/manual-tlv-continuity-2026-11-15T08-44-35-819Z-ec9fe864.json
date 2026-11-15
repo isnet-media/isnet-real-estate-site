@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "kind": "publisher_requested_live_freshness_repair",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": null,
+  "runKey": "manual-tlv-continuity-2026-11-15T08-44-35-819Z-ec9fe864",
+  "execution_mode": "manual_interactive",
+  "policy_version": "2026-11-14/1.1",
+  "recorded_at": "2026-11-15T08:55:57.560Z",
+  "target": "TLVNET-site",
+  "scope": [
+    "news",
+    "real-estate",
+    "economy-tech",
+    "community",
+    "nine published neighborhood pages"
+  ],
+  "root_causes": [
+    {
+      "signature": "tlvnet/section-lead/media-preference-demotes-latest",
+      "cause": "build-editorial.py feature() selected a non-AI photograph among the first eight stories, ahead of the latest reviewed article. Economy09Nov and community06Nov remained leads despite14Nov articles."
+    },
+    {
+      "signature": "tlvnet/promotion-expiry/application-deadline-ignored",
+      "cause": "Promotion filters used activity start/end but ignored existing application_deadline=2026-11-10 for the Mehuga program starting19Nov."
+    }
+  ],
+  "changes": [
+    "Latest eligible story leads regardless of its approved media type; expired-only lists have no promotional lead.",
+    "Shared promotion_policy.py uses the earliest explicit expiry, application/registration deadline or event boundary; date-only registration deadline includes that Israel calendar day.",
+    "City, neighborhood, editorial and launch preparation share the rule; neighborhood pages receive the existing runtime expiry guard.",
+    "news-freshness.py checks all seven rendered section leads and excludes expired article promotions from neighborhood data on every prepare-public run."
+  ],
+  "tests": {
+    "build_news": "passed",
+    "prepare_public": "passed",
+    "photo_bank": "162 local JPGs, licenses, evidence and checksums passed",
+    "foundation": "passed",
+    "production_build": "passed",
+    "news_freshness": "passed",
+    "neighborhoods": "passed",
+    "seo": "passed",
+    "article_records_unchanged": true
+  },
+  "publication": {
+    "owner": "Automation_9776808c73848191a9d748dd09315960",
+    "run_key": "manual-tlv-continuity-2026-11-15T08-44-35-819Z-ec9fe864",
+    "released_at": "2026-11-15T08:55:06.080Z",
+    "source_commit": "b9a919660ec6e5758d119fa555cd6648c695d9f9",
+    "saved_version": 607,
+    "saved_version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_92c17cc4797881919dcdae283fbaebec",
+    "deployment_id": "appgdep_6af972d6f6408191947d3e1bf6591559",
+    "deployment_status": "succeeded",
+    "status": "fixed_verified",
+    "scope": "Publication ordering and application-deadline promotion expiry; no new reporting",
+    "public_verification": "News, real estate, economy and community leads/images/credits; economy/community full bodies; nine neighborhood pages; expired registration absent.",
+    "desktop_visual_review": "community screenshot passed",
+    "mobile_visual_review": "pending",
+    "prechange_version": 606,
+    "version": 607,
+    "deploy_count": 1
+  },
+  "public_verification": {
+    "observed_at": "2026-11-15T08:55:57.560Z",
+    "method": "independent live cloud browser DOM and community desktop screenshot",
+    "section_leads": [
+      {
+        "url": "https://tlvnet.com/news/",
+        "article_id": "ntt-833-einstein-ramat-aviv-20261115",
+        "image_loaded": true,
+        "natural_width": 1536,
+        "credit": "אילוסטרציה – AI"
+      },
+      {
+        "url": "https://tlvnet.com/news/real-estate",
+        "article_id": "isaac-stern-two-projects-financing-20261113",
+        "image_loaded": true,
+        "natural_width": 799,
+        "credit": "Shahar Yaari / פלאש90"
+      },
+      {
+        "url": "https://tlvnet.com/news/economy-tech",
+        "article_id": "dreeze-tlv-cloud-application-recovery-seed-20261114",
+        "image_loaded": true,
+        "natural_width": 1200,
+        "credit": "אילוסטרציה – AI",
+        "full_article_body_read": true
+      },
+      {
+        "url": "https://tlvnet.com/news/community",
+        "article_id": "lasova-tlv-day-evening-volunteering-guide-20261114",
+        "image_loaded": true,
+        "natural_width": 1200,
+        "credit": "אילוסטרציה – AI",
+        "full_article_body_read": true
+      }
+    ],
+    "neighborhoods": [
+      {
+        "url": "https://tlvnet.com/neighborhoods/florentin/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      },
+      {
+        "url": "https://tlvnet.com/neighborhoods/bitzaron/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      },
+      {
+        "url": "https://tlvnet.com/neighborhoods/yad-eliyahu/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      },
+      {
+        "url": "https://tlvnet.com/neighborhoods/jaffa/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      },
+      {
+        "url": "https://tlvnet.com/neighborhoods/old-north/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      },
+      {
+        "url": "https://tlvnet.com/neighborhoods/hadar-yosef/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      },
+      {
+        "url": "https://tlvnet.com/neighborhoods/hatikva/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      },
+      {
+        "url": "https://tlvnet.com/neighborhoods/lev-tel-aviv/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      },
+      {
+        "url": "https://tlvnet.com/neighborhoods/ezra/",
+        "opened": true,
+        "cards_present": true,
+        "runtime_expiry_guard": true,
+        "expired_mehuga_registration_absent": true
+      }
+    ],
+    "desktop_visual_review": "community passed",
+    "mobile_visual_review": "pending; no supported mobile viewport used",
+    "preview": "unavailable: UND_ERR_SOCKET during dev preview startup; production build and live browser passed"
+  },
+  "continuity": {
+    "news": {
+      "enabled": true,
+      "hours_israel": [
+        8,
+        14,
+        19
+      ],
+      "last_owner_run_id": "a54ff66b-def8-8322-8f51-13ea81f38301"
+    },
+    "economy": {
+      "enabled": true,
+      "hour_israel": 12
+    },
+    "community": {
+      "enabled": true,
+      "hour_israel": 13
+    },
+    "real_estate": {
+      "enabled": true,
+      "hour_israel": 16
+    },
+    "controller": {
+      "enabled": true,
+      "schedule": "hourly at minute35"
+    },
+    "schedules_changed": false,
+    "agents_created_or_dispatched": 0
+  },
+  "remaining_queue": {
+    "community_source_coverage": "Original community checkpoint remains coverage_complete=false; candidate/source gaps are retained with original writer, not marked resolved by this presentation repair.",
+    "ready_unpublished_articles_in_public_articles_for_three_desks": 0,
+    "mobile_visual_review": "pending"
+  },
+  "new_reporting_published": 0,
+  "cost": null,
+  "cost_qualification": "No dollar usage metric measured; no monetary enforcement claim."
+}
