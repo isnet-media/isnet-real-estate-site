@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T09:14:46.273Z",
+  "updated_at": "2026-11-15T09:56:41.751Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -503,8 +503,8 @@
     {
       "id": "tlvnet-social-publication-not-verified",
       "status": "awaiting_external_action",
-      "root_cause": "Prior interactive Facebook guide promotion succeeded; recurring FB/Instagram release and Instagram image upload were not verified.",
-      "next_action": "Renew the valid Page connection through the existing social admin, then verify one actual post. Do not blindly retry with expired credentials or change permissions under this controller mandate.",
+      "root_cause": "Meta Page authentication rejected with 190/463 on13Nov. Existing server cron continues successfully but returns the persisted authentication block before creating a new post claim or sending to Meta. Scheduler success/HTTP200 do not prove publication.",
+      "next_action": "Owner must renew Page connection through https://tlvnet.com/admin?desk=social using the existing secure flow. Preserve durable claims/counter; validate exact Page identity and actual publication permission, then one eligible post with public permalink proof. No new credential generation or permission expansion performed under this mandate.",
       "latest_handoff": {
         "evidence": "ops/agent-harmony/releases/20261113-completion.json",
         "last_reported_success_post": "1520426491146188_122103423777545268",
@@ -514,11 +514,17 @@
         "controller_live_post_verified": false
       },
       "latest_controller_read": {
-        "observed_at": "2026-11-13T14:31:37.188Z",
-        "evidence": "ops/incident-response/evidence/social-runs-b8641b1e-3cec-8322-a6e7-5c6f1e11a895.json",
+        "observed_at": "2026-11-15T09:56:41.751Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-77bd6113-7a88-832a-a3ee-e0a7b3ef1a7a.json",
         "auth_error": "meta_error_190_463",
-        "attempt_count": "unknown legacy record",
+        "new_social_runs": 0,
+        "legacy_attempt_count": "unknown; no reset",
+        "scheduler_active": true,
+        "latest_cron_run_id": 48,
+        "latest_http_status": 200,
+        "latest_http_safe_result": "meta_error_190_463",
         "retry": false,
+        "credentials_modified": false,
         "public_post_checked": false
       }
     },
@@ -3087,9 +3093,29 @@
       "inbox": "ops/incident-response/inbox/manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json",
       "remaining": "Next scheduled original-owner run and new live culture output remain unverified. Instruction readback is not a published_verified result.",
       "prevention": "Existing hourly controller now distinguishes new publication from old-story edits and monitors source-coverage stagnation; bounded version-aware checks."
+    },
+    {
+      "id": "tlvnet-senior-events-expired-verification-feed-empty",
+      "status": "open",
+      "category": "source",
+      "root_cause": "Saved senior event verification dates are7Nov while current API excludes records older than48hours; original collector owner15Nov live API returned406rawevents and0senior records. Current v609 source gate independently confirmed. Primary factual revalidation/execution access unresolved.",
+      "first_seen": "2026-11-15T09:56:41.751Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-77bd6113-7a88-832a-a3ee-e0a7b3ef1a7a.json",
+      "source_inbox": "ops/incident-response/inbox/5a385977-ca7c-8322-af47-4efed6bfbc13-1.json",
+      "source_fingerprint": "senior-events:2026-11-07;verification-gate:172800000",
+      "next_action": "Existing event owner obtains readable current primary details and refreshes only genuinely reverified rows using real data-write claim; do not expand expiry or fake timestamps. Existing execution access blocker remains unchanged.",
+      "public_verification": "Owner-reported live API09:03UTC; no independent controller broad fetch repeated on unchanged source.",
+      "prevention": "Freshness coverage checkpoint must track actual eligible senior rows, not raw catalog totals; retain real verification dates and existing data claims.",
+      "occurrences": [
+        {
+          "run_id": "5a385977-ca7c-8322-af47-4efed6bfbc13",
+          "inbox": "ops/incident-response/inbox/5a385977-ca7c-8322-af47-4efed6bfbc13-1.json",
+          "observed_at": "2026-11-15T09:06:16Z"
+        }
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75",
+  "last_review_runKey": "ops-2026-11-15-77bd6113-7a88-832a-a3ee-e0a7b3ef1a7a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
