@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T17:24:52.278Z",
+  "updated_at": "2026-11-15T18:40:34.222Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1774,6 +1774,20 @@
         "mobile": "pending",
         "asset_hash": "pending original writer",
         "qualification": "New current-owner live products verified. Existingfixed_verifiedstatus retained, no new repair claimed; writer channel403/cache limits not site outage."
+      },
+      "latest_owner_run_observation": {
+        "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+        "run_id": "9c25d922-61e0-8331-b958-c000013496be",
+        "status": "completed",
+        "completed_at": "2026-11-15T17:39:00.086477Z",
+        "result_matches_run": true,
+        "reported_new_CMS": 1,
+        "reported_new_public_verified": 0,
+        "reported_existing_public_verified": 1,
+        "raanana_new_post_id": 811636,
+        "controller_public_readback": "public_readback_verified_asset_hash_and_visual_quality_pending",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json",
+        "qualification": "This does not assert both cities have a new verified article in this run."
       }
     },
     {
@@ -2492,7 +2506,20 @@
       "prevention": "Use required title/categoryId/defaultImageId/tags plus content/description/creatorName/publish as appropriate; tags is comma-separated string. Add optional fields only as needed with schema-valid values. Keep existing post IDs and dedup before retry; never recreate published posts.",
       "resolution": "Mitigated through original-owner changed payload, not independently fixed_verified.",
       "observed_at": "2026-11-14T09:11:12.935Z",
-      "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json"
+      "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json",
+      "latest_historical_triage": {
+        "observed_at": "2026-11-15T18:40:34.222Z",
+        "source_inbox": "ops/incident-response/inbox/20261114-future-cms-create-post-validation.json",
+        "optional_payload": "Previously mitigated, not retried",
+        "homepage_followups": [
+          "BatYam",
+          "Gedera",
+          "Herzliya",
+          "Holon",
+          "KiryatGat"
+        ],
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json"
+      }
     },
     {
       "id": "future-magazine-five-city-homepage-card-gap",
@@ -3662,7 +3689,7 @@
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78",
+  "last_review_runKey": "ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
