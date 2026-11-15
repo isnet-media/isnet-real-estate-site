@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "d4367d19-cf9c-8322-b165-2140fcce9361",
+  "runKey": "ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-15T20:21:32.725Z",
+  "signature": "cross-task/exact-controller-result-in-sports-owner-run",
+  "incident_id": "controller-active-scope-inherited-writer-approval",
+  "status": "awaiting_external_action",
+  "sports_task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "sports_run_id": "37cbf175-5f34-8320-b921-abb82295b707",
+  "sports_completed_at": "2026-11-15T19:32:33.620482Z",
+  "sports_chat_ref": {
+    "type": "chatgpt",
+    "id": "6af80764-2768-83ed-8f61-4262b0bbbb17"
+  },
+  "controller_previous_run_id": "66f4eaea-b874-8326-9b23-1510b4bf3d77",
+  "controller_completed_at": "2026-11-15T19:32:45.943655Z",
+  "controller_chat_ref": {
+    "type": "chatgpt",
+    "id": "6af9a740-d610-83ed-9693-16fa0d8984d7"
+  },
+  "results_exact_equal": true,
+  "result_excerpt": "תיקנתי לפני פריסה טעות שלי בזיהוי תפקיד הבקר ככתב ספורט. לא פורסם תוכן בטעות; שתי הטיוטות נשמרו בתור לבדיקת הכתב, והנעילה שיצרתי שוחררה.\n\nבאתר נמצאו **שמונה כתבות חדשות מהיום** בשבעת המדורים שנבדקו. בקהילה ובתרבות לא נוספו כתבות חדשות; ריצת הספורט בערב עדיין הייתה פעילה בעת הבדיקה. החוסרים ונקודות ההמשך תועדו למעקב, ונוסף לנוהל שלב מפורש לאימות התפקיד לפני כתיבה ופרסום.",
+  "configuration": {
+    "sports_prompt_correct": true,
+    "controller_prompt_correct": true,
+    "different_conversation_ids": true,
+    "sports_environment_selection": "inherited",
+    "controller_environment_selection": "inherited"
+  },
+  "impact": "Sports21:00owner run completed with controller-scope result and no sports evening source commit or publication.8new articles today retained; no625version; two unapproved research drafts remain in original checkpoint.",
+  "root_cause": "Exact duplicate cross-task result and missing sports deliverable verified; backend routing/context attribution cause unestablished. False self_owned/null chat_ref alone not used as diagnosis.",
+  "mitigation": "No source pushed/deployed and no original owner approvals fabricated; own lease already free; drafts retained pending actual sports-owner review. Prior procedural RUNBOOK change is not an end-to-end runtime fix.",
+  "required_action": "Inspect scheduler/context isolation and result attribution for these exact two runs/conversations through the platform runtime; this connector exposes task prompt/result metadata but not execution routing logs or an isolation-repair operation. Do not replay/trigger tasks or change schedules to simulate repair.",
+  "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
+  "source_head": "87541358cd703b9f936c53fdb748b7c8cefe2333",
+  "saved_version": 624,
+  "source_unchanged": true,
+  "lease_state": "free",
+  "schedules_changed": false,
+  "agents_started": false,
+  "publication": false
+}
