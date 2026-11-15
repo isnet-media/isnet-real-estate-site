@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T10:13:19.274Z",
+  "updated_at": "2026-11-15T10:54:41.586Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -502,31 +502,39 @@
     },
     {
       "id": "tlvnet-social-publication-not-verified",
-      "status": "awaiting_external_action",
-      "root_cause": "Meta Page authentication rejected with 190/463 on13Nov. Existing server cron continues successfully but returns the persisted authentication block before creating a new post claim or sending to Meta. Scheduler success/HTTP200 do not prove publication.",
-      "next_action": "Owner must renew Page connection through https://tlvnet.com/admin?desk=social using the existing secure flow. Preserve durable claims/counter; validate exact Page identity and actual publication permission, then one eligible post with public permalink proof. No new credential generation or permission expansion performed under this mandate.",
+      "status": "mitigated",
+      "root_cause": "Historical Meta190/463 expired Page authentication stopped the existing server publisher. Publisher renewed the Page connection on15Nov; one real API post succeeded and was independently verified public. The existing cron transport is present; first regular post after renewal still needs separate verification. Instagram remains a separate unimplemented/unverified path.",
+      "next_action": "Existing controller checks the next normal13:00 Israel server slot social_runs result and public post, without dispatching another publisher. Do not request renewed credentials again unless new live evidence indicates an authentication failure. Continue to report Instagram separately; exact derived Page token lifetime was not observed.",
       "latest_handoff": {
-        "evidence": "ops/agent-harmony/releases/20261113-completion.json",
-        "last_reported_success_post": "1520426491146188_122103423777545268",
-        "blocked_reason": "meta_error_190_463",
-        "reconnect_code_reported_tested": true,
-        "credentials_modified": false,
-        "controller_live_post_verified": false
+        "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json",
+        "blocked_reason": null,
+        "current_page_identity": "1520426491146188",
+        "owner_renewal_verified": true,
+        "credentials_entered_by_controller": false,
+        "controller_live_post_verified": true
       },
       "latest_controller_read": {
-        "observed_at": "2026-11-15T09:56:41.751Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-15-77bd6113-7a88-832a-a3ee-e0a7b3ef1a7a.json",
-        "auth_error": "meta_error_190_463",
-        "new_social_runs": 0,
-        "legacy_attempt_count": "unknown; no reset",
-        "scheduler_active": true,
-        "latest_cron_run_id": 48,
-        "latest_http_status": 200,
-        "latest_http_safe_result": "meta_error_190_463",
-        "retry": false,
-        "credentials_modified": false,
-        "public_post_checked": false
-      }
+        "observed_at": "2026-11-15T10:53:58.329Z",
+        "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json",
+        "blocked_reason": null,
+        "enabled": 1,
+        "post_id": "1520426491146188_122105524611545268",
+        "public_post_checked": true,
+        "new_publish_attempts": 1,
+        "duplicate_claims_removed": 0,
+        "counters_reset": 0
+      },
+      "facebook_authentication_status": "fixed_verified",
+      "facebook_publication": {
+        "status": "published_verified",
+        "post_id": "1520426491146188_122105524611545268",
+        "permalink": "https://www.facebook.com/122103410883545268/posts/122105524611545268",
+        "observed_at": "2026-11-15T10:53:58.329Z",
+        "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json"
+      },
+      "facebook_unattended_status": "configuration_verified_pending_first_normal_slot",
+      "instagram_status": "awaiting_separate_implementation_and_authentication",
+      "prevention": "Shared factual-teaser formatter and permanent publisher closing deployed613; existing durable claims/counter/circuit breaker retained. Track real slot results rather than cron/HTTP success only; no unconditional permanent-token guarantee."
     },
     {
       "id": "ashdod-cinema-four-missing-trailers",
