@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T01:16:31Z",
+  "updated_at": "2026-11-15T03:03:30Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2664,7 +2664,7 @@
       "status": "open",
       "temporal_scope": "historical_only",
       "fingerprint": "supermarket-city-release/test_stage_super_city_release/yavne-root-analytics/report-files-StopIteration",
-      "root_cause": "Historical packaging fixture copied the shared Yavne analytics file and recorded its dependency, then failed because report.files lacked its expected root path. Implementation-level cause remains unestablished.",
+      "root_cause": "stage_city copies first-party dependencies under output/assets, then enumerates destination.rglob under output/SUPER.YAVNE only; dependency is consequently absent from manifest.files/file_count/hash coverage. Historical fixture reproduction confirms the manifest omission. Current delivery implementation and live product are not asserted.",
       "occurrences": [
         {
           "run_id": 43045103486,
@@ -2693,21 +2693,24 @@
           "name": "city-bundle (BATYAM)",
           "conclusion": "failure",
           "failed_step": "Verify independent city packaging behavior",
-          "full_log_read": false
+          "full_log_read": false,
+          "classification": "inferred shared deterministic fixture failure; individual full log unverified"
         },
         {
           "job_id": 130606850012,
           "name": "city-bundle (TLV)",
           "conclusion": "failure",
           "failed_step": "Verify independent city packaging behavior",
-          "full_log_read": false
+          "full_log_read": false,
+          "classification": "inferred shared deterministic fixture failure; individual full log unverified"
         },
         {
           "job_id": 130606850032,
           "name": "city-bundle (YAVNE)",
           "conclusion": "failure",
           "failed_step": "Verify independent city packaging behavior",
-          "full_log_read": false
+          "full_log_read": false,
+          "classification": "inferred shared deterministic fixture failure; individual full log unverified"
         },
         {
           "job_id": 130606850139,
@@ -2721,33 +2724,73 @@
           "name": "city-bundle (KGAT)",
           "conclusion": "failure",
           "failed_step": "Verify independent city packaging behavior",
-          "full_log_read": false
+          "full_log_read": false,
+          "classification": "inferred shared deterministic fixture failure; individual full log unverified"
         },
         {
           "job_id": 130606850315,
           "name": "city-bundle (HOLON)",
           "conclusion": "failure",
           "failed_step": "Verify independent city packaging behavior",
-          "full_log_read": false
+          "full_log_read": false,
+          "classification": "inferred shared deterministic fixture failure; individual full log unverified"
         },
         {
           "job_id": 130606850553,
           "name": "city-bundle (RISHON)",
           "conclusion": "failure",
           "failed_step": "Verify independent city packaging behavior",
-          "full_log_read": false
+          "full_log_read": false,
+          "classification": "inferred shared deterministic fixture failure; individual full log unverified"
         }
       ],
       "current_source": {
         "test_path": "tests/test_stage_super_city_release.py",
         "lookup": "404 at main; no tests run or old route resurrected"
       },
-      "resolution": "Historical representative job diagnosed only. Other six matrix jobs remain metadata-only; same step is not exact cause proof.",
-      "next_action": "Continue remaining matrix coverage from saved job IDs only if needed to resolve a distinct signature; do not reread sample full log. Current delivery owner must include every copied shared dependency in manifest files/hash coverage if corresponding code exists on its authorized route.",
+      "resolution": "Historical deterministic fixture diagnosed. Remaining six same-step jobs grouped by source-based inference, with raw individual failures unverified; no repeated full logs, current-code restoration, publication or storage changes.",
+      "next_action": "Retain manifest completeness/hash checks on the current authorized delivery route. If corresponding source is restored by its owner, cover copied root dependencies as well as city files and require real public proof. Do not resurrect historical migration code or reread unchanged six job logs.",
       "prevention": "Keep output-byte assertions separate from manifest completeness and hash coverage; do not weaken packaging checks.",
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2.json",
       "observed_at": "2026-11-15T01:16:31Z",
-      "last_review_runKey": "ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2"
+      "last_review_runKey": "ops-2026-11-15-52242775-7e34-832a-b5b2-4233f619ebea",
+      "source_based_diagnosis": {
+        "run_id": 43045103486,
+        "source_commit": "14afc6b0f0f8a5cee7dbf9f4c0d18110d7ab85bb",
+        "observed_at": "2026-11-15T03:03:30Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-52242775-7e34-832a-b5b2-4233f619ebea.json",
+        "workflow_blob": "b9099062448276934ccc24f419ea19ef2770d8e8",
+        "source_blob": "4f078c790bdcf730231a072fec410a073e2c1cf7",
+        "test_blob": "6f66aa0a557754d16b260725b786bf36bd145761",
+        "cause": "stage_city copies first-party dependencies under output/assets, then enumerates destination.rglob under output/SUPER.YAVNE only; dependency is consequently absent from manifest.files/file_count/hash coverage.",
+        "reproduction": {
+          "kind": "exact historical source and existing synthetic unittest fixture",
+          "suite_tests": 7,
+          "suite_errors": 1,
+          "expected_error": "StopIteration on report.files assets/yavne-analytics.js",
+          "harness_exit_code": 0,
+          "network_requests": 0,
+          "real_catalog_reads": 0,
+          "current_live_verification": false
+        },
+        "matrix_grouping": {
+          "sample_full_log_job_id": 130606850139,
+          "inferred_shared_fixture_job_ids": [
+            130606849434,
+            130606850012,
+            130606850032,
+            130606850198,
+            130606850315,
+            130606850553
+          ],
+          "confidence_basis": "same source commit, identical pre-staging unittest command in workflow, hardcoded synthetic Yavne fixture independent of matrix.city; city parameter first used only after successful tests",
+          "individual_other_full_logs_read": false,
+          "qualification": "Six jobs grouped by deterministic source-based inference and their already-recorded same failed step. Their exact individual log text remains unverified; no complete-log-coverage claim."
+        },
+        "controller_source_changes": false,
+        "code_fix_applied": false,
+        "public_fix_verified": false
+      }
     },
     {
       "id": "historical-super-readiness-meta-refresh-fixture",
@@ -2792,7 +2835,7 @@
       "last_review_runKey": "ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2"
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2",
+  "last_review_runKey": "ops-2026-11-15-52242775-7e34-832a-b5b2-4233f619ebea",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
