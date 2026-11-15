@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T21:43:46.387Z",
+  "updated_at": "2026-11-15T22:36:40.091Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1181,7 +1181,7 @@
       "evidence_path": "ops/incident-response/evidence/photo-bank-control-native-read-20261113.json",
       "mitigation": "Verified read-only effective runtime controls enabled=true, blockedIds=[], version0 via absent row plus exact deployed source defaults. Documented authorized read path in RUNBOOK; no rights gate/DB/access changes.",
       "remaining": "Mobile visual review remains pending; this is a quality follow-up, not an unpublished draft or ownership blockade.",
-      "next_action": "Sports owner resumes existing draft first, uses native live control reads if public fetch cannot read it, verifies exact JPG rights and body/asset match, acquires an existing valid publication lease and publishes once. Controller does not approve the editorial image or operate the writer.",
+      "next_action": "Do not republish the superseded13Nov draft. Preserve already-recorded v594 public verification and subsequent owner continuity. Reconcile stale source ledger only with current body/asset and matching proof; mobile visual follow-up remains pending.",
       "reported_runKey": "ops-2026-11-13-5d3b31b8-6e98-8326-ae01-e1b9ceffa171",
       "latest_source_check": {
         "commit": "406b4d91735b61d27fd241ef58a86f8137cf4284",
@@ -1243,6 +1243,19 @@
           "runtime_result_matched": true
         },
         "notification": "Previously announced sports publication; suppress repeat alert."
+      },
+      "latest_historical_handoff_reconciliation": {
+        "observed_at": "2026-11-15T22:36:40.091Z",
+        "inbox": "ops/incident-response/inbox/56a526f7-4760-8320-a519-595bd865e651-1.json",
+        "source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+        "article_status": "published",
+        "article_published_at": "2026-11-14T04:43:34.540366+00:00",
+        "photo_bank_id": "maccabi-club-derby-20261112",
+        "publication_receipt": "publication_prepared in source; stale ledger receipt, no new publication claim",
+        "prior_verified_resolution_retained": true,
+        "new_public_readback": false,
+        "republished": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
       }
     },
     {
@@ -1962,6 +1975,21 @@
           "conclusion": "failure",
           "source_commit": "af4b778a154d6ec34aeba500024d262c4ad5a83b",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42736428359"
+        },
+        {
+          "run_id": 42665160712,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-09T17:29:46Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "b6867b7ca8fcac2733c4a72793beadc7837367f9",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42665160712",
+          "job_id": 129326768811,
+          "failed_step": "Verify GA4 configuration",
+          "reason": "GA4_PROPERTY_ID present; GA4_SERVICE_ACCOUNT_JSON absent; exit2 before fetch/commit",
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
         }
       ],
       "evidence": {
@@ -1978,7 +2006,16 @@
       },
       "next_action": "No automatic retry or schedule edit. If analytics restoration is requested, existing credential owner must configure authorized GA4 service-account access in the existing secret path and complete a manual check before any separately authorized scheduling change.",
       "controller_changes": false,
-      "reported_runKey": "ops-2026-11-13-548c5169-77bc-8322-a4d1-e9148367a9d4"
+      "reported_runKey": "ops-2026-11-13-548c5169-77bc-8322-a4d1-e9148367a9d4",
+      "last_review_runKey": "ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a",
+      "latest_historical_review": {
+        "observed_at": "2026-11-15T22:36:40.091Z",
+        "run_id": 42665160712,
+        "known_root": true,
+        "current_recurrence_confirmed": false,
+        "configuration_changed": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
+      }
     },
     {
       "id": "tlvnet-news-runtime-paused-on-shared-blocker",
@@ -3752,7 +3789,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6",
+  "last_review_runKey": "ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
