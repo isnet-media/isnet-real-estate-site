@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T21:43:46.387Z",
+  "updated_at": "2026-11-15T22:36:40.091Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-15T18:06:52Z",
   "initial_history": {
@@ -17,11 +17,11 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "243 historical run entries remain in11workflowgroups after source-specific standup failure grouping.",
-      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+      "remaining": "242 historical run entries remain in 11 workflow groups after one exact GA4 credential failure was grouped.",
+      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
     },
     "full_logs_read_this_cycle": [
-      42838770457
+      42665160712
     ],
     "unconfirmed_publish_failure_ids": [
       43357854397,
@@ -2776,18 +2776,6 @@
       ],
       ".github/workflows/update-event-analytics.yml": [
         {
-          "run_id": 42665160712,
-          "workflow": "Update event analytics",
-          "path": ".github/workflows/update-event-analytics.yml",
-          "attempt": 1,
-          "created_at": "2026-11-09T17:29:46Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "b6867b7ca8fcac2733c4a72793beadc7837367f9",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42665160712",
-          "classification": "Historical metadata only; root signature unconfirmed, not a new current failure or verified recurrence."
-        },
-        {
           "run_id": 42573504013,
           "workflow": "Update event analytics",
           "path": ".github/workflows/update-event-analytics.yml",
@@ -2974,14 +2962,14 @@
     "metadata_rows_inspected_this_cycle": 0,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
-      "observed_at": "2026-11-15T21:43:46.387Z",
+      "observed_at": "2026-11-15T22:36:40.091Z",
       "last_run_ids": [
-        42838770457
+        42665160712
       ],
-      "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json",
-      "remaining_run_entries": 243,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json",
+      "remaining_run_entries": 242,
       "remaining_workflow_groups": 11,
-      "grouping_basis": "Exact source-specific full log: missing YOUTUBE_API_KEY; known historical root, no new current recurrence"
+      "grouping_basis": "Exact historical job log: missing GA4_SERVICE_ACCOUNT_JSON before analytics fetch. Known root, no current recurrence inferred."
     }
   },
   "inbox_path": "ops/incident-response/inbox/",
@@ -3031,19 +3019,20 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
   },
   "last_cycle": {
-    "run_id": "b6b63dbd-a038-8322-8a0b-ca991e2f75c0",
-    "runKey": "ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0",
+    "run_id": "d62d280b-e220-8322-86d4-e0393ad2bd1a",
+    "runKey": "ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a",
     "policy_version": "2026-11-15/1.2",
-    "started_at": "2026-11-15T21:40:33.994469Z",
-    "observed_at": "2026-11-15T21:43:46.387Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json",
+    "started_at": "2026-11-15T22:33:48.789397Z",
+    "observed_at": "2026-11-15T22:36:40.091Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json",
     "targets_reviewed": [
-      "7TLVNETdesk metadata",
-      "culture magazine historical failure checkpoint",
-      "Actions and inbox delta",
+      "7TLVNET owner metadata",
+      "Actions/inbox delta",
       "social_runs",
-      "one historical standup failure",
-      "TLVNET source/stability metadata"
+      "historical analytics run42665160712",
+      "sports13Novcheckpoint",
+      "classes13Novcheckpoint",
+      "TLVNET stabilization"
     ],
     "new_workflow_runs": 0,
     "new_workflow_failures": 0,
@@ -3051,15 +3040,17 @@
     "new_social_runs": 0,
     "new_verified_articles": 0,
     "saved_version": 624,
-    "current_source_head": "87541358cd703b9f936c53fdb748b7c8cefe2333",
+    "current_deployed_source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+    "source_head_refreshed": false,
     "source_unchanged": true,
     "build_or_deploy": false,
-    "history_remaining": 243,
-    "unread_inbox_remaining": 13,
+    "history_remaining": 242,
+    "unread_inbox_remaining": 11,
     "schedules_changed": false,
     "agents_created_or_triggered": false,
     "calls_measured": null,
-    "cost_measured": null
+    "cost_measured": null,
+    "local_date": "2026-11-16"
   },
   "concurrent_controller_observation": {
     "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
@@ -3509,7 +3500,9 @@
     "ops/incident-response/inbox/43417323807-1.json",
     "ops/incident-response/inbox/d4367d19-cf9c-8322-b165-2140fcce9361-cross-task-result-attribution.json",
     "ops/incident-response/inbox/491a159f-33f8-8322-a053-5453bcb6312d-1.json",
-    "ops/incident-response/inbox/f4a89fe4-2388-832e-a89b-6caa25891449-source-identity.json"
+    "ops/incident-response/inbox/f4a89fe4-2388-832e-a89b-6caa25891449-source-identity.json",
+    "ops/incident-response/inbox/56a526f7-4760-8320-a519-595bd865e651-1.json",
+    "ops/incident-response/inbox/786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4892,6 +4885,40 @@
       "agents_created_or_triggered": false,
       "calls_measured": null,
       "cost_measured": null
+    },
+    {
+      "run_id": "d62d280b-e220-8322-86d4-e0393ad2bd1a",
+      "runKey": "ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a",
+      "policy_version": "2026-11-15/1.2",
+      "started_at": "2026-11-15T22:33:48.789397Z",
+      "observed_at": "2026-11-15T22:36:40.091Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json",
+      "targets_reviewed": [
+        "7TLVNET owner metadata",
+        "Actions/inbox delta",
+        "social_runs",
+        "historical analytics run42665160712",
+        "sports13Novcheckpoint",
+        "classes13Novcheckpoint",
+        "TLVNET stabilization"
+      ],
+      "new_workflow_runs": 0,
+      "new_workflow_failures": 0,
+      "metadata_rows_read": 10,
+      "new_social_runs": 0,
+      "new_verified_articles": 0,
+      "saved_version": 624,
+      "current_deployed_source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+      "source_head_refreshed": false,
+      "source_unchanged": true,
+      "build_or_deploy": false,
+      "history_remaining": 242,
+      "unread_inbox_remaining": 11,
+      "schedules_changed": false,
+      "agents_created_or_triggered": false,
+      "calls_measured": null,
+      "cost_measured": null,
+      "local_date": "2026-11-16"
     }
   ],
   "photo_controls_checkpoint": {
@@ -4911,7 +4938,64 @@
       "run_id": "786c310e-a5ec-832c-8d7d-5ca6e75ac986",
       "completed_at": "2026-11-13T09:00:38.869838Z",
       "reported_result": "פורסם ואומת תיקון ב[מעושרים בתל אביב](https://tlvnet.com/meusharim/), גרסה 586: הרשומה „צור קשר” הוסרה מהקורסים, ושבע רשומות הקורסים של מנשר נשמרו.\n\nהסקירה הייתה חלקית. מקורות שלא נפתחו ביבנה ובתל אביב תועדו להמשך, ללא שינוי בתאריכי האימות שלהם.",
-      "qualification": "Matched task/run result, not independent controller publication verification"
+      "qualification": "Matched task/run result, not independent controller publication verification",
+      "handoff_checkpoint": {
+        "schema_version": 1,
+        "kind": "classes_cycle_handoff",
+        "task_id": "Automation_6f7ebf4f01148191b17ce098a1061217",
+        "run_id": "786c310e-a5ec-832c-8d7d-5ca6e75ac986",
+        "runKey": "classes-2026-11-13-quarterly-786c310e",
+        "attempt": 1,
+        "created_at": "2026-11-13 08:59:39 UTC",
+        "status": "partial_review",
+        "signature": "classes/source-detail-read/web-retrieval-unavailable",
+        "source_origin_outage_claimed": false,
+        "automation_state_changed": false,
+        "verified_fix": {
+          "site": "https://tlvnet.com/meusharim/",
+          "version": 586,
+          "commit": "373066ad45f3a3180b3feddad55cfe581ae5fcdb",
+          "deployment_id": "appgdep_6af6d0f4b3ac81918379e195783a693c",
+          "status": "succeeded",
+          "result": "Exact non-course contact row absent from live184-record JSON; seven genuine Minshar courses and legitimate course route retained"
+        },
+        "remaining": [
+          {
+            "city": "yavne",
+            "id": "yavne-1854495",
+            "status": "blocked_source_read",
+            "action": "Existing authorized collector/browser source read required before factual refresh; no origin outage inferred"
+          },
+          {
+            "city": "tel-aviv",
+            "id": "tlv-BZ17202703933",
+            "status": "blocked_source_read",
+            "action": "Use documented public rendered municipal route when available; do not relabel old snapshot as fresh"
+          },
+          {
+            "city": "tel-aviv",
+            "provider": "museum-courses",
+            "status": "blocked_source_read",
+            "action": "Verify actual detail before changing schedule/registration; prior cached facts are not fresh detail verification"
+          },
+          {
+            "cities": [
+              "ashdod",
+              "rishon-lezion",
+              "kiryat-gat"
+            ],
+            "status": "partial_review",
+            "action": "Continue remaining existing rows with cached/conditional collectors; samples do not establish full-city freshness"
+          }
+        ],
+        "evidence": "Some primary detail reads returned tool Internal Error without an HTTP status. This limits those samples only, not source-host availability or independent catalogue work. Original source facts/dates retained; current documentation already records municipal unattended-access limitation.",
+        "journal": "ops/daily-audit/2026-11-13.json",
+        "next_action": "Keep scoped checkpoint; cheaply check access changes on the existing saved cycle. No blind retry, new schedule/agent or deployment for this handoff.",
+        "log_only": true,
+        "controller_ingested_at": "2026-11-15T22:36:40.091Z",
+        "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json",
+        "qualification": "Original owner verification report retained; no new source collection or independent live revalidation this cycle."
+      }
     },
     "Automation_1db28c66207881918ef57966330dca21": {
       "enabled": true,
@@ -5640,8 +5724,18 @@
       }
     },
     "qualification": "Seven desks source metadata/results delta; live focused620neighborhood and changed consumer checks. Not whole-network live revalidation.",
-    "metadata_checked_at": "2026-11-15T21:43:46.387Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+    "metadata_checked_at": "2026-11-15T22:36:40.091Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json",
+    "date_rollover": {
+      "date_from": "2026-11-15",
+      "date_to": "2026-11-16",
+      "prior_day_seven_desks_article_count": 8,
+      "prior_day_counts_retained": true,
+      "today_count_reclassified": false,
+      "nighttime_no_due_owner_run_not_incident": true,
+      "observed_at": "2026-11-15T22:36:40.091Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
+    }
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-15T10:53:58.329Z",
@@ -5950,10 +6044,8 @@
     "mobile_visual_review": "pending"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-15T21:43:46.387Z",
+    "observed_at": "2026-11-15T22:36:40.091Z",
     "remaining_paths": [
-      "ops/incident-response/inbox/56a526f7-4760-8320-a519-595bd865e651-1.json",
-      "ops/incident-response/inbox/786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json",
       "ops/incident-response/inbox/8a03b756-2764-8330-a302-b024f7ab97db-1.json",
       "ops/incident-response/inbox/b8641b1e-3cec-8322-a6e7-5c6f1e11a895-1.json",
       "ops/incident-response/inbox/c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json",
@@ -5966,7 +6058,7 @@
       "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
       "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
     ],
-    "reason": "Historical culture runtime failure linked to existing incident, later owner recovery separately recorded. Old consumer identity patch superseded by current15Nov source, not applied."
+    "reason": "Historical sports draft superseded by later published source; public receipt follow-up retained. Classes partial-review handoff ingested with source-level work retained."
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -6000,14 +6092,14 @@
     "normal_owner_coverage_verification": "pending"
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-15T21:43:46.387Z",
+    "observed_at": "2026-11-15T22:36:40.091Z",
     "through": "2026-11-15T18:06:52Z",
     "rows": 10,
     "seen_ids_at_boundary": [
       43744885699
     ],
-    "remaining": "New metadata unchanged;243historical entries remain.",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+    "remaining": "No new workflow metadata; 242 historical entries remain.",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
   },
   "remaining_followup": [
     "244historical Actions entries",
@@ -6030,17 +6122,17 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-15T21:43:46.387Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json",
+    "observed_at": "2026-11-15T22:36:40.091Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json",
     "source_unchanged": true,
     "new_actions": 0,
     "new_failures": 0,
     "new_social": 0,
     "historical_full_logs_read": 1,
-    "historical_run_grouped": 42838770457,
-    "remaining_history": 243,
+    "historical_run_grouped": 42665160712,
+    "remaining_history": 242,
     "historical_inbox_reconciled": 2,
-    "remaining_inbox": 13,
+    "remaining_inbox": 11,
     "no_new_publisher_alert": true
   },
   "latest_owner_publication_observation": {
@@ -6132,6 +6224,18 @@
       "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
       "observed_at": "2026-11-15T19:31:58.042Z",
       "qualification": "Unpublished controller research; actual sports-owner editor/image approval required. No ready-to-publish claim."
+    },
+    {
+      "article_id": "maccabi-hapoel-euroleague-derby-win-20261112",
+      "status": "source_published_historical_receipt_reconciled",
+      "content_owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+      "checkpoint": "ops/incident-response/inbox/56a526f7-4760-8320-a519-595bd865e651-1.json",
+      "observed_at": "2026-11-15T22:36:40.091Z",
+      "source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+      "public_url": "https://tlvnet.com/news/maccabi-hapoel-euroleague-derby-win-20261112",
+      "qualification": "Exact current deployed source says published on14Nov with club derby image; prior independent v594 public proof already recorded in incident resolution. No fresh body/image check this cycle; stale13Nov draft must not be republished.",
+      "next_action": "Retain prior verified proof; if changed source or a receipt-normalization publication is justified, verify current exact body/image/hash before reconciling the stale publication_prepared ledger. Mobile visual follow-up remains pending.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
     }
   ],
   "latest_scope_identity_mitigation": {
