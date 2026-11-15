@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "883cb0e4-4408-8326-adde-38362798ff8f",
+  "runKey": "ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-15T11:33:19.316Z",
+  "scope": [
+    "user-requested continuous TLVNET neighborhood aggregation",
+    "7 exact owner task results/freshness metadata",
+    "Actions/inbox delta",
+    "new social_runs result"
+  ],
+  "authority": "Existing controller technical repair and publisher request to aggregate neighborhood content continuously; no alternate reporting or new automation",
+  "source": {
+    "opened_commit": "cd21c306ca48e8c1eba68d80c81034aaf241b7e7",
+    "source_commit": "83a71abf3e1af3d3b1090d418fbf1a349a19d8d3",
+    "version": 615,
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_871bd2186108819190ceba57c9314297",
+    "deployment_id": "appgdep_6af99744a660819189391c447e41b6d7",
+    "deployment_status": "succeeded",
+    "deployed_at": "2026-11-15T11:28:30.463597+00:00"
+  },
+  "technical_change": {
+    "status": "fixed_verified",
+    "details": [
+      "One canonical cross-desk stream including explicitly relevant published news, real-estate, economy, community, consumer, sports, culture/future and dated night publications",
+      "Compact body-free summaries regenerated in existing prepare-public; existing published D1 metadata merged on page entry with 60-second public cache and one bounded metadata read; no new cron",
+      "Accurate specific neighborhood and multiple-neighborhood name matching including compound Hebrew prefixes",
+      "Canonical URL deduplication; original publication dates govern order; old article corrections do not become new articles",
+      "All selected boards can display existing verified sales with source and actual transaction date; no invented neighborhood/address or asking-price sale",
+      "Time-sensitive content carries expiry and disappears during viewing; ordinary dated news remains archive"
+    ]
+  },
+  "coverage": {
+    "areas": 73,
+    "rich_pages": 9,
+    "local_records": 221,
+    "article_metadata_summaries": 40,
+    "sale_reports": 58,
+    "located_sale_reports": 50,
+    "sale_coverage": "selected_reports_not_complete_registry",
+    "sale_neighborhoods_with_records": 8,
+    "unlocated_sales_remain_city_only": true,
+    "no_new_editorial_articles_written_by_controller": true,
+    "preserved_community_owner_additions": [
+      "בית הבאר בחורשה — קריית שלום",
+      "מרכז הדר אפקה — נאות אפקה א'"
+    ]
+  },
+  "tests": {
+    "passed": [
+      "npm run build (foundation, prepared content, reviewed images, SEO, framework)",
+      "tests/neighborhood-updates.mjs",
+      "tests/neighborhoods.mjs",
+      "tests/neighborhood_sales.py",
+      "tests/agent-dispatch.mjs",
+      "Python compound Hebrew prefix regression",
+      "python scripts/check-photo-bank.py:163 local JPGs"
+    ],
+    "initial_build_failure": "Old agent-dispatch regression asserted cancelled community/consumer routing. Corrected actual documentary ownership and test expectations after exact current owner verification; subsequent full build passed."
+  },
+  "live_verification": {
+    "status": "passed_desktop_and_runtime",
+    "urls": [
+      "https://tlvnet.com/city-hub/",
+      "https://tlvnet.com/city-hub/?neighborhood=%D7%A8%D7%9E%D7%AA%20%D7%90%D7%91%D7%99%D7%91#nb-selection",
+      "https://tlvnet.com/neighborhoods/yad-eliyahu/",
+      "https://tlvnet.com/api/neighborhood-updates?neighborhood=%D7%A8%D7%9E%D7%AA%20%D7%90%D7%91%D7%99%D7%91"
+    ],
+    "ramat_aviv": {
+      "sections": [
+        "news",
+        "sports"
+      ],
+      "articles": 2,
+      "dates_visible": true,
+      "duplicate_article_cards": 0,
+      "desktop_screenshot_viewed": true,
+      "overflow": false
+    },
+    "yad_eliyahu": {
+      "sections": [
+        "real-estate",
+        "economy-tech"
+      ],
+      "articles": 2,
+      "sales": 6,
+      "duplicate_article_cards": 0,
+      "expired_activity_cards": 0,
+      "cover_image_loaded": true
+    },
+    "live_api": {
+      "live_available": true,
+      "server_now": "2026-11-15T11:30:06.293Z",
+      "article_bodies_exposed": false
+    },
+    "economy_owner_completion": {
+      "run_id": "8337496b-ecfc-8333-89c4-9b9c52a0d562",
+      "body_characters": 2827,
+      "title": true,
+      "JPG_loaded": true,
+      "credit": "אילוסטרציה – AI"
+    },
+    "mobile_visual_review": "pending; native accessibility provider unavailable; no mobile pass claimed",
+    "terminal_HTTP_reader": "Executor HTTP reader returned403; no live outage inferred; permitted browser public UI/readback succeeded"
+  },
+  "ownership_source_repair": {
+    "status": "configuration_verified",
+    "existing_tasks_only": true,
+    "actual_schedules_changed": false,
+    "permissions_changed": false,
+    "community_task": "Automation_e03d80ff914c8191a790fc66e7447826",
+    "consumer_task": "Automation_e2f02000cdf4819190022b85f4391076",
+    "public_profile_readback": "community→community active and consumer→consumer active; executionLock=false",
+    "writer_docs": "Whole replacement with exact current effective prompts for community/news/economy/consumer, preserving source history",
+    "next": "Observe next normal owner runs after source repair; no manual trigger or publication count guarantee",
+    "inbox_reference": "ops/incident-response/inbox/20261115-community-source-owner-stale.json"
+  },
+  "social": {
+    "new_slot": "2026-11-15T11",
+    "started_at": "2026-11-15T11:00:01.660Z",
+    "finished_at": "2026-11-15T11:00:13.542Z",
+    "recorded_status": "published",
+    "post_id": "1520426491146188_122105553411545268",
+    "article_url": "https://tlvnet.com/news/tel-aviv-ai-project-management-builder-jobs-20261115.html",
+    "authentication_block": null,
+    "manual_attempts_this_cycle": 0,
+    "public_verification": "pending: logged-out public permalink redirected and displayed content unavailable; no login or alternate send attempted",
+    "public_observed_url": "https://www.facebook.com/61596358055015/posts/122105553411545268/",
+    "instagram": "not verified"
+  },
+  "controller_delta": {
+    "actions_new_count": 12,
+    "actions_new_failures": 0,
+    "actions_boundary_included": "2026-11-15T09:26:06Z",
+    "new_inbox": 1,
+    "historical_entries_remaining": 245,
+    "historical_groups_remaining": 11,
+    "historical_logs_read_this_cycle": 0,
+    "reason": "Prioritized concrete authorized neighborhood release; retained historical checkpoint without claiming completed review",
+    "pending_owner_runs_completed": [
+      "8337496b-ecfc-8333-89c4-9b9c52a0d562",
+      "86e22d2d-4dec-8320-8f7a-3866419e8597"
+    ]
+  },
+  "lease": {
+    "acquired_with_CAS": true,
+    "readback_verified": true,
+    "prior_writer_priority_preserved": true,
+    "prior_writer_version": 614,
+    "own_token_only_released": true,
+    "release_readback_free": true
+  },
+  "remaining": [
+    "Mobile visual review",
+    "Next normal community/consumer owner outcomes after documentary routing repair",
+    "Further neighborhood original coverage via existing 73-area plan; no sale data invented for unserved neighborhoods",
+    "Public confirmation of first normal Facebook slot",
+    "245 historical root-triage entries in11groups"
+  ],
+  "no_automation_created": true,
+  "no_task_triggered": true,
+  "no_schedule_change": true,
+  "no_DNS_R2_schema_or_permission_changes": true,
+  "no_supermarket_collection_or_public_scan": true,
+  "calls_measured": null,
+  "cost_measured": null
+}
