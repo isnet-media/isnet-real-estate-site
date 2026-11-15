@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T12:45:44.170Z",
+  "updated_at": "2026-11-15T13:27:43.278Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2392,6 +2392,27 @@
               "exact_feed_match": false
             }
           ]
+        },
+        {
+          "run_id": 43715912284,
+          "job_id": 132817284552,
+          "root_id": "historical-public-events-full-record-parity-mismatch",
+          "new_signature": "Ashdod/subcategory/1record",
+          "record_id": "auto_as_af48bdecc62c7648b067",
+          "http": 200,
+          "github_count": 1049,
+          "public_count": 1049,
+          "missing": 0,
+          "extra": 0,
+          "differing": 1,
+          "field": "subcategory",
+          "rishon_match": true,
+          "status": "open_not_fixed",
+          "full_log_read": true,
+          "production_change": false,
+          "created_at": "2026-11-15T12:50:47Z",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43715912284",
+          "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json"
         }
       ],
       "observed_at": "2026-11-14T08:29:54.014Z",
@@ -2404,7 +2425,7 @@
       },
       "deployment": null,
       "public_proof": null,
-      "next_action": "Continue bounded triage from saved root groups; inspect recorded field differences/source provenance when this signature next needs work. Preserve exact comparison and existing identity/media gates; do not retry old workflow or weaken gate.",
+      "next_action": "Compare same source snapshot and public normalizer for eventauto_as_af48bdecc62c7648b067 subcategory. Counts and IDs agree; no blanket feed outage or fix inferred.",
       "prevention": "Record actual differing fields and source/deploy hashes in audit artifacts so non-priority drift can be distinguished from availability and identity errors.",
       "reported_runKey": "ops-2026-11-14-9590c5dd-ba6c-8332-86c4-985b56f032b4",
       "current_evidence": {
@@ -2414,7 +2435,9 @@
         "source_commit": "9af4b06a5858b20ca5b61688ed85da18176eb543",
         "readback_comparison_step": "success",
         "qualification": "Current original audit job compared public JSON successfully. Full success logs not read; current root mitigation evidence, not field-level reconstruction or controller fixed_verified."
-      }
+      },
+      "latest_variant": "Ashdod/subcategory/1record",
+      "latest_observed_at": "2026-11-15T13:27:43.278Z"
     },
     {
       "id": "future-cms-create-post-optional-payload-validation",
@@ -3410,9 +3433,86 @@
       "prevention": "Durable existing release queue, fresh-source CAS and lease checks, pure shared portal projection, regression and original content-owner continuity.",
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-a6015263-65b4-8326-b418-76875ee90297.json",
       "verified_at": "2026-11-15T12:45:44.170Z"
+    },
+    {
+      "id": "tlvnet-prepared-editorial-release-continuity",
+      "fingerprint": "tlvnet/editorial-release/deferred-owner-draft-not-resumed",
+      "status": "fixed_verified",
+      "scope": "Specific recovered original-owner draft and technical queue visibility; overall editorial coverage remains under review",
+      "root_cause": "The noon original news owner's approved draft was deferred by the actual consumer lease and not resumed after legitimate release. Existing dispatch omitted publication_prepared and publication_pending_existing_writer entries; AGENT_OPERATIONS still described cancelled community/consumer ownership.",
+      "source_commit": "95ce4ac78ba4fb660b2f761dec05c408ee2bdaba",
+      "version": 622,
+      "repair": {
+        "technical_status": "fixed_verified",
+        "configuration_status": "configuration_verified_pending_normal_owner_execution",
+        "changes": [
+          "Original-owner prepared draft recovery integrity validator preserves editor/image/body approvals and validates body/asset/owner/fresh facts/duplicates",
+          "Existing dispatch exposes publication-prepared, blocked-by-writer and pending-verification states, with record timestamps and no implied approval/ownership",
+          "Corrected stale community/consumer owners in published operations interface and manifest",
+          "Existing operations queue closed using live evidence; no new task, queue, schedule or permission"
+        ],
+        "regression_passed": [
+          "tests/prepared-news-recovery.mjs",
+          "npm run build including foundation/news/SEO/preparation checks",
+          "python scripts/check-photo-bank.py:164 local JPG assets",
+          "git diff --check",
+          "manifest owner IDs match current profiles"
+        ],
+        "live_dispatch": {
+          "pending_count": 5,
+          "includes_recovered_article": true,
+          "source_status": "published",
+          "projection_status": "source_published_pending_verification",
+          "publicationApproved": false,
+          "ownershipProof": false
+        },
+        "pending_receipt_rule": "Source news ledger remains predeployment pending; this immutable public receipt closes ops queue. Do not duplicate/replay article or deploy journal only; reconcile source ledger on next actual owner content release."
+      },
+      "verification": {
+        "status": "published_verified",
+        "article_id": "metropoline-12-neve-avivim-ramat-hahayal-diversions-20261115",
+        "url": "https://tlvnet.com/news/metropoline-12-neve-avivim-ramat-hahayal-diversions-20261115",
+        "original_owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "original_owner_run_id": "e66260dc-41c0-8332-89c9-87a4dbf99048",
+        "original_owner_run_key": "news-2026-11-15-14:00-e66260dc",
+        "original_checkpoint": "ops/incident-response/inbox/e66260dc-41c0-8332-89c9-87a4dbf99048-1.json",
+        "body_sha256": "3facdbdbf387293676d2122bb0993eb4956b33171413d89b714e308ec33aabf5",
+        "asset_sha256": "58dfe39e7e10c2db4d4962719e618a2b71ff61a56e18852b0e0689fceefdee76",
+        "body_and_reviews_unchanged": true,
+        "executor_task_id": "Automation_9776808c73848191a9d748dd09315960",
+        "published_at": "2026-11-15T13:11:27.181Z",
+        "verified_at": "2026-11-15T13:25:34.266Z",
+        "proof": {
+          "full_visible_body": true,
+          "title": true,
+          "image_loaded": true,
+          "credit": "Bahnfrend · CC BY-SA4.0",
+          "archive_caption_2019": true,
+          "home_link": true,
+          "news_link": true,
+          "neve_avivim_link": true,
+          "ramat_hahayal_link": true,
+          "desktop_visual": "passed",
+          "mobile_visual": "pending_native_input_unavailable"
+        },
+        "lease": {
+          "acquired_and_read_back": true,
+          "released_own_token": true,
+          "read_back_state": "free"
+        }
+      },
+      "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
+      "remaining": {
+        "historical_run_entries": 245,
+        "unread_inbox_backlog": 28,
+        "new_actions_delta": "New-run delta not yet read down to12:27:19Z; resume created_at<=2026-11-15T12:42:47Z and >12:27:19Z, exclude recorded IDs. Historical245entries unchanged.",
+        "mobile_visual_review": "pending",
+        "coverage_candidates": "Existing research queues require original owner verification; no alternative writer triggered"
+      },
+      "verified_at": "2026-11-15T13:25:34.266Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-a6015263-65b4-8326-b418-76875ee90297",
+  "last_review_runKey": "continuity-repair-20261115T130716Z",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
