@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T00:19:49Z",
+  "updated_at": "2026-11-15T01:16:31Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2658,9 +2658,141 @@
       "observed_at": "2026-11-14T23:16:03Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100.json",
       "last_review_runKey": "ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100"
+    },
+    {
+      "id": "historical-super-city-manifest-root-analytics-entry",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "supermarket-city-release/test_stage_super_city_release/yavne-root-analytics/report-files-StopIteration",
+      "root_cause": "Historical packaging fixture copied the shared Yavne analytics file and recorded its dependency, then failed because report.files lacked its expected root path. Implementation-level cause remains unestablished.",
+      "occurrences": [
+        {
+          "run_id": 43045103486,
+          "attempt": 1,
+          "created_at": "2026-11-11T15:07:03Z",
+          "source_commit": "14afc6b0f0f8a5cee7dbf9f4c0d18110d7ab85bb",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43045103486",
+          "classification": "historical metadata only; root signature not confirmed in this cycle",
+          "workflow": ".github/workflows/supermarket-city-release.yml",
+          "job_id": 130606850139,
+          "job_name": "city-bundle (ASHDOD)",
+          "failed_step": "Verify independent city packaging behavior",
+          "failed_test": "test_yavne_first_party_root_analytics_pinned_and_byte_identical",
+          "assertion": "StopIteration looking for assets/yavne-analytics.js in report.files",
+          "test_file": "tests/test_stage_super_city_release.py:45",
+          "log_read_full": true,
+          "historical_test_blob": "6f66aa0a557754d16b260725b786bf36bd145761",
+          "qualification": "Prior fixture assertions confirmed copied output bytes, first_party_root_scripts inclusion and required_site_prefix; failure specifically manifest.files entry absence, not proof analytics file was missing.",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2.json",
+          "observed_at": "2026-11-15T01:16:31Z"
+        }
+      ],
+      "matrix_metadata": [
+        {
+          "job_id": 130606849434,
+          "name": "city-bundle (BATYAM)",
+          "conclusion": "failure",
+          "failed_step": "Verify independent city packaging behavior",
+          "full_log_read": false
+        },
+        {
+          "job_id": 130606850012,
+          "name": "city-bundle (TLV)",
+          "conclusion": "failure",
+          "failed_step": "Verify independent city packaging behavior",
+          "full_log_read": false
+        },
+        {
+          "job_id": 130606850032,
+          "name": "city-bundle (YAVNE)",
+          "conclusion": "failure",
+          "failed_step": "Verify independent city packaging behavior",
+          "full_log_read": false
+        },
+        {
+          "job_id": 130606850139,
+          "name": "city-bundle (ASHDOD)",
+          "conclusion": "failure",
+          "failed_step": "Verify independent city packaging behavior",
+          "full_log_read": true
+        },
+        {
+          "job_id": 130606850198,
+          "name": "city-bundle (KGAT)",
+          "conclusion": "failure",
+          "failed_step": "Verify independent city packaging behavior",
+          "full_log_read": false
+        },
+        {
+          "job_id": 130606850315,
+          "name": "city-bundle (HOLON)",
+          "conclusion": "failure",
+          "failed_step": "Verify independent city packaging behavior",
+          "full_log_read": false
+        },
+        {
+          "job_id": 130606850553,
+          "name": "city-bundle (RISHON)",
+          "conclusion": "failure",
+          "failed_step": "Verify independent city packaging behavior",
+          "full_log_read": false
+        }
+      ],
+      "current_source": {
+        "test_path": "tests/test_stage_super_city_release.py",
+        "lookup": "404 at main; no tests run or old route resurrected"
+      },
+      "resolution": "Historical representative job diagnosed only. Other six matrix jobs remain metadata-only; same step is not exact cause proof.",
+      "next_action": "Continue remaining matrix coverage from saved job IDs only if needed to resolve a distinct signature; do not reread sample full log. Current delivery owner must include every copied shared dependency in manifest files/hash coverage if corresponding code exists on its authorized route.",
+      "prevention": "Keep output-byte assertions separate from manifest completeness and hash coverage; do not weaken packaging checks.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2.json",
+      "observed_at": "2026-11-15T01:16:31Z",
+      "last_review_runKey": "ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2"
+    },
+    {
+      "id": "historical-super-readiness-meta-refresh-fixture",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "super-independent-site-readiness/test_tlv_placeholder_and_license_not_assumed/meta-refresh-false",
+      "root_cause": "Historical no-network audit fixture with a root meta-refresh HTML returned meta_or_script_redirect_index=false, failing expected redirect detection. Parser implementation cause not proved.",
+      "occurrences": [
+        {
+          "run_id": 43035751852,
+          "attempt": 1,
+          "created_at": "2026-11-11T14:09:24Z",
+          "source_commit": "1b5422e44aa0fe36fa99286beaa43f41190c0438",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43035751852",
+          "classification": "historical metadata only; root signature not confirmed in this cycle",
+          "workflow": ".github/workflows/super-independent-site-readiness.yml",
+          "job_id": 130573987014,
+          "failed_step": "Check site readiness audit safety rules (no network)",
+          "failed_test": "test_tlv_placeholder_and_license_not_assumed",
+          "assertion": "meta_or_script_redirect_index False when fixture uses <meta http-equiv=\"refresh\" content=\"0;url=/\">",
+          "test_file": "tests/test_audit_super_independent_site.py:37",
+          "log_read_full": true,
+          "historical_test_blob": "71680eaff3deb067da30534c9310a43376286e3a",
+          "test_results": {
+            "ran": 6,
+            "failures": 1
+          },
+          "qualification": "Later media-rights and rollback assertions in this test were not reached. Failure is synthetic fixture redirect-detection, not actual public redirect or rights evidence.",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2.json",
+          "observed_at": "2026-11-15T01:16:31Z"
+        }
+      ],
+      "current_source": {
+        "test_path": "tests/test_audit_super_independent_site.py",
+        "lookup": "404 at main; no current regression or public verification"
+      },
+      "resolution": "Historical classification only. No media approval, redirect change, migration or repaired-site claim.",
+      "next_action": "If the corresponding current owner route needs this audit, validate standard and case/quoting variants of meta-refresh and keep rights/rollback acceptance independent. Do not revive removed migration code.",
+      "prevention": "Separate detecting redirect placeholders from granting public readiness, rights and production rollback approval.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2.json",
+      "observed_at": "2026-11-15T01:16:31Z",
+      "last_review_runKey": "ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2"
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a",
+  "last_review_runKey": "ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
