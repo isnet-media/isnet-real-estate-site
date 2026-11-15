@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "run_id": "00a4f12b-fd04-8326-abcc-11d083799830",
+  "runKey": "continuity-repair-20261115T130716Z",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "recorded_at": "2026-11-15T13:27:43.278Z",
+  "status": "repaired_with_remaining_followup",
+  "severity": "publication_continuity",
+  "summary": "Original noon owner's approved news draft now published and independently verified on v622; pending states and stale operations ownership repaired. Changed event feed parity signature remains open.",
+  "checkpoint": {
+    "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
+    "signatures": [
+      {
+        "root": "tlvnet/editorial-release/deferred-owner-draft-not-resumed",
+        "status": "fixed_verified_for_recovered_item_and_queue_visibility"
+      },
+      {
+        "root": "public-events-readback-audit/normalized-current-feed/exact-record-parity-mismatch",
+        "variant": "Ashdod/subcategory/1record",
+        "run_id": 43715912284,
+        "status": "open"
+      }
+    ],
+    "next_actions": [
+      "Normal owner-run/source coverage verification for seven TLVNET desks; do not trigger writers or replace them",
+      "Read source/audit normalization for Ashdod eventauto_as_af48bdecc62c7648b067 subcategory mismatch; compare same snapshots before changing production",
+      "Resume bounded Actions delta below12:42:47Z to prior12:27:19Z;117IDs checkpointed"
+    ],
+    "no_new_automation": true
+  }
+}
