@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+  "run_key": "community-2026-11-15-daily",
+  "recorded_at": "2026-11-15T11:12:15.456Z",
+  "target": "TLVNET",
+  "signature": "TLVNET/community/source-policy/stale-news-owner-cancelled-12Nov",
+  "status": "open",
+  "evidence": {
+    "source_commit": "777a9c7684fb5bec0470e9696e31fb78af5c0bee",
+    "writer_file": "public/news/agents/community/WRITER.md",
+    "writer_conflict": "File contains city-news scope and says news owns community;latest active publisher task explicitly standalone community with city-hub scope.",
+    "profile_file": "public/news/briefs-writer-profile.json",
+    "profile_conflict": "community.enabled=true but stale schedule.status=cancelled observed12Nov and coverageOwnerTopic=news"
+  },
+  "impact": "Misleading source documentation;current15Nov replacement mandate followed. No news scope executed, no schedules/permissions changed.",
+  "next_action": "Reconcile documentary domain ownership and stale schedule metadata against current publisher-approved automation in controller scope;do not disable writer or block independent verified neighborhood enrichment."
+}
