@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "d62d280b-e220-8322-86d4-e0393ad2bd1a",
+  "runKey": "ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a",
+  "policy_version": "2026-11-15/1.2",
+  "started_at": "2026-11-15T22:33:48.789397Z",
+  "observed_at": "2026-11-15T22:36:40.091Z",
+  "local_date": "2026-11-16",
+  "targets_reviewed": [
+    "7TLVNET owner metadata",
+    "Actions/inbox delta",
+    "social_runs",
+    "historical analytics run42665160712",
+    "sports13Novcheckpoint",
+    "classes13Novcheckpoint",
+    "TLVNET stabilization"
+  ],
+  "source": {
+    "version": 624,
+    "deployed_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+    "deployed_version_unchanged": true,
+    "source_head": "not refreshed thiscycle; currentdeployed commit snapshot read directly by git show",
+    "source_read": "Targeted sports article and ledger read at exact current deployed commit. No full catalog rescan.",
+    "sports_readback": "{\"id\": \"maccabi-hapoel-euroleague-derby-win-20261112\", \"title\": \"הדרבי שוב צהוב: מכבי ניצחה את הפועל ביורוליג בלימסול\", \"status\": \"published\", \"published_at\": \"2026-11-14T04:43:34.540366+00:00\", \"publication_state\": \"publication_prepared\", \"owner_automation_id\": \"Automation_499e6c8b36648191a9f8f102b0d5d6fe\", \"runKey\": \"manual-recovery-20261114T044022Z-633cab7f\", \"photo_bank_id\": \"maccabi-club-derby-20261112\"}\n[{\"runKey\": \"manual-recovery-20261114T044022Z-633cab7f\", \"status\": \"publication_prepared\", \"articleIds\": [\"maccabi-jerusalem-saturday-preview-20261114\", \"maccabi-hapoel-euroleague-derby-win-20261112\"], \"urls\": null, \"completedAt\": null}, {\"runKey\": \"sports-2026-11-13-09-56a526f7-4760-8320-a519-595bd865e651\", \"status\": \"draft_waiting_image\", \"articleIds\": [\"maccabi-hapoel-euroleague-derby-win-20261112\"], \"urls\": null, \"completedAt\": \"2026-11-13T07:12:29.211Z\"}]\n",
+    "new_publications_observed": 0,
+    "public_health": null,
+    "independent_public_body_image_check": "not performed; prior proofs retained, old derby receipt followup remains pending"
+  },
+  "rollover": {
+    "date_from": "2026-11-15",
+    "date_to": "2026-11-16",
+    "prior_day_seven_desks_article_count": 8,
+    "prior_day_counts_retained": true,
+    "today_count_reclassified": false,
+    "nighttime_no_due_owner_run_not_incident": true
+  },
+  "actions": {
+    "metadata_rows": 10,
+    "new_runs": 0,
+    "new_failures": 0,
+    "watermark": "2026-11-15T18:06:52Z",
+    "boundary_run_id": 43744885699
+  },
+  "social": {
+    "rows_read": 11,
+    "new_rows": 0,
+    "watermark": "2026-11-15T19:00:08.442Z",
+    "send_replayed": false
+  },
+  "historical": {
+    "run_id": 42665160712,
+    "job_id": 129326768811,
+    "created_at": "2026-11-09T17:29:46Z",
+    "source_commit": "b6867b7ca8fcac2733c4a72793beadc7837367f9",
+    "root_incident": "historical-event-analytics-missing-ga4-service-account",
+    "failed_step": "Verify GA4 configuration",
+    "reason": "GA4_PROPERTY_ID present; GA4_SERVICE_ACCOUNT_JSON absent; exit2 before fetch/commit.",
+    "full_log_reads": 1,
+    "new_current_failure": false,
+    "remaining_run_entries": 242
+  },
+  "inbox_reconciled": [
+    {
+      "path": "ops/incident-response/inbox/56a526f7-4760-8320-a519-595bd865e651-1.json",
+      "decision": "Old image/control blocker superseded by later sourcepublication; exact original article alreadypublished14Nov in current deployed source with clubderbyphoto. Currentbody/asset differ from old13Novdraft. Do not republish old draft or reuse its approval; preserve verification followup."
+    },
+    {
+      "path": "ops/incident-response/inbox/786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json",
+      "decision": "Historical classes handoff ingested, original verified fix proof retained as owner report; remaining source rows preserved in related_task_results, no source collection/retry or freshness claim."
+    }
+  ],
+  "remaining_inbox": 11,
+  "classes_checkpoint": {
+    "schema_version": 1,
+    "kind": "classes_cycle_handoff",
+    "task_id": "Automation_6f7ebf4f01148191b17ce098a1061217",
+    "run_id": "786c310e-a5ec-832c-8d7d-5ca6e75ac986",
+    "runKey": "classes-2026-11-13-quarterly-786c310e",
+    "attempt": 1,
+    "created_at": "2026-11-13 08:59:39 UTC",
+    "status": "partial_review",
+    "signature": "classes/source-detail-read/web-retrieval-unavailable",
+    "source_origin_outage_claimed": false,
+    "automation_state_changed": false,
+    "verified_fix": {
+      "site": "https://tlvnet.com/meusharim/",
+      "version": 586,
+      "commit": "373066ad45f3a3180b3feddad55cfe581ae5fcdb",
+      "deployment_id": "appgdep_6af6d0f4b3ac81918379e195783a693c",
+      "status": "succeeded",
+      "result": "Exact non-course contact row absent from live184-record JSON; seven genuine Minshar courses and legitimate course route retained"
+    },
+    "remaining": [
+      {
+        "city": "yavne",
+        "id": "yavne-1854495",
+        "status": "blocked_source_read",
+        "action": "Existing authorized collector/browser source read required before factual refresh; no origin outage inferred"
+      },
+      {
+        "city": "tel-aviv",
+        "id": "tlv-BZ17202703933",
+        "status": "blocked_source_read",
+        "action": "Use documented public rendered municipal route when available; do not relabel old snapshot as fresh"
+      },
+      {
+        "city": "tel-aviv",
+        "provider": "museum-courses",
+        "status": "blocked_source_read",
+        "action": "Verify actual detail before changing schedule/registration; prior cached facts are not fresh detail verification"
+      },
+      {
+        "cities": [
+          "ashdod",
+          "rishon-lezion",
+          "kiryat-gat"
+        ],
+        "status": "partial_review",
+        "action": "Continue remaining existing rows with cached/conditional collectors; samples do not establish full-city freshness"
+      }
+    ],
+    "evidence": "Some primary detail reads returned tool Internal Error without an HTTP status. This limits those samples only, not source-host availability or independent catalogue work. Original source facts/dates retained; current documentation already records municipal unattended-access limitation.",
+    "journal": "ops/daily-audit/2026-11-13.json",
+    "next_action": "Keep scoped checkpoint; cheaply check access changes on the existing saved cycle. No blind retry, new schedule/agent or deployment for this handoff.",
+    "log_only": true
+  },
+  "owner_runs": {
+    "Automation_b3345c399b988191a1ba9848e3e3668b": {
+      "id": "db934004-503c-8332-a023-ebaf5f8a3380",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-15T17:00:00Z",
+      "started_at": "2026-11-15T17:01:11.039225Z",
+      "completed_at": "2026-11-15T17:22:21.519593Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6af5efa4-1a90-83eb-8acd-a8df4f02cd4c"
+      }
+    },
+    "Automation_82add5edecd8819197814e83bac85a75": {
+      "id": "6986d03c-add8-8329-ba19-20efca34fa34",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-15T14:00:00Z",
+      "started_at": "2026-11-15T14:34:31.341666Z",
+      "completed_at": "2026-11-15T14:51:37.967469Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6af5b8b0-f2c8-83ed-bee9-3753b93080b9"
+      }
+    },
+    "Automation_a32c48a7ae848191a5769078a5c74a09": {
+      "id": "8337496b-ecfc-8333-89c4-9b9c52a0d562",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-15T10:00:00Z",
+      "started_at": "2026-11-15T10:10:51.137096Z",
+      "completed_at": "2026-11-15T10:26:44.515164Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6af6e7ee-aef4-83eb-9a15-53e6dba697c9"
+      }
+    },
+    "Automation_e03d80ff914c8191a790fc66e7447826": {
+      "id": "86e22d2d-4dec-8320-8f7a-3866419e8597",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-15T11:00:00Z",
+      "started_at": "2026-11-15T11:02:18.685247Z",
+      "completed_at": "2026-11-15T11:20:21.552493Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6aefca53-37bc-83eb-95c2-1ee0d1d63c94"
+      }
+    },
+    "Automation_e2f02000cdf4819190022b85f4391076": {
+      "id": "393e5584-4ac4-832e-9d36-7b712cf494b9",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-15T12:00:00Z",
+      "started_at": "2026-11-15T12:04:37.027654Z",
+      "completed_at": "2026-11-15T12:16:30.820640Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6af000ed-40f8-83ed-ab86-7baf8280349f"
+      }
+    },
+    "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
+      "id": "37cbf175-5f34-8320-b921-abb82295b707",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-15T19:00:00Z",
+      "started_at": "2026-11-15T19:04:39.557620Z",
+      "completed_at": "2026-11-15T19:32:33.620482Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6af80764-2768-83ed-8f61-4262b0bbbb17"
+      }
+    },
+    "Automation_53543605ce188191ba90f3f1979203dc": {
+      "id": "ebc6b2f1-e850-832d-be04-1928ff1b3949",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-15T07:00:00Z",
+      "started_at": "2026-11-15T07:36:00.361936Z",
+      "completed_at": "2026-11-15T07:58:40.710977Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6af6bfaf-1470-83eb-b437-ea3232a7518e"
+      }
+    }
+  },
+  "stability": {
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    },
+    "qualification_started_at": null,
+    "latency": null,
+    "capacity_test": false,
+    "backup_test": false,
+    "restore_test": false
+  },
+  "known_sports_context_failure": "unchanged and not retried/realerted",
+  "build_or_deploy": false,
+  "schedules_changed": false,
+  "agents_created_or_triggered": false,
+  "calls_measured": null,
+  "cost_measured": null
+}
