@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "neighborhood-mini-sites-20261115T122532Z-37afc15a",
+  "policy_version": "2026-11-15/1.2",
+  "created_at": "2026-11-15T12:26:06.183Z",
+  "target": "TLVNET-site",
+  "category": "publication_continuity",
+  "status": "publication_pending_existing_writer",
+  "source_fingerprint": "90d789d6a7f0d66ab08cc16d5b89853837ace4bf",
+  "root_signature": "tlvnet-neighborhood-mini-sites-pending-existing-writer",
+  "evidence": "ops/incident-response/evidence/neighborhood-mini-sites-20261115T122532Z-37afc15a.json",
+  "source_patch": "ops/incident-response/evidence/neighborhood-mini-sites-20261115T122532Z-37afc15a.patch",
+  "owner": "WORK:6af99330-89f8-83eb-a1b7-e268ae17a88d",
+  "summary": "Requested mini-site upgrade is implemented and build/regression passed in isolated source. Shared release lease held by another active WORK publisher. No competing push/deploy. Facebook discovery candidate retained unverified; no private data collected.",
+  "next_action": "Existing controller/release owner: preserve current active publisher; after legitimate release, merge this source patch into fresh Sites source (3-way against source_base), preserve parallel coverage cursor/notes and all content, run preparation/build and regression on merged source, acquire CAS lease/readback, publish once, verify live desktop/mobile and then release own token. Do not start or dispatch another task."
+}
