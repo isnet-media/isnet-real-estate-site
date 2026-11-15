@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T06:43:46Z",
+  "updated_at": "2026-11-15T07:17:55Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2925,9 +2925,52 @@
       "observed_at": "2026-11-15T04:46:55Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-438da9ee-f230-832a-9687-45b7ba95d76a.json",
       "last_review_runKey": "ops-2026-11-15-438da9ee-f230-832a-9687-45b7ba95d76a"
+    },
+    {
+      "id": "github-actions-dispatch-current-session-unavailable",
+      "status": "awaiting_external_action",
+      "fingerprint": "GitHub/current-session/workflow_dispatch/operation-not-exposed",
+      "root_cause": "Current authorized connection exposes Actions reads and reruns but no workflow_dispatch for initiating current normal collectors; collector owner also reported unauthenticated local gh and anonymous GitHub UI. Underlying scheduled-run absence reason notestablished.",
+      "occurrences": [
+        {
+          "task_id": "Automation_fa808d30470c8191b3eb981f197bbb1d",
+          "run_id": "e5f1bc96-a838-8333-be96-c0032383fb71",
+          "inbox": "ops/incident-response/inbox/e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
+          "recorded_at": "2026-11-15T06:35:15Z"
+        }
+      ],
+      "evidence": {
+        "manual_dispatch": "Existing collector owner reports no workflow_dispatch tool, gh unauthenticated, anonymous GitHubUI. Controller tool inventory confirms no workflow_dispatch operation; did not createcredentials ortrysecuritybypass.",
+        "actions_delta": {
+          "since": "2026-11-15T03:33:39Z",
+          "total_count": 1,
+          "only_run": 43672913756,
+          "conclusion": "skipped",
+          "new_collection_run": 0
+        },
+        "schedule_source": {
+          "path": ".github/workflows/super-prices.yml",
+          "blob": "870bf16c8e0ab88ee776f1222d0c26adcacb4411",
+          "cron": "0 6 * * 0,2,4",
+          "qualification": "Source schedule exists; workflow active/enabled state not independently established. No assertion GitHub timer guarantees immediate execution."
+        },
+        "provider_prices": "Original collector checkpoint reports lastgood12Nov except TLV9Nov,21publicdatafilesHTTP200. No controller catalogue rescan orsource-date renewal.",
+        "public_wrapper": "Originalexecutor403 is retrieval limitation, notsiteoutage; no broadpublicUIreviewthiscycle."
+      },
+      "next_action": "Use the existing authorized GitHub execution connection to confirm enabled state and current-day claim of the existing collectors, and dispatch only if no active run/dailyclaim and within approvedwindow. Do not enable cancelledworkflows, createnewcredentials orchangepermissions/schedules.",
+      "change": "No credentials,permissions,schedule orpipeline changes; preservedactualsourceprices.",
+      "tests": {
+        "code_changed": false,
+        "regression": false,
+        "public_result_verified": false
+      },
+      "prevention": "Confirm existing execution connection and exactdailyclaims; no blindreruns ornewcredential provisioning.",
+      "observed_at": "2026-11-15T07:17:55Z",
+      "last_review_runKey": "ops-2026-11-15-09a818b2-b278-832a-b5b1-29dff01686d0",
+      "public_proof": null
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-9ac23e83-a480-832a-b524-47cfbeb1bfa4",
+  "last_review_runKey": "ops-2026-11-15-09a818b2-b278-832a-b5b1-29dff01686d0",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
