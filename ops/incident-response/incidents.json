@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T10:54:41.586Z",
+  "updated_at": "2026-11-15T11:35:07.167Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -504,7 +504,7 @@
       "id": "tlvnet-social-publication-not-verified",
       "status": "mitigated",
       "root_cause": "Historical Meta190/463 expired Page authentication stopped the existing server publisher. Publisher renewed the Page connection on15Nov; one real API post succeeded and was independently verified public. The existing cron transport is present; first regular post after renewal still needs separate verification. Instagram remains a separate unimplemented/unverified path.",
-      "next_action": "Existing controller checks the next normal13:00 Israel server slot social_runs result and public post, without dispatching another publisher. Do not request renewed credentials again unless new live evidence indicates an authentication failure. Continue to report Instagram separately; exact derived Page token lifetime was not observed.",
+      "next_action": "Publicly verify the exact11:00Z post through existing authorized access. Keep already-sent post claimed; do not send again. Inspect only subsequent new social_runs. Instagram remains separate.",
       "latest_handoff": {
         "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json",
         "blocked_reason": null,
@@ -514,15 +514,22 @@
         "controller_live_post_verified": true
       },
       "latest_controller_read": {
-        "observed_at": "2026-11-15T10:53:58.329Z",
-        "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json",
-        "blocked_reason": null,
-        "enabled": 1,
-        "post_id": "1520426491146188_122105524611545268",
-        "public_post_checked": true,
-        "new_publish_attempts": 1,
-        "duplicate_claims_removed": 0,
-        "counters_reset": 0
+        "observed_at": "2026-11-15T11:35:07.167Z",
+        "new_rows": 1,
+        "normal_slot": {
+          "new_slot": "2026-11-15T11",
+          "started_at": "2026-11-15T11:00:01.660Z",
+          "finished_at": "2026-11-15T11:00:13.542Z",
+          "recorded_status": "published",
+          "post_id": "1520426491146188_122105553411545268",
+          "article_url": "https://tlvnet.com/news/tel-aviv-ai-project-management-builder-jobs-20261115.html",
+          "authentication_block": null,
+          "manual_attempts_this_cycle": 0,
+          "public_verification": "pending: logged-out public permalink redirected and displayed content unavailable; no login or alternate send attempted",
+          "public_observed_url": "https://www.facebook.com/61596358055015/posts/122105553411545268/",
+          "instagram": "not verified"
+        },
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f.json"
       },
       "facebook_authentication_status": "fixed_verified",
       "facebook_publication": {
@@ -532,7 +539,7 @@
         "observed_at": "2026-11-15T10:53:58.329Z",
         "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json"
       },
-      "facebook_unattended_status": "configuration_verified_pending_first_normal_slot",
+      "facebook_unattended_status": "normal_slot_recorded_published_public_verification_pending",
       "instagram_status": "awaiting_separate_implementation_and_authentication",
       "prevention": "Shared factual-teaser formatter and permanent publisher closing deployed613; existing durable claims/counter/circuit breaker retained. Track real slot results rather than cron/HTTP success only; no unconditional permanent-token guarantee."
     },
@@ -1082,7 +1089,7 @@
         "source_open": "Source helper failed generically; one justified ordinary authenticated Git fetch succeeded. Source read only; source main untouched."
       },
       "impact": "News publication continued through authorized news owner; operational routing remains stale until patch is released.",
-      "next_action": "Existing release owner to use coordinated coverage+portability bundle after valid lease and current-source checks; old community-only patch is superseded. Verify live owner after release.",
+      "next_action": "Use current dedicated community owner. Do not restore the historical news-owner routing from this incident's old repair.",
       "reported_runKey": "ops-2026-11-13-2b4d4313-dc9c-8326-9bbe-e53d28b9e74d",
       "latest_source_check": {
         "commit": "406b4d91735b61d27fd241ef58a86f8137cf4284",
@@ -1102,6 +1109,14 @@
         "controller_applied_fix": false,
         "fix_origin": "Publisher-authorized manual rollout; controller independently verified code and live configuration",
         "scope": "Routing/cap configuration only; not proof of new content publication or global lock enforcement"
+      },
+      "policy_supersession": {
+        "observed_at": "2026-11-15T11:35:07.167Z",
+        "previous_authority": "Historical transfer to news writer, superseded by restored dedicated community ownership",
+        "current_owner": "Automation_e03d80ff914c8191a790fc66e7447826",
+        "current_repair_version": 615,
+        "configuration_status": "configuration_verified",
+        "current_evidence": "ops/incident-response/evidence/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f.json"
       }
     },
     {
@@ -1825,9 +1840,9 @@
         "readback": "Actual four prompt texts and enabled state inspected, no new specialist result after v1.1 yet",
         "live_dispatch_probe": "Both public dispatch GETs returned403; no retry/bypass or claim of current API owner"
       },
-      "next_action": "Refresh/apply/read back isolated consumer WRITER replacement through existing authorized source connection; preserve current runtime specialist ownership and schedules. No new credentials or speculative historical Work gate.",
-      "qualification": "New policy-version inconsistency, not evidence prior v1.0 routing repair failed or actual duplicate publication occurred.",
-      "observed_at": "2026-11-13T14:31:37.188Z",
+      "next_action": "Observe next normal owner run for community and consumer after615. Only actual appropriate live content verifies editorial continuity.",
+      "qualification": "Technical dispatch/source consistency tested; overall configuration remains pending normal owner product, not fixed_verified.",
+      "observed_at": "2026-11-15T11:35:07.167Z",
       "reported_runKey": "ops-2026-11-13-b8641b1e-3cec-8322-a6e7-5c6f1e11a895",
       "prompt_repair": {
         "observed_at": "2026-11-14T04:55:32.725Z",
@@ -1837,32 +1852,27 @@
         "evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json"
       },
       "source_writer_repair": {
-        "observed_at": "2026-11-14T13:37:41.382Z",
-        "path": "public/news/agents/consumer/WRITER.md",
-        "source_commit": "77b7f03aa5c0b7eb93320982802c1ba24be108ef",
-        "current_effective_runtime_owner": "Automation_e2f02000cdf4819190022b85f4391076",
-        "stale_source_owner": "Automation_a32c48a7ae848191a5769078a5c74a09",
-        "patch": "ops/incident-response/patches/tlvnet-consumer-writer-identity-20261114.patch",
-        "backup": "ops/incident-response/backups/consumer-WRITER-77b7f03aa5c0.md",
-        "tests": {
-          "old_sha256": "a9e22594322418e7a9cac7f6bf8bc68a36d61a29847691e0f80c816acddc366e",
-          "new_sha256": "18a3a178200249377bf5d0ef0151ee4f46b532a7a335bd1be72080106f0dd6d4",
-          "git_apply_check": true,
-          "single_file_only": true,
-          "old_identity_removed": true,
-          "legacy_work_condition_removed": true,
-          "source_changed": false
-        },
-        "status": "isolated_patch_prepared_not_applied",
-        "fresh_source_fetch": {
-          "attempts": 1,
-          "result": "fatal: could not read Username for https://git.chatgpt-team.site: No such device or address",
-          "new_credentials_created": false
-        },
-        "minimal_action": "Existing authorized Sites source owner must refresh current main, review/apply this one-file replacement preserving concurrent changes, then read back source identity. Do not deploy just for instructions.",
-        "publication_effect": "Effective consumer runtime is correct and original owner reports live publication; stale source has not blocked this run.",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-14-f4a89fe4-2388-832e-a89b-6caa25891449.json"
-      }
+        "status": "configuration_verified",
+        "version": 615,
+        "source_commit": "83a71abf3e1af3d3b1090d418fbf1a349a19d8d3",
+        "files": [
+          "public/news/agents/community/WRITER.md",
+          "public/news/agents/consumer/WRITER.md",
+          "public/news/agents/news/WRITER.md",
+          "public/news/agents/economy-tech/WRITER.md",
+          "public/agent-instructions/agents/03_tlv_news.md",
+          "public/agent-instructions/agents/06_tlv_economy.md",
+          "public/agent-instructions/agents/08_tlv_community.md",
+          "public/agent-instructions/agents/09_tlv_consumer.md",
+          "public/news/briefs-writer-profile.json",
+          "tests/agent-dispatch.mjs"
+        ],
+        "basis": "Exact current effective task prompts and actual schedule metadata; whole source replacement; no automation schedule/permission/enabled mutations",
+        "public_profile_readback": "community routes to active community, consumer to active consumer, neither projection is a lock"
+      },
+      "configuration_status": "configuration_verified",
+      "latest_inbox": "ops/incident-response/inbox/20261115-community-source-owner-stale.json",
+      "evidence_latest": "ops/incident-response/evidence/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f.json"
     },
     {
       "id": "historical-event-analytics-missing-ga4-service-account",
@@ -3143,9 +3153,94 @@
           "observed_at": "2026-11-15T09:06:16Z"
         }
       ]
+    },
+    {
+      "id": "tlvnet-neighborhood-cross-desk-live-aggregation",
+      "status": "fixed_verified",
+      "fingerprint": "TLVNET/neighborhood/aggregation/static-only-scoped",
+      "root_cause": "Neighborhood boards used a build-time partial news feed, sparse selections returned before live event integration, and local sales rendering existed only on rich standalone pages. No unified runtime cross-desk canonical stream.",
+      "occurrences": [],
+      "observed_at": "2026-11-15T11:35:07.167Z",
+      "repair": {
+        "source_commit": "83a71abf3e1af3d3b1090d418fbf1a349a19d8d3",
+        "version": 615,
+        "deployment_id": "appgdep_6af99744a660819189391c447e41b6d7",
+        "change": [
+          "One canonical cross-desk stream including explicitly relevant published news, real-estate, economy, community, consumer, sports, culture/future and dated night publications",
+          "Compact body-free summaries regenerated in existing prepare-public; existing published D1 metadata merged on page entry with 60-second public cache and one bounded metadata read; no new cron",
+          "Accurate specific neighborhood and multiple-neighborhood name matching including compound Hebrew prefixes",
+          "Canonical URL deduplication; original publication dates govern order; old article corrections do not become new articles",
+          "All selected boards can display existing verified sales with source and actual transaction date; no invented neighborhood/address or asking-price sale",
+          "Time-sensitive content carries expiry and disappears during viewing; ordinary dated news remains archive"
+        ]
+      },
+      "verification": {
+        "status": "passed_desktop_and_runtime",
+        "urls": [
+          "https://tlvnet.com/city-hub/",
+          "https://tlvnet.com/city-hub/?neighborhood=%D7%A8%D7%9E%D7%AA%20%D7%90%D7%91%D7%99%D7%91#nb-selection",
+          "https://tlvnet.com/neighborhoods/yad-eliyahu/",
+          "https://tlvnet.com/api/neighborhood-updates?neighborhood=%D7%A8%D7%9E%D7%AA%20%D7%90%D7%91%D7%99%D7%91"
+        ],
+        "ramat_aviv": {
+          "sections": [
+            "news",
+            "sports"
+          ],
+          "articles": 2,
+          "dates_visible": true,
+          "duplicate_article_cards": 0,
+          "desktop_screenshot_viewed": true,
+          "overflow": false
+        },
+        "yad_eliyahu": {
+          "sections": [
+            "real-estate",
+            "economy-tech"
+          ],
+          "articles": 2,
+          "sales": 6,
+          "duplicate_article_cards": 0,
+          "expired_activity_cards": 0,
+          "cover_image_loaded": true
+        },
+        "live_api": {
+          "live_available": true,
+          "server_now": "2026-11-15T11:30:06.293Z",
+          "article_bodies_exposed": false
+        },
+        "economy_owner_completion": {
+          "run_id": "8337496b-ecfc-8333-89c4-9b9c52a0d562",
+          "body_characters": 2827,
+          "title": true,
+          "JPG_loaded": true,
+          "credit": "אילוסטרציה – AI"
+        },
+        "mobile_visual_review": "pending; native accessibility provider unavailable; no mobile pass claimed",
+        "terminal_HTTP_reader": "Executor HTTP reader returned403; no live outage inferred; permitted browser public UI/readback succeeded"
+      },
+      "tests": {
+        "passed": [
+          "npm run build (foundation, prepared content, reviewed images, SEO, framework)",
+          "tests/neighborhood-updates.mjs",
+          "tests/neighborhoods.mjs",
+          "tests/neighborhood_sales.py",
+          "tests/agent-dispatch.mjs",
+          "Python compound Hebrew prefix regression",
+          "python scripts/check-photo-bank.py:163 local JPGs"
+        ],
+        "initial_build_failure": "Old agent-dispatch regression asserted cancelled community/consumer routing. Corrected actual documentary ownership and test expectations after exact current owner verification; subsequent full build passed."
+      },
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f.json",
+      "prevention": "Existing prepare-public regenerates compact metadata for every content release; runtime published-only metadata is merged on each selected board visit, canonical URLs deduplicate and precise locality rules are regression-tested. Existing community coverage plan retains all73areas.",
+      "remaining": [
+        "Mobile visual review",
+        "Further neighborhood original coverage via existing 73-area plan; no sale data invented for unserved neighborhoods"
+      ],
+      "reported_runKey": "ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f"
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-47c3a058-30a4-8326-a2a9-41f9d751c10f",
+  "last_review_runKey": "ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
