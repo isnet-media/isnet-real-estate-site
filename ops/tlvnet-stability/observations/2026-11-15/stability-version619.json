@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "site": "TLVNET.COM",
+  "observed_at": "2026-11-15T12:39:51.623Z",
+  "run_key": "stability-20261115-aa40a42e-291c-4ea6-9a01-d03041c6227c",
+  "source_commit": "d8a42f61bf42f5bbbf737ff5724c46f0435b9c8a",
+  "version_number": 619,
+  "deployment_id": "appgdep_6af9a5ad9ddc8191af8e50ed6ba251aa",
+  "deployment_status": "succeeded",
+  "rollback_version": 618,
+  "changes_verified": [
+    "Owner-only transactional D1 schema/table inventory",
+    "ETag-pinned private R2 object export",
+    "Anonymous backup denial403",
+    "Live home and six article title/image/canonical checks",
+    "Lossless PNG2025601to1179078bytes; pixel-identical local check"
+  ],
+  "backup": {
+    "mode": "manual",
+    "snapshot_at": "2026-11-15T12:30:20.208Z",
+    "d1_tables": 24,
+    "d1_rows": 72,
+    "r2_objects": 6,
+    "r2_bytes": 249046,
+    "restore_data_seconds": 0.207,
+    "restore_integrity": "ok",
+    "full_running_site_restore": false,
+    "offsite_copy": "pending_save",
+    "unattended": false,
+    "rpo": null,
+    "missing_secret_names": [
+      "TLVNET_AGENT_TOKEN",
+      "TLVNET_SOCIAL_KEY",
+      "TLVNET_SOCIAL_SCHEDULER_KEY"
+    ]
+  },
+  "worker_sample": {
+    "scope": "Last 40 sampled Worker logs, not traffic-wide availability or load test",
+    "events": 40,
+    "http5xx": 0,
+    "outcomeErrors": 0,
+    "cpuP50ms": 4,
+    "cpuP95ms": 37,
+    "wallP50ms": 106,
+    "wallP95ms": 712,
+    "cpuMaxMs": 43,
+    "wallMaxMs": 714
+  },
+  "publication": {
+    "fresh_article_checks": [
+      {
+        "id": "suspicious-shopping-links-clickcheck-guide-20261115",
+        "url": "https://tlvnet.com/news/suspicious-shopping-links-clickcheck-guide-20261115",
+        "title_found": true,
+        "broken_images": 0
+      },
+      {
+        "id": "tel-aviv-ai-project-management-builder-jobs-20261115",
+        "url": "https://tlvnet.com/news/tel-aviv-ai-project-management-builder-jobs-20261115",
+        "title_found": true,
+        "broken_images": 0
+      },
+      {
+        "id": "maccabi-jerusalem-home-loss-20261114",
+        "url": "https://tlvnet.com/news/maccabi-jerusalem-home-loss-20261114",
+        "title_found": true,
+        "broken_images": 0
+      },
+      {
+        "id": "ntt-833-einstein-ramat-aviv-20261115",
+        "url": "https://tlvnet.com/news/ntt-833-einstein-ramat-aviv-20261115",
+        "title_found": true,
+        "broken_images": 0
+      },
+      {
+        "id": "isaac-stern-two-projects-financing-20261113",
+        "url": "https://tlvnet.com/news/isaac-stern-two-projects-financing-20261113",
+        "title_found": true,
+        "broken_images": 0
+      },
+      {
+        "id": "city-museum-troubled-waters-opening-20261106",
+        "url": "https://tlvnet.com/news/city-museum-troubled-waters-opening-20261106",
+        "title_found": true,
+        "broken_images": 0
+      }
+    ],
+    "new_publication": [
+      "news morning",
+      "economy-tech",
+      "consumer",
+      "real-estate14Nov"
+    ],
+    "existing_update": [
+      "culture-news15Nov"
+    ],
+    "non_article_update": [
+      "community15Nov"
+    ],
+    "publication_pending": [
+      {
+        "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "run_id": "e66260dc-41c0-8332-89c9-87a4dbf99048",
+        "topic": "line12",
+        "reason": "Newsnoon reported consumer lease and queue-write blocker; consumer finished618 and this lease released619; draft remains with owner, do not duplicate or trigger."
+      }
+    ],
+    "receipt_gap": [
+      "sports source/live published while owner ledger publication_prepared",
+      "consumer uses live_verification schema not parsed by conservative projection"
+    ],
+    "full_cycle_coverage_proven": false
+  },
+  "isolated_tests": {
+    "actual_hosted_cloudflare_load": false,
+    "local_sqlite_only": true,
+    "preview_http": "ECONNREFUSED from executor despite preview daemon running; collection limitation",
+    "recovery_regression": [
+      "agent-dispatch pass",
+      "social scheduler pass",
+      "social publisher pass"
+    ],
+    "monitor_notification_end_to_end": false
+  },
+  "remaining": [
+    "Unattendedbackup identity/access and independentretention",
+    "Runtime secret escrow",
+    "HostedisolatedCloudflare resourceandmetrics access",
+    "Ownerretry/pendingpublication reconciliation",
+    "Controller end-to-end alert and safe repair proof"
+  ]
+}
