@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T08:55:57.560Z",
+  "updated_at": "2026-11-15T09:14:46.273Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -3047,6 +3047,46 @@
       "deployment_id": "appgdep_6af972d6f6408191947d3e1bf6591559",
       "prevention": "Shared promotion expiry and chronological lead selection checked on every writer release; runtime expiry guard on neighborhood pages.",
       "qualification": "Technical freshness repair verified; original article dates and bodies unchanged; mobile visual QA and original community research gaps remain pending."
+    },
+    {
+      "id": "tlvnet-culture-freshness-monitoring-gap",
+      "status": "mitigated",
+      "root_cause": "Active daily culture writer's15Nov run updated two existing articles across culture/night and published zero new articles. Latest declared culture article publication date12Nov. Combined desk output does not prove local culture freshness.",
+      "signature": "tlvnet/culture-freshness/new-reporting-vs-existing-updates-not-separated",
+      "recorded_at": "2026-11-15T09:14:46.273Z",
+      "configuration_verified_at": "2026-11-15T09:14:46.273Z",
+      "change": {
+        "culture": {
+          "ok": true,
+          "id": "Automation_53543605ce188191ba90f3f1979203dc",
+          "version": "2026-11-15/1.1",
+          "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Jerusalem:20261113T090000\nRRULE:FREQ=DAILY;BYHOUR=9;BYMINUTE=0;BYSECOND=0\nEND:VEVENT",
+          "is_enabled": true
+        },
+        "controller": {
+          "ok": true,
+          "id": "Automation_9776808c73848191a9d748dd09315960",
+          "version": "2026-11-15/1.2",
+          "schedule": "BEGIN:VEVENT\nDTSTART:20261113T042701Z\nRRULE:FREQ=HOURLY;BYMINUTE=35;BYSECOND=0\nEND:VEVENT",
+          "is_enabled": true
+        },
+        "canonical_paths": [
+          "ops/agent-harmony/instructions/agents/07_tlv_culture_news.md",
+          "ops/agent-harmony/instructions/agents/20_incident_controller.md"
+        ],
+        "culture_priority": "Culture phase before night, ready backlog first, independent item after isolated blockage, sourced feature when news discovery yields none, separate counters by desk.",
+        "proactive_monitor": "Track actual article freshness, substantive updates, source coverage and pending queues; two completed owner cycles without new article trigger diagnosis, not automatic outage or artificial publication quota; source/version cache avoids rescans."
+      },
+      "validation": {
+        "full_prompt_exact_readback": true,
+        "schedules_unchanged": true,
+        "is_enabled_unchanged": true,
+        "canonical_replaced_after_backup": true
+      },
+      "evidence": "ops/incident-response/evidence/manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json",
+      "inbox": "ops/incident-response/inbox/manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json",
+      "remaining": "Next scheduled original-owner run and new live culture output remain unverified. Instruction readback is not a published_verified result.",
+      "prevention": "Existing hourly controller now distinguishes new publication from old-story edits and monitors source-coverage stagnation; bounded version-aware checks."
     }
   ],
   "last_review_runKey": "ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75",
