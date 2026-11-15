@@ -17,13 +17,14 @@
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": "2026-11-15T13:27:43.278Z",
-  "last_daily_summary_at": null,
+  "last_observation_at": "2026-11-15T14:22:46.049Z",
+  "last_daily_summary_at": "2026-11-15T14:22:46.049Z",
   "observations": [
     "observations/2026-11-15/stability-version619.json",
     "observations/2026-11-15/a6015263-65b4-8326-b418-76875ee90297.json",
     "observations/2026-11-15/receipt-normalization-version621.json",
-    "observations/2026-11-15/continuity-repair-20261115T130716Z.json"
+    "observations/2026-11-15/continuity-repair-20261115T130716Z.json",
+    "observations/2026-11-15/51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json"
   ],
   "remaining": [
     "Unattendedbackup identity/access and independentretention",
@@ -42,6 +43,22 @@
     "observed_at": "2026-11-15T13:27:43.278Z",
     "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json"
   },
-  "daily_summary_status": "Baseline less than24hours old; no seven-day qualification claimed.",
-  "access_request": "BACKUP_ACCESS_REQUEST_20261115.md"
+  "daily_summary_status": {
+    "observed_at": "2026-11-15T14:22:46.049Z",
+    "status": "baseline_gates_incomplete",
+    "summary": "Version622 source and owners unchanged, prior5new articles;14:00social send recorded, public proof pending. Offsite unattended backup, running restore and hosted-capacity gates unverified; qualification not started.",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json"
+  },
+  "access_request": "BACKUP_ACCESS_REQUEST_20261115.md",
+  "latest_controller_observation": {
+    "run_id": "51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
+    "source_commit": "95ce4ac78ba4fb660b2f761dec05c408ee2bdaba",
+    "source_unchanged": true,
+    "version": 622,
+    "owner_results_unchanged": true,
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json",
+    "public_sample_status": "reader_unavailable_not_downtime",
+    "measured_latency": null,
+    "new_backup_restore_capacity_measurements": false
+  }
 }
