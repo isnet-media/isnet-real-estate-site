@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T07:17:55Z",
+  "updated_at": "2026-11-15T08:15:26Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2968,9 +2968,36 @@
       "observed_at": "2026-11-15T07:17:55Z",
       "last_review_runKey": "ops-2026-11-15-09a818b2-b278-832a-b5b1-29dff01686d0",
       "public_proof": null
+    },
+    {
+      "id": "sports/article-tag/copied-euroleague-label-on-domestic-recap",
+      "status": "open",
+      "root_cause": "New sportsarticle inherited Euroleague tag from source template while domesticmatchbody is correct.",
+      "severity": "low_metadata",
+      "occurrences": [
+        {
+          "article_id": "maccabi-jerusalem-home-loss-20261114",
+          "url": "https://tlvnet.com/news/maccabi-jerusalem-home-loss-20261114",
+          "version": 606,
+          "observed_at": "2026-11-15T08:15:26Z",
+          "inbox": "ops/incident-response/inbox/fc2fb076-a494-832a-955b-07c686a4ba75-sports-tag.json"
+        }
+      ],
+      "change": "No sourceedit/deploy bycontroller; retainedlivearticle.",
+      "tests": {
+        "public_body": true,
+        "desktop": true,
+        "mobile": false,
+        "code_changed": false
+      },
+      "next_action": "Original sportswriter corrects tag toכדורסל·ליגת העל in current source after freshread/CAS; review generic illustrationprefix on exactgamephotowithoutalteringrights. Include with nextrealcontentrelease; no controller parallelpublish orjournal-onlybuild.",
+      "prevention": "Contentowner checks competition/tag alongside title/lead/body beforepublication; no blanketbaseline ornewagent.",
+      "observed_at": "2026-11-15T08:15:26Z",
+      "last_review_runKey": "ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-09a818b2-b278-832a-b5b1-29dff01686d0",
+  "last_review_runKey": "ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
