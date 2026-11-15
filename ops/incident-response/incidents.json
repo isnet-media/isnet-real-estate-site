@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T12:02:27.100Z",
+  "updated_at": "2026-11-15T12:45:44.170Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -723,6 +723,15 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43417323807",
           "classification": "Unchanged exact poster-quality signature independently confirmed",
           "job_id": 131858410930
+        },
+        {
+          "run_id": 43708750732,
+          "attempt": 1,
+          "job_id": 132795505612,
+          "created_at": "2026-11-15T11:24:09Z",
+          "source_commit": "9c7a6d197944dd7765ce262b3ffae45c57ec2bb9",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43708750732",
+          "classification": "Same exact official_promotional artwork gate/title confirmed from full log. Existing open root, no repeat publisher alert."
         }
       ],
       "evidence": {
@@ -741,7 +750,7 @@
       "next_action": "Existing Holon owner must obtain a rights-verified, film-specific poster through the established media policy before the next justified refresh. No fabricated image approval or full collection retry here.",
       "prevention": "Keep last good committed catalog on candidate media failure. Holon collector still has a daily timer despite weekly events policy; prepare a separate change that also prevents its workflow-edit push trigger from starting an unintended full collection.",
       "reported_runKey": "ops-2026-11-13-3d23c9a8-b114-8326-8682-369823a0770a",
-      "last_seen_at": "2026-11-13T12:13:20.668Z",
+      "last_seen_at": "2026-11-15T12:45:44.170Z",
       "no_retry_reason": "Exact same title, source and illustration; no rights/media change. Later release-check success is not proof of refreshed candidate publication."
     },
     {
@@ -3343,9 +3352,67 @@
       "prevention": "Both named sources required in each existing writer cycle; index/category scan checkpoint, truthful blocked/deferred accounting, persistent research handoffs and existing-publication hints. No copied articles/images and no additional scheduler.",
       "next_action": "Observe normal owner runs after617; inspect actual coverage decisions and independently verify appropriate new live products. Existing five candidates remain research, not approved publication. Do not manually trigger writers or repeat unchanged blocked reads.",
       "reported_runKey": "local-coverage-2026-11-15T11-44-13-230Z"
+    },
+    {
+      "id": "tlvnet-neighborhood-mini-sites-release",
+      "category": "presentation_and_routing",
+      "status": "fixed_verified",
+      "root_cause": "Requested neighborhood mini-site implementation remained on isolated source while real shared publication leases belonged to consumer/stability owners; public site still served previous neighborhood design.",
+      "change": "Merged source patch into fresh619source, refreshed directory design and local editions, preserved parallel content and quality gates, acquired/read back CAS lease after legitimate release, deployed620once and verified affected live pages.",
+      "source_commit": "a9b95b02806fece045c2ac556d4f13845cb4fd37",
+      "deployment_id": "appgdep_6af9a80ae6948191a82d4913b7b572ab",
+      "version": 620,
+      "regression_tests": [
+        "npm run build passed on merged619source",
+        "neighborhoods.mjs passed",
+        "neighborhood-updates.mjs passed",
+        "neighborhood-portals.mjs passed",
+        "164 JPG photo-bank integrity passed",
+        "git diff --check passed"
+      ],
+      "public_proof": [
+        {
+          "url": "https://tlvnet.com/city-hub/",
+          "title": "כל שכונה. הסיפור שלה.",
+          "neighborhood_choices": 73,
+          "rich_entrances": 9,
+          "desktop_visual": "passed"
+        },
+        {
+          "url": "https://tlvnet.com/city-hub/?neighborhood=%D7%A8%D7%9E%D7%AA%20%D7%90%D7%91%D7%99%D7%91%20%D7%92%27#nb-selection",
+          "title": "רמת אביב ג׳ נט",
+          "verified_institution": "רוזין",
+          "content_scope": "Institution/source directory, no invented news or dated events",
+          "desktop_visual": "passed",
+          "horizontal_overflow": false
+        },
+        {
+          "url": "https://tlvnet.com/neighborhoods/florentin/",
+          "title": "פלורנטין נט",
+          "photo_loaded": true,
+          "credit": "udi Steinwell Pikiwiki Israel · CC BY2.5 with source/license links",
+          "local_cards": 7,
+          "actual_sale_rows": 7,
+          "expired_cards": 0,
+          "horizontal_overflow": false,
+          "desktop_visual": "passed"
+        },
+        {
+          "url": "https://tlvnet.com/news/suspicious-shopping-links-clickcheck-guide-20261115",
+          "title": true,
+          "body_length": 1616,
+          "JPG_loaded": true,
+          "credit": "אילוסטרציה – AI",
+          "verification_scope": "Fresh focused article/body/image/credit readback; owner619 proof retained for home/section links"
+        }
+      ],
+      "remaining": "Mobile visual review pending; sparse source coverage is a content-owner follow-up, not claimed solved.",
+      "prevention": "Durable existing release queue, fresh-source CAS and lease checks, pure shared portal projection, regression and original content-owner continuity.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-a6015263-65b4-8326-b418-76875ee90297.json",
+      "verified_at": "2026-11-15T12:45:44.170Z"
     }
   ],
-  "last_review_runKey": "local-coverage-2026-11-15T11-44-13-230Z",
+  "last_review_runKey": "ops-2026-11-15-a6015263-65b4-8326-b418-76875ee90297",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
