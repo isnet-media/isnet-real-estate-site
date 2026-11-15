@@ -1,0 +1,526 @@
+diff --git a/data/neighborhoods/WRITER.md b/data/neighborhoods/WRITER.md
+index 9be4251..07339f9 100644
+--- a/data/neighborhoods/WRITER.md
++++ b/data/neighborhoods/WRITER.md
+@@ -53,3 +53,9 @@
+ עסקאות מכירה נגזרות מאותו אוסף דיווחים מאומת ומוצגות בכל לוח שכונה שיש לו עסקאות משויכות, גם בלי דף עשיר עצמאי. משמרים מקור, תאריך חוזה אמיתי, חלק בזכויות וכיסוי חלקי; אין מחירי מודעות בתוך מכירות. עובדות עסקה חדשות מחייבות עדכון בידי כתב הנדל״ן/בעל התוכן ולא המצאה בידי הבקר.
+ 
+ בדיקות `tests/neighborhood-updates.mjs` נוספו להכנה הקיימת. פעילויות ומועדי הרשמה מסוננים לפי תוקפם גם בזמן צפייה; ידיעה חדשותית נשארת בארכיון עם תאריך מקורי.
++
++## מהדורות שכונתיות —15.11.2026
++העיצוב החדש מופעל מה-builder הקיים ובצפייה דרך `neighborhood-portal.js`. לכל שכונה זהות מקומית וזרם חדשות אחד מכל מדורי האתר; אין עותקים של כתבות. דפי הכיסוי הדל מציגים מהדורה מקומית דרך הבחירה הקיימת, ועמוד עצמאי מקודם רק בשער האיכות הקיים.
++`resident-tools.json` מרכז קישורי שירות עירוניים שנבדקו; הם אינם נתוני תחבורה בזמן אמת או רשימות מקומיות שסוננו מראש. `audiences` ברשומת מוסד דורש ראיה מפורשת; קישור לקטלוג אינו אירוע בעל תאריך מאומת ואינו מקום פנוי. קטגוריות הגיל הקיימות `עד5`/`13-18` מסווגות כילדים ונוער בלי להמציא קהל יעד חדש.
++בדוק גם `social-sources.json`: דפים וקבוצות פייסבוק שכונתיים הם מקורות גילוי בלבד. רישום היסטורי אינו אימות פעילות נוכחית. שמור URL אמיתי, שכונה, ראיה לזהות, ציבורי/סגור, תאריך פוסט שנקרא, checked_at וחסם. קבוצה לא מאומתת אינה מופיעה במדריך הציבורי. מידע אישי, תמונות וטענות של תושבים אינם מועתקים אוטומטית; הכתב מאמת ונותן ייחוס מתאים, ובמידת הצורך פונה לבירור במסגרת הרשאה. אין להצטרף לקבוצות, לפנות לאחרים, להתקין אוסף חדש או להפעיל משימה אחרת מכוח הבדיקה. כשל גישה לא יוצר לולאת ניסיונות.
++למבצעי סופר נדרשים קובצי מבצעים אמיתיים, שיוך סניף מאומת, תוקף ותנאי מועדון/כמות. offer_count בקטלוג מחירים הוא מספר הצעות מחיר, לא מספר מבצעים. אין להציג מחירי6.11 כמבצעי היום ואין לאסוף מחוץ לחלון המאושר.
+diff --git a/data/neighborhoods/coverage-plan.json b/data/neighborhoods/coverage-plan.json
+index 5fa440c..2457c93 100644
+--- a/data/neighborhoods/coverage-plan.json
++++ b/data/neighborhoods/coverage-plan.json
+@@ -56,8 +56,8 @@
+         "news": 0,
+         "housing": 0,
+         "places": 2,
+-        "kids": 0,
+-        "classes": 3,
++        "kids": 1,
++        "classes": 2,
+         "seniors": 0,
+         "services": 2
+       },
+@@ -66,7 +66,6 @@
+       "missing_topics": [
+         "news",
+         "housing",
+-        "kids",
+         "seniors"
+       ]
+     },
+@@ -139,8 +138,8 @@
+         "news": 1,
+         "housing": 1,
+         "places": 0,
+-        "kids": 8,
+-        "classes": 5,
++        "kids": 9,
++        "classes": 4,
+         "seniors": 0,
+         "services": 1
+       },
+@@ -220,15 +219,15 @@
+         "news": 1,
+         "housing": 1,
+         "places": 3,
+-        "kids": 0,
+-        "classes": 1,
++        "kids": 1,
++        "classes": 0,
+         "seniors": 2,
+         "services": 1
+       },
+       "total": 9,
+       "ready": true,
+       "missing_topics": [
+-        "kids"
++        "classes"
+       ]
+     },
+     {
+@@ -238,8 +237,8 @@
+         "news": 0,
+         "housing": 0,
+         "places": 0,
+-        "kids": 10,
+-        "classes": 25,
++        "kids": 26,
++        "classes": 9,
+         "seniors": 1,
+         "services": 1
+       },
+@@ -258,8 +257,8 @@
+         "news": 3,
+         "housing": 1,
+         "places": 0,
+-        "kids": 23,
+-        "classes": 13,
++        "kids": 25,
++        "classes": 11,
+         "seniors": 0,
+         "services": 1
+       },
+@@ -431,8 +430,8 @@
+         "news": 1,
+         "housing": 2,
+         "places": 0,
+-        "kids": 2,
+-        "classes": 1,
++        "kids": 3,
++        "classes": 0,
+         "seniors": 0,
+         "services": 0
+       },
+@@ -440,6 +439,7 @@
+       "ready": true,
+       "missing_topics": [
+         "places",
++        "classes",
+         "seniors",
+         "services"
+       ]
+@@ -1515,9 +1515,9 @@
+         "kids": 0,
+         "classes": 0,
+         "seniors": 0,
+-        "services": 0
++        "services": 1
+       },
+-      "total": 0,
++      "total": 1,
+       "ready": false,
+       "missing_topics": [
+         "news",
+@@ -1525,8 +1525,7 @@
+         "places",
+         "kids",
+         "classes",
+-        "seniors",
+-        "services"
++        "seniors"
+       ]
+     },
+     {
+@@ -1724,5 +1723,29 @@
+     "municipal-ba-hursha-kiryat-shalom": "d0f8f56aa2f1c436cf1f794d601d7cbf7214ab7da50e922bfeb7b400856af703",
+     "municipal-hadar-afeka": "ea790d3e19cfd5ee940650f2b82ee5bad9b20e12bead9cfbff7abbf38d76b7eb"
+   },
+-  "next_action": "Continue after hadar-afeka with next unresolved planned entries;do not rescan unchanged institutional records or duplicate event/class collectors."
++  "next_action": "Continue after hadar-afeka with next unresolved planned entries;do not rescan unchanged institutional records or duplicate event/class collectors.",
++  "mini_site_upgrade": {
++    "requested_at": "2026-11-15T12:22:35.265208+00:00",
++    "status": "implementation_prepared",
++    "owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
++    "sources": [
++      "sources.json",
++      "resident-tools.json",
++      "social-sources.json"
++    ],
++    "priorities": [
++      "Complete all73 area coverage with existing cursor; do not restrict to publisher examples.",
++      "Verify neighborhood-specific parks, libraries, playrooms and seniors sources; no invented schedules.",
++      "Use already-published cross-desk news and verified closed-sales feed; preserve canonical links.",
++      "Review accessible public community social sources as leads only; check last actual posts, privacy and reuse rights.",
++      "Supermarket promotions require verified branch mapping, actual Promo files, conditions and valid dates; no collection outside authorized windows."
++    ],
++    "missing_data": [
++      "Current dated seniors events",
++      "Ramat Aviv Gimel: only verified institution directory currently",
++      "No verified neighborhood Promo feed",
++      "Facebook current activity and public access unverified"
++    ],
++    "continuity": "Existing owner/build/runtime paths only; no new task, schedule or competing publication."
++  }
+ }
+diff --git a/data/neighborhoods/registry.json b/data/neighborhoods/registry.json
+index fce6c3a..653b346 100644
+--- a/data/neighborhoods/registry.json
++++ b/data/neighborhoods/registry.json
+@@ -785,6 +785,18 @@
+       "address": "קהילת קייב 3",
+       "source_url": "https://www.tel-aviv.gov.il/Documents/accessible-activities-tlv.pdf",
+       "evidence": "Municipal contact directory page9 explicitly pairs center with Neot Afeka Alef;historical location mapping only,checked15Nov2026."
++    },
++    {
++      "names": [
++        "מרכז קהילתי רוזין",
++        "קאנטרי קהילתי ג - רוזין",
++        "רוזין וקאנטרי קהילתי ג׳"
++      ],
++      "neighborhoods": [
++        "רמת אביב ג'"
++      ],
++      "source_url": "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/Rozin.aspx",
++      "evidence": "Municipal2026budget: Ramat Aviv Gimel(Rozin) library in community center; turn107view2 lines17763–17764,17843–17846."
+     }
+   ],
+   "record_exclusions": {
+diff --git a/data/neighborhoods/resident-tools.json b/data/neighborhoods/resident-tools.json
+new file mode 100644
+index 0000000..c30f642
+--- /dev/null
++++ b/data/neighborhoods/resident-tools.json
+@@ -0,0 +1,33 @@
++{
++  "checked_at": "2026-11-15T12:18:09.446981+00:00",
++  "evidence": [
++    "turn107view0 lines335–348",
++    "turn107view1 lines177–188"
++  ],
++  "links": [
++    {
++      "group": "transport",
++      "title": "תחבורה, חניה ועבודות ברחובות",
++      "url": "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/Transportation.aspx",
++      "note": "מידע עירוני; בוחרים כתובת או מסלול."
++    },
++    {
++      "group": "transport",
++      "title": "מפת העיר: תנועה, מוסדות ושירותים",
++      "url": "https://gisn.tel-aviv.gov.il/",
++      "note": "מפה עירונית לחיפוש לפי כתובת."
++    },
++    {
++      "group": "resident",
++      "title": "השירותים העירוניים ומוקד106",
++      "url": "https://www.tel-aviv.gov.il/About/Pages/onlineservices.aspx",
++      "note": "דיווח מפגעים, פניות ושירותים מקוונים."
++    },
++    {
++      "group": "resident",
++      "title": "מידע עירוני לפי שכונה וכתובת",
++      "url": "https://www.tel-aviv.gov.il/Pages/NeighborhoodLobby.aspx",
++      "note": "מוסדות ומידע לתושבים במדריך העירוני."
++    }
++  ]
++}
+diff --git a/data/neighborhoods/social-sources.json b/data/neighborhoods/social-sources.json
+new file mode 100644
+index 0000000..4935a77
+--- /dev/null
++++ b/data/neighborhoods/social-sources.json
+@@ -0,0 +1,24 @@
++{
++  "schema_version": 1,
++  "owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
++  "checked_at": "2026-11-15T12:22:35.265208+00:00",
++  "policy": "Publicly accessible sources are discovery leads only. Verify group identity, neighborhood, public visibility, last post dates and poster rights before using any item. No private-group collection, member lists, automatic cross-posting, copied photos, or joining without a separate task. No continuous Facebook/API access is assumed.",
++  "sources": [
++    {
++      "id": "facebook-florentin-residents",
++      "name": "תושבי שכונת פלורנטין",
++      "neighborhood": "פלורנטין",
++      "url": "https://www.facebook.com/groups/florentineighborhood",
++      "discovery_url": "https://timeout.co.il/קהילות-בתל-אביב/",
++      "discovery_source_date": "2021-08-12",
++      "status": "discovered_unverified",
++      "full_text_read": false,
++      "public_access_verified": false,
++      "recent_activity_verified": false,
++      "checked_at": "2026-11-15T12:22:35.265208+00:00",
++      "blocker": "Public web fetch throttled; historical secondary reference is not evidence of current activity or access. No retry without meaningful change.",
++      "next_action": "Verify current group identity/public access and dated content within existing owner cycle; keep unverified group out of the public directory."
++    }
++  ],
++  "remaining_neighborhoods": "73-area registry; Facebook coverage not established; do not fabricate group URLs or assume all neighborhoods have accessible feeds."
++}
+diff --git a/data/neighborhoods/sources.json b/data/neighborhoods/sources.json
+index 9e2b1ed..99706ed 100644
+--- a/data/neighborhoods/sources.json
++++ b/data/neighborhoods/sources.json
+@@ -7,8 +7,12 @@
+     "kind": "services",
+     "source_url": "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/Florentin.aspx",
+     "description": "חוגים, סדנאות ואירועי תרבות, ספורט ומחול לילדים ולמבוגרים. מקור קבוע לאיתור פעילות שכונתית ולמעבר ללוח החוגים.",
+-    "checked_at": "2026-11-10T08:19:19.623510+00:00",
+-    "evidence": "נפתח ונקרא: turn25view0 שורות 317–319. המקור אומר במפורש שהמרכז הוא בית קהילת שכונת פלורנטין. הכתובת לא נחשפה בטקסט הנגיש; אין להציג כתובת משוערת."
++    "checked_at": "2026-11-15T12:18:09.446981+00:00",
++    "evidence": "turn105view0 lines319,783–794 read15Nov2026: local institution and early-years playroom. No current event dates, price or opening hours inferred.",
++    "audiences": [
++      "kids",
++      "classes"
++    ]
+   },
+   {
+     "id": "mehuga-florentin",
+@@ -330,5 +334,20 @@
+     "neighborhood_evidence_url": "https://www.tel-aviv.gov.il/Documents/accessible-activities-tlv.pdf",
+     "owner_automation_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+     "runKey": "community-2026-11-15-daily"
++  },
++  {
++    "id": "municipal-rozin-gimel",
++    "title": "רוזין וקאנטרי קהילתי ג׳",
++    "neighborhood": "רמת אביב ג'",
++    "kind": "services",
++    "source_url": "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/Rozin.aspx",
++    "description": "מרכז קהילתי עם ספרייה, תרבות וחוגים, ולצדו קאנטרי עם מתקני ספורט ומשחקייה לפעוטות. פרטי ההרשמה והשעות אצל המפעיל.",
++    "checked_at": "2026-11-15T12:18:09.446981+00:00",
++    "evidence": "turn105view1 lines327–328: full institution description. Locality: municipal2026budget turn107view2 lines17763–17764 and17843–17846 names Ramat Aviv Gimel/Rozin. Historical location evidence only, no current hours or course availability inferred.",
++    "audiences": [
++      "kids",
++      "classes"
++    ],
++    "source_date": null
+   }
+ ]
+diff --git a/public/city-hub/neighborhood-portal.css b/public/city-hub/neighborhood-portal.css
+new file mode 100644
+index 0000000..3127c9b
+--- /dev/null
++++ b/public/city-hub/neighborhood-portal.css
+@@ -0,0 +1,7 @@
++/* Local editions: one honest content stream and a useful resident desk. */
++.np-masthead{--np-ink:#153332;color:var(--np-ink);margin:18px 0 36px}.np-edition{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid #b9c6bf;padding:10px 0;font-size:13px}.np-edition a{text-decoration:none}.np-edition button{border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;min-height:44px}.np-brand{display:flex;justify-content:space-between;align-items:center;gap:28px;padding:28px 0}.np-kicker{font-size:12px;font-weight:800;letter-spacing:.08em;color:#45665b}.np-brand h1{font-size:clamp(36px,5.5vw,68px);line-height:1.12;margin:9px 0;font-weight:900;letter-spacing:-.04em}.np-brand em{font-style:normal;color:var(--nb-accent,#126f6a);font-weight:400}.np-brand p{margin:0;font-size:16px}.np-switch label{font-size:12px;display:block;margin-bottom:6px}.np-switch div{display:flex;min-width:235px}.np-switch select{width:100%;border:1px solid #b9c6bf;padding:12px;font:inherit;background:white;color:#153332}.np-switch button{background:#153332;color:white;border:0;min-width:44px;font-size:22px}.np-nav{display:flex;gap:25px;overflow-x:auto;border-top:3px solid #153332;border-bottom:1px solid #b9c6bf;padding:0 3px;scrollbar-width:thin}.np-nav a{white-space:nowrap;padding:15px 0;text-decoration:none;color:#153332;font-size:14px;font-weight:700;min-height:48px}.np-nav a:hover{color:var(--nb-accent,#126f6a)}.np-intro{display:grid;grid-template-columns:.8fr 1.2fr;background:var(--nb-soft,#e4eee8);margin-top:25px;min-height:290px}.np-intro>div:first-child{padding:34px}.np-intro h2{font-size:clamp(30px,4vw,46px);line-height:1.1;margin:16px 0;font-weight:800;letter-spacing:-.03em}.np-intro p{font-size:16px;line-height:1.7;max-width:32em}.np-intro a{color:inherit;font-weight:700}.np-cover{margin:0;position:relative;min-width:0;display:flex;flex-direction:column;background:#153332}.np-cover img{width:100%;height:290px;object-fit:cover;flex:1;min-height:0}.np-cover figcaption{padding:7px 12px;font-size:10px;color:white;background:#153332;line-height:1.5}.np-pattern{display:flex;flex-direction:column;justify-content:center;padding:35px;font-size:clamp(24px,3vw,40px);color:#153332;background:repeating-linear-gradient(135deg,transparent 0 24px,#1533320a 24px 25px);border-right:1px solid #15333222}.np-pattern b{font-weight:800}.np-layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:34px;align-items:start}.np-main{min-width:0}.np-sidebar{display:grid;gap:22px}.np-service{padding:24px;background:#f2f4ef;border-top:3px solid #153332}.np-service h2{font-size:23px;margin:8px 0 12px;line-height:1.25}.np-service p{font-size:14px;line-height:1.7}.np-tool{display:block;padding:13px 0;border-bottom:1px solid #15333222;text-decoration:none;color:#153332;font-weight:700;line-height:1.5}.np-tool small{display:block;font-weight:400;font-size:12px;color:#52665c}.np-service>small{display:block;margin-top:16px;line-height:1.7;font-size:12px}.np-market{background:#e8eddb}.np-main .nb-section{margin-top:0;margin-bottom:36px}.np-main .nb-section>header{border-top:3px solid #153332;padding-top:16px}.np-main .nb-section>header h2{font-size:26px}.np-main .nb-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.np-main .nb-card{border-radius:0;box-shadow:none;border:1px solid #d8dfd6;background:white}.np-main .nb-card h3{font-size:21px;line-height:1.4}.np-main .nb-card-body{padding:22px}.np-main .nb-card-graphic{height:90px}.np-main .nb-update-card:first-child{grid-column:1/-1;background:#f3f5ef;border-right:5px solid var(--nb-accent,#126f6a)}.np-main .nb-update-card:first-child h3{font-size:30px}.np-save-status:empty{display:none}.np-sources-note{font-size:13px;color:#52665c;line-height:1.7;margin:24px 0}.np-local-source{border-right:3px solid #126f6a;padding:12px 16px;background:#f3f5ef}.np-local-source a{font-weight:700;color:#153332}.np-local-source p{font-size:13px;margin:7px 0}.np-main [id],.np-sidebar [id]{scroll-margin-top:30px}body.np-active #nb-rich-pages,body.np-active .nb-all-neighborhoods,body.np-active main>.nb-hero,body.np-active main>.nb-method,body.np-active main>.nb-sales-entry{display:none}
++@media(max-width:900px){.np-layout{grid-template-columns:minmax(0,1fr) 240px;gap:22px}.np-brand h1{font-size:45px}.np-intro>div:first-child{padding:24px}.np-service{padding:18px}}
++@media(max-width:700px){.np-masthead{margin-top:0}.np-edition{font-size:11px;gap:8px}.np-brand{display:block;padding:24px 0 18px}.np-brand h1{font-size:44px}.np-switch{margin-top:18px;max-width:100%}.np-switch div{min-width:0}.np-nav{gap:22px;margin-inline:-4px}.np-intro{grid-template-columns:1fr;margin-top:18px}.np-intro>div:first-child{padding:24px}.np-intro h2{font-size:36px}.np-intro h2 br{display:none}.np-cover img{height:200px;max-height:230px}.np-pattern{display:none}.np-layout{display:block}.np-main .nb-grid{grid-template-columns:1fr}.np-main .nb-update-card:first-child h3{font-size:26px}.np-sidebar{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.np-service h2{font-size:20px}.np-main .nb-section>header h2{font-size:25px}.np-main .nb-card-body{padding:20px}.np-sidebar .np-service{min-width:0}.np-tool{overflow-wrap:anywhere}.np-save-status{font-size:13px}}
++@media(max-width:430px){.np-sidebar{grid-template-columns:1fr}.np-brand h1{font-size:38px}}
++
++.np-discover{margin:0 0 30px;padding:20px 0;border-bottom:1px solid #b9c6bf}.np-discover h2{font-size:24px;margin:0 0 14px}.np-discover div{display:flex;flex-wrap:wrap;gap:10px}.np-discover a{padding:10px 14px;border:1px solid #c5cec3;text-decoration:none;color:#153332;font-weight:700;font-size:13px}.np-discover p{font-size:12px;color:#52665c;line-height:1.7;margin-bottom:0}
+diff --git a/public/city-hub/neighborhood-portal.js b/public/city-hub/neighborhood-portal.js
+new file mode 100644
+index 0000000..254eb7f
+--- /dev/null
++++ b/public/city-hub/neighborhood-portal.js
+@@ -0,0 +1,38 @@
++import {escapeHTML as E} from './neighborhood-model.js';
++import {itemIsCurrent} from './neighborhood-updates.js';
++import {renderLocalCard} from './neighborhood-render.js';
++const safe=u=>/^(https:\/\/|\/(?!\/))/.test(u||'');
++export const topics={kids:'מה עושים עם הילדים?',seniors:'גימלאים בשכונה',classes:'חוגים בשכונה',places:'אוכל, קפה ומקומות',services:'קהילה ומוסדות'};
++export function portalParts(data,name){
++ const n=data.neighborhoods.find(n=>n.name===name);if(!n)return {header:'',aside:''};
++ const rows=data.items.filter(x=>x.neighborhoods.includes(name)&&itemIsCurrent(x));
++ const v=data.visuals?.[n.slug]||{},p=v.photo;
++ const photo=p?.rights_status==='verified'&&safe(p.url)?'<figure class="np-cover"><img src="'+E(p.url)+'" alt="'+E(p.alt)+'" width="800" height="533" fetchpriority="high"><figcaption>'+E(p.credit)+' · <a href="'+E(p.source_url)+'" target="_blank" rel="noopener">מקור</a>'+(p.license_url?' · <a href="'+E(p.license_url)+'" target="_blank" rel="noopener">רישיון</a>':'')+'</figcaption></figure>':'<div class="np-pattern" aria-hidden="true"><span>קרוב לבית.</span><b>קרוב אליכם.</b></div>';
++ const hasTopic=k=>rows.some(x=>x.kind===k||x.audiences?.includes(k));
++ const nav=[['#nb-updates','חדשות '+name],['#np-discover','מה עושים בשכונה?'],...Object.entries(topics).filter(([k])=>hasTopic(k)).map(([k,v])=>['#nb-'+k,v]),['#np-transport','תחבורה ושירותים']];
++ const options=data.neighborhoods.slice().sort((a,b)=>a.name.localeCompare(b.name,'he')).map(a=>'<option value="'+E(a.name)+'"'+(a.name===name?' selected':'')+'>'+E(a.name)+'</option>').join('');
++ const header='<section class="np-masthead"><div class="np-edition"><a href="/city-hub/">תל אביב נט / המקומונים של השכונות</a><button type="button" data-save-neighborhood="'+E(name)+'">זו השכונה שלי ♡</button></div><div class="np-brand"><div><span class="np-kicker">המקומון של השכונה</span><h1>'+E(name)+' <em>נט</em></h1><p>החדשות, האנשים וכל מה שקרוב לבית.</p></div><form class="np-switch" action="/city-hub/"><label for="np-choice">עוברים לשכונה אחרת</label><div><select id="np-choice" name="neighborhood">'+options+'</select><button>←</button></div></form></div><nav class="np-nav" aria-label="מדורי '+E(name)+'">'+nav.map(([url,label])=>'<a href="'+url+'">'+E(label)+'</a>').join('')+'</nav><div class="np-intro"><div><span class="np-kicker">החיים ב'+E(name)+'</span><h2>כל השכונה,<br>במקום אחד.</h2><p>'+E(v.intro||'מה קורה ליד הבית, איפה נפגשים ואיך מוצאים את המידע שצריך.')+'</p><a href="#nb-updates">לחדשות השכונה ↓</a></div>'+photo+'</div><p class="np-save-status" role="status"></p></section>';
++ const links=data.resident_tools||[];
++ const aside='<aside class="np-sidebar"><section class="np-service" id="np-transport"><span class="np-kicker">שימושי לתושבים</span><h2>יוצאים מהבית?</h2><p>תחבורה, עבודות ברחוב וחניה: במקורות העירוניים בוחרים כתובת או מסלול.</p>'+links.filter(x=>x.group==='transport').map(tool).join('')+'</section><section class="np-service"><h2>הבניין והרחוב שלי</h2>'+links.filter(x=>x.group==='resident').map(tool).join('')+'</section><section class="np-service np-market"><span class="np-kicker">קונים קרוב לבית</span><h2>הסופר והסל שלי</h2><p>השוואת מחירים בסניפי תל אביב לפי תאריך המקור שמוצג בכל סניף. הכיסוי חלקי.</p><a class="np-tool" href="/super/">לבחירת סניף ולהשוואת הסל ←</a><small>מבצעים שכונתיים ייכללו כשיהיו נתוני מבצע תקפים ומיפוי סניף מאומת. מחירי המדף אינם רשימת מבצעים.</small></section><section class="np-service"><h2>בכמה נמכרה דירה?</h2><p>מכירות מדווחות עם תאריך עסקה ומקור. כשאין דיווח מאומת לשכונה, אפשר לעיין בלוח העירוני.</p><a class="np-tool" href="/real-estate/deals/">ללוח העסקאות העירוני ←</a></section></aside>';
++ const sourceGuides=Object.entries(topics).filter(([kind])=>!rows.some(x=>x.kind===kind)).map(([kind,title])=>{
++  const institutions=rows.filter(x=>x.content_type==='institution'&&x.audiences?.includes(kind));
++  if(!institutions.length)return '';
++  return '<section class="nb-section" id="nb-'+kind+'"><header><h2>'+E(title)+'</h2><p>מקורות מקומיים לפעילות. מועדים, תנאי הרשמה וזמינות נבדקים אצל המפעיל.</p></header>'+institutions.map(x=>'<div class="np-local-source"><a href="'+E(x.url)+'" target="_blank" rel="noopener">'+E(x.title)+' ↗</a><p>'+E(x.description)+'</p></div>').join('')+'</section>';
++ }).join('');
++ const discover='<section class="np-discover" id="np-discover"><h2>מה עושים ב'+E(name)+'?</h2><div>'+Object.entries(topics).filter(([k])=>hasTopic(k)).map(([k,v])=>'<a href="#nb-'+k+'">'+E(v)+' ←</a>').join('')+'</div><p>פעילויות עם מועד מאומת מופיעות בלוח הקרוב; מדריכים ומוסדות קבועים מופיעים בנפרד.</p></section>';
++ return {header,aside,sourceGuides,discover};
++}
++function tool(x){return safe(x.url)?'<a class="np-tool" href="'+E(x.url)+'" target="_blank" rel="noopener">'+E(x.title)+' ↗<small>'+E(x.note||'')+'</small></a>':'';}
++export function localSections(data,name){
++ const rows=data.items.filter(x=>x.neighborhoods.includes(name)&&itemIsCurrent(x)&&!/^\/(news|articles|culture|future|night)\//.test(x.url)&&safe(x.url));
++ return Object.entries(topics).map(([kind,title])=>{
++  const group=rows.filter(x=>x.kind===kind);if(!group.length)return '';
++  return '<section class="nb-section" id="nb-'+kind+'"><header><h2>'+E(title)+'</h2></header><div class="nb-grid">'+group.map(x=>renderLocalCard(x,data.labels)).join('')+'</div></section>';
++ }).join('');
++}
++export function bindPortal(root,data,name){
++ const form=root.querySelector('.np-switch');form?.addEventListener('submit',e=>{const n=data.neighborhoods.find(n=>n.name===form.elements.neighborhood.value);if(n){e.preventDefault();location.href=n.ready?n.url:'/city-hub/?neighborhood='+encodeURIComponent(n.name);}});
++ const button=root.querySelector('[data-save-neighborhood]');
++ const update=()=>{try{const saved=localStorage.getItem('tlv-neighborhood')===name;button?.setAttribute('aria-pressed',String(saved));if(button)button.textContent=saved?'השכונה שלי ♥':'זו השכונה שלי ♡';}catch{}};
++ button?.addEventListener('click',()=>{try{localStorage.setItem('tlv-neighborhood',name);update();root.querySelector('.np-save-status').textContent='השכונה נשמרה במכשיר הזה.';}catch{root.querySelector('.np-save-status').textContent='לא ניתן לשמור במכשיר זה. אפשר לשמור את הקישור בסימניות.';}});update();
++}
+diff --git a/public/city-hub/neighborhood-render.js b/public/city-hub/neighborhood-render.js
+index e64f4ec..a7246bb 100644
+--- a/public/city-hub/neighborhood-render.js
++++ b/public/city-hub/neighborhood-render.js
+@@ -3,9 +3,9 @@ import {sectionLabels,localURL} from './neighborhood-updates.js';
+ const stamp=v=>Number.isFinite(Date.parse(v))?new Intl.DateTimeFormat('he-IL',{timeZone:'Asia/Jerusalem',dateStyle:'medium'}).format(new Date(v)):'';
+ const safe=url=>/^(https:\/\/|\/(?!\/))/.test(url||'');
+ export function renderArticles(items,name){
+- if(!items.length)return '<section class="nb-section" id="nb-updates"><header><h2>מה חדש ב'+E(name)+'?</h2><p>כתבות הקשורות לשכונה יופיעו כאן עם פרסומן באתר.</p></header></section>';
++ if(!items.length)return '<section class="nb-section" id="nb-updates"><header><h2>חדשות '+E(name)+'</h2><p>כתבות הקשורות לשכונה יופיעו כאן עם פרסומן באתר.</p></header></section>';
+  const card=a=>'<article class="nb-card nb-update-card"'+(a.valid_until?' data-valid-until="'+E(a.valid_until)+'"':'')+'><div class="nb-card-body"><div class="nb-update-meta"><span>'+E(sectionLabels[a.section]||'כתבות מהאתר')+(a.sponsored?' · תוכן מקודם':'')+'</span><time datetime="'+E(a.published_at)+'">'+E(stamp(a.published_at))+'</time></div><h3><a href="'+E(localURL(a.url))+'">'+E(a.title)+'</a></h3><p>'+E(a.description)+'</p><a class="nb-action" href="'+E(localURL(a.url))+'">לכתבה המלאה ←</a></div></article>';
+- return '<section class="nb-section" id="nb-updates"><header><h2>מה חדש ב'+E(name)+'?</h2><p>חדשות וכל הכתבות הקשורות לשכונה, מהחדש לישן.</p></header><div class="nb-grid">'+items.slice(0,12).map(card).join('')+'</div>'+(items.length>12?'<details class="nb-more"><summary>עוד כתבות מהשכונה ('+(items.length-12)+')</summary><div class="nb-grid">'+items.slice(12).map(card).join('')+'</div></details>':'')+'</section>';
++ return '<section class="nb-section" id="nb-updates"><header><h2>חדשות '+E(name)+'</h2><p>חדשות וכל הכתבות הקשורות לשכונה, מהחדש לישן.</p></header><div class="nb-grid">'+items.slice(0,12).map(card).join('')+'</div>'+(items.length>12?'<details class="nb-more"><summary>עוד כתבות מהשכונה ('+(items.length-12)+')</summary><div class="nb-grid">'+items.slice(12).map(card).join('')+'</div></details>':'')+'</section>';
+ }
+ export function renderSales(rows,name){
+  if(!rows.length)return '';
+@@ -14,4 +14,4 @@ export function renderSales(rows,name){
+  const table=entries=>'<div class="nb-sales-table"><table><caption>עסקאות מדווחות ב'+E(name)+'</caption><thead><tr><th>כתובת ומועד עסקה</th><th>חדרים</th><th>מ״ר</th><th>מחיר מכירה</th></tr></thead><tbody>'+entries.map(row).join('')+'</tbody></table></div>';
+  return '<section class="nb-section nb-sales" id="nb-sales"><header><h2>עסקאות דירות ב'+E(name)+'</h2></header><p class="nb-sales-intro">מכירות שדווחו, לפי מועד העסקה. אוסף חלקי עם המקור לכל עסקה.</p>'+table(rows.slice(0,3))+(rows.length>3?'<details class="nb-sales-all"><summary>עוד עסקאות ופרטים ('+(rows.length-3)+')</summary>'+table(rows.slice(3))+'</details>':'')+'<p class="nb-sales-note">אלה מחירי מכירה מדווחים. פרטי המקור אינם רשימת מודעות; מועד עסקה חסר נשאר מסומן כחסר.</p><a class="nb-source-link" href="/real-estate/deals/">לכל עסקאות הדירות שאספנו בתל אביב ←</a></section>';
+ }
+-export function renderLocalCard(x,labels){return '<article class="nb-card"'+(x.valid_until?' data-valid-until="'+E(x.valid_until)+'"':'')+'><div class="nb-card-body"><small>'+E(labels[x.kind]||'מידע מקומי')+'</small>'+(x.start?'<time datetime="'+E(x.start)+'">'+E(stamp(x.start))+'</time>':'')+'<h3><a href="'+E(x.url)+'">'+E(x.title)+'</a></h3><p>'+E(x.description||'')+'</p>'+(x.address?'<div class="nb-facts">'+E(x.address)+'</div>':'')+(x.content_type==='course'?'<small>זמינות ההצטרפות ותנאי ההרשמה אצל המפעיל</small>':'')+'<a class="nb-action" href="'+E(x.url)+'">לפרטים במקור ←</a></div></article>';}
++export function renderLocalCard(x,labels){return '<article class="nb-card" data-item-id="'+E(x.id)+'"'+(x.valid_until?' data-valid-until="'+E(x.valid_until)+'"':'')+'><div class="nb-card-body"><small>'+E(labels[x.kind]||'מידע מקומי')+'</small>'+(x.start?'<time datetime="'+E(x.start)+'">'+E(stamp(x.start))+'</time>':'')+'<h3><a href="'+E(x.url)+'">'+E(x.title)+'</a></h3><p>'+E(x.description||'')+'</p>'+(x.address?'<div class="nb-facts">'+E(x.address)+'</div>':'')+(x.content_type==='course'?'<small>זמינות ההצטרפות ותנאי ההרשמה אצל המפעיל</small>':'')+'<a class="nb-action" href="'+E(x.url)+'">לפרטים במקור ←</a></div></article>';}
+diff --git a/public/city-hub/neighborhoods.js b/public/city-hub/neighborhoods.js
+index 012c768..b154c84 100644
+--- a/public/city-hub/neighborhoods.js
++++ b/public/city-hub/neighborhoods.js
+@@ -1,3 +1,4 @@
++import {portalParts,localSections,bindPortal} from './neighborhood-portal.js';
+ import {escapeHTML as E,matchNeighborhoods,currentEvent,resolveNeighborhood,normalizeNeighborhood} from './neighborhood-model.js';
+ import {itemIsCurrent,articleKey,mergeNeighborhoodArticles,localSales} from './neighborhood-updates.js';
+ import {renderArticles,renderSales,renderLocalCard} from './neighborhood-render.js';
+@@ -14,14 +15,17 @@ get('/city-hub/neighborhoods.json').then(async data=>{
+  search?.addEventListener('input',()=>{const term=normalizeNeighborhood(search.value);if(term)index.open=true;for(const a of index.querySelectorAll('[data-neighborhood-name]')){const n=resolveNeighborhood(a.dataset.neighborhoodName,data);a.hidden=!!term&&![n.name,...n.aliases].some(name=>normalizeNeighborhood(name).includes(term));}const count=[...index.querySelectorAll('[data-neighborhood-name]')].filter(a=>!a.hidden).length;document.querySelector('#nb-search-status').textContent=term?(count?'נמצאו '+count+' שכונות ואזורים':'לא נמצאה התאמה. נסו שם אחר או בחרו מהרשימה.') : '';});
+  if(!selected&&selectedArea?.ready){location.replace(selectedArea.url);return;}
+  const name=selected||selectedArea?.name;if(!name)return;
+- try{localStorage.setItem('tlv-neighborhood',name)}catch{}
+  if(!selected){
+   const mount=document.querySelector('#nb-selection');mount.hidden=false;
+   const rows=data.items.filter(x=>x.neighborhoods.includes(name)&&itemIsCurrent(x));
+   const local=rows.filter(x=>!/^\/(news|articles|culture|future|night)\//.test(x.url)&&safe(x.url));
+   const fallback=rows.filter(x=>/^\/(news|articles|culture|future|night)\//.test(x.url)&&x.published_at);
+-  mount.innerHTML='<header class="nb-selection-heading"><span>קרוב לבית</span><h2>'+E(name)+'</h2><p>חדשות, נדל״ן, פעילות ומידע שימושי לתושבים.</p></header><div id="nb-updates-live">'+renderArticles(mergeNeighborhoodArticles(fallback,name),name)+'</div><div id="nb-local-sales"></div><div id="nb-live" aria-live="polite"></div>'+(local.length?'<section class="nb-section"><header><h2>חיים בשכונה</h2></header><div class="nb-grid">'+local.map(x=>renderLocalCard(x,data.labels)).join('')+'</div></section>':'')+'<section class="nb-resident-tools"><h3>מידע ושירותים לתושבים</h3><p>למידע מדויק על הבניין והרחוב, בחרו כתובת במערכת העירונית.</p><div><a href="https://www.tel-aviv.gov.il/Pages/NeighborhoodLobby.aspx" target="_blank" rel="noopener">מה קורה בשכונה — מידע עירוני לפי כתובת ↗</a><a href="https://gisn.tel-aviv.gov.il/" target="_blank" rel="noopener">המפה העירונית — תכנון, מוסדות ושירותים ↗</a><a href="/guide/">פעילויות ואירועים בעיר ←</a><a href="/real-estate/deals/">עסקאות דירות לפי שכונה ורבעון ←</a></div></section>';
++  const parts=portalParts(data,name);document.body.classList.add('np-active');
++  mount.innerHTML=parts.header+'<div class="np-layout"><div class="np-main">'+parts.discover+'<div id="nb-updates-live">'+renderArticles(mergeNeighborhoodArticles(fallback,name),name)+'</div><div id="nb-local-sales"></div><div id="nb-live" aria-live="polite"></div>'+localSections(data,name)+parts.sourceGuides+'</div>'+parts.aside+'</div>';
++  document.title=name+' נט — חדשות וחיים בשכונה | תל אביב נט';
++
+  }
++ bindPortal(document,data,name);
+  const updateMount=document.querySelector('#nb-updates-live');
+  // Exactly one bounded metadata read on entry; no new polling/collector/cron.
+  const updates=get('/api/neighborhood-updates?neighborhood='+encodeURIComponent(name)).then(feed=>{
+diff --git a/scripts/build-neighborhood-portals.mjs b/scripts/build-neighborhood-portals.mjs
+new file mode 100644
+index 0000000..c4bff93
+--- /dev/null
++++ b/scripts/build-neighborhood-portals.mjs
+@@ -0,0 +1,4 @@
++import {readFileSync} from 'node:fs';
++import {portalParts} from '../public/city-hub/neighborhood-portal.js';
++const data=JSON.parse(readFileSync('public/city-hub/neighborhoods.json'));
++process.stdout.write(JSON.stringify(Object.fromEntries(data.neighborhoods.map(n=>[n.name,portalParts(data,n.name)]))));
+diff --git a/scripts/build-neighborhoods.py b/scripts/build-neighborhoods.py
+index 6bf75c3..44ff6e0 100644
+--- a/scripts/build-neighborhoods.py
++++ b/scripts/build-neighborhoods.py
+@@ -4,7 +4,7 @@ from datetime import datetime,timezone,timedelta
+ from zoneinfo import ZoneInfo
+ from bs4 import BeautifulSoup
+ from xml.etree import ElementTree as ET
+-import json,re,html,hashlib
++import json,re,html,hashlib,subprocess
+ from neighborhood_sales import collect_sales,render_sales
+ from neighborhood_visuals import icon,hero_media,local_image
+ from neighborhood_matching import named_matches
+@@ -85,7 +85,7 @@ for x in courses:
+  if x.get('status')=='closed' or not date(x.get('verified_at')) or now-date(x['verified_at'])>timedelta(days=30):continue
+  if x.get('start_date') and x['start_date']<now.astimezone(ZoneInfo('Asia/Jerusalem')).strftime('%Y-%m-%d'):continue
+  ages=x.get('ages') or []
+- kind='kids' if any(v in ages for v in ['0-3','3-6','6-12','12-18','kids']) else 'seniors' if '60+' in ages and '18+' not in ages else 'classes'
++ kind='kids' if any(v in ages for v in ['0-3','3-6','6-12','12-18','13-18','עד 5','kids']) else 'seniors' if '60+' in ages and '18+' not in ages else 'classes'
+  schedule=' · '.join((v.get('day','')+' '+v.get('time','')).strip() for v in x.get('schedule',[]))
+  add(x,kind,x['name'],x.get('description',''),x['source_url'],age=x.get('age',''),schedule=schedule,availability='unknown',content_type='course')
+ for file in ['public/events/seed.json','public/events/children-seed.json','public/guide/data/senior-events.json']:
+@@ -96,7 +96,7 @@ for file in ['public/events/seed.json','public/events/children-seed.json','publi
+ for x in sources:
+  if x.get('neighborhood') and not x['source_url'].lower().endswith('.pdf'):
+   kind=x['kind'];kind='services' if kind=='classes' else kind
+-  add(x,kind,x['title'],x['description'],x['source_url'],x['checked_at'],content_type='institution')
++  add(x,kind,x['title'],x['description'],x['source_url'],x['checked_at'],content_type='institution',audiences=x.get('audiences',[]))
+ 
+ sales_config=read('data/neighborhoods/sales.json')
+ sales=collect_sales(list(news.values()),sales_config,defs,today=now.astimezone(ZoneInfo('Asia/Jerusalem')).date())
+@@ -118,8 +118,9 @@ for f in (P/'news').glob('*.html'):
+  for a in s.select('.nb-story-links a'):
+   if a.get('href') not in ready_paths:a.decompose()
+  f.write_text(str(s))
+-payload={'municipal_source':registry.get('municipal_index_source'),'built_at':now.isoformat(),'neighborhoods':coverage,'venues':registry['venues'],'record_exclusions':registry.get('record_exclusions',{}),'record_locations':registry.get('record_locations',{}),'items':items,'labels':labels}
++payload={'municipal_source':registry.get('municipal_index_source'),'built_at':now.isoformat(),'neighborhoods':coverage,'venues':registry['venues'],'record_exclusions':registry.get('record_exclusions',{}),'record_locations':registry.get('record_locations',{}),'items':items,'labels':labels,'visuals':visuals,'resident_tools':read('data/neighborhoods/resident-tools.json')['links']}
+ (P/'city-hub/neighborhoods.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n')
++portals=json.loads(subprocess.check_output(['node','scripts/build-neighborhood-portals.mjs'],cwd=R))
+ # The existing homepage selector consumes this registry, so thin entrances are not promoted.
+ from urllib.parse import quote
+ feed['neighborhoods']=[n['name'] for n in coverage];feed['neighborhood_pages']={n['name']:(n['url'] if n['ready'] else '/city-hub/?neighborhood='+quote(n['name'])) for n in coverage}
+@@ -146,7 +147,7 @@ def shell(title,description,path,body,name=''):
+  v=next((visuals.get(n['slug'],{}) for n in defs if n['name']==name),{})
+  theme='--nb-accent:'+v.get('accent','#126f6a')+';--nb-soft:'+v.get('soft','#e4eee8')
+  ld={'@context':'https://schema.org','@graph':[{'@type':'CollectionPage','@id':url+'#webpage','url':url,'name':title,'description':description,'inLanguage':'he-IL','isPartOf':{'@id':'https://tlvnet.com/#website'},'about':{'@type':'Place','name':name or 'שכונות תל אביב־יפו'}},{'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'תל אביב נט','item':'https://tlvnet.com/'},{'@type':'ListItem','position':2,'name':'השכונה שלי','item':'https://tlvnet.com/city-hub/'}]+([{'@type':'ListItem','position':3,'name':name,'item':url}] if name else [])}]}
+- return '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+E(title)+'</title><meta name="description" content="'+E(description)+'"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+url+'"><meta property="og:title" content="'+E(title)+'"><meta property="og:description" content="'+E(description)+'"><meta property="og:url" content="'+url+'"><meta property="og:type" content="website"><meta property="og:image" content="https://tlvnet.com/tlvnet-logo-approved.png"><link rel="stylesheet" href="/city-hub/neighborhoods.css"><script type="application/ld+json">'+json.dumps(ld,ensure_ascii=False).replace('<','\\u003c')+'</script></head><body data-neighborhood="'+E(name)+'" style="'+E(theme)+'"><a class="nb-skip" href="#content">לדלג לתוכן</a><header class="nb-header"><a href="/home?mode=day"><img src="/tlvnet-logo-approved.png" alt="תל אביב נט — עמוד הבית" width="150" height="70"></a><nav><a href="/news/">חדשות תל אביב</a><a href="/guide/">מה עושים בעיר</a><a href="/city-hub/">השכונה שלי</a></nav></header><main id="content">'+body+'</main><footer class="nb-footer"><a href="/home?mode=day">TLVNET · המקומון של תל אביב</a><a href="/about.html">אודות ויצירת קשר</a><a href="/editorial-policy">המדיניות המערכתית</a><a href="/updates.html">עדכונים</a></footer><script src="/launch-ready.js" defer></script><script type="module" src="/city-hub/neighborhoods.js"></script></body></html>'
++ return '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+E(title)+'</title><meta name="description" content="'+E(description)+'"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+url+'"><meta property="og:title" content="'+E(title)+'"><meta property="og:description" content="'+E(description)+'"><meta property="og:url" content="'+url+'"><meta property="og:type" content="website"><meta property="og:image" content="https://tlvnet.com/tlvnet-logo-approved.png"><link rel="stylesheet" href="/city-hub/neighborhoods.css"><link rel="stylesheet" href="/city-hub/neighborhood-portal.css"><script type="application/ld+json">'+json.dumps(ld,ensure_ascii=False).replace('<','\\u003c')+'</script></head><body data-neighborhood="'+E(name)+'" style="'+E(theme)+'"><a class="nb-skip" href="#content">לדלג לתוכן</a><header class="nb-header"><a href="/home?mode=day"><img src="/tlvnet-logo-approved.png" alt="תל אביב נט — עמוד הבית" width="150" height="70"></a><nav><a href="/news/">חדשות תל אביב</a><a href="/guide/">מה עושים בעיר</a><a href="/city-hub/">השכונה שלי</a></nav></header><main id="content">'+body+'</main><footer class="nb-footer"><a href="/home?mode=day">TLVNET · המקומון של תל אביב</a><a href="/about.html">אודות ויצירת קשר</a><a href="/editorial-policy">המדיניות המערכתית</a><a href="/updates.html">עדכונים</a></footer><script src="/launch-ready.js" defer></script><script type="module" src="/city-hub/neighborhoods.js"></script></body></html>'
+ def chooser():return '<form class="nb-chooser" action="/city-hub/" method="get"><label for="nb-choice">השכונה שלי</label><select name="neighborhood" id="nb-choice"><option value="">בחרו שכונה או אזור</option>'+''.join('<option value="'+E(n['name'])+'">'+E(n['name'])+'</option>' for n in sorted(coverage,key=lambda n:n['name']))+'</select><button>לשכונה שלי ←</button></form>'
+ for n in ready:
+  name=n['name'];rows=[x for x in items if name in x['neighborhoods']];local_sales=[d for d in sales if d['neighborhood']==name];available=[k for k in labels if n['counts'][k]]
+@@ -156,8 +157,10 @@ for n in ready:
+  nav='<nav class="nb-topics" aria-label="בעמוד השכונה">'+''.join('<a href="#nb-'+k+'">'+icon(k)+E(labels[k])+'</a>' for k in available)+('<a href="#nb-sales">עסקאות דירות לפי רבעון</a>' if local_sales else '')+'</nav>'
+  sections=''
+  for k in available:
+-  group=[x for x in rows if x['kind']==k]
+-  sections+='<section class="nb-section" id="nb-'+k+'"><header><h2>'+icon(k)+E(labels[k])+'</h2></header><div class="nb-grid">'+''.join(card(x,name) for x in group[:9])+'</div>'+('<details class="nb-more"><summary>עוד ב'+E(labels[k])+' ('+str(len(group)-9)+')</summary><div class="nb-grid">'+''.join(card(x,name) for x in group[9:])+'</div></details>' if len(group)>9 else '')+'</section>'
++  if k=='housing' and 'news' in available:continue
++  group=[x for x in rows if x['kind'] in (['news','housing'] if k in ['news','housing'] else [k])]
++  section_title='חדשות '+name if k in ['news','housing'] else labels[k]
++  sections+='<section class="nb-section" id="nb-'+k+'"><header><h2>'+icon(k)+E(section_title)+'</h2></header><div class="nb-grid">'+''.join(card(x,name) for x in group[:9])+'</div>'+('<details class="nb-more"><summary>עוד ב'+E(labels[k])+' ('+str(len(group)-9)+')</summary><div class="nb-grid">'+''.join(card(x,name) for x in group[9:])+'</div></details>' if len(group)>9 else '')+'</section>'
+  links='<aside class="nb-more-neighborhoods"><h2>ממשיכים לגלות את העיר</h2>'+''.join('<a href="'+x['url']+'">'+E(x['name'])+' ←</a>' for x in ready if x['slug']!=n['slug'])+'</aside>'
+  picks=[]
+  for kind in ['news','housing','places','kids','seniors','classes']:
+@@ -167,7 +170,7 @@ for n in ready:
+  picks_html='<section class="nb-picks"><h2>מתחילים קרוב לבית</h2><div>'+''.join('<a href="'+E(x['url'])+'"><span class="nb-pick-icon">'+icon(x['kind'])+'</span><span>'+E(labels[x['kind']])+'</span><strong>'+E(x['title'])+'</strong><b aria-hidden="true">←</b></a>' for x in picks)+'</div></section>'
+  tools=[x for x in sources if x['id'] in ['municipal-permits','municipal-local-committee','municipal-building-rights']]
+  housing_tools='<aside class="nb-method"><h2>מה מתוכנן בכתובת שלכם?</h2><p>לבדיקת בניין או מתחם ב'+E(name)+' אפשר לחפש לפי כתובת במקורות העירוניים. בקשה, החלטה והיתר הם שלבים שונים.</p>'+''.join('<a class="nb-source-link" href="'+E(x['source_url'])+'" target="_blank" rel="noopener">'+E(x['title'])+' ↗</a>' for x in tools)+'</aside>'
+- body=intro+nav+picks_html+'<div id="nb-updates-live"></div><div id="nb-live" aria-live="polite"></div>'+render_sales(local_sales,name)+sections+housing_tools+links
++ body=portals[name]['header']+'<div class="np-layout"><div class="np-main">'+portals[name]['discover']+'<div id="nb-updates-live"></div><div id="nb-live" aria-live="polite"></div>'+render_sales(local_sales,name)+sections+portals[name]['sourceGuides']+housing_tools+'</div>'+portals[name]['aside']+'</div>'+links
+  p=P/n['url'].lstrip('/');p.mkdir(parents=True,exist_ok=True);(p/'index.html').write_text(shell('חדשות '+name+', נדל״ן ומה עושים בשכונה | תל אביב נט',description,n['url'],body,name))
+  # Link existing stories back to their actual neighbourhood; not a generic tag cloud.
+  for x in rows:
+diff --git a/scripts/prepare-public.mjs b/scripts/prepare-public.mjs
+index 003a956..e16ec5e 100644
+--- a/scripts/prepare-public.mjs
++++ b/scripts/prepare-public.mjs
+@@ -11,7 +11,7 @@ const inputs=['lib/local-news-coverage.mjs','tests/local-news-coverage.mjs','scr
+ inputs.push('scripts/build-stay.py','data/stay/catalog.json','data/stay/photos.json','data/stay/nearby.json','public/guide/data/food-guides.json','tests/stay.mjs');
+ inputs.push('scripts/home_cover.py','data/home-cover.json','tests/home-cover.py','scripts/audit-image-quality.py','scripts/image_presentation.py','data/photo-bank/presentation.json','data/photo-bank/legacy-image-assignments.json','lib/news-photo-selection.mjs','app/api/editorial-publish/route.ts','tests/news-photos.mjs','tests/image-presentation.py','tests/news-image-registry.py','scripts/build-home-layout.py','tests/home-layout.py','scripts/polish-public.py','tests/night-feed.py');
+ let python;for(const executable of ['python','python3']){const probe=spawnSync(executable,['-c','import bs4'],{stdio:'ignore'});if(probe.status===0){python=executable;break}}
+-inputs.push('public/city-hub/neighborhood-updates.js','public/city-hub/neighborhood-render.js','scripts/build-neighborhood-updates.mjs','tests/neighborhood-updates.mjs');
++inputs.push('tests/neighborhood-portals.mjs','data/neighborhoods/resident-tools.json','public/city-hub/neighborhood-portal.js','public/city-hub/neighborhood-portal.css','scripts/build-neighborhood-portals.mjs','public/city-hub/neighborhood-updates.js','public/city-hub/neighborhood-render.js','scripts/build-neighborhood-updates.mjs','tests/neighborhood-updates.mjs');
+ inputs.push('scripts/neighborhood_visuals.py','data/neighborhoods/visuals.json','scripts/neighborhood_sales.py','data/neighborhoods/sales.json','tests/neighborhood_sales.py','tests/neighborhoods.mjs','scripts/check-seo.py','scripts/build-neighborhoods.py','data/neighborhoods/registry.json','data/neighborhoods/sources.json','scripts/prepare-launch.py','scripts/prepare-super-intro.mjs','public/super/data/catalog.json');
+ inputs.push('scripts/photo_request_queue.py','tests/photo-request-queue.py','scripts/check-photo-bank.py','tests/stock-photo-provenance.py','scripts/news_photo_gate.py','data/photo-bank/text-only-baseline.json','tests/news-photo-publication.py');
+ inputs.push('lib/article-sharing.mjs','public/article-sharing.js','public/article-sharing.css');
+@@ -39,6 +39,7 @@ if(python){
+  const seoCheck=spawnSync(python,['scripts/check-seo.py'],{stdio:'inherit'});if(seoCheck.status!==0)process.exit(seoCheck.status||1);
+  const neighborhoodCheck=spawnSync(process.execPath,['tests/neighborhoods.mjs'],{stdio:'inherit'});if(neighborhoodCheck.status!==0)process.exit(neighborhoodCheck.status||1);
+  const updatesCheck=spawnSync(process.execPath,['tests/neighborhood-updates.mjs'],{stdio:'inherit'});if(updatesCheck.status!==0)process.exit(updatesCheck.status||1);
++ const portalsCheck=spawnSync(process.execPath,['tests/neighborhood-portals.mjs'],{stdio:'inherit'});if(portalsCheck.status!==0)process.exit(portalsCheck.status||1);
+  const stream=spawnSync(python,['scripts/build-article-stream.py'],{stdio:'inherit'});if(stream.status!==0)process.exit(stream.status||1);
+  const follow=spawnSync(process.execPath,['scripts/prepare-social-follow.mjs'],{stdio:'inherit'});if(follow.status!==0)process.exit(follow.status||1);
+  const paths=[...new Set([...inputs,...files('public')])].sort();
+diff --git a/tests/neighborhood-portals.mjs b/tests/neighborhood-portals.mjs
+new file mode 100644
+index 0000000..c0a4776
+--- /dev/null
++++ b/tests/neighborhood-portals.mjs
+@@ -0,0 +1,15 @@
++import assert from 'node:assert/strict';
++import {readFileSync} from 'node:fs';
++import {portalParts,localSections} from '../public/city-hub/neighborhood-portal.js';
++const data=JSON.parse(readFileSync('public/city-hub/neighborhoods.json'));
++for(const n of data.neighborhoods){
++ const x=portalParts(data,n.name);assert(x.header.includes('<h1>'));assert(x.header.includes('המקומון של השכונה'));assert(x.aside.includes('מידע עירוני'));assert(x.aside.includes('מחירי המדף אינם רשימת מבצעים'));
++ if(n.ready){const html=readFileSync('public'+n.url+'index.html','utf8');assert(html.includes('np-layout'));assert(html.includes('neighborhood-portal.css'));}
++}
++const g=portalParts(data,"רמת אביב ג'");assert(g.sourceGuides.includes('רוזין'));assert(g.sourceGuides.includes('nb-kids'));assert(g.sourceGuides.includes('nb-classes'));assert(!g.sourceGuides.includes('nb-seniors'));
++assert(!portalParts(data,'רמת אביב').sourceGuides.includes('רוזין'));
++const fake={...data,neighborhoods:[{name:'<script>',slug:'test'}],items:[],visuals:{test:{photo:{url:'javascript:alert(1)',rights_status:'verified'}}}};
++assert(!portalParts(fake,'<script>').header.includes('<script>'));assert(!portalParts(fake,'<script>').header.includes('javascript:'));
++const expired={...data,items:[{id:'expired',kind:'kids',title:'STALE_SENTINEL',url:'/guide/',neighborhoods:["רמת אביב ג'"],valid_until:'2020-01-01'}]};
++assert(!localSections(expired,"רמת אביב ג'").includes('STALE_SENTINEL'));
++console.log('PASS:73 local editions, crawlable rich layouts, verified source-only guides, no inferred seniors or locality, expired content and unsafe photo exclusion');
