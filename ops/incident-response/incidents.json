@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-14T23:16:03Z",
+  "updated_at": "2026-11-15T00:19:49Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -396,7 +396,28 @@
       },
       "resolution_commit": "568ec413cdd0a57ca8a69d9eccf11657f3c83e7f",
       "resolution": "Automatic timer removed; explicit dispatch retained.",
-      "next_action": "Publisher can provide a legitimately configured YouTube Data API credential if new-artist discovery is required; do not acquire one or expand access autonomously."
+      "next_action": "Publisher can provide a legitimately configured YouTube Data API credential if new-artist discovery is required; do not acquire one or expand access autonomously.",
+      "occurrences": [
+        {
+          "run_id": 43038183515,
+          "attempt": 1,
+          "created_at": "2026-11-11T14:24:36Z",
+          "source_commit": "703179794e97fd512b34062800d980289788f99f",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43038183515",
+          "classification": "historical metadata only; root signature not confirmed in this cycle",
+          "workflow": ".github/workflows/discover-standup-videos.yml",
+          "job_id": 130582543059,
+          "failed_step": "Find videos for new stand-up performers",
+          "assertion": "YOUTUBE_API_KEY not set; new-artist discovery did not run.",
+          "exit_code": 2,
+          "log_read_full": true,
+          "current_credential_read": false,
+          "retry": false,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a.json",
+          "observed_at": "2026-11-15T00:19:49Z"
+        }
+      ],
+      "last_review_runKey": "ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a"
     },
     {
       "id": "ims-no-valid-current-period",
@@ -769,6 +790,60 @@
           "public_verification": false,
           "evidence": "ops/incident-response/evidence/ops-2026-11-14-2eb45d4f-892c-832a-ab3d-ade0da32a84e.json",
           "observed_at": "2026-11-14T23:05:49Z"
+        },
+        {
+          "run_id": 43048647624,
+          "attempt": 1,
+          "created_at": "2026-11-11T15:28:07Z",
+          "source_commit": "08b9cfa3b71d6f622b2df02fba65945b2a617922",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43048647624",
+          "classification": "confirmed historical gate; precise pair limited to this run",
+          "workflow": ".github/workflows/public-events-readback-audit.yml",
+          "job_id": 130619400119,
+          "failed_step": "Normalize expected feeds with the publication integrity policy",
+          "log_read_full": true,
+          "assertion": "Publication blocked: unresolved duplicate candidates in ashdod",
+          "unresolved_pair": [
+            {
+              "event_id": "board_d351916811189195dc",
+              "title": "טוק טוק – קומדיה אובססיבית",
+              "date": "2026-12-26",
+              "time": "21:00",
+              "venue": "המשכן לאומניות הבמה – אשדוד",
+              "source": "https://friends-hist.co.il/show/%D7%98%D7%95%D7%A7-%D7%98%D7%95%D7%A7-%D7%A7%D7%95%D7%9E%D7%93%D7%99%D7%94-%D7%90%D7%95%D7%91%D7%A1%D7%A1%D7%99%D7%91%D7%99%D7%AA/"
+            },
+            {
+              "event_id": "board_b12ed6ec78c0f3a808",
+              "title": "טוק טוק – קומדיה אובססיבית – Toc-toc",
+              "date": "2026-12-26",
+              "time": "21:00",
+              "venue": "המשכן לאמנויות הבמה אשדוד",
+              "source": "https://sababa.events/he/event/טוק-טוק-קומדיה-אובססיבית-toc-toc/ashdod/"
+            }
+          ],
+          "diagnostic_readback": {
+            "checked_at": "2026-11-11T15:29:50.562400+00:00",
+            "dataset_head": "08b9cfa3b71d6f622b2df02fba65945b2a617922",
+            "ashdod": {
+              "http": 200,
+              "github_count": 1023,
+              "public_count": 994,
+              "missing_public_ids": 32,
+              "extra_public_ids": 3,
+              "different_records": 419
+            },
+            "rishon": {
+              "http": 200,
+              "github_count": 2198,
+              "public_count": 2191,
+              "missing_public_ids": 7,
+              "extra_public_ids": 0,
+              "different_records": 959
+            },
+            "qualification": "Comparison ran after failed prerequisite normalization. This is historical source/public divergence, not clean normalized full-record parity evidence; do not merge with Nov6 no-missing-ID/non-priority-only root or infer a current outage."
+          },
+          "evidence": "ops/incident-response/evidence/ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a.json",
+          "observed_at": "2026-11-15T00:19:49Z"
         }
       ],
       "unclassified_same_workflow_occurrences": [
@@ -872,7 +947,31 @@
       "current_state": "Historical11Nov19:07Pagesrun43084295505classifiedas Ashdod unresolvedduplicate1vs0, same historical testblob as11Nov19:15. Exactpairnotprinted; currentgate retained. No currentoutage/recovery inferred.",
       "next_action": "Continue bounded historical signature classification. If the nested-stage signature recurs with new input, expose redacted child diagnostic stderr while retaining the gate; do not re-run content collection for historical logs.",
       "prevention": "Separate workflow metadata grouping from confirmed root cause. Preserve exact identity, times, venue and source evidence.",
-      "last_review_runKey": "ops-2026-11-14-2eb45d4f-892c-832a-ab3d-ade0da32a84e"
+      "last_review_runKey": "ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a",
+      "historical_pair_evidence": {
+        "run_id": 43048647624,
+        "city": "ashdod",
+        "pair": [
+          {
+            "event_id": "board_d351916811189195dc",
+            "title": "טוק טוק – קומדיה אובססיבית",
+            "date": "2026-12-26",
+            "time": "21:00",
+            "venue": "המשכן לאומניות הבמה – אשדוד",
+            "source": "https://friends-hist.co.il/show/%D7%98%D7%95%D7%A7-%D7%98%D7%95%D7%A7-%D7%A7%D7%95%D7%9E%D7%93%D7%99%D7%94-%D7%90%D7%95%D7%91%D7%A1%D7%A1%D7%99%D7%91%D7%99%D7%AA/"
+          },
+          {
+            "event_id": "board_b12ed6ec78c0f3a808",
+            "title": "טוק טוק – קומדיה אובססיבית – Toc-toc",
+            "date": "2026-12-26",
+            "time": "21:00",
+            "venue": "המשכן לאמנויות הבמה אשדוד",
+            "source": "https://sababa.events/he/event/טוק-טוק-קומדיה-אובססיבית-toc-toc/ashdod/"
+          }
+        ],
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a.json",
+        "qualification": "Does not identify the pair behind other logs that omitted it; not permission to merge or change identity policy."
+      }
     },
     {
       "id": "tlvnet-community-cancelled-owner-routing",
@@ -2561,7 +2660,7 @@
       "last_review_runKey": "ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100"
     }
   ],
-  "last_review_runKey": "ops-2026-11-14-b7a1d169-e750-832a-9fe7-c2ef73720100",
+  "last_review_runKey": "ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
