@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T03:03:30Z",
+  "updated_at": "2026-11-15T04:46:55Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2833,9 +2833,63 @@
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2.json",
       "observed_at": "2026-11-15T01:16:31Z",
       "last_review_runKey": "ops-2026-11-15-2447f279-6ec4-832a-bea8-c40de79ed9e2"
+    },
+    {
+      "id": "historical-super-batyam-private-read-http400",
+      "status": "open",
+      "temporal_scope": "historical_only",
+      "fingerprint": "super-batyam-resume/stage_super_private_storage.verified_existing/GET-SUPER.BATYAM-data-offers08/HTTP400",
+      "root_cause": "Historical private authenticated object GET returned HTTP400 during resume verification. Code treats only404 as absent and aborts on other HTTP errors. Underlying response/body/provider reason is not captured in the traceback and is unestablished; no auth, quota, missing-object or current-outage inference.",
+      "occurrences": [
+        {
+          "run_id": 42969667497,
+          "workflow": "Resume BATYAM private storage staging (no production cutover)",
+          "path": ".github/workflows/super-batyam-resume.yml",
+          "attempt": 1,
+          "created_at": "2026-11-11T06:02:40Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "c31d074a001fcf716d3efae8739f97a3660b55b5",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42969667497",
+          "classification": "Failed step metadata inspected; root cause unconfirmed; full logs deferred",
+          "jobs": [
+            {
+              "job_id": 130354941377,
+              "failed_steps": [
+                "Resume private immutable BATYAM release using existing verified files"
+              ]
+            }
+          ],
+          "job_id": 130354941377,
+          "failed_step": "Resume private immutable BATYAM release using existing verified files",
+          "failed_command": "scripts/stage_super_private_storage.py:76 verified_existing",
+          "assertion": "RuntimeError: Private read failed for SUPER.BATYAM/data/offers/08.json HTTP400",
+          "log_read_full": true,
+          "source_blob": "0807ba9213b042e252c01c406e96d9d614d373a0",
+          "source_lines": "55-102",
+          "observed_at": "2026-11-15T04:46:55Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-15-438da9ee-f230-832a-9687-45b7ba95d76a.json"
+        }
+      ],
+      "source_observation": {
+        "blob": "0807ba9213b042e252c01c406e96d9d614d373a0",
+        "verified_existing": "404 returnsFalse; other HTTP errors raise; successful bytes require200 and matchingSHA256",
+        "upload_guard": "400/409 POST only accepted after verified readback; overwrite remains refused",
+        "phase": "error occurred in initial existing-object GET, before POST for this particular file",
+        "qualification": "Earlier object writes in the historical job are not excluded; this log does not establish completed staging or public cutover."
+      },
+      "resolution": "Historical signature classified only. No storage/API retry, credential read, migration, collector or publication; no current code restoration.",
+      "next_action": "Do not resurrect the historical staging route. If a new failure occurs on the current authorized owner route, retain redacted method/status/body and immutable object identifiers to distinguish request/provider causes before one justified retry; keep byte/hash and no-overwrite guards.",
+      "prevention": "Keep readback verification errors distinct from upload conflict handling and public acceptance. HTTP400 is not permission to overwrite or assume object absence.",
+      "related_incident_ids": [
+        "historical-super-rishon-private-upload-http520"
+      ],
+      "observed_at": "2026-11-15T04:46:55Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-438da9ee-f230-832a-9687-45b7ba95d76a.json",
+      "last_review_runKey": "ops-2026-11-15-438da9ee-f230-832a-9687-45b7ba95d76a"
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-52242775-7e34-832a-b5b2-4233f619ebea",
+  "last_review_runKey": "ops-2026-11-15-438da9ee-f230-832a-9687-45b7ba95d76a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
