@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "00a4f12b-fd04-8326-abcc-11d083799830",
+  "runKey": "continuity-repair-20261115T130716Z",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-15T13:27:43.278Z",
+  "site": "https://tlvnet.com",
+  "source_commit": "95ce4ac78ba4fb660b2f761dec05c408ee2bdaba",
+  "version": 622,
+  "deployment_id": "appgdep_6af9b160239881918898783c7f130191",
+  "deployment_status": "succeeded",
+  "publication": {
+    "status": "published_verified",
+    "url": "https://tlvnet.com/news/metropoline-12-neve-avivim-ramat-hahayal-diversions-20261115",
+    "original_owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+    "original_owner_run_id": "e66260dc-41c0-8332-89c9-87a4dbf99048",
+    "body_image_credit_home_section_and_neighborhoods": true
+  },
+  "regression": [
+    "tests/prepared-news-recovery.mjs",
+    "npm run build including foundation/news/SEO/preparation checks",
+    "python scripts/check-photo-bank.py:164 local JPG assets",
+    "git diff --check",
+    "manifest owner IDs match current profiles"
+  ],
+  "availability": {
+    "measurement": "targeted public pages rendered successfully",
+    "measured_requests_only": true,
+    "uptime_percentage": null,
+    "performance_latency": null
+  },
+  "backup_restore_capacity": {
+    "new_backup_or_restore_performed": false,
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    },
+    "qualification_started_at": null,
+    "qualification_ends_at": null
+  },
+  "rollback": {
+    "retained_version": 621,
+    "automatic_rollback_tested": false
+  },
+  "remaining": {
+    "historical_run_entries": 245,
+    "unread_inbox_backlog": 28,
+    "new_actions_delta": "New-run delta not yet read down to12:27:19Z; resume created_at<=2026-11-15T12:42:47Z and >12:27:19Z, exclude recorded IDs. Historical245entries unchanged.",
+    "mobile_visual_review": "pending",
+    "coverage_candidates": "Existing research queues require original owner verification; no alternative writer triggered"
+  },
+  "schedules_changed": false,
+  "new_automation_created": false,
+  "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
+  "call_cost": {
+    "calls": null,
+    "cost": null
+  }
+}
