@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "site": "TLVNET.COM",
+  "observed_at": "2026-11-15T13:02:39.743Z",
+  "run_key": "receipt-normalization-20261115-77ec49e4",
+  "version_number": 621,
+  "source_commit": "4d468bedba4d76e985720fca9cca67506397e843",
+  "deployment_id": "appgdep_6af9acaf8e248191bfd2e1f5723edfea",
+  "rollback_version": 620,
+  "changes_verified": [
+    "consumer live_verification receipt normalized with full body/title/credit/status and matching asset hash requirements",
+    "multi-article/false hash receipts rejected in regression",
+    "community useful local board update classified separately from new article"
+  ],
+  "service_access": {
+    "wrangler_authenticated": false,
+    "backup_principal_found": false,
+    "scope": "Accessible session/source/runtime metadata only, not a complete Cloudflare account identity inventory",
+    "dashboard": "sign-in required",
+    "existing_keys_repurposed": false,
+    "request_path": "ops/tlvnet-stability/BACKUP_ACCESS_REQUEST_20261115.md"
+  },
+  "publication_reconciliation": [
+    {
+      "topic": "consumer",
+      "article_id": "suspicious-shopping-links-clickcheck-guide-20261115",
+      "state": "recorded_verified_new_publication",
+      "fresh_live_title_body_credit_image": true
+    },
+    {
+      "topic": "sports",
+      "owner_run_id": "5c7dde68-b260-8324-86c0-e581a1a5caeb",
+      "article_id": "maccabi-jerusalem-home-loss-20261114",
+      "url": "https://tlvnet.com/news/maccabi-jerusalem-home-loss-20261114",
+      "state": "live_observed_owner_receipt_gap_reconciled",
+      "fresh_live_title_body_credit_image": true,
+      "live_image_byte_hash_rechecked": false,
+      "source_and_old_ledger_preserved": true,
+      "action": "Do not replay this article because old owner ledger is prepared; publication is present. Original release provenance is not rewritten."
+    }
+  ],
+  "isolated_application_load": {
+    "fixture_articles": 242,
+    "requests": 320,
+    "concurrency": [
+      1,
+      4,
+      8,
+      16
+    ],
+    "successes": 320,
+    "p95_ms": [
+      29.37,
+      26.796,
+      43.723,
+      83.317
+    ],
+    "agent_attempts": 8,
+    "upstream_calls_during_failure": 1,
+    "conflicts_prevented": 7,
+    "failed_job_retained": true,
+    "public_reads_continued": true,
+    "retry_recovered": true,
+    "scope": "Actual app handlers on offline restored SQLite/file media; no Workers/cloud limits measured; Node process RSS is not per-isolate memory."
+  },
+  "monitor": {
+    "existing_task": "Automation_9776808c73848191a9d748dd09315960",
+    "observed_existing_run": "a6015263-65b4-8326-b418-76875ee90297",
+    "run_completed": true,
+    "qualification_started_at": null
+  },
+  "new_keys_created": false,
+  "new_automations_created": false,
+  "production_data_written": false,
+  "other_sites_changed": false
+}
