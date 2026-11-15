@@ -11,17 +11,18 @@
   "gates": {
     "automated_full_offsite_backup": "not_verified",
     "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
-    "isolated_capacity_test": "not_verified",
+    "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
     "scheduled_publication_reconciliation": "partial"
   },
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": "2026-11-15T12:45:44.170Z",
+  "last_observation_at": "2026-11-15T13:02:39.743Z",
   "last_daily_summary_at": null,
   "observations": [
     "observations/2026-11-15/stability-version619.json",
-    "observations/2026-11-15/a6015263-65b4-8326-b418-76875ee90297.json"
+    "observations/2026-11-15/a6015263-65b4-8326-b418-76875ee90297.json",
+    "observations/2026-11-15/receipt-normalization-version621.json"
   ],
   "remaining": [
     "Unattendedbackup identity/access and independentretention",
@@ -32,11 +33,12 @@
   ],
   "scope": "TLVNET.COM only for this stabilization program; no DNS, other-city work, new paid services or security expansion",
   "latest_deployment": {
-    "source_commit": "a9b95b02806fece045c2ac556d4f13845cb4fd37",
-    "version": 620,
-    "deployment_id": "appgdep_6af9a80ae6948191a82d4913b7b572ab",
+    "version": 621,
+    "source_commit": "4d468bedba4d76e985720fca9cca67506397e843",
+    "deployment_id": "appgdep_6af9acaf8e248191bfd2e1f5723edfea",
     "status": "succeeded",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-a6015263-65b4-8326-b418-76875ee90297.json"
+    "rollback_version": 620
   },
-  "daily_summary_status": "Baseline less than24hours old; no seven-day qualification claimed."
+  "daily_summary_status": "Baseline less than24hours old; no seven-day qualification claimed.",
+  "access_request": "BACKUP_ACCESS_REQUEST_20261115.md"
 }
