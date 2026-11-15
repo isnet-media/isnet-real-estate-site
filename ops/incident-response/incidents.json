@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T18:40:34.222Z",
+  "updated_at": "2026-11-15T19:31:58.042Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -3687,6 +3687,24 @@
       "impact": "Partial index/backfill coverage only; verified independent publication continued",
       "next_action": "Retain original bounded backfill cursor; resume only with changed rate-limit state in next original-owner cycle",
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
+    },
+    {
+      "id": "controller-active-scope-inherited-writer-approval",
+      "status": "mitigated",
+      "classification": "ownership/scope",
+      "root_cause": "This execution followed writer-scope text before active controller-role reconciliation and locally prepared2drafts with an assumed sports identity. Explicit latest controller-only scope was restored before source push or deployment. Connector false/null flags are not backend misrouting proof.",
+      "observed_at": "2026-11-15T19:31:58.042Z",
+      "change": "Invalidated local approvals; retained unapproved drafts in existing immutable inbox; isolated dirty research checkout; opened fresh source; released only exact token created by this execution; added procedural RUNBOOK guard.",
+      "tests": "Local draft body/image checks and build passed before correction, but not owner authorization. Current public MaccabiJerusalem fullbody/loaded image/credit and desktop viewed; no new article published.",
+      "public_proof": [
+        "https://tlvnet.com/news/maccabi-jerusalem-home-loss-20261114"
+      ],
+      "evidence": [
+        "ops/incident-response/evidence/ops-2026-11-15-66f4eaea-b874-8326-9b23-1510b4bf3d77.json"
+      ],
+      "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
+      "prevention": "Keep actual executor identity separate from intended owner; explicit active-role reconciliation before approval/CAS. Procedural mitigation only; no runtime fixed_verified claim.",
+      "remaining": "Actual sports owner must review two retained drafts; original evening run37cbf175 still in progress. No task triggered."
     }
   ],
   "last_review_runKey": "ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6",
