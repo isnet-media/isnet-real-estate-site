@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T17:24:52.278Z",
+  "updated_at": "2026-11-15T18:40:34.222Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-15T16:28:40Z",
+  "last_processed_run_created_at": "2026-11-15T18:06:52Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -3043,34 +3043,29 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
   },
   "last_cycle": {
-    "run_id": "908bbdd2-0044-8326-9bb2-f15f076a1b78",
-    "runKey": "ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78",
+    "run_id": "ec77c74d-904c-8326-a80d-1192ed4a5af6",
+    "runKey": "ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6",
     "policy_version": "2026-11-15/1.2",
-    "started_at": "2026-11-15T17:21:03.310160Z",
-    "observed_at": "2026-11-15T17:24:52.278Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json",
+    "started_at": "2026-11-15T18:35:42.420032Z",
+    "observed_at": "2026-11-15T18:40:34.222Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json",
     "targets_reviewed": [
-      "7TLVNETdesk owner metadata",
-      "Changed evening news source and live article",
-      "New source429 and build regression inbox",
+      "7TLVNETdesk result/source metadata",
+      "Actual pending joint city writer run9c25",
+      "Raanana59 new CMS811636 and image851020 public readback",
       "Actions/inbox bounded delta",
       "social_runs delta",
-      "Stability metadata"
+      "TLVNET stability metadata"
     ],
-    "new_workflow_runs": 0,
-    "metadata_rows_read": 1,
+    "new_workflow_runs": 2,
+    "metadata_rows_read": 3,
     "new_workflow_failures": 0,
+    "completed_pending_city_runs": 1,
+    "city_public_content_verified_quality_pending": 1,
     "new_social_runs": 1,
-    "new_fixed_verified_incidents": [
-      "tlvnet-local-coverage-completed-handoff-build-regression"
-    ],
-    "new_open_incidents": [
-      "tlvnet-local-source-municipal-category429"
-    ],
     "build_or_deploy": false,
-    "saved_version": 624,
     "source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
-    "source_receipt_commit": "87541358cd703b9f936c53fdb748b7c8cefe2333",
+    "saved_version": 624,
     "history_remaining": 244,
     "actual_schedules_changed": false,
     "no_automation_created": true,
@@ -3515,7 +3510,9 @@
     "ops/incident-response/inbox/db934004-503c-8332-a023-ebaf5f8a3380-1.json",
     "ops/incident-response/inbox/db934004-503c-8332-a023-ebaf5f8a3380-2.json",
     "ops/incident-response/inbox/20261113-city-writer-runtime-policy11.json",
-    "ops/incident-response/inbox/20261114-community-preview-followup.json"
+    "ops/incident-response/inbox/20261114-community-preview-followup.json",
+    "ops/incident-response/inbox/20261114-consumer-preview-and-source-identity.json",
+    "ops/incident-response/inbox/20261114-future-cms-create-post-validation.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4767,6 +4764,41 @@
       "no_automation_created": true,
       "calls_measured": null,
       "cost_measured": null
+    },
+    {
+      "run_id": "908bbdd2-0044-8326-9bb2-f15f076a1b78",
+      "runKey": "ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78",
+      "policy_version": "2026-11-15/1.2",
+      "started_at": "2026-11-15T17:21:03.310160Z",
+      "observed_at": "2026-11-15T17:24:52.278Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json",
+      "targets_reviewed": [
+        "7TLVNETdesk owner metadata",
+        "Changed evening news source and live article",
+        "New source429 and build regression inbox",
+        "Actions/inbox bounded delta",
+        "social_runs delta",
+        "Stability metadata"
+      ],
+      "new_workflow_runs": 0,
+      "metadata_rows_read": 1,
+      "new_workflow_failures": 0,
+      "new_social_runs": 1,
+      "new_fixed_verified_incidents": [
+        "tlvnet-local-coverage-completed-handoff-build-regression"
+      ],
+      "new_open_incidents": [
+        "tlvnet-local-source-municipal-category429"
+      ],
+      "build_or_deploy": false,
+      "saved_version": 624,
+      "source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+      "source_receipt_commit": "87541358cd703b9f936c53fdb748b7c8cefe2333",
+      "history_remaining": 244,
+      "actual_schedules_changed": false,
+      "no_automation_created": true,
+      "calls_measured": null,
+      "cost_measured": null
     }
   ],
   "photo_controls_checkpoint": {
@@ -4798,10 +4830,16 @@
     "9c25d922-61e0-8331-b958-c000013496be": {
       "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
       "run_id": "9c25d922-61e0-8331-b958-c000013496be",
-      "status": "in_progress",
+      "status": "completed",
       "qualification": "Actual pending execution retained; no publication claimed, no writes or task activation by controller",
-      "observed_at": "2026-11-15T17:24:52.278Z",
-      "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
+      "observed_at": "2026-11-15T18:40:34.222Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json",
+      "completed_at": "2026-11-15T17:39:00.086477Z",
+      "result_matches_run": true,
+      "reported_new_CMS": 1,
+      "reported_new_public_verified": 0,
+      "reported_existing_public_verified": 1,
+      "controller_public_readback": "public_readback_verified_asset_hash_and_visual_quality_pending"
     }
   },
   "publication_pending_existing_writer": {
@@ -4936,7 +4974,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-15T17:00:10.701Z",
+    "max_finished_at": "2026-11-15T18:00:09.599Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -4946,12 +4984,13 @@
       "2026-11-15T14",
       "2026-11-15T15",
       "2026-11-15T16",
-      "2026-11-15T17"
+      "2026-11-15T17",
+      "2026-11-15T18"
     ],
-    "observed_at": "2026-11-15T17:24:52.278Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json",
+    "observed_at": "2026-11-15T18:40:34.222Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json",
     "new_rows_this_cycle": 1,
-    "public_verification": "17:00send recorded; publicFacebook proof pending, no resend."
+    "public_verification": "18:00send recorded; independent Facebook public proof pending, no resend."
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -4972,8 +5011,8 @@
     "health_run_id": 43601862906,
     "qualification": "Terminal metadata only; no controller public scan or article-publication inference. workflow_run deployments relate to event collector work; controller did not build/deploy."
   },
-  "latest_city_public_verifications": [
-    {
+  "latest_city_public_verifications": {
+    "0": {
       "owner": "Automation_845f7ef0033c8191b7490e0dc5748754",
       "owner_run_id": "b84dc713-bb8c-8321-861b-a2ba0e403c28",
       "body_full": true,
@@ -5003,7 +5042,7 @@
         "credit": "אילוסטרציה: David McElwee / Pexels. צילום ארכיון כללי, לא מהאירוע."
       }
     },
-    {
+    "1": {
       "owner": "Automation_845f7ef0033c8191b7490e0dc5748754",
       "owner_run_id": "b84dc713-bb8c-8321-861b-a2ba0e403c28",
       "body_full": true,
@@ -5032,8 +5071,53 @@
         "src": "https://raanananet.co.il/dyncontent/tmp/241/2026_11_15_0df05d25-e9b4-43f5-8ae8-a068860815b8_640_480_Crop_.jpg",
         "credit": "אילוסטרציה: Pavel Danilyuk / Pexels. צילום טפסים כללי, אינו מתעד הגשה ברעננה."
       }
+    },
+    "observed_at": "2026-11-15T18:40:34.222Z",
+    "raanana811636": {
+      "website_id": 59,
+      "post_id": 811636,
+      "file_id": 851020,
+      "category_id": 1953,
+      "category": "Community > Education",
+      "status": "public_readback_verified_asset_hash_and_visual_quality_pending",
+      "canonical_url": "https://raanananet.co.il/%d7%a7%d7%94%d7%99%d7%9c%d7%94/%d7%9e%d7%97%d7%a8-%d7%a0%d7%a4%d7%aa%d7%97%d7%aa-%d7%94%d7%94%d7%a8%d7%a9%d7%9e%d7%94-%d7%9c%d7%a7%d7%99%d7%99%d7%98%d7%a0%d7%aa-%d7%97%d7%a0%d7%95%d7%9b%d7%94-%d7%91%d7%a8%d7%a2%d7%a0%d7%a0%d7%94-%d7%94%d7%9e%d7%95%d7%a2%d7%93%d7%99%d7%9d-%d7%94%d7%9e%d7%97%d7%99%d7%a8-%d7%95%d7%9e%d7%94-%d7%97%d7%a9%d7%95%d7%91-%d7%9c%d7%93%d7%a2%d7%aa-811636",
+      "title": "מחר נפתחת ההרשמה לקייטנת חנוכה ברעננה: המועדים, המחיר ומה חשוב לדעת",
+      "source": "Original owner verified15NovRaanana municipal announcement; controller did not independently reverify unavailable primary reader.",
+      "controller_checks": {
+        "full_visible_body": true,
+        "image_loaded": true,
+        "image_dimensions": [
+          640,
+          480
+        ],
+        "image_src": "https://raanananet.co.il/dyncontent/tmp/284/2026_11_15_77a09109-d8d9-4fbc-ac37-1203806ced92_640_480_Crop_.jpg",
+        "credit": "Eliezer Muller / Pexels (Pexels License); explicitly illustrative and not Raanana camp",
+        "home_link": true,
+        "education_category_link": true,
+        "canonical_matches": true
+      },
+      "limitations": {
+        "source_image_original_hash": null,
+        "served_derivative_hash": null,
+        "hash_reader": "HTTP403; one direct read attempt; browser JPG loaded independently",
+        "desktop": "DOM content review passed; no screenshot visual sign-off",
+        "mobile": "pending"
+      },
+      "routing_observation": {
+        "guessed_child_only_route": "404",
+        "actual_site_card_route": "/קהילה/<post-slug>",
+        "public_outage": false,
+        "prevention": "Use observed public link/canonical, not inferred child category URL; protocol documented in existing RUNBOOK. No public source/CMS mutation."
+      },
+      "owner_other_results": {
+        "raanana811584": "Owner-reported existing article verified, not new publication and not independently re-read this cycle",
+        "herzliya811624": "Existing cultural article reported by original owner; no alternative or duplicate story created"
+      },
+      "new_published_verified_count_this_cycle": 0,
+      "public_content_readbacks_completed": 1,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json"
     }
-  ],
+  },
   "latest_tlvnet_queue_observation": {
     "run_id": 43635012197,
     "job_id": 132569805191,
@@ -5046,9 +5130,7 @@
     "job_cap": 2,
     "budget_qualification": "Technical job/call caps only; no monetary enforcement or actual provider usage measured. No success log read; actual processed row count not inferred."
   },
-  "pending_task_run_ids": [
-    "9c25d922-61e0-8331-b958-c000013496be"
-  ],
+  "pending_task_run_ids": [],
   "latest_supermarket_execution_checkpoint": {
     "source_inbox": "ops/incident-response/inbox/e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
     "evidence": "ops/incident-response/evidence/ops-2026-11-15-09a818b2-b278-832a-b5b1-29dff01686d0.json",
@@ -5097,6 +5179,18 @@
         "tel-aviv-housing-sales-q3-2026-cbs-20261115"
       ],
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-dcc9642c-79dc-8326-998b-1cb689a8bebc.json"
+    },
+    {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "run_id": "9c25d922-61e0-8331-b958-c000013496be",
+      "status": "completed",
+      "completed_at": "2026-11-15T17:39:00.086477Z",
+      "result_matches_run": true,
+      "reported_new_CMS": 1,
+      "reported_new_public_verified": 0,
+      "reported_existing_public_verified": 1,
+      "public_readback": "public_readback_verified_asset_hash_and_visual_quality_pending",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json"
     }
   ],
   "latest_manual_freshness_repair": {
@@ -5417,8 +5511,8 @@
       }
     },
     "qualification": "Seven desks source metadata/results delta; live focused620neighborhood and changed consumer checks. Not whole-network live revalidation.",
-    "metadata_checked_at": "2026-11-15T16:38:49.839Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
+    "metadata_checked_at": "2026-11-15T18:40:34.222Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json"
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-15T10:53:58.329Z",
@@ -5727,10 +5821,8 @@
     "mobile_visual_review": "pending"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-15T17:24:52.278Z",
+    "observed_at": "2026-11-15T18:40:34.222Z",
     "remaining_paths": [
-      "ops/incident-response/inbox/20261114-consumer-preview-and-source-identity.json",
-      "ops/incident-response/inbox/20261114-future-cms-create-post-validation.json",
       "ops/incident-response/inbox/20261114-isnet-sports-city-targets.json",
       "ops/incident-response/inbox/20261114-sports-existing-city-owner-correction.json",
       "ops/incident-response/inbox/43417323807-1.json",
@@ -5750,7 +5842,7 @@
       "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
       "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
     ],
-    "reason": "Two historical city-runtime/community-preview reports triaged; current joint owner active and pending actual result retained, mobile limitation unchanged."
+    "reason": "Consumer historical sourceidentity superseded; optionalfuturepayload alreadymitigated;5homepagecardfollowups retained under original incident."
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -5784,23 +5876,23 @@
     "normal_owner_coverage_verification": "pending"
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-15T16:38:49.839Z",
-    "through": "2026-11-15T16:28:40Z",
-    "rows": 17,
+    "observed_at": "2026-11-15T18:40:34.222Z",
+    "through": "2026-11-15T18:06:52Z",
+    "rows": 3,
     "seen_ids_at_boundary": [
-      43735679316
+      43744885699
     ],
-    "remaining": "New metadata delta complete,244historical rows remain",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json"
+    "remaining": "New metadata complete;244historical entries remain",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json"
   },
   "remaining_followup": [
-    "244historical Actions rows",
-    "20historical inbox paths",
-    "6news research items and initial7daybackfill;category429",
-    "Joint city writer pending9c25run",
-    "Community/culture coverage followup",
-    "Mobile review/publicFacebook proof",
-    "Backup/restore/capacity gates unchanged"
+    "244historical Actions entries",
+    "18historical inbox paths",
+    "Raanana811636 original/served image hash and desktop/mobile screenshot review",
+    "5ISNET future homepage-card followups, original existing incident",
+    "TLVNET source429/coverage queues unchanged",
+    "Public Facebook proof",
+    "Backup/restore/capacity qualification unchanged"
   ],
   "source_repair_followups": [
     {
@@ -5814,11 +5906,12 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-15T17:24:52.278Z",
-    "source_changed": true,
-    "owner_run_changed": "news",
-    "new_editorial_product": true,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
+    "observed_at": "2026-11-15T18:40:34.222Z",
+    "TLVsource_unchanged": true,
+    "all7TLVowner_results_unchanged": true,
+    "joint_city_run_completed": true,
+    "raanana_public_content_verified_quality_pending": true,
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json"
   },
   "latest_owner_publication_observation": {
     "owner_run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
