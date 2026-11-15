@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T20:22:51.166Z",
+  "updated_at": "2026-11-15T21:43:46.387Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -417,7 +417,24 @@
           "observed_at": "2026-11-15T00:19:49Z"
         }
       ],
-      "last_review_runKey": "ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a"
+      "last_review_runKey": "ops-2026-11-15-c79895db-311c-832a-9e98-87629add318a",
+      "historical_occurrences": [
+        {
+          "run_id": 42838770457,
+          "job_id": 129907989844,
+          "source_commit": "e29fbedfcaed8f77285ceffd285101cd3ec84fdd",
+          "failed_step": "Find videos for new stand-up performers",
+          "root_incident": "youtube-discovery-missing-api-key",
+          "verified_log_reason": "YOUTUBE_API_KEY not set; new-artist discovery did not run.",
+          "exit_code": 2,
+          "full_log_reads": 1,
+          "current_recurrence_claimed": false,
+          "remaining_runs": 243,
+          "observed_at": "2026-11-15T21:43:46.387Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+        }
+      ],
+      "last_historical_review_at": "2026-11-15T21:43:46.387Z"
     },
     {
       "id": "ims-no-valid-current-period",
@@ -1920,7 +1937,14 @@
       },
       "configuration_status": "configuration_verified",
       "latest_inbox": "ops/incident-response/inbox/20261115-community-source-owner-stale.json",
-      "evidence_latest": "ops/incident-response/evidence/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f.json"
+      "evidence_latest": "ops/incident-response/evidence/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f.json",
+      "historical_patch_reconciliation": {
+        "checkpoint": "ops/incident-response/inbox/f4a89fe4-2388-832e-a89b-6caa25891449-source-identity.json",
+        "source_head": "87541358cd703b9f936c53fdb748b7c8cefe2333",
+        "observed_at": "2026-11-15T21:43:46.387Z",
+        "outcome": "CurrentconsumerWRITER15Nov1.1 andAGENT_OPERATIONS correctowner supersede old unapplied14Novpatch; patchnotapplied.",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+      }
     },
     {
       "id": "historical-event-analytics-missing-ga4-service-account",
@@ -2351,7 +2375,16 @@
       "next_action": "Existing source-runtime operator obtains diagnostic trace/checkpoint for exact491a159f-33f8-8322-a053-5453bcb6312d, classifies cause, then one focused correction only if conditions changed. No old-run retry or competing writer.",
       "observed_at": "2026-11-14T05:46:49.373Z",
       "reported_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
-      "notification": "Already reported in interactive morning review; no duplicate alert."
+      "notification": "Already reported in interactive morning review; no duplicate alert.",
+      "later_owner_recovery": {
+        "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+        "run_id": "6379975d-999c-8326-8552-5bef8f3859ff",
+        "completed_at": "2026-11-15T09:35:25.994106Z",
+        "url": "https://tlvnet.com/culture/article-daily-2026-11-15",
+        "proof": "Original owner reports publication/syndication and current unchanged source has corresponding entry; no independent public revalidation this cycle.",
+        "failed13Nov_root_resolved": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+      }
     },
     {
       "id": "historical-events-cache-policy-hash-mismatch",
