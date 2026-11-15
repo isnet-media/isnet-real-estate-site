@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T04:46:55Z",
+  "updated_at": "2026-11-15T05:44:02Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -456,17 +456,41 @@
           "classification": "historical occurrence; no current outage inferred",
           "evidence": "ops/incident-response/evidence/ops-2026-11-14-1513978a-4cd0-832a-81d9-6bac2faab63f.json",
           "observed_at": "2026-11-14T20:55:36Z"
+        },
+        {
+          "run_id": 42868572471,
+          "workflow": "Refresh Ashdod sea forecast",
+          "path": ".github/workflows/ashdod-sea.yml",
+          "attempt": 1,
+          "created_at": "2026-11-10T17:47:43Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "03d8860571aa0f5fa38e25b56fdd1b9e2cd92523",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42868572471",
+          "classification": "Historical exact validator signature; source period ranges not printed, no current outage or recurrence inferred",
+          "job_id": 130013392522,
+          "failed_step": "Run node scripts/refresh-ashdod-sea.mjs",
+          "assertion": "No currently valid forecast; retaining last good file",
+          "log_read_full": true,
+          "historical_unit_tests": {
+            "tests": 5,
+            "passed": 5,
+            "failed": 0
+          },
+          "publish_step": "skipped",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-15-4eb55489-5554-832a-974b-c1d1fad74d06.json",
+          "observed_at": "2026-11-15T05:44:02Z"
         }
       ],
       "last_historical_triage": {
-        "run_id": 43036929335,
-        "observed_at": "2026-11-14T20:55:36Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-14-1513978a-4cd0-832a-81d9-6bac2faab63f.json",
-        "unit_tests": "5passed",
+        "run_id": 42868572471,
+        "observed_at": "2026-11-15T05:44:02Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-15-4eb55489-5554-832a-974b-c1d1fad74d06.json",
+        "unit_tests": "5passed historically; not rerun by controller",
         "publish_step": "skipped",
         "source_date_preserved": true,
         "current_public_status": "not checked",
-        "change": "No source code, source collection or public deployment."
+        "change": "Historical root classification only; no source request, retry, code change or deployment."
       }
     },
     {
@@ -2889,7 +2913,7 @@
       "last_review_runKey": "ops-2026-11-15-438da9ee-f230-832a-9687-45b7ba95d76a"
     }
   ],
-  "last_review_runKey": "ops-2026-11-15-438da9ee-f230-832a-9687-45b7ba95d76a",
+  "last_review_runKey": "ops-2026-11-15-4eb55489-5554-832a-974b-c1d1fad74d06",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
