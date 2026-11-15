@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T16:38:49.839Z",
+  "updated_at": "2026-11-15T17:24:52.278Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-15T16:28:40Z",
   "initial_history": {
@@ -3043,28 +3043,34 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
   },
   "last_cycle": {
-    "run_id": "5118ddf2-d724-8326-94a5-1a6ee8791928",
-    "runKey": "ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928",
+    "run_id": "908bbdd2-0044-8326-9bb2-f15f076a1b78",
+    "runKey": "ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78",
     "policy_version": "2026-11-15/1.2",
-    "started_at": "2026-11-15T16:29:23.726961Z",
-    "observed_at": "2026-11-15T16:38:49.839Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json",
+    "started_at": "2026-11-15T17:21:03.310160Z",
+    "observed_at": "2026-11-15T17:24:52.278Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json",
     "targets_reviewed": [
-      "7TLVNETdesk source/result metadata",
+      "7TLVNETdesk owner metadata",
+      "Changed evening news source and live article",
+      "New source429 and build regression inbox",
       "Actions/inbox bounded delta",
-      "1historical Actions root",
       "social_runs delta",
-      "TLVNET stability gate metadata"
+      "Stability metadata"
     ],
-    "new_workflow_runs": 16,
-    "metadata_rows_read": 17,
+    "new_workflow_runs": 0,
+    "metadata_rows_read": 1,
     "new_workflow_failures": 0,
-    "historical_full_logs_read": 1,
     "new_social_runs": 1,
+    "new_fixed_verified_incidents": [
+      "tlvnet-local-coverage-completed-handoff-build-regression"
+    ],
+    "new_open_incidents": [
+      "tlvnet-local-source-municipal-category429"
+    ],
     "build_or_deploy": false,
-    "source_commit": "3b549fe9c825d641add938454177bd226b0ac48b",
-    "source_receipt_commit": "6a9a452625f0cb966f1a27e141c151563a272afb",
-    "saved_version": 623,
+    "saved_version": 624,
+    "source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+    "source_receipt_commit": "87541358cd703b9f936c53fdb748b7c8cefe2333",
     "history_remaining": 244,
     "actual_schedules_changed": false,
     "no_automation_created": true,
@@ -3445,7 +3451,8 @@
     "sports/article-tag/copied-euroleague-label-on-domestic-recap",
     "tlvnet-culture-freshness-monitoring-gap",
     "tlvnet-senior-events-expired-verification-feed-empty",
-    "tlvnet-local-source-coverage-handoff-gap"
+    "tlvnet-local-source-coverage-handoff-gap",
+    "tlvnet-local-source-municipal-category429"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -3504,7 +3511,11 @@
     "ops/incident-response/inbox/122b42e1-c6bc-8325-9797-95a2377b76c0-1.json",
     "ops/incident-response/inbox/12c2c4b8-09e4-832e-9dff-a385525c9bc7-historical-holon-search.json",
     "ops/incident-response/inbox/16393a6e-7de0-8331-b22c-ff087e54b7c9-1.json",
-    "ops/incident-response/inbox/1b1c98bb-0cec-832e-a20b-b2f45dcd4958-1.json"
+    "ops/incident-response/inbox/1b1c98bb-0cec-832e-a20b-b2f45dcd4958-1.json",
+    "ops/incident-response/inbox/db934004-503c-8332-a023-ebaf5f8a3380-1.json",
+    "ops/incident-response/inbox/db934004-503c-8332-a023-ebaf5f8a3380-2.json",
+    "ops/incident-response/inbox/20261113-city-writer-runtime-policy11.json",
+    "ops/incident-response/inbox/20261114-community-preview-followup.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4727,6 +4738,35 @@
       "no_automation_created": true,
       "calls_measured": null,
       "cost_measured": null
+    },
+    {
+      "run_id": "5118ddf2-d724-8326-94a5-1a6ee8791928",
+      "runKey": "ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928",
+      "policy_version": "2026-11-15/1.2",
+      "started_at": "2026-11-15T16:29:23.726961Z",
+      "observed_at": "2026-11-15T16:38:49.839Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json",
+      "targets_reviewed": [
+        "7TLVNETdesk source/result metadata",
+        "Actions/inbox bounded delta",
+        "1historical Actions root",
+        "social_runs delta",
+        "TLVNET stability gate metadata"
+      ],
+      "new_workflow_runs": 16,
+      "metadata_rows_read": 17,
+      "new_workflow_failures": 0,
+      "historical_full_logs_read": 1,
+      "new_social_runs": 1,
+      "build_or_deploy": false,
+      "source_commit": "3b549fe9c825d641add938454177bd226b0ac48b",
+      "source_receipt_commit": "6a9a452625f0cb966f1a27e141c151563a272afb",
+      "saved_version": 623,
+      "history_remaining": 244,
+      "actual_schedules_changed": false,
+      "no_automation_created": true,
+      "calls_measured": null,
+      "cost_measured": null
     }
   ],
   "photo_controls_checkpoint": {
@@ -4754,6 +4794,14 @@
       "completed_at": "2026-11-13T09:29:20.465345Z",
       "reported_result": "נבדקו במדגם שמונה מקומות במדריכים הקיימים. בשבעה נמצאה התאמה לפרטים שבמקורות המסעדה או ההזמנה, ולא נמצא שינוי שמצריך פרסום. אתר WHITE ביבנה החזיר 403; המגבלה תועדה, ופרטיו ותאריך האימות הקודם נשמרו. בתל אביב אומתה התאמת הקטלוג החי למקור ונבדקה טעינת שתי תמונות JPG עם קרדיט. הבדיקה חלקית; לא בוצעה פריסה.",
       "qualification": "Matched task/run result, not independent controller publication verification"
+    },
+    "9c25d922-61e0-8331-b958-c000013496be": {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "run_id": "9c25d922-61e0-8331-b958-c000013496be",
+      "status": "in_progress",
+      "qualification": "Actual pending execution retained; no publication claimed, no writes or task activation by controller",
+      "observed_at": "2026-11-15T17:24:52.278Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
     }
   },
   "publication_pending_existing_writer": {
@@ -4888,7 +4936,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-15T16:00:10.397Z",
+    "max_finished_at": "2026-11-15T17:00:10.701Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -4897,12 +4945,13 @@
       "2026-11-15T13",
       "2026-11-15T14",
       "2026-11-15T15",
-      "2026-11-15T16"
+      "2026-11-15T16",
+      "2026-11-15T17"
     ],
-    "observed_at": "2026-11-15T16:38:49.839Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json",
+    "observed_at": "2026-11-15T17:24:52.278Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json",
     "new_rows_this_cycle": 1,
-    "public_verification": "16:00recorded published; public Facebook proof pending, no resend."
+    "public_verification": "17:00send recorded; publicFacebook proof pending, no resend."
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -4997,7 +5046,9 @@
     "job_cap": 2,
     "budget_qualification": "Technical job/call caps only; no monetary enforcement or actual provider usage measured. No success log read; actual processed row count not inferred."
   },
-  "pending_task_run_ids": [],
+  "pending_task_run_ids": [
+    "9c25d922-61e0-8331-b958-c000013496be"
+  ],
   "latest_supermarket_execution_checkpoint": {
     "source_inbox": "ops/incident-response/inbox/e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
     "evidence": "ops/incident-response/evidence/ops-2026-11-15-09a818b2-b278-832a-b5b1-29dff01686d0.json",
@@ -5112,39 +5163,49 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-15T15:19:55.760Z",
-    "source_commit": "3b549fe9c825d641add938454177bd226b0ac48b",
-    "saved_version": 623,
+    "observed_at": "2026-11-15T17:24:52.278Z",
+    "source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+    "saved_version": 624,
     "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
     "desks": {
       "news": {
-        "last_new_published_at": "2026-11-15T13:11:27.181Z",
-        "last_new_id": "metropoline-12-neve-avivim-ramat-hahayal-diversions-20261115",
-        "last_substantive_update_at": "2026-11-15T13:11:27.181Z",
-        "last_updated_id": "metropoline-12-neve-avivim-ramat-hahayal-diversions-20261115",
+        "last_new_published_at": "2026-11-15T17:12:44.728732+00:00",
+        "last_new_id": "london-ministore-brawl-seven-arrests-20261115",
+        "last_substantive_update_at": "2026-11-15T17:12:44.728732+00:00",
+        "last_updated_id": "london-ministore-brawl-seven-arrests-20261115",
         "update_basis": "declared body update/publication metadata; technical lead change counted separately",
-        "published_count": 78,
+        "published_count": 79,
         "handoff_status_counts": {
           "candidate_not_read": 14
         },
-        "ledger_sha256": "f813ef74c789fc9fb3730906e8fa2ccedb6b817722ca09cc1dc4c6f72906bcad",
-        "latest_body_sha256": "3facdbdbf387293676d2122bb0993eb4956b33171413d89b714e308ec33aabf5",
+        "ledger_sha256": "1d2908795ad4bbeea8682aa20b5506becbe49cfad1948413f11aea5c934db5f6",
+        "latest_body_sha256": "97919bad178431b1a6c285b1befb12d95e25500cf70889259c44f93af4fab951",
         "section_url": "https://tlvnet.com/news/index.html",
-        "lead_article_id": "metropoline-12-neve-avivim-ramat-hahayal-diversions-20261115",
-        "lead_published_at": "2026-11-15T13:11:27.181Z",
-        "last_owner_run_id": "e66260dc-41c0-8332-89c9-87a4dbf99048",
-        "last_owner_completed_at": "2026-11-15T12:12:11.055045Z",
+        "lead_article_id": "london-ministore-brawl-seven-arrests-20261115",
+        "lead_published_at": "2026-11-15T17:12:44.728732+00:00",
+        "last_owner_run_id": "db934004-503c-8332-a023-ebaf5f8a3380",
+        "last_owner_completed_at": "2026-11-15T17:22:21.519593Z",
         "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
         "owner_run_changed_since_checkpoint": true,
-        "last_new_published_basis": "622source metadata and controller independent live article/image/credit/home/news/both neighborhoods proof",
+        "last_new_published_basis": "624source plus independent controller public body/image/credit/home/section readback",
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
-        "coverage_state": "recovered_original_owner_draft_published_verified_research_coverage_followup_pending",
+        "coverage_state": "1new published verified; six research items; initialbackfill incomplete;tlvonline category429; not domain-wide block",
         "pending_draft_id": null,
         "pending_draft_inbox": null,
         "last_release_executor_task_id": "Automation_9776808c73848191a9d748dd09315960",
         "last_release_runKey": "continuity-repair-20261115T130716Z",
-        "verification_evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json"
+        "verification_evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json",
+        "remaining_queue": [
+          "coverage-naim715-716-golda-20261115",
+          "coverage-tlv-road-safety-preliminary2026-20261115",
+          "Grazianibody primaryconfirmation",
+          "ShaulHaMelech medicalprimary",
+          "Rokach5369 primarydecision",
+          "Lavon79 currenttenderstatus"
+        ],
+        "source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+        "saved_version": 624
       },
       "real-estate": {
         "last_new_published_at": "2026-11-15T14:43:16.996038+00:00",
@@ -5357,7 +5418,7 @@
     },
     "qualification": "Seven desks source metadata/results delta; live focused620neighborhood and changed consumer checks. Not whole-network live revalidation.",
     "metadata_checked_at": "2026-11-15T16:38:49.839Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json"
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-15T10:53:58.329Z",
@@ -5666,10 +5727,8 @@
     "mobile_visual_review": "pending"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-15T16:38:49.839Z",
+    "observed_at": "2026-11-15T17:24:52.278Z",
     "remaining_paths": [
-      "ops/incident-response/inbox/20261113-city-writer-runtime-policy11.json",
-      "ops/incident-response/inbox/20261114-community-preview-followup.json",
       "ops/incident-response/inbox/20261114-consumer-preview-and-source-identity.json",
       "ops/incident-response/inbox/20261114-future-cms-create-post-validation.json",
       "ops/incident-response/inbox/20261114-isnet-sports-city-targets.json",
@@ -5691,14 +5750,14 @@
       "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
       "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
     ],
-    "reason": "Two historical news/real-estate checkpoints triaged. Legacy blocker superseded; unapproved volunteering item remains original immutable checkpoint, not republished."
+    "reason": "Two historical city-runtime/community-preview reports triaged; current joint owner active and pending actual result retained, mobile limitation unchanged."
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
-    "observed_at": "2026-11-15T15:19:55.760Z",
-    "published_new_today": 7,
+    "observed_at": "2026-11-15T17:24:52.278Z",
+    "published_new_today": 8,
     "by_section": {
-      "news": 2,
+      "news": 3,
       "real-estate": 2,
       "economy-tech": 1,
       "community": 0,
@@ -5706,8 +5765,8 @@
       "sports": 1,
       "culture-news": 0
     },
-    "status": "normal_real_estate_owner623two_new_verified_remaining_coverage_followup",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-dcc9642c-79dc-8326-998b-1cb689a8bebc.json",
+    "status": "normal_evening_news_owner624new_article_verified",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json",
     "artificial_article_cap_found": false,
     "ready_news_draft_id": null,
     "repair_evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
@@ -5735,12 +5794,13 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json"
   },
   "remaining_followup": [
-    "244historical Actions rows/11groups",
-    "22historical inbox entries",
-    "Original-owner research/coverage followups",
-    "Volunteering old checkpoint not publication-ready; image pending",
-    "Mobile review and independent Facebook public post proof",
-    "Existing backup/restore/capacity qualification gates"
+    "244historical Actions rows",
+    "20historical inbox paths",
+    "6news research items and initial7daybackfill;category429",
+    "Joint city writer pending9c25run",
+    "Community/culture coverage followup",
+    "Mobile review/publicFacebook proof",
+    "Backup/restore/capacity gates unchanged"
   ],
   "source_repair_followups": [
     {
@@ -5754,12 +5814,11 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-15T16:38:49.839Z",
-    "source_unchanged": true,
-    "all_seven_owner_run_ids_unchanged": true,
-    "new_editorial_product": false,
-    "new_failure": false,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json"
+    "observed_at": "2026-11-15T17:24:52.278Z",
+    "source_changed": true,
+    "owner_run_changed": "news",
+    "new_editorial_product": true,
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
   },
   "latest_owner_publication_observation": {
     "owner_run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
