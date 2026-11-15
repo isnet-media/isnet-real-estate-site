@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T10:13:39.304Z",
+  "updated_at": "2026-11-15T10:55:01.508Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-15T09:26:06Z",
   "initial_history": {
@@ -3257,11 +3257,11 @@
   },
   "sites": {
     "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
-    "version_number": 609,
-    "deployment_id": "appgdep_6af97eac8a748191980f35b7931504d7",
+    "version_number": 613,
+    "deployment_id": "appgdep_6af98ea5b3c081919ccec0703abf0c9d",
     "status": "succeeded",
-    "published_source": "15cb2dad3067dbb93e4bd8df17a8c7129ae258d2",
-    "observed_at": "2026-11-15T09:57:09.819Z",
+    "published_source": "777a9c7684fb5bec0470e9696e31fb78af5c0bee",
+    "observed_at": "2026-11-15T10:53:58.329Z",
     "other_observed_versions": [
       {
         "version": 587,
@@ -3419,12 +3419,12 @@
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75.json"
     },
     "latest_saved_version": {
-      "version": 609,
-      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_e527b87f10f481918932a7f61225d88d",
-      "source_commit": "15cb2dad3067dbb93e4bd8df17a8c7129ae258d2",
+      "version": 613,
+      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_5e167f397fbc8191b671a0582d40b91b",
+      "source_commit": "777a9c7684fb5bec0470e9696e31fb78af5c0bee",
       "status": "deployed_verified",
-      "deployment_id": "appgdep_6af97eac8a748191980f35b7931504d7",
-      "evidence": "ops/incident-response/evidence/manual-neighborhood-expansion-2026-11-15T09-24-34-073Z.json"
+      "deployment_id": "appgdep_6af98ea5b3c081919ccec0703abf0c9d",
+      "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json"
     }
   },
   "open_incident_ids": [
@@ -5084,15 +5084,49 @@
     "qualification": "Version609 and content fingerprints unchanged. Exact owner runtime metadata refreshed; active economy run retained without attributing prior result."
   },
   "latest_social_publication_diagnosis": {
-    "observed_at": "2026-11-15T09:57:09.819Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-77bd6113-7a88-832a-a3ee-e0a7b3ef1a7a.json",
-    "status": "awaiting_external_action",
-    "blocked_reason": "meta_error_190_463",
-    "scheduler_active": true,
-    "latest_cron_run_id": 48,
-    "last_recorded_post_id": "1520426491146188_122103423777545268",
-    "public_post_verified": false,
-    "renewal_required": true,
-    "no_credentials_or_claims_changed": true
+    "observed_at": "2026-11-15T10:53:58.329Z",
+    "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json",
+    "status": "mitigated",
+    "facebook_authentication": "fixed_verified",
+    "facebook_publication": "published_verified",
+    "facebook_unattended": "configuration_verified_pending_first_normal_slot",
+    "blocked_reason": null,
+    "scheduler_enabled": 1,
+    "current_post_id": "1520426491146188_122105524611545268",
+    "current_public_permalink": "https://www.facebook.com/122103410883545268/posts/122105524611545268",
+    "public_post_verified": true,
+    "renewal_required": false,
+    "no_claims_removed_or_counters_reset": true,
+    "instagram": "separate_unverified"
+  },
+  "latest_manual_social_recovery": {
+    "task_id": "Automation_9776808c73848191a9d748dd09315960",
+    "run_id": null,
+    "run_key": "manual-social-cta-20261115T102945Z",
+    "policy_version": "2026-11-15/1.2",
+    "copy_policy_version": "2026-11-15/4",
+    "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json",
+    "source_commit": "777a9c7684fb5bec0470e9696e31fb78af5c0bee",
+    "saved_version": 613,
+    "deployment_id": "appgdep_6af98ea5b3c081919ccec0703abf0c9d",
+    "post_id": "1520426491146188_122105524611545268",
+    "public_post": "https://www.facebook.com/122103410883545268/posts/122105524611545268",
+    "published_verified": true,
+    "edited_in_place": true,
+    "desktop_visual_review": "passed",
+    "mobile_visual_review": "not performed",
+    "lease": "released_verified",
+    "schedules_permissions_and_automation_state_unchanged": true
+  },
+  "social_publication_checkpoint": {
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "status": "pending_first_normal_slot_after_renewal",
+    "after": "2026-11-15T10:24:12.686Z",
+    "next_normal_slot": "2026-11-15T11:00:00Z",
+    "last_verified_manual_post_id": "1520426491146188_122105524611545268",
+    "manual_post_consumes_current_hour": true,
+    "source_policy": "2026-11-15/4",
+    "action": "Read new social_runs rows only; verify exact slot/time, attempt/directives and actual public permalink. No run_now, duplicate post, claim removal, counter reset or credential renewal without new auth evidence.",
+    "evidence": "ops/incident-response/evidence/manual-social-cta-20261115T102945Z.json"
   }
 }
