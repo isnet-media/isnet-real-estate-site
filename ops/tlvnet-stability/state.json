@@ -10,21 +10,29 @@
   "phase": "baseline_and_repairs",
   "gates": {
     "automated_full_offsite_backup": "not_verified",
-    "full_production_data_restore": "not_verified",
+    "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
     "isolated_capacity_test": "not_verified",
     "scheduled_publication_reconciliation": "partial"
   },
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": null,
+  "last_observation_at": "2026-11-15T12:39:51.623Z",
   "last_daily_summary_at": null,
-  "observations": [],
-  "remaining": [
-    "Full D1/R2 snapshot and offsite encrypted retention",
-    "Unattended owner-authorized backup invocation",
-    "Restore actual production bytes into isolated resources",
-    "Hosted/representative load metrics"
+  "observations": [
+    "observations/2026-11-15/stability-version619.json"
   ],
-  "scope": "TLVNET.COM only for this stabilization program; no DNS, other-city work, new paid services or security expansion"
+  "remaining": [
+    "Unattendedbackup identity/access and independentretention",
+    "Runtime secret escrow",
+    "HostedisolatedCloudflare resourceandmetrics access",
+    "Ownerretry/pendingpublication reconciliation",
+    "Controller end-to-end alert and safe repair proof"
+  ],
+  "scope": "TLVNET.COM only for this stabilization program; no DNS, other-city work, new paid services or security expansion",
+  "latest_deployment": {
+    "version": 619,
+    "id": "appgdep_6af9a5ad9ddc8191af8e50ed6ba251aa",
+    "rollback_version": 618
+  }
 }
