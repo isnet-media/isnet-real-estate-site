@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": null,
+  "runKey": "manual-social-cta-20261115T102945Z",
+  "policy_version": "2026-11-15/1.2",
+  "social_copy_policy_version": "2026-11-15/4",
+  "execution_type": "publisher_authorized_interactive_recovery_and_social_copy_update",
+  "observed_at": "2026-11-15T10:53:58.329Z",
+  "scope": [
+    "TLVNET Facebook connection",
+    "existing server publisher",
+    "permanent closing CTA",
+    "short teaser copy",
+    "existing Facebook post edit"
+  ],
+  "original_failure": "meta_error_190_463",
+  "authentication": {
+    "renewed_by": "publisher via Meta and the existing secure Site connection form",
+    "stored_at": "2026-11-15T10:24:09.564Z",
+    "exact_page_identity_verified": "1520426491146188",
+    "credential_values_in_evidence": false,
+    "parent_user_token": {
+      "type": "USER",
+      "valid": true,
+      "expires_date": "2027-01-14",
+      "basis": "Meta UI; not the expiry date of the derived Page credential"
+    },
+    "page_token_expiry": "not independently observed; no non-expiring credential claim",
+    "optional_feed_read": "meta_error_10_0; optional read was denied, actual publish and public browser readback succeeded",
+    "credential_entry_by_agent": false
+  },
+  "publication": {
+    "status": "published_verified",
+    "sent_at": "2026-11-15T10:25:37.883Z",
+    "post_id": "1520426491146188_122105524611545268",
+    "permalink": "https://www.facebook.com/122103410883545268/posts/122105524611545268",
+    "source_article": "https://tlvnet.com/news/ntt-833-einstein-ramat-aviv-20261115.html",
+    "transport": "existing Site publisher API via owner UI",
+    "attempts_this_recovery": 1,
+    "new_posts": 1,
+    "duplicate_claims_removed": 0,
+    "persistent_attempt_counters_reset": 0,
+    "existing_failed_article": "Retained as rejected_auth with no post ID; not resent",
+    "real_claim": "Existing D1 social_posts unique article_url claim preserved and independently read back",
+    "public_browser_readback": {
+      "page": "תל אביב נט Tlvnet",
+      "audience": "public",
+      "title_and_teaser": true,
+      "article_link": true,
+      "image": {
+        "loaded": true,
+        "width": 500,
+        "height": 261
+      },
+      "desktop_visual": "passed",
+      "mobile_visual": "not performed"
+    },
+    "edited_in_place": true,
+    "final_message": "נוסעים לרמת אביב? שינוי בתחנות שכדאי להכיר לפני הנסיעה הבאה\n\nהתחנה שאתם מכירים עדיין במסלול? בדקו מה השתנה לפני הנסיעה הבאה.\n\nכנסו להכיר את תל אביב נט - המקומון החדש של תל אביב\nhttps://tlvnet.com/news/ntt-833-einstein-ramat-aviv-20261115.html",
+    "profile_restored": "original personal profile restored after existing Page identity used for edit",
+    "paid_promotion": false
+  },
+  "copy_changes": {
+    "shared_formatter": "lib/social-publisher.mjs",
+    "scope": "manual and existing scheduled Facebook article/promotional posts",
+    "closing": "כנסו להכיר את תל אביב נט - המקומון החדש של תל אביב",
+    "relevant_link_last": true,
+    "full_article_lead_copied": false,
+    "section_specific_short_hooks": true,
+    "contextual_headline_example": "Ramat Aviv route-change articles use a factual question without station/alternative details",
+    "existing_section_promotions_preserved": true,
+    "preview_url_occurrences": 1,
+    "public_policy": "public/social-publication-policy.json",
+    "instructions": "public/agent-instructions/agents/19_social.md"
+  },
+  "releases": [
+    {
+      "version": 611,
+      "source": "b63e34f5078c3114048858278a176a2514db3c11",
+      "deployment": "appgdep_6af98b57642c819186b532f90943eb1b",
+      "status": "succeeded",
+      "change": "Publisher closing CTA and relevant URL"
+    },
+    {
+      "version": 612,
+      "source": "82cd78bcc627abfda06afb38a45b4dac65e99b6c",
+      "deployment": "appgdep_6af98d49f3b081918072290b3c3a4c72",
+      "status": "succeeded",
+      "change": "Additional publisher steering: curiosity-led teaser instead of full article lead"
+    },
+    {
+      "version": 613,
+      "source": "777a9c7684fb5bec0470e9696e31fb78af5c0bee",
+      "deployment": "appgdep_6af98ea5b3c081919ccec0703abf0c9d",
+      "status": "succeeded",
+      "change": "Correct duplicate URL in owner preview, discovered during live QA; static asset update, unchanged Worker hash"
+    }
+  ],
+  "validation": {
+    "social_publisher": "passed: factual teaser, omitted full lead, article/category link correctness, closing retained under long text, encrypted credentials, atomic duplicate claim and attempt ceiling",
+    "social_scheduler": "passed: Israel hours, current-day and canonical selection, concurrent slot claim, manual slot consumption, preflight and auth barrier recovery",
+    "full_build": "passed for runtime CTA/teaser changes",
+    "static_preview_fix": "JS syntax and full public preparation passed; exact source/deployed asset equality; unchanged Worker bundle verified",
+    "live_owner_preview": "passed on613; final teaser and exactly one relevant URL",
+    "public_post": "passed after in-place edit; visible public audience, message, image and article link",
+    "concurrent_source": "Opened current43ae244a35ba52f87c745cb47829e6ffedd910c6, preserving original economy writer610 and its verification journals; source CAS pushes succeeded",
+    "source_news_bodies_changed": false
+  },
+  "schedule": {
+    "existing_enabled": 1,
+    "blocked_reason": null,
+    "blocked_cleared_at": "2026-11-15T10:24:12.686Z",
+    "hours": "09:00–21:00 Asia/Jerusalem",
+    "supabase_job": "tlvnet-facebook-hourly-v1",
+    "last_native_scheduler_transport_check": "15Nov09:00UTC callback succeeded; blocked auth outcome before renewal",
+    "schedules_changed": false,
+    "automations_created": 0,
+    "other_agents_invoked": 0,
+    "unattended_after_recovery": "pending next normal existing server slot; no manual scheduled callback dispatch",
+    "next_normal_slot": "2026-11-15T11:00:00Z",
+    "qualification": "Manual successful public post proves current publish permission; do not label a future automatic slot published_verified until a new matching social_runs record and public post are observed."
+  },
+  "lease": {
+    "owner": "Automation_9776808c73848191a9d748dd09315960",
+    "run_key": "manual-social-cta-20261115T102945Z",
+    "released_at": "2026-11-15T10:52:45.911Z",
+    "source_commit": "777a9c7684fb5bec0470e9696e31fb78af5c0bee",
+    "saved_version": 613,
+    "saved_version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_5e167f397fbc8191b671a0582d40b91b",
+    "deployment_id": "appgdep_6af98ea5b3c081919ccec0703abf0c9d",
+    "deployment_status": "succeeded",
+    "scope": "Social permanent closing CTA, factual teaser style and preview link deduplication",
+    "status": "published_verified",
+    "public_verification": "One public Facebook post verified and edited in place; live /api/social preview returns final teaser with exactly one relevant URL; no second post sent.",
+    "desktop_visual_review": "passed; actual Facebook screenshot observed",
+    "mobile_visual_review": "not performed"
+  },
+  "remaining": {
+    "automatic_first_slot": "Verify new social_runs record after13:00 Israel in existing controller; parse attempt/nextAction/supportRequired/notifyPublisher/stopped and public permalink.",
+    "instagram": "Separate implementation/authentication remains unverified; no Instagram publication claimed.",
+    "page_credential_lifetime": "Exact Page token expiry not observed; no promise of permanent validity or zero future failures."
+  },
+  "metrics": {
+    "new_posts": 1,
+    "edited_posts": 1,
+    "new_agents": 0,
+    "new_schedules": 0,
+    "claims_deleted": 0,
+    "counters_reset": 0,
+    "paid_spend": 0,
+    "actual_api_cost": null,
+    "api_calls_cost_measured": false
+  }
+}
