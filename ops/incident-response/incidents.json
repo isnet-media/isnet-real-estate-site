@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T19:31:58.042Z",
+  "updated_at": "2026-11-15T20:22:51.166Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -751,7 +751,8 @@
       "prevention": "Keep last good committed catalog on candidate media failure. Holon collector still has a daily timer despite weekly events policy; prepare a separate change that also prevents its workflow-edit push trigger from starting an unintended full collection.",
       "reported_runKey": "ops-2026-11-13-3d23c9a8-b114-8326-8682-369823a0770a",
       "last_seen_at": "2026-11-15T12:45:44.170Z",
-      "no_retry_reason": "Exact same title, source and illustration; no rights/media change. Later release-check success is not proof of refreshed candidate publication."
+      "no_retry_reason": "Exact same title, source and illustration; no rights/media change. Later release-check success is not proof of refreshed candidate publication.",
+      "latest_historical_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json"
     },
     {
       "id": "historical-publication-duplicate-gate-pre-repair",
@@ -3690,9 +3691,9 @@
     },
     {
       "id": "controller-active-scope-inherited-writer-approval",
-      "status": "mitigated",
+      "status": "awaiting_external_action",
       "classification": "ownership/scope",
-      "root_cause": "This execution followed writer-scope text before active controller-role reconciliation and locally prepared2drafts with an assumed sports identity. Explicit latest controller-only scope was restored before source push or deployment. Connector false/null flags are not backend misrouting proof.",
+      "root_cause": "Cross-task result attribution/context anomaly: sports owner run and controller run have byte-identical controller-scope final text despite distinct task prompts and conversations. Backend root cause is not established; prior procedural mitigation is not an end-to-end repair.",
       "observed_at": "2026-11-15T19:31:58.042Z",
       "change": "Invalidated local approvals; retained unapproved drafts in existing immutable inbox; isolated dirty research checkout; opened fresh source; released only exact token created by this execution; added procedural RUNBOOK guard.",
       "tests": "Local draft body/image checks and build passed before correction, but not owner authorization. Current public MaccabiJerusalem fullbody/loaded image/credit and desktop viewed; no new article published.",
@@ -3700,11 +3701,22 @@
         "https://tlvnet.com/news/maccabi-jerusalem-home-loss-20261114"
       ],
       "evidence": [
-        "ops/incident-response/evidence/ops-2026-11-15-66f4eaea-b874-8326-9b23-1510b4bf3d77.json"
+        "ops/incident-response/evidence/ops-2026-11-15-66f4eaea-b874-8326-9b23-1510b4bf3d77.json",
+        "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json"
       ],
       "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
       "prevention": "Keep actual executor identity separate from intended owner; explicit active-role reconciliation before approval/CAS. Procedural mitigation only; no runtime fixed_verified claim.",
-      "remaining": "Actual sports owner must review two retained drafts; original evening run37cbf175 still in progress. No task triggered."
+      "remaining": "Inspect scheduler/context isolation and result attribution for these exact two runs/conversations through the platform runtime; this connector exposes task prompt/result metadata but not execution routing logs or an isolation-repair operation. Do not replay/trigger tasks or change schedules to simulate repair.",
+      "last_observed_at": "2026-11-15T20:22:51.166Z",
+      "new_runtime_evidence": {
+        "sports_run_id": "37cbf175-5f34-8320-b921-abb82295b707",
+        "controller_previous_run_id": "66f4eaea-b874-8326-9b23-1510b4bf3d77",
+        "results_exact_equal": true,
+        "distinct_chat_refs": true,
+        "correct_saved_prompts": true,
+        "sports_completed_without_evening_publication": true,
+        "source_unchanged": true
+      }
     }
   ],
   "last_review_runKey": "ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6",
