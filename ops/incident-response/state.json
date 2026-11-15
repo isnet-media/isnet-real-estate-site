@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T12:45:44.170Z",
+  "updated_at": "2026-11-15T13:00:39.186Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-15T12:27:19Z",
   "initial_history": {
@@ -4677,9 +4677,9 @@
   },
   "publication_pending_existing_writer": {
     "target": "TLVNET-site",
-    "state": "free",
-    "owner": null,
-    "observed_at": "2026-11-15T12:45:44.170Z",
+    "state": "held",
+    "owner": "WORK:6af99330-89f8-83eb-a1b7-e268ae17a88d",
+    "observed_at": "2026-11-15T13:00:39.186Z",
     "last_release": {
       "owner": "Automation_9776808c73848191a9d748dd09315960",
       "run_key": "ops-2026-11-15-a6015263-65b4-8326-b418-76875ee90297",
@@ -4704,13 +4704,15 @@
         "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
         "owner_run_id": "e66260dc-41c0-8332-89c9-87a4dbf99048",
         "status": "publication_pending_existing_writer",
-        "current_target_state": "free_after_legitimate_release",
+        "current_target_state": "held_by_existing_WORK_publisher_observed",
         "inbox": "ops/incident-response/inbox/e66260dc-41c0-8332-89c9-87a4dbf99048-1.json",
-        "next_action": "Original news owner resumes saved verified draft after fresh time-sensitive checks; no alternate controller publication or task trigger"
+        "next_action": "Prioritize original news owner's preserved line12 draft through established owner/release path after fresh time-sensitive checks and legitimate lease availability. Maintenance should retain minimal owned publication window and yield release priority to ready editorial content. Reconcile actual per-desk new vs updated vs blocked outcomes; incomplete research must preserve candidates and document original alternative review. Controller must not publish an alternate article, trigger writers, change schedules or bypass locks.",
+        "priority": "ready_editorial_content_first",
+        "audit_evidence": "ops/incident-response/evidence/publication-throughput-audit-2026-11-15T13-00-39-186Z.json"
       }
     ],
-    "lease_until": null,
-    "owner_run_key": null,
+    "lease_until": "2026-11-15T13:23:55.449Z",
+    "owner_run_key": "receipt-normalization-20261115-77ec49e4",
     "lease_blob_sha": "23e839fe9c075ec54932e2e3963a6cca99f87d86",
     "pending_item_references": [
       "ops/incident-response/inbox/e6d4b4b3-779c-8321-850a-cd86b3554385-1.json",
@@ -5550,5 +5552,23 @@
       "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
     ],
     "reason": "Bounded historical triage; new run/delta and release-ready item prioritized."
+  },
+  "latest_publication_throughput_audit": {
+    "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
+    "observed_at": "2026-11-15T13:00:39.186Z",
+    "published_new_today": 4,
+    "by_section": {
+      "news": 1,
+      "sports": 1,
+      "economy-tech": 1,
+      "consumer": 1,
+      "community": 0,
+      "culture-news": 0,
+      "real-estate": 0
+    },
+    "status": "diagnosed_release_continuity_open",
+    "evidence": "ops/incident-response/evidence/publication-throughput-audit-2026-11-15T13-00-39-186Z.json",
+    "artificial_article_cap_found": false,
+    "ready_news_draft_id": "metropoline-12-neve-avivim-ramat-hahayal-diversions-20261115"
   }
 }
