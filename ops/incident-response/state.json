@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T11:34:20.295Z",
+  "updated_at": "2026-11-15T11:36:16.387Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-15T11:14:23Z",
   "initial_history": {
@@ -3075,7 +3075,9 @@
     "new_workflow_failures": 0,
     "new_inbox": 1,
     "new_social_runs": 1,
-    "new_incident_ids": [],
+    "new_incident_ids": [
+      "tlvnet-neighborhood-cross-desk-live-aggregation"
+    ],
     "new_fixed_verified_incidents": [
       "tlvnet-neighborhood-cross-desk-live-aggregation"
     ],
@@ -3500,7 +3502,8 @@
     "ops/incident-response/inbox/5a385977-ca7c-8322-af47-4efed6bfbc13-1.json",
     "ops/incident-response/inbox/manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json",
     "ops/incident-response/inbox/manual-tlv-continuity-2026-11-15T08-44-35-819Z-ec9fe864.json",
-    "ops/incident-response/inbox/20261115-community-source-owner-stale.json"
+    "ops/incident-response/inbox/20261115-community-source-owner-stale.json",
+    "ops/incident-response/inbox/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f-neighborhood-aggregation.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -5123,9 +5126,9 @@
       "neighborhoods": {
         "total": 73,
         "ready": 9,
-        "cursor": null,
+        "cursor": "hadar-afeka",
         "owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
-        "coverage_sha256": "9d3791a24865c2516f29f74a3c3955c3b11b1f4556b2c4716cb7cfff9bf09657",
+        "coverage_sha256": "e755c726931124985788b8c4e1d647344303d9a005d94bd5ceb8414bcf2d32c7",
         "published_v609_verified_evidence": "ops/incident-response/evidence/manual-neighborhood-expansion-2026-11-15T09-24-34-073Z.json",
         "deadline_filter_regression": "v607 and v609 prior verified; no source change this cycle",
         "last_owner_run_status": "completed",
@@ -5134,7 +5137,9 @@
         "aggregation_status": "fixed_verified",
         "last_owner_run_id": "86e22d2d-4dec-8320-8f7a-3866419e8597",
         "evidence": "ops/incident-response/evidence/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f.json",
-        "mobile_visual_review": "pending"
+        "mobile_visual_review": "pending",
+        "coverage_checked_at": "2026-11-15T11:10:43.912153+00:00",
+        "next_action": "Continue existing73-area owner plan after hadar-afeka; preserve notes/signatures; enrich explicit article neighborhood metadata only after relevance verification."
       }
     },
     "qualification": "Seven exact owner runs/results and source metadata reviewed; only changed economy full article and targeted neighborhood views fetched. Controller technical release is not new editorial output."
@@ -5236,6 +5241,17 @@
       "Further neighborhood original coverage via existing 73-area plan; no sale data invented for unserved neighborhoods",
       "Public confirmation of first normal Facebook slot",
       "245 historical root-triage entries in11groups"
-    ]
+    ],
+    "next_owner_handoff": {
+      "owner_task": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "source_queue": "data/neighborhoods/coverage-plan.json",
+      "cursor": "hadar-afeka",
+      "actions": [
+        "Continue verified local source coverage without duplicate event/class collection",
+        "Retain explicit neighborhoods on original published articles when actual relevance is verified; body-only/ambiguous locations require owner verification",
+        "Keep actual transaction dates/source provenance and unknown locality unassigned",
+        "Complete mobile visual check for city-hub selected board and rich page when native preview control is available"
+      ]
+    }
   }
 }
