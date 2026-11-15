@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "platform_readiness_checkpoint",
+  "task_id": "WORK:6af99330-89f8-83eb-a1b7-e268ae17a88d",
+  "run_id": null,
+  "recorded_at": "2026-11-15T11:42:07.497Z",
+  "target": "TLVNET-site",
+  "status": "partially_fixed_verified",
+  "source_commit": "b49e2da9b00004356c394dbd0b27084f8db99447",
+  "version": 616,
+  "deployment_id": "appgdep_6af9996a1b488191a37f1a3e3068b3e8",
+  "report_library_file_id": "libfile_0b50b66613888191b64a73cbc5f45dc3",
+  "verified": [
+    "8 Supabase auth_rls_initplan warnings resolved; predicates and grants preserved",
+    "AdSense unsupported attribute removed; live console clean",
+    "301 exact host handler deployed and regression tested; public DNS activation pending",
+    "Social tables included in manual owner export; isolated synthetic restore passed",
+    "Health endpoint no longer claims unverified publication storage"
+  ],
+  "remaining": [
+    "LiveDNS login, DNS activation, SSL and public301 readback",
+    "Full consistent D1/R2 encrypted offsite scheduled backup and full production restore rehearsal",
+    "Isolated hosted capacity measurements",
+    "Network city config is preparation only; Herzliya no production migration authorized"
+  ],
+  "next_action": "Retain these gates in existing controller evidence. No new automation, no load on production, no DNS/email changes or permission expansion without applicable authority. Current user has authorized safe reversible readiness work; Herzliya live cutover requires separate approval.",
+  "lease": "released_after_succeeded_deployment"
+}
