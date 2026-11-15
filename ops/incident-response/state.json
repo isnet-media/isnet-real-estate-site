@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T20:22:51.166Z",
+  "updated_at": "2026-11-15T21:43:46.387Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-15T18:06:52Z",
   "initial_history": {
@@ -17,11 +17,11 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "244historical run entries in11workflowgroups remain after grouping43080193734 under known Ashdod identity gate.",
-      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json"
+      "remaining": "243 historical run entries remain in11workflowgroups after source-specific standup failure grouping.",
+      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
     },
     "full_logs_read_this_cycle": [
-      43080193734
+      42838770457
     ],
     "unconfirmed_publish_failure_ids": [
       43357854397,
@@ -2478,18 +2478,6 @@
       ],
       ".github/workflows/discover-standup-videos.yml": [
         {
-          "run_id": 42838770457,
-          "workflow": "Discover stand-up videos",
-          "path": ".github/workflows/discover-standup-videos.yml",
-          "attempt": 1,
-          "created_at": "2026-11-10T14:53:56Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "e29fbedfcaed8f77285ceffd285101cd3ec84fdd",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42838770457",
-          "classification": "Historical metadata only; no full log read, signature not established."
-        },
-        {
           "run_id": 42653952225,
           "workflow": "Discover stand-up videos",
           "path": ".github/workflows/discover-standup-videos.yml",
@@ -2986,14 +2974,14 @@
     "metadata_rows_inspected_this_cycle": 0,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
-      "observed_at": "2026-11-15T16:38:49.839Z",
+      "observed_at": "2026-11-15T21:43:46.387Z",
       "last_run_ids": [
-        43080193734
+        42838770457
       ],
-      "evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json",
-      "remaining_run_entries": 244,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json",
+      "remaining_run_entries": 243,
       "remaining_workflow_groups": 11,
-      "grouping_basis": "Exact historical full log assertion, not current-outage inference"
+      "grouping_basis": "Exact source-specific full log: missing YOUTUBE_API_KEY; known historical root, no new current recurrence"
     }
   },
   "inbox_path": "ops/incident-response/inbox/",
@@ -3043,31 +3031,31 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
   },
   "last_cycle": {
-    "run_id": "d4367d19-cf9c-8322-b165-2140fcce9361",
-    "runKey": "ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361",
+    "run_id": "b6b63dbd-a038-8322-8a0b-ca991e2f75c0",
+    "runKey": "ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0",
     "policy_version": "2026-11-15/1.2",
-    "started_at": "2026-11-15T20:17:53.393311Z",
-    "observed_at": "2026-11-15T20:22:51.166Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
+    "started_at": "2026-11-15T21:40:33.994469Z",
+    "observed_at": "2026-11-15T21:43:46.387Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json",
     "targets_reviewed": [
-      "7TLVNETowner metadata",
-      "pending sports37cbf175 completion",
-      "Actions/inbox bounded delta",
-      "social_runs11rows",
-      "TLVNET stabilization source/deployment metadata"
+      "7TLVNETdesk metadata",
+      "culture magazine historical failure checkpoint",
+      "Actions and inbox delta",
+      "social_runs",
+      "one historical standup failure",
+      "TLVNET source/stability metadata"
     ],
     "new_workflow_runs": 0,
     "new_workflow_failures": 0,
     "metadata_rows_read": 10,
     "new_social_runs": 0,
-    "completed_pending_sports_runs": 1,
     "new_verified_articles": 0,
     "saved_version": 624,
     "current_source_head": "87541358cd703b9f936c53fdb748b7c8cefe2333",
     "source_unchanged": true,
     "build_or_deploy": false,
-    "history_remaining": 244,
-    "unread_inbox_remaining": 15,
+    "history_remaining": 243,
+    "unread_inbox_remaining": 13,
     "schedules_changed": false,
     "agents_created_or_triggered": false,
     "calls_measured": null,
@@ -3185,15 +3173,15 @@
     },
     "Automation_46f4cacaaa288191aad7b49de5a04ae7": {
       "enabled": true,
-      "last_run_id": "491a159f-33f8-8322-a053-5453bcb6312d",
-      "started_at": "2026-11-13T08:33:50.760480Z",
-      "completed_at": "2026-11-13T09:03:54.327778Z",
-      "recorded_status": "failed",
-      "result": "פורסמה היום כתבה אחת בלבד בתרבות נט:\n\n[״שש שעות, 800 עמודים וסופרת אחת שנכנסת לבמה בלי לדפוק״](https://tlvnet.com/culture/article-daily-2026-11-08)\n\nהכתבה המלאה עלתה עם צילום הפקה רשמי של ה־RSC וקרדיט ל־Johan Persson. אומתו באתר החי:\n\n- הכתבה ועמוד מדור תרבות נט\n- הכרטיסייה בגלריית עמוד הבית\n- רישום הפרסום ביומן הכתב ל־8 בנובמבר\n- מניעת כתבה יומית שנייה\n- תקינות בנייה, SEO והרשאות הפרסום",
-      "result_run_id": "50641e69-2620-8330-9faa-3ad049e05402",
-      "result_created_at": "2026-11-08T06:19:35.954596Z",
-      "observed_at": "2026-11-15T08:15:26Z",
-      "qualification": "Latestresult is historical anddoes not describe currentfailedrun.",
+      "last_run_id": "6379975d-999c-8326-8552-5bef8f3859ff",
+      "started_at": "2026-11-15T09:28:10.564695Z",
+      "completed_at": "2026-11-15T09:35:25.994106Z",
+      "recorded_status": "completed",
+      "result": "הושלם בהצלחה — `published_verified`.\n\nפורסמה כתבת תרבות נט מקורית אחת:\n\n[פילומנה קאנק באה להציל את הקולנוע. קודם היא תבלבל אותו למוות](https://tlvnet.com/culture/article-daily-2026-11-15)\n\nאומת בפועל:\n\n- גוף מלא, תמונת JPG וקרדיט „אילוסטרציה – AI”.\n- הופעה במדור תרבות נט ובעמוד הבית של TLVNET.\n- הפצה מלאה לעשרת אתרי הרשת: [אשדוד](https://ashdodnet.com/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%99%D7%A9%D7%A8%D7%90%D7%9C%D7%99%D7%AA/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811551), [ישובניק](https://www.yeshuvnik.net/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811552), [יבנה](https://www.yavnenet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811553), [ראשון](https://www.rishonet.com/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811554), [גן יבנה](https://www.ganyavne.net/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811555), [חולון](https://holonnet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811556), [בת ים](https://batyamnet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811557), [גדרה](https://gederanet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811558), [הרצליה](https://herzliyanet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811559), [קריית גת](https://kgatnet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%A4%D7%99%D7%9C%D7%95%D7%9E%D7%A0%D7%94-%D7%A7%D7%90%D7%A0%D7%A7-%D7%91%D7%90%D7%94-%D7%9C%D7%94%D7%A6%D7%99%D7%9C-%D7%90%D7%AA-%D7%94%D7%A7%D7%95%D7%9C%D7%A0%D7%95%D7%A2-%D7%A7%D7%95%D7%93%D7%9D-%D7%94%D7%99%D7%90-%D7%AA%D7%91%D7%9C%D7%91%D7%9C-%D7%90%D7%95%D7%AA%D7%95-%D7%9C%D7%9E%D7%95%D7%95%D7%AA-811560).\n- כל עשרת כרטיסי המדור אומתו. שבעה כרטיסי בית עודכנו; באשדוד, גדרה וקריית גת אין בעמוד הבית משטח לכרטיס כתבה, אלא הפניה למדור בלבד.\n- היומנים עודכנו והנעילות שוחררו. בדיקת מובייל לא הייתה זמינה במחזור זה ולכן לא סומנה בטעות כמאושרת.",
+      "result_run_id": "6379975d-999c-8326-8552-5bef8f3859ff",
+      "result_created_at": "2026-11-15T09:35:25.780386Z",
+      "observed_at": "2026-11-15T21:43:46.387Z",
+      "qualification": "Latest normal owner run/result matched with15Nov magazine source entry; this is later recovery, not cause/fix proof for failed13Nov run; not localculture-news.",
       "effective_policy": "2026-11-14/1.0"
     },
     "Automation_09c630803fe481919ccd2f476f0d6916": {
@@ -3519,7 +3507,9 @@
     "ops/incident-response/inbox/20261114-sports-existing-city-owner-correction.json",
     "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
     "ops/incident-response/inbox/43417323807-1.json",
-    "ops/incident-response/inbox/d4367d19-cf9c-8322-b165-2140fcce9361-cross-task-result-attribution.json"
+    "ops/incident-response/inbox/d4367d19-cf9c-8322-b165-2140fcce9361-cross-task-result-attribution.json",
+    "ops/incident-response/inbox/491a159f-33f8-8322-a053-5453bcb6312d-1.json",
+    "ops/incident-response/inbox/f4a89fe4-2388-832e-a89b-6caa25891449-source-identity.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4871,6 +4861,37 @@
       "agents_created_or_triggered": false,
       "calls_measured": null,
       "cost_measured": null
+    },
+    {
+      "run_id": "b6b63dbd-a038-8322-8a0b-ca991e2f75c0",
+      "runKey": "ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0",
+      "policy_version": "2026-11-15/1.2",
+      "started_at": "2026-11-15T21:40:33.994469Z",
+      "observed_at": "2026-11-15T21:43:46.387Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json",
+      "targets_reviewed": [
+        "7TLVNETdesk metadata",
+        "culture magazine historical failure checkpoint",
+        "Actions and inbox delta",
+        "social_runs",
+        "one historical standup failure",
+        "TLVNET source/stability metadata"
+      ],
+      "new_workflow_runs": 0,
+      "new_workflow_failures": 0,
+      "metadata_rows_read": 10,
+      "new_social_runs": 0,
+      "new_verified_articles": 0,
+      "saved_version": 624,
+      "current_source_head": "87541358cd703b9f936c53fdb748b7c8cefe2333",
+      "source_unchanged": true,
+      "build_or_deploy": false,
+      "history_remaining": 243,
+      "unread_inbox_remaining": 13,
+      "schedules_changed": false,
+      "agents_created_or_triggered": false,
+      "calls_measured": null,
+      "cost_measured": null
     }
   ],
   "photo_controls_checkpoint": {
@@ -5060,8 +5081,8 @@
       "2026-11-15T18",
       "2026-11-15T19"
     ],
-    "observed_at": "2026-11-15T20:22:51.166Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
+    "observed_at": "2026-11-15T21:43:46.387Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json",
     "new_rows_this_cycle": 0,
     "public_verification": "19:00send recorded; public Facebook proof pending, no resend."
   },
@@ -5619,8 +5640,8 @@
       }
     },
     "qualification": "Seven desks source metadata/results delta; live focused620neighborhood and changed consumer checks. Not whole-network live revalidation.",
-    "metadata_checked_at": "2026-11-15T20:22:51.166Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json"
+    "metadata_checked_at": "2026-11-15T21:43:46.387Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-15T10:53:58.329Z",
@@ -5929,9 +5950,8 @@
     "mobile_visual_review": "pending"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-15T20:22:51.166Z",
+    "observed_at": "2026-11-15T21:43:46.387Z",
     "remaining_paths": [
-      "ops/incident-response/inbox/491a159f-33f8-8322-a053-5453bcb6312d-1.json",
       "ops/incident-response/inbox/56a526f7-4760-8320-a519-595bd865e651-1.json",
       "ops/incident-response/inbox/786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json",
       "ops/incident-response/inbox/8a03b756-2764-8330-a302-b024f7ab97db-1.json",
@@ -5941,13 +5961,12 @@
       "ops/incident-response/inbox/dd4d9e0b-6858-8326-a56e-4365bd312654-1.json",
       "ops/incident-response/inbox/e6d4b4b3-779c-8321-850a-cd86b3554385-1.json",
       "ops/incident-response/inbox/ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
-      "ops/incident-response/inbox/f4a89fe4-2388-832e-a89b-6caa25891449-source-identity.json",
       "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
       "ops/incident-response/inbox/manual-policy-completion-20261113-1.json",
       "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
       "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
     ],
-    "reason": "Two historical city-sports assignment reports reconciled: later publisher correction supersedes unauthorized expansion. Actual city-writer identity incident remains open. Controller research handoff ingested and retained for actual sports owner; not an approved release."
+    "reason": "Historical culture runtime failure linked to existing incident, later owner recovery separately recorded. Old consumer identity patch superseded by current15Nov source, not applied."
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -5981,14 +6000,14 @@
     "normal_owner_coverage_verification": "pending"
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-15T20:22:51.166Z",
+    "observed_at": "2026-11-15T21:43:46.387Z",
     "through": "2026-11-15T18:06:52Z",
     "rows": 10,
     "seen_ids_at_boundary": [
       43744885699
     ],
-    "remaining": "No new Actions metadata;244historical run entries remain.",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json"
+    "remaining": "New metadata unchanged;243historical entries remain.",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
   },
   "remaining_followup": [
     "244historical Actions entries",
@@ -6011,15 +6030,18 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-15T20:22:51.166Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
-    "pending_sports_completed": 1,
+    "observed_at": "2026-11-15T21:43:46.387Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json",
+    "source_unchanged": true,
     "new_actions": 0,
+    "new_failures": 0,
     "new_social": 0,
-    "historical_inbox_grouped": 1,
-    "remaining_inbox": 15,
-    "history_remaining": 244,
-    "new_runtime_result_anomaly": true
+    "historical_full_logs_read": 1,
+    "historical_run_grouped": 42838770457,
+    "remaining_history": 243,
+    "historical_inbox_reconciled": 2,
+    "remaining_inbox": 13,
+    "no_new_publisher_alert": true
   },
   "latest_owner_publication_observation": {
     "owner_run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
