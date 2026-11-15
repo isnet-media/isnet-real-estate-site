@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T08:15:26Z",
+  "updated_at": "2026-11-15T08:55:57.560Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2995,6 +2995,58 @@
       "observed_at": "2026-11-15T08:15:26Z",
       "last_review_runKey": "ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75",
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75.json"
+    },
+    {
+      "id": "tlvnet-section-lead-media-preference",
+      "status": "fixed_verified",
+      "root_cause": "build-editorial.py feature() selected a non-AI photograph among the first eight stories, ahead of the latest reviewed article. Economy09Nov and community06Nov remained leads despite14Nov articles.",
+      "signature": "tlvnet/section-lead/media-preference-demotes-latest",
+      "observed_at": "2026-11-15T08:55:57.560Z",
+      "resolved_at": "2026-11-15T08:55:57.560Z",
+      "change": [
+        "Latest eligible story leads regardless of its approved media type; expired-only lists have no promotional lead.",
+        "Shared promotion_policy.py uses the earliest explicit expiry, application/registration deadline or event boundary; date-only registration deadline includes that Israel calendar day.",
+        "City, neighborhood, editorial and launch preparation share the rule; neighborhood pages receive the existing runtime expiry guard.",
+        "news-freshness.py checks all seven rendered section leads and excludes expired article promotions from neighborhood data on every prepare-public run."
+      ],
+      "regression_tests": [
+        "tests/news-freshness.py",
+        "tests/neighborhoods.mjs",
+        "prepare-public release gate",
+        "production build"
+      ],
+      "public_proof": "ops/incident-response/evidence/manual-tlv-continuity-2026-11-15T08-44-35-819Z-ec9fe864.json",
+      "source_commit": "b9a919660ec6e5758d119fa555cd6648c695d9f9",
+      "version": 607,
+      "deployment_id": "appgdep_6af972d6f6408191947d3e1bf6591559",
+      "prevention": "Shared promotion expiry and chronological lead selection checked on every writer release; runtime expiry guard on neighborhood pages.",
+      "qualification": "Technical freshness repair verified; original article dates and bodies unchanged; mobile visual QA and original community research gaps remain pending."
+    },
+    {
+      "id": "tlvnet-application-deadline-ignored",
+      "status": "fixed_verified",
+      "root_cause": "Promotion filters used activity start/end but ignored existing application_deadline=2026-11-10 for the Mehuga program starting19Nov.",
+      "signature": "tlvnet/promotion-expiry/application-deadline-ignored",
+      "observed_at": "2026-11-15T08:55:57.560Z",
+      "resolved_at": "2026-11-15T08:55:57.560Z",
+      "change": [
+        "Latest eligible story leads regardless of its approved media type; expired-only lists have no promotional lead.",
+        "Shared promotion_policy.py uses the earliest explicit expiry, application/registration deadline or event boundary; date-only registration deadline includes that Israel calendar day.",
+        "City, neighborhood, editorial and launch preparation share the rule; neighborhood pages receive the existing runtime expiry guard.",
+        "news-freshness.py checks all seven rendered section leads and excludes expired article promotions from neighborhood data on every prepare-public run."
+      ],
+      "regression_tests": [
+        "tests/news-freshness.py",
+        "tests/neighborhoods.mjs",
+        "prepare-public release gate",
+        "production build"
+      ],
+      "public_proof": "ops/incident-response/evidence/manual-tlv-continuity-2026-11-15T08-44-35-819Z-ec9fe864.json",
+      "source_commit": "b9a919660ec6e5758d119fa555cd6648c695d9f9",
+      "version": 607,
+      "deployment_id": "appgdep_6af972d6f6408191947d3e1bf6591559",
+      "prevention": "Shared promotion expiry and chronological lead selection checked on every writer release; runtime expiry guard on neighborhood pages.",
+      "qualification": "Technical freshness repair verified; original article dates and bodies unchanged; mobile visual QA and original community research gaps remain pending."
     }
   ],
   "last_review_runKey": "ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75",
