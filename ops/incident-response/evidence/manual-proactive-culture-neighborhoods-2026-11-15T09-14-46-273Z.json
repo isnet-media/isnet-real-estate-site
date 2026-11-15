@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": null,
+  "runKey": "manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z",
+  "execution_mode": "manual_interactive",
+  "policy_version": "2026-11-15/1.2",
+  "recorded_at": "2026-11-15T09:14:46.273Z",
+  "status": "configuration_verified",
+  "backup": "ops/agent-harmony/backups/20261115-proactive-culture-freshness-2026-11-15T09-10-42-494Z.json",
+  "root_signature": "tlvnet/culture-freshness/new-reporting-vs-existing-updates-not-separated",
+  "observed": "Active daily culture writer's15Nov run updated two existing articles across culture/night and published zero new articles. Latest declared culture article publication date12Nov. Combined desk output does not prove local culture freshness.",
+  "changes": {
+    "culture": {
+      "ok": true,
+      "id": "Automation_53543605ce188191ba90f3f1979203dc",
+      "version": "2026-11-15/1.1",
+      "schedule": "BEGIN:VEVENT\nDTSTART;TZID=Asia/Jerusalem:20261113T090000\nRRULE:FREQ=DAILY;BYHOUR=9;BYMINUTE=0;BYSECOND=0\nEND:VEVENT",
+      "is_enabled": true
+    },
+    "controller": {
+      "ok": true,
+      "id": "Automation_9776808c73848191a9d748dd09315960",
+      "version": "2026-11-15/1.2",
+      "schedule": "BEGIN:VEVENT\nDTSTART:20261113T042701Z\nRRULE:FREQ=HOURLY;BYMINUTE=35;BYSECOND=0\nEND:VEVENT",
+      "is_enabled": true
+    },
+    "canonical_paths": [
+      "ops/agent-harmony/instructions/agents/07_tlv_culture_news.md",
+      "ops/agent-harmony/instructions/agents/20_incident_controller.md"
+    ],
+    "culture_priority": "Culture phase before night, ready backlog first, independent item after isolated blockage, sourced feature when news discovery yields none, separate counters by desk.",
+    "proactive_monitor": "Track actual article freshness, substantive updates, source coverage and pending queues; two completed owner cycles without new article trigger diagnosis, not automatic outage or artificial publication quota; source/version cache avoids rescans."
+  },
+  "validation": {
+    "full_prompt_exact_readback": true,
+    "schedules_unchanged": true,
+    "is_enabled_unchanged": true,
+    "canonical_replaced_after_backup": true
+  },
+  "publication": {
+    "site_deployments_this_change": 0,
+    "new_articles_this_change": 0,
+    "qualification": "Instruction repair only. Original culture owner must demonstrate next-cycle new published_verified output; not fixed_verified yet. No new tasks, subagents or task dispatch."
+  },
+  "neighborhoods": {
+    "source_live_version": 607,
+    "latest_saved_version_checked": 608,
+    "source_commit_checked": "86117202a4fe0a5819350ac4c8e0106eeea26caa",
+    "source_readback": "608 neighborhood records/items equal607; only built_at differs.",
+    "registered": 21,
+    "promoted_pages": 9,
+    "requested": [
+      {
+        "name": "רמת אביב",
+        "registered": false,
+        "existing_articles": 2
+      },
+      {
+        "name": "נווה אביבים",
+        "registered": true,
+        "promoted": false,
+        "items": 2
+      },
+      {
+        "name": "רמת אביב ג",
+        "registered": false
+      },
+      {
+        "name": "נאות אפקה",
+        "registered": false
+      },
+      {
+        "name": "נווה שרת",
+        "registered": true,
+        "promoted": false,
+        "items": 3
+      },
+      {
+        "name": "תל ברוך צפון",
+        "registered": false
+      },
+      {
+        "name": "בבלי",
+        "registered": true,
+        "promoted": false,
+        "items": 1
+      },
+      {
+        "name": "נחלת יצחק",
+        "registered": true,
+        "promoted": false,
+        "items": 1
+      }
+    ],
+    "verified_source_hubs": [
+      {
+        "url": "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/NorthWest.aspx",
+        "source_date": null,
+        "checked_at": "2026-11-15T09:14:46.273Z",
+        "scope": "Named north-west neighborhoods, community centers, activities and local infrastructure."
+      },
+      {
+        "url": "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/NorthEast.aspx",
+        "source_date": null,
+        "checked_at": "2026-11-15T09:14:46.273Z",
+        "scope": "Named north-east neighborhoods including Neot AfekaA/B, Neve Sharet and Tel Baruch north."
+      },
+      {
+        "url": "https://www.tel-aviv.gov.il/Residents/CommunityAndSports/Pages/Bavly.aspx",
+        "source_date": null,
+        "checked_at": "2026-11-15T09:14:46.273Z",
+        "scope": "Bavli community center's declared activities/services; no claim of current individual-class availability."
+      }
+    ],
+    "recommendation": "Neighborhood granularity is useful for combined news/services/activities/quarterly property data. Group navigationally by area, keep exact verified neighborhood associations, and expose pages once sufficiently rich. No promise of daily new journalism per neighborhood. No new neighborhood pages published in response to this advice request."
+  },
+  "remaining_queue": [
+    {
+      "owner": "Automation_53543605ce188191ba90f3f1979203dc",
+      "item": "clfb-all-sight-exhibition-20261114",
+      "status": "research_checkpoint",
+      "reason": "Institutional practical details not independently verified; unchanged blocker not retried. Continue independent culture topic under updated priority."
+    },
+    {
+      "item": "next original culture writer run",
+      "status": "pending_owner_run_and_live_output"
+    }
+  ],
+  "cost": null,
+  "cost_qualification": "No monetary usage metric measured."
+}
