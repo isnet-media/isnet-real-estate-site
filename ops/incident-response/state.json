@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T13:27:43.278Z",
+  "updated_at": "2026-11-15T14:22:46.049Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-15T12:27:19Z",
+  "last_processed_run_created_at": "2026-11-15T14:20:05Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -3059,27 +3059,24 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
   },
   "last_cycle": {
-    "run_id": "00a4f12b-fd04-8326-abcc-11d083799830",
-    "runKey": "continuity-repair-20261115T130716Z",
+    "run_id": "51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
+    "runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
     "policy_version": "2026-11-15/1.2",
-    "started_at": "2026-11-15T13:07:16.319094Z",
-    "scheduled_controller_started_at": "2026-11-15T13:15:34.252753Z",
-    "observed_at": "2026-11-15T13:27:43.278Z",
-    "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
+    "started_at": "2026-11-15T14:16:10.523987Z",
+    "observed_at": "2026-11-15T14:22:46.049Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json",
     "targets_reviewed": [
-      "TLVNET prepared editorial release",
-      "7desk metadata",
-      "Actions bounded delta",
-      "social_runs delta",
-      "stability gates metadata"
+      "7 TLVNET desk source metadata and exact owner results",
+      "Existing incident inbox and Actions delta",
+      "social_runs new row",
+      "TLVNET stability gates"
     ],
-    "new_workflow_runs": 117,
+    "new_workflow_runs": 81,
+    "metadata_rows_read": 85,
     "new_workflow_failures": 1,
     "new_social_runs": 1,
-    "new_fixed_verified_incidents": [
-      "tlvnet-prepared-editorial-release-continuity"
-    ],
-    "build_or_deploy": true,
+    "new_fixed_verified_incidents": [],
+    "build_or_deploy": false,
     "source_commit": "95ce4ac78ba4fb660b2f761dec05c408ee2bdaba",
     "saved_version": 622,
     "history_remaining": 245,
@@ -3510,9 +3507,21 @@
     "ops/incident-response/inbox/20261115-community-neighborhood-preview-observation.json",
     "ops/incident-response/inbox/43708750732-1.json",
     "ops/incident-response/inbox/neighborhood-mini-sites-20261115T122532Z-37afc15a.json",
-    "ops/incident-response/inbox/continuity-repair-20261115T130716Z.json"
+    "ops/incident-response/inbox/continuity-repair-20261115T130716Z.json",
+    "ops/incident-response/inbox/43715219054-1.json",
+    "ops/incident-response/inbox/43715912284-1.json",
+    "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
+    "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json",
+    "ops/incident-response/inbox/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19-artifact-metadata.json",
+    "ops/incident-response/inbox/publication-throughput-audit-2026-11-15T13-00-39-186Z.json",
+    "ops/incident-response/inbox/tlvnet-stability-20261115-version619.json"
   ],
-  "pending_github_run_ids": [],
+  "pending_github_run_ids": [
+    43723779132,
+    43723779165,
+    43723691713,
+    43723640459
+  ],
   "cycle_history": [
     {
       "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -4647,6 +4656,36 @@
       "no_automation_created": true,
       "calls_measured": null,
       "cost_measured": null
+    },
+    {
+      "run_id": "00a4f12b-fd04-8326-abcc-11d083799830",
+      "runKey": "continuity-repair-20261115T130716Z",
+      "policy_version": "2026-11-15/1.2",
+      "started_at": "2026-11-15T13:07:16.319094Z",
+      "scheduled_controller_started_at": "2026-11-15T13:15:34.252753Z",
+      "observed_at": "2026-11-15T13:27:43.278Z",
+      "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
+      "targets_reviewed": [
+        "TLVNET prepared editorial release",
+        "7desk metadata",
+        "Actions bounded delta",
+        "social_runs delta",
+        "stability gates metadata"
+      ],
+      "new_workflow_runs": 117,
+      "new_workflow_failures": 1,
+      "new_social_runs": 1,
+      "new_fixed_verified_incidents": [
+        "tlvnet-prepared-editorial-release-continuity"
+      ],
+      "build_or_deploy": true,
+      "source_commit": "95ce4ac78ba4fb660b2f761dec05c408ee2bdaba",
+      "saved_version": 622,
+      "history_remaining": 245,
+      "actual_schedules_changed": false,
+      "no_automation_created": true,
+      "calls_measured": null,
+      "cost_measured": null
     }
   ],
   "photo_controls_checkpoint": {
@@ -4808,18 +4847,19 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-15T13:00:11.121Z",
+    "max_finished_at": "2026-11-15T14:00:15.634Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
       "2026-11-15T11",
       "2026-11-15T12",
-      "2026-11-15T13"
+      "2026-11-15T13",
+      "2026-11-15T14"
     ],
-    "observed_at": "2026-11-15T13:27:43.278Z",
-    "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
+    "observed_at": "2026-11-15T14:22:46.049Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json",
     "new_rows_this_cycle": 1,
-    "public_verification": "13:00recorded published; independent Facebook post proof pending, no resend."
+    "public_verification": "14:00recorded published; independent public post proof pending. No resend."
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -5231,7 +5271,9 @@
         "next_action": "Continue existing73-area owner plan after hadar-afeka; preserve notes/signatures; enrich explicit article neighborhood metadata only after relevance verification."
       }
     },
-    "qualification": "Seven desks source metadata/results delta; live focused620neighborhood and changed consumer checks. Not whole-network live revalidation."
+    "qualification": "Seven desks source metadata/results delta; live focused620neighborhood and changed consumer checks. Not whole-network live revalidation.",
+    "metadata_checked_at": "2026-11-15T14:22:46.049Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json"
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-15T10:53:58.329Z",
@@ -5540,10 +5582,8 @@
     "mobile_visual_review": "pending"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-15T12:45:44.170Z",
+    "observed_at": "2026-11-15T14:22:46.049Z",
     "remaining_paths": [
-      "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
-      "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json",
       "ops/incident-response/inbox/122b42e1-c6bc-8325-9797-95a2377b76c0-1.json",
       "ops/incident-response/inbox/12c2c4b8-09e4-832e-9dff-a385525c9bc7-historical-holon-search.json",
       "ops/incident-response/inbox/16393a6e-7de0-8331-b22c-ff087e54b7c9-1.json",
@@ -5571,7 +5611,7 @@
       "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
       "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
     ],
-    "reason": "Bounded historical triage; new run/delta and release-ready item prioritized."
+    "reason": "Two historical handoffs triaged: inherited old roles superseded; portability patch retained pending actual source release. Existing current-day audit/baseline already reconciled."
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -5590,7 +5630,8 @@
     "evidence": "ops/incident-response/evidence/publication-throughput-audit-2026-11-15T13-00-39-186Z.json",
     "artificial_article_cap_found": false,
     "ready_news_draft_id": null,
-    "repair_evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json"
+    "repair_evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
+    "metadata_checked_at": "2026-11-15T14:22:46.049Z"
   },
   "latest_release_continuity_repair": {
     "runKey": "continuity-repair-20261115T130716Z",
@@ -5604,146 +5645,43 @@
     "normal_owner_coverage_verification": "pending"
   },
   "actions_delta_checkpoint": {
-    "rows": 120,
-    "unique_count": 117,
-    "oldest": "2026-11-15T12:42:47Z",
-    "newest": "2026-11-15T13:12:27Z",
-    "ids": [
-      43717783169,
-      43717783027,
-      43717783008,
-      43717596784,
-      43717596781,
-      43717139951,
-      43717139936,
-      43717139906,
-      43717101383,
-      43717101347,
-      43717101329,
-      43717101311,
-      43717101310,
-      43717101295,
-      43717062740,
-      43717062227,
-      43717057948,
-      43717057904,
-      43717057827,
-      43717054113,
-      43717054033,
-      43717015740,
-      43717015665,
-      43717015663,
-      43716988267,
-      43716988123,
-      43716988119,
-      43716981112,
-      43716981073,
-      43716974555,
-      43716974530,
-      43716974470,
-      43716974436,
-      43716897134,
-      43716862992,
-      43716862921,
-      43716824795,
-      43716555091,
-      43716492124,
-      43716467826,
-      43716464757,
-      43716453303,
-      43716452900,
-      43716452868,
-      43716452867,
-      43716452865,
-      43716447970,
-      43716447964,
-      43716447679,
-      43716447624,
-      43716447609,
-      43716443526,
-      43716443507,
-      43716443503,
-      43716436128,
-      43716398210,
-      43716351699,
-      43716318794,
-      43716315187,
-      43716304766,
-      43716289767,
-      43716260071,
-      43716260056,
-      43716260050,
-      43716119849,
-      43716119839,
-      43715999656,
-      43715998346,
-      43715961620,
-      43715912284,
-      43715912211,
-      43715912208,
-      43715685818,
-      43715685734,
-      43715685720,
-      43715680330,
-      43715680318,
-      43715639690,
-      43715626576,
-      43715622107,
-      43715621991,
-      43715621968,
-      43715617113,
-      43715617063,
-      43715591894,
-      43715591889,
-      43715582470,
-      43715540238,
-      43715539847,
-      43715539838,
-      43715399866,
-      43715399719,
-      43715378323,
-      43715376010,
-      43715375608,
-      43715370508,
-      43715370325,
-      43715370250,
-      43715369370,
-      43715344506,
-      43715344437,
-      43715344414,
-      43715326422,
-      43715326379,
-      43715322944,
-      43715322138,
-      43715322091,
-      43715322090,
-      43715322000,
-      43715321362,
-      43715321348,
-      43715321262,
-      43715312418,
-      43715259007,
-      43715256686,
-      43715254248,
-      43715234542
+    "observed_at": "2026-11-15T14:22:46.049Z",
+    "prior_partial_delta_completed": true,
+    "through": "2026-11-15T14:20:05Z",
+    "seen_ids_at_boundary": [
+      43723779132,
+      43723779165,
+      43723779137
     ],
-    "failures": [
-      {
-        "run_id": 43715912284,
-        "name": "Verify public event feed read-back",
-        "created_at": "2026-11-15T12:50:47Z"
-      }
-    ],
-    "remaining": "New-run delta not yet read down to12:27:19Z; resume created_at<=2026-11-15T12:42:47Z and >12:27:19Z, exclude recorded IDs. Historical245entries unchanged.",
-    "observed_at": "2026-11-15T13:27:43.278Z",
-    "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
-    "prior_watermark_retained": "2026-11-15T12:27:19Z"
+    "remaining": "Pending completion IDs retained. New metadata fully paged through14:20:05Z; historical245rows remain.",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json"
   },
-  "remaining_followup": {
-    "historical_run_entries": 245,
-    "unread_inbox_backlog": 28,
-    "new_actions_delta": "New-run delta not yet read down to12:27:19Z; resume created_at<=2026-11-15T12:42:47Z and >12:27:19Z, exclude recorded IDs. Historical245entries unchanged.",
-    "mobile_visual_review": "pending",
-    "coverage_candidates": "Existing research queues require original owner verification; no alternative writer triggered"
+  "remaining_followup": [
+    "4 pending Actions IDs retained regardless of watermark",
+    "245 historical Actions rows in11workflowgroups",
+    "26 unread historical inbox paths",
+    "Existing original-owner research and editorial coverage followups",
+    "Mobile visual review and independent Facebook post proof",
+    "Backup/restore/hosted-capacity qualification gates unchanged"
+  ],
+  "source_repair_followups": [
+    {
+      "signature": "tlvnet/release/windows-stay-sitemap-and-source-access",
+      "status": "pending_next_actual_owner_release",
+      "source_commit": "95ce4ac78ba4fb660b2f761dec05c408ee2bdaba",
+      "location": "scripts/build-stay.py:187",
+      "finding": "str(Path) still used; PureWindowsPath yields backslash. Current Linux build unaffected; use existing as_posix patch with regression at next real change; do not restore old ownership patch or deploy journal.",
+      "patch": "ops/incident-response/patches/tlvnet-stay-sitemap-portable-20261113.patch",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json"
+    }
+  ],
+  "latest_incremental_review": {
+    "observed_at": "2026-11-15T14:22:46.049Z",
+    "source_unchanged": true,
+    "all_seven_owner_run_ids_unchanged": true,
+    "new_editorial_product": false,
+    "public_health_reader_unavailable": true,
+    "public_downtime_inferred": false,
+    "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json"
   }
 }
