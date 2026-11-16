@@ -1,0 +1,50 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "8826d757-cab4-8332-89e6-1f0c69971941",
+  "runKey": "ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941",
+  "policy_version": "2026-11-15/1.2",
+  "started_at": "2026-11-16T19:45:02.539874Z",
+  "observed_at": "2026-11-16T19:51:56.188Z",
+  "evidence": "ops/incident-response/evidence/ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941.json",
+  "observation": "ops/tlvnet-stability/observations/2026-11-16/8826d757-cab4-8332-89e6-1f0c69971941.json",
+  "signature": "TLVNET/ops-publication-report/owner-receipt-schema-mismatch",
+  "status": "fixed_verified",
+  "severity": "monitoring",
+  "root_cause": "publication_evidence and updatedExistingArticleIds not recognized; exact body/image byte receipts mislabeled incomplete.",
+  "source_commit": "af6d73c4332053a94165c750c815890c87ba3977",
+  "regression": "Actual original-owner protocol: two new publications and two existing updates recognized. Altered body, hash, credit, title, section/home reference, deployment and URL rejected. Prior tests still pass.",
+  "public_evidence": [
+    {
+      "article_id": "hapoel-baskonia-paris-away-week-preview-20261116",
+      "url": "https://tlvnet.com/news/hapoel-baskonia-paris-away-week-preview-20261116.html",
+      "checked_at": "2026-11-16T19:48:20.260300+00:00",
+      "asset_sha256": "1d6d24fc4dfc52ce7cb92146c9c13ecf9a25e1e38fa5b64065b3e54912b513f8"
+    },
+    {
+      "article_id": "sofoklis-schortsanitis-kidney-donor-disclosure-20261116",
+      "url": "https://tlvnet.com/news/sofoklis-schortsanitis-kidney-donor-disclosure-20261116.html",
+      "checked_at": "2026-11-16T19:48:20.381826+00:00",
+      "asset_sha256": "3fd11a089deab2320529dbaf0cc01c848b6474686795dd9107e57f0cfb2875ee"
+    },
+    {
+      "article_id": "olympiacos-aris-loss-before-maccabi-20261115",
+      "url": "https://tlvnet.com/news/olympiacos-aris-loss-before-maccabi-20261115.html",
+      "checked_at": "2026-11-16T19:48:20.301083+00:00",
+      "asset_sha256": "33918c3c821b03d05ee3ec1385c45177a3307ebb20fd99ae0d9fba2cde87c75f"
+    },
+    {
+      "article_id": "maccabi-kiryat-shmona-away-ticket-priority-20261115",
+      "url": "https://tlvnet.com/news/maccabi-kiryat-shmona-away-ticket-priority-20261115.html",
+      "checked_at": "2026-11-16T19:48:20.217149+00:00",
+      "asset_sha256": "39613d02e839d0192e7dae85f697fb24945b65ee9dc4e14211ed8bac2c46151a"
+    }
+  ],
+  "no_site_deploy_required": true,
+  "minor_followup": {
+    "signature": "TLVNET/favicon/missing-static-route",
+    "status": "open_low_priority",
+    "observed_at": "2026-11-16T19:51:56.188Z",
+    "reason": "Two actual GET/favicon.ico404s in sampled logs; not a news/article failure or proof of view-count problem.",
+    "next_action": "Restore approved small site icon in a future genuine site change under the existing release lease; no journal-only deploy."
+  }
+}
