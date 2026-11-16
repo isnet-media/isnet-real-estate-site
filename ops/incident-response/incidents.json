@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T19:51:56.188Z",
+  "updated_at": "2026-11-16T20:32:20.276Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4556,9 +4556,43 @@
       "next_action": "Use approved site icon in next genuine owned release; no standalone deployment for this journal.",
       "first_seen_at": "2026-11-16T19:51:56.188Z",
       "last_seen_at": "2026-11-16T19:51:56.188Z"
+    },
+    {
+      "id": "controller-public-readback-auto-review-scope",
+      "status": "awaiting_external_action",
+      "severity": "verification",
+      "first_seen_at": "2026-11-16T20:32:20.276Z",
+      "last_seen_at": "2026-11-16T20:32:20.276Z",
+      "root_cause": "Automatic approval review rejected a harmless public Herzliya read as outside TLVNET-only controller scope; underlying mismatch between existing controller responsibilities and approval scope is not established.",
+      "action": "Public readback of shared owner CMS811801/811802 via Herzliya/Raanana home pages",
+      "impact": "CMS811801/811802 public body/image/credit/canonical proof remains pending; no public outage inferred.",
+      "change": "No bypass, alternate route or retry. Unaffected TLVNET health read completed.",
+      "next_action": "Retain for a scope-authorized public review in the existing owner/controller path; noninteractive run cannot request clarification. No new task or permission change.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-d694d4c0-e3d8-832e-a862-30a655abe5be.json",
+      "occurrences": [
+        {
+          "runKey": "ops-2026-11-16-d694d4c0-e3d8-832e-a862-30a655abe5be",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-16-d694d4c0-e3d8-832e-a862-30a655abe5be.json"
+        }
+      ]
+    },
+    {
+      "id": "historical-event-release-unresolved-candidate",
+      "status": "open",
+      "severity": "historical",
+      "first_seen_at": "2026-11-16T20:32:20.276Z",
+      "last_seen_at": "2026-11-16T20:32:20.276Z",
+      "root_cause": "11Nov event-integrity gate reported one unresolved Ashdod candidate at scripts/test-event-integrity.cjs126; exact candidate identity/deeper cause not established from log.",
+      "workflow": ".github/workflows/pages.yml",
+      "run_id": 43049169659,
+      "source_commit": "a71740f51803673d96367a8fa88c011e43e691f8",
+      "verification": "Historical deployment skipped after failed integrity check; no current outage or recurrence claim.",
+      "prevention": "Preserve editorial identity gate; never merge/change candidates just to pass.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-d694d4c0-e3d8-832e-a862-30a655abe5be.json",
+      "next_action": "Inspect retained historical candidate evidence only if available/changed; continue bounded backlog. Current production not changed."
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941",
+  "last_review_runKey": "ops-2026-11-16-d694d4c0-e3d8-832e-a862-30a655abe5be",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
