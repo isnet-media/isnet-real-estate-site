@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T05:46:55.355Z",
+  "updated_at": "2026-11-16T06:10:56.210Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-16T02:54:55Z",
   "initial_history": {
@@ -17,10 +17,10 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "228 historical run entries remain in 9 workflow groups.",
-      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json"
+      "remaining": "227 historical run entries remain in8workflow groups.",
+      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json"
     },
-    "full_logs_read_this_cycle": 2,
+    "full_logs_read_this_cycle": 1,
     "unconfirmed_publish_failure_ids": [
       43357854397,
       43338632547,
@@ -2628,48 +2628,6 @@
           "classification": "Full log: historical trailer coverage 42/44; two missing embeds; existing root family; current state not inferred."
         }
       ],
-      ".github/workflows/super-remaining-private-stage.yml": [
-        {
-          "run_id": 42959059460,
-          "workflow": "Stage remaining six supermarket cities in private storage (no public cutover)",
-          "path": ".github/workflows/super-remaining-private-stage.yml",
-          "attempt": 2,
-          "created_at": "2026-11-11T04:24:47Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "5958cfaca9a61eacfdb1aa216635c3d3ff810850",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42959059460",
-          "classification": "Failed step metadata inspected; root cause unconfirmed; full logs deferred",
-          "jobs": [
-            {
-              "job_id": 130331639320,
-              "failed_steps": [
-                "Stage unchanged city files privately and verify each download by SHA256"
-              ]
-            },
-            {
-              "job_id": 130331640358,
-              "failed_steps": []
-            },
-            {
-              "job_id": 130331640593,
-              "failed_steps": []
-            },
-            {
-              "job_id": 130331641292,
-              "failed_steps": []
-            },
-            {
-              "job_id": 130331694315,
-              "failed_steps": []
-            },
-            {
-              "job_id": 130331695386,
-              "failed_steps": []
-            }
-          ]
-        }
-      ],
       ".github/workflows/holon-events.yml": [
         {
           "run_id": 42809472860,
@@ -2788,15 +2746,14 @@
     "metadata_rows_inspected_this_cycle": 0,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
-      "observed_at": "2026-11-16T05:46:55.355Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
       "last_run_ids": [
-        42622231838,
-        42514677571
+        42959059460
       ],
-      "evidence": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json",
-      "remaining_run_entries": 228,
-      "remaining_workflow_groups": 9,
-      "grouping_basis": "Two exact historical Holon search logs confirm known query/frozen-date/no-match signature; no present recurrence."
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json",
+      "remaining_run_entries": 227,
+      "remaining_workflow_groups": 8,
+      "grouping_basis": "Exact historical BATYAM private writeHTTP400; separate from known readHTTP400. No present outage inference."
     }
   },
   "inbox_path": "ops/incident-response/inbox/",
@@ -2846,19 +2803,19 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
   },
   "last_cycle": {
-    "run_id": "51422982-32fc-8322-8cc4-5a73609bc04a",
-    "runKey": "ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a",
+    "run_id": "0c5a1278-fc58-8322-9e9b-93f262b37431",
+    "runKey": "ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431",
     "policy_version": "2026-11-15/1.2",
-    "started_at": "2026-11-16T05:41:17.755400Z",
-    "observed_at": "2026-11-16T05:46:55.355Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json",
+    "started_at": "2026-11-16T06:08:05.266795Z",
+    "observed_at": "2026-11-16T06:10:56.210Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json",
     "targets_reviewed": [
-      "Existing incident/pending queue",
-      "Seven TLVNET editorial desks metadata",
-      "Actions delta and bounded historical group",
-      "social_runs new rows",
-      "TLVNET stability/source metadata",
-      "Two new manual checkpoints"
+      "Pending prepared queue",
+      "7TLVNET desk run metadata",
+      "Actions/inbox delta",
+      "social_runs",
+      "One historical private-stage failure",
+      "TLVNET stability"
     ],
     "new_workflow_runs": 0,
     "new_workflow_failures": 0,
@@ -2867,12 +2824,19 @@
     "new_verified_articles": 0,
     "saved_version": 625,
     "current_deployed_source_commit": "40c18684235065f4ce3426e8ffefc4ea6e7c3674",
-    "source_head_refreshed": true,
-    "source_unchanged": false,
-    "catalog_unchanged": true,
+    "source_unchanged": true,
     "build_or_deploy": false,
-    "history_remaining": 228,
+    "history_remaining": 227,
     "unread_inbox_remaining": 0,
+    "pending_task_run_ids": [
+      {
+        "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96",
+        "status": "in_progress",
+        "started_at": "2026-11-16T06:03:34.604078Z",
+        "reason": "Await exact normal owner result and public readback; do not trigger"
+      }
+    ],
     "schedules_changed": false,
     "agents_created_or_triggered": false,
     "calls_measured": null,
@@ -2886,17 +2850,17 @@
   "task_results_watermark": {
     "Automation_b3345c399b988191a1ba9848e3e3668b": {
       "enabled": true,
-      "last_run_id": "db934004-503c-8332-a023-ebaf5f8a3380",
-      "started_at": "2026-11-15T17:01:11.039225Z",
-      "completed_at": "2026-11-15T17:22:21.519593Z",
-      "recorded_status": "completed",
+      "last_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96",
+      "started_at": "2026-11-16T06:03:34.604078Z",
+      "completed_at": null,
+      "recorded_status": "in_progress",
       "result": "פורסמה ואומתה: [קטטה בלונדון מיניסטור: שבעה נעצרו, שלושה נותרו במעצר](https://tlvnet.com/news/london-ministore-brawl-seven-arrests-20261115).\n\nנבדקו הגוף המלא, התמונה, הקרדיט וההפניות במדור ובבית. תוקנה גם בדיקה שעצרה את הבנייה. יתרת המחקר וביקורת המובייל נשמרו להמשך.",
       "result_run_id": "db934004-503c-8332-a023-ebaf5f8a3380",
-      "observed_at": "2026-11-16T05:46:55.355Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-16/1.2",
       "result_created_at": "2026-11-15T17:22:20.218750Z",
-      "qualification": "Exact run/result matched; public proof recorded separately",
+      "qualification": "Current run active; latest_result belongs to prior completed run. No new output or failure inferred.",
       "effective_policy": "2026-11-14/1.0"
     },
     "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
@@ -2907,7 +2871,7 @@
       "recorded_status": "completed",
       "result": "תיקנתי לפני פריסה טעות שלי בזיהוי תפקיד הבקר ככתב ספורט. לא פורסם תוכן בטעות; שתי הטיוטות נשמרו בתור לבדיקת הכתב, והנעילה שיצרתי שוחררה.\n\nבאתר נמצאו **שמונה כתבות חדשות מהיום** בשבעת המדורים שנבדקו. בקהילה ובתרבות לא נוספו כתבות חדשות; ריצת הספורט בערב עדיין הייתה פעילה בעת הבדיקה. החוסרים ונקודות ההמשך תועדו למעקב, ונוסף לנוהל שלב מפורש לאימות התפקיד לפני כתיבה ופרסום.",
       "result_run_id": "37cbf175-5f34-8320-b921-abb82295b707",
-      "observed_at": "2026-11-16T05:46:55.355Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.4",
       "result_created_at": "2026-11-15T19:32:33.345957Z",
@@ -2922,7 +2886,7 @@
       "recorded_status": "completed",
       "result": "פורסמו ואומתו באתר החי:\n\n- [תא/5500: הדיונים הקרובים והמטרו](https://tlvnet.com/news/ta5500-south-center-objections-agendas-20261115)\n- [נתוני העסקאות ומלאי הדירות בתל אביב](https://tlvnet.com/news/tel-aviv-housing-sales-q3-2026-cbs-20261115)\n\nנבדקו הגוף המלא, התמונות, הקרדיטים וההפניות במדור ובבית. הנעילה שוחררה. יתרת המחקר, השלמת סריקת העבר וביקורת המובייל נשמרו להמשך.",
       "result_run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
-      "observed_at": "2026-11-16T05:46:55.355Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.1",
       "result_created_at": "2026-11-15T14:51:37.489179Z",
@@ -2937,7 +2901,7 @@
       "recorded_status": "completed",
       "result": "פורסמה ואומתה במדור כלכלה והייטק: [מה מבקשות שתי משרות AI בתל אביב](https://tlvnet.com/news/tel-aviv-ai-project-management-builder-jobs-20261115).\n\nהגוף המלא, התמונה, הקרדיט וההפניות במדור ובבית אומתו. בדיקת הדסקטופ לכתבה ולמדור עברה; מובייל ותצוגת הכרטיס בבית נותרו לבדיקה.\n\nPlurai ו־Edelbyte נשמרו להשלמת אימות. הנעילה שוחררה.",
       "result_run_id": "8337496b-ecfc-8333-89c4-9b9c52a0d562",
-      "observed_at": "2026-11-16T05:46:55.355Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.1",
       "result_created_at": "2026-11-15T10:26:43.816415Z",
@@ -2952,7 +2916,7 @@
       "recorded_status": "completed",
       "result": "פורסמו שני עדכונים לכתבות קיימות:\n\n- [״עיר על מים סוערים״ — מידע מעודכן לביקור](https://tlvnet.com/news/city-museum-troubled-waters-opening-20261106)\n- [Mozaik Ses — ההוצאה החדשה וההקלטה התל אביבית](https://tlvnet.com/night/stories/mozaik-ses-last-shootout-wormhole-preview-20261107)\n\nאומתו גוף מלא, תמונות, קרדיטים וקישורי מדור. בדיקת מחשב בוצעה; בדיקות מובייל וכרטיסי המדור ממתינות בתור האיכות. חומר שחסר אימות נשמר להמשך.",
       "result_run_id": "ebc6b2f1-e850-832d-be04-1928ff1b3949",
-      "observed_at": "2026-11-16T05:46:55.355Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.2",
       "result_created_at": "2026-11-15T07:58:38.575301Z",
@@ -2968,7 +2932,7 @@
       "result": "פורסמו ואומתו באתר החי שתי השלמות ללוחות השכונתיים:\n\n- [קריית שלום](https://tlvnet.com/city-hub/?neighborhood=%D7%A7%D7%A8%D7%99%D7%99%D7%AA%20%D7%A9%D7%9C%D7%95%D7%9D): בית הבאר בחורשה.\n- [נאות אפקה א׳](https://tlvnet.com/city-hub/?neighborhood=%D7%A0%D7%90%D7%95%D7%AA%20%D7%90%D7%A4%D7%A7%D7%94%20%D7%90%27): מרכז הדר אפקה.\n\nבדיקות הבנייה, העדכניות וה־SEO עברו. לא פורסמו כתבות חדשות; מועמדים שחסר להם אימות נשמרו להמשך. בדיקת מובייל ממתינה והחסמים תועדו לבקר.\n\nמשימה: `Automation_e03d80ff914c8191a790fc66e7447826`  \nrunKey: `community-2026-11-15-daily`",
       "result_run_id": "86e22d2d-4dec-8320-8f7a-3866419e8597",
       "qualification": "Exact run/result matched; public proof recorded separately",
-      "observed_at": "2026-11-16T05:46:55.355Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.3",
       "result_created_at": "2026-11-15T11:20:21.253435Z",
@@ -2983,7 +2947,7 @@
       "result": "פורסם ואומת באתר החי: [הודעה על חבילה? כלי חינמי לבדיקת הקישור לפני שפותחים](https://tlvnet.com/news/suspicious-shopping-links-clickcheck-guide-20261115).\n\nאומתו הגוף, התמונה, הקרדיט וההפניות במדור ובעמוד הבית. נבדקו גם שני המקומונים ונמנעה כפילות בגראז׳ סייל.\n\nיתרת המחקר נשמרה להמשך. ביקורת התצוגה במחשב ובמובייל עדיין ממתינה ותועדה לבקר.",
       "result_run_id": "393e5584-4ac4-832e-9d36-7b712cf494b9",
       "qualification": "Exact run/result matched; public proof recorded separately",
-      "observed_at": "2026-11-16T05:46:55.355Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.1",
       "result_created_at": "2026-11-15T12:16:30.516172Z",
@@ -3254,7 +3218,8 @@
     "tlvnet-senior-events-expired-verification-feed-empty",
     "tlvnet-local-source-coverage-handoff-gap",
     "tlvnet-local-source-municipal-category429",
-    "controller-active-scope-inherited-writer-approval"
+    "controller-active-scope-inherited-writer-approval",
+    "historical-super-batyam-private-write-http400"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -4995,6 +4960,47 @@
       "calls_measured": null,
       "cost_measured": null,
       "local_date": "2026-11-16"
+    },
+    {
+      "run_id": "0c5a1278-fc58-8322-9e9b-93f262b37431",
+      "runKey": "ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431",
+      "policy_version": "2026-11-15/1.2",
+      "started_at": "2026-11-16T06:08:05.266795Z",
+      "observed_at": "2026-11-16T06:10:56.210Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json",
+      "targets_reviewed": [
+        "Pending prepared queue",
+        "7TLVNET desk run metadata",
+        "Actions/inbox delta",
+        "social_runs",
+        "One historical private-stage failure",
+        "TLVNET stability"
+      ],
+      "new_workflow_runs": 0,
+      "new_workflow_failures": 0,
+      "metadata_rows_read": 30,
+      "new_social_runs": 0,
+      "new_verified_articles": 0,
+      "saved_version": 625,
+      "current_deployed_source_commit": "40c18684235065f4ce3426e8ffefc4ea6e7c3674",
+      "source_unchanged": true,
+      "build_or_deploy": false,
+      "history_remaining": 227,
+      "unread_inbox_remaining": 0,
+      "pending_task_run_ids": [
+        {
+          "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+          "run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96",
+          "status": "in_progress",
+          "started_at": "2026-11-16T06:03:34.604078Z",
+          "reason": "Await exact normal owner result and public readback; do not trigger"
+        }
+      ],
+      "schedules_changed": false,
+      "agents_created_or_triggered": false,
+      "calls_measured": null,
+      "cost_measured": null,
+      "local_date": "2026-11-16"
     }
   ],
   "photo_controls_checkpoint": {
@@ -5599,8 +5605,8 @@
       "2026-11-15T18",
       "2026-11-15T19"
     ],
-    "observed_at": "2026-11-16T05:46:55.355Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json",
+    "observed_at": "2026-11-16T06:10:56.210Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json",
     "new_rows_this_cycle": 0,
     "public_verification": "19:00send recorded; public Facebook proof pending, no resend."
   },
@@ -5742,7 +5748,15 @@
     "job_cap": 2,
     "budget_qualification": "Technical job/call caps only; no monetary enforcement or actual provider usage measured. No success log read; actual processed row count not inferred."
   },
-  "pending_task_run_ids": [],
+  "pending_task_run_ids": [
+    {
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96",
+      "status": "in_progress",
+      "started_at": "2026-11-16T06:03:34.604078Z",
+      "reason": "Await exact normal owner result and public readback; do not trigger"
+    }
+  ],
   "latest_supermarket_execution_checkpoint": {
     "source_inbox": "ops/incident-response/inbox/e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
     "evidence": "ops/incident-response/evidence/ops-2026-11-15-09a818b2-b278-832a-b5b1-29dff01686d0.json",
@@ -5896,13 +5910,13 @@
         "section_url": "https://tlvnet.com/news/index.html",
         "lead_article_id": "london-ministore-brawl-seven-arrests-20261115",
         "lead_published_at": "2026-11-15T17:12:44.728732+00:00",
-        "last_owner_run_id": "db934004-503c-8332-a023-ebaf5f8a3380",
-        "last_owner_completed_at": "2026-11-15T17:22:21.519593Z",
+        "last_owner_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96",
+        "last_owner_completed_at": null,
         "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
-        "owner_run_changed_since_checkpoint": false,
+        "owner_run_changed_since_checkpoint": true,
         "last_new_published_basis": "624source plus independent controller public body/image/credit/home/section readback",
-        "last_owner_run_status": "completed",
-        "pending_owner_result": false,
+        "last_owner_run_status": "in_progress",
+        "pending_owner_result": true,
         "coverage_state": "1new published verified; six research items; initialbackfill incomplete;tlvonline category429; not domain-wide block",
         "pending_draft_id": null,
         "pending_draft_inbox": null,
@@ -5919,9 +5933,9 @@
         ],
         "source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
         "saved_version": 624,
-        "last_owner_started_at": "2026-11-15T17:01:11.039225Z",
+        "last_owner_started_at": "2026-11-16T06:03:34.604078Z",
         "throughput_followup": {
-          "status": "awaiting_next_normal_owner_progress",
+          "status": "normal_owner_run_in_progress",
           "checkpoint": "ops/incident-response/inbox/manual-news-throughput-audit-2026-11-16T04-30-49-134Z.json",
           "last_reviewed_owner_run_id": "db934004-503c-8332-a023-ebaf5f8a3380",
           "coverage_complete": false,
@@ -5934,9 +5948,10 @@
             "not_fixed_verified": true,
             "next_step": "Observe next normal original news owner run at08:00Israel; retain exact16Nov1.2 canonical/active task policy; Site WRITER mirror still older until next real content/source release.",
             "no_task_triggered": true
-          }
+          },
+          "pending_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96"
         },
-        "metadata_checked_at": "2026-11-16T05:46:55.355Z"
+        "metadata_checked_at": "2026-11-16T06:10:56.210Z"
       },
       "real-estate": {
         "last_new_published_at": "2026-11-15T14:43:16.996038+00:00",
@@ -5993,7 +6008,7 @@
         "saved_version": 623,
         "verification_evidence": "ops/incident-response/evidence/ops-2026-11-15-dcc9642c-79dc-8326-998b-1cb689a8bebc.json",
         "last_owner_started_at": "2026-11-15T14:34:31.341666Z",
-        "metadata_checked_at": "2026-11-16T05:46:55.355Z"
+        "metadata_checked_at": "2026-11-16T06:10:56.210Z"
       },
       "economy-tech": {
         "last_new_published_at": "2026-11-15T10:16:52.664155+00:00",
@@ -6020,7 +6035,7 @@
         "last_owner_started_at": "2026-11-15T10:10:51.137096Z",
         "pending_owner_result": false,
         "independent_full_body_image_credit_verified_at": "2026-11-15T11:34:20.295Z",
-        "metadata_checked_at": "2026-11-16T05:46:55.355Z"
+        "metadata_checked_at": "2026-11-16T06:10:56.210Z"
       },
       "community": {
         "last_new_published_at": "2026-11-14T11:04:56Z",
@@ -6052,7 +6067,7 @@
         "mini_site_technical_update_at": "2026-11-15T12:40:04.126313Z",
         "coverage_cursor": "hadar-afeka",
         "last_owner_started_at": "2026-11-15T11:02:18.685247Z",
-        "metadata_checked_at": "2026-11-16T05:46:55.355Z"
+        "metadata_checked_at": "2026-11-16T06:10:56.210Z"
       },
       "consumer": {
         "last_new_published_at": "2026-11-15T12:09:49.421224+00:00",
@@ -6087,7 +6102,7 @@
           "verification_scope": "Fresh focused article/body/image/credit readback; owner619 proof retained for home/section links"
         },
         "last_owner_started_at": "2026-11-15T12:04:37.027654Z",
-        "metadata_checked_at": "2026-11-16T05:46:55.355Z"
+        "metadata_checked_at": "2026-11-16T06:10:56.210Z"
       },
       "sports": {
         "last_new_published_at": "2026-11-15T07:12:41.741744+00:00",
@@ -6132,7 +6147,7 @@
         "last_owner_new_articles": 0,
         "coverage_state": "Evening owner completed without sports publication; cross-task identical controller result verified.2unapproved research drafts retained; original owner review remains required.",
         "execution_anomaly_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
-        "metadata_checked_at": "2026-11-16T05:46:55.355Z"
+        "metadata_checked_at": "2026-11-16T06:10:56.210Z"
       },
       "culture-news": {
         "last_new_published_at": "2026-11-12T07:35:00Z",
@@ -6157,7 +6172,7 @@
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
         "last_owner_started_at": "2026-11-15T07:36:00.361936Z",
-        "metadata_checked_at": "2026-11-16T05:46:55.355Z"
+        "metadata_checked_at": "2026-11-16T06:10:56.210Z"
       },
       "neighborhoods": {
         "total": 73,
@@ -6188,8 +6203,8 @@
       }
     },
     "qualification": "Seven desks source metadata/results delta; live focused620neighborhood and changed consumer checks. Not whole-network live revalidation.",
-    "metadata_checked_at": "2026-11-16T05:46:55.355Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json",
+    "metadata_checked_at": "2026-11-16T06:10:56.210Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json",
     "date_rollover": {
       "date_from": "2026-11-15",
       "date_to": "2026-11-16",
@@ -6514,14 +6529,9 @@
     "reconciled_at": "2026-11-16T05:46:55.355Z"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-16T05:46:55.355Z",
+    "observed_at": "2026-11-16T06:10:56.210Z",
     "unread_entries": 0,
-    "ingested": [
-      "ops/incident-response/inbox/national-news-priority-2026-11-16T04-48-37-126Z.json",
-      "ops/incident-response/inbox/neighborhood-groups-20261116T050812Z-408ab6ed.json"
-    ],
-    "ignored_readme": true,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json"
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json"
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -6555,18 +6565,18 @@
     "normal_owner_coverage_verification": "pending"
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-16T05:46:55.355Z",
+    "observed_at": "2026-11-16T06:10:56.210Z",
     "through": "2026-11-16T02:54:55Z",
     "rows": 30,
     "seen_ids_at_boundary": [
       43794991816
     ],
     "new_run_ids": [],
-    "remaining": "Saved boundary reached;228 historical entries remain.",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json"
+    "remaining": "Saved boundary reached;227 historical entries remain.",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json"
   },
   "remaining_followup": [
-    "228 historical Actions entries in9groups",
+    "227 historical Actions entries in8groups",
     "18historical inbox paths",
     "Raanana811636 original/served image hash and desktop/mobile screenshot review",
     "5ISNET future homepage-card followups, original existing incident",
