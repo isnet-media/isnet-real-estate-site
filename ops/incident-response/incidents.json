@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T06:10:56.210Z",
+  "updated_at": "2026-11-16T12:46:17.772Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -643,7 +643,14 @@
       },
       "facebook_unattended_status": "normal_slot_recorded_published_public_verification_pending",
       "instagram_status": "awaiting_separate_implementation_and_authentication",
-      "prevention": "Shared factual-teaser formatter and permanent publisher closing deployed613; existing durable claims/counter/circuit breaker retained. Track real slot results rather than cron/HTTP success only; no unconditional permanent-token guarantee."
+      "prevention": "Shared factual-teaser formatter and permanent publisher closing deployed613; existing durable claims/counter/circuit breaker retained. Track real slot results rather than cron/HTTP success only; no unconditional permanent-token guarantee.",
+      "latest_reconciliation": {
+        "observed_at": "2026-11-16T12:46:17.772Z",
+        "new_scheduled_rows": 6,
+        "post_appPublished_rows": 2,
+        "detail": "No API error in new rows; no independent public or organic Insights proof. Historical Meta auth and new appPublished receipt are separate evidence.",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json"
+      }
     },
     {
       "id": "ashdod-cinema-four-missing-trailers",
@@ -2854,8 +2861,8 @@
     },
     {
       "id": "future-cms-create-post-optional-payload-validation",
-      "status": "mitigated",
-      "root_cause": "First batched create_post payload returned INVALID_ARGUMENT on10 targets. Original writer reports one changed-payload retry omitted optional createDate/subTitle-style fields and all10 posts succeeded. Exact invalid field/value combination not retained; current tool schema explicitly accepts both fields, so unsupported-field root cause is not established.",
+      "status": "awaiting_external_action",
+      "root_cause": "Recurrent create_post INVALID_ARGUMENT now also rejects a current-schema minimal required payload. Optional-field hypothesis from14Nov is insufficient. Exact server validator field/value/reason is not exposed by this connector and remains unestablished.",
       "occurrences": [
         {
           "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
@@ -2863,6 +2870,25 @@
           "runKey": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-14T10-22-58+02-00",
           "observed_at": "2026-11-14T08:58:37.888Z",
           "inbox": "ops/incident-response/inbox/20261114-future-cms-create-post-validation.json"
+        },
+        {
+          "observed_at": "2026-11-16T09:01:00Z",
+          "inbox": "ops/incident-response/inbox/2026-11-16T090100Z-future-isnet-create-post-invalid-argument.json",
+          "targets": [
+            2,
+            55,
+            51,
+            26,
+            62,
+            60,
+            28,
+            25,
+            61,
+            41
+          ],
+          "posts_created": 0,
+          "focused_minimal_retry_same_error": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json"
         }
       ],
       "change": "Original writer used minimal documented create payload; no controller repost or schema change.",
@@ -2870,7 +2896,7 @@
         "original_writer": "Reported CMS and public full body/image/credit/category verification on10 destinations.",
         "controller": "CMS Herzliya811483 readback template=false, hide=false, category2181, full body, image850822 and tags; no independent public body/image verification due read access."
       },
-      "prevention": "Use required title/categoryId/defaultImageId/tags plus content/description/creatorName/publish as appropriate; tags is comma-separated string. Add optional fields only as needed with schema-valid values. Keep existing post IDs and dedup before retry; never recreate published posts.",
+      "prevention": "Require server-side field-specific validation error and preserved sanitized rejected payload; retain original image IDs, exact-title dedupe and own per-targetCAS before a materially changed owner retry. No blind additional batch.",
       "resolution": "Mitigated through original-owner changed payload, not independently fixed_verified.",
       "observed_at": "2026-11-14T09:11:12.935Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-47019859-a278-8332-895e-1a4193cee12a.json",
@@ -2886,6 +2912,21 @@
           "KiryatGat"
         ],
         "evidence": "ops/incident-response/evidence/ops-2026-11-15-ec77c74d-904c-8326-a80d-1192ed4a5af6.json"
+      },
+      "updated_at": "2026-11-16T12:46:17.772Z",
+      "last_seen_at": "2026-11-16T09:01:00Z",
+      "impact": "16NovFuture article live onTLVNET,0created posts across10existing ISNET target sections;10uploaded images retained.",
+      "current_signature": "ISNET-CMS/all-targets/create_post/INVALID_ARGUMENT/minimal-current-schema",
+      "next_action": "Read server validator field/value/reason for16Nov09:01Z rejected request; compare preserved failed payload against811479; no identical retry.",
+      "latest_evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json",
+      "controller_retries_this_cycle": 0,
+      "last_good_comparison": {
+        "websiteId": 2,
+        "post_id": 811479,
+        "categoryId": 2114,
+        "type": "Article",
+        "tags_present": true,
+        "body_length": 4710
       }
     },
     {
@@ -4176,6 +4217,17 @@
         "controller_reconciled_at": "2026-11-16T02:53:13Z",
         "new_publications_this_cycle": 0,
         "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
+      },
+      "latest_followup": {
+        "observed_at": "2026-11-16T12:46:17.772Z",
+        "version": 633,
+        "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
+        "deployment_id": "appgdep_6afafa6aa9608191981219a4def58a79",
+        "article_id": "metropoline-university-hagana-night-stops-17nov-20261116",
+        "status": "deployed_public_verification_pending",
+        "remaining_prepared": 5,
+        "no_new_fixed_verified_claim": true,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json"
       }
     },
     {
@@ -4368,7 +4420,7 @@
       "observed_at": "2026-11-16T06:10:56.210Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431",
+  "last_review_runKey": "ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
