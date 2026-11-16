@@ -1,0 +1,66 @@
+{
+  "kind": "manual_handoff",
+  "source": "publisher_requested_facebook_blocker_repair",
+  "task_id": null,
+  "execution_identity": "interactive:6af9a740-d610-83ed-9693-16fa0d8984d7",
+  "runKey": "facebook-live-repair:2026-11-16T10:46:27Z",
+  "policy_version": "2026-11-15/1.2",
+  "checked_at": "2026-11-16T11:00:01.125Z",
+  "signature": "meta-publisher-development-mode-missing-privacy-url-zero-new-post-views",
+  "previous_evidence": "ops/incident-response/inbox/manual-facebook-zero-views-20261116-5ab7d2d6.json",
+  "status": "mitigated",
+  "verification_level": "configuration_verified",
+  "target": {
+    "site": "TLVNET",
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "meta_app_id": "2805713519823793",
+    "facebook_page_profile_id": "61596358055015",
+    "page_api_id": "1520426491146188"
+  },
+  "changes": [
+    "Published app-specific privacy/deletion notice based on existing runtime data handling; added it to source generator and preparation fingerprint so later builds preserve it.",
+    "Saved https://tlvnet.com/privacy#social-publisher as Meta app privacy URL, and https://tlvnet.com/privacy#social-data-deletion as data-deletion instructions URL; confirmed values survived reload.",
+    "Meta go_live changed from required-privacy blocker and disabled Publish to all requirements completed; invoked Publish once. Reload confirmed Published and Unpublish button.",
+    "Caption formatter now converts em/en dashes, other special hyphens and typographic ellipsis to ordinary punctuation and strips zero-width characters. URLs are preserved."
+  ],
+  "source_commit": "ce5623213481c7e823c93ea9a48e3b32fd6f02fc",
+  "deployment": {
+    "version": 630,
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_cb5b36357e488191a733f26293f87516",
+    "deployment_id": "appgdep_6afae0c60458819197fdef990a9e751c",
+    "status": "succeeded",
+    "env_set_revision": 3
+  },
+  "public_urls": [
+    "https://tlvnet.com/privacy#social-publisher",
+    "https://tlvnet.com/privacy#social-data-deletion"
+  ],
+  "meta_status_url": "https://developers.facebook.com/apps/2805713519823793/go_live/?business_id=1017512578048964",
+  "tests": [
+    "prepare-public completed with existing content/image/freshness/SEO/neighborhood regression checks.",
+    "check-foundation passed, including publishing, encryption, access, duplicate claims, existing scheduler and failure attempt limits.",
+    "Focused social-publisher tests passed after punctuation change, including URL preservation and no fourth send.",
+    "Framework build and strip-bundled-super-data completed; one production deployment.",
+    "Preserved unrelated generated public pages and photo quality issue records byte-for-byte from current source rather than publishing generator churn.",
+    "Live privacy page full text and deletion anchor verified in browser; desktop screenshot reviewed.",
+    "Meta app settings readback after reload and Published status after reload; desktop screenshot reviewed.",
+    "Existing Facebook post122105701887545268 loaded as public-marked post under manager session; no repost."
+  ],
+  "publication_lease": {
+    "token": "dcc4335d-36d1-465d-83a9-c2675ce83cf3",
+    "acquired_with_cas": true,
+    "readback_verified": true,
+    "released_own_token": true,
+    "release_commit": "1280a9bb074d35c4ed2c235e756547f196d7888d",
+    "state_readback": "free"
+  },
+  "pending": [
+    "Independent post visibility to a person without app role remains unverified. Anonymous public web reader returned DisabledError; manager session is insufficient proof.",
+    "Organic reach recovery and last24h zero cause not yet fixed_verified. Earlier older API posts had small positive counts; do not assign every zero definitively to development mode.",
+    "Next naturally scheduled owner slot after Live is 2026-11-16T11 UTC /13:00 Israel. It was not yet present at the final bounded D1 read; reconcile it on existing controller run, without dispatch.",
+    "Measure organic views and nonfollowers separately from ads at24h/48h; do not interpret unavailable metrics as numeric0.",
+    "No mobile visual review. No new performance collector, Reels/gallery/poll publishing route or6–8/day experiment activated in this blocker repair."
+  ],
+  "preserved": "No schedule, enabled flag, permissions scope, DB schema, DNS, R2 structure or keys changed. No new task/agent or manual social dispatch; no claim cleared and no existing post recreated.",
+  "calls_cost": "No monetary cost measurement available; not estimated."
+}
