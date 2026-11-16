@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-15T22:36:40.091Z",
+  "updated_at": "2026-11-15T23:59:20Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -432,9 +432,25 @@
           "remaining_runs": 243,
           "observed_at": "2026-11-15T21:43:46.387Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+        },
+        {
+          "run_id": 42653952225,
+          "job_id": 129287327100,
+          "source_commit": "32ff88c816921fa136e0f0904aff30cd73b49233",
+          "created_at": "2026-11-09T16:21:36Z",
+          "root": "youtube-discovery-missing-api-key",
+          "failed_step": "Find videos for new stand-up performers",
+          "error": "YOUTUBE_API_KEY not set; new-artist discovery did not run.",
+          "exit_code": 2,
+          "verified_catalog_reuse_unaffected_per_log": true,
+          "current_recurrence_claimed": false,
+          "full_log_reads": 1,
+          "remaining_entries": 241,
+          "observed_at": "2026-11-15T23:59:20Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-16-08e7921c-383c-8322-8b25-395116192fca.json"
         }
       ],
-      "last_historical_review_at": "2026-11-15T21:43:46.387Z"
+      "last_historical_review_at": "2026-11-15T23:59:20Z"
     },
     {
       "id": "ims-no-valid-current-period",
@@ -1256,6 +1272,15 @@
         "new_public_readback": false,
         "republished": false,
         "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
+      },
+      "legacy_evening_handoff_reconciliation": {
+        "inbox": "ops/incident-response/inbox/8a03b756-2764-8330-a302-b024f7ab97db-1.json",
+        "observed_at": "2026-11-15T23:59:20Z",
+        "obsolete_legacy_Work_proof_precondition_voided_by_publisher": "2026-11-14",
+        "sports_currently_enabled": true,
+        "prior_derby_publication_resolution_retained": true,
+        "republished": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-08e7921c-383c-8322-8b25-395116192fca.json"
       }
     },
     {
@@ -1957,6 +1982,15 @@
         "observed_at": "2026-11-15T21:43:46.387Z",
         "outcome": "CurrentconsumerWRITER15Nov1.1 andAGENT_OPERATIONS correctowner supersede old unapplied14Novpatch; patchnotapplied.",
         "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+      },
+      "latest_historical_handoff_reconciliation": {
+        "inbox": "ops/incident-response/inbox/b8641b1e-3cec-8322-a6e7-5c6f1e11a895-1.json",
+        "observed_at": "2026-11-15T23:59:20Z",
+        "current_four_prompts_read": true,
+        "community_consumer_separate_current_owners": true,
+        "no_new_routing_or_public_verification": true,
+        "configuration_status_retained": "configuration_verified",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-08e7921c-383c-8322-8b25-395116192fca.json"
       }
     },
     {
@@ -3789,7 +3823,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a",
+  "last_review_runKey": "ops-2026-11-16-08e7921c-383c-8322-8b25-395116192fca",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
