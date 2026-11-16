@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T18:24:54.876Z",
+  "updated_at": "2026-11-16T19:51:56.188Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4513,9 +4513,52 @@
         "evidence": "ops/incident-response/evidence/ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5.json",
         "production_data_written": false
       }
+    },
+    {
+      "id": "tlvnet-publication-evidence-owner-schema",
+      "status": "fixed_verified",
+      "severity": "monitoring",
+      "signature": "TLVNET/ops-publication-report/owner-receipt-schema-mismatch",
+      "first_seen_at": "2026-11-16T19:51:56.188Z",
+      "last_seen_at": "2026-11-16T19:51:56.188Z",
+      "root_cause": "publication_evidence and updatedExistingArticleIds not recognized; exact body/image byte receipts mislabeled incomplete.",
+      "change": {
+        "source_commit": "af6d73c4332053a94165c750c815890c87ba3977",
+        "files": [
+          "lib/publication-evidence.mjs",
+          "tests/publication-evidence.mjs"
+        ],
+        "scope": "Ops-only CLI report and regression test; no application route import, build or site deploy."
+      },
+      "tests": "Actual original-owner protocol: two new publications and two existing updates recognized. Altered body, hash, credit, title, section/home reference, deployment and URL rejected. Prior tests still pass.",
+      "verification": {
+        "report_sports_new": 2,
+        "report_sports_updates": 2,
+        "actual_full_live_bodies": 4,
+        "matching_public_JPG_hashes": 4,
+        "credit_home_section_verified": true,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941.json"
+      },
+      "prevention": "Strict receipt protocol normalization tied to current article body/hash and original source/deployment. Incomplete receipts elsewhere stay incomplete; no generic status promotion.",
+      "occurrences": [
+        {
+          "runKey": "ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941.json"
+        }
+      ]
+    },
+    {
+      "id": "tlvnet-favicon-route-missing",
+      "status": "open",
+      "severity": "low",
+      "root_cause": "Observed404 for GET/favicon.ico; missing static icon route. Two sampled legitimate browser requests, no article failure inferred.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941.json",
+      "next_action": "Use approved site icon in next genuine owned release; no standalone deployment for this journal.",
+      "first_seen_at": "2026-11-16T19:51:56.188Z",
+      "last_seen_at": "2026-11-16T19:51:56.188Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5",
+  "last_review_runKey": "ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
