@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "incident_id": "2026-11-16-future-isnet-create-post-invalid-argument",
+  "subsystem": "ISNET CMS",
+  "domain": "future-magazine-network-distribution",
+  "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+  "run_key": "Automation_09c630803fe481919ccd2f476f0d6916:2026-11-16T10-33-25+02-00",
+  "detected_at": "2026-11-16T09:01:00Z",
+  "policy_version": "2026-11-14/1.0",
+  "status": "open",
+  "fingerprint": "ISNET-CMS/all-targets/create_post/INVALID_ARGUMENT/minimal-current-schema",
+  "evidence": {
+    "targets": [
+      2,
+      55,
+      51,
+      26,
+      62,
+      60,
+      28,
+      25,
+      61,
+      41
+    ],
+    "categories": [
+      2114,
+      2178,
+      2179,
+      2180,
+      2181,
+      2182,
+      2183,
+      2174,
+      2184,
+      2185
+    ],
+    "duplicate_search": "0 existing exact-title matches on all targets",
+    "image_uploads": "succeeded independently for all targets, ids 851090-851099",
+    "create_attempt_1": "INVALID_ARGUMENT on all targets; no post ID returned",
+    "focused_retry": "websiteId 2 with current-schema minimal required payload and no optional booleans; same INVALID_ARGUMENT; no post ID returned",
+    "created_posts": 0,
+    "locks": "each own lock acquired/read back and released; no other owner's lock altered"
+  },
+  "impact": "TLVNET article is live and verified; distribution to all 10 existing ISNET Future sections is blocked. Images are uploaded but no posts were created.",
+  "smallest_next_action": "Inspect the ISNET create_post server-side validation/log for the rejected field/value and compare with the last successful Future publication payload (2026-11-14, post 811479). Do not recreate until the validator reason changes; resume by exact-title dedupe.",
+  "publisher_notification": "required once: material new all-target distribution blocker"
+}
