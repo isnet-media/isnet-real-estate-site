@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T00:59:57Z",
+  "updated_at": "2026-11-16T01:59:05Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -470,9 +470,56 @@
           "remaining_run_entries": 240,
           "observed_at": "2026-11-16T00:59:57Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-16-023d355a-8dd4-8322-bc82-b7c2f07c62eb.json"
+        },
+        {
+          "run_id": 42375176161,
+          "workflow": "Discover stand-up videos",
+          "path": ".github/workflows/discover-standup-videos.yml",
+          "attempt": 1,
+          "created_at": "2026-11-07T13:03:13Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "64e8dbc425ef8e60fa0d15ffbbd23d2ff1ad90ff",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42375176161",
+          "classification": "Historical metadata only; root unconfirmed. No current outage or repair inferred.",
+          "job_id": 128411174846,
+          "root": "youtube-discovery-missing-api-key",
+          "failed_step": "Find videos for new stand-up performers",
+          "error": "YOUTUBE_API_KEY not set; new-artist discovery did not run.",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "observed_at": "2026-11-16T01:59:05Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json"
+        },
+        {
+          "run_id": 42232625825,
+          "workflow": "Discover stand-up videos",
+          "path": ".github/workflows/discover-standup-videos.yml",
+          "attempt": 1,
+          "created_at": "2026-11-06T14:17:37Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "b964dd7b90ace798dc4f228b8b979d0bdcaf5af3",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42232625825",
+          "classification": "Historical metadata only; exact root unconfirmed, no current outage or repair inferred.",
+          "job_id": 127942060757,
+          "root": "youtube-discovery-missing-api-key",
+          "failed_step": "Find videos for new stand-up performers",
+          "error": "YOUTUBE_API_KEY not set; new-artist discovery did not run.",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "observed_at": "2026-11-16T01:59:05Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json"
         }
       ],
-      "last_historical_review_at": "2026-11-16T00:59:57Z"
+      "last_historical_review_at": "2026-11-16T01:59:05Z",
+      "initial_history_group_triage_complete": {
+        "observed_at": "2026-11-16T01:59:05Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json",
+        "qualification": "All entries previously queued for this workflow classified; not an audit of every possible historic run and not proof of restored credentials."
+      }
     },
     {
       "id": "ims-no-valid-current-period",
@@ -3715,7 +3762,92 @@
         "mobile_visual_review": "pending",
         "coverage_candidates": "Existing research queues require original owner verification; no alternative writer triggered"
       },
-      "verified_at": "2026-11-15T13:25:34.266Z"
+      "verified_at": "2026-11-15T13:25:34.266Z",
+      "latest_historical_reconciliation": {
+        "observed_at": "2026-11-16T01:59:05Z",
+        "inbox": [
+          "ops/incident-response/inbox/dd4d9e0b-6858-8326-a56e-4365bd312654-1.json",
+          "ops/incident-response/inbox/e6d4b4b3-779c-8321-850a-cd86b3554385-1.json"
+        ],
+        "completed_articles": [
+          {
+            "article_id": "superbus-171-holon-north-tlv-20261114",
+            "status": "published_verified",
+            "evidence": "ops/incident-response/evidence/ops-2026-11-14-b566499d-9660-832e-8629-bddddd544a1b.json",
+            "url": "https://tlvnet.com/news/superbus-171-holon-north-tlv-20261114",
+            "owner_run_id": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1",
+            "qualification": "Previously recorded later completion, not new publication or fresh public readback"
+          },
+          {
+            "article_id": "tlv-light-rail-night-works-15-19-nov-20261114",
+            "status": "updated_existing_verified_by_original_writer",
+            "evidence": "ops/incident-response/evidence/ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7.json",
+            "url": "https://tlvnet.com/news/tlv-light-rail-night-works-15-19-nov-20261114",
+            "owner_run_id": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1",
+            "qualification": "Previously recorded later completion, not new publication or fresh public readback"
+          },
+          {
+            "article_id": "city-museum-troubled-waters-opening-20261106",
+            "status": "updated_existing_published_verified",
+            "evidence": "ops/incident-response/evidence/ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75.json",
+            "url": "https://tlvnet.com/news/city-museum-troubled-waters-opening-20261106",
+            "owner_run_id": "ebc6b2f1-e850-832d-be04-1928ff1b3949",
+            "qualification": "Previously recorded later completion, not new publication or fresh public readback"
+          },
+          {
+            "article_id": "mozaik-ses-last-shootout-wormhole-preview-20261107",
+            "status": "updated_existing_published_verified",
+            "evidence": "ops/incident-response/evidence/ops-2026-11-15-fc2fb076-a494-832a-955b-07c686a4ba75.json",
+            "url": "https://tlvnet.com/night/stories/mozaik-ses-last-shootout-wormhole-preview-20261107",
+            "owner_run_id": "ebc6b2f1-e850-832d-be04-1928ff1b3949",
+            "qualification": "Previously recorded later completion, not new publication or fresh public readback"
+          }
+        ],
+        "remaining_research": {
+          "news": [
+            {
+              "url": "https://www.be106.net/255/164803",
+              "status": "research_checkpoint_unchanged",
+              "reason": "No fresh primary/courtoutcome; juvenileidentityexcluded."
+            },
+            {
+              "url": "https://www.be106.net/255/164802",
+              "status": "research_checkpoint_unchanged",
+              "reason": "No new independentoutcome; seizure notforfeiture."
+            },
+            {
+              "url": "https://www.be106.net/255/164805",
+              "status": "research_checkpoint_unchanged",
+              "reason": "No currentmedicaloutcome; originalseverity notcurrentstate."
+            }
+          ],
+          "culture": [
+            {
+              "content_id": "clfb-all-sight-exhibition-20261114",
+              "status": "owner_research_pending",
+              "primary_url": "https://center.clfb.org.il/exhibition/all-sight-is-of-the-soul",
+              "missing": [
+                "Full institution visit/date/status verification",
+                "Appropriate licensed image or marked illustration with actual review"
+              ],
+              "next_action": "Actual owner verifies full institution dates/status and relevant rights before publication."
+            },
+            {
+              "content_id": "kirisute-levontin-release-show-20261114",
+              "status": "expired_historical_only",
+              "primary_url": "https://levontin7.com/events/dance-of-the-cursed-release-show/",
+              "missing": [
+                "Relevant image and actual reuse basis",
+                "Ticket/admission details if included; do not invent show-start, fees or age"
+              ],
+              "next_action": "Do not promote as future activity or roll date forward."
+            }
+          ]
+        },
+        "new_publication": false,
+        "fresh_public_readback": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json"
+      }
     },
     {
       "id": "pages-artifact-metadata-transient-missing",
@@ -3845,7 +3977,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-023d355a-8dd4-8322-bc82-b7c2f07c62eb",
+  "last_review_runKey": "ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
