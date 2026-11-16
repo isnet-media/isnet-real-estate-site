@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T12:49:44.452Z",
+  "updated_at": "2026-11-16T13:27:55.998Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-16T11:52:43Z",
+  "last_processed_run_created_at": "2026-11-16T13:06:54Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -17,7 +17,7 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "227 historical run entries remain in8workflow groups.",
+      "remaining": "226historical run entries remain in8workflow groups.",
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json"
     },
     "full_logs_read_this_cycle": 0,
@@ -2656,18 +2656,6 @@
       ],
       ".github/workflows/events-public-health.yml": [
         {
-          "run_id": 42668061644,
-          "workflow": "Public events health checks",
-          "path": ".github/workflows/events-public-health.yml",
-          "attempt": 1,
-          "created_at": "2026-11-09T17:47:38Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "ba7a7c1c1fec2ed31688c6e7745e4a08656d2056",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42668061644",
-          "classification": "Full log read this cycle: Yavne kids category HTTP503; 32 other endpoints returned200; upstream root not established. Historical, not current recurrence."
-        },
-        {
           "run_id": 42404676803,
           "workflow": "Public events health checks",
           "path": ".github/workflows/events-public-health.yml",
@@ -2743,19 +2731,17 @@
         }
       ]
     },
-    "metadata_rows_inspected_this_cycle": 0,
+    "metadata_rows_inspected_this_cycle": 1,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
-      "observed_at": "2026-11-16T12:46:17.772Z",
+      "observed_at": "2026-11-16T13:27:55.998Z",
       "last_run_ids": [
-        42959059460
+        42668061644
       ],
-      "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json",
-      "remaining_run_entries": 227,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
+      "remaining_run_entries": 226,
       "remaining_workflow_groups": 8,
-      "grouping_basis": "Exact historical BATYAM private writeHTTP400; separate from known readHTTP400. No present outage inference.",
-      "progress_this_cycle": 0,
-      "reason": "Ready original-owner publication prioritized; unchanged historical backlog retained"
+      "grouping_basis": "Previously full-read Yavne kids503 exact known root; correlated duplicate removed without another log read."
     }
   },
   "inbox_path": "ops/incident-response/inbox/",
@@ -2806,18 +2792,18 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "7d119da4-2dec-8332-ad56-78ec553b00f4",
-    "runKey": "ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4",
-    "started_at": "2026-11-16T12:24:15.563014Z",
-    "observed_at": "2026-11-16T12:46:17.772Z",
-    "status": "deployment_succeeded_public_verification_pending_new_cms_blocker",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json",
-    "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
+    "run_id": "733a9d9b-2ec0-8332-b7de-9caec81a3714",
+    "runKey": "ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714",
+    "started_at": "2026-11-16T13:19:26.391942Z",
+    "observed_at": "2026-11-16T13:27:55.998Z",
+    "status": "checked_transient503_recovered_unchanged_publication_pending",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
     "saved_version": 633,
-    "new_actions": 24,
-    "full_logs_read": 0,
-    "remaining_prepared": 5,
-    "historical_remaining": 227
+    "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
+    "new_actions": 35,
+    "full_logs_read": 1,
+    "historical_remaining": 226,
+    "remaining_prepared": 5
   },
   "concurrent_controller_observation": {
     "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
@@ -3195,7 +3181,8 @@
     "tlvnet-local-source-coverage-handoff-gap",
     "tlvnet-local-source-municipal-category429",
     "controller-active-scope-inherited-writer-approval",
-    "historical-super-batyam-private-write-http400"
+    "historical-super-batyam-private-write-http400",
+    "events-health-herzliya-cinema-transient503"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -3291,7 +3278,9 @@
     "ops/incident-response/inbox/20261116-consumer-visual-followup.json",
     "ops/incident-response/inbox/8e7a0bb8-4e2c-8330-9ba5-cb22f666339d-1.json",
     "ops/incident-response/inbox/manual-facebook-live-repair-20261116-dcc4335d.json",
-    "ops/incident-response/inbox/manual-facebook-zero-views-20261116-5ab7d2d6.json"
+    "ops/incident-response/inbox/manual-facebook-zero-views-20261116-5ab7d2d6.json",
+    "ops/incident-response/inbox/20261116-controller633-public-verification-pending.json",
+    "ops/incident-response/inbox/43871108617-1.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -5000,6 +4989,21 @@
       "full_logs_read": 0,
       "remaining_prepared": 5,
       "historical_remaining": 227
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "733a9d9b-2ec0-8332-b7de-9caec81a3714",
+      "runKey": "ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714",
+      "started_at": "2026-11-16T13:19:26.391942Z",
+      "observed_at": "2026-11-16T13:27:55.998Z",
+      "status": "checked_transient503_recovered_unchanged_publication_pending",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
+      "saved_version": 633,
+      "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
+      "new_actions": 35,
+      "full_logs_read": 1,
+      "historical_remaining": 226,
+      "remaining_prepared": 5
     }
   ],
   "photo_controls_checkpoint": {
@@ -5602,7 +5606,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-16T12:00:11.386Z",
+    "max_finished_at": "2026-11-16T13:00:11.085Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -5620,12 +5624,13 @@
       "2026-11-16T09",
       "2026-11-16T10",
       "2026-11-16T11",
-      "2026-11-16T12"
+      "2026-11-16T12",
+      "2026-11-16T13"
     ],
-    "observed_at": "2026-11-16T12:46:17.772Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json",
-    "new_rows_this_cycle": 6,
-    "public_verification": "API statuses published;2after appPublished repair; independent public/organic Insights proof remains pending; no resend"
+    "observed_at": "2026-11-16T13:27:55.998Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
+    "new_rows_this_cycle": 1,
+    "public_verification": "API receipt only. Organic reach and public post proof remain pending; no resend."
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -5754,7 +5759,7 @@
     }
   },
   "latest_tlvnet_queue_observation": {
-    "observed_at": "2026-11-16T12:46:17.772Z",
+    "observed_at": "2026-11-16T13:27:55.998Z",
     "prepared_original_owner_items": 5,
     "verification_only_items": [
       "metropoline-university-hagana-night-stops-17nov-20261116"
@@ -5766,7 +5771,9 @@
       "ichilov-wonderful-ai-development-partnership-20261116",
       "edelbyte-series-a-tel-aviv-office-20261116"
     ],
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json"
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
+    "progress_this_cycle": 0,
+    "reason": "Five checkpoints retained; unchanged source access blocks not retried; new incident triage within bounded cycle. Native projection drafts0does not mean inbox queue empty."
   },
   "pending_task_run_ids": [],
   "latest_supermarket_execution_checkpoint": {
@@ -5974,7 +5981,7 @@
           },
           "pending_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96"
         },
-        "metadata_checked_at": "2026-11-16T12:46:17.772Z",
+        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
         "coverage_queue_count": 20,
         "coverage_queue_checkpoint": "public/news/agents/news/ledger.json",
         "public_verification": "pending_for_633",
@@ -6039,7 +6046,7 @@
         "saved_version": 633,
         "verification_evidence": "ops/incident-response/evidence/ops-2026-11-15-dcc9642c-79dc-8326-998b-1cb689a8bebc.json",
         "last_owner_started_at": "2026-11-15T14:34:31.341666Z",
-        "metadata_checked_at": "2026-11-16T12:46:17.772Z",
+        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
         "coverage_queue_count": 9,
         "coverage_queue_checkpoint": "public/news/agents/real-estate/ledger.json",
         "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending"
@@ -6069,7 +6076,7 @@
         "last_owner_started_at": "2026-11-16T10:40:40.792099Z",
         "pending_owner_result": false,
         "independent_full_body_image_credit_verified_at": "2026-11-15T11:34:20.295Z",
-        "metadata_checked_at": "2026-11-16T12:46:17.772Z",
+        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
         "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
         "saved_version": 633,
         "coverage_queue_count": 1,
@@ -6113,7 +6120,7 @@
         "mini_site_technical_update_at": "2026-11-15T12:40:04.126313Z",
         "coverage_cursor": "hadar-afeka",
         "last_owner_started_at": "2026-11-16T11:03:01.766109Z",
-        "metadata_checked_at": "2026-11-16T12:46:17.772Z",
+        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
         "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
         "saved_version": 633,
         "coverage_queue_count": 11,
@@ -6154,7 +6161,7 @@
           "verification_scope": "Fresh focused article/body/image/credit readback; owner619 proof retained for home/section links"
         },
         "last_owner_started_at": "2026-11-16T12:07:13.283003Z",
-        "metadata_checked_at": "2026-11-16T12:46:17.772Z",
+        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
         "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
         "saved_version": 633,
         "coverage_queue_count": 8,
@@ -6205,7 +6212,7 @@
         "last_owner_new_articles": 2,
         "coverage_state": "Two published_verified original owner627 articles; mobile visual pending; prior unapproved research drafts superseded by actual owner work",
         "execution_anomaly_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
-        "metadata_checked_at": "2026-11-16T12:46:17.772Z",
+        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
         "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
         "saved_version": 633,
         "coverage_queue_count": 3,
@@ -6237,7 +6244,7 @@
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
         "last_owner_started_at": "2026-11-16T07:54:51.117698Z",
-        "metadata_checked_at": "2026-11-16T12:46:17.772Z",
+        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
         "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
         "saved_version": 633,
         "coverage_queue_count": 6,
@@ -6266,7 +6273,7 @@
         "last_owner_started_at": "2026-11-15T11:02:18.685247Z",
         "last_owner_completed_at": "2026-11-15T11:20:21.552493Z",
         "owner_run_changed_since_checkpoint": false,
-        "metadata_checked_at": "2026-11-16T12:46:17.772Z",
+        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
         "navigation_areas": 25,
         "original_localities": 73,
         "technical_version": 625,
@@ -6275,9 +6282,9 @@
         "expiry_regression": "passed_current_source"
       }
     },
-    "qualification": "Current seven-desk source/results metadata and original owner receipts; controller633 live reader403, no whole-network revalidation.",
-    "metadata_checked_at": "2026-11-16T12:46:17.772Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json",
+    "qualification": "Seven owner results and version633 unchanged; existing section publication/queue/lead/expiry signatures retained, no bodies rescanned or new live proof.",
+    "metadata_checked_at": "2026-11-16T13:27:55.998Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
     "date_rollover": {
       "date_from": "2026-11-15",
       "date_to": "2026-11-16",
@@ -6607,11 +6614,10 @@
     "reconciled_at": "2026-11-16T05:46:55.355Z"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-16T12:46:17.772Z",
+    "observed_at": "2026-11-16T13:27:55.998Z",
     "unread_entries": 0,
-    "new_entries_processed": 8,
-    "historical_remaining_separate": true,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json"
+    "entries_processed": 2,
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json"
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -6645,18 +6651,19 @@
     "normal_owner_coverage_verification": "pending"
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-16T12:46:17.772Z",
-    "from": "2026-11-16T02:54:55Z",
-    "through": "2026-11-16T11:52:43Z",
-    "rows": 25,
-    "strictly_new": 24,
+    "observed_at": "2026-11-16T13:27:55.998Z",
+    "from": "2026-11-16T11:52:43Z",
+    "through": "2026-11-16T13:06:54Z",
+    "rows": 36,
+    "strictly_new": 35,
+    "failures": 1,
+    "superseded_cancelled": 2,
     "next_page": null,
-    "failures": 0,
-    "full_logs_read": 0,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json"
+    "full_logs_read": 1,
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json"
   },
   "remaining_followup": [
-    "227 historical Actions entries in8groups",
+    "226 historical Actions entries in8groups",
     "18historical inbox paths",
     "Raanana811636 original/served image hash and desktop/mobile screenshot review",
     "5ISNET future homepage-card followups, original existing incident",
@@ -6687,170 +6694,22 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-16T12:46:17.772Z",
-    "owner_runs": [
-      {
-        "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
-        "last_run": {
-          "id": "2fbb7d04-7870-832a-943e-511abc3ab400",
-          "recorded_status": "completed",
-          "scheduled_for": "2026-11-16T12:00:00Z",
-          "started_at": "2026-11-16T12:08:56.874335Z",
-          "completed_at": "2026-11-16T12:16:51.565054Z",
-          "chat_ref": {
-            "type": "chatgpt",
-            "id": "6af5efa4-1a90-83eb-8acd-a8df4f02cd4c"
-          }
-        },
-        "latest_result": {
-          "run_id": "2fbb7d04-7870-832a-943e-511abc3ab400",
-          "created_at": "2026-11-16T12:16:50.973430Z",
-          "completed_at": "2026-11-16T12:16:51.565054Z"
-        }
-      },
-      {
-        "task_id": "Automation_82add5edecd8819197814e83bac85a75",
-        "last_run": {
-          "id": "6986d03c-add8-8329-ba19-20efca34fa34",
-          "recorded_status": "completed",
-          "scheduled_for": "2026-11-15T14:00:00Z",
-          "started_at": "2026-11-15T14:34:31.341666Z",
-          "completed_at": "2026-11-15T14:51:37.967469Z",
-          "chat_ref": {
-            "type": "chatgpt",
-            "id": "6af5b8b0-f2c8-83ed-bee9-3753b93080b9"
-          }
-        },
-        "latest_result": {
-          "run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
-          "created_at": "2026-11-15T14:51:37.489179Z",
-          "completed_at": "2026-11-15T14:51:37.967469Z"
-        }
-      },
-      {
-        "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
-        "last_run": {
-          "id": "fa8047fe-cd4c-832b-9c0d-0fbedd0cdea1",
-          "recorded_status": "completed",
-          "scheduled_for": "2026-11-16T10:00:00Z",
-          "started_at": "2026-11-16T10:40:40.792099Z",
-          "completed_at": "2026-11-16T10:59:14.558971Z",
-          "chat_ref": {
-            "type": "chatgpt",
-            "id": "6af6e7ee-aef4-83eb-9a15-53e6dba697c9"
-          }
-        },
-        "latest_result": {
-          "run_id": "fa8047fe-cd4c-832b-9c0d-0fbedd0cdea1",
-          "created_at": "2026-11-16T10:59:13.676739Z",
-          "completed_at": "2026-11-16T10:59:14.558971Z"
-        }
-      },
-      {
-        "task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
-        "last_run": {
-          "id": "a64670a2-9d9c-832c-83f1-b2015cdfedf5",
-          "recorded_status": "completed",
-          "scheduled_for": "2026-11-16T11:00:00Z",
-          "started_at": "2026-11-16T11:03:01.766109Z",
-          "completed_at": "2026-11-16T11:29:26.556430Z",
-          "chat_ref": {
-            "type": "chatgpt",
-            "id": "6aefca53-37bc-83eb-95c2-1ee0d1d63c94"
-          }
-        },
-        "latest_result": {
-          "run_id": "a64670a2-9d9c-832c-83f1-b2015cdfedf5",
-          "created_at": "2026-11-16T11:29:26.207915Z",
-          "completed_at": "2026-11-16T11:29:26.556430Z"
-        }
-      },
-      {
-        "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
-        "last_run": {
-          "id": "772511e5-2b60-8326-8a38-6e2fb54e111c",
-          "recorded_status": "completed",
-          "scheduled_for": "2026-11-16T12:00:00Z",
-          "started_at": "2026-11-16T12:07:13.283003Z",
-          "completed_at": "2026-11-16T12:20:33.867928Z",
-          "chat_ref": {
-            "type": "chatgpt",
-            "id": "6af000ed-40f8-83ed-ab86-7baf8280349f"
-          }
-        },
-        "latest_result": {
-          "run_id": "772511e5-2b60-8326-8a38-6e2fb54e111c",
-          "created_at": "2026-11-16T12:20:33.532424Z",
-          "completed_at": "2026-11-16T12:20:33.867928Z"
-        }
-      },
-      {
-        "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
-        "last_run": {
-          "id": "8e7a0bb8-4e2c-8330-9ba5-cb22f666339d",
-          "recorded_status": "completed",
-          "scheduled_for": "2026-11-16T07:00:00Z",
-          "started_at": "2026-11-16T06:57:06.757526Z",
-          "completed_at": "2026-11-16T07:11:36.484955Z",
-          "chat_ref": {
-            "type": "chatgpt",
-            "id": "6af80764-2768-83ed-8f61-4262b0bbbb17"
-          }
-        },
-        "latest_result": {
-          "run_id": "8e7a0bb8-4e2c-8330-9ba5-cb22f666339d",
-          "created_at": "2026-11-16T07:11:36.113376Z",
-          "completed_at": "2026-11-16T07:11:36.484955Z"
-        }
-      },
-      {
-        "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
-        "last_run": {
-          "id": "eb25dc5a-2750-8325-9189-cdf85c90fa3d",
-          "recorded_status": "completed",
-          "scheduled_for": "2026-11-16T07:00:00Z",
-          "started_at": "2026-11-16T07:54:51.117698Z",
-          "completed_at": "2026-11-16T08:12:12.609247Z",
-          "chat_ref": {
-            "type": "chatgpt",
-            "id": "6af6bfaf-1470-83eb-b437-ea3232a7518e"
-          }
-        },
-        "latest_result": {
-          "run_id": "eb25dc5a-2750-8325-9189-cdf85c90fa3d",
-          "created_at": "2026-11-16T08:12:12.427549Z",
-          "completed_at": "2026-11-16T08:12:12.609247Z"
-        }
-      },
-      {
-        "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
-        "last_run": {
-          "id": "a1cbef40-7ec8-832d-a8c4-9e1d1c9f97fc",
-          "recorded_status": "completed",
-          "scheduled_for": "2026-11-16T06:00:00Z",
-          "started_at": "2026-11-16T06:01:49.293431Z",
-          "completed_at": "2026-11-16T06:11:12.182084Z",
-          "chat_ref": {
-            "type": "chatgpt",
-            "id": "6af34f09-0d90-83eb-925c-8e1698a86927"
-          }
-        },
-        "latest_result": {
-          "run_id": "a1cbef40-7ec8-832d-a8c4-9e1d1c9f97fc",
-          "created_at": "2026-11-16T06:11:11.652948Z",
-          "completed_at": "2026-11-16T06:11:12.182084Z"
-        }
-      }
-    ],
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json",
-    "same_source_not_rescanned": true,
-    "sports_exact_metadata_followup_at": "2026-11-16T12:49:44.452Z",
-    "stability_observation": "ops/tlvnet-stability/observations/2026-11-16/7d119da4-2dec-8332-ad56-78ec553b00f4.json",
-    "lease_release_readback": {
-      "free": true,
-      "own_last_release": true,
-      "version": 633
-    }
+    "observed_at": "2026-11-16T13:27:55.998Z",
+    "source_unchanged": true,
+    "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
+    "owner_run_ids": {
+      "news": "2fbb7d04-7870-832a-943e-511abc3ab400",
+      "real-estate": "6986d03c-add8-8329-ba19-20efca34fa34",
+      "economy-tech": "fa8047fe-cd4c-832b-9c0d-0fbedd0cdea1",
+      "community": "a64670a2-9d9c-832c-83f1-b2015cdfedf5",
+      "consumer": "772511e5-2b60-8326-8a38-6e2fb54e111c",
+      "sports": "8e7a0bb8-4e2c-8330-9ba5-cb22f666339d",
+      "culture-news": "eb25dc5a-2750-8325-9189-cdf85c90fa3d"
+    },
+    "public_reader_unchanged_no_retry": true,
+    "prepared_count": 5,
+    "verification_only": 1
   },
   "latest_owner_publication_observation": {
     "owner_run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
