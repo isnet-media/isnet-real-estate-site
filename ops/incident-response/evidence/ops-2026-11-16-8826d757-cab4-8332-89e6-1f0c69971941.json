@@ -1,0 +1,1985 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "8826d757-cab4-8332-89e6-1f0c69971941",
+  "runKey": "ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941",
+  "policy_version": "2026-11-15/1.2",
+  "started_at": "2026-11-16T19:45:02.539874Z",
+  "observed_at": "2026-11-16T19:51:56.188Z",
+  "evidence": "ops/incident-response/evidence/ops-2026-11-16-8826d757-cab4-8332-89e6-1f0c69971941.json",
+  "observation": "ops/tlvnet-stability/observations/2026-11-16/8826d757-cab4-8332-89e6-1f0c69971941.json",
+  "scope": "Controller only; no new content/owner replay, task mutation, production deployment, catalog collection or permission change.",
+  "actions": {
+    "watermark": "2026-11-16T17:27:33Z",
+    "new_runs": 0,
+    "overlap_runs": 1,
+    "pending": [],
+    "query_total": 1,
+    "complete_through_prior_boundary": true,
+    "full_logs_read": 0
+  },
+  "inbox": {
+    "new_changed": 0,
+    "inventory_count": 73
+  },
+  "source": {
+    "published": "6e73e81e8ce5a93b6c64ab6bd0dc5199ddb1ebc9",
+    "owner_journal": "eae4e28c43ffe63836e86f7a35620ad329bc1295",
+    "report_fix": "af6d73c4332053a94165c750c815890c87ba3977",
+    "version": 638,
+    "deployment": "appgdep_6afb58ae88408191bfe493eaf155d90c",
+    "status": "succeeded"
+  },
+  "repair": {
+    "signature": "TLVNET/ops-publication-report/owner-receipt-schema-mismatch",
+    "files": [
+      "lib/publication-evidence.mjs",
+      "tests/publication-evidence.mjs"
+    ],
+    "cause": "publication_evidence and updatedExistingArticleIds not recognized; exact body/image byte receipts mislabeled incomplete.",
+    "regression": "Actual original-owner protocol: two new publications and two existing updates recognized. Altered body, hash, credit, title, section/home reference, deployment and URL rejected. Prior tests still pass.",
+    "execution": "Committed operational report executed successfully; consumed only by CLI report and tests, not live application routes. No build/deploy needed.",
+    "new_publication_performed": false
+  },
+  "publication_evidence": [
+    {
+      "article_id": "hapoel-baskonia-paris-away-week-preview-20261116",
+      "url": "https://tlvnet.com/news/hapoel-baskonia-paris-away-week-preview-20261116.html",
+      "title": "מוויטוריה לפריז: הפועל תל אביב נכנסת לשבוע חוץ ביורוליג",
+      "status": "published_verified",
+      "checked_at": "2026-11-16T19:48:20.260300+00:00",
+      "body_sha256": "c6881c3ab97dcca56637f93afed53d7cc73769e633aea2ceedba271678f8ae08",
+      "public_html_sha256": "4995b095e297118bb88722fc24703338004f0cd7d0fbf1565dae1075b4b23274",
+      "source_html_sha256": "4995b095e297118bb88722fc24703338004f0cd7d0fbf1565dae1075b4b23274",
+      "exact_html_bytes_match": true,
+      "full_public_body": true,
+      "title_verified": true,
+      "JPG_loaded": true,
+      "asset_sha256_source": "1d6d24fc4dfc52ce7cb92146c9c13ecf9a25e1e38fa5b64065b3e54912b513f8",
+      "asset_sha256_public": "1d6d24fc4dfc52ce7cb92146c9c13ecf9a25e1e38fa5b64065b3e54912b513f8",
+      "credit_verified": true,
+      "archive_caption": true,
+      "section_link": true,
+      "home_link": true,
+      "desktop_visual": "pending",
+      "mobile_visual": "pending",
+      "photo_bank_id": "flash90-F260623OBH13"
+    },
+    {
+      "article_id": "sofoklis-schortsanitis-kidney-donor-disclosure-20261116",
+      "url": "https://tlvnet.com/news/sofoklis-schortsanitis-kidney-donor-disclosure-20261116.html",
+      "title": "סופו סיפר על ההמתנה להשתלת כליה",
+      "status": "published_verified",
+      "checked_at": "2026-11-16T19:48:20.381826+00:00",
+      "body_sha256": "2f629c5a9bc1bd9b42d0e6bbdd8eaf7eabfaf97717eedb8ae8d2bd40f83b28d0",
+      "public_html_sha256": "8c4ce7583eff5edf07ba0bb14f499ccf09f1a704ca47ea470cf248667bcb2b67",
+      "source_html_sha256": "8c4ce7583eff5edf07ba0bb14f499ccf09f1a704ca47ea470cf248667bcb2b67",
+      "exact_html_bytes_match": true,
+      "full_public_body": true,
+      "title_verified": true,
+      "JPG_loaded": true,
+      "asset_sha256_source": "3fd11a089deab2320529dbaf0cc01c848b6474686795dd9107e57f0cfb2875ee",
+      "asset_sha256_public": "3fd11a089deab2320529dbaf0cc01c848b6474686795dd9107e57f0cfb2875ee",
+      "credit_verified": true,
+      "archive_caption": true,
+      "section_link": true,
+      "home_link": true,
+      "desktop_visual": "pending",
+      "mobile_visual": "pending",
+      "photo_bank_id": "sofoklis-schortsanitis-2011"
+    },
+    {
+      "article_id": "olympiacos-aris-loss-before-maccabi-20261115",
+      "url": "https://tlvnet.com/news/olympiacos-aris-loss-before-maccabi-20261115.html",
+      "title": "לפני מכבי בלימסול: אולימפיאקוס ספגה 100 נקודות והובסה",
+      "status": "published_verified",
+      "checked_at": "2026-11-16T19:48:20.301083+00:00",
+      "body_sha256": "4e00c7f73169fc29dfca2a975fa31caaf9d1767def1cc783b95ba85b63fd6b32",
+      "public_html_sha256": "f9df3276cfc862cb78d070ecb0bc2f6e42945597514a8d5fc143082b089e0f80",
+      "source_html_sha256": "f9df3276cfc862cb78d070ecb0bc2f6e42945597514a8d5fc143082b089e0f80",
+      "exact_html_bytes_match": true,
+      "full_public_body": true,
+      "title_verified": true,
+      "JPG_loaded": true,
+      "asset_sha256_source": "33918c3c821b03d05ee3ec1385c45177a3307ebb20fd99ae0d9fba2cde87c75f",
+      "asset_sha256_public": "33918c3c821b03d05ee3ec1385c45177a3307ebb20fd99ae0d9fba2cde87c75f",
+      "credit_verified": true,
+      "archive_caption": true,
+      "section_link": true,
+      "home_link": true,
+      "desktop_visual": "pending",
+      "mobile_visual": "pending",
+      "photo_bank_id": "spyros-kyprianou-arena-2014"
+    },
+    {
+      "article_id": "maccabi-kiryat-shmona-away-ticket-priority-20261115",
+      "url": "https://tlvnet.com/news/maccabi-kiryat-shmona-away-ticket-priority-20261115.html",
+      "title": "הקדימות לכרטיסי ק״ש הסתיימה: אלה תנאי המכירה שפרסמה מכבי",
+      "status": "published_verified",
+      "checked_at": "2026-11-16T19:48:20.217149+00:00",
+      "body_sha256": "dfa9ab26a0bccc5151a4838114b0cfc68580d9385e3098f363c5d13e5275fe28",
+      "public_html_sha256": "9eb0d69ee2b395e8180762b305c1e22d5cceabd86da2b9eaf9e76bb46b035473",
+      "source_html_sha256": "9eb0d69ee2b395e8180762b305c1e22d5cceabd86da2b9eaf9e76bb46b035473",
+      "exact_html_bytes_match": true,
+      "full_public_body": true,
+      "title_verified": true,
+      "JPG_loaded": true,
+      "asset_sha256_source": "39613d02e839d0192e7dae85f697fb24945b65ee9dc4e14211ed8bac2c46151a",
+      "asset_sha256_public": "39613d02e839d0192e7dae85f697fb24945b65ee9dc4e14211ed8bac2c46151a",
+      "credit_verified": true,
+      "archive_caption": true,
+      "section_link": true,
+      "home_link": true,
+      "desktop_visual": "pending",
+      "mobile_visual": "pending",
+      "photo_bank_id": "flash90-F260103DM11"
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "is_enabled": true,
+      "run": {
+        "id": "6beb8dc9-9da4-832a-b839-5042d39cbb82",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-16T17:00:00Z",
+        "started_at": "2026-11-16T16:56:55.864107Z",
+        "completed_at": "2026-11-16T17:10:21.688258Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6af5efa4-1a90-83eb-8acd-a8df4f02cd4c"
+        }
+      },
+      "result_run_id": "6beb8dc9-9da4-832a-b839-5042d39cbb82",
+      "result_created_at": "2026-11-16T17:10:21.281393Z",
+      "result": "פורסמו ואומתו ארבע כתבות:\n\n- [המעצר בחשד להפצת סמים במרכז העיר](https://tlvnet.com/news/center-tlv-short-term-flat-drug-arrest-20261116)\n- [היערכות לחורף והנחיות לתושבים](https://tlvnet.com/news/tlv-winter-drainage-preparation-resident-guide-20261116)\n- [הולך הרגל שנפגע בלוינסקי](https://tlvnet.com/news/levinski-pedestrian-injured-20261116)\n- [הדיווח על תפיסת הנשק ביפו](https://tlvnet.com/news/jaffa-carlo-hidden-yard-arrest-20261116)\n\nהגופים, התמונות, הקרדיטים וההפניות אומתו בשרת הייצור. ביקורת התצוגה במחשב ובמובייל עדיין ממתינה. יתרת המחקר נשמרה.",
+      "requires_action": false
+    },
+    {
+      "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+      "is_enabled": true,
+      "run": {
+        "id": "ecc9c956-ad20-832c-9f60-7dba0986736a",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-16T19:00:00Z",
+        "started_at": "2026-11-16T19:03:36.328749Z",
+        "completed_at": "2026-11-16T19:28:45.265462Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6af80764-2768-83ed-8f61-4262b0bbbb17"
+        }
+      },
+      "result_run_id": "ecc9c956-ad20-832c-9f60-7dba0986736a",
+      "result_created_at": "2026-11-16T19:28:45.102638Z",
+      "result": "פורסמו ואומתו באתר החי שתי כתבות חדשות:\n\n- [שבוע החוץ של הפועל ביורוליג](https://tlvnet.com/news/hapoel-baskonia-paris-away-week-preview-20261116)\n- [סופו וההמתנה להשתלת כליה](https://tlvnet.com/news/sofoklis-schortsanitis-kidney-donor-disclosure-20261116)\n\nעודכנו גם הכתבה לקראת אולימפיאקוס ומידע הכרטיסים של מכבי לאחר סיום הקדימות.\n\nאומתו הגופים המלאים, התמונות, הקרדיטים וההפניות במדור ובבית. ביקורת התצוגה במחשב ובמובייל עדיין ממתינה. שלושה פריטי מחקר נשמרו להשלמת אימות.",
+      "requires_action": false
+    },
+    {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "is_enabled": true,
+      "run": {
+        "id": "0c9baddb-5244-8329-b453-362851b06fb3",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-16T17:00:00Z",
+        "started_at": "2026-11-16T16:58:51.350130Z",
+        "completed_at": "2026-11-16T17:11:13.574802Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6af34f09-0d90-83eb-925c-8e1698a86927"
+        }
+      },
+      "result_run_id": "0c9baddb-5244-8329-b453-362851b06fb3",
+      "result_created_at": "2026-11-16T17:11:12.556148Z",
+      "result": "## דוח חדשות הערב, 16 בנובמבר 2026\n\n**שתי כתבות מקומיות חדשות פורסמו ב־CMS של ISNET, אחת בכל עיר.** שתיהן אומתו ברשומות הפרסום, כולל שיוך מדור ותמונה, אך עדיין אין אימות ציבורי מלא באתר החי.\n\n**הרצליה נט:** פורסמה כתבה **811801**, ״מחר בהרצליה: ארבע פעילויות במרכז הקיימות, מסדנאות לילדים ועד ערב אנרגיה״. הכתבה מרכזת ארבע פעילויות ל־17 בנובמבר בשעות 16:30, 17:30, 18:30 ו־20:00, לאחר בדיקת דפי האירועים הרשמיים. <Cite refs={[\"turn292771view0\",\"turn292771view1\",\"turn292771view2\",\"turn292771view3\"]}/> צורפה תמונת המחשה מורשית של Anna Shvets מ־Pexels, מספר **851224**. הפרסום אומת במדור תרבות ובידור. בדיקת האתר הציבורי נכשלה בשגיאת 403.\n\n**רעננה נט:** פורסמה כתבה **811802**, ״מחר ברעננה: קובי מידן ואיתי פרל חוזרים לשירים ולסיפור החיים של לאונרד כהן״. האירוע מתוכנן ל־17 בנובמבר בשעה 20:00 בהיכל התרבות יד לבנים, לפי מערכת הכרטיסים העירונית. <Cite ref=\"turn292771view4\"/> צורפה תמונת המחשה מורשית של Daniel Ponomarev מ־Pexels, מספר **851225**. הפרסום אומת במדור תרבות. האתר הציבורי החזיר גרסה ישנה של המדור, ולכן הכתבה עדיין לא אומתה בו.\n\n| מדד | תוצאה |\n|---|---:|\n| כתבות חדשות שאומתו ב־CMS | 2 |\n| כתבות עם אימות ציבורי מלא | 0 |\n| נעילות פרסום שנרכשו ושוחררו | 2 |\n| פריסות אתר או שינויי תזמון | 0 |\n\n**החסם שנותר:** אימות שתי הכתבות באתר הציבורי, לרבות גוף הכתבה, תמונה, קרדיט וקישור ישיר. גם חישוב hash עצמאי לתמונות ובדיקות מובייל ומחשב עדיין ממתינים. לא בוצע ניסיון פרסום כפול.\n\nנשמרו יומני ביצוע נפרדים עם המקורות, מזהי הפרסומים, זכויות התמונות, `runKey` והחסמים: [יומן הרצליה](sandbox:/mnt/data/isnet-run-2026-11-16-1900/herzliya.json) · [יומן רעננה](sandbox:/mnt/data/isnet-run-2026-11-16-1900/raanana.json).\n\n<text color=\"secondary\" size=\"xs\">policy_version: 2026-11-14/1.1 · task_id: Automation_845f7ef0033c8191b7490e0dc5748754 · run_id לא נמסר</text>",
+      "requires_action": false
+    },
+    {
+      "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "is_enabled": true,
+      "run": {
+        "id": "b0cae23f-428c-8321-a384-8f42270f7ab7",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-16T14:00:00Z",
+        "started_at": "2026-11-16T14:34:52.092016Z",
+        "completed_at": "2026-11-16T14:53:24.122789Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6af5b8b0-f2c8-83ed-bee9-3753b93080b9"
+        }
+      },
+      "result_run_id": "b0cae23f-428c-8321-a384-8f42270f7ab7",
+      "result_created_at": "2026-11-16T14:53:23.582583Z",
+      "result": "פורסמו שלוש כתבות נדל״ן:\n\n- [מחירי הדירות בתל אביב](https://tlvnet.com/news/tel-aviv-average-home-price-q3-2026-20261116)\n- [החלטת התכנון בהר ציון–חזנוביץ](https://tlvnet.com/news/har-zion-hazanovich-deposit-decision-explained-20261116)\n- [הדיווח על ההריסה בגליפולי](https://tlvnet.com/news/galipolis-yad-eliyahu-reported-demolition-20261116)\n\nהגופים, התמונות, הקרדיטים וההפניות אומתו בשרת הייצור. בדיקת הדומיין המותאם וביקורת התצוגה נותרו להשלמה. יתרת המחקר נשמרה והנעילה שוחררה.",
+      "requires_action": false
+    },
+    {
+      "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "is_enabled": true,
+      "run": {
+        "id": "fa8047fe-cd4c-832b-9c0d-0fbedd0cdea1",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-16T10:00:00Z",
+        "started_at": "2026-11-16T10:40:40.792099Z",
+        "completed_at": "2026-11-16T10:59:14.558971Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6af6e7ee-aef4-83eb-9a15-53e6dba697c9"
+        }
+      },
+      "result_run_id": "fa8047fe-cd4c-832b-9c0d-0fbedd0cdea1",
+      "result_created_at": "2026-11-16T10:59:13.676739Z",
+      "result": "לא פורסמו כתבות בגלל נעילת פרסום תקפה של עבודה אחרת.\n\nשלוש טיוטות — מדד אוקטובר, איכילוב–Wonderful ו־Edelbyte — נשמרו עם המקורות ובדיקות התמונות [בתור הקיים](https://github.com/isnet-media/isnet-real-estate-site/blob/main/ops/incident-response/inbox/2026-11-16-economy-tech-fa8047fe-publication-pending.json). הבנייה והאימות החי ממתינים.\n\n[תיק המסירה המלא](https://chatgpt.com/library?file_id=libfile_ae6ae164c1608191bf9c882a16ec6cba&account_id=personal)",
+      "requires_action": false
+    },
+    {
+      "task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "is_enabled": true,
+      "run": {
+        "id": "a64670a2-9d9c-832c-83f1-b2015cdfedf5",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-16T11:00:00Z",
+        "started_at": "2026-11-16T11:03:01.766109Z",
+        "completed_at": "2026-11-16T11:29:26.556430Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6aefca53-37bc-83eb-95c2-1ee0d1d63c94"
+        }
+      },
+      "result_run_id": "a64670a2-9d9c-832c-83f1-b2015cdfedf5",
+      "result_created_at": "2026-11-16T11:29:26.207915Z",
+      "result": "פורסמה ואומתה [הכתבה על סדנת תיקון הבגדים בבית ליבלינג](https://tlvnet.com/news/liebling-clothes-mending-workshop-20261116), כולל תמונה, קרדיט וקישורים מהמדור ומהבית.\n\nנוסף [עמוד עצמאי לנווה צדק](https://tlvnet.com/neighborhoods/neve-tzedek/), ושלושה שירותים מאומתים שולבו בלוחות השכונתיים.\n\nביקורת התצוגה החזותית במחשב ובמובייל ממתינה ודווחה לבקר. מועמדים שחסר בהם אימות נשמרו להמשך.",
+      "requires_action": false
+    },
+    {
+      "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "is_enabled": true,
+      "run": {
+        "id": "772511e5-2b60-8326-8a38-6e2fb54e111c",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-16T12:00:00Z",
+        "started_at": "2026-11-16T12:07:13.283003Z",
+        "completed_at": "2026-11-16T12:20:33.867928Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6af000ed-40f8-83ed-ab86-7baf8280349f"
+        }
+      },
+      "result_run_id": "772511e5-2b60-8326-8a38-6e2fb54e111c",
+      "result_created_at": "2026-11-16T12:20:33.532424Z",
+      "result": "פורסם ואומת [המדריך לחניה לבאי היכל התרבות](https://tlvnet.com/news/hatarbut-tlv-parking-benefit-guide-20261116), כולל תנאי ההטבה וההבדל בין החניונים. הגוף, התמונה, הקרדיט והקישורים מהמדור ומהבית נבדקו.\n\nביקורת התצוגה במחשב ובמובייל ממתינה ותועדה לבקר. פריטים שחסר בהם אימות נשמרו להמשך.",
+      "requires_action": false
+    },
+    {
+      "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+      "is_enabled": true,
+      "run": {
+        "id": "eb25dc5a-2750-8325-9189-cdf85c90fa3d",
+        "recorded_status": "completed",
+        "scheduled_for": "2026-11-16T07:00:00Z",
+        "started_at": "2026-11-16T07:54:51.117698Z",
+        "completed_at": "2026-11-16T08:12:12.609247Z",
+        "chat_ref": {
+          "type": "chatgpt",
+          "id": "6af6bfaf-1470-83eb-b437-ea3232a7518e"
+        }
+      },
+      "result_run_id": "eb25dc5a-2750-8325-9189-cdf85c90fa3d",
+      "result_created_at": "2026-11-16T08:12:12.427549Z",
+      "result": "פורסמו ואומתו באתר החי שתי כתבות תרבות חדשות:\n\n- [שמונה ערבי ג׳אז בעוגן בנמל יפו](https://tlvnet.com/news/jazz-haogen-winter-series-20261116)\n- [פסטיבל הקומדיות הצרפתיות מגיע לקולנוע לב](https://tlvnet.com/news/oh-la-la-lev-french-comedy-20261116)\n\nאומתו הגוף המלא, התמונות, הקרדיטים וההפניות במדור ובבית. ביקורת התצוגה במחשב ובמובייל עדיין ממתינה.\n\nבתור הלילה לא נמצאה טיוטה חדשה בשלה לפרסום. החוסרים נשמרו להמשך, ללא פרסום כפול או חידוש מועדים שחלפו.",
+      "requires_action": false
+    }
+  ],
+  "section_metadata": {
+    "news": {
+      "last_new_published_at": "2026-11-16T17:02:16.060698+00:00",
+      "last_substantive_update_at": "2026-11-15T06:11:01.979529+00:00",
+      "last_owner_run_id": null,
+      "lead_id": "center-tlv-short-term-flat-drug-arrest-20261116",
+      "lead_title": "בן 31 נעצר בחשד להפצת סמים מדירה במרכז תל אביב",
+      "lead_date": "2026-11-16T17:02:16.060698+00:00",
+      "runKey": "news-20261116-evening-403c9cfe-99bf-4b7b-8bc4-ec36934cc718",
+      "coverage_complete": null,
+      "queue": [
+        {
+          "content_id": "coverage-hazaken-vehayam-appeal-20261116",
+          "source_url": "https://posta.co.il/article/999445-2/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "Full secondary legal text read via search; court order and exact conditions not independently read; inconsistent security amount250k/300k excluded. Need primary order or reliable clarification and suitable licensed closure image.",
+          "next_action": "Full secondary legal text read via search; court order and exact conditions not independently read; inconsistent security amount250k/300k excluded. Need primary order or reliable clarification and suitable licensed closure image."
+        },
+        {
+          "content_id": "coverage-opera-hotel-appeal-20261116",
+          "source_url": "https://tlvonline.co.il/מלון-האופרה-נאבק-בצו/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "Full secondary report read. Appeal8Nov is not a granted stay; primary order/case and current operational status not established. Need order and exact procedural outcome, no invented current closure/opening claim.",
+          "next_action": "Full secondary report read. Appeal8Nov is not a granted stay; primary order/case and current operational status not established. Need order and exact procedural outcome, no invented current closure/opening claim."
+        },
+        {
+          "content_id": "coverage-tlv-road-safety-preliminary2026-20261115",
+          "source_url": "https://tlvonline.co.il/%D7%A9%D7%91%D7%95%D7%A2-%D7%94%D7%91%D7%98%D7%99%D7%97%D7%95%D7%AA-%D7%91%D7%93%D7%A8%D7%9B%D7%99%D7%9D-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-2026/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "Sponsored secondary15Novread; primarytargetedsearch didnot locate datacutoff or matchedperiod. Do not callpartial2026 datafull-yearresult.",
+          "next_action": "Sponsored secondary15Novread; primarytargetedsearch didnot locate datacutoff or matchedperiod. Do not callpartial2026 datafull-yearresult. Prior item blocker remains; no retry without changed evidence."
+        },
+        {
+          "content_id": "coverage-naim715-716-golda-20261115",
+          "source_url": "https://telavivi.news/naim-weekend-715-716-routes/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "Exact municipalnotice returned unreadabletemplate; generic municipalservice text stillsaysport, while complete3Novlocal/15Novlocal reports sayGolda from6Nov. No reliable currentprimaryroute resolved.",
+          "next_action": "Exact municipalnotice returned unreadabletemplate; generic municipalservice text stillsaysport, while complete3Novlocal/15Novlocal reports sayGolda from6Nov. No reliable currentprimaryroute resolved. Prior item blocker remains; no retry without changed evidence."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.globes.co.il/news/article.aspx?did=1001562414",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "סכסוך משפטי מסחרי שהתגלה בRSS8.11; המקבל יקרא מקור מלא ויבדוק שלב הליך; לא לפרסום בידי נדלן.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.ynet.co.il/yedioth/article/yokra14930252",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "גילויחיפוש8Nov:מחלוקתמוניציפלית/משפטיתוחינוך,לאהודעתתרבות.המקבליקראמקורמלא,תאריך,טענותהמשפחהותגובתהעיריהויעשהכפילות;אינדקסאינואימות,איןעקיפתתשלום.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.lgbtqcenter.org.il/clinic/therapy-groups/?ContentID=78311",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "שירות טיפולי עירוני ולא פעילות קהילה כללית. דף המארגן נקרא ומציין14מפגשים מ8.11.2026 בימי ראשון19:00–20:30 בהרצל158,לגברים21ומעלה,300שח ושיחת היכרות כתנאי. אין אישור מקום פנוי או נגישות פיזית; כתב החדשות יקרא מקור מלא,יבדוק כפילות ותנאים בעצמו. אין כאן הבטחת תועלת טיפולית או קבלה.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.nta.co.il/חדשות/עבודות-תשתית-בשטח-האתר-ברחוב-אבן-גבירול-בקטע-שבין-רחוב-לסקוב-לרחוב-קפלן-81126/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "גילוי בחיפוש בלבד; תחבורה ותשתית ולא נדלן. המקבל חייב לקרוא מקור מלא ולאמת מועד והסדרים; תוצאת חיפוש אינה ראיה ואינה מצדיקה עקיפה של403.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://gisn.tel-aviv.gov.il/tabaot/docs.aspx?id_taba=8441&st_taba=מח/5369&mode=internet",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "עיקר המועמד תשתית עירונית ללא תוספת מגורים, ולכןחדשות ולאנדלן. רשומתGISתוכנית507-1495738/מח5369מסמנתהפקדה3.11וטעינה6.11. המקבליקראמסמךתכנוןמלא,גבולותומועדפרסוםולאיציגהפקדהכאישוראוביצוע. איןטענהשהתחדש8.11.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.e-b.co.il/wp-content/uploads/מכרז-894-לבון-79-מודעה-על-דחיית-המועד-להגשת-ההצעה.pdf",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "שירות ציבורי/מוניציפלי, לא ידיעת נדלן למגורים. המקבל יקרא בעצמו מסמך מלא והבהרות; תאריך הוצאת ההודעה וסטטוס מכרז עדכני/ביצוע טרם אומתו. אין לפתוח כמבנה שנפתח לציבור.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "שירותעירוני ובטיחותלציבור, שייך לחדשות. פרקרחצהבחורףבמקורמלאמצייןמפורשות7.11; המקבליקראבעצמוויבדוקאםישעדכון/הבהרהומניעתכפילות. אין להסיק סגירתהחופים עצמם.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://t.me/MOHreport/13802",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "חדשות בריאות ולא צרכנות. המקבל חייב לקרוא ולאמת תאריך פרסום והתפתחות עדכנית; הגוף בערוץ הציבורי מדגיש שאין מקרה מאומת. אין לפרסם חשד כמחלה מאומתת או דיווח ישן כאירוע היום.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": "coverage-yefet-arrests-followup-20261116",
+          "source_url": "https://www.be106.net/255/165248",
+          "status": "deferred_budget",
+          "reason": "Full secondary report in search cites police; possible substantive update to existing yefet-three-injured-20261116. Need exact dated police corroboration or carefully attributed update and fullbody re-review, never duplicate injury article.",
+          "next_action": "Full secondary report in search cites police; possible substantive update to existing yefet-three-injured-20261116. Need exact dated police corroboration or carefully attributed update and fullbody re-review, never duplicate injury article."
+        },
+        {
+          "content_id": "coverage-dan-levinski-289-5-20261116",
+          "source_url": "https://www.dan.co.il/updates?295e85e9_page=3&aeb2eab9_page=5",
+          "status": "deferred_budget",
+          "reason": "New operator index item observed for16Novongoingworks, routes289/5. Full relevant directions,dates/stops not read; compare existing roadworks stories before writing.",
+          "next_action": "New operator index item observed for16Novongoingworks, routes289/5. Full relevant directions,dates/stops not read; compare existing roadworks stories before writing."
+        }
+      ],
+      "status": "published_verified"
+    },
+    "real-estate": {
+      "last_new_published_at": "2026-11-16T14:44:51.882231+00:00",
+      "last_substantive_update_at": "2026-11-11T13:17:18.374295+00:00",
+      "last_owner_run_id": "b0cae23f-428c-8321-a384-8f42270f7ab7",
+      "lead_id": "tel-aviv-average-home-price-q3-2026-20261116",
+      "lead_title": "ממוצע של 4.61 מיליון שקל לדירה בתל אביב: מה הנתון מודד",
+      "lead_date": "2026-11-16T14:44:51.882231+00:00",
+      "runKey": "real-estate-2026-11-16-b0cae23f",
+      "coverage_complete": null,
+      "queue": [
+        {
+          "content_id": "coverage-university-station-plan-5071377456",
+          "title": "הרחבת תחנת האוניברסיטה: תוכנית507-1377456",
+          "source_url": "https://tlvonline.co.il/הרחבת-תחנת-האוניברסיטה/",
+          "reason": "Complete15Nov secondary story read, primary plan not available in bounded search; no unverified planning particulars published",
+          "next_action": "Read primary plan507-1377456; establish actual new stage/date, compare transport coverage."
+        },
+        {
+          "content_id": "Landmark companysales",
+          "next_action": "Verifycompanysalesprimary"
+        },
+        {
+          "content_id": "coverage-pi-glilot-land-dispute-20261116",
+          "source_url": "https://tlvonline.co.il/קרב-המיליארדים-בפי-גלילות/",
+          "reason": "Candidate link discovered, full relevant text/jurisdiction and primary evidence not read; cannot assert TelAviv scope.",
+          "next_action": "Read complete story, establish city jurisdiction and primary dispute evidence before drafting.",
+          "status": "deferred_budget"
+        }
+      ],
+      "status": "published_verified"
+    },
+    "economy-tech": {
+      "last_new_published_at": "2026-11-16T16:48:30.281Z",
+      "last_substantive_update_at": "2026-11-11T14:29:08Z",
+      "last_owner_run_id": "c7423892-2320-8332-8334-0ca60137294d",
+      "lead_id": "ichilov-wonderful-ai-development-partnership-20261116",
+      "lead_title": "איכילוב ו־Wonderful מתכננים סוכני AI לבית החולים",
+      "lead_date": "2026-11-16T16:48:30.281Z",
+      "runKey": "ops-2026-11-16-c7423892-2320-8332-8334-0ca60137294d",
+      "coverage_complete": null,
+      "queue": null,
+      "status": "published_pending_verification"
+    },
+    "sports": {
+      "last_new_published_at": "2026-11-16T19:17:24.990498+00:00",
+      "last_substantive_update_at": "2026-11-16T19:17:24.990498+00:00",
+      "last_owner_run_id": "ecc9c956-ad20-832c-9f60-7dba0986736a",
+      "lead_id": "sofoklis-schortsanitis-kidney-donor-disclosure-20261116",
+      "lead_title": "סופו סיפר על ההמתנה להשתלת כליה",
+      "lead_date": "2026-11-16T19:17:24.990498+00:00",
+      "runKey": "sports-2026-11-16-21:00-ecc9c956",
+      "coverage_complete": false,
+      "queue": [
+        {
+          "source_url": "https://sports.walla.co.il/item/3876045",
+          "status": "research_checkpoint_official_decision_unverified",
+          "next_action": "Read new official decision if published; no identical retry."
+        },
+        {
+          "source_url": "https://www.football.org.il/leagues/games/game/?game_id=1124950&season_id=-1",
+          "status": "research_checkpoint",
+          "reason": "Prior conflicting0:2 and5:2 source variants remain unresolved; no new source basis this run."
+        },
+        {
+          "content_id": "sports-solar-courts-primary-progress",
+          "status": "researched_waiting_material_progress",
+          "source_urls": [
+            "https://tlvonline.co.il/קירוי-סולארי-מגרשי-ספורט/",
+            "https://yoatzim.funder.co.il/article/212516"
+          ],
+          "source_date": "2026-10-22",
+          "reason": "Full company-distributed announcement read:3.8m order,2027plans; no current installation progress/location list. Future relevance retained, not rejected for age.",
+          "next_action": "Check material municipal/company progress when source changes."
+        }
+      ],
+      "status": "published_verified"
+    },
+    "community": {
+      "last_new_published_at": "2026-11-16T11:18:25.962766+00:00",
+      "last_substantive_update_at": "2026-11-07T08:14:42.760372+00:00",
+      "last_owner_run_id": null,
+      "lead_id": "liebling-clothes-mending-workshop-20261116",
+      "lead_title": "החולצה הישנה נשארת: סדנת תיקון בגדים בבית ליבלינג",
+      "lead_date": "2026-11-16T11:18:25.962766+00:00",
+      "runKey": "community-2026-11-16-daily",
+      "coverage_complete": null,
+      "queue": [
+        "coverage-frankfurt-retiree-havruta-20261115",
+        "coverage-cat-feeding-locations-discovery-20261115",
+        "community-shablul-49970-20261116",
+        "textile-community-installation-202611",
+        "shapira-center-farewell-41639"
+      ],
+      "status": "published_verified"
+    },
+    "consumer": {
+      "last_new_published_at": "2026-11-16T12:12:18.684499+00:00",
+      "last_substantive_update_at": "2026-11-09T09:48:00Z",
+      "last_owner_run_id": null,
+      "lead_id": "hatarbut-tlv-parking-benefit-guide-20261116",
+      "lead_title": "20 שקל לחניה לפני המופע: התנאי שכדאי להכיר בהיכל התרבות",
+      "lead_date": "2026-11-16T12:12:18.684499+00:00",
+      "runKey": "consumer-2026-11-16-daily",
+      "coverage_complete": false,
+      "queue": "Prior fullsource gap, unreviewed46sourcebody metadata, Dandasha conditions and datedMOHnotice retained. Single discovery cycle; no no_update or complete citycoverage claim.",
+      "status": "published_verified"
+    },
+    "culture-news": {
+      "last_new_published_at": "2026-11-16T08:02:42.771208+00:00",
+      "last_substantive_update_at": "2026-11-15T07:46:50.740984+00:00",
+      "last_owner_run_id": "eb25dc5a-2750-8325-9189-cdf85c90fa3d",
+      "lead_id": "jazz-haogen-winter-series-20261116",
+      "lead_title": "מנמל פתוח לסלון חורפי: שמונה ערבי ג׳אז בעוגן",
+      "lead_date": "2026-11-16T08:02:42.771208+00:00",
+      "runKey": "culture-night-2026-11-16-09:00-eb25dc5a",
+      "coverage_complete": null,
+      "queue": [
+        {
+          "id": "clfb-all-sight-exhibition-20261114",
+          "status": "draft_research_checkpoint",
+          "reason": "Fullcurator14Novcolumn read; institutional full page still JSshell,dates/access not independently readable. Existing checkpoint preserved,no duplicate draft/article."
+        },
+        {
+          "id": "kirisute-levontin-release-show-20261114",
+          "status": "expired_candidate_not_published",
+          "reason": "14Novevent already passed; not rolled forward."
+        }
+      ],
+      "status": "published_verified"
+    }
+  },
+  "coverage": {
+    "news": {
+      "remaining_queue": [
+        {
+          "content_id": "coverage-hazaken-vehayam-appeal-20261116",
+          "source_url": "https://posta.co.il/article/999445-2/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "Full secondary legal text read via search; court order and exact conditions not independently read; inconsistent security amount250k/300k excluded. Need primary order or reliable clarification and suitable licensed closure image.",
+          "next_action": "Full secondary legal text read via search; court order and exact conditions not independently read; inconsistent security amount250k/300k excluded. Need primary order or reliable clarification and suitable licensed closure image."
+        },
+        {
+          "content_id": "coverage-opera-hotel-appeal-20261116",
+          "source_url": "https://tlvonline.co.il/מלון-האופרה-נאבק-בצו/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "Full secondary report read. Appeal8Nov is not a granted stay; primary order/case and current operational status not established. Need order and exact procedural outcome, no invented current closure/opening claim.",
+          "next_action": "Full secondary report read. Appeal8Nov is not a granted stay; primary order/case and current operational status not established. Need order and exact procedural outcome, no invented current closure/opening claim."
+        },
+        {
+          "content_id": "coverage-tlv-road-safety-preliminary2026-20261115",
+          "source_url": "https://tlvonline.co.il/%D7%A9%D7%91%D7%95%D7%A2-%D7%94%D7%91%D7%98%D7%99%D7%97%D7%95%D7%AA-%D7%91%D7%93%D7%A8%D7%9B%D7%99%D7%9D-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-2026/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "Sponsored secondary15Novread; primarytargetedsearch didnot locate datacutoff or matchedperiod. Do not callpartial2026 datafull-yearresult.",
+          "next_action": "Sponsored secondary15Novread; primarytargetedsearch didnot locate datacutoff or matchedperiod. Do not callpartial2026 datafull-yearresult. Prior item blocker remains; no retry without changed evidence."
+        },
+        {
+          "content_id": "coverage-naim715-716-golda-20261115",
+          "source_url": "https://telavivi.news/naim-weekend-715-716-routes/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "Exact municipalnotice returned unreadabletemplate; generic municipalservice text stillsaysport, while complete3Novlocal/15Novlocal reports sayGolda from6Nov. No reliable currentprimaryroute resolved.",
+          "next_action": "Exact municipalnotice returned unreadabletemplate; generic municipalservice text stillsaysport, while complete3Novlocal/15Novlocal reports sayGolda from6Nov. No reliable currentprimaryroute resolved. Prior item blocker remains; no retry without changed evidence."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.globes.co.il/news/article.aspx?did=1001562414",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "סכסוך משפטי מסחרי שהתגלה בRSS8.11; המקבל יקרא מקור מלא ויבדוק שלב הליך; לא לפרסום בידי נדלן.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.ynet.co.il/yedioth/article/yokra14930252",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "גילויחיפוש8Nov:מחלוקתמוניציפלית/משפטיתוחינוך,לאהודעתתרבות.המקבליקראמקורמלא,תאריך,טענותהמשפחהותגובתהעיריהויעשהכפילות;אינדקסאינואימות,איןעקיפתתשלום.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.lgbtqcenter.org.il/clinic/therapy-groups/?ContentID=78311",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "שירות טיפולי עירוני ולא פעילות קהילה כללית. דף המארגן נקרא ומציין14מפגשים מ8.11.2026 בימי ראשון19:00–20:30 בהרצל158,לגברים21ומעלה,300שח ושיחת היכרות כתנאי. אין אישור מקום פנוי או נגישות פיזית; כתב החדשות יקרא מקור מלא,יבדוק כפילות ותנאים בעצמו. אין כאן הבטחת תועלת טיפולית או קבלה.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.nta.co.il/חדשות/עבודות-תשתית-בשטח-האתר-ברחוב-אבן-גבירול-בקטע-שבין-רחוב-לסקוב-לרחוב-קפלן-81126/",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "גילוי בחיפוש בלבד; תחבורה ותשתית ולא נדלן. המקבל חייב לקרוא מקור מלא ולאמת מועד והסדרים; תוצאת חיפוש אינה ראיה ואינה מצדיקה עקיפה של403.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://gisn.tel-aviv.gov.il/tabaot/docs.aspx?id_taba=8441&st_taba=מח/5369&mode=internet",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "עיקר המועמד תשתית עירונית ללא תוספת מגורים, ולכןחדשות ולאנדלן. רשומתGISתוכנית507-1495738/מח5369מסמנתהפקדה3.11וטעינה6.11. המקבליקראמסמךתכנוןמלא,גבולותומועדפרסוםולאיציגהפקדהכאישוראוביצוע. איןטענהשהתחדש8.11.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.e-b.co.il/wp-content/uploads/מכרז-894-לבון-79-מודעה-על-דחיית-המועד-להגשת-ההצעה.pdf",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "שירות ציבורי/מוניציפלי, לא ידיעת נדלן למגורים. המקבל יקרא בעצמו מסמך מלא והבהרות; תאריך הוצאת ההודעה וסטטוס מכרז עדכני/ביצוע טרם אומתו. אין לפתוח כמבנה שנפתח לציבור.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "שירותעירוני ובטיחותלציבור, שייך לחדשות. פרקרחצהבחורףבמקורמלאמצייןמפורשות7.11; המקבליקראבעצמוויבדוקאםישעדכון/הבהרהומניעתכפילות. אין להסיק סגירתהחופים עצמם.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": null,
+          "source_url": "https://t.me/MOHreport/13802",
+          "status": "blocked",
+          "article_id": null,
+          "reason": "חדשות בריאות ולא צרכנות. המקבל חייב לקרוא ולאמת תאריך פרסום והתפתחות עדכנית; הגוף בערוץ הציבורי מדגיש שאין מקרה מאומת. אין לפרסם חשד כמחלה מאומתת או דיווח ישן כאירוע היום.",
+          "next_action": "Read full source, check relevance and existing publication before release."
+        },
+        {
+          "content_id": "coverage-yefet-arrests-followup-20261116",
+          "source_url": "https://www.be106.net/255/165248",
+          "status": "deferred_budget",
+          "reason": "Full secondary report in search cites police; possible substantive update to existing yefet-three-injured-20261116. Need exact dated police corroboration or carefully attributed update and fullbody re-review, never duplicate injury article.",
+          "next_action": "Full secondary report in search cites police; possible substantive update to existing yefet-three-injured-20261116. Need exact dated police corroboration or carefully attributed update and fullbody re-review, never duplicate injury article."
+        },
+        {
+          "content_id": "coverage-dan-levinski-289-5-20261116",
+          "source_url": "https://www.dan.co.il/updates?295e85e9_page=3&aeb2eab9_page=5",
+          "status": "deferred_budget",
+          "reason": "New operator index item observed for16Novongoingworks, routes289/5. Full relevant directions,dates/stops not read; compare existing roadworks stories before writing.",
+          "next_action": "New operator index item observed for16Novongoingworks, routes289/5. Full relevant directions,dates/stops not read; compare existing roadworks stories before writing."
+        }
+      ],
+      "coverage_complete": null,
+      "local_coverage": {
+        "policy_version": "2026-11-16/1.2",
+        "runKey": "news-20261116-evening-403c9cfe-99bf-4b7b-8bc4-ec36934cc718",
+        "sources": [
+          {
+            "source_url": "https://tlvonline.co.il/",
+            "category_url": "https://tlvonline.co.il/category/מוניציפלי/",
+            "checked_at": "2026-11-16T17:02:16.060698+00:00",
+            "status": "blocked",
+            "homepage_status": "read",
+            "category_status": "blocked_429",
+            "watermark": "2026-11-16",
+            "latest_source_published_at": "2026-11-16",
+            "discovered_count": 2,
+            "decisions": [
+              {
+                "content_id": "center-tlv-short-term-flat-drug-arrest-20261116",
+                "article_id": "center-tlv-short-term-flat-drug-arrest-20261116",
+                "source_url": "https://www.walla.co.il/news/breaking-news/383961616",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "tlv-winter-drainage-preparation-resident-guide-20261116",
+                "article_id": "tlv-winter-drainage-preparation-resident-guide-20261116",
+                "source_url": "https://www.tel-aviv.gov.il/About/Pages/WinterPreparations.aspx",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "levinski-pedestrian-injured-20261116",
+                "article_id": "levinski-pedestrian-injured-20261116",
+                "source_url": "https://www.walla.co.il/news/breaking-news/383961643",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "jaffa-carlo-hidden-yard-arrest-20261116",
+                "article_id": "jaffa-carlo-hidden-yard-arrest-20261116",
+                "source_url": "https://telavivi.news/jaffa-carlo-gun-arrest/",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "metropoline-university-hagana-night-stops-17nov-20261116",
+                "article_id": "metropoline-university-hagana-night-stops-17nov-20261116",
+                "status": "covered"
+              },
+              {
+                "content_id": "jaffa-shakra-additional-arrest-20261116",
+                "article_id": "jaffa-shakra-additional-arrest-20261116",
+                "status": "covered"
+              },
+              {
+                "content_id": "london-ministore-brawl-seven-arrests-20261115",
+                "article_id": "london-ministore-brawl-seven-arrests-20261115",
+                "status": "covered"
+              },
+              {
+                "content_id": "ben-yehuda-construction-site-body-found-20261114",
+                "article_id": "ben-yehuda-construction-site-body-found-20261114",
+                "status": "covered"
+              },
+              {
+                "content_id": "center-tlv-police-impersonation-robbery-arrest-20261112",
+                "article_id": "center-tlv-police-impersonation-robbery-arrest-20261112",
+                "status": "covered"
+              }
+            ],
+            "cursor": {
+              "page": 1,
+              "complete": false,
+              "overlap_hours": 24,
+              "initial_lookback_days": 7,
+              "next": "Lower index/backfill from savedcursor; no exhaustive7day claim"
+            },
+            "deferred_candidate_ids": [
+              "coverage-hazaken-vehayam-appeal-20261116",
+              "coverage-opera-hotel-appeal-20261116",
+              "coverage-tlv-road-safety-preliminary2026-20261115",
+              "coverage-naim715-716-golda-20261115",
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              "coverage-yefet-arrests-followup-20261116",
+              "coverage-dan-levinski-289-5-20261116"
+            ],
+            "next_action": "Existing429 categoryblocker, no repeated unchangedretry; homepage read"
+          },
+          {
+            "source_url": "https://telavivi.news/",
+            "category_url": "https://telavivi.news/category/crime-and-law/",
+            "checked_at": "2026-11-16T17:02:16.060698+00:00",
+            "status": "read",
+            "homepage_status": "read",
+            "category_status": "read",
+            "watermark": "2026-11-16",
+            "latest_source_published_at": "2026-11-16",
+            "discovered_count": 2,
+            "decisions": [
+              {
+                "content_id": "center-tlv-short-term-flat-drug-arrest-20261116",
+                "article_id": "center-tlv-short-term-flat-drug-arrest-20261116",
+                "source_url": "https://www.walla.co.il/news/breaking-news/383961616",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "tlv-winter-drainage-preparation-resident-guide-20261116",
+                "article_id": "tlv-winter-drainage-preparation-resident-guide-20261116",
+                "source_url": "https://www.tel-aviv.gov.il/About/Pages/WinterPreparations.aspx",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "levinski-pedestrian-injured-20261116",
+                "article_id": "levinski-pedestrian-injured-20261116",
+                "source_url": "https://www.walla.co.il/news/breaking-news/383961643",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "jaffa-carlo-hidden-yard-arrest-20261116",
+                "article_id": "jaffa-carlo-hidden-yard-arrest-20261116",
+                "source_url": "https://telavivi.news/jaffa-carlo-gun-arrest/",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "metropoline-university-hagana-night-stops-17nov-20261116",
+                "article_id": "metropoline-university-hagana-night-stops-17nov-20261116",
+                "status": "covered"
+              },
+              {
+                "content_id": "jaffa-shakra-additional-arrest-20261116",
+                "article_id": "jaffa-shakra-additional-arrest-20261116",
+                "status": "covered"
+              },
+              {
+                "content_id": "london-ministore-brawl-seven-arrests-20261115",
+                "article_id": "london-ministore-brawl-seven-arrests-20261115",
+                "status": "covered"
+              },
+              {
+                "content_id": "ben-yehuda-construction-site-body-found-20261114",
+                "article_id": "ben-yehuda-construction-site-body-found-20261114",
+                "status": "covered"
+              },
+              {
+                "content_id": "center-tlv-police-impersonation-robbery-arrest-20261112",
+                "article_id": "center-tlv-police-impersonation-robbery-arrest-20261112",
+                "status": "covered"
+              }
+            ],
+            "cursor": {
+              "page": 1,
+              "complete": false,
+              "overlap_hours": 24,
+              "initial_lookback_days": 7,
+              "next": "Lower index/backfill from savedcursor; no exhaustive7day claim"
+            },
+            "deferred_candidate_ids": [
+              "coverage-hazaken-vehayam-appeal-20261116",
+              "coverage-opera-hotel-appeal-20261116",
+              "coverage-tlv-road-safety-preliminary2026-20261115",
+              "coverage-naim715-716-golda-20261115",
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              "coverage-yefet-arrests-followup-20261116",
+              "coverage-dan-levinski-289-5-20261116"
+            ],
+            "next_action": "Top relevantcrimeindexread; retained lowerbackfill checkpoint"
+          }
+        ],
+        "decisions": [
+          {
+            "content_id": "center-tlv-short-term-flat-drug-arrest-20261116",
+            "article_id": "center-tlv-short-term-flat-drug-arrest-20261116",
+            "source_url": "https://www.walla.co.il/news/breaking-news/383961616",
+            "status": "published_verified"
+          },
+          {
+            "content_id": "tlv-winter-drainage-preparation-resident-guide-20261116",
+            "article_id": "tlv-winter-drainage-preparation-resident-guide-20261116",
+            "source_url": "https://www.tel-aviv.gov.il/About/Pages/WinterPreparations.aspx",
+            "status": "published_verified"
+          },
+          {
+            "content_id": "levinski-pedestrian-injured-20261116",
+            "article_id": "levinski-pedestrian-injured-20261116",
+            "source_url": "https://www.walla.co.il/news/breaking-news/383961643",
+            "status": "published_verified"
+          },
+          {
+            "content_id": "jaffa-carlo-hidden-yard-arrest-20261116",
+            "article_id": "jaffa-carlo-hidden-yard-arrest-20261116",
+            "source_url": "https://telavivi.news/jaffa-carlo-gun-arrest/",
+            "status": "published_verified"
+          },
+          {
+            "content_id": "metropoline-university-hagana-night-stops-17nov-20261116",
+            "article_id": "metropoline-university-hagana-night-stops-17nov-20261116",
+            "status": "covered"
+          },
+          {
+            "content_id": "jaffa-shakra-additional-arrest-20261116",
+            "article_id": "jaffa-shakra-additional-arrest-20261116",
+            "status": "covered"
+          },
+          {
+            "content_id": "london-ministore-brawl-seven-arrests-20261115",
+            "article_id": "london-ministore-brawl-seven-arrests-20261115",
+            "status": "covered"
+          },
+          {
+            "content_id": "ben-yehuda-construction-site-body-found-20261114",
+            "article_id": "ben-yehuda-construction-site-body-found-20261114",
+            "status": "covered"
+          },
+          {
+            "content_id": "center-tlv-police-impersonation-robbery-arrest-20261112",
+            "article_id": "center-tlv-police-impersonation-robbery-arrest-20261112",
+            "status": "covered"
+          }
+        ],
+        "deferred_candidate_ids": [
+          "coverage-hazaken-vehayam-appeal-20261116",
+          "coverage-opera-hotel-appeal-20261116",
+          "coverage-tlv-road-safety-preliminary2026-20261115",
+          "coverage-naim715-716-golda-20261115",
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "coverage-yefet-arrests-followup-20261116",
+          "coverage-dan-levinski-289-5-20261116"
+        ]
+      },
+      "articleIds": [
+        "center-tlv-short-term-flat-drug-arrest-20261116",
+        "tlv-winter-drainage-preparation-resident-guide-20261116",
+        "levinski-pedestrian-injured-20261116",
+        "jaffa-carlo-hidden-yard-arrest-20261116"
+      ]
+    },
+    "real-estate": {
+      "remaining_queue": [
+        {
+          "content_id": "coverage-university-station-plan-5071377456",
+          "title": "הרחבת תחנת האוניברסיטה: תוכנית507-1377456",
+          "source_url": "https://tlvonline.co.il/הרחבת-תחנת-האוניברסיטה/",
+          "reason": "Complete15Nov secondary story read, primary plan not available in bounded search; no unverified planning particulars published",
+          "next_action": "Read primary plan507-1377456; establish actual new stage/date, compare transport coverage."
+        },
+        {
+          "content_id": "Landmark companysales",
+          "next_action": "Verifycompanysalesprimary"
+        },
+        {
+          "content_id": "coverage-pi-glilot-land-dispute-20261116",
+          "source_url": "https://tlvonline.co.il/קרב-המיליארדים-בפי-גלילות/",
+          "reason": "Candidate link discovered, full relevant text/jurisdiction and primary evidence not read; cannot assert TelAviv scope.",
+          "next_action": "Read complete story, establish city jurisdiction and primary dispute evidence before drafting.",
+          "status": "deferred_budget"
+        }
+      ],
+      "coverage_complete": null,
+      "local_coverage": {
+        "policy_version": "2026-11-15/1.1",
+        "runKey": "real-estate-2026-11-16-b0cae23f",
+        "sources": [
+          {
+            "source_url": "https://tlvonline.co.il/",
+            "category_url": "https://tlvonline.co.il/category/נדלן/",
+            "checked_at": "2026-11-16T14:44:51.882231+00:00",
+            "status": "read",
+            "homepage_status": "read",
+            "category_status": "read",
+            "watermark": "2026-11-16",
+            "latest_source_published_at": "2026-11-16",
+            "cursor": {
+              "initial_lookback_days": 7,
+              "overlap_hours": 24,
+              "page": 1,
+              "complete": false,
+              "next": "Unprocessed lower page1 candidates and bounded page2 backfill; previous cursor retained"
+            },
+            "discovered_count": 5,
+            "decisions": [
+              {
+                "content_id": "tel-aviv-average-home-price-q3-2026-20261116",
+                "article_id": "tel-aviv-average-home-price-q3-2026-20261116",
+                "source_url": "https://www.cbs.gov.il/he/mediarelease/Madad/DocLib/2026/361/10_26_361b.pdf",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "har-zion-hazanovich-deposit-decision-explained-20261116",
+                "article_id": "har-zion-hazanovich-deposit-decision-explained-20261116",
+                "source_url": "https://www.tel-aviv.gov.il/Residents/Development/DocLib/פרוטוקול   26-0020ב מתאריך 21-10-26.pdf",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "galipolis-yad-eliyahu-reported-demolition-20261116",
+                "article_id": "galipolis-yad-eliyahu-reported-demolition-20261116",
+                "source_url": "https://tlvonline.co.il/התחדשות-יד-אליהו/",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "sde-dov-pfas-plot-2210-results-20261108",
+                "article_id": "sde-dov-pfas-plot-2210-results-20261108",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+                "article_id": "neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "beit-haitonaim-design-plan-114-apartments-20261110",
+                "article_id": "beit-haitonaim-design-plan-114-apartments-20261110",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "ta5500-south-center-objections-agendas-20261115",
+                "article_id": "ta5500-south-center-objections-agendas-20261115",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "isaac-stern-two-projects-financing-20261113",
+                "article_id": "isaac-stern-two-projects-financing-20261113",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "maccabi-jaffa-phased-occupancy-forecast-20261105",
+                "article_id": "maccabi-jaffa-phased-occupancy-forecast-20261105",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              }
+            ],
+            "deferred_candidate_ids": [
+              "coverage-university-station-plan-5071377456",
+              "Landmark companysales",
+              "coverage-pi-glilot-land-dispute-20261116"
+            ],
+            "next_action": "Retain lower-page/backfill candidates; do not claim exhaustive7day review. No unchanged claim without saved page signature."
+          },
+          {
+            "source_url": "https://telavivi.news/",
+            "category_url": "https://telavivi.news/category/real-estate-economics-business/",
+            "checked_at": "2026-11-16T14:44:51.882231+00:00",
+            "status": "read",
+            "homepage_status": "read",
+            "category_status": "read",
+            "watermark": "2026-11-15",
+            "latest_source_published_at": null,
+            "cursor": {
+              "initial_lookback_days": 7,
+              "overlap_hours": 24,
+              "page": 1,
+              "complete": false,
+              "next": "Unprocessed lower page1 candidates and bounded page2 backfill; previous cursor retained"
+            },
+            "discovered_count": 2,
+            "decisions": [
+              {
+                "content_id": "tel-aviv-average-home-price-q3-2026-20261116",
+                "article_id": "tel-aviv-average-home-price-q3-2026-20261116",
+                "source_url": "https://www.cbs.gov.il/he/mediarelease/Madad/DocLib/2026/361/10_26_361b.pdf",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "har-zion-hazanovich-deposit-decision-explained-20261116",
+                "article_id": "har-zion-hazanovich-deposit-decision-explained-20261116",
+                "source_url": "https://www.tel-aviv.gov.il/Residents/Development/DocLib/פרוטוקול   26-0020ב מתאריך 21-10-26.pdf",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "galipolis-yad-eliyahu-reported-demolition-20261116",
+                "article_id": "galipolis-yad-eliyahu-reported-demolition-20261116",
+                "source_url": "https://tlvonline.co.il/התחדשות-יד-אליהו/",
+                "status": "published_verified"
+              },
+              {
+                "content_id": "sde-dov-pfas-plot-2210-results-20261108",
+                "article_id": "sde-dov-pfas-plot-2210-results-20261108",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+                "article_id": "neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "beit-haitonaim-design-plan-114-apartments-20261110",
+                "article_id": "beit-haitonaim-design-plan-114-apartments-20261110",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "ta5500-south-center-objections-agendas-20261115",
+                "article_id": "ta5500-south-center-objections-agendas-20261115",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "isaac-stern-two-projects-financing-20261113",
+                "article_id": "isaac-stern-two-projects-financing-20261113",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              },
+              {
+                "content_id": "maccabi-jaffa-phased-occupancy-forecast-20261105",
+                "article_id": "maccabi-jaffa-phased-occupancy-forecast-20261105",
+                "status": "covered",
+                "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+              }
+            ],
+            "deferred_candidate_ids": [
+              "coverage-university-station-plan-5071377456",
+              "Landmark companysales",
+              "coverage-pi-glilot-land-dispute-20261116"
+            ],
+            "next_action": "Retain lower-page/backfill candidates; do not claim exhaustive7day review. No unchanged claim without saved page signature."
+          }
+        ],
+        "decisions": [
+          {
+            "content_id": "tel-aviv-average-home-price-q3-2026-20261116",
+            "article_id": "tel-aviv-average-home-price-q3-2026-20261116",
+            "source_url": "https://www.cbs.gov.il/he/mediarelease/Madad/DocLib/2026/361/10_26_361b.pdf",
+            "status": "published_verified"
+          },
+          {
+            "content_id": "har-zion-hazanovich-deposit-decision-explained-20261116",
+            "article_id": "har-zion-hazanovich-deposit-decision-explained-20261116",
+            "source_url": "https://www.tel-aviv.gov.il/Residents/Development/DocLib/פרוטוקול   26-0020ב מתאריך 21-10-26.pdf",
+            "status": "published_verified"
+          },
+          {
+            "content_id": "galipolis-yad-eliyahu-reported-demolition-20261116",
+            "article_id": "galipolis-yad-eliyahu-reported-demolition-20261116",
+            "source_url": "https://tlvonline.co.il/התחדשות-יד-אליהו/",
+            "status": "published_verified"
+          },
+          {
+            "content_id": "sde-dov-pfas-plot-2210-results-20261108",
+            "article_id": "sde-dov-pfas-plot-2210-results-20261108",
+            "status": "covered",
+            "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+          },
+          {
+            "content_id": "neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+            "article_id": "neve-sharet-hatzanchanim-permit-80-apartments-20261109",
+            "status": "covered",
+            "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+          },
+          {
+            "content_id": "beit-haitonaim-design-plan-114-apartments-20261110",
+            "article_id": "beit-haitonaim-design-plan-114-apartments-20261110",
+            "status": "covered",
+            "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+          },
+          {
+            "content_id": "ta5500-south-center-objections-agendas-20261115",
+            "article_id": "ta5500-south-center-objections-agendas-20261115",
+            "status": "covered",
+            "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+          },
+          {
+            "content_id": "isaac-stern-two-projects-financing-20261113",
+            "article_id": "isaac-stern-two-projects-financing-20261113",
+            "status": "covered",
+            "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+          },
+          {
+            "content_id": "maccabi-jaffa-phased-occupancy-forecast-20261105",
+            "article_id": "maccabi-jaffa-phased-occupancy-forecast-20261105",
+            "status": "covered",
+            "reason": "Same plot/project/stage or agenda already covered under existing headline; no material independently established change."
+          }
+        ],
+        "deferred_candidate_ids": [
+          "coverage-university-station-plan-5071377456",
+          "Landmark companysales",
+          "coverage-pi-glilot-land-dispute-20261116"
+        ]
+      },
+      "articleIds": [
+        "tel-aviv-average-home-price-q3-2026-20261116",
+        "har-zion-hazanovich-deposit-decision-explained-20261116",
+        "galipolis-yad-eliyahu-reported-demolition-20261116"
+      ]
+    },
+    "economy-tech": {
+      "remaining_queue": [],
+      "coverage_complete": null,
+      "local_coverage": null,
+      "articleIds": [
+        "ichilov-wonderful-ai-development-partnership-20261116"
+      ]
+    },
+    "sports": {
+      "remaining_queue": [
+        {
+          "source_url": "https://sports.walla.co.il/item/3876045",
+          "status": "research_checkpoint_official_decision_unverified",
+          "next_action": "Read new official decision if published; no identical retry."
+        },
+        {
+          "source_url": "https://www.football.org.il/leagues/games/game/?game_id=1124950&season_id=-1",
+          "status": "research_checkpoint",
+          "reason": "Prior conflicting0:2 and5:2 source variants remain unresolved; no new source basis this run."
+        },
+        {
+          "content_id": "sports-solar-courts-primary-progress",
+          "status": "researched_waiting_material_progress",
+          "source_urls": [
+            "https://tlvonline.co.il/קירוי-סולארי-מגרשי-ספורט/",
+            "https://yoatzim.funder.co.il/article/212516"
+          ],
+          "source_date": "2026-10-22",
+          "reason": "Full company-distributed announcement read:3.8m order,2027plans; no current installation progress/location list. Future relevance retained, not rejected for age.",
+          "next_action": "Check material municipal/company progress when source changes."
+        }
+      ],
+      "coverage_complete": false,
+      "local_coverage": {
+        "policy_version": "2026-11-15/1.0",
+        "runKey": "sports-2026-11-16-21:00-ecc9c956",
+        "sources": [
+          {
+            "source_url": "https://tlvonline.co.il/",
+            "category_url": "https://tlvonline.co.il/category/ספורט/",
+            "checked_at": "2026-11-16T19:17:24.990498+00:00",
+            "status": "read",
+            "watermark": "2026-10-28",
+            "latest_source_published_at": null,
+            "latest_source_date_note": "28Oct retained prior observation, not newly observed dated full item this run.",
+            "cursor": "homepage sports area and first category page read; older archive checkpoint retained",
+            "discovered_count": 0,
+            "next_action": "24hour overlap on changed index; continue bounded7day archive where relevant."
+          },
+          {
+            "source_url": "https://telavivi.news/",
+            "category_url": "https://telavivi.news/category/culture-and-leisure/",
+            "checked_at": "2026-11-16T19:17:24.990498+00:00",
+            "status": "read",
+            "watermark": null,
+            "latest_source_published_at": null,
+            "cursor": "homepage and culture/leisure index read; no dedicated sport index observed",
+            "discovered_count": 0,
+            "next_action": "Check newly indexed sports items with24hour overlap; keep initial backfill incomplete."
+          }
+        ],
+        "decisions": [
+          {
+            "content_id": "sports-solar-courts-primary-progress",
+            "decision": "researched_waiting_material_progress"
+          }
+        ],
+        "deferred_candidate_ids": [
+          "sports-solar-courts-primary-progress"
+        ]
+      },
+      "articleIds": [
+        "hapoel-baskonia-paris-away-week-preview-20261116",
+        "sofoklis-schortsanitis-kidney-donor-disclosure-20261116",
+        "olympiacos-aris-loss-before-maccabi-20261115",
+        "maccabi-kiryat-shmona-away-ticket-priority-20261115"
+      ]
+    },
+    "community": {
+      "remaining_queue": [
+        "coverage-frankfurt-retiree-havruta-20261115",
+        "coverage-cat-feeding-locations-discovery-20261115",
+        "community-shablul-49970-20261116",
+        "textile-community-installation-202611",
+        "shapira-center-farewell-41639"
+      ],
+      "coverage_complete": null,
+      "local_coverage": null,
+      "articleIds": [
+        "liebling-clothes-mending-workshop-20261116"
+      ]
+    },
+    "consumer": {
+      "remaining_queue": "Prior fullsource gap, unreviewed46sourcebody metadata, Dandasha conditions and datedMOHnotice retained. Single discovery cycle; no no_update or complete citycoverage claim.",
+      "coverage_complete": false,
+      "local_coverage": {
+        "policy_version": "2026-11-15/1.0",
+        "runKey": "consumer-2026-11-16-daily",
+        "sources": [
+          {
+            "source_url": "https://tlvonline.co.il/",
+            "checked_at": "2026-11-16T12:12:18.684499+00:00",
+            "status": "read",
+            "indexes": [
+              "https://tlvonline.co.il/",
+              "https://tlvonline.co.il/category/עסקים/",
+              "https://tlvonline.co.il/category/עסקים/page/2/"
+            ],
+            "watermark": null,
+            "cursor": "Business page3 and consumer-relevant servicecategory backlog remain",
+            "latest_source_published_at": null,
+            "latest_source_published_at_scope": "Latest dated relevant full article observed, not newest sitewideitem",
+            "discovered_count": 2,
+            "source_fingerprint": "63b417c1a4fcb8f9f9d9d7634fc3cf148ba1cd89f4ec6e4261742259731bbd0d",
+            "signature_basis": "Index manifest, not content hash; no unchanged claim",
+            "next_action": "Business page3 and consumer-relevant servicecategory backlog remain"
+          },
+          {
+            "source_url": "https://telavivi.news/",
+            "checked_at": "2026-11-16T12:12:18.684499+00:00",
+            "status": "read",
+            "indexes": [
+              "https://telavivi.news/",
+              "https://telavivi.news/category/real-estate-economics-business/",
+              "https://telavivi.news/category/food/"
+            ],
+            "watermark": null,
+            "cursor": "Further7dayitems and primarypopupconditions remain; foodcategory accessrecovered",
+            "latest_source_published_at": "2026-11-04",
+            "latest_source_published_at_scope": "Latest dated relevant full article observed, not newest sitewideitem",
+            "discovered_count": 4,
+            "source_fingerprint": "056aa1a458ff0cb03147f7796f7fc437c248ebc19ec57c3c63cfdfa5ad1e4e8d",
+            "signature_basis": "Index manifest, not content hash; no unchanged claim",
+            "next_action": "Further7dayitems and primarypopupconditions remain; foodcategory accessrecovered"
+          }
+        ],
+        "decisions": [
+          {
+            "content_id": "consumer-r2m-parking-offer-primary-terms",
+            "decision": "ready_for_publication",
+            "article_id": "hatarbut-tlv-parking-benefit-guide-20261116"
+          },
+          {
+            "source_url": "https://shiruetto.com/",
+            "decision": "covered_expired",
+            "article_id": "about-us-jaffa-entry-prices-20261112"
+          },
+          {
+            "source_url": "https://www.be106.net/255/164046",
+            "decision": "duplicate",
+            "article_id": "suspicious-shopping-links-clickcheck-guide-20261115"
+          },
+          {
+            "content_id": "isracard-online",
+            "decision": "duplicate_unchanged",
+            "article_id": "isracard-november-online-cashback-terms-20261106",
+            "reason": "Full primary stillsoldout, no new benefit inferred from hidden success template"
+          },
+          {
+            "content_id": "liebling-textile",
+            "decision": "duplicate_other_section",
+            "article_id": "liebling-clothes-mending-workshop-20261116"
+          },
+          {
+            "content_id": "shablul",
+            "decision": "existing_owner_community_checkpoint",
+            "reason": "Mainly participatory familyactivity; no parallel consumerarticle"
+          },
+          {
+            "content_id": "dandasha-jaffa-popup",
+            "decision": "deferred_budget",
+            "reason": "4Novsecondaryfullread; planned3weekevent maystill relevant. Primarycurrentavailability/prices not read, no advertised bargain inferred."
+          },
+          {
+            "content_id": "calcalist-retail",
+            "decision": "not_relevant",
+            "reason": "Ownership/financing news, no verified local service/price change; no parallel economycopy"
+          },
+          {
+            "content_id": "MOH-dragonfly",
+            "decision": "deferred_verification",
+            "reason": "Official healthchannel index contains warning but datedfullpost/independentlocallink not verified; no medical report or newincidentclaim."
+          }
+        ],
+        "deferred_candidate_ids": [
+          "consumer-dandasha-jaffa-popup-20261116"
+        ],
+        "next_action": "Continue retained primary and localbacklog in next scheduledcycle. Not no_update or citywidecompletecoverage."
+      },
+      "articleIds": [
+        "hatarbut-tlv-parking-benefit-guide-20261116"
+      ]
+    },
+    "culture-news": {
+      "remaining_queue": [
+        {
+          "id": "clfb-all-sight-exhibition-20261114",
+          "status": "draft_research_checkpoint",
+          "reason": "Fullcurator14Novcolumn read; institutional full page still JSshell,dates/access not independently readable. Existing checkpoint preserved,no duplicate draft/article."
+        },
+        {
+          "id": "kirisute-levontin-release-show-20261114",
+          "status": "expired_candidate_not_published",
+          "reason": "14Novevent already passed; not rolled forward."
+        }
+      ],
+      "coverage_complete": null,
+      "local_coverage": {
+        "policy_version": "2026-11-15/1.2",
+        "runKey": "culture-night-2026-11-16-09:00-eb25dc5a",
+        "sources": [
+          {
+            "source_url": "https://tlvonline.co.il/",
+            "category_url": "https://tlvonline.co.il/category/תרבות/",
+            "checked_at": "2026-11-16T08:02:42.771208+00:00",
+            "status": "read",
+            "watermark": null,
+            "cursor": {
+              "initial_lookback_days": 7,
+              "page": 1,
+              "complete": false
+            },
+            "latest_source_published_at": null,
+            "discovered_count": 0,
+            "source_fingerprint": "bdd1806d5e09689b8b63e09e9e69906ee037f5acf2a0b0d7726d2ec1cafa80bb",
+            "decisions": [],
+            "deferred_candidate_ids": [
+              "boy-george-primary-date-rights",
+              "remaining-category-backfill"
+            ],
+            "next_action": "Category snapshot older than homepage; no unchanged or completecoverage claim"
+          },
+          {
+            "source_url": "https://telavivi.news/",
+            "category_url": "https://telavivi.news/category/culture-and-leisure/",
+            "checked_at": "2026-11-16T08:02:42.771208+00:00",
+            "status": "read",
+            "watermark": "2026-11-16",
+            "cursor": {
+              "initial_lookback_days": 7,
+              "page": 1,
+              "complete": false
+            },
+            "latest_source_published_at": "2026-11-16",
+            "discovered_count": 2,
+            "source_fingerprint": "e7fb2631f0e212f92828dd22bc8b82511d8172e120afec21d136a59635641a3f",
+            "decisions": [
+              {
+                "article_id": "jazz-haogen-winter-series-20261116",
+                "status": "published_verified"
+              },
+              {
+                "article_id": "oh-la-la-lev-french-comedy-20261116",
+                "status": "published_verified"
+              }
+            ],
+            "deferred_candidate_ids": [
+              "boy-george-primary-date-rights",
+              "remaining-category-backfill"
+            ],
+            "next_action": "Continue bounded lower-index backfill; older events expiry checked"
+          }
+        ]
+      },
+      "articleIds": [
+        "jazz-haogen-winter-series-20261116",
+        "oh-la-la-lev-french-comedy-20261116"
+      ]
+    }
+  },
+  "report": {
+    "checkedAt": "2026-11-16T19:50:42.318Z",
+    "sourceCommit": "af6d73c4332053a94165c750c815890c87ba3977",
+    "catalogSha256": "744ac3625d0be00b416dc6fb7c54f93527dd97969d6bb76c4844266cb58fa749",
+    "latest": {
+      "news": {
+        "runId": null,
+        "runKey": "news-20261116-evening-403c9cfe-99bf-4b7b-8bc4-ec36934cc718",
+        "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "observedAt": "2026-11-16T17:02:16.060698+00:00",
+        "reportedStatus": "published_verified",
+        "outcome": "article_records",
+        "sourceCommit": "b5680a3843ed1393d56bfc76f0671be406eedc4c",
+        "deploymentId": "appgdep_6afb387fe14c8191b66dde608b65856b",
+        "version": 637,
+        "coverageComplete": false,
+        "coverageState": "not_proven",
+        "queue": [
+          {
+            "content_id": "coverage-hazaken-vehayam-appeal-20261116",
+            "source_url": "https://posta.co.il/article/999445-2/",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "Full secondary legal text read via search; court order and exact conditions not independently read; inconsistent security amount250k/300k excluded. Need primary order or reliable clarification and suitable licensed closure image.",
+            "next_action": "Full secondary legal text read via search; court order and exact conditions not independently read; inconsistent security amount250k/300k excluded. Need primary order or reliable clarification and suitable licensed closure image."
+          },
+          {
+            "content_id": "coverage-opera-hotel-appeal-20261116",
+            "source_url": "https://tlvonline.co.il/מלון-האופרה-נאבק-בצו/",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "Full secondary report read. Appeal8Nov is not a granted stay; primary order/case and current operational status not established. Need order and exact procedural outcome, no invented current closure/opening claim.",
+            "next_action": "Full secondary report read. Appeal8Nov is not a granted stay; primary order/case and current operational status not established. Need order and exact procedural outcome, no invented current closure/opening claim."
+          },
+          {
+            "content_id": "coverage-tlv-road-safety-preliminary2026-20261115",
+            "source_url": "https://tlvonline.co.il/%D7%A9%D7%91%D7%95%D7%A2-%D7%94%D7%91%D7%98%D7%99%D7%97%D7%95%D7%AA-%D7%91%D7%93%D7%A8%D7%9B%D7%99%D7%9D-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-2026/",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "Sponsored secondary15Novread; primarytargetedsearch didnot locate datacutoff or matchedperiod. Do not callpartial2026 datafull-yearresult.",
+            "next_action": "Sponsored secondary15Novread; primarytargetedsearch didnot locate datacutoff or matchedperiod. Do not callpartial2026 datafull-yearresult. Prior item blocker remains; no retry without changed evidence."
+          },
+          {
+            "content_id": "coverage-naim715-716-golda-20261115",
+            "source_url": "https://telavivi.news/naim-weekend-715-716-routes/",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "Exact municipalnotice returned unreadabletemplate; generic municipalservice text stillsaysport, while complete3Novlocal/15Novlocal reports sayGolda from6Nov. No reliable currentprimaryroute resolved.",
+            "next_action": "Exact municipalnotice returned unreadabletemplate; generic municipalservice text stillsaysport, while complete3Novlocal/15Novlocal reports sayGolda from6Nov. No reliable currentprimaryroute resolved. Prior item blocker remains; no retry without changed evidence."
+          },
+          {
+            "content_id": null,
+            "source_url": "https://www.globes.co.il/news/article.aspx?did=1001562414",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "סכסוך משפטי מסחרי שהתגלה בRSS8.11; המקבל יקרא מקור מלא ויבדוק שלב הליך; לא לפרסום בידי נדלן.",
+            "next_action": "Read full source, check relevance and existing publication before release."
+          },
+          {
+            "content_id": null,
+            "source_url": "https://www.ynet.co.il/yedioth/article/yokra14930252",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "גילויחיפוש8Nov:מחלוקתמוניציפלית/משפטיתוחינוך,לאהודעתתרבות.המקבליקראמקורמלא,תאריך,טענותהמשפחהותגובתהעיריהויעשהכפילות;אינדקסאינואימות,איןעקיפתתשלום.",
+            "next_action": "Read full source, check relevance and existing publication before release."
+          },
+          {
+            "content_id": null,
+            "source_url": "https://www.lgbtqcenter.org.il/clinic/therapy-groups/?ContentID=78311",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "שירות טיפולי עירוני ולא פעילות קהילה כללית. דף המארגן נקרא ומציין14מפגשים מ8.11.2026 בימי ראשון19:00–20:30 בהרצל158,לגברים21ומעלה,300שח ושיחת היכרות כתנאי. אין אישור מקום פנוי או נגישות פיזית; כתב החדשות יקרא מקור מלא,יבדוק כפילות ותנאים בעצמו. אין כאן הבטחת תועלת טיפולית או קבלה.",
+            "next_action": "Read full source, check relevance and existing publication before release."
+          },
+          {
+            "content_id": null,
+            "source_url": "https://www.nta.co.il/חדשות/עבודות-תשתית-בשטח-האתר-ברחוב-אבן-גבירול-בקטע-שבין-רחוב-לסקוב-לרחוב-קפלן-81126/",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "גילוי בחיפוש בלבד; תחבורה ותשתית ולא נדלן. המקבל חייב לקרוא מקור מלא ולאמת מועד והסדרים; תוצאת חיפוש אינה ראיה ואינה מצדיקה עקיפה של403.",
+            "next_action": "Read full source, check relevance and existing publication before release."
+          },
+          {
+            "content_id": null,
+            "source_url": "https://gisn.tel-aviv.gov.il/tabaot/docs.aspx?id_taba=8441&st_taba=מח/5369&mode=internet",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "עיקר המועמד תשתית עירונית ללא תוספת מגורים, ולכןחדשות ולאנדלן. רשומתGISתוכנית507-1495738/מח5369מסמנתהפקדה3.11וטעינה6.11. המקבליקראמסמךתכנוןמלא,גבולותומועדפרסוםולאיציגהפקדהכאישוראוביצוע. איןטענהשהתחדש8.11.",
+            "next_action": "Read full source, check relevance and existing publication before release."
+          },
+          {
+            "content_id": null,
+            "source_url": "https://www.e-b.co.il/wp-content/uploads/מכרז-894-לבון-79-מודעה-על-דחיית-המועד-להגשת-ההצעה.pdf",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "שירות ציבורי/מוניציפלי, לא ידיעת נדלן למגורים. המקבל יקרא בעצמו מסמך מלא והבהרות; תאריך הוצאת ההודעה וסטטוס מכרז עדכני/ביצוע טרם אומתו. אין לפתוח כמבנה שנפתח לציבור.",
+            "next_action": "Read full source, check relevance and existing publication before release."
+          },
+          {
+            "content_id": null,
+            "source_url": "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "שירותעירוני ובטיחותלציבור, שייך לחדשות. פרקרחצהבחורףבמקורמלאמצייןמפורשות7.11; המקבליקראבעצמוויבדוקאםישעדכון/הבהרהומניעתכפילות. אין להסיק סגירתהחופים עצמם.",
+            "next_action": "Read full source, check relevance and existing publication before release."
+          },
+          {
+            "content_id": null,
+            "source_url": "https://t.me/MOHreport/13802",
+            "status": "blocked",
+            "article_id": null,
+            "reason": "חדשות בריאות ולא צרכנות. המקבל חייב לקרוא ולאמת תאריך פרסום והתפתחות עדכנית; הגוף בערוץ הציבורי מדגיש שאין מקרה מאומת. אין לפרסם חשד כמחלה מאומתת או דיווח ישן כאירוע היום.",
+            "next_action": "Read full source, check relevance and existing publication before release."
+          },
+          {
+            "content_id": "coverage-yefet-arrests-followup-20261116",
+            "source_url": "https://www.be106.net/255/165248",
+            "status": "deferred_budget",
+            "reason": "Full secondary report in search cites police; possible substantive update to existing yefet-three-injured-20261116. Need exact dated police corroboration or carefully attributed update and fullbody re-review, never duplicate injury article.",
+            "next_action": "Full secondary report in search cites police; possible substantive update to existing yefet-three-injured-20261116. Need exact dated police corroboration or carefully attributed update and fullbody re-review, never duplicate injury article."
+          },
+          {
+            "content_id": "coverage-dan-levinski-289-5-20261116",
+            "source_url": "https://www.dan.co.il/updates?295e85e9_page=3&aeb2eab9_page=5",
+            "status": "deferred_budget",
+            "reason": "New operator index item observed for16Novongoingworks, routes289/5. Full relevant directions,dates/stops not read; compare existing roadworks stories before writing.",
+            "next_action": "New operator index item observed for16Novongoingworks, routes289/5. Full relevant directions,dates/stops not read; compare existing roadworks stories before writing."
+          }
+        ],
+        "records": [
+          {
+            "articleId": "center-tlv-short-term-flat-drug-arrest-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/center-tlv-short-term-flat-drug-arrest-20261116",
+            "verificationRecorded": true
+          },
+          {
+            "articleId": "tlv-winter-drainage-preparation-resident-guide-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/tlv-winter-drainage-preparation-resident-guide-20261116",
+            "verificationRecorded": true
+          },
+          {
+            "articleId": "levinski-pedestrian-injured-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/levinski-pedestrian-injured-20261116",
+            "verificationRecorded": true
+          },
+          {
+            "articleId": "jaffa-carlo-hidden-yard-arrest-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/jaffa-carlo-hidden-yard-arrest-20261116",
+            "verificationRecorded": true
+          }
+        ],
+        "scope": "Recorded evidence only; fresh live readback and exact scheduled-run reconciliation remain required."
+      },
+      "real-estate": {
+        "runId": "b0cae23f-428c-8321-a384-8f42270f7ab7",
+        "runKey": "real-estate-2026-11-16-b0cae23f",
+        "owner": "Automation_82add5edecd8819197814e83bac85a75",
+        "observedAt": "2026-11-16T14:44:51.882231+00:00",
+        "reportedStatus": "published_verified",
+        "outcome": "article_records",
+        "sourceCommit": "f929ca3669c7c699d0e520bf9be7b3b582e8fba7",
+        "deploymentId": "appgdep_6afb1878d1148191ab5e8e1aadf82da1",
+        "version": 634,
+        "coverageComplete": false,
+        "coverageState": "not_proven",
+        "queue": [
+          {
+            "content_id": "coverage-university-station-plan-5071377456",
+            "title": "הרחבת תחנת האוניברסיטה: תוכנית507-1377456",
+            "source_url": "https://tlvonline.co.il/הרחבת-תחנת-האוניברסיטה/",
+            "reason": "Complete15Nov secondary story read, primary plan not available in bounded search; no unverified planning particulars published",
+            "next_action": "Read primary plan507-1377456; establish actual new stage/date, compare transport coverage."
+          },
+          {
+            "content_id": "Landmark companysales",
+            "next_action": "Verifycompanysalesprimary"
+          },
+          {
+            "content_id": "coverage-pi-glilot-land-dispute-20261116",
+            "source_url": "https://tlvonline.co.il/קרב-המיליארדים-בפי-גלילות/",
+            "reason": "Candidate link discovered, full relevant text/jurisdiction and primary evidence not read; cannot assert TelAviv scope.",
+            "next_action": "Read complete story, establish city jurisdiction and primary dispute evidence before drafting.",
+            "status": "deferred_budget"
+          }
+        ],
+        "records": [
+          {
+            "articleId": "tel-aviv-average-home-price-q3-2026-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/tel-aviv-average-home-price-q3-2026-20261116",
+            "verificationRecorded": true
+          },
+          {
+            "articleId": "har-zion-hazanovich-deposit-decision-explained-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/har-zion-hazanovich-deposit-decision-explained-20261116",
+            "verificationRecorded": true
+          },
+          {
+            "articleId": "galipolis-yad-eliyahu-reported-demolition-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/galipolis-yad-eliyahu-reported-demolition-20261116",
+            "verificationRecorded": true
+          }
+        ],
+        "scope": "Recorded evidence only; fresh live readback and exact scheduled-run reconciliation remain required."
+      },
+      "economy-tech": {
+        "runId": "c7423892-2320-8332-8334-0ca60137294d",
+        "runKey": "ops-2026-11-16-c7423892-2320-8332-8334-0ca60137294d",
+        "owner": "Automation_9776808c73848191a9d748dd09315960",
+        "observedAt": "2026-11-16T16:48:30.281Z",
+        "reportedStatus": "published_pending_verification",
+        "outcome": "article_records",
+        "sourceCommit": null,
+        "deploymentId": null,
+        "version": null,
+        "coverageComplete": false,
+        "coverageState": "not_proven",
+        "queue": [],
+        "records": [
+          {
+            "articleId": "ichilov-wonderful-ai-development-partnership-20261116",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          }
+        ],
+        "scope": "Recorded evidence only; fresh live readback and exact scheduled-run reconciliation remain required."
+      },
+      "sports": {
+        "runId": "ecc9c956-ad20-832c-9f60-7dba0986736a",
+        "runKey": "sports-2026-11-16-21:00-ecc9c956",
+        "owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+        "observedAt": "2026-11-16T19:28:01.295496+00:00",
+        "reportedStatus": "published_verified",
+        "outcome": "article_records",
+        "sourceCommit": "6e73e81e8ce5a93b6c64ab6bd0dc5199ddb1ebc9",
+        "deploymentId": "appgdep_6afb58ae88408191bfe493eaf155d90c",
+        "version": 638,
+        "coverageComplete": false,
+        "coverageState": "incomplete",
+        "queue": [
+          {
+            "source_url": "https://sports.walla.co.il/item/3876045",
+            "status": "research_checkpoint_official_decision_unverified",
+            "next_action": "Read new official decision if published; no identical retry."
+          },
+          {
+            "source_url": "https://www.football.org.il/leagues/games/game/?game_id=1124950&season_id=-1",
+            "status": "research_checkpoint",
+            "reason": "Prior conflicting0:2 and5:2 source variants remain unresolved; no new source basis this run."
+          },
+          {
+            "content_id": "sports-solar-courts-primary-progress",
+            "status": "researched_waiting_material_progress",
+            "source_urls": [
+              "https://tlvonline.co.il/קירוי-סולארי-מגרשי-ספורט/",
+              "https://yoatzim.funder.co.il/article/212516"
+            ],
+            "source_date": "2026-10-22",
+            "reason": "Full company-distributed announcement read:3.8m order,2027plans; no current installation progress/location list. Future relevance retained, not rejected for age.",
+            "next_action": "Check material municipal/company progress when source changes."
+          }
+        ],
+        "records": [
+          {
+            "articleId": "hapoel-baskonia-paris-away-week-preview-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/hapoel-baskonia-paris-away-week-preview-20261116.html",
+            "verificationRecorded": true
+          },
+          {
+            "articleId": "sofoklis-schortsanitis-kidney-donor-disclosure-20261116",
+            "outcome": "recorded_verified_new_publication",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/sofoklis-schortsanitis-kidney-donor-disclosure-20261116.html",
+            "verificationRecorded": true
+          },
+          {
+            "articleId": "olympiacos-aris-loss-before-maccabi-20261115",
+            "outcome": "recorded_verified_existing_update",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/olympiacos-aris-loss-before-maccabi-20261115.html",
+            "verificationRecorded": true
+          },
+          {
+            "articleId": "maccabi-kiryat-shmona-away-ticket-priority-20261115",
+            "outcome": "recorded_verified_existing_update",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/maccabi-kiryat-shmona-away-ticket-priority-20261115.html",
+            "verificationRecorded": true
+          }
+        ],
+        "scope": "Recorded evidence only; fresh live readback and exact scheduled-run reconciliation remain required."
+      },
+      "community": {
+        "runId": null,
+        "runKey": "community-2026-11-16-daily",
+        "owner": "Automation_e03d80ff914c8191a790fc66e7447826",
+        "observedAt": "2026-11-16T11:28:30.088380+00:00",
+        "reportedStatus": "published_verified",
+        "outcome": "article_records",
+        "sourceCommit": "2b8f5193fe33605e9dbe48d9c8de8f8c7677ce1c",
+        "deploymentId": "appgdep_6afae7f6124481919f62f79ac840cebd",
+        "version": 631,
+        "coverageComplete": false,
+        "coverageState": "not_proven",
+        "queue": [
+          "coverage-frankfurt-retiree-havruta-20261115",
+          "coverage-cat-feeding-locations-discovery-20261115",
+          "community-shablul-49970-20261116",
+          "textile-community-installation-202611",
+          "shapira-center-farewell-41639"
+        ],
+        "records": [
+          {
+            "articleId": "liebling-clothes-mending-workshop-20261116",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/liebling-clothes-mending-workshop-20261116",
+            "verificationRecorded": false
+          }
+        ],
+        "scope": "Recorded evidence only; fresh live readback and exact scheduled-run reconciliation remain required."
+      },
+      "consumer": {
+        "runId": null,
+        "runKey": "consumer-2026-11-16-daily",
+        "owner": "Automation_e2f02000cdf4819190022b85f4391076",
+        "observedAt": "2026-11-16T12:19:52.525568+00:00",
+        "reportedStatus": "published_verified",
+        "outcome": "article_records",
+        "sourceCommit": "c686da6791f80a77cf5d39d3bec9c040c1557bd3",
+        "deploymentId": "appgdep_6afaf479d6148191baf394a23094a986",
+        "version": 632,
+        "coverageComplete": false,
+        "coverageState": "incomplete",
+        "queue": "Prior fullsource gap, unreviewed46sourcebody metadata, Dandasha conditions and datedMOHnotice retained. Single discovery cycle; no no_update or complete citycoverage claim.",
+        "records": [
+          {
+            "articleId": "hatarbut-tlv-parking-benefit-guide-20261116",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          }
+        ],
+        "scope": "Recorded evidence only; fresh live readback and exact scheduled-run reconciliation remain required."
+      },
+      "culture-news": {
+        "runId": "eb25dc5a-2750-8325-9189-cdf85c90fa3d",
+        "runKey": "culture-night-2026-11-16-09:00-eb25dc5a",
+        "owner": "Automation_53543605ce188191ba90f3f1979203dc",
+        "observedAt": "2026-11-16T08:11:19.968495+00:00",
+        "reportedStatus": "published_verified",
+        "outcome": "article_records",
+        "sourceCommit": "dcecffa9f01bf9f93874f224436c16c6843ce85e",
+        "deploymentId": "appgdep_6afaba06d7448191a4405de519767ec3",
+        "version": null,
+        "coverageComplete": false,
+        "coverageState": "not_proven",
+        "queue": [
+          {
+            "id": "clfb-all-sight-exhibition-20261114",
+            "status": "draft_research_checkpoint",
+            "reason": "Fullcurator14Novcolumn read; institutional full page still JSshell,dates/access not independently readable. Existing checkpoint preserved,no duplicate draft/article."
+          },
+          {
+            "id": "kirisute-levontin-release-show-20261114",
+            "status": "expired_candidate_not_published",
+            "reason": "14Novevent already passed; not rolled forward."
+          }
+        ],
+        "records": [
+          {
+            "articleId": "jazz-haogen-winter-series-20261116",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/jazz-haogen-winter-series-20261116",
+            "verificationRecorded": false
+          },
+          {
+            "articleId": "oh-la-la-lev-french-comedy-20261116",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": "https://tlvnet.com/news/oh-la-la-lev-french-comedy-20261116",
+            "verificationRecorded": false
+          }
+        ],
+        "scope": "Recorded evidence only; fresh live readback and exact scheduled-run reconciliation remain required."
+      }
+    },
+    "drafts": [],
+    "scope": "One compact projection of existing evidence; no remote reads, new publication or historical journal rewrite."
+  },
+  "worker_sample": {
+    "events": [
+      {
+        "timestamp": "2026-11-16T19:46:12.894Z",
+        "method": "HEAD",
+        "path": "/main",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 4,
+        "request_id": "7f74bb6f3e06eed5f388a4ad15e4afcf"
+      },
+      {
+        "timestamp": "2026-11-16T19:46:12.832Z",
+        "method": "HEAD",
+        "path": "/wordpress",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 7,
+        "request_id": "fb677bdf238c6d4643404a4b961388ed"
+      },
+      {
+        "timestamp": "2026-11-16T19:46:12.658Z",
+        "method": "HEAD",
+        "path": "/old",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 4,
+        "request_id": "e6a7c2eb133a38134c229e1db753ebe5"
+      },
+      {
+        "timestamp": "2026-11-16T19:46:12.602Z",
+        "method": "HEAD",
+        "path": "/backup",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 14,
+        "request_id": "670939182dc07c2f2a3eaffa5c020d08"
+      },
+      {
+        "timestamp": "2026-11-16T19:46:12.496Z",
+        "method": "HEAD",
+        "path": "/new",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 9,
+        "request_id": "93ef7844ba48238b0331b653a83a6d57"
+      },
+      {
+        "timestamp": "2026-11-16T19:46:12.430Z",
+        "method": "HEAD",
+        "path": "/wp",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 10,
+        "request_id": "a716a00e0dc2d524bc16703416f52f6c"
+      },
+      {
+        "timestamp": "2026-11-16T19:46:12.355Z",
+        "method": "HEAD",
+        "path": "/bk",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 7,
+        "request_id": "8aebb3a9c4bac7d8b9288106d77c63c9"
+      },
+      {
+        "timestamp": "2026-11-16T19:46:12.276Z",
+        "method": "HEAD",
+        "path": "/bc",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 35,
+        "request_id": "087123c80bf268f9e923b091841392ab"
+      },
+      {
+        "timestamp": "2026-11-16T19:43:46.653Z",
+        "method": "GET",
+        "path": "/favicon.ico",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 62,
+        "request_id": "f4a9293117cf8784fb6b6768ebe7560a"
+      },
+      {
+        "timestamp": "2026-11-16T19:38:56.191Z",
+        "method": "GET",
+        "path": "/favicon.ico",
+        "status": 404,
+        "outcome": "ok",
+        "wallTimeMs": 53,
+        "request_id": "9b7023aa32a53bed5c256418bf06bac9"
+      }
+    ],
+    "limit": 10,
+    "complete": false,
+    "interpretation": "Eight HEAD requests to absent WordPress-style paths, two favicon404s; all outcome=ok. No5xx/exception in this bounded sample; not complete error rate or uptime. Missing favicon retained as low-priority followup; raw headers/IPs/query identifiers omitted."
+  },
+  "social": {
+    "slot": "2026-11-16T19",
+    "finished_at": "2026-11-16T19:00:13.911Z",
+    "status": "published",
+    "post_id": "1520426491146188_122107074813545268",
+    "detail": null,
+    "new_rows": 1,
+    "public_post_verified": false,
+    "organic_reach_verified": false,
+    "no_resend": true
+  },
+  "health": {
+    "home_http": 200,
+    "section_http": 200,
+    "new_changed_article_requests": 4,
+    "exact_full_HTML_matches": 4,
+    "exact_JPG_matches": 4,
+    "total_HTTP_GETs": 10,
+    "latency_ms": null,
+    "desktop_visual": "pending",
+    "mobile_visual": "pending"
+  },
+  "neighborhoods": {
+    "source_inputs_unchanged_since637": true,
+    "method": "git diff of public/city-hub and data/neighborhoods between deployed637 and638 source is empty; prior deadline checks retained, no repeat full body scan"
+  },
+  "remaining": {
+    "history": 224,
+    "history_groups": 8,
+    "history_advanced_this_cycle": false,
+    "reason": "Bounded cycle prioritized new report-schema repair and four changed-publication readbacks.",
+    "shared_writer_public_pending": [
+      811801,
+      811802
+    ],
+    "old_pending_retained": true,
+    "backup_gates": "unchanged, qualification_not_started",
+    "social": "public post/organic exposure still unverified"
+  },
+  "api_calls": null,
+  "cost": null
+}
