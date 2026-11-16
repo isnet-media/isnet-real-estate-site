@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "neighborhood-groups-20261116T050812Z-408ab6ed",
+  "scheduled_run_id": null,
+  "invocation": "publisher_direct_request_in_existing_controller_conversation",
+  "policy_version": "2026-11-15/1.2",
+  "navigation_policy_version": "2026-11-16/1.0",
+  "observed_at": "2026-11-16T05:34:31.010Z",
+  "target": "TLVNET-site",
+  "status": "technical_fixed_verified",
+  "source_commit": "40c18684235065f4ce3426e8ffefc4ea6e7c3674",
+  "version": 625,
+  "deployment_id": "appgdep_6afa94b97cc08191ac88ab3fbaafbd74",
+  "deployment_status": "succeeded",
+  "deployed_at": "2026-11-16T05:29:45.214269+00:00",
+  "changes": [
+    "25 regional navigation entrances retain all73 original localities and all existing deep links",
+    "Photographic covers/cards, fixed section navigation, exact neighborhood chips, grouped home selector, named-locality article/sale rows",
+    "Existing metadata endpoint serves one bounded regional or exact-neighborhood projection with existing DB read; no new collection/schedule/schema",
+    "Existing builder and fingerprint inputs retain changes on future authorized releases"
+  ],
+  "counts": {
+    "navigation_areas": 25,
+    "original_localities": 73,
+    "photographic_area_cards": 25,
+    "city_context_fallback_areas": 11,
+    "new_editorial_articles_written": 0
+  },
+  "public_checks": [
+    {
+      "url": "https://tlvnet.com/city-hub/",
+      "areas": 25,
+      "photos": 25,
+      "selector_options_including_placeholder": 26,
+      "horizontal_overflow": false
+    },
+    {
+      "url": "https://tlvnet.com/city-hub/areas/ramat-aviv/",
+      "heading": "רמת אביב והסביבה נט",
+      "photo_loaded": true,
+      "credit_and_source_present": true,
+      "exact_neighborhood_filters": true,
+      "desktop_visual": "passed",
+      "horizontal_overflow": false
+    },
+    {
+      "url": "https://tlvnet.com/api/neighborhood-updates?area=ramat-aviv",
+      "items": 3,
+      "live_available": true,
+      "body_free_metadata": true
+    },
+    {
+      "url": "https://tlvnet.com/api/neighborhood-updates?area=ramat-aviv&neighborhood=%D7%A8%D7%9E%D7%AA%20%D7%90%D7%91%D7%99%D7%91%20%D7%92%27",
+      "neighborhood": "רמת אביב ג'",
+      "items": 0,
+      "live_available": true,
+      "qualification": "No stories from adjacent Ramat Aviv were falsely assigned"
+    },
+    {
+      "url": "https://tlvnet.com/city-hub/areas/hatikva/",
+      "sale_rows": 18,
+      "visible_sale_localities": [
+        "עזרא והארגזים",
+        "התקווה"
+      ],
+      "photo_loaded": true,
+      "horizontal_overflow": false
+    },
+    {
+      "url": "https://tlvnet.com/",
+      "selector_options_including_placeholder": 26,
+      "field": "area",
+      "selection_click_verified_destination": "https://tlvnet.com/city-hub/areas/ramat-aviv/"
+    }
+  ],
+  "regression": [
+    "npm run build passed",
+    "neighborhood-groups.mjs passed: complete partition, canonical dedup, isolation, expiry, source locality and non-mutating projection",
+    "neighborhoods.mjs,neighborhood-portals.mjs,neighborhood-updates.mjs and neighborhood_sales.py passed in full preparation",
+    "Selected bank cover hashes/rights match existing JPGs",
+    "git diff --check passed",
+    "News article source, locality registry and sale fact inputs unchanged"
+  ],
+  "lease": {
+    "CAS_acquired": true,
+    "readback_verified": true,
+    "renewed_once": true,
+    "own_token_only_released": true,
+    "release_readback_free": true
+  },
+  "remaining": [
+    "Mobile visual review pending; no viewport emulation supported in current browser",
+    "11 regions use visibly labelled licensed city-context archive cover pending verified local photographs",
+    "Neighborhood enrichment, activity/registration verification and2026 sale completeness remain with existing content owners/cursor; no new collection was claimed"
+  ],
+  "preview_runtime_limit": "Development runner API returned runner-binding error; public production API was subsequently directly verified with live_available=true. No production outage inferred.",
+  "no_new_automation_or_agent": true,
+  "no_schedule_enabled_permission_DNS_R2_schema_change": true,
+  "api_calls": null,
+  "cost": null
+}
