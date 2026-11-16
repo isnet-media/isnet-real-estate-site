@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T05:46:55.355Z",
+  "updated_at": "2026-11-16T06:10:56.210Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4304,9 +4304,71 @@
         "sports_completed_without_evening_publication": true,
         "source_unchanged": true
       }
+    },
+    {
+      "id": "historical-super-batyam-private-write-http400",
+      "status": "open",
+      "classification": "Historical diagnostic; present behavior unverified",
+      "fingerprint": "super-remaining-private-stage/stage_super_private_storage.py:63/BATYAM/write/HTTP400/5958cfac",
+      "root_cause": "Historical BATYAM private storage upload returnedHTTP400. Exact provider/body/auth/path reason was not preserved in the traceback and is unestablished. Separate from known private GET400.",
+      "occurrences": [
+        {
+          "run_id": 42959059460,
+          "workflow": "Stage remaining six supermarket cities in private storage (no public cutover)",
+          "path": ".github/workflows/super-remaining-private-stage.yml",
+          "attempt": 2,
+          "created_at": "2026-11-11T04:24:47Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "5958cfaca9a61eacfdb1aa216635c3d3ff810850",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42959059460",
+          "classification": "Failed step metadata inspected; root cause unconfirmed; full logs deferred",
+          "jobs": [
+            {
+              "job_id": 130331639320,
+              "failed_steps": [
+                "Stage unchanged city files privately and verify each download by SHA256"
+              ]
+            },
+            {
+              "job_id": 130331640358,
+              "failed_steps": []
+            },
+            {
+              "job_id": 130331640593,
+              "failed_steps": []
+            },
+            {
+              "job_id": 130331641292,
+              "failed_steps": []
+            },
+            {
+              "job_id": 130331694315,
+              "failed_steps": []
+            },
+            {
+              "job_id": 130331695386,
+              "failed_steps": []
+            }
+          ],
+          "job_id": 130331639320,
+          "city": "BATYAM",
+          "failed_script": "scripts/stage_super_private_storage.py:63",
+          "observed_error": "RuntimeError: Storage write failed HTTP 400",
+          "at": "2026-11-11T04:56:08.1741091Z",
+          "public_cutover": false,
+          "scope": "Historical private stage, no current outage inferred"
+        }
+      ],
+      "next_action": "At next authorized owner storage-stage/source change inspect redacted provider error category/request-id and exact object operation; do not replay collector, change permissions or retry unchanged input.",
+      "prevention": "Keep read/write operation and source-specific diagnostics distinct; retain last-good data and private-stage guard.",
+      "current_outage_verified": false,
+      "fixed_verified": false,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431.json",
+      "observed_at": "2026-11-16T06:10:56.210Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a",
+  "last_review_runKey": "ops-2026-11-16-0c5a1278-fc58-8322-9e9b-93f262b37431",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
