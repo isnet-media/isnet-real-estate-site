@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T04:41:21.582Z",
+  "updated_at": "2026-11-16T05:46:55.355Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -3038,6 +3038,32 @@
           "matched_events": 0,
           "failed_locator": ".siteSearchChat__card a[href^=\"event.html?id=\"]",
           "live_job": "skipped"
+        },
+        {
+          "run_id": 42622231838,
+          "workflow": "Holon events release checks",
+          "path": ".github/workflows/holon-events-tests.yml",
+          "attempt": 1,
+          "created_at": "2026-11-09T13:04:14Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "dc6e8da8ccea21b8b7b2a2c5373342cbcccf1105",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42622231838",
+          "classification": "Historical exact log confirmed same known search-smoke no-match signature; query אור לגויים, frozen2026-11-07T08:00Z, raw191,total191,events0; locator timeout30000ms, live job skipped. No present outage inferred.",
+          "job_id": 129177019731
+        },
+        {
+          "run_id": 42514677571,
+          "workflow": "Holon events release checks",
+          "path": ".github/workflows/holon-events-tests.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T19:22:01Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "e8335c6e53d70cf99c71dddffc7e37921ce98da6",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42514677571",
+          "classification": "Historical exact log confirmed same known search-smoke no-match signature; query אור לגויים, frozen2026-11-07T08:00Z, raw191,total191,events0; locator timeout30000ms, live job skipped. No present outage inferred.",
+          "job_id": 128834984700
         }
       ],
       "current_source": {
@@ -3054,7 +3080,9 @@
       "fixed_verified": false,
       "evidence": "ops/incident-response/evidence/ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7.json",
       "observed_at": "2026-11-14T18:53:41.892Z",
-      "reported_runKey": "ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7"
+      "reported_runKey": "ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7",
+      "last_metadata_review_at": "2026-11-16T05:46:55.355Z",
+      "latest_evidence": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json"
     },
     {
       "id": "tlvnet-local-parallel-public-prepare",
@@ -3901,7 +3929,25 @@
       "remaining": "Mobile visual review pending; sparse source coverage is a content-owner follow-up, not claimed solved.",
       "prevention": "Durable existing release queue, fresh-source CAS and lease checks, pure shared portal projection, regression and original content-owner continuity.",
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-a6015263-65b4-8326-b418-76875ee90297.json",
-      "verified_at": "2026-11-15T12:45:44.170Z"
+      "verified_at": "2026-11-15T12:45:44.170Z",
+      "latest_regional_design_release": {
+        "source_commit": "40c18684235065f4ce3426e8ffefc4ea6e7c3674",
+        "version": 625,
+        "deployment_id": "appgdep_6afa94b97cc08191ac88ab3fbaafbd74",
+        "deployed_at": "2026-11-16T05:29:45.214269+00:00",
+        "checkpoint": "ops/incident-response/inbox/neighborhood-groups-20261116T050812Z-408ab6ed.json",
+        "areas": 25,
+        "localities": 73,
+        "desktop_visual": "prior direct request passed; evidence ingested",
+        "mobile_visual": "pending",
+        "new_editorial_articles": 0,
+        "remaining": [
+          "Mobile visual review pending",
+          "11areas retain labelled archive city-context covers"
+        ],
+        "controller_cycle_reconciliation": "ops/incident-response/evidence/ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a.json",
+        "already_reported": true
+      }
     },
     {
       "id": "tlvnet-prepared-editorial-release-continuity",
@@ -4260,7 +4306,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-1c9ee959-2b68-8322-ab97-d7aa53afe326",
+  "last_review_runKey": "ops-2026-11-16-51422982-32fc-8322-8cc4-5a73609bc04a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
