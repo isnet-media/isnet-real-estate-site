@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T01:59:05Z",
+  "updated_at": "2026-11-16T02:53:13Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-15T23:02:05Z",
   "initial_history": {
@@ -17,12 +17,12 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "238 historical run entries remain in 10 workflow groups; stand-up discovery backlog source-specific triage completed.",
-      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json"
+      "remaining": "236 historical run entries remain in 10 workflow groups.",
+      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
     },
     "full_logs_read_this_cycle": [
-      42375176161,
-      42232625825
+      42573504013,
+      42536519333
     ],
     "unconfirmed_publish_failure_ids": [
       43357854397,
@@ -2727,30 +2727,6 @@
       ],
       ".github/workflows/update-event-analytics.yml": [
         {
-          "run_id": 42573504013,
-          "workflow": "Update event analytics",
-          "path": ".github/workflows/update-event-analytics.yml",
-          "attempt": 1,
-          "created_at": "2026-11-09T06:31:00Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "fdbd1831d78b0e0bed28b8467eda1776ba8636f9",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42573504013",
-          "classification": "Historical metadata only; exact cause unconfirmed. No current outage/repair inferred."
-        },
-        {
-          "run_id": 42536519333,
-          "workflow": "Update event analytics",
-          "path": ".github/workflows/update-event-analytics.yml",
-          "attempt": 1,
-          "created_at": "2026-11-08T23:43:14Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "55091b209f035f0d35ef1311440923f39b41d069",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42536519333",
-          "classification": "Historical metadata only; exact cause unconfirmed; no present outage or repair inferred."
-        },
-        {
           "run_id": 42516392984,
           "workflow": "Update event analytics",
           "path": ".github/workflows/update-event-analytics.yml",
@@ -2913,15 +2889,15 @@
     "metadata_rows_inspected_this_cycle": 0,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
-      "observed_at": "2026-11-16T01:59:05Z",
+      "observed_at": "2026-11-16T02:53:13Z",
       "last_run_ids": [
-        42375176161,
-        42232625825
+        42573504013,
+        42536519333
       ],
-      "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json",
-      "remaining_run_entries": 238,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json",
+      "remaining_run_entries": 236,
       "remaining_workflow_groups": 10,
-      "grouping_basis": "Two exact source-specific historical logs confirm missing YOUTUBE_API_KEY; standup group complete. No current recurrence claim."
+      "grouping_basis": "Two exact source-specific historical logs confirm missing GA4_SERVICE_ACCOUNT_JSON; known root, no present recurrence."
     }
   },
   "inbox_path": "ops/incident-response/inbox/",
@@ -2971,18 +2947,19 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-14-bab7f47b-2850-832e-ba02-f83c930cd387.json"
   },
   "last_cycle": {
-    "run_id": "30f22bd3-8104-8322-bc96-984d8c82ce20",
-    "runKey": "ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20",
+    "run_id": "e08be42c-4ed0-8322-b0cf-4e5852cfe8c5",
+    "runKey": "ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5",
     "policy_version": "2026-11-15/1.2",
-    "started_at": "2026-11-16T01:56:12.755168Z",
-    "observed_at": "2026-11-16T01:59:05Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json",
+    "started_at": "2026-11-16T02:50:30.817904Z",
+    "observed_at": "2026-11-16T02:53:13Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json",
     "targets_reviewed": [
       "Seven TLVNET desk owner metadata",
-      "Actions and inbox delta",
+      "Actions/inbox delta",
       "social_runs",
-      "Two historical prepared-publication handoffs",
-      "Two historical standup jobs",
+      "Historical community routing handoff",
+      "Original writer14Nov publication receipt",
+      "Two historical GA4 jobs",
       "TLVNET stabilization"
     ],
     "new_workflow_runs": 0,
@@ -2995,8 +2972,8 @@
     "source_head_refreshed": false,
     "source_unchanged": true,
     "build_or_deploy": false,
-    "history_remaining": 238,
-    "unread_inbox_remaining": 5,
+    "history_remaining": 236,
+    "unread_inbox_remaining": 3,
     "schedules_changed": false,
     "agents_created_or_triggered": false,
     "calls_measured": null,
@@ -3459,7 +3436,9 @@
     "ops/incident-response/inbox/c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json",
     "ops/incident-response/inbox/cf7874b1-48a4-832a-b3fc-af7c8de865e9-1.json",
     "ops/incident-response/inbox/dd4d9e0b-6858-8326-a56e-4365bd312654-1.json",
-    "ops/incident-response/inbox/e6d4b4b3-779c-8321-850a-cd86b3554385-1.json"
+    "ops/incident-response/inbox/e6d4b4b3-779c-8321-850a-cd86b3554385-1.json",
+    "ops/incident-response/inbox/ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
+    "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4976,6 +4955,40 @@
       "calls_measured": null,
       "cost_measured": null,
       "local_date": "2026-11-16"
+    },
+    {
+      "run_id": "e08be42c-4ed0-8322-b0cf-4e5852cfe8c5",
+      "runKey": "ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5",
+      "policy_version": "2026-11-15/1.2",
+      "started_at": "2026-11-16T02:50:30.817904Z",
+      "observed_at": "2026-11-16T02:53:13Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json",
+      "targets_reviewed": [
+        "Seven TLVNET desk owner metadata",
+        "Actions/inbox delta",
+        "social_runs",
+        "Historical community routing handoff",
+        "Original writer14Nov publication receipt",
+        "Two historical GA4 jobs",
+        "TLVNET stabilization"
+      ],
+      "new_workflow_runs": 0,
+      "new_workflow_failures": 0,
+      "metadata_rows_read": 10,
+      "new_social_runs": 0,
+      "new_verified_articles": 0,
+      "saved_version": 624,
+      "current_deployed_source_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+      "source_head_refreshed": false,
+      "source_unchanged": true,
+      "build_or_deploy": false,
+      "history_remaining": 236,
+      "unread_inbox_remaining": 3,
+      "schedules_changed": false,
+      "agents_created_or_triggered": false,
+      "calls_measured": null,
+      "cost_measured": null,
+      "local_date": "2026-11-16"
     }
   ],
   "photo_controls_checkpoint": {
@@ -5201,6 +5214,79 @@
           }
         ],
         "qualification": "Original immutable inbox retains full research/proposals. Old lease not current ownership evidence; do not replay publication or inherit stale approvals."
+      },
+      "historical_publication_receipt": {
+        "run_id": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1",
+        "source_commit": "b9c6ef285b682a770336672eef9e539502bea1dc",
+        "verification_commit": "c1f76fc225e42fe0a6348656ccdaecf731994e98",
+        "version": 602,
+        "deployment_id": "appgdep_6af89633a1c0819181ad011b649bf00a",
+        "verified_at": "2026-11-14T17:16:20Z",
+        "public_verification": [
+          {
+            "article_id": "superbus-171-holon-north-tlv-20261114",
+            "url": "https://tlvnet.com/news/superbus-171-holon-north-tlv-20261114",
+            "article_http": 200,
+            "image_http": 200,
+            "full_body": true,
+            "title": true,
+            "image_hash": true,
+            "JPG": true,
+            "credit": true,
+            "section_link": true,
+            "home_link": true,
+            "body_sha256": "a003de330065bf9abc366942b479fd7fc3d258a8887a991f15542d9964877da9",
+            "asset_sha256": "e64f440e7d1ffaf22b97accb0f2de3f243a54645e167dd97eb4dea685b114d52"
+          },
+          {
+            "article_id": "tlv-light-rail-night-works-15-19-nov-20261114",
+            "url": "https://tlvnet.com/news/tlv-light-rail-night-works-15-19-nov-20261114",
+            "article_http": 200,
+            "image_http": 200,
+            "full_body": true,
+            "title": true,
+            "image_hash": true,
+            "JPG": true,
+            "credit": true,
+            "section_link": true,
+            "home_link": true,
+            "body_sha256": "6ea000c58692dd3835577ccc1a5daa488d97f21c686421fdaca9fe1a97b3f2a5",
+            "asset_sha256": "950628be78ce327a463330e7302ff9e14d5171158c757e9803decba1293719f1"
+          }
+        ],
+        "visual_review": {
+          "desktop_articles": "passed; actual screenshots of both live article images, captions and body",
+          "mobile": "pending",
+          "desktop_cards": "pending",
+          "quality_queue": "data/photo-bank/quality-issues.json; records tied to article/body/asset/current task"
+        },
+        "remaining_queue": [
+          {
+            "url": "https://www.be106.net/255/164803",
+            "status": "research_checkpoint_unchanged",
+            "reason": "No fresh primary/courtoutcome; juvenileidentityexcluded."
+          },
+          {
+            "url": "https://www.be106.net/255/164802",
+            "status": "research_checkpoint_unchanged",
+            "reason": "No new independentoutcome; seizure notforfeiture."
+          },
+          {
+            "url": "https://www.be106.net/255/164805",
+            "status": "research_checkpoint_unchanged",
+            "reason": "No currentmedicaloutcome; originalseverity notcurrentstate."
+          }
+        ],
+        "inbox": "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
+        "controller_ingested_at": "2026-11-16T02:53:13Z",
+        "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json",
+        "qualification": "Historical original owner receipt; no fresh independent live readback or new publication count."
+      },
+      "historical_community_routing_handoff": {
+        "inbox": "ops/incident-response/inbox/ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
+        "status": "superseded_current_owner_policy",
+        "observed_at": "2026-11-16T02:53:13Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
       }
     },
     "Automation_53543605ce188191ba90f3f1979203dc": {
@@ -5285,7 +5371,39 @@
         "status": "published_verified",
         "evidence": "ops/incident-response/evidence/ops-2026-11-14-b566499d-9660-832e-8629-bddddd544a1b.json",
         "url": "https://tlvnet.com/news/superbus-171-holon-north-tlv-20261114",
-        "owner_run_id": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1"
+        "owner_run_id": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1",
+        "original_writer_receipt": {
+          "inbox": "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
+          "run_id": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1",
+          "source_commit": "b9c6ef285b682a770336672eef9e539502bea1dc",
+          "version": 602,
+          "deployment_id": "appgdep_6af89633a1c0819181ad011b649bf00a",
+          "observed_at": "2026-11-14T17:16:20Z",
+          "verification": {
+            "article_id": "superbus-171-holon-north-tlv-20261114",
+            "url": "https://tlvnet.com/news/superbus-171-holon-north-tlv-20261114",
+            "article_http": 200,
+            "image_http": 200,
+            "full_body": true,
+            "title": true,
+            "image_hash": true,
+            "JPG": true,
+            "credit": true,
+            "section_link": true,
+            "home_link": true,
+            "body_sha256": "a003de330065bf9abc366942b479fd7fc3d258a8887a991f15542d9964877da9",
+            "asset_sha256": "e64f440e7d1ffaf22b97accb0f2de3f243a54645e167dd97eb4dea685b114d52"
+          },
+          "visual_review": {
+            "desktop_articles": "passed; actual screenshots of both live article images, captions and body",
+            "mobile": "pending",
+            "desktop_cards": "pending",
+            "quality_queue": "data/photo-bank/quality-issues.json; records tied to article/body/asset/current task"
+          },
+          "controller_reconciled_at": "2026-11-16T02:53:13Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json",
+          "qualification": "Historical owner proof, not new independent controller verification"
+        }
       },
       {
         "article_id": "tlv-light-rail-night-works-15-19-nov-20261114",
@@ -5313,7 +5431,39 @@
         "desktop_cards": "pending",
         "mobile": "pending",
         "existing_quality_queue": "data/photo-bank/quality-issues.json; records tied to article/body/asset/current task",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7.json"
+        "evidence": "ops/incident-response/evidence/ops-2026-11-14-12c2c4b8-09e4-832e-9dff-a385525c9bc7.json",
+        "original_writer_receipt": {
+          "inbox": "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
+          "run_id": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1",
+          "source_commit": "b9c6ef285b682a770336672eef9e539502bea1dc",
+          "version": 602,
+          "deployment_id": "appgdep_6af89633a1c0819181ad011b649bf00a",
+          "observed_at": "2026-11-14T17:16:20Z",
+          "verification": {
+            "article_id": "tlv-light-rail-night-works-15-19-nov-20261114",
+            "url": "https://tlvnet.com/news/tlv-light-rail-night-works-15-19-nov-20261114",
+            "article_http": 200,
+            "image_http": 200,
+            "full_body": true,
+            "title": true,
+            "image_hash": true,
+            "JPG": true,
+            "credit": true,
+            "section_link": true,
+            "home_link": true,
+            "body_sha256": "6ea000c58692dd3835577ccc1a5daa488d97f21c686421fdaca9fe1a97b3f2a5",
+            "asset_sha256": "950628be78ce327a463330e7302ff9e14d5171158c757e9803decba1293719f1"
+          },
+          "visual_review": {
+            "desktop_articles": "passed; actual screenshots of both live article images, captions and body",
+            "mobile": "pending",
+            "desktop_cards": "pending",
+            "quality_queue": "data/photo-bank/quality-issues.json; records tied to article/body/asset/current task"
+          },
+          "controller_reconciled_at": "2026-11-16T02:53:13Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json",
+          "qualification": "Historical owner proof, not new independent controller verification"
+        }
       },
       {
         "article_id": "city-museum-troubled-waters-opening-20261106",
@@ -5974,8 +6124,8 @@
       }
     },
     "qualification": "Seven desks source metadata/results delta; live focused620neighborhood and changed consumer checks. Not whole-network live revalidation.",
-    "metadata_checked_at": "2026-11-16T01:59:05Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json",
+    "metadata_checked_at": "2026-11-16T02:53:13Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json",
     "date_rollover": {
       "date_from": "2026-11-15",
       "date_to": "2026-11-16",
@@ -6294,15 +6444,13 @@
     "mobile_visual_review": "pending"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-16T01:59:05Z",
+    "observed_at": "2026-11-16T02:53:13Z",
     "remaining_paths": [
-      "ops/incident-response/inbox/ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
-      "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
       "ops/incident-response/inbox/manual-policy-completion-20261113-1.json",
       "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
       "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
     ],
-    "reason": "Old news/culture release contention superseded by later publication completions; unresolved research preserved for actual owners, elapsed event kept historical."
+    "reason": "Obsolete community transfer handoff and original14Nov publication completion ingested; actual current owners retained; no replay."
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -6336,15 +6484,15 @@
     "normal_owner_coverage_verification": "pending"
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-16T01:59:05Z",
+    "observed_at": "2026-11-16T02:53:13Z",
     "through": "2026-11-15T23:02:05Z",
     "rows": 10,
     "seen_ids_at_boundary": [
       43772559297
     ],
-    "remaining": "No unseen new metadata beyond saved boundary;238 historical entries remain.",
+    "remaining": "No new metadata beyond saved boundary;236 historical entries remain.",
     "new_run_ids": [],
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json"
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
   },
   "remaining_followup": [
     "244historical Actions entries",
@@ -6367,20 +6515,20 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-16T01:59:05Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json",
+    "observed_at": "2026-11-16T02:53:13Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json",
     "source_unchanged": true,
     "new_actions": 0,
     "new_failures": 0,
     "new_social": 0,
     "historical_full_logs_read": 2,
     "historical_runs_grouped": [
-      42375176161,
-      42232625825
+      42573504013,
+      42536519333
     ],
-    "remaining_history": 238,
+    "remaining_history": 236,
     "historical_inbox_reconciled": 2,
-    "remaining_inbox": 5,
+    "remaining_inbox": 3,
     "no_new_publisher_alert": true
   },
   "latest_owner_publication_observation": {
