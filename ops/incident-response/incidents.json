@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T17:45:25.794Z",
+  "updated_at": "2026-11-16T18:24:54.876Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1166,9 +1166,33 @@
           "rerun": false,
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43080193734",
           "evidence": "ops/incident-response/evidence/ops-2026-11-15-5118ddf2-d724-8326-94a5-1a6ee8791928.json"
+        },
+        {
+          "run_id": 43074679220,
+          "job_id": 130711283706,
+          "created_at": "2026-11-11T18:07:08Z",
+          "error": "Ashdod unresolved candidate1vs0 at event integrity gate",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5.json"
         }
       ],
-      "last_historical_review_at": "2026-11-15T16:38:49.839Z"
+      "last_historical_review_at": "2026-11-15T16:38:49.839Z",
+      "latest_historical_triage": {
+        "run_id": 43074679220,
+        "attempt": 1,
+        "job_id": 130711283706,
+        "workflow": ".github/workflows/pages.yml",
+        "created_at": "2026-11-11T18:07:08Z",
+        "source_commit": "47e8f2201022ec4e44b99d55097546b4b620c406",
+        "failed_step": "Build compact event listings and canonical sitemap",
+        "log_excerpt": "AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release; 1 !== 0; scripts/test-event-integrity.cjs:126:99",
+        "matched_incident": "historical-publication-duplicate-gate-pre-repair",
+        "qualification": "Same city/test/stage/root class; exact duplicate pair not in log. No current outage or recovery inferred, no gate weakened.",
+        "full_logs_read": 1,
+        "remaining_records": 224,
+        "remaining_groups": 8,
+        "observed_at": "2026-11-16T18:24:05.469Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5.json"
+      }
     },
     {
       "id": "tlvnet-community-cancelled-owner-routing",
@@ -4455,7 +4479,7 @@
       "status": "awaiting_external_action",
       "signature": "ims-sea/refresh/no-currently-valid-period",
       "root_cause": "Live IMS response issued16Nov16:23Israel contains only20:00onward periods for213/210. Current local time not covered. Validation correctly rejects; no current replacement exists in the observed source.",
-      "impact": "Sea refresh rejected; last good south/central JSONexpired16Nov08:00. Current widget rendering not verified.",
+      "impact": "IMS period is nowcurrent; retained source files still end16Nov08:00 and require original owner refresh. No live widget render claim.",
       "first_seen_at": "2026-11-09T22:24:11Z",
       "last_seen_at": "2026-11-16T15:41:35Z",
       "updated_at": "2026-11-16T15:56:31.918Z",
@@ -4467,17 +4491,31 @@
         "future_only_20_at_17_40_rejection": "passed_synthetic_reproduction",
         "production_data_written": false
       },
-      "next_action": "Recheck only after source periods or their actual time validity changes through existing owner/claim path. Never relabel expired data, accept future-only data as current, alter schedules, or rerun unchanged inputs.",
+      "next_action": "Existing authorized owner/workflow must refresh through original concurrency lane. Existing GitHub workflow-dispatch capability unavailable in controller connection; no new job/schedule/claim or alternate writer.",
       "prevention": "Keep sourceIssue/from/to provenance and current-period exclusion. Group recurrence by this signature; source HTTP200 alone does not verify current data.",
       "public_verification": {
         "url": "https://ashdodnet.com/",
         "reader_status": 403,
         "render_verification": "pending",
         "not_outage_proof": true
+      },
+      "latest_source_recheck": {
+        "observed_at": "2026-11-16T18:24:05.469Z",
+        "source_issue": "2026-11-16T16:23",
+        "current_period": {
+          "from": "2026-11-16T20:00",
+          "to": "2026-11-17T08:00",
+          "minCm": 30,
+          "maxCm": 50
+        },
+        "production_source_files_still_expired": true,
+        "parser_result": "Both213/210valid after real20:00 threshold",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5.json",
+        "production_data_written": false
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-bedc0984-0df4-8332-a7a2-63f19dd49d91",
+  "last_review_runKey": "ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
