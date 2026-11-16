@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "023d355a-8dd4-8322-bc82-b7c2f07c62eb",
+  "runKey": "ops-2026-11-16-023d355a-8dd4-8322-bc82-b7c2f07c62eb",
+  "policy_version": "2026-11-15/1.2",
+  "started_at": "2026-11-16T00:57:51.349652Z",
+  "observed_at": "2026-11-16T00:59:57Z",
+  "local_date": "2026-11-16",
+  "targets_reviewed": [
+    "Seven TLVNET owner run metadata",
+    "Actions/inbox delta",
+    "social_runs",
+    "Historical restaurant source checkpoint",
+    "Historical Ben Yehuda news publication/source checkpoint",
+    "One historical standup job",
+    "TLVNET stability gates"
+  ],
+  "source": {
+    "version": 624,
+    "deployed_commit": "d15f2182f1f5f440424e987d4f4ba05697040dd8",
+    "deployment_id": "appgdep_6af9e977ac0c819195c117ff3d7b2e12",
+    "version_unchanged": true,
+    "source_head_refreshed": false,
+    "new_publications_verified": 0,
+    "body_image_rescan": false,
+    "public_health": null,
+    "qualification": "Metadata unchanged; previous public proof retained, no fresh live health/body/image claim"
+  },
+  "actions": {
+    "metadata_rows": 10,
+    "new_runs": 0,
+    "new_failures": 0,
+    "overlap_boundary": 43772559297,
+    "watermark": "2026-11-15T23:02:05Z"
+  },
+  "owners": [
+    {
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "run_id": "db934004-503c-8332-a023-ebaf5f8a3380",
+      "changed": false
+    },
+    {
+      "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
+      "changed": false
+    },
+    {
+      "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "run_id": "8337496b-ecfc-8333-89c4-9b9c52a0d562",
+      "changed": false
+    },
+    {
+      "task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "run_id": "86e22d2d-4dec-8320-8f7a-3866419e8597",
+      "changed": false
+    },
+    {
+      "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "run_id": "393e5584-4ac4-832e-9d36-7b712cf494b9",
+      "changed": false
+    },
+    {
+      "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+      "run_id": "37cbf175-5f34-8320-b921-abb82295b707",
+      "changed": false
+    },
+    {
+      "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+      "run_id": "ebc6b2f1-e850-832d-be04-1928ff1b3949",
+      "changed": false
+    }
+  ],
+  "social": {
+    "rows_read": 11,
+    "new_rows": 0,
+    "watermark": "2026-11-15T19:00:08.442Z",
+    "public_proof_pending": true,
+    "replayed": false
+  },
+  "inbox_reconciled": [
+    {
+      "path": "ops/incident-response/inbox/c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json",
+      "decision": "Historical WHITE403 limited to one source detail; no origin closure/outage inferred. Preserve original dates and existing owner follow-up; no fresh retry."
+    },
+    {
+      "path": "ops/incident-response/inbox/cf7874b1-48a4-832a-b3fc-af7c8de865e9-1.json",
+      "decision": "Original writer v595 verification report retained as historical owner evidence, not new independent verification or publication. Retain mobile pending and scoped source-access checkpoint; no old primary-query retry."
+    }
+  ],
+  "original_owner_handoffs": [
+    {
+      "schema_version": 1,
+      "kind": "restaurant_source_handoff",
+      "task_id": "Automation_1db28c66207881918ef57966330dca21",
+      "run_id": "c4f8d5ba-1d64-8320-9f67-18b831a8ff4a",
+      "runKey": "restaurants-2026-11-13-monthly-c4f8d5ba",
+      "attempt": 1,
+      "created_at": "2026-11-13T09:27:47Z",
+      "status": "partial_source_review",
+      "signature": "yavne/WHITE/primary-source/web-retrieval-http403",
+      "evidence": {
+        "url": "https://whitesushibar.co.il/",
+        "http": 403,
+        "channel": "web retrieval",
+        "directory_corroboration": "WHITE at Shidlovsky1 in Yavne; not substituted for primary verification",
+        "origin_outage_or_closure_claimed": false
+      },
+      "impact": "Only the WHITE detail refresh was skipped. Independent source samples and TLVNET live source/media checks completed without content change.",
+      "journal": "ops/daily-audit/2026-11-13.json",
+      "next_action": "Retain facts and dates; cheaply recheck permitted source access on the next saved cycle when changed conditions justify it. No bypass, blind retry, new task or schedule change.",
+      "automation_state_changed": false,
+      "log_only": true
+    },
+    {
+      "schema_version": 1,
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "runKey": "news-2026-11-14-08:00-cf7874b1",
+      "policy_version": "2026-11-14/1.0",
+      "article_id": "ben-yehuda-construction-site-body-found-20261114",
+      "source_commit": "80e47a99d14567103a713ca0f6b2cda97c58c543",
+      "deployment_id": "appgdep_6af7fc721af481918c7fcb924fa27bec",
+      "version_number": 595,
+      "verified_at": "2026-11-14T06:17:07Z",
+      "public_url": "https://tlvnet.com/news/ben-yehuda-construction-site-body-found-20261114",
+      "public_verification": {
+        "deployment": "succeeded",
+        "full_body": true,
+        "image": true,
+        "asset_sha256": "d06eab68e6a9c472502ecafca5de1c8f868928e98a53d0fe2ca3e7c34c377cd7",
+        "credit": true,
+        "home_link": true,
+        "section_link": true,
+        "native_GET": 200,
+        "custom_domain_browser": true
+      },
+      "visual_review": {
+        "desktop": "passed: full archive image, archive date, credit and body visually inspected at desktop viewport after deployment",
+        "mobile": "pending: no mobile viewport controller available",
+        "desktop_preview": "unavailable",
+        "mobile_preview": "unavailable",
+        "post_publication_visual_review": "mobile_pending"
+      },
+      "status": "publication_verified_with_source_checkpoints",
+      "incident_signature": "TLVNET/news/primary-source-read/timeout-and-inaccessible-query",
+      "source_failures": [
+        {
+          "url": "https://superbus.co.il/inner.asp?page=news",
+          "result": "Full primary page open timed out on initial and www variation; two attempts exhausted; secondary full article read; no current timetable claimed."
+        },
+        {
+          "url": "https://t.me/s/Israel_Police_100?q=%D7%94%D7%97%D7%99%D7%9C",
+          "result": "Exact primary archive query inaccessible via search tool; full channel accessible and used for independent Ben Yehuda story."
+        },
+        {
+          "url": "https://t.me/s/Israel_Police_100?q=%D7%A9%D7%9E%D7%A9%D7%AA",
+          "result": "Exact primary archive query inaccessible; older minor case retained as research checkpoint."
+        }
+      ],
+      "root_cause": "Not established; observed source retrieval limitations only. No claim that publication, Site or entire agent failed.",
+      "next_action": "On next normal cycle make one cheap changed-state check for saved operator announcement; complete full primary verification before any new timetable claim. Complete mobile visual review of published article when a supported viewport is available.",
+      "agent_enabled_unchanged": true,
+      "schedule_unchanged": true,
+      "new_agents_created": 0,
+      "no_retry_loop": true
+    }
+  ],
+  "historical": {
+    "run_id": 42484985742,
+    "workflow": "Discover stand-up videos",
+    "path": ".github/workflows/discover-standup-videos.yml",
+    "attempt": 1,
+    "created_at": "2026-11-08T13:26:38Z",
+    "status": "completed",
+    "conclusion": "failure",
+    "source_commit": "127efadd23863780c78ef214c75f70ae79d31c15",
+    "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42484985742",
+    "classification": "Historical metadata only; exact root unconfirmed. No current outage or recovery inferred.",
+    "job_id": 128744797200,
+    "failed_step": "Find videos for new stand-up performers",
+    "root": "youtube-discovery-missing-api-key",
+    "error": "YOUTUBE_API_KEY not set; new-artist discovery did not run.",
+    "exit_code": 2,
+    "full_log_reads": 1,
+    "current_recurrence_confirmed": false,
+    "remaining_run_entries": 240
+  },
+  "remaining_inbox": 7,
+  "stability": {
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    },
+    "qualification_started_at": null,
+    "daily_summary_due": false,
+    "latency": null,
+    "backup_restore_capacity_measurements": false
+  },
+  "known_runtime_identity_blocker": "Unchanged and not retried",
+  "visual_review": "No fresh desktop/mobile review; existing mobile pending retained",
+  "build_or_deploy": false,
+  "schedules_changed": false,
+  "agents_created_or_triggered": false,
+  "calls_measured": null,
+  "cost_measured": null
+}
