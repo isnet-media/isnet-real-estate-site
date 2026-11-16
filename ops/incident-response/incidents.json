@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T02:53:13Z",
+  "updated_at": "2026-11-16T04:06:56Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1255,6 +1255,17 @@
         "current_owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
         "new_fix_claimed": false,
         "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
+      },
+      "latest_historical_policy_reconciliation": {
+        "observed_at": "2026-11-16T04:06:56Z",
+        "inbox": [
+          "ops/incident-response/inbox/manual-policy-completion-20261113-1.json",
+          "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
+          "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
+        ],
+        "decision": "Old13Nov maps and nonself/null-chat uncertainty do not restore cancelled-owner or Work-proof barriers; current publisher scope and actual target CAS/review requirements remain. Later confirmed cross-task-result fault is separate and unresolved.",
+        "new_fixed_verified_claim": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
       }
     },
     {
@@ -1803,6 +1814,17 @@
         "runKey": "manual-recovery-20261114T044022Z-633cab7f",
         "evidence": "ops/incident-response/evidence/tlv-news-sports-recovery-20261114.json",
         "published_verified": 4
+      },
+      "latest_historical_policy_reconciliation": {
+        "observed_at": "2026-11-16T04:06:56Z",
+        "inbox": [
+          "ops/incident-response/inbox/manual-policy-completion-20261113-1.json",
+          "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
+          "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
+        ],
+        "decision": "Old13Nov maps and nonself/null-chat uncertainty do not restore cancelled-owner or Work-proof barriers; current publisher scope and actual target CAS/review requirements remain. Later confirmed cross-task-result fault is separate and unresolved.",
+        "new_fixed_verified_claim": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
       }
     },
     {
@@ -2141,6 +2163,66 @@
           "current_recurrence_confirmed": false,
           "full_log_read": true,
           "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
+        },
+        {
+          "run_id": 42516392984,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T19:42:40Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "2e1c0537ba60c7af4690effd3993f4eda0c0e9e6",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42516392984",
+          "classification": "Historical metadata only; exact cause unconfirmed; no present outage or repair inferred.",
+          "job_id": 128840232964,
+          "root": "historical-event-analytics-missing-ga4-service-account",
+          "failed_step": "Verify GA4 configuration",
+          "error": "Missing GA4_SERVICE_ACCOUNT_JSON",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
+        },
+        {
+          "run_id": 42493652139,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T15:12:44Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "14302b45ec0c54da10927d5a8591f26837749a68",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42493652139",
+          "classification": "Historical metadata only; exact cause unconfirmed; no present outage or repair inferred.",
+          "job_id": 128771147851,
+          "root": "historical-event-analytics-missing-ga4-service-account",
+          "failed_step": "Verify GA4 configuration",
+          "error": "Missing GA4_SERVICE_ACCOUNT_JSON",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
+        },
+        {
+          "run_id": 42458486499,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T07:21:54Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "a4b0c0dd4bfe42ff9b7aabaef4579e72c5ccc129",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42458486499",
+          "classification": "Historical metadata only; exact cause unconfirmed. No present outage or recovery inferred.",
+          "job_id": 128662475310,
+          "root": "historical-event-analytics-missing-ga4-service-account",
+          "failed_step": "Verify GA4 configuration",
+          "error": "Missing GA4_SERVICE_ACCOUNT_JSON",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
         }
       ],
       "evidence": {
@@ -2158,16 +2240,17 @@
       "next_action": "No automatic retry or schedule edit. If analytics restoration is requested, existing credential owner must configure authorized GA4 service-account access in the existing secret path and complete a manual check before any separately authorized scheduling change.",
       "controller_changes": false,
       "reported_runKey": "ops-2026-11-13-548c5169-77bc-8322-a4d1-e9148367a9d4",
-      "last_review_runKey": "ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5",
+      "last_review_runKey": "ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34",
       "latest_historical_review": {
-        "observed_at": "2026-11-16T02:53:13Z",
+        "observed_at": "2026-11-16T04:06:56Z",
         "run_ids": [
-          42573504013,
-          42536519333
+          42516392984,
+          42493652139,
+          42458486499
         ],
         "known_root": true,
         "current_recurrence_confirmed": false,
-        "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
       }
     },
     {
@@ -4094,7 +4177,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5",
+  "last_review_runKey": "ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
@@ -4155,5 +4238,31 @@
       "controller_retry": false,
       "controller_seen_at": "2026-11-14T07:00:20Z"
     }
-  ]
+  ],
+  "last_historical_policy_handoff_reconciliation": {
+    "observed_at": "2026-11-16T04:06:56Z",
+    "inbox": [
+      "ops/incident-response/inbox/manual-policy-completion-20261113-1.json",
+      "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
+      "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json"
+    ],
+    "release_records": [
+      {
+        "path": "ops/agent-harmony/releases/20261113-policy-rollout.json",
+        "sha": "3cd289f2748bb003a90cea723cdb7dba53ca1e8c",
+        "version": 591,
+        "status": "historical_partial_verified",
+        "current_owner_map_superseded": true
+      },
+      {
+        "path": "ops/agent-harmony/releases/20261113-completion.json",
+        "sha": "fef13096d80d719cc4e27639ace03fab30ddb639",
+        "version": 592,
+        "ci_collection_steps": "skipped_on_push",
+        "qualification": "Source/config tests, not proof of fresh source collection"
+      }
+    ],
+    "unresolved": "Sports stats binding, exact public FB proof, global monetary enforcement and existing legacy TLVNET cadence decision retained in state; no new access/configuration or live success claim",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
+  }
 }
