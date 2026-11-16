@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "b28a8a3c-a510-8332-b4c5-feedac37ad04",
+  "runKey": "ops-2026-11-16-b28a8a3c-a510-8332-b4c5-feedac37ad04",
+  "policy_version": "2026-11-15/1.2",
+  "started_at": "2026-11-16T15:51:29.864001Z",
+  "observed_at": "2026-11-16T15:56:31.918Z",
+  "scope": [
+    "GitHub Actions delta",
+    "Ashdod/CentralCoast IMS source and parser diagnosis",
+    "TLVNET seven desks/current source/social delta",
+    "TLVNET stability observation"
+  ],
+  "actions": {
+    "from": "2026-11-16T13:57:01Z",
+    "through": "2026-11-16T15:41:45Z",
+    "rows_including_boundary": 3,
+    "new": 2,
+    "failures": 1,
+    "remaining_pages": 0,
+    "full_logs_current": 1,
+    "full_logs_historical": 1
+  },
+  "new_incident": {
+    "signature": "ims-sea/refresh/no-currently-valid-period",
+    "workflow_run": 43898943792,
+    "job": 133409994006,
+    "source_commit": "bbed9e4c6b10cc362d766c007feb6068ef458773",
+    "failed_at": "2026-11-16T15:41:35Z",
+    "error": "No currently valid forecast; retaining last good file",
+    "source": {
+      "url": "https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml",
+      "status": 200,
+      "bytes": 6086,
+      "issue": [
+        "2026-11-16 16:23"
+      ],
+      "regions": {
+        "210": {
+          "name": [
+            "Central Coast"
+          ],
+          "from": [
+            "2026-11-16 20:00",
+            "2026-11-17 08:00"
+          ],
+          "to": [
+            "2026-11-17 08:00",
+            "2026-11-17 20:00"
+          ]
+        },
+        "213": {
+          "name": [
+            "Southern Coast"
+          ],
+          "from": [
+            "2026-11-16 20:00",
+            "2026-11-17 08:00"
+          ],
+          "to": [
+            "2026-11-17 08:00",
+            "2026-11-17 20:00"
+          ]
+        }
+      }
+    },
+    "last_good": {
+      "issued_at_local": "2026-11-15T00:01",
+      "last_period_ends_local": "2026-11-16T08:00",
+      "files": [
+        "weather/ashdod/sea.json",
+        "weather/ashdod/central.json"
+      ]
+    },
+    "cause": "Live IMS response issued16Nov16:23Israel contains only20:00onward periods for213/210. Current local time not covered. Validation correctly rejects; no current replacement exists in the observed source.",
+    "tests": {
+      "existing_parser": 5,
+      "passed": 5,
+      "future_only_20_at_17_40_rejection": "passed_synthetic_reproduction",
+      "production_data_written": false
+    },
+    "public_render": {
+      "url": "https://ashdodnet.com/",
+      "reader_status": 403,
+      "render_verification": "pending",
+      "not_outage_proof": true
+    },
+    "status": "awaiting_external_action",
+    "next_action": "Recheck only after source periods or their actual time validity changes through existing owner/claim path. Never relabel expired data, accept future-only data as current, alter schedules, or rerun unchanged inputs.",
+    "inbox": "ops/incident-response/inbox/43898943792-1.json"
+  },
+  "historical": {
+    "triaged_run": 42711431596,
+    "job": 129481678064,
+    "created_at": "2026-11-09T22:23:23Z",
+    "immediate_error_same": true,
+    "old_source_future_vs_expired_not_established": true,
+    "prior_remaining": 226,
+    "remaining": 225,
+    "groups_remaining": 8
+  },
+  "tlvnet": {
+    "version": 635,
+    "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+    "source_unchanged": true,
+    "owner_results_unchanged": true,
+    "body_rescan": false,
+    "publication_evidence_script_executed": true,
+    "not_live_proof": true,
+    "prepared_pending": [
+      "center-tlv-short-term-flat-drug-arrest-20261116",
+      "tlv-winter-drainage-preparation-resident-guide-20261116",
+      "ichilov-wonderful-ai-development-partnership-20261116"
+    ],
+    "verification_only": [
+      "metropoline-university-hagana-night-stops-17nov-20261116",
+      "october-cpi-national-household-context-tlv-20261116",
+      "edelbyte-series-a-tel-aviv-office-20261116"
+    ],
+    "unchanged_reader403_not_retried": true,
+    "neighborhood_deadline_lead_checks": "Unchanged635source and previous regression evidence retained, not new rendering approval."
+  },
+  "social": {
+    "new_rows": 0,
+    "read_page_exhausted": true,
+    "watermark": "2026-11-16T15:00:19.369Z",
+    "organic_reach": null,
+    "public_proof_pending": true,
+    "no_resend": true
+  },
+  "stability": {
+    "daily_summary_due": false,
+    "last_daily_summary_at": "2026-11-16T15:12:45.697Z",
+    "qualification_started_at": null,
+    "new_backup_restore_capacity_measurements": false
+  },
+  "remaining": {
+    "prepared": 3,
+    "verification_only": 3,
+    "historical": 225,
+    "desktop_mobile": "pending_prior_items",
+    "hospital_asset_package": "Original saved library checkpoint retained; release deferred while new sea-source incident diagnosed."
+  },
+  "inbox_processed": [
+    "ops/incident-response/inbox/20261116-controller635-public-verification-pending.json",
+    "ops/incident-response/inbox/43898943792-1.json"
+  ],
+  "cost": {
+    "dollars": null,
+    "measured": false
+  },
+  "changes": {
+    "code": false,
+    "build": false,
+    "deploy": false,
+    "task_schedule": false,
+    "permissions": false,
+    "agents_started": false
+  },
+  "not_whole_network_revalidation": true
+}
