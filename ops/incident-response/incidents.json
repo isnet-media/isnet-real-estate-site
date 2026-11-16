@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T04:06:56Z",
+  "updated_at": "2026-11-16T04:41:21.582Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2223,6 +2223,66 @@
           "current_recurrence_confirmed": false,
           "full_log_read": true,
           "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
+        },
+        {
+          "run_id": 42430533727,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T00:36:43Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "b13dbded761d9c9094afded486547b5cac0d3157",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42430533727",
+          "classification": "Historical metadata only; exact cause unconfirmed. No present outage or recovery inferred.",
+          "job_id": 128578220406,
+          "root": "historical-event-analytics-missing-ga4-service-account",
+          "failed_step": "Verify GA4 configuration",
+          "error": "Missing GA4_SERVICE_ACCOUNT_JSON",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-1c9ee959-2b68-8322-ab97-d7aa53afe326.json"
+        },
+        {
+          "run_id": 42413173403,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-07T20:53:01Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "6c0a6a98350b1c61419576fd2285c181a59ffc11",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42413173403",
+          "classification": "Historical metadata only; root unconfirmed. No current outage or repair inferred.",
+          "job_id": 128525461508,
+          "root": "historical-event-analytics-missing-ga4-service-account",
+          "failed_step": "Verify GA4 configuration",
+          "error": "Missing GA4_SERVICE_ACCOUNT_JSON",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-1c9ee959-2b68-8322-ab97-d7aa53afe326.json"
+        },
+        {
+          "run_id": 42391349810,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-07T16:27:04Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "5b89aa524c8d541f9c3d0a39b089924d25b10a79",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42391349810",
+          "classification": "Historical metadata only; root unconfirmed. No current outage or repair inferred.",
+          "job_id": 128459404599,
+          "root": "historical-event-analytics-missing-ga4-service-account",
+          "failed_step": "Verify GA4 configuration",
+          "error": "Missing GA4_SERVICE_ACCOUNT_JSON",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-1c9ee959-2b68-8322-ab97-d7aa53afe326.json"
         }
       ],
       "evidence": {
@@ -2240,17 +2300,17 @@
       "next_action": "No automatic retry or schedule edit. If analytics restoration is requested, existing credential owner must configure authorized GA4 service-account access in the existing secret path and complete a manual check before any separately authorized scheduling change.",
       "controller_changes": false,
       "reported_runKey": "ops-2026-11-13-548c5169-77bc-8322-a4d1-e9148367a9d4",
-      "last_review_runKey": "ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34",
+      "last_review_runKey": "ops-2026-11-16-1c9ee959-2b68-8322-ab97-d7aa53afe326",
       "latest_historical_review": {
-        "observed_at": "2026-11-16T04:06:56Z",
+        "observed_at": "2026-11-16T04:41:21.582Z",
         "run_ids": [
-          42516392984,
-          42493652139,
-          42458486499
+          42430533727,
+          42413173403,
+          42391349810
         ],
         "known_root": true,
         "current_recurrence_confirmed": false,
-        "evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json"
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-1c9ee959-2b68-8322-ab97-d7aa53afe326.json"
       }
     },
     {
@@ -3739,7 +3799,7 @@
         "coverage-cat-feeding-locations-discovery-20261115"
       ],
       "prevention": "Both named sources required in each existing writer cycle; index/category scan checkpoint, truthful blocked/deferred accounting, persistent research handoffs and existing-publication hints. No copied articles/images and no additional scheduler.",
-      "next_action": "Real-estate normal owner progress independently verified. Retain original-owner backfill and4research candidates; assess other desks on changed normal runs. No new scheduler or blanket coverage pass.",
+      "next_action": "At next existing normal news owner cycle compare actual run ID, full retained queue decisions, bounded coverage cursor progress and new/updated public proof. Do not close coverage because one story was published or a source was blocked. Existing numeric quotas remain null; controller does not become writer or trigger the task.",
       "reported_runKey": "local-coverage-2026-11-15T11-44-13-230Z",
       "normal_owner_execution_verified": [
         {
@@ -3760,7 +3820,30 @@
           "backfill_complete": false,
           "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
         }
-      ]
+      ],
+      "news_throughput_followup": {
+        "original_manual_runKey": "manual-news-throughput-audit-2026-11-16T04-30-49-134Z",
+        "original_manual_run_id": null,
+        "source_commit": "87541358cd703b9f936c53fdb748b7c8cefe2333",
+        "actual_owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "last_owner_run_id": "db934004-503c-8332-a023-ebaf5f8a3380",
+        "next_recorded_owner_time": "2026-11-16T08:00:00+02:00",
+        "status": "awaiting_next_normal_owner_progress",
+        "findings": [
+          "Actual active task prompt repeatedly prohibits1–2article quota.",
+          "Current source profile maxPerRun=null and maxPerTopicPerRun=null; dispatch does not truncate workQueue/researchQueue to one.",
+          "15Nov morning published833route story; two additional emergency candidates lacked bounded current verification; several prior stories duplicates.",
+          "15Nov noon actual consumer CAS conflict deferred approved Metropoline12 draft; controller mechanical recovery later published unchanged owner-approved content. Dispatch recovery already fixedv622.",
+          "15Nov evening published LondonMinistore brief, retained6research candidates; category429 and initial7daycoverage incomplete. Published source does not prove all worthwhile news exhausted.",
+          "14candidate_not_read handoffs include out-of-news-domain or historic items; they are not14approved ready news articles."
+        ],
+        "next_action": "At the actual news owner's next existing cycle prioritize retained in-domain current candidates and unprocessed coverage. Decide each against evidence, duplicate and public-interest checks. Do not stop because one article is published; continue within actual budget and save exact budget/remaining reason if ending. An inaccessible primary source alone is not a desk-wide blocker; evaluate whether reliable full reports support a narrowly attributed account without an unverified cause or current medical outcome. Do not revive expired activity, change schedule/permissions or trigger another agent.",
+        "scope": "Controller monitors/refines technical routing only; no editorial replacement, speculative new cap removal, task trigger or schedule changes.",
+        "checkpoint": "ops/incident-response/inbox/manual-news-throughput-audit-2026-11-16T04-30-49-134Z.json",
+        "observed_at": "2026-11-16T04:41:21.582Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-1c9ee959-2b68-8322-ab97-d7aa53afe326.json",
+        "new_technical_fix_claimed": false
+      }
     },
     {
       "id": "tlvnet-neighborhood-mini-sites-release",
@@ -4177,7 +4260,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34",
+  "last_review_runKey": "ops-2026-11-16-1c9ee959-2b68-8322-ab97-d7aa53afe326",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
