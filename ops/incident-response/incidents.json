@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T01:59:05Z",
+  "updated_at": "2026-11-16T02:53:13Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1247,6 +1247,14 @@
         "current_repair_version": 615,
         "configuration_status": "configuration_verified",
         "current_evidence": "ops/incident-response/evidence/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f.json"
+      },
+      "latest_historical_reconciliation": {
+        "observed_at": "2026-11-16T02:53:13Z",
+        "inbox": "ops/incident-response/inbox/ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
+        "decision": "Obsolete transfer/cancelled-owner instruction superseded by publisher-restored independent community owner; no old prompt/map replay",
+        "current_owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+        "new_fix_claimed": false,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
       }
     },
     {
@@ -2093,6 +2101,46 @@
           "failed_step": "Verify GA4 configuration",
           "reason": "GA4_PROPERTY_ID present; GA4_SERVICE_ACCOUNT_JSON absent; exit2 before fetch/commit",
           "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
+        },
+        {
+          "run_id": 42573504013,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-09T06:31:00Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "fdbd1831d78b0e0bed28b8467eda1776ba8636f9",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42573504013",
+          "classification": "Historical metadata only; exact cause unconfirmed. No current outage/repair inferred.",
+          "job_id": 129015977755,
+          "root": "historical-event-analytics-missing-ga4-service-account",
+          "failed_step": "Verify GA4 configuration",
+          "error": "Missing GA4_SERVICE_ACCOUNT_JSON",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
+        },
+        {
+          "run_id": 42536519333,
+          "workflow": "Update event analytics",
+          "path": ".github/workflows/update-event-analytics.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T23:43:14Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "55091b209f035f0d35ef1311440923f39b41d069",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42536519333",
+          "classification": "Historical metadata only; exact cause unconfirmed; no present outage or repair inferred.",
+          "job_id": 128901906637,
+          "root": "historical-event-analytics-missing-ga4-service-account",
+          "failed_step": "Verify GA4 configuration",
+          "error": "Missing GA4_SERVICE_ACCOUNT_JSON",
+          "exit_code": 2,
+          "current_recurrence_confirmed": false,
+          "full_log_read": true,
+          "controller_evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
         }
       ],
       "evidence": {
@@ -2110,14 +2158,16 @@
       "next_action": "No automatic retry or schedule edit. If analytics restoration is requested, existing credential owner must configure authorized GA4 service-account access in the existing secret path and complete a manual check before any separately authorized scheduling change.",
       "controller_changes": false,
       "reported_runKey": "ops-2026-11-13-548c5169-77bc-8322-a4d1-e9148367a9d4",
-      "last_review_runKey": "ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a",
+      "last_review_runKey": "ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5",
       "latest_historical_review": {
-        "observed_at": "2026-11-15T22:36:40.091Z",
-        "run_id": 42665160712,
+        "observed_at": "2026-11-16T02:53:13Z",
+        "run_ids": [
+          42573504013,
+          42536519333
+        ],
         "known_root": true,
         "current_recurrence_confirmed": false,
-        "configuration_changed": false,
-        "evidence": "ops/incident-response/evidence/ops-2026-11-16-d62d280b-e220-8322-86d4-e0393ad2bd1a.json"
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
       }
     },
     {
@@ -3847,6 +3897,73 @@
         "new_publication": false,
         "fresh_public_readback": false,
         "evidence": "ops/incident-response/evidence/ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20.json"
+      },
+      "original_writer_completion_receipt": {
+        "run_id": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1",
+        "source_commit": "b9c6ef285b682a770336672eef9e539502bea1dc",
+        "verification_commit": "c1f76fc225e42fe0a6348656ccdaecf731994e98",
+        "version": 602,
+        "deployment_id": "appgdep_6af89633a1c0819181ad011b649bf00a",
+        "verified_at": "2026-11-14T17:16:20Z",
+        "public_verification": [
+          {
+            "article_id": "superbus-171-holon-north-tlv-20261114",
+            "url": "https://tlvnet.com/news/superbus-171-holon-north-tlv-20261114",
+            "article_http": 200,
+            "image_http": 200,
+            "full_body": true,
+            "title": true,
+            "image_hash": true,
+            "JPG": true,
+            "credit": true,
+            "section_link": true,
+            "home_link": true,
+            "body_sha256": "a003de330065bf9abc366942b479fd7fc3d258a8887a991f15542d9964877da9",
+            "asset_sha256": "e64f440e7d1ffaf22b97accb0f2de3f243a54645e167dd97eb4dea685b114d52"
+          },
+          {
+            "article_id": "tlv-light-rail-night-works-15-19-nov-20261114",
+            "url": "https://tlvnet.com/news/tlv-light-rail-night-works-15-19-nov-20261114",
+            "article_http": 200,
+            "image_http": 200,
+            "full_body": true,
+            "title": true,
+            "image_hash": true,
+            "JPG": true,
+            "credit": true,
+            "section_link": true,
+            "home_link": true,
+            "body_sha256": "6ea000c58692dd3835577ccc1a5daa488d97f21c686421fdaca9fe1a97b3f2a5",
+            "asset_sha256": "950628be78ce327a463330e7302ff9e14d5171158c757e9803decba1293719f1"
+          }
+        ],
+        "visual_review": {
+          "desktop_articles": "passed; actual screenshots of both live article images, captions and body",
+          "mobile": "pending",
+          "desktop_cards": "pending",
+          "quality_queue": "data/photo-bank/quality-issues.json; records tied to article/body/asset/current task"
+        },
+        "remaining_queue": [
+          {
+            "url": "https://www.be106.net/255/164803",
+            "status": "research_checkpoint_unchanged",
+            "reason": "No fresh primary/courtoutcome; juvenileidentityexcluded."
+          },
+          {
+            "url": "https://www.be106.net/255/164802",
+            "status": "research_checkpoint_unchanged",
+            "reason": "No new independentoutcome; seizure notforfeiture."
+          },
+          {
+            "url": "https://www.be106.net/255/164805",
+            "status": "research_checkpoint_unchanged",
+            "reason": "No currentmedicaloutcome; originalseverity notcurrentstate."
+          }
+        ],
+        "inbox": "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
+        "controller_reconciled_at": "2026-11-16T02:53:13Z",
+        "new_publications_this_cycle": 0,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5.json"
       }
     },
     {
@@ -3977,7 +4094,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-16-30f22bd3-8104-8322-bc96-984d8c82ce20",
+  "last_review_runKey": "ops-2026-11-16-e08be42c-4ed0-8322-b0cf-4e5852cfe8c5",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
