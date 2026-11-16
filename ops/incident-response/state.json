@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T13:27:55.998Z",
+  "updated_at": "2026-11-16T15:12:45.697Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-16T13:06:54Z",
+  "last_processed_run_created_at": "2026-11-16T13:57:01Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -2731,17 +2731,19 @@
         }
       ]
     },
-    "metadata_rows_inspected_this_cycle": 1,
+    "metadata_rows_inspected_this_cycle": 0,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
-      "observed_at": "2026-11-16T13:27:55.998Z",
+      "observed_at": "2026-11-16T15:12:45.697Z",
       "last_run_ids": [
         42668061644
       ],
-      "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
       "remaining_run_entries": 226,
       "remaining_workflow_groups": 8,
-      "grouping_basis": "Previously full-read Yavne kids503 exact known root; correlated duplicate removed without another log read."
+      "grouping_basis": "Previously full-read Yavne kids503 exact known root; correlated duplicate removed without another log read.",
+      "progress_this_cycle": 0,
+      "reason": "Ready original-owner content prioritized;2released; retained history226"
     }
   },
   "inbox_path": "ops/incident-response/inbox/",
@@ -2792,18 +2794,18 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "733a9d9b-2ec0-8332-b7de-9caec81a3714",
-    "runKey": "ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714",
-    "started_at": "2026-11-16T13:19:26.391942Z",
-    "observed_at": "2026-11-16T13:27:55.998Z",
-    "status": "checked_transient503_recovered_unchanged_publication_pending",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
-    "saved_version": 633,
-    "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-    "new_actions": 35,
-    "full_logs_read": 1,
+    "run_id": "3f21dfcf-319c-8332-be8c-5388ac43fcc9",
+    "runKey": "ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9",
+    "started_at": "2026-11-16T15:01:29.795973Z",
+    "observed_at": "2026-11-16T15:12:45.697Z",
+    "status": "two_prepared_items_deployed_live_verification_pending",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
+    "saved_version": 635,
+    "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+    "new_actions": 4,
+    "full_logs_read": 0,
     "historical_remaining": 226,
-    "remaining_prepared": 5
+    "remaining_prepared": 3
   },
   "concurrent_controller_observation": {
     "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
@@ -5004,6 +5006,21 @@
       "full_logs_read": 1,
       "historical_remaining": 226,
       "remaining_prepared": 5
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "3f21dfcf-319c-8332-be8c-5388ac43fcc9",
+      "runKey": "ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9",
+      "started_at": "2026-11-16T15:01:29.795973Z",
+      "observed_at": "2026-11-16T15:12:45.697Z",
+      "status": "two_prepared_items_deployed_live_verification_pending",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
+      "saved_version": 635,
+      "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+      "new_actions": 4,
+      "full_logs_read": 0,
+      "historical_remaining": 226,
+      "remaining_prepared": 3
     }
   ],
   "photo_controls_checkpoint": {
@@ -5383,36 +5400,35 @@
     "target": "TLVNET-site",
     "state": "free",
     "owner": null,
-    "observed_at": "2026-11-16T12:46:17.772Z",
+    "observed_at": "2026-11-16T15:12:45.697Z",
     "last_release": {
       "owner": "Automation_9776808c73848191a9d748dd09315960",
-      "run_key": "ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4",
-      "released_at": "2026-11-16T12:45:09.229Z",
+      "run_key": "ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9",
+      "released_at": "2026-11-16T15:11:45.522Z",
       "status": "deployed_public_verification_pending_reader403",
-      "version": 633,
-      "deployment_id": "appgdep_6afafa6aa9608191981219a4def58a79",
-      "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
+      "version": 635,
+      "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+      "deployment_id": "appgdep_6afb1cdcf4d8819182199172c00ed789",
       "article_ids": [
-        "metropoline-university-hagana-night-stops-17nov-20261116"
+        "october-cpi-national-household-context-tlv-20261116",
+        "edelbyte-series-a-tel-aviv-office-20261116"
       ],
-      "public_url": "https://tlvnet.com/news/metropoline-university-hagana-night-stops-17nov-20261116"
+      "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json"
     },
     "controller_acquisition_attempts": 1,
-    "qualification": "Foreign writer/consumer leases released normally. Controller633 own token released/read back free;5prepared need continuation,633verification must not republish.",
+    "qualification": "Original writer634 released normally. Controller635own CAS released/read back free;3prepared and3verification-only items retained, no duplicate publish.",
     "pending_items_reference": null,
     "pending_items": [
       "center-tlv-short-term-flat-drug-arrest-20261116",
       "tlv-winter-drainage-preparation-resident-guide-20261116",
-      "october-cpi-national-household-context-tlv-20261116",
-      "ichilov-wonderful-ai-development-partnership-20261116",
-      "edelbyte-series-a-tel-aviv-office-20261116"
+      "ichilov-wonderful-ai-development-partnership-20261116"
     ],
     "lease_until": null,
     "owner_run_key": null,
     "lease_blob_sha": "23e839fe9c075ec54932e2e3963a6cca99f87d86",
     "pending_item_references": [
-      "ops/incident-response/inbox/2026-11-16-economy-tech-fa8047fe-publication-pending.json",
-      "ops/incident-response/inbox/20261116-news-2fbb7d04-publication-pending.json"
+      "ops/incident-response/inbox/20261116-news-2fbb7d04-publication-pending.json",
+      "ops/incident-response/inbox/2026-11-16-economy-tech-fa8047fe-publication-pending.json"
     ],
     "completed_queue_items": [
       {
@@ -5606,7 +5622,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-16T13:00:11.085Z",
+    "max_finished_at": "2026-11-16T15:00:19.369Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -5625,12 +5641,14 @@
       "2026-11-16T10",
       "2026-11-16T11",
       "2026-11-16T12",
-      "2026-11-16T13"
+      "2026-11-16T13",
+      "2026-11-16T14",
+      "2026-11-16T15"
     ],
-    "observed_at": "2026-11-16T13:27:55.998Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
-    "new_rows_this_cycle": 1,
-    "public_verification": "API receipt only. Organic reach and public post proof remain pending; no resend."
+    "observed_at": "2026-11-16T15:12:45.697Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
+    "new_rows_this_cycle": 2,
+    "public_verification": "Two new APIpublished receipts; organic/public proof pending. No resend."
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -5759,21 +5777,21 @@
     }
   },
   "latest_tlvnet_queue_observation": {
-    "observed_at": "2026-11-16T13:27:55.998Z",
-    "prepared_original_owner_items": 5,
+    "observed_at": "2026-11-16T15:12:45.697Z",
+    "prepared_original_owner_items": 3,
     "verification_only_items": [
-      "metropoline-university-hagana-night-stops-17nov-20261116"
+      "metropoline-university-hagana-night-stops-17nov-20261116",
+      "october-cpi-national-household-context-tlv-20261116",
+      "edelbyte-series-a-tel-aviv-office-20261116"
     ],
     "remaining": [
       "center-tlv-short-term-flat-drug-arrest-20261116",
       "tlv-winter-drainage-preparation-resident-guide-20261116",
-      "october-cpi-national-household-context-tlv-20261116",
-      "ichilov-wonderful-ai-development-partnership-20261116",
-      "edelbyte-series-a-tel-aviv-office-20261116"
+      "ichilov-wonderful-ai-development-partnership-20261116"
     ],
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
-    "progress_this_cycle": 0,
-    "reason": "Five checkpoints retained; unchanged source access blocks not retried; new incident triage within bounded cycle. Native projection drafts0does not mean inbox queue empty."
+    "progress_this_cycle": 2,
+    "reason": "Two news sources still require changed accessible refresh; hospital new JPEG/package retained in existing original-owner checkpoint. No replacement content or forged approval.",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json"
   },
   "pending_task_run_ids": [],
   "latest_supermarket_execution_checkpoint": {
@@ -5918,9 +5936,9 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-16T12:46:17.772Z",
-    "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-    "saved_version": 633,
+    "observed_at": "2026-11-16T15:12:45.697Z",
+    "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+    "saved_version": 635,
     "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json",
     "desks": {
       "news": {
@@ -5961,8 +5979,8 @@
           "center-tlv-short-term-flat-drug-arrest-20261116",
           "tlv-winter-drainage-preparation-resident-guide-20261116"
         ],
-        "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-        "saved_version": 633,
+        "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+        "saved_version": 635,
         "last_owner_started_at": "2026-11-16T12:08:56.874335Z",
         "throughput_followup": {
           "status": "normal_owner_run_in_progress",
@@ -5981,7 +5999,7 @@
           },
           "pending_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96"
         },
-        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
+        "metadata_checked_at": "2026-11-16T15:12:45.697Z",
         "coverage_queue_count": 20,
         "coverage_queue_checkpoint": "public/news/agents/news/ledger.json",
         "public_verification": "pending_for_633",
@@ -5992,12 +6010,12 @@
         "morning_original_owner_new_verified_articles": 4
       },
       "real-estate": {
-        "last_new_published_at": "2026-11-15T14:43:16.996038+00:00",
-        "last_new_id": "tel-aviv-housing-sales-q3-2026-cbs-20261115",
-        "last_substantive_update_at": "2026-11-15T14:43:16.996038+00:00",
+        "last_new_published_at": "2026-11-16T14:44:51.882231+00:00",
+        "last_new_id": "tel-aviv-average-home-price-q3-2026-20261116",
+        "last_substantive_update_at": "2026-11-16T14:44:51.882231+00:00",
         "last_updated_id": "tel-aviv-housing-sales-q3-2026-cbs-20261115",
         "update_basis": "declared body update/publication metadata; technical lead change counted separately",
-        "published_count": 28,
+        "published_count": 31,
         "handoff_status_counts": {
           "candidate_not_read": 4,
           "resolved_published_by_target": 1
@@ -6005,24 +6023,17 @@
         "ledger_sha256": "74b9cade2075dada53f9a743f24bd063e8b0ed1f219ff5c0aae6af17c5a93a6c",
         "latest_body_sha256": "b11601b49b2b14ed5daf0430f20a7c9a6ab2123b1a034a72d8ce246211cede7d",
         "section_url": "https://tlvnet.com/news/real-estate.html",
-        "lead_article_id": "tel-aviv-housing-sales-q3-2026-cbs-20261115",
-        "lead_published_at": "2026-11-15T14:43:16.996038+00:00",
-        "last_owner_run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
-        "last_owner_completed_at": "2026-11-15T14:51:37.967469Z",
+        "lead_article_id": "tel-aviv-average-home-price-q3-2026-20261116",
+        "lead_published_at": "2026-11-16T14:44:51.882231+00:00",
+        "last_owner_run_id": "b0cae23f-428c-8321-a384-8f42270f7ab7",
+        "last_owner_completed_at": "2026-11-16T14:53:24.122789Z",
         "owner_task_id": "Automation_82add5edecd8819197814e83bac85a75",
         "owner_run_changed_since_checkpoint": false,
-        "last_new_published_basis": "Current source plus original owner publication receipts; no repeated full body scan",
+        "last_new_published_basis": "Original634owner live production HTTP200/fullbody/JPG/credit/hash/home/section/neighborhood receipts reconciled",
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
-        "coverage_state": "Two new articles independently live verified; both required local category indices checked; initial7daybackfill incomplete",
+        "coverage_state": "Three verified new owner articles; lower-page7daybackfill not complete; render review pending",
         "remaining_queue": [
-          {
-            "content_id": "coverage-har-zion-hazanovich-primary",
-            "title": "הר ציון–חזנוביץ: אימות מסמך הפקדה",
-            "source_url": "https://telavivi.news/har-zion-hazanovich-renewal/",
-            "reason": "6Nov secondary report concerns21Oct decision; primary planning decision unread",
-            "next_action": "Read primary planning decision and compare exact stage/date to existing corpus."
-          },
           {
             "content_id": "coverage-university-station-plan-5071377456",
             "title": "הרחבת תחנת האוניברסיטה: תוכנית507-1377456",
@@ -6031,64 +6042,65 @@
             "next_action": "Read primary plan507-1377456; establish actual new stage/date, compare transport coverage."
           },
           {
-            "content_id": "coverage-neve-shaanan-plan-primary",
-            "title": "נווה שאנן: מסמך תכנון ראשוני",
-            "source_url": "https://telavivi.news/category/real-estate-economics-business/",
-            "reason": "Existing checkpoint, source/category candidate only; no primary plan read",
-            "next_action": "Read complete story and primary plan; compare HarZion/Hazanovich before duplicate research."
-          },
-          {
             "content_id": "Landmark companysales",
             "next_action": "Verifycompanysalesprimary"
+          },
+          {
+            "content_id": "coverage-pi-glilot-land-dispute-20261116",
+            "source_url": "https://tlvonline.co.il/קרב-המיליארדים-בפי-גלילות/",
+            "reason": "Candidate link discovered, full relevant text/jurisdiction and primary evidence not read; cannot assert TelAviv scope.",
+            "next_action": "Read complete story, establish city jurisdiction and primary dispute evidence before drafting.",
+            "status": "deferred_budget"
           }
         ],
-        "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-        "saved_version": 633,
-        "verification_evidence": "ops/incident-response/evidence/ops-2026-11-15-dcc9642c-79dc-8326-998b-1cb689a8bebc.json",
-        "last_owner_started_at": "2026-11-15T14:34:31.341666Z",
-        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
+        "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+        "saved_version": 635,
+        "verification_evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
+        "last_owner_started_at": "2026-11-16T14:34:52.092016Z",
+        "metadata_checked_at": "2026-11-16T15:12:45.697Z",
         "coverage_queue_count": 9,
         "coverage_queue_checkpoint": "public/news/agents/real-estate/ledger.json",
-        "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending"
+        "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending",
+        "last_owner_new_articles": 3
       },
       "economy-tech": {
-        "last_new_published_at": "2026-11-15T10:16:52.664155+00:00",
-        "last_new_id": "tel-aviv-ai-project-management-builder-jobs-20261115",
-        "last_substantive_update_at": "2026-11-15T10:16:52.664155+00:00",
+        "last_new_published_at": "2026-11-16T15:04:26.861Z",
+        "last_new_id": "edelbyte-series-a-tel-aviv-office-20261116",
+        "last_substantive_update_at": "2026-11-16T15:04:26.861Z",
         "last_updated_id": "dreeze-tlv-cloud-application-recovery-seed-20261114",
         "update_basis": "declared body update/publication metadata; technical lead change counted separately",
-        "published_count": 30,
+        "published_count": 32,
         "handoff_status_counts": {
           "candidate_not_read": 1
         },
         "ledger_sha256": "0a9569e1d5f094ec08ecc56a7badd88557b2ad78e72896176a82bfa63023f54e",
         "latest_body_sha256": "cfab866439d24874e9a4219ca95ca160ce84735882ebeaec43a4670506671cc5",
         "section_url": "https://tlvnet.com/news/economy-tech.html",
-        "lead_article_id": "tel-aviv-ai-project-management-builder-jobs-20261115",
-        "lead_published_at": "2026-11-15T10:16:52.664155+00:00",
+        "lead_article_id": "edelbyte-series-a-tel-aviv-office-20261116",
+        "lead_published_at": "2026-11-16T15:04:26.861Z",
         "last_owner_run_id": "fa8047fe-cd4c-832b-9c0d-0fbedd0cdea1",
         "last_owner_completed_at": "2026-11-16T10:59:14.558971Z",
         "owner_task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
         "owner_run_changed_since_checkpoint": false,
-        "last_new_published_basis": "Current source plus original owner publication receipts; no repeated full body scan",
+        "last_new_published_basis": "635source deployed; public readback403pending; original approvals preserved",
         "previous_completed_owner_run_id": "be1bbf37-d410-8327-a142-2c1c170f14dd",
         "last_owner_run_status": "completed",
         "last_owner_started_at": "2026-11-16T10:40:40.792099Z",
         "pending_owner_result": false,
         "independent_full_body_image_credit_verified_at": "2026-11-15T11:34:20.295Z",
-        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
-        "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-        "saved_version": 633,
+        "metadata_checked_at": "2026-11-16T15:12:45.697Z",
+        "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+        "saved_version": 635,
         "coverage_queue_count": 1,
         "coverage_queue_checkpoint": "public/news/agents/economy-tech/ledger.json",
-        "coverage_state": "Three original approved drafts retained; fresh source refresh and one new authorized hospital JPEG require continuation",
+        "coverage_state": "2prepared originals released;hospital full package remains in existingcheckpoint",
         "prepared_pending": [
-          "october-cpi-national-household-context-tlv-20261116",
-          "ichilov-wonderful-ai-development-partnership-20261116",
-          "edelbyte-series-a-tel-aviv-office-20261116"
+          "ichilov-wonderful-ai-development-partnership-20261116"
         ],
         "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending",
-        "last_owner_new_articles": 0
+        "last_owner_new_articles": 0,
+        "controller_new_deployed_articles": 2,
+        "public_verification": "pending_for_635"
       },
       "community": {
         "last_new_published_at": "2026-11-16T11:18:25.962766+00:00",
@@ -6120,9 +6132,9 @@
         "mini_site_technical_update_at": "2026-11-15T12:40:04.126313Z",
         "coverage_cursor": "hadar-afeka",
         "last_owner_started_at": "2026-11-16T11:03:01.766109Z",
-        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
-        "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-        "saved_version": 633,
+        "metadata_checked_at": "2026-11-16T15:12:45.697Z",
+        "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+        "saved_version": 635,
         "coverage_queue_count": 11,
         "coverage_queue_checkpoint": "public/news/agents/community/ledger.json",
         "coverage_state": "One new owner631 article; NeveTzedek page and3services added; visual follow-up pending",
@@ -6161,9 +6173,9 @@
           "verification_scope": "Fresh focused article/body/image/credit readback; owner619 proof retained for home/section links"
         },
         "last_owner_started_at": "2026-11-16T12:07:13.283003Z",
-        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
-        "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-        "saved_version": 633,
+        "metadata_checked_at": "2026-11-16T15:12:45.697Z",
+        "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+        "saved_version": 635,
         "coverage_queue_count": 8,
         "coverage_queue_checkpoint": "public/news/agents/consumer/ledger.json",
         "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending",
@@ -6212,9 +6224,9 @@
         "last_owner_new_articles": 2,
         "coverage_state": "Two published_verified original owner627 articles; mobile visual pending; prior unapproved research drafts superseded by actual owner work",
         "execution_anomaly_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
-        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
-        "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-        "saved_version": 633,
+        "metadata_checked_at": "2026-11-16T15:12:45.697Z",
+        "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+        "saved_version": 635,
         "coverage_queue_count": 3,
         "coverage_queue_checkpoint": "public/news/agents/sports/ledger.json",
         "owner_receipt_status": "published_verified",
@@ -6244,9 +6256,9 @@
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
         "last_owner_started_at": "2026-11-16T07:54:51.117698Z",
-        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
-        "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-        "saved_version": 633,
+        "metadata_checked_at": "2026-11-16T15:12:45.697Z",
+        "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+        "saved_version": 635,
         "coverage_queue_count": 6,
         "coverage_queue_checkpoint": "public/news/agents/culture-news/ledger.json",
         "coverage_state": "Two new culture-news articles in actual owner run, separate from night and magazine counters",
@@ -6255,25 +6267,25 @@
       },
       "neighborhoods": {
         "total": 73,
-        "ready": 10,
+        "ready": 11,
         "cursor": "neve-tzedek",
         "owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
         "coverage_sha256": "e755c726931124985788b8c4e1d647344303d9a005d94bd5ceb8414bcf2d32c7",
         "published_v609_verified_evidence": "ops/incident-response/evidence/manual-neighborhood-expansion-2026-11-15T09-24-34-073Z.json",
-        "deadline_filter_regression": "v607 and v609 prior verified; no source change this cycle",
+        "deadline_filter_regression": "passed635source; no visual approval",
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
-        "local_records": 229,
+        "local_records": 231,
         "aggregation_status": "fixed_verified",
         "last_owner_run_id": "a64670a2-9d9c-832c-83f1-b2015cdfedf5",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-16-7d119da4-2dec-8332-ad56-78ec553b00f4.json",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
         "mobile_visual_review": "pending",
         "coverage_checked_at": "2026-11-16T12:46:17.772Z",
         "next_action": "Continue existing73-area owner plan after hadar-afeka; preserve notes/signatures; enrich explicit article neighborhood metadata only after relevance verification.",
         "last_owner_started_at": "2026-11-15T11:02:18.685247Z",
         "last_owner_completed_at": "2026-11-15T11:20:21.552493Z",
         "owner_run_changed_since_checkpoint": false,
-        "metadata_checked_at": "2026-11-16T13:27:55.998Z",
+        "metadata_checked_at": "2026-11-16T15:12:45.697Z",
         "navigation_areas": 25,
         "original_localities": 73,
         "technical_version": 625,
@@ -6282,9 +6294,9 @@
         "expiry_regression": "passed_current_source"
       }
     },
-    "qualification": "Seven owner results and version633 unchanged; existing section publication/queue/lead/expiry signatures retained, no bodies rescanned or new live proof.",
-    "metadata_checked_at": "2026-11-16T13:27:55.998Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
+    "qualification": "Current source/owner receipts:3real-estate owner634verified;2controller635deployed public readback403pending; no whole-network revalidation.",
+    "metadata_checked_at": "2026-11-16T15:12:45.697Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
     "date_rollover": {
       "date_from": "2026-11-15",
       "date_to": "2026-11-16",
@@ -6651,16 +6663,15 @@
     "normal_owner_coverage_verification": "pending"
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-16T13:27:55.998Z",
-    "from": "2026-11-16T11:52:43Z",
-    "through": "2026-11-16T13:06:54Z",
-    "rows": 36,
-    "strictly_new": 35,
-    "failures": 1,
-    "superseded_cancelled": 2,
+    "observed_at": "2026-11-16T15:12:45.697Z",
+    "from": "2026-11-16T13:06:54Z",
+    "through": "2026-11-16T13:57:01Z",
+    "rows": 5,
+    "strictly_new": 4,
+    "failures": 0,
     "next_page": null,
-    "full_logs_read": 1,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json"
+    "full_logs_read": 0,
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json"
   },
   "remaining_followup": [
     "226 historical Actions entries in8groups",
@@ -6671,9 +6682,10 @@
     "Public Facebook proof",
     "Backup/restore/capacity qualification unchanged",
     "633 bus article deployed: GET body/JPG/credit/home/section pending, no republish",
-    "Five approved original-owner drafts in16Novnews/economy checkpoints",
+    "Three approved original-owner drafts remain in16Novnews/economy checkpoints",
     "Future CMS10target INVALID_ARGUMENT: server field/value validation log required",
-    "SharedHerzliya811674/Raanana811676 public proof and visuals pending"
+    "SharedHerzliya811674/Raanana811676 public proof and visuals pending",
+    "635two economy originals deployed; verification-only, never republish."
   ],
   "source_repair_followups": [
     {
@@ -6694,22 +6706,24 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-16T13:27:55.998Z",
-    "source_unchanged": true,
-    "source_commit": "8055478bb131cc4a39f2dbd223380c310b8bb2fc",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-16-733a9d9b-2ec0-8332-b7de-9caec81a3714.json",
-    "owner_run_ids": {
-      "news": "2fbb7d04-7870-832a-943e-511abc3ab400",
-      "real-estate": "6986d03c-add8-8329-ba19-20efca34fa34",
-      "economy-tech": "fa8047fe-cd4c-832b-9c0d-0fbedd0cdea1",
-      "community": "a64670a2-9d9c-832c-83f1-b2015cdfedf5",
-      "consumer": "772511e5-2b60-8326-8a38-6e2fb54e111c",
-      "sports": "8e7a0bb8-4e2c-8330-9ba5-cb22f666339d",
-      "culture-news": "eb25dc5a-2750-8325-9189-cdf85c90fa3d"
-    },
-    "public_reader_unchanged_no_retry": true,
-    "prepared_count": 5,
-    "verification_only": 1
+    "observed_at": "2026-11-16T15:12:45.697Z",
+    "source_unchanged": false,
+    "source_commit": "787054b733c2fbda4bb85da56e6e49371f4fa52e",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
+    "original_owner_634_run": "b0cae23f-428c-8321-a384-8f42270f7ab7",
+    "controller_release_635_count": 2,
+    "independent_public_verification": false,
+    "shared_metadata": {
+      "last_result_run_id": "a1cbef40-7ec8-832d-a8c4-9e1d1c9f97fc",
+      "last_recorded_run_id": "a1cbef40-7ec8-832d-a8c4-9e1d1c9f97fc",
+      "last_run_time": "2026-11-16T13:32:31.197764+00:00",
+      "schedule_unchanged": true,
+      "qualification": "Last result still morning run. last_run_time13:32UTCdoes not match exposed06:00run details; no inference of midday publication from timestamp.",
+      "public_pending": [
+        811674,
+        811676
+      ]
+    }
   },
   "latest_owner_publication_observation": {
     "owner_run_id": "6986d03c-add8-8329-ba19-20efca34fa34",
@@ -6867,5 +6881,14 @@
     },
     "evidence": "ops/incident-response/evidence/ops-2026-11-16-a7b3d5ed-dde0-8322-bdfa-526248b43d34.json",
     "qualification": "Current-owner duplicate/fact review required; old collected inputs not relabeled fresh."
+  },
+  "latest_daily_stability_summary": {
+    "observed_at": "2026-11-16T15:12:45.697Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-16-3f21dfcf-319c-8332-be8c-5388ac43fcc9.json",
+    "qualification_started_at": null,
+    "version": 635,
+    "prepared_pending": 3,
+    "verification_pending": 3,
+    "gates_incomplete": true
   }
 }
