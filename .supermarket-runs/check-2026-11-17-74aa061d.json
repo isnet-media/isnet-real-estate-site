@@ -1,0 +1,702 @@
+{
+  "schema_version": 1,
+  "kind": "supermarket_maintenance_checkpoint",
+  "task_id": "Automation_fa808d30470c8191b3eb981f197bbb1d",
+  "runKey": "super-20261117-74aa061d-042b-441e-aa7e-5377479aeac8",
+  "run_id_kind": "locally_generated_execution_key_no_connector_run_id_available",
+  "policy_version": "2026-11-14/1.0",
+  "started_at": "2026-11-17T06:28:10.849395+00:00",
+  "recorded_at": "2026-11-17T06:30:24.456886+00:00",
+  "status": "partial_verified_collection_action_blocked",
+  "targets_reviewed": [
+    "ASHDOD",
+    "YAVNE",
+    "KGAT",
+    "RISHON",
+    "HOLON",
+    "BATYAM",
+    "TLV"
+  ],
+  "window": {
+    "collection_allowed": true,
+    "public_health_allowed": true,
+    "expected_completed_collection_day": "2026-11-15",
+    "today_collection_overdue": false,
+    "reason": "Current Israeli morning before10:30; do not infer scheduled17Novcollection permanentlyfailed."
+  },
+  "prior_checkpoint": ".supermarket-runs/check-2026-11-15-e5f1bc96.json",
+  "source_procedures": [
+    "scripts/super-ashdod/OPERATIONS.md",
+    "scripts/super_daily_run.py",
+    "scripts/super_schedule.py",
+    "ops/incident-response/RUNBOOK.md"
+  ],
+  "independent_delivery": {
+    "project_id": "appgprj_6ad8879811688191bdaaf7e7fa024a14",
+    "version": 14,
+    "source_commit": "9c673f1ac6d032d9aefa6cf2fb732e3793f0164f",
+    "delivery_release_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+    "interface": "Worker read-only GET/HEAD/OPTIONS, immutable validated GitHub release pointer; /health explicitly collection_invoked=false. No data-writer or new endpoint invented.",
+    "source_opened_fresh": true,
+    "source_or_storage_changed": false
+  },
+  "coverage_before": [
+    {
+      "city": "ASHDOD",
+      "branches": 20,
+      "last_attempt_at": "2026-11-12T15:57:44.515351+02:00",
+      "last_attempt_updated": 16,
+      "retained_last_attempt": 4,
+      "source_file_dates": {
+        "2026-11-10": 4,
+        "2026-11-12": 16
+      },
+      "before_source_dates": {
+        "2026-11-10": 4,
+        "2026-11-12": 16
+      },
+      "after_source_dates": {
+        "2026-11-10": 4,
+        "2026-11-12": 16
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.ASHDOD/data/refresh-status.json",
+      "normalized_snapshot_sha256": "70b0ba04d33853b98c80967d5bbb0a94f0621eedaecef635f1181707a65c16cc"
+    },
+    {
+      "city": "YAVNE",
+      "branches": 7,
+      "last_attempt_at": "2026-11-12T15:57:52.353308+02:00",
+      "last_attempt_updated": 4,
+      "retained_last_attempt": 3,
+      "source_file_dates": {
+        "2026-11-12": 4,
+        "2026-11-10": 3
+      },
+      "before_source_dates": {
+        "2026-11-12": 4,
+        "2026-11-10": 3
+      },
+      "after_source_dates": {
+        "2026-11-12": 4,
+        "2026-11-10": 3
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.YAVNE/data/refresh-status.json",
+      "normalized_snapshot_sha256": "4269542417ce70b06f54baffff7cdb9738bbbeb04432cf9f2859418a54dfff81"
+    },
+    {
+      "city": "KGAT",
+      "branches": 9,
+      "last_attempt_at": "2026-11-12T15:58:08.756070+02:00",
+      "last_attempt_updated": 7,
+      "retained_last_attempt": 2,
+      "source_file_dates": {
+        "2026-11-12": 7,
+        "2026-11-10": 2
+      },
+      "before_source_dates": {
+        "2026-11-12": 7,
+        "2026-11-10": 2
+      },
+      "after_source_dates": {
+        "2026-11-12": 7,
+        "2026-11-10": 2
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.KGAT/data/refresh-status.json",
+      "normalized_snapshot_sha256": "15258ed4f8c8acb01137cd48f0b2f27bf93c48755b86bf6eace8ff937ab21692"
+    },
+    {
+      "city": "RISHON",
+      "branches": 24,
+      "last_attempt_at": "2026-11-12T15:59:39.655958+02:00",
+      "last_attempt_updated": 17,
+      "retained_last_attempt": 7,
+      "source_file_dates": {
+        "2026-11-12": 17,
+        "2026-11-09": 7
+      },
+      "before_source_dates": {
+        "2026-11-12": 17,
+        "2026-11-09": 7
+      },
+      "after_source_dates": {
+        "2026-11-12": 17,
+        "2026-11-09": 7
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.RISHON/data/refresh-status.json",
+      "normalized_snapshot_sha256": "d41c8cb7ca543852279302260089ff3fb3fec2d7270dec062c86df96c17e2c9b"
+    },
+    {
+      "city": "HOLON",
+      "branches": 23,
+      "last_attempt_at": "2026-11-12T16:01:18.959708+02:00",
+      "last_attempt_updated": 16,
+      "retained_last_attempt": 7,
+      "source_file_dates": {
+        "2026-11-12": 16,
+        "2026-11-10": 7
+      },
+      "before_source_dates": {
+        "2026-11-12": 16,
+        "2026-11-10": 7
+      },
+      "after_source_dates": {
+        "2026-11-12": 16,
+        "2026-11-10": 7
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.HOLON/data/refresh-status.json",
+      "normalized_snapshot_sha256": "eb7f84f62172d020cc361244f61c79e414ba76ff18d35c94cf293e6c8f77f739"
+    },
+    {
+      "city": "BATYAM",
+      "branches": 19,
+      "last_attempt_at": "2026-11-12T16:01:26.149997+02:00",
+      "last_attempt_updated": 15,
+      "retained_last_attempt": 4,
+      "source_file_dates": {
+        "2026-11-12": 15,
+        "2026-11-10": 4
+      },
+      "before_source_dates": {
+        "2026-11-12": 15,
+        "2026-11-10": 4
+      },
+      "after_source_dates": {
+        "2026-11-12": 15,
+        "2026-11-10": 4
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.BATYAM/data/refresh-status.json",
+      "normalized_snapshot_sha256": "c9c96d6a6ad98f9130b5689bc213fe53cc79454448d5c109490ee3f3d6b74683"
+    },
+    {
+      "city": "TLV",
+      "branches": 19,
+      "last_attempt_at": "2026-11-12T16:10:23.936631+02:00",
+      "last_attempt_updated": 0,
+      "retained_last_attempt": 19,
+      "source_file_dates": {
+        "2026-11-09": 19
+      },
+      "before_source_dates": {
+        "2026-11-09": 19
+      },
+      "after_source_dates": {
+        "2026-11-09": 19
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.TLV/data/refresh-status.json",
+      "normalized_snapshot_sha256": "35a850bc80e1d48ffcd851bd0be40bd8d7900ee26f96a574181ccc74a996d849"
+    }
+  ],
+  "coverage_after": [
+    {
+      "city": "ASHDOD",
+      "branches": 20,
+      "last_attempt_at": "2026-11-12T15:57:44.515351+02:00",
+      "last_attempt_updated": 16,
+      "retained_last_attempt": 4,
+      "source_file_dates": {
+        "2026-11-10": 4,
+        "2026-11-12": 16
+      },
+      "before_source_dates": {
+        "2026-11-10": 4,
+        "2026-11-12": 16
+      },
+      "after_source_dates": {
+        "2026-11-10": 4,
+        "2026-11-12": 16
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.ASHDOD/data/refresh-status.json",
+      "normalized_snapshot_sha256": "70b0ba04d33853b98c80967d5bbb0a94f0621eedaecef635f1181707a65c16cc"
+    },
+    {
+      "city": "YAVNE",
+      "branches": 7,
+      "last_attempt_at": "2026-11-12T15:57:52.353308+02:00",
+      "last_attempt_updated": 4,
+      "retained_last_attempt": 3,
+      "source_file_dates": {
+        "2026-11-12": 4,
+        "2026-11-10": 3
+      },
+      "before_source_dates": {
+        "2026-11-12": 4,
+        "2026-11-10": 3
+      },
+      "after_source_dates": {
+        "2026-11-12": 4,
+        "2026-11-10": 3
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.YAVNE/data/refresh-status.json",
+      "normalized_snapshot_sha256": "4269542417ce70b06f54baffff7cdb9738bbbeb04432cf9f2859418a54dfff81"
+    },
+    {
+      "city": "KGAT",
+      "branches": 9,
+      "last_attempt_at": "2026-11-12T15:58:08.756070+02:00",
+      "last_attempt_updated": 7,
+      "retained_last_attempt": 2,
+      "source_file_dates": {
+        "2026-11-12": 7,
+        "2026-11-10": 2
+      },
+      "before_source_dates": {
+        "2026-11-12": 7,
+        "2026-11-10": 2
+      },
+      "after_source_dates": {
+        "2026-11-12": 7,
+        "2026-11-10": 2
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.KGAT/data/refresh-status.json",
+      "normalized_snapshot_sha256": "15258ed4f8c8acb01137cd48f0b2f27bf93c48755b86bf6eace8ff937ab21692"
+    },
+    {
+      "city": "RISHON",
+      "branches": 24,
+      "last_attempt_at": "2026-11-12T15:59:39.655958+02:00",
+      "last_attempt_updated": 17,
+      "retained_last_attempt": 7,
+      "source_file_dates": {
+        "2026-11-12": 17,
+        "2026-11-09": 7
+      },
+      "before_source_dates": {
+        "2026-11-12": 17,
+        "2026-11-09": 7
+      },
+      "after_source_dates": {
+        "2026-11-12": 17,
+        "2026-11-09": 7
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.RISHON/data/refresh-status.json",
+      "normalized_snapshot_sha256": "d41c8cb7ca543852279302260089ff3fb3fec2d7270dec062c86df96c17e2c9b"
+    },
+    {
+      "city": "HOLON",
+      "branches": 23,
+      "last_attempt_at": "2026-11-12T16:01:18.959708+02:00",
+      "last_attempt_updated": 16,
+      "retained_last_attempt": 7,
+      "source_file_dates": {
+        "2026-11-12": 16,
+        "2026-11-10": 7
+      },
+      "before_source_dates": {
+        "2026-11-12": 16,
+        "2026-11-10": 7
+      },
+      "after_source_dates": {
+        "2026-11-12": 16,
+        "2026-11-10": 7
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.HOLON/data/refresh-status.json",
+      "normalized_snapshot_sha256": "eb7f84f62172d020cc361244f61c79e414ba76ff18d35c94cf293e6c8f77f739"
+    },
+    {
+      "city": "BATYAM",
+      "branches": 19,
+      "last_attempt_at": "2026-11-12T16:01:26.149997+02:00",
+      "last_attempt_updated": 15,
+      "retained_last_attempt": 4,
+      "source_file_dates": {
+        "2026-11-12": 15,
+        "2026-11-10": 4
+      },
+      "before_source_dates": {
+        "2026-11-12": 15,
+        "2026-11-10": 4
+      },
+      "after_source_dates": {
+        "2026-11-12": 15,
+        "2026-11-10": 4
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.BATYAM/data/refresh-status.json",
+      "normalized_snapshot_sha256": "c9c96d6a6ad98f9130b5689bc213fe53cc79454448d5c109490ee3f3d6b74683"
+    },
+    {
+      "city": "TLV",
+      "branches": 19,
+      "last_attempt_at": "2026-11-12T16:10:23.936631+02:00",
+      "last_attempt_updated": 0,
+      "retained_last_attempt": 19,
+      "source_file_dates": {
+        "2026-11-09": 19
+      },
+      "before_source_dates": {
+        "2026-11-09": 19
+      },
+      "after_source_dates": {
+        "2026-11-09": 19
+      },
+      "changed_branches": 0,
+      "newly_collected_branches": 0,
+      "public_url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.TLV/data/refresh-status.json",
+      "normalized_snapshot_sha256": "35a850bc80e1d48ffcd851bd0be40bd8d7900ee26f96a574181ccc74a996d849"
+    }
+  ],
+  "newly_collected_branches": 0,
+  "changed_prices": 0,
+  "new_publications": 0,
+  "retailer_catalogs_downloaded": 0,
+  "claims_or_locks_modified": false,
+  "public_data_verified": {
+    "cities": 7,
+    "branches": 121,
+    "report_updated_last_attempt": 75,
+    "retained_last_attempt": 46,
+    "source_dates": {
+      "2026-11-12": 75,
+      "2026-11-10": 20,
+      "2026-11-09": 26
+    },
+    "readback": [
+      {
+        "name": "release",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/release",
+        "status": 200,
+        "sha256": "09b43f3e9bfa1e0a132142c34908bd1f437da2aba9424ce398f5ae8dd21d451b",
+        "source_commit": null,
+        "bytes": 60
+      },
+      {
+        "name": "ASHDOD/source-status.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.ASHDOD/data/source-status.json",
+        "status": 200,
+        "sha256": "9aa60f4ae444c2f023520d9c3590598a412b7a18cabe62f355361386e5d613d2",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 2250
+      },
+      {
+        "name": "ASHDOD/city-basket.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.ASHDOD/data/city-basket.json",
+        "status": 200,
+        "sha256": "26af1da8d2e0dd7317fe49c3a6557b5bef25afc825fe07a86f5a183bd710449e",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 1411451
+      },
+      {
+        "name": "ASHDOD/entry",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.ASHDOD/",
+        "status": 200,
+        "sha256": "292a9188c802e4b327af0200aa3a2401bd5cdc280cc7a028071f341eb2de1b33",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 49073,
+        "checks": {
+          "html": true,
+          "monthly_design_target_mentioned": false,
+          "recipes_reference": true
+        }
+      },
+      {
+        "name": "YAVNE/source-status.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.YAVNE/data/source-status.json",
+        "status": 200,
+        "sha256": "9b98c96fe079810229884731182429262a07a603daba106482cf4adf250b0737",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 2501
+      },
+      {
+        "name": "YAVNE/city-basket.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.YAVNE/data/city-basket.json",
+        "status": 200,
+        "sha256": "b2d8012f79d87a8eb3cf2ef74131e11489ec4714b99d70e7543fdde52cd47f55",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 531493
+      },
+      {
+        "name": "YAVNE/entry",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.YAVNE/",
+        "status": 200,
+        "sha256": "b58d981866c432157e87a27c8bc7726fc27ca5afe38a5994307be9606c1214f6",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 49069,
+        "checks": {
+          "html": true,
+          "monthly_design_target_mentioned": false,
+          "recipes_reference": true
+        }
+      },
+      {
+        "name": "KGAT/source-status.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.KGAT/data/source-status.json",
+        "status": 200,
+        "sha256": "738d8f0d6f0775c23533531e2a91a7a3c3ae3011abd8273a28c76dd76eac0cb6",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 2273
+      },
+      {
+        "name": "KGAT/city-basket.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.KGAT/data/city-basket.json",
+        "status": 200,
+        "sha256": "f339c2caaaa6f7a93c6b2bdfae70b59fcf9438c51bf31fcea75451b419abd10d",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 673439
+      },
+      {
+        "name": "KGAT/entry",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.KGAT/",
+        "status": 200,
+        "sha256": "e0e67700c06850960afbd8fcd0d556da968492327926dd23b29284d71cdfdfc0",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 49177,
+        "checks": {
+          "html": true,
+          "monthly_design_target_mentioned": false,
+          "recipes_reference": true
+        }
+      },
+      {
+        "name": "RISHON/source-status.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.RISHON/data/source-status.json",
+        "status": 200,
+        "sha256": "854dc9b5db0df245bc899f11358de3bc3eb257cac7826f0d41746524445aacb9",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 993
+      },
+      {
+        "name": "RISHON/city-basket.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.RISHON/data/city-basket.json",
+        "status": 200,
+        "skipped_body": "metadata-only budget, body too large"
+      },
+      {
+        "name": "RISHON/entry",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.RISHON/",
+        "status": 200,
+        "sha256": "744c3ff058fab29c384d1377303035e9ba4a78e6fa93d6031409e75209ca1d20",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 49142,
+        "checks": {
+          "html": true,
+          "monthly_design_target_mentioned": false,
+          "recipes_reference": true
+        }
+      },
+      {
+        "name": "HOLON/source-status.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.HOLON/data/source-status.json",
+        "status": 200,
+        "sha256": "7c58fd7d1762964199e7b0d1d2fcf8107b1b7b45ad12d74dfdc410e7cde49843",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 1533
+      },
+      {
+        "name": "HOLON/city-basket.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.HOLON/data/city-basket.json",
+        "status": 200,
+        "skipped_body": "metadata-only budget, body too large"
+      },
+      {
+        "name": "HOLON/entry",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.HOLON/",
+        "status": 200,
+        "sha256": "64f9da2aa64ca9c393fdd79c8f7935db9e958caacc09c2a0a679b7c7735123da",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 49578,
+        "checks": {
+          "html": true,
+          "monthly_design_target_mentioned": false,
+          "recipes_reference": true
+        }
+      },
+      {
+        "name": "BATYAM/source-status.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.BATYAM/data/source-status.json",
+        "status": 200,
+        "sha256": "c9d35ece7396d6fdbf7e81cb35b4b8d8c7603e23d2f3bfa96df0ed3e7ddf40c9",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 786
+      },
+      {
+        "name": "BATYAM/city-basket.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.BATYAM/data/city-basket.json",
+        "status": 200,
+        "sha256": "6e55ca68936e7c76a1e41a974cfc10245a0fe7e72889387cd799b0bf062144a0",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 1326888
+      },
+      {
+        "name": "BATYAM/entry",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.BATYAM/",
+        "status": 200,
+        "sha256": "48c0a575e548129ab05ba522444d8064a5abd56698659ec5be1fa4c445c4809d",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 49568,
+        "checks": {
+          "html": true,
+          "monthly_design_target_mentioned": false,
+          "recipes_reference": true
+        }
+      },
+      {
+        "name": "TLV/source-status.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.TLV/data/source-status.json",
+        "status": 200,
+        "sha256": "b85c7356cdcc6fd04cb6888d45ca78163adc9bc2e671acf2471fca91ab4e6783",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 2987
+      },
+      {
+        "name": "TLV/city-basket.json",
+        "url": "https://isnetsuper.ebs987449.chatgpt.site/SUPER.TLV/data/city-basket.json",
+        "status": 200,
+        "sha256": "82f309c5f2e3bb27003140487c6fc54910e02a9fafa13d97ff70c0729ed75f28",
+        "source_commit": "7baf78df5677bf439c9f88d2e77a27c9c3f73754",
+        "bytes": 1357557
+      },
+      {
+        "name": "TLV/entry",
+        "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site/super/",
+        "status": 200,
+        "sha256": "05aeb0c58ababdccf881f4946109c17ebc131040f8761e761fc23d4c0b982597",
+        "source_commit": null,
+        "bytes": 54035,
+        "checks": {
+          "html": true,
+          "monthly_design_target_mentioned": false,
+          "recipes_reference": true
+        }
+      }
+    ],
+    "baskets": [
+      {
+        "city": "ASHDOD",
+        "http": 200,
+        "body_read": true,
+        "default_variant": "monthly",
+        "monthly_line_count": 48,
+        "omitted_lines": [],
+        "scope_complete": false,
+        "skip_reason": null
+      },
+      {
+        "city": "YAVNE",
+        "http": 200,
+        "body_read": true,
+        "default_variant": "monthly",
+        "monthly_line_count": 48,
+        "omitted_lines": [],
+        "scope_complete": false,
+        "skip_reason": null
+      },
+      {
+        "city": "KGAT",
+        "http": 200,
+        "body_read": true,
+        "default_variant": "monthly",
+        "monthly_line_count": 48,
+        "omitted_lines": [],
+        "scope_complete": false,
+        "skip_reason": null
+      },
+      {
+        "city": "RISHON",
+        "http": 200,
+        "body_read": false,
+        "default_variant": null,
+        "monthly_line_count": null,
+        "omitted_lines": null,
+        "scope_complete": null,
+        "skip_reason": "metadata-only budget, body too large"
+      },
+      {
+        "city": "HOLON",
+        "http": 200,
+        "body_read": false,
+        "default_variant": null,
+        "monthly_line_count": null,
+        "omitted_lines": null,
+        "scope_complete": null,
+        "skip_reason": "metadata-only budget, body too large"
+      },
+      {
+        "city": "BATYAM",
+        "http": 200,
+        "body_read": true,
+        "default_variant": "monthly",
+        "monthly_line_count": 48,
+        "omitted_lines": [],
+        "scope_complete": false,
+        "skip_reason": null
+      },
+      {
+        "city": "TLV",
+        "http": 200,
+        "body_read": true,
+        "default_variant": "monthly",
+        "monthly_line_count": 48,
+        "omitted_lines": [],
+        "scope_complete": false,
+        "skip_reason": null
+      }
+    ],
+    "qualification": "Authorized independent Sites live metadata and entryHTML read; not anonymous canonical-domain or mobile/desktop visual testing and not new collection. Two large basket bodies deliberately skipped at1.5MB cap; only HTTPheaders verified there. No productcatalog/offers downloaded."
+  },
+  "blockers": [
+    {
+      "signature": "github-actions-dispatch-current-session-unavailable",
+      "status": "known_unchanged",
+      "evidence": [
+        "Current connector can read runs/contents but exposes no workflow-dispatch operation",
+        "Specific workflow-state endpoint unsupported by connector; enabledstate remains unverified",
+        "Local gh has no authenticated hosts",
+        "Available connected-browser tool was discovered, but invocation returned Unknown tool(browser.js); no identical retry",
+        "Previouscheckpoint15Nov same block; no anonymous cloudbrowser/signin probing repeated"
+      ],
+      "impact": "Normal missingdailycollection cannot be initiated with available authenticated execution. No existing claim overwritten, workflow enabled or oldpipeline revived.",
+      "action_required": "Restore an existing authorized executor for the current normal collector and its dailyclaim mechanism, and verify enabled/running state; no new credentials, schedules or permissions requested automatically."
+    },
+    {
+      "signature": "public-super-entry-http403-current-executor",
+      "status": "known_not_retried",
+      "evidence": "Prior canonical domains reader403 preserved; thisrun used the authorized existing independent Sites delivery metadata and HTML only. No assertion canonical sites are down."
+    }
+  ],
+  "known_source_failures": {
+    "replayed": false,
+    "history_only": true,
+    "retained": 46,
+    "note": "Historical12NovConnectTimeout/HTTPError from reports, not new retailer probes or proof current retailers blocked."
+  },
+  "continuation": {
+    "priority": "Current owner normal collection via existing dailyclaims within allowed morning window; if it finishes compare true sourcefile dates and validatedpublicdata before stale-source recovery.",
+    "preserved": "All lastgood prices, source dates, 3500ILSdesign target, quantities, comparisons and recipe dates unchanged.",
+    "remaining": "No retailerdelta collection, anonymous canonical wrappers, devicevisual or fullbasketfunctional verification."
+  },
+  "journal_only": true,
+  "build": false,
+  "deploy": false,
+  "settings_permissions_billing_changed": false,
+  "subagents_started": 0,
+  "retries": 1,
+  "api_cost": null,
+  "automation_state": "unchanged; independent partial verification succeeded. Existing execution capability currently unavailable; no self-disable or newagent.",
+  "scope_note": "Supermarket task only; no news/article/image produced in this data-maintenance stage.",
+  "retry_note": "One repeated unsupported workflow-list read occurred while inspecting an unparsed tool error; then stopped. Specificworkflow endpoint was a distinct capability check; browser Unknowntool not retried. No retailer-source or collection retries."
+}
