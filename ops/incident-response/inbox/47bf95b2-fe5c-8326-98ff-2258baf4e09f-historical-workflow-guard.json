@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "47bf95b2-fe5c-8326-98ff-2258baf4e09f",
+  "runKey": "ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f",
+  "policy_version": "2026-11-15/1.2",
+  "reported_at": "2026-11-17T23:30:08.282Z",
+  "type": "historical_root_classification",
+  "current_incident": false,
+  "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
+  "incidents": [
+    "historical-super-daily-workflow-deployment-guard",
+    "historical-institution-ui-missing-ashdod-source"
+  ],
+  "historical": {
+    "run_id": 42655553856,
+    "attempt": 1,
+    "job_id": 129293233588,
+    "source_commit": "e07dac14a053a94248e92f0ba7e980d9856f9d59",
+    "created_at": "2026-11-09T16:30:59Z",
+    "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42655553856",
+    "failed_step": "Build compact event listings and canonical sitemap",
+    "root": "historical-super-daily-workflow-deployment-guard",
+    "error_at": "2026-11-09T16:32:45.7101747Z",
+    "error": "test_super_daily_run.py38 assertion: super-tlv-prices.yml missing --deployment-only",
+    "current_source_review": {
+      "test_sha": "54d2794df88489a42ceef6e2a839320b5e43c6a0",
+      "workflow_sha": "94edb85e348e6bc78fb044968deef701b3a879f3",
+      "current_workflow_contains_deployment_only": true,
+      "current_failure_reproduced": false,
+      "qualification": "Configuration readback only: exact historical missing flag now present. No controller code change or live data recovery inferred."
+    },
+    "secondary": {
+      "root": "historical-institution-ui-missing-ashdod-source",
+      "error_at": "2026-11-09T16:32:41.5445619Z",
+      "error": "test-institution-ui.cjs22 Missing source in ashdod",
+      "blocking": false,
+      "qualification": "continue-on-error warning; exact record identity and current data integrity unconfirmed. No broad/current event data scan or publisher decision required this cycle."
+    },
+    "full_logs_read": 1,
+    "remaining": 190,
+    "current_recurrence": false
+  },
+  "next_action": "Retain historical occurrences. Missing --deployment-only now present by current source readback; no schedule edit, collector invocation or publication. Ashdod source-record identity remains historical followup.",
+  "notifyPublisher": false
+}
