@@ -1,0 +1,94 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "b1852057-da04-832a-9ca9-c6e63ad9a00c",
+  "runKey": "ops-2026-11-17-b1852057-da04-832a-9ca9-c6e63ad9a00c",
+  "policy_version": "2026-11-15/1.2",
+  "created_at": "2026-11-17T18:47:00.495Z",
+  "type": "existing_incident_changed_input",
+  "canonical_incident_id": "ims-no-valid-current-period",
+  "target": "ISNET/weather/ashdod",
+  "source_fingerprint": "e7f5d9837ea56a753f6737a9dc2aecccd6aa4c7d52b31b44a46610b0b03a7b68",
+  "status": "validated_source_ready_existing_owner_release_pending",
+  "source": {
+    "url": "https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml",
+    "source_sha256": "e7f5d9837ea56a753f6737a9dc2aecccd6aa4c7d52b31b44a46610b0b03a7b68",
+    "observed_at": "2026-11-17T18:45:50.646Z",
+    "regions": [
+      {
+        "schema": 1,
+        "city": "אשדוד",
+        "regionId": 213,
+        "region": "החוף הדרומי",
+        "source": "השירות המטאורולוגי הישראלי",
+        "sourceUrl": "https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml",
+        "timeZone": "Asia/Jerusalem",
+        "issuedAtLocal": "2026-11-17T16:04",
+        "fetchedAt": "2026-11-17T18:45:50.646Z",
+        "periods": [
+          {
+            "from": "2026-11-17T20:00",
+            "to": "2026-11-18T08:00",
+            "minCm": 40,
+            "maxCm": 70
+          },
+          {
+            "from": "2026-11-18T08:00",
+            "to": "2026-11-18T20:00",
+            "minCm": 50,
+            "maxCm": 70
+          }
+        ]
+      },
+      {
+        "schema": 1,
+        "city": null,
+        "regionId": 210,
+        "region": "החוף המרכזי",
+        "source": "השירות המטאורולוגי הישראלי",
+        "sourceUrl": "https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml",
+        "timeZone": "Asia/Jerusalem",
+        "issuedAtLocal": "2026-11-17T16:04",
+        "fetchedAt": "2026-11-17T18:45:50.646Z",
+        "periods": [
+          {
+            "from": "2026-11-17T20:00",
+            "to": "2026-11-18T08:00",
+            "minCm": 40,
+            "maxCm": 70
+          },
+          {
+            "from": "2026-11-18T08:00",
+            "to": "2026-11-18T20:00",
+            "minCm": 50,
+            "maxCm": 70
+          }
+        ]
+      }
+    ],
+    "before_valid_boundary_rejected": true,
+    "current_both_regions_passed": true,
+    "source_http": 200,
+    "source_request_count": 1
+  },
+  "stored_files": [
+    {
+      "path": "weather/ashdod/sea.json",
+      "issued_at": "2026-11-15T00:01",
+      "last_valid_to": "2026-11-16T08:00"
+    },
+    {
+      "path": "weather/ashdod/central.json",
+      "issued_at": "2026-11-15T00:01",
+      "last_valid_to": "2026-11-16T08:00"
+    }
+  ],
+  "routing": {
+    "existing_owner_workflow": ".github/workflows/ashdod-sea.yml",
+    "triggered": false,
+    "new_automation": false
+  },
+  "next_action": "Existing authorized data owner must refetch and validate current source, check actual claim and concurrent run, publish both distinct regions through existing mechanism and verify live widget. Saved validated periods are evidence only; do not reuse after expiry.",
+  "controller_publication": false,
+  "publication_limit": "No existing data claim acquisition interface found in checked workflow/script. Workflow concurrency is not a controller lease; none invented. No data write, task trigger or schedule change.",
+  "evidence": "ops/incident-response/evidence/ops-2026-11-17-b1852057-da04-832a-9ca9-c6e63ad9a00c.json"
+}
