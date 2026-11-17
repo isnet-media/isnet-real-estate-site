@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T06:14:58.331Z",
+  "updated_at": "2026-11-17T08:12:19.686Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4561,7 +4561,25 @@
         "correct_saved_prompts": true,
         "sports_completed_without_evening_publication": true,
         "source_unchanged": true
-      }
+      },
+      "last_seen_at": "2026-11-17T08:12:19.686Z",
+      "latest_occurrence": {
+        "news": {
+          "run_id": "30be2ec5-0c9c-8326-8f72-ed04fd6d34ae",
+          "result": "Same run ID but final text describes seven supermarket editions instead of news. Source news receipt has locally generated key and no runtime ID."
+        },
+        "culture": {
+          "run_id": "de74036c-2198-8331-be27-9bfe1698d827",
+          "status": "failed",
+          "latest_result_run_id": "eb25dc5a-2750-8325-9189-cdf85c90fa3d",
+          "latest_result_date": "2026-11-16",
+          "source_receipt_runtime_id": null,
+          "publication_verified_independently": true
+        },
+        "status": "existing root requires runtime/service reconciliation; no prompt or schedule change"
+      },
+      "latest_evidence": "ops/incident-response/evidence/ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff.json",
+      "next_action": "Existing runtime support must reconcile news30be2ec5 output routing and culturede74036c failure/stale result using exact IDs. No automatic rerun or schedule/prompt mutations."
     },
     {
       "id": "historical-super-batyam-private-write-http400",
@@ -4962,10 +4980,43 @@
       "mitigation": "Continue independent read-only checks and durable checkpoint; do not repeat entire unchanged source restoration solely for a journal.",
       "next_action": "Retain partial checkout; do not repeat full source restoration solely for an unchanged-version journal. Run the report when verified local source becomes available or a changed publication/source requires source work.",
       "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json",
-      "production_changed": false
+      "production_changed": false,
+      "latest_observation": {
+        "at": "2026-11-17T08:12:19.686Z",
+        "source_report_executed": true,
+        "source_commit": "3b41deb9d8814fdfb015873caa908d7dd5263c52",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff.json",
+        "note": "Existing checkout restored through native source helper; no public outage."
+      }
+    },
+    {
+      "id": "tlvnet-historical-receipt-mutable-fixture",
+      "signature": "tlvnet/build/publication-evidence-test/real-receipt-fixture-reads-mutable-catalog",
+      "root_cause": "Historical test fixture read mutable current articles; legitimate body update invalidated historical receipt.",
+      "prevention": "Frozen contemporaneous actual receipt/catalog test fixture; runtime integrity validation unchanged.",
+      "first_seen_at": "2026-11-17T08:12:19.686Z",
+      "status": "fixed_verified",
+      "last_seen_at": "2026-11-17T08:12:19.686Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff.json",
+      "version": 643,
+      "independent_controller_live_verification": true,
+      "mobile_visual_review": "pending"
+    },
+    {
+      "id": "tlvnet-culture-release-finalizer-section",
+      "signature": "culture-release-finalizer-restored-own-section-html",
+      "root_cause": "Owner release finalizer restored prior culture section HTML, hiding new article links.",
+      "prevention": "Owner corrected keep set and regenerated section; actual public references independently verified.",
+      "first_seen_at": "2026-11-17T08:12:19.686Z",
+      "status": "fixed_verified",
+      "last_seen_at": "2026-11-17T08:12:19.686Z",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff.json",
+      "version": 643,
+      "independent_controller_live_verification": true,
+      "mobile_visual_review": "pending"
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-1eeeaba5-b3a8-832e-b3f5-4322c5faf65d",
+  "last_review_runKey": "ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
