@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T09:55:12.179Z",
+  "updated_at": "2026-11-17T10:31:58.785Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4984,6 +4984,21 @@
           "remaining": 204,
           "observed_at": "2026-11-17T09:55:12.179Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b.json"
+        },
+        {
+          "run_id": 43024614279,
+          "job_id": 130536032725,
+          "source_commit": "9335ffa6d58b9fa7eca02cd4ab3b36fdf211259a",
+          "signature": "ashdod unresolved candidates before release / actual1 expected0",
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "classification": "Known historical release gate, deployment skipped; no present recurrence inferred.",
+          "log_excerpt": [
+            "2:57:14.6044964Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:57:14.6045377Z \\n2026-11-11T12:57:14.6045471Z 1 !== 0\\n2026-11-11T12:57:14.6045587Z \\n2026-11-11T12:57:1",
+            "8Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:57:14.6050710Z   actual: 1,\\n2026-11-11T12:57:14.6050905Z   expected: 0,\\n2026-11-11T12:57:14.6051112Z   operator: 'strictEqual',\\n2026-11-11T12"
+          ],
+          "remaining": 203,
+          "observed_at": "2026-11-17T10:31:58.785Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09.json"
         }
       ],
       "remaining_historical_review": "208 historical entries across8workflow groups; no new current failure established.",
@@ -5004,19 +5019,19 @@
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-ea75c661-52f4-832e-9990-8a6e3ab173eb.json"
       },
       "last_historical_triage": {
-        "run_id": 43024761556,
-        "job_id": 130536641522,
+        "run_id": 43024614279,
+        "job_id": 130536032725,
+        "source_commit": "9335ffa6d58b9fa7eca02cd4ab3b36fdf211259a",
         "signature": "ashdod unresolved candidates before release / actual1 expected0",
         "failed_step": "Build compact event listings and canonical sitemap",
-        "classification": "Known historical root; deployment skipped; no current recurrence inferred.",
-        "source_commit": "bc4e1a0ecc57ce7388f6846e30198a27969f372e",
+        "classification": "Known historical release gate, deployment skipped; no present recurrence inferred.",
         "log_excerpt": [
-          "6056Z \\n2026-11-11T12:58:26.3226731Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:58:26.3227280Z \\n2026-11-11T12:58:26.3227381Z 1 !== 0\\n2026-11-11T12:58:26.3227496Z \\n2026-11-11T12:58:26.3228042Z     ",
-          "1-11T12:58:26.3233025Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:58:26.3233336Z   actual: 1,\\n2026-11-11T12:58:26.3233628Z   expected: 0,\\n2026-11-11T12:58:26.3233981Z   operator: 'strictEqual',\\n2026-11-11T12:58:26.3234361Z   diff: 'simpl"
+          "2:57:14.6044964Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:57:14.6045377Z \\n2026-11-11T12:57:14.6045471Z 1 !== 0\\n2026-11-11T12:57:14.6045587Z \\n2026-11-11T12:57:1",
+          "8Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:57:14.6050710Z   actual: 1,\\n2026-11-11T12:57:14.6050905Z   expected: 0,\\n2026-11-11T12:57:14.6051112Z   operator: 'strictEqual',\\n2026-11-11T12"
         ],
-        "remaining": 204,
-        "observed_at": "2026-11-17T09:55:12.179Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b.json"
+        "remaining": 203,
+        "observed_at": "2026-11-17T10:31:58.785Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09.json"
       }
     },
     {
@@ -5099,7 +5114,7 @@
       "publisher_notified_at": "2026-11-17T09:55:12.179Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b",
+  "last_review_runKey": "ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
