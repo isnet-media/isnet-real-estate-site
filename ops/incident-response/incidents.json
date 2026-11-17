@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T08:12:19.686Z",
+  "updated_at": "2026-11-17T08:33:56.700Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4579,7 +4579,15 @@
         "status": "existing root requires runtime/service reconciliation; no prompt or schedule change"
       },
       "latest_evidence": "ops/incident-response/evidence/ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff.json",
-      "next_action": "Existing runtime support must reconcile news30be2ec5 output routing and culturede74036c failure/stale result using exact IDs. No automatic rerun or schedule/prompt mutations."
+      "next_action": "Existing runtime support must reconcile news30be2ec5 output routing and culturede74036c failure/stale result using exact IDs. No automatic rerun or schedule/prompt mutations.",
+      "latest_pending_run_observation": {
+        "observed_at": "2026-11-17T08:33:56.700Z",
+        "run_id": "de74036c-2198-8331-be27-9bfe1698d827",
+        "status": "completed",
+        "latest_result": null,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156.json",
+        "note": "Completion after retry does not establish source/publication attribution; existing root remains open."
+      }
     },
     {
       "id": "historical-super-batyam-private-write-http400",
@@ -4949,6 +4957,18 @@
           "signature": "event integrity / ashdod unresolved candidates / actual2 expected0",
           "observed_at": "2026-11-17T05:39:57.593Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-ea75c661-52f4-832e-9990-8a6e3ab173eb.json"
+        },
+        {
+          "run_id": 43025172675,
+          "job_id": 130537991382,
+          "source_commit": "4a2a1539d6502cd55b52af33ccf804f89646740e",
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "signature": "ashdod unresolved candidates before release / actual1 expected0",
+          "classification": "Known historical release-integrity root; no new current recurrence, exact candidate/deeper cause not established.",
+          "full_logs_read": 1,
+          "remaining": 205,
+          "observed_at": "2026-11-17T08:33:56.700Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156.json"
         }
       ],
       "remaining_historical_review": "208 historical entries across8workflow groups; no new current failure established.",
@@ -4967,6 +4987,18 @@
         "signature": "event integrity / ashdod unresolved candidates / actual2 expected0",
         "observed_at": "2026-11-17T05:39:57.593Z",
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-ea75c661-52f4-832e-9990-8a6e3ab173eb.json"
+      },
+      "last_historical_triage": {
+        "run_id": 43025172675,
+        "job_id": 130537991382,
+        "source_commit": "4a2a1539d6502cd55b52af33ccf804f89646740e",
+        "failed_step": "Build compact event listings and canonical sitemap",
+        "signature": "ashdod unresolved candidates before release / actual1 expected0",
+        "classification": "Known historical release-integrity root; no new current recurrence, exact candidate/deeper cause not established.",
+        "full_logs_read": 1,
+        "remaining": 205,
+        "observed_at": "2026-11-17T08:33:56.700Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156.json"
       }
     },
     {
@@ -5016,7 +5048,7 @@
       "mobile_visual_review": "pending"
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff",
+  "last_review_runKey": "ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
