@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T08:33:56.700Z",
+  "updated_at": "2026-11-17T09:55:12.179Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4969,6 +4969,21 @@
           "remaining": 205,
           "observed_at": "2026-11-17T08:33:56.700Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156.json"
+        },
+        {
+          "run_id": 43024761556,
+          "job_id": 130536641522,
+          "signature": "ashdod unresolved candidates before release / actual1 expected0",
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "classification": "Known historical root; deployment skipped; no current recurrence inferred.",
+          "source_commit": "bc4e1a0ecc57ce7388f6846e30198a27969f372e",
+          "log_excerpt": [
+            "6056Z \\n2026-11-11T12:58:26.3226731Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:58:26.3227280Z \\n2026-11-11T12:58:26.3227381Z 1 !== 0\\n2026-11-11T12:58:26.3227496Z \\n2026-11-11T12:58:26.3228042Z     ",
+            "1-11T12:58:26.3233025Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:58:26.3233336Z   actual: 1,\\n2026-11-11T12:58:26.3233628Z   expected: 0,\\n2026-11-11T12:58:26.3233981Z   operator: 'strictEqual',\\n2026-11-11T12:58:26.3234361Z   diff: 'simpl"
+          ],
+          "remaining": 204,
+          "observed_at": "2026-11-17T09:55:12.179Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b.json"
         }
       ],
       "remaining_historical_review": "208 historical entries across8workflow groups; no new current failure established.",
@@ -4989,16 +5004,19 @@
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-ea75c661-52f4-832e-9990-8a6e3ab173eb.json"
       },
       "last_historical_triage": {
-        "run_id": 43025172675,
-        "job_id": 130537991382,
-        "source_commit": "4a2a1539d6502cd55b52af33ccf804f89646740e",
-        "failed_step": "Build compact event listings and canonical sitemap",
+        "run_id": 43024761556,
+        "job_id": 130536641522,
         "signature": "ashdod unresolved candidates before release / actual1 expected0",
-        "classification": "Known historical release-integrity root; no new current recurrence, exact candidate/deeper cause not established.",
-        "full_logs_read": 1,
-        "remaining": 205,
-        "observed_at": "2026-11-17T08:33:56.700Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156.json"
+        "failed_step": "Build compact event listings and canonical sitemap",
+        "classification": "Known historical root; deployment skipped; no current recurrence inferred.",
+        "source_commit": "bc4e1a0ecc57ce7388f6846e30198a27969f372e",
+        "log_excerpt": [
+          "6056Z \\n2026-11-11T12:58:26.3226731Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:58:26.3227280Z \\n2026-11-11T12:58:26.3227381Z 1 !== 0\\n2026-11-11T12:58:26.3227496Z \\n2026-11-11T12:58:26.3228042Z     ",
+          "1-11T12:58:26.3233025Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:58:26.3233336Z   actual: 1,\\n2026-11-11T12:58:26.3233628Z   expected: 0,\\n2026-11-11T12:58:26.3233981Z   operator: 'strictEqual',\\n2026-11-11T12:58:26.3234361Z   diff: 'simpl"
+        ],
+        "remaining": 204,
+        "observed_at": "2026-11-17T09:55:12.179Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b.json"
       }
     },
     {
@@ -5046,9 +5064,42 @@
       "version": 643,
       "independent_controller_live_verification": true,
       "mobile_visual_review": "pending"
+    },
+    {
+      "id": "2026-11-17-culture-gedera-home-gateway-stale",
+      "first_seen_at": "2026-11-17T09:18:25Z",
+      "status": "awaiting_external_action",
+      "severity": "partial_homepage_distribution",
+      "last_seen_at": "2026-11-17T09:55:12.179Z",
+      "root_cause": "Homepage gateway retains old seed on failed category fetch; underlying browser failure cause not established. Current code/path/nativecategory verified. Component editor session absent.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b.json",
+      "observations": {
+        "homepage_http": 200,
+        "inline_function": "startMagazineGateway",
+        "feed_path": "/תרבות-נט",
+        "feed_path_matches_native_category": true,
+        "seed_ids": [
+          811200,
+          810707,
+          810710
+        ],
+        "refresh_version": "20261111",
+        "script_behavior": "render seed, fetch same-origin category credentials omit/cache no-store with10s abort; errors retain old seed and set feedStatus seed-feed-unavailable",
+        "category_controller_GET": 403,
+        "qualifier": "Bare client403 does not prove identical browser origin failure or security-block root cause.",
+        "CMS_lease": "free; no lease acquired, no write attempted",
+        "connector_capability": "Category/post tools available; no homepage-component HTML field in update_website",
+        "browser_admin": "Observed https://admin.isnet.co.il/Manager/SignIn?returnUrl=%2F login wall; no authenticated component-editor session",
+        "source_file_checked": "events-preview/shared/public-cms.js does not contain startMagazineGateway; function observed inline in servedhomepage"
+      },
+      "next_action": "Use existing authorized CMS component-editor session for Gedera51; inspect actual category-fetch error, preserve current homepage and other writer changes, then repair fetch/seed and verify811887 home card. No access expansion, key creation or article replay.",
+      "post_id": 811887,
+      "website_id": 51,
+      "publication_replay": false,
+      "publisher_notified_at": "2026-11-17T09:55:12.179Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156",
+  "last_review_runKey": "ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
