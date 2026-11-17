@@ -1,0 +1,15 @@
+{
+  "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "runtime_run_id": "38a1e803-a5b0-8328-886b-9998b0ec315d",
+  "runKey": "sports-2026-11-17-09:00-38a1e803",
+  "policy_version": "2026-11-15/1.4",
+  "target": "TLVNET-site",
+  "recorded_at": "2026-11-17T07:13:11.639Z",
+  "signature": "tlvnet/build/publication-evidence-test/real-receipt-fixture-reads-mutable-catalog",
+  "status": "mitigated_pending_build_and_publication",
+  "cause": "tests/publication-evidence.mjs historical16Nov receipt assertion expected two existing updates against current live source bodies; legitimate17Nov update invalidated old proof and assertion expected2 received1.",
+  "change": "Frozen four contemporaneous articles plus original receipt into tests/fixtures/sports-publication-evidence-20261116.json from source5d13bf760a6457b6a255bab61b2034a27c345c90. Test consumes snapshot; runtime evidence integrity gates unchanged.",
+  "regression": "node tests/publication-evidence.mjs passed: correct counts and body/asset/credit/title/references/deployment/URL negative checks.",
+  "next_action": "Writer completing current one-site build/deploy/live readback; controller may reconcile next scheduled cycle. No task invocation.",
+  "secrets": false
+}
