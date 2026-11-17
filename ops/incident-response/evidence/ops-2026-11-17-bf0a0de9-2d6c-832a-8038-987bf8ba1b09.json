@@ -1,0 +1,150 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "bf0a0de9-2d6c-832a-8038-987bf8ba1b09",
+  "runKey": "ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09",
+  "policy_version": "2026-11-15/1.2",
+  "started_at": "2026-11-17T10:29:07.053364Z",
+  "observed_at": "2026-11-17T10:31:58.785Z",
+  "deployment": {
+    "version_number": 644,
+    "source_commit": "0a5ea5d4e50d8b9ef4ae19cc087ef64514cab6d7",
+    "deployment_id": "appgdep_6afc16ba10048191b665648cba5a8742",
+    "status": "succeeded",
+    "changed": false
+  },
+  "scope": [
+    "TLVNET seven-desk source checkpoint/economy due-slot metadata",
+    "Actions delta/one historical log",
+    "inbox/social delta",
+    "Worker error sample"
+  ],
+  "actions": {
+    "watermark": "2026-11-17T03:16:56Z",
+    "rows": 1,
+    "strictly_new": 0,
+    "pending": [],
+    "historical": {
+      "run_id": 43024614279,
+      "job_id": 130536032725,
+      "source_commit": "9335ffa6d58b9fa7eca02cd4ab3b36fdf211259a",
+      "signature": "ashdod unresolved candidates before release / actual1 expected0",
+      "failed_step": "Build compact event listings and canonical sitemap",
+      "classification": "Known historical release gate, deployment skipped; no present recurrence inferred.",
+      "log_excerpt": [
+        "2:57:14.6044964Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:57:14.6045377Z \\n2026-11-11T12:57:14.6045471Z 1 !== 0\\n2026-11-11T12:57:14.6045587Z \\n2026-11-11T12:57:1",
+        "8Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:57:14.6050710Z   actual: 1,\\n2026-11-11T12:57:14.6050905Z   expected: 0,\\n2026-11-11T12:57:14.6051112Z   operator: 'strictEqual',\\n2026-11-11T12"
+      ],
+      "remaining": 203
+    }
+  },
+  "inbox": {
+    "new_writer_events": 0,
+    "own_acknowledged_checkpoint": [
+      "ops/incident-response/inbox/ec310390-60fc-832e-98e4-f71cc8457a0b-gedera-gateway-diagnosis.json"
+    ]
+  },
+  "economy": {
+    "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+    "last_run": {
+      "id": "fa8047fe-cd4c-832b-9c0d-0fbedd0cdea1",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-16T10:00:00Z",
+      "started_at": "2026-11-16T10:40:40.792099Z",
+      "completed_at": "2026-11-16T10:59:14.558971Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6af6e7ee-aef4-83eb-9a15-53e6dba697c9"
+      }
+    },
+    "due_local": "2026-11-17T12:00:00+02:00",
+    "current_scheduled_slot_run_id": null,
+    "status": "due_slot_not_yet_observed",
+    "qualification": "No12:00run visible at12:29. No worker-failure or second completed no-new-article inference. Preserve routing/result checkpoint; no invocation."
+  },
+  "social": {
+    "new_rows": [
+      {
+        "slot": "2026-11-17T10",
+        "status": "published",
+        "article_url": "https://tlvnet.com/news/gross-fogel-suzanne-science-philosophy-20261117.html",
+        "post_id": "1520426491146188_122107627749545268",
+        "detail": null,
+        "started_at": "2026-11-17T10:00:01.670Z",
+        "finished_at": "2026-11-17T10:00:16.987Z"
+      }
+    ],
+    "public_verification": "API receipt only; exact publicpost and organic reach unverified; no sends"
+  },
+  "worker_log_sample": {
+    "since_minutes": 60,
+    "limit": 10,
+    "errors_only": true,
+    "events": [
+      {
+        "timestamp": "2026-11-17T10:18:15.204Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "297fdd9e17de73dea7fbbbeebb0cf4a1"
+      },
+      {
+        "timestamp": "2026-11-17T10:18:14.389Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "4208e6f7e07be3dc31d775b5f3f9d4b7"
+      },
+      {
+        "timestamp": "2026-11-17T10:16:50.916Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "a22e8c71e0bfe159a851c60934ddc337"
+      },
+      {
+        "timestamp": "2026-11-17T10:16:39.277Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "a26040319cc6b9b9a2ace3be79d61cf9"
+      },
+      {
+        "timestamp": "2026-11-17T09:41:09.667Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "d5dad4d862577c1bb70ceb4a80a12d4a"
+      }
+    ],
+    "qualification": "Five known favicon404 samples only; no complete error-rate or p95 measurement."
+  },
+  "source_report": {
+    "executed": false,
+    "reason": "Same deployed644source; previous current report retained; no unchanged-body scan."
+  },
+  "public_health": {
+    "status": "not_retried_unchanged_collection_limit",
+    "last_client_status": 403,
+    "last_observed_at": "2026-11-17T09:51:36.003822+00:00",
+    "site_outage_proven": false
+  },
+  "stability": {
+    "qualification_started_at": null,
+    "gates_changed": false,
+    "daily_summary_due": false
+  },
+  "new_articles_verified": 0,
+  "controller_publications": 0,
+  "controller_site_deployments": 0,
+  "visuals": {
+    "desktop": "not performed",
+    "mobile": "pending"
+  },
+  "remaining": [
+    "203 historical Actions entries across8groups",
+    "Economy12:00run/result reconciliation on next existing cycle",
+    "Gedera authenticated component editor unchanged; no retry",
+    "644 magazine independent body readback pending403",
+    "Existing source research queues, CMS publicproof, mobile reviews and backup/restore/hostedcapacity gates"
+  ],
+  "metrics": {
+    "public_GETs": 0,
+    "API_calls": null,
+    "cost": null
+  }
+}
