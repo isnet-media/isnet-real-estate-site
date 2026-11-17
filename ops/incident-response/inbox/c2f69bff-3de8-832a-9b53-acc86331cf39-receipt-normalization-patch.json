@@ -1,0 +1,22 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "c2f69bff-3de8-832a-9b53-acc86331cf39",
+  "runKey": "ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-17T11:23:11.266Z",
+  "signature": "tlvnet/publication-evidence/owner-receipt-shape-aliases",
+  "status": "isolated_patch_tested_pending_existing_release",
+  "patch": "ops/incident-response/patches/c2f69bff-3de8-832a-9b53-acc86331cf39-publication-receipt-shapes.patch",
+  "source_base": "8b596d0e3f1eee83c51c06cee636872b4d5d8573",
+  "change": "Accept explicit source_commit_verified and version aliases. Normalize economy/culture hashed proof shapes only when body/asset hashes, credit/title/body, home/section and image flags match current articles. Classify verification-only receipts separately from substantive updates. Preserve no fake runtime IDs.",
+  "tests": [
+    "Existing sports/consumer positive and negative regression suite passed",
+    "New economy/culture alias and hash/flag/reference/deployment/version/source mutation tests passed; draft denial",
+    "Real current source: economy3 and culture2 proofs recognized; culture publication kind left unspecified absent explicit new IDs",
+    "git apply --check against current source passed; live checkout remained clean"
+  ],
+  "live_status": "not deployed; not fixed_verified",
+  "next_action": "Apply/reconcile patch only on next actual existing owner release, under fresh source/CAS lease; run foundation regression. No journal-only build/deploy.",
+  "evidence": "ops/incident-response/evidence/ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39.json",
+  "controller_invoked": false
+}
