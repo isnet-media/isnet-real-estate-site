@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T19:54:17.432Z",
+  "updated_at": "2026-11-17T20:51:53.427Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1952,6 +1952,19 @@
           "at": "2026-11-09T23:40:40.0148018Z",
           "failure": "syncing_files timeout",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42720707980"
+        },
+        {
+          "run_id": 42698248119,
+          "job_id": 129435794502,
+          "source_commit": "f342ed3a6bd5303d9537ed08b0244032cba7a593",
+          "at": "2026-11-09T21:12:52.6427188Z",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42698248119",
+          "status_counts": {
+            "deployment_in_progress": 1,
+            "syncing_files": 113,
+            "empty_terminal": 1
+          },
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-f9ff76e8-d310-8326-9bc8-05441614cee9.json"
         }
       ],
       "evidence": {
@@ -1972,17 +1985,11 @@
         "underlying_provider_cause": "unconfirmed"
       },
       "last_historical_review": {
-        "run_id": 42720707980,
-        "job_id": 129513651250,
-        "source_commit": "472e46f1102a97d06fbcff62bdcdf6410ff07317",
-        "failed_step": "Deploy",
-        "failure_at": "2026-11-09T23:40:40.0148018Z",
-        "signature": "historical-pages-sync-files-timeout",
-        "excerpt": "deployment_in_progress then syncing_files until Timeout reached, aborting!",
+        "runKey": "ops-2026-11-17-f9ff76e8-d310-8326-9bc8-05441614cee9",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-f9ff76e8-d310-8326-9bc8-05441614cee9.json",
+        "run_id": 42698248119,
         "current_recurrence": false,
-        "remaining": 194,
-        "observed_at": "2026-11-17T19:54:17.432Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-17-d2ceec3f-4030-832a-bd88-2e5f38c8c244.json"
+        "underlying_provider_cause": "unconfirmed"
       }
     },
     {
@@ -5454,7 +5461,7 @@
       "controller_retry": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-d2ceec3f-4030-832a-bd88-2e5f38c8c244",
+  "last_review_runKey": "ops-2026-11-17-f9ff76e8-d310-8326-9bc8-05441614cee9",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
