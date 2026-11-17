@@ -1,0 +1,165 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "c2f69bff-3de8-832a-9b53-acc86331cf39",
+  "runKey": "ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39",
+  "policy_version": "2026-11-15/1.2",
+  "started_at": "2026-11-17T11:17:54.702386Z",
+  "observed_at": "2026-11-17T11:23:11.266Z",
+  "scope": [
+    "TLVNET seven-desk source report delta",
+    "Economy completed run and active community owner",
+    "Actions delta/one historical root",
+    "social new metadata",
+    "ISNET source-backup artifact metadata"
+  ],
+  "deployment": {
+    "version_number": 644,
+    "source_commit": "0a5ea5d4e50d8b9ef4ae19cc087ef64514cab6d7",
+    "deployment_id": "appgdep_6afc16ba10048191b665648cba5a8742",
+    "status": "previously confirmed succeeded; same current version",
+    "changed": false
+  },
+  "current_source": {
+    "commit": "8b596d0e3f1eee83c51c06cee636872b4d5d8573",
+    "opened_with_native_helper": true,
+    "source_report_executed": true,
+    "drafts": 0
+  },
+  "economy": {
+    "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+    "run": {
+      "id": "12219b46-3020-8323-9c31-d1c4b27dbe53",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-17T10:00:00Z",
+      "started_at": "2026-11-17T10:34:20.150671Z",
+      "completed_at": "2026-11-17T10:43:04.501025Z",
+      "chat_ref": {
+        "type": "chatgpt",
+        "id": "6af6e7ee-aef4-83eb-9a15-53e6dba697c9"
+      }
+    },
+    "reported_existing_verified": 3,
+    "new_articles": 0,
+    "old_handoffs_covered": 4,
+    "coverage_complete": false,
+    "deferred_candidate_ids": [
+      "manpower-tlv-q4-2026-outlook",
+      "boi-bank-technology-exercise-20261117",
+      "telavivi-tonica-neighborhood-app"
+    ],
+    "root_triage": "Published16Nov backlog resolved; four old handoffs closed and bounded new discovery recorded. Individual source/local relevance blocks retained, no domain-wide item blocker found. No assertion all news exhausted. Next owner should continue current candidates/cursor and consider original sourced alternative when no mature new item."
+  },
+  "community": {
+    "task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+    "run": {
+      "id": "43049e17-c924-8324-8573-a5ce8a8c8de8",
+      "recorded_status": "in_progress",
+      "scheduled_for": "2026-11-17T11:00:00Z",
+      "started_at": "2026-11-17T10:59:09.650705Z",
+      "completed_at": null,
+      "chat_ref": null
+    },
+    "lease_state": "held",
+    "lease_until": "2026-11-17T11:42:43.000Z",
+    "action": "Priority preserved; controller made no Site source write or deployment."
+  },
+  "normalization_patch": {
+    "status": "isolated_patch_tested_pending_existing_release",
+    "patch": "ops/incident-response/patches/c2f69bff-3de8-832a-9b53-acc86331cf39-publication-receipt-shapes.patch",
+    "source_base": "8b596d0e3f1eee83c51c06cee636872b4d5d8573",
+    "change": "Accept explicit source_commit_verified and version aliases. Normalize economy/culture hashed proof shapes only when body/asset hashes, credit/title/body, home/section and image flags match current articles. Classify verification-only receipts separately from substantive updates. Preserve no fake runtime IDs.",
+    "tests": [
+      "Existing sports/consumer positive and negative regression suite passed",
+      "New economy/culture alias and hash/flag/reference/deployment/version/source mutation tests passed; draft denial",
+      "Real current source: economy3 and culture2 proofs recognized; culture publication kind left unspecified absent explicit new IDs",
+      "git apply --check against current source passed; live checkout remained clean"
+    ],
+    "live_status": "not deployed; not fixed_verified",
+    "next_action": "Apply/reconcile patch only on next actual existing owner release, under fresh source/CAS lease; run foundation regression. No journal-only build/deploy."
+  },
+  "actions": {
+    "from": "2026-11-17T03:16:56Z",
+    "through": "2026-11-17T10:44:26Z",
+    "new_rows": [
+      {
+        "id": 44067362245,
+        "workflow": "Daily ISNET source backup",
+        "status": "success"
+      },
+      {
+        "id": 44067601031,
+        "workflow": "Record operation failures",
+        "status": "skipped"
+      }
+    ],
+    "new_failures": 0,
+    "pending": [],
+    "historical": {
+      "run_id": 43023331753,
+      "job_id": 130532195701,
+      "signature": "ashdod unresolved candidates before release / actual1 expected0",
+      "source_commit": "9207714e1f3ecb7274a8567f47cba31fc91ab562",
+      "classification": "Historical known integrity gate; deployment skipped, no current recurrence.",
+      "excerpt": [
+        "2:49:12.2115145Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:49:12.2115590Z \\n2026-11-11T12:49:12.2115664Z 1 !== 0\\n2026-11-11T12:49:12.2115758Z \\n2026-11-11T12:49:1",
+        "4Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:49:12.2119929Z   actual: 1,\\n2026-11-11T12:49:12.2120045Z   expected: 0,\\n2026-11-11T12:49:12.2120167Z   operator: 'strictEqual',\\n2026-11-11T12"
+      ],
+      "remaining": 202
+    }
+  },
+  "source_backup": {
+    "run_id": 44067362245,
+    "repository": "isnet-media/isnet-real-estate-site",
+    "source_commit": "3e840be2d2db80d6c7e02007e8abdd912425c456",
+    "status": "success",
+    "artifact_id": 14320613420,
+    "size_bytes": 919390844,
+    "digest": "sha256:9a5ae1f711acc3f142e99f0e3fceb61d307ecca1d8848cfbc1d765a77eb50d31",
+    "created_at": "2026-11-17T10:44:20Z",
+    "expires_at": "2026-11-24T10:44:10Z",
+    "scope": "Workflow Git bundle --all, verify and clone check for two ISNET source files; seven-day artifact. No artifact download or independent restore this cycle.",
+    "TLVNET_full_backup_gate_satisfied": false,
+    "reason": "Different repository source backup; no TLVNET D1/R2/runtime secrets or running isolated full restore proof."
+  },
+  "social": {
+    "new_rows": [
+      {
+        "slot": "2026-11-17T11",
+        "status": "published",
+        "article_url": "https://tlvnet.com/news/hapoel-baskonia-paris-away-week-preview-20261116.html",
+        "post_id": "1520426491146188_122107667343545268",
+        "detail": null,
+        "started_at": "2026-11-17T11:00:01.495Z",
+        "finished_at": "2026-11-17T11:00:10.292Z"
+      }
+    ],
+    "public_proof": "API receipt only; no exact publicpost or organic-reach verification; no sends"
+  },
+  "public_readback": {
+    "performed": false,
+    "reason": "Same644public bodies and known unchanged403 collection limitation; owner economy fresh byte proofs recorded separately, no bypass."
+  },
+  "inbox": {
+    "new_originating_events": 0
+  },
+  "new_controller_published_verified": 0,
+  "controller_site_changes": 0,
+  "controller_deployments": 0,
+  "stability": {
+    "qualification_started_at": null,
+    "gates_changed": false,
+    "daily_summary_due": false
+  },
+  "remaining": [
+    "Active community run43049e17 completion/public output",
+    "Next genuine release of isolated receipt normalization patch",
+    "202historical Actions entries",
+    "Gedera component-editor authentication unchanged",
+    "Existing CMS/mobile/public proof and backup/fullrestore/hostedcapacity prerequisites"
+  ],
+  "metrics": {
+    "public_GETs": 0,
+    "API_calls": null,
+    "cost": null
+  }
+}
