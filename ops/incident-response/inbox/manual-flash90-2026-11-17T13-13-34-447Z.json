@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "incident_id": "flash90-cloud-session-not-retained",
+  "status": "awaiting_external_action",
+  "checked_at": "2026-11-17T13:13:34.447Z",
+  "runKey": "manual-flash90-2026-11-17T13-13-34-447Z",
+  "task_id": null,
+  "scheduled_run_id": null,
+  "controller_agent_id": "Automation_9776808c73848191a9d748dd09315960",
+  "policy_version": "2026-11-15/1.2",
+  "trigger": "Explicit publisher request to verify independent cloud login/download and last download date",
+  "target": "TLVNET",
+  "provider": "Flash90",
+  "observations": [
+    {
+      "attempt": 1,
+      "method": "normal subscriber UI with secure browserAuth",
+      "login": "submitted; target home visibly showed tlvnet",
+      "subsequent_item": "returned Login; low-resolution download showed Id 848165: Log in to continue",
+      "download_verified": false
+    },
+    {
+      "attempt": 2,
+      "material_change": "stay signed in checked; navigation through site's search UI",
+      "login": "submitted; target home visibly showed tlvnet",
+      "subsequent_search": "search returned matching asset but header reverted to Login",
+      "download_verified": false
+    }
+  ],
+  "root_cause": "Not established. Signed-in UI did not persist across normal site navigation in this cloud session. No assertion of invalid password, global outage or bot block.",
+  "historical_evidence": {
+    "site_source_sha": "e696b29952ef9d8b48b29bdb4a405589353328c8",
+    "site_version": 646,
+    "flash90_assets": 46,
+    "all_bank_checked_at": "2026-11-08T13:37:33.538918+00:00",
+    "independent_download_timestamp_present": false,
+    "latest_article_use_in_source": {
+      "article_id": "gross-fogel-suzanne-science-philosophy-20261117",
+      "published_at": "2026-11-17T07:46:59.284021+00:00",
+      "photo_bank_id": "flash90-F180606MA14"
+    },
+    "later_log_evidence": "Photo bank runs on 11-12 Nov reported authenticated subscriber catalogue unavailable; existing licensed archive assets reused."
+  },
+  "next_action": "Supplier/session investigation or publisher-approved normal cloud authentication continuation; do not repeat unchanged attempts, export cookies, use local-PC downloads or assert unattended success.",
+  "new_photos_downloaded": 0,
+  "published_articles": 0,
+  "manual_user_pc_downloads": 0,
+  "deploy_requested": false,
+  "cost_measured": false,
+  "secrets_stored": false
+}
