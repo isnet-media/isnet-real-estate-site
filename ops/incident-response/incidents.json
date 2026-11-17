@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T00:39:05.832Z",
+  "updated_at": "2026-11-17T01:18:30.489Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -809,19 +809,46 @@
           "HTTP_errors_in_this_log": false,
           "observed_at": "2026-11-17T00:39:05.832Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json"
+        },
+        {
+          "run_id": 42770453562,
+          "workflow": "All cities supermarket public health",
+          "path": ".github/workflows/super-health.yml",
+          "attempt": 1,
+          "created_at": "2026-11-10T06:43:43Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "0ae2339562253517483b346922a29c96509cf597",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42770453562",
+          "classification": "Historical retained-source subtype: Ashdod4/Holon7/BatYam4; all7editions overdue using Nov9source. No HTTP error observed in this log. Upstream cause unestablished; legacy daily policy is not current schedule.",
+          "job_id": 129676756411,
+          "incident_id": "supermarket-public-http-and-stale-branches",
+          "failed_step": "Run python scripts/check_super_public.py",
+          "signature": "historical public-data freshness / retained sources + legacy daily overdue",
+          "observed_at": "2026-11-17T01:18:30.489Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json"
         }
       ],
       "latest_historical_triage": {
-        "observed_at": "2026-11-15T10:12:56.081Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-15-47c3a058-30a4-8326-a2a9-41f9d751c10f.json",
-        "run_id": 43040005387,
-        "rishon_stale": 7,
-        "tlv_stale": 19,
-        "current_public_check": false,
-        "repair_performed": false
+        "run_id": 42770453562,
+        "workflow": "All cities supermarket public health",
+        "path": ".github/workflows/super-health.yml",
+        "attempt": 1,
+        "created_at": "2026-11-10T06:43:43Z",
+        "status": "completed",
+        "conclusion": "failure",
+        "source_commit": "0ae2339562253517483b346922a29c96509cf597",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42770453562",
+        "classification": "Historical retained-source subtype: Ashdod4/Holon7/BatYam4; all7editions overdue using Nov9source. No HTTP error observed in this log. Upstream cause unestablished; legacy daily policy is not current schedule.",
+        "job_id": 129676756411,
+        "incident_id": "supermarket-public-http-and-stale-branches",
+        "failed_step": "Run python scripts/check_super_public.py",
+        "signature": "historical public-data freshness / retained sources + legacy daily overdue",
+        "observed_at": "2026-11-17T01:18:30.489Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json"
       },
-      "last_seen_at": "2026-11-17T00:39:05.832Z",
-      "remaining_historical_review": 218
+      "last_seen_at": "2026-11-17T01:18:30.489Z",
+      "remaining_historical_review": "216 historical run entries across8workflow groups; no new current failure established."
     },
     {
       "id": "holon-new-screening-unverified-poster",
@@ -4617,7 +4644,7 @@
       "status": "open",
       "severity": "historical",
       "first_seen_at": "2026-11-16T20:32:20.276Z",
-      "last_seen_at": "2026-11-17T00:39:05.832Z",
+      "last_seen_at": "2026-11-17T01:18:30.489Z",
       "root_cause": "11Nov event-integrity gate reported one unresolved Ashdod candidate at scripts/test-event-integrity.cjs126; exact candidate identity/deeper cause not established from log.",
       "workflow": ".github/workflows/pages.yml",
       "run_id": 43049169659,
@@ -4678,9 +4705,39 @@
           "classification": "Known historical integrity gate; candidate identity and deeper cause not established; deployment skipped; not current recurrence.",
           "observed_at": "2026-11-17T00:39:05.832Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json"
+        },
+        {
+          "run_id": 43039663211,
+          "attempt": 1,
+          "created_at": "2026-11-11T14:33:47Z",
+          "source_commit": "0132527323f50b98bf8c4b669a2b52701656a0e6",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43039663211",
+          "classification": "Known historical release integrity gate; deploy skipped. Earlier nonblocking missing-source QA also observed; affected candidate/source identity not established. Not a current recurrence.",
+          "path": ".github/workflows/pages.yml",
+          "job_id": 130587749763,
+          "incident_id": "historical-event-release-unresolved-candidate",
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "signature": "scripts/test-event-integrity.cjs / ashdod unresolved candidates before release / actual1 expected0",
+          "observed_at": "2026-11-17T01:18:30.489Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json"
         }
       ],
-      "remaining_historical_review": 218
+      "remaining_historical_review": "216 historical run entries across8workflow groups; no new current failure established.",
+      "latest_historical_triage": {
+        "run_id": 43039663211,
+        "attempt": 1,
+        "created_at": "2026-11-11T14:33:47Z",
+        "source_commit": "0132527323f50b98bf8c4b669a2b52701656a0e6",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43039663211",
+        "classification": "Known historical release integrity gate; deploy skipped. Earlier nonblocking missing-source QA also observed; affected candidate/source identity not established. Not a current recurrence.",
+        "path": ".github/workflows/pages.yml",
+        "job_id": 130587749763,
+        "incident_id": "historical-event-release-unresolved-candidate",
+        "failed_step": "Build compact event listings and canonical sitemap",
+        "signature": "scripts/test-event-integrity.cjs / ashdod unresolved candidates before release / actual1 expected0",
+        "observed_at": "2026-11-17T01:18:30.489Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json"
+      }
     },
     {
       "id": "controller-source-report-scratch-cache-unavailable",
@@ -4696,7 +4753,7 @@
       "production_changed": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d",
+  "last_review_runKey": "ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
