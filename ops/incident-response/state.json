@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T00:39:05.832Z",
+  "updated_at": "2026-11-17T01:18:30.489Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-16T20:36:04Z",
   "initial_history": {
@@ -17,8 +17,8 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "218historical run entries remain in8workflow groups.",
-      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json"
+      "remaining": "216 historical run entries remain in 8 workflow groups.",
+      "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json"
     },
     "full_logs_read_this_cycle": 2,
     "unconfirmed_publish_failure_ids": [
@@ -52,14 +52,6 @@
     "metadata_runs_total": 3102,
     "untriaged_workflow_groups": {
       ".github/workflows/pages.yml": [
-        {
-          "run_id": 43039663211,
-          "attempt": 1,
-          "created_at": "2026-11-11T14:33:47Z",
-          "source_commit": "0132527323f50b98bf8c4b669a2b52701656a0e6",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43039663211",
-          "classification": "historical metadata only; root signature not confirmed in this cycle"
-        },
         {
           "run_id": 43026800941,
           "attempt": 1,
@@ -937,18 +929,6 @@
         }
       ],
       ".github/workflows/super-health.yml": [
-        {
-          "run_id": 42770453562,
-          "workflow": "All cities supermarket public health",
-          "path": ".github/workflows/super-health.yml",
-          "attempt": 1,
-          "created_at": "2026-11-10T06:43:43Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "0ae2339562253517483b346922a29c96509cf597",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42770453562",
-          "classification": "Historical metadata only; signature unconfirmed; no present-failure or recovery claim."
-        },
         {
           "run_id": 42763524782,
           "workflow": "All cities supermarket public health",
@@ -2659,24 +2639,31 @@
         }
       ]
     },
-    "metadata_rows_inspected_this_cycle": 1,
+    "metadata_rows_inspected_this_cycle": 0,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
-      "observed_at": "2026-11-16T15:56:31.918Z",
+      "observed_at": "2026-11-17T01:18:30.489Z",
       "last_run_ids": [
-        42711431596
+        43039663211,
+        42770453562
       ],
-      "evidence": "ops/incident-response/evidence/ops-2026-11-16-b28a8a3c-a510-8332-b4c5-feedac37ad04.json",
-      "remaining_run_entries": 225,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json",
+      "remaining_run_entries": 216,
       "remaining_workflow_groups": 8,
-      "grouping_basis": "Exact no-current-period guard error; historical expired-vs-future source not established."
+      "grouping_basis": "Exact historical job/step/log signatures; no current recurrence or upstream source cause inferred."
     },
     "latest_root_triage": {
-      "observed_at": "2026-11-16T18:24:05.469Z",
-      "run_id": 43074679220,
-      "incident": "historical-publication-duplicate-gate-pre-repair",
-      "remaining": 224,
-      "evidence": "ops/incident-response/evidence/ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5.json"
+      "observed_at": "2026-11-17T01:18:30.489Z",
+      "run_ids": [
+        43039663211,
+        42770453562
+      ],
+      "incidents": [
+        "historical-event-release-unresolved-candidate",
+        "supermarket-public-http-and-stale-branches"
+      ],
+      "remaining": 216,
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json"
     }
   },
   "inbox_path": "ops/incident-response/inbox/",
@@ -2727,21 +2714,21 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "57a66860-9cf0-832e-8e8f-b37fffef084d",
-    "runKey": "ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d",
+    "run_id": "08f3c081-476c-832e-8514-06ea6b544e8c",
+    "runKey": "ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c",
     "policy_version": "2026-11-15/1.2",
-    "started_at": "2026-11-17T00:30:07.990771Z",
-    "observed_at": "2026-11-17T00:39:05.832Z",
+    "started_at": "2026-11-17T01:13:21.092677Z",
+    "observed_at": "2026-11-17T01:18:30.489Z",
     "local_date": "2026-11-17",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json",
-    "observation": "ops/tlvnet-stability/observations/2026-11-17/57a66860-9cf0-832e-8e8f-b37fffef084d.json",
-    "status": "no_new_publication_failure_source_report_collection_limited",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json",
+    "observation": "ops/tlvnet-stability/observations/2026-11-17/08f3c081-476c-832e-8514-06ea6b544e8c.json",
+    "status": "no_new_publication_failure_unchanged_known_collection_limit",
     "saved_version": 638,
     "source_commit": "6e73e81e8ce5a93b6c64ab6bd0dc5199ddb1ebc9",
     "new_actions": 0,
     "full_logs_read": 2,
     "historical_records_classified": 2,
-    "historical_remaining": 218,
+    "historical_remaining": 216,
     "newly_verified_articles": 0,
     "new_site_deployments": 0,
     "source_report_executed": false
@@ -5181,6 +5168,27 @@
       "newly_verified_articles": 0,
       "new_site_deployments": 0,
       "source_report_executed": false
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "08f3c081-476c-832e-8514-06ea6b544e8c",
+      "runKey": "ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c",
+      "policy_version": "2026-11-15/1.2",
+      "started_at": "2026-11-17T01:13:21.092677Z",
+      "observed_at": "2026-11-17T01:18:30.489Z",
+      "local_date": "2026-11-17",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json",
+      "observation": "ops/tlvnet-stability/observations/2026-11-17/08f3c081-476c-832e-8514-06ea6b544e8c.json",
+      "status": "no_new_publication_failure_unchanged_known_collection_limit",
+      "saved_version": 638,
+      "source_commit": "6e73e81e8ce5a93b6c64ab6bd0dc5199ddb1ebc9",
+      "new_actions": 0,
+      "full_logs_read": 2,
+      "historical_records_classified": 2,
+      "historical_remaining": 216,
+      "newly_verified_articles": 0,
+      "new_site_deployments": 0,
+      "source_report_executed": false
     }
   ],
   "photo_controls_checkpoint": {
@@ -5885,8 +5893,8 @@
       "2026-11-16T18",
       "2026-11-16T19"
     ],
-    "observed_at": "2026-11-17T00:39:05.832Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json",
+    "observed_at": "2026-11-17T01:18:30.489Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json",
     "new_rows_this_cycle": 0,
     "public_verification": "API receipt only; public post and organic reach unverified; no resend."
   },
@@ -6845,8 +6853,8 @@
       }
     },
     "qualification": "Seven owner exact run IDs/source635unchanged; prior lead/deadline signature proof retained; no new full-body or rendered verification.",
-    "metadata_checked_at": "2026-11-17T00:39:05.832Z",
-    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json",
+    "metadata_checked_at": "2026-11-17T01:18:30.489Z",
+    "latest_metadata_evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json",
     "date_rollover": {
       "local_date": "2026-11-17",
       "checked_at": "2026-11-16T22:49:36.943Z",
@@ -7294,7 +7302,7 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-17T00:39:05.832Z",
+    "observed_at": "2026-11-17T01:18:30.489Z",
     "from": "2026-11-16T20:36:04Z",
     "through": "2026-11-16T20:36:04Z",
     "rows": 1,
@@ -7303,10 +7311,10 @@
     "next_page": null,
     "full_logs_read": 2,
     "historical_full_logs": 2,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json"
+    "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json"
   },
   "remaining_followup": [
-    "218 historical Actions entries in8groups",
+    "216 historical Actions entries in8groups",
     "18historical inbox paths",
     "Raanana811636 original/served image hash and desktop/mobile screenshot review",
     "5ISNET future homepage-card followups, original existing incident",
@@ -7342,8 +7350,8 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-17T00:39:05.832Z",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json",
+    "observed_at": "2026-11-17T01:18:30.489Z",
+    "evidence": "ops/incident-response/evidence/ops-2026-11-17-08f3c081-476c-832e-8514-06ea6b544e8c.json",
     "published_source_commit": "6e73e81e8ce5a93b6c64ab6bd0dc5199ddb1ebc9",
     "published_source_unchanged": true,
     "repository_head_refreshed": false,
@@ -7351,15 +7359,16 @@
     "owner_results_unchanged": true,
     "prepared_count": "not_recomputed_source_unavailable",
     "public_health": {
+      "checked_at": "2026-11-17T01:17:43.014262+00:00",
       "url": "https://tlvnet.com/home.html",
       "status": 200,
       "bytes": 121079,
       "sha256": "2c2116fabc45288643a17936b8d350ab2d96dc40ec5a873014b7eb4a03e289c8",
+      "elapsed_ms": 12714,
       "matches_previous_verified_home": true,
-      "elapsed_ms": 12756,
-      "scope": "One public TLVNET page, client/proxy latency only"
+      "scope": "One public home request; client/proxy latency, not origin latency, p95 or continuous availability."
     },
-    "new_incident": "controller-source-report-scratch-cache-unavailable"
+    "new_incident": null
   },
   "latest_owner_publication_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -7477,7 +7486,7 @@
     "evidence": "ops/incident-response/evidence/ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5.json"
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-17T00:39:05.832Z",
+    "observed_at": "2026-11-17T01:18:30.489Z",
     "files": [
       {
         "name": "01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -7610,6 +7619,10 @@
       {
         "name": "56a526f7-4760-8320-a519-595bd865e651-1.json",
         "sha": "09c8a5157cab70b10f53a6e18227e55ab5c0bac1"
+      },
+      {
+        "name": "57a66860-9cf0-832e-8e8f-b37fffef084d-source-report-cache-checkpoint.json",
+        "sha": "ffeb59f67bab99a0915462e5dd18b9b5ceceffd3"
       },
       {
         "name": "5a385977-ca7c-8322-af47-4efed6bfbc13-1.json",
@@ -7778,13 +7791,9 @@
       {
         "name": "work-readiness-20261115-616.json",
         "sha": "776685a1d097ea753cbad8ce0f6d42e8952fcad0"
-      },
-      {
-        "name": "57a66860-9cf0-832e-8e8f-b37fffef084d-source-report-cache-checkpoint.json",
-        "sha": "ffeb59f67bab99a0915462e5dd18b9b5ceceffd3"
       }
     ],
-    "next_action": "Skip unchanged bodies by saved SHA and processed basename"
+    "next_action": "Read only new/changed immutable entries next cycle."
   },
   "source_report_checkpoint": {
     "observed_at": "2026-11-17T00:39:05.832Z",
