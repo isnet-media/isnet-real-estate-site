@@ -1,0 +1,62 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "bf0a0de9-2d6c-832a-8038-987bf8ba1b09",
+  "runKey": "ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-17T10:31:58.785Z",
+  "latest_deployment": {
+    "version_number": 644,
+    "source_commit": "0a5ea5d4e50d8b9ef4ae19cc087ef64514cab6d7",
+    "deployment_id": "appgdep_6afc16ba10048191b665648cba5a8742",
+    "status": "succeeded",
+    "changed": false
+  },
+  "evidence": "ops/incident-response/evidence/ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09.json",
+  "source_report_executed": false,
+  "worker_error_sample": {
+    "since_minutes": 60,
+    "limit": 10,
+    "errors_only": true,
+    "events": [
+      {
+        "timestamp": "2026-11-17T10:18:15.204Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "297fdd9e17de73dea7fbbbeebb0cf4a1"
+      },
+      {
+        "timestamp": "2026-11-17T10:18:14.389Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "4208e6f7e07be3dc31d775b5f3f9d4b7"
+      },
+      {
+        "timestamp": "2026-11-17T10:16:50.916Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "a22e8c71e0bfe159a851c60934ddc337"
+      },
+      {
+        "timestamp": "2026-11-17T10:16:39.277Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "a26040319cc6b9b9a2ace3be79d61cf9"
+      },
+      {
+        "timestamp": "2026-11-17T09:41:09.667Z",
+        "status": 404,
+        "outcome": "ok",
+        "request_id": "d5dad4d862577c1bb70ceb4a80a12d4a"
+      }
+    ],
+    "qualification": "Five known favicon404 samples only; no complete error-rate or p95 measurement."
+  },
+  "public_health": {
+    "status": "not_retried_unchanged_collection_limit",
+    "last_client_status": 403,
+    "last_observed_at": "2026-11-17T09:51:36.003822+00:00",
+    "site_outage_proven": false
+  },
+  "qualification_started_at": null,
+  "gates_changed": false
+}
