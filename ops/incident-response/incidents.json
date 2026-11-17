@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T14:59:10.616Z",
+  "updated_at": "2026-11-17T16:07:36.283Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -530,7 +530,7 @@
         "job_id": 131274308791
       },
       "resolution": "Freshness protection retained; no false repair or stale-as-current publication claimed.",
-      "next_action": "On the next permitted weather cycle, inspect source issue/time ranges against Israel time; distinguish delayed runner from upstream gap and fix only supported cause.",
+      "next_action": "Do not weaken validation or publish future periods as current. Revisit at a valid-time boundary/source change in an existing cycle through established owner/claim publication path.",
       "occurrences": [
         {
           "run_id": 42757125108,
@@ -593,7 +593,20 @@
         "source_date_preserved": true,
         "current_public_status": "not checked",
         "change": "Historical root classification only; no source request, retry, code change or deployment."
-      }
+      },
+      "last_occurrence": {
+        "run_id": 44120134085,
+        "job_id": 134168902341,
+        "attempt": 1,
+        "created_at": "2026-11-17T15:56:55Z",
+        "exact_error": "No currently valid forecast; retaining last good file",
+        "source_issue": "2026-11-17T16:04",
+        "valid_from": "2026-11-17T20:00",
+        "source_sha256": "e7f5d9837ea56a753f6737a9dc2aecccd6aa4c7d52b31b44a46610b0b03a7b68",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-cc75c56c-8d44-832a-ab62-ec49342f2e6c.json"
+      },
+      "last_observed_at": "2026-11-17T16:07:36.283Z",
+      "public_widget_current_status": "not independently checked"
     },
     {
       "id": "github-notifications-mailbox-mismatch",
@@ -1913,12 +1926,12 @@
         "underlying_provider_cause": "unconfirmed"
       },
       "last_historical_review": {
-        "run_id": 42828222300,
-        "job_id": 129871096285,
-        "source_commit": "d867701074d326b07566cb73846dd818bbaa6415",
-        "observed_at": "2026-11-17T14:59:10.616Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-17-59384ee9-483c-832a-9e14-b08fdf8a7561.json",
-        "classification": "same provider syncing_files timeout; no new current failure or repair"
+        "run_id": 42763381493,
+        "job_id": 129654543532,
+        "source_commit": "2dd14623320e6f86ca8454899783d156b222d6e0",
+        "observed_at": "2026-11-17T16:07:36.283Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-cc75c56c-8d44-832a-ab62-ec49342f2e6c.json",
+        "classification": "same historical syncing_files timeout; no current recurrence/fix claim"
       }
     },
     {
@@ -4749,7 +4762,10 @@
         "parser_result": "Both213/210valid after real20:00 threshold",
         "evidence": "ops/incident-response/evidence/ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5.json",
         "production_data_written": false
-      }
+      },
+      "canonical_incident_id": "ims-no-valid-current-period",
+      "last_controller_observed_at": "2026-11-17T16:07:36.283Z",
+      "last_evidence": "ops/incident-response/evidence/ops-2026-11-17-cc75c56c-8d44-832a-ab62-ec49342f2e6c.json"
     },
     {
       "id": "tlvnet-publication-evidence-owner-schema",
