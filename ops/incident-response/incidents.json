@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T03:08:55.683Z",
+  "updated_at": "2026-11-17T04:32:56.813Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2941,6 +2941,24 @@
           "created_at": "2026-11-15T12:50:47Z",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43715912284",
           "evidence": "ops/incident-response/evidence/continuity-repair-20261115T130716Z.json"
+        },
+        {
+          "run_id": 42580667040,
+          "workflow": "Verify public event feed read-back",
+          "path": ".github/workflows/public-events-readback-audit.yml",
+          "attempt": 1,
+          "created_at": "2026-11-09T07:39:00Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "30bd5d08281548fca4196815c1e42848c9aca87c",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42580667040",
+          "classification": "Historical9NovJSON readback: Ashdod969source/public IDs and counts equal,6full-record differences, priority-field differences empty; Rishon2156source/public records match. BothHTTP200, no missing/extra/duplicateIDs. Exact differing fields/upstream cause unestablished; no current public or visual verification.",
+          "job_id": 129038328856,
+          "incident_id": "historical-public-events-full-record-parity-mismatch",
+          "failed_step": "Compare public JSON with normalized current GitHub feed",
+          "signature": "full-record public JSON parity / Ashdod6 differing records / priority fields equal",
+          "observed_at": "2026-11-17T04:32:56.813Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-d39e4690-16f8-832e-bb4b-892a7e0ba5f5.json"
         }
       ],
       "observed_at": "2026-11-14T08:29:54.014Z",
@@ -2973,7 +2991,27 @@
         "conclusion": "success",
         "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json",
         "qualification": "Different snapshot; historical mismatch cause not proved fixed. No re-read of unchanged failure log."
-      }
+      },
+      "last_seen_at": "2026-11-17T04:32:56.813Z",
+      "latest_historical_triage": {
+        "run_id": 42580667040,
+        "workflow": "Verify public event feed read-back",
+        "path": ".github/workflows/public-events-readback-audit.yml",
+        "attempt": 1,
+        "created_at": "2026-11-09T07:39:00Z",
+        "status": "completed",
+        "conclusion": "failure",
+        "source_commit": "30bd5d08281548fca4196815c1e42848c9aca87c",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42580667040",
+        "classification": "Historical9NovJSON readback: Ashdod969source/public IDs and counts equal,6full-record differences, priority-field differences empty; Rishon2156source/public records match. BothHTTP200, no missing/extra/duplicateIDs. Exact differing fields/upstream cause unestablished; no current public or visual verification.",
+        "job_id": 129038328856,
+        "incident_id": "historical-public-events-full-record-parity-mismatch",
+        "failed_step": "Compare public JSON with normalized current GitHub feed",
+        "signature": "full-record public JSON parity / Ashdod6 differing records / priority fields equal",
+        "observed_at": "2026-11-17T04:32:56.813Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-d39e4690-16f8-832e-bb4b-892a7e0ba5f5.json"
+      },
+      "remaining_historical_review": "210 historical entries across8workflow groups; no new current failure established."
     },
     {
       "id": "future-cms-create-post-optional-payload-validation",
@@ -4680,7 +4718,7 @@
       "status": "open",
       "severity": "historical",
       "first_seen_at": "2026-11-16T20:32:20.276Z",
-      "last_seen_at": "2026-11-17T03:08:55.683Z",
+      "last_seen_at": "2026-11-17T04:32:56.813Z",
       "root_cause": "11Nov event-integrity gate reported one unresolved Ashdod candidate at scripts/test-event-integrity.cjs126; exact candidate identity/deeper cause not established from log.",
       "workflow": ".github/workflows/pages.yml",
       "run_id": 43049169659,
@@ -4788,24 +4826,40 @@
           "signature": "scripts/test-event-integrity.cjs / ashdod unresolved candidates before release / actual2 expected0",
           "observed_at": "2026-11-17T03:08:55.683Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-bbb95af5-26f8-832e-98c2-7641462cce8d.json"
+        },
+        {
+          "run_id": 43026113733,
+          "attempt": 1,
+          "created_at": "2026-11-11T13:06:15Z",
+          "source_commit": "5366eefb5244f990490174585c7a4014f0347a9e",
+          "workflow": "Publish priceboard",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43026113733",
+          "classification": "Historical integrity gate;2unresolved candidates; deploy skipped. Earlier missing-source nonblocking QA also observed. Candidate/source identity and deeper cause unestablished. Not current recurrence.",
+          "path": ".github/workflows/pages.yml",
+          "job_id": 130541224722,
+          "incident_id": "historical-event-release-unresolved-candidate",
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "signature": "event integrity / ashdod unresolved candidates / actual2 expected0",
+          "observed_at": "2026-11-17T04:32:56.813Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-d39e4690-16f8-832e-bb4b-892a7e0ba5f5.json"
         }
       ],
-      "remaining_historical_review": "212 historical entries across8workflow groups; no new current failure established.",
+      "remaining_historical_review": "210 historical entries across8workflow groups; no new current failure established.",
       "latest_historical_triage": {
-        "run_id": 43026690343,
+        "run_id": 43026113733,
         "attempt": 1,
-        "created_at": "2026-11-11T13:10:10Z",
-        "source_commit": "ea5f085245bb0585f0b331339ea8bfd68a069fe2",
+        "created_at": "2026-11-11T13:06:15Z",
+        "source_commit": "5366eefb5244f990490174585c7a4014f0347a9e",
         "workflow": "Publish priceboard",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43026690343",
-        "classification": "Known historical release integrity gate:2unresolved candidates; deployment skipped. Candidate identity and deeper cause unestablished; no current recurrence inferred.",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43026113733",
+        "classification": "Historical integrity gate;2unresolved candidates; deploy skipped. Earlier missing-source nonblocking QA also observed. Candidate/source identity and deeper cause unestablished. Not current recurrence.",
         "path": ".github/workflows/pages.yml",
-        "job_id": 130543066889,
+        "job_id": 130541224722,
         "incident_id": "historical-event-release-unresolved-candidate",
         "failed_step": "Build compact event listings and canonical sitemap",
-        "signature": "scripts/test-event-integrity.cjs / ashdod unresolved candidates before release / actual2 expected0",
-        "observed_at": "2026-11-17T03:08:55.683Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-17-bbb95af5-26f8-832e-98c2-7641462cce8d.json"
+        "signature": "event integrity / ashdod unresolved candidates / actual2 expected0",
+        "observed_at": "2026-11-17T04:32:56.813Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-d39e4690-16f8-832e-bb4b-892a7e0ba5f5.json"
       }
     },
     {
@@ -4822,7 +4876,7 @@
       "production_changed": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-bbb95af5-26f8-832e-98c2-7641462cce8d",
+  "last_review_runKey": "ops-2026-11-17-d39e4690-16f8-832e-bb4b-892a7e0ba5f5",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
