@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-16T23:18:36.100Z",
+  "updated_at": "2026-11-17T00:39:05.832Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -775,6 +775,40 @@
           "evidence": "ops/incident-response/evidence/ops-2026-11-15-47c3a058-30a4-8326-a2a9-41f9d751c10f.json",
           "signature": "super-public-health/retained-old-source/RISHON7-TLV19",
           "qualification": "Additional historical occurrence of retained-source data failures; not a current HTTP outage or current source recovery. Deeper supplier cause unestablished."
+        },
+        {
+          "run_id": 42771714239,
+          "workflow": "All cities supermarket public health",
+          "path": ".github/workflows/super-health.yml",
+          "attempt": 1,
+          "created_at": "2026-11-10T06:55:12Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "68253b9f0a7e8011696e26b17748f9bd030f4cc0",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42771714239",
+          "classification": "Historical data-freshness subtype of existing supermarket-public-http-and-stale-branches group; upstream causes not established. Old daily-overdue policy is not the current collection schedule. No price catalogs fetched or current public checks outside window.",
+          "job_id": 129680809508,
+          "failed_step": "Run python scripts/check_super_public.py",
+          "signature": "historical public-data freshness / retained sources + legacy daily overdue",
+          "observed_at_run": "2026-11-10T06:56:15Z",
+          "retained_branch_counts": {
+            "ASHDOD": 4,
+            "HOLON": 7,
+            "BATYAM": 4
+          },
+          "overdue_editions": [
+            "ASHDOD",
+            "YAVNE",
+            "KGAT",
+            "RISHON",
+            "HOLON",
+            "BATYAM",
+            "TLV"
+          ],
+          "source_snapshot_date": "2026-11-09",
+          "HTTP_errors_in_this_log": false,
+          "observed_at": "2026-11-17T00:39:05.832Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json"
         }
       ],
       "latest_historical_triage": {
@@ -785,7 +819,9 @@
         "tlv_stale": 19,
         "current_public_check": false,
         "repair_performed": false
-      }
+      },
+      "last_seen_at": "2026-11-17T00:39:05.832Z",
+      "remaining_historical_review": 218
     },
     {
       "id": "holon-new-screening-unverified-poster",
@@ -4581,7 +4617,7 @@
       "status": "open",
       "severity": "historical",
       "first_seen_at": "2026-11-16T20:32:20.276Z",
-      "last_seen_at": "2026-11-16T23:18:36.100Z",
+      "last_seen_at": "2026-11-17T00:39:05.832Z",
       "root_cause": "11Nov event-integrity gate reported one unresolved Ashdod candidate at scripts/test-event-integrity.cjs126; exact candidate identity/deeper cause not established from log.",
       "workflow": ".github/workflows/pages.yml",
       "run_id": 43049169659,
@@ -4629,12 +4665,38 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43040643567",
           "observed_at": "2026-11-16T23:18:36.100Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-30ef12f3-941c-832e-a86e-679d673f8f3a.json"
+        },
+        {
+          "run_id": 43040490980,
+          "attempt": 1,
+          "job_id": 130590651784,
+          "created_at": "2026-11-11T14:38:56Z",
+          "source_commit": "9db17c11dc4df6c142d45147a6f8738fc11aefb4",
+          "workflow": ".github/workflows/pages.yml",
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "signature": "scripts/test-event-integrity.cjs126 / ashdod unresolved candidates before release / actual1 expected0",
+          "classification": "Known historical integrity gate; candidate identity and deeper cause not established; deployment skipped; not current recurrence.",
+          "observed_at": "2026-11-17T00:39:05.832Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json"
         }
       ],
-      "remaining_historical_review": 220
+      "remaining_historical_review": 218
+    },
+    {
+      "id": "controller-source-report-scratch-cache-unavailable",
+      "status": "mitigated",
+      "severity": "collection_limit",
+      "first_seen_at": "2026-11-17T00:39:05.832Z",
+      "last_seen_at": "2026-11-17T00:39:05.832Z",
+      "root_cause": "Previously cached Site checkout is absent in current scratch environment. One bounded authorized source-open remained in Git fetch; own read was stopped with partial checkout retained. Cache lifecycle/provider fetch root cause not established.",
+      "impact": "Source publication-evidence-report not rerun. Native638 deployment metadata and actual exact public home bytes remain verified; no article outage or owner block inferred.",
+      "mitigation": "Continue independent read-only checks and durable checkpoint; do not repeat entire unchanged source restoration solely for a journal.",
+      "next_action": "Retain partial checkout; do not repeat full source restoration solely for an unchanged-version journal. Run the report when verified local source becomes available or a changed publication/source requires source work.",
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d.json",
+      "production_changed": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-30ef12f3-941c-832e-a86e-679d673f8f3a",
+  "last_review_runKey": "ops-2026-11-17-57a66860-9cf0-832e-8e8f-b37fffef084d",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
