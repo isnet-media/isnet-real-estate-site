@@ -1,0 +1,292 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+  "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+  "runKey": "consumer-2026-11-17-daily",
+  "policy_version": "2026-11-15/1.1",
+  "target": "TLVNET/consumer",
+  "recorded_at": "2026-11-17T12:07:30Z",
+  "status": "checkpoint_pending_source_write",
+  "newPublishedArticleIds": [],
+  "readyArticleIds": [],
+  "verifiedExistingArticleIds": [
+    "hatarbut-tlv-parking-benefit-guide-20261116"
+  ],
+  "new_publications": 0,
+  "no_update": false,
+  "coverage_complete": false,
+  "window": {
+    "last_published_verified_at": "2026-11-16T12:19:52.525568+00:00",
+    "review_from": "2026-11-16T11:56:00Z",
+    "review_to": "2026-11-17T12:07:30Z",
+    "overlap_hours": 24,
+    "initial_backlog": "Remaining bounded7daycoverage retained, no claim of exhaustive archive scan"
+  },
+  "source": {
+    "commit_opened": "0326bff62c751420526d100f0f4dbaa08d3d2d7c",
+    "ledger": "public/news/agents/consumer/ledger.json",
+    "shared_source_written": false,
+    "reason": "Valid other-owner TLVNET-site lease observed before any shared content write. Consumer source journal and handoff decisions retained in existing incident-response inbox per RUNBOOK."
+  },
+  "publication_lane": {
+    "status": "publication_pending_existing_writer",
+    "lease_blob_sha": "c14d39d9bae5446d725de1b6980d1300fb50a130",
+    "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+    "run_key": "news-20261117-afternoon-1794916681252-msweisj8o6",
+    "acquired_at": "2026-11-17T11:58:01.252Z",
+    "lease_until": "2026-11-17T12:23:01.252Z",
+    "scope": "Blocks source journal/content writes; no approved new consumer release candidate exists. Not evidence of a failed deployment.",
+    "lease_acquired_by_this_run": false,
+    "deployments_this_run": 0
+  },
+  "local_coverage": {
+    "policy_version": "2026-11-15/1.0",
+    "runKey": "consumer-2026-11-17-daily",
+    "sources": [
+      {
+        "source_url": "https://tlvonline.co.il/",
+        "checked_at": "2026-11-17T12:07:30Z",
+        "status": "read",
+        "indexes": [
+          "https://tlvonline.co.il/",
+          "https://tlvonline.co.il/category/עסקים/",
+          "https://tlvonline.co.il/category/פנאי/",
+          "https://tlvonline.co.il/category/עסקים/page/3/"
+        ],
+        "blocked_indexes": [
+          {
+            "url": "https://tlvonline.co.il/category/עסקים/page/2/",
+            "status": "blocked",
+            "reason": "Current reader returned Internal Error inaccessible; no unchanged retry"
+          }
+        ],
+        "watermark": "2026-11-17",
+        "latest_source_published_at": "2026-11-17",
+        "latest_source_scope": "Latest dated full relevant story observed: Goia closure, not exhaustive sitewide watermark",
+        "cursor": "Businesspage3 reviewed; page2 failed thiscycle. Page3 seasonal/old titles do not establish7daycompletion; retain oldestdate boundary pending.",
+        "discovered_count": 1,
+        "decisions": [
+          {
+            "content_id": "tlvonline-goia-habarzel4-closure-20261117",
+            "decision": "handoff_news",
+            "reason": "Police administrative closure, source17Nov, order16Nov until15Dec. Active news owner; no parallel consumer allegations article.",
+            "source_url": "https://tlvonline.co.il/צו-סגירה-מסעדת-גויה/"
+          }
+        ],
+        "deferred_candidate_ids": [
+          "tlvonline-goia-habarzel4-closure-20261117"
+        ],
+        "next_action": "Owner news to check full police/order source and existing coverage. Consumer continues remaining cursor nextscheduledcycle."
+      },
+      {
+        "source_url": "https://telavivi.news/",
+        "checked_at": "2026-11-17T12:07:30Z",
+        "status": "read",
+        "indexes": [
+          "https://telavivi.news/",
+          "https://telavivi.news/category/food/",
+          "https://telavivi.news/category/real-estate-economics-business/"
+        ],
+        "watermark": null,
+        "latest_source_published_at": "2026-11-04",
+        "latest_source_scope": "Dated consumerpopup fullstory; homepage newer cultureitems not given guessed dates",
+        "cursor": "Currenthomes/categories reviewed; primarypopup terms and remaining relevant7daydated backlog unresolved",
+        "discovered_count": 3,
+        "decisions": [
+          {
+            "content_id": "consumer-dandasha-jaffa-popup-20261116",
+            "decision": "blocked",
+            "reason": "Primary branch data conflicts and eventdates conflict between fullsecondary reports; primary current popupterms not found."
+          },
+          {
+            "content_id": "humongous-atidim-park-tel-aviv-opening-2027",
+            "decision": "handoff_economy",
+            "source_published_at": "2026-10-18",
+            "reason": "FutureMarch2027 branch, not alreadyopen/newtoday. Economic owner should verify primary if renewed publicinterest; no consumer recommendation."
+          },
+          {
+            "content_id": "r2m-heichal-parking",
+            "decision": "duplicate",
+            "article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
+            "reason": "Parking20NIS7h alreadypublished; R2Mrestaurantplanned2027 not consumernewopening."
+          }
+        ],
+        "deferred_candidate_ids": [
+          "consumer-dandasha-jaffa-popup-20261116"
+        ],
+        "next_action": "Retain current primaryverification blocker, no source-date refresh or duplication."
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "content_id": "consumer-dandasha-jaffa-popup-20261116",
+      "source_fingerprint": "66eb3e673a2c7eefdcc13e76089b9a26932dea929b2924ffecaad553872744d0",
+      "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "runKey": "consumer-2026-11-17-daily",
+      "target": "TLVNET/consumer",
+      "status": "primary_terms_pending",
+      "last_attempt_at": "2026-11-17T12:07:30Z",
+      "source_url": "https://telavivi.news/dandasha-jaffa-amit-haykin-numa-popup-2026/",
+      "sources_read": [
+        "https://dandasha.co.il/",
+        "https://dandasha.co.il/pages/branches",
+        "https://dandasha.co.il/pages/סניף-תל-אביב-יפו-2",
+        "https://dandasha.co.il/blogs/dandasha-blog",
+        "https://dandasha.co.il/pages/אודות"
+      ],
+      "evidence": {
+        "branch_index": "Hiram8 SunThu9–19 Fri10–14",
+        "branch_detail": "Sameaddress SunThu9–19:30 Fri9–14",
+        "secondary_dates": "Telavivi4Nov places both personalities starting3Nov; fullSupercoupons3Nov puts AmitJaffa2Dec and MeitalDizengoff16Nov. Neither is a current primaryconfirmation.",
+        "primary_event_announcement": "Not found in current homepage/branch/about/blog; blog shows historical2024/2023 entries"
+      },
+      "next_action": "Read a dated organizer confirmation resolving actual popup participant/date/currentconditions; don't repeat sameinputs, no bargain or currentstock claim."
+    },
+    {
+      "content_id": "consumer-moh-dragonfly-verification-20261116",
+      "status": "dated_old_notice_no_new_local_development_verified",
+      "source_url": "https://t.me/MOHreport/13808",
+      "source_date": "2026-11-08",
+      "date_basis": "Officialgov search index shows8Nov2026; dated Walla/IsraelHayom source results agree. Govpage itself no readablelines. Fullofficial warning body read on MOHpublicchannel index; per-postembed did not exposebody/date.",
+      "full_notice_body_read": true,
+      "new_notice_today": false,
+      "local_incident_verified": false,
+      "next_action": "Retain for original source-based productregistry serviceangle only if local use/currentprimary status verified; do not publish8Novincident as new17Nov."
+    },
+    {
+      "source_url": "https://www.be106.net/255/164046",
+      "status": "duplicate",
+      "article_id": "suspicious-shopping-links-clickcheck-guide-20261115",
+      "reason": "Full existing article covers ClickCheck. Incomingnewsreason incorrectly refers to Ebola; preserved originalotherdeskledger and recorded correct recipient decision."
+    },
+    {
+      "source_url": "https://shiruetto.com/",
+      "status": "covered_expired",
+      "article_id": "about-us-jaffa-entry-prices-20261112",
+      "reason": "Existingpublishedguide covers12–14Novfair; datepassed. No newfair claim."
+    },
+    {
+      "source_url": "https://benefits.isracard.co.il/benefitsforall/online/november_38825/",
+      "status": "duplicate",
+      "article_id": "isracard-november-online-cashback-terms-20261106",
+      "reason": "Fullprimary stillsoldout. Registration-success template does not establish availability."
+    },
+    {
+      "source_url": "https://www.azrielimalls.co.il/malls/tel-aviv/coupons",
+      "status": "read_no_verified_new_change",
+      "article_id": "azrieli-tlv-abulafia-coupon-terms-november-20261106",
+      "reason": "Abulafiaexistingcovered. Otherretailcoupons are commercialoffers not independentlyverifiednewdeals; no advertisedprice comparison as market saving."
+    },
+    {
+      "source_url": "https://www.calcalist.co.il/shopping",
+      "status": "not_relevant",
+      "reason": "16NovINCENSEownership, Nestleexecutive andRamiLevycreditauthorization don't establish verifiedTLVconsumerprice/servicechange. No investment/credit advice."
+    },
+    {
+      "source_url": "https://www.globes.co.il/",
+      "status": "read_no_in_scope_verified_new_item",
+      "reason": "Investment/corporate headlines excluded; supermarket/FLYCARD/RamiLevyadvertorials labelledmarketing and not treated as journalism."
+    },
+    {
+      "source_url": "https://www.netunim.co.il/kesef/mechirei-mazon/yishuv/tel-aviv-yafo",
+      "status": "discovery_only",
+      "reason": "Search-onlyconsumerpricecomparison lead. Rawchainpricefiles, identicalbasket/localbranchmapping not read. No cheapeststore or savings article."
+    }
+  ],
+  "source_limits": [
+    {
+      "source_url": "https://www.consumers.org.il/category/messages-and-announcements",
+      "status": "blocked",
+      "reason": "RequestRejected supportID1798359689493114502"
+    },
+    {
+      "source_url": "https://www.gov.il/he/Departments/DynamicCollectors/products-recall-and-warning-search",
+      "status": "dynamic_shell_only",
+      "reason": "Angularplaceholders no loadedresults; not proof no recalls"
+    },
+    {
+      "source_url": "https://www.tel-aviv.gov.il/Residents/Digitel/Pages/Benefits.aspx",
+      "status": "dynamic_shell_only",
+      "reason": "Benefitresults unresolvedAngular; no currentoffer claimed"
+    },
+    {
+      "source_url": "https://www.tel-aviv.gov.il/Residents/Environment/Pages/ReduceConsumption.aspx",
+      "status": "standing_service_content_read",
+      "reason": "Swaps/repair/lending standinginfo with no newdate; communityownership not duplicated"
+    },
+    {
+      "source_url": "https://www.tel-aviv.gov.il/Pages/HomePage.aspx",
+      "status": "dynamic_shell_only"
+    },
+    {
+      "source_url": "https://www.cbs.gov.il/",
+      "status": "dynamic_shell_only",
+      "reason": "No citydata extracted from skeleton"
+    },
+    {
+      "source_url": "https://www.themarker.com/consumer",
+      "status": "blocked",
+      "reason": "403"
+    },
+    {
+      "source_url": "https://www.bizportal.co.il/consumerism",
+      "status": "blocked",
+      "reason": "404"
+    },
+    {
+      "source_url": "https://www.be106.net/255/",
+      "status": "read_old_index_returned",
+      "reason": "Returned28Sepitems/advertorial not current17Novcoverage"
+    },
+    {
+      "source_url": "https://www.hatarbut.co.il/parking/",
+      "status": "full_parking_service_content_read",
+      "reason": "20NIS7h TLV/noapp and36NISadjacentcarpark stillpresent, no newlylaunchedoffer inferred"
+    }
+  ],
+  "visual_followup": {
+    "article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
+    "body_sha256": "457d91ecd4293f50c7158aa55a454b12a7e3ccbdd11a101b256bef23f3ecf26c",
+    "asset_sha256": "03833a0b8ff62fd7747f1f0d1a23053b0c6b8b077f640c171081339320694e42",
+    "desktop_article": "actually_viewed_full_frame_and_credit",
+    "desktop_section": "actually_viewed_loadedcards_fullframe",
+    "mobile": "pending_no_supported_viewport_control",
+    "new_quality_issue": "Duplicate credittext in articlecaption, creator/sourcecredit visiblypresent. Cosmeticrendererfollowup, no rightsmissingclaim.",
+    "source_image_or_body_changed": false
+  },
+  "next_action": "Controller may merge this own consumerjournal and handoffdecisions into existingledger only under actual own targetCAS after currentwriter finishes. Do not deploy journalalone or stamp these candidates as approved. Nextconsumerdailycycle resumes exact candidates/cursor.",
+  "safety": {
+    "other_lease_modified": false,
+    "automations_changed": false,
+    "agents_spawned": false,
+    "db_r2_dns_changed": false,
+    "gates_changed": false,
+    "builds": 0,
+    "deployments": 0
+  },
+  "api_cost": null,
+  "api_cost_note": "No measured cost supplied; no dollarcap claim.",
+  "live_verification": {
+    "checked_at": "2026-11-17T12:05:44.310521+00:00",
+    "url": "https://tlvnet.com/news/hatarbut-tlv-parking-benefit-guide-20261116",
+    "article_http": 200,
+    "title": true,
+    "body_segments": 7,
+    "full_body": true,
+    "body_sha256": "457d91ecd4293f50c7158aa55a454b12a7e3ccbdd11a101b256bef23f3ecf26c",
+    "image_http": 200,
+    "jpeg": true,
+    "asset_sha256": "03833a0b8ff62fd7747f1f0d1a23053b0c6b8b077f640c171081339320694e42",
+    "image_hash_matches": true,
+    "credit": true,
+    "section_http": 200,
+    "section_link": true,
+    "home_http": 200,
+    "home_link": true,
+    "desktop_article_visual": "passed_full_frame_credit_present_duplicate_credit_text_observed",
+    "desktop_section_visual": "passed_loaded_images_and_full_frame",
+    "mobile_visual_review": "pending",
+    "new_publication": false
+  }
+}
