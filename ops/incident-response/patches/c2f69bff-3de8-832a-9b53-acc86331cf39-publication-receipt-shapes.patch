@@ -1,0 +1,54 @@
+--- a/lib/publication-evidence.mjs
++++ b/lib/publication-evidence.mjs
+@@ -5,8 +5,16 @@
+ export function publicationEvidence(entry,articles){
+  const newIds=ids(entry.newPublishedArticleIds),updatedIds=ids(entry.updatedExistingIds||entry.updatedExistingArticleIds||entry.verifiedExistingArticleIds);
+  const all=[...new Set([...ids(entry.articleIds),...newIds,...updatedIds])];
+- const commit=entry.source_commit||null,deployment=entry.deployment_id||null,version=entry.version_number??null;
+- const proofs=Array.isArray(entry.public_verification)?[...entry.public_verification]:entry.public_verification?.article_id?[entry.public_verification]:[];
++ const commit=entry.source_commit||entry.source_commit_verified||null,deployment=entry.deployment_id||null,version=entry.version_number??entry.version??null;
++ const rawProofs=Array.isArray(entry.public_verification)?entry.public_verification:entry.public_verification?.article_id?[entry.public_verification]:[];
++ const proofs=rawProofs.flatMap(p=>{
++  if(p.published_verified===undefined)return [p]; // Established legacy receipt protocol.
++  const a=articles.find(a=>a.id===p.article_id),body=a&&createHash('sha256').update(a.body_html||'').digest('hex'),asset=a?.image_review?.asset_sha256;
++  const references=(p.section_link===true&&p.home_link===true)||(p.section===true&&p.home===true);
++  const image=(p.image_hash===true&&p.image_src===true)||(p.asset_sha===true&&p.image===true);
++  if(p.published_verified!==true||!a||p.body_sha256!==body||!(/^[a-f0-9]{64}$/.test(asset||''))||p.asset_sha256!==asset||!references||!image||p.full_body!==true||p.title!==true||p.credit!==true||!p.url?.startsWith('https://tlvnet.com/'))return [];
++  return [{article_id:p.article_id,url:p.url,full_body:true,title:true,credit:true,image_hash:true}];
++ });
+  // Sports owners persist byte-level receipts under publication_evidence. Accept
+  // that explicit protocol only when it still matches the current body and asset.
+  for(const p of Array.isArray(entry.publication_evidence)?entry.publication_evidence:[]){
+@@ -25,7 +33,7 @@
+   const article=articles.find(a=>a.id===id),proof=proofs.find(p=>p.article_id===id);
+   const complete=!!(commit&&deployment&&version&&proof?.url&&proof.full_body===true&&proof.title===true&&proof.credit===true&&proof.image_hash===true);
+   let outcome='unverified';
+-  if(complete&&article?.status==='published')outcome=newIds.includes(id)?'recorded_verified_new_publication':updatedIds.includes(id)||entry.newArticleCount===0||entry.newPublishedArticleCount===0?'recorded_verified_existing_update':'recorded_verified_publication_kind_unspecified';
++  if(complete&&article?.status==='published')outcome=newIds.includes(id)?'recorded_verified_new_publication':updatedIds.includes(id)||entry.newArticleCount===0||entry.newPublishedArticleCount===0?'recorded_verified_existing_update':entry.existingPublicationsVerifiedCount>0&&entry.newPublishedVerifiedCount===0?'recorded_verified_existing_publication':'recorded_verified_publication_kind_unspecified';
+   else if(article?.status==='published')outcome='source_published_receipt_incomplete';
+   else if(article?.status==='draft')outcome='draft_not_public';
+   else if(/blocked|fail/.test(entry.status||''))outcome='blocked';
+--- /dev/null
++++ b/tests/publication-evidence-receipt-shapes.mjs
+@@ -0,0 +1,13 @@
++import assert from 'node:assert/strict';
++import {createHash} from 'node:crypto';
++import {publicationEvidence} from '../lib/publication-evidence.mjs';
++const a={id:'a',status:'published',body_html:'<p>Verified original body.</p>',image_review:{asset_sha256:'a'.repeat(64)}};
++const p={article_id:'a',url:'https://tlvnet.com/news/a',published_verified:true,body_sha256:createHash('sha256').update(a.body_html).digest('hex'),asset_sha256:'a'.repeat(64),title:true,full_body:true,credit:true,section:true,home:true,image:true,asset_sha:true};
++const economy={articleIds:['a'],source_commit_verified:'sha',version_number:644,deployment_id:'dep',existingPublicationsVerifiedCount:1,newPublishedVerifiedCount:0,public_verification:[p]};
++assert.equal(publicationEvidence(economy,[a]).records[0].outcome,'recorded_verified_existing_publication');
++const culture={...economy,source_commit:'sha',source_commit_verified:undefined,version_number:undefined,version:642,newPublishedArticleIds:['a'],public_verification:[{...p,section:undefined,home:undefined,image:undefined,asset_sha:undefined,section_link:true,home_link:true,image_hash:true,image_src:true}]};
++assert.equal(publicationEvidence(culture,[a]).records[0].outcome,'recorded_verified_new_publication');
++for(const base of [economy,culture])for(const mutate of [e=>e.public_verification[0].body_sha256='0'.repeat(64),e=>e.public_verification[0].asset_sha256='0'.repeat(64),e=>e.public_verification[0].published_verified=false,e=>e.public_verification[0].credit=false,e=>e.public_verification[0].title=false,e=>e.public_verification[0].full_body=false,e=>{e.public_verification[0].home=false;e.public_verification[0].home_link=false},e=>e.public_verification[0].url='https://example.com/',e=>e.deployment_id=null,e=>{e.version=null;e.version_number=null},e=>{e.source_commit=null;e.source_commit_verified=null}]){const e=structuredClone(base);mutate(e);assert.equal(publicationEvidence(e,[a]).records[0].verificationRecorded,false);}
++assert.equal(publicationEvidence(economy,[{...a,body_html:'changed'}]).records[0].verificationRecorded,false);
++assert.equal(publicationEvidence(culture,[{...a,status:'draft'}]).records[0].outcome,'draft_not_public');
++console.log('PASS: economy/culture receipt aliases, verification-only classification; changed bodies/assets, missing references/provenance, false flags and drafts rejected.');
+--- a/tests/publication-evidence.mjs
++++ b/tests/publication-evidence.mjs
+@@ -32,3 +32,5 @@
+ const changed=structuredClone(catalog);changed.find(a=>a.id===sports.articleIds[0]).body_html+='changed';
+ assert.equal(publicationEvidence(sports,changed).records[0].verificationRecorded,false);
+ console.log('PASS: actual sports receipts distinguish two new articles/two updates; changed body, asset, credit, title, references, deployment and URL rejected');
++
++await import('./publication-evidence-receipt-shapes.mjs');
