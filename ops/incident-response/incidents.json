@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T10:31:58.785Z",
+  "updated_at": "2026-11-17T11:23:11.266Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4999,6 +4999,20 @@
           "remaining": 203,
           "observed_at": "2026-11-17T10:31:58.785Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09.json"
+        },
+        {
+          "run_id": 43023331753,
+          "job_id": 130532195701,
+          "signature": "ashdod unresolved candidates before release / actual1 expected0",
+          "source_commit": "9207714e1f3ecb7274a8567f47cba31fc91ab562",
+          "classification": "Historical known integrity gate; deployment skipped, no current recurrence.",
+          "excerpt": [
+            "2:49:12.2115145Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:49:12.2115590Z \\n2026-11-11T12:49:12.2115664Z 1 !== 0\\n2026-11-11T12:49:12.2115758Z \\n2026-11-11T12:49:1",
+            "4Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:49:12.2119929Z   actual: 1,\\n2026-11-11T12:49:12.2120045Z   expected: 0,\\n2026-11-11T12:49:12.2120167Z   operator: 'strictEqual',\\n2026-11-11T12"
+          ],
+          "remaining": 202,
+          "observed_at": "2026-11-17T11:23:11.266Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39.json"
         }
       ],
       "remaining_historical_review": "208 historical entries across8workflow groups; no new current failure established.",
@@ -5019,19 +5033,18 @@
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-ea75c661-52f4-832e-9990-8a6e3ab173eb.json"
       },
       "last_historical_triage": {
-        "run_id": 43024614279,
-        "job_id": 130536032725,
-        "source_commit": "9335ffa6d58b9fa7eca02cd4ab3b36fdf211259a",
+        "run_id": 43023331753,
+        "job_id": 130532195701,
         "signature": "ashdod unresolved candidates before release / actual1 expected0",
-        "failed_step": "Build compact event listings and canonical sitemap",
-        "classification": "Known historical release gate, deployment skipped; no present recurrence inferred.",
-        "log_excerpt": [
-          "2:57:14.6044964Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:57:14.6045377Z \\n2026-11-11T12:57:14.6045471Z 1 !== 0\\n2026-11-11T12:57:14.6045587Z \\n2026-11-11T12:57:1",
-          "8Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:57:14.6050710Z   actual: 1,\\n2026-11-11T12:57:14.6050905Z   expected: 0,\\n2026-11-11T12:57:14.6051112Z   operator: 'strictEqual',\\n2026-11-11T12"
+        "source_commit": "9207714e1f3ecb7274a8567f47cba31fc91ab562",
+        "classification": "Historical known integrity gate; deployment skipped, no current recurrence.",
+        "excerpt": [
+          "2:49:12.2115145Z AssertionError [ERR_ASSERTION]: ashdod has unresolved candidates before release\\n2026-11-11T12:49:12.2115590Z \\n2026-11-11T12:49:12.2115664Z 1 !== 0\\n2026-11-11T12:49:12.2115758Z \\n2026-11-11T12:49:1",
+          "4Z   code: 'ERR_ASSERTION',\\n2026-11-11T12:49:12.2119929Z   actual: 1,\\n2026-11-11T12:49:12.2120045Z   expected: 0,\\n2026-11-11T12:49:12.2120167Z   operator: 'strictEqual',\\n2026-11-11T12"
         ],
-        "remaining": 203,
-        "observed_at": "2026-11-17T10:31:58.785Z",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09.json"
+        "remaining": 202,
+        "observed_at": "2026-11-17T11:23:11.266Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39.json"
       }
     },
     {
@@ -5112,9 +5125,32 @@
       "website_id": 51,
       "publication_replay": false,
       "publisher_notified_at": "2026-11-17T09:55:12.179Z"
+    },
+    {
+      "id": "tlvnet-publication-evidence-receipt-shapes",
+      "first_seen_at": "2026-11-17T11:23:11.266Z",
+      "status": "mitigated",
+      "last_seen_at": "2026-11-17T11:23:11.266Z",
+      "root_cause": "Known owner receipt schemas use source_commit_verified/version aliases and hashed proof flags not fully recognized by compact report. Verification-only receipts must not be counted as new content or substantive edits.",
+      "mitigation": {
+        "status": "isolated_patch_tested_pending_existing_release",
+        "patch": "ops/incident-response/patches/c2f69bff-3de8-832a-9b53-acc86331cf39-publication-receipt-shapes.patch",
+        "source_base": "8b596d0e3f1eee83c51c06cee636872b4d5d8573",
+        "change": "Accept explicit source_commit_verified and version aliases. Normalize economy/culture hashed proof shapes only when body/asset hashes, credit/title/body, home/section and image flags match current articles. Classify verification-only receipts separately from substantive updates. Preserve no fake runtime IDs.",
+        "tests": [
+          "Existing sports/consumer positive and negative regression suite passed",
+          "New economy/culture alias and hash/flag/reference/deployment/version/source mutation tests passed; draft denial",
+          "Real current source: economy3 and culture2 proofs recognized; culture publication kind left unspecified absent explicit new IDs",
+          "git apply --check against current source passed; live checkout remained clean"
+        ],
+        "live_status": "not deployed; not fixed_verified",
+        "next_action": "Apply/reconcile patch only on next actual existing owner release, under fresh source/CAS lease; run foundation regression. No journal-only build/deploy."
+      },
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39.json",
+      "production_changed": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-bf0a0de9-2d6c-832a-8038-987bf8ba1b09",
+  "last_review_runKey": "ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
