@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T22:48:33.236Z",
+  "updated_at": "2026-11-17T23:30:08.282Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5493,9 +5493,59 @@
         "current_recurrence": false,
         "underlying_provider_cause": "unconfirmed"
       }
+    },
+    {
+      "id": "historical-super-daily-workflow-deployment-guard",
+      "status": "mitigated",
+      "fingerprint": "pages/build-compact-lists/test_super_daily_run/workflow-missing-deployment-only/TLV",
+      "root_cause": "Historical exact workflow assertion failed because super-tlv-prices.yml lacked --deployment-only. Current workflow now carries the flag; no current failure reproduced.",
+      "occurrences": [
+        {
+          "run_id": 42655553856,
+          "attempt": 1,
+          "job_id": 129293233588,
+          "source_commit": "e07dac14a053a94248e92f0ba7e980d9856f9d59",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42655553856",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
+          "at": "2026-11-09T16:32:45.7101747Z"
+        }
+      ],
+      "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
+      "inbox": "ops/incident-response/inbox/47bf95b2-fe5c-8326-98ff-2258baf4e09f-historical-workflow-guard.json",
+      "current_source_review": {
+        "test_sha": "54d2794df88489a42ceef6e2a839320b5e43c6a0",
+        "workflow_sha": "94edb85e348e6bc78fb044968deef701b3a879f3",
+        "current_workflow_contains_deployment_only": true,
+        "current_failure_reproduced": false,
+        "qualification": "Configuration readback only: exact historical missing flag now present. No controller code change or live data recovery inferred."
+      },
+      "next_action": "Observe ordinary future owner/Pages results; no rerun, schedule change, collection or deployment for historical-only mismatch.",
+      "controller_retry": false
+    },
+    {
+      "id": "historical-institution-ui-missing-ashdod-source",
+      "status": "open",
+      "fingerprint": "pages/organizer-source-integrity/test-institution-ui.cjs22/Missing-source-in-ashdod",
+      "root_cause": "Historical organizer/source data assertion found at least one Ashdod event with empty sources. Exact event identity and current data status not established; historical gate continued with warning.",
+      "occurrences": [
+        {
+          "run_id": 42655553856,
+          "attempt": 1,
+          "job_id": 129293233588,
+          "source_commit": "e07dac14a053a94248e92f0ba7e980d9856f9d59",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42655553856",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
+          "at": "2026-11-09T16:32:41.5445619Z"
+        }
+      ],
+      "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
+      "inbox": "ops/incident-response/inbox/47bf95b2-fe5c-8326-98ff-2258baf4e09f-historical-workflow-guard.json",
+      "current_state": "Historical warning only; no current outage or verified fix inferred.",
+      "next_action": "Bounded original-source identity/data review if fresh relevant source or owner evidence changes. Never drop source checks or invent event evidence.",
+      "controller_retry": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-8500416a-89c8-8326-9e0e-da7b7ea022b9",
+  "last_review_runKey": "ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
