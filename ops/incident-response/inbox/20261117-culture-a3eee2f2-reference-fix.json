@@ -1,0 +1,152 @@
+{
+  "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+  "runKey": "culture-night-20261117-a3eee2f2-7dab-4356-965b-bc775102dc13",
+  "run_id_kind": "locally_generated_execution_key_no_connector_run_id_exposed",
+  "policy_version": "2026-11-15/1.2",
+  "checked_at": "2026-11-17T08:07:55.382463+00:00",
+  "subsystem": "TLVNET culture/night publication",
+  "status": "fixed_verified",
+  "root_signature": "culture-release-finalizer-restored-own-section-html",
+  "cause": "Initial release finalizer kept /news index and newstories but incorrectly restored /news/culture.html topriorHEAD. Livebrowseractualsection revealed missingreferences.",
+  "change": "Focused keep-set corrected and actualculturesection regenerated without altering eitherarticle body or originaldates. Version642 fixedreferences; subsequent independentnightversion643 preservesboth.",
+  "public_verification": [
+    {
+      "article_id": "festival2-hameretz-interdisciplinary-20261117",
+      "url": "https://tlvnet.com/news/festival2-hameretz-interdisciplinary-20261117",
+      "checked_at": "2026-11-17T07:52:04.855406+00:00",
+      "published_verified": true,
+      "article_http": 200,
+      "image_http": 200,
+      "body_sha256": "4031aceb9fbb768639fab37c2e0a2ce151d1920ec8c7c7d255e87d324b6c230f",
+      "asset_sha256": "2b17282f9cba355d8e4e3d4386271750dcc360f022227e01c2e4756758d40f4e",
+      "title": true,
+      "full_body": true,
+      "image_src": true,
+      "image_hash": true,
+      "JPG": true,
+      "credit": true,
+      "archive_date": true,
+      "section_link": true,
+      "home_link": true,
+      "section_reference_verified": true,
+      "section_url": "https://tlvnet.com/news/culture",
+      "section_checked_at": "2026-11-17T07:57:34.922878+00:00"
+    },
+    {
+      "article_id": "gross-fogel-suzanne-science-philosophy-20261117",
+      "url": "https://tlvnet.com/news/gross-fogel-suzanne-science-philosophy-20261117",
+      "checked_at": "2026-11-17T07:52:36.916380+00:00",
+      "published_verified": true,
+      "article_http": 200,
+      "image_http": 200,
+      "body_sha256": "d50b44b2f1c3243dc9980427ce89f896b306a4805968de4c51194fe499e74e78",
+      "asset_sha256": "2f6cd5b1d8dfa23841d698163b9d208e857d19a93a848170c9e920997b5cb59b",
+      "title": true,
+      "full_body": true,
+      "image_src": true,
+      "image_hash": true,
+      "JPG": true,
+      "credit": true,
+      "archive_date": true,
+      "section_link": true,
+      "home_link": true,
+      "verification_retry": {
+        "count": 1,
+        "reason": "Verifier incorrectly expectedISOdate; visiblecaptionuses6.6.2018. Focusedbody/captionGETonly; otherpassedchecks retained"
+      },
+      "section_reference_verified": true,
+      "section_url": "https://tlvnet.com/news/culture",
+      "section_checked_at": "2026-11-17T07:57:34.922927+00:00"
+    },
+    {
+      "article_id": "city-museum-era-nightlife-talk-20261126",
+      "url": "https://tlvnet.com/night/stories/city-museum-era-nightlife-talk-20261126",
+      "checked_at": "2026-11-17T08:04:30.891509+00:00",
+      "published_verified": true,
+      "http_status": {
+        "/night/stories/city-museum-era-nightlife-talk-20261126": 200,
+        "/night/": 200,
+        "/night/sections/tonight": 200,
+        "/photo-bank/assets/old-city-hall-bialik-2011.jpg": 200,
+        "/news/culture": 200
+      },
+      "body_sha256": "8f4b4677204d6ddbc534459caea965e1b7e04a757e6b76e2e9a384caee45fcae",
+      "asset_sha256": "890dcfea350dd0658f07da1d3a78dde1ac5100fa8d2e036a4f12fe791823cfb2",
+      "title": true,
+      "full_body": true,
+      "image": true,
+      "asset_sha": true,
+      "credit": true,
+      "license_link": true,
+      "home": true,
+      "section": true,
+      "culture_references": true,
+      "credit_observed": "צילום: איתי טיומקין · CC BY-SA 4.0 · ארכיון 22.10.2011",
+      "credit_verification": "Canonical livebrowser AX and screenshot confirmedauthor,license,date. Existing renderer stripsprocessingphrase; initial literalcreditcomparison failed. Correctedreadbackonly, no sitepatch/redeploy.",
+      "desktop_visual_review": "passed",
+      "mobile_visual_review": "pending"
+    }
+  ],
+  "release": {
+    "culture_version": 642,
+    "culture_commit": "0c13d728d2021ab4464e70d0e621a432e17cdd97",
+    "culture_deployment": "appgdep_6afc08d380208191a18f6fd44a308acf",
+    "final_version": 643,
+    "final_commit": "4840dbbe0ed896b59709f2fe2ba59d2865549ae0",
+    "final_deployment": "appgdep_6afc0a69428c81919e555a86e681fdbb"
+  },
+  "journal_commit": "3b41deb9d8814fdfb015873caa908d7dd5263c52",
+  "metrics": {
+    "culture_news_new_published_verified": 2,
+    "culture_news_updated_existing_verified": 0,
+    "night_published_verified": 1,
+    "imagegen_calls": 1,
+    "api_calls": null,
+    "cost": null
+  },
+  "checks": [
+    "fullbody,title,image,assetSHA,credit,license,home,relevantsection",
+    "sourceCASnonforcepush",
+    "build-news,prepare-public,check-photo-bank,image-presentation,foundation,frameworkbuild",
+    "night-feed17currentunique"
+  ],
+  "visual_review": {
+    "desktop": "passed",
+    "mobile": "pending_in_existing_quality_issues"
+  },
+  "remaining_queue": [
+    "clfb-all-sight-exhibition-20261114:changedsecondaryread,primaryJSshellandartworkrightsnotresolved",
+    "coverage-boy-george-20261116:knownunchangedsource/portrairightsblocker",
+    "boundedlowerindex/backfill and storednewcandidates",
+    "night existingseven-to-fourteenNov candidates notrolledforward; no duplicateevent/restaurantcollection"
+  ],
+  "coverage": {
+    "local_home_and_category_read": [
+      "https://tlvonline.co.il/",
+      "https://tlvonline.co.il/category/תרבות/",
+      "https://telavivi.news/",
+      "https://telavivi.news/category/culture-and-leisure/"
+    ],
+    "latest_observed_source_dates": [
+      "2026-11-16",
+      "2026-11-17"
+    ],
+    "complete": false,
+    "night_scopes": [
+      "tonight",
+      "underground",
+      "date-city",
+      "sins",
+      "budget"
+    ]
+  },
+  "verification_corrections": [
+    "Talkcaption used6.6.2018 notISO; focusedcaptionreadback correctedverifier",
+    "Nightcredit cleanrenderer omitsprocessingphrase; canonicalbrowser confirmedauthor,license,date; noextra sitechange"
+  ],
+  "prevention": "Validate actualsections[path] against new article IDs before packaging; retain site-specificsectionHTML in sourcefinalization. No baseline/gate relaxation.",
+  "controller_triggered": false,
+  "schedules_or_permissions_changed": false,
+  "notifications": "Single checkpoint; no repeatedunchanged blocker alert",
+  "lease": "Own token release follows terminaldeployments and publicverification; no foreignleasechanged"
+}
