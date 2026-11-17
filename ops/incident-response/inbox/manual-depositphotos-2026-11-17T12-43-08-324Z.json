@@ -22,10 +22,41 @@
     "https://depositphotos.com/subscription-agreement.html"
   ],
   "photo_bank_gate": "Existing Depositphotos bank records use publisher-supplied provenance. An agent-downloaded file must retain its true download/license provenance; do not falsely label it as a publisher upload or bypass metadata/rights gates.",
-  "status": "authorization_recorded_browser_access_verified_unattended_path_unverified",
+  "status": "authorization_and_connection_route_verified_waiting_user_connection",
   "activate_controller": false,
   "create_automation": false,
   "schedule_changed": false,
   "site_deployment": false,
-  "new_images_published": 0
+  "new_images_published": 0,
+  "setup_requested_at": "2026-11-17T12:46:33.553Z",
+  "setup": {
+    "status": "awaiting_user_provider_connection",
+    "provider_connector": "DepositPhotos MCP",
+    "official_source": "https://blog.depositphotos.com/depositphotos-mcp.html",
+    "connection_url": "https://chatgpt.com/plugins/plugin_asdk_app_69a1cf9421d081919ce806c97034e6b8",
+    "official_capabilities": [
+      "account-linked search",
+      "existing licensed file re-download with matching file/size/license",
+      "new download deducted from existing plan"
+    ],
+    "available_tool_search": "No Depositphotos tool currently exposed; provider search did not return an eligible installable plugin.",
+    "browser_block": "Browser host restrictions did not grant access to chatgpt.com for connector setup. No alternate browser, cookies, raw endpoint, keys or permission bypass attempted.",
+    "publisher_next_action": "Open official connection URL and authorize DepositPhotos account in ChatGPT.",
+    "verification_after_connection": {
+      "file_id": "247625980",
+      "file_description": "Cityscape of Tel Aviv viewed from TLV Balloon flying over Hayark",
+      "contributor": "Dudlajzov",
+      "existing_purchase_date": "2026-11-11",
+      "existing_size": "L",
+      "method": "Subscription Plan",
+      "steps": [
+        "Confirm connector account and current active plan",
+        "Request re-download of the exact already-licensed file, size and license; verify no new quota/charge",
+        "Verify actual JPEG bytes/dimensions/hash and retrieve license/credit evidence",
+        "Integrate true connector download provenance into existing photo-bank workflow; do not label agent download as publisher upload"
+      ]
+    },
+    "unattended_verified": false,
+    "production_configuration_changed": false
+  }
 }
