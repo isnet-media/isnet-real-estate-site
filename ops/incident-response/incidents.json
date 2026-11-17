@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T17:31:13.922Z",
+  "updated_at": "2026-11-17T18:47:00.495Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -529,8 +529,8 @@
         "run_id": 43244751537,
         "job_id": 131274308791
       },
-      "resolution": "Freshness protection retained; no false repair or stale-as-current publication claimed.",
-      "next_action": "Do not weaken validation or publish future periods as current. Revisit at a valid-time boundary/source change in an existing cycle through established owner/claim publication path.",
+      "resolution": "Source availability/valid-time blocker changed: current parser now accepts213/210. Stored JSON still expired; public repair not verified.",
+      "next_action": "Existing authorized data owner must refetch and validate current source, check actual claim and concurrent run, publish both distinct regions through existing mechanism and verify live widget. Saved validated periods are evidence only; do not reuse after expiry.",
       "occurrences": [
         {
           "run_id": 42757125108,
@@ -605,8 +605,30 @@
         "source_sha256": "e7f5d9837ea56a753f6737a9dc2aecccd6aa4c7d52b31b44a46610b0b03a7b68",
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-cc75c56c-8d44-832a-ab62-ec49342f2e6c.json"
       },
-      "last_observed_at": "2026-11-17T16:07:36.283Z",
-      "public_widget_current_status": "not independently checked"
+      "last_observed_at": "2026-11-17T18:47:00.495Z",
+      "public_widget_current_status": "not independently checked",
+      "current_source_checkpoint": {
+        "observed_at": "2026-11-17T18:45:50.646Z",
+        "source_url": "https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml",
+        "source_sha256": "e7f5d9837ea56a753f6737a9dc2aecccd6aa4c7d52b31b44a46610b0b03a7b68",
+        "source_issue": "2026-11-17T16:04",
+        "current_period_from": "2026-11-17T20:00",
+        "current_period_to": "2026-11-18T08:00",
+        "regions": [
+          213,
+          210
+        ],
+        "current_both_regions_passed": true,
+        "before_valid_boundary_rejected": true,
+        "source_request_count": 1,
+        "status": "source_valid_existing_owner_release_pending",
+        "public_files_last_valid_to": "2026-11-16T08:00",
+        "public_widget_verified": false,
+        "handoff": "ops/incident-response/inbox/b1852057-da04-832a-9ca9-c6e63ad9a00c-sea-source-current.json",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-17-b1852057-da04-832a-9ca9-c6e63ad9a00c.json",
+        "no_task_triggered": true
+      },
+      "release_handoff": "ops/incident-response/inbox/b1852057-da04-832a-9ca9-c6e63ad9a00c-sea-source-current.json"
     },
     {
       "id": "github-notifications-mailbox-mismatch",
@@ -5402,9 +5424,29 @@
       "controller_evidence": "ops/incident-response/evidence/ops-2026-11-17-59384ee9-483c-832a-9e14-b08fdf8a7561.json",
       "media_destination_policy_version": "2026-11-17/1.1",
       "destination_scope": "Flash90 TLVNET only; Depositphotos all network websites per publisher. Provider download access remains unverified."
+    },
+    {
+      "id": "historical-pages-empty-status-timeout",
+      "status": "mitigated",
+      "fingerprint": "GitHub Pages/deploy/empty status repeated/600000ms timeout",
+      "root_cause": "Historical deploy-pages received empty statuses until timeout; underlying cause not established. Distinct from syncing_files variant.",
+      "occurrences": [
+        {
+          "run_id": 42720818507,
+          "job_id": 129519316066,
+          "at": "2026-11-09T23:53:09.3737460Z",
+          "source_commit": "472e46f1102a97d06fbcff62bdcdf6410ff07317",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42720818507"
+        }
+      ],
+      "evidence": "ops/incident-response/evidence/ops-2026-11-17-b1852057-da04-832a-9ca9-c6e63ad9a00c.json",
+      "inbox": "ops/incident-response/inbox/b1852057-da04-832a-9ca9-c6e63ad9a00c-historical-pages-empty-status.json",
+      "current_state": "Historical only; recent Pages success metadata observed in prior cycles, no current recurrence inferred",
+      "next_action": "Retain occurrence; investigate only on changed/current recurrence. No rerun or deployment.",
+      "controller_retry": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-17-8596b82f-d184-832a-8ea4-313409108a94",
+  "last_review_runKey": "ops-2026-11-17-b1852057-da04-832a-9ca9-c6e63ad9a00c",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
