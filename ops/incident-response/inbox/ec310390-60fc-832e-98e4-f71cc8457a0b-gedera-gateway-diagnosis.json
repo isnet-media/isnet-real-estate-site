@@ -1,0 +1,35 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "ec310390-60fc-832e-98e4-f71cc8457a0b",
+  "runKey": "ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-17T09:55:12.179Z",
+  "id": "2026-11-17-culture-gedera-home-gateway-stale",
+  "status": "awaiting_external_action",
+  "website_id": 51,
+  "category_id": 2150,
+  "post_id": 811887,
+  "original_inbox": "ops/incident-response/inbox/2026-11-17T091825Z-culture-gedera-home-gateway-stale.json",
+  "observations": {
+    "homepage_http": 200,
+    "inline_function": "startMagazineGateway",
+    "feed_path": "/תרבות-נט",
+    "feed_path_matches_native_category": true,
+    "seed_ids": [
+      811200,
+      810707,
+      810710
+    ],
+    "refresh_version": "20261111",
+    "script_behavior": "render seed, fetch same-origin category credentials omit/cache no-store with10s abort; errors retain old seed and set feedStatus seed-feed-unavailable",
+    "category_controller_GET": 403,
+    "qualifier": "Bare client403 does not prove identical browser origin failure or security-block root cause.",
+    "CMS_lease": "free; no lease acquired, no write attempted",
+    "connector_capability": "Category/post tools available; no homepage-component HTML field in update_website",
+    "browser_admin": "Observed https://admin.isnet.co.il/Manager/SignIn?returnUrl=%2F login wall; no authenticated component-editor session",
+    "source_file_checked": "events-preview/shared/public-cms.js does not contain startMagazineGateway; function observed inline in servedhomepage"
+  },
+  "next_action": "Use existing authorized CMS component-editor session for Gedera51; inspect actual category-fetch error, preserve current homepage and other writer changes, then repair fetch/seed and verify811887 home card. No access expansion, key creation or article replay.",
+  "evidence": "ops/incident-response/evidence/ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b.json",
+  "controller_invoked": false
+}
