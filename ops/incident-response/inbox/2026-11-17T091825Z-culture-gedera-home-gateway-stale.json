@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "incident_id": "2026-11-17-culture-gedera-home-gateway-stale",
+  "subsystem": "ISNET public homepage magazine gateway",
+  "domain": "culture-net-network-distribution",
+  "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+  "run_key": "Automation_46f4cacaaa288191aad7b49de5a04ae7:2026-11-17T10-48-16+02-00",
+  "detected_at": "2026-11-17T09:18:25Z",
+  "policy_version": "2026-11-14/1.0",
+  "status": "open",
+  "fingerprint": "gederanet/home/culture-gateway/seed-feed-unavailable/article811887",
+  "evidence": {
+    "website_id": 51,
+    "category_id": 2150,
+    "post_id": 811887,
+    "article_public": "verified: exact H1, full body, JPG and visible AI illustration credit",
+    "category_public": "verified: new article card and image present in Culture Net section",
+    "homepage_public": "not updated: Culture Net gateway still renders articleIds 811200,810707,810710",
+    "homepage_dataset": {
+      "magazineRefreshVersion": "20261111",
+      "articleIds": "811200,810707,810710",
+      "feedStatus": "seed-feed-unavailable"
+    },
+    "retry": "none; public evidence identifies a pre-existing gateway refresh/fetch failure rather than a post creation failure"
+  },
+  "impact": "The article is publicly readable and present in Gedera Net's Culture Net section, but the existing homepage Culture Net gateway keeps an older seeded card set and does not surface the new article.",
+  "smallest_next_action": "Inspect the homepage startMagazineGateway fetch for /תרבות-נט and the seed refresh path for website 51; restore a successful feed read, then verify article 811887 appears without rewriting the whole homepage component.",
+  "publisher_notification": "required once: partial distribution blocker on one homepage only"
+}
