@@ -12,12 +12,28 @@
     "automated_full_offsite_backup": "not_verified",
     "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
     "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
-    "scheduled_publication_reconciliation": "partial"
+    "scheduled_publication_reconciliation": {
+      "0": "p",
+      "1": "a",
+      "2": "r",
+      "3": "t",
+      "4": "i",
+      "5": "a",
+      "6": "l",
+      "latest_sample": {
+        "observed_at": "2026-11-18T19:56:42Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
+        "sports_owner_run_id": "cbad6525-8d98-8330-ac4a-95d36437a7ba",
+        "sport_articles": 3,
+        "culture_runtime_no_update": true,
+        "full_coverage": false
+      }
+    }
   },
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": "2026-11-18T18:37:02.492Z",
+  "last_observation_at": "2026-11-18T19:56:42Z",
   "last_daily_summary_at": "2026-11-18T16:08:12.541Z",
   "observations": [
     "observations/2026-11-15/stability-version619.json",
@@ -160,6 +176,12 @@
       "path": "ops/tlvnet-stability/observations/2026-11-18/14bffc64-84e4-8322-85e1-bbeff20b8240.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-18/14bffc64-84e4-8322-85e1-bbeff20b8240.json",
       "observed_at": "2026-11-18T18:37:02.492Z"
+    },
+    {
+      "run_id": "bbc71902-e2b8-8322-a9e5-ca1d812e7928",
+      "path": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
+      "observed_at": "2026-11-18T19:56:42Z"
     }
   ],
   "remaining": [
@@ -171,15 +193,15 @@
   ],
   "scope": "TLVNET.COM only for this stabilization program; no DNS, other-city work, new paid services or security expansion",
   "latest_deployment": {
-    "version": 660,
-    "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
-    "deployment_id": "appgdep_6afddac668588191aa63cd808258a443",
-    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_40668a8e9df8819180ce15408694506c",
+    "version": 662,
+    "source_commit": "04990c1daa3756ff514c2bb0516843e9802c7479",
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_0b500c567d888191943ccd26b3ca3cb5",
+    "deployment_id": "appgdep_6afdf84782ac8191a953a4039a8bb051",
     "status": "succeeded",
-    "terminal_at": "2026-11-18T17:05:29.456970+00:00",
+    "terminal_at": "2026-11-18T19:11:33.543580+00:00",
     "role": "owner",
     "access": "public",
-    "observed_at": "2026-11-18T18:37:02.492Z"
+    "observed_at": "2026-11-18T19:56:42Z"
   },
   "daily_summary_status": {
     "observed_at": "2026-11-18T16:08:12.541Z",
@@ -200,14 +222,20 @@
   },
   "access_request": "BACKUP_ACCESS_REQUEST_20261115.md",
   "latest_controller_observation": {
-    "run_id": "14bffc64-84e4-8322-85e1-bbeff20b8240",
-    "observation": "ops/tlvnet-stability/observations/2026-11-18/14bffc64-84e4-8322-85e1-bbeff20b8240.json",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/14bffc64-84e4-8322-85e1-bbeff20b8240.json",
-    "version": 660,
-    "qualification_started_at": null,
-    "new_verified": 0,
-    "source_report_rerun": false,
-    "projection_repair_pending": true,
-    "daily_summary": false
+    "task_id": "Automation_9776808c73848191a9d748dd09315960",
+    "run_id": "bbc71902-e2b8-8322-a9e5-ca1d812e7928",
+    "runKey": "ops-2026-11-18-bbc71902-e2b8-8322-a9e5-ca1d812e7928",
+    "observed_at": "2026-11-18T19:56:42Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
+    "new_verified_sports_urls": [
+      "https://tlvnet.com/news/maccabi-olympiacos-overtime-loss-20261117",
+      "https://tlvnet.com/news/hapoel-baskonia-away-win-20261117",
+      "https://tlvnet.com/news/maccabi-dubai-limassol-preview-20261119"
+    ],
+    "facebook_public_content_pending": true,
+    "instagram_autonomous_unverified": true,
+    "caption_incident": "tlvnet-sports-archive-caption-context-reuse",
+    "status": "baseline_observation_only",
+    "production_changes": 0
   }
 }
