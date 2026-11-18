@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T01:36:50.708Z",
+  "updated_at": "2026-11-18T02:14:41.167Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1980,6 +1980,34 @@
           },
           "variant": "syncing_files113 then finished_file_sync once before timeout; no terminal successful deploy",
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-8500416a-89c8-8326-9e0e-da7b7ea022b9.json"
+        },
+        {
+          "run_id": 42626214877,
+          "attempt": 1,
+          "job_id": 129191061329,
+          "source_commit": "8d65efc7dc083399f0f41a299d62d6504e760f40",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42626214877",
+          "at": "2026-11-09T13:45:20.4711002Z",
+          "status_counts": {
+            "deployment_in_progress": 1,
+            "syncing_files": 113,
+            "": 1
+          },
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c.json"
+        },
+        {
+          "run_id": 42617729060,
+          "attempt": 1,
+          "job_id": 129161689309,
+          "source_commit": "46a364cc8a7c7653ad7dcc8a35cae598f815e806",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42617729060",
+          "at": "2026-11-09T12:44:24.7535363Z",
+          "status_counts": {
+            "deployment_in_progress": 1,
+            "syncing_files": 113,
+            "": 1
+          },
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c.json"
         }
       ],
       "evidence": {
@@ -2000,10 +2028,12 @@
         "underlying_provider_cause": "unconfirmed"
       },
       "last_historical_review": {
-        "runKey": "ops-2026-11-18-8500416a-89c8-8326-9e0e-da7b7ea022b9",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-18-8500416a-89c8-8326-9e0e-da7b7ea022b9.json",
-        "run_id": 42658889730,
-        "attempt": 1,
+        "runKey": "ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c.json",
+        "run_ids": [
+          42626214877,
+          42617729060
+        ],
         "current_recurrence": false,
         "underlying_provider_cause": "unconfirmed"
       }
@@ -5617,7 +5647,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-0ed2bb91-6230-8326-bef5-765879b7cf59",
+  "last_review_runKey": "ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
