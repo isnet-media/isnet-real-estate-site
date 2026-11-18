@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "bbc71902-e2b8-8322-a9e5-ca1d812e7928",
+  "runKey": "ops-2026-11-18-bbc71902-e2b8-8322-a9e5-ca1d812e7928",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-18T19:56:42Z",
+  "incident_id": "tlvnet-sports-archive-caption-context-reuse",
+  "category": "image",
+  "target": "TLVNET-site",
+  "owner_automation_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "owner_run_id": "cbad6525-8d98-8330-ac4a-95d36437a7ba",
+  "article_id": "maccabi-olympiacos-overtime-loss-20261117",
+  "public_url": "https://tlvnet.com/news/maccabi-olympiacos-overtime-loss-20261117",
+  "section_url": "https://tlvnet.com/news/sports",
+  "source_commit": "04990c1daa3756ff514c2bb0516843e9802c7479",
+  "journal_commit": "7c063dab2394057680ae11d6e1d4fdc0e2dc4e68",
+  "saved_version": 662,
+  "root_signature": "TLVNET photo-bank reusable archive caption still names prior fixture",
+  "root_cause": "scripts/news_images.py resolves an approved asset from data/photo-bank.json. The public caption inherited the bank record's Partizan-specific note although the new Olympiacos article's own image_caption was contextualized correctly.",
+  "live_evidence": {
+    "wrong_caption": "צילום חימום מספטמבר; אינו מהמשחק מול פרטיזן בנובמבר.",
+    "asset": "daniel-theis-maccabi-2026",
+    "author": "Davidr1974",
+    "license": "CC0",
+    "sha256": "50ff6dac5b5a0c8d085d3f8dc1c459fba9430b3a69b73c4f657026e18d5edd64"
+  },
+  "status": "local_patch_verified_release_pending",
+  "patch_base": "7c063dab2394057680ae11d6e1d4fdc0e2dc4e68",
+  "patch": "diff --git a/data/photo-bank.json b/data/photo-bank.json\nindex a2309b2..de3e2b0 100644\n--- a/data/photo-bank.json\n+++ b/data/photo-bank.json\n@@ -2530,9 +2530,9 @@\n         \"דניאל תייס בחימום במדי מכבי תל אביב — ארכיון 8.9.2026\",\n         \"basketball\"\n       ],\n-      \"represents\": \"דניאל תייס בחימום במדי מכבי תל אביב — ארכיון 8.9.2026 · צילום חימום מספטמבר; אינו מהמשחק מול פרטיזן בנובמבר.\",\n+      \"represents\": \"דניאל תייס בחימום במדי מכבי תל אביב — ארכיון 8.9.2026 · צילום ארכיון מאימון החימום; אינו תיעוד המשחק המדווח.\",\n       \"restrictions\": [\n-        \"צילום חימום מספטמבר; אינו מהמשחק מול פרטיזן בנובמבר.\",\n+        \"צילום ארכיון מאימון החימום; אינו תיעוד המשחק המדווח.\",\n         \"Preserve creator, source, license and modification notice; comply with stated open-license terms.\",\n         \"Never present an archive as a photograph of the reported game.\"\n       ],\n@@ -2552,12 +2552,12 @@\n       \"subject_kind\": \"person_archive\",\n       \"sport\": \"basketball\",\n       \"person_identity_required\": true,\n-      \"caption\": \"דניאל תייס בחימום במדי מכבי תל אביב — ארכיון 8.9.2026 · צילום חימום מספטמבר; אינו מהמשחק מול פרטיזן בנובמבר.\",\n+      \"caption\": \"דניאל תייס בחימום במדי מכבי תל אביב — ארכיון 8.9.2026 · צילום ארכיון מאימון החימום; אינו תיעוד המשחק המדווח.\",\n       \"categories\": [\n         \"sports\",\n         \"people\"\n       ],\n-      \"usage_note_he\": \"צילום חימום מספטמבר; אינו מהמשחק מול פרטיזן בנובמבר.\",\n+      \"usage_note_he\": \"צילום ארכיון מאימון החימום; אינו תיעוד המשחק המדווח.\",\n       \"geography\": {\n         \"city\": null,\n         \"precision\": \"source_documented_archive\"\n",
+  "regression": [
+    "Photo bank checker passed for all 174 verified local JPGs.",
+    "Local renderer removes the unrelated fixture from the Olympiacos caption, preserves archive label and visible credit, and keeps the original Partizan article's image binding.",
+    "Only four contextual text fields of this asset changed; JPG/hash/license/source and editorial approvals were preserved."
+  ],
+  "release_blocker": "Existing source checkout is readable and reconciled to the production version plus owner receipt, but normal Git remote read returned no usable username/credential in this execution. No new source credential was issued under the cycle's no-keys mandate; patch was not pushed and no lease or deployment was started.",
+  "next_action": "Use the existing production release owner's authenticated source path and TLVNET-site CAS. Apply this single-asset patch to current source, check the generated detail and section captions, run publication checks and confirm the same public URLs after one deployment. Store fixture-specific context with an individual article or review; keep reusable bank descriptions fixture-neutral.",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
+}
