@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T09:58:50.364Z",
+  "updated_at": "2026-11-18T11:06:31.333Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5842,6 +5842,22 @@
           "error_at": "2026-11-08T11:37:30.0154329Z",
           "error": "test_cinema_listing_editorial.py:13 StopIteration for cinema-city-6639",
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-58937e33-8e80-8326-8fe8-dda2719f4f2c.json"
+        },
+        {
+          "run_id": 42476345750,
+          "workflow": "Publish priceboard",
+          "path": ".github/workflows/pages.yml",
+          "attempt": 1,
+          "created_at": "2026-11-08T11:34:25Z",
+          "status": "completed",
+          "conclusion": "failure",
+          "source_commit": "c346953330c48664d18b113dca07847db49e0989",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42476345750",
+          "classification": "Historical metadata only; exact root unconfirmed. No current outage or recovery inferred.",
+          "job_id": 128718452362,
+          "error_at": "2026-11-08T11:35:54.4100307Z",
+          "error": "test_cinema_listing_editorial.py:13 StopIteration for cinema-city-6639",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-52401ecd-7bb0-8322-9480-d544ac03c997.json"
         }
       ],
       "evidence": "ops/incident-response/evidence/ops-2026-11-18-76b93745-e058-8326-a9d3-755615b03c24.json",
@@ -5849,14 +5865,55 @@
       "current_state": "Current source uses isolated fixture and preserves six-city IDs/schedules. Configuration readback only, no new repair or current regression/public success inferred.",
       "next_action": "Retain current isolated fixture; no live catalog recollection or artificial film restoration.",
       "last_historical_review": {
-        "observed_at": "2026-11-18T09:58:50.364Z",
-        "run_id": "58937e33-8e80-8326-8fe8-dda2719f4f2c",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-18-58937e33-8e80-8326-8fe8-dda2719f4f2c.json",
-        "status": "Same known root, no new current outage or fix claim"
+        "observed_at": "2026-11-18T11:06:31.333Z",
+        "run_id": "52401ecd-7bb0-8322-9480-d544ac03c997",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-52401ecd-7bb0-8322-9480-d544ac03c997.json",
+        "status": "Same known root, no current outage or new fix claim"
       }
+    },
+    {
+      "id": "shared-image-presentation-review-id-stale-markup",
+      "status": "mitigated",
+      "fingerprint": "image_presentation.shared_asset_id_changed_stale_generated_markup",
+      "root_cause": "A unique src was preserved but its shared registry id was changed to a new article id. Existing real-estate section markup retained old id; tests/image-presentation.py:52 fails. Fit contain and position50/50/hash unchanged; no visible crop defect established.",
+      "occurrences": [
+        {
+          "run_id": "52401ecd-7bb0-8322-9480-d544ac03c997",
+          "owner_run_id": "f45dbfcf-ed34-832f-b758-7641f992a898",
+          "source_commit": "bc1a518a574f2633451b03696924bd60f120db08",
+          "version": 656,
+          "at": "2026-11-18T11:06:31.333Z",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-52401ecd-7bb0-8322-9480-d544ac03c997.json"
+        }
+      ],
+      "evidence": "ops/incident-response/evidence/ops-2026-11-18-52401ecd-7bb0-8322-9480-d544ac03c997.json",
+      "inbox": "ops/incident-response/inbox/52401ecd-7bb0-8322-9480-d544ac03c997-shared-presentation-id-repair.json",
+      "change": {
+        "registry": "For exact src and unchanged hash restore stable canonical id; preserve current source_reviewed_at, reason, owner and review_history, plus article-specific body/image approvals.",
+        "generated_files": [
+          "public/news/index.html",
+          "public/news/economy-tech.html"
+        ],
+        "generated_exact_attribute_replacement": {
+          "from": "data-image-review=\"tlv-center-tech-entry-jobs-snapshot-20261118\"",
+          "to": "data-image-review=\"realestate16-fullframe-skyline-university-2022\""
+        },
+        "test_before": "FAIL public/news/real-estate.html Section review missing after generation",
+        "test_after": "PASS tests/image-presentation.py on isolated exact656base. No gates/assertions/baseline changed.",
+        "changes": "3 files, registry id and exact two generated review-attribute values only; image/body/crop unchanged"
+      },
+      "regression": {
+        "before": "FAIL public/news/real-estate.html Section review missing after generation",
+        "after": "PASS tests/image-presentation.py on isolated exact656base. No gates/assertions/baseline changed."
+      },
+      "release_status": "isolated_tested_recipe_pending_existing_owner_release",
+      "public_proof": null,
+      "next_action": "Existing release owner opens fresh source, verifies exactsrc/hash/current registry, preserves parallel work, merges stable-id correction, runs normal prepare-public and relevant image/freshness/build checks under real own CAS, then verifies live affected sections. Do not blindly apply old patch or publish prepared-public fingerprint from old source. No extra writer/task/dispatch.",
+      "prevention": "Keep per-src registry identity stable across articles when bytes/framing are unchanged; retain per-article fulltext/image reviews in article record/history.",
+      "no_visible_crop_defect_established": true
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-58937e33-8e80-8326-8fe8-dda2719f4f2c",
+  "last_review_runKey": "ops-2026-11-18-52401ecd-7bb0-8322-9480-d544ac03c997",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
