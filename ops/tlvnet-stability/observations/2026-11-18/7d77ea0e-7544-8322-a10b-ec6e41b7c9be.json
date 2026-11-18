@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "7d77ea0e-7544-8322-a10b-ec6e41b7c9be",
+  "runKey": "ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-18T11:31:53.594Z",
+  "evidence": "ops/incident-response/evidence/ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be.json",
+  "site": {
+    "version": 657,
+    "source_commit": "e3ddcbd6e815f4bc8174df303ccdcdb9d038f38e",
+    "deployment_id": "appgdep_6afd89e339bc819190f0e98e353284c3",
+    "status": "succeeded",
+    "terminal_at": "2026-11-18T11:20:21.655537+00:00",
+    "catalog_sha256": "a791e36ec70ce808fc95ce32e8e68c254564d92f15152b19352730578092fafd",
+    "audience": "public",
+    "current_user_role": "owner"
+  },
+  "owner_run_id": "ad3860fc-61e8-8330-9ec9-f6cfed0bd53e",
+  "new_owner_verified": 1,
+  "existing_owner_updated": 1,
+  "controller_new_verified": 0,
+  "source_report_executed": true,
+  "regression": [
+    {
+      "command": "python tests/image-presentation.py",
+      "status": "pass"
+    },
+    {
+      "command": "python tests/news-freshness.py",
+      "status": "pass",
+      "scope": "All seven source lead orderings, earliest registration expiry, no expired neighborhood promotions"
+    },
+    {
+      "command": "python scripts/check-photo-bank.py",
+      "status": "pass",
+      "jpgs": 174
+    }
+  ],
+  "presentation": {
+    "previous_failure_version": 656,
+    "current_test": "PASS tests/image-presentation.py",
+    "current_registry_id": "tlv-center-tech-entry-jobs-snapshot-20261118",
+    "current_generated_markup_matches": true,
+    "repair_method": "Existing community publication regenerated section markup; stable-id isolated recipe was not incorporated",
+    "source_test_changed": false,
+    "controller_site_write": false,
+    "status": "mitigated_current_deployed_regression_passed_independent_public_pending",
+    "prevention_remaining": "Preserve shared per-src review identity or regenerate all dependent pages when it changes",
+    "no_visible_crop_defect_established": true
+  },
+  "coverage_complete": false,
+  "public_health_sample": null,
+  "availability": null,
+  "latency": null,
+  "metrics_reason": "Existing controller public-readback scope block; no substitute or estimated measurements",
+  "backup_restore_gate_changes": false,
+  "gates": {
+    "automated_full_offsite_backup": "not_verified",
+    "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+    "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+    "scheduled_publication_reconciliation": "partial"
+  },
+  "qualification_started_at": null,
+  "daily_summary_due": false
+}
