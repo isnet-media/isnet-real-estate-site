@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "6f31adc1-f9dc-8322-b26c-3775cfe0712a",
+  "runKey": "ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-18T16:05:59.739Z",
+  "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json",
+  "site": {
+    "version": 659,
+    "source_commit": "292c5392cbe8a6dc3a3a399f922adc5d6a84d49d",
+    "deployment_id": "appgdep_6afdbf06438081918fc034a04e214b40",
+    "status": "succeeded",
+    "terminal_at": "2026-11-18T15:07:11.181974+00:00",
+    "role": "owner",
+    "access": "public"
+  },
+  "source_report_executed": true,
+  "new_realestate_owner_articles": 1,
+  "new_controller_verified": 0,
+  "gates": {
+    "automated_full_offsite_backup": "not_verified",
+    "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+    "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+    "scheduled_publication_reconciliation": "partial"
+  },
+  "qualification_started_at": null,
+  "public_health": null,
+  "latency": null,
+  "daily_summary": false,
+  "projection_repair": {
+    "inbox": "ops/incident-response/inbox/6f31adc1-f9dc-8322-b26c-3775cfe0712a-neighborhood-slug-order-repair.json",
+    "status": "mitigated_isolated_tested_pending_release",
+    "tests": [
+      "node tests/neighborhood-updates.mjs PASS including canonical slug and unknown slug exclusion",
+      "node scripts/build-neighborhood-updates.mjs then python scripts/build-neighborhoods.py succeeded",
+      "Exact original id now in compact canonical תכנית ל' summary and northwest-coast static HTML",
+      "node tests/neighborhood-groups.mjs PASS:25groups/73localities/dedup/isolation/expiry"
+    ],
+    "current_live_repaired": false
+  }
+}
