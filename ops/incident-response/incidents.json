@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T17:42:48.702Z",
+  "updated_at": "2026-11-18T18:37:02.492Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6161,6 +6161,15 @@
       "evidence": [
         "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json"
       ]
+    },
+    {
+      "id": "tlvnet-instagram-web-composer-next-fails",
+      "status": "awaiting_external_action",
+      "root_cause": "Provider returned a generic UI error; exact cause unconfirmed. Normalized 1080×1350 JPEG produced the same failure. Prior direct operator interaction, not a new scheduled Meta API send.",
+      "root_signature": "Instagram web composer Crop → Next → Something went wrong",
+      "next_action": "Retain the approved item with existing publisher. Validate actual Meta authorization and supported Instagram publication path separately before any new send. Do not repeat this browser path without a changed cause. No duplicate/manual send or schedule change by controller.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-18/14bffc64-84e4-8322-85e1-bbeff20b8240.json",
+      "inbox": "ops/incident-response/inbox/14bffc64-84e4-8322-85e1-bbeff20b8240-instagram-web-composer.json"
     }
   ],
   "last_review_runKey": "ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7",
