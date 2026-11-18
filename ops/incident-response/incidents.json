@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T02:14:41.167Z",
+  "updated_at": "2026-11-18T03:10:43.626Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -2008,6 +2008,21 @@
             "": 1
           },
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c.json"
+        },
+        {
+          "run_id": 42602643169,
+          "attempt": 1,
+          "job_id": 129110601961,
+          "source_commit": "edc7dc71d9bfc421f0279174e6caa1abb94c703b",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42602643169",
+          "at": "2026-11-09T10:53:04.9913472Z",
+          "status_counts": {
+            "deployment_queued": 1,
+            "deployment_in_progress": 1,
+            "syncing_files": 113
+          },
+          "error": "Timeout reached, aborting!",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929.json"
         }
       ],
       "evidence": {
@@ -2028,14 +2043,10 @@
         "underlying_provider_cause": "unconfirmed"
       },
       "last_historical_review": {
-        "runKey": "ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c.json",
-        "run_ids": [
-          42626214877,
-          42617729060
-        ],
-        "current_recurrence": false,
-        "underlying_provider_cause": "unconfirmed"
+        "runKey": "ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929.json",
+        "run_id": 42602643169,
+        "current_recurrence": false
       }
     },
     {
@@ -5148,6 +5159,17 @@
           "remaining": 202,
           "observed_at": "2026-11-17T11:23:11.266Z",
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39.json"
+        },
+        {
+          "run_id": 42581967268,
+          "attempt": 1,
+          "job_id": 129042596429,
+          "source_commit": "f9462988f25ffe7cfb8a3232fea7db2f970972d7",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42581967268",
+          "at": "2026-11-09T07:53:08.7268818Z",
+          "status_counts": {},
+          "error": "test-event-integrity.cjs121: Ashdod has1unresolved candidate before release (expected0)",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929.json"
         }
       ],
       "remaining_historical_review": "208 historical entries across8workflow groups; no new current failure established.",
@@ -5180,6 +5202,12 @@
         "remaining": 202,
         "observed_at": "2026-11-17T11:23:11.266Z",
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39.json"
+      },
+      "last_historical_review": {
+        "runKey": "ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929.json",
+        "run_id": 42581967268,
+        "current_recurrence": false
       }
     },
     {
@@ -5647,7 +5675,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-2cf127fd-3104-8326-80ad-af867ef3769c",
+  "last_review_runKey": "ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
