@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T06:54:24.987Z",
+  "updated_at": "2026-11-18T07:58:36.707Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4727,7 +4727,7 @@
       "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
       "prevention": "Keep actual executor identity separate from intended owner; explicit active-role reconciliation before approval/CAS. Procedural mitigation only; no runtime fixed_verified claim.",
       "remaining": "Inspect scheduler/context isolation and result attribution for these exact two runs/conversations through the platform runtime; this connector exposes task prompt/result metadata but not execution routing logs or an isolation-repair operation. Do not replay/trigger tasks or change schedules to simulate repair.",
-      "last_observed_at": "2026-11-15T20:22:51.166Z",
+      "last_observed_at": "2026-11-18T07:58:36.707Z",
       "new_runtime_evidence": {
         "sports_run_id": "37cbf175-5f34-8320-b921-abb82295b707",
         "controller_previous_run_id": "66f4eaea-b874-8326-9b23-1510b4bf3d77",
@@ -4754,7 +4754,7 @@
         "status": "existing root requires runtime/service reconciliation; no prompt or schedule change"
       },
       "latest_evidence": "ops/incident-response/evidence/ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff.json",
-      "next_action": "Existing runtime support must reconcile news30be2ec5 output routing and culturede74036c failure/stale result using exact IDs. No automatic rerun or schedule/prompt mutations.",
+      "next_action": "Existing runtime support must reconcile task execution identity, result attribution and authorized public-read scope using exact18Nov run IDs. Actual sports owner reviews retained drafts after fresh facts/rights/control/CAS checks; no parallel writer, automatic rerun or schedule/permission mutation.",
       "latest_pending_run_observation": {
         "observed_at": "2026-11-17T08:33:56.700Z",
         "run_id": "de74036c-2198-8331-be27-9bfe1698d827",
@@ -4762,7 +4762,19 @@
         "latest_result": null,
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156.json",
         "note": "Completion after retry does not establish source/publication attribution; existing root remains open."
-      }
+      },
+      "occurrences": [
+        {
+          "run_id": "4856cab8-5264-8326-a0f8-7900e5c8a55c",
+          "observed_at": "2026-11-18T07:58:36.707Z",
+          "sports_run_id": "4aa4ca0c-4298-8320-b080-edb7dada4ff2",
+          "culture_run_id": "7ed5dc2c-4dcc-8329-83ce-96971bfd7a39",
+          "signature": "controller-active-scope-inherited-writer-approval",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-4856cab8-5264-8326-a0f8-7900e5c8a55c.json",
+          "inbox": "ops/incident-response/inbox/4856cab8-5264-8326-a0f8-7900e5c8a55c-sports-scope-review-handoff.json",
+          "current_state": "sports latest result belongs to17Nov; culture completed no_update has null result; source651 no new editorial article; cross-context sports drafts unapproved, browser authority denied, no bypass."
+        }
+      ]
     },
     {
       "id": "historical-super-batyam-private-write-http400",
@@ -4967,7 +4979,7 @@
       "action": "Public readback of shared owner CMS811801/811802 via Herzliya/Raanana home pages",
       "impact": "CMS811801/811802 public body/image/credit/canonical proof remains pending; no public outage inferred.",
       "change": "No bypass, alternate route or retry. Unaffected TLVNET health read completed.",
-      "next_action": "Retain for a scope-authorized public review in the existing owner/controller path; noninteractive run cannot request clarification. No new task or permission change.",
+      "next_action": "Existing runtime support must reconcile task execution identity, result attribution and authorized public-read scope using exact18Nov run IDs. Actual sports owner reviews retained drafts after fresh facts/rights/control/CAS checks; no parallel writer, automatic rerun or schedule/permission mutation.",
       "evidence": "ops/incident-response/evidence/ops-2026-11-16-d694d4c0-e3d8-832e-a862-30a655abe5be.json",
       "occurrences": [
         {
@@ -4982,13 +4994,24 @@
           "evidence": "ops/incident-response/evidence/ops-2026-11-17-1eeeaba5-b3a8-832e-b3f5-4322c5faf65d.json",
           "inbox": "ops/incident-response/inbox/1eeeaba5-b3a8-832e-b3f5-4322c5faf65d-super-public-approval-scope.json",
           "no_retry_or_bypass": true
+        },
+        {
+          "run_id": "4856cab8-5264-8326-a0f8-7900e5c8a55c",
+          "observed_at": "2026-11-18T07:58:36.707Z",
+          "sports_run_id": "4aa4ca0c-4298-8320-b080-edb7dada4ff2",
+          "culture_run_id": "7ed5dc2c-4dcc-8329-83ce-96971bfd7a39",
+          "signature": "controller-public-readback-auto-review-scope",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-4856cab8-5264-8326-a0f8-7900e5c8a55c.json",
+          "inbox": "ops/incident-response/inbox/4856cab8-5264-8326-a0f8-7900e5c8a55c-sports-scope-review-handoff.json",
+          "current_state": "sports latest result belongs to17Nov; culture completed no_update has null result; source651 no new editorial article; cross-context sports drafts unapproved, browser authority denied, no bypass."
         }
       ],
       "latest_supermarket_scope_followup": {
         "observed_at": "2026-11-17T06:14:58.331Z",
         "action": "Existing execution administrator must confirm current collector enabled/running state and authorize execution through the original daily-claim mechanism. Clarify approval scope for supermarket public metadata; do not create keys, enable cancelled workflows or modify schedules.",
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-1eeeaba5-b3a8-832e-b3f5-4322c5faf65d.json"
-      }
+      },
+      "last_observed_at": "2026-11-18T07:58:36.707Z"
     },
     {
       "id": "historical-event-release-unresolved-candidate",
@@ -5784,7 +5807,7 @@
       "next_action": "Retain current isolated fixture; no live catalog recollection or artificial film restoration."
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-76b93745-e058-8326-a9d3-755615b03c24",
+  "last_review_runKey": "ops-2026-11-18-4856cab8-5264-8326-a0f8-7900e5c8a55c",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
