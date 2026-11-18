@@ -12,28 +12,12 @@
     "automated_full_offsite_backup": "not_verified",
     "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
     "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
-    "scheduled_publication_reconciliation": {
-      "0": "p",
-      "1": "a",
-      "2": "r",
-      "3": "t",
-      "4": "i",
-      "5": "a",
-      "6": "l",
-      "latest_sample": {
-        "observed_at": "2026-11-18T19:56:42Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
-        "sports_owner_run_id": "cbad6525-8d98-8330-ac4a-95d36437a7ba",
-        "sport_articles": 3,
-        "culture_runtime_no_update": true,
-        "full_coverage": false
-      }
-    }
+    "scheduled_publication_reconciliation": "partial"
   },
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": "2026-11-18T19:56:42Z",
+  "last_observation_at": "2026-11-18T20:39:28Z",
   "last_daily_summary_at": "2026-11-18T16:08:12.541Z",
   "observations": [
     "observations/2026-11-15/stability-version619.json",
@@ -182,6 +166,12 @@
       "path": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
       "observed_at": "2026-11-18T19:56:42Z"
+    },
+    {
+      "run_id": "f625c711-d024-8332-8bb2-5cebd1357e90",
+      "path": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+      "observed_at": "2026-11-18T20:39:28Z"
     }
   ],
   "remaining": [
@@ -223,19 +213,25 @@
   "access_request": "BACKUP_ACCESS_REQUEST_20261115.md",
   "latest_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "bbc71902-e2b8-8322-a9e5-ca1d812e7928",
-    "runKey": "ops-2026-11-18-bbc71902-e2b8-8322-a9e5-ca1d812e7928",
-    "observed_at": "2026-11-18T19:56:42Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
-    "new_verified_sports_urls": [
-      "https://tlvnet.com/news/maccabi-olympiacos-overtime-loss-20261117",
-      "https://tlvnet.com/news/hapoel-baskonia-away-win-20261117",
-      "https://tlvnet.com/news/maccabi-dubai-limassol-preview-20261119"
-    ],
-    "facebook_public_content_pending": true,
-    "instagram_autonomous_unverified": true,
-    "caption_incident": "tlvnet-sports-archive-caption-context-reuse",
+    "run_id": "f625c711-d024-8332-8bb2-5cebd1357e90",
+    "runKey": "ops-2026-11-18-f625c711-d024-8332-8bb2-5cebd1357e90",
+    "observed_at": "2026-11-18T20:39:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
     "status": "baseline_observation_only",
-    "production_changes": 0
+    "production_changes": 0,
+    "public_health": "homepage_rendered",
+    "reconciled_prior_sports_drafts": [
+      "maccabi-olympiacos-overtime-loss-20261117",
+      "hapoel-baskonia-away-win-20261117"
+    ],
+    "caption_release_pending": "ops/incident-response/inbox/bbc71902-e2b8-8322-a9e5-ca1d812e7928-sports-caption-context-reuse.json",
+    "previous_reconciliation_sample": {
+      "observed_at": "2026-11-18T19:56:42Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
+      "sports_owner_run_id": "cbad6525-8d98-8330-ac4a-95d36437a7ba",
+      "sport_articles": 3,
+      "culture_runtime_no_update": true,
+      "full_coverage": false
+    }
   }
 }
