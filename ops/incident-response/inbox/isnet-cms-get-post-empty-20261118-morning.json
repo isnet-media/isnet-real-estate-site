@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "kind": "manual_writer_incident",
+  "source": "writer_herzliya_raanana",
+  "created_at": "2026-11-18T06:17:07.915Z",
+  "policy_version": "2026-11-17/1.2",
+  "owner": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "targets": [
+    "ISNET-CMS-62",
+    "ISNET-CMS-59"
+  ],
+  "signature": "mcp_isnet_admin_get_post_200_empty_object_while_list_posts_confirms_publication",
+  "status": "open",
+  "severity": "low",
+  "observed_at_local": "2026-11-18 08:12-08:15 Asia/Jerusalem",
+  "examples": [
+    {
+      "websiteId": 62,
+      "post_ids": [
+        812014,
+        812009,
+        812010
+      ]
+    },
+    {
+      "websiteId": 59,
+      "post_ids": [
+        812011,
+        812012
+      ]
+    }
+  ],
+  "evidence": "get_post for five existing published post IDs returned empty {} without title/content; create_post success responses also returned {} or missing .text, while subsequent list_posts confirms correct title, image, category, hide=false, template=false",
+  "impact": "Connector cannot read back post full HTML/tags/urlField; reduces independent post verification. All five posts remain published in CMS and no retry of create_post is warranted.",
+  "public_evidence": "Herzliya homepage web tool gave 403, a recurring known symptom. Raanana homepage web extraction showed content as of Nov17 evening (stale compared to Nov18 08:12 CMS publications). Neither symptom proves site down to ordinary visitors.",
+  "safe_action": "Investigate connector serialization of get_post/create_post and confirm post identifiers, return full safe response; compare CMS IDs with public output; do not republish or deploy for incident only",
+  "no_secrets": true
+}
