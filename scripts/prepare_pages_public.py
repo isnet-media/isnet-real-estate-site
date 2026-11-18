@@ -8,13 +8,16 @@ import shutil
 import subprocess
 
 PAGES_LIMIT = 1_000_000_000
-WARNING_BYTES = 850_000_000
+WARNING_BYTES = 800_000_000
+CRITICAL_BYTES = 900_000_000
 
 def check_capacity(size):
     if size >= PAGES_LIMIT:
         raise ValueError('Public site reaches the 1 GB Pages limit; move heavy assets before uploading')
-    if size >= WARNING_BYTES:
-        print('::warning title=Public hosting capacity::Public site exceeds 850 MB; plan asset storage expansion')
+    if size >= CRITICAL_BYTES:
+        print('::warning title=Critical Pages headroom::Public payload exceeds 900 MB; require storage migration before any new city')
+    elif size >= WARNING_BYTES:
+        print('::warning title=Public hosting capacity::Public site exceeds 800 MB; plan asset storage expansion')
 
 
 ROOT = Path(__file__).resolve().parents[1]
