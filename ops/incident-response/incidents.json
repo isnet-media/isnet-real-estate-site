@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T14:48:36.587Z",
+  "updated_at": "2026-11-18T16:05:59.739Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4728,6 +4728,13 @@
           "status": "partial_source_block_only",
           "provider_root_not_independently_established": true,
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be.json"
+        },
+        {
+          "owner_run_id": "544b4fa2-1500-8325-b7b7-6bd7d2b13f38",
+          "inbox": "ops/incident-response/inbox/real-estate-20261118-source-readers.json",
+          "observed_at": "2026-11-18T16:05:59.739Z",
+          "scope": "Three storyread429, index/category readable; PDF screenshot timeout only; extracted primary section read. No globaldeskblock.",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
         }
       ]
     },
@@ -4905,14 +4912,31 @@
           "job_id": 133409994006,
           "created_at": "2026-11-16T15:40:41Z",
           "inbox": "ops/incident-response/inbox/43898943792-1.json"
+        },
+        {
+          "canonical_incident": "ims-sea-no-currently-valid-period",
+          "run_id": 44337585068,
+          "job_id": 134918367805,
+          "source_commit": "d74be1db3dda794855631eb4a8277e9fdefe2d14",
+          "error_at": "2026-11-18T15:37:08.4434190Z",
+          "error": "No currently valid forecast; retaining last good file",
+          "regression_in_workflow": "5 parser tests passed",
+          "last_good_preserved": true,
+          "guard_weakened": false,
+          "full_log_read": true,
+          "fresh_primary_read": "One IMS XML reader call unsupported text/xml; source current periods not independently observed. No retry or claimed HTTP outage.",
+          "source_script_sha": "74688b9a3d00bbab96e8cb8110677bd0c88df958",
+          "new_signature": false,
+          "inbox": "ops/incident-response/inbox/44337585068-1.json",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
         }
       ],
       "status": "awaiting_external_action",
       "signature": "ims-sea/refresh/no-currently-valid-period",
       "root_cause": "Live IMS response issued16Nov16:23Israel contains only20:00onward periods for213/210. Current local time not covered. Validation correctly rejects; no current replacement exists in the observed source.",
-      "impact": "IMS period is nowcurrent; retained source files still end16Nov08:00 and require original owner refresh. No live widget render claim.",
+      "impact": "New18Nov refresh rejected uncovered current period and retained lastgood. Actual current XML periods and live widget freshness not independently verified.",
       "first_seen_at": "2026-11-09T22:24:11Z",
-      "last_seen_at": "2026-11-16T15:41:35Z",
+      "last_seen_at": "2026-11-18T15:37:10Z",
       "updated_at": "2026-11-16T15:56:31.918Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-16-b28a8a3c-a510-8332-b4c5-feedac37ad04.json",
       "change": "No code change, data overwrite, manual rerun or deployment. Existing guard passed regression.",
@@ -4922,7 +4946,7 @@
         "future_only_20_at_17_40_rejection": "passed_synthetic_reproduction",
         "production_data_written": false
       },
-      "next_action": "Existing authorized owner/workflow must refresh through original concurrency lane. Existing GitHub workflow-dispatch capability unavailable in controller connection; no new job/schedule/claim or alternate writer.",
+      "next_action": "Resume existing owner/workflow on materially changed current IMS periods. Keep lastgood dates honest; no manual retry, schedulechange, region substitution or guard relaxation.",
       "prevention": "Keep sourceIssue/from/to provenance and current-period exclusion. Group recurrence by this signature; source HTTP200 alone does not verify current data.",
       "public_verification": {
         "url": "https://ashdodnet.com/",
@@ -4945,8 +4969,15 @@
         "production_data_written": false
       },
       "canonical_incident_id": "ims-no-valid-current-period",
-      "last_controller_observed_at": "2026-11-17T16:07:36.283Z",
-      "last_evidence": "ops/incident-response/evidence/ops-2026-11-17-cc75c56c-8d44-832a-ab62-ec49342f2e6c.json"
+      "last_controller_observed_at": "2026-11-18T16:05:59.739Z",
+      "last_evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json",
+      "current_recurrence": {
+        "source_commit": "d74be1db3dda794855631eb4a8277e9fdefe2d14",
+        "run_id": 44337585068,
+        "error": "No currently valid forecast; retaining last good file",
+        "tests": "5 parser tests passed",
+        "primary_reader_limit": "One IMS XML reader call unsupported text/xml; source current periods not independently observed. No retry or claimed HTTP outage."
+      }
     },
     {
       "id": "tlvnet-publication-evidence-owner-schema",
@@ -5944,6 +5975,19 @@
           "no_current_failure_inferred": true,
           "remaining": 171,
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-ad80fe00-e260-8322-9d80-4fd3d1495084.json"
+        },
+        {
+          "run_id": 42474960816,
+          "attempt": 1,
+          "created_at": "2026-11-08T11:15:49Z",
+          "source_commit": "7449eaec2cfe68d5f03525cd2146a09406195cb1",
+          "job_id": 128714109429,
+          "error_at": "2026-11-08T11:17:19.5381029Z",
+          "step": "Build compact event listings and canonical sitemap",
+          "error": "test_cinema_listing_editorial.py:13 StopIteration for cinema-city-6639",
+          "canonical_incident": "historical-cinema-editorial-fixed-film-stopiteration",
+          "remaining": 170,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
         }
       ],
       "evidence": "ops/incident-response/evidence/ops-2026-11-18-76b93745-e058-8326-a9d3-755615b03c24.json",
@@ -5951,10 +5995,10 @@
       "current_state": "Current source uses isolated fixture and preserves six-city IDs/schedules. Configuration readback only, no new repair or current regression/public success inferred.",
       "next_action": "Retain current isolated fixture; no live catalog recollection or artificial film restoration.",
       "last_historical_review": {
-        "observed_at": "2026-11-18T14:48:36.587Z",
-        "run_id": "ad80fe00-e260-8322-9d80-4fd3d1495084",
-        "remaining": 171,
-        "evidence": "ops/incident-response/evidence/ops-2026-11-18-ad80fe00-e260-8322-9d80-4fd3d1495084.json"
+        "observed_at": "2026-11-18T16:05:59.739Z",
+        "run_id": "6f31adc1-f9dc-8322-b26c-3775cfe0712a",
+        "remaining": 170,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
       }
     },
     {
@@ -6005,9 +6049,59 @@
         "evidence": "ops/incident-response/evidence/ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be.json"
       },
       "current_repair_method": "Existing community publication regenerated section markup; stable-id isolated recipe was not incorporated"
+    },
+    {
+      "id": "tlvnet-neighborhood-explicit-slug-stale-build-order",
+      "status": "mitigated",
+      "fingerprint": "neighborhood_projection.explicit_slug_ignored_and_stale_static_build_order",
+      "root_cause": [
+        "Explicit neighborhood IDs only matched names/aliases, ignoring canonical slug lamed. Article has no other recognized alias text, so articleSummary returns null.",
+        "prepare-public invokes build-neighborhoods before build-neighborhood-updates, so static group pages consume previous summaries."
+      ],
+      "occurrences": [
+        {
+          "run_id": "6f31adc1-f9dc-8322-b26c-3775cfe0712a",
+          "owner_run_id": "544b4fa2-1500-8325-b7b7-6bd7d2b13f38",
+          "version": 659,
+          "article_id": "country-lamed-planning-framework-explained-20261118",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
+        }
+      ],
+      "inbox": "ops/incident-response/inbox/6f31adc1-f9dc-8322-b26c-3775cfe0712a-neighborhood-slug-order-repair.json",
+      "evidence": [
+        "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
+      ],
+      "change": "Three-file isolated patch, no sourcepush/deploy",
+      "regression": [
+        "node tests/neighborhood-updates.mjs PASS including canonical slug and unknown slug exclusion",
+        "node scripts/build-neighborhood-updates.mjs then python scripts/build-neighborhoods.py succeeded",
+        "Exact original id now in compact canonical תכנית ל' summary and northwest-coast static HTML",
+        "node tests/neighborhood-groups.mjs PASS:25groups/73localities/dedup/isolation/expiry"
+      ],
+      "public_proof": "Owner confirmed missing canonical area; isolated generated output repaired. Deployed repair/public verification pending.",
+      "next_action": "Open fresh source, preserve parallel owner work, merge three-file patch, acquire/readback existing realCAS TLVNET-site/no concurrent deploy, run full normal preparation/build checks, publish once then verify affected summary and canonical area public link. Do not copy stale prepared-public fingerprints or republish article. Current controller independent public scope block remains; no release done thiscycle."
+    },
+    {
+      "id": "tlvnet-editorial-build-missing-target-artifact",
+      "status": "mitigated",
+      "fingerprint": "TLVNET/editorial-release/missing-explicit-build-news-step",
+      "root_cause": "This owner workflow initially invoked build-site/prepare-public without explicit scripts/build-news.py. Section/homecards updated but new public/news/<id>.html absent. Existing fullbuild gates did not reject missing target article.",
+      "inbox": "ops/incident-response/inbox/real-estate-20261118-missing-generated-article.json",
+      "occurrences": [
+        {
+          "owner_run_id": "544b4fa2-1500-8325-b7b7-6bd7d2b13f38",
+          "source": "367ccf869d835e478f82d67a12456da530a99689",
+          "at": "2026-11-18T15:01:16.545Z"
+        }
+      ],
+      "current_state": "Owner explicitly built target before659 and verified live body/image/credit/home/section. Current missing article not inferred. Gate prevention remains pending.",
+      "next_action": "Assess explicit build-news invocation plus new/changed target artifact assertion within existing release checks; preserve current body/image/facts gates. No redundant publication.",
+      "evidence": [
+        "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-ad80fe00-e260-8322-9d80-4fd3d1495084",
+  "last_review_runKey": "ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
