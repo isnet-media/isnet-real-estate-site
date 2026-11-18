@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T19:56:42Z",
+  "updated_at": "2026-11-18T20:39:28Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-18T19:27:32Z",
   "initial_history": {
@@ -17,13 +17,13 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "167 historical run entries remain in 8 workflow groups for first-pass triage. Exact cause remains unconfirmed for metadata-only records.",
+      "remaining": "166 historical run entries remain in 8 workflow groups for first-pass triage. Exact cause remains unconfirmed for metadata-only records.",
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
-        "run_id": 42241041767,
-        "status": "historical known failed-step family, metadata triaged, specific cause unconfirmed",
-        "observed_at": "2026-11-18T19:56:42Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
+        "run_id": 42182796562,
+        "status": "historical metadata triaged to known step family; exact cause unconfirmed",
+        "observed_at": "2026-11-18T20:39:28Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json"
       }
     },
     "full_logs_read_this_cycle": 0,
@@ -372,18 +372,6 @@
         }
       ],
       ".github/workflows/public-events-readback-audit.yml": [
-        {
-          "run_id": 42182796562,
-          "attempt": 1,
-          "created_at": "2026-11-06T07:43:58Z",
-          "workflow": "Verify public event feed read-back",
-          "path": ".github/workflows/public-events-readback-audit.yml",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "07dbb9c49addead493b29c5a6fb3e531757b765a",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42182796562",
-          "classification": "Historical metadata only; full log not read, root signature unconfirmed."
-        },
         {
           "run_id": 42177371654,
           "attempt": 1,
@@ -2152,25 +2140,26 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "bbc71902-e2b8-8322-a9e5-ca1d812e7928",
-    "runKey": "ops-2026-11-18-bbc71902-e2b8-8322-a9e5-ca1d812e7928",
+    "run_id": "f625c711-d024-8332-8bb2-5cebd1357e90",
+    "runKey": "ops-2026-11-18-f625c711-d024-8332-8bb2-5cebd1357e90",
     "policy_version": "2026-11-15/1.2",
-    "observed_at": "2026-11-18T19:56:42Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
-    "observation": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
-    "status": "incremental_review_caption_repair_pending",
+    "observed_at": "2026-11-18T20:39:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+    "observation": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+    "status": "no_update_live_changes",
     "saved_version": 662,
     "source_commit": "04990c1daa3756ff514c2bb0516843e9802c7479",
-    "new_actions": 2,
-    "new_social_rows": 1,
-    "public_posts_verified": 0,
+    "new_actions": 0,
+    "new_social_rows": 0,
+    "new_inbox": 0,
     "full_logs_read": 0,
     "historical_runs_metadata_reviewed": 1,
-    "historical_remaining": 167,
-    "newly_checked_sports_publications": 3,
-    "newly_checked_city_publications": 3,
+    "historical_remaining": 166,
+    "newly_verified_articles": 0,
     "new_site_deployments": 0,
-    "source_report_executed": true
+    "source_report_executed": false,
+    "source_report_reused": true,
+    "sports_drafts_reconciled": 2
   },
   "concurrent_controller_observation": {
     "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
@@ -5604,6 +5593,29 @@
       "newly_checked_city_publications": 3,
       "new_site_deployments": 0,
       "source_report_executed": true
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "f625c711-d024-8332-8bb2-5cebd1357e90",
+      "runKey": "ops-2026-11-18-f625c711-d024-8332-8bb2-5cebd1357e90",
+      "policy_version": "2026-11-15/1.2",
+      "observed_at": "2026-11-18T20:39:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+      "observation": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+      "status": "no_update_live_changes",
+      "saved_version": 662,
+      "source_commit": "04990c1daa3756ff514c2bb0516843e9802c7479",
+      "new_actions": 0,
+      "new_social_rows": 0,
+      "new_inbox": 0,
+      "full_logs_read": 0,
+      "historical_runs_metadata_reviewed": 1,
+      "historical_remaining": 166,
+      "newly_verified_articles": 0,
+      "new_site_deployments": 0,
+      "source_report_executed": false,
+      "source_report_reused": true,
+      "sports_drafts_reconciled": 2
     }
   ],
   "photo_controls_checkpoint": {
@@ -6340,8 +6352,10 @@
     ],
     "observed_at": "2026-11-18T19:56:42Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
-    "new_rows_this_cycle": 1,
-    "public_verification": "Target permalink loaded with exact TLVNET author/title in browser metadata; Meta overlaid login and full post content is still unverified."
+    "new_rows_this_cycle": 0,
+    "public_verification": "Target permalink loaded with exact TLVNET author/title in browser metadata; Meta overlaid login and full post content is still unverified.",
+    "last_checked_at": "2026-11-18T20:39:28Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json"
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -6552,9 +6566,7 @@
     "news_research_queues_unchanged": true,
     "controller_status": "read_only_active_publisher_preserved"
   },
-  "pending_task_run_ids": [
-    "4aa4ca0c-4298-8320-b080-edb7dada4ff2"
-  ],
+  "pending_task_run_ids": [],
   "latest_supermarket_execution_checkpoint": {
     "source_inbox": "ops/incident-response/inbox/e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
     "evidence": "ops/incident-response/evidence/ops-2026-11-17-1eeeaba5-b3a8-832e-b3f5-4322c5faf65d.json",
@@ -6935,10 +6947,10 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-18T19:56:42Z",
+    "observed_at": "2026-11-18T20:39:28Z",
     "source_commit": "04990c1daa3756ff514c2bb0516843e9802c7479",
     "saved_version": 662,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
     "desks": {
       "news": {
         "last_new_published_at": "2026-11-18T17:00:47.320846+00:00",
@@ -7603,17 +7615,10 @@
             "next_action": "Check material municipal/company progress when source changes."
           },
           {
-            "content_id": "maccabi-olympiacos-final-20261117",
-            "source_url": "https://maccabi.co.il/games/olympiacos-piraeus-17-11-2026/?tab=recap",
-            "status": "awaiting_final_official_result",
-            "reason": "Official page read labelsLIVE and0:0placeholder; partial four-quarter narrative not a terminal result. No final score inferred, no repeated polling.",
-            "next_action": "Read terminal dated official result at next existing cycle; preserve preview and distinguish actual final report."
-          },
-          {
             "content_id": "maccabi-volleyball-challenge-cup-20261117",
             "source_url": "https://m.sport5.co.il/Articles.aspx?DocId=567949&FolderID=1716",
-            "status": "blocked_source_full_text",
-            "reason": "New relevant volleyball candidate discovered; fullpage reader inaccessible. No full-body or opponent verification claimed.",
+            "status": "awaiting_return_leg_final_and_licensed_image",
+            "reason": "Official17Nov first-leg announcement read; secondary first-leg win discovered. Return leg18Nov final not read; do not label first leg as qualification.",
             "next_action": "Primary club/federation full source when changed/available; article and suitable licensed image pending."
           }
         ],
@@ -8198,10 +8203,10 @@
     "reconciled_at": "2026-11-16T05:46:55.355Z"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-18T19:56:42Z",
+    "observed_at": "2026-11-18T20:39:28Z",
     "unread_entries": 0,
-    "new_entries_processed": 2,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
+    "new_entries_processed": 0,
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json"
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -8308,11 +8313,11 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-18T19:56:42Z",
-    "from": "2026-11-18T16:44:08Z",
+    "observed_at": "2026-11-18T20:39:28Z",
+    "from": "2026-11-18T19:27:32Z",
     "through": "2026-11-18T19:27:32Z",
-    "rows": 3,
-    "strictly_new": 2,
+    "rows": 1,
+    "strictly_new": 0,
     "failures": 0,
     "new_root_failures": 0,
     "seen_ids_at_boundary": [
@@ -8321,7 +8326,7 @@
     "next_page": null,
     "pending_run_ids": [],
     "full_logs_read": 0,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -8374,15 +8379,15 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-18T19:56:42Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
+    "observed_at": "2026-11-18T20:39:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
     "owners_checked": 9,
-    "inbox_new": 2,
-    "actions_new": 2,
-    "social_new_rows": 1,
+    "inbox_new": 0,
+    "actions_new": 0,
+    "social_new_rows": 0,
     "historical_classified": 1,
-    "historical_remaining": 167,
-    "new_isolated_repair": "ops/incident-response/inbox/bbc71902-e2b8-8322-a9e5-ca1d812e7928-sports-caption-context-reuse.json",
+    "historical_remaining": 166,
+    "ready_items": 0,
     "site_source_pushed": false,
     "site_deployed": false
   },
@@ -8522,7 +8527,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-18T19:56:42Z",
+    "observed_at": "2026-11-18T20:39:28Z",
     "files": [
       {
         "name": "01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -9241,5 +9246,22 @@
     "tests_passed": true,
     "public_verified": false,
     "no_source_push": true
+  },
+  "latest_pending_run_reconciliation": {
+    "historical_run_id": "4aa4ca0c-4298-8320-b080-edb7dada4ff2",
+    "historical_runKey": "sports-2026-11-18-09:00-4aa4ca0c",
+    "historical_runtime_terminal_status": null,
+    "checkpoint_at": "2026-11-18T07:02:40.659746+00:00",
+    "checkpoint_sha256": "bb8df02fa4eb0dbae6937cbffbbf56762ef49b1b4637d2d39627d62f3e8daddd",
+    "status": "Both original drafts reconciled to actual later publication by the authorized sports owner. Historical terminal metadata is no longer returned by the task connector. No historical publication attributed.",
+    "later_owner_run_id": "cbad6525-8d98-8330-ac4a-95d36437a7ba",
+    "published_article_ids": [
+      "maccabi-olympiacos-overtime-loss-20261117",
+      "hapoel-baskonia-away-win-20261117"
+    ],
+    "unresolved_research_count": 4,
+    "observed_at": "2026-11-18T20:39:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+    "archived_runtime_gap": "Original run terminal result unavailable via current connector; keep metadata gap separately from resolved drafts."
   }
 }
