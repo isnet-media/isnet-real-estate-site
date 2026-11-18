@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T20:39:28Z",
+  "updated_at": "2026-11-18T21:23:55Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-18T19:27:32Z",
   "initial_history": {
@@ -17,13 +17,17 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "166 historical run entries remain in 8 workflow groups for first-pass triage. Exact cause remains unconfirmed for metadata-only records.",
+      "remaining": "163 historical runs remain in 7 workflow groups for first-pass metadata triage. Exact cause remains unconfirmed for metadata-only records.",
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
-        "run_id": 42182796562,
-        "status": "historical metadata triaged to known step family; exact cause unconfirmed",
-        "observed_at": "2026-11-18T20:39:28Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json"
+        "run_ids": [
+          42177371654,
+          42418462576,
+          42750086041
+        ],
+        "status": "historical failed-step metadata recorded",
+        "observed_at": "2026-11-18T21:23:55Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json"
       }
     },
     "full_logs_read_this_cycle": 0,
@@ -58,18 +62,6 @@
     "metadata_runs_total": 3102,
     "untriaged_workflow_groups": {
       ".github/workflows/pages.yml": [
-        {
-          "run_id": 42418462576,
-          "workflow": "Publish priceboard",
-          "path": ".github/workflows/pages.yml",
-          "attempt": 1,
-          "created_at": "2026-11-07T21:59:44Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "d48602f51f759f1f3f64b789cf7f1ce740495e86",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42418462576",
-          "classification": "Historical metadata only; root unconfirmed. No current outage or repair inferred."
-        },
         {
           "run_id": 42368157939,
           "workflow": "Publish priceboard",
@@ -371,33 +363,8 @@
           "classification": "Historical metadata only; full log not read, root signature unconfirmed."
         }
       ],
-      ".github/workflows/public-events-readback-audit.yml": [
-        {
-          "run_id": 42177371654,
-          "attempt": 1,
-          "created_at": "2026-11-06T06:54:07Z",
-          "workflow": "Verify public event feed read-back",
-          "path": ".github/workflows/public-events-readback-audit.yml",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "9148c122d12933061f166ffb42929c15265a097f",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177371654",
-          "classification": "Historical metadata only; full log not read, root signature unconfirmed."
-        }
-      ],
+      ".github/workflows/public-events-readback-audit.yml": [],
       ".github/workflows/super-health.yml": [
-        {
-          "run_id": 42750086041,
-          "workflow": "All cities supermarket public health",
-          "path": ".github/workflows/super-health.yml",
-          "attempt": 1,
-          "created_at": "2026-11-10T03:32:19Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "a6d1d5a184e848c0f2dcf50d1768e16d5c7c61d5",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42750086041",
-          "classification": "Historical metadata only; signature unconfirmed; no present-failure or recovery claim."
-        },
         {
           "run_id": 42749683474,
           "workflow": "All cities supermarket public health",
@@ -2140,12 +2107,12 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "f625c711-d024-8332-8bb2-5cebd1357e90",
-    "runKey": "ops-2026-11-18-f625c711-d024-8332-8bb2-5cebd1357e90",
+    "run_id": "168bb578-9d68-8332-9e39-bd761fd55d0c",
+    "runKey": "ops-2026-11-18-168bb578-9d68-8332-9e39-bd761fd55d0c",
     "policy_version": "2026-11-15/1.2",
-    "observed_at": "2026-11-18T20:39:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
-    "observation": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+    "observed_at": "2026-11-18T21:23:55Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json",
+    "observation": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json",
     "status": "no_update_live_changes",
     "saved_version": 662,
     "source_commit": "04990c1daa3756ff514c2bb0516843e9802c7479",
@@ -2153,13 +2120,12 @@
     "new_social_rows": 0,
     "new_inbox": 0,
     "full_logs_read": 0,
-    "historical_runs_metadata_reviewed": 1,
-    "historical_remaining": 166,
+    "historical_runs_metadata_reviewed": 3,
+    "historical_remaining": 163,
     "newly_verified_articles": 0,
     "new_site_deployments": 0,
     "source_report_executed": false,
-    "source_report_reused": true,
-    "sports_drafts_reconciled": 2
+    "source_report_reused": true
   },
   "concurrent_controller_observation": {
     "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
@@ -5616,6 +5582,28 @@
       "source_report_executed": false,
       "source_report_reused": true,
       "sports_drafts_reconciled": 2
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "168bb578-9d68-8332-9e39-bd761fd55d0c",
+      "runKey": "ops-2026-11-18-168bb578-9d68-8332-9e39-bd761fd55d0c",
+      "policy_version": "2026-11-15/1.2",
+      "observed_at": "2026-11-18T21:23:55Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json",
+      "observation": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json",
+      "status": "no_update_live_changes",
+      "saved_version": 662,
+      "source_commit": "04990c1daa3756ff514c2bb0516843e9802c7479",
+      "new_actions": 0,
+      "new_social_rows": 0,
+      "new_inbox": 0,
+      "full_logs_read": 0,
+      "historical_runs_metadata_reviewed": 3,
+      "historical_remaining": 163,
+      "newly_verified_articles": 0,
+      "new_site_deployments": 0,
+      "source_report_executed": false,
+      "source_report_reused": true
     }
   ],
   "photo_controls_checkpoint": {
@@ -6354,8 +6342,8 @@
     "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
     "new_rows_this_cycle": 0,
     "public_verification": "Target permalink loaded with exact TLVNET author/title in browser metadata; Meta overlaid login and full post content is still unverified.",
-    "last_checked_at": "2026-11-18T20:39:28Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json"
+    "last_checked_at": "2026-11-18T21:23:55Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json"
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -6947,10 +6935,10 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-18T20:39:28Z",
+    "observed_at": "2026-11-18T21:23:55Z",
     "source_commit": "04990c1daa3756ff514c2bb0516843e9802c7479",
     "saved_version": 662,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json",
     "desks": {
       "news": {
         "last_new_published_at": "2026-11-18T17:00:47.320846+00:00",
@@ -8203,10 +8191,10 @@
     "reconciled_at": "2026-11-16T05:46:55.355Z"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-18T20:39:28Z",
+    "observed_at": "2026-11-18T21:23:55Z",
     "unread_entries": 0,
     "new_entries_processed": 0,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json"
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -8313,7 +8301,7 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-18T20:39:28Z",
+    "observed_at": "2026-11-18T21:23:55Z",
     "from": "2026-11-18T19:27:32Z",
     "through": "2026-11-18T19:27:32Z",
     "rows": 1,
@@ -8326,7 +8314,7 @@
     "next_page": null,
     "pending_run_ids": [],
     "full_logs_read": 0,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -8379,14 +8367,14 @@
     }
   ],
   "latest_incremental_review": {
-    "observed_at": "2026-11-18T20:39:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/f625c711-d024-8332-8bb2-5cebd1357e90.json",
+    "observed_at": "2026-11-18T21:23:55Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/168bb578-9d68-8332-9e39-bd761fd55d0c.json",
     "owners_checked": 9,
     "inbox_new": 0,
     "actions_new": 0,
     "social_new_rows": 0,
-    "historical_classified": 1,
-    "historical_remaining": 166,
+    "historical_classified": 3,
+    "historical_remaining": 163,
     "ready_items": 0,
     "site_source_pushed": false,
     "site_deployed": false
@@ -8527,7 +8515,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-18T20:39:28Z",
+    "observed_at": "2026-11-18T21:23:55Z",
     "files": [
       {
         "name": "01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
