@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T18:37:02.492Z",
+  "updated_at": "2026-11-18T19:56:42Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6170,9 +6170,35 @@
       "next_action": "Retain the approved item with existing publisher. Validate actual Meta authorization and supported Instagram publication path separately before any new send. Do not repeat this browser path without a changed cause. No duplicate/manual send or schedule change by controller.",
       "evidence": "ops/tlvnet-stability/observations/2026-11-18/14bffc64-84e4-8322-85e1-bbeff20b8240.json",
       "inbox": "ops/incident-response/inbox/14bffc64-84e4-8322-85e1-bbeff20b8240-instagram-web-composer.json"
+    },
+    {
+      "id": "tlvnet-sports-archive-caption-context-reuse",
+      "status": "open",
+      "fingerprint": "TLVNET photo-bank reusable archive caption still names prior fixture",
+      "root_cause": "scripts/news_images.py resolves an approved asset from data/photo-bank.json. The public caption inherited the bank record's Partizan-specific note although the new Olympiacos article's own image_caption was contextualized correctly.",
+      "impact": "Wrong fixture reference in the public archive-photo caption on the evening Olympiacos article and on its sports-section card.",
+      "occurrences": [
+        {
+          "observed_at": "2026-11-18T19:56:42Z",
+          "owner_run_id": "cbad6525-8d98-8330-ac4a-95d36437a7ba",
+          "version": 662,
+          "url": "https://tlvnet.com/news/maccabi-olympiacos-overtime-loss-20261117",
+          "section_url": "https://tlvnet.com/news/sports"
+        }
+      ],
+      "change_status": "local_patch_verified_release_pending",
+      "regression": [
+        "Photo bank checker passed for all 174 verified local JPGs.",
+        "Local renderer removes the unrelated fixture from the Olympiacos caption, preserves archive label and visible credit, and keeps the original Partizan article's image binding.",
+        "Only four contextual text fields of this asset changed; JPG/hash/license/source and editorial approvals were preserved."
+      ],
+      "release_blocker": "Existing source checkout is readable and reconciled to the production version plus owner receipt, but normal Git remote read returned no usable username/credential in this execution. No new source credential was issued under the cycle's no-keys mandate; patch was not pushed and no lease or deployment was started.",
+      "next_action": "Use the existing production release owner's authenticated source path and TLVNET-site CAS. Apply this single-asset patch to current source, check the generated detail and section captions, run publication checks and confirm the same public URLs after one deployment. Store fixture-specific context with an individual article or review; keep reusable bank descriptions fixture-neutral.",
+      "inbox": "ops/incident-response/inbox/bbc71902-e2b8-8322-a9e5-ca1d812e7928-sports-caption-context-reuse.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7",
+  "last_review_runKey": "ops-2026-11-18-bbc71902-e2b8-8322-a9e5-ca1d812e7928",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
