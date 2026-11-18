@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+  "runKey": "real-estate-20261118-1795013726133",
+  "policy_version": "2026-11-15/1.1",
+  "observed_at": "2026-11-18T14:58:40.749Z",
+  "status": "open",
+  "related_incident": "tlvnet-local-source-municipal-category429",
+  "signature": "TLVNET/real-estate/external-source-reader429-and-PDF-screenshot-timeout",
+  "evidence": [
+    {
+      "urls": [
+        "https://tlvonline.co.il/התחדשות-רחוב-המשנה/",
+        "https://tlvonline.co.il/פיצול-מתחם-התחנה-המרכזית/",
+        "https://tlvonline.co.il/תוכנית-הרחבת-קאנטרי-למד/"
+      ],
+      "result": "web reader429; homepage and real-estatecategory readable. No supplier rootcause inferred. Cachedrefread retriggered429 within initialdiscovery; stopped."
+    },
+    {
+      "url": "https://www.tel-aviv.gov.il/Residents/Development/DocLib/פרוטוקול 25-0024ב מתאריך 24-12-2025.pdf",
+      "pages": [
+        57,
+        62,
+        63
+      ],
+      "result": "3 screenshot requests timed out. Relevant full extractedtext read. No claim of PDFvisual review."
+    }
+  ],
+  "impact": "Item-specific newstage/currentfullbody gaps queued; independent historicalprimary analysis continues with original dates and explicit limits.",
+  "next_action": "Inspect reader/supplier only with changedresponse/access evidence; no repeated unchangedfetch, newkeys, agentactivation or schedulechange.",
+  "controller_triggered": false
+}
