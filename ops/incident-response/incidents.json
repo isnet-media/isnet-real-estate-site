@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-17T23:30:08.282Z",
+  "updated_at": "2026-11-18T00:23:15.223Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5508,6 +5508,15 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42655553856",
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
           "at": "2026-11-09T16:32:45.7101747Z"
+        },
+        {
+          "run_id": 42655368613,
+          "attempt": 1,
+          "job_id": 129292438350,
+          "source_commit": "42568c52c1f12dfad57be46d74c008b6315e7f94",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42655368613",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-b6417199-e230-8326-a559-7a6184ecbaa3.json",
+          "at": "2026-11-09T16:31:24.0486982Z"
         }
       ],
       "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
@@ -5520,7 +5529,13 @@
         "qualification": "Configuration readback only: exact historical missing flag now present. No controller code change or live data recovery inferred."
       },
       "next_action": "Observe ordinary future owner/Pages results; no rerun, schedule change, collection or deployment for historical-only mismatch.",
-      "controller_retry": false
+      "controller_retry": false,
+      "last_historical_review": {
+        "runKey": "ops-2026-11-18-b6417199-e230-8326-a559-7a6184ecbaa3",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-b6417199-e230-8326-a559-7a6184ecbaa3.json",
+        "run_id": 42655368613,
+        "current_recurrence": false
+      }
     },
     {
       "id": "historical-institution-ui-missing-ashdod-source",
@@ -5536,16 +5551,31 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42655553856",
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
           "at": "2026-11-09T16:32:41.5445619Z"
+        },
+        {
+          "run_id": 42655368613,
+          "attempt": 1,
+          "job_id": 129292438350,
+          "source_commit": "42568c52c1f12dfad57be46d74c008b6315e7f94",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42655368613",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-b6417199-e230-8326-a559-7a6184ecbaa3.json",
+          "at": "2026-11-09T16:31:14.7638296Z"
         }
       ],
       "evidence": "ops/incident-response/evidence/ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f.json",
       "inbox": "ops/incident-response/inbox/47bf95b2-fe5c-8326-98ff-2258baf4e09f-historical-workflow-guard.json",
       "current_state": "Historical warning only; no current outage or verified fix inferred.",
       "next_action": "Bounded original-source identity/data review if fresh relevant source or owner evidence changes. Never drop source checks or invent event evidence.",
-      "controller_retry": false
+      "controller_retry": false,
+      "last_historical_review": {
+        "runKey": "ops-2026-11-18-b6417199-e230-8326-a559-7a6184ecbaa3",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-b6417199-e230-8326-a559-7a6184ecbaa3.json",
+        "run_id": 42655368613,
+        "current_recurrence": false
+      }
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-47bf95b2-fe5c-8326-98ff-2258baf4e09f",
+  "last_review_runKey": "ops-2026-11-18-b6417199-e230-8326-a559-7a6184ecbaa3",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
