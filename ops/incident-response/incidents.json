@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T11:06:31.333Z",
+  "updated_at": "2026-11-18T11:31:53.594Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4718,7 +4718,18 @@
       ],
       "impact": "Partial index/backfill coverage only; verified independent publication continued",
       "next_action": "Retain original bounded backfill cursor; resume only with changed rate-limit state in next original-owner cycle",
-      "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json"
+      "evidence": "ops/incident-response/evidence/ops-2026-11-15-908bbdd2-0044-8326-9bb2-f15f076a1b78.json",
+      "related_category_observations": [
+        {
+          "url": "https://tlvonline.co.il/category/קהילה/",
+          "reported_by": "Automation_e03d80ff914c8191a790fc66e7447826",
+          "owner_run_id": "ad3860fc-61e8-8330-9ec9-f6cfed0bd53e",
+          "http": 429,
+          "status": "partial_source_block_only",
+          "provider_root_not_independently_established": true,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be.json"
+        }
+      ]
     },
     {
       "id": "controller-active-scope-inherited-writer-approval",
@@ -5558,16 +5569,34 @@
     },
     {
       "id": "tlvnet-community-bank-record-required-metadata",
-      "status": "open",
+      "status": "mitigated",
       "first_seen_at": "2026-11-17T11:21:19Z",
       "last_seen_at": "2026-11-17T12:33:20.064Z",
       "root_cause": "Generated image record omitted visual_review and further required schema fields. Existing owner's initial+focused validation failed; image/draft preserved, no rights gate bypass.",
       "article_id": "arik-einstein-neighborhood-hanukkah-20261117",
       "owner": "Automation_e03d80ff914c8191a790fc66e7447826",
       "attempts": 2,
-      "next_action": "Existing owner nextscheduledcycle completes full schema from actual retained JPEG/visual evidence/provenance; no regeneration, invented rights, changed approval or third retry this cycle.",
-      "evidence": "ops/incident-response/inbox/20261117-community-image-metadata-checkpoint.json",
-      "scope": "Only item blocked; independent community publication succeeded645retained646."
+      "next_action": "Retain original owner verified publication and controller regression; independent public readback only when authorized. No republish or regeneration.",
+      "evidence": [
+        "ops/incident-response/inbox/20261117-community-image-metadata-checkpoint.json",
+        "ops/incident-response/evidence/ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be.json"
+      ],
+      "scope": "Only item blocked; independent community publication succeeded645retained646.",
+      "current_state": "Original owner repaired metadata and published retained draft657; controller174JPG schema/checksum check passed. Independent controller public readback pending.",
+      "regression": {
+        "command": "python scripts/check-photo-bank.py",
+        "status": "pass",
+        "jpgs": 174,
+        "source": "e3ddcbd6e815f4bc8174df303ccdcdb9d038f38e"
+      },
+      "original_owner_public_proof": {
+        "inbox": "ops/incident-response/inbox/20261118-community-publication-evidence.json",
+        "run_id": "ad3860fc-61e8-8330-9ec9-f6cfed0bd53e",
+        "article_id": "arik-einstein-neighborhood-hanukkah-20261117",
+        "body_image_credit_section_home": true,
+        "desktop_article": true,
+        "mobile_cards": "pending"
+      }
     },
     {
       "id": "flash90-cloud-session-not-retained",
@@ -5858,6 +5887,19 @@
           "error_at": "2026-11-08T11:35:54.4100307Z",
           "error": "test_cinema_listing_editorial.py:13 StopIteration for cinema-city-6639",
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-52401ecd-7bb0-8322-9480-d544ac03c997.json"
+        },
+        {
+          "run_id": 42475917496,
+          "attempt": 1,
+          "source_commit": "d8a717cb11c37fe76571c7970beb25523468044b",
+          "job_id": 128717146040,
+          "error_at": "2026-11-08T11:30:31.8821972Z",
+          "step": "Build compact event listings and canonical sitemap",
+          "signature": "test_cinema_listing_editorial.py:13 StopIteration for cinema-city-6639",
+          "canonical_incident": "historical-cinema-editorial-fixed-film-stopiteration",
+          "current_outage_inferred": false,
+          "remaining": 174,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be.json"
         }
       ],
       "evidence": "ops/incident-response/evidence/ops-2026-11-18-76b93745-e058-8326-a9d3-755615b03c24.json",
@@ -5865,10 +5907,10 @@
       "current_state": "Current source uses isolated fixture and preserves six-city IDs/schedules. Configuration readback only, no new repair or current regression/public success inferred.",
       "next_action": "Retain current isolated fixture; no live catalog recollection or artificial film restoration.",
       "last_historical_review": {
-        "observed_at": "2026-11-18T11:06:31.333Z",
-        "run_id": "52401ecd-7bb0-8322-9480-d544ac03c997",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-18-52401ecd-7bb0-8322-9480-d544ac03c997.json",
-        "status": "Same known root, no current outage or new fix claim"
+        "observed_at": "2026-11-18T11:31:53.594Z",
+        "run_id": "7d77ea0e-7544-8322-a10b-ec6e41b7c9be",
+        "remaining": 174,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be.json"
       }
     },
     {
@@ -5906,14 +5948,22 @@
         "before": "FAIL public/news/real-estate.html Section review missing after generation",
         "after": "PASS tests/image-presentation.py on isolated exact656base. No gates/assertions/baseline changed."
       },
-      "release_status": "isolated_tested_recipe_pending_existing_owner_release",
+      "release_status": "existing_owner657_regenerated_markup_regression_passed_public_readback_pending",
       "public_proof": null,
-      "next_action": "Existing release owner opens fresh source, verifies exactsrc/hash/current registry, preserves parallel work, merges stable-id correction, runs normal prepare-public and relevant image/freshness/build checks under real own CAS, then verifies live affected sections. Do not blindly apply old patch or publish prepared-public fingerprint from old source. No extra writer/task/dispatch.",
+      "next_action": "No extra deployment. Independent affected public section readback pending when authorized; durable stable per-src identity prevention still pending.",
       "prevention": "Keep per-src registry identity stable across articles when bytes/framing are unchanged; retain per-article fulltext/image reviews in article record/history.",
-      "no_visible_crop_defect_established": true
+      "no_visible_crop_defect_established": true,
+      "current_deployed_regression": {
+        "source": "e3ddcbd6e815f4bc8174df303ccdcdb9d038f38e",
+        "version": 657,
+        "test": "PASS tests/image-presentation.py",
+        "checked_at": "2026-11-18T11:31:53.594Z",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be.json"
+      },
+      "current_repair_method": "Existing community publication regenerated section markup; stable-id isolated recipe was not incorporated"
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-52401ecd-7bb0-8322-9480-d544ac03c997",
+  "last_review_runKey": "ops-2026-11-18-7d77ea0e-7544-8322-a10b-ec6e41b7c9be",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
