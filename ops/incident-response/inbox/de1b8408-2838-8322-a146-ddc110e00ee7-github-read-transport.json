@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "de1b8408-2838-8322-a146-ddc110e00ee7",
+  "runKey": "ops-2026-11-18-de1b8408-2838-8322-a146-ddc110e00ee7",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-18T16:19:00.383Z",
+  "target": "GitHub read API",
+  "signature": "github_connector.RemoteProtocolError.disconnected_without_response",
+  "status": "observed_transient",
+  "operation": "GET actions/runs/42473058230/jobs",
+  "attempts": 1,
+  "error": "RemoteProtocolError: Server disconnected without sending a response.",
+  "impact": "One historical read deferred; no current production failure inferred. Subsequent independent GitHub reads succeeded.",
+  "next_action": "Retain exact historical run checkpoint for next existing cycle; no unchanged retry, dispatch, disabling or permission change."
+}
