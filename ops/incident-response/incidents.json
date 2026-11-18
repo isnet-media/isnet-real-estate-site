@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T03:10:43.626Z",
+  "updated_at": "2026-11-18T04:48:06.773Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5170,6 +5170,26 @@
           "status_counts": {},
           "error": "test-event-integrity.cjs121: Ashdod has1unresolved candidate before release (expected0)",
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929.json"
+        },
+        {
+          "run_id": 42581639566,
+          "attempt": 1,
+          "job_id": 129041504448,
+          "source_commit": "83cccf4aea3a2e9d6d37e1e2dfeffae726c5e1f4",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42581639566",
+          "at": "2026-11-09T07:49:39.4558174Z",
+          "error": "test-event-integrity.cjs121: Ashdod unresolved candidates before release",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-5fe36865-8854-8326-b224-abb6e30ab9ae.json"
+        },
+        {
+          "run_id": 42581486272,
+          "attempt": 1,
+          "job_id": 129041002355,
+          "source_commit": "d64e5ee97180efad9940d3c377e9c3569e046441",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42581486272",
+          "at": "2026-11-09T07:48:08.4810759Z",
+          "error": "test-event-integrity.cjs121: Ashdod unresolved candidates before release",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-5fe36865-8854-8326-b224-abb6e30ab9ae.json"
         }
       ],
       "remaining_historical_review": "208 historical entries across8workflow groups; no new current failure established.",
@@ -5204,9 +5224,12 @@
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39.json"
       },
       "last_historical_review": {
-        "runKey": "ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929.json",
-        "run_id": 42581967268,
+        "runKey": "ops-2026-11-18-5fe36865-8854-8326-b224-abb6e30ab9ae",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-5fe36865-8854-8326-b224-abb6e30ab9ae.json",
+        "run_ids": [
+          42581639566,
+          42581486272
+        ],
         "current_recurrence": false
       }
     },
@@ -5675,7 +5698,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-b13d5826-b800-8326-835f-c5475f877929",
+  "last_review_runKey": "ops-2026-11-18-5fe36865-8854-8326-b224-abb6e30ab9ae",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
