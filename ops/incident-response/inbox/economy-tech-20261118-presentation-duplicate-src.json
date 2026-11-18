@@ -1,0 +1,18 @@
+{
+  "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+  "runKey": "economy-tech-20261118-1794997198243",
+  "policy_version": "2026-11-15/1.1",
+  "observed_at": "2026-11-18T10:22:53.574Z",
+  "subsystem": "TLVNET-source-preparation",
+  "signature": "image_presentation.load_reviews.duplicate_src",
+  "status": "mitigated",
+  "cause": "This cycle appended a second presentation record for an existing skyline asset; registry keys by src, so build-news correctly rejected duplicate.",
+  "correction": "Merged source review into existing same-src record, retained previous review in review_history; same src/SHA/contain/position preserved. No gate/baseline change.",
+  "checks": [
+    "build-news.py passed after one focused data correction",
+    "check-photo-bank.py passed172localJPGs"
+  ],
+  "publication_status": "pending_build_and_public_verification",
+  "prevention": "Read registry by canonical src before adding a new per-asset presentation record; article-specific review stays linked to bodyhash in article record.",
+  "controller_invoked": false
+}
