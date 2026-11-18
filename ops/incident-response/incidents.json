@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T13:16:15.002Z",
+  "updated_at": "2026-11-18T14:48:36.587Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5929,6 +5929,21 @@
           "no_current_failure_inferred": true,
           "remaining": 172,
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-c971c792-6990-8322-99eb-0d7e20f67027.json"
+        },
+        {
+          "run_id": 42475546061,
+          "attempt": 1,
+          "created_at": "2026-11-08T11:23:35Z",
+          "source_commit": "befd3d884bd42fc605b74f885a397dc8fba27d61",
+          "job_id": 128715961502,
+          "step": "Build compact event listings and canonical sitemap",
+          "error_at": "2026-11-08T11:24:59.3206755Z",
+          "error": "test_cinema_listing_editorial.py:13 StopIteration for cinema-city-6639",
+          "canonical_incident": "historical-cinema-editorial-fixed-film-stopiteration",
+          "full_logs_read": 1,
+          "no_current_failure_inferred": true,
+          "remaining": 171,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-ad80fe00-e260-8322-9d80-4fd3d1495084.json"
         }
       ],
       "evidence": "ops/incident-response/evidence/ops-2026-11-18-76b93745-e058-8326-a9d3-755615b03c24.json",
@@ -5936,10 +5951,10 @@
       "current_state": "Current source uses isolated fixture and preserves six-city IDs/schedules. Configuration readback only, no new repair or current regression/public success inferred.",
       "next_action": "Retain current isolated fixture; no live catalog recollection or artificial film restoration.",
       "last_historical_review": {
-        "observed_at": "2026-11-18T13:16:15.002Z",
-        "run_id": "c971c792-6990-8322-99eb-0d7e20f67027",
-        "remaining": 172,
-        "evidence": "ops/incident-response/evidence/ops-2026-11-18-c971c792-6990-8322-99eb-0d7e20f67027.json"
+        "observed_at": "2026-11-18T14:48:36.587Z",
+        "run_id": "ad80fe00-e260-8322-9d80-4fd3d1495084",
+        "remaining": 171,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-ad80fe00-e260-8322-9d80-4fd3d1495084.json"
       }
     },
     {
@@ -5992,7 +6007,7 @@
       "current_repair_method": "Existing community publication regenerated section markup; stable-id isolated recipe was not incorporated"
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-c971c792-6990-8322-99eb-0d7e20f67027",
+  "last_review_runKey": "ops-2026-11-18-ad80fe00-e260-8322-9d80-4fd3d1495084",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
