@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "6f31adc1-f9dc-8322-b26c-3775cfe0712a",
+  "runKey": "ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-18T16:05:59.739Z",
+  "target": "TLVNET-site",
+  "signature": "neighborhood_projection.explicit_slug_ignored_and_stale_static_build_order",
+  "status": "mitigated_isolated_tested_pending_release",
+  "baseline_source": "292c5392cbe8a6dc3a3a399f922adc5d6a84d49d",
+  "article_id": "country-lamed-planning-framework-explained-20261118",
+  "article_url": "https://tlvnet.com/news/country-lamed-planning-framework-explained-20261118",
+  "area_url": "https://tlvnet.com/city-hub/areas/northwest-coast/",
+  "root_cause": [
+    "Explicit neighborhood IDs only matched names/aliases, ignoring canonical slug lamed. Article has no other recognized alias text, so articleSummary returns null.",
+    "prepare-public invokes build-neighborhoods before build-neighborhood-updates, so static group pages consume previous summaries."
+  ],
+  "patch": "diff --git a/public/city-hub/neighborhood-model.js b/public/city-hub/neighborhood-model.js\nindex 996d8d5..0d16477 100644\n--- a/public/city-hub/neighborhood-model.js\n+++ b/public/city-hub/neighborhood-model.js\n@@ -7,7 +7,7 @@ export function resolveNeighborhood(value,data){const wanted=norm(value);return\n export function matchNeighborhoods(record,data){\n  const found=new Set();\n  const explicit=[record.neighborhood,record.neighborhoods].flat().filter(Boolean);\n- for(const n of data.neighborhoods||[])if(explicit.some(value=>(n.aliases||[n.name]).some(a=>norm(a)===norm(value))))found.add(n.name);\n+ for(const n of data.neighborhoods||[])if(explicit.some(value=>[n.name,n.slug,...(n.aliases||[])].filter(Boolean).some(a=>norm(a)===norm(value))))found.add(n.name);\n  for(const key of ['title','name','tag','tags','why_chosen','lead','address','district'])for(const field of [record[key]].flat().filter(Boolean)){\n   const value=norm(field),spans=[];\n   for(const n of data.neighborhoods||[])for(const a of n.aliases||[n.name]){\ndiff --git a/scripts/prepare-public.mjs b/scripts/prepare-public.mjs\nindex 12f1db4..9e4f1b9 100644\n--- a/scripts/prepare-public.mjs\n+++ b/scripts/prepare-public.mjs\n@@ -27,8 +27,8 @@ if(python){\n  const supermarket=spawnSync(process.execPath,['scripts/prepare-super-intro.mjs'],{stdio:'inherit'});if(supermarket.status!==0)process.exit(supermarket.status||1);\n  const launch=spawnSync(python,['scripts/prepare-launch.py'],{stdio:'inherit'});if(launch.status!==0)process.exit(launch.status||1);\n  const seo=spawnSync(python,['scripts/build-seo.py'],{stdio:'inherit'});if(seo.status!==0)process.exit(seo.status||1);\n- const neighborhoods=spawnSync(python,['scripts/build-neighborhoods.py'],{stdio:'inherit'});if(neighborhoods.status!==0)process.exit(neighborhoods.status||1);\n  const updates=spawnSync(process.execPath,['scripts/build-neighborhood-updates.mjs'],{stdio:'inherit'});if(updates.status!==0)process.exit(updates.status||1);\n+ const neighborhoods=spawnSync(python,['scripts/build-neighborhoods.py'],{stdio:'inherit'});if(neighborhoods.status!==0)process.exit(neighborhoods.status||1);\n  const stay=spawnSync(python,['scripts/build-stay.py'],{stdio:'inherit'});if(stay.status!==0)process.exit(stay.status||1);\n  const homeLayout=spawnSync(python,['scripts/build-home-layout.py'],{stdio:'inherit'});if(homeLayout.status!==0)process.exit(homeLayout.status||1);\n  const polish=spawnSync(python,['scripts/polish-public.py'],{stdio:'inherit'});if(polish.status!==0)process.exit(polish.status||1);\ndiff --git a/tests/neighborhood-updates.mjs b/tests/neighborhood-updates.mjs\nindex f0a9732..11f753b 100644\n--- a/tests/neighborhood-updates.mjs\n+++ b/tests/neighborhood-updates.mjs\n@@ -13,6 +13,9 @@ assert.equal(articleSummary({...base,published_at:'2026-11-16T09:00:00Z'},regist\n assert.equal(articleSummary({...base,url:'https://evil.example/news/one'},registry,now),null);\n assert.equal(articleSummary({...base,promotion_ends_at:'2026-11-15T11:00:00Z'},registry,now),null);\n assert.equal(articleSummary({...base,title:'חדשות תל אביב-יפו',lead:''},registry,now),null);\n+const explicitLamed=articleSummary({...base,title:'מסגרת תכנון מקומית',lead:'',section:'real-estate',neighborhoods:['lamed']},registry,now);\n+assert.deepEqual(explicitLamed.neighborhoods,[registry.neighborhoods.find(n=>n.slug==='lamed').name]);\n+assert.equal(articleSummary({...base,title:'מסגרת תכנון מקומית',lead:'',neighborhoods:['unknown-locality']},registry,now),null);\n assert.deepEqual(articleSummary({...base,title:'סיור בתל ברוך צפון',lead:''},registry,now).neighborhoods,['תל ברוך צפון']);\n assert.deepEqual(articleSummary({...base,title:'מפגש ברמת אביב ג׳',lead:''},registry,now).neighborhoods,[registry.neighborhoods.find(n=>n.slug==='ramat-aviv-gimel').name]);\n const multi=articleSummary({...base,title:'תכנון בבבלי ובנחלת יצחק'},registry,now);assert(multi.neighborhoods.includes('בבלי'));assert(multi.neighborhoods.includes('נחלת יצחק'));\n",
+  "test_before": "Exact659 original articleSummary=null, compact updates lacks article, static northwest-coast lacks article.",
+  "test_after": [
+    "node tests/neighborhood-updates.mjs PASS including canonical slug and unknown slug exclusion",
+    "node scripts/build-neighborhood-updates.mjs then python scripts/build-neighborhoods.py succeeded",
+    "Exact original id now in compact canonical תכנית ל' summary and northwest-coast static HTML",
+    "node tests/neighborhood-groups.mjs PASS:25groups/73localities/dedup/isolation/expiry"
+  ],
+  "release_protocol": "Open fresh source, preserve parallel owner work, merge three-file patch, acquire/readback existing realCAS TLVNET-site/no concurrent deploy, run full normal preparation/build checks, publish once then verify affected summary and canonical area public link. Do not copy stale prepared-public fingerprints or republish article. Current controller independent public scope block remains; no release done thiscycle.",
+  "new_approval": false,
+  "body_date_image_changed": false,
+  "no_source_push": true,
+  "no_deploy": true,
+  "public_verified": false,
+  "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
+}
