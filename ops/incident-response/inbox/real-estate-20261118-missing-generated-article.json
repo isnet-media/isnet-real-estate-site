@@ -1,0 +1,20 @@
+{
+  "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+  "runKey": "real-estate-20261118-1795013726133",
+  "policy_version": "2026-11-15/1.1",
+  "observed_at": "2026-11-18T15:01:16.545Z",
+  "status": "open",
+  "signature": "TLVNET/editorial-release/missing-explicit-build-news-step",
+  "root_cause": "This owner workflow initially invoked build-site/prepare-public without explicit scripts/build-news.py. Section/homecards updated but new public/news/<id>.html absent. Existing fullbuild gates did not reject missing target article.",
+  "evidence": {
+    "article_id": "country-lamed-planning-framework-explained-20261118",
+    "source_checkpoint_commit": "367ccf869d835e478f82d67a12456da530a99689",
+    "source_pushed": true,
+    "site_version_saved": false,
+    "production_deployed": false
+  },
+  "focused_correction": "Run explicit build-news.py before complete prepare/build; assert new public and dist/client article files plus home/section/body/image prior to save/deploy.",
+  "prevention": "Retain mandatory explicit build-news step and targetartifact assertions; no gate orbaselinechanged.",
+  "next_action": "Record focused corrected build and exact public verification result in owner finaljournal; controller may later assess missing target artifact gate without new taskactivation.",
+  "controller_triggered": false
+}
