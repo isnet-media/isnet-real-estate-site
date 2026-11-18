@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T16:05:59.739Z",
+  "updated_at": "2026-11-18T16:19:00.383Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6099,9 +6099,29 @@
       "evidence": [
         "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
       ]
+    },
+    {
+      "id": "github-read-transport-disconnected",
+      "status": "mitigated",
+      "fingerprint": "github_connector.RemoteProtocolError.disconnected_without_response",
+      "root_cause": "Transport peer disconnected without response for one historical jobs GET. Underlying cause unestablished.",
+      "occurrences": [
+        {
+          "run_id": "de1b8408-2838-8322-a146-ddc110e00ee7",
+          "target_historical_run_id": 42473058230,
+          "observed_at": "2026-11-18T16:19:00.383Z",
+          "inbox": "ops/incident-response/inbox/de1b8408-2838-8322-a146-ddc110e00ee7-github-read-transport.json",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-de1b8408-2838-8322-a146-ddc110e00ee7.json"
+        }
+      ],
+      "impact": "One historical record remains untriaged. Independent subsequent Github reads succeeded; no production failure or overall API outage inferred.",
+      "next_action": "Retain historical cursor for next existing cycle; avoid unchanged immediate retry or disabling controller.",
+      "evidence": [
+        "ops/incident-response/evidence/ops-2026-11-18-de1b8408-2838-8322-a146-ddc110e00ee7.json"
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a",
+  "last_review_runKey": "ops-2026-11-18-de1b8408-2838-8322-a146-ddc110e00ee7",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
