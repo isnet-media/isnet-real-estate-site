@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T16:19:00.383Z",
+  "updated_at": "2026-11-18T17:42:48.702Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5988,6 +5988,20 @@
           "canonical_incident": "historical-cinema-editorial-fixed-film-stopiteration",
           "remaining": 170,
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
+        },
+        {
+          "run_id": 42473058230,
+          "attempt": 1,
+          "created_at": "2026-11-08T10:49:40Z",
+          "source_commit": "973fe12ca177f4a028c61f4658b5abe1c898943c",
+          "job_id": 128708527801,
+          "step": "Build compact event listings and canonical sitemap",
+          "error_at": "2026-11-08T10:52:49.9019956Z",
+          "error": "test_cinema_listing_editorial.py:13 StopIteration for cinema-city-6639",
+          "canonical_incident": "historical-cinema-editorial-fixed-film-stopiteration",
+          "previous_transport_error": "Jobs read now succeeded in new cycle. No incident reset or immediate retry.",
+          "remaining": 169,
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json"
         }
       ],
       "evidence": "ops/incident-response/evidence/ops-2026-11-18-76b93745-e058-8326-a9d3-755615b03c24.json",
@@ -5995,10 +6009,10 @@
       "current_state": "Current source uses isolated fixture and preserves six-city IDs/schedules. Configuration readback only, no new repair or current regression/public success inferred.",
       "next_action": "Retain current isolated fixture; no live catalog recollection or artificial film restoration.",
       "last_historical_review": {
-        "observed_at": "2026-11-18T16:05:59.739Z",
-        "run_id": "6f31adc1-f9dc-8322-b26c-3775cfe0712a",
-        "remaining": 170,
-        "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
+        "observed_at": "2026-11-18T17:42:48.702Z",
+        "run_id": "e7a34709-e5ac-8322-abcd-3d377a6b50a7",
+        "remaining": 169,
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json"
       }
     },
     {
@@ -6115,13 +6129,41 @@
         }
       ],
       "impact": "One historical record remains untriaged. Independent subsequent Github reads succeeded; no production failure or overall API outage inferred.",
-      "next_action": "Retain historical cursor for next existing cycle; avoid unchanged immediate retry or disabling controller.",
+      "next_action": "No immediate retry or external action needed; retain isolated transport occurrence history and group recurrence if observed.",
       "evidence": [
         "ops/incident-response/evidence/ops-2026-11-18-de1b8408-2838-8322-a146-ddc110e00ee7.json"
+      ],
+      "latest_observation": {
+        "observed_at": "2026-11-18T17:42:48.702Z",
+        "status": "same historical jobs read succeeded in next cycle",
+        "evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json"
+      }
+    },
+    {
+      "id": "isnet-cms-subtitle-length-reported",
+      "status": "open",
+      "fingerprint": "isnet_cms.create_post.subtitle_length_reported_unknown_server_constraint",
+      "root_cause": "Owner reports subtitle length validation failure after one correction. Exact payload/server constraint unestablished; connector optional subTitle metadata has no max length.",
+      "occurrences": [
+        {
+          "owner_run_id": "3798dc11-29c4-832d-a5e8-fb3388713027",
+          "websiteId": 62,
+          "item": "Weizmann school renovation",
+          "attempts_reported": 2,
+          "observed_at": "2026-11-18T17:42:48.702Z",
+          "inbox": "ops/incident-response/inbox/e7a34709-e5ac-8322-abcd-3d377a6b50a7-cms-subtitle-validation-handoff.json",
+          "evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json"
+        }
+      ],
+      "impact": "Single unpublished item. Other three city items proceeded. No CMS-wide outage or failed-subtitle publication attempt by controller.",
+      "next_action": "Original owner retains full source/draft/media + sanitized exact error/character count; use confirmed constraint or reviewed omission of optional subtitle on future allowed attempt with duplicate/CAS checks. No invented max or same-input third retry.",
+      "inbox": "ops/incident-response/inbox/e7a34709-e5ac-8322-abcd-3d377a6b50a7-cms-subtitle-validation-handoff.json",
+      "evidence": [
+        "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json"
       ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-de1b8408-2838-8322-a146-ddc110e00ee7",
+  "last_review_runKey": "ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
