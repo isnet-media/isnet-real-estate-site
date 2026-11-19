@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "ops-2026-11-19-571e35f6-ba50-832e-b036-40030d40b061",
+  "policy_version": "2026-11-15/1.2",
+  "recorded_at": "2026-11-19T13:50:12.117Z",
+  "target": "TLVNET-site",
+  "signature": "tlvnet-prepare-public-restaurant-rail-total-after-trim",
+  "status": "open",
+  "severity": "build_regression",
+  "evidence": {
+    "source_before": "9db4c3d0071831e4afcbd33289fd2c21fee56388",
+    "failing_check": "tests/home-layout.py:21",
+    "observed": "Full regeneration failed on restaurant rail count after the homepage transformations. On the exact previously deployed snapshot, the same test passed.",
+    "candidate_cause": "scripts/polish-public.py truncates discovery rails at six cards after normalizing the total; it does not update that total after trimming.",
+    "scope": "The checked snapshot path preserves the public homepage and verifies every source/output fingerprint. Full regeneration remains affected."
+  },
+  "next_action": "Reproduce exact count before and after the polish pass, then synchronize the count at the trimming step and run full regeneration without changing the requested first hummus card."
+}
