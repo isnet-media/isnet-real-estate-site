@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://isnet.co.il/astrology/rising/"><meta name="description" content="גלו מהו מזל האופק שלכם וקראו פרשנות אישית על הדרך שבה אתם ניגשים לאנשים ולמצבים חדשים.">
+<title>מחשבון אופק | עולם האסטרולוגיה שלך</title><link rel="stylesheet" href="/astrology/style.css"><script defer src="/astrology/app.js"></script></head>
+<body><a class="skip" href="#main">דילוג לתוכן</a><header><div class="bar"><a class="brand" href="/astrology/">✦ עולם האסטרולוגיה שלך</a><nav aria-label="ניווט ראשי"><a href="/astrology/#signs">המזלות</a><a href="/astrology/compatibility/">התאמה זוגית</a><a href="/astrology/compass/">המצפן האישי</a><a href="/astrology/#guides">מדריכים</a></nav></div></header>
+<main id="main" class=""><section class="hero"><div class="hero-inner"><small>אשדוד נט · מגזין</small><h1>מחשבון אופק</h1><p>גלו מהו מזל האופק שלכם וקראו פרשנות אישית על הדרך שבה אתם ניגשים לאנשים ולמצבים חדשים.</p></div></section><div class="body"><form id="rising-form" class="rising-form" method="dialog">
+  <label>תאריך לידה<input name="day" type="date" min="1900-01-01" max="2099-12-31"></label>
+  <label>שעת לידה מקומית<input name="hour" type="time"></label>
+  <label>מקום לידה<select name="city">
+    <option value="">בחרו עיר</option>
+    <option value="31.80,34.65,Asia/Jerusalem">אשדוד</option>
+    <option value="32.08,34.78,Asia/Jerusalem">תל אביב</option>
+    <option value="31.78,35.22,Asia/Jerusalem">ירושלים</option>
+    <option value="32.79,34.99,Asia/Jerusalem">חיפה</option>
+    <option value="31.25,34.79,Asia/Jerusalem">באר שבע</option>
+    <option value="32.17,34.84,Asia/Jerusalem">הרצליה</option>
+    <option value="32.18,34.87,Asia/Jerusalem">רעננה</option>
+    <option value="31.88,34.74,Asia/Jerusalem">יבנה</option>
+    <option value="31.61,34.77,Asia/Jerusalem">קריית גת</option>
+    <option value="32.02,34.77,Asia/Jerusalem">חולון</option>
+    <option value="31.97,34.80,Asia/Jerusalem">ראשון לציון</option>
+    <option value="custom">מקום אחר באמצעות קואורדינטות ואזור זמן</option>
+  </select></label>
+  <fieldset id="rising-custom" hidden>
+    <legend>פרטי מקום הלידה</legend>
+    <label>קו רוחב<input name="lat" type="number" step="any" min="-66.49" max="66.49"></label>
+    <label>קו אורך<input name="lon" type="number" step="any" min="-180" max="180"></label>
+    <label>אזור זמן<input name="zone" dir="ltr" placeholder="Europe/Paris"></label>
+  </fieldset>
+  <button type="submit">לחשב את האופק</button>
+</form>
+<article id="rising-result" hidden aria-live="polite"></article>
+<article><h2>מה אומר האופק?</h2>
+<p>האופק הוא הנקודה שבה גלגל המזלות הטרופי חוצה את האופק המזרחי ברגע הלידה. במסורת האסטרולוגית הוא משמש להתבוננות ברושם ראשוני ובדרך שבה אנחנו ניגשים למצבים חדשים. התוצאה קבועה כל עוד פרטי הלידה זהים.</p>
+<p>הקריאה מבוססת על פרשנות אסטרולוגית להתבוננות אישית. החישוב מתבצע בדפדפן ופרטי הלידה אינם נשמרים או נשלחים. עיר ברשימה מייצגת את קואורדינטות מרכז העיר ואת אזור הזמן שלה.</p>
+<p>החישוב משתמש בזמן כוכבי מקומי ובנטיית מישור המילקה. <a href="https://www.astro.com/swisseph/Table_Arctic_Placidus_readme.pdf">מקור לנוסחה של Astrodienst</a>.</p></article>
+<script type="module" src="/astrology/rising.mjs"></script>
+</div></main>
+<footer><a href="/astrology/">עולם האסטרולוגיה שלך</a><p>התוכן מבוסס על מסורות אסטרולוגיות ומיועד לבידור ולהתבוננות אישית.</p></footer></body></html>

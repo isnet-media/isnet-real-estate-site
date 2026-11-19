@@ -1,0 +1,98 @@
+.isnet-astro {
+  --astro-gold: #ffe0a3;
+  --astro-ink: #121027;
+  --astro-border: #d3a96555;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff5e3;
+  background: #121027;
+  border: 1px solid #ab804b;
+  border-radius: 13px;
+  font-family: Arial, sans-serif;
+  line-height: 1.45;
+  text-align: start;
+}
+.isnet-astro *, .isnet-astro *::before, .isnet-astro *::after { box-sizing: inherit; }
+.isnet-astro__lead {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 218px;
+  padding: 20px clamp(18px, 4.5%, 48px);
+  background: radial-gradient(ellipse at 17% 58%, #453158, #17152f 48%, #121027 76%);
+  isolation: isolate;
+}
+.isnet-astro__lead::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(270deg,#121027 27%,#121027d6 42%,transparent 70%), url('./zodiac-wheel.jpg') left 43% / 64% auto no-repeat;
+}
+.isnet-astro__copy { max-width: 62%; position: relative; }
+.isnet-astro__copy h2 { margin: 0; color: #fff2d8; font: 700 clamp(29px, 5vw, 55px)/1.07 Georgia, serif; letter-spacing: -.045em; }
+.isnet-astro__copy em { color: var(--astro-gold); font-style: normal; }
+.isnet-astro__copy p { color: #f2e7f3; margin: 9px 0 14px; font-size: clamp(13px,1.5vw,17px); }
+.isnet-astro a { text-decoration: none; }
+.isnet-astro__cta { display: inline-flex; align-items: center; gap: .55em; padding: 7px 12px; min-height: 40px; font-size: 14px; border-radius: 5px; color: #22152b; background: #ffe0a3; font-weight: 700; }
+.isnet-astro__cta:hover { background: #fff0cc; }
+.isnet-astro__signs { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); border-block: 1px solid var(--astro-border); padding: 7px; gap: 3px; margin: 0; }
+.isnet-astro__signs a { display: flex; min-height: 52px; flex-direction: column; justify-content: center; text-align: center; color: #fff5e3; font-size: 13px; border-radius: 5px; gap: 1px; padding: 3px 0; }
+.isnet-astro__signs span { color: var(--astro-gold); font: 24px/1 Georgia, serif; }
+.isnet-astro__signs a:hover { background: #34294a; }
+.isnet-astro a:focus-visible { outline: 2px solid #fff1ba; outline-offset: -2px; }
+@media (max-width: 680px) {
+  .isnet-astro__lead { min-height: 174px; padding: 15px; }
+  .isnet-astro__lead::before { background: linear-gradient(270deg,#121027 18%,#121027ca 52%,#12102736 100%),url('./zodiac-wheel.jpg') left center / auto 113% no-repeat; }
+  .isnet-astro__copy { max-width: 80%; }
+  .isnet-astro__signs { grid-template-columns: repeat(6,minmax(0,1fr)); }
+  .isnet-astro__signs a { min-height: 45px; }
+  .isnet-astro__signs span { font-size: 20px; }
+}
+.isnet-astro__lead {
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: end;
+  padding: 0;
+}
+.isnet-astro__lead::before {
+  background:
+    linear-gradient(0deg,#110d23dd,transparent 48%),
+    linear-gradient(270deg,#121027 17%,#121027bd 41%,transparent 74%),
+    url('./zodiac-wheel.jpg') left 43% / 68% auto no-repeat;
+}
+.isnet-astro__copy { padding: 25px clamp(16px,4.5%,48px) 22px; min-height: 205px; }
+.isnet-astro__signs { background: #16112790; }
+.isnet-astro__signs span { font-variant-emoji: text; }
+@media (max-width: 680px) {
+  .isnet-astro__lead::before {
+    background:
+      linear-gradient(0deg,#130e27c9,transparent 55%),
+      linear-gradient(270deg,#121027 2%,#121027bf 44%,#12102736 100%),
+      url('./zodiac-wheel.jpg') left 40% / auto 118% no-repeat;
+  }
+  .isnet-astro__copy { min-height: 150px; padding: 16px 13px; }
+}
+
+.isnet-astro__topics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  max-width: 510px;
+}
+.isnet-astro__topics a {
+  justify-content: space-between;
+  min-height: 44px;
+  border: 1px solid #f1d498a3;
+  padding: 6px 9px;
+  line-height: 1.25;
+}
+.isnet-astro__topics a:not(:hover) { color: #fff2d8; background: #21162dde; }
+.isnet-astro__topics a span { color: #b07736; }
+.isnet-astro__topics a:not(:hover) span { color: var(--astro-gold); }
+@media (max-width: 680px) {
+  .isnet-astro__copy { max-width: 100%; }
+  .isnet-astro__topics a { font-size: 12px; }
+  .isnet-astro__lead::before { background-position: center, center, left top; }
+}
