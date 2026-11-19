@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T11:57:27Z",
+  "updated_at": "2026-11-19T12:23:30.044Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-19T11:53:04Z",
+  "last_processed_run_created_at": "2026-11-19T11:59:49Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -17,7 +17,7 @@
       "created_at_before": null,
       "also_resume_equal_timestamp_with_id": null,
       "seen_ids_at_boundary": [],
-      "remaining": "121 historical entries remain in 2 workflow groups.",
+      "remaining": "118 historical entries remain in2workflow groups; failed-step metadata only, roots unconfirmed.",
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
         "run_ids": [
@@ -62,30 +62,6 @@
     "metadata_runs_total": 3102,
     "untriaged_workflow_groups": {
       ".github/workflows/pages.yml": [
-        {
-          "run_id": 42235409405,
-          "workflow": "Publish priceboard",
-          "path": ".github/workflows/pages.yml",
-          "attempt": 1,
-          "created_at": "2026-11-06T14:36:18Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "278a44f0db60edbe79966529b50051fcd97bad97",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42235409405",
-          "classification": "Historical metadata only; exact root unconfirmed, no current outage or repair inferred."
-        },
-        {
-          "run_id": 42234580850,
-          "workflow": "Publish priceboard",
-          "path": ".github/workflows/pages.yml",
-          "attempt": 1,
-          "created_at": "2026-11-06T14:30:51Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "40e80c722a13dbab2c79f3cfd5a069a397b89e18",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42234580850",
-          "classification": "Historical metadata only; exact root unconfirmed, no current outage or repair inferred."
-        },
         {
           "run_id": 42233845616,
           "workflow": "Publish priceboard",
@@ -233,18 +209,6 @@
       ],
       ".github/workflows/public-events-readback-audit.yml": [],
       ".github/workflows/super-health.yml": [
-        {
-          "run_id": 42658200203,
-          "workflow": "All cities supermarket public health",
-          "path": ".github/workflows/super-health.yml",
-          "attempt": 1,
-          "created_at": "2026-11-09T16:46:50Z",
-          "status": "completed",
-          "conclusion": "failure",
-          "source_commit": "f44c3c81e1904bf84378114fde714c7827eefe5b",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42658200203",
-          "classification": "Historical metadata only; root signature not confirmed. No current failure or recovery inferred."
-        },
         {
           "run_id": 42657814616,
           "workflow": "All cities supermarket public health",
@@ -1527,16 +1491,16 @@
     "metadata_rows_inspected_this_cycle": 3,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
-      "observed_at": "2026-11-19T11:57:27Z",
+      "observed_at": "2026-11-19T12:23:30.044Z",
       "last_run_ids": [
-        42235515953,
-        42658314259,
-        42194913372
+        42235409405,
+        42658200203,
+        42234580850
       ],
-      "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
-      "remaining_run_entries": 121,
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+      "remaining_run_entries": 118,
       "remaining_workflow_groups": 2,
-      "grouping_basis": "Failed steps retained, exact roots unconfirmed."
+      "grouping_basis": "Failed-step metadata retained; no root-cause or fixed claim."
     },
     "latest_root_triage": {
       "observed_at": "2026-11-17T06:14:58.331Z",
@@ -1550,14 +1514,14 @@
       "evidence": "ops/incident-response/evidence/ops-2026-11-17-1eeeaba5-b3a8-832e-b3f5-4322c5faf65d.json"
     },
     "last_review": {
-      "runKey": "ops-2026-11-19-2b1c39ad-3c8c-832e-901a-7bcaac4e561a",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
+      "runKey": "ops-2026-11-19-a892b30a-96b8-832e-8bb9-b1f67c8f8b3b",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
       "classified_run_ids": [
-        42235515953,
-        42658314259,
-        42194913372
+        42235409405,
+        42658200203,
+        42234580850
       ],
-      "remaining": 121,
+      "remaining": 118,
       "root": "unconfirmed"
     }
   },
@@ -1628,28 +1592,25 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "2b1c39ad-3c8c-832e-901a-7bcaac4e561a",
-    "runKey": "ops-2026-11-19-2b1c39ad-3c8c-832e-901a-7bcaac4e561a",
+    "run_id": "a892b30a-96b8-832e-8bb9-b1f67c8f8b3b",
+    "runKey": "ops-2026-11-19-a892b30a-96b8-832e-8bb9-b1f67c8f8b3b",
     "policy_version": "2026-11-15/1.2",
-    "scheduled_for": "2026-11-19T11:35:00Z",
-    "started_at": "2026-11-19T11:52:22.978498Z",
-    "observed_at": "2026-11-19T11:57:27Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
-    "observation": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
-    "status": "investigation_and_canonical_neighborhood_verified_community_owner_pending",
-    "saved_version": 673,
-    "source_commit": "1173c4a993d05985f7b0db195619720264b51e9a",
-    "new_actions": 46,
+    "scheduled_for": "2026-11-19T12:35:00Z",
+    "started_at": "2026-11-19T12:14:43.875406Z",
+    "observed_at": "2026-11-19T12:23:30.044Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+    "observation": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+    "status": "consumer_live_journal_pending_community_ready_held_economy_due_slot_unobserved",
+    "saved_version": 676,
+    "public_checked_version": 675,
+    "source_commit": "a125f69c202c3c087b3f192ee28299d6c602ce07",
+    "new_actions": 10,
     "new_social_rows": 1,
     "new_inbox": 1,
     "full_logs_read": 0,
     "historical_runs_metadata_reviewed": 3,
-    "historical_remaining": 121,
-    "controller_new_deployments": 0,
-    "verified_repairs": [
-      "tlvnet-investigations-publication-route-unverified",
-      "tlvnet-neighborhood-explicit-slug-stale-build-order"
-    ]
+    "historical_remaining": 118,
+    "controller_new_deployments": 0
   },
   "concurrent_controller_observation": {
     "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
@@ -2078,7 +2039,8 @@
     "isnet-cms-subtitle-length-reported",
     "tlvnet-instagram-web-composer-next-fails",
     "tlvnet-news-python-bs4-after-workspace-cleanup",
-    "culture-net-herzliya-public-404-20261119"
+    "culture-net-herzliya-public-404-20261119",
+    "tlvnet-economy-20261119-due-run-evidence-missing"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -2218,7 +2180,8 @@
     "9386f7de-5bf0-8332-bf04-b81deb328608-investigations-publication-route.json",
     "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5-culture-magazine-runtime-publication-gap.json",
     "20261119T094834Z-culture-net-herzliya-public-404.json",
-    "20261119-community-ready-garage-update.json"
+    "20261119-community-ready-garage-update.json",
+    "ops/incident-response/inbox/20261119-consumer-publication-675-verified.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -6147,7 +6110,18 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
       "checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json"
     },
-    "acquired_at": "2026-11-19T11:49:00.095Z"
+    "acquired_at": "2026-11-19T11:49:00.095Z",
+    "latest_observed_lease": {
+      "state": "held",
+      "owner": "work:tlvnet-home-presentation",
+      "run_key": "home-presentation-2026-11-19T12:18:05.518Z",
+      "acquired_at": "2026-11-19T12:18:05.518Z",
+      "lease_until": "2026-11-19T12:43:05.518Z",
+      "token_excluded": true
+    },
+    "latest_observed_at": "2026-11-19T12:23:30.044Z",
+    "latest_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+    "blocked_item": "tlv-neighborhood-garage-sale-20261106"
   },
   "policy_version": "2026-11-15/1.2",
   "rollout_remaining": {
@@ -6168,7 +6142,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-19T11:00:11.182Z",
+    "max_finished_at": "2026-11-19T12:00:10.076Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -6224,12 +6198,13 @@
       "2026-11-19T08",
       "2026-11-19T09",
       "2026-11-19T10",
-      "2026-11-19T11"
+      "2026-11-19T11",
+      "2026-11-19T12"
     ],
-    "observed_at": "2026-11-19T11:57:27Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
+    "observed_at": "2026-11-19T12:23:30.044Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
     "new_rows_this_cycle": 1,
-    "public_verification": "Permalink and matching headline visible. Login overlay prevented full post readback.",
+    "public_verification": "New slot is reported published by native DB; public post not independently rechecked this cycle.",
     "last_checked_at": "2026-11-19T11:57:27Z",
     "check_evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
   },
@@ -6514,8 +6489,8 @@
     }
   },
   "latest_tlvnet_queue_observation": {
-    "observed_at": "2026-11-19T11:57:27Z",
-    "prepared_original_owner_items": 0,
+    "observed_at": "2026-11-19T12:23:30.044Z",
+    "prepared_original_owner_items": 1,
     "verification_only_items": [
       {
         "article_id": "arlozorov-salomon-infrastructure-works-nov2026",
@@ -6581,7 +6556,7 @@
     "original_owner_new_publications": 4,
     "new_live_verifications": 4,
     "reason": "Original evening637owner resolved both midday prepared items and published2additional originals; research coverage/backfill retained",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
     "events_source_metadata": {
       "checkpoint": "ops/event-refresh-checkpoint.json",
       "runKey": "publisher-events-20261118T1121-jerusalem",
@@ -6744,9 +6719,66 @@
         "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
       }
     },
-    "pending_ready_count": 1
+    "pending_ready_count": 1,
+    "community": {
+      "status": "publication_pending_existing_writer",
+      "article_id": "tlv-neighborhood-garage-sale-20261106",
+      "owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "owner_run_id": "52a229d3-175c-8328-a1cb-32792489b027",
+      "checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json",
+      "pending_ready": 1,
+      "pending_verification": 7,
+      "owner_picked_up": true,
+      "prepared_rewrite_live": false,
+      "old_live_article_verified": {
+        "title": "שישירוק ביד אליהו: ההרשמה לעשרה דוכנים עד 8 בנובמבר",
+        "body": true,
+        "image_loaded": true,
+        "width": 1800,
+        "credit": "ResaJoan · CC0 1.0",
+        "citywide_registration_paragraph_present": true
+      },
+      "projection": "Dispatch remains old research status and has no ready queue item; immutable ops checkpoint remains authoritative."
+    },
+    "consumer": {
+      "status": "published_verified_journal_pending_mobile_pending",
+      "article_id": "good-pharm-charity-cream-terms-20261119",
+      "url": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119",
+      "owner_task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "owner_run_id": "7098a995-fea0-8322-875b-8b78ffa4967a",
+      "source_published_label": "2026-11-19T14:06+02:00",
+      "full_body_independently_read": true,
+      "image_loaded": true,
+      "image_width": 1536,
+      "credit": "אילוסטרציה – AI",
+      "section_link": true,
+      "home_link": true,
+      "owner_ledger_status": "image_approved_ready_to_publish",
+      "classification": "End journal write deferred, not failed publication. Do not redeploy.",
+      "checkpoint": "ops/incident-response/inbox/20261119-consumer-publication-675-verified.json",
+      "metrics": {
+        "newly_published": 1,
+        "pending_ready": 0,
+        "pending_verification": 5
+      },
+      "visual": {
+        "desktop": "original owner viewed; controller DOM checked",
+        "mobile": "pending"
+      }
+    },
+    "latest_shared_lease": {
+      "state": "held",
+      "owner": "work:tlvnet-home-presentation",
+      "run_key": "home-presentation-2026-11-19T12:18:05.518Z",
+      "acquired_at": "2026-11-19T12:18:05.518Z",
+      "lease_until": "2026-11-19T12:43:05.518Z",
+      "token_excluded": true
+    },
+    "pending_recovery_reason": "Actual active owner lease; fresh source helper unavailable. No changed-input recovery beyond one initial source attempt. No deployment."
   },
-  "pending_task_run_ids": [],
+  "pending_task_run_ids": [
+    "2121bc7c-3c80-8326-a9f7-a4ae0173b2d1"
+  ],
   "latest_supermarket_execution_checkpoint": {
     "source_inbox": "ops/incident-response/inbox/e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
     "evidence": "ops/incident-response/evidence/ops-2026-11-17-1eeeaba5-b3a8-832e-b3f5-4322c5faf65d.json",
@@ -7135,9 +7167,9 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-19T11:57:27Z",
+    "observed_at": "2026-11-19T12:23:30.044Z",
     "source_commit": "1173c4a993d05985f7b0db195619720264b51e9a",
-    "saved_version": 673,
+    "saved_version": 676,
     "evidence": "ops/tlvnet-stability/observations/2026-11-19/9b75dc5d-27bc-8332-80c3-c95a914056ff.json",
     "desks": {
       "news": {
@@ -7161,12 +7193,12 @@
         "section_url": "https://tlvnet.com/news/index.html",
         "lead_article_id": "rokach-pedestrian-killed-motorcycle-20261119",
         "lead_published_at": "2026-11-19T08:05+02:00",
-        "last_owner_run_id": "1e99537f-c684-832a-9482-d6d8083d019d",
-        "last_owner_completed_at": "2026-11-19T06:14:16.487280Z",
+        "last_owner_run_id": "2121bc7c-3c80-8326-a9f7-a4ae0173b2d1",
+        "last_owner_completed_at": null,
         "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
         "owner_run_changed_since_checkpoint": true,
         "last_new_published_basis": "Current source metadata; no publication-date changes; linked public owner evidence retained.",
-        "last_owner_run_status": "completed",
+        "last_owner_run_status": "in_progress",
         "pending_owner_result": false,
         "coverage_state": "incomplete_owner_reported_queue_retained",
         "pending_draft_id": null,
@@ -7411,7 +7443,9 @@
           "last_substantive_update_at": "2026-11-19T06:12:12.880956+00:00",
           "observed_at": "2026-11-19T11:57:27Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
-        }
+        },
+        "last_section_link_checked_at": "2026-11-19T12:23:30.044Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
       },
       "real-estate": {
         "last_new_published_at": "2026-11-18T14:57:55.576102+00:00",
@@ -7535,7 +7569,9 @@
           "last_substantive_update_at": "2026-11-16T14:44:51.882231+00:00",
           "observed_at": "2026-11-19T11:57:27Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
-        }
+        },
+        "last_section_link_checked_at": "2026-11-19T12:23:30.044Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
       },
       "economy-tech": {
         "last_new_published_at": "2026-11-18T10:21:46.730111+00:00",
@@ -7656,7 +7692,9 @@
           "last_substantive_update_at": "2026-11-16T16:48:30.281Z",
           "observed_at": "2026-11-19T11:57:27Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
-        }
+        },
+        "last_section_link_checked_at": "2026-11-19T12:23:30.044Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
       },
       "community": {
         "last_new_published_at": "2026-11-18T11:11:13.937148+00:00",
@@ -7773,12 +7811,18 @@
             "scope": "Shared deployment only. No acquisition, forced release or token stored."
           },
           "findings": "Original owner picked up and prepared eligible update. Earlier article already contains 24 Nov 22:00 city-wide registration in a paragraph; prepared rewrite is not live. Compare exact body and asset after actual lease release. Preserve original owner and do not republish the existing article."
-        }
+        },
+        "last_section_link_checked_at": "2026-11-19T12:23:30.044Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+        "pending_ready": 1,
+        "pending_verification": 7,
+        "coverage_status": "Owner prepared update; immutable ops checkpoint retained while shared lane held",
+        "owner_checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json"
       },
       "consumer": {
-        "last_new_published_at": "2026-11-16T12:12:18.684499+00:00",
-        "last_new_id": "hatarbut-tlv-parking-benefit-guide-20261116",
-        "last_substantive_update_at": "2026-11-09T09:48:00Z",
+        "last_new_published_at": "2026-11-19T14:06+02:00",
+        "last_new_id": "good-pharm-charity-cream-terms-20261119",
+        "last_substantive_update_at": "2026-11-19T14:06+02:00",
         "last_updated_id": "isracard-november-online-cashback-terms-20261106",
         "update_basis": "declared body update/publication metadata; technical lead change counted separately",
         "published_count": 12,
@@ -7793,8 +7837,8 @@
         "section_url": "https://tlvnet.com/news/consumer.html",
         "lead_article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
         "lead_published_at": "2026-11-16T12:12:18.684499+00:00",
-        "last_owner_run_id": "8a5f1f3c-c5f0-832a-807e-6f54e312a8ba",
-        "last_owner_completed_at": "2026-11-18T12:06:03.197103Z",
+        "last_owner_run_id": "7098a995-fea0-8322-875b-8b78ffa4967a",
+        "last_owner_completed_at": "2026-11-19T12:18:08.006344Z",
         "owner_task_id": "Automation_e2f02000cdf4819190022b85f4391076",
         "owner_run_changed_since_checkpoint": false,
         "last_new_published_basis": "Current source metadata; no publication-date changes; linked public owner evidence retained.",
@@ -7853,7 +7897,13 @@
           "last_substantive_update_at": "2026-11-09T09:48:00Z",
           "observed_at": "2026-11-19T11:57:27Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
-        }
+        },
+        "last_section_link_checked_at": "2026-11-19T12:23:30.044Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+        "publication_status": "published_verified_journal_pending_mobile_pending",
+        "pending_ready": 0,
+        "pending_verification": 5,
+        "source_journal_checkpoint": "ops/incident-response/inbox/20261119-consumer-publication-675-verified.json"
       },
       "sports": {
         "last_new_published_at": "2026-11-19T07:01:29.520007Z",
@@ -8071,7 +8121,9 @@
           "last_substantive_update_at": "2026-11-19T07:01:29.520007Z",
           "observed_at": "2026-11-19T11:57:27Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
-        }
+        },
+        "last_section_link_checked_at": "2026-11-19T12:23:30.044Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
       },
       "culture-news": {
         "last_new_published_at": "2026-11-19T09:50+02:00",
@@ -8250,7 +8302,9 @@
           "last_substantive_update_at": "2026-11-15T07:46:50.740984+00:00",
           "observed_at": "2026-11-19T11:57:27Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
-        }
+        },
+        "last_section_link_checked_at": "2026-11-19T12:23:30.044Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
       },
       "neighborhoods": {
         "total": 73,
@@ -8318,9 +8372,9 @@
         }
       }
     },
-    "qualification": "Metadata for7desks; fresh live body/image/credit/home/section for community only. No all-network verification claim.",
-    "metadata_checked_at": "2026-11-19T11:57:27Z",
-    "latest_metadata_evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
+    "qualification": "8 public section link checks; full article/image/credit for consumer, pending community existing version, legacy news and investigations. Later676 terminal only; no all-site audit.",
+    "metadata_checked_at": "2026-11-19T12:23:30.044Z",
+    "latest_metadata_evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
     "date_rollover": {
       "local_date": "2026-11-18",
       "observed_at": "2026-11-18T09:58:50.364Z",
@@ -8667,10 +8721,10 @@
     "reconciled_at": "2026-11-16T05:46:55.355Z"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-19T02:54:20Z",
-    "unread_entries": 0,
-    "new_entries_processed": 0,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/9b75dc5d-27bc-8332-80c3-c95a914056ff.json"
+    "observed_at": "2026-11-19T12:23:30.044Z",
+    "new_entries_processed": 1,
+    "controller_created_inbox": "ops/incident-response/inbox/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b-economy-due-run-evidence.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -8777,20 +8831,15 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-19T11:57:27Z",
-    "from": "2026-11-19T10:21:07Z",
-    "through": "2026-11-19T11:53:04Z",
-    "rows": 47,
-    "strictly_new": 46,
+    "observed_at": "2026-11-19T12:23:30.044Z",
+    "from": "2026-11-19T11:53:04Z",
+    "through": "2026-11-19T11:59:49Z",
+    "strictly_new": 10,
     "failures": 0,
-    "new_root_failures": 0,
-    "seen_ids_at_boundary": [
-      44518770584
-    ],
-    "next_page": null,
-    "pending_run_ids": [],
     "full_logs_read": 0,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
+    "pending_run_ids": [],
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+    "boundary_crossed": true
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -9052,611 +9101,495 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-19T11:57:27Z",
+    "observed_at": "2026-11-19T12:23:30.044Z",
     "files": [
       {
-        "name": "01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
         "sha": "31eca6c586cdaaa07426282763770293292f9970"
       },
       {
-        "name": "01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json",
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-2.json",
         "sha": "77628b49c3418109a2b80ec686b5a2337f5eaaf8"
       },
       {
-        "name": "09a818b2-b278-832a-b5b1-29dff01686d0-1.json",
         "path": "ops/incident-response/inbox/09a818b2-b278-832a-b5b1-29dff01686d0-1.json",
         "sha": "d33a53d7a0d83081fd571fbd164bb996dcea6522"
       },
       {
-        "name": "0fef72fc-fe30-832a-9259-77015b8a0f3b-dispatch-repair.json",
         "path": "ops/incident-response/inbox/0fef72fc-fe30-832a-9259-77015b8a0f3b-dispatch-repair.json",
         "sha": "2ab6809a43026929420fe6f4cf3b353ba9dfa822"
       },
       {
-        "name": "122b42e1-c6bc-8325-9797-95a2377b76c0-1.json",
         "path": "ops/incident-response/inbox/122b42e1-c6bc-8325-9797-95a2377b76c0-1.json",
         "sha": "cf199524ac40cf01f24813e8cd1a332ff5de232c"
       },
       {
-        "name": "12c2c4b8-09e4-832e-9dff-a385525c9bc7-historical-holon-search.json",
         "path": "ops/incident-response/inbox/12c2c4b8-09e4-832e-9dff-a385525c9bc7-historical-holon-search.json",
         "sha": "ddf24e21ab0d461ab4e8ea64e039b98d57528d48"
       },
       {
-        "name": "14bffc64-84e4-8322-85e1-bbeff20b8240-instagram-web-composer.json",
         "path": "ops/incident-response/inbox/14bffc64-84e4-8322-85e1-bbeff20b8240-instagram-web-composer.json",
         "sha": "9bf45786b65bba34a489001f583ec443206bcd67"
       },
       {
-        "name": "16393a6e-7de0-8331-b22c-ff087e54b7c9-1.json",
         "path": "ops/incident-response/inbox/16393a6e-7de0-8331-b22c-ff087e54b7c9-1.json",
         "sha": "502b9fb9648ac75e1394640dd1f0606ca0644495"
       },
       {
-        "name": "1b1c98bb-0cec-832e-a20b-b2f45dcd4958-1.json",
         "path": "ops/incident-response/inbox/1b1c98bb-0cec-832e-a20b-b2f45dcd4958-1.json",
         "sha": "222893d00672beec65f400dd5e8de7a03c785ebd"
       },
       {
-        "name": "1eeeaba5-b3a8-832e-b3f5-4322c5faf65d-super-public-approval-scope.json",
         "path": "ops/incident-response/inbox/1eeeaba5-b3a8-832e-b3f5-4322c5faf65d-super-public-approval-scope.json",
         "sha": "756c3d4c790e5e67fa028d3e643cbef041e105e6"
       },
       {
-        "name": "2026-11-16-economy-tech-fa8047fe-publication-pending.json",
         "path": "ops/incident-response/inbox/2026-11-16-economy-tech-fa8047fe-publication-pending.json",
         "sha": "f9457041dea151d5e45415bce3ffc9750b2f1d80"
       },
       {
-        "name": "2026-11-16T090100Z-future-isnet-create-post-invalid-argument.json",
         "path": "ops/incident-response/inbox/2026-11-16T090100Z-future-isnet-create-post-invalid-argument.json",
         "sha": "24d23740e41ab55d59d44e54d50d73f7e8a23547"
       },
       {
-        "name": "2026-11-17T091825Z-culture-gedera-home-gateway-stale.json",
         "path": "ops/incident-response/inbox/2026-11-17T091825Z-culture-gedera-home-gateway-stale.json",
         "sha": "7331d3a7e397e70a7802196f522bc87e0f4764e0"
       },
       {
-        "name": "2026-11-19-news-morning-python-bs4.json",
         "path": "ops/incident-response/inbox/2026-11-19-news-morning-python-bs4.json",
         "sha": "d06aaa413a1236e3c6792b07793f1a9a515fea4e"
       },
       {
-        "name": "20261113-city-writer-runtime-policy11.json",
         "path": "ops/incident-response/inbox/20261113-city-writer-runtime-policy11.json",
         "sha": "f81783a7f041e280879602c8f5c2753e31ddf215"
       },
       {
-        "name": "20261114-community-preview-followup.json",
         "path": "ops/incident-response/inbox/20261114-community-preview-followup.json",
         "sha": "57ca26c1b2090878e4bc8d2f3dabc11389d2cd3a"
       },
       {
-        "name": "20261114-consumer-preview-and-source-identity.json",
         "path": "ops/incident-response/inbox/20261114-consumer-preview-and-source-identity.json",
         "sha": "ca008534bcf22634d63f526cc7f528d0bd144e33"
       },
       {
-        "name": "20261114-future-cms-create-post-validation.json",
         "path": "ops/incident-response/inbox/20261114-future-cms-create-post-validation.json",
         "sha": "42b00a3487f40d87c691e6cc158b34dd48e274ce"
       },
       {
-        "name": "20261114-isnet-sports-city-targets.json",
         "path": "ops/incident-response/inbox/20261114-isnet-sports-city-targets.json",
         "sha": "0984baa27b5f32c8b49b6a14d32e2cb0f96b0183"
       },
       {
-        "name": "20261114-sports-existing-city-owner-correction.json",
         "path": "ops/incident-response/inbox/20261114-sports-existing-city-owner-correction.json",
         "sha": "de47b0df74aed418d50aba56968e37a3a67e88e8"
       },
       {
-        "name": "20261115-community-neighborhood-preview-observation.json",
         "path": "ops/incident-response/inbox/20261115-community-neighborhood-preview-observation.json",
         "sha": "deb027c9a88cfabdefdbf494bb5196a3cb629bb8"
       },
       {
-        "name": "20261115-community-source-owner-stale.json",
         "path": "ops/incident-response/inbox/20261115-community-source-owner-stale.json",
         "sha": "578e02d3d3fc2962dcff38723973ede4cde420c2"
       },
       {
-        "name": "20261115-consumer-preview-occupied.json",
         "path": "ops/incident-response/inbox/20261115-consumer-preview-occupied.json",
         "sha": "85dfdc6327d9a0ffca6fe38668a45c953170d233"
       },
       {
-        "name": "20261116-community-preview-url-policy.json",
         "path": "ops/incident-response/inbox/20261116-community-preview-url-policy.json",
         "sha": "aa1b7095f4d19c02df9af2b0454837113eef454f"
       },
       {
-        "name": "20261116-consumer-visual-followup.json",
         "path": "ops/incident-response/inbox/20261116-consumer-visual-followup.json",
         "sha": "de659714444721c21d69872a5a8e5616b48bd209"
       },
       {
-        "name": "20261116-controller633-public-verification-pending.json",
         "path": "ops/incident-response/inbox/20261116-controller633-public-verification-pending.json",
         "sha": "b3894b67b9255a46ab7e32d0271f84ec0d8cba66"
       },
       {
-        "name": "20261116-controller635-public-verification-pending.json",
         "path": "ops/incident-response/inbox/20261116-controller635-public-verification-pending.json",
         "sha": "0973942cde09d4788c460a1c57dd170f4e568df4"
       },
       {
-        "name": "20261116-news-2fbb7d04-publication-pending.json",
         "path": "ops/incident-response/inbox/20261116-news-2fbb7d04-publication-pending.json",
         "sha": "30084fd5af10365886be234280536eea9192a449"
       },
       {
-        "name": "20261116-news-evening-f28e47d1-verified.json",
         "path": "ops/incident-response/inbox/20261116-news-evening-f28e47d1-verified.json",
         "sha": "d05445fde50dc81863a78f09abeac0c318c8a780"
       },
       {
-        "name": "20261117-community-handoff-reason-mismatch.json",
         "path": "ops/incident-response/inbox/20261117-community-handoff-reason-mismatch.json",
         "sha": "7d4eb93cc55780de68466b88c62ff188772f12f3"
       },
       {
-        "name": "20261117-community-image-metadata-checkpoint.json",
         "path": "ops/incident-response/inbox/20261117-community-image-metadata-checkpoint.json",
         "sha": "6a0c36691da9bce707ee863fea8e0d1462d09e4e"
       },
       {
-        "name": "20261117-community-publication-evidence.json",
         "path": "ops/incident-response/inbox/20261117-community-publication-evidence.json",
         "sha": "b084868f6fd98509b7af07f3326d86e97d160bb6"
       },
       {
-        "name": "20261117-consumer-checkpoint-1206Z.json",
         "path": "ops/incident-response/inbox/20261117-consumer-checkpoint-1206Z.json",
         "sha": "08dea05be19f9c64c3f31479771375d854cecca1"
       },
       {
-        "name": "20261117-culture-a3eee2f2-reference-fix.json",
         "path": "ops/incident-response/inbox/20261117-culture-a3eee2f2-reference-fix.json",
         "sha": "1bde1a1c1712c2ce78c14c16f93de0c2d51d6b86"
       },
       {
-        "name": "20261117-super-74aa061d-checkpoint.json",
         "path": "ops/incident-response/inbox/20261117-super-74aa061d-checkpoint.json",
         "sha": "52df1842111823768665899efb9f067227190a3b"
       },
       {
-        "name": "20261118-community-publication-evidence.json",
         "path": "ops/incident-response/inbox/20261118-community-publication-evidence.json",
         "sha": "b05c33f043466c548736de3bf68427fecb76d835"
       },
       {
-        "name": "20261118-consumer-research-checkpoint.json",
         "path": "ops/incident-response/inbox/20261118-consumer-research-checkpoint.json",
         "sha": "84499b6e80f21e4a0e1ba802280b56abc4b6cbf8"
       },
       {
-        "name": "20261119-community-ready-garage-update.json",
         "path": "ops/incident-response/inbox/20261119-community-ready-garage-update.json",
         "sha": "94e2ce9a3e579269a74086be63258cd58cab732e"
       },
       {
-        "name": "20261119T094834Z-culture-net-herzliya-public-404.json",
+        "path": "ops/incident-response/inbox/20261119-consumer-publication-675-verified.json",
+        "sha": "10baab88205f4a978b253a684d57a557a0bd624f"
+      },
+      {
         "path": "ops/incident-response/inbox/20261119T094834Z-culture-net-herzliya-public-404.json",
         "sha": "d725b2748d2cd48062808391e9d9195ca1a927d9"
       },
       {
-        "name": "38a1e803-a5b0-8328-886b-9998b0ec315d-publication-evidence-fixture.json",
         "path": "ops/incident-response/inbox/38a1e803-a5b0-8328-886b-9998b0ec315d-publication-evidence-fixture.json",
         "sha": "d576d5d1e49cbf00e984b93dc8f1d446dafbe869"
       },
       {
-        "name": "38a1e803-a5b0-8328-886b-9998b0ec315d-sports640-publication-receipt.json",
         "path": "ops/incident-response/inbox/38a1e803-a5b0-8328-886b-9998b0ec315d-sports640-publication-receipt.json",
         "sha": "ab791219d34b2f192b8b17f3574e595b35d0cf15"
       },
       {
-        "name": "43417323807-1.json",
         "path": "ops/incident-response/inbox/43417323807-1.json",
         "sha": "6ed862083c4ddfa84844ab3380df122dc13071d7"
       },
       {
-        "name": "43708750732-1.json",
         "path": "ops/incident-response/inbox/43708750732-1.json",
         "sha": "ef4671943b752899973ee982154d183ad086150c"
       },
       {
-        "name": "43715219054-1.json",
         "path": "ops/incident-response/inbox/43715219054-1.json",
         "sha": "b31b46772254b7d2dbdecd183f70494ee8141042"
       },
       {
-        "name": "43715912284-1.json",
         "path": "ops/incident-response/inbox/43715912284-1.json",
         "sha": "a50625858ae4245372867f401f00db49b13ed577"
       },
       {
-        "name": "43871108617-1.json",
         "path": "ops/incident-response/inbox/43871108617-1.json",
         "sha": "b92250e9db7d3fda0f1b344f3d0f1e813df95e21"
       },
       {
-        "name": "43898943792-1.json",
         "path": "ops/incident-response/inbox/43898943792-1.json",
         "sha": "3a07dcaf0c3552ba95d2e454f76ca2d7b2a3d2fd"
       },
       {
-        "name": "44120134085-1.json",
         "path": "ops/incident-response/inbox/44120134085-1.json",
         "sha": "f59a6bf8124a03166c094eb42bcb5a6a0ab4c47d"
       },
       {
-        "name": "44337585068-1.json",
         "path": "ops/incident-response/inbox/44337585068-1.json",
         "sha": "9dfdbe8b136db1b1606b1808b5f49ccbed642141"
       },
       {
-        "name": "47abf9a3-eae0-8328-9c3a-36c7c86fcaf5-sports.json",
         "path": "ops/incident-response/inbox/47abf9a3-eae0-8328-9c3a-36c7c86fcaf5-sports.json",
         "sha": "a37f43fbc10fe2a82cd50ac62842406273c42994"
       },
       {
-        "name": "47bf95b2-fe5c-8326-98ff-2258baf4e09f-historical-workflow-guard.json",
         "path": "ops/incident-response/inbox/47bf95b2-fe5c-8326-98ff-2258baf4e09f-historical-workflow-guard.json",
         "sha": "95c6d1f2d494c4538544f85af41530d11950ac74"
       },
       {
-        "name": "4856cab8-5264-8326-a0f8-7900e5c8a55c-sports-scope-review-handoff.json",
         "path": "ops/incident-response/inbox/4856cab8-5264-8326-a0f8-7900e5c8a55c-sports-scope-review-handoff.json",
         "sha": "be9baf1c191de4865076e68d92cfdc2a3bd0519a"
       },
       {
-        "name": "491a159f-33f8-8322-a053-5453bcb6312d-1.json",
         "path": "ops/incident-response/inbox/491a159f-33f8-8322-a053-5453bcb6312d-1.json",
         "sha": "654113a145213cfa62fad7c7007e7993bffc622b"
       },
       {
-        "name": "52401ecd-7bb0-8322-9480-d544ac03c997-shared-presentation-id-repair.json",
         "path": "ops/incident-response/inbox/52401ecd-7bb0-8322-9480-d544ac03c997-shared-presentation-id-repair.json",
         "sha": "3e9480470c2e0db395128ffc749a7a93241feec1"
       },
       {
-        "name": "56a526f7-4760-8320-a519-595bd865e651-1.json",
         "path": "ops/incident-response/inbox/56a526f7-4760-8320-a519-595bd865e651-1.json",
         "sha": "09c8a5157cab70b10f53a6e18227e55ab5c0bac1"
       },
       {
-        "name": "57a66860-9cf0-832e-8e8f-b37fffef084d-source-report-cache-checkpoint.json",
         "path": "ops/incident-response/inbox/57a66860-9cf0-832e-8e8f-b37fffef084d-source-report-cache-checkpoint.json",
         "sha": "ffeb59f67bab99a0915462e5dd18b9b5ceceffd3"
       },
       {
-        "name": "59384ee9-483c-832a-9e14-b08fdf8a7561-toha-caption-quality.json",
         "path": "ops/incident-response/inbox/59384ee9-483c-832a-9e14-b08fdf8a7561-toha-caption-quality.json",
         "sha": "2dbfbd7e653e0880a68b1f5660740124e6c86b2d"
       },
       {
-        "name": "5a385977-ca7c-8322-af47-4efed6bfbc13-1.json",
         "path": "ops/incident-response/inbox/5a385977-ca7c-8322-af47-4efed6bfbc13-1.json",
         "sha": "f44d39430d2b39985dffa34099a7eded3f44ba00"
       },
       {
-        "name": "66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
         "path": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
         "sha": "a4264c06c5b2fb2d46ffeae9d281673246e6df73"
       },
       {
-        "name": "68b8bc80-55f0-832e-8203-ebf1af374bff-runtime-and-receipt-reconciliation.json",
         "path": "ops/incident-response/inbox/68b8bc80-55f0-832e-8203-ebf1af374bff-runtime-and-receipt-reconciliation.json",
         "sha": "488755301be6954373d5c12b2c7fb65a36cde8d3"
       },
       {
-        "name": "6f31adc1-f9dc-8322-b26c-3775cfe0712a-neighborhood-slug-order-repair.json",
         "path": "ops/incident-response/inbox/6f31adc1-f9dc-8322-b26c-3775cfe0712a-neighborhood-slug-order-repair.json",
         "sha": "455c26f8caff761741a4057e904439b52adf1ecb"
       },
       {
-        "name": "76b93745-e058-8326-a9d3-755615b03c24-historical-cinema-fixture.json",
         "path": "ops/incident-response/inbox/76b93745-e058-8326-a9d3-755615b03c24-historical-cinema-fixture.json",
         "sha": "ac2a5e31504faa444cca40c516d1bb2295224bf5"
       },
       {
-        "name": "786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json",
         "path": "ops/incident-response/inbox/786c310e-a5ec-832c-8d7d-5ca6e75ac986-1.json",
         "sha": "097065267995ba273028e0a312ad5ddf3a5285c8"
       },
       {
-        "name": "8826d757-cab4-8332-89e6-1f0c69971941-publication-report-normalization.json",
         "path": "ops/incident-response/inbox/8826d757-cab4-8332-89e6-1f0c69971941-publication-report-normalization.json",
         "sha": "8d73b4a945391dc902b3b906187b6475f462a561"
       },
       {
-        "name": "8a03b756-2764-8330-a302-b024f7ab97db-1.json",
         "path": "ops/incident-response/inbox/8a03b756-2764-8330-a302-b024f7ab97db-1.json",
         "sha": "8d0b061340166f63f9e5ce7702399e68a95fa78f"
       },
       {
-        "name": "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5-culture-magazine-runtime-publication-gap.json",
         "path": "ops/incident-response/inbox/8b5cfe9d-e7e4-832e-8778-93ee58b74ac5-culture-magazine-runtime-publication-gap.json",
         "sha": "62aca58dee7ec8c236903357758a027a65ef83b3"
       },
       {
-        "name": "8e7a0bb8-4e2c-8330-9ba5-cb22f666339d-1.json",
         "path": "ops/incident-response/inbox/8e7a0bb8-4e2c-8330-9ba5-cb22f666339d-1.json",
         "sha": "1ded4bdfe50bdd1b2b40e67a4f410f87de39f69b"
       },
       {
-        "name": "9386f7de-5bf0-8332-bf04-b81deb328608-investigations-publication-route.json",
         "path": "ops/incident-response/inbox/9386f7de-5bf0-8332-bf04-b81deb328608-investigations-publication-route.json",
         "sha": "7d10be91be395cb6466c13acd878597e1826c13a"
       },
       {
-        "name": "README.md",
         "path": "ops/incident-response/inbox/README.md",
         "sha": "a4d2c38eb7fe80dad30b3b84aadedb3596e91863"
       },
       {
-        "name": "a54ff66b-def8-8322-8f51-13ea81f38301-1.json",
         "path": "ops/incident-response/inbox/a54ff66b-def8-8322-8f51-13ea81f38301-1.json",
         "sha": "4c5ec2c8e2b785a9236c8824ddafc79545f3613b"
       },
       {
-        "name": "b1852057-da04-832a-9ca9-c6e63ad9a00c-historical-pages-empty-status.json",
         "path": "ops/incident-response/inbox/b1852057-da04-832a-9ca9-c6e63ad9a00c-historical-pages-empty-status.json",
         "sha": "f78f772de4861c657a34955ac470d6720159b5ce"
       },
       {
-        "name": "b1852057-da04-832a-9ca9-c6e63ad9a00c-sea-source-current.json",
         "path": "ops/incident-response/inbox/b1852057-da04-832a-9ca9-c6e63ad9a00c-sea-source-current.json",
         "sha": "081f4c4e67b65e3758dff34b2172738094eb1915"
       },
       {
-        "name": "b8641b1e-3cec-8322-a6e7-5c6f1e11a895-1.json",
         "path": "ops/incident-response/inbox/b8641b1e-3cec-8322-a6e7-5c6f1e11a895-1.json",
         "sha": "5be97f8daf88671d1755f4b86e991b4eff4aa5b6"
       },
       {
-        "name": "bbc71902-e2b8-8322-a9e5-ca1d812e7928-sports-caption-context-reuse.json",
         "path": "ops/incident-response/inbox/bbc71902-e2b8-8322-a9e5-ca1d812e7928-sports-caption-context-reuse.json",
         "sha": "e06144c15798f9e5f288dca07e15e041fe760c92"
       },
       {
-        "name": "c2f69bff-3de8-832a-9b53-acc86331cf39-receipt-normalization-patch.json",
         "path": "ops/incident-response/inbox/c2f69bff-3de8-832a-9b53-acc86331cf39-receipt-normalization-patch.json",
         "sha": "e658d42c4d06e723ef9d7a2850c1a0603b17867c"
       },
       {
-        "name": "c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json",
         "path": "ops/incident-response/inbox/c4f8d5ba-1d64-8320-9f67-18b831a8ff4a-1.json",
         "sha": "309437359563be3ba0723a75e580a49637ce4ae0"
       },
       {
-        "name": "c7423892-2320-8332-8334-0ca60137294d-publication-verified-visual-pending.json",
         "path": "ops/incident-response/inbox/c7423892-2320-8332-8334-0ca60137294d-publication-verified-visual-pending.json",
         "sha": "6307649390a9394f564dd18bc5278b6605d05548"
       },
       {
-        "name": "cf7874b1-48a4-832a-b3fc-af7c8de865e9-1.json",
         "path": "ops/incident-response/inbox/cf7874b1-48a4-832a-b3fc-af7c8de865e9-1.json",
         "sha": "5c0dedf942ab48f79a0d1a8d82290620e3d0f8b1"
       },
       {
-        "name": "continuity-repair-20261115T130716Z.json",
         "path": "ops/incident-response/inbox/continuity-repair-20261115T130716Z.json",
         "sha": "f1309febd7e6d730a327ed2d8cc765612c1714bf"
       },
       {
-        "name": "d4367d19-cf9c-8322-b165-2140fcce9361-cross-task-result-attribution.json",
         "path": "ops/incident-response/inbox/d4367d19-cf9c-8322-b165-2140fcce9361-cross-task-result-attribution.json",
         "sha": "4ff74d5333495b8ab115e5a0d5b7c5ab7ce25f8d"
       },
       {
-        "name": "d694d4c0-e3d8-832e-a862-30a655abe5be-public-readback-review-block.json",
         "path": "ops/incident-response/inbox/d694d4c0-e3d8-832e-a862-30a655abe5be-public-readback-review-block.json",
         "sha": "ffb8c0909a3b82ce4477d5ba1096b6ec9dcb4951"
       },
       {
-        "name": "db934004-503c-8332-a023-ebaf5f8a3380-1.json",
         "path": "ops/incident-response/inbox/db934004-503c-8332-a023-ebaf5f8a3380-1.json",
         "sha": "1d5be6b4adc3f977e1b546c81a67c132cf4c2646"
       },
       {
-        "name": "db934004-503c-8332-a023-ebaf5f8a3380-2.json",
         "path": "ops/incident-response/inbox/db934004-503c-8332-a023-ebaf5f8a3380-2.json",
         "sha": "4c3ef90dbd448430c8110ee4409c417391c5d57b"
       },
       {
-        "name": "dd4d9e0b-6858-8326-a56e-4365bd312654-1.json",
         "path": "ops/incident-response/inbox/dd4d9e0b-6858-8326-a56e-4365bd312654-1.json",
         "sha": "2383f767b40da64f47f49620053c3f7598b1deff"
       },
       {
-        "name": "de1b8408-2838-8322-a146-ddc110e00ee7-github-read-transport.json",
         "path": "ops/incident-response/inbox/de1b8408-2838-8322-a146-ddc110e00ee7-github-read-transport.json",
         "sha": "e5126fe43fbc01c255d38ee4c5cf5a141d7adfbe"
       },
       {
-        "name": "e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
         "path": "ops/incident-response/inbox/e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
         "sha": "b4fe2231dbd792e05f2e5d7ff48d31954739e2e1"
       },
       {
-        "name": "e66260dc-41c0-8332-89c9-87a4dbf99048-1.json",
         "path": "ops/incident-response/inbox/e66260dc-41c0-8332-89c9-87a4dbf99048-1.json",
         "sha": "6b0aa87442e4b786ee7c7c976c200723b122f8af"
       },
       {
-        "name": "e6d4b4b3-779c-8321-850a-cd86b3554385-1.json",
         "path": "ops/incident-response/inbox/e6d4b4b3-779c-8321-850a-cd86b3554385-1.json",
         "sha": "7469958417d57e274639bb0aa64277e22c2a907c"
       },
       {
-        "name": "e7a34709-e5ac-8322-abcd-3d377a6b50a7-cms-subtitle-validation-handoff.json",
         "path": "ops/incident-response/inbox/e7a34709-e5ac-8322-abcd-3d377a6b50a7-cms-subtitle-validation-handoff.json",
         "sha": "c41608db039ea8360c6251913e915be52298a60d"
       },
       {
-        "name": "ec310390-60fc-832e-98e4-f71cc8457a0b-gedera-gateway-diagnosis.json",
         "path": "ops/incident-response/inbox/ec310390-60fc-832e-98e4-f71cc8457a0b-gedera-gateway-diagnosis.json",
         "sha": "e1a30a650a3099c2a64ef5edb5a22e13fd8f9b10"
       },
       {
-        "name": "economy-tech-20261118-presentation-duplicate-src.json",
         "path": "ops/incident-response/inbox/economy-tech-20261118-presentation-duplicate-src.json",
         "sha": "552fb4a432390d6280f59d9304ff570a6ad61f1b"
       },
       {
-        "name": "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
         "path": "ops/incident-response/inbox/ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
         "sha": "91a61f6bf728e82a4854245c5a595226c985e749"
       },
       {
-        "name": "f4a89fe4-2388-832e-a89b-6caa25891449-source-identity.json",
         "path": "ops/incident-response/inbox/f4a89fe4-2388-832e-a89b-6caa25891449-source-identity.json",
         "sha": "8df9a8e13b3826420ede810654d0e9cfc04277c9"
       },
       {
-        "name": "fc2fb076-a494-832a-955b-07c686a4ba75-sports-tag.json",
         "path": "ops/incident-response/inbox/fc2fb076-a494-832a-955b-07c686a4ba75-sports-tag.json",
         "sha": "392dffcd34491fcd79645548786513d1ffdd2e11"
       },
       {
-        "name": "ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
         "path": "ops/incident-response/inbox/ffbd13a4-92b0-8326-92d0-fcfbd6bcbbe1-1.json",
         "sha": "a84ddc77e2dd061f3f3dd7a891ddd3815d366273"
       },
       {
-        "name": "isnet-cms-get-post-empty-20261118-morning.json",
         "path": "ops/incident-response/inbox/isnet-cms-get-post-empty-20261118-morning.json",
         "sha": "0ee2462870814555c633b81003f17cf44dc069ab"
       },
       {
-        "name": "local-coverage-2026-11-15T11-44-13-230Z.json",
         "path": "ops/incident-response/inbox/local-coverage-2026-11-15T11-44-13-230Z.json",
         "sha": "e0f2c67939991f18e13037f414b3872fef48433b"
       },
       {
-        "name": "manual-depositphotos-2026-11-17T12-43-08-324Z.json",
         "path": "ops/incident-response/inbox/manual-depositphotos-2026-11-17T12-43-08-324Z.json",
         "sha": "8be9a9771b6ef31695eeb79dcec1ac1407aa290e"
       },
       {
-        "name": "manual-facebook-live-repair-20261116-dcc4335d.json",
         "path": "ops/incident-response/inbox/manual-facebook-live-repair-20261116-dcc4335d.json",
         "sha": "1a8b8b5b9e9d107e9ab5fffbfd484d569117cfa8"
       },
       {
-        "name": "manual-facebook-zero-views-20261116-5ab7d2d6.json",
         "path": "ops/incident-response/inbox/manual-facebook-zero-views-20261116-5ab7d2d6.json",
         "sha": "7905185a5a98b2be3cb6e050b043a5a4af55e856"
       },
       {
-        "name": "manual-flash90-2026-11-17T13-13-34-447Z.json",
         "path": "ops/incident-response/inbox/manual-flash90-2026-11-17T13-13-34-447Z.json",
         "sha": "6acaf4b51396c47881cd6161700286f4591aad23"
       },
       {
-        "name": "manual-news-throughput-audit-2026-11-16T04-30-49-134Z.json",
         "path": "ops/incident-response/inbox/manual-news-throughput-audit-2026-11-16T04-30-49-134Z.json",
         "sha": "21a528cf32b09138421b663f39f3f1ea24062b41"
       },
       {
-        "name": "manual-photo-provider-destinations-2026-11-17T13-40-04-593Z.json",
         "path": "ops/incident-response/inbox/manual-photo-provider-destinations-2026-11-17T13-40-04-593Z.json",
         "sha": "2e04b1d434fcecfb2cbc00af32dd872019b3c9f4"
       },
       {
-        "name": "manual-photo-provider-instructions-2026-11-17T13-36-46-200Z.json",
         "path": "ops/incident-response/inbox/manual-photo-provider-instructions-2026-11-17T13-36-46-200Z.json",
         "sha": "af471c9947808d1cf24b6d79a0d6c0d9c6690160"
       },
       {
-        "name": "manual-policy-completion-20261113-1.json",
         "path": "ops/incident-response/inbox/manual-policy-completion-20261113-1.json",
         "sha": "56e273224fccd075fa94cd8b107ae82e257906ae"
       },
       {
-        "name": "manual-policy-rollout-20261113-1.json",
         "path": "ops/incident-response/inbox/manual-policy-rollout-20261113-1.json",
         "sha": "dad44717479bf405e8fa45534199bd95df660184"
       },
       {
-        "name": "manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json",
         "path": "ops/incident-response/inbox/manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json",
         "sha": "476e8fd5c2df6489b309b6d64f3c7894291214f1"
       },
       {
-        "name": "manual-tlv-continuity-2026-11-15T08-44-35-819Z-ec9fe864.json",
         "path": "ops/incident-response/inbox/manual-tlv-continuity-2026-11-15T08-44-35-819Z-ec9fe864.json",
         "sha": "44098ca636d390a3567fd0026e1a0033311005b0"
       },
       {
-        "name": "national-news-priority-2026-11-16T04-48-37-126Z.json",
         "path": "ops/incident-response/inbox/national-news-priority-2026-11-16T04-48-37-126Z.json",
         "sha": "c0fdd573764221edc4e8aea0983a5f8fadc10f5d"
       },
       {
-        "name": "neighborhood-groups-20261116T050812Z-408ab6ed.json",
         "path": "ops/incident-response/inbox/neighborhood-groups-20261116T050812Z-408ab6ed.json",
         "sha": "f365f7e5c347a54ab0ec884230229004ec8f5d31"
       },
       {
-        "name": "neighborhood-mini-sites-20261115T122532Z-37afc15a.json",
         "path": "ops/incident-response/inbox/neighborhood-mini-sites-20261115T122532Z-37afc15a.json",
         "sha": "f288f8da0f7de63a64b0c81dbc5815ca13acc4e4"
       },
       {
-        "name": "news-community-20261113T120421Z-binding-check-1.json",
         "path": "ops/incident-response/inbox/news-community-20261113T120421Z-binding-check-1.json",
         "sha": "b86d56a0d522653620146294c10494c706409684"
       },
       {
-        "name": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19-artifact-metadata.json",
         "path": "ops/incident-response/inbox/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19-artifact-metadata.json",
         "sha": "4e38d11027762e1094419dbc78fabba0009bef8a"
       },
       {
-        "name": "ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f-neighborhood-aggregation.json",
         "path": "ops/incident-response/inbox/ops-2026-11-15-883cb0e4-4408-8326-adde-38362798ff8f-neighborhood-aggregation.json",
         "sha": "feb46bed5e1672ad5c32b6dc294e2a38c91d3e55"
       },
       {
-        "name": "publication-throughput-audit-2026-11-15T13-00-39-186Z.json",
         "path": "ops/incident-response/inbox/publication-throughput-audit-2026-11-15T13-00-39-186Z.json",
         "sha": "4b97d05ed125a756adaa280d0f1d6ded636fc4a6"
       },
       {
-        "name": "real-estate-20261118-missing-generated-article.json",
         "path": "ops/incident-response/inbox/real-estate-20261118-missing-generated-article.json",
         "sha": "684fda905407621b13dbb20d3b5af0cd6905cb79"
       },
       {
-        "name": "real-estate-20261118-neighborhood-projection.json",
         "path": "ops/incident-response/inbox/real-estate-20261118-neighborhood-projection.json",
         "sha": "7bb3e837081abf8d44d6fb31625166e2e941e332"
       },
       {
-        "name": "real-estate-20261118-source-readers.json",
         "path": "ops/incident-response/inbox/real-estate-20261118-source-readers.json",
         "sha": "53f5965e06a12d6faa34a8f13ba9acf4d7a8f904"
       },
       {
-        "name": "tlvnet-stability-20261115-version619.json",
         "path": "ops/incident-response/inbox/tlvnet-stability-20261115-version619.json",
         "sha": "93120103e5cefaf62666873b2e286f5d105fd740"
       },
       {
-        "name": "work-readiness-20261115-616.json",
         "path": "ops/incident-response/inbox/work-readiness-20261115-616.json",
         "sha": "776685a1d097ea753cbad8ce0f6d42e8952fcad0"
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
   },
   "source_report_checkpoint": {
     "status": "executed_on_current_published_source_plus_owner_receipt",
@@ -9664,7 +9597,14 @@
     "journal_commit": "7c063dab2394057680ae11d6e1d4fdc0e2dc4e68",
     "catalog_sha256": "b05cdf45f3fe627b55789ff7b54100ddfb4c49c288385b2321963715fc400005",
     "observed_at": "2026-11-18T19:56:42Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
+    "current_attempt": {
+      "observed_at": "2026-11-19T12:23:30.044Z",
+      "status": "fresh_source_checkout_unavailable",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+      "attempts": 1,
+      "no_stale_source_run": true
+    }
   },
   "latest_city_owner_publication_observation": {
     "owner_task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
@@ -9786,31 +9726,28 @@
     "prior_pending_run_reconciled": true
   },
   "latest_economy_due_slot_observation": {
+    "id": "tlvnet-economy-20261119-due-run-evidence-missing",
     "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
-    "run": {
-      "id": "12219b46-3020-8323-9c31-d1c4b27dbe53",
+    "status": "scheduled_run_evidence_missing_not_proven_failed",
+    "expected_scheduled_for": "2026-11-19T10:00:00Z",
+    "last_observed_run": {
+      "id": "f45dbfcf-ed34-832f-b758-7641f992a898",
       "recorded_status": "completed",
-      "scheduled_for": "2026-11-17T10:00:00Z",
-      "started_at": "2026-11-17T10:34:20.150671Z",
-      "completed_at": "2026-11-17T10:43:04.501025Z",
+      "scheduled_for": "2026-11-18T10:00:00Z",
+      "started_at": "2026-11-18T10:17:14.345378Z",
+      "completed_at": "2026-11-18T10:28:05.217651Z",
       "chat_ref": {
         "type": "chatgpt",
         "id": "6af6e7ee-aef4-83eb-9a15-53e6dba697c9"
       }
     },
-    "reported_existing_verified": 3,
-    "new_articles": 0,
-    "old_handoffs_covered": 4,
-    "coverage_complete": false,
-    "deferred_candidate_ids": [
-      "manpower-tlv-q4-2026-outlook",
-      "boi-bank-technology-exercise-20261117",
-      "telavivi-tonica-neighborhood-app"
-    ],
-    "root_triage": "Published16Nov backlog resolved; four old handoffs closed and bounded new discovery recorded. Individual source/local relevance blocks retained, no domain-wide item blocker found. No assertion all news exhausted. Next owner should continue current candidates/cursor and consider original sourced alternative when no mature new item.",
-    "observed_at": "2026-11-17T11:23:11.266Z",
-    "status": "completed_actual_run_observed",
-    "evidence": "ops/incident-response/evidence/ops-2026-11-17-c2f69bff-3de8-832a-9b53-acc86331cf39.json"
+    "next_run_time": "2026-11-20T12:00:00+02:00",
+    "enabled": true,
+    "public_latest": "2026-11-18",
+    "next_action": "Find actual runtime execution record for due slot. Preserve owner and research queue; no forced run or schedule change.",
+    "observed_at": "2026-11-19T12:23:30.044Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+    "inbox": "ops/incident-response/inbox/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b-economy-due-run-evidence.json"
   },
   "latest_isnet_source_backup_observation": {
     "run_id": 44504575640,
@@ -9996,30 +9933,35 @@
     "no_source_push": true
   },
   "latest_pending_run_reconciliation": {
-    "historical_run_id": "4aa4ca0c-4298-8320-b080-edb7dada4ff2",
-    "historical_runKey": "sports-2026-11-18-09:00-4aa4ca0c",
-    "historical_runtime_terminal_status": null,
-    "checkpoint_at": "2026-11-18T07:02:40.659746+00:00",
-    "checkpoint_sha256": "bb8df02fa4eb0dbae6937cbffbbf56762ef49b1b4637d2d39627d62f3e8daddd",
-    "status": "Both original drafts reconciled to actual later publication by the authorized sports owner. Historical terminal metadata is no longer returned by the task connector. No historical publication attributed.",
-    "later_owner_run_id": "cbad6525-8d98-8330-ac4a-95d36437a7ba",
-    "published_article_ids": [
-      "maccabi-olympiacos-overtime-loss-20261117",
-      "hapoel-baskonia-away-win-20261117"
+    "observed_at": "2026-11-19T12:23:30.044Z",
+    "pending": [
+      {
+        "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "run_id": "2121bc7c-3c80-8326-a9f7-a4ae0173b2d1",
+        "scheduled_for": "2026-11-19T12:00:00Z",
+        "status": "in_progress",
+        "old_result_not_attributed_to_new_run": true
+      }
     ],
-    "unresolved_research_count": 4,
-    "observed_at": "2026-11-19T10:30:30Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json",
-    "archived_runtime_gap": "Original run terminal result unavailable via current connector; keep metadata gap separately from resolved drafts.",
-    "city_run_id": "06a3180c-7d30-8329-8a4c-2321e1480f2d",
-    "city_run_status": "completed",
-    "public_detail_remaining": [],
-    "city_readback_evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json",
-    "magazine_run_id": "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5",
-    "magazine_tlvnet_publication_reconciled": true,
-    "magazine_herzliya_pending_post_ids": [
-      812268
-    ]
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+    "old_results_not_attributed_to_active_run": true
   },
-  "current_pending_task_runs": []
+  "current_pending_task_runs": [
+    {
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "run_id": "2121bc7c-3c80-8326-a9f7-a4ae0173b2d1",
+      "scheduled_for": "2026-11-19T12:00:00Z",
+      "status": "in_progress",
+      "old_result_not_attributed_to_new_run": true
+    }
+  ],
+  "herzliya_coordination": {
+    "source_writes": 0,
+    "deployments": 0,
+    "agents_triggered": 0,
+    "bli_heshbon": false,
+    "owner_reference_from_user": "6afc88e6-3818-83ed-977e-e51edc14fa37",
+    "new_concrete_qa_findings": [],
+    "note": "No independent Herzliya public QA in this TLVNET cycle; existing owner completes QA. Publisher-reported AdSense/GA4 results not relabelled as controller verification."
+  }
 }
