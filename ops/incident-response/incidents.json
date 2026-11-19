@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T09:29:44Z",
+  "updated_at": "2026-11-19T10:30:30Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -3091,6 +3091,55 @@
           "desktop_visual": "not_applicable_without_current_article"
         },
         "next_action": "Match exact failed runtime trace and original editorial/source checkpoint to version 667; after owner lease release or normal expiry, reconcile actual article ID and existing CMS posts before owner resumes a missing step. Avoid a replay or duplicate publication."
+      },
+      "latest_scope_recovery": {
+        "owner_task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+        "owner_run_id": "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5",
+        "owner_run_key": "2026-11-19:7f40bfd88c9a754c44ec5a1eb11d84d6",
+        "owner_report_matches_run": true,
+        "previous_runtime_observation": "failed with missing result",
+        "current_runtime_status": "completed",
+        "current_completed_at": "2026-11-19T09:53:33.369655Z",
+        "id": "daily-2026-11-19",
+        "title": "אמריקה העניקה פרס לספר על כלא. את הסופר היא השאירה מחוץ לדלת",
+        "article_date": "2026-11-19",
+        "url": "https://tlvnet.com/culture/article-daily-2026-11-19",
+        "status": "published_verified",
+        "body_sha256": "23b85fdece4f43e609a57ab97c80e08f8d60a817d160c86e2856446aa93f462c",
+        "asset_sha256": "5c4088c27a330e065d787765f837ea8dbb0b5aa9081183db0ff7be3e56d6b332",
+        "hash_basis": "Original owner verified receipt; controller independently checked public DOM, not byte hashes",
+        "public_checks": [
+          "article title",
+          "substantive article body",
+          "image element",
+          "visible illustration credit",
+          "section lead",
+          "homepage card"
+        ],
+        "section_url": "https://tlvnet.com/culture/",
+        "owner_report_verified_other_ISNET_targets": 9,
+        "controller_reverified_targets": [
+          "TLVNET only"
+        ],
+        "visual": {
+          "desktop": "owner reported checked",
+          "mobile": "pending"
+        },
+        "deployment": {
+          "version": 668,
+          "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_a5216519901081918e1bf8326046cb56",
+          "source_commit": "a50efe77a5416c65a0afb69e2cd943173012d45e",
+          "deployment_id": "appgdep_6afec59dfd108191bde5b520b0076250",
+          "status": "succeeded",
+          "terminal_at": "2026-11-19T09:47:24.558771+00:00",
+          "role": "owner",
+          "access": "public",
+          "observed_at": "2026-11-19T10:30:30Z"
+        },
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json",
+        "recovered_runtime_occurrence": "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5",
+        "historical_root_still_unconfirmed": true,
+        "herzliya_related_incident": "culture-net-herzliya-public-404-20261119"
       }
     },
     {
@@ -6245,7 +6294,19 @@
         "node tests/neighborhood-groups.mjs PASS:25groups/73localities/dedup/isolation/expiry"
       ],
       "public_proof": "Owner confirmed missing canonical area; isolated generated output repaired. Deployed repair/public verification pending.",
-      "next_action": "Open fresh source, preserve parallel owner work, merge three-file patch, acquire/readback existing realCAS TLVNET-site/no concurrent deploy, run full normal preparation/build checks, publish once then verify affected summary and canonical area public link. Do not copy stale prepared-public fingerprints or republish article. Current controller independent public scope block remains; no release done thiscycle."
+      "next_action": "Open fresh source, preserve parallel owner work, merge three-file patch, acquire/readback existing realCAS TLVNET-site/no concurrent deploy, run full normal preparation/build checks, publish once then verify affected summary and canonical area public link. Do not copy stale prepared-public fingerprints or republish article. Current controller independent public scope block remains; no release done thiscycle.",
+      "latest_public_followup": {
+        "url": "https://tlvnet.com/city-hub/areas/ramat-aviv/",
+        "status": "general_area_link_gap_still_observed",
+        "sample": "General real-estate navigation and deal board link observed; no direct link to the Country Lamed article on this sampled page.",
+        "expected_story_url": "https://tlvnet.com/news/country-lamed-planning-framework-explained-20261118",
+        "canonical_northwest_portal_current_readback": "pending",
+        "patch_evidence": [
+          "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
+        ],
+        "observed_at": "2026-11-19T10:30:30Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
+      }
     },
     {
       "id": "tlvnet-editorial-build-missing-target-artifact",
@@ -6424,7 +6485,63 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json",
       "inbox": "ops/incident-response/inbox/9386f7de-5bf0-8332-bf04-b81deb328608-investigations-publication-route.json",
       "next_action": "Use existing authenticated TLVNET source access to verify or wire the dedicated category, detail and section routes, and homepage selection. Verify that an unapproved draft keeps the existing slide, the first eligible owner release becomes the only hero, previous releases sort by original publication time, and mobile/desktop output plus normal story routes remain intact. Keep draft and assets with original owner; one normal release under TLVNET-site CAS after relevant checks.",
-      "prevention": "Exercise the section + homepage flow with an original-owner fixture and preserve prelaunch fallback until the first approved release."
+      "prevention": "Exercise the section + homepage flow with an original-owner fixture and preserve prelaunch fallback until the first approved release.",
+      "latest_priority_followup": {
+        "observed_at": "2026-11-19T10:30:30Z",
+        "source_gate": {
+          "status": "fresh_authenticated_source_unavailable",
+          "required_release": 668,
+          "source_commit": "a50efe77a5416c65a0afb69e2cd943173012d45e",
+          "local_cache_contains_release": false,
+          "prior_remote_auth_blocker_unchanged": true,
+          "source_retry_attempted": false,
+          "current_lease_state": "free",
+          "concurrent_deployment_observed": false,
+          "no_new_credentials": true,
+          "next_action": "Use existing authenticated access to the same TLVNET checkout. Apply the retained canonical-slug + build-order patch after rebasing and verify the exact canonical neighborhood link. On the same current tree verify/wire investigations category, article and section route and eligible homepage lead fallback. Run focused regressions and standard single release only with existing CAS ownership."
+        },
+        "status": "open",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
+      }
+    },
+    {
+      "id": "culture-net-herzliya-public-404-20261119",
+      "status": "open",
+      "fingerprint": "ISNET/CMS62/2120/existing-post-812268-not-projected-on-herzliya-sites",
+      "root_cause": "Likely downstream ingestion or rendering of the existing CMS post. The last asserted live Herzliya synchronization completed before the owner created this record; exact importer exclusion/failure not yet established.",
+      "occurrences": [
+        {
+          "owner_task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+          "owner_run_id": "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5",
+          "observed_at": "2026-11-19T10:30:30Z",
+          "inbox": "ops/incident-response/inbox/20261119T094834Z-culture-net-herzliya-public-404.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
+        }
+      ],
+      "root_evidence": {
+        "website_id": 62,
+        "post_id": 812268,
+        "category_id": 2120,
+        "image_id": 851746,
+        "status": "cms_exists_public_projection_pending",
+        "date": "2026-11-19",
+        "owner_attempted_route": "https://herzliyanet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%90%D7%9E%D7%A8%D7%99%D7%A7%D7%94-%D7%94%D7%A2%D7%A0%D7%99%D7%A7%D7%94-%D7%A4%D7%A8%D7%A1-%D7%9C%D7%A1%D7%A4%D7%A8-%D7%A2%D7%9C-%D7%9B%D7%9C%D7%90-%D7%90%D7%AA-%D7%94%D7%A1%D7%95%D7%A4%D7%A8-%D7%94%D7%99%D7%90-%D7%94%D7%A9%D7%90%D7%99%D7%A8%D7%94-%D7%9E%D7%97%D7%95%D7%A5-%D7%9C%D7%93%D7%9C%D7%AA-812268",
+        "owner_attempted_result": "public not found",
+        "observed_section_url": "https://herzliyanet.co.il/news/culture/",
+        "observed_home_url": "https://herzliyanet.co.il/",
+        "observed_section_and_home_lead_date": "2026-11-17",
+        "current_article_link_present": false,
+        "cms_independent_readback": "Exact existing post 812268, category 2120, image ID 851746 and nonempty body. publishExternalStatus=NotPublish also appears on live Herzliya control post 812202, so it does not explain this missing projection.",
+        "herzliya_site_writer_latest_run": "97f5208f-8fc4-8322-967f-e94bc0c8080b",
+        "cause_assessment": "Likely downstream ingestion or rendering of the existing CMS post. The last asserted live Herzliya synchronization completed before the owner created this record; exact importer exclusion/failure not yet established.",
+        "next_action": "Check existing Herzliya Sites sync output for CMS62/2120/post 812268, then verify canonical article URL, body/image/credit and department/home links after its normal ingestion. Preserve the CMS record and existing owner; do not recreate or guess URL.",
+        "inbox": "ops/incident-response/inbox/20261119T094834Z-culture-net-herzliya-public-404.json",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
+      },
+      "next_action": "Check existing Herzliya Sites sync output for CMS62/2120/post 812268, then verify canonical article URL, body/image/credit and department/home links after its normal ingestion. Preserve the CMS record and existing owner; do not recreate or guess URL.",
+      "impact": "Herzliya only. Other targets reported separately by original owner.",
+      "inbox": "ops/incident-response/inbox/20261119T094834Z-culture-net-herzliya-public-404.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
     }
   ],
   "last_review_runKey": "ops-2026-11-19-9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7",
