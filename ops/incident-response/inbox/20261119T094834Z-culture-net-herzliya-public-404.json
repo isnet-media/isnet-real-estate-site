@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "incident_id": "culture-net-herzliya-public-404-20261119",
+  "reported_at": "2026-11-19T09:48:34Z",
+  "reporter": {
+    "agent_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+    "run_key": "2026-11-19:7f40bfd88c9a754c44ec5a1eb11d84d6",
+    "policy_version": "2026-11-14/1.0"
+  },
+  "subsystem": "ISNET CMS public routing",
+  "website": {
+    "website_id": 62,
+    "name": "הרצליה נט",
+    "category_id": 2120,
+    "category_name": "תרבות נט"
+  },
+  "item": {
+    "post_id": 812268,
+    "image_id": 851746,
+    "title": "אמריקה העניקה פרס לספר על כלא. את הסופר היא השאירה מחוץ לדלת",
+    "body_sha256": "23b85fdece4f43e609a57ab97c80e08f8d60a817d160c86e2856446aa93f462c",
+    "asset_sha256": "5c4088c27a330e065d787765f837ea8dbb0b5aa9081183db0ff7be3e56d6b332"
+  },
+  "status": "open",
+  "severity": "publication_public_readback_failed",
+  "evidence": {
+    "cms_readback": "published=true, full body, categoryId=2120, imageId=851746, credit אילוסטרציה – AI",
+    "public_homepage": "article card not observed",
+    "attempted_public_url": "https://herzliyanet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA-%D7%A0%D7%98/%D7%90%D7%9E%D7%A8%D7%99%D7%A7%D7%94-%D7%94%D7%A2%D7%A0%D7%99%D7%A7%D7%94-%D7%A4%D7%A8%D7%A1-%D7%9C%D7%A1%D7%A4%D7%A8-%D7%A2%D7%9C-%D7%9B%D7%9C%D7%90-%D7%90%D7%AA-%D7%94%D7%A1%D7%95%D7%A4%D7%A8-%D7%94%D7%99%D7%90-%D7%94%D7%A9%D7%90%D7%99%D7%A8%D7%94-%D7%9E%D7%97%D7%95%D7%A5-%D7%9C%D7%93%D7%9C%D7%AA-812268",
+    "observed_result": "העמוד לא נמצא | הרצליה נט"
+  },
+  "bounded_attempts": {
+    "initial": "homepage/category discovery",
+    "focused_retry": "direct CMS-style route",
+    "result": "unchanged public absence/404; no republish attempted"
+  },
+  "impact": "The item is stored and marked published in CMS but is not yet publicly verified on Herzliya. Nine other ISNET destinations and TLVNET verified independently.",
+  "requested_controller_action": "Discover the actual canonical/public route for post 812268 and reconcile Herzliya publication/rendering. Do not recreate the post or guess routes; verify full public body, image, credit, category/home card.",
+  "duplicates_prevented": 1
+}
