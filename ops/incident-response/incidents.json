@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T08:50:57Z",
+  "updated_at": "2026-11-19T09:29:44Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -3004,6 +3004,16 @@
           "started_at": "2026-11-13T08:33:50.760480Z",
           "completed_at": "2026-11-13T09:03:54.327778Z",
           "inbox": "ops/incident-response/inbox/491a159f-33f8-8322-a053-5453bcb6312d-1.json"
+        },
+        {
+          "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+          "run_id": "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5",
+          "started_at": "2026-11-19T08:55:01.347140Z",
+          "completed_at": "2026-11-19T09:25:06.015672Z",
+          "observed_at": "2026-11-19T09:29:44Z",
+          "inbox": "ops/incident-response/inbox/8b5cfe9d-e7e4-832e-8778-93ee58b74ac5-culture-magazine-runtime-publication-gap.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-19/faa18b25-8680-8332-95e7-39f9d8078b8a.json",
+          "symptom": "failed runtime with no matching result, contemporaneous terminal 667, current culture edition not observable, valid owner lease still held"
         }
       ],
       "evidence": {
@@ -3013,7 +3023,7 @@
         "enabled": true
       },
       "qualification": "Runtime failure is verified, absence of public publication is not. Existing public culture items cannot be attributed to this failed execution without provenance. Old8Nov result is not13Nov success.",
-      "next_action": "Existing source-runtime operator obtains diagnostic trace/checkpoint for exact491a159f-33f8-8322-a053-5453bcb6312d, classifies cause, then one focused correction only if conditions changed. No old-run retry or competing writer.",
+      "next_action": "Match exact failed runtime trace and original editorial/source checkpoint to version 667; after owner lease release or normal expiry, reconcile actual article ID and existing CMS posts before owner resumes a missing step. Avoid a replay or duplicate publication.",
       "observed_at": "2026-11-14T05:46:49.373Z",
       "reported_runKey": "ops-2026-11-14-2f2d2080-3e40-8332-8df0-571e8d002717",
       "notification": "Already reported in interactive morning review; no duplicate alert.",
@@ -3025,6 +3035,62 @@
         "proof": "Original owner reports publication/syndication and current unchanged source has corresponding entry; no independent public revalidation this cycle.",
         "failed13Nov_root_resolved": false,
         "evidence": "ops/incident-response/evidence/ops-2026-11-15-b6b63dbd-a038-8322-8a0b-ca991e2f75c0.json"
+      },
+      "latest_occurrence": {
+        "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+        "run_id": "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5",
+        "started_at": "2026-11-19T08:55:01.347140Z",
+        "completed_at": "2026-11-19T09:25:06.015672Z",
+        "observed_at": "2026-11-19T09:29:44Z",
+        "inbox": "ops/incident-response/inbox/8b5cfe9d-e7e4-832e-8778-93ee58b74ac5-culture-magazine-runtime-publication-gap.json",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/faa18b25-8680-8332-95e7-39f9d8078b8a.json",
+        "symptom": "failed runtime with no matching result, contemporaneous terminal 667, current culture edition not observable, valid owner lease still held"
+      },
+      "latest_evidence": {
+        "owner_task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+        "owner_run_id": "8b5cfe9d-e7e4-832e-8778-93ee58b74ac5",
+        "owner_status": "failed",
+        "owner_started_at": "2026-11-19T08:55:01.347140Z",
+        "owner_completed_at": "2026-11-19T09:25:06.015672Z",
+        "matching_owner_result": false,
+        "stale_result_run_id": "544be73c-c360-832a-b73b-c75a11567845",
+        "target": "TLVNET-site",
+        "scheduled_slot": "2026-11-19T08:00:00Z",
+        "status": "failed_runtime_publication_unverified",
+        "concurrent_release": {
+          "version": 667,
+          "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_0bfd5a3ad65481919854815b41a1592b",
+          "source_commit": "4f8b870e08caba3103883215fb104cdc92c87ec5",
+          "deployment_id": "appgdep_6afebe6e0260819182225855b2ca21be",
+          "status": "succeeded",
+          "terminal_at": "2026-11-19T09:16:57.504823+00:00",
+          "host_url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+          "observed_at": "2026-11-19T09:29:44Z",
+          "correlation": "Deployment became terminal within the magazine runtime. No matching journal receipt proves what it included or which owner produced it."
+        },
+        "lease": {
+          "owner": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+          "state": "held",
+          "valid_when_observed": true,
+          "lease_until": "2026-11-19T09:44:08.266Z",
+          "run_key": "2026-11-19:7f40bfd88c9a754c44ec5a1eb11d84d6",
+          "last_verified_release_version": 666,
+          "blob_sha": "711245934084eb9425568ccdfce0ec3a6ac4c300"
+        },
+        "public": {
+          "section_url": "https://tlvnet.com/culture/",
+          "provider_section_url": "https://tlvnet-newsroom.ebs987449.chatgpt.site/culture/",
+          "homepage_url": "https://tlvnet.com/",
+          "section_lead_date": "2026-11-17",
+          "homepage_uses_same_previous_lead": true,
+          "expected_daily_url": "https://tlvnet.com/culture/article-daily-2026-11-19",
+          "expected_daily_readback": 404,
+          "status": "Expected dated article unresolved and no current magazine card in inspected surfaces; no current title/body/asset to approve.",
+          "other_ISNET_targets": "Syndication status unverified this cycle.",
+          "mobile_visual": "not_applicable_without_current_article",
+          "desktop_visual": "not_applicable_without_current_article"
+        },
+        "next_action": "Match exact failed runtime trace and original editorial/source checkpoint to version 667; after owner lease release or normal expiry, reconcile actual article ID and existing CMS posts before owner resumes a missing step. Avoid a replay or duplicate publication."
       }
     },
     {
