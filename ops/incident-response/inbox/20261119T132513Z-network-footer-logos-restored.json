@@ -1,0 +1,156 @@
+{
+  "id": "isnet-network-footer-herz-legacy-logo-paths",
+  "status": "fixed_verified",
+  "updated_at": "2026-11-19T13:25:13Z",
+  "scope": "Publisher-requested network footer repair",
+  "root_cause": "19 network-footer image URLs used Herzliya legacy /dyncontent paths that were missing after migration. TLVNET used working /media/network copies of the same approved publisher-owned marks.",
+  "change": "Restore exactly 19 legacy public paths from hash-verified approved local assets during production build; no CMS template, article, Google setting, schedule or DNS changes.",
+  "source": {
+    "project_id": "appgprj_6afc5ae8297c819188a05e055b3a30d1",
+    "baseline_sha": "adda43656bcaf1a26b4b7f2ffe917d7439f0e07b",
+    "commit_sha": "4a8b3a1e5abc5f1cecf13a3c6e5ec6ff325c8429",
+    "version": 29
+  },
+  "deployment": {
+    "id": "appgdep_6afef657506481919d3535e692f2b658",
+    "status": "succeeded",
+    "terminal_at": "2026-11-19T13:15:20.348784+00:00"
+  },
+  "tests": [
+    "Production build passed",
+    "19 approved asset hashes, legacy/current byte equality and PNG/JPEG signatures passed",
+    "1459 HTML pages: production and preview validation passed",
+    "Public JavaScript syntax passed",
+    "Banner and consent regression passed"
+  ],
+  "public_verification": {
+    "checked_at": "2026-11-19T13:25:13Z",
+    "method": "Live browser DOM after scrolling footer into view; every img complete with naturalWidth > 0; visual review of repaired Ashdod footer",
+    "sites": [
+      {
+        "url": "https://ashdodnet.com/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://tlvnet.com/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://holonnet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://herzliyanet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://raanananet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://kgatnet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://www.jerusalemnet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://jerusalemharedim.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://gederanet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://givatayimnet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://www.ramatgannet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://www.yavnenet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://www.ganyavne.net/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://nessziona.net/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://www.rishonet.com/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://batyamnet.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://www.ashqelon.net/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://www.yeshuvnik.net/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://www.b7net.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      },
+      {
+        "url": "https://ashdods.co.il/",
+        "images": 22,
+        "loaded": 22,
+        "broken": []
+      }
+    ],
+    "mobile_visual_review": "not_performed"
+  },
+  "prevention": "Build-time compatibility mapping checks manifest hashes and fails on missing or altered assets; no rebuild/deploy for journal updates.",
+  "remaining": [],
+  "related_source_evidence": "ops/network-logo-compatibility.json is prepared pre-deployment evidence; this record supplies post-deployment verification."
+}
