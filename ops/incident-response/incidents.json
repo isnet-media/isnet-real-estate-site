@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T06:19:28Z",
+  "updated_at": "2026-11-19T07:26:37Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6173,7 +6173,7 @@
     },
     {
       "id": "tlvnet-sports-archive-caption-context-reuse",
-      "status": "open",
+      "status": "fixed_verified",
       "fingerprint": "TLVNET photo-bank reusable archive caption still names prior fixture",
       "root_cause": "scripts/news_images.py resolves an approved asset from data/photo-bank.json. The public caption inherited the bank record's Partizan-specific note although the new Olympiacos article's own image_caption was contextualized correctly.",
       "impact": "Wrong fixture reference in the public archive-photo caption on the evening Olympiacos article and on its sports-section card.",
@@ -6186,16 +6186,47 @@
           "section_url": "https://tlvnet.com/news/sports"
         }
       ],
-      "change_status": "local_patch_verified_release_pending",
+      "change_status": "owner_deployed_public_verified",
       "regression": [
         "Photo bank checker passed for all 174 verified local JPGs.",
         "Local renderer removes the unrelated fixture from the Olympiacos caption, preserves archive label and visible credit, and keeps the original Partizan article's image binding.",
         "Only four contextual text fields of this asset changed; JPG/hash/license/source and editorial approvals were preserved."
       ],
-      "release_blocker": "Existing source checkout is readable and reconciled to the production version plus owner receipt, but normal Git remote read returned no usable username/credential in this execution. No new source credential was issued under the cycle's no-keys mandate; patch was not pushed and no lease or deployment was started.",
-      "next_action": "Use the existing production release owner's authenticated source path and TLVNET-site CAS. Apply this single-asset patch to current source, check the generated detail and section captions, run publication checks and confirm the same public URLs after one deployment. Store fixture-specific context with an individual article or review; keep reusable bank descriptions fixture-neutral.",
+      "release_blocker": null,
+      "next_action": "Keep reusable photo-bank descriptions fixture-neutral; store match-specific context with each article. Separate viewport review remains in owner quality queue.",
       "inbox": "ops/incident-response/inbox/bbc71902-e2b8-8322-a9e5-ca1d812e7928-sports-caption-context-reuse.json",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/58025d4e-7ce0-8332-b3a7-69267878abc8.json",
+      "fixed_verified_at": "2026-11-19T07:26:37Z",
+      "previous_release_blocker": "Existing source checkout is readable and reconciled to the production version plus owner receipt, but normal Git remote read returned no usable username/credential in this execution. No new source credential was issued under the cycle's no-keys mandate; patch was not pushed and no lease or deployment was started.",
+      "verified_repair": {
+        "incident_id": "tlvnet-sports-archive-caption-context-reuse",
+        "status": "fixed_verified",
+        "affected_url": "https://tlvnet.com/news/maccabi-olympiacos-overtime-loss-20261117",
+        "section_url": "https://tlvnet.com/news/sports",
+        "owner_task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+        "owner_run_id": "210ba9a9-bddc-832c-8f63-bd7ebc772dff",
+        "owner_run_key": "sports-20261119-morning-210ba9a9-bddc-832c-8f63-bd7ebc772dff",
+        "public_caption": "דניאל תייס בחימום במדי מכבי תל אביב, ארכיון 8.9.2026 · צילום ארכיון מאימון החימום; אינו תיעוד המשחק המדווח.",
+        "credit": "Davidr1974 · CC0",
+        "checks": [
+          "Article body and image semantics present in fresh public browser readback.",
+          "Correct neutral warm-up archive caption and visible credit on both article and exact sports card; no unrelated Partizan fixture in that caption.",
+          "Original isolated photo-bank integrity and renderer regression passed as recorded in the incident; published owner accepted release and the live outcome matches the regression."
+        ],
+        "observed_at": "2026-11-19T07:26:37Z"
+      },
+      "deployment": {
+        "version": 665,
+        "source_commit": "3f628bca2d16b7bc8be2c2c3f6e71930a7ee13c8",
+        "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_12f05edd82b48191a17096dd1dd126b4",
+        "deployment_id": "appgdep_6afe9fd549248191ab36bb91a8a32e25",
+        "status": "succeeded",
+        "terminal_at": "2026-11-19T07:06:12.601940+00:00",
+        "role": "owner",
+        "access": "public",
+        "observed_at": "2026-11-19T07:26:37Z"
+      },
+      "regression_evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
     },
     {
       "id": "tlvnet-news-python-bs4-after-workspace-cleanup",
