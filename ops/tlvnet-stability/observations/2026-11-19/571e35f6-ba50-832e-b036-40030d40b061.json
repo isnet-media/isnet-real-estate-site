@@ -1,0 +1,512 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "571e35f6-ba50-832e-b036-40030d40b061",
+  "runKey": "ops-2026-11-19-571e35f6-ba50-832e-b036-40030d40b061",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-19T13:52:46.205Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-19/571e35f6-ba50-832e-b036-40030d40b061.json",
+  "source_commit": "47e612792e0f9b87b558a2d58273dc63271af882",
+  "saved_version": 679,
+  "deployment": {
+    "id": "appgdep_6afefea3ad148191b168ce8b4c16d571",
+    "status": "succeeded",
+    "terminal_at": "2026-11-19T13:50:43.114061+00:00"
+  },
+  "prior_deployment": {
+    "id": "appgdep_6afef2ed6b988191ae2f08c551da0b8c",
+    "version": 678,
+    "status": "succeeded",
+    "terminal_at": "2026-11-19T13:00:54.764282+00:00"
+  },
+  "target": "TLVNET-site",
+  "new_deployments": 1,
+  "availability": {
+    "checked_at": "2026-11-19T13:52:46.206Z",
+    "sample": "Live homepage, seven editorial sections, investigations section, two dark-theme routes, and northern coast neighborhood",
+    "latency_ms": null,
+    "reason_no_latency": "No HTTP latency was measured."
+  },
+  "lease_at_intake": {
+    "state": "free",
+    "previous_owner_released_at": "2026-11-19T13:01:57.324Z"
+  },
+  "maintenance_lease": {
+    "owner": "Automation_9776808c73848191a9d748dd09315960",
+    "acquired_at": "2026-11-19T13:44:01.429Z",
+    "lease_until": "2026-11-19T14:09:01.429Z",
+    "released_at": "2026-11-19T13:51:58.419Z",
+    "release_readback": "free"
+  },
+  "verified_repair": {
+    "id": "tlvnet-dark-network-contact-low-contrast",
+    "status": "fixed_verified",
+    "root_cause": "Shared footer used a dark foreground and dark link color on both dark themes.",
+    "change": "Apply light text, underlined teal links, and matching focus outline to contact block for guide and night theme.",
+    "desktop": [
+      {
+        "bg": "rgb(16, 17, 21)",
+        "bodybg": "rgb(16, 17, 21)",
+        "contactWidth": 1244,
+        "linkColors": [
+          "rgb(157, 231, 220)",
+          "rgb(157, 231, 220)",
+          "rgb(157, 231, 220)"
+        ],
+        "linkTypes": [
+          "mailto:",
+          "mailto:",
+          "tel:"
+        ],
+        "logoCards": 21,
+        "overflow": false,
+        "text": "rgb(231, 239, 237)",
+        "theme": "tlv-unified tlv-day-theme tlv-guide-dark",
+        "url": "https://tlvnet.com/guide/restaurants",
+        "viewport": 1912
+      },
+      {
+        "bg": "rgb(16, 11, 16)",
+        "bodybg": "rgba(0, 0, 0, 0)",
+        "contactWidth": 1244,
+        "linkColors": [
+          "rgb(157, 231, 220)",
+          "rgb(157, 231, 220)",
+          "rgb(157, 231, 220)"
+        ],
+        "linkTypes": [
+          "mailto:",
+          "mailto:",
+          "tel:"
+        ],
+        "logoCards": 21,
+        "overflow": false,
+        "text": "rgb(231, 239, 237)",
+        "theme": "tlv-unified tlv-night-theme",
+        "url": "https://tlvnet.com/night/sections/tonight",
+        "viewport": 1912
+      },
+      {
+        "bg": "rgba(0, 0, 0, 0)",
+        "bodybg": "rgb(244, 243, 237)",
+        "contactWidth": 1244,
+        "linkColors": [
+          "rgb(18, 99, 95)",
+          "rgb(18, 99, 95)",
+          "rgb(18, 99, 95)"
+        ],
+        "linkTypes": [
+          "mailto:",
+          "mailto:",
+          "tel:"
+        ],
+        "logoCards": 21,
+        "overflow": false,
+        "text": "rgb(16, 52, 66)",
+        "theme": "tlv-day-theme editorial-story tlv-unified",
+        "url": "https://tlvnet.com/news/la-guardia-bicycle-network-20261119",
+        "viewport": 1912
+      }
+    ],
+    "mobile_visual_review": "pending: viewport override did not take effect on the connected browser",
+    "logo_images_loaded": 22,
+    "contrast_text_min": 16.14,
+    "contrast_link_min": 13.38,
+    "regression": [
+      "Foundation validation passed",
+      "Prepared public snapshot fingerprints validated",
+      "Home layout regression passed on exact preserved homepage",
+      "Worker build and archive succeeded",
+      "Only network footer CSS byte-changed among 1875 non-framework assets versus previously built version",
+      "3 contact links and 21 logo cards retained"
+    ],
+    "full_regeneration_issue": "ops/incident-response/inbox/571e35f6-ba50-832e-b036-40030d40b061-restaurant-rail-build.json"
+  },
+  "freshness": {
+    "news": {
+      "url": "https://tlvnet.com/news/",
+      "heading": "חדשות תל אביב",
+      "lead": [
+        "/news/rokach-pedestrian-killed-motorcycle-20261119",
+        "הולכת רגל נהרגה מפגיעת אופנוע בשדרות רוקח"
+      ],
+      "expected_article_reference": true
+    },
+    "real-estate": {
+      "url": "https://tlvnet.com/news/real-estate",
+      "heading": "נדל״ן בתל אביב",
+      "lead": [
+        "/news/country-lamed-planning-framework-explained-20261118",
+        "קאנטרי ל׳: מה עומד מאחורי מסגרת הבנייה של עד עשר קומות"
+      ],
+      "expected_article_reference": true
+    },
+    "economy-tech": {
+      "url": "https://tlvnet.com/news/economy-tech",
+      "heading": "כלכלה והייטק",
+      "lead": [
+        "/news/tlv-center-tech-entry-jobs-snapshot-20261118",
+        "אלפי משרות הייטק באזור תל אביב והמרכז, רק כ־3% למתחילים"
+      ],
+      "expected_article_reference": true
+    },
+    "community": {
+      "url": "https://tlvnet.com/news/community",
+      "heading": "קהילה ושכונות",
+      "lead": [
+        "/news/arik-einstein-neighborhood-hanukkah-20261117",
+        "מדליקים יחד בדב הוז: חגיגת חנוכה ברחבה של אריק איינשטיין"
+      ],
+      "expected_article_reference": true
+    },
+    "consumer": {
+      "url": "https://tlvnet.com/news/consumer",
+      "heading": "צרכנות וקונים חכם",
+      "lead": [
+        "/news/good-pharm-charity-cream-terms-20261119",
+        "קרם ב־10 שקלים ותרומה לאגודה: מה כוללת יוזמת גוד פארם"
+      ],
+      "expected_article_reference": true
+    },
+    "sports": {
+      "url": "https://tlvnet.com/news/sports",
+      "heading": "ספורט בתל אביב",
+      "lead": [
+        "/news/hapoel-paris-pace-enis-return-20261119",
+        "מבחן הקצב של הפועל בפריז: איטודיס דורש תרומה מכולם"
+      ],
+      "expected_article_reference": true
+    },
+    "culture-news": {
+      "url": "https://tlvnet.com/news/culture",
+      "heading": "תרבות, מסך ובמה",
+      "lead": [
+        "/news/solidarity-film-festival-20261210-20261119",
+        "עשרה ימים של קולנוע וזכויות אדם: סולידריות חוזר לסינמטק"
+      ],
+      "expected_article_reference": true
+    }
+  },
+  "queues": [
+    {
+      "topic": "news",
+      "counts": {
+        "blocked": 12,
+        "candidate_not_read": 8,
+        "primary_pending": 1,
+        "research_pending": 1,
+        "resolved_updated_existing_verified": 1
+      },
+      "release": {
+        "state": "release_or_verification_pending",
+        "pendingCount": 1,
+        "oldestObservedAt": "2026-11-09T22:46:00Z",
+        "articleIds": [
+          "arlozorov-salomon-infrastructure-works-nov2026"
+        ],
+        "requiresRecoveryCheck": true,
+        "publicationApproved": false,
+        "ownershipProof": false,
+        "notice": "A completed run does not close these items. Check the original owner checkpoint, actual publication and current lease; this projection grants no approval or lock."
+      }
+    },
+    {
+      "topic": "community",
+      "counts": {
+        "blocked": 5,
+        "candidate_not_read": 5,
+        "outside_scope_handoff": 1,
+        "primary_verification_pending": 1
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": [],
+        "requiresRecoveryCheck": false,
+        "publicationApproved": false,
+        "ownershipProof": false,
+        "notice": "A completed run does not close these items. Check the original owner checkpoint, actual publication and current lease; this projection grants no approval or lock."
+      }
+    },
+    {
+      "topic": "economy-tech",
+      "counts": {
+        "blocked": 3,
+        "candidate_not_read": 3,
+        "handoff": 1
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": [],
+        "requiresRecoveryCheck": false,
+        "publicationApproved": false,
+        "ownershipProof": false,
+        "notice": "A completed run does not close these items. Check the original owner checkpoint, actual publication and current lease; this projection grants no approval or lock."
+      }
+    },
+    {
+      "topic": "real-estate",
+      "counts": {
+        "blocked": 3,
+        "candidate_not_read": 1,
+        "outside_scope_handoff": 1,
+        "research_pending": 2
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": [],
+        "requiresRecoveryCheck": false,
+        "publicationApproved": false,
+        "ownershipProof": false,
+        "notice": "A completed run does not close these items. Check the original owner checkpoint, actual publication and current lease; this projection grants no approval or lock."
+      }
+    },
+    {
+      "topic": "consumer",
+      "counts": {
+        "candidate_not_read": 1,
+        "primary_date_and_scope_pending": 1,
+        "primary_terms_pending": 2,
+        "primary_verification_pending": 2
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": [],
+        "requiresRecoveryCheck": false,
+        "publicationApproved": false,
+        "ownershipProof": false,
+        "notice": "A completed run does not close these items. Check the original owner checkpoint, actual publication and current lease; this projection grants no approval or lock."
+      }
+    },
+    {
+      "topic": "sports",
+      "counts": {
+        "researched_waiting_material_progress": 1
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": [],
+        "requiresRecoveryCheck": false,
+        "publicationApproved": false,
+        "ownershipProof": false,
+        "notice": "A completed run does not close these items. Check the original owner checkpoint, actual publication and current lease; this projection grants no approval or lock."
+      }
+    },
+    {
+      "topic": "culture-news",
+      "counts": {
+        "candidate_not_read": 9,
+        "research_pending": 3
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": [],
+        "requiresRecoveryCheck": false,
+        "publicationApproved": false,
+        "ownershipProof": false,
+        "notice": "A completed run does not close these items. Check the original owner checkpoint, actual publication and current lease; this projection grants no approval or lock."
+      }
+    }
+  ],
+  "owner_runs": [
+    {
+      "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "id": "2121bc7c-3c80-8326-a9f7-a4ae0173b2d1",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-19T12:00:00Z",
+      "started_at": "2026-11-19T12:04:17.185141Z",
+      "completed_at": "2026-11-19T12:21:35.860838Z",
+      "matched_result": true
+    },
+    {
+      "owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "id": "52a229d3-175c-8328-a1cb-32792489b027",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-19T11:00:00Z",
+      "started_at": "2026-11-19T11:02:13.667778Z",
+      "completed_at": "2026-11-19T11:09:38.709360Z",
+      "matched_result": true
+    },
+    {
+      "owner_task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "id": "f45dbfcf-ed34-832f-b758-7641f992a898",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-18T10:00:00Z",
+      "started_at": "2026-11-18T10:17:14.345378Z",
+      "completed_at": "2026-11-18T10:28:05.217651Z",
+      "matched_result": true
+    },
+    {
+      "owner_task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "id": "544b4fa2-1500-8325-b7b7-6bd7d2b13f38",
+      "recorded_status": "completed",
+      "scheduled_for": "2026-11-18T14:00:00Z",
+      "started_at": "2026-11-18T14:48:34.830936Z",
+      "completed_at": "2026-11-18T15:11:03.450447Z",
+      "matched_result": true
+    }
+  ],
+  "publication": {
+    "sample": [
+      {
+        "bodyLength": 1569,
+        "credit": "להמחשה",
+        "id": "good-pharm-charity-cream-terms-20261119",
+        "media": [
+          {
+            "loaded": true,
+            "width": 1536
+          }
+        ],
+        "title": "קרם ב־10 שקלים ותרומה לאגודה: מה כוללת יוזמת גוד פארם",
+        "url": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119"
+      },
+      {
+        "bodyLength": 1264,
+        "credit": "אילוסטרציה · בניין העירייה וכיכר רבין, ארכיון; להמחשה · כיכר רבין, מבט מבניין העירייה · ארכיון 2015-01-26 · צילום: Israel Preker Pikiwiki Israel · CC ",
+        "id": "arlozorov-salomon-infrastructure-works-nov2026",
+        "media": [
+          {
+            "loaded": true,
+            "width": 1743
+          }
+        ],
+        "title": "עבודות חשמל ליליות בארלוזורוב; חידוש מים וביוב בסלומון",
+        "url": "https://tlvnet.com/news/arlozorov-salomon-infrastructure-works-nov2026"
+      },
+      {
+        "bodyLength": 1840,
+        "credit": "אילוסטרציה · בניין העירייה וכיכר רבין ממגדל גן העיר · ארכיון 2020-08-12 · צילום: Anagoria · CC BY 3.0 מקור · רישיון",
+        "id": "country-lamed-planning-framework-explained-20261118",
+        "media": [
+          {
+            "loaded": true,
+            "width": 1800
+          }
+        ],
+        "title": "קאנטרי ל׳: מה עומד מאחורי מסגרת הבנייה של עד עשר קומות",
+        "url": "https://tlvnet.com/news/country-lamed-planning-framework-explained-20261118"
+      }
+    ],
+    "investigations": {
+      "route": "https://tlvnet.com/news/bli-heshbon",
+      "article": "https://tlvnet.com/news/la-guardia-bicycle-network-20261119",
+      "full_body": true,
+      "image_width": 1600,
+      "credit_visible": true,
+      "section_link": true,
+      "home_link": true
+    },
+    "neighborhood": {
+      "feed": "https://tlvnet.com/city-hub/updates.json",
+      "area": "https://tlvnet.com/city-hub/areas/northwest-coast/",
+      "article_id": "country-lamed-planning-framework-explained-20261118",
+      "record_found": true,
+      "exact_article_link": true
+    },
+    "consumer": "Live in home and section; original completion journal/visual QA pending",
+    "arlozorov": "Older live article and section link, absent from current home; journal needs reconciliation"
+  },
+  "remaining": {
+    "news": {
+      "pending_ready": 5,
+      "owner_picked_up": true,
+      "catalog_matches": 0,
+      "home_matches": 0,
+      "section_matches": 0,
+      "checkpoint": "ops/incident-response/inbox/2026-11-19-news-noon-prepared-1795090419252.json",
+      "ids": [
+        "yehuda-maccabi-tree-collapse-20261119",
+        "einstein-lane-reduction-nov23-20261119",
+        "har-zion-salomon-new-junction-20261119",
+        "reifman-road-resurfacing-nov29-20261119",
+        "purple-line-licensing-milestone-20261119"
+      ],
+      "former_lease": {
+        "owner": "work:tlvnet-home-presentation",
+        "acquired_at": "2026-11-19T12:18:05.518Z",
+        "until": "2026-11-19T12:43:05.518Z",
+        "active_at_current_intake": false
+      }
+    },
+    "community": {
+      "pending_ready": 1,
+      "pending_verification": 7,
+      "owner_picked_up": true,
+      "updated_headline_live": false,
+      "public_article": "https://tlvnet.com/news/tlv-neighborhood-garage-sale-20261106",
+      "checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json"
+    },
+    "economy": "19 Nov due slot still missing from observed run history. Prior owner's latest public lead remains 18 Nov.",
+    "historical": "118 items remain for root triage in 2 groups; no historical log replay this cycle."
+  },
+  "actions": {
+    "reviewed": 27,
+    "through": "2026-11-19T13:31:19Z",
+    "cancelled": [
+      {
+        "id": 44533904471,
+        "name": "Publish priceboard",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "created_at": "2026-11-19T13:29:11Z",
+        "head_sha": "ea1662b7fb0423f51d851111c8b296c9c0ca5711",
+        "html_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44533904471"
+      },
+      {
+        "id": 44533963133,
+        "name": "Publish priceboard",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "created_at": "2026-11-19T13:29:33Z",
+        "head_sha": "ea1662b7fb0423f51d851111c8b296c9c0ca5711",
+        "html_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44533963133"
+      }
+    ],
+    "later_success": 44534131963,
+    "full_logs_read": 0
+  },
+  "inbox_entries": [
+    "ops/incident-response/inbox/2026-11-19-news-noon-prepared-1795090419252.json",
+    "ops/incident-response/inbox/20261119T132513Z-network-footer-logos-restored.json",
+    "ops/incident-response/inbox/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b-economy-due-run-evidence.json"
+  ],
+  "social": {
+    "new_rows": [
+      {
+        "slot": "2026-11-19T13",
+        "status": "published",
+        "finished_at": "2026-11-19T13:00:17.905Z"
+      }
+    ],
+    "public_permalink_verified": false,
+    "attempts_started": 0
+  },
+  "worker": {
+    "sample_count": 8,
+    "paths_404": {
+      "/favicon.ico": 6,
+      "/meta.json": 2
+    },
+    "scope": "Bounded provider sample; no availability or error-rate extrapolation."
+  },
+  "gates": {
+    "automated_full_offsite_backup": "not_verified",
+    "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+    "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+    "scheduled_publication_reconciliation": "partial"
+  },
+  "qualification_started_at": null,
+  "cost": null,
+  "api_usage_measured": false
+}
