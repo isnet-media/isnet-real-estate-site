@@ -56,6 +56,83 @@ const url=target(a.href);if(url)a.href=url},true);
 })();""".replace('SETTINGS', settings) + '</script>'
 
 
+ADSENSE_CLIENT = 'ca-pub-3043177344534285'
+ADSENSE_LOADER = (
+    '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='
+    + ADSENSE_CLIENT + '" crossorigin="anonymous" data-isnet-adsense></script>'
+)
+AD_PLACEMENTS = {'events-landing', 'events-article', 'astrology-landing', 'astrology-forecast', 'astrology-article'}
+AD_CONFIG = 'isnet_adsense_slots.json'
+NO_AD_SECTIONS = {'admin', 'assets', 'data', 'ops', 'scripts', 'tests', 'shared', 'preview', 'staging', 'drafts', 'embed', 'widget'}
+AD_CSS = """
+<style data-isnet-ad-style>
+.isnet-ad-space{--isnet-ad-rule:#cfdce8;--isnet-ad-ink:#465a6b;box-sizing:border-box;width:100%;min-width:0;margin:clamp(18px,4vw,32px) auto;display:grid;justify-items:center;gap:5px;padding:10px 0 0;border-top:1px solid var(--isnet-ad-rule);color:var(--isnet-ad-ink)}
+.isnet-ad-space[data-placement^="astrology-"]{--isnet-ad-rule:#b6904a63;--isnet-ad-ink:#e7c986}
+.isnet-ad-space small{font:500 .68rem/1.3 system-ui,sans-serif}
+.isnet-ad-space ins{width:300px;height:100px;max-width:100%}
+@media(min-width:380px){.isnet-ad-space ins{width:320px}}
+@media(min-width:850px){.isnet-ad-space ins{width:728px;height:90px}}
+.isnet-ad-space:not(:has(ins[data-ad-status])){visibility:hidden}
+.isnet-ad-space:has(ins[data-ad-status="unfilled"]){display:none}
+</style>""".strip()
+AD_SLOT = re.compile(r'<aside\b[^>]*\bdata-placement="(astrology-(?:landing|forecast))"[^>]*>\s*</aside>', re.I)
+
+
+def ad_units(root):
+    path = root / 'scripts' / AD_CONFIG
+    if not path.exists():
+        return {}
+    config = json.loads(path.read_text())
+    if not isinstance(config, dict) or any(
+        name not in AD_PLACEMENTS or not isinstance(slot, str) or not re.fullmatch(r'[0-9]+', slot)
+        for name, slot in config.items()
+    ):
+        raise ValueError('ISNET AdSense configuration needs known placements and verified numeric display ad slots')
+    return config
+
+
+def ad_placement(path):
+    parts = path.parts
+    if len(parts) < 2 or path.suffix.lower() != '.html' or NO_AD_SECTIONS.intersection(parts[1:]):
+        return None
+    if parts[0] == 'astrology':
+        if len(parts) == 2 and path.name != 'index.html':
+            return None  # Reusable markup, not an independent article.
+        return 'astrology-landing' if len(parts) == 2 else 'astrology-article'
+    if parts[0] == 'events-preview' and len(parts) >= 3:
+        return 'events-landing' if len(parts) == 3 and path.name == 'index.html' else 'events-article'
+    return None
+
+
+def render_adsense(html, placement, units):
+    head = re.search(r'</head\s*>', html, re.I)
+    main_ends = list(re.finditer(r'</main\s*>', html, re.I))
+    if not head or not main_ends or re.search(r'<meta\b[^>]*(?:noindex|http-equiv=["\']?refresh)', html, re.I):
+        return html
+    if re.search(r'<script\b[^>]*\bdata-isnet-adsense', html, re.I):
+        return html
+    if 'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js' in html:
+        return html  # Preserve prior monetization and avoid double loading.
+    anchor = AD_SLOT.search(html)
+    if anchor and placement.startswith('astrology-'):
+        placement = anchor.group(1)
+        start, end = anchor.span()
+    else:
+        start = end = main_ends[-1].start()
+    slot = units.get(placement)
+    if slot:
+        banner = (
+            f'<aside class="isnet-ad-space" data-placement="{placement}" aria-label="פרסומות">'
+            '<small>פרסומות</small>'
+            f'<ins class="adsbygoogle" style="display:inline-block" data-ad-client="{ADSENSE_CLIENT}" data-ad-slot="{slot}"></ins>'
+            '<script>(window.adsbygoogle=window.adsbygoogle||[]).push({});</script></aside>'
+        )
+    else:
+        banner = f'<aside hidden data-placement="{placement}" aria-hidden="true"></aside>'
+    html = html[:start] + banner + html[end:]
+    return html[:head.start()] + ADSENSE_LOADER + (AD_CSS if slot else '') + html[head.start():]
+
+
 def stage(root, output, *, cities=None, source_commit=None, preserve_news_release=False):
     root, output = root.resolve(), output.resolve()
     if output == root or root in output.parents:
@@ -86,11 +163,21 @@ def stage(root, output, *, cities=None, source_commit=None, preserve_news_releas
     check_capacity(sum(p.stat().st_size for p in payload_files) + len(script.encode())*sum(p.suffix == '.html' and p.relative_to(root).parts[0] in {'SUPER.'+c for c in cities} for p in payload_files) + 4096)
     output.mkdir(parents=True)
     injected = 0
+    units = {} if preserve_news_release else ad_units(root)
     for path in payload_files:
         dest = output / path.relative_to(root)
         dest.parent.mkdir(parents=True, exist_ok=True)
-        city = path.relative_to(root).parts[0]
-        if path.suffix == '.html' and city in {'SUPER.'+c for c in cities} and 'assets' not in path.relative_to(root).parts:
+        relative = path.relative_to(root)
+        city = relative.parts[0]
+        placement = None if preserve_news_release else ad_placement(relative)
+        if placement:
+            html = path.read_text(encoding='utf-8')
+            rendered = render_adsense(html, placement, units)
+            if rendered == html:
+                shutil.copy2(path, dest)
+            else:
+                dest.write_text(rendered, encoding='utf-8')
+        elif path.suffix == '.html' and city in {'SUPER.'+c for c in cities} and 'assets' not in path.relative_to(root).parts:
             html = path.read_text()
             if not re.search(r'<head\b[^>]*>', html, re.I):
                 raise ValueError('Missing HTML head: ' + str(path))
