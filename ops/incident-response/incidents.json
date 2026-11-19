@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T13:52:46.205Z",
+  "updated_at": "2026-11-19T15:04:07.951Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -769,6 +769,12 @@
         "artifact_id": 13503702860,
         "source_date": "2026-11-06",
         "scope": "Historical only; no current source scan or repair."
+      },
+      "latest_observed_occurrence": {
+        "id": 44545279458,
+        "incident_id": "ashdod-cinema-four-missing-trailers",
+        "status": "failed_step_matches_existing_root; exact current missing count not inferred",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44545279458"
       }
     },
     {
@@ -6873,11 +6879,37 @@
     },
     {
       "id": "tlvnet-prepare-public-restaurant-rail-total-after-trim",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-19T15:04:07.951Z",
+      "root_cause": "The rail was trimmed after its total was calculated. The publishing source now recalculates after trimming.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json",
+      "next_action": "Keep existing home-layout regression; no further deploy.",
+      "source_commit": "4ecef5073e3d4b4a014c087828623cdeaa34e2cd",
+      "deployment": {
+        "id": "appgdep_6aff0d568cf48191a37e7e8f8769e997",
+        "status": "succeeded",
+        "updated_at": "2026-11-19T14:53:26.865923+00:00"
+      },
+      "verification": {
+        "status": "fixed_verified",
+        "deployed_with_owner_article": true,
+        "source_delta": "Recompute .rail-total after trimming cards in scripts/polish-public.py",
+        "regression": "python tests/home-layout.py passed independently against journal commit descending from exact deployed source; build and 177 photo checks recorded by owner",
+        "live": {
+          "count": 7,
+          "total": "07",
+          "first_href": "/guide/restaurants?topic=hummus"
+        },
+        "owner_evidence": "ops/incident-response/inbox/2026-11-19-real-estate-home-rail-count-result.json"
+      }
+    },
+    {
+      "id": "tlvnet-real-estate-neighborhood-tag-absent-bnei-efraim-217",
       "status": "open",
-      "updated_at": "2026-11-19T13:52:46.205Z",
-      "root_cause": "Full public regeneration trips home-layout.py:21 on restaurant rail total. Candidate cause: later presentation pass truncates cards without recalculating the count.",
-      "evidence": "ops/incident-response/inbox/571e35f6-ba50-832e-b036-40030d40b061-restaurant-rail-build.json",
-      "next_action": "Reproduce exact count before and after the polish pass, then synchronize the count at the trimming step and run full regeneration without changing the requested first hummus card."
+      "updated_at": "2026-11-19T15:04:07.951Z",
+      "root_cause": "Published real-estate article has an empty explicit neighborhoods list; corresponding feed entry absent. Exact expected area remains to be verified by owner.",
+      "evidence": "ops/incident-response/inbox/65b92745-d7d0-832e-a574-d87e57682c18-bnei-efraim-neighborhood-readback.json",
+      "next_action": "Verify and set exact area slug under original desk ownership."
     }
   ],
   "last_review_runKey": "ops-2026-11-19-a892b30a-96b8-832e-8bb9-b1f67c8f8b3b",
