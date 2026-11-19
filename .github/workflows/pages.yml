@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - "index.html"
+      - "ads.txt"
+      - "scripts/apply_adsense.cjs"
+      - "scripts/test_adsense.cjs"
       - "assets/**"
       - "data/**"
       - "projects/**"
@@ -340,6 +343,11 @@ jobs:
           python scripts/test_prepare_pages_public.py
           python scripts/verify_super_delivery.py
           python scripts/prepare_pages_public.py --output "$RUNNER_TEMP/isnet-pages-public"
+
+      - name: Apply and verify shared AdSense after all page generators
+        run: |
+          node scripts/test_adsense.cjs
+          node scripts/apply_adsense.cjs "$RUNNER_TEMP/isnet-pages-public"
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
