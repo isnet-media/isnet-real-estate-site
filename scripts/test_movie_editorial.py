@@ -4,7 +4,16 @@ from pathlib import Path
 from urllib.parse import urlparse
 from xml.etree import ElementTree as ET
 from bs4 import BeautifulSoup
-from build_movie_editorial import ROOT, CITIES, BASE, merged, editorial_html
+from build_movie_editorial import ROOT, CITIES, BASE, merged, editorial_html, upcoming_times, schedule_html
+samples=['16:59','17:00','17:01','21:00']
+assert upcoming_times('2026-11-19',samples,'2026-11-19 17:00')==['17:01','21:00']
+assert samples==['16:59','17:00','17:01','21:00']
+assert upcoming_times('2026-11-18',['23:59'],'2026-11-19 00:01')==[]
+assert upcoming_times('2026-11-20',['00:02'],'2026-11-20 00:01')==['00:02']
+assert upcoming_times('2026-11-21',['00:00'],'2026-11-20 00:01')==['00:00']
+fixture={'venues':[{'name':'Test cinema','schedule':{'2026-11-19':samples},'sessions':[]}]}
+visible=schedule_html(fixture,'2026-11-19','2026-11-19 17:00')
+assert '16:59' not in visible and '>17:00<' not in visible and '17:01' in visible
 registry=json.loads((ROOT/'events-preview/shared/data/movie-editorial.json').read_text())
 index=json.loads((ROOT/'events-preview/shared/data/movie-page-index.json').read_text())
 urls=set();total=0
@@ -62,7 +71,8 @@ for city in CITIES:
         from datetime import datetime
         from zoneinfo import ZoneInfo
         day=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat()
-        expected_tickets={v['article_url'] for v in union['venues'] if str(v.get('article_url','')).startswith('https://') and any(d>=day and t for d,t in v.get('schedule',{}).items())}
+        as_of=soup.body['data-screenings-as-of']
+        expected_tickets={v['article_url'] for v in union['venues'] if str(v.get('article_url','')).startswith('https://') and any(upcoming_times(d,t,as_of) for d,t in v.get('schedule',{}).items())}
         assert {a['href'] for a in soup.select('#ticketLinks a')}==expected_tickets,url
         for venue in union['venues']:
             for day,times in venue.get('schedule',{}).items():

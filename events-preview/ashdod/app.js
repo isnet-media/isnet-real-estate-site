@@ -1,3 +1,7 @@
+const cinemaMinuteFormatter=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
+let cinemaMinuteValue="",cinemaMinuteCheckedAt=0;
+function cinemaMinute(){const now=Date.now();if(!cinemaMinuteValue||now-cinemaMinuteCheckedAt>=1000){cinemaMinuteValue=cinemaMinuteFormatter.format(new Date(now)).slice(0,16);cinemaMinuteCheckedAt=now;}return cinemaMinuteValue;}
+function cinemaFutureTimes(day,times,now=cinemaMinute()){return (Array.isArray(times)?times:[]).filter(time=>typeof time==="string"&&/^\d{2}:\d{2}$/.test(time)&&day+" "+time>now);}
 const cinemaDayFormatter=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"});
 const cinemaShortDateFormatter=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
 let cinemaRenderSignature="";function cinemaToday(){return cinemaDayFormatter.format(new Date())}
@@ -417,8 +421,8 @@ function featureCard(e){
 }
 
 function cinemaScheduleInfo(venue){
-  const day=iso(today());
-  const schedule=venue.schedule||{};
+  const day=cinemaToday();
+  const schedule=Object.fromEntries(Object.entries(venue.schedule||{}).map(([d,t])=>[d,cinemaFutureTimes(d,t)]).filter(([,t])=>t.length));
   if(Array.isArray(schedule[day])&&schedule[day].length){
     return {date:day,label:"היום",times:schedule[day]};
   }
@@ -470,16 +474,16 @@ function renderCinema(){
   const grid=$("cinemaGrid"),section=$("cinemaSection"); if(!grid||!section)return;
   section.hidden=!state.cinemaOpen;
   if(!state.cinemaOpen){grid.innerHTML="";cinemaRenderSignature="";return}
-  const signature=[state.cinemaUpdatedAt,state.cinema.length,state.cinemaVenue,state.cinemaAudience,state.cinemaQuery,state.cinemaLimit||24,state.cinemaEditorialReady,cinemaToday()].join("|");
+  const signature=[state.cinemaUpdatedAt,state.cinema.length,state.cinemaVenue,state.cinemaAudience,state.cinemaQuery,state.cinemaLimit||24,state.cinemaEditorialReady,cinemaMinute()].join("|");
   if(signature===cinemaRenderSignature)return;cinemaRenderSignature=signature;
   const arr=state.cinema
-    .filter(m=>m.venues.some(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=iso(today())&&Array.isArray(times)&&times.length)))
+    .filter(m=>m.venues.some(v=>Object.entries(v.schedule||{}).some(([day,times])=>cinemaFutureTimes(day,times).length>0)))
     .filter(m=>state.cinemaAudience==="all"||m.is_family===true)
     .filter(m=>state.cinemaVenue==="all"||m.venues.some(v=>v.id===state.cinemaVenue))
     .sort((a,b)=>{
       const day=iso(today());
-      const at=a.venues.some(v=>Array.isArray(v.schedule?.[day])&&v.schedule[day].length)?0:1;
-      const bt=b.venues.some(v=>Array.isArray(v.schedule?.[day])&&v.schedule[day].length)?0:1;
+      const at=a.venues.some(v=>cinemaFutureTimes(day,v.schedule?.[day]).length)?0:1;
+      const bt=b.venues.some(v=>cinemaFutureTimes(day,v.schedule?.[day]).length)?0:1;
       return at-bt||a.title.localeCompare(b.title,"he");
     });
   grid.innerHTML=arr.length?arr.slice(0,state.cinemaLimit||24).map(cinemaCard).join("")+(arr.length>(state.cinemaLimit||24)?'<button id="cinemaLoadMore" type="button" class="cinemaBackButton" style="grid-column:1/-1;justify-self:center">עוד סרטים ↓</button>':''):'<div class="cinemaEmpty"><h3>סרטי הקולנוע בעיר מתעדכנים</h3><p>עדיין אין במאגר סרטים מאומתים עם שעות הקרנה לבית הקולנוע שבחרתם. לא נציג שעות או טריילרים לא בדוקים.</p><p>ניתן בינתיים לבדוק את ההקרנות באתרים הרשמיים של בתי הקולנוע.</p><div class="cinemaEmpty__links"><a href="https://www.cinema-city.co.il/" target="_blank" rel="noopener noreferrer">סינמה סיטי ←</a><a href="https://www.planetcinema.co.il/rishon" target="_blank" rel="noopener noreferrer">פלאנט ראשון לציון ←</a></div></div>';

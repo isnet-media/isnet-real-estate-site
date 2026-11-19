@@ -36,11 +36,15 @@ def merged(movies):
    for s in v.get('sessions',[]):
     if s not in target['sessions']:target['sessions'].append(s)
  out['venues']=list(venues.values());return out
-def schedule_html(movie,day):
+def upcoming_times(day,times,now=None):
+ stamp=now or datetime.now(ZoneInfo('Asia/Jerusalem')).strftime('%Y-%m-%d %H:%M')
+ return [t for t in (times if isinstance(times,list) else []) if isinstance(t,str) and re.fullmatch(r'\d{2}:\d{2}',t) and day+' '+t>stamp]
+def schedule_html(movie,day,now=None):
  out=[]
  for venue in movie['venues']:
   rows=[]
   for date,times in sorted(venue.get('schedule',{}).items()):
+   times=upcoming_times(date,times,now)
    if date<day or not times:continue
    links=[]
    for time in sorted(set(times)):
@@ -53,7 +57,7 @@ def schedule_html(movie,day):
 def build():
  from search_discovery import page_schema,lastmod
  modified={}
- registry=json.loads((ROOT/'events-preview/shared/data/movie-editorial.json').read_text());aliases=registry['aliases'];records=registry['movies'];today=datetime.now(ZoneInfo('Asia/Jerusalem')).date().isoformat();urls=[];index={};report={'cities':{},'editorial_records':len(records),'audience_scores':sum(bool(r.get('audience_rating')) for r in records.values()),'critics_summaries':sum(bool(r.get('critics')) for r in records.values()),'description_words':{'min':min(len(r.get('original_text','').split()) for r in records.values()),'max':max(len(r.get('original_text','').split()) for r in records.values())}}
+ registry=json.loads((ROOT/'events-preview/shared/data/movie-editorial.json').read_text());aliases=registry['aliases'];records=registry['movies'];stamp=datetime.now(ZoneInfo('Asia/Jerusalem')).strftime('%Y-%m-%d %H:%M');today=stamp[:10];urls=[];index={};report={'cities':{},'editorial_records':len(records),'audience_scores':sum(bool(r.get('audience_rating')) for r in records.values()),'critics_summaries':sum(bool(r.get('critics')) for r in records.values()),'description_words':{'min':min(len(r.get('original_text','').split()) for r in records.values()),'max':max(len(r.get('original_text','').split()) for r in records.values())}}
  for city,label in CITIES.items():
   folder=ROOT/'events-preview'/city;data=json.loads((folder/'data/cinema.json').read_text());groups={};index[city]={}
   for m in data['movies']:
@@ -73,16 +77,16 @@ def build():
    for old in soup.select('link[rel=canonical]'):old.decompose()
    for anchor in soup.select('a[href^="#"]'):anchor['href']=url+anchor['href']
    soup.head.append(soup.new_tag('link',rel='canonical',href=url));soup.head.append(soup.new_tag('meta',attrs={'name':'robots','content':'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}))
-   soup.body['data-movie-id']=movie['id'];soup.body['data-static-movie']='true';soup.find(id='page').attrs.pop('hidden',None);soup.find(id='loadingState')['hidden']=''
+   soup.body['data-screenings-as-of']=stamp;soup.body['data-movie-id']=movie['id'];soup.body['data-static-movie']='true';soup.find(id='page').attrs.pop('hidden',None);soup.find(id='loadingState')['hidden']=''
    for ident,value in [('movieTitle',movie['title']),('fullSynopsis',text)]:soup.find(id=ident).string=value
-   soup.find(id='cinemaSchedules').clear();soup.find(id='cinemaSchedules').append(BeautifulSoup(schedule_html(movie,today),'html.parser'))
+   soup.find(id='cinemaSchedules').clear();soup.find(id='cinemaSchedules').append(BeautifulSoup(schedule_html(movie,today,stamp),'html.parser'))
    soup.find(id='movieEditorial').replace_with(BeautifulSoup(editorial_html(record),'html.parser'))
    poster=safe(urljoin(BASE+city+'/',movie.get('poster_url') or '')) if movie.get('poster_url') else ''
    if poster:
     image=soup.new_tag('img',src=poster,alt='כרזת הסרט '+movie['title']);image['class']=['officialPoster'];soup.find(id='heroMedia').append(image)
    tickets=soup.find(id='ticketLinks');tickets.clear();available=[]
    for v in movie['venues']:
-    if safe(v.get('article_url')) and any(d>=today and times for d,times in v.get('schedule',{}).items()):
+    if safe(v.get('article_url')) and any(upcoming_times(d,times,stamp) for d,times in v.get('schedule',{}).items()):
      label_venue='ב'+v['name'].replace('HOT Cinema','הוט סינמה');available.append(v)
      tickets.append(BeautifulSoup('<a href="'+esc(v['article_url'])+'" target="_blank" rel="noopener noreferrer">'+esc(label_venue)+' <span aria-hidden="true">↗</span></a>','html.parser'))
    if not available:soup.find(id='ticketAvailability').attrs.pop('hidden',None)

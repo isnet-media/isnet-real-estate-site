@@ -1,4 +1,21 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+for(const path of ['events-preview/ashdod/movie.js','events-preview/ashdod/app.js','events-preview/ashdod/pilot/app.js']){
+ const source=fs.readFileSync(path,'utf8');
+ const stop=source.indexOf('\n',source.indexOf('function cinemaFutureTimes'));
+ assert(stop>0,'Minute-aware cinema filter required: '+path);
+ let clock=Date.parse('2026-11-19T15:00:00Z');
+ class CinemaTestDate extends Date{constructor(...args){super(...(args.length?args:[clock]));}static now(){return clock;}}
+ const ctx=vm.createContext({Intl,Date:CinemaTestDate});vm.runInContext(source.slice(0,stop+1),ctx);
+ const times=['16:59','17:00','17:01','21:00'];
+ assert.equal(vm.runInContext('cinemaMinute()',ctx),'2026-11-19 17:00');
+ assert.deepEqual(Array.from(ctx.cinemaFutureTimes('2026-11-19',times)),['17:01','21:00']);
+ assert.deepEqual(times,['16:59','17:00','17:01','21:00']);
+ clock=Date.parse('2026-11-19T22:01:00Z');
+ assert.equal(vm.runInContext('cinemaMinute()',ctx),'2026-11-20 00:01');
+ assert.deepEqual(Array.from(ctx.cinemaFutureTimes('2026-11-19',['23:59'])),[]);
+ assert.deepEqual(Array.from(ctx.cinemaFutureTimes('2026-11-20',['00:00','00:02'])),['00:02']);
+ assert.deepEqual(Array.from(ctx.cinemaFutureTimes('2026-11-21',['00:00'])),['00:00']);
+}
 (async()=>{
 for(const city of ['ashdod','rishon-lezion','yavne']){
  const source=fs.readFileSync(`events-preview/${city}/pilot/app.js`,'utf8');

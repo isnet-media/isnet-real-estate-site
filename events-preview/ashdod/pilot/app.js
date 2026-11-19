@@ -1,3 +1,7 @@
+const cinemaMinuteFormatter=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
+let cinemaMinuteValue="",cinemaMinuteCheckedAt=0;
+function cinemaMinute(){const now=Date.now();if(!cinemaMinuteValue||now-cinemaMinuteCheckedAt>=1000){cinemaMinuteValue=cinemaMinuteFormatter.format(new Date(now)).slice(0,16);cinemaMinuteCheckedAt=now;}return cinemaMinuteValue;}
+function cinemaFutureTimes(day,times,now=cinemaMinute()){return (Array.isArray(times)?times:[]).filter(time=>typeof time==="string"&&/^\d{2}:\d{2}$/.test(time)&&day+" "+time>now);}
 // Ashdod GA4: public event metadata only; never transmit raw search text or URLs.
 (function () {
   if (!/\/events-preview\/ashdod(?:\/|$)/.test(location.pathname) || window.ashdodAnalytics) return;
@@ -460,11 +464,11 @@ const cinemaDayFormatter=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusal
 const cinemaShortDateFormatter=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
 let cinemaDayValue="",cinemaDayCheckedAt=0,cinemaRenderSignature="";
 function cinemaToday(){const now=Date.now();if(!cinemaDayValue||now-cinemaDayCheckedAt>=1000){cinemaDayValue=cinemaDayFormatter.format(new Date(now));cinemaDayCheckedAt=now;}return cinemaDayValue;}
-function cinemaVenueActive(venue){return Object.entries(venue.schedule||{}).some(([day,times])=>day>=cinemaToday()&&Array.isArray(times)&&times.length)}
+function cinemaVenueActive(venue){return Object.entries(venue.schedule||{}).some(([day,times])=>cinemaFutureTimes(day,times).length>0)}
 function cinemaMovieAvailable(movie){return movie.venues.some(cinemaVenueActive)||Boolean(movie.is_family&&movie.family_catalog_source_url)}
 function cinemaScheduleInfo(venue){
   const day=cinemaToday();
-  const schedule=venue.schedule||{};
+  const schedule=Object.fromEntries(Object.entries(venue.schedule||{}).map(([d,t])=>[d,cinemaFutureTimes(d,t)]).filter(([,t])=>t.length));
   if(Array.isArray(schedule[day])&&schedule[day].length){
     return {date:day,label:"היום",times:schedule[day]};
   }
@@ -533,7 +537,7 @@ function renderCinema(){
   if(state.cinemaLoading){grid.innerHTML="";return;}
   document.title=state.cinemaOpen?"סרטים באשדוד | מה עושים באשדוד?":"מה עושים באשדוד? | מבית אשדוד נט";
   if(!state.cinemaOpen){grid.innerHTML="";cinemaRenderSignature="";return}
-  const signature=[state.cinemaUpdatedAt,state.cinema.length,state.cinemaVenue,state.cinemaAudience,state.cinemaQuery,state.cinemaLimit||24,state.cinemaEditorialReady,cinemaToday()].join("|");
+  const signature=[state.cinemaUpdatedAt,state.cinema.length,state.cinemaVenue,state.cinemaAudience,state.cinemaQuery,state.cinemaLimit||24,state.cinemaEditorialReady,cinemaMinute()].join("|");
   if(signature===cinemaRenderSignature)return;cinemaRenderSignature=signature;
   const arr=state.cinema
     .filter(m=>cinemaMovieAvailable(m)&&m.venues.some(v=>state.cinemaVenue==="all"||v.id===state.cinemaVenue))
@@ -542,8 +546,8 @@ function renderCinema(){
     .filter(m=>state.cinemaVenue==="all"||m.venues.some(v=>v.id===state.cinemaVenue))
     .sort((a,b)=>{
       const day=cinemaToday();
-      const at=a.venues.some(v=>Array.isArray(v.schedule?.[day])&&v.schedule[day].length)?0:1;
-      const bt=b.venues.some(v=>Array.isArray(v.schedule?.[day])&&v.schedule[day].length)?0:1;
+      const at=a.venues.some(v=>cinemaFutureTimes(day,v.schedule?.[day]).length)?0:1;
+      const bt=b.venues.some(v=>cinemaFutureTimes(day,v.schedule?.[day]).length)?0:1;
       return at-bt||a.title.localeCompare(b.title,"he");
     });
   cinemaSpotlight(arr);
@@ -1495,4 +1499,3 @@ window.ISNET_LOAD_FULL_SEARCH=()=>{
 };
 window.ISNET_SEARCH_CATALOG=()=>({events:state.events,movies:state.cinema,taxonomy:window.publicTaxonomy||[]});
 init().catch(err=>{console.error(err);if($("homeLoading"))$("homeLoading").hidden=true;if(state.cinemaLoading&&document.body.classList.contains("cinemaMode")&&$("cinemaLoading")){$("cinemaLoading").innerHTML='<h2>לא הצלחנו לטעון את הסרטים</h2><p>נסו לרענן את העמוד.</p><a href="./">חזרה לכל האירועים ←</a>'}$("eventsGrid").innerHTML='<div class="emptyState"><h3>לא הצלחנו לטעון את האירועים</h3><p>נסו לרענן את העמוד.</p></div>'});
-
