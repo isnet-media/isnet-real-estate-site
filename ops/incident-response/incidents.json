@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T11:57:27Z",
+  "updated_at": "2026-11-19T12:23:30.044Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6322,7 +6322,13 @@
         "general_area_link_not_observed": true,
         "qualification": "Separate general area and canonical group. Earlier isolated regression applies to canonical slug and build order."
       },
-      "next": "Canonical feed and live area now match; retain previously documented regression proof."
+      "next": "Canonical feed and live area now match; retain previously documented regression proof.",
+      "latest_recheck": {
+        "observed_at": "2026-11-19T12:23:30.044Z",
+        "status": "prior_fixed_verified_retained",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+        "checks": "Actual updates feed and canonical northwest-coast area link"
+      }
     },
     {
       "id": "tlvnet-editorial-build-missing-target-artifact",
@@ -6550,7 +6556,13 @@
         ],
         "visual_review": "Browser DOM checked. Dedicated desktop and mobile screenshot QA not repeated."
       },
-      "previous_evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json"
+      "previous_evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json",
+      "latest_recheck": {
+        "observed_at": "2026-11-19T12:23:30.044Z",
+        "status": "prior_fixed_verified_retained",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+        "checks": "Full public body, loaded image, credit, Avi Or byline, section and homepage lead"
+      }
     },
     {
       "id": "culture-net-herzliya-public-404-20261119",
@@ -6590,9 +6602,29 @@
       "impact": "Herzliya only. Other targets reported separately by original owner.",
       "inbox": "ops/incident-response/inbox/20261119T094834Z-culture-net-herzliya-public-404.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
+    },
+    {
+      "id": "tlvnet-economy-20261119-due-run-evidence-missing",
+      "status": "open",
+      "category": "scheduling_evidence",
+      "fingerprint": "TLVNET/economy-tech/2026-11-19T10:00Z/scheduled-run-evidence-missing",
+      "root_cause": "Not established. Exact task metadata has no current due-slot run; no failed publication inferred.",
+      "impact": "Today's economy slot has no observable run/result; public latest new economy article is18Nov.",
+      "occurrences": [
+        {
+          "observed_at": "2026-11-19T12:23:30.044Z",
+          "expected_scheduled_for": "2026-11-19T10:00:00Z",
+          "last_observed_run_id": "f45dbfcf-ed34-832f-b758-7641f992a898",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
+        }
+      ],
+      "next_action": "Find actual runtime execution record for due slot. Preserve owner and research queue; no forced run or schedule change.",
+      "inbox": "ops/incident-response/inbox/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b-economy-due-run-evidence.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+      "configuration_changes": 0
     }
   ],
-  "last_review_runKey": "ops-2026-11-19-9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7",
+  "last_review_runKey": "ops-2026-11-19-a892b30a-96b8-832e-8bb9-b1f67c8f8b3b",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
