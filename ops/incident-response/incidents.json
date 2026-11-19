@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T15:04:07.951Z",
+  "updated_at": "2026-11-19T16:57:54.984Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4856,7 +4856,17 @@
       },
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json",
       "next_action": "Observe pending regular deployments. Do not retry unchanged transient failure or weaken artifact validation.",
-      "reported_runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19"
+      "reported_runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
+      "latest_observation": {
+        "runs": [
+          44560022386,
+          44561651779
+        ],
+        "later_ordinary_success": 44561835377,
+        "new_security_release_success": 44571272587,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/6fe3b20b-30d4-832e-ba6d-d891ed5bd241.json",
+        "at": "2026-11-19T16:57:54.984Z"
+      }
     },
     {
       "id": "tlvnet-local-coverage-completed-handoff-build-regression",
@@ -6910,6 +6920,48 @@
       "root_cause": "Published real-estate article has an empty explicit neighborhoods list; corresponding feed entry absent. Exact expected area remains to be verified by owner.",
       "evidence": "ops/incident-response/inbox/65b92745-d7d0-832e-a574-d87e57682c18-bnei-efraim-neighborhood-readback.json",
       "next_action": "Verify and set exact area slug under original desk ownership."
+    },
+    {
+      "id": "isnet-pages-internal-ops-published",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-19T16:57:54.984Z",
+      "root_cause": "Staging copied the top-level ops directory. Preservation mode also copied pre-existing public ops files.",
+      "verification": {
+        "before_internal_status": 200,
+        "after_internal_status": 404,
+        "old_document_present": false,
+        "homepage": 200,
+        "ashdod_cinema_sample": 200,
+        "astrology_root": 200
+      },
+      "repair": "Exclude ops from the two public staging paths and cover the exclusion in staging regression.",
+      "deployment": {
+        "source_commit": "ce2348e620fea8c681767cfc397aebccd7c5610d",
+        "run_id": 44571272587,
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44571272587",
+        "finished_at": "2026-11-19T16:56:15Z"
+      },
+      "evidence": "ops/incident-response/inbox/6fe3b20b-30d4-832e-ba6d-d891ed5bd241-isnet-operational-artifact-boundary.json"
+    },
+    {
+      "id": "isnet-public-source-operational-records",
+      "status": "awaiting_external_action",
+      "updated_at": "2026-11-19T16:57:54.984Z",
+      "root_cause": "Repository remains public; exclusion from hosted artifact does not remove source/history exposure.",
+      "evidence": "ops/incident-response/inbox/6fe3b20b-30d4-832e-ba6d-d891ed5bd241-isnet-operational-artifact-boundary.json",
+      "next_action": "Move any non-public operating material to an approved private store and assess already-public repository history; current evidence establishes metadata exposure, not credential compromise."
+    },
+    {
+      "id": "playwright155-ubuntu2604-browser-install",
+      "status": "open",
+      "updated_at": "2026-11-19T16:57:54.984Z",
+      "root_cause": "Playwright 1.55 chromium install rejects ubuntu26.04-x64",
+      "runs": [
+        44560679071,
+        44560679082
+      ],
+      "evidence": "ops/incident-response/inbox/6fe3b20b-30d4-832e-ba6d-d891ed5bd241-playwright155-ubuntu2604.json",
+      "next_action": "Move checks to a verified supported runner or adapt pinned browser dependency, keeping Chromium checks required."
     }
   ],
   "last_review_runKey": "ops-2026-11-19-a892b30a-96b8-832e-8bb9-b1f67c8f8b3b",
