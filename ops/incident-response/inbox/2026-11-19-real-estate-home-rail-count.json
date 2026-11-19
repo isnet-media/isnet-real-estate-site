@@ -1,0 +1,11 @@
+{
+  "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+  "runKey": "real-estate-20261119-1795099493978",
+  "recorded_at": "2026-11-19T14:48:52.023Z",
+  "status": "mitigated_pending_build_and_live",
+  "signature": "TLVNET/home-layout.py/restaurant-rail-total-after-polish-trim",
+  "evidence": "Build home-layout assertion: 6 restaurant cards but rail-total07. polish-public.py trims cards after render_hummus_home computes total.",
+  "change": "Recompute rail-total from remaining cards immediately after existing trim; no test/gate removal or baseline expansion.",
+  "validation": "Existing tests/home-layout.py regression test retained; one focused corrected build running.",
+  "next_action": "Verify corrected build and actual live home count with editorial release; no controller activation."
+}
