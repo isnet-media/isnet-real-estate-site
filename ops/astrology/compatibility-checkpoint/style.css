@@ -1,0 +1,139 @@
+:root{color-scheme:dark;--night:#10132a;--panel:#191e39;--line:#353953;--gold:#edcf93;--text:#f5f1e9;--muted:#d9d4e0}
+*{box-sizing:border-box}body{margin:0;background:var(--night);color:var(--text);font:1.06rem/1.75 Arial,sans-serif}a{color:var(--gold);text-underline-offset:.25em}header{border-bottom:1px solid var(--line);background:#0e1124}.bar,.hero-inner,.body,footer{width:min(1120px,calc(100% - 36px));margin:auto}.bar{display:flex;gap:1.6rem;align-items:center;justify-content:space-between;padding:.9rem 0}.brand{font-weight:bold;text-decoration:none}nav{display:flex;gap:1.1rem;flex-wrap:wrap}nav a{color:var(--text);font-size:.92rem}.hero{background:radial-gradient(ellipse at 12% 25%,#433663 0%,transparent 45%),radial-gradient(ellipse at 75% 85%,#202d58 0%,transparent 58%),#11142d;border-bottom:1px solid var(--line);position:relative}.hero-inner{padding:clamp(3rem,9vw,8rem) 0}.hero small,.feature small{color:var(--gold);font-weight:bold}.hero p{font-size:clamp(1.13rem,3vw,1.45rem);max-width:42rem;color:var(--muted);margin:0}.hero h1{font:700 clamp(2.35rem,7vw,5.1rem)/1.12 Georgia,serif;margin:.24em 0;color:#fff7e4}.body{padding:2rem 0 3rem}section+section,.feature+section,section+.feature{margin-top:2.5rem}h2{line-height:1.25;color:var(--gold);margin-top:0}.feature,article,.card,form{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.25rem}.feature{padding:clamp(1.3rem,4vw,2.5rem);background:linear-gradient(125deg,#242947,#1a1d35)}.feature h2{margin:.4em 0}.button,button{display:inline-block;background:var(--gold);color:#151426;border:0;border-radius:6px;padding:.6rem 1.1rem;font:inherit;font-weight:bold;text-decoration:none;cursor:pointer}.grid,.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}.grid{grid-template-columns:repeat(6,minmax(0,1fr))}.card{display:flex;flex-direction:column;text-decoration:none;color:var(--text)}.grid .card{align-items:center;padding:.9rem .2rem}.card:hover,.card:focus-visible{border-color:var(--gold)}.card span{font-family:Georgia,serif;font-size:2.5rem;line-height:1.2;color:var(--gold)}.card small,.facts{color:var(--muted)}article p:last-child{margin-bottom:0}form{display:flex;gap:1rem;align-items:end;flex-wrap:wrap;margin-bottom:1rem}label{display:grid;gap:.2rem}select{font:inherit;padding:.5rem;min-width:8rem;border:1px solid #777a9b;border-radius:5px;background:var(--night);color:var(--text)}footer{padding:1.4rem 0;border-top:1px solid var(--line);color:var(--muted)}.skip:not(:focus){position:absolute;clip-path:inset(50%)}:focus-visible{outline:2px solid var(--gold);outline-offset:4px}@media(max-width:680px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.bar{display:block}nav{margin-top:.4rem;gap:.25rem 1rem}}
+
+.reader-flow { display: grid; gap: 1.2rem; margin-block-start: 2rem; }
+.reader-next { border-block-start: 3px solid var(--gold); }
+.reader-next h2 { margin-block-end: .75rem; }
+.reader-next > .facts { margin-block-start: 0; }
+.edition { margin-block-end: 1rem; }
+
+.topic-nav, .topic-signs { display: flex; gap: .55rem; flex-wrap: wrap; }
+.topic-nav { margin-block-end: 1.5rem; }
+.topic-nav a, .topic-signs a { padding: .38rem .68rem; border: 1px solid var(--line); border-radius: 6px; }
+.topic { padding: .85rem 1rem; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.topic summary { cursor: pointer; color: var(--gold); font-weight: 700; }
+.topic .topic-signs { margin-block-start: .6rem; }
+#weekly .feature { margin: 0; }
+
+.zodiac-hero {
+  --glow: #663b54;
+  background: radial-gradient(ellipse at 26% 45%,var(--glow),transparent 61%),#101326;
+  border-block-end: 1px solid var(--line);
+}
+.zodiac-hero[data-element="אדמה"] { --glow: #364a43; }
+.zodiac-hero[data-element="אוויר"] { --glow: #42416d; }
+.zodiac-hero[data-element="מים"] { --glow: #20485f; }
+.zodiac-hero__inner {
+  width: min(1120px,calc(100% - 36px));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr .9fr;
+  gap: clamp(18px,5vw,70px);
+  align-items: center;
+  padding-block: clamp(20px,4vw,46px);
+}
+.zodiac-hero__back { font-size: .94rem; }
+.zodiac-hero h1 {
+  font: 700 clamp(2.85rem,7vw,6rem)/1.04 Georgia,serif;
+  margin: .14em 0;
+  color: #fff3dc;
+}
+.zodiac-hero p { margin: 0; max-width: 37ch; color: #eee3ef; font-size: clamp(1rem,2vw,1.24rem); }
+.zodiac-hero dl { display:flex; gap: 12px; flex-wrap:wrap; margin: 18px 0 0; }
+.zodiac-hero dl div { display:flex; gap:.45rem; border:1px solid #edcf9360; border-radius:6px; padding: 3px 10px; }
+.zodiac-hero dt { color:var(--gold); }
+.zodiac-hero dd { margin:0; }
+.zodiac-hero figure { margin:0; border:1px solid #edcf9370; border-radius: 14px; overflow:hidden; background:#101326; }
+.zodiac-hero img { display:block; width:100%; height:auto; aspect-ratio: 1.48; object-fit:cover; object-position:center 32%; }
+.sign-page .body { padding-block-start: 1rem; }
+.zodiac-jump { align-items:center; gap: 5px 9px; margin-block-end: 1.2rem; }
+.zodiac-jump strong { color:#fff3dc; margin-inline-end:.35rem; }
+.zodiac-jump a { border:1px solid var(--line); border-radius: 6px; padding: .3rem .75rem; }
+.zodiac-editions .edition { border-inline-start: 3px solid var(--gold); padding: clamp(16px,4vw,32px); }
+.zodiac-editions .edition p { max-width: 74ch; }
+.zodiac-editions .edition .facts { font-size:.92rem; }
+.zodiac-editions .edition:target, #life-topics:target { outline: 1px solid var(--gold); outline-offset: 4px; }
+.sign-page #life-topics { margin-block: 2rem; }
+@media (max-width: 650px) {
+  .zodiac-hero__inner { grid-template-columns: 1fr; gap: 14px; }
+  .zodiac-hero figure { grid-row: 1; }
+  .zodiac-hero img { aspect-ratio: 1.45; }
+  .zodiac-hero dl { margin-block-start: 10px; }
+}
+
+.zodiac-discover {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block-start: 2rem;
+  padding: clamp(16px, 4vw, 32px);
+  border: 1px solid #edcf9380;
+  border-radius: 14px;
+  background: linear-gradient(270deg, #151327 31%, #151327d9 65%, #1513278f), url('./zodiac-wheel.jpg') left 45% / cover;
+}
+.zodiac-discover h2 { margin-block-end: .35rem; }
+.zodiac-discover p { margin: 0; }
+
+.astro-landing { background: radial-gradient(ellipse at 10% 25%,#211d38,transparent 55%),#101326; }
+.landing-hero { border-block-end: 1px solid #d9ad6355; background: #101127; }
+.landing-hero__inner { position: relative; isolation: isolate; display: flex; align-items: center; width: min(1200px,100%); min-height: 375px; margin-inline: auto; }
+.landing-hero__inner > img { position: absolute; z-index: -2; inset-block: 0; inset-inline-end: 0; width: 70%; height: 100%; object-fit: cover; object-position: 36% 48%; }
+.landing-hero__inner::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(270deg,#101127 24%,#101127f2 37%,#10112712 70%,#10112780); }
+.landing-hero__copy { padding: 36px clamp(18px,5vw,66px); max-width: 60%; }
+.landing-hero__eyebrow { color: var(--gold); font-size: .9rem; font-weight: 700; margin: 0; }
+.landing-hero h1 { font: 700 clamp(2.8rem,6.4vw,5.8rem)/1.03 Georgia,serif; margin: .15em 0 .28em; color: #fff3da; }
+.landing-hero h1 em { color: var(--gold); font-style: normal; }
+.landing-hero__copy > p:not(.landing-hero__eyebrow) { color:#f2e6f0; margin: 0 0 1.25rem; }
+.landing-hero nav { align-items: center; gap: 10px; }
+.landing-secondary { display:inline-block; padding:.53rem .8rem; border: 1px solid #edcf9380; border-radius:6px; background:#151328dc; text-decoration:none; }
+.astro-landing .body { padding-block-start: 0; }
+.landing-nav { gap: .35rem 1.25rem; padding-block: .8rem; border-block-end: 1px solid var(--line); margin-block-end: 1.5rem; }
+.landing-nav a { padding-block: .35rem; }
+.landing-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .25rem 1rem; margin-block-end: .8rem; }
+.landing-heading h2,.landing-date { margin: 0; }
+.landing-date { color: var(--muted); font-size: .9rem; }
+.landing-signs { display:grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: .7rem; }
+.landing-sign { display:grid; position:relative; align-items:end; aspect-ratio:1.15; isolation:isolate; overflow:hidden; border:1px solid #b595656b; border-radius:10px; color:#fff4db; text-decoration:none; }
+.landing-sign img { position:absolute; z-index:-2; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 32%; }
+.landing-sign::after { content:''; position:absolute; z-index:-1; inset:0; background:linear-gradient(0deg,#090719 2%,#090719a8 29%,transparent 70%); }
+.landing-sign > span { padding:.4rem .55rem; display:grid; line-height:1.25; }
+.landing-sign strong { font-size:1.13rem; }
+.landing-sign small { color:#ffe1ab; font-size:.74rem; }
+.landing-sign:hover { border-color:var(--gold); }
+.astro-landing #weekly .feature { background:linear-gradient(270deg,#21172f,#231b38 47%,#21172f80),url('./zodiac-wheel.jpg') left 44% / cover; border-color:#edcf9370; }
+.landing-tools .card { background:linear-gradient(145deg,#291f3b,#181c36); border-block-start:2px solid #b39464; }
+@media(max-width: 740px) {
+  .landing-hero__inner { min-height: 350px; align-items:flex-end; }
+  .landing-hero__copy { max-width: 100%; padding-block: 80px 24px; }
+  .landing-hero__inner > img { width: 100%; object-position: center 35%; }
+  .landing-hero__inner::after { background:linear-gradient(0deg,#101127 6%,#101127ed 29%,#10112718 100%); }
+  .landing-signs { grid-template-columns:repeat(3,minmax(0,1fr)); gap:.55rem; }
+}
+
+.astro-ad {
+  margin: 1.4rem auto;
+  width: min(100%,970px);
+  min-height: 120px;
+}
+.astro-ad .adsbygoogle { min-height: inherit; }
+.astro-ad--preview {
+  display: grid;
+  place-items: center;
+  border: 1px dashed #a99c815e;
+  border-radius: 10px;
+  background: #171b32;
+  color: #e1d8c6;
+  font-size: .84rem;
+}
+@media(max-width: 650px) {
+  .astro-ad { min-height: 100px; margin-block: 1rem; }
+}
+
+.rising-form { align-items: end; flex-wrap: wrap; }
+.rising-form label { min-width: min(100%, 13rem); }
+.rising-form input { padding: .55rem; color: var(--text); background: #171a32; border: 1px solid var(--line); border-radius: .35rem; font: inherit; }
+.rising-form fieldset { width: 100%; border: 1px solid var(--line); border-radius: .35rem; }
+.rising-form fieldset:not([hidden]) { display: flex; flex-wrap: wrap; gap: .65rem; }
+#rising-result:not([hidden]) { margin-block: 1rem; }
