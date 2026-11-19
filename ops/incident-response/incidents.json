@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T13:25:13Z",
+  "updated_at": "2026-11-19T13:52:46.205Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6778,6 +6778,106 @@
       "prevention": "Build-time compatibility mapping checks manifest hashes and fails on missing or altered assets; no rebuild/deploy for journal updates.",
       "remaining": [],
       "related_source_evidence": "ops/network-logo-compatibility.json is prepared pre-deployment evidence; this record supplies post-deployment verification."
+    },
+    {
+      "id": "tlvnet-dark-network-contact-low-contrast",
+      "status": "fixed_verified",
+      "root_cause": "Shared footer used a dark foreground and dark link color on both dark themes.",
+      "change": "Apply light text, underlined teal links, and matching focus outline to contact block for guide and night theme.",
+      "desktop": [
+        {
+          "bg": "rgb(16, 17, 21)",
+          "bodybg": "rgb(16, 17, 21)",
+          "contactWidth": 1244,
+          "linkColors": [
+            "rgb(157, 231, 220)",
+            "rgb(157, 231, 220)",
+            "rgb(157, 231, 220)"
+          ],
+          "linkTypes": [
+            "mailto:",
+            "mailto:",
+            "tel:"
+          ],
+          "logoCards": 21,
+          "overflow": false,
+          "text": "rgb(231, 239, 237)",
+          "theme": "tlv-unified tlv-day-theme tlv-guide-dark",
+          "url": "https://tlvnet.com/guide/restaurants",
+          "viewport": 1912
+        },
+        {
+          "bg": "rgb(16, 11, 16)",
+          "bodybg": "rgba(0, 0, 0, 0)",
+          "contactWidth": 1244,
+          "linkColors": [
+            "rgb(157, 231, 220)",
+            "rgb(157, 231, 220)",
+            "rgb(157, 231, 220)"
+          ],
+          "linkTypes": [
+            "mailto:",
+            "mailto:",
+            "tel:"
+          ],
+          "logoCards": 21,
+          "overflow": false,
+          "text": "rgb(231, 239, 237)",
+          "theme": "tlv-unified tlv-night-theme",
+          "url": "https://tlvnet.com/night/sections/tonight",
+          "viewport": 1912
+        },
+        {
+          "bg": "rgba(0, 0, 0, 0)",
+          "bodybg": "rgb(244, 243, 237)",
+          "contactWidth": 1244,
+          "linkColors": [
+            "rgb(18, 99, 95)",
+            "rgb(18, 99, 95)",
+            "rgb(18, 99, 95)"
+          ],
+          "linkTypes": [
+            "mailto:",
+            "mailto:",
+            "tel:"
+          ],
+          "logoCards": 21,
+          "overflow": false,
+          "text": "rgb(16, 52, 66)",
+          "theme": "tlv-day-theme editorial-story tlv-unified",
+          "url": "https://tlvnet.com/news/la-guardia-bicycle-network-20261119",
+          "viewport": 1912
+        }
+      ],
+      "mobile_visual_review": "pending: viewport override did not take effect on the connected browser",
+      "logo_images_loaded": 22,
+      "contrast_text_min": 16.14,
+      "contrast_link_min": 13.38,
+      "regression": [
+        "Foundation validation passed",
+        "Prepared public snapshot fingerprints validated",
+        "Home layout regression passed on exact preserved homepage",
+        "Worker build and archive succeeded",
+        "Only network footer CSS byte-changed among 1875 non-framework assets versus previously built version",
+        "3 contact links and 21 logo cards retained"
+      ],
+      "full_regeneration_issue": "ops/incident-response/inbox/571e35f6-ba50-832e-b036-40030d40b061-restaurant-rail-build.json",
+      "updated_at": "2026-11-19T13:52:46.205Z",
+      "source_commit": "47e612792e0f9b87b558a2d58273dc63271af882",
+      "deployment": {
+        "id": "appgdep_6afefea3ad148191b168ce8b4c16d571",
+        "status": "succeeded",
+        "terminal_at": "2026-11-19T13:50:43.114061+00:00"
+      },
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/571e35f6-ba50-832e-b036-40030d40b061.json"
+    },
+    {
+      "id": "tlvnet-prepare-public-restaurant-rail-total-after-trim",
+      "status": "open",
+      "updated_at": "2026-11-19T13:52:46.205Z",
+      "root_cause": "Full public regeneration trips home-layout.py:21 on restaurant rail total. Candidate cause: later presentation pass truncates cards without recalculating the count.",
+      "evidence": "ops/incident-response/inbox/571e35f6-ba50-832e-b036-40030d40b061-restaurant-rail-build.json",
+      "next_action": "Reproduce exact count before and after the polish pass, then synchronize the count at the trimming step and run full regeneration without changing the requested first hummus card."
     }
   ],
   "last_review_runKey": "ops-2026-11-19-a892b30a-96b8-832e-8bb9-b1f67c8f8b3b",
