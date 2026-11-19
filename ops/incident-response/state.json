@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T15:04:07.951Z",
+  "updated_at": "2026-11-19T15:14:51.942Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-19T14:51:21Z",
   "initial_history": {
@@ -21,13 +21,12 @@
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
         "run_ids": [
-          42235515953,
-          42658314259,
-          42194913372
+          42233845616,
+          42657814616
         ],
-        "observed_at": "2026-11-19T11:57:27Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
-        "status": "historical failed-step metadata recorded"
+        "observed_at": "2026-11-19T15:14:51.942Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json",
+        "status": "Historical failed-step metadata recorded; unconfirmed root entries retained."
       }
     },
     "full_logs_read_this_cycle": 0,
@@ -72,7 +71,21 @@
           "conclusion": "failure",
           "source_commit": "af3a60733f39f4da8ffcc6733e0300c5887f8bc1",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42233845616",
-          "classification": "Historical metadata only; exact root unconfirmed, no current outage or repair inferred."
+          "classification": "Historical metadata only; exact root unconfirmed, no current outage or repair inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-19T15:14:51.942Z",
+            "jobs": [
+              {
+                "id": 127946239397,
+                "name": "deploy",
+                "conclusion": "failure",
+                "steps": [
+                  "Build compact event listings and canonical sitemap"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json"
+          }
         },
         {
           "run_id": 42233719350,
@@ -219,7 +232,21 @@
           "conclusion": "failure",
           "source_commit": "dc304b7320ac9d5d842f59e0d5e198bdd1a03431",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42657814616",
-          "classification": "Historical metadata only; root signature not confirmed. No current failure or recovery inferred."
+          "classification": "Historical metadata only; root signature not confirmed. No current failure or recovery inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-19T15:14:51.942Z",
+            "jobs": [
+              {
+                "id": 129300956285,
+                "name": "check",
+                "conclusion": "failure",
+                "steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json"
+          }
         },
         {
           "run_id": 42657791553,
@@ -1488,7 +1515,7 @@
       ".github/workflows/events-public-health.yml": [],
       ".github/workflows/update-event-analytics.yml": []
     },
-    "metadata_rows_inspected_this_cycle": 3,
+    "metadata_rows_inspected_this_cycle": 2,
     "metadata_last_observed_run_at": "2026-11-06T05:06:48Z",
     "root_triage_checkpoint": {
       "observed_at": "2026-11-19T12:23:30.044Z",
@@ -1592,18 +1619,18 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "65b92745-d7d0-832e-a574-d87e57682c18",
-    "runKey": "ops-2026-11-19-65b92745-d7d0-832e-a574-d87e57682c18",
+    "run_id": "a41935ac-61d0-832e-be41-f6fc209a4b10",
+    "runKey": "ops-2026-11-19-a41935ac-61d0-832e-be41-f6fc209a4b10",
     "policy_version": "2026-11-15/1.2",
-    "observed_at": "2026-11-19T15:04:07.951Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json",
-    "status": "owner_680_live_rail_fix_and_bnei_efraim_verified",
+    "observed_at": "2026-11-19T15:14:51.942Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json",
+    "status": "no_update",
     "saved_version": 680,
     "public_checked_version": 680,
     "source_commit": "4ecef5073e3d4b4a014c087828623cdeaa34e2cd",
-    "new_actions": 62,
-    "new_social_rows": 2,
-    "new_inbox": 4,
+    "new_actions": 0,
+    "new_social_rows": 0,
+    "new_inbox": 1,
     "full_logs_read": 0,
     "controller_new_deployments": 0
   },
@@ -2184,7 +2211,8 @@
     "2026-11-19-real-estate-home-rail-count-result.json",
     "2026-11-19-real-estate-home-rail-count.json",
     "44545279458-1.json",
-    "571e35f6-ba50-832e-b036-40030d40b061-restaurant-rail-build.json"
+    "571e35f6-ba50-832e-b036-40030d40b061-restaurant-rail-build.json",
+    "65b92745-d7d0-832e-a574-d87e57682c18-bnei-efraim-neighborhood-readback.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -5417,6 +5445,23 @@
       "new_inbox": 4,
       "full_logs_read": 0,
       "controller_new_deployments": 0
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "a41935ac-61d0-832e-be41-f6fc209a4b10",
+      "runKey": "ops-2026-11-19-a41935ac-61d0-832e-be41-f6fc209a4b10",
+      "policy_version": "2026-11-15/1.2",
+      "observed_at": "2026-11-19T15:14:51.942Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json",
+      "status": "no_update",
+      "saved_version": 680,
+      "public_checked_version": 680,
+      "source_commit": "4ecef5073e3d4b4a014c087828623cdeaa34e2cd",
+      "new_actions": 0,
+      "new_social_rows": 0,
+      "new_inbox": 1,
+      "full_logs_read": 0,
+      "controller_new_deployments": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -6816,9 +6861,13 @@
     },
     "pending_recovery_reason": "Actual active owner lease; fresh source helper unavailable. No changed-input recovery beyond one initial source attempt. No deployment.",
     "current_lease": {
+      "target": "TLVNET-site",
       "state": "free",
-      "last_owner": "Automation_82add5edecd8819197814e83bac85a75",
-      "last_release_at": "2026-11-19T14:54:52.414Z"
+      "owner": null,
+      "acquired_at": null,
+      "lease_until": null,
+      "last_release_owner": "Automation_82add5edecd8819197814e83bac85a75",
+      "last_released_at": "2026-11-19T14:54:52.414Z"
     },
     "pending_ready_by_desk": {
       "news": {
@@ -6976,7 +7025,9 @@
           "articleIds": []
         }
       }
-    }
+    },
+    "last_delta_checked_at": "2026-11-19T15:14:51.942Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json"
   },
   "pending_task_run_ids": [],
   "latest_supermarket_execution_checkpoint": {
@@ -8655,7 +8706,9 @@
           "la-guardia-bicycle-network-20261119"
         ]
       }
-    }
+    },
+    "last_delta_checked_at": "2026-11-19T15:14:51.942Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json"
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-15T10:53:58.329Z",
@@ -9102,14 +9155,14 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-19T15:04:07.951Z",
-    "from": "2026-11-19T13:31:19Z",
+    "observed_at": "2026-11-19T15:14:51.942Z",
+    "from": "2026-11-19T14:51:21Z",
     "through": "2026-11-19T14:51:21Z",
-    "strictly_new": 62,
+    "strictly_new": 0,
     "full_logs_read": 0,
     "boundary_crossed": true,
     "pending_run_ids": [],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -9371,7 +9424,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-19T15:04:07.951Z",
+    "observed_at": "2026-11-19T15:14:51.942Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -9634,6 +9687,10 @@
         "sha": "f44d39430d2b39985dffa34099a7eded3f44ba00"
       },
       {
+        "path": "ops/incident-response/inbox/65b92745-d7d0-832e-a574-d87e57682c18-bnei-efraim-neighborhood-readback.json",
+        "sha": "d37447754466077629738b6b61eab309ad967af6"
+      },
+      {
         "path": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
         "sha": "a4264c06c5b2fb2d46ffeae9d281673246e6df73"
       },
@@ -9887,7 +9944,7 @@
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json"
   },
   "source_report_checkpoint": {
     "status": "executed_on_current_published_source_plus_owner_receipt",
