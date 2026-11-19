@@ -11,18 +11,22 @@ BASE='https://isnet.co.il/events-preview/'
 def esc(v):return html.escape(str(v or ''),quote=True)
 def safe(v):return v if isinstance(v,str) and v.startswith('https://') else ''
 def editorial_html(record):
- critics=record.get('critics');rating=record.get('audience_rating')
- if critics:
-  criticism='<p>'+esc(critics['summary'])+'</p><p class="movieEditorialSource"><a href="'+esc(safe(critics['url']))+'" target="_blank" rel="noopener">'+esc(critics['source'])+' · למקור הביקורות</a> · נבדק '+esc(critics['checked_at'])+'</p>'
- else:criticism='<p class="movieEditorialMuted">סיכום ביקורות מאומת עדיין אינו זמין במדור.</p>'
- if rating:
-  score=esc(rating['value'])+('%' if rating['scale']==100 else '/'+str(rating['scale']))
-  audience='<p class="movieAudienceScore"><bdi>'+score+'</bdi><span>'+esc(rating['label'])+'</span></p><p>'+esc(rating.get('count_label',''))+'</p><p class="movieEditorialSource"><a href="'+esc(safe(rating['url']))+'" target="_blank" rel="noopener">'+esc(rating['source'])+' · לציון במקור</a> · נבדק '+esc(rating['checked_at'])+'</p>'
- else:audience='<p class="movieEditorialMuted">אין כרגע ציון קהל מאומת להצגה במדור.</p>'
- if record.get('content_type')=='screening_event':criticism='<p>זהו אירוע תוכן או שידור, ולא סרט עלילתי. ביקורות וציוני סרטים אינם מוצגים עבורו.</p>';audience='<p>לא חל על סוג האירוע הזה.</p>'
- source=next((x for x in record.get('synopsis_sources',[]) if safe(x)),None)
- note='<p class="movieEditorialSource">נוסח מקורי של מערכת מה עושים'+(' · <a href="'+esc(source)+'" target="_blank" rel="noopener">לפרטי הסרט במקור</a>' if source else '')+'</p>'
- return '<section id="movieEditorial" class="contentCard movieEditorial"><h2>ביקורות ותגובת הקהל</h2><div class="movieEditorialGrid"><section><h3>מה אומרים המבקרים?</h3>'+criticism+'</section><section><h3>מה חושב הקהל?</h3>'+audience+'</section></div><p class="movieEditorialMethod">נתוני הקהל הם תמונת מצב ממקור חיצוני, לא הצבעות באתר שלנו. אחוז אהדה מציין את שיעור המדרגים שנתנו ציון חיובי; הוא אינו ציון ממוצע מתוך 10. נתונים חסרים אינם מוצגים כאפס.</p>'+note+'</section>'
+ def paragraphs(value):return ''.join('<p>'+esc(p.strip())+'</p>' for p in str(value or '').split('\n\n') if p.strip())
+ def brief(item):
+  if not isinstance(item,dict) or not item.get('summary') or not item.get('source') or not safe(item.get('url')):return ''
+  return '<div>'+paragraphs(item['summary'])+'<p class="movieEditorialSource"><a href="'+esc(item['url'])+'" target="_blank" rel="noopener">'+esc(item['source'])+'</a>'+(' · נבדק '+esc(item['checked_at']) if item.get('checked_at') else '')+'</p></div>'
+ def section(title,body):return '<section><h3>'+esc(title)+'</h3>'+body+'</section>' if body else ''
+ r=record.get('audience_rating');rating=''
+ if r and isinstance(r.get('value'),(int,float)) and r.get('scale') in (5,10,100) and 0<=r['value']<=r['scale'] and safe(r.get('url')) and r.get('source') and r.get('checked_at'):
+  score=str(r['value'])+('%' if r.get('metric')=='positive_audience_percentage' and r['scale']==100 else '/'+str(r['scale']))
+  rating='<p class="movieAudienceScore"><bdi>'+esc(score)+'</bdi><span>'+esc(r.get('label'))+'</span></p><p>'+esc(r.get('count_label',''))+'</p><p class="movieEditorialSource"><a href="'+esc(r['url'])+'" target="_blank" rel="noopener">'+esc(r['source'])+'</a> · נבדק '+esc(r['checked_at'])+'</p>'
+ parts=section('מה אומרים המבקרים?',brief(record.get('critics')))+section('מה חושב הקהל?',brief(record.get('audience_reception'))+rating)
+ parts+=section('איך הסרט התקבל בעולם',''.join(brief(x) for x in record.get('world_reception',[]) if isinstance(x,dict)))
+ parts+=section('למי הסרט מתאים',paragraphs(record.get('viewing_guide')))+section('עוד פרטים לפני שבוחרים',''.join(brief(x) for x in record.get('watch_details',[]) if isinstance(x,dict)))
+ if not parts:return '<section id="movieEditorial" class="contentCard movieEditorial" hidden></section>'
+ method='<p class="movieEditorialMethod">הציונים הם תמונת מצב ממקור חיצוני, ולא הצבעות באתר שלנו. אחוז אהדה הוא שיעור הדירוגים החיוביים, ולא ציון ממוצע.</p>' if rating else ''
+ return '<section id="movieEditorial" class="contentCard movieEditorial"><h2>לפני שבוחרים סרט</h2><div class="movieEditorialGrid">'+parts+'</div>'+method+'</section>'
+
 def merged(movies):
  out=dict(movies[0]);venues={}
  for m in movies:
@@ -123,3 +127,4 @@ def build():
  (ROOT/'events-preview/movie-sitemap.xml').write_bytes(tostring(sitemap,encoding='utf-8',xml_declaration=True))
  (ROOT/'events-preview/admin/data/movie-editorial-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');print(json.dumps(report,ensure_ascii=False));return urls
 if __name__=='__main__':build()
+
