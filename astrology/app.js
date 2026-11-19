@@ -36,6 +36,11 @@ if (match) {
     event.preventDefault();
     try {
       const rows = await signs;
+      const pair = [rows[first.selectedIndex][0], rows[second.selectedIndex][0]].sort().join('-');
+      if (pair === 'capricorn-virgo') {
+        location.assign('/astrology/compatibility/capricorn-virgo/');
+        return;
+      }
       const [, a,, elementA] = rows[first.selectedIndex];
       const [, b,, elementB] = rows[second.selectedIndex];
       const shared = elementA === elementB;
