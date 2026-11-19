@@ -84,6 +84,8 @@ def build():
    poster=safe(urljoin(BASE+city+'/',movie.get('poster_url') or '')) if movie.get('poster_url') else ''
    if poster:
     image=soup.new_tag('img',src=poster,alt='כרזת הסרט '+movie['title']);image['class']=['officialPoster'];soup.find(id='heroMedia').append(image)
+   if poster and movie.get('poster_credit'):
+    credit=soup.new_tag('p',id='moviePosterCredit');credit['class']=['movieEditorialSource'];credit.string=movie['poster_credit'];soup.find(id='heroMedia').insert_after(credit)
    tickets=soup.find(id='ticketLinks');tickets.clear();available=[]
    for v in movie['venues']:
     if safe(v.get('article_url')) and any(upcoming_times(d,times,stamp) for d,times in v.get('schedule',{}).items()):
