@@ -50,10 +50,54 @@ const readings = [
 const form = typeof document === 'undefined' ? null : document.querySelector('#rising-form');
 if (form) {
   const fields = form.elements;
-  const custom = document.querySelector('#rising-custom');
   const result = document.querySelector('#rising-result');
-  form.addEventListener('change', () => { custom.hidden = fields.city.value !== 'custom'; });
-  form.addEventListener('submit', event => {
+  const citySuggestions = document.querySelector('#rising-city-suggestions');
+  const countrySuggestions = document.querySelector('#rising-country-suggestions');
+  const norm = value => value.normalize('NFD').replace(/\p{M}/gu,'').trim().toLowerCase().replace(/\s+/g,' ');
+  const aliases = {
+    'ישראל':'israel','צרפת':'france','בריטניה':'united kingdom','אנגליה':'united kingdom','ארצות הברית':'united states','ארה"ב':'united states',
+    'גרמניה':'germany','איטליה':'italy','ספרד':'spain','הולנד':'netherlands','יוון':'greece','טורקיה':'turkey','קנדה':'canada',
+    'אוסטרליה':'australia','רוסיה':'russia','אוקראינה':'ukraine','פולין':'poland','הודו':'india','מרוקו':'morocco','יפן':'japan',
+    'פריז':'paris','לונדון':'london','ניו יורק':'new york','new york city':'new york','united states of america':'united states','usa':'united states','רומא':'rome','אתונה':'athens','ברלין':'berlin','מדריד':'madrid',
+    'טורונטו':'toronto','מוסקבה':'moscow','מיאמי':'miami','טוקיו':'tokyo','סידני':'sydney'
+  };
+  const key = value => aliases[norm(value)] || norm(value);
+  const country = row => row[1].split(',').at(-1).trim();
+  let places;
+  function loadPlaces() {
+    if (!places) places = fetch(new URL('./rising-cities.json', import.meta.url))
+      .then(response => {
+        if (!response.ok) throw Error('City list unavailable');
+        return response.json();
+      })
+      .catch(error => { places = null; throw error; });
+    return places;
+  }
+  function suggest(list, values) {
+    list.replaceChildren(...[...new Set(values)].slice(0,12).map(value => {
+      const option = document.createElement('option');
+      option.value = value;
+      return option;
+    }));
+  }
+  let revision = 0;
+  form.addEventListener('input', async event => {
+    const current = ++revision;
+    result.hidden = true;
+    if (![fields.city, fields.country].includes(event.target)) return;
+    try {
+      const rows = await loadPlaces();
+      if (current !== revision) return;
+      const cityQuery = key(fields.city.value);
+      const countryQuery = key(fields.country.value);
+      const cities = cityQuery ? rows.filter(row => [row[0],row[5]].some(name => key(name).startsWith(cityQuery))) : rows;
+      suggest(citySuggestions, cities.filter(row => !countryQuery || key(country(row)).startsWith(countryQuery)).map(row => row[0]));
+      suggest(countrySuggestions, cities.map(country).filter(name => !countryQuery || key(name).startsWith(countryQuery)));
+    } catch {
+      // A later input or submission retries the city list.
+    }
+  });
+  form.addEventListener('submit', async event => {
     event.preventDefault();
     result.replaceChildren();
     result.hidden = false;
@@ -66,16 +110,33 @@ if (form) {
       print('p', 'לחישוב אופק דרושים תאריך ושעת לידה מקומית. אם שעת הלידה אינה ידועה, אין דרך לתת מזל אופק מדויק.');
       return;
     }
-    const values = fields.city.value === 'custom' ?
-      [fields.lat.value, fields.lon.value, fields.zone.value.trim()] : fields.city.value.split(',');
-    if (values.some(value => value === '')) {
-      print('p','בחרו מקום לידה או מלאו קווי רוחב ואורך ואזור זמן.');
+    const city = key(fields.city.value);
+    const nation = key(fields.country.value);
+    if (!city || !nation) {
+      print('p','הקלידו את עיר הלידה ואת מדינת הלידה.');
       return;
     }
-    const [lat, lon, zone] = values;
+    const current = ++revision;
+    let rows;
+    try { rows = await loadPlaces(); }
+    catch {
+      if (current === revision) print('p','רשימת הערים לא נטענה. נסו ללחוץ שוב על כפתור החישוב.');
+      return;
+    }
+    if (current !== revision) return;
+    const matches = rows.filter(row => key(country(row)) === nation && [row[0],row[5]].some(name => key(name) === city));
+    if (!matches.length) {
+      print('p','לא מצאנו את העיר במדינה הזו. נסו את השם באנגלית או בחרו הצעה מהרשימה.');
+      return;
+    }
+    if (new Set(matches.map(row => row[4])).size > 1 || matches.some(row => Math.hypot(row[2]-matches[0][2],row[3]-matches[0][3]) > .1)) {
+      print('p','מצאנו יותר מעיר אחת בשם הזה במדינה. נסו שם מלא יותר.');
+      return;
+    }
+    const [, , lat, lon, zone] = matches[0];
     let instants;
     try { instants = localInstants(fields.day.value, fields.hour.value, zone); }
-    catch { print('p','אזור הזמן אינו מוכר. הזינו מזהה כמו Europe/Paris.'); return; }
+    catch { print('p','לא הצלחנו לזהות את אזור הזמן של מקום הלידה.'); return; }
     if (instants.length !== 1) {
       print('p', instants.length ? 'השעה הופיעה פעמיים בגלל מעבר שעון. צריך לזהות באיזו מהן התרחשה הלידה.' :
         'השעה המקומית אינה קיימת בתאריך הזה לפי כללי אזור הזמן. בדקו את פרטי הלידה.');
@@ -83,7 +144,7 @@ if (form) {
     }
     let degree;
     try { degree = risingLongitude(instants[0],Number(lat),Number(lon)); }
-    catch { print('p','בדקו את הקואורדינטות. החישוב הזמין כאן מוגבל לקווי רוחב בין 66.5° דרום ל־66.5° צפון.'); return; }
+    catch { print('p','מקום הלידה נמצא מחוץ לטווח שבו המחשבון יכול לתת תוצאה מדויקת.'); return; }
     const [name, theme, interpretation, practice] = readings[Math.floor(degree / 30)];
     const within = degree % 30;
     print('h2', 'אופק ' + name);
