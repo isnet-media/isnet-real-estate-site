@@ -1,0 +1,587 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "65b92745-d7d0-832e-a574-d87e57682c18",
+  "runKey": "ops-2026-11-19-65b92745-d7d0-832e-a574-d87e57682c18",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-19T15:04:07.951Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json",
+  "source_commit": "4ecef5073e3d4b4a014c087828623cdeaa34e2cd",
+  "saved_version": 680,
+  "terminal_deployment": {
+    "id": "appgdep_6aff0d568cf48191a37e7e8f8769e997",
+    "status": "succeeded",
+    "updated_at": "2026-11-19T14:53:26.865923+00:00"
+  },
+  "controller_new_deployments": 0,
+  "publication_lease_observed": {
+    "state": "free",
+    "last_owner": "Automation_82add5edecd8819197814e83bac85a75",
+    "last_release_at": "2026-11-19T14:54:52.414Z"
+  },
+  "targets": {
+    "home": {
+      "url": "https://tlvnet.com/",
+      "status": 200,
+      "lead": "הבטיחו לנו 250 ק״מ של שבילי אופניים עד 2025. אז למה היעד השתנה ל־2030?",
+      "references": [
+        "bnei-efraim-217-planned-demolition-20261119",
+        "la-guardia-bicycle-network-20261119",
+        "country-lamed-planning-framework-explained-20261118"
+      ]
+    },
+    "news": {
+      "url": "https://tlvnet.com/news/",
+      "status": 200,
+      "lead": [
+        "/news/rokach-pedestrian-killed-motorcycle-20261119",
+        "הולכת רגל נהרגה מפגיעת אופנוע בשדרות רוקח"
+      ],
+      "references": [
+        "bnei-efraim-217-planned-demolition-20261119",
+        "la-guardia-bicycle-network-20261119",
+        "country-lamed-planning-framework-explained-20261118"
+      ]
+    },
+    "real-estate": {
+      "url": "https://tlvnet.com/news/real-estate",
+      "status": 200,
+      "lead": [
+        "/news/bnei-efraim-217-planned-demolition-20261119",
+        "בני אפרים 217: הריסה מתוכננת מיום ראשון ושינוי במעבר הולכי הרגל"
+      ],
+      "references": [
+        "bnei-efraim-217-planned-demolition-20261119",
+        "country-lamed-planning-framework-explained-20261118"
+      ]
+    },
+    "economy-tech": {
+      "url": "https://tlvnet.com/news/economy-tech",
+      "status": 200,
+      "lead": [
+        "/news/tlv-center-tech-entry-jobs-snapshot-20261118",
+        "אלפי משרות הייטק באזור תל אביב והמרכז, רק כ־3% למתחילים"
+      ],
+      "references": []
+    },
+    "community": {
+      "url": "https://tlvnet.com/news/community",
+      "status": 200,
+      "lead": [
+        "/news/arik-einstein-neighborhood-hanukkah-20261117",
+        "מדליקים יחד בדב הוז: חגיגת חנוכה ברחבה של אריק איינשטיין"
+      ],
+      "references": [
+        "tlv-neighborhood-garage-sale-20261106"
+      ]
+    },
+    "consumer": {
+      "url": "https://tlvnet.com/news/consumer",
+      "status": 200,
+      "lead": [
+        "/news/good-pharm-charity-cream-terms-20261119",
+        "קרם ב־10 שקלים ותרומה לאגודה: מה כוללת יוזמת גוד פארם"
+      ],
+      "references": []
+    },
+    "sports": {
+      "url": "https://tlvnet.com/news/sports",
+      "status": 200,
+      "lead": [
+        "/news/hapoel-paris-pace-enis-return-20261119",
+        "מבחן הקצב של הפועל בפריז: איטודיס דורש תרומה מכולם"
+      ],
+      "references": []
+    },
+    "culture-news": {
+      "url": "https://tlvnet.com/news/culture",
+      "status": 200,
+      "lead": [
+        "/news/solidarity-film-festival-20261210-20261119",
+        "עשרה ימים של קולנוע וזכויות אדם: סולידריות חוזר לסינמטק"
+      ],
+      "references": []
+    },
+    "bli-heshbon": {
+      "url": "https://tlvnet.com/news/bli-heshbon",
+      "status": 200,
+      "lead": [
+        "/news/la-guardia-bicycle-network-20261119",
+        "הבטיחו לנו 250 ק״מ של שבילי אופניים עד 2025. אז למה היעד השתנה ל־2030?"
+      ],
+      "references": [
+        "la-guardia-bicycle-network-20261119"
+      ]
+    }
+  },
+  "rail_fix": {
+    "status": "fixed_verified",
+    "deployed_with_owner_article": true,
+    "source_delta": "Recompute .rail-total after trimming cards in scripts/polish-public.py",
+    "regression": "python tests/home-layout.py passed independently against journal commit descending from exact deployed source; build and 177 photo checks recorded by owner",
+    "live": {
+      "count": 7,
+      "total": "07",
+      "first_href": "/guide/restaurants?topic=hummus"
+    },
+    "owner_evidence": "ops/incident-response/inbox/2026-11-19-real-estate-home-rail-count-result.json"
+  },
+  "articles": {
+    "new_real_estate": {
+      "id": "bnei-efraim-217-planned-demolition-20261119",
+      "published_at": "2026-11-19T14:46:09.318594+00:00",
+      "owner_task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "owner_run_id": "8db3ae81-a69c-8331-afbd-33fb607a6a64",
+      "url": "https://tlvnet.com/news/bnei-efraim-217-planned-demolition-20261119",
+      "body_paragraphs": 6,
+      "credit": "להמחשה",
+      "media": {
+        "status": 200,
+        "jpeg": true,
+        "bytes": 533283,
+        "sha256": "775c182c28c34b965c52fc9eb7e956cfb0179b217e9171a77cd431d739a58811"
+      },
+      "checksum_matches_owner_receipt": true,
+      "home_link": true,
+      "section_link": true,
+      "status": "published_verified",
+      "source_journal": "b6d923ced716125ebc82ed6b24b8443be6a5df90",
+      "public_projection": "Receipt lag: compact source report still marks receipt incomplete; dispatch shows one verification-pending entry without a published article ID. No redeploy.",
+      "visual_review": "pending_desktop_mobile"
+    },
+    "investigations": {
+      "owner": "אבי אור",
+      "url": "https://tlvnet.com/news/la-guardia-bicycle-network-20261119",
+      "section": "https://tlvnet.com/news/bli-heshbon",
+      "body_length": 3205,
+      "home_link": true,
+      "section_link": true,
+      "credit": "אילוסטרציה · טיילת הרברט סמואל, תל אביב · Depositphotos",
+      "media": {
+        "status": 200,
+        "jpeg": true,
+        "bytes": 436567,
+        "sha256": "6cd539a384bc0744f23b2ae03fad28133677e1ade90fbd08948d3425e5ef4e3e"
+      }
+    },
+    "old_news_receipt": {
+      "url": "https://tlvnet.com/news/arlozorov-salomon-infrastructure-works-nov2026",
+      "status": "existing_article_live_receipt_pending",
+      "body_paragraphs": 4,
+      "credit": "אילוסטרציה · בניין העירייה וכיכר רבין, ארכיון; להמחשה · כיכר רבין, מבט מבניין העירייה · ארכיון 2015-01-26 · צילום: Israel Preker Pikiwiki Israel · CC BY 2.5 מקור · רישיון"
+    }
+  },
+  "neighborhood": {
+    "feed": "https://tlvnet.com/city-hub/updates.json",
+    "area": "https://tlvnet.com/city-hub/areas/northwest-coast/",
+    "country_lamed_present": true,
+    "expired_before_local_date_in_feed": 0,
+    "article_area_handoff": {
+      "path": "ops/incident-response/inbox/65b92745-d7d0-832e-a574-d87e57682c18-bnei-efraim-neighborhood-readback.json",
+      "ok": true,
+      "sha": "97c167c0cefecac7ed030c1cfcb322079909f64f"
+    }
+  },
+  "owner_runs": [
+    {
+      "desk": "news",
+      "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "run_id": "2121bc7c-3c80-8326-a9f7-a4ae0173b2d1",
+      "scheduled_for": "2026-11-19T12:00:00Z",
+      "result_matches": true
+    },
+    {
+      "desk": "real-estate",
+      "owner": "Automation_82add5edecd8819197814e83bac85a75",
+      "run_id": "8db3ae81-a69c-8331-afbd-33fb607a6a64",
+      "scheduled_for": "2026-11-19T14:00:00Z",
+      "result_matches": true
+    },
+    {
+      "desk": "economy-tech",
+      "owner": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "run_id": "f45dbfcf-ed34-832f-b758-7641f992a898",
+      "scheduled_for": "2026-11-18T10:00:00Z",
+      "result_matches": true
+    },
+    {
+      "desk": "community",
+      "owner": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "run_id": "52a229d3-175c-8328-a1cb-32792489b027",
+      "scheduled_for": "2026-11-19T11:00:00Z",
+      "result_matches": true
+    },
+    {
+      "desk": "consumer",
+      "owner": "Automation_e2f02000cdf4819190022b85f4391076",
+      "run_id": "7098a995-fea0-8322-875b-8b78ffa4967a",
+      "scheduled_for": "2026-11-19T12:00:00Z",
+      "result_matches": true
+    },
+    {
+      "desk": "sports",
+      "owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+      "run_id": "210ba9a9-bddc-832c-8f63-bd7ebc772dff",
+      "scheduled_for": "2026-11-19T07:00:00Z",
+      "result_matches": true
+    },
+    {
+      "desk": "culture-news",
+      "owner": "Automation_53543605ce188191ba90f3f1979203dc",
+      "run_id": "548ad7d7-4704-8321-a0b0-c24815aa588a",
+      "scheduled_for": null,
+      "result_matches": null
+    }
+  ],
+  "dispatch": {
+    "news": {
+      "counts": {
+        "research_pending": 1,
+        "blocked": 12,
+        "primary_pending": 1,
+        "resolved_updated_existing_verified": 1,
+        "candidate_not_read": 8
+      },
+      "release": {
+        "state": "release_or_verification_pending",
+        "pendingCount": 1,
+        "oldestObservedAt": "2026-11-09T22:46:00Z",
+        "articleIds": [
+          "arlozorov-salomon-infrastructure-works-nov2026"
+        ]
+      }
+    },
+    "real-estate": {
+      "counts": {
+        "blocked": 3,
+        "research_pending": 2,
+        "outside_scope_handoff": 1,
+        "candidate_not_read": 1,
+        "publication_pending_verification": 1
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": []
+      }
+    },
+    "economy-tech": {
+      "counts": {
+        "handoff": 1,
+        "blocked": 3,
+        "candidate_not_read": 3
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": []
+      }
+    },
+    "community": {
+      "counts": {
+        "primary_verification_pending": 1,
+        "blocked": 5,
+        "candidate_not_read": 5,
+        "outside_scope_handoff": 1
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": []
+      }
+    },
+    "consumer": {
+      "counts": {
+        "primary_terms_pending": 2,
+        "primary_verification_pending": 2,
+        "primary_date_and_scope_pending": 1,
+        "candidate_not_read": 1
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": []
+      }
+    },
+    "sports": {
+      "counts": {
+        "researched_waiting_material_progress": 1
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": []
+      }
+    },
+    "culture-news": {
+      "counts": {
+        "research_pending": 3,
+        "candidate_not_read": 9
+      },
+      "release": {
+        "state": "no_release_candidate_recorded",
+        "pendingCount": 0,
+        "oldestObservedAt": null,
+        "articleIds": []
+      }
+    }
+  },
+  "pending_ready": {
+    "news": {
+      "pending_ready": 5,
+      "owner_picked_up": true,
+      "catalog_matches": 0,
+      "home_matches": 0,
+      "section_matches": 0,
+      "checkpoint": "ops/incident-response/inbox/2026-11-19-news-noon-prepared-1795090419252.json",
+      "ids": [
+        "yehuda-maccabi-tree-collapse-20261119",
+        "einstein-lane-reduction-nov23-20261119",
+        "har-zion-salomon-new-junction-20261119",
+        "reifman-road-resurfacing-nov29-20261119",
+        "purple-line-licensing-milestone-20261119"
+      ],
+      "former_lease": {
+        "owner": "work:tlvnet-home-presentation",
+        "acquired_at": "2026-11-19T12:18:05.518Z",
+        "until": "2026-11-19T12:43:05.518Z",
+        "active_at_current_intake": false
+      },
+      "current_shared_lock": "free at intake",
+      "live_endpoints": [
+        {
+          "id": "yehuda-maccabi-tree-collapse-20261119",
+          "status": 404
+        },
+        {
+          "id": "einstein-lane-reduction-nov23-20261119",
+          "status": 404
+        },
+        {
+          "id": "har-zion-salomon-new-junction-20261119",
+          "status": 404
+        },
+        {
+          "id": "reifman-road-resurfacing-nov29-20261119",
+          "status": 404
+        },
+        {
+          "id": "purple-line-licensing-milestone-20261119",
+          "status": 404
+        }
+      ],
+      "owner_run_changed": false
+    },
+    "community": {
+      "pending_ready": 1,
+      "pending_verification": 7,
+      "owner_picked_up": true,
+      "updated_headline_live": false,
+      "public_article": "https://tlvnet.com/news/tlv-neighborhood-garage-sale-20261106",
+      "checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json",
+      "actual_public_headline": "שישירוק ביד אליהו: ההרשמה לעשרה דוכנים עד 8 בנובמבר",
+      "owner_run_changed": false
+    }
+  },
+  "economy": "19-Nov expected run absent in available task records; latest lead from 18-Nov. Current dispatch shows no release-ready candidate.",
+  "evidence_report": {
+    "source_commit": "b6d923ced716125ebc82ed6b24b8443be6a5df90",
+    "catalog_hash": "c3589d83f88b427168930b0ff263ddf173183bf4ac5b1fdbe6bb49e6f028544e",
+    "latest": {
+      "news": {
+        "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "run_key": "news-20261119-morning-1795068050826",
+        "observed_at": "2026-11-19T06:13:33.015685+00:00",
+        "coverage_state": "not_proven",
+        "records": [
+          {
+            "articleId": "rokach-pedestrian-killed-motorcycle-20261119",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          },
+          {
+            "articleId": "haymanot-kasau-tel-aviv-rally-18nov-20261118",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          }
+        ]
+      },
+      "real-estate": {
+        "owner": "Automation_82add5edecd8819197814e83bac85a75",
+        "run_key": "real-estate-20261119-1795099493978",
+        "observed_at": "2026-11-19T14:54:25.366367+00:00",
+        "coverage_state": "not_proven",
+        "records": [
+          {
+            "articleId": "bnei-efraim-217-planned-demolition-20261119",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          }
+        ]
+      },
+      "economy-tech": {
+        "owner": "Automation_a32c48a7ae848191a5769078a5c74a09",
+        "run_key": "economy-tech-20261118-1794997198243",
+        "observed_at": "2026-11-18T10:21:46.730111+00:00",
+        "coverage_state": "not_proven",
+        "records": [
+          {
+            "articleId": "tlv-center-tech-entry-jobs-snapshot-20261118",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          }
+        ]
+      },
+      "sports": {
+        "owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+        "run_key": "sports-20261119-morning-210ba9a9-bddc-832c-8f63-bd7ebc772dff",
+        "observed_at": "2026-11-19T07:08:05.501196+00:00",
+        "coverage_state": "incomplete",
+        "records": [
+          {
+            "articleId": "maccabi-volleyball-istanbul-qualification-20261118",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          },
+          {
+            "articleId": "hapoel-paris-pace-enis-return-20261119",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          },
+          {
+            "articleId": "maccabi-dubai-limassol-preview-20261119",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          }
+        ]
+      },
+      "community": {
+        "owner": "Automation_e03d80ff914c8191a790fc66e7447826",
+        "run_key": "community-2026-11-18-daily",
+        "observed_at": "2026-11-18T11:13:20.025505+00:00",
+        "coverage_state": "incomplete",
+        "records": [
+          {
+            "articleId": "access-israel-railway-park-volunteers-20261127",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          },
+          {
+            "articleId": "arik-einstein-neighborhood-hanukkah-20261117",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          }
+        ]
+      },
+      "consumer": {
+        "owner": "Automation_e2f02000cdf4819190022b85f4391076",
+        "run_key": "consumer-2026-11-19-daily",
+        "observed_at": "2026-11-19T12:10:09.014147+00:00",
+        "coverage_state": "incomplete",
+        "records": []
+      },
+      "culture-news": {
+        "owner": "Automation_53543605ce188191ba90f3f1979203dc",
+        "run_key": "culture-night-20261119-1795074512662",
+        "observed_at": "2026-11-19T07:58:01.220869+00:00",
+        "coverage_state": "not_proven",
+        "records": [
+          {
+            "articleId": "international-exposure-dance-20261202-20261119",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          },
+          {
+            "articleId": "odyssea-family-dance-suzanne-20261210-20261119",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          },
+          {
+            "articleId": "solidarity-film-festival-20261210-20261119",
+            "outcome": "source_published_receipt_incomplete",
+            "sourceStatus": "published",
+            "publicUrl": null,
+            "verificationRecorded": false
+          }
+        ]
+      }
+    }
+  },
+  "actions": {
+    "watermark_from": "2026-11-19T13:31:19Z",
+    "through": "2026-11-19T14:51:21Z",
+    "runs": 62,
+    "pending": [],
+    "full_logs_read": 0,
+    "known_signature_recurrence": {
+      "id": 44545279458,
+      "incident_id": "ashdod-cinema-four-missing-trailers",
+      "status": "failed_step_matches_existing_root; exact current missing count not inferred",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44545279458"
+    },
+    "history_remaining": "118 historical entries remain in2workflow groups; failed-step metadata only, roots unconfirmed."
+  },
+  "social": [
+    {
+      "slot": "2026-11-19T14",
+      "status": "published",
+      "finished_at": "2026-11-19T14:00:15.279Z",
+      "post_id": "1520426491146188_122109828189545268",
+      "classification": "service_recorded_published_public_readback_not_performed"
+    },
+    {
+      "slot": "2026-11-19T15",
+      "status": "published",
+      "finished_at": "2026-11-19T15:00:11.296Z",
+      "post_id": "1520426491146188_122109880707545268",
+      "classification": "service_recorded_published_public_readback_not_performed"
+    }
+  ],
+  "new_inbox": [
+    "ops/incident-response/inbox/2026-11-19-real-estate-home-rail-count-result.json",
+    "ops/incident-response/inbox/2026-11-19-real-estate-home-rail-count.json",
+    "ops/incident-response/inbox/44545279458-1.json",
+    "ops/incident-response/inbox/571e35f6-ba50-832e-b036-40030d40b061-restaurant-rail-build.json"
+  ],
+  "availability": {
+    "url": "https://tlvnet.com/",
+    "status": 200,
+    "client_elapsed_ms": 6975,
+    "scope": "One controller curl home response through its network path; other page requests scoped to recovery. Not origin latency, outage rate or a capacity measurement."
+  },
+  "gates": {
+    "automated_full_offsite_backup": "not_verified",
+    "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+    "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+    "scheduled_publication_reconciliation": "partial"
+  },
+  "qualification_started_at": null,
+  "cost": null,
+  "api_usage_measured": false
+}
