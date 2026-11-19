@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T16:57:54.984Z",
+  "updated_at": "2026-11-19T17:43:36.024Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-19T16:49:01Z",
+  "last_processed_run_created_at": "2026-11-19T17:09:49Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -21,12 +21,12 @@
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
         "run_ids": [
-          42233845616,
-          42657814616
+          42233719350,
+          42657791553
         ],
-        "observed_at": "2026-11-19T15:14:51.942Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-19/a41935ac-61d0-832e-be41-f6fc209a4b10.json",
-        "status": "Historical failed-step metadata recorded; unconfirmed root entries retained."
+        "observed_at": "2026-11-19T17:43:36.024Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+        "status": "Failed step metadata captured; root not inferred."
       }
     },
     "full_logs_read_this_cycle": 0,
@@ -97,7 +97,20 @@
           "conclusion": "failure",
           "source_commit": "dfa5f2c953573e58d41a8bf9ff4ce70697a9a6a3",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42233719350",
-          "classification": "Historical metadata only; exact root unconfirmed, no current outage or repair inferred."
+          "classification": "Historical metadata only; exact root unconfirmed, no current outage or repair inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-19T17:43:36.024Z",
+            "jobs": [
+              {
+                "name": "deploy",
+                "conclusion": "failure",
+                "failed_steps": [
+                  "Build compact event listings and canonical sitemap"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
+          }
         },
         {
           "run_id": 42225516633,
@@ -258,7 +271,20 @@
           "conclusion": "failure",
           "source_commit": "dc304b7320ac9d5d842f59e0d5e198bdd1a03431",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42657791553",
-          "classification": "Historical metadata only; root signature not confirmed. No current failure or recovery inferred."
+          "classification": "Historical metadata only; root signature not confirmed. No current failure or recovery inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-19T17:43:36.024Z",
+            "jobs": [
+              {
+                "name": "check",
+                "conclusion": "failure",
+                "failed_steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
+          }
         },
         {
           "run_id": 42657226201,
@@ -1619,21 +1645,20 @@
   },
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "6fe3b20b-30d4-832e-ba6d-d891ed5bd241",
-    "runKey": "ops-2026-11-19-6fe3b20b-30d4-832e-ba6d-d891ed5bd241",
+    "run_id": "08a7e9f6-cc00-832e-a764-0743b12984db",
+    "runKey": "ops-2026-11-19-08a7e9f6-cc00-832e-a764-0743b12984db",
     "policy_version": "2026-11-15/1.2",
-    "observed_at": "2026-11-19T16:57:54.984Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/6fe3b20b-30d4-832e-ba6d-d891ed5bd241.json",
-    "status": "tlvnet_unchanged_isnet_pages_boundary_fixed",
-    "saved_version": 680,
-    "public_checked_version": 680,
-    "source_commit": "4ecef5073e3d4b4a014c087828623cdeaa34e2cd",
-    "new_actions": 110,
+    "observed_at": "2026-11-19T17:43:36.024Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+    "status": "five_news_queue_publications_and_raanana_readback_verified",
+    "saved_version": 681,
+    "public_checked_version": 681,
+    "source_commit": "4c870ba3d62766ec8eb5c549b13a4548eb0d4d38",
+    "new_actions": 8,
     "new_social_rows": 1,
-    "new_inbox": 9,
-    "full_logs_read": 4,
-    "tlvnet_deployments_started": 0,
-    "isnet_deployments_started": 1
+    "new_inbox": 3,
+    "full_logs_read": 0,
+    "controller_new_deployments": 0
   },
   "concurrent_controller_observation": {
     "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
@@ -2066,7 +2091,8 @@
     "tlvnet-economy-20261119-due-run-evidence-missing",
     "tlvnet-real-estate-neighborhood-tag-absent-bnei-efraim-217",
     "isnet-public-source-operational-records",
-    "playwright155-ubuntu2604-browser-install"
+    "playwright155-ubuntu2604-browser-install",
+    "tlvnet-news-nested-receipt-checks-projection"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -2226,7 +2252,9 @@
     "44560679082-1.json",
     "44561651779-1.json",
     "6fe3b20b-30d4-832e-ba6d-d891ed5bd241-isnet-operational-artifact-boundary.json",
-    "6fe3b20b-30d4-832e-ba6d-d891ed5bd241-playwright155-ubuntu2604.json"
+    "6fe3b20b-30d4-832e-ba6d-d891ed5bd241-playwright155-ubuntu2604.json",
+    "2026-11-19-news-evening-20261119-1795107991-verified.json",
+    "08a7e9f6-cc00-832e-a764-0743b12984db-news-nested-publication-receipt.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -5494,6 +5522,23 @@
       "full_logs_read": 4,
       "tlvnet_deployments_started": 0,
       "isnet_deployments_started": 1
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "08a7e9f6-cc00-832e-a764-0743b12984db",
+      "runKey": "ops-2026-11-19-08a7e9f6-cc00-832e-a764-0743b12984db",
+      "policy_version": "2026-11-15/1.2",
+      "observed_at": "2026-11-19T17:43:36.024Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+      "status": "five_news_queue_publications_and_raanana_readback_verified",
+      "saved_version": 681,
+      "public_checked_version": 681,
+      "source_commit": "4c870ba3d62766ec8eb5c549b13a4548eb0d4d38",
+      "new_actions": 8,
+      "new_social_rows": 1,
+      "new_inbox": 3,
+      "full_logs_read": 0,
+      "controller_new_deployments": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -6256,7 +6301,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-19T16:00:10.394Z",
+    "max_finished_at": "2026-11-19T17:00:08.392Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -6317,7 +6362,8 @@
       "2026-11-19T13",
       "2026-11-19T14",
       "2026-11-19T15",
-      "2026-11-19T16"
+      "2026-11-19T16",
+      "2026-11-19T17"
     ],
     "observed_at": "2026-11-19T12:23:30.044Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
@@ -6607,7 +6653,7 @@
     }
   },
   "latest_tlvnet_queue_observation": {
-    "observed_at": "2026-11-19T15:04:07.951Z",
+    "observed_at": "2026-11-19T17:43:36.024Z",
     "prepared_original_owner_items": 1,
     "verification_only_items": [
       {
@@ -6674,7 +6720,7 @@
     "original_owner_new_publications": 4,
     "new_live_verifications": 4,
     "reason": "Original evening637owner resolved both midday prepared items and published2additional originals; research coverage/backfill retained",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
     "events_source_metadata": {
       "checkpoint": "ops/event-refresh-checkpoint.json",
       "runKey": "publisher-events-20261118T1121-jerusalem",
@@ -6837,7 +6883,7 @@
         "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
       }
     },
-    "pending_ready_count": 6,
+    "pending_ready_count": 1,
     "community": {
       "status": "publication_pending_existing_writer",
       "article_id": "tlv-neighborhood-garage-sale-20261106",
@@ -6898,30 +6944,25 @@
       "owner": null,
       "acquired_at": null,
       "lease_until": null,
-      "last_release_version": 680
+      "last_release_owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "last_release_at": "2026-11-19 17:15:44 UTC"
     },
     "pending_ready_by_desk": {
       "news": {
-        "pending_ready": 5,
+        "pending_ready": 0,
         "owner_picked_up": true,
         "catalog_matches": 0,
         "home_matches": 0,
         "section_matches": 0,
         "checkpoint": "ops/incident-response/inbox/2026-11-19-news-noon-prepared-1795090419252.json",
-        "ids": [
-          "yehuda-maccabi-tree-collapse-20261119",
-          "einstein-lane-reduction-nov23-20261119",
-          "har-zion-salomon-new-junction-20261119",
-          "reifman-road-resurfacing-nov29-20261119",
-          "purple-line-licensing-milestone-20261119"
-        ],
+        "ids": [],
         "former_lease": {
           "owner": "work:tlvnet-home-presentation",
           "acquired_at": "2026-11-19T12:18:05.518Z",
           "until": "2026-11-19T12:43:05.518Z",
           "active_at_current_intake": false
         },
-        "current_shared_lock": "free at intake",
+        "current_shared_lock": "free",
         "live_endpoints": [
           {
             "id": "yehuda-maccabi-tree-collapse-20261119",
@@ -6944,7 +6985,19 @@
             "status": 404
           }
         ],
-        "owner_run_changed": false
+        "owner_run_changed": false,
+        "resolved": {
+          "ids": [
+            "yehuda-maccabi-tree-collapse-20261119",
+            "einstein-lane-reduction-nov23-20261119",
+            "har-zion-salomon-new-junction-20261119",
+            "reifman-road-resurfacing-nov29-20261119",
+            "purple-line-licensing-milestone-20261119"
+          ],
+          "owner_run_id": "029724f7-36f0-8326-9175-25afd9275a96",
+          "status": "published_verified",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
+        }
       },
       "community": {
         "pending_ready": 1,
@@ -6961,13 +7014,6 @@
     "arlozorov_public_verified_journal_pending": true,
     "dispatch_reconciled": {
       "news": {
-        "counts": {
-          "research_pending": 1,
-          "blocked": 12,
-          "primary_pending": 1,
-          "resolved_updated_existing_verified": 1,
-          "candidate_not_read": 8
-        },
         "release": {
           "state": "release_or_verification_pending",
           "pendingCount": 1,
@@ -6975,85 +7021,91 @@
           "articleIds": [
             "arlozorov-salomon-infrastructure-works-nov2026"
           ]
+        },
+        "counts": {
+          "publication_pending_verification": 6,
+          "blocked": 11,
+          "primary_pending": 1,
+          "resolved_updated_existing_verified": 1,
+          "candidate_not_read": 8
         }
       },
       "real-estate": {
+        "release": {
+          "state": "no_release_candidate_recorded",
+          "pendingCount": 0,
+          "oldestObservedAt": null,
+          "articleIds": []
+        },
         "counts": {
           "blocked": 3,
           "research_pending": 2,
           "outside_scope_handoff": 1,
-          "candidate_not_read": 1,
-          "publication_pending_verification": 1
-        },
+          "candidate_not_read": 1
+        }
+      },
+      "economy-tech": {
         "release": {
           "state": "no_release_candidate_recorded",
           "pendingCount": 0,
           "oldestObservedAt": null,
           "articleIds": []
-        }
-      },
-      "economy-tech": {
+        },
         "counts": {
           "handoff": 1,
           "blocked": 3,
           "candidate_not_read": 3
-        },
+        }
+      },
+      "community": {
         "release": {
           "state": "no_release_candidate_recorded",
           "pendingCount": 0,
           "oldestObservedAt": null,
           "articleIds": []
-        }
-      },
-      "community": {
+        },
         "counts": {
           "primary_verification_pending": 1,
           "blocked": 5,
           "candidate_not_read": 5,
           "outside_scope_handoff": 1
-        },
+        }
+      },
+      "consumer": {
         "release": {
           "state": "no_release_candidate_recorded",
           "pendingCount": 0,
           "oldestObservedAt": null,
           "articleIds": []
-        }
-      },
-      "consumer": {
+        },
         "counts": {
           "primary_terms_pending": 2,
           "primary_verification_pending": 2,
           "primary_date_and_scope_pending": 1,
           "candidate_not_read": 1
-        },
-        "release": {
-          "state": "no_release_candidate_recorded",
-          "pendingCount": 0,
-          "oldestObservedAt": null,
-          "articleIds": []
         }
       },
       "sports": {
-        "counts": {
-          "researched_waiting_material_progress": 1
-        },
         "release": {
           "state": "no_release_candidate_recorded",
           "pendingCount": 0,
           "oldestObservedAt": null,
           "articleIds": []
+        },
+        "counts": {
+          "researched_waiting_material_progress": 1
         }
       },
       "culture-news": {
-        "counts": {
-          "research_pending": 3,
-          "candidate_not_read": 9
-        },
         "release": {
           "state": "no_release_candidate_recorded",
           "pendingCount": 0,
           "oldestObservedAt": null,
           "articleIds": []
+        },
+        "counts": {
+          "research_pending": 3,
+          "candidate_not_read": 9
         }
       }
     },
@@ -7449,16 +7501,16 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-19T15:04:07.951Z",
-    "source_commit": "4ecef5073e3d4b4a014c087828623cdeaa34e2cd",
-    "saved_version": 680,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json",
+    "observed_at": "2026-11-19T17:43:36.024Z",
+    "source_commit": "4c870ba3d62766ec8eb5c549b13a4548eb0d4d38",
+    "saved_version": 681,
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
     "desks": {
       "news": {
-        "last_new_published_at": "2026-11-19T08:05+02:00",
-        "last_new_id": "rokach-pedestrian-killed-motorcycle-20261119",
-        "last_substantive_update_at": "2026-11-19T06:12:12.880956+00:00",
-        "last_updated_id": "haymanot-kasau-tel-aviv-rally-18nov-20261118",
+        "last_new_published_at": "2026-11-19T17:07:37.472451+00:00",
+        "last_new_id": "purple-line-licensing-milestone-20261119",
+        "last_substantive_update_at": "2026-11-19T17:07:37.472451+00:00",
+        "last_updated_id": "purple-line-licensing-milestone-20261119",
         "update_basis": "declared body update/publication metadata; technical lead change counted separately",
         "published_count": 94,
         "handoff_status_counts": {
@@ -7473,21 +7525,21 @@
         "ledger_sha256": "d5099886451403bbb427b53b640fd419015002a21aaaea55344db6af301795ca",
         "latest_body_sha256": "97919bad178431b1a6c285b1befb12d95e25500cf70889259c44f93af4fab951",
         "section_url": "https://tlvnet.com/news/index.html",
-        "lead_article_id": "rokach-pedestrian-killed-motorcycle-20261119",
-        "lead_published_at": "2026-11-19T08:05+02:00",
-        "last_owner_run_id": "2121bc7c-3c80-8326-a9f7-a4ae0173b2d1",
-        "last_owner_completed_at": null,
+        "lead_article_id": "purple-line-licensing-milestone-20261119",
+        "lead_published_at": "2026-11-19T17:07:37.472451+00:00",
+        "last_owner_run_id": "029724f7-36f0-8326-9175-25afd9275a96",
+        "last_owner_completed_at": "2026-11-19T17:16:12.888505Z",
         "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
         "owner_run_changed_since_checkpoint": true,
         "last_new_published_basis": "Current source metadata; no publication-date changes; linked public owner evidence retained.",
-        "last_owner_run_status": "in_progress",
+        "last_owner_run_status": "completed",
         "pending_owner_result": false,
         "coverage_state": "incomplete_owner_reported_queue_retained",
         "pending_draft_id": null,
         "pending_draft_inbox": null,
         "last_release_executor_task_id": "Automation_9776808c73848191a9d748dd09315960",
         "last_release_runKey": "continuity-repair-20261115T130716Z",
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-19/9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7.json",
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
         "remaining_queue": [
           {
             "content_id": "coverage-dan-levinski-289-5-20261116",
@@ -7607,8 +7659,8 @@
             "reason": "17Novpublication describes event afterSaturday, no actualeventdate established; not presented as tonight."
           }
         ],
-        "source_commit": "5ebb06222c12291751c46fd897a1c2c75691bb1b",
-        "saved_version": 664,
+        "source_commit": "4c870ba3d62766ec8eb5c549b13a4548eb0d4d38",
+        "saved_version": 681,
         "last_owner_started_at": "2026-11-19T05:56:32.250947Z",
         "throughput_followup": {
           "status": "normal_owner_published4_verified",
@@ -7630,17 +7682,160 @@
         "metadata_checked_at": "2026-11-19T06:19:28Z",
         "coverage_queue_count": 17,
         "coverage_queue_checkpoint": "public/news/agents/news/ledger.json",
-        "public_verification": {
-          "original_owner_verified": true,
-          "controller_independent_readback": true,
-          "article_ids": [
-            "rokach-pedestrian-killed-motorcycle-20261119",
-            "haymanot-kasau-tel-aviv-rally-18nov-20261118"
-          ],
-          "desktop_mobile": "pending"
-        },
+        "public_verification": [
+          {
+            "id": "yehuda-maccabi-tree-collapse-20261119",
+            "url": "https://tlvnet.com/news/yehuda-maccabi-tree-collapse-20261119",
+            "title": "עץ קרס ביהודה המכבי; בבוקר נחסם הכביש, ללא דיווח על נפגעים",
+            "pass": true,
+            "source_article": {
+              "id": "yehuda-maccabi-tree-collapse-20261119",
+              "published_at": "2026-11-19T17:07:37.472451+00:00",
+              "updated_at": "2026-11-19T17:07:37.472451+00:00",
+              "section": "news",
+              "status": "published",
+              "image_credit": "שדרות רוטשילד, תל אביב · Depositphotos"
+            },
+            "body_paragraphs_verified": {
+              "id": "yehuda-maccabi-tree-collapse-20261119",
+              "matches": 4,
+              "paragraphs": 4,
+              "title_match": true
+            },
+            "asset_path": "/photo-bank/assets/deposit-rothschild-boulevard-cafes.jpg",
+            "asset_sha256": "77cf9bdc0aeb0f00fbfcfd5779a68191ca5eac9b3e16d80da14156178ec13c94",
+            "asset": {
+              "jpeg": true,
+              "hash_matches": true,
+              "bytes": 555302
+            },
+            "visible_credit": "אילוסטרציה · שדרות רוטשילד, תל אביב · Depositphotos מקור",
+            "home_link": true,
+            "section_link": true
+          },
+          {
+            "id": "einstein-lane-reduction-nov23-20261119",
+            "url": "https://tlvnet.com/news/einstein-lane-reduction-nov23-20261119",
+            "title": "באיינשטיין: שני לילות סגירה וצמצום נתיבים לכשנה",
+            "pass": true,
+            "source_article": {
+              "id": "einstein-lane-reduction-nov23-20261119",
+              "published_at": "2026-11-19T17:07:37.472451+00:00",
+              "updated_at": "2026-11-19T17:07:37.472451+00:00",
+              "section": "news",
+              "status": "published",
+              "image_credit": "אילוסטרציה – AI"
+            },
+            "body_paragraphs_verified": {
+              "id": "einstein-lane-reduction-nov23-20261119",
+              "matches": 4,
+              "paragraphs": 4,
+              "title_match": true
+            },
+            "asset_path": "/photo-bank/assets/tlv-night-roadworks-ai-20261109.jpg",
+            "asset_sha256": "950628be78ce327a463330e7302ff9e14d5171158c757e9803decba1293719f1",
+            "asset": {
+              "jpeg": true,
+              "hash_matches": true,
+              "bytes": 363674
+            },
+            "visible_credit": "להמחשה",
+            "home_link": true,
+            "section_link": true
+          },
+          {
+            "id": "har-zion-salomon-new-junction-20261119",
+            "url": "https://tlvnet.com/news/har-zion-salomon-new-junction-20261119",
+            "title": "הלילה בסלומון: עבודות לקראת צומת מרומזר חדש בהר ציון",
+            "pass": true,
+            "source_article": {
+              "id": "har-zion-salomon-new-junction-20261119",
+              "published_at": "2026-11-19T17:07:37.472451+00:00",
+              "updated_at": "2026-11-19T17:07:37.472451+00:00",
+              "section": "news",
+              "status": "published",
+              "image_credit": "אילוסטרציה – AI"
+            },
+            "body_paragraphs_verified": {
+              "id": "har-zion-salomon-new-junction-20261119",
+              "matches": 4,
+              "paragraphs": 4,
+              "title_match": true
+            },
+            "asset_path": "/photo-bank/assets/tlv-night-roadworks-ai-20261109.jpg",
+            "asset_sha256": "950628be78ce327a463330e7302ff9e14d5171158c757e9803decba1293719f1",
+            "asset": {
+              "jpeg": true,
+              "hash_matches": true,
+              "bytes": 363674
+            },
+            "visible_credit": "להמחשה",
+            "home_link": true,
+            "section_link": true
+          },
+          {
+            "id": "reifman-road-resurfacing-nov29-20261119",
+            "url": "https://tlvnet.com/news/reifman-road-resurfacing-nov29-20261119",
+            "title": "רייפמן ייסגר לעבודות סלילה בסוף נובמבר; גם החניה תוגבל",
+            "pass": true,
+            "source_article": {
+              "id": "reifman-road-resurfacing-nov29-20261119",
+              "published_at": "2026-11-19T17:07:37.472451+00:00",
+              "updated_at": "2026-11-19T17:07:37.472451+00:00",
+              "section": "news",
+              "status": "published",
+              "image_credit": "אילוסטרציה – AI"
+            },
+            "body_paragraphs_verified": {
+              "id": "reifman-road-resurfacing-nov29-20261119",
+              "matches": 3,
+              "paragraphs": 3,
+              "title_match": true
+            },
+            "asset_path": "/photo-bank/assets/day-road-resurfacing-ai-20261119.jpg",
+            "asset_sha256": "3cd0e614dcc26681a004d21dc911d12b05d83e9aaf5fa5813890fc45f75d9c7a",
+            "asset": {
+              "jpeg": true,
+              "hash_matches": true,
+              "bytes": 504566
+            },
+            "visible_credit": "להמחשה",
+            "home_link": true,
+            "section_link": true
+          },
+          {
+            "id": "purple-line-licensing-milestone-20261119",
+            "url": "https://tlvnet.com/news/purple-line-licensing-milestone-20261119",
+            "title": "לפי דיווחים: הושלם רישוי הקו הסגול; פתיחתו מתוכננת ליוני 2028",
+            "pass": true,
+            "source_article": {
+              "id": "purple-line-licensing-milestone-20261119",
+              "published_at": "2026-11-19T17:07:37.472451+00:00",
+              "updated_at": "2026-11-19T17:07:37.472451+00:00",
+              "section": "news",
+              "status": "published",
+              "image_credit": "אילוסטרציה – AI"
+            },
+            "body_paragraphs_verified": {
+              "id": "purple-line-licensing-milestone-20261119",
+              "matches": 4,
+              "paragraphs": 4,
+              "title_match": true
+            },
+            "asset_path": "/photo-bank/assets/tlv-night-roadworks-ai-20261109.jpg",
+            "asset_sha256": "950628be78ce327a463330e7302ff9e14d5171158c757e9803decba1293719f1",
+            "asset": {
+              "jpeg": true,
+              "hash_matches": true,
+              "bytes": 363674
+            },
+            "visible_credit": "להמחשה",
+            "home_link": true,
+            "section_link": true
+          }
+        ],
         "lead_basis": "Current fresh source plus news freshness regression and actual live news/home links",
-        "last_owner_new_articles": 1,
+        "last_owner_new_articles": 5,
         "last_owner_prepared_articles": 0,
         "controller_new_deployed_articles": 0,
         "morning_original_owner_new_verified_articles": 4,
@@ -7706,13 +7901,6 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
         },
         "latest_live_dispatch": {
-          "counts": {
-            "research_pending": 1,
-            "blocked": 12,
-            "primary_pending": 1,
-            "resolved_updated_existing_verified": 1,
-            "candidate_not_read": 8
-          },
           "release": {
             "state": "release_or_verification_pending",
             "pendingCount": 1,
@@ -7720,10 +7908,17 @@
             "articleIds": [
               "arlozorov-salomon-infrastructure-works-nov2026"
             ]
+          },
+          "counts": {
+            "publication_pending_verification": 6,
+            "blocked": 11,
+            "primary_pending": 1,
+            "resolved_updated_existing_verified": 1,
+            "candidate_not_read": 8
           }
         },
-        "last_section_link_checked_at": "2026-11-19T15:04:07.951Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json"
+        "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
       },
       "real-estate": {
         "last_new_published_at": "2026-11-19T14:46:09.318594+00:00",
@@ -7842,22 +8037,21 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
         },
         "latest_live_dispatch": {
-          "counts": {
-            "blocked": 3,
-            "research_pending": 2,
-            "outside_scope_handoff": 1,
-            "candidate_not_read": 1,
-            "publication_pending_verification": 1
-          },
           "release": {
             "state": "no_release_candidate_recorded",
             "pendingCount": 0,
             "oldestObservedAt": null,
             "articleIds": []
+          },
+          "counts": {
+            "blocked": 3,
+            "research_pending": 2,
+            "outside_scope_handoff": 1,
+            "candidate_not_read": 1
           }
         },
-        "last_section_link_checked_at": "2026-11-19T15:04:07.951Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json"
+        "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
       },
       "economy-tech": {
         "last_new_published_at": "2026-11-18T10:21:46.730111+00:00",
@@ -7961,20 +8155,20 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
         },
         "latest_live_dispatch": {
-          "counts": {
-            "handoff": 1,
-            "blocked": 3,
-            "candidate_not_read": 3
-          },
           "release": {
             "state": "no_release_candidate_recorded",
             "pendingCount": 0,
             "oldestObservedAt": null,
             "articleIds": []
+          },
+          "counts": {
+            "handoff": 1,
+            "blocked": 3,
+            "candidate_not_read": 3
           }
         },
-        "last_section_link_checked_at": "2026-11-19T15:04:07.951Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json"
+        "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
       },
       "community": {
         "last_new_published_at": "2026-11-18T11:11:13.937148+00:00",
@@ -8043,17 +8237,17 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
         },
         "latest_live_dispatch": {
-          "counts": {
-            "primary_verification_pending": 1,
-            "blocked": 5,
-            "candidate_not_read": 5,
-            "outside_scope_handoff": 1
-          },
           "release": {
             "state": "no_release_candidate_recorded",
             "pendingCount": 0,
             "oldestObservedAt": null,
             "articleIds": []
+          },
+          "counts": {
+            "primary_verification_pending": 1,
+            "blocked": 5,
+            "candidate_not_read": 5,
+            "outside_scope_handoff": 1
           }
         },
         "latest_owner_prepared_checkpoint": {
@@ -8087,8 +8281,8 @@
           },
           "findings": "Original owner picked up and prepared eligible update. Earlier article already contains 24 Nov 22:00 city-wide registration in a paragraph; prepared rewrite is not live. Compare exact body and asset after actual lease release. Preserve original owner and do not republish the existing article."
         },
-        "last_section_link_checked_at": "2026-11-19T15:04:07.951Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json",
+        "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
         "pending_ready": 1,
         "pending_verification": 7,
         "coverage_status": "Owner prepared update; immutable ops checkpoint retained while shared lane held",
@@ -8155,21 +8349,21 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
         },
         "latest_live_dispatch": {
-          "counts": {
-            "primary_terms_pending": 2,
-            "primary_verification_pending": 2,
-            "primary_date_and_scope_pending": 1,
-            "candidate_not_read": 1
-          },
           "release": {
             "state": "no_release_candidate_recorded",
             "pendingCount": 0,
             "oldestObservedAt": null,
             "articleIds": []
+          },
+          "counts": {
+            "primary_terms_pending": 2,
+            "primary_verification_pending": 2,
+            "primary_date_and_scope_pending": 1,
+            "candidate_not_read": 1
           }
         },
-        "last_section_link_checked_at": "2026-11-19T15:04:07.951Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json",
+        "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
         "publication_status": "published_verified_journal_pending_mobile_pending",
         "pending_ready": 0,
         "pending_verification": 5,
@@ -8376,18 +8570,18 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json"
         },
         "latest_live_dispatch": {
-          "counts": {
-            "researched_waiting_material_progress": 1
-          },
           "release": {
             "state": "no_release_candidate_recorded",
             "pendingCount": 0,
             "oldestObservedAt": null,
             "articleIds": []
+          },
+          "counts": {
+            "researched_waiting_material_progress": 1
           }
         },
-        "last_section_link_checked_at": "2026-11-19T15:04:07.951Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json"
+        "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
       },
       "culture-news": {
         "last_new_published_at": "2026-11-19T09:50+02:00",
@@ -8550,19 +8744,19 @@
           }
         ],
         "latest_live_dispatch": {
-          "counts": {
-            "research_pending": 3,
-            "candidate_not_read": 9
-          },
           "release": {
             "state": "no_release_candidate_recorded",
             "pendingCount": 0,
             "oldestObservedAt": null,
             "articleIds": []
+          },
+          "counts": {
+            "research_pending": 3,
+            "candidate_not_read": 9
           }
         },
-        "last_section_link_checked_at": "2026-11-19T15:04:07.951Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/65b92745-d7d0-832e-a574-d87e57682c18.json"
+        "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
       },
       "neighborhoods": {
         "total": 73,
@@ -8648,7 +8842,12 @@
         "url": "https://tlvnet.com/",
         "status": 200,
         "lead": "הבטיחו לנו 250 ק״מ של שבילי אופניים עד 2025. אז למה היעד השתנה ל־2030?",
-        "references": [
+        "refs": [
+          "yehuda-maccabi-tree-collapse-20261119",
+          "einstein-lane-reduction-nov23-20261119",
+          "har-zion-salomon-new-junction-20261119",
+          "reifman-road-resurfacing-nov29-20261119",
+          "purple-line-licensing-milestone-20261119",
           "bnei-efraim-217-planned-demolition-20261119",
           "la-guardia-bicycle-network-20261119",
           "country-lamed-planning-framework-explained-20261118"
@@ -8658,10 +8857,15 @@
         "url": "https://tlvnet.com/news/",
         "status": 200,
         "lead": [
-          "/news/rokach-pedestrian-killed-motorcycle-20261119",
-          "הולכת רגל נהרגה מפגיעת אופנוע בשדרות רוקח"
+          "/news/purple-line-licensing-milestone-20261119",
+          "לפי דיווחים: הושלם רישוי הקו הסגול; פתיחתו מתוכננת ליוני 2028"
         ],
-        "references": [
+        "refs": [
+          "yehuda-maccabi-tree-collapse-20261119",
+          "einstein-lane-reduction-nov23-20261119",
+          "har-zion-salomon-new-junction-20261119",
+          "reifman-road-resurfacing-nov29-20261119",
+          "purple-line-licensing-milestone-20261119",
           "bnei-efraim-217-planned-demolition-20261119",
           "la-guardia-bicycle-network-20261119",
           "country-lamed-planning-framework-explained-20261118"
@@ -8674,7 +8878,7 @@
           "/news/bnei-efraim-217-planned-demolition-20261119",
           "בני אפרים 217: הריסה מתוכננת מיום ראשון ושינוי במעבר הולכי הרגל"
         ],
-        "references": [
+        "refs": [
           "bnei-efraim-217-planned-demolition-20261119",
           "country-lamed-planning-framework-explained-20261118"
         ]
@@ -8686,7 +8890,7 @@
           "/news/tlv-center-tech-entry-jobs-snapshot-20261118",
           "אלפי משרות הייטק באזור תל אביב והמרכז, רק כ־3% למתחילים"
         ],
-        "references": []
+        "refs": []
       },
       "community": {
         "url": "https://tlvnet.com/news/community",
@@ -8695,7 +8899,7 @@
           "/news/arik-einstein-neighborhood-hanukkah-20261117",
           "מדליקים יחד בדב הוז: חגיגת חנוכה ברחבה של אריק איינשטיין"
         ],
-        "references": [
+        "refs": [
           "tlv-neighborhood-garage-sale-20261106"
         ]
       },
@@ -8706,7 +8910,7 @@
           "/news/good-pharm-charity-cream-terms-20261119",
           "קרם ב־10 שקלים ותרומה לאגודה: מה כוללת יוזמת גוד פארם"
         ],
-        "references": []
+        "refs": []
       },
       "sports": {
         "url": "https://tlvnet.com/news/sports",
@@ -8715,7 +8919,7 @@
           "/news/hapoel-paris-pace-enis-return-20261119",
           "מבחן הקצב של הפועל בפריז: איטודיס דורש תרומה מכולם"
         ],
-        "references": []
+        "refs": []
       },
       "culture-news": {
         "url": "https://tlvnet.com/news/culture",
@@ -8724,7 +8928,7 @@
           "/news/solidarity-film-festival-20261210-20261119",
           "עשרה ימים של קולנוע וזכויות אדם: סולידריות חוזר לסינמטק"
         ],
-        "references": []
+        "refs": []
       },
       "bli-heshbon": {
         "url": "https://tlvnet.com/news/bli-heshbon",
@@ -8733,7 +8937,7 @@
           "/news/la-guardia-bicycle-network-20261119",
           "הבטיחו לנו 250 ק״מ של שבילי אופניים עד 2025. אז למה היעד השתנה ל־2030?"
         ],
-        "references": [
+        "refs": [
           "la-guardia-bicycle-network-20261119"
         ]
       }
@@ -9186,14 +9390,14 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-19T16:57:54.984Z",
-    "from": "2026-11-19T14:51:21Z",
-    "through": "2026-11-19T16:49:01Z",
-    "strictly_new": 110,
+    "observed_at": "2026-11-19T17:43:36.024Z",
+    "from": "2026-11-19T16:49:01Z",
+    "through": "2026-11-19T17:09:49Z",
+    "strictly_new": 8,
     "boundary_crossed": true,
-    "full_logs_read": 4,
+    "full_logs_read": 0,
     "pending_run_ids": [],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/6fe3b20b-30d4-832e-ba6d-d891ed5bd241.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -9455,7 +9659,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-19T16:57:54.984Z",
+    "observed_at": "2026-11-19T17:43:36.024Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -9520,6 +9724,10 @@
       {
         "path": "ops/incident-response/inbox/2026-11-19-cinema-v2-verification-cinema-20261119-1795101154.json",
         "sha": "1e8d476903192b9cda203060c7c03cd2ce17c7e8"
+      },
+      {
+        "path": "ops/incident-response/inbox/2026-11-19-news-evening-20261119-1795107991-verified.json",
+        "sha": "5d253c3ac0b464f328c5e0de983394ff0483a6f2"
       },
       {
         "path": "ops/incident-response/inbox/2026-11-19-news-morning-python-bs4.json",
@@ -9770,6 +9978,14 @@
         "sha": "455c26f8caff761741a4057e904439b52adf1ecb"
       },
       {
+        "path": "ops/incident-response/inbox/6fe3b20b-30d4-832e-ba6d-d891ed5bd241-isnet-operational-artifact-boundary.json",
+        "sha": "249c830e2a7784612315d1f5181e778176747a8c"
+      },
+      {
+        "path": "ops/incident-response/inbox/6fe3b20b-30d4-832e-ba6d-d891ed5bd241-playwright155-ubuntu2604.json",
+        "sha": "e076d7b4755551ecb0e7e9b08221e5b43f0e9133"
+      },
+      {
         "path": "ops/incident-response/inbox/76b93745-e058-8326-a9d3-755615b03c24-historical-cinema-fixture.json",
         "sha": "ac2a5e31504faa444cca40c516d1bb2295224bf5"
       },
@@ -10011,7 +10227,7 @@
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/6fe3b20b-30d4-832e-ba6d-d891ed5bd241.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
   },
   "source_report_checkpoint": {
     "status": "executed_on_current_published_source_plus_owner_receipt",
@@ -10386,5 +10602,45 @@
     "run_id": 44571272587,
     "evidence": "ops/tlvnet-stability/observations/2026-11-19/6fe3b20b-30d4-832e-ba6d-d891ed5bd241.json",
     "source_separation_remaining": true
+  },
+  "latest_raanana_independent_readback": {
+    "target": "ISNET-CMS-59",
+    "id": 812316,
+    "status": "published_verified",
+    "owner_run_id": "f8bc7230-09d4-8325-ae2a-8ee2199b009c",
+    "cms_record": true,
+    "article": {
+      "status": 200,
+      "url": "https://raanananet.co.il/%d7%97%d7%93%d7%a9%d7%95%d7%aa/%d7%90%d7%99%d7%a9%d7%95%d7%a8-%d7%90%d7%9b%d7%9c%d7%95%d7%a1-%d7%9c-64-%d7%93%d7%99%d7%a8%d7%95%d7%aa-%d7%91%d7%a8%d7%97%d7%95%d7%91-%d7%94%d7%92%d7%93%d7%95%d7%93-%d7%94%d7%a2%d7%91%d7%a8%d7%99-%d7%9e%d7%94-%d7%9e%d7%a9%d7%aa%d7%a0%d7%94-%d7%91%d7%a9%d7%9b%d7%95%d7%a0%d7%aa-%d7%95%d7%99%d7%a6%d7%9e%d7%9f-812316",
+      "h1": "אישור אכלוס ל־64 דירות ברחוב הגדוד העברי: מה משתנה בשכונת ויצמן?",
+      "core_paragraph_count": 7,
+      "image": "https://raanananet.co.il/dyncontent/tmp/242/2026_11_19_71649338-859d-4641-90ba-c7ec863c875d_1200_628_Fit_.jpg",
+      "credit": true,
+      "credit_caption": "התמונה: צילום אילוסטרציה של בנייני מגורים מחוץ לרעננה; אינה תמונה של הפרויקט ברחוב הגדוד העברי. צילום: SHOX ART / Pexels.",
+      "section_labels": [
+        "חדשות נדל\"ן"
+      ]
+    },
+    "served_image": {
+      "valid": true,
+      "dimensions": [
+        418,
+        628
+      ],
+      "format": "JPEG"
+    },
+    "section": {
+      "url": "https://raanananet.co.il/%d7%97%d7%93%d7%a9%d7%95%d7%aa/%d7%97%d7%93%d7%a9%d7%95%d7%aa-%d7%a0%d7%93%d7%9c-%d7%9f",
+      "heading": "חדשות נדל\"ן",
+      "article_link": true
+    },
+    "home": {
+      "url": "https://raanananet.co.il/",
+      "links_new_article": true,
+      "prior_recent_lead_still_first": true,
+      "home_new_article_not_first_lead": true
+    },
+    "visual_review": "pending desktop and 390px; no template edit",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json"
   }
 }
