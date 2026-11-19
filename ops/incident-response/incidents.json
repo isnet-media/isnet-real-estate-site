@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18T19:56:42Z",
+  "updated_at": "2026-11-19T06:19:28Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6196,9 +6196,35 @@
       "next_action": "Use the existing production release owner's authenticated source path and TLVNET-site CAS. Apply this single-asset patch to current source, check the generated detail and section captions, run publication checks and confirm the same public URLs after one deployment. Store fixture-specific context with an individual article or review; keep reusable bank descriptions fixture-neutral.",
       "inbox": "ops/incident-response/inbox/bbc71902-e2b8-8322-a9e5-ca1d812e7928-sports-caption-context-reuse.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json"
+    },
+    {
+      "id": "tlvnet-news-python-bs4-after-workspace-cleanup",
+      "status": "mitigated",
+      "fingerprint": "build-news-python-missing-bs4-after-workspace-cleanup",
+      "root_cause": "Owner reported that the workspace cleanup left the local Python build environment without Beautiful Soup, imported by scripts/build-news.py.",
+      "impact": "The first build stopped before deployment. A focused retry after dependency installation succeeded and both morning content results were independently observed on the public site.",
+      "change_status": "Owner installed the dependency in its runtime. Persistent build setup was not modified.",
+      "occurrences": [
+        {
+          "observed_at": "2026-11-19T06:07:17.394Z",
+          "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+          "owner_run_id": "1e99537f-c684-832a-9482-d6d8083d019d",
+          "owner_runKey": "news-20261119-morning-1795068050826",
+          "inbox": "ops/incident-response/inbox/2026-11-19-news-morning-python-bs4.json",
+          "version": 664
+        }
+      ],
+      "regression": {
+        "status": "public_release_recovered_persistent_regression_pending",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7.json"
+      },
+      "release_blocker": "No source checkout or reusable authenticated Sites source credential is available in this controller execution. The repair must use the existing authorized source path.",
+      "next_action": "Have the existing source owner declare or confirm Beautiful Soup in the tracked build dependencies, install the declared dependencies before build-news.py, and confirm the news build once from a clean workspace. Close the recurrence risk only after that check and a matching live result.",
+      "inbox": "ops/incident-response/inbox/2026-11-19-news-morning-python-bs4.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-18-bbc71902-e2b8-8322-a9e5-ca1d812e7928",
+  "last_review_runKey": "ops-2026-11-19-9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
