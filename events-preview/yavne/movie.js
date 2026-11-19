@@ -1,4 +1,8 @@
 // ISNET shared layout: edit events-preview/ashdod, not this generated file.
+const cinemaMinuteFormatter=new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
+let cinemaMinuteValue="",cinemaMinuteCheckedAt=0;
+function cinemaMinute(){const now=Date.now();if(!cinemaMinuteValue||now-cinemaMinuteCheckedAt>=1000){cinemaMinuteValue=cinemaMinuteFormatter.format(new Date(now)).slice(0,16);cinemaMinuteCheckedAt=now;}return cinemaMinuteValue;}
+function cinemaFutureTimes(day,times,now=cinemaMinute()){return (Array.isArray(times)?times:[]).filter(time=>typeof time==="string"&&/^\d{2}:\d{2}$/.test(time)&&day+" "+time>now);}
 const $=id=>document.getElementById(id);
 const fmtFull=new Intl.DateTimeFormat("he-IL",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
 const fmtShort=new Intl.DateTimeFormat("he-IL",{weekday:"short",day:"numeric",month:"short"});
@@ -7,10 +11,10 @@ function localDate(s){const [y,m,d]=String(s||"").split("-").map(Number);return 
 function movieUrl(id){return window.CinemaEditorial?.url(id)||"movie.html?id="+encodeURIComponent(id)}
 function venueLabel(id){return id==="cinema-city"?"סינמטק יבנה":"סינמטק יבנה יבנה"}
 function cinemaToday(){return new Intl.DateTimeFormat("sv-SE",{timeZone:"Asia/Jerusalem",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
-function activeMovieVenues(movie){return movie.venues.filter(v=>Object.entries(v.schedule||{}).some(([day,times])=>day>=cinemaToday()&&Array.isArray(times)&&times.length))}
+function activeMovieVenues(movie){return movie.venues.filter(v=>Object.entries(v.schedule||{}).some(([day,times])=>cinemaFutureTimes(day,times).length>0))}
 function allDates(movie){
   const dates=new Set();
-  activeMovieVenues(movie).forEach(v=>Object.keys(v.schedule||{}).filter(d=>d>=cinemaToday()&&Array.isArray(v.schedule[d])&&v.schedule[d].length).forEach(d=>dates.add(d)));
+  activeMovieVenues(movie).forEach(v=>Object.keys(v.schedule||{}).filter(d=>cinemaFutureTimes(d,v.schedule[d]).length>0).forEach(d=>dates.add(d)));
   return [...dates].sort();
 }
 function renderHero(movie){
@@ -50,9 +54,9 @@ function screeningBookingUrl(venue,date,time){
 }
 function renderSchedules(movie){
   $("cinemaSchedules").innerHTML=movie.venues.map(v=>{
-    const dates=Object.keys(v.schedule||{}).filter(d=>d>=cinemaToday()&&Array.isArray(v.schedule[d])&&v.schedule[d].length).sort();
+    const dates=Object.keys(v.schedule||{}).filter(d=>cinemaFutureTimes(d,v.schedule[d]).length>0).sort();
     const rows=dates.length?dates.map(date=>{
-      const times=(v.schedule[date]||[]).map(t=>{
+      const times=cinemaFutureTimes(date,v.schedule[date]).map(t=>{
         const url=screeningBookingUrl(v,date,t),label=t+(screeningLanguage(v,date,t)?" · "+screeningLanguage(v,date,t):"");
         return url?'<a class="showtime" href="'+escapeHtml(url)+'" target="_blank" rel="noopener noreferrer" aria-label="'+escapeHtml("פרטים והזמנה · "+movie.title+" · "+v.name+" · "+date+" · "+label)+'">'+escapeHtml(label)+'</a>':'<span class="showtime">'+escapeHtml(label)+'</span>';
       }).join("");
