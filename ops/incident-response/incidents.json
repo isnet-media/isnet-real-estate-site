@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T17:43:36.024Z",
+  "updated_at": "2026-11-19T18:13:01Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6582,7 +6582,7 @@
     },
     {
       "id": "culture-net-herzliya-public-404-20261119",
-      "status": "open",
+      "status": "fixed_verified",
       "fingerprint": "ISNET/CMS62/2120/existing-post-812268-not-projected-on-herzliya-sites",
       "root_cause": "Likely downstream ingestion or rendering of the existing CMS post. The last asserted live Herzliya synchronization completed before the owner created this record; exact importer exclusion/failure not yet established.",
       "occurrences": [
@@ -6617,7 +6617,19 @@
       "next_action": "Check existing Herzliya Sites sync output for CMS62/2120/post 812268, then verify canonical article URL, body/image/credit and department/home links after its normal ingestion. Preserve the CMS record and existing owner; do not recreate or guess URL.",
       "impact": "Herzliya only. Other targets reported separately by original owner.",
       "inbox": "ops/incident-response/inbox/20261119T094834Z-culture-net-herzliya-public-404.json",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json",
+      "updated_at": "2026-11-19T18:13:01Z",
+      "resolution": {
+        "verified_existing_post_id": 812268,
+        "public_url": "https://herzliyanet.co.il/תרבות-נט/אמריקה-העניקה-פרס-לספר-על-כלא-את-הסופר-היא-השאירה-מחוץ-לדלת-812268",
+        "public_section_url": "https://herzliyanet.co.il/news/culture/",
+        "homepage_url": "https://herzliyanet.co.il/",
+        "owner_version": 30,
+        "terminal_deployment_id": "appgdep_6aff36bd2dac8191977bdf539e1e94cd",
+        "body_and_jpeg_and_public_caption": true,
+        "no_controller_republish": true,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/4ed04bf3-611c-832e-b9ab-23ba90f1b795.json"
+      }
     },
     {
       "id": "tlvnet-economy-20261119-due-run-evidence-missing",
@@ -6973,7 +6985,7 @@
       "next_action": "Adopt isolated tested normalization in existing authorized source lane without rebuilding only for journal; preserve missing per-item classification."
     }
   ],
-  "last_review_runKey": "ops-2026-11-19-a892b30a-96b8-832e-8bb9-b1f67c8f8b3b",
+  "last_review_runKey": "ops-2026-11-19-4ed04bf3-611c-832e-b9ab-23ba90f1b795",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
