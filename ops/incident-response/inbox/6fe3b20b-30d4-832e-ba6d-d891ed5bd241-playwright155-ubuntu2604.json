@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "source": "github-actions",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "ops-2026-11-19-6fe3b20b-30d4-832e-ba6d-d891ed5bd241",
+  "policy_version": "2026-11-15/1.2",
+  "recorded_at": "2026-11-19T16:54:51.416Z",
+  "target": "ISNET event release checks",
+  "signature": "playwright155-ubuntu2604-browser-install",
+  "status": "open",
+  "evidence": {
+    "runs": [
+      "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44560679071",
+      "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44560679082"
+    ],
+    "failed_step": "npx playwright install --with-deps chromium",
+    "observed": "Playwright 1.55 rejects Chromium on ubuntu26.04-x64. Both workflows use ubuntu-latest. Data checks and browser verification are separate."
+  },
+  "next_action": "Reconcile exact supported runner with the existing workflow owner; test a supported runner or compatible pinned browser dependency without dropping browser verification or changing schedules. Avoid overlapping active Pages security release."
+}
