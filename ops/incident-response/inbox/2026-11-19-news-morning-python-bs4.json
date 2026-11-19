@@ -1,0 +1,13 @@
+{
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "runKey": "news-20261119-morning-1795068050826",
+  "recorded_at": "2026-11-19T06:07:17.394Z",
+  "target": "TLVNET-site",
+  "subsystem": "writer-local-build",
+  "root_signature": "build-news-python-missing-bs4-after-workspace-cleanup",
+  "status": "mitigated",
+  "evidence": "Initial scripts/build-news.py stopped during import: ModuleNotFoundError: No module named bs4. No deployment attempted from failed build.",
+  "change": "Installed beautifulsoup4 4.15.0 and soupsieve 4.1.2 in current runtime through ordinary pip. No repository dependency inputs or permissions changed.",
+  "next_action": "Complete current actual content build and live verification; controller can inspect runtime prerequisite recurrence in its normal cycle. No controller activation.",
+  "limitations": "Installed runtime prerequisite is not public publication success; public readback remains pending."
+}
