@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T10:30:30Z",
+  "updated_at": "2026-11-19T11:57:27Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6267,7 +6267,7 @@
     },
     {
       "id": "tlvnet-neighborhood-explicit-slug-stale-build-order",
-      "status": "mitigated",
+      "status": "fixed_verified",
       "fingerprint": "neighborhood_projection.explicit_slug_ignored_and_stale_static_build_order",
       "root_cause": [
         "Explicit neighborhood IDs only matched names/aliases, ignoring canonical slug lamed. Article has no other recognized alias text, so articleSummary returns null.",
@@ -6296,17 +6296,33 @@
       "public_proof": "Owner confirmed missing canonical area; isolated generated output repaired. Deployed repair/public verification pending.",
       "next_action": "Open fresh source, preserve parallel owner work, merge three-file patch, acquire/readback existing realCAS TLVNET-site/no concurrent deploy, run full normal preparation/build checks, publish once then verify affected summary and canonical area public link. Do not copy stale prepared-public fingerprints or republish article. Current controller independent public scope block remains; no release done thiscycle.",
       "latest_public_followup": {
-        "url": "https://tlvnet.com/city-hub/areas/ramat-aviv/",
-        "status": "general_area_link_gap_still_observed",
-        "sample": "General real-estate navigation and deal board link observed; no direct link to the Country Lamed article on this sampled page.",
-        "expected_story_url": "https://tlvnet.com/news/country-lamed-planning-framework-explained-20261118",
-        "canonical_northwest_portal_current_readback": "pending",
-        "patch_evidence": [
-          "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
-        ],
-        "observed_at": "2026-11-19T10:30:30Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
-      }
+        "status": "fixed_verified",
+        "feed_url": "https://tlvnet.com/city-hub/updates.json",
+        "article_id": "country-lamed-planning-framework-explained-20261118",
+        "feed_neighborhood": "תכנית ל'",
+        "feed_updated_at": "2026-11-18T14:57:55.576102+00:00",
+        "feed_article_path": "/news/country-lamed-planning-framework-explained-20261118.html",
+        "canonical_area_url": "https://tlvnet.com/city-hub/areas/northwest-coast/",
+        "exact_article_link_observed": true,
+        "general_area_url": "https://tlvnet.com/city-hub/areas/ramat-aviv/",
+        "general_area_link_not_observed": true,
+        "qualification": "Separate general area and canonical group. Earlier isolated regression applies to canonical slug and build order."
+      },
+      "fixed_verified_at": "2026-11-19T11:57:27Z",
+      "verified_recovery": {
+        "status": "fixed_verified",
+        "feed_url": "https://tlvnet.com/city-hub/updates.json",
+        "article_id": "country-lamed-planning-framework-explained-20261118",
+        "feed_neighborhood": "תכנית ל'",
+        "feed_updated_at": "2026-11-18T14:57:55.576102+00:00",
+        "feed_article_path": "/news/country-lamed-planning-framework-explained-20261118.html",
+        "canonical_area_url": "https://tlvnet.com/city-hub/areas/northwest-coast/",
+        "exact_article_link_observed": true,
+        "general_area_url": "https://tlvnet.com/city-hub/areas/ramat-aviv/",
+        "general_area_link_not_observed": true,
+        "qualification": "Separate general area and canonical group. Earlier isolated regression applies to canonical slug and build order."
+      },
+      "next": "Canonical feed and live area now match; retain previously documented regression proof."
     },
     {
       "id": "tlvnet-editorial-build-missing-target-artifact",
@@ -6469,7 +6485,7 @@
     },
     {
       "id": "tlvnet-investigations-publication-route-unverified",
-      "status": "open",
+      "status": "fixed_verified",
       "category": "publication_routing",
       "fingerprint": "TLVNET/investigations/first-owner-output-draft-no-verified-section-or-home-route",
       "root_cause": "Observed blocking condition: no verified publication integration for the investigation section. Exact current source file/guard is unconfirmed because current production source is not readable in this cycle via existing credentials.",
@@ -6482,9 +6498,9 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json"
         }
       ],
-      "evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/2b1c39ad-3c8c-832e-901a-7bcaac4e561a.json",
       "inbox": "ops/incident-response/inbox/9386f7de-5bf0-8332-bf04-b81deb328608-investigations-publication-route.json",
-      "next_action": "Use existing authenticated TLVNET source access to verify or wire the dedicated category, detail and section routes, and homepage selection. Verify that an unapproved draft keeps the existing slide, the first eligible owner release becomes the only hero, previous releases sort by original publication time, and mobile/desktop output plus normal story routes remain intact. Keep draft and assets with original owner; one normal release under TLVNET-site CAS after relevant checks.",
+      "next_action": "Keep original ownership, perform normal live checks for next eligible release.",
       "prevention": "Exercise the section + homepage flow with an original-owner fixture and preserve prelaunch fallback until the first approved release.",
       "latest_priority_followup": {
         "observed_at": "2026-11-19T10:30:30Z",
@@ -6502,7 +6518,39 @@
         },
         "status": "open",
         "evidence": "ops/tlvnet-stability/observations/2026-11-19/fdacb684-4d90-832e-9e28-106c28835cf7.json"
-      }
+      },
+      "fixed_verified_at": "2026-11-19T11:57:27Z",
+      "verified_recovery": {
+        "status": "fixed_verified",
+        "owner_task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
+        "byline": "אבי אור",
+        "owner_older_scheduled_run_id": "2c1dc8ea-0d80-832a-94e3-3d17ef9ad429",
+        "owner_release": {
+          "version": 673,
+          "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_33bc09f162588191985f89913a23c9b9",
+          "source_commit": "1173c4a993d05985f7b0db195619720264b51e9a",
+          "deployment_id": "appgdep_6afedcd0a5348191bf6cea754b33ef20",
+          "status": "succeeded",
+          "terminal_at": "2026-11-19T11:26:35.285443+00:00",
+          "access": "public",
+          "observed_at": "2026-11-19T11:57:27Z"
+        },
+        "owner_release_run_key": "publisher-headline-2026-11-19T11:24:05.812Z",
+        "basis": "Later owner release confirmed independently; earlier draft-only result superseded for this article.",
+        "article_id": "la-guardia-bicycle-network-20261119",
+        "url": "https://tlvnet.com/news/la-guardia-bicycle-network-20261119",
+        "headline": "הבטיחו לנו 250 ק״מ של שבילי אופניים עד 2025. אז למה היעד השתנה ל־2030?",
+        "section_url": "https://tlvnet.com/news/bli-heshbon",
+        "home_url": "https://tlvnet.com/",
+        "checks": [
+          "Live detail title, body, image element, and visible Depositphotos credit",
+          "Named section links to exact detail path",
+          "Same headline and matching link as lead on public homepage, dedicated section entry present",
+          "Cinema guide link and neighborhood path still render"
+        ],
+        "visual_review": "Browser DOM checked. Dedicated desktop and mobile screenshot QA not repeated."
+      },
+      "previous_evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json"
     },
     {
       "id": "culture-net-herzliya-public-404-20261119",
