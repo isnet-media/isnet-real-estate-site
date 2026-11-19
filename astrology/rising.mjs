@@ -1,158 +1,343 @@
-const radians = Math.PI / 180;
-const circle = value => (value % 360 + 360) % 360;
+import { localDayPositions, localInstants, positions, signIndex } from './rising-positions.mjs';
+import { glyphs, readings, roles, roleSummaries, signNames, synthesis } from './rising-readings.mjs';
 
-export function localInstants(date, time, zone) {
-  const nominal = Date.parse(date + 'T' + time + ':00Z');
-  if (!Number.isFinite(nominal)) return [];
-  const formatter = new Intl.DateTimeFormat('en-GB', {
-    timeZone: zone, calendar: 'gregory', numberingSystem: 'latn', hourCycle: 'h23',
-    year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit',
-    minute: '2-digit', second: '2-digit'
-  });
-  const clock = timestamp => {
-    const f = Object.fromEntries(formatter.formatToParts(timestamp).map(({type, value}) => [type, value]));
-    return Date.parse(`${f.year}-${f.month}-${f.day}T${f.hour}:${f.minute}:${f.second}Z`);
-  };
-  const offsets = new Set([-48,-24,-12,0,12,24,48].map(hours => {
-    const sample = nominal + hours * 3600000;
-    return clock(sample) - sample;
+const canonical = 'https://isnet.co.il/astrology/rising/';
+const form = document.querySelector('#rising-form');
+const fields = form.elements;
+const result = document.querySelector('#rising-result');
+const error = document.querySelector('#rising-error');
+const submit = document.querySelector('#rising-submit');
+const citySuggestions = document.querySelector('#rising-city-suggestions');
+const countrySuggestions = document.querySelector('#rising-country-suggestions');
+let revision = 0;
+
+function node(tag, content, className) {
+  const element = document.createElement(tag);
+  if (content) element.textContent = content;
+  if (className) element.className = className;
+  return element;
+}
+
+const normalize = value => value.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f\u0591-\u05bd\u05bf-\u05c7]/g,'').replace(/[-‐־’']/g,' ').replace(/\s+/g,' ').trim();
+const translations = {
+  'new york':'ניו יורק', london:'לונדון', paris:'פריז', berlin:'ברלין', moscow:'מוסקבה',
+  rome:'רומא', madrid:'מדריד', barcelona:'ברצלונה', athens:'אתונה', istanbul:'איסטנבול',
+  toronto:'טורונטו', montreal:'מונטריאול', 'los angeles':'לוס אנגלס', miami:'מיאמי',
+  chicago:'שיקגו', tokyo:'טוקיו', sydney:'סידני', melbourne:'מלבורן', dubai:'דובאי',
+  singapore:'סינגפור', amsterdam:'אמסטרדם', prague:'פראג', vienna:'וינה', warsaw:'ורשה',
+  'buenos aires':'בואנוס איירס', 'sao paulo':'סאו פאולו', kyiv:'קייב', kiev:'קייב',
+  bangkok:'בנגקוק', brussels:'בריסל', bucharest:'בוקרשט', budapest:'בודפשט', cairo:'קהיר',
+  lisbon:'ליסבון', stockholm:'סטוקהולם', copenhagen:'קופנהגן', oslo:'אוסלו', reykjavik:'רייקיאוויק'
+};
+const countryAliases = {
+  'ישראל':'israel','צרפת':'france','בריטניה':'united kingdom','אנגליה':'united kingdom',
+  'ארצות הברית':'united states','ארה"ב':'united states','ארה״ב':'united states','usa':'united states',
+  'united states of america':'united states','גרמניה':'germany','איטליה':'italy','ספרד':'spain',
+  'הולנד':'netherlands','יוון':'greece','טורקיה':'turkey','קנדה':'canada','אוסטרליה':'australia',
+  'רוסיה':'russia','אוקראינה':'ukraine','פולין':'poland','הודו':'india','מרוקו':'morocco','יפן':'japan',
+  'שוויץ':'switzerland','אוסטריה':'austria','ברזיל':'brazil','ארגנטינה':'argentina','מצרים':'egypt',
+  'פורטוגל':'portugal','בלגיה':'belgium','רומניה':'romania','הונגריה':'hungary','שוודיה':'sweden',
+  'דנמרק':'denmark','נורווגיה':'norway','איסלנד':'iceland','דרום אפריקה':'south africa','ניו זילנד':'new zealand'
+};
+const countryKey = text => countryAliases[normalize(text)] || normalize(text);
+const cityAliases = {'new york city':'new york','תל אביב יפו':'תל אביב','תל אביב-יפו':'תל אביב','גבעתיים':'givatayim'};
+const cityKey = text => cityAliases[normalize(text)] || normalize(text);
+const countryName = row => row[1].split(',').at(-1).trim();
+const province = row => row[1].split(',').slice(0,-1).join(',').trim();
+const cityLabel = row => translations[normalize(row[5])] || translations[normalize(row[0])] || row[0];
+const fullLabel = row => [cityLabel(row),province(row)].filter(Boolean).join(', ');
+
+let cityLoad;
+function loadCities() {
+  if (!cityLoad) cityLoad = fetch(new URL('./rising-cities.json',import.meta.url))
+    .then(response => {
+      if (!response.ok) throw new Error('city data unavailable');
+      return response.json();
+    })
+    .then(rows => rows.map(row => ({
+      row, nation: countryKey(countryName(row)),
+      names: [...new Set([cityKey(row[0]),cityKey(row[5]),cityKey(cityLabel(row)),cityKey(fullLabel(row)),cityKey([row[0],province(row)].filter(Boolean).join(' ')),cityKey([row[0],province(row)].filter(Boolean).join(', '))].filter(Boolean))]
+    })))
+    .catch(error => { cityLoad = undefined; throw error; });
+  return cityLoad;
+}
+
+function showError(message = '', field) {
+  error.textContent = message;
+  error.hidden = !message;
+  if (field) field.focus();
+}
+
+function suggest(list,values) {
+  list.replaceChildren(...[...new Set(values)].slice(0,12).map(value => {
+    const item = node('option');
+    item.value = value;
+    return item;
   }));
-  return [...offsets].map(offset => nominal - offset).filter(candidate => clock(candidate) === nominal);
 }
 
-export function risingLongitude(timestamp, latitude, longitude) {
-  if (!Number.isFinite(timestamp) || !Number.isFinite(latitude) || Math.abs(latitude) >= 66.5 ||
-      !Number.isFinite(longitude) || Math.abs(longitude) > 180) throw new RangeError('Invalid coordinates');
-  const days = timestamp / 86400000 + 2440587.5 - 2451545;
-  const centuries = days / 36525;
-  const theta = circle(280.46061837 + 360.98564736629 * days + 0.000387933 *
-    centuries ** 2 - centuries ** 3 / 38710000 + longitude) * radians;
-  const tilt = (23.43929111 - 0.013004167 * centuries) * radians;
-  return circle(Math.atan2(Math.cos(theta), -(Math.sin(theta) * Math.cos(tilt) +
-    Math.tan(latitude * radians) * Math.sin(tilt))) / radians);
+form.addEventListener('input',async event => {
+  const current = ++revision;
+  showError();
+  result.hidden = true;
+  if (![fields.city,fields.country].includes(event.target)) return;
+  try {
+    const cities = await loadCities();
+    if (revision !== current) return;
+    const city = cityKey(fields.city.value);
+    const nation = countryKey(fields.country.value);
+    const matches = cities.filter(item => !city || item.names.some(name => name.startsWith(city)));
+    suggest(citySuggestions,matches.filter(item => !nation || item.nation.startsWith(nation))
+      .flatMap(({row}) => [cityLabel(row),fullLabel(row)]));
+    suggest(countrySuggestions,matches.filter(item => !nation || item.nation.startsWith(nation))
+      .map(({row}) => countryName(row)));
+  } catch {
+    // A later edit or submission retries the local gazetteer.
+  }
+});
+
+function synchronize() {
+  fields.hour.disabled = fields.unknown.checked;
+}
+form.addEventListener('change',synchronize);
+synchronize();
+fields.hour.addEventListener('input', () => {
+  const digits = fields.hour.value.replace(/\D/g,'').slice(0,4);
+  fields.hour.value = digits.length > 2 ? digits.slice(0,2)+':'+digits.slice(2) : digits;
+});
+
+function matchedLocation(cities,city,nation) {
+  const exact = cities.filter(item => item.nation===nation && item.names.includes(city));
+  if (!exact.length) return null;
+  const first = exact[0].row;
+  if (exact.some(({row}) => row[4] !== first[4] || Math.hypot(row[2]-first[2],row[3]-first[3])>.1)) return false;
+  return [first[2],first[3],first[4]];
 }
 
-const readings = [
-  ['טלה','ישירות ויוזמה','פתיחה מהירה יכולה להניע שיחה או משימה תקועה. בקשרים קרובים ובעבודה, השהיה קצרה מאפשרת גם לאחרים לבחור איך להצטרף.','לפני ההצעה הבאה, שאלו מה הצד השני היה רוצה שיקרה.'],
-  ['שור','יציבות ונוכחות','רוגע ועקביות יכולים לשדר ביטחון גם בלי הרבה מילים. כשקצב הביצוע משתנה בעבודה או בבית, כדאי לברר מה חיוני לכם לשמר.','בחרו שינוי קטן שתוכלו לנסות בלי לוותר על שגרה שטובה לכם.'],
-  ['תאומים','סקרנות וגמישות','שאלות מהירות עשויות לפתוח דלתות בשיחה ובצוות. בקשר מתמשך, הישארות עם נושא אחד עוד רגע יכולה ליצור תחושה שמישהו באמת נשמע.','בשיחה הבאה שאלו שאלת המשך לפני שתספרו סיפור משלכם.'],
-  ['סרטן','רגישות לסביבה','אתם עשויים לשים לב מהר לאווירה ולמה שאנשים צריכים. בעבודה ובבית כדאי לומר גם מה אתם צריכים, כדי שהטיפול באחרים לא יהפוך לאחריות מובנת מאליה.','נסחו בקשה אחת שאפשר לענות עליה בצורה מעשית.'],
-  ['אריה','חום ונראות','נוכחות פתוחה יכולה להקל על אנשים להתחיל לדבר או להצטרף לפרויקט. בקשרים ובעבודה, שיתוף הבמה עשוי להעמיק את האמון מעבר לרושם הראשון.','תנו למישהו נוסף לפתוח שיחה שאתם בדרך כלל מובילים.'],
-  ['בתולה','דיוק והבחנה','היכולת להבחין בפרטים יכולה להרגיע צוות ולתת תמיכה מעשית בבית. לפעמים מה שנחוץ לצד השני הוא הקשבה לפני הצעת תיקון.','שאלו אם מתאים לקבל הצעה לפני שאתם נותנים אותה.'],
-  ['מאזניים','התחשבות ושיקול דעת','קל לכם לראות כמה נקודות מבט, תכונה שמועילה בשיתוף פעולה ובזוגיות. הבעת העדפה ברורה יכולה אפילו להקל על החלטה משותפת.','אמרו מה הייתם בוחרים לפני שתציעו פשרה.'],
-  ['עקרב','עומק ובירור','נוכחות שקטה וסקרנות לגבי מה שמסתתר מאחורי הדברים עשויות לבלוט מהר. בקשר קרוב או בעבודה, אפשר לבקש בהירות בלי להניח מראש כוונה.','הפכו השערה אחת לשאלה ישירה ומכבדת.'],
-  ['קשת','פתיחות ואופק רחב','רעיון חדש או נקודת מבט אחרת יכולים להכניס אנרגיה למפגש ולצוות. בקשר מתמשך, כדאי לבדוק איך ההתלהבות נשמרת גם בפרטים הקטנים.','בחרו רעיון אחד והגדירו פעולה קטנה שתוכלו להשלים השבוע.'],
-  ['גדי','אחריות ותכנון','היכולת לקחת דברים ברצינות עשויה להשרות אמון בעבודה ובבית. שיתוף בכוונה או בהתלבטות מוקדם יותר נותן לאחרים הזדמנות להיות שותפים.','בחרו משימה אחת שאפשר לחלוק, ובקשו עזרה לפני שהעומס גדל.'],
-  ['דלי','עצמאות ומחשבה מקורית','מבט מעט אחר יכול לשנות שיחה או לפתור בעיה קבוצתית. ביחסים ובעבודה, הסבר אישי וקונקרטי עוזר לאחרים להבין מה חשוב לכם.','תארו כבעיה מעשית אחת את השינוי שאתם רוצים לראות.'],
-  ['דגים','דמיון והקשבה','קליטת ניואנסים יכולה לעזור בשיחה ובעבודה יצירתית. לפני שאתם מקבלים על עצמכם עוד צורך של מישהו אחר, בררו מה התבקש ומה אתם יכולים לתת.','רשמו דבר אחד שאתם מרגישים ודבר אחד שאתם יודעים, והשוו ביניהם.']
-];
+const titles = ['שמש','ירח','אופק'];
 
-const form = typeof document === 'undefined' ? null : document.querySelector('#rising-form');
-if (form) {
-  const fields = form.elements;
-  const result = document.querySelector('#rising-result');
-  const citySuggestions = document.querySelector('#rising-city-suggestions');
-  const countrySuggestions = document.querySelector('#rising-country-suggestions');
-  const norm = value => value.normalize('NFD').replace(/\p{M}/gu,'').trim().toLowerCase().replace(/\s+/g,' ');
-  const aliases = {
-    'ישראל':'israel','צרפת':'france','בריטניה':'united kingdom','אנגליה':'united kingdom','ארצות הברית':'united states','ארה"ב':'united states',
-    'גרמניה':'germany','איטליה':'italy','ספרד':'spain','הולנד':'netherlands','יוון':'greece','טורקיה':'turkey','קנדה':'canada',
-    'אוסטרליה':'australia','רוסיה':'russia','אוקראינה':'ukraine','פולין':'poland','הודו':'india','מרוקו':'morocco','יפן':'japan',
-    'פריז':'paris','לונדון':'london','ניו יורק':'new york','new york city':'new york','united states of america':'united states','usa':'united states','רומא':'rome','אתונה':'athens','ברלין':'berlin','מדריד':'madrid',
-    'טורונטו':'toronto','מוסקבה':'moscow','מיאמי':'miami','טוקיו':'tokyo','סידני':'sydney'
+function card(index, candidates, degrees, unavailable) {
+  const card = node('article',null,'rising-card rising-card--'+index);
+  const known = candidates.length === 1;
+  card.append(node('span',known ? glyphs[candidates[0]]+'\uFE0E' : '—','rising-glyph'));
+  card.append(node('h3',roles[index]));
+  card.append(node('p',known ? signNames[candidates[0]] : candidates.length > 1 ? candidates.map(sign => signNames[sign]).join(' או ') : 'לא ניתן לקבוע','rising-card-name'));
+  if (known && degrees?.[index] != null) {
+    const within = degrees[index] % 30;
+    card.append(node('p',`${Math.floor(within*100)/100}° במזל`,'rising-degree'));
+    if (within < 0.15 || within > 29.85) card.append(node('small','קרוב לגבול בין מזלות. כדאי לבדוק מחדש את דיוק שעת הלידה והמיקום.'));
+  }
+  if (known) card.append(node('p',roleSummaries[index]));
+  else card.append(node('p',unavailable[index]));
+  return card;
+}
+
+function reading(index, sign) {
+  const [title, interpretation, practice] = readings[index][sign];
+  const details = node('details',null,'rising-reading');
+  const heading = node('summary',`${titles[index]} ב${signNames[sign]} · ${title}`);
+  details.append(heading,node('p',interpretation),node('h4','משהו שאפשר לנסות'),node('p',practice));
+  return details;
+}
+
+function render(sets,degrees,unavailable) {
+  const known = sets.map(signs => signs.length === 1 ? signs[0] : null);
+  result.replaceChildren();
+  const heading = node('h2','שלושת המזלות שלי');
+  heading.id = 'rising-result-heading';
+  heading.tabIndex = -1;
+  result.append(heading);
+  const cards = node('div',null,'rising-cards');
+  sets.forEach((signs,index) => cards.append(card(index,signs,degrees,unavailable)));
+  result.append(cards);
+  if (known.every(sign => sign !== null)) {
+    const combined = node('section',null,'rising-synthesis');
+    combined.append(node('h3','איך שלושת המזלות שלכם מתחברים?'));
+    for (const [theme,message] of synthesis(...known)) {
+      const block = node('article');
+      block.append(node('h4',theme),node('p',message));
+      combined.append(block);
+    }
+    result.append(combined);
+  } else result.append(node('p','קריאה משולבת מלאה זמינה כשאפשר לזהות בוודאות את שלושת המזלות.','rising-result-note'));
+  if (known.some(sign => sign !== null)) {
+    const readingsArea = node('section',null,'rising-reading-list');
+    readingsArea.append(node('h3','להעמיק בכל אחד מהמזלות'));
+    known.forEach((sign,index) => { if (sign !== null) readingsArea.append(reading(index,sign)); });
+    result.append(readingsArea);
+  }
+  result.append(sharing(known));
+  result.hidden = false;
+  heading.focus();
+}
+
+form.addEventListener('submit',async event => {
+  event.preventDefault();
+  showError();
+  result.hidden = true;
+  if (!fields.day.value || !fields.day.validity.valid) {
+    showError('בחרו תאריך לידה מלא בין 1900 ל־2099.',fields.day);
+    return;
+  }
+  if (!fields.unknown.checked && !/^([01]\d|2[0-3]):[0-5]\d$/.test(fields.hour.value)) {
+    showError('כתבו שעת לידה בפורמט 24 שעות (למשל 14:35), או סמנו ששעת הלידה לא ידועה.',fields.hour);
+    return;
+  }
+  const city = cityKey(fields.city.value);
+  const nation = countryKey(fields.country.value);
+  if (!city || !nation) {
+    showError('הקלידו את עיר הלידה ואת מדינת הלידה.',city ? fields.country : fields.city);
+    return;
+  }
+  const current = ++revision;
+  let cities;
+  try { cities = await loadCities(); }
+  catch {
+    if (current === revision) showError('רשימת הערים לא זמינה כרגע. אפשר ללחוץ שוב על כפתור החישוב.');
+    return;
+  }
+  if (current !== revision) return;
+  const place = matchedLocation(cities,city,nation);
+  if (!place) {
+    showError(place===false ? 'יש כמה ערים בשם הזה באותה מדינה. בחרו הצעה שמציינת גם מחוז, או הקלידו עיר ומחוז.' :
+      'לא מצאנו עיר תואמת במדינה שהוזנה. בדקו את האיות או נסו את שם העיר באנגלית.',fields.city);
+    return;
+  }
+  const [lat,lon,zone] = place;
+  try {
+    if (fields.unknown.checked) {
+      const sets = localDayPositions(fields.day.value,zone);
+      if (!sets) {
+        showError('תאריך הלידה אינו קיים בלוח המקומי של אזור הזמן שנבחר. בדקו את התאריך והמקום.');
+        return;
+      }
+      render(sets,null,['השמש החליפה מזל באותו יום. דרושה שעה.','הירח החליף מזל באותו יום. דרושה שעה.','חישוב האופק דורש שעת לידה.']);
+      return;
+    }
+    const instants = localInstants(fields.day.value,fields.hour.value,zone);
+    if (!instants.length) {
+      showError('השעה לא התקיימה בתאריך ובאזור הזמן שנבחרו. ייתכן שמדובר במעבר לשעון קיץ.',fields.hour);
+      return;
+    }
+    const calculated = instants.map(instant => positions(instant,lat,lon));
+    const sets = titles.map((_title,index) => [...new Set(calculated.map(row => signIndex(row[index])).filter(sign => sign !== null))]);
+    if (instants.length > 1) sets[2] = [];
+    const crossover = 'השעה המקומית התקיימה פעמיים בגלל שינוי שעון. שעה עם ציון ההיסט מ־UTC דרושה להכרעה.';
+    render(sets,instants.length === 1 ? calculated[0] : null,[crossover,crossover,instants.length > 1 ? crossover : 'חיתוך האופק אינו חד־משמעי בנקודה הזאת.']);
+  } catch {
+    showError('לא ניתן לחשב לפי הפרטים שהוזנו. בדקו שוב את תאריך הלידה ואת פרטי המקום.');
+  }
+});
+submit.disabled = false;
+
+function shareImage(known) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1200;
+  canvas.height = 1200;
+  const ctx = canvas.getContext('2d');
+  const sky = ctx.createLinearGradient(100,0,1100,1200);
+  sky.addColorStop(0,'#171425');
+  sky.addColorStop(.55,'#1f2144');
+  sky.addColorStop(1,'#101228');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0,0,1200,1200);
+  const gold = '#f0cf91';
+  ctx.strokeStyle = gold;
+  ctx.lineWidth = 3;
+  ctx.strokeRect(42,42,1116,1116);
+  for (let i=0;i<64;i++) {
+    ctx.globalAlpha = .15 + (i%5)*.09;
+    ctx.fillStyle = gold;
+    const x = 75+(i*319)%1051, y = 75+(i*i*43)%1051;
+    ctx.fillRect(x,y,i%6===0 ? 5 : 2,i%6===0 ? 5 : 2);
+  }
+  ctx.globalAlpha = 1;
+  const write = (value,x,y,size,color='#fff1d9',weight='700',family='Arial, sans-serif',direction='rtl') => {
+    ctx.direction = direction;
+    ctx.font = weight+' '+size+'px '+family;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = color;
+    ctx.fillText(value,x,y);
   };
-  const key = value => aliases[norm(value)] || norm(value);
-  const country = row => row[1].split(',').at(-1).trim();
-  let places;
-  function loadPlaces() {
-    if (!places) places = fetch(new URL('./rising-cities.json', import.meta.url))
-      .then(response => {
-        if (!response.ok) throw Error('City list unavailable');
-        return response.json();
-      })
-      .catch(error => { places = null; throw error; });
-    return places;
-  }
-  function suggest(list, values) {
-    list.replaceChildren(...[...new Set(values)].slice(0,12).map(value => {
-      const option = document.createElement('option');
-      option.value = value;
-      return option;
-    }));
-  }
-  let revision = 0;
-  form.addEventListener('input', async event => {
-    const current = ++revision;
-    result.hidden = true;
-    if (![fields.city, fields.country].includes(event.target)) return;
+  write('ישראל נט | אסטרולוגיה',600,156,41,gold);
+  write('שלושת המזלות שלי',600,300,75);
+  known.forEach((sign,index) => {
+    const x=940-340*index;
+    ctx.fillStyle='#292544';
+    ctx.fillRect(x-143,400,286,391);
+    ctx.strokeStyle='#9d7848';
+    ctx.strokeRect(x-143,400,286,391);
+    write(glyphs[sign]+'\uFE0E',x,566,116,gold,'400','system-ui, sans-serif','ltr');
+    write(titles[index],x,658,41,'#e8d9be');
+    write(signNames[sign],x,738,54);
+  });
+  write('ומה שלושת המזלות שלך?',600,951,49,gold);
+  write('isnet.co.il/astrology',600,1030,34,'#fff1d9','400','Arial, sans-serif','ltr');
+  return new Promise((resolve,reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('canvas')), 'image/png'));
+}
+
+function sharing(known) {
+  const section = node('section',null,'rising-share');
+  section.append(node('h3','לשתף את המחשבון'));
+  const actions = node('div',null,'rising-share-actions');
+  const status = node('p');
+  status.setAttribute('aria-live','polite');
+  const copy = node('button','העתקת קישור');
+  copy.type = 'button';
+  copy.addEventListener('click',async () => {
     try {
-      const rows = await loadPlaces();
-      if (current !== revision) return;
-      const cityQuery = key(fields.city.value);
-      const countryQuery = key(fields.country.value);
-      const cities = cityQuery ? rows.filter(row => [row[0],row[5]].some(name => key(name).startsWith(cityQuery))) : rows;
-      suggest(citySuggestions, cities.filter(row => !countryQuery || key(country(row)).startsWith(countryQuery)).map(row => row[0]));
-      suggest(countrySuggestions, cities.map(country).filter(name => !countryQuery || key(name).startsWith(countryQuery)));
+      await navigator.clipboard.writeText(canonical);
+      status.textContent = 'הקישור הועתק.';
     } catch {
-      // A later input or submission retries the city list.
+      const href = node('a',canonical);
+      href.href = canonical;
+      href.dir = 'ltr';
+      status.replaceChildren('אפשר להעתיק את הקישור: ',href);
     }
   });
-  form.addEventListener('submit', async event => {
-    event.preventDefault();
-    result.replaceChildren();
-    result.hidden = false;
-    const print = (tag, message) => {
-      const node = document.createElement(tag);
-      node.textContent = message;
-      result.append(node);
-    };
-    if (!fields.day.value || !fields.hour.value) {
-      print('p', 'לחישוב אופק דרושים תאריך ושעת לידה מקומית. אם שעת הלידה אינה ידועה, אין דרך לתת מזל אופק מדויק.');
-      return;
+  actions.append(copy);
+  if (known.every(sign => sign !== null)) {
+    section.append(node('p','הכרטיס כולל רק את שמות המזלות. פרטי הלידה אינם מופיעים בו.'));
+    const fileName = 'isnet-three-signs.png';
+    const download = node('button','הורדת כרטיס PNG');
+    download.type = 'button';
+    download.addEventListener('click',async () => {
+      try {
+        const href = URL.createObjectURL(await shareImage(known));
+        const link = node('a');
+        link.href = href;
+        link.download = fileName;
+        document.body.append(link);
+        link.click();
+        link.remove();
+        window.setTimeout(() => URL.revokeObjectURL(href),30000);
+        status.textContent = 'הכרטיס נוצר להורדה.';
+      } catch { status.textContent = 'יצירת הכרטיס לא הצליחה. אפשר להעתיק את הקישור.'; }
+    });
+    actions.prepend(download);
+    if (typeof navigator.share === 'function') {
+      const share = node('button','שיתוף');
+      share.type = 'button';
+      // Prepare the image before the tap to keep Safari’s user activation.
+      let shareFile;
+      shareImage(known).then(blob => { shareFile = new File([blob],fileName,{type:'image/png'}); }).catch(() => {});
+      share.addEventListener('click',async () => {
+        const shareData = {title:'ומה שלושת המזלות שלך?',url:canonical};
+        try {
+          if (shareFile && navigator.canShare?.({files:[shareFile]})) shareData.files = [shareFile];
+          await navigator.share(shareData);
+        } catch (err) { if (err.name !== 'AbortError') status.textContent = 'השיתוף לא זמין כרגע. אפשר להוריד כרטיס או להעתיק קישור.'; }
+      });
+      actions.append(share);
     }
-    const city = key(fields.city.value);
-    const nation = key(fields.country.value);
-    if (!city || !nation) {
-      print('p','הקלידו את עיר הלידה ואת מדינת הלידה.');
-      return;
-    }
-    const current = ++revision;
-    let rows;
-    try { rows = await loadPlaces(); }
-    catch {
-      if (current === revision) print('p','רשימת הערים לא נטענה. נסו ללחוץ שוב על כפתור החישוב.');
-      return;
-    }
-    if (current !== revision) return;
-    const matches = rows.filter(row => key(country(row)) === nation && [row[0],row[5]].some(name => key(name) === city));
-    if (!matches.length) {
-      print('p','לא מצאנו את העיר במדינה הזו. נסו את השם באנגלית או בחרו הצעה מהרשימה.');
-      return;
-    }
-    if (new Set(matches.map(row => row[4])).size > 1 || matches.some(row => Math.hypot(row[2]-matches[0][2],row[3]-matches[0][3]) > .1)) {
-      print('p','מצאנו יותר מעיר אחת בשם הזה במדינה. נסו שם מלא יותר.');
-      return;
-    }
-    const [, , lat, lon, zone] = matches[0];
-    let instants;
-    try { instants = localInstants(fields.day.value, fields.hour.value, zone); }
-    catch { print('p','לא הצלחנו לזהות את אזור הזמן של מקום הלידה.'); return; }
-    if (instants.length !== 1) {
-      print('p', instants.length ? 'השעה הופיעה פעמיים בגלל מעבר שעון. צריך לזהות באיזו מהן התרחשה הלידה.' :
-        'השעה המקומית אינה קיימת בתאריך הזה לפי כללי אזור הזמן. בדקו את פרטי הלידה.');
-      return;
-    }
-    let degree;
-    try { degree = risingLongitude(instants[0],Number(lat),Number(lon)); }
-    catch { print('p','מקום הלידה נמצא מחוץ לטווח שבו המחשבון יכול לתת תוצאה מדויקת.'); return; }
-    const [name, theme, interpretation, practice] = readings[Math.floor(degree / 30)];
-    const within = degree % 30;
-    print('h2', 'אופק ' + name);
-    print('p', `מיקום משוער במזל: ${within.toFixed(2)}° · ${theme}`);
-    if (within < 0.5 || within > 29.5) print('p','האופק קרוב לגבול בין מזלות. סטייה קטנה בשעת הלידה עשויה לשנות את התוצאה.');
-    print('h3','קריאה אסטרולוגית להתבוננות');
-    print('p',interpretation);
-    print('h3','צעד מעשי');
-    print('p',practice);
-  });
+  } else if (typeof navigator.share === 'function') {
+    const share = node('button','שיתוף קישור');
+    share.type = 'button';
+    share.addEventListener('click',() => navigator.share({title:'שלושת המזלות שלי',url:canonical}).catch(err => {
+      if (err.name !== 'AbortError') status.textContent = 'השיתוף לא זמין כרגע. אפשר להעתיק את הקישור.';
+    }));
+    actions.append(share);
+  }
+  section.append(actions,status);
+  return section;
 }
