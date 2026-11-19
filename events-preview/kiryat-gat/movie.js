@@ -40,6 +40,11 @@ function renderHero(movie){
     $("heroMedia").innerHTML=movie.poster_url?'<img class="officialPoster" src="'+escapeHtml(movie.poster_url)+'" alt="כרזת הסרט '+escapeHtml(movie.title)+'" referrerpolicy="no-referrer" data-image-fallback="'+escapeHtml(imageFallback)+'" onerror="if(this.dataset.imageFallback){const u=this.dataset.imageFallback;delete this.dataset.imageFallback;if(u!==this.src){this.src=u}else{this.remove()}}else{this.remove()}">':'<div class="heroFallback"><span>🎬</span><b>'+escapeHtml(movie.title)+'</b></div>';
 
   }
+  $("moviePosterCredit")?.remove();
+  if(movie.poster_url&&movie.poster_credit){
+    const credit=document.createElement("p");credit.id="moviePosterCredit";credit.className="movieEditorialSource";credit.textContent=movie.poster_credit;
+    $("heroMedia").insertAdjacentElement("afterend",credit);
+  }
 }
 function screeningLanguage(venue,date,time){
   const languages=[...new Set((venue.sessions||[]).filter(s=>s.date===date&&s.time===time).map(s=>s.dubbed_language).filter(Boolean))];
