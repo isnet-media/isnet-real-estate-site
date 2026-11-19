@@ -18,7 +18,8 @@ def check_capacity(size):
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXCLUDE = {'scripts', 'tests', 'docs', 'package.json', 'package-lock.json', 'README.md'}
+INTERNAL_OPS_DIRECTORY = 'ops'
+EXCLUDE = {INTERNAL_OPS_DIRECTORY, 'scripts', 'tests', 'docs', 'package.json', 'package-lock.json', 'README.md'}
 
 def public_entries(root):
     return [p for p in root.iterdir() if not p.name.startswith('.') and p.name not in EXCLUDE]
@@ -141,7 +142,10 @@ def stage(root, output, *, cities=None, source_commit=None, preserve_news_releas
         raise ValueError('Refuse to replace an existing staging directory')
     if preserve_news_release and (root/'.git').exists():
         raise ValueError('A preserved public release must not contain git metadata')
-    entries = list(root.iterdir()) if preserve_news_release else public_entries(root)
+    entries = (
+        [p for p in root.iterdir() if p.name != INTERNAL_OPS_DIRECTORY]
+        if preserve_news_release else public_entries(root)
+    )
     if not (root / 'index.html').is_file():
         raise ValueError('Missing public home page')
     for entry in entries:

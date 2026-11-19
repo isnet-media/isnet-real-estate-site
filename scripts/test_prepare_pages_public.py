@@ -17,10 +17,9 @@ with tempfile.TemporaryDirectory() as tmp:
     output = base / 'public'
     stage(root, output)
     for path in ['index.html', 'robots.txt', 'SUPER.TLV/data/prices.json',
-                 'events-preview/ashdod/assets/photo.jpg', 'ops/MONITOR.md',
-                 'weather/ashdod/sea.json']:
+                 'events-preview/ashdod/assets/photo.jpg', 'weather/ashdod/sea.json']:
         assert (output / path).read_bytes() == (root / path).read_bytes()
-    for path in ['scripts', 'tests', '.git', '.supermarket-repair']:
+    for path in ['ops', 'scripts', 'tests', '.git', '.supermarket-repair']:
         assert not (output / path).exists()
     for unsafe in [root, root / 'public', output]:
         try:
@@ -28,6 +27,21 @@ with tempfile.TemporaryDirectory() as tmp:
             raise AssertionError('Unsafe output accepted')
         except ValueError:
             pass
+# A prior live release may already contain operational files; never carry them forward.
+with tempfile.TemporaryDirectory() as tmp:
+    base = Path(tmp)
+    old = base / 'old-public'
+    (old / 'ops').mkdir(parents=True)
+    (old / 'ops' / 'private.json').write_text('{}')
+    (old / 'index.html').write_text('<html><head></head><body>Preserved</body></html>')
+    (old / 'deployment-version.json').write_text('{"source_commit":"previous-release"}')
+    (old / 'robots.txt').write_text('User-agent: *')
+    output = base / 'next-public'
+    stage(old, output, cities=set(), source_commit='a' * 40, preserve_news_release=True)
+    assert not (output / 'ops').exists()
+    assert (output / 'index.html').read_bytes() == (old / 'index.html').read_bytes()
+    assert (output / 'robots.txt').read_bytes() == (old / 'robots.txt').read_bytes()
+
 print('Public paths and bytes preserved; operational evidence excluded; unsafe outputs refused')
 
 from prepare_pages_public import check_capacity, PAGES_LIMIT
