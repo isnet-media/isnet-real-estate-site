@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T18:13:01Z",
+  "updated_at": "2026-11-19T20:50:22Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4973,7 +4973,7 @@
       "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
       "prevention": "Keep actual executor identity separate from intended owner; explicit active-role reconciliation before approval/CAS. Procedural mitigation only; no runtime fixed_verified claim.",
       "remaining": "Inspect scheduler/context isolation and result attribution for these exact two runs/conversations through the platform runtime; this connector exposes task prompt/result metadata but not execution routing logs or an isolation-repair operation. Do not replay/trigger tasks or change schedules to simulate repair.",
-      "last_observed_at": "2026-11-18T07:58:36.707Z",
+      "last_observed_at": "2026-11-19T20:50:22Z",
       "new_runtime_evidence": {
         "sports_run_id": "37cbf175-5f34-8320-b921-abb82295b707",
         "controller_previous_run_id": "66f4eaea-b874-8326-9b23-1510b4bf3d77",
@@ -4983,31 +4983,26 @@
         "sports_completed_without_evening_publication": true,
         "source_unchanged": true
       },
-      "last_seen_at": "2026-11-17T08:12:19.686Z",
+      "last_seen_at": "2026-11-19T20:50:22Z",
       "latest_occurrence": {
-        "news": {
-          "run_id": "30be2ec5-0c9c-8326-8f72-ed04fd6d34ae",
-          "result": "Same run ID but final text describes seven supermarket editions instead of news. Source news receipt has locally generated key and no runtime ID."
-        },
-        "culture": {
-          "run_id": "de74036c-2198-8331-be27-9bfe1698d827",
-          "status": "failed",
-          "latest_result_run_id": "eb25dc5a-2750-8325-9189-cdf85c90fa3d",
-          "latest_result_date": "2026-11-16",
-          "source_receipt_runtime_id": null,
-          "publication_verified_independently": true
-        },
-        "status": "existing root requires runtime/service reconciliation; no prompt or schedule change"
+        "run_id": "eb664208-f2e0-832a-a49d-4e3bb644dd6a",
+        "observed_at": "2026-11-19T20:50:22Z",
+        "sports_run_id": "028e5aaa-f7fc-8328-9501-b166e40f7d33",
+        "controller_result_run_id": "812e0bb1-10c8-832e-8a83-5d6a6a70110c",
+        "signature": "controller-active-scope-inherited-writer-approval",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
+        "inbox": "ops/incident-response/inbox/eb664208-f2e0-832a-a49d-4e3bb644dd6a-sports-controller-scope-recurrence.json",
+        "current_state": "Sports completed with the same controller report as the distinct controller run. Current sports pages and ledger supply no new publication mapped to that sports run."
       },
-      "latest_evidence": "ops/incident-response/evidence/ops-2026-11-17-68b8bc80-55f0-832e-8203-ebf1af374bff.json",
-      "next_action": "Existing runtime support must reconcile task execution identity, result attribution and authorized public-read scope using exact18Nov run IDs. Actual sports owner reviews retained drafts after fresh facts/rights/control/CAS checks; no parallel writer, automatic rerun or schedule/permission mutation.",
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
+      "next_action": "Use existing runtime support to reconcile exact task/result context for the paired run IDs. Retain original sports owner and prior research candidates. Recheck at next normal owner result or actual runtime change. No forced rerun or site redeploy for result attribution.",
       "latest_pending_run_observation": {
-        "observed_at": "2026-11-17T08:33:56.700Z",
-        "run_id": "de74036c-2198-8331-be27-9bfe1698d827",
-        "status": "completed",
-        "latest_result": null,
-        "evidence": "ops/incident-response/evidence/ops-2026-11-17-354cab93-336c-832e-bef1-47ee8cf6b156.json",
-        "note": "Completion after retry does not establish source/publication attribution; existing root remains open."
+        "observed_at": "2026-11-19T20:50:22Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
+        "sports_run_id": "028e5aaa-f7fc-8328-9501-b166e40f7d33",
+        "controller_report_run_id": "812e0bb1-10c8-832e-8a83-5d6a6a70110c",
+        "status": "completed_result_scope_mismatch",
+        "original_owner_retained": true
       },
       "occurrences": [
         {
@@ -5019,6 +5014,16 @@
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-4856cab8-5264-8326-a0f8-7900e5c8a55c.json",
           "inbox": "ops/incident-response/inbox/4856cab8-5264-8326-a0f8-7900e5c8a55c-sports-scope-review-handoff.json",
           "current_state": "sports latest result belongs to17Nov; culture completed no_update has null result; source651 no new editorial article; cross-context sports drafts unapproved, browser authority denied, no bypass."
+        },
+        {
+          "run_id": "eb664208-f2e0-832a-a49d-4e3bb644dd6a",
+          "observed_at": "2026-11-19T20:50:22Z",
+          "sports_run_id": "028e5aaa-f7fc-8328-9501-b166e40f7d33",
+          "controller_result_run_id": "812e0bb1-10c8-832e-8a83-5d6a6a70110c",
+          "signature": "controller-active-scope-inherited-writer-approval",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
+          "inbox": "ops/incident-response/inbox/eb664208-f2e0-832a-a49d-4e3bb644dd6a-sports-controller-scope-recurrence.json",
+          "current_state": "Sports completed with the same controller report as the distinct controller run. Current sports pages and ledger supply no new publication mapped to that sports run."
         }
       ]
     },
@@ -6985,7 +6990,7 @@
       "next_action": "Adopt isolated tested normalization in existing authorized source lane without rebuilding only for journal; preserve missing per-item classification."
     }
   ],
-  "last_review_runKey": "ops-2026-11-19-4ed04bf3-611c-832e-b9ab-23ba90f1b795",
+  "last_review_runKey": "ops-2026-11-19-eb664208-f2e0-832a-a49d-4e3bb644dd6a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
