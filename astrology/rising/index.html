@@ -9,13 +9,17 @@ gtag('js', new Date());
 gtag('config', 'G-YEFDXMCHB1', {
   page_location: location.origin + location.pathname
 });
-</script><style>.astro-calc-hero{position:relative;isolation:isolate;overflow:hidden;background:#11142a;border-bottom:1px solid #edcf9360}.astro-calc-hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(270deg,#11142a 32%,#11142ad9 48%,#11142a0c 85%),url('/astrology/zodiac-wheel.jpg') left 45%/68% auto no-repeat}.astro-calc-hero .hero-inner{padding-block:clamp(34px,5vw,76px)}.astro-calc-hero h1{max-width:29ch;font-size:clamp(1.95rem,5vw,4rem);line-height:1.13;overflow-wrap:break-word}.astro-calc-hero p{max-width:55ch}.astro-calc-hero .astro-calc-kicker{color:#edcf93;font-size:.9rem;font-weight:bold}@media(max-width:640px){.astro-calc-hero:after{background:linear-gradient(0deg,#11142a,#11142acc 45%,#11142a55),url('/astrology/zodiac-wheel.jpg') center 38%/cover no-repeat}.astro-calc-hero .hero-inner{padding-block:58px 25px}}</style><link rel="stylesheet" href="/astrology/rising.css?v=three-signs"></head>
+</script><style>.astro-calc-hero{position:relative;isolation:isolate;overflow:hidden;background:#11142a;border-bottom:1px solid #edcf9360}.astro-calc-hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(270deg,#11142a 32%,#11142ad9 48%,#11142a0c 85%),url('/astrology/zodiac-wheel.jpg') left 45%/68% auto no-repeat}.astro-calc-hero .hero-inner{padding-block:clamp(34px,5vw,76px)}.astro-calc-hero h1{max-width:29ch;font-size:clamp(1.95rem,5vw,4rem);line-height:1.13;overflow-wrap:break-word}.astro-calc-hero p{max-width:55ch}.astro-calc-hero .astro-calc-kicker{color:#edcf93;font-size:.9rem;font-weight:bold}@media(max-width:640px){.astro-calc-hero:after{background:linear-gradient(0deg,#11142a,#11142acc 45%,#11142a55),url('/astrology/zodiac-wheel.jpg') center 38%/cover no-repeat}.astro-calc-hero .hero-inner{padding-block:58px 25px}}</style><link rel="stylesheet" href="/astrology/rising.css?v=three-signs"><style>.rising-birth-date{min-width:0;margin:0;padding:0;border:0}.rising-birth-date legend{margin:0 0 .25rem;padding:0}.rising-date-fields{display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:.45rem}.rising-date-fields label{min-width:0;font-size:.85rem}.rising-date-fields input{min-width:0;width:100%;box-sizing:border-box;text-align:center;font-size:16px;padding-inline:.25rem}</style></head>
 <body><a class="skip" href="#main">דילוג לתוכן</a><header><div class="bar"><a class="brand" href="/astrology/">✦ עולם האסטרולוגיה שלך</a><nav aria-label="ניווט ראשי"><a href="/astrology/#signs">המזלות</a><a href="/astrology/compatibility/">התאמה זוגית</a><a href="/astrology/#guides">מדריכים</a></nav></div></header>
 <main id="main" class="astro-calc-page"><section class="hero astro-calc-hero"><div class="hero-inner"><a class="astro-calc-kicker" href="/astrology/">עולם האסטרולוגיה שלך ←</a><h1>מי אתם באמת לפי הכוכבים? גלו את מזל השמש, הירח והאופק שלכם.</h1><p>מזל השמש הוא רק ההתחלה. תאריך הלידה, השעה והמקום שבהם נולדתם חושפים שלושה צדדים שונים באישיות שלכם, לפי האסטרולוגיה.</p></div></section><div class="body"><div class="big-three">
   <p class="big-three-note">חשבו את שלושת המזלות לפי פרטי הלידה. החישוב מתבצע במכשיר שלכם ופרטי הלידה לא נשמרים.</p>
   <form id="rising-form" class="rising-form" method="dialog" autocomplete="off" novalidate>
     <div class="rising-form-grid">
-      <label for="rising-day">תאריך לידה<input id="rising-day" name="day" type="date" min="1900-01-01" max="2099-12-31" aria-required="true"></label>
+      <fieldset class="rising-birth-date"><legend>תאריך לידה</legend><div class="rising-date-fields" dir="rtl">
+<label for="rising-day">יום<input id="rising-day" name="day" type="text" inputmode="numeric" maxlength="2" autocomplete="bday-day" aria-required="true" placeholder="01" dir="ltr"></label>
+<label for="rising-month">חודש<input id="rising-month" name="month" type="text" inputmode="numeric" maxlength="2" autocomplete="bday-month" aria-required="true" placeholder="01" dir="ltr"></label>
+<label for="rising-year">שנה<input id="rising-year" name="year" type="text" inputmode="numeric" maxlength="4" autocomplete="bday-year" aria-required="true" placeholder="1990" dir="ltr"></label>
+</div></fieldset>
       <label for="rising-hour">שעת לידה מקומית<input name="hour" id="rising-hour" dir="ltr" placeholder="HH:MM" inputmode="numeric" maxlength="5" aria-describedby="rising-24h"><small id="rising-24h">בפורמט 24 שעות, למשל 14:35</small></label>
       <label for="rising-city">עיר לידה<input name="city" id="rising-city" type="text" list="rising-city-suggestions" placeholder="למשל אשדוד" maxlength="90" autocomplete="off" spellcheck="false" dir="auto"><datalist id="rising-city-suggestions"></datalist></label>
       <label for="rising-country">מדינת לידה<input name="country" id="rising-country" type="text" list="rising-country-suggestions" placeholder="למשל ישראל" maxlength="90" autocomplete="off" spellcheck="false" dir="auto"><datalist id="rising-country-suggestions"></datalist></label>
@@ -23,7 +27,7 @@ gtag('config', 'G-YEFDXMCHB1', {
     <label class="rising-checkbox"><input type="checkbox" name="unknown"> שעת הלידה לא ידועה לי</label>
     <p class="rising-form-hint">אפשר להקליד עיר ומדינה או לבחור מן ההצעות.</p>
     <p id="rising-error" role="alert" hidden></p>
-    <button type="submit" id="rising-submit" disabled>גלו את שלושת המזלות שלי</button>
+    <button type="submit" id="rising-submit">גלו את שלושת המזלות שלי</button>
     <noscript><p>יש להפעיל JavaScript כדי להשתמש במחשבון במכשיר שלכם.</p></noscript>
   </form>
   <section id="rising-result" aria-labelledby="rising-result-heading" hidden></section>
@@ -35,6 +39,6 @@ gtag('config', 'G-YEFDXMCHB1', {
     <p>מקורות לחישוב ולמיקום: <a href="https://github.com/cosinekitty/astronomy">Astronomy Engine</a>, <a href="https://www.astro.com/swisseph/Table_Arctic_Placidus_readme.pdf">נוסחת האופק של Astrodienst</a> ו־<a href="https://github.com/kevinroberts/city-timezones">City Timezones</a>.</p>
   </article>
 </div>
-<script type="module" src="/astrology/rising.mjs?v=three-signs"></script>
+<script type="module" src="/astrology/rising.mjs?v=manual-date-1"></script>
 </div></main>
 <footer><a href="/astrology/">עולם האסטרולוגיה שלך</a><p>התוכן מבוסס על מסורות אסטרולוגיות ומיועד לבידור ולהתבוננות אישית.</p></footer></body></html>

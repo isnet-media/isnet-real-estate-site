@@ -6,7 +6,6 @@ const form = document.querySelector('#rising-form');
 const fields = form.elements;
 const result = document.querySelector('#rising-result');
 const error = document.querySelector('#rising-error');
-const submit = document.querySelector('#rising-submit');
 const citySuggestions = document.querySelector('#rising-city-suggestions');
 const countrySuggestions = document.querySelector('#rising-country-suggestions');
 let revision = 0;
@@ -171,12 +170,23 @@ function render(sets,degrees,unavailable) {
   heading.focus();
 }
 
+function parseBirthDate(dayText, monthText, yearText) {
+  const values = [dayText, monthText, yearText].map(value => value.trim());
+  if (!/^\d{1,2}$/.test(values[0]) || !/^\d{1,2}$/.test(values[1]) || !/^\d{4}$/.test(values[2])) return null;
+  const [day, month, year] = values.map(Number);
+  if (year < 1900 || year > 2099) return null;
+  const date = new Date(Date.UTC(year, month - 1, day));
+  if (date.getUTCDate() !== day || date.getUTCMonth() + 1 !== month) return null;
+  return [year, String(month).padStart(2, '0'), String(day).padStart(2, '0')].join('-');
+}
+
 form.addEventListener('submit',async event => {
   event.preventDefault();
   showError();
   result.hidden = true;
-  if (!fields.day.value || !fields.day.validity.valid) {
-    showError('בחרו תאריך לידה מלא בין 1900 ל־2099.',fields.day);
+  const birthDate = parseBirthDate(fields.day.value, fields.month.value, fields.year.value);
+  if (!birthDate) {
+    showError('הקלידו תאריך לידה תקין: יום, חודש ושנה בת ארבע ספרות בין 1900 ל־2099.',fields.day);
     return;
   }
   if (!fields.unknown.checked && !/^([01]\d|2[0-3]):[0-5]\d$/.test(fields.hour.value)) {
@@ -206,7 +216,7 @@ form.addEventListener('submit',async event => {
   const [lat,lon,zone] = place;
   try {
     if (fields.unknown.checked) {
-      const sets = localDayPositions(fields.day.value,zone);
+      const sets = localDayPositions(birthDate,zone);
       if (!sets) {
         showError('תאריך הלידה אינו קיים בלוח המקומי של אזור הזמן שנבחר. בדקו את התאריך והמקום.');
         return;
@@ -214,7 +224,7 @@ form.addEventListener('submit',async event => {
       render(sets,null,['השמש החליפה מזל באותו יום. דרושה שעה.','הירח החליף מזל באותו יום. דרושה שעה.','חישוב האופק דורש שעת לידה.']);
       return;
     }
-    const instants = localInstants(fields.day.value,fields.hour.value,zone);
+    const instants = localInstants(birthDate,fields.hour.value,zone);
     if (!instants.length) {
       showError('השעה לא התקיימה בתאריך ובאזור הזמן שנבחרו. ייתכן שמדובר במעבר לשעון קיץ.',fields.hour);
       return;
@@ -228,7 +238,6 @@ form.addEventListener('submit',async event => {
     showError('לא ניתן לחשב לפי הפרטים שהוזנו. בדקו שוב את תאריך הלידה ואת פרטי המקום.');
   }
 });
-submit.disabled = false;
 
 function shareImage(known) {
   const canvas = document.createElement('canvas');
