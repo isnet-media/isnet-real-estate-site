@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T07:26:37Z",
+  "updated_at": "2026-11-19T08:50:57Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4011,7 +4011,7 @@
     },
     {
       "id": "tlvnet-culture-freshness-monitoring-gap",
-      "status": "mitigated",
+      "status": "fixed_verified",
       "root_cause": "Active daily culture writer's15Nov run updated two existing articles across culture/night and published zero new articles. Latest declared culture article publication date12Nov. Combined desk output does not prove local culture freshness.",
       "signature": "tlvnet/culture-freshness/new-reporting-vs-existing-updates-not-separated",
       "recorded_at": "2026-11-15T09:14:46.273Z",
@@ -4044,10 +4044,96 @@
         "is_enabled_unchanged": true,
         "canonical_replaced_after_backup": true
       },
-      "evidence": "ops/incident-response/evidence/manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json",
       "inbox": "ops/incident-response/inbox/manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json",
-      "remaining": "Next scheduled original-owner run and new live culture output remain unverified. Instruction readback is not a published_verified result.",
-      "prevention": "Existing hourly controller now distinguishes new publication from old-story edits and monitors source-coverage stagnation; bounded version-aware checks."
+      "remaining": "Desktop/mobile layout and open research coverage remain separate.",
+      "prevention": "Existing hourly controller now distinguishes new publication from old-story edits and monitors source-coverage stagnation; bounded version-aware checks.",
+      "fixed_verified_at": "2026-11-19T08:50:57Z",
+      "verified_repair": {
+        "owner_task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+        "owner_run_id": "548ad7d7-4704-8321-a0b0-c24815aa588a",
+        "owner_runKey": "culture-night-20261119-1795074512662",
+        "owner_completed_at": "2026-11-19T07:58:57.303625Z",
+        "status": "published_verified",
+        "deployment": {
+          "version": 666,
+          "source_commit": "9fa51c888c8fd3c079b0807877147c9cae7d8dae",
+          "deployment_id": "appgdep_6afeab8c08d481918712f849a836a193",
+          "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_39e32640ca9c8191a9cfcabd28716b2a",
+          "terminal_at": "2026-11-19T07:56:14.430154+00:00",
+          "status": "succeeded",
+          "role": "owner",
+          "access": "public",
+          "observed_at": "2026-11-19T08:50:57Z"
+        },
+        "new_culture_news": 3,
+        "updated_existing_culture_news": 0,
+        "new_night": 0,
+        "checked_at": "2026-11-19T08:50:57Z",
+        "original_owner_confirmed_full_bodies_assets_and_references": true,
+        "new_publications": [
+          {
+            "article_id": "international-exposure-dance-20261202-20261119",
+            "url": "https://tlvnet.com/news/international-exposure-dance-20261202-20261119",
+            "title": "חשיפה בינלאומית חוזרת: מחול ישראלי, וגם מופעים פתוחים לקהל",
+            "section": "culture-news",
+            "published_at": "2026-11-19T09:50+02:00",
+            "credit": "מרים אלסטר/פלאש 90",
+            "confirmed_public_dom": [
+              "heading",
+              "article body",
+              "image element",
+              "visible credit",
+              "section card",
+              "homepage card"
+            ],
+            "visual_review": "desktop_and_mobile_pending"
+          },
+          {
+            "article_id": "odyssea-family-dance-suzanne-20261210-20261119",
+            "url": "https://tlvnet.com/news/odyssea-family-dance-suzanne-20261210-20261119",
+            "title": "שתי ימאיות וקהל צעיר: ״אודיסאה״ תעלה בסוזן דלל בחנוכה",
+            "section": "culture-news",
+            "published_at": "2026-11-19T09:50+02:00",
+            "credit": "מרים אלסטר/פלאש 90",
+            "confirmed_public_dom": [
+              "heading",
+              "article body",
+              "image element",
+              "visible credit",
+              "section card",
+              "homepage card"
+            ],
+            "visual_review": "desktop_and_mobile_pending"
+          },
+          {
+            "article_id": "solidarity-film-festival-20261210-20261119",
+            "url": "https://tlvnet.com/news/solidarity-film-festival-20261210-20261119",
+            "title": "עשרה ימים של קולנוע וזכויות אדם: סולידריות חוזר לסינמטק",
+            "section": "culture-news",
+            "published_at": "2026-11-19T09:50+02:00",
+            "credit": "מרים אלסטר/פלאש 90",
+            "confirmed_public_dom": [
+              "heading",
+              "article body",
+              "image element",
+              "visible credit",
+              "section card",
+              "homepage card"
+            ],
+            "visual_review": "desktop_and_mobile_pending"
+          }
+        ],
+        "lead_article_id": "solidarity-film-festival-20261210-20261119",
+        "lead_published_at": "2026-11-19T09:50+02:00",
+        "publication_time_precision": "published page displays minute; no source seconds inferred",
+        "section_url": "https://tlvnet.com/news/culture",
+        "source_journal_commit": "7964474468b6b19446263c0820170c1b7ae40319",
+        "queue_limits": "Published Odyssea backfill reconciled. Exact current owner ledger and night queue counts inaccessible in this cycle; retained unresolved items are a lower bound.",
+        "visual_review": "pending desktop and mobile",
+        "regression_basis": "Previously verified exact configuration and independent live three-article proof on an original scheduled owner run; separate culture and night counts reconcile to the owner receipt."
+      },
+      "prior_evidence": "ops/incident-response/evidence/manual-proactive-culture-neighborhoods-2026-11-15T09-14-46-273Z.json"
     },
     {
       "id": "tlvnet-senior-events-expired-verification-feed-empty",
@@ -6253,6 +6339,26 @@
       "next_action": "Have the existing source owner declare or confirm Beautiful Soup in the tracked build dependencies, install the declared dependencies before build-news.py, and confirm the news build once from a clean workspace. Close the recurrence risk only after that check and a matching live result.",
       "inbox": "ops/incident-response/inbox/2026-11-19-news-morning-python-bs4.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-19/9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7.json"
+    },
+    {
+      "id": "tlvnet-investigations-publication-route-unverified",
+      "status": "open",
+      "category": "publication_routing",
+      "fingerprint": "TLVNET/investigations/first-owner-output-draft-no-verified-section-or-home-route",
+      "root_cause": "Observed blocking condition: no verified publication integration for the investigation section. Exact current source file/guard is unconfirmed because current production source is not readable in this cycle via existing credentials.",
+      "impact": "The first investigation is retained by its writer outside publication; the live homepage retains its intended prelaunch slide.",
+      "occurrences": [
+        {
+          "observed_at": "2026-11-19T08:50:57Z",
+          "owner_run_id": "2c1dc8ea-0d80-832a-94e3-3d17ef9ad429",
+          "production_version": 666,
+          "evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json"
+        }
+      ],
+      "evidence": "ops/tlvnet-stability/observations/2026-11-19/9386f7de-5bf0-8332-bf04-b81deb328608.json",
+      "inbox": "ops/incident-response/inbox/9386f7de-5bf0-8332-bf04-b81deb328608-investigations-publication-route.json",
+      "next_action": "Use existing authenticated TLVNET source access to verify or wire the dedicated category, detail and section routes, and homepage selection. Verify that an unapproved draft keeps the existing slide, the first eligible owner release becomes the only hero, previous releases sort by original publication time, and mobile/desktop output plus normal story routes remain intact. Keep draft and assets with original owner; one normal release under TLVNET-site CAS after relevant checks.",
+      "prevention": "Exercise the section + homepage flow with an original-owner fixture and preserve prelaunch fallback until the first approved release."
     }
   ],
   "last_review_runKey": "ops-2026-11-19-9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7",
