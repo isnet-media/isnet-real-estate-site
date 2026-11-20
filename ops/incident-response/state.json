@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T11:48:05.809Z",
+  "updated_at": "2026-11-20T12:51:38.241Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-20T11:29:39Z",
+  "last_processed_run_created_at": "2026-11-20T12:01:23Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -2626,7 +2626,9 @@
     "ops/incident-response/inbox/20261120T083153Z-future-source-checkpoint-2d6dc628.json",
     "ops/incident-response/inbox/f69ddfba-d18c-8330-b2a9-977150c124ec-tlvnet-social-source-alias.json",
     "ops/incident-response/inbox/2026-11-20-economy-tech-wage-primary-source.json",
-    "ops/incident-response/inbox/20261120-community-garage-update-698-verified.json"
+    "ops/incident-response/inbox/20261120-community-garage-update-698-verified.json",
+    "ops/incident-response/inbox/2026-11-20-news-frishman-closure-date-conflict.json",
+    "ops/incident-response/inbox/20261120-consumer-checkpoint-ai-credit-regression.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -6250,6 +6252,27 @@
       "new_articles": 1,
       "updated_articles": 1,
       "pending_ready": 0
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "40c65dde-c100-832c-945d-96aae62f848a",
+      "runKey": "ops-2026-11-20-40c65dde-c100-832c-945d-96aae62f848a",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 2,
+      "observed_at": "2026-11-20T12:51:38.241Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
+      "status": "ai_labels_fixed_verified_and_news_owner_readback",
+      "saved_version": 700,
+      "public_checked_version": 700,
+      "source_commit": "bc56f7b507b24e74c1ef1effceeab38c1c9975db",
+      "new_actions": 12,
+      "new_inbox": 2,
+      "new_social_rows": 0,
+      "full_logs_read": 0,
+      "controller_new_deployments": 1,
+      "controller_editorial_writes": 0,
+      "new_articles": 3,
+      "pending_ready": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -7060,8 +7083,8 @@
       "2026-11-20T09",
       "2026-11-20T10"
     ],
-    "observed_at": "2026-11-20T11:48:05.809Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+    "observed_at": "2026-11-20T12:51:38.241Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
     "new_rows_this_cycle": 0,
     "public_verification": "Existing run_failed guard observed unchanged, no new social rows.",
     "last_checked_at": "2026-11-20T07:31:45.056Z",
@@ -7348,7 +7371,7 @@
     }
   },
   "latest_tlvnet_queue_observation": {
-    "observed_at": "2026-11-20T11:48:05.809Z",
+    "observed_at": "2026-11-20T12:51:38.241Z",
     "prepared_original_owner_items": 0,
     "verification_only_items": [
       {
@@ -7384,7 +7407,7 @@
     "original_owner_new_publications": 4,
     "new_live_verifications": 4,
     "reason": "Original evening637owner resolved both midday prepared items and published2additional originals; research coverage/backfill retained",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
     "events_source_metadata": {
       "checkpoint": "ops/event-refresh-checkpoint.json",
       "runKey": "publisher-events-20261118T1121-jerusalem",
@@ -7402,7 +7425,7 @@
     },
     "active_lease": null,
     "news_research_queues_unchanged": true,
-    "controller_status": "economy_and_community_owner_publications_verified",
+    "controller_status": "ai_labels_fixed_verified_and_news_owner_readback",
     "current_readonly_dispatch": {
       "news": {
         "dispatch_url": "https://tlvnet.com/api/briefs-writer?view=dispatch&topic=news",
@@ -7807,6 +7830,13 @@
       "status": "owner_research_pending_dedup_media",
       "historical_lease_expired": true,
       "owner": "Automation_09c630803fe481919ccd2f476f0d6916"
+    },
+    "consumer_recovery": {
+      "status": "ai_credit_fixed_verified",
+      "pending_media": 1,
+      "pending_verification": 6,
+      "owner_checkpoint": "ops/incident-response/inbox/20261120-consumer-checkpoint-ai-credit-regression.json",
+      "article": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119"
     }
   },
   "pending_task_run_ids": [],
@@ -8198,16 +8228,16 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-20T11:48:05.809Z",
-    "source_commit": "ae5642c47f4dbdf911a318a5bcec3aa7b233eda6",
-    "saved_version": 698,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+    "observed_at": "2026-11-20T12:51:38.241Z",
+    "source_commit": "bc56f7b507b24e74c1ef1effceeab38c1c9975db",
+    "saved_version": 700,
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
     "desks": {
       "news": {
-        "last_new_published_at": "2026-11-20T06:11:08.142691+00:00",
-        "last_new_id": "purple-line-licensing-milestone-20261119",
-        "last_substantive_update_at": "2026-11-20T06:11:08.142691+00:00",
-        "last_updated_id": "purple-line-licensing-milestone-20261119",
+        "last_new_published_at": "2026-11-20T12:02:28.585447+00:00",
+        "last_new_id": "purple-line-center-night-closures-20261122",
+        "last_substantive_update_at": "2026-11-20T12:02:28.585447+00:00",
+        "last_updated_id": "purple-line-center-night-closures-20261122",
         "update_basis": "Source-declared article timestamps; no inferred edit from rebuild or publication label",
         "published_count": 94,
         "handoff_status_counts": {
@@ -8224,19 +8254,19 @@
         "section_url": "https://tlvnet.com/news/index.html",
         "lead_article_id": "purple-line-licensing-milestone-20261119",
         "lead_published_at": "2026-11-19T17:07:37.472451+00:00",
-        "last_owner_run_id": "e34c454e-1518-8328-b5c7-ea55f35ad07b",
-        "last_owner_completed_at": "2026-11-20T06:20:19.264585Z",
+        "last_owner_run_id": "25919dfa-ec58-8324-8641-79ec0046bb0e",
+        "last_owner_completed_at": "2026-11-20T12:08:33.260431Z",
         "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
         "owner_run_changed_since_checkpoint": true,
-        "last_new_published_basis": "Current source metadata; no publication-date changes; linked public owner evidence retained.",
+        "last_new_published_basis": "Exact authenticated news source and live public evidence",
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
-        "coverage_state": "incomplete_owner_reported_queue_retained",
+        "coverage_state": "incomplete_external_source_checks_pending",
         "pending_draft_id": null,
         "pending_draft_inbox": null,
         "last_release_executor_task_id": "Automation_9776808c73848191a9d748dd09315960",
         "last_release_runKey": "continuity-repair-20261115T130716Z",
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "remaining_queue": [
           {
             "content_id": "coverage-dan-levinski-289-5-20261116",
@@ -8377,7 +8407,7 @@
           },
           "pending_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96"
         },
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
         "coverage_queue_count": 17,
         "coverage_queue_checkpoint": "public/news/agents/news/ledger.json",
         "public_verification": [
@@ -8533,7 +8563,7 @@
           }
         ],
         "lead_basis": "Current fresh source plus news freshness regression and actual live news/home links",
-        "last_owner_new_articles": 5,
+        "last_owner_new_articles": 3,
         "last_owner_prepared_articles": 0,
         "controller_new_deployed_articles": 0,
         "morning_original_owner_new_verified_articles": 4,
@@ -8616,7 +8646,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "latest_metadata_check": {
           "last_owner_run_id": "e34c454e-1518-8328-b5c7-ea55f35ad07b",
           "status": "completed",
@@ -8668,11 +8698,18 @@
         "lead_title": "נהג נעצר לאחר מרדף בתל אביב, שוטר נפצע קל",
         "section_status": 200,
         "latest_observed_owner_run": {
-          "id": "e34c454e-1518-8328-b5c7-ea55f35ad07b",
+          "id": "25919dfa-ec58-8324-8641-79ec0046bb0e",
           "state": "completed",
-          "completed_at": "2026-11-20T06:20:19.264585Z",
+          "completed_at": "2026-11-20T12:08:33.260431Z",
           "result_matches_run": true
-        }
+        },
+        "pending_ready": 0,
+        "pending_visual_review": true,
+        "latest_verified_public_ids": [
+          "kamuel-suspected-drugs-ammunition-arrest-20261119",
+          "hagana-purple-line-directional-closures-20261122",
+          "purple-line-center-night-closures-20261122"
+        ]
       },
       "real-estate": {
         "last_new_published_at": "2026-11-19T14:46:09.318594+00:00",
@@ -8746,7 +8783,7 @@
         "saved_version": 680,
         "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
         "last_owner_started_at": "2026-11-18T14:48:34.830936Z",
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
         "coverage_queue_count": 9,
         "coverage_queue_checkpoint": "public/news/agents/real-estate/ledger.json",
         "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending",
@@ -8805,7 +8842,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "latest_metadata_check": {
           "last_owner_run_id": "8db3ae81-a69c-8331-afbd-33fb607a6a64",
           "status": "completed",
@@ -8856,7 +8893,7 @@
         "last_owner_started_at": "2026-11-18T10:17:14.345378Z",
         "pending_owner_result": false,
         "independent_full_body_image_credit_verified_at": "2026-11-16T17:00:46.396Z",
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 1,
@@ -8943,7 +8980,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "latest_metadata_check": {
           "last_owner_run_id": "f45dbfcf-ed34-832f-b758-7641f992a898",
           "status": "completed",
@@ -9004,7 +9041,7 @@
         "mini_site_technical_update_at": "2026-11-15T12:40:04.126313Z",
         "coverage_cursor": "kiryat-shalom",
         "last_owner_started_at": "2026-11-18T10:59:34.166480Z",
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 11,
@@ -9083,7 +9120,7 @@
           "findings": "Original owner picked up and prepared eligible update. Earlier article already contains 24 Nov 22:00 city-wide registration in a paragraph; prepared rewrite is not live. Compare exact body and asset after actual lease release. Preserve original owner and do not republish the existing article."
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "pending_ready": 0,
         "pending_verification": 9,
         "coverage_status": "Owner prepared update; immutable ops checkpoint retained while shared lane held",
@@ -9130,8 +9167,8 @@
         "section_url": "https://tlvnet.com/news/consumer.html",
         "lead_article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
         "lead_published_at": "2026-11-16T12:12:18.684499+00:00",
-        "last_owner_run_id": "7098a995-fea0-8322-875b-8b78ffa4967a",
-        "last_owner_completed_at": "2026-11-19T12:18:08.006344Z",
+        "last_owner_run_id": "860b4fda-4350-8320-a8b4-4be1ecf01173",
+        "last_owner_completed_at": "2026-11-20T12:10:51.616684Z",
         "owner_task_id": "Automation_e2f02000cdf4819190022b85f4391076",
         "owner_run_changed_since_checkpoint": false,
         "last_new_published_basis": "Current source metadata; no publication-date changes; linked public owner evidence retained.",
@@ -9148,14 +9185,14 @@
           "verification_scope": "Fresh focused article/body/image/credit readback; owner619 proof retained for home/section links"
         },
         "last_owner_started_at": "2026-11-18T11:56:07.976170Z",
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 8,
         "coverage_queue_checkpoint": "ops/incident-response/inbox/20261118-consumer-research-checkpoint.json",
         "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending",
         "last_owner_new_articles": 0,
-        "coverage_state": "incomplete_source_ledger_pending_merge_existing_writer",
+        "coverage_state": "pending_source_and_media_owner_checkpoint",
         "remaining_queue": "Prior fullsource gap, unreviewed46sourcebody metadata, Dandasha conditions and datedMOHnotice retained. Single discovery cycle; no no_update or complete citycoverage claim.",
         "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
         "coverage_complete": false,
@@ -9187,10 +9224,10 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "publication_status": "published_verified_journal_pending_mobile_pending",
         "pending_ready": 0,
-        "pending_verification": 5,
+        "pending_verification": 6,
         "source_journal_checkpoint": "ops/incident-response/inbox/20261119-consumer-publication-675-verified.json",
         "latest_metadata_check": {
           "last_owner_run_id": "7098a995-fea0-8322-875b-8b78ffa4967a",
@@ -9208,11 +9245,14 @@
         "lead_title": "קרם ב־10 שקלים ותרומה לאגודה: מה כוללת יוזמת גוד פארם",
         "section_status": 200,
         "latest_observed_owner_run": {
-          "id": "7098a995-fea0-8322-875b-8b78ffa4967a",
+          "id": "860b4fda-4350-8320-a8b4-4be1ecf01173",
           "state": "completed",
-          "completed_at": "2026-11-19T12:18:08.006344Z",
+          "completed_at": "2026-11-20T12:10:51.616684Z",
           "result_matches_run": true
-        }
+        },
+        "pending_media": 1,
+        "credit_display_fixed_verified": true,
+        "credit_fix_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json"
       },
       "sports": {
         "last_new_published_at": "2026-11-20T07:06:56.317232+00:00",
@@ -9296,7 +9336,7 @@
         "last_owner_new_articles": 2,
         "coverage_state": "three_owner_research_checkpoints_and_mobile_pending",
         "execution_anomaly_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
         "source_commit": "3f628bca2d16b7bc8be2c2c3f6e71930a7ee13c8",
         "saved_version": 665,
         "coverage_queue_count": 3,
@@ -9426,7 +9466,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "latest_metadata_check": {
           "last_owner_run_id": "028e5aaa-f7fc-8328-9501-b166e40f7d33",
           "status": "completed",
@@ -9475,7 +9515,7 @@
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
         "last_owner_started_at": "2026-11-19T07:46:01.268727Z",
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
         "source_commit": "8bebe9ec75a07373cfeb8211a1eb0525474f04bd",
         "saved_version": 694,
         "coverage_queue_count": 7,
@@ -9623,7 +9663,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "latest_metadata_check": {
           "last_owner_run_id": "548ad7d7-4704-8321-a0b0-c24815aa588a",
           "status": "completed",
@@ -9669,7 +9709,7 @@
         "last_owner_started_at": "2026-11-18T10:59:34.166480Z",
         "last_owner_completed_at": "2026-11-18T11:26:01.746479Z",
         "owner_run_changed_since_checkpoint": false,
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
         "navigation_areas": 25,
         "original_localities": 73,
         "technical_version": 625,
@@ -9719,7 +9759,7 @@
           "at": "2026-11-19T19:09:52Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/812e0bb1-10c8-832e-8a83-5d6a6a70110c.json"
         },
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "latest_observed_owner_run": {
           "id": "afcac5cb-688c-8326-adc1-daad053f6672",
           "state": "completed",
@@ -9750,8 +9790,8 @@
         "lead_title": "הבטיחו לנו 250 ק״מ של שבילי אופניים עד 2025. אז למה היעד השתנה ל־2030?",
         "section_status": 200,
         "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/f69ddfba-d18c-8330-b2a9-977150c124ec.json",
-        "metadata_checked_at": "2026-11-20T11:48:05.809Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "metadata_checked_at": "2026-11-20T12:51:38.241Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
         "latest_observed_owner_run": {
           "id": "caf12d98-ec2c-8328-9c7e-18deae3cc074",
           "state": "completed",
@@ -10598,7 +10638,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-20T11:48:05.809Z",
+    "observed_at": "2026-11-20T12:51:38.241Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -11207,6 +11247,14 @@
       {
         "path": "ops/incident-response/inbox/20261120-community-garage-update-698-verified.json",
         "sha": "c0d039ed01d4b8c7473f7b36a54d0f3e38015150"
+      },
+      {
+        "path": "ops/incident-response/inbox/2026-11-20-news-frishman-closure-date-conflict.json",
+        "sha": "b222d40e43a91b83c5e43c5fcf566822beaae773"
+      },
+      {
+        "path": "ops/incident-response/inbox/20261120-consumer-checkpoint-ai-credit-regression.json",
+        "sha": "c2a52a61cc25692dff1ea243ccca10fee8faf70c"
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
@@ -11220,11 +11268,10 @@
     "observed_at": "2026-11-18T19:56:42Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
     "current_attempt": {
-      "observed_at": "2026-11-20T10:15:04.731Z",
+      "observed_at": "2026-11-20T12:51:38.241Z",
       "status": "executed_current_owner_source",
-      "source_commit": "e162b1a205d0e12374a69f0e690974044377c191",
-      "catalog_sha256": "bd7551e6c5f3d5b0288b0348da293a4ef8915bf5d320b36ee2b6c5b6fa9943bb",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-20/f69ddfba-d18c-8330-b2a9-977150c124ec.json"
+      "source_commit": "1f1ca6c7f3cc435d35f5acea6bfc4eb813565578",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json"
     }
   },
   "latest_city_owner_publication_observation": {
@@ -11655,7 +11702,18 @@
     "template_changed_by_controller": false,
     "desktop_visual": "pending",
     "mobile_visual": "pending",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json",
+    "latest": {
+      "observed_at": "2026-11-20T12:51:38.241Z",
+      "article_id": 812395,
+      "owner_run_id": "430f9172-1124-8323-8d2a-fbadd85a5207",
+      "article_url": "https://raanananet.co.il/%d7%97%d7%93%d7%a9%d7%95%d7%aa/raanana-10-children-road-accident-injuries-2025-20261120",
+      "home_link": true,
+      "body_fact_paragraphs": 5,
+      "public_image_loaded": true,
+      "credit_verification": "pending",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json"
+    }
   },
   "latest_cinema_public_readback": {
     "owner_run_id": "a92ade65-15d8-8322-a07f-eabef135bc0d",
