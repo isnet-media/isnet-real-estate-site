@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T05:53:34.264Z",
+  "updated_at": "2026-11-20T06:39:13.754Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7006,9 +7006,27 @@
         "occurrences": 1
       },
       "next_action": "Observe once for recurrence or impact on a real TLVNET route. If reproduced on a supported route, inspect current routing/response body ownership under the authorized source path, then verify a local regression before production change."
+    },
+    {
+      "id": "tlvnet-duplicate-banner-runtime",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-20T06:39:13.754Z",
+      "root_cause": "The Worker added ads-runtime.js to the document head a second time when injecting CMS publication cards. Both script executions mounted the same ad slot.",
+      "change": "Deduplicate existing head assets and add only missing resources. Make ads-runtime initialization idempotent.",
+      "verification": {
+        "deployment": "appgdep_6affea91972c8191a880c4014b1b8395",
+        "version": 688,
+        "public_home_runtime_count": 1,
+        "home_news_has_creative": true,
+        "desktop_mobile_visual": "pending"
+      },
+      "evidence": [
+        "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json",
+        "ops/incident-response/inbox/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-double-runtime.json"
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-20-3362ff4e-e93c-8330-b03b-e5c5b91a0ebb",
+  "last_review_runKey": "ops-2026-11-20-9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
