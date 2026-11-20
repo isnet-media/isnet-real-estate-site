@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T12:51:38.241Z",
+  "updated_at": "2026-11-20T15:30:26Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5151,6 +5151,22 @@
           "new_signature": false,
           "inbox": "ops/incident-response/inbox/44337585068-1.json",
           "evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json"
+        },
+        {
+          "run_id": 44762981803,
+          "job_id": 136380077324,
+          "log_cause": "No currently valid forecast; retaining last good file",
+          "forecast_file_updated_by_run": false,
+          "public_widget_not_rechecked": true,
+          "existing_incident": "ims-sea-no-currently-valid-period",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44762981803",
+          "next_action": "Resume through existing data owner on verified current source, no workflow rerun in this cycle.",
+          "error_at": "2026-11-20T15:25:19.0214542Z",
+          "observed_at": "2026-11-20T15:30:26Z",
+          "full_log_read": true,
+          "existing_signature": true,
+          "inbox": "ops/incident-response/inbox/44762981803-1.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-20/97a01801-2058-832c-802d-32ee133e5941.json"
         }
       ],
       "status": "awaiting_external_action",
@@ -7141,9 +7157,62 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
       "inbox": "ops/incident-response/inbox/2026-11-20-news-frishman-closure-date-conflict.json",
       "next_action": "Original news owner waits for corrected operator notice or explicitly corroborated date."
+    },
+    {
+      "id": "TLVNET/real-estate/article-neighborhood/group-slug-instead-of-registry-slug",
+      "status": "fixed_verified",
+      "root_cause": "Input metadata used group slugnew-north; matcher requires canonical neighborhood slugnew-north-north.",
+      "change": "Corrected same article neighborhood in existing registry; unchanged body/photo/original published_at; no baseline or implementation change.",
+      "prevention": "Resolve neighborhood against existing registry and assert generated destination reference before release.",
+      "owner_task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "occurrences": [
+        {
+          "inbox": "ops/incident-response/inbox/2026-11-20-real-estate-neighborhood-reference-recovered.json",
+          "owner_run_id": "44df85b3-60e8-832f-9f1d-cdd32a5e12b6",
+          "verified_at": "2026-11-20T15:30:26Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-20/97a01801-2058-832c-802d-32ee133e5941.json"
+        }
+      ],
+      "evidence": {
+        "deployment": {
+          "version": 702,
+          "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_26f53ac4268881919c1c503f15ad0267",
+          "source_commit": "43d42b3e8f398cc76f84b6d9e02b507c9414d5ff",
+          "deployment_id": "appgdep_6b0064adfc7481918707b011e3d9de5b",
+          "status": "succeeded",
+          "terminal_at": "2026-11-20T15:18:21.141398+00:00",
+          "domain": "https://tlvnet.com/",
+          "observed_at": "2026-11-20T15:30:26Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-20/97a01801-2058-832c-802d-32ee133e5941.json"
+        },
+        "public_url": "https://tlvnet.com/news/louis-marshall-10-16-reported-demolition-20261120",
+        "neighborhood": "https://tlvnet.com/city-hub/areas/new-north/",
+        "feed": "https://tlvnet.com/city-hub/updates.json",
+        "mobile_visual": "pending"
+      }
+    },
+    {
+      "id": "TLVNET/real-estate/local-source-read/telavivi-yaaz-http403",
+      "status": "awaiting_external_action",
+      "root_cause": "Candidate source returned HTTP 403 to the original owner; dated primary permit not available in checkpoint.",
+      "owner_task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "impact": "Single candidate",
+      "next_action": "Resume only with changed permitted source access or a current full primary permit. No controller invocation or schedule change.",
+      "occurrences": [
+        {
+          "inbox": "ops/incident-response/inbox/2026-11-20-real-estate-local-source-access.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-20/97a01801-2058-832c-802d-32ee133e5941.json",
+          "observed_at": "2026-11-20T15:30:26Z"
+        }
+      ],
+      "evidence": {
+        "source_url": "https://telavivi.news/yaaz-four-building-permits-quarter-4/",
+        "observed_http_status": 403,
+        "controller_retry": false
+      }
     }
   ],
-  "last_review_runKey": "ops-2026-11-20-40c65dde-c100-832c-945d-96aae62f848a",
+  "last_review_runKey": "ops-2026-11-20-97a01801-2058-832c-802d-32ee133e5941",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
