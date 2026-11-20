@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-19T20:50:22Z",
+  "updated_at": "2026-11-20T05:53:34.264Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6988,9 +6988,27 @@
       "evidence": "ops/incident-response/inbox/08a7e9f6-cc00-832e-a764-0743b12984db-news-nested-publication-receipt.json",
       "verification": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
       "next_action": "Adopt isolated tested normalization in existing authorized source lane without rebuilding only for journal; preserve missing per-item classification."
+    },
+    {
+      "id": "tlvnet-worker-fallback-disturbed-response-stream",
+      "status": "open",
+      "priority": "low",
+      "updated_at": "2026-11-20T05:53:34.264Z",
+      "root_cause": "Worker reported an already-consumed response stream during a request outside supported navigation. Specific source branch and trigger are unconfirmed.",
+      "evidence": [
+        "ops/incident-response/inbox/3362ff4e-e93c-8330-b03b-e5c5b91a0ebb-worker-fallback-response-stream.json",
+        "ops/tlvnet-stability/observations/2026-11-20/3362ff4e-e93c-8330-b03b-e5c5b91a0ebb.json"
+      ],
+      "verification": {
+        "known_live_pages_status": 200,
+        "ordinary_missing_route_status": 404,
+        "normal_publication_impact_observed": false,
+        "occurrences": 1
+      },
+      "next_action": "Observe once for recurrence or impact on a real TLVNET route. If reproduced on a supported route, inspect current routing/response body ownership under the authorized source path, then verify a local regression before production change."
     }
   ],
-  "last_review_runKey": "ops-2026-11-19-eb664208-f2e0-832a-a49d-4e3bb644dd6a",
+  "last_review_runKey": "ops-2026-11-20-3362ff4e-e93c-8330-b03b-e5c5b91a0ebb",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
