@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "incident_id": "tlvnet-duplicate-banner-runtime",
+  "status": "fixed_verified",
+  "classification": "public_presentation",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "9dd0685b-e524-8330-816e-2f23a07ea01a",
+  "runKey": "ops-2026-11-20-9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix",
+  "observed_at": "2026-11-20T06:39:13.754Z",
+  "policy_definition_revision": 2,
+  "policy_version": "2026-11-15/1.2",
+  "root_cause": "The Worker added ads-runtime.js to the document head a second time when injecting CMS publication cards. Both script executions mounted the same ad slot.",
+  "change": "Deduplicate existing head assets and add only missing resources. Make ads-runtime initialization idempotent.",
+  "source_commit": "af8d39ff6092c5ecd4b045fb1e7ae68bc9347ad2",
+  "base_commit": "d863bbdb056fc2eda88858bc697a4675ae169d1d",
+  "version": 688,
+  "deployment_id": "appgdep_6affea91972c8191a880c4014b1b8395",
+  "deployment_status": "succeeded",
+  "production_url": "https://tlvnet.com/",
+  "public_verification": {
+    "home": {
+      "status": 200,
+      "url": "https://tlvnet.com/",
+      "runtime_tags": 1,
+      "css_tags": 1,
+      "fresh_news_still_linked": true
+    },
+    "home_alias": {
+      "status": 200,
+      "url": "https://tlvnet.com/home",
+      "runtime_tags": 1,
+      "css_tags": 1,
+      "fresh_news_still_linked": true
+    },
+    "news": {
+      "status": 200,
+      "url": "https://tlvnet.com/news/",
+      "runtime_tags": 1,
+      "css_tags": 1,
+      "fresh_news_still_linked": true
+    },
+    "investigations": {
+      "status": 200,
+      "url": "https://tlvnet.com/news/bli-heshbon",
+      "runtime_tags": 1,
+      "css_tags": 1,
+      "fresh_news_still_linked": false,
+      "investigation_still_linked": true
+    },
+    "article": {
+      "status": 200,
+      "url": "https://tlvnet.com/news/jaffa-achiluf-shooting-death-20261120",
+      "runtime_tags": 1,
+      "css_tags": 1,
+      "fresh_news_still_linked": true
+    },
+    "runtime": {
+      "status": 200,
+      "url": "https://tlvnet.com/ads-runtime.js",
+      "matches_build": true,
+      "guard_present": true
+    },
+    "inventory": {
+      "status": 200,
+      "url": "https://tlvnet.com/api/ads-inventory?page=home&zone=day&device=desktop&width=1287",
+      "has_home_news_creative": true,
+      "width": 728
+    },
+    "city_feed": {
+      "status": 200,
+      "url": "https://tlvnet.com/city-hub/updates.json",
+      "jaffa": true,
+      "country_lamed": true
+    }
+  },
+  "regression": {
+    "advertising_tests": "passed",
+    "worker_head_existing_tags": [
+      0,
+      1,
+      2
+    ],
+    "double_script_execution": "one fetch and one device listener",
+    "build": "passed",
+    "visual_review": "pending"
+  },
+  "lease_release_commit": "a87aedb01f34fe588772010af74eb004c9df152b",
+  "receipt": "ops/incident-response/inbox/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-double-runtime.json",
+  "evidence_path": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
+}
