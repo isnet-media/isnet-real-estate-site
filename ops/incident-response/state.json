@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T12:51:38.241Z",
+  "updated_at": "2026-11-20T13:22:26.693Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-20T12:01:23Z",
+  "last_processed_run_created_at": "2026-11-20T13:13:32Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -6273,6 +6273,27 @@
       "controller_editorial_writes": 0,
       "new_articles": 3,
       "pending_ready": 0
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "dfcb5a1e-3d04-832c-b851-f631842a3cab",
+      "runKey": "ops-2026-11-20-dfcb5a1e-3d04-832c-b851-f631842a3cab",
+      "policy_version": "2026-11-15/1.2",
+      "observed_at": "2026-11-20T13:22:26.693Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/dfcb5a1e-3d04-832c-b851-f631842a3cab.json",
+      "status": "no_material_change_after_incremental_verification",
+      "private_definition_revision": 2,
+      "saved_version": 700,
+      "public_checked_version": 700,
+      "source_commit": "bc56f7b507b24e74c1ef1effceeab38c1c9975db",
+      "new_actions": 27,
+      "new_inbox": 0,
+      "new_social_rows": 0,
+      "full_logs_read": 0,
+      "controller_editorial_writes": 0,
+      "controller_new_deployments": 0,
+      "new_articles": 0,
+      "pending_ready": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -7083,8 +7104,8 @@
       "2026-11-20T09",
       "2026-11-20T10"
     ],
-    "observed_at": "2026-11-20T12:51:38.241Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
+    "observed_at": "2026-11-20T13:22:26.693Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/dfcb5a1e-3d04-832c-b851-f631842a3cab.json",
     "new_rows_this_cycle": 0,
     "public_verification": "Existing run_failed guard observed unchanged, no new social rows.",
     "last_checked_at": "2026-11-20T07:31:45.056Z",
@@ -7371,7 +7392,7 @@
     }
   },
   "latest_tlvnet_queue_observation": {
-    "observed_at": "2026-11-20T12:51:38.241Z",
+    "observed_at": "2026-11-20T13:22:26.693Z",
     "prepared_original_owner_items": 0,
     "verification_only_items": [
       {
@@ -7407,7 +7428,7 @@
     "original_owner_new_publications": 4,
     "new_live_verifications": 4,
     "reason": "Original evening637owner resolved both midday prepared items and published2additional originals; research coverage/backfill retained",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/dfcb5a1e-3d04-832c-b851-f631842a3cab.json",
     "events_source_metadata": {
       "checkpoint": "ops/event-refresh-checkpoint.json",
       "runKey": "publisher-events-20261118T1121-jerusalem",
@@ -7425,7 +7446,7 @@
     },
     "active_lease": null,
     "news_research_queues_unchanged": true,
-    "controller_status": "ai_labels_fixed_verified_and_news_owner_readback",
+    "controller_status": "no_material_change_after_incremental_verification",
     "current_readonly_dispatch": {
       "news": {
         "dispatch_url": "https://tlvnet.com/api/briefs-writer?view=dispatch&topic=news",
@@ -10638,7 +10659,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-20T12:51:38.241Z",
+    "observed_at": "2026-11-20T13:22:26.693Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -11564,17 +11585,13 @@
     "original_queue_preserved": true
   },
   "latest_cancelled_publish_metadata": {
-    "run_id": 44311553395,
-    "source_commit": "e88134d55bc2be97827a1ba20c375077d0867a16",
-    "jobs": [],
-    "followup_run": 44311633190,
-    "status": "cancelled_no_jobs_successor_succeeded",
-    "outage_inferred": false,
-    "evidence": "ops/incident-response/evidence/ops-2026-11-18-ad80fe00-e260-8322-9d80-4fd3d1495084.json",
-    "next_action": "No rerun required on this evidence; cancellation cause remains unproven, no concurrency change.",
-    "successor_status": "completed",
-    "successor_conclusion": "success",
-    "successor_updated_at": "2026-11-18T13:16:11Z"
+    "run_id": 44741913272,
+    "successor_run_id": 44741972392,
+    "same_sha": true,
+    "classification": "cancelled before any job; same-source deployment job later succeeded",
+    "verification_scope": "Actions metadata; no public catalog pull outside authorized hours",
+    "observed_at": "2026-11-20T13:22:26.693Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/dfcb5a1e-3d04-832c-b851-f631842a3cab.json"
   },
   "latest_realestate_due_slot_observation": {
     "owner": "Automation_82add5edecd8819197814e83bac85a75",
