@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T06:28:57.495Z",
+  "updated_at": "2026-11-20T06:39:13.754Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-20T05:42:45Z",
   "initial_history": {
@@ -1942,16 +1942,19 @@
     "observed_at": "2026-11-20T06:28:57.495Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json",
     "status": "morning_publications_verified_ledger_projection_pending",
-    "saved_version": 687,
-    "public_checked_version": 687,
+    "saved_version": 688,
+    "public_checked_version": 688,
     "source_commit": "326dac060551139ee5b5352314f4ada5bf2a09dd",
     "new_actions": 0,
     "new_social_rows": 0,
     "new_inbox": 0,
     "full_logs_read": 0,
-    "controller_new_deployments": 0,
+    "controller_new_deployments": 1,
     "new_articles": 5,
-    "existing_article_updates": 0
+    "existing_article_updates": 0,
+    "banner_repair_evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json",
+    "news_ledger_projection_verified": true,
+    "private_definition_revision": 2
   },
   "concurrent_controller_observation": {
     "run_id": "65157bd5-aa20-832a-959b-81a527987c69",
@@ -2292,17 +2295,15 @@
     "deployment_status": "succeeded",
     "evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
     "latest_status_check": {
-      "version": 687,
-      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_98858e10f45c81918891e7606b3c9f00",
-      "source_commit": "326dac060551139ee5b5352314f4ada5bf2a09dd",
-      "deployment_id": "appgdep_6affe5cb36b08191bf22dac46af8da92",
+      "version": 688,
+      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_fe821242f8008191988f56b7b7fc3f69",
+      "source_commit": "af8d39ff6092c5ecd4b045fb1e7ae68bc9347ad2",
+      "deployment_id": "appgdep_6affea91972c8191a880c4014b1b8395",
       "status": "succeeded",
-      "terminal_at": "2026-11-20T06:17:11.043830+00:00",
-      "domain": "https://tlvnet.com",
-      "previous_version": 686,
-      "controller_started_this_deployment": false,
-      "observed_at": "2026-11-20T06:28:57.495Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json"
+      "terminal_at": "2026-11-20T06:37:26.931798+00:00",
+      "domain": "https://tlvnet.com/",
+      "observed_at": "2026-11-20T06:39:13.754Z",
+      "evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
     },
     "journal_head": "dbfab77093176725ab490015017dff8231978b57",
     "latest_controller_verification": {
@@ -2382,6 +2383,10 @@
       "last_payload_matches_previous": true,
       "new_article": false,
       "visual_review": "pending"
+    },
+    "latest_verified_banner_repair": {
+      "version": 688,
+      "evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
     }
   },
   "open_incident_ids": [
@@ -7537,8 +7542,8 @@
       "owner": null,
       "acquired_at": null,
       "lease_until": null,
-      "last_release_owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
-      "last_release_at": "2026-11-20T06:19:26.623Z"
+      "last_release_owner": "Automation_9776808c73848191a9d748dd09315960",
+      "last_release_evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
     },
     "pending_ready_by_desk": {
       "news": {
@@ -7714,7 +7719,14 @@
       }
     },
     "last_delta_checked_at": "2026-11-20T06:28:57.495Z",
-    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json"
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json",
+    "news_morning_ledger_readback": {
+      "updated_at": "2026-11-20T06:19:04.132666+00:00",
+      "entries": 95,
+      "morning_run_present": true,
+      "observed_at": "2026-11-20T06:39:13.754Z",
+      "evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
+    }
   },
   "pending_task_run_ids": [
     {
@@ -8568,7 +8580,14 @@
             "rejected": 5,
             "duplicates": 7
           },
-          "public_ledger_projection_pending": true
+          "public_ledger_projection_pending": false,
+          "ledger_readback": {
+            "updated_at": "2026-11-20T06:19:04.132666+00:00",
+            "entries": 95,
+            "morning_run_present": true,
+            "observed_at": "2026-11-20T06:39:13.754Z",
+            "evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
+          }
         }
       },
       "real-estate": {
@@ -10946,6 +10965,10 @@
       {
         "path": "ops/incident-response/inbox/3362ff4e-e93c-8330-b03b-e5c5b91a0ebb-worker-fallback-response-stream.json",
         "sha": "d6755b0b52f6239956ba8c0e4e49b638792c8507"
+      },
+      {
+        "path": "ops/incident-response/inbox/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-double-runtime.json",
+        "sha": "7742a2b8bc9d7bb3c98423b42b0ff90e442e797f"
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
