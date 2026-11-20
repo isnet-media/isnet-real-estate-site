@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T06:39:13.754Z",
+  "updated_at": "2026-11-20T07:31:45.056Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7024,9 +7024,40 @@
         "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json",
         "ops/incident-response/inbox/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-double-runtime.json"
       ]
+    },
+    {
+      "id": "tlvnet-social-managed-public-availability",
+      "status": "mitigated",
+      "updated_at": "2026-11-20T07:31:45.056Z",
+      "root_cause": "Managed HTML was pruned from ASSETS, but both social callers checked ASSETS for catalog-backed pages.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
+      "inbox": "ops/incident-response/inbox/81d3d078-76bc-8330-a9fa-8a8cdb65531d-social-managed-public-availability.json",
+      "occurrences": [
+        {
+          "slot": "2026-11-20T07",
+          "status": "article_unavailable",
+          "article_url": "https://tlvnet.com/news/tel-aviv-overnight-police-chase-20261120.html"
+        }
+      ],
+      "change": "Both social paths now use the same managed public HTML loaders as the public Worker and reject unpublished source overlays. Existing public promotions and dynamic publications remain supported.",
+      "source_commit": "77fbe16234295a39c185fb6387c6291d19afe96e",
+      "deployment_id": "appgdep_6afff6f983c48191af9035aca8655ed6",
+      "tests": "Scheduler regression: simulated removed static asset, canonical and .html paths, allowed promotion, absent article, unpublished article, private path. Foundation and production build passed.",
+      "next_action": "Observe next authorized scheduled send and publicly verify the actual post. No manual replay."
+    },
+    {
+      "id": "tlvnet-sports-named-game-missing-event-date-status-20261120",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-20T07:31:45.056Z",
+      "root_cause": "Game metadata missing on sports report; actual club game photograph got the illustration label.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
+      "inbox": "ops/incident-response/inbox/20261120-sports-7ae15d34-publication-caption-readback.json",
+      "change": "Original sports owner corrected date and finished status; independent live figure/credit readback passed.",
+      "deployment_id": "appgdep_6afff3c4c5d08191967e08cac8264281",
+      "next_action": "Keep dedicated mobile view pending in owner queue."
     }
   ],
-  "last_review_runKey": "ops-2026-11-20-9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix",
+  "last_review_runKey": "ops-2026-11-20-81d3d078-76bc-8330-a9fa-8a8cdb65531d",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
