@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "runKey": "sports-20261120-morning-7ae15d34-a184-832a-8551-85cd72ffdd8a",
+  "runtime_run_id": "7ae15d34-a184-832a-8551-85cd72ffdd8a",
+  "policy_version": "2026-11-15/1.4",
+  "policy_revision": 2,
+  "policy_checksum": "e33b7cde36271d5552aa4bbef8c661b88127cbd9395ca203f7f3fdd346d2971c",
+  "root_signature": "tlvnet-sports-named-game-missing-event-date-status-20261120",
+  "status": "fixed_verified",
+  "cause": "Owner article omitted event_date and finished game_status; exact19Nov photograph was displayed with illustration label in691.",
+  "change": "Added verified event date and terminal game status to existing story metadata; no duplicate article or body/image replacement.",
+  "tests": [
+    "news-photo-publication regression",
+    "Actual Dubai story documentary classification assertion",
+    "check-photo-bank",
+    "prepare-public",
+    "production build"
+  ],
+  "first_publication": {
+    "id": "appgdep_6afff2c0fa8881919c108d2ab4033cc9",
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "title": "תל אביב נט — חדר המערכת",
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_3c013d9424688191a86cf7b78e989844",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-11-20T07:12:26.139261+00:00"
+  },
+  "caption_correction": {
+    "id": "appgdep_6afff3c4c5d08191967e08cac8264281",
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "title": "תל אביב נט — חדר המערכת",
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_5516896740a481918d508f526a39f4db",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://tlvnet-newsroom.ebs987449.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6aeb3c238d748191bf82c9cd9c653c32",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-11-20T07:16:44.775117+00:00"
+  },
+  "source_commit": "7ba307b60310e02f09daf899a4fc166f4f99aab3",
+  "public_readback": {
+    "checked_at": "2026-11-20T07:17:33.015719+00:00",
+    "home": {
+      "maccabi-dubai-home-loss-20261119": true,
+      "hapoel-paris-away-loss-20261119": true
+    },
+    "section": {
+      "maccabi-dubai-home-loss-20261119": true,
+      "hapoel-paris-away-loss-20261119": true
+    },
+    "articles": [
+      {
+        "article_id": "maccabi-dubai-home-loss-20261119",
+        "url": "https://tlvnet.com/news/maccabi-dubai-home-loss-20261119",
+        "status": 200,
+        "title": true,
+        "full_body": true,
+        "body_sha256": "3c33d208489bba31a3a6d6f59279d4e59e5b84f8353cac420b33d44c22846430",
+        "image": true,
+        "credit": true,
+        "asset_sha256": "107a9dc5b6933640bdb077bff5bdc2ce8b4a047ff5a48ff8d692e5f7613a10ac",
+        "asset_hash_matches": true,
+        "caption": "ג׳ימי קלארק מול דוויין בייקון בלימסול, 19.11.2026. · צילום: קונסטנטינוס קיפריאנו, באדיבות מכבי תל אביב מקור"
+      },
+      {
+        "article_id": "hapoel-paris-away-loss-20261119",
+        "url": "https://tlvnet.com/news/hapoel-paris-away-loss-20261119",
+        "status": 200,
+        "title": true,
+        "full_body": true,
+        "body_sha256": "c0c8cd691f032a5a05922ef58095a9ff6bbbf4af8cfa96ae459d71815e53be0b",
+        "image": true,
+        "credit": true,
+        "asset_sha256": "1d6d24fc4dfc52ce7cb92146c9c13ecf9a25e1e38fa5b64065b3e54912b513f8",
+        "asset_hash_matches": true,
+        "caption": "דימיטריוס איטודיס במשחק גמר ליגת העל במנורה, 23.6.2026. ארכיון, לא מהמשחק המדווח. · אורן בן חקון/פלאש 90 מקור"
+      }
+    ],
+    "desktop_visual": "Both actual live article images and visible credits inspected at1348px width; no distortion/crop; Maccabi documentary caption corrected.",
+    "mobile_visual": "pending_not_inspected"
+  },
+  "metrics": {
+    "discovered": 3,
+    "verified": 3,
+    "newly_published": 2,
+    "updated_existing_articles": 0,
+    "pending_ready": 0,
+    "pending_verification": 3,
+    "blocked_real": 0,
+    "duplicates_prevented": 2
+  },
+  "remaining": "Original official-decision, disputed youth-score and solar-court-progress checkpoints retained. Dedicated mobile visual review and local historical archive backfill pending.",
+  "prevention": "Keep verified event_date and terminal game_status when selecting named_game media; validate actual new story caption as well as generic fixture. No permanent agent-definition change made.",
+  "controller_triggered": false,
+  "cost": null
+}
