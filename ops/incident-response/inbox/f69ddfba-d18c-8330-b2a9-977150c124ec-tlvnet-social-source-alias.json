@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "incident_id": "tlvnet-social-source-alias-run-failed",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "runKey": "f69ddfba-d18c-8330-b2a9-977150c124ec",
+  "policy_version": "2026-11-15/1.2",
+  "reported_at": "2026-11-20T10:06:25.729Z",
+  "priority": "operational",
+  "status": "open",
+  "scope": "Facebook only",
+  "evidence": {
+    "successful_slot": "2026-11-20T09",
+    "article": "https://tlvnet.com/news/parking-blue-white-budget-20261120",
+    "public_post": "https://www.facebook.com/61596358055015/posts/122110607397545268/",
+    "failed_slot": "2026-11-20T10",
+    "selected_alias": "https://tlvnet.com/articles/parking-blue-white-budget-20261120",
+    "alias_redirects_to_same_article": true,
+    "run_status": "needs_review",
+    "detail": "run_failed",
+    "post_id": null,
+    "no_second_matching_claim_found": true,
+    "social_schedule_state": {
+      "enabled": 1,
+      "blocked_reason": "run_failed"
+    },
+    "source_candidates": "Existing selection includes mirrored articles as independent alias candidates; exact thrown exception not exposed in run receipt or log sample."
+  },
+  "mitigation": "Isolated candidate normalization and mirror exclusion passed focused regression. No previous slot replay or claim change.",
+  "reset": "Existing owner endpoint only releases Meta authentication rejections. This incident requires a separately authorized exact-state reconciliation and no auto-resend; no reset attempted."
+}
