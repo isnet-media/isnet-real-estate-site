@@ -17,7 +17,7 @@
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": "2026-11-20T02:22:07.203Z",
+  "last_observation_at": "2026-11-20T04:07:18.204Z",
   "last_daily_summary_at": "2026-11-19T16:57:54.984Z",
   "observations": [
     "observations/2026-11-15/stability-version619.json",
@@ -352,6 +352,12 @@
       "path": "ops/tlvnet-stability/observations/2026-11-20/b6e7e371-47e4-8330-b55c-52c185b7125a.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-20/b6e7e371-47e4-8330-b55c-52c185b7125a.json",
       "observed_at": "2026-11-20T02:22:07.203Z"
+    },
+    {
+      "run_id": "20322ff0-87fc-8330-8b7e-5911e8693880",
+      "path": "ops/tlvnet-stability/observations/2026-11-20/20322ff0-87fc-8330-8b7e-5911e8693880.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/20322ff0-87fc-8330-8b7e-5911e8693880.json",
+      "observed_at": "2026-11-20T04:07:18.204Z"
     }
   ],
   "remaining": [
@@ -372,8 +378,8 @@
     "domain": "https://tlvnet.com/",
     "previous_version": 683,
     "release_classification": "Public HTML/configurable CSS/news JSON served via Worker. Read-only live checks and existing local route regression pass. No editorial/source catalog modification.",
-    "observed_at": "2026-11-20T02:22:07.203Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/b6e7e371-47e4-8330-b55c-52c185b7125a.json"
+    "observed_at": "2026-11-20T04:07:18.204Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/20322ff0-87fc-8330-8b7e-5911e8693880.json"
   },
   "daily_summary_status": {
     "at": "2026-11-19T16:57:54.984Z",
@@ -385,20 +391,22 @@
   "access_request": "BACKUP_ACCESS_REQUEST_20261115.md",
   "latest_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "b6e7e371-47e4-8330-b55c-52c185b7125a",
-    "runKey": "ops-2026-11-20-b6e7e371-47e4-8330-b55c-52c185b7125a",
+    "run_id": "20322ff0-87fc-8330-8b7e-5911e8693880",
+    "runKey": "ops-2026-11-20-20322ff0-87fc-8330-8b7e-5911e8693880",
     "policy_version": "2026-11-15/1.2",
-    "observed_at": "2026-11-20T02:22:07.203Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/b6e7e371-47e4-8330-b55c-52c185b7125a.json",
-    "status": "public_release_and_owner_queues_unchanged_verified",
+    "observed_at": "2026-11-20T04:07:18.204Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/20322ff0-87fc-8330-8b7e-5911e8693880.json",
+    "status": "existing_cms_update_verified_without_deployment",
     "saved_version": 684,
     "public_checked_version": 684,
     "source_commit": "000b0d59ba4db0649670947feaf06bf8ea37f0cc",
-    "new_actions": 0,
+    "new_actions": 6,
     "new_social_rows": 0,
     "new_inbox": 0,
     "full_logs_read": 0,
     "controller_new_deployments": 0,
+    "new_articles": 0,
+    "existing_article_updates": 1,
     "pending_ready": 1,
     "production_changes_by_controller": 0,
     "qualification_started_at": null,
@@ -418,16 +426,27 @@
     "news_new_verified": 5
   },
   "latest_independent_admin_recovery_observation": {
-    "observed_at": "2026-11-20T00:53:27.484Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/a417a947-b0a8-8330-8218-96760fc933b0.json",
+    "observed_at": "2026-11-20T04:07:18.204Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/20322ff0-87fc-8330-8b7e-5911e8693880.json",
     "latest": {
-      "created_at": "2026-11-20 00:32:36.119428+00",
-      "d1_table_count": 29,
-      "inventory_objects": 6,
-      "object_copy_refs": 6,
-      "missing_matching_copy_refs": 0,
-      "copy_refs_missing_storage_metadata": 0,
-      "bucket_private": true
+      "created_at": "2026-11-20 03:57:46.195141+00",
+      "checksum": "c0650b0ebab231511cac6a594413deb2acddc917c20b91ce09fd4812a1452bca",
+      "tables_type": "object",
+      "table_count": 33,
+      "object_copy_count": 9,
+      "object_copy_keys": [
+        "etag",
+        "object_key",
+        "remote_path",
+        "sha256",
+        "size"
+      ],
+      "refs": 9,
+      "matching_storage_metadata": 9,
+      "refs_in_private_bucket": 9,
+      "source": "Supabase snapshot and storage object metadata",
+      "object_bytes_rehashed": false,
+      "restore_end_to_end_verified": false
     },
     "counts_by_kind": [
       {
@@ -447,6 +466,7 @@
     ],
     "object_bytes_downloaded_by_controller": false,
     "unattended_complete_cycle_with_retention_and_alerting_verified": false,
-    "full_isolated_site_restore_verified": false
+    "full_isolated_site_restore_verified": false,
+    "prior_evidence": "ops/tlvnet-stability/observations/2026-11-20/a417a947-b0a8-8330-8218-96760fc933b0.json"
   }
 }
