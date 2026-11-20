@@ -1,0 +1,969 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+  "runKey": "consumer-2026-11-20-daily",
+  "recorded_at": "2026-11-20T12:10:21Z",
+  "status": "checkpoint_saved_source_write_deferred_credit_regression",
+  "signature": "TLVNET/consumer/live-article/ai-credit-label-missing",
+  "source_commit": "b7ad794971fc5268bdb140d530afb6557eec9dca",
+  "latest_observed_site_version": 699,
+  "latest_observed_deployment": "appgdep_6b0037d038d48191a0c74ea485892d56",
+  "latest_observed_deployment_status": "succeeded",
+  "entry_to_append_when_owned": {
+    "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+    "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+    "runKey": "consumer-2026-11-20-daily",
+    "policy_version": "2026-11-15/1.1",
+    "policy_update": "2026-11-19/tlv-publish-recovery-1",
+    "private_policy_revision": 2,
+    "private_policy_checksum": "0b940314918a71fe43c39badb8ec8a8116687638e82d5a612a1ae414886381dd",
+    "private_policy_read_ack_at": "2026-11-20T12:04:33.470458Z",
+    "recorded_at": "2026-11-20T12:09:50Z",
+    "target": "TLVNET/consumer",
+    "status": "checkpoint_saved_publication_pending_existing_writer",
+    "source_commit": "b7ad794971fc5268bdb140d530afb6557eec9dca",
+    "window_start": "2026-11-19T12:06:17.177790+00:00",
+    "overlap_start": "2026-11-18T12:06:17.177790+00:00",
+    "window_end": "2026-11-20T12:09:50Z",
+    "coverage_complete": false,
+    "metrics": {
+      "discovered": 3,
+      "verified": 1,
+      "newly_published": 0,
+      "updated": 0,
+      "rejected": 1,
+      "pending_ready": 0,
+      "pending_verification": 6,
+      "pending_media": 1,
+      "blocked_real": 2,
+      "duplicate": 2
+    },
+    "metric_notes": "Verified1 counts recall factual source verification, not article/editor/media approval or publication. Two duplicates are existing incoming/covered facts, not newly created articles. Existing live article now fails credit label check; prior675publication history retained.",
+    "decisions": [
+      {
+        "content_id": "kv-yavne-cucumber-recall-26142-20261119",
+        "source_fingerprint": "product:7290002057352|batch:26-142|hours:11:00-13:00|best-before:05.2029",
+        "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+        "runKey": "consumer-2026-11-20-daily",
+        "target": "TLVNET/consumer",
+        "toTopic": "consumer",
+        "title": "בדיקת אצוות מלפפונים במלח של קבוצת יבנה — הודעת החזרה19בנובמבר",
+        "source_url": "https://t.me/s/MOHReport",
+        "source_message_url": "https://t.me/MOHreport/13838",
+        "secondary_source_url": "https://www.calcalist.co.il/shopping/article/hjenrt3afe",
+        "source_published_at": "2026-11-19",
+        "checked_at": "2026-11-20T12:09:50Z",
+        "status": "publication_pending_existing_writer",
+        "source_verification": "Full original official channel post body read, including date, product,barcode,batch,hours,bestbefore and contact; exact matching secondary read. Individual Telegram permalink returns embed shell, not falsely claimed full body there.",
+        "facts": {
+          "product": "מלפפונים במלח, 7-9 גדול",
+          "brand": "קבוצת יבנה",
+          "barcode": "7290002057352",
+          "production_code": "26-142",
+          "production_hours": "11:00–13:00",
+          "best_before": "05.2029",
+          "instruction": "צרכנים שרכשו מוצר התואם לפרטים מתבקשים שלא לצרוך אותו ולפנות לשירות הלקוחות",
+          "contact": "olivemaz@kv-yavne.co.il",
+          "basis": "Consumer reported metallic foreign body in one item; manufacturer's recall coordinated with Central District Food Service."
+        },
+        "local_angle": "Useful product-identification notice for Tel Aviv–Jaffa readers who may hold this product; no specific city incident, store inventory or citywide distribution asserted.",
+        "readiness": "source_verified_pending_original_article_and_image",
+        "image_search": {
+          "local_authorized_bank": "No exact cucumber/pickle/canned-goods asset found by subject search",
+          "new_downloads": 0,
+          "new_generation": 0,
+          "reason": "No unrelated cream/market image assigned to actual recalled product. No image permission inherited from news-site attribution."
+        },
+        "editor_review": null,
+        "image_review": null,
+        "next_action": "Original owner to obtain own valid CAS after competing owner releases; refresh source/duplicate check, write original scoped notice and complete permitted relevant image then one build/deploy/live verification. Do not describe this as approved publish-ready solely waiting for lease."
+      },
+      {
+        "content_id": "iqtech-compensation-update-20261117",
+        "source_fingerprint": "url:https://www.consumers.org.il/item/news_171126",
+        "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+        "runKey": "consumer-2026-11-20-daily",
+        "target": "TLVNET/consumer",
+        "toTopic": "consumer",
+        "title": "איקיוטק — בדיקת זכאות ומועד הגשת הצהרה לפיצוי",
+        "source_url": "https://www.consumers.org.il/item/news_171126",
+        "discovery_url": "https://www.consumers.org.il/category/messages-and-announcements",
+        "source_published_at": "2026-11-17",
+        "checked_at": "2026-11-20T12:09:50Z",
+        "status": "primary_full_text_pending",
+        "reason": "Actual Council index shows stated500NIS and9Dec2026 deadline; full item returned explicit Request Rejected. Complete eligibility, court decision, form and scope not read. Index is not sufficient legal/entitlement verification.",
+        "next_action": "Read full official notice/court or original representative instructions when access/evidence changes. No unchanged retry or guaranteed compensation claim.",
+        "editor_review": null,
+        "image_review": null
+      },
+      {
+        "content_id": "namal-reusable-cup-coffee-offer-20261122",
+        "status": "pending_verification",
+        "reason": "Official Hanukkah programme related link shows22Nov–24Dec2026 offer; full terms page returned403. Headline does not verify eligible members, participating cafes or full conditions."
+      },
+      {
+        "content_id": "consumer-dandasha-jaffa-popup-20261116",
+        "status": "pending_verification",
+        "reason": "Contradictory dates retained; no changed primary confirmation, no unchanged retry."
+      },
+      {
+        "content_id": "consumer-moh-dragonfly-verification-20261116",
+        "status": "pending_verification",
+        "reason": "8Nov notice and unresolved full-date/current-scope verification retained from18Nov, no new local incident claim."
+      },
+      {
+        "content_id": "menora-smoking-settlement-20260922",
+        "status": "pending_verification",
+        "reason": "Old source; current implementation and judgment not verified, carried forward."
+      },
+      {
+        "content_id": "babylon-port-bowling-padel-20261011",
+        "status": "pending_verification",
+        "reason": "Old plan not proof of actual opening/tariffs, carried forward."
+      },
+      {
+        "content_id": "third-party-grocery-promotion-index-20261120",
+        "status": "rejected_not_independently_verified",
+        "reason": "WizStore dated branch snippets are discovery only; no actual Promo file/retailer terms, no verified offer conditions or price comparison; no new supermarket collection outside permitted scope."
+      },
+      {
+        "content_id": "r2m-heichal-parking",
+        "status": "duplicate",
+        "article_id": "hatarbut-tlv-parking-benefit-guide-20261116"
+      },
+      {
+        "content_id": "about-us-jaffa-20261112",
+        "status": "duplicate_expired",
+        "article_id": "about-us-jaffa-entry-prices-20261112"
+      },
+      {
+        "content_id": "municipal-garage-sale-20261127",
+        "status": "existing_handoff_community",
+        "article_id": "tlv-neighborhood-garage-sale-20261106",
+        "reason": "Community owner20Nov updated existing canonical; no consumer copy."
+      }
+    ],
+    "local_coverage": {
+      "policy_version": "2026-11-15/1.0",
+      "runKey": "consumer-2026-11-20-daily",
+      "sources": [
+        {
+          "source_url": "https://tlvonline.co.il/",
+          "checked_at": "2026-11-20T12:09:50Z",
+          "status": "read",
+          "indexes": [
+            "https://tlvonline.co.il/",
+            "https://tlvonline.co.il/category/עסקים/",
+            "https://tlvonline.co.il/category/פנאי/"
+          ],
+          "watermark": "2026-11-17",
+          "latest_source_published_at": null,
+          "cursor": "Current relevant category/home indexes reviewed; bounded prior archive cursor preserved, not full7day completion.",
+          "discovered_count": 0,
+          "decisions": [
+            {
+              "content_id": "goia-habarzel-closure",
+              "status": "existing_handoff_news",
+              "reason": "Prior recipient news handoff retained; index listing not new consumer reopening/date evidence."
+            },
+            {
+              "content_id": "garage-hamburgers-ownership",
+              "status": "out_of_scope_economy",
+              "reason": "Ownership headline, no verified customer price/service change."
+            }
+          ],
+          "deferred_candidate_ids": [
+            "menora-smoking-settlement-20260922",
+            "babylon-port-bowling-padel-20261011"
+          ],
+          "next_action": "Continue preserved primary/actual-current-operation gaps only with changed evidence."
+        },
+        {
+          "source_url": "https://telavivi.news/",
+          "checked_at": "2026-11-20T12:09:50Z",
+          "status": "read",
+          "indexes": [
+            "https://telavivi.news/",
+            "https://telavivi.news/category/real-estate-economics-business/",
+            "https://telavivi.news/category/food/"
+          ],
+          "watermark": "2026-11-19",
+          "latest_source_published_at": null,
+          "cursor": "Current relevant home/category read, prior19Nov consumer boundary retained; home20Nov community headlines do not advance consumer full-source timestamp.",
+          "discovered_count": 0,
+          "decisions": [
+            {
+              "content_id": "r2m-heichal-parking",
+              "status": "duplicate",
+              "article_id": "hatarbut-tlv-parking-benefit-guide-20261116"
+            },
+            {
+              "content_id": "humongous-atidim-park-tel-aviv-opening-2027",
+              "status": "existing_handoff_economy",
+              "reason": "PlannedMarch2027, no new actual consumer opening."
+            }
+          ],
+          "deferred_candidate_ids": [
+            "consumer-dandasha-jaffa-popup-20261116"
+          ],
+          "next_action": "Only new dated organizer evidence resolves popup date contradiction; no unchanged retries."
+        }
+      ]
+    },
+    "sources_checked": [
+      {
+        "url": "https://www.calcalist.co.il/shopping",
+        "status": "index_read",
+        "result": "19Nov20:59 recall discovered then full article/original channel body read; commercial Altman interview not treated as independent consumer medical evidence."
+      },
+      {
+        "url": "https://www.globes.co.il/",
+        "status": "index_read",
+        "result": "Market/company leads, no new independently verified TLV consumer terms selected."
+      },
+      {
+        "url": "https://www.consumers.org.il/category/messages-and-announcements",
+        "status": "index_read",
+        "result": "17Nov IQTech future-deadline lead, full item rejected."
+      },
+      {
+        "url": "https://www.consumers.org.il/item/news_171126",
+        "status": "blocked_request_rejected"
+      },
+      {
+        "url": "https://www.tel-aviv.gov.il/Residents/Environment/Pages/ReduceConsumption.aspx",
+        "status": "standing_service_body_read",
+        "result": "Swaps/lending existing service; no new dated program or stock asserted."
+      },
+      {
+        "url": "https://goodpharm.co.il/",
+        "status": "index_read",
+        "result": "Existing campaign banner still linked; no new price or full banner visual revalidation claimed."
+      },
+      {
+        "url": "https://t.me/s/MOHReport",
+        "status": "original_full_recall_body_read",
+        "source_date": "2026-11-19"
+      },
+      {
+        "url": "https://info.org.il/telegram/MOHreport/",
+        "status": "archive_full_recall_body_read",
+        "result": "Independent archive firstrender cached18Nov; targeted find returned actual19Nov body and link. Original official channel full body separately read; archive not sole authority."
+      },
+      {
+        "url": "https://www.kv-yavne.co.il/",
+        "status": "blocked_reader_inaccessible",
+        "result": "No unchanged retry."
+      }
+    ],
+    "remaining_queue": [
+      {
+        "content_id": "kv-yavne-cucumber-recall-26142-20261119",
+        "source_fingerprint": "product:7290002057352|batch:26-142|hours:11:00-13:00|best-before:05.2029",
+        "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+        "runKey": "consumer-2026-11-20-daily",
+        "target": "TLVNET/consumer",
+        "toTopic": "consumer",
+        "title": "בדיקת אצוות מלפפונים במלח של קבוצת יבנה — הודעת החזרה19בנובמבר",
+        "source_url": "https://t.me/s/MOHReport",
+        "source_message_url": "https://t.me/MOHreport/13838",
+        "secondary_source_url": "https://www.calcalist.co.il/shopping/article/hjenrt3afe",
+        "source_published_at": "2026-11-19",
+        "checked_at": "2026-11-20T12:09:50Z",
+        "status": "publication_pending_existing_writer",
+        "source_verification": "Full original official channel post body read, including date, product,barcode,batch,hours,bestbefore and contact; exact matching secondary read. Individual Telegram permalink returns embed shell, not falsely claimed full body there.",
+        "facts": {
+          "product": "מלפפונים במלח, 7-9 גדול",
+          "brand": "קבוצת יבנה",
+          "barcode": "7290002057352",
+          "production_code": "26-142",
+          "production_hours": "11:00–13:00",
+          "best_before": "05.2029",
+          "instruction": "צרכנים שרכשו מוצר התואם לפרטים מתבקשים שלא לצרוך אותו ולפנות לשירות הלקוחות",
+          "contact": "olivemaz@kv-yavne.co.il",
+          "basis": "Consumer reported metallic foreign body in one item; manufacturer's recall coordinated with Central District Food Service."
+        },
+        "local_angle": "Useful product-identification notice for Tel Aviv–Jaffa readers who may hold this product; no specific city incident, store inventory or citywide distribution asserted.",
+        "readiness": "source_verified_pending_original_article_and_image",
+        "image_search": {
+          "local_authorized_bank": "No exact cucumber/pickle/canned-goods asset found by subject search",
+          "new_downloads": 0,
+          "new_generation": 0,
+          "reason": "No unrelated cream/market image assigned to actual recalled product. No image permission inherited from news-site attribution."
+        },
+        "editor_review": null,
+        "image_review": null,
+        "next_action": "Original owner to obtain own valid CAS after competing owner releases; refresh source/duplicate check, write original scoped notice and complete permitted relevant image then one build/deploy/live verification. Do not describe this as approved publish-ready solely waiting for lease."
+      },
+      {
+        "content_id": "iqtech-compensation-update-20261117",
+        "source_fingerprint": "url:https://www.consumers.org.il/item/news_171126",
+        "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+        "runKey": "consumer-2026-11-20-daily",
+        "target": "TLVNET/consumer",
+        "toTopic": "consumer",
+        "title": "איקיוטק — בדיקת זכאות ומועד הגשת הצהרה לפיצוי",
+        "source_url": "https://www.consumers.org.il/item/news_171126",
+        "discovery_url": "https://www.consumers.org.il/category/messages-and-announcements",
+        "source_published_at": "2026-11-17",
+        "checked_at": "2026-11-20T12:09:50Z",
+        "status": "primary_full_text_pending",
+        "reason": "Actual Council index shows stated500NIS and9Dec2026 deadline; full item returned explicit Request Rejected. Complete eligibility, court decision, form and scope not read. Index is not sufficient legal/entitlement verification.",
+        "next_action": "Read full official notice/court or original representative instructions when access/evidence changes. No unchanged retry or guaranteed compensation claim.",
+        "editor_review": null,
+        "image_review": null
+      },
+      {
+        "content_id": "namal-reusable-cup-coffee-offer-20261122",
+        "status": "pending_verification",
+        "reason": "Official Hanukkah programme related link shows22Nov–24Dec2026 offer; full terms page returned403. Headline does not verify eligible members, participating cafes or full conditions."
+      },
+      {
+        "content_id": "consumer-dandasha-jaffa-popup-20261116",
+        "status": "pending_verification",
+        "reason": "Contradictory dates retained; no changed primary confirmation, no unchanged retry."
+      },
+      {
+        "content_id": "consumer-moh-dragonfly-verification-20261116",
+        "status": "pending_verification",
+        "reason": "8Nov notice and unresolved full-date/current-scope verification retained from18Nov, no new local incident claim."
+      },
+      {
+        "content_id": "menora-smoking-settlement-20260922",
+        "status": "pending_verification",
+        "reason": "Old source; current implementation and judgment not verified, carried forward."
+      },
+      {
+        "content_id": "babylon-port-bowling-padel-20261011",
+        "status": "pending_verification",
+        "reason": "Old plan not proof of actual opening/tariffs, carried forward."
+      }
+    ],
+    "lease": {
+      "target": "TLVNET-site",
+      "state": "held",
+      "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "run_key": "news-20261120T115952Z-709ada2d-af80-4b27-b4cf-1bfd7cd80e16",
+      "acquired_at": "2026-11-20T11:59:52.948511+00:00",
+      "lease_until": "2026-11-20T12:29:52.948511+00:00",
+      "last_release": {
+        "owner": "Automation_e03d80ff914c8191a790fc66e7447826",
+        "run_key": "community-2026-11-20-daily",
+        "released_at": "2026-11-20T11:06:42Z",
+        "reason": "terminal_deployment698_live_existing_article_update_verified",
+        "deployment_id": "appgdep_6b0029720c40819180cebbc5f3fc59f4",
+        "version_number": 698,
+        "source_commit": "ae5642c47f4dbdf911a318a5bcec3aa7b233eda6",
+        "journal_commit": "96a0761e08882054e8248dde9ef000986c6bf834",
+        "article_ids": [
+          "tlv-neighborhood-garage-sale-20261106"
+        ]
+      },
+      "renewed_at": null
+    },
+    "builds": 0,
+    "new_deployments": 0,
+    "source_checkout_unchanged": true,
+    "API_cost": null
+  },
+  "handoffs_to_merge_when_owned": [
+    {
+      "content_id": "kv-yavne-cucumber-recall-26142-20261119",
+      "source_fingerprint": "product:7290002057352|batch:26-142|hours:11:00-13:00|best-before:05.2029",
+      "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "runKey": "consumer-2026-11-20-daily",
+      "target": "TLVNET/consumer",
+      "toTopic": "consumer",
+      "title": "בדיקת אצוות מלפפונים במלח של קבוצת יבנה — הודעת החזרה19בנובמבר",
+      "source_url": "https://t.me/s/MOHReport",
+      "source_message_url": "https://t.me/MOHreport/13838",
+      "secondary_source_url": "https://www.calcalist.co.il/shopping/article/hjenrt3afe",
+      "source_published_at": "2026-11-19",
+      "checked_at": "2026-11-20T12:09:50Z",
+      "status": "publication_pending_existing_writer",
+      "source_verification": "Full original official channel post body read, including date, product,barcode,batch,hours,bestbefore and contact; exact matching secondary read. Individual Telegram permalink returns embed shell, not falsely claimed full body there.",
+      "facts": {
+        "product": "מלפפונים במלח, 7-9 גדול",
+        "brand": "קבוצת יבנה",
+        "barcode": "7290002057352",
+        "production_code": "26-142",
+        "production_hours": "11:00–13:00",
+        "best_before": "05.2029",
+        "instruction": "צרכנים שרכשו מוצר התואם לפרטים מתבקשים שלא לצרוך אותו ולפנות לשירות הלקוחות",
+        "contact": "olivemaz@kv-yavne.co.il",
+        "basis": "Consumer reported metallic foreign body in one item; manufacturer's recall coordinated with Central District Food Service."
+      },
+      "local_angle": "Useful product-identification notice for Tel Aviv–Jaffa readers who may hold this product; no specific city incident, store inventory or citywide distribution asserted.",
+      "readiness": "source_verified_pending_original_article_and_image",
+      "image_search": {
+        "local_authorized_bank": "No exact cucumber/pickle/canned-goods asset found by subject search",
+        "new_downloads": 0,
+        "new_generation": 0,
+        "reason": "No unrelated cream/market image assigned to actual recalled product. No image permission inherited from news-site attribution."
+      },
+      "editor_review": null,
+      "image_review": null,
+      "next_action": "Original owner to obtain own valid CAS after competing owner releases; refresh source/duplicate check, write original scoped notice and complete permitted relevant image then one build/deploy/live verification. Do not describe this as approved publish-ready solely waiting for lease."
+    },
+    {
+      "content_id": "iqtech-compensation-update-20261117",
+      "source_fingerprint": "url:https://www.consumers.org.il/item/news_171126",
+      "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "runKey": "consumer-2026-11-20-daily",
+      "target": "TLVNET/consumer",
+      "toTopic": "consumer",
+      "title": "איקיוטק — בדיקת זכאות ומועד הגשת הצהרה לפיצוי",
+      "source_url": "https://www.consumers.org.il/item/news_171126",
+      "discovery_url": "https://www.consumers.org.il/category/messages-and-announcements",
+      "source_published_at": "2026-11-17",
+      "checked_at": "2026-11-20T12:09:50Z",
+      "status": "primary_full_text_pending",
+      "reason": "Actual Council index shows stated500NIS and9Dec2026 deadline; full item returned explicit Request Rejected. Complete eligibility, court decision, form and scope not read. Index is not sufficient legal/entitlement verification.",
+      "next_action": "Read full official notice/court or original representative instructions when access/evidence changes. No unchanged retry or guaranteed compensation claim.",
+      "editor_review": null,
+      "image_review": null
+    }
+  ],
+  "quality_issue": {
+    "kind": "ai_credit_label_missing",
+    "status": "regression",
+    "article_id": "good-pharm-charity-cream-terms-20261119",
+    "url": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119",
+    "body_sha256": "6765d9b230a83091060840678c06e9b88a8281322075c7cf4cb9a14a5ac2a192",
+    "asset_sha256": "fc55de381620e217307c64ee3443890e2e5334c53d2d7ac7afc43e56d776683d",
+    "src": "/photo-bank/assets/hand-cream-charity-concept-ai-20261119.jpg",
+    "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+    "runKey": "consumer-2026-11-20-daily",
+    "recorded_at": "2026-11-20T12:10:21Z",
+    "expected_credit": "אילוסטרציה – AI",
+    "observed_caption": "להמחשה",
+    "actual_HTML": [
+      "<figure class=\"city-story-image\"><img alt=\"קרם ידיים ותרומה — המחשה\" decoding=\"async\" fetchpriority=\"high\" src=\"/photo-bank/assets/hand-cream-charity-concept-ai-20261119.jpg\"/><figcaption>להמחשה</figcaption></figure>",
+      "<figcaption>להמחשה</figcaption>"
+    ],
+    "source_asset_and_body_unchanged": true,
+    "original_publication_675_was_verified": true,
+    "current_credit_verification_passed": false,
+    "desktop_mobile_rendered_review": "not_performed_this_cycle",
+    "next_action": "Existing authorized render/publication owner restore explicit AI indication on article image without removing gates or changing source/body/asset/publicationdate. Verify full article and mobile/card separately. Do not republish unchanged article as new."
+  },
+  "existing_live_verification": {
+    "live": {
+      "checked_at": "2026-11-20T12:06:55.374000+00:00",
+      "new_publication": false,
+      "article_id": "good-pharm-charity-cream-terms-20261119",
+      "url": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119",
+      "article_http": 200,
+      "title": true,
+      "full_body": true,
+      "credit": false,
+      "image_http": 200,
+      "jpeg": true,
+      "asset_sha256": "fc55de381620e217307c64ee3443890e2e5334c53d2d7ac7afc43e56d776683d",
+      "asset_hash_matches": true,
+      "section_http": 200,
+      "section_link": true,
+      "home_http": 200,
+      "home_link": true,
+      "existing_published_verified": false
+    },
+    "credit": {
+      "http": 200,
+      "figure_markup": [
+        "<figure class=\"city-story-image\"><img alt=\"קרם ידיים ותרומה — המחשה\" decoding=\"async\" fetchpriority=\"high\" src=\"/photo-bank/assets/hand-cream-charity-concept-ai-20261119.jpg\"/><figcaption>להמחשה</figcaption></figure>",
+        "<figcaption>להמחשה</figcaption>"
+      ],
+      "matching_visible_fragments": [],
+      "label_present": false
+    },
+    "body_sha256": "6765d9b230a83091060840678c06e9b88a8281322075c7cf4cb9a14a5ac2a192",
+    "asset_sha256": "fc55de381620e217307c64ee3443890e2e5334c53d2d7ac7afc43e56d776683d",
+    "src": "/photo-bank/assets/hand-cream-charity-concept-ai-20261119.jpg"
+  },
+  "prior19Nov_completion_to_reconcile": {
+    "schema_version": 1,
+    "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+    "runKey": "consumer-2026-11-19-daily",
+    "policy_version": "2026-11-15/1.1",
+    "policy_update": "2026-11-19/tlv-publish-recovery-1",
+    "target": "TLVNET/consumer",
+    "recorded_at": "2026-11-19T12:17:03.776267+00:00",
+    "status": "published_verified_mobile_quality_followup",
+    "signature": "TLVNET/consumer/visual-review/mobile-viewport-unavailable",
+    "publication": {
+      "state": "published_verified",
+      "lease_owner": "Automation_e2f02000cdf4819190022b85f4391076",
+      "lease_until": "2026-11-19T12:34:06.702Z",
+      "source_commit": "6e95c719de299e152fec0c59b3748bbadcf3d40f",
+      "version_number": 675,
+      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_27b98e21a4c481919a4d99097dda86fb",
+      "deployment_id": "appgdep_6afee803e46081918ee023de53e77719",
+      "deployment_status": "succeeded",
+      "terminal_at": "2026-11-19T12:14:12.567410+00:00"
+    },
+    "live_verification": {
+      "checked_at": "2026-11-19T12:14:33.349795+00:00",
+      "article_id": "good-pharm-charity-cream-terms-20261119",
+      "url": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119",
+      "article_http": 200,
+      "title": true,
+      "full_body": true,
+      "credit": true,
+      "image_http": 200,
+      "jpeg": true,
+      "asset_sha256": "fc55de381620e217307c64ee3443890e2e5334c53d2d7ac7afc43e56d776683d",
+      "asset_hash_matches": true,
+      "section_http": 200,
+      "section_article_link": true,
+      "home_http": 200,
+      "home_article_link": true,
+      "published_verified": true
+    },
+    "metrics": {
+      "discovered": 2,
+      "verified": 1,
+      "newly_published": 1,
+      "updated": 0,
+      "rejected": 1,
+      "pending_ready": 0,
+      "pending_verification": 5,
+      "blocked_real": 1,
+      "duplicate": 2
+    },
+    "decisions": [
+      {
+        "content_id": "good-pharm-charity-cream-terms-20261119",
+        "status": "published_verified",
+        "reason": "Original bounded consumer-service account verified against actual official campaign banner and branch list; promises attributed to retailer; local stock not asserted.",
+        "url": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119"
+      },
+      {
+        "content_id": "namal-reusable-cup-coffee-offer-20261122",
+        "status": "pending_verification",
+        "reason": "Official Hanukkah programme related link shows22Nov–24Dec2026 offer; full terms page returned403. Headline does not verify eligible members, participating cafes or full conditions."
+      },
+      {
+        "content_id": "consumer-dandasha-jaffa-popup-20261116",
+        "status": "pending_verification",
+        "reason": "Contradictory dates retained; no changed primary confirmation, no unchanged retry."
+      },
+      {
+        "content_id": "consumer-moh-dragonfly-verification-20261116",
+        "status": "pending_verification",
+        "reason": "8Nov notice and unresolved full-date/current-scope verification retained from18Nov, no new local incident claim."
+      },
+      {
+        "content_id": "menora-smoking-settlement-20260922",
+        "status": "pending_verification",
+        "reason": "Old source; current implementation and judgment not verified, carried forward."
+      },
+      {
+        "content_id": "babylon-port-bowling-padel-20261011",
+        "status": "pending_verification",
+        "reason": "Old plan not proof of actual opening/tariffs, carried forward."
+      },
+      {
+        "content_id": "about-us-jaffa-20261112",
+        "status": "duplicate_expired",
+        "article_id": "about-us-jaffa-entry-prices-20261112",
+        "reason": "Incoming handoff covered;12–14Nov passed."
+      },
+      {
+        "content_id": "r2m-heichal-parking",
+        "status": "duplicate",
+        "article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
+        "reason": "Original16Nov guide already covers facts; no new launch."
+      },
+      {
+        "content_id": "humongous-atidim-park-tel-aviv-opening-2027",
+        "status": "existing_handoff_economy",
+        "reason": "Old18Oct plannedMarch2027 opening remains economy-owned; no new opening."
+      },
+      {
+        "content_id": "municipal-service-closure-20261112",
+        "status": "rejected_expired",
+        "reason": "12Nov service closure not upcoming19Nov."
+      },
+      {
+        "content_id": "municipal-garage-sale-20261127",
+        "status": "existing_handoff_community",
+        "reason": "Participation story belongs community; no parallel consumer publication."
+      }
+    ],
+    "local_coverage": {
+      "policy_version": "2026-11-15/1.0",
+      "runKey": "consumer-2026-11-19-daily",
+      "sources": [
+        {
+          "source_url": "https://tlvonline.co.il/",
+          "checked_at": "2026-11-19T12:10:09.014147+00:00",
+          "status": "read",
+          "indexes": [
+            "https://tlvonline.co.il/",
+            "https://tlvonline.co.il/category/פנאי/",
+            "https://tlvonline.co.il/category/עסקים/"
+          ],
+          "watermark": "2026-11-17",
+          "watermark_basis": "Latest dated consumer story observed; not a sitewide freshness assertion. Previous bounded cursor preserved.",
+          "cursor": "Fresh current indexes reviewed; earlier bounded backlog remains, no claim all7days fully audited.",
+          "discovered_count": 0,
+          "decisions": [],
+          "deferred_candidate_ids": [
+            "menora-smoking-settlement-20260922",
+            "babylon-port-bowling-padel-20261011"
+          ],
+          "next_action": "Continue retained backlog only with changed evidence; no repeated same-index cycle."
+        },
+        {
+          "source_url": "https://telavivi.news/",
+          "checked_at": "2026-11-19T12:10:09.014147+00:00",
+          "status": "read",
+          "indexes": [
+            "https://telavivi.news/",
+            "https://telavivi.news/category/food/",
+            "https://telavivi.news/category/real-estate-economics-business/"
+          ],
+          "watermark": "2026-11-19",
+          "watermark_basis": "Latest dated consumer story observed; not a sitewide freshness assertion. Previous bounded cursor preserved.",
+          "cursor": "Fresh current indexes reviewed; earlier bounded backlog remains, no claim all7days fully audited.",
+          "discovered_count": 1,
+          "decisions": [
+            {
+              "content_id": "good-pharm-charity-cream-terms-20261119",
+              "status": "image_approved_ready_to_publish",
+              "reason": "Original bounded consumer-service account verified against actual official campaign banner and branch list; promises attributed to retailer; local stock not asserted."
+            },
+            {
+              "content_id": "about-us-jaffa-20261112",
+              "status": "duplicate_expired",
+              "article_id": "about-us-jaffa-entry-prices-20261112",
+              "reason": "Incoming handoff covered;12–14Nov passed."
+            },
+            {
+              "content_id": "r2m-heichal-parking",
+              "status": "duplicate",
+              "article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
+              "reason": "Original16Nov guide already covers facts; no new launch."
+            },
+            {
+              "content_id": "humongous-atidim-park-tel-aviv-opening-2027",
+              "status": "existing_handoff_economy",
+              "reason": "Old18Oct plannedMarch2027 opening remains economy-owned; no new opening."
+            }
+          ],
+          "deferred_candidate_ids": [
+            "consumer-dandasha-jaffa-popup-20261116"
+          ],
+          "next_action": "Continue retained backlog only with changed evidence; no repeated same-index cycle.",
+          "latest_source_published_at": "2026-11-19",
+          "latest_source_scope": "Full GoodPharm consumer source, not sitewide latest timestamp."
+        }
+      ]
+    },
+    "quality_followup": {
+      "kind": "rendered_visual_review_pending",
+      "page": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119",
+      "section": "consumer",
+      "review_id": "consumer-goodpharm-mobile-20261119",
+      "article_id": "good-pharm-charity-cream-terms-20261119",
+      "src": "/photo-bank/assets/hand-cream-charity-concept-ai-20261119.jpg",
+      "body_sha256": "6765d9b230a83091060840678c06e9b88a8281322075c7cf4cb9a14a5ac2a192",
+      "asset_sha256": "fc55de381620e217307c64ee3443890e2e5334c53d2d7ac7afc43e56d776683d",
+      "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "runKey": "consumer-2026-11-19-daily",
+      "recorded_at": "2026-11-19T12:17:03.776267+00:00",
+      "desktop_article": "viewed_passed",
+      "desktop_card": "viewed_passed",
+      "mobile": "pending",
+      "reason": "Cloud browser reviewed actual desktop article and card. No supported mobile viewport change performed; no mobile approval claimed.",
+      "next_action": "Inspect actual mobile article and card in a supported viewport, preserve file/body approval if unchanged."
+    },
+    "checkpoint_merged": "consumer-2026-11-18-daily",
+    "no_automation_changes": true,
+    "next_action": "Reconcile this verified publication and original owner journal into current source in the next authorized cycle. Mobile QA remains pending; do not republish article.",
+    "source_journal_write": "deferred_after_terminal_publication",
+    "journal_reason": "Post-publication source journal sync made initial attempt and one focused correction; git origin fetch unavailable. No further retry/build/deploy. Original fully updated owner ledger retained in this immutable checkpoint.",
+    "source_journal_entry": {
+      "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "runKey": "consumer-2026-11-19-daily",
+      "policy_version": "2026-11-15/1.1",
+      "policy_update": "2026-11-19/tlv-publish-recovery-1",
+      "media_access_policy_version": "2026-11-17/1.1",
+      "target": "TLVNET/consumer",
+      "recorded_at": "2026-11-19T12:17:03.776267+00:00",
+      "status": "published_verified",
+      "source_commit_before": "66f3ff8d78838ed6a4ecbff86cf666021deb258e",
+      "window_start": "2026-11-16T12:12:18.684499+00:00",
+      "checkpoint_resumed": "consumer-2026-11-18-daily",
+      "window_end": "2026-11-19T12:10:09.014147+00:00",
+      "coverage_complete": false,
+      "newPublishedArticleIds": [
+        "good-pharm-charity-cream-terms-20261119"
+      ],
+      "readyArticleIds": [],
+      "metrics": {
+        "discovered": 2,
+        "verified": 1,
+        "newly_published": 1,
+        "updated": 0,
+        "rejected": 1,
+        "pending_ready": 0,
+        "pending_verification": 5,
+        "blocked_real": 1,
+        "duplicate": 2
+      },
+      "decisions": [
+        {
+          "content_id": "good-pharm-charity-cream-terms-20261119",
+          "status": "published_verified",
+          "reason": "Original bounded consumer-service account verified against actual official campaign banner and branch list; promises attributed to retailer; local stock not asserted.",
+          "url": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119"
+        },
+        {
+          "content_id": "namal-reusable-cup-coffee-offer-20261122",
+          "status": "pending_verification",
+          "reason": "Official Hanukkah programme related link shows22Nov–24Dec2026 offer; full terms page returned403. Headline does not verify eligible members, participating cafes or full conditions."
+        },
+        {
+          "content_id": "consumer-dandasha-jaffa-popup-20261116",
+          "status": "pending_verification",
+          "reason": "Contradictory dates retained; no changed primary confirmation, no unchanged retry."
+        },
+        {
+          "content_id": "consumer-moh-dragonfly-verification-20261116",
+          "status": "pending_verification",
+          "reason": "8Nov notice and unresolved full-date/current-scope verification retained from18Nov, no new local incident claim."
+        },
+        {
+          "content_id": "menora-smoking-settlement-20260922",
+          "status": "pending_verification",
+          "reason": "Old source; current implementation and judgment not verified, carried forward."
+        },
+        {
+          "content_id": "babylon-port-bowling-padel-20261011",
+          "status": "pending_verification",
+          "reason": "Old plan not proof of actual opening/tariffs, carried forward."
+        },
+        {
+          "content_id": "about-us-jaffa-20261112",
+          "status": "duplicate_expired",
+          "article_id": "about-us-jaffa-entry-prices-20261112",
+          "reason": "Incoming handoff covered;12–14Nov passed."
+        },
+        {
+          "content_id": "r2m-heichal-parking",
+          "status": "duplicate",
+          "article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
+          "reason": "Original16Nov guide already covers facts; no new launch."
+        },
+        {
+          "content_id": "humongous-atidim-park-tel-aviv-opening-2027",
+          "status": "existing_handoff_economy",
+          "reason": "Old18Oct plannedMarch2027 opening remains economy-owned; no new opening."
+        },
+        {
+          "content_id": "municipal-service-closure-20261112",
+          "status": "rejected_expired",
+          "reason": "12Nov service closure not upcoming19Nov."
+        },
+        {
+          "content_id": "municipal-garage-sale-20261127",
+          "status": "existing_handoff_community",
+          "reason": "Participation story belongs community; no parallel consumer publication."
+        }
+      ],
+      "local_coverage": {
+        "policy_version": "2026-11-15/1.0",
+        "runKey": "consumer-2026-11-19-daily",
+        "sources": [
+          {
+            "source_url": "https://tlvonline.co.il/",
+            "checked_at": "2026-11-19T12:10:09.014147+00:00",
+            "status": "read",
+            "indexes": [
+              "https://tlvonline.co.il/",
+              "https://tlvonline.co.il/category/פנאי/",
+              "https://tlvonline.co.il/category/עסקים/"
+            ],
+            "watermark": "2026-11-17",
+            "watermark_basis": "Latest dated consumer story observed; not a sitewide freshness assertion. Previous bounded cursor preserved.",
+            "cursor": "Fresh current indexes reviewed; earlier bounded backlog remains, no claim all7days fully audited.",
+            "discovered_count": 0,
+            "decisions": [],
+            "deferred_candidate_ids": [
+              "menora-smoking-settlement-20260922",
+              "babylon-port-bowling-padel-20261011"
+            ],
+            "next_action": "Continue retained backlog only with changed evidence; no repeated same-index cycle."
+          },
+          {
+            "source_url": "https://telavivi.news/",
+            "checked_at": "2026-11-19T12:10:09.014147+00:00",
+            "status": "read",
+            "indexes": [
+              "https://telavivi.news/",
+              "https://telavivi.news/category/food/",
+              "https://telavivi.news/category/real-estate-economics-business/"
+            ],
+            "watermark": "2026-11-19",
+            "watermark_basis": "Latest dated consumer story observed; not a sitewide freshness assertion. Previous bounded cursor preserved.",
+            "cursor": "Fresh current indexes reviewed; earlier bounded backlog remains, no claim all7days fully audited.",
+            "discovered_count": 1,
+            "decisions": [
+              {
+                "content_id": "good-pharm-charity-cream-terms-20261119",
+                "status": "image_approved_ready_to_publish",
+                "reason": "Original bounded consumer-service account verified against actual official campaign banner and branch list; promises attributed to retailer; local stock not asserted."
+              },
+              {
+                "content_id": "about-us-jaffa-20261112",
+                "status": "duplicate_expired",
+                "article_id": "about-us-jaffa-entry-prices-20261112",
+                "reason": "Incoming handoff covered;12–14Nov passed."
+              },
+              {
+                "content_id": "r2m-heichal-parking",
+                "status": "duplicate",
+                "article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
+                "reason": "Original16Nov guide already covers facts; no new launch."
+              },
+              {
+                "content_id": "humongous-atidim-park-tel-aviv-opening-2027",
+                "status": "existing_handoff_economy",
+                "reason": "Old18Oct plannedMarch2027 opening remains economy-owned; no new opening."
+              }
+            ],
+            "deferred_candidate_ids": [
+              "consumer-dandasha-jaffa-popup-20261116"
+            ],
+            "next_action": "Continue retained backlog only with changed evidence; no repeated same-index cycle.",
+            "latest_source_published_at": "2026-11-19",
+            "latest_source_scope": "Full GoodPharm consumer source, not sitewide latest timestamp."
+          }
+        ]
+      },
+      "sources_checked": [
+        {
+          "url": "https://telavivi.news/good-pharm-hand-cream-cancer/",
+          "status": "full_read",
+          "source_date": "2026-11-19"
+        },
+        {
+          "url": "https://goodpharm.co.il/",
+          "status": "index_and_actual_banner_read"
+        },
+        {
+          "url": "https://goodpharm.co.il/wp-content/uploads/2026/11/65679_Dr_Fischer_Hand_Cream_Breast_Cancer_banner_1920x700_04.jpg",
+          "status": "actual_image_downloaded_and_viewed_for_facts_only",
+          "result": "10NIS,all sales money donation,valid15Dec2026; no publication rights assumed."
+        },
+        {
+          "url": "https://goodpharm.co.il/רשימת-סניפים-תל-אביב",
+          "status": "full_branch_service_read",
+          "result": "IbnGvirol166,Allenby66; no inventory claim."
+        },
+        {
+          "url": "https://www.cancer.org.il/",
+          "status": "index_read",
+          "result": "No independent transfer/payment confirmation claimed."
+        },
+        {
+          "url": "https://www.namal.co.il/events/hanuka/",
+          "status": "full_read_related_offer_discovery"
+        },
+        {
+          "url": "https://www.namal.co.il/events/coffee/",
+          "status": "blocked_403",
+          "result": "No repeated attempt; individual offer pending."
+        },
+        {
+          "url": "https://www.calcalist.co.il/shopping",
+          "status": "index_read",
+          "result": "Altman commercial interview/18Nov import-plan index, not independent local consumer terms; no full interview copied."
+        },
+        {
+          "url": "https://www.globes.co.il/",
+          "status": "index_read",
+          "result": "Finance/markets lead, no new independently verified TLV consumer terms selected."
+        }
+      ],
+      "checks": {
+        "build_news": "passed",
+        "prepare_public": "passed_in_npm_build",
+        "build": "passed",
+        "photo_bank": "passed",
+        "news_photo_gate": "passed",
+        "image_presentation": "passed",
+        "freshness": "passed",
+        "SEO": "passed"
+      },
+      "visual_review": {
+        "original_image": "performed",
+        "final_JPEG": "performed",
+        "desktop_page": "not_performed",
+        "mobile_page": "pending_not_performed",
+        "post_publication_visual_review": "desktop_passed_mobile_pending",
+        "desktop_article": "performed_live_full_image_credit",
+        "desktop_section_card": "performed_live_full_frame"
+      },
+      "publication": {
+        "state": "published_verified",
+        "lease_owner": "Automation_e2f02000cdf4819190022b85f4391076",
+        "lease_until": "2026-11-19T12:34:06.702Z",
+        "source_commit": "6e95c719de299e152fec0c59b3748bbadcf3d40f",
+        "version_number": 675,
+        "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_27b98e21a4c481919a4d99097dda86fb",
+        "deployment_id": "appgdep_6afee803e46081918ee023de53e77719",
+        "deployment_status": "succeeded",
+        "terminal_at": "2026-11-19T12:14:12.567410+00:00"
+      },
+      "cost": null,
+      "automation_changes": false,
+      "live_verification": {
+        "checked_at": "2026-11-19T12:14:33.349795+00:00",
+        "article_id": "good-pharm-charity-cream-terms-20261119",
+        "url": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119",
+        "article_http": 200,
+        "title": true,
+        "full_body": true,
+        "credit": true,
+        "image_http": 200,
+        "jpeg": true,
+        "asset_sha256": "fc55de381620e217307c64ee3443890e2e5334c53d2d7ac7afc43e56d776683d",
+        "asset_hash_matches": true,
+        "section_http": 200,
+        "section_article_link": true,
+        "home_http": 200,
+        "home_article_link": true,
+        "published_verified": true
+      },
+      "next_action": "Next ordinary daily owner run: review changed queued sources and complete mobile QA; no duplicate publication or new task."
+    },
+    "quality_issue_entry": {
+      "kind": "rendered_visual_review_pending",
+      "page": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119",
+      "section": "consumer",
+      "review_id": "consumer-goodpharm-mobile-20261119",
+      "article_id": "good-pharm-charity-cream-terms-20261119",
+      "src": "/photo-bank/assets/hand-cream-charity-concept-ai-20261119.jpg",
+      "body_sha256": "6765d9b230a83091060840678c06e9b88a8281322075c7cf4cb9a14a5ac2a192",
+      "asset_sha256": "fc55de381620e217307c64ee3443890e2e5334c53d2d7ac7afc43e56d776683d",
+      "owner_automation_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "runKey": "consumer-2026-11-19-daily",
+      "recorded_at": "2026-11-19T12:17:03.776267+00:00",
+      "desktop_article": "viewed_passed",
+      "desktop_card": "viewed_passed",
+      "mobile": "pending",
+      "reason": "Cloud browser reviewed actual desktop article and card. No supported mobile viewport change performed; no mobile approval claimed.",
+      "next_action": "Inspect actual mobile article and card in a supported viewport, preserve file/body approval if unchanged."
+    }
+  },
+  "prior19Nov_reconciliation_note": "Original19Nov publication675 receipt verified then,source ledger still erroneously ready/no newPublished IDs. Preserve historical publication proof and append today's separate current-credit regression; don't mark missing image or recreate/republish.",
+  "source_journal_write": "publication_pending_existing_writer",
+  "source_checkout_unchanged": true,
+  "new_deployments": 0,
+  "builds": 0,
+  "no_automation_changes": true,
+  "next_action": "Controller reads this existing inbox without activation. Reconcile actual source ledger/quality issue when own valid CAS available, preserve queues and existing news owner. Original consumer owner retains new recall/compensation candidates; no invented approvals."
+}
