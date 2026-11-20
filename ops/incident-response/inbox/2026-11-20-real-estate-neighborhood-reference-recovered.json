@@ -1,0 +1,42 @@
+{
+  "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+  "runKey": "real-estate-20261120-612caa97-ed9e-4ac9-9fb1-cafe93068e39",
+  "policy_version": "2026-11-15/1.1",
+  "signature": "TLVNET/real-estate/article-neighborhood/group-slug-instead-of-registry-slug",
+  "status": "fixed_verified",
+  "article_id": "louis-marshall-10-16-reported-demolition-20261120",
+  "url": "https://tlvnet.com/news/louis-marshall-10-16-reported-demolition-20261120",
+  "first_attempt": {
+    "version": 701,
+    "neighborhood_link": false,
+    "body_image_credit_home_section": true
+  },
+  "root_cause": "Input metadata used group slugnew-north; matcher requires canonical neighborhood slugnew-north-north.",
+  "change": "Corrected same article neighborhood in existing registry; unchanged body/photo/original published_at; no baseline or implementation change.",
+  "verified_at": "2026-11-20T15:19:08.854107+00:00",
+  "verification": {
+    "version": 702,
+    "deployment_id": "appgdep_6b0064adfc7481918707b011e3d9de5b",
+    "deployment_status": "succeeded",
+    "source_commit": "43d42b3e8f398cc76f84b6d9e02b507c9414d5ff",
+    "journal_commit": "357dff949650494e477766327d3a9e6c6547c1d0",
+    "body": true,
+    "image": true,
+    "jpg_hash": true,
+    "credit": true,
+    "home_link": true,
+    "section_link": true,
+    "neighborhood_link": true,
+    "desktop_browser": "passed on tlvnet.com; unchanged body/image across correction",
+    "mobile_visual": "pending",
+    "serving_origin": "https://tlvnet-newsroom.ebs987449.chatgpt.site"
+  },
+  "verification_limit": {
+    "action": "Additional photo-bank read/poll",
+    "result": "automatic_approval_review_rejected",
+    "reason": "Repeated retry without changed access state; targeted-retry limit.",
+    "response": "No further bank request. Prior successful same-run live control/asset read15:12:57 retained for unchanged-asset neighborhood-only correction."
+  },
+  "prevention": "Resolve neighborhood against existing registry and assert generated destination reference before release.",
+  "controller_retry": false
+}
