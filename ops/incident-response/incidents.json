@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T07:31:45.056Z",
+  "updated_at": "2026-11-20T08:21:47.206Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7027,8 +7027,8 @@
     },
     {
       "id": "tlvnet-social-managed-public-availability",
-      "status": "mitigated",
-      "updated_at": "2026-11-20T07:31:45.056Z",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-20T08:21:47.206Z",
       "root_cause": "Managed HTML was pruned from ASSETS, but both social callers checked ASSETS for catalog-backed pages.",
       "evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
       "inbox": "ops/incident-response/inbox/81d3d078-76bc-8330-a9fa-8a8cdb65531d-social-managed-public-availability.json",
@@ -7043,7 +7043,30 @@
       "source_commit": "77fbe16234295a39c185fb6387c6291d19afe96e",
       "deployment_id": "appgdep_6afff6f983c48191af9035aca8655ed6",
       "tests": "Scheduler regression: simulated removed static asset, canonical and .html paths, allowed promotion, absent article, unpublished article, private path. Foundation and production build passed.",
-      "next_action": "Observe next authorized scheduled send and publicly verify the actual post. No manual replay."
+      "next_action": "Continue checking new scheduled results. Original 09:00 slot not replayed.",
+      "fixed_verified_at": "2026-11-20T08:21:47.206Z",
+      "public_verification": {
+        "new_rows": 1,
+        "latest_slot": "2026-11-20T08",
+        "finished_at": "2026-11-20T08:00:23.760Z",
+        "journal_status": "published",
+        "post_id": "1520426491146188_122110556601545268",
+        "public_url": "https://www.facebook.com/61596358055015/posts/122110556601545268/",
+        "public_http": 200,
+        "public_page_title_and_text_match": true,
+        "public_embed_http": 200,
+        "public_embed_article_link_match": true,
+        "article_url": "https://tlvnet.com/news/kamea-erga-arison-friday-20261120.html",
+        "article_http": 200,
+        "attempt": null,
+        "nextAction": null,
+        "supportRequired": null,
+        "notifyPublisher": null,
+        "stopped": null,
+        "status": "fixed_verified",
+        "prior_failed_slot_replayed": false,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json"
+      }
     },
     {
       "id": "tlvnet-sports-named-game-missing-event-date-status-20261120",
@@ -7057,7 +7080,7 @@
       "next_action": "Keep dedicated mobile view pending in owner queue."
     }
   ],
-  "last_review_runKey": "ops-2026-11-20-81d3d078-76bc-8330-a9fa-8a8cdb65531d",
+  "last_review_runKey": "ops-2026-11-20-7bc39e0a-9370-8330-a313-9b1c80d5d7f5",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
