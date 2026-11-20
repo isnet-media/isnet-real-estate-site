@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T08:21:47.206Z",
+  "updated_at": "2026-11-20T10:15:04.731Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7078,9 +7078,35 @@
       "change": "Original sports owner corrected date and finished status; independent live figure/credit readback passed.",
       "deployment_id": "appgdep_6afff3c4c5d08191967e08cac8264281",
       "next_action": "Keep dedicated mobile view pending in owner queue."
+    },
+    {
+      "id": "tlvnet-social-source-alias-run-failed",
+      "status": "mitigated",
+      "updated_at": "2026-11-20T10:15:04.731Z",
+      "root_cause": "Candidate union treated source-backed D1 mirror /articles/<id> as a separate candidate from /news/<id>; exact exception inside generic run_failed remains unobserved.",
+      "occurrences": [
+        {
+          "slot": "2026-11-20T09",
+          "status": "published",
+          "article_url": "https://tlvnet.com/news/parking-blue-white-budget-20261120.html"
+        },
+        {
+          "slot": "2026-11-20T10",
+          "status": "needs_review",
+          "article_url": "https://tlvnet.com/articles/parking-blue-white-budget-20261120"
+        }
+      ],
+      "inbox": "ops/incident-response/inbox/f69ddfba-d18c-8330-b2a9-977150c124ec-tlvnet-social-source-alias.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/f69ddfba-d18c-8330-b2a9-977150c124ec.json",
+      "source_commit": "bde22c97093377f6d95f6b872f260a82349ba887",
+      "deployment_id": "appgdep_6b001d623b808191a2aab12fd1de5023",
+      "change": "Exclude unedited source mirrors and use existing canonical source path for genuine editorial overlays.",
+      "tests": "Scheduler/publisher regression, foundation, production build, bundle inspection and affected public routes pass.",
+      "remaining": "Non-authentication scheduling circuit breaker is still active; no authorized recovery route for this exact flag was found. Existing successful post and absence of a second send claim verified.",
+      "next_action": "In authorized production maintenance, reconcile and release only the confirmed run_failed state after preserving claims and both slots; validate a future ordinary send."
     }
   ],
-  "last_review_runKey": "ops-2026-11-20-7bc39e0a-9370-8330-a313-9b1c80d5d7f5",
+  "last_review_runKey": "ops-2026-11-20-f69ddfba-d18c-8330-b2a9-977150c124ec",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
