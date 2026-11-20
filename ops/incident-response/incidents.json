@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T11:48:05.809Z",
+  "updated_at": "2026-11-20T12:51:38.241Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7120,9 +7120,30 @@
       "inbox": "ops/incident-response/inbox/2026-11-20-economy-tech-wage-primary-source.json",
       "source_url": "https://sachar-board.mof.org.il/pages/guf.html",
       "next_action": "Original desk verifies the exact authoritative rows and denominator from an authorized source when a change is available."
+    },
+    {
+      "id": "tlvnet-consumer-ai-caption-regression",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-20T12:51:38.241Z",
+      "root_cause": "Public news generator overwrote explicit AI mark with generic illustration caption",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
+      "inbox": "ops/incident-response/inbox/20261120-consumer-checkpoint-ai-credit-regression.json",
+      "source_commit": "bc56f7b507b24e74c1ef1effceeab38c1c9975db",
+      "deployment_id": "appgdep_6b00420b960c819187deb3fff95546a8",
+      "tests": "Existing media registry test plus AI-caption idempotence, full foundation, production build, and live comparison against four AI and two licensed articles; neighborhood, section and home readback.",
+      "next_action": "Preserve explicit provenance label in both news generation paths; visual review separately pending."
+    },
+    {
+      "id": "tlvnet-news-frishman-operator-closure-date-conflict",
+      "status": "awaiting_external_action",
+      "updated_at": "2026-11-20T12:51:38.241Z",
+      "root_cause": "Operator notice contains conflicting date references for the Frishman closure. Exact dates not included in published news.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/40c65dde-c100-832c-945d-96aae62f848a.json",
+      "inbox": "ops/incident-response/inbox/2026-11-20-news-frishman-closure-date-conflict.json",
+      "next_action": "Original news owner waits for corrected operator notice or explicitly corroborated date."
     }
   ],
-  "last_review_runKey": "ops-2026-11-20-b9f12e0b-0e7c-832c-8ce3-69a07559f03f",
+  "last_review_runKey": "ops-2026-11-20-40c65dde-c100-832c-945d-96aae62f848a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
