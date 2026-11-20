@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T07:31:45.056Z",
+  "updated_at": "2026-11-20T08:21:47.206Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-20T06:32:29Z",
   "initial_history": {
@@ -2621,7 +2621,8 @@
     "08a7e9f6-cc00-832e-a764-0743b12984db-news-nested-publication-receipt.json",
     "eb664208-f2e0-832a-a49d-4e3bb644dd6a-sports-controller-scope-recurrence.json",
     "ops/incident-response/inbox/20261120-sports-7ae15d34-publication-caption-readback.json",
-    "ops/incident-response/inbox/81d3d078-76bc-8330-a9fa-8a8cdb65531d-social-managed-public-availability.json"
+    "ops/incident-response/inbox/81d3d078-76bc-8330-a9fa-8a8cdb65531d-social-managed-public-availability.json",
+    "ops/incident-response/inbox/2026-11-20-culture-night-20261120-1795160838-readback.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -6158,6 +6159,28 @@
       "controller_editorial_writes": 0,
       "new_articles_owner": "sports",
       "private_definition_revision": 2
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "7bc39e0a-9370-8330-a313-9b1c80d5d7f5",
+      "runKey": "ops-2026-11-20-7bc39e0a-9370-8330-a313-9b1c80d5d7f5",
+      "policy_version": "2026-11-15/1.2",
+      "observed_at": "2026-11-20T08:21:47.206Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
+      "status": "facebook_fixed_verified_culture_custom_domain_verified",
+      "saved_version": 694,
+      "public_checked_version": 694,
+      "source_commit": "b6d8fbc7b01911001f1bf221bc5cdeb07f377234",
+      "new_actions": 0,
+      "new_social_rows": 1,
+      "new_inbox": 1,
+      "full_logs_read": 0,
+      "controller_new_deployments": 0,
+      "controller_editorial_writes": 0,
+      "new_articles": 2,
+      "new_articles_owner": "culture-news",
+      "private_definition_revision": 2,
+      "pending_ready": 1
     }
   ],
   "photo_controls_checkpoint": {
@@ -6898,7 +6921,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-20T07:00:02.479Z",
+    "max_finished_at": "2026-11-20T08:00:23.760Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -6963,12 +6986,13 @@
       "2026-11-19T17",
       "2026-11-19T18",
       "2026-11-19T19",
-      "2026-11-20T07"
+      "2026-11-20T07",
+      "2026-11-20T08"
     ],
-    "observed_at": "2026-11-19T12:23:30.044Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
+    "observed_at": "2026-11-20T08:21:47.206Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
     "new_rows_this_cycle": 1,
-    "public_verification": "New 09:00 slot stopped at article availability before a provider send. Code deployed; future normal send pending.",
+    "public_verification": "Provider accepted the scheduled 10:00 post; public Facebook page and article link verified.",
     "last_checked_at": "2026-11-20T07:31:45.056Z",
     "check_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json"
   },
@@ -7253,7 +7277,7 @@
     }
   },
   "latest_tlvnet_queue_observation": {
-    "observed_at": "2026-11-20T07:31:45.056Z",
+    "observed_at": "2026-11-20T08:21:47.206Z",
     "prepared_original_owner_items": 1,
     "verification_only_items": [
       {
@@ -7298,7 +7322,7 @@
     "original_owner_new_publications": 4,
     "new_live_verifications": 4,
     "reason": "Original evening637owner resolved both midday prepared items and published2additional originals; research coverage/backfill retained",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
     "events_source_metadata": {
       "checkpoint": "ops/event-refresh-checkpoint.json",
       "runKey": "publisher-events-20261118T1121-jerusalem",
@@ -7316,7 +7340,7 @@
     },
     "active_lease": null,
     "news_research_queues_unchanged": true,
-    "controller_status": "one_original_owner_prepared_update_retained_under_active_shared_lease",
+    "controller_status": "culture_custom_domain_verified_community_update_still_with_owner",
     "current_readonly_dispatch": {
       "news": {
         "dispatch_url": "https://tlvnet.com/api/briefs-writer?view=dispatch&topic=news",
@@ -7471,7 +7495,9 @@
         "credit": "ResaJoan · CC0 1.0",
         "citywide_registration_paragraph_present": true
       },
-      "projection": "Dispatch remains old research status and has no ready queue item; immutable ops checkpoint remains authoritative."
+      "projection": "Dispatch remains old research status and has no ready queue item; immutable ops checkpoint remains authoritative.",
+      "current_owner_run_unchanged": true,
+      "current_public_title": "שישירוק ביד אליהו: ההרשמה לעשרה דוכנים עד 8 בנובמבר | TLVNET"
     },
     "consumer": {
       "status": "published_verified_journal_pending_mobile_pending",
@@ -7698,7 +7724,12 @@
       "observed_at": "2026-11-20T06:39:13.754Z",
       "evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
     },
-    "previous_shared_lease_released": true
+    "previous_shared_lease_released": true,
+    "latest_public_culture_verification": [
+      "https://tlvnet.com/news/kamea-erga-arison-friday-20261120",
+      "https://tlvnet.com/news/liebling-open-space-neutra-vdl-20261229"
+    ],
+    "dynamic_dispatch_readback_status": 403
   },
   "pending_task_run_ids": [],
   "latest_supermarket_execution_checkpoint": {
@@ -8089,10 +8120,10 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-20T07:31:45.056Z",
-    "source_commit": "3b915be02e5b497cf3f21832f5710c32c615a60b",
-    "saved_version": 693,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
+    "observed_at": "2026-11-20T08:21:47.206Z",
+    "source_commit": "8bebe9ec75a07373cfeb8211a1eb0525474f04bd",
+    "saved_version": 694,
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
     "desks": {
       "news": {
         "last_new_published_at": "2026-11-20T06:11:08.142691+00:00",
@@ -8110,7 +8141,7 @@
           "published_verified": 4,
           "resolved_updated_existing_verified": 1
         },
-        "ledger_sha256": "d5099886451403bbb427b53b640fd419015002a21aaaea55344db6af301795ca",
+        "ledger_sha256": "8b1f03c499db1ca3cc4c957f00e5556c5496c3c60bb49bcd8ef905fddb98b6c7",
         "latest_body_sha256": "97919bad178431b1a6c285b1befb12d95e25500cf70889259c44f93af4fab951",
         "section_url": "https://tlvnet.com/news/index.html",
         "lead_article_id": "purple-line-licensing-milestone-20261119",
@@ -8268,7 +8299,7 @@
           },
           "pending_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96"
         },
-        "metadata_checked_at": "2026-11-19T06:19:28Z",
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
         "coverage_queue_count": 17,
         "coverage_queue_checkpoint": "public/news/agents/news/ledger.json",
         "public_verification": [
@@ -8507,7 +8538,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
         "latest_metadata_check": {
           "last_owner_run_id": "e34c454e-1518-8328-b5c7-ea55f35ad07b",
           "status": "completed",
@@ -8557,7 +8588,13 @@
         "source_latest_declared_update_id": "tel-aviv-overnight-police-chase-20261120",
         "result_matches_run": true,
         "lead_title": "נהג נעצר לאחר מרדף בתל אביב, שוטר נפצע קל",
-        "section_status": 200
+        "section_status": 200,
+        "latest_observed_owner_run": {
+          "id": "e34c454e-1518-8328-b5c7-ea55f35ad07b",
+          "state": "completed",
+          "completed_at": "2026-11-20T06:20:19.264585Z",
+          "result_matches_run": true
+        }
       },
       "real-estate": {
         "last_new_published_at": "2026-11-19T14:46:09.318594+00:00",
@@ -8573,7 +8610,7 @@
           "research_pending": 3,
           "blocked": 2
         },
-        "ledger_sha256": "3e09cf3576324e60e02796aca3a7b04ca3325862cbaaed55a816275b1ccf72fb",
+        "ledger_sha256": "827db6f6fe8f00593f4d909048951a55febd07fe97a86b901b87231d2b27fa76",
         "latest_body_sha256": "b11601b49b2b14ed5daf0430f20a7c9a6ab2123b1a034a72d8ce246211cede7d",
         "section_url": "https://tlvnet.com/news/real-estate.html",
         "lead_article_id": "bnei-efraim-217-planned-demolition-20261119",
@@ -8631,7 +8668,7 @@
         "saved_version": 680,
         "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
         "last_owner_started_at": "2026-11-18T14:48:34.830936Z",
-        "metadata_checked_at": "2026-11-18T17:42:48.702Z",
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
         "coverage_queue_count": 9,
         "coverage_queue_checkpoint": "public/news/agents/real-estate/ledger.json",
         "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending",
@@ -8690,7 +8727,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
         "latest_metadata_check": {
           "last_owner_run_id": "8db3ae81-a69c-8331-afbd-33fb607a6a64",
           "status": "completed",
@@ -8705,7 +8742,13 @@
         "source_latest_declared_update_id": "bnei-efraim-217-planned-demolition-20261119",
         "result_matches_run": true,
         "lead_title": "בני אפרים 217: הריסה מתוכננת מיום ראשון ושינוי במעבר הולכי הרגל",
-        "section_status": 200
+        "section_status": 200,
+        "latest_observed_owner_run": {
+          "id": "8db3ae81-a69c-8331-afbd-33fb607a6a64",
+          "state": "completed",
+          "completed_at": "2026-11-19T14:55:19.285422Z",
+          "result_matches_run": true
+        }
       },
       "economy-tech": {
         "last_new_published_at": "2026-11-18T10:21:46.730111+00:00",
@@ -8735,7 +8778,7 @@
         "last_owner_started_at": "2026-11-18T10:17:14.345378Z",
         "pending_owner_result": false,
         "independent_full_body_image_credit_verified_at": "2026-11-16T17:00:46.396Z",
-        "metadata_checked_at": "2026-11-18T17:42:48.702Z",
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 1,
@@ -8822,7 +8865,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
         "latest_metadata_check": {
           "last_owner_run_id": "f45dbfcf-ed34-832f-b758-7641f992a898",
           "status": "completed",
@@ -8837,7 +8880,13 @@
         "source_latest_declared_update_id": "tlv-center-tech-entry-jobs-snapshot-20261118",
         "result_matches_run": true,
         "lead_title": "אלפי משרות הייטק באזור תל אביב והמרכז, רק כ־3% למתחילים",
-        "section_status": 200
+        "section_status": 200,
+        "latest_observed_owner_run": {
+          "id": "f45dbfcf-ed34-832f-b758-7641f992a898",
+          "state": "completed",
+          "completed_at": "2026-11-18T10:28:05.217651Z",
+          "result_matches_run": true
+        }
       },
       "community": {
         "last_new_published_at": "2026-11-18T11:11:13.937148+00:00",
@@ -8872,7 +8921,7 @@
         "mini_site_technical_update_at": "2026-11-15T12:40:04.126313Z",
         "coverage_cursor": "kiryat-shalom",
         "last_owner_started_at": "2026-11-18T10:59:34.166480Z",
-        "metadata_checked_at": "2026-11-18T17:42:48.702Z",
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 11,
@@ -8951,7 +9000,7 @@
           "findings": "Original owner picked up and prepared eligible update. Earlier article already contains 24 Nov 22:00 city-wide registration in a paragraph; prepared rewrite is not live. Compare exact body and asset after actual lease release. Preserve original owner and do not republish the existing article."
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
         "pending_ready": 1,
         "pending_verification": 7,
         "coverage_status": "Owner prepared update; immutable ops checkpoint retained while shared lane held",
@@ -8970,7 +9019,13 @@
         "source_latest_declared_update_id": "access-israel-railway-park-volunteers-20261127",
         "result_matches_run": true,
         "lead_title": "מדליקים יחד בדב הוז: חגיגת חנוכה ברחבה של אריק איינשטיין",
-        "section_status": 200
+        "section_status": 200,
+        "latest_observed_owner_run": {
+          "id": "52a229d3-175c-8328-a1cb-32792489b027",
+          "state": "completed",
+          "completed_at": "2026-11-19T11:09:38.709360Z",
+          "result_matches_run": true
+        }
       },
       "consumer": {
         "last_new_published_at": "2026-11-19T12:06:17.177790+00:00",
@@ -8985,7 +9040,7 @@
           "primary_terms_pending": 1,
           "primary_date_and_scope_pending": 1
         },
-        "ledger_sha256": "d4adad7d1e891d455037134a83131d36ac7d6af09253c1668af47405ef385d50",
+        "ledger_sha256": "9b82368a0ec43739c2f5b2f5ae4d5e26094f3fab425d2d5896fb233e11b69f65",
         "latest_body_sha256": "ada37c97cad3373ed4c327f5f6c641ec77950c4a9be97236dd741cc43601fc63",
         "section_url": "https://tlvnet.com/news/consumer.html",
         "lead_article_id": "hatarbut-tlv-parking-benefit-guide-20261116",
@@ -9008,7 +9063,7 @@
           "verification_scope": "Fresh focused article/body/image/credit readback; owner619 proof retained for home/section links"
         },
         "last_owner_started_at": "2026-11-18T11:56:07.976170Z",
-        "metadata_checked_at": "2026-11-18T17:42:48.702Z",
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 8,
@@ -9047,7 +9102,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
         "publication_status": "published_verified_journal_pending_mobile_pending",
         "pending_ready": 0,
         "pending_verification": 5,
@@ -9066,7 +9121,13 @@
         "source_latest_declared_update_id": "good-pharm-charity-cream-terms-20261119",
         "result_matches_run": true,
         "lead_title": "קרם ב־10 שקלים ותרומה לאגודה: מה כוללת יוזמת גוד פארם",
-        "section_status": 200
+        "section_status": 200,
+        "latest_observed_owner_run": {
+          "id": "7098a995-fea0-8322-875b-8b78ffa4967a",
+          "state": "completed",
+          "completed_at": "2026-11-19T12:18:08.006344Z",
+          "result_matches_run": true
+        }
       },
       "sports": {
         "last_new_published_at": "2026-11-20T07:06:56.317232+00:00",
@@ -9079,7 +9140,7 @@
           "candidate_not_read": 2,
           "researched_waiting_material_progress": 1
         },
-        "ledger_sha256": "7492d6126aaca4d17af508f09e64fe4ae8c7df162735d0a2771f05bedbaa89b2",
+        "ledger_sha256": "d8627c466f9f238723bd43ca8a791ce7fdc1d5d1b961fe63d2d7f7844387e76d",
         "latest_body_sha256": "ebe564d1387c7268fb688eee8e9ae53be5961180cbcc058649b293635d0656ae",
         "section_url": "https://tlvnet.com/news/sports.html",
         "lead_article_id": "hapoel-paris-pace-enis-return-20261119",
@@ -9150,7 +9211,7 @@
         "last_owner_new_articles": 2,
         "coverage_state": "three_owner_research_checkpoints_and_mobile_pending",
         "execution_anomaly_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
-        "metadata_checked_at": "2026-11-19T07:26:37Z",
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
         "source_commit": "3f628bca2d16b7bc8be2c2c3f6e71930a7ee13c8",
         "saved_version": 665,
         "coverage_queue_count": 3,
@@ -9280,7 +9341,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
         "latest_metadata_check": {
           "last_owner_run_id": "028e5aaa-f7fc-8328-9501-b166e40f7d33",
           "status": "completed",
@@ -9296,41 +9357,47 @@
         "result_matches_run": true,
         "lead_title": "שלשה של חיפי הכריעה: הפועל תל אביב הפסידה 97:96 בפריז",
         "section_status": 200,
-        "pending_ready": 0
+        "pending_ready": 0,
+        "latest_observed_owner_run": {
+          "id": "7ae15d34-a184-832a-8551-85cd72ffdd8a",
+          "state": "completed",
+          "completed_at": "2026-11-20T07:20:00.864347Z",
+          "result_matches_run": true
+        }
       },
       "culture-news": {
-        "last_new_published_at": "2026-11-19T07:50:03.046527+00:00",
-        "last_new_id": "solidarity-film-festival-20261210-20261119",
-        "last_substantive_update_at": "2026-11-19T07:50:03.046527+00:00",
-        "last_updated_id": "city-museum-troubled-waters-opening-20261106",
+        "last_new_published_at": "2026-11-20T07:48:47.349789+00:00",
+        "last_new_id": "kamea-erga-arison-friday-20261120",
+        "last_substantive_update_at": "2026-11-20T07:48:47.349789+00:00",
+        "last_updated_id": "kamea-erga-arison-friday-20261120",
         "update_basis": "Source-declared article timestamps; no inferred edit from rebuild or publication label",
-        "published_count": 45,
+        "published_count": 50,
         "handoff_status_counts": {
           "candidate_not_read": 4,
           "research_pending": 4,
           "published_verified": 1
         },
-        "ledger_sha256": "1c5033083cc4734d6cefdeeb079ff31265527600699ec30d741afc2e01d5bb27",
+        "ledger_sha256": "7d95b86607a5005b1da45f1dfb06369d551699a24c97b610ddb657f87c3af007",
         "latest_body_sha256": "86b3d410cbd5da637871e9ce3c96f9af50082145b26a2354c95bc2923e0b7381",
-        "section_url": "https://tlvnet.com/news/culture.html",
-        "lead_article_id": "solidarity-film-festival-20261210-20261119",
-        "lead_published_at": "2026-11-19T09:50+02:00",
-        "last_owner_run_id": "548ad7d7-4704-8321-a0b0-c24815aa588a",
-        "last_owner_completed_at": "2026-11-19T07:58:57.303625Z",
+        "section_url": "https://tlvnet.com/news/culture",
+        "lead_article_id": "kamea-erga-arison-friday-20261120",
+        "lead_published_at": "2026-11-20T07:48:47.349789+00:00",
+        "last_owner_run_id": "d7cbf4b5-b338-8333-a933-1e4928cb3a79",
+        "last_owner_completed_at": "2026-11-20T07:55:13.561614Z",
         "owner_task_id": "Automation_53543605ce188191ba90f3f1979203dc",
-        "owner_run_changed_since_checkpoint": false,
+        "owner_run_changed_since_checkpoint": true,
         "last_new_published_basis": "Original-owner release plus public page time at minute precision",
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
         "last_owner_started_at": "2026-11-19T07:46:01.268727Z",
-        "metadata_checked_at": "2026-11-19T08:50:57Z",
-        "source_commit": "9fa51c888c8fd3c079b0807877147c9cae7d8dae",
-        "saved_version": 666,
-        "coverage_queue_count": null,
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
+        "source_commit": "8bebe9ec75a07373cfeb8211a1eb0525474f04bd",
+        "saved_version": 694,
+        "coverage_queue_count": 7,
         "coverage_queue_checkpoint": "public/news/agents/culture-news/ledger.json",
-        "coverage_state": "incomplete_retained_checkpoints_current_queue_unread",
+        "coverage_state": "incomplete_owner_research_retained",
         "lead_basis": "Current live culture section lead",
-        "last_owner_new_articles": 3,
+        "last_owner_new_articles": 2,
         "remaining_queue": [
           {
             "content_id": "festival2-related-lower-index",
@@ -9382,7 +9449,7 @@
             "next_action": "Retain existing draft and source discrepancy; only reopen if readableprimary/currentrights evidence changes"
           }
         ],
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
         "runtime_publication_link": "unverified: latest_result null; public643 retained independently",
         "coverage_complete": false,
         "latest_runKey": "culture-night-20261119-1795074512662",
@@ -9471,7 +9538,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-19T17:43:36.024Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
         "latest_metadata_check": {
           "last_owner_run_id": "548ad7d7-4704-8321-a0b0-c24815aa588a",
           "status": "completed",
@@ -9486,7 +9553,16 @@
         "source_latest_declared_update_id": "solidarity-film-festival-20261210-20261119",
         "result_matches_run": true,
         "lead_title": "עשרה ימים של קולנוע וזכויות אדם: סולידריות חוזר לסינמטק",
-        "section_status": 200
+        "section_status": 200,
+        "latest_observed_owner_run": {
+          "id": "d7cbf4b5-b338-8333-a933-1e4928cb3a79",
+          "state": "completed",
+          "completed_at": "2026-11-20T07:55:13.561614Z",
+          "result_matches_run": true
+        },
+        "pending_ready": 0,
+        "publication_custom_domain_verified": true,
+        "pending_visual_review": true
       },
       "neighborhoods": {
         "total": 73,
@@ -9508,7 +9584,7 @@
         "last_owner_started_at": "2026-11-18T10:59:34.166480Z",
         "last_owner_completed_at": "2026-11-18T11:26:01.746479Z",
         "owner_run_changed_since_checkpoint": false,
-        "metadata_checked_at": "2026-11-18T18:37:02.492Z",
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
         "navigation_areas": 25,
         "original_localities": 73,
         "technical_version": 625,
@@ -9557,6 +9633,13 @@
           "status": "completed",
           "at": "2026-11-19T19:09:52Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/812e0bb1-10c8-832e-8a83-5d6a6a70110c.json"
+        },
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
+        "latest_observed_owner_run": {
+          "id": "52a229d3-175c-8328-a1cb-32792489b027",
+          "state": "completed",
+          "completed_at": "2026-11-19T11:09:38.709360Z",
+          "result_matches_run": true
         }
       },
       "bli-heshbon": {
@@ -9581,7 +9664,15 @@
         "result_matches_run": true,
         "lead_title": "הבטיחו לנו 250 ק״מ של שבילי אופניים עד 2025. אז למה היעד השתנה ל־2030?",
         "section_status": 200,
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json"
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
+        "metadata_checked_at": "2026-11-20T08:21:47.206Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json",
+        "latest_observed_owner_run": {
+          "id": "caf12d98-ec2c-8328-9c7e-18deae3cc074",
+          "state": "in_progress",
+          "completed_at": null,
+          "result_matches_run": false
+        }
       }
     },
     "qualification": "8 public section link checks; full article/image/credit for consumer, pending community existing version, legacy news and investigations. Later676 terminal only; no all-site audit.",
@@ -9708,82 +9799,11 @@
     "latest_checked_release_source": "326dac060551139ee5b5352314f4ada5bf2a09dd"
   },
   "latest_social_publication_diagnosis": {
-    "slot": "2026-11-20T07",
-    "finished_at": "2026-11-20T07:00:02.479Z",
-    "observed_status": "article_unavailable",
-    "post_id": null,
-    "detail": null,
-    "attempt": null,
-    "nextAction": null,
-    "supportRequired": null,
-    "notifyPublisher": null,
-    "stopped": null,
-    "article_url": "https://tlvnet.com/news/tel-aviv-overnight-police-chase-20261120.html",
-    "incident_id": "tlvnet-social-managed-public-availability",
-    "root_cause": "Managed HTML was pruned from ASSETS, but both social callers checked ASSETS for catalog-backed pages.",
-    "repair": "Both social paths now use the same managed public HTML loaders as the public Worker and reject unpublished source overlays. Existing public promotions and dynamic publications remain supported.",
-    "test": "Scheduler regression: simulated removed static asset, canonical and .html paths, allowed promotion, absent article, unpublished article, private path. Foundation and production build passed.",
-    "end_to_end_facebook": "pending_normal_authorized_send_and_public_readback",
-    "retry_old_slot": false,
-    "status": "mitigated",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json",
-    "incidentPath": "ops/incident-response/inbox/81d3d078-76bc-8330-a9fa-8a8cdb65531d-social-managed-public-availability.json",
-    "live_get_checks": [
-      {
-        "url": "https://tlvnet.com/news/tel-aviv-overnight-police-chase-20261120.html",
-        "http": 200,
-        "cms": "newsroom-v1",
-        "ms": 4605,
-        "title": "נהג נעצר לאחר מרדף בתל אביב, שוטר נפצע קל | TLVNET",
-        "link": true,
-        "runtime_tags": 1,
-        "body": true,
-        "image": true,
-        "credit": true
-      },
-      {
-        "url": "https://tlvnet.com/news/tel-aviv-overnight-police-chase-20261120",
-        "http": 200,
-        "cms": "newsroom-v1",
-        "ms": 4552,
-        "title": "נהג נעצר לאחר מרדף בתל אביב, שוטר נפצע קל | TLVNET",
-        "link": true,
-        "runtime_tags": 1,
-        "body": true,
-        "image": true,
-        "credit": true
-      },
-      {
-        "url": "https://tlvnet.com/news/",
-        "http": 200,
-        "cms": "newsroom-v1",
-        "ms": 4747,
-        "title": "חדשות תל אביב | TLVNET, המקומון של תל אביב",
-        "link": true,
-        "runtime_tags": 1
-      },
-      {
-        "url": "https://tlvnet.com/",
-        "http": 200,
-        "cms": "newsroom-v1",
-        "ms": 4651,
-        "title": "חדשות תל אביב ומה עושים בעיר | תל אביב נט, TLVNET",
-        "link": true,
-        "runtime_tags": 1
-      },
-      {
-        "url": "https://tlvnet.com/guide/category.html?category=kids",
-        "http": 200,
-        "cms": "newsroom-v1",
-        "ms": 4562,
-        "title": "מה עושים בתל אביב | TLVNET",
-        "link": false,
-        "runtime_tags": 1
-      }
-    ],
-    "deployment_id": "appgdep_6afff6f983c48191af9035aca8655ed6",
-    "source_commit": "77fbe16234295a39c185fb6387c6291d19afe96e",
-    "observed_at": "2026-11-20T07:31:45.056Z"
+    "status": "fixed_verified",
+    "observed_at": "2026-11-20T08:21:47.206Z",
+    "public_url": "https://www.facebook.com/61596358055015/posts/122110556601545268/",
+    "slot": "2026-11-20T08",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json"
   },
   "latest_manual_social_recovery": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -10483,7 +10503,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-20T07:31:45.056Z",
+    "observed_at": "2026-11-20T08:21:47.206Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -11072,6 +11092,10 @@
       {
         "path": "ops/incident-response/inbox/work-readiness-20261115-616.json",
         "sha": "776685a1d097ea753cbad8ce0f6d42e8952fcad0"
+      },
+      {
+        "path": "ops/incident-response/inbox/2026-11-20-culture-night-20261120-1795160838-readback.json",
+        "sha": "64590693888134c3d95ae598645ff51f60217da0"
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
@@ -11085,11 +11109,11 @@
     "observed_at": "2026-11-18T19:56:42Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-18/bbc71902-e2b8-8322-a9e5-ca1d812e7928.json",
     "current_attempt": {
-      "observed_at": "2026-11-20T07:31:45.056Z",
-      "status": "executed_current_source_plus_journal",
-      "source_commit": "3b915be02e5b497cf3f21832f5710c32c615a60b",
-      "catalog_sha256": "d0c340f9f246b963c295bac906c97451851bc7957065d04be3b3eb103adafd3a",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json"
+      "observed_at": "2026-11-20T08:21:47.206Z",
+      "status": "executed_current_source_plus_owner_journal",
+      "source_commit": "8bebe9ec75a07373cfeb8211a1eb0525474f04bd",
+      "catalog_sha256": "e497ab48208912ba578b2eba230564825745731e71ab08eeccbd393628acc658",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/7bc39e0a-9370-8330-a313-9b1c80d5d7f5.json"
     }
   },
   "latest_city_owner_publication_observation": {
@@ -11428,7 +11452,13 @@
     "latest_sports_status": "two_articles_independently_verified",
     "latest_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json"
   },
-  "current_pending_task_runs": [],
+  "current_pending_task_runs": [
+    {
+      "task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
+      "run_id": "caf12d98-ec2c-8328-9c7e-18deae3cc074",
+      "status": "in_progress_at_intake"
+    }
+  ],
   "herzliya_coordination": {
     "source_writes": 0,
     "deployments": 0,
