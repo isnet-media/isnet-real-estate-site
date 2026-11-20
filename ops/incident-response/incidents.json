@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T10:15:04.731Z",
+  "updated_at": "2026-11-20T11:48:05.809Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6638,7 +6638,7 @@
     },
     {
       "id": "tlvnet-economy-20261119-due-run-evidence-missing",
-      "status": "open",
+      "status": "mitigated",
       "category": "scheduling_evidence",
       "fingerprint": "TLVNET/economy-tech/2026-11-19T10:00Z/scheduled-run-evidence-missing",
       "root_cause": "Not established. Exact task metadata has no current due-slot run; no failed publication inferred.",
@@ -6651,10 +6651,16 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json"
         }
       ],
-      "next_action": "Find actual runtime execution record for due slot. Preserve owner and research queue; no forced run or schedule change.",
+      "next_action": "Preserve historical 19 November runtime evidence gap. 20 November expected slot completed with independent live publication proof.",
       "inbox": "ops/incident-response/inbox/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b-economy-due-run-evidence.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-19/a892b30a-96b8-832e-8bb9-b1f67c8f8b3b.json",
-      "configuration_changes": 0
+      "configuration_changes": 0,
+      "updated_at": "2026-11-20T11:48:05.809Z",
+      "recovery_evidence": {
+        "owner_run_id": "3faf9f65-9c48-8325-9eb4-cd741c017938",
+        "public_article": "https://tlvnet.com/news/islo-incredibuild-ai-software-factory-investment-20261120",
+        "observation": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json"
+      }
     },
     {
       "id": "isnet-network-footer-herz-legacy-logo-paths",
@@ -7104,9 +7110,19 @@
       "tests": "Scheduler/publisher regression, foundation, production build, bundle inspection and affected public routes pass.",
       "remaining": "Non-authentication scheduling circuit breaker is still active; no authorized recovery route for this exact flag was found. Existing successful post and absence of a second send claim verified.",
       "next_action": "In authorized production maintenance, reconcile and release only the confirmed run_failed state after preserving claims and both slots; validate a future ordinary send."
+    },
+    {
+      "id": "tlvnet-economy-municipal-wage-primary-source-access",
+      "status": "open",
+      "updated_at": "2026-11-20T11:48:05.809Z",
+      "root_cause": "Owner could not read the exact Treasury wage rows or methodology. Denominator, gross pay and full-time basis not independently available. Scope restricted to a held research article.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+      "inbox": "ops/incident-response/inbox/2026-11-20-economy-tech-wage-primary-source.json",
+      "source_url": "https://sachar-board.mof.org.il/pages/guf.html",
+      "next_action": "Original desk verifies the exact authoritative rows and denominator from an authorized source when a change is available."
     }
   ],
-  "last_review_runKey": "ops-2026-11-20-f69ddfba-d18c-8330-b2a9-977150c124ec",
+  "last_review_runKey": "ops-2026-11-20-b9f12e0b-0e7c-832c-8ce3-69a07559f03f",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
