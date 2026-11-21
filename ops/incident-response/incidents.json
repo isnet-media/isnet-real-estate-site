@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T08:40:15.000Z",
+  "updated_at": "2026-11-21T09:55:07.000Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7271,26 +7271,42 @@
       "id": "tlvnet-culture-nested-verification-deployment-projection",
       "signature": "tlvnet-culture-nested-verification-deployment-projection",
       "related_incident": "tlvnet-news-nested-receipt-checks-projection",
-      "status": "mitigated",
+      "status": "fixed_verified",
       "severity": "monitoring",
       "first_seen_at": "2026-11-21T08:40:15.000Z",
       "last_seen_at": "2026-11-21T08:40:15.000Z",
       "root_cause": "Culture writer puts release in deployment and readback in verification[].checks. Compact report reads flat release fields and supported legacy proof containers, so returns source_published_receipt_incomplete even though body/hash/credit/home/section are live.",
       "verification": {
-        "independent_public_url": "https://tlvnet.com/news/shlomo-emanuel-amiad-book-exhibition-20261124",
-        "body_image_credit_and_links": true,
-        "release": 708,
-        "evidence": "ops/tlvnet-stability/observations/2026-11-21/104d6708-090c-8328-96d0-cac56a6c693b.json"
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/fe24fdfe-2cb0-8328-a30e-495cb5ce471b.json",
+        "live_article": "https://tlvnet.com/news/shlomo-emanuel-amiad-book-exhibition-20261124",
+        "regression": "Existing suite and malformed nested receipt negatives pass. Actual v708 culture record now recognized, with no inferred new-vs-edit classification for a single record from aggregate counts and no night item counted in news."
       },
       "change": {
-        "status": "isolated_fix_verified_pending_source_adoption",
+        "status": "source_correction_readback_verified",
         "checkpoint": "ops/incident-response/inbox/20261121-104d6708-090c-8328-96d0-cac56a6c693b-culture-nested-publication-receipt.json",
-        "controller_deployments": 0
+        "controller_deployments": 0,
+        "commit": "a41576c2fadbb20d76e2e435efaf538e24112e35",
+        "no_deploy": true
       },
-      "prevention": "Strict receipt dialect normalization with actual ledger regression and independent live verification; count publication types only when per-item evidence supports them."
+      "prevention": "Strict receipt dialect normalization with actual ledger regression and independent live verification; count publication types only when per-item evidence supports them.",
+      "updated_at": "2026-11-21T09:55:07.000Z"
+    },
+    {
+      "id": "herzliya-magazine-handoff-new-media-import-required",
+      "signature": "herzliya-magazine-handoff-new-media-import-required",
+      "status": "open",
+      "severity": "publication_single_destination",
+      "first_seen_at": "2026-11-21T09:55:07.000Z",
+      "last_seen_at": "2026-11-21T09:55:07.000Z",
+      "root_cause": "Current direct handoff awaits approved local image import and a local media.fileId.",
+      "impact": "Single Herzliya destination pending; TLVNET and ISNET edition readbacks recorded.",
+      "owner_task_id": "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a",
+      "next_action": "Herzliya owner imports the verified photo, assigns local media ID and completes the existing direct handoff.",
+      "source_inbox": "ops/incident-response/inbox/20261121T084849Z-culture-herzliya-new-media-required.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/fe24fdfe-2cb0-8328-a30e-495cb5ce471b.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-21-104d6708-090c-8328-96d0-cac56a6c693b",
+  "last_review_runKey": "ops-2026-11-21-fe24fdfe-2cb0-8328-a30e-495cb5ce471b",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
