@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-21T15:20:36.657Z",
+  "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+  "runKey": "real-estate-20261121-47883972-5806-4793-8c43-7684a29d6e53",
+  "target": "TLVNET-site",
+  "subsystem": "TLVNET news image presentation",
+  "signature": "build-news:image_presentation.load_reviews:duplicate_src",
+  "status": "fixed_verified",
+  "root_cause": "This writer appended a presentation review by bank ID although a different review ID already covered the same src/SHA. Existing validator correctly rejected the duplicate before deployment.",
+  "correction": "Removed only this run's duplicate; retained original same-SHA full-frame contain review and original approval identity. No code or baseline change.",
+  "attempts": {
+    "initial": 1,
+    "focused_correction": 1
+  },
+  "checks": [
+    "build-news.py passed after correction",
+    "check-photo-bank.py passed",
+    "tests/image-presentation.py passed after prepare-public",
+    "npm run build passed"
+  ],
+  "verification_note": "Pre-prepare framing test lacked prepared section markup; post-prepare test passed without gate changes. Initial live body comparator required dash/comma spacing normalization; focused paragraph/headings readback passed without a content edit or second deployment.",
+  "publication": {
+    "version_number": 712,
+    "deployment_id": "appgdep_6b01b5e26b4c81919524061baf262215",
+    "status": "succeeded",
+    "source_commit": "541d21aa2cd450de8af8056e8c6bfbe64760d719",
+    "journal_commit": "48143433bf265468eddafe348ec0daad14430cdf",
+    "url": "https://tlvnet.com/news/terra-design-conditional-affordable-housing-explained-20261121",
+    "public_checks": "Full body, title, lead, image bytes/SHA256, credit, home, section, neighborhood and bank controls verified; live desktop visual checked; mobile pending."
+  },
+  "prevention": "Resolve presentation entries by exact src and asset SHA before considering a new review ID; run framing test after prepare-public.",
+  "controller_triggered": false,
+  "schedule_changed": false
+}
