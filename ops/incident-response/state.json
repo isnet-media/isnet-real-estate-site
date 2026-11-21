@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T05:37:18.000Z",
+  "updated_at": "2026-11-21T06:37:28.000Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-21T03:42:15Z",
   "initial_history": {
@@ -21,14 +21,14 @@
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
         "run_ids": [
-          42576340738,
-          42573268482
+          42570660832,
+          42570427270
         ],
-        "observed_at": "2026-11-21T05:37:18.000Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "observed_at": "2026-11-21T06:37:28.000Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "status": "Historical failures localized to check_super_public.py; roots unconfirmed."
       },
-      "remaining_without_failed_step_metadata": 70
+      "remaining_without_failed_step_metadata": 68
     },
     "full_logs_read_this_cycle": 0,
     "unconfirmed_publish_failure_ids": [
@@ -1305,7 +1305,21 @@
           "conclusion": "failure",
           "source_commit": "882cd7773a5dc7219e855152d75f7a893d9b95e3",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42570660832",
-          "classification": "Historical metadata only; exact cause unconfirmed. No current outage/repair inferred."
+          "classification": "Historical metadata only; exact cause unconfirmed. No current outage/repair inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-21T06:37:28.000Z",
+            "jobs": [
+              {
+                "id": 129007020161,
+                "name": "check",
+                "conclusion": "failure",
+                "failed_steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
+          }
         },
         {
           "run_id": 42570427270,
@@ -1317,7 +1331,21 @@
           "conclusion": "failure",
           "source_commit": "882cd7773a5dc7219e855152d75f7a893d9b95e3",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42570427270",
-          "classification": "Historical metadata only; exact cause unconfirmed. No current outage/repair inferred."
+          "classification": "Historical metadata only; exact cause unconfirmed. No current outage/repair inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-21T06:37:28.000Z",
+            "jobs": [
+              {
+                "id": 129006306555,
+                "name": "check",
+                "conclusion": "failure",
+                "failed_steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
+          }
         },
         {
           "run_id": 42570202163,
@@ -2322,20 +2350,20 @@
   "task_results_watermark": {
     "Automation_b3345c399b988191a1ba9848e3e3668b": {
       "enabled": true,
-      "last_run_id": "62f7a368-64d8-8324-a4a7-3349c81e2996",
-      "started_at": "2026-11-20T17:04:15.390403Z",
-      "completed_at": "2026-11-20T17:16:59.777341Z",
+      "last_run_id": "a487323d-91cc-8320-a179-93323ec0da66",
+      "started_at": "2026-11-21T05:56:01.425437Z",
+      "completed_at": "2026-11-21T06:10:44.054319Z",
       "recorded_status": "completed",
-      "result": "**שתי ידיעות חדשות פורסמו ואומתו בתל אביב נט ב־20 בנובמבר:**\n\n- [נעצר חשוד בשוד של אישה בת 85 בביתה ברחוב המעפילים](https://tlvnet.com/news/ha-maapilim-robbery-arrest-20261120). תוצאת הדיון בהארכת המעצר טרם אומתה. genui{\"citation\":{\"ref\":\"turn226476739view0\"}}\n- [צעירה חולצה מהמים בחוף הצוק ופונתה במצב קשה](https://tlvnet.com/news/hatzuk-beach-woman-rescue-20261119). מצבה לאחר הפינוי טרם אומת. genui{\"citation\":{\"refs\":[\"turn734246569view2\",\"turn791470688search1\"]}}\n\nבאתר החי אומתו גוף הכתבות, צילומי הארכיון, הקרדיטים וההפניות מהשער ומהמדור. אומתה גם ההפניה לידיעת השוד מדף יד אליהו. תצוגת המחשב נבדקה, ובדיקת המובייל ממתינה. הכיתוב הכפול ״ידיעה״ תוקן במקור ויתעדכן באתר בפריסה הבאה.\n\nמתוך 3 מועמדים חדשים בתחום, 2 פורסמו ו־1 נשמר לאימות. 6 כפילויות נמנעו ודיווח אחד הוצא מהסיקור משום שהאירוע היה בהרצליה. בתור נותרו 4 פריטים לאימות, ובהם השריפה ברחוב יסוד המעלה, ו־9 פריטים עם חסמים קודמים. אין ידיעות מוכנות נוספות בתור.",
-      "result_run_id": "62f7a368-64d8-8324-a4a7-3349c81e2996",
-      "observed_at": "2026-11-20T20:32:42Z",
+      "result": "שתי כתבות חדשות פורסמו ואומתו באתר החי של תל אביב נט.\n\n- [עבודות סיבים וחשמל בפלורנטין](https://tlvnet.com/news/florentin-fiber-electricity-works-20261122) — מועדי העבודות ברחוב הרבי מבכרך ובאברבנאל 59. genui{\"citation\":{\"ref\":\"turn809116994search4\"}}\n- [חמישה לילות של עבודות לקו הסגול ליד סבידור](https://tlvnet.com/news/savidor-purple-line-night-works-20261122) — שעות הנחת המסילות ברחוב על פרשת דרכים. genui{\"citation\":{\"refs\":[\"turn392315381search0\",\"turn392315381search1\"]}}\n\nבשתי הכתבות אומתו הגוף המלא, התמונות, הקרדיטים והקישורים במדור החדשות ובעמוד הבית. הכתבה על פלורנטין מופיעה גם בעמוד השכונה. תצוגת המחשב נבדקה, ובדיקת המובייל ממתינה.\n\n**סיכום המחזור** — 3 מועמדים חדשים, 2 אומתו ופורסמו, 0 כתבות קיימות עודכנו, 6 כפילויות זוהו ודיווח אחד מטירה נדחה כי הוא מחוץ לתחום. אין פריטים מוכנים שממתינים לפרסום. בתור נשמרו 5 פריטים שממתינים לאימות ו־9 חסמים קודמים. הפריט החדש על עבודות בצומת כביר ממתין לאימות גבולות העבודות והסדרי הגישה.\n\nגרסה 2 של ההוראות הפרטיות נקראה והקריאה תועדה. יומן המחזור נשמר ונעילת הפרסום שוחררה.",
+      "result_run_id": "a487323d-91cc-8320-a179-93323ec0da66",
+      "observed_at": "2026-11-21T06:37:28.000Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-16/1.2",
-      "result_created_at": "2026-11-20T17:16:59.252784Z",
+      "result_created_at": "2026-11-21T06:10:43.813760Z",
       "qualification": "Exact run/result read; old latest_result not attributed to new run. Public owner proof and controller verification separate.",
       "effective_policy": "2026-11-14/1.0",
       "result_matches_attempt": true,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-20/ab079a3a-8f68-8328-9b92-54cfdf6fc51f.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
       "result_summary_truncated": false
     },
     "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
@@ -2480,22 +2508,22 @@
     },
     "Automation_845f7ef0033c8191b7490e0dc5748754": {
       "enabled": true,
-      "last_run_id": "4f51cf97-0a48-8323-8678-5068e8473758",
-      "started_at": "2026-11-20T16:59:05.908414Z",
-      "completed_at": "2026-11-20T17:05:40.210564Z",
+      "last_run_id": "b60ec145-3510-8333-97b9-2dca949d230c",
+      "started_at": "2026-11-21T05:57:41.553713Z",
+      "completed_at": "2026-11-21T06:01:10.744607Z",
       "recorded_status": "completed",
-      "result": "## דוח חדשות רעננה — שישי, 20.11.2026, ערב\n\n**כתבה חדשה פורסמה ב־CMS59 ואומתה ברשימת הפרסומים.** האימות הציבורי המלא עדיין פתוח.\n\n### הכתבה החדשה — 812401\n\n**״מחר ברעננה: טריוויה עם הצ׳ייסר, סרט ומוזיקה — ומה כבר אזל״**\n\nמדריך מעשי לאירועי שבת, 21 בנובמבר, המבוסס על חמישה דפי אירועים רשמיים של עיריית רעננה.\n\nהכתבה כוללת הקרנת ״הסיפור שאינו נגמר״ והרצאה לילדים ב־11:00, ערב טריוויה עם איתי הרמן ב־19:30 במחיר 50 שקל, ומופע שירי ים ב־20:30 במחיר 80 שקל. בנוסף מצוין כי מופעי ״שבת עיתון״ ומחווה לביטלס ולאבבא מסומנים כאזלו הכרטיסים. <Cite refs={[\"turn700544view1\",\"turn700544view2\",\"turn700544view3\",\"turn700544view0\",\"turn700544view4\"]}/>\n\n| רכיב | תוצאה |\n|---|---|\n| מזהה CMS | **812401** |\n| מועד פרסום | 20.11.2026, 19:03 |\n| מדור | תרבות רעננה |\n| תמונה | 851225 — Daniel Ponomarev / Pexels |\n| רשומת CMS | פורסמה, גלויה, עותק אחד |\n| אימות ציבורי | `pending` |\n| בדיקות עמוד הבית | `pending` |\n\nהתמונה נבחרה מבנק רעננה הקיים, עם קרדיט המחשה ולא כתיעוד של אחד האירועים. בדיקת hash עצמאית לא הושלמה.\n\n### סיכום המחזור\n\n<grid columns={3} gap={2}>\n  {#each [{n:\"5\",l:\"אירועים אומתו\"},{n:\"1\",l:\"פורסם ב־CMS\"},{n:\"0\",l:\"אימותים ציבוריים מלאים\"}] as item}\n    <grid-item>\n      <box border radius=\"lg\" padding={3} gap={1} align=\"center\">\n        <title size=\"xl\" tabularNums>{item.n}</title>\n        <caption textAlign=\"center\">{item.l}</caption>\n      </box>\n    </grid-item>\n  {/each}\n</grid>\n\nנסרקו מקורות עירוניים, צומת השרון, מקורות מקומיים נוספים ולוח האירועים העירוני. לא נמצא עותק קודם לנושא שנבחר. `duplicates_prevented=0`; בדיקות כפילות בוצעו לפני הפרסום ואחריו.\n\nלא שיניתי את ארבע הראשיות או את CMS37279. עמוד הבית שהוחזר בבדיקה הציג זמן מוקדם לפרסום, ולכן לא שימש כהוכחה לקליטה או לכשל באו",
-      "result_run_id": "4f51cf97-0a48-8323-8678-5068e8473758",
-      "result_created_at": "2026-11-20T17:05:39.603938Z",
-      "observed_at": "2026-11-20T20:32:42Z",
+      "result": "## חדשות רעננה — שבת, 21.11.2026, בוקר\n\n**כתבה חדשה על פסטיבל הג'אז הבינלאומי ברעננה פורסמה בהצלחה ב־CMS59.** הרשומה והפרסום במערכת אומתו; האימות המלא באתר הציבורי עדיין ממתין.\n\n<box gap={2}>\n  <text weight=\"medium\">כתבה 812409</text>\n  <title size=\"lg\">פקיטו דה ריברה, אהוד בנאי וג'אז לילדים: הפסטיבל מגיע לרעננה</title>\n  <text color=\"secondary\" size=\"xs\">21.11.2026, 08:00 | מדור תרבות</text>\n  פסטיבל World Jazz Music יתקיים ב־10–12 בדצמבר, עם כ־20 מופעים בחמישה מתחמים. הכתבה מציגה את האירועים המרכזיים בכל יום, בהם הופעת פקיטו דה ריברה, מפגשים מוזיקליים, מופעי ילדים והאירוח של אהוד בנאי. הפרטים נבדקו בלוח העירייה ובדיווחים שפורסמו ב־11–17 בנובמבר. <Cite refs={[\"turn252340search1\",\"turn823037search2\",\"turn823037search5\"]}/>\n  <Link url=\"https://admin.isnet.co.il/Posts/Edit/812409\" title=\"פתיחת הכתבה באדמין\"/>\n</box>\n\n| מדד | תוצאה |\n|---|---|\n| נושאים מתאימים שהתגלו | 1 |\n| נושאים שאומתו | 1 |\n| כתבות שפורסמו ב־CMS | 1 |\n| `published_verified` | 0 — ממתין |\n| כפילויות שהתגלו | 0 |\n| תמונה | 851225, המחשה מורשית מ־Pexels |\n\nהתמונה נלקחה מבנק רעננה הקיים, בקרדיט Daniel Ponomarev / Pexels, ואינה מוצגת כתיעוד מהפסטיבל. בדיקת hash עצמאית לא התאפשרה.\n\n**בקרת פרסום:** נמצאה רשומה אחת בלבד, גלויה ולא טיוטה. כתובת הכתבה הציבורית עדיין לא נפתחה בהצלחה בבדיקה, ולכן איני מסמן אותה כמאומתת באתר.\n\n**בקרת הבית:** לא בוצעו שינויים בארבע הראשיות, בסקריפט `raanana-auto-headlines-v1` או בתיקוני CMS37279. בדיקות תצוגת מחשב ו־390 פיקסלים נותרו `pending`, משום שלא הייתה בדיקת דפדפן חזותית תקפה.\n\nנעילת `ISNET-CMS-59` שוחררה ואומתה כפנויה. יומן הפרסום נשמר ב־<Link url=\"https://github.com/isnet-media/isnet-real-estate-site/commit/9798edb8f40af6c8866a028251621649a6f41904\" title=\"GitHub — תיעוד המחזור\"/>.\n\nלא פורסמו כתבות מילוי או עותקים חוזרים, ולא בוצעה כל פעולה במערכת הרצליה.",
+      "result_run_id": "b60ec145-3510-8333-97b9-2dca949d230c",
+      "result_created_at": "2026-11-21T06:01:10.251174Z",
+      "observed_at": "2026-11-21T06:37:28.000Z",
       "qualification": "Exact run/result read; old latest_result not attributed to new run. Public owner proof and controller verification separate.",
       "effective_policy": "2026-11-14/1.1",
       "current_policy_version": "2026-11-18/herzliya-news-2",
       "current_configuration_observed_at": "2026-11-18T08:40:36.667Z",
       "configuration_status": "readback_observed_owner_run_pending",
       "result_matches_attempt": true,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-20/ab079a3a-8f68-8328-9b92-54cfdf6fc51f.json",
-      "result_summary_truncated": true
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
+      "result_summary_truncated": false
     },
     "Automation_50ecabf864448191ac5bee0edaecca74": {
       "last_run_id": "5a385977-ca7c-8322-af47-4efed6bfbc13",
@@ -6081,6 +6109,31 @@
       "full_logs_read": 0,
       "owners_checked": 13,
       "ready_items_source": 0
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "af295dbc-7db0-8328-913a-97e30fe53616",
+      "runKey": "ops-2026-11-21-af295dbc-7db0-8328-913a-97e30fe53616",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 2,
+      "observed_at": "2026-11-21T06:37:28.000Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
+      "status": "owner_publications_verified",
+      "saved_version": 706,
+      "public_checked_version_prior": 705,
+      "current_health_http": 200,
+      "deployment_id": "appgdep_6b01357023ec8191a87f31801423be36",
+      "source_commit": "b283dfc4d62f2a78bff8111814dbc7d2e8457cd1",
+      "source_head": "7dcdb480a7c3884e0f147679e33201ea0f8be2f3",
+      "new_actions": 0,
+      "new_inbox": 0,
+      "new_social_rows": 0,
+      "new_articles": 2,
+      "controller_new_deployments": 0,
+      "controller_editorial_writes": 0,
+      "full_logs_read": 0,
+      "owners_checked": 13,
+      "ready_items_source": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -6895,8 +6948,8 @@
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/100eea27-f180-832c-a674-75914025141c.json",
     "new_rows_this_cycle": 0,
     "public_verification": "No new social run; previously reported run_failed guard unchanged.",
-    "last_checked_at": "2026-11-21T05:37:18.000Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json"
+    "last_checked_at": "2026-11-21T06:37:28.000Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -7433,16 +7486,20 @@
     },
     "pending_recovery_reason": "Actual active owner lease; fresh source helper unavailable. No changed-input recovery beyond one initial source attempt. No deployment.",
     "current_lease": {
+      "target": "TLVNET-site",
       "state": "free",
       "owner": null,
+      "run_key": null,
+      "acquired_at": null,
       "lease_until": null,
       "last_release": {
-        "owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
-        "run_key": "sports-20261120-evening-3702db6e-1d24-8326-923d-46dafc87e688",
-        "released_at": "2026-11-20T19:32:55Z",
+        "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "run_key": "news-20261121-morning-810e0c10-090a-44c4-b867-cdb87ea30872",
+        "released_at": "2026-11-21T06:10:23Z",
         "status": "published_verified",
-        "deployment_id": "appgdep_6b009eeb33dc8191b44606d0833d0fdd"
-      }
+        "deployment_id": "appgdep_6b01357023ec8191a87f31801423be36"
+      },
+      "renewed_at": null
     },
     "pending_ready_by_desk": {
       "news": {
@@ -7622,14 +7679,20 @@
         }
       }
     },
-    "last_delta_checked_at": "2026-11-21T05:37:18.000Z",
-    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+    "last_delta_checked_at": "2026-11-21T06:37:28.000Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
     "news_morning_ledger_readback": {
-      "updated_at": "2026-11-20T06:19:04.132666+00:00",
-      "entries": 95,
-      "morning_run_present": true,
-      "observed_at": "2026-11-20T06:39:13.754Z",
-      "evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
+      "discovered": 3,
+      "verified": 2,
+      "newly_published": 2,
+      "updated": 0,
+      "rejected": 1,
+      "pending_ready": 0,
+      "pending_verification": 5,
+      "blocked_real": 9,
+      "duplicate": 6,
+      "runKey": "news-20261121-morning-810e0c10-090a-44c4-b867-cdb87ea30872",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
     },
     "previous_shared_lease_released": true,
     "latest_public_culture_verification": [
@@ -7667,9 +7730,9 @@
       "global_current_pending_ready_independent_verification": "pending; attempted public route did not return dispatch JSON; no automatic release"
     },
     "global_pending_ready_independently_verified": false,
-    "latest_incremental_queue_basis": "Exact source HEAD, terminal deployment, and owner run IDs unchanged. Retained checked desk-ledger counts and Bli Heshbon checkpoint. Current background-worker queue was directly checked; no new incident inbox files. Runtime-only desk queues were not queried.",
+    "latest_incremental_queue_basis": "News receipt at exact fetched source confirms two ready items published and zero ready remaining. Unchanged desk runs retain prior ready-count checkpoint; background queue checked independently. No retry or republish.",
     "news_pending_ready_owner_report": 0,
-    "news_pending_verification_owner_report": 4,
+    "news_pending_verification_owner_report": 5,
     "news_prior_blockers_owner_report": 9,
     "dispatch_source_projection": {
       "news": {
@@ -7718,7 +7781,9 @@
       "research_queue_remaining": 3
     }
   },
-  "pending_task_run_ids": [],
+  "pending_task_run_ids": [
+    "6684eb16-97f4-832c-9fbe-21e969cb96ad"
+  ],
   "latest_supermarket_execution_checkpoint": {
     "source_inbox": "ops/incident-response/inbox/e5f1bc96-a838-8333-be96-c0032383fb71-1.json",
     "evidence": "ops/incident-response/evidence/ops-2026-11-17-1eeeaba5-b3a8-832e-b3f5-4322c5faf65d.json",
@@ -8041,6 +8106,22 @@
       "recorded_status": "completed",
       "result_payload_available": true,
       "evidence": "ops/tlvnet-stability/observations/2026-11-19/58025d4e-7ce0-8332-b3a7-69267878abc8.json"
+    },
+    {
+      "run_id": "a487323d-91cc-8320-a179-93323ec0da66",
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "completed_at": "2026-11-21T06:10:44.054319Z",
+      "recorded_status": "completed",
+      "result_payload_available": true,
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
+    },
+    {
+      "run_id": "b60ec145-3510-8333-97b9-2dca949d230c",
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "completed_at": "2026-11-21T06:01:10.744607Z",
+      "recorded_status": "completed",
+      "result_payload_available": true,
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
     }
   ],
   "latest_manual_freshness_repair": {
@@ -8113,10 +8194,10 @@
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/c1f2d516-b7d8-832c-ab62-ed4b7a7da857.json",
     "desks": {
       "news": {
-        "last_new_published_at": "2026-11-20T17:10:52.603951+00:00",
-        "last_new_id": "ha-maapilim-robbery-arrest-20261120",
-        "last_substantive_update_at": "2026-11-20T17:10:52.603951+00:00",
-        "last_updated_id": "ha-maapilim-robbery-arrest-20261120",
+        "last_new_published_at": "2026-11-21T06:04:02.225343+00:00",
+        "last_new_id": "savidor-purple-line-night-works-20261122",
+        "last_substantive_update_at": "2026-11-21T06:04:02.225343+00:00",
+        "last_updated_id": "savidor-purple-line-night-works-20261122",
         "update_basis": "Source-declared article timestamps; no inferred edit from rebuild or publication label",
         "published_count": 94,
         "handoff_status_counts": {
@@ -8128,13 +8209,13 @@
           "published_verified": 4,
           "resolved_updated_existing_verified": 1
         },
-        "ledger_sha256": "8b1f03c499db1ca3cc4c957f00e5556c5496c3c60bb49bcd8ef905fddb98b6c7",
+        "ledger_sha256": "e567ecf0545807e0e2a2088a4d37c5c1597ba90ed70be45726ad334b7b3dc8b2",
         "latest_body_sha256": "97919bad178431b1a6c285b1befb12d95e25500cf70889259c44f93af4fab951",
         "section_url": "https://tlvnet.com/news/index.html",
         "lead_article_id": "hatzuk-beach-woman-rescue-20261119",
         "lead_published_at": "2026-11-19T17:07:37.472451+00:00",
-        "last_owner_run_id": "62f7a368-64d8-8324-a4a7-3349c81e2996",
-        "last_owner_completed_at": "2026-11-20T17:16:59.777341Z",
+        "last_owner_run_id": "a487323d-91cc-8320-a179-93323ec0da66",
+        "last_owner_completed_at": "2026-11-21T06:10:44.054319Z",
         "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
         "owner_run_changed_since_checkpoint": true,
         "last_new_published_basis": "Exact authenticated news source and live public evidence",
@@ -8266,9 +8347,9 @@
             "reason": "17Novpublication describes event afterSaturday, no actualeventdate established; not presented as tonight."
           }
         ],
-        "source_commit": "6d3b820b1bd086f30bdc683e2485039505352e6d",
-        "saved_version": 703,
-        "last_owner_started_at": "2026-11-19T05:56:32.250947Z",
+        "source_commit": "b283dfc4d62f2a78bff8111814dbc7d2e8457cd1",
+        "saved_version": 706,
+        "last_owner_started_at": "2026-11-21T05:56:01.425437Z",
         "throughput_followup": {
           "status": "normal_owner_published4_verified",
           "checkpoint": "ops/incident-response/inbox/manual-news-throughput-audit-2026-11-16T04-30-49-134Z.json",
@@ -8286,7 +8367,7 @@
           },
           "pending_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96"
         },
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "coverage_queue_count": 17,
         "coverage_queue_checkpoint": "public/news/agents/news/ledger.json",
         "public_verification": [
@@ -8489,7 +8570,7 @@
           }
         ],
         "coverage_complete": false,
-        "latest_runKey": "news-20261117-evening-1794935352603-bgv8y107h38",
+        "latest_runKey": "news-20261121-morning-810e0c10-090a-44c4-b867-cdb87ea30872",
         "handoff_total": 33,
         "handoff_open_count": 11,
         "latest_receipt_queue_count": 17,
@@ -8525,7 +8606,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-20T20:32:42Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "latest_metadata_check": {
           "last_owner_run_id": "e34c454e-1518-8328-b5c7-ea55f35ad07b",
           "status": "completed",
@@ -8540,33 +8621,120 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-20/16e4ba62-b278-8330-afec-8e85a7038bc7.json"
         },
         "latest_morning_publication_observation": {
-          "evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json",
-          "ids": [
-            "tel-aviv-overnight-police-chase-20261120",
-            "jaffa-achiluf-shooting-death-20261120",
-            "dan-line-16-hagana-route-restored-20261120",
-            "levinsky-chelnov-purple-line-night-works-20261120",
-            "gioia-barzel-administrative-closure-20261117"
-          ],
-          "status": "published_verified",
-          "queue": {
-            "discovered": 4,
-            "verified": 5,
-            "new_articles": 5,
+          "owner_run_id": "a487323d-91cc-8320-a179-93323ec0da66",
+          "owner_completed_at": "2026-11-21T06:10:44.054319Z",
+          "runKey": "news-20261121-morning-810e0c10-090a-44c4-b867-cdb87ea30872",
+          "metrics": {
+            "discovered": 3,
+            "verified": 2,
+            "newly_published": 2,
+            "updated": 0,
+            "rejected": 1,
             "pending_ready": 0,
-            "pending_verification": 2,
-            "blocked_existing": 9,
-            "rejected": 5,
-            "duplicates": 7
+            "pending_verification": 5,
+            "blocked_real": 9,
+            "duplicate": 6
           },
-          "public_ledger_projection_pending": false,
-          "ledger_readback": {
-            "updated_at": "2026-11-20T06:19:04.132666+00:00",
-            "entries": 95,
-            "morning_run_present": true,
-            "observed_at": "2026-11-20T06:39:13.754Z",
-            "evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
-          }
+          "ledger_sha256": "e567ecf0545807e0e2a2088a4d37c5c1597ba90ed70be45726ad334b7b3dc8b2",
+          "article_records": [
+            {
+              "id": "savidor-purple-line-night-works-20261122",
+              "title": "ליד סבידור: חמישה לילות של עבודות לקו הסגול ברחוב על פרשת דרכים",
+              "section": "news",
+              "published_at": "2026-11-21T06:04:02.225343+00:00",
+              "updated_at": "2026-11-21T06:04:02.225343+00:00",
+              "status": "published",
+              "image_credit": "Rakoon · CC0 1.0 · הוקטן ונדחס ל־JPG"
+            },
+            {
+              "id": "florentin-fiber-electricity-works-20261122",
+              "title": "מיום ראשון בפלורנטין: עבודות סיבים בהרבי מבכרך וכבלי חשמל באברבנאל",
+              "section": "news",
+              "published_at": "2026-11-21T06:04:02.225343+00:00",
+              "updated_at": "2026-11-21T06:04:02.225343+00:00",
+              "status": "published",
+              "image_credit": "Anatoli Axelrod · CC BY 3.0 · הוקטן ונדחס ל־JPG"
+            }
+          ],
+          "public_articles": [
+            {
+              "id": "florentin-fiber-electricity-works-20261122",
+              "url": "https://tlvnet.com/news/florentin-fiber-electricity-works-20261122",
+              "heading": "מיום ראשון בפלורנטין: עבודות סיבים בהרבי מבכרך וכבלי חשמל באברבנאל",
+              "status": 200,
+              "paragraphs": 6,
+              "image_url": "https://tlvnet.com/photo-bank/assets/florentin-abarbanel-corner-2010.jpg",
+              "image_status": 200,
+              "image_mime": "image/jpeg",
+              "jpeg": true,
+              "credit": "אילוסטרציה · פינת פלורנטין ואברבנאל · צילום ארכיון מ־2010 · Anatoli Axelrod · CC BY 3.0 מקור · רישיון",
+              "home_link": true,
+              "section_link": true,
+              "neighborhood_link": true,
+              "source": {
+                "id": "florentin-fiber-electricity-works-20261122",
+                "title": "מיום ראשון בפלורנטין: עבודות סיבים בהרבי מבכרך וכבלי חשמל באברבנאל",
+                "section": "news",
+                "published_at": "2026-11-21T06:04:02.225343+00:00",
+                "updated_at": "2026-11-21T06:04:02.225343+00:00",
+                "status": "published",
+                "image_credit": "Anatoli Axelrod · CC BY 3.0 · הוקטן ונדחס ל־JPG"
+              },
+              "desktop_visual": "passed_by_owner",
+              "mobile_visual": "pending"
+            },
+            {
+              "id": "savidor-purple-line-night-works-20261122",
+              "url": "https://tlvnet.com/news/savidor-purple-line-night-works-20261122",
+              "heading": "ליד סבידור: חמישה לילות של עבודות לקו הסגול ברחוב על פרשת דרכים",
+              "status": 200,
+              "paragraphs": 5,
+              "image_url": "https://tlvnet.com/photo-bank/assets/namir-road-archive-2016.jpg",
+              "image_status": 200,
+              "image_mime": "image/jpeg",
+              "jpeg": true,
+              "credit": "אילוסטרציה · דרך נמיר בתל אביב · צילום ארכיון מ־2016 · Rakoon · CC0 1.0 מקור · רישיון",
+              "home_link": true,
+              "section_link": true,
+              "neighborhood_link": null,
+              "source": {
+                "id": "savidor-purple-line-night-works-20261122",
+                "title": "ליד סבידור: חמישה לילות של עבודות לקו הסגול ברחוב על פרשת דרכים",
+                "section": "news",
+                "published_at": "2026-11-21T06:04:02.225343+00:00",
+                "updated_at": "2026-11-21T06:04:02.225343+00:00",
+                "status": "published",
+                "image_credit": "Rakoon · CC0 1.0 · הוקטן ונדחס ל־JPG"
+              },
+              "desktop_visual": "passed_by_owner",
+              "mobile_visual": "pending"
+            }
+          ],
+          "neighborhood": {
+            "name": "פלורנטין",
+            "json": {
+              "status": 200,
+              "url": "https://tlvnet.com/city-hub/updates.json",
+              "includes_florentin": true,
+              "matches": [
+                {
+                  "url": "/news/florentin-fiber-electricity-works-20261122.html",
+                  "neighborhoods": "['פלורנטין']",
+                  "updated_at": "2026-11-21T06:04:02.225343+00:00"
+                }
+              ]
+            },
+            "site": {
+              "status": 200,
+              "url": "https://tlvnet.com/neighborhoods/florentin/",
+              "links": {
+                "florentin-fiber-electricity-works-20261122": true,
+                "savidor-purple-line-night-works-20261122": false
+              }
+            }
+          },
+          "status": "published_verified",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
         },
         "count": 105,
         "source_latest_article": "tel-aviv-overnight-police-chase-20261120",
@@ -8590,86 +8758,61 @@
           "purple-line-center-night-closures-20261122"
         ],
         "latest_owner_pending_counts": {
-          "research_pending": 4,
+          "research_pending": 5,
           "previous_blockers": 9
         },
         "latest_publications": [
           {
-            "id": "ha-maapilim-robbery-arrest-20261120",
-            "url": "https://tlvnet.com/news/ha-maapilim-robbery-arrest-20261120",
-            "title": "נעצר חשוד בשוד של אישה בת 85 בביתה ברחוב המעפילים | TLVNET",
-            "paragraph_lengths": [
-              100,
-              166,
-              138,
-              143,
-              49
-            ],
-            "image": {
-              "status": 200,
-              "url": "https://tlvnet.com/photo-bank/assets/police-patrol-tlv-2026.jpg",
-              "jpeg": true,
-              "sha256": "c4fea703cb182b0dddc575126b6793b2fe16dde18d4b24263518ec7db3b79a07",
-              "alt": "ניידת משטרה בתל אביב",
-              "title": "",
-              "mime": "image/jpeg"
-            },
-            "visible_credit": "אילוסטרציה · ניידת משטרה בתל אביב · 2026-02-28 · ארכיון · צילום: MoserB · CC0 1.0 מקור · רישיון",
-            "homepage_link": true,
+            "id": "florentin-fiber-electricity-works-20261122",
+            "url": "https://tlvnet.com/news/florentin-fiber-electricity-works-20261122",
+            "heading": "מיום ראשון בפלורנטין: עבודות סיבים בהרבי מבכרך וכבלי חשמל באברבנאל",
+            "status": 200,
+            "paragraphs": 6,
+            "image_url": "https://tlvnet.com/photo-bank/assets/florentin-abarbanel-corner-2010.jpg",
+            "image_status": 200,
+            "image_mime": "image/jpeg",
+            "jpeg": true,
+            "credit": "אילוסטרציה · פינת פלורנטין ואברבנאל · צילום ארכיון מ־2010 · Anatoli Axelrod · CC BY 3.0 מקור · רישיון",
+            "home_link": true,
             "section_link": true,
-            "neighborhood_feed": {
-              "id": "ha-maapilim-robbery-arrest-20261120",
-              "title": "נעצר חשוד בשוד של אישה בת 85 בביתה ברחוב המעפילים",
-              "url": "/news/ha-maapilim-robbery-arrest-20261120.html",
-              "neighborhoods": [
-                "יד אליהו"
-              ],
-              "published_at": "2026-11-20T17:10:52.603951+00:00",
-              "updated_at": "2026-11-20T17:10:52.603951+00:00"
-            },
             "neighborhood_link": true,
-            "published_at": "2026-11-20T17:10:52.603951+00:00",
-            "published_at_precision": "source-declared milliseconds",
-            "duplicate_type_on_article": true,
-            "duplicate_type_on_home": true,
-            "controller_visual": "HTML and image bytes only",
-            "owner_desktop_visual": "passed",
-            "mobile_visual": "pending",
-            "status": "published_verified"
+            "source": {
+              "id": "florentin-fiber-electricity-works-20261122",
+              "title": "מיום ראשון בפלורנטין: עבודות סיבים בהרבי מבכרך וכבלי חשמל באברבנאל",
+              "section": "news",
+              "published_at": "2026-11-21T06:04:02.225343+00:00",
+              "updated_at": "2026-11-21T06:04:02.225343+00:00",
+              "status": "published",
+              "image_credit": "Anatoli Axelrod · CC BY 3.0 · הוקטן ונדחס ל־JPG"
+            },
+            "desktop_visual": "passed_by_owner",
+            "mobile_visual": "pending"
           },
           {
-            "id": "hatzuk-beach-woman-rescue-20261119",
-            "url": "https://tlvnet.com/news/hatzuk-beach-woman-rescue-20261119",
-            "title": "צעירה חולצה מהמים בחוף הצוק ופונתה במצב קשה | TLVNET",
-            "paragraph_lengths": [
-              104,
-              162,
-              140,
-              78,
-              49
-            ],
-            "image": {
-              "status": 200,
-              "url": "https://tlvnet.com/photo-bank/assets/coast-tlv-aerial-2026.jpg",
-              "jpeg": true,
-              "sha256": "e32b02af0a474b439ed74d62265e2e5ab06a34e1f09a31274c30d9f3fa2f2ab7",
-              "alt": "קו החוף של תל אביב ממטוס",
-              "title": "",
-              "mime": "image/jpeg"
-            },
-            "visible_credit": "אילוסטרציה · קו החוף של תל אביב ממטוס · ארכיון 2026-02-25 · צילום: MoserB · CC0 מקור · רישיון",
-            "homepage_link": true,
+            "id": "savidor-purple-line-night-works-20261122",
+            "url": "https://tlvnet.com/news/savidor-purple-line-night-works-20261122",
+            "heading": "ליד סבידור: חמישה לילות של עבודות לקו הסגול ברחוב על פרשת דרכים",
+            "status": 200,
+            "paragraphs": 5,
+            "image_url": "https://tlvnet.com/photo-bank/assets/namir-road-archive-2016.jpg",
+            "image_status": 200,
+            "image_mime": "image/jpeg",
+            "jpeg": true,
+            "credit": "אילוסטרציה · דרך נמיר בתל אביב · צילום ארכיון מ־2016 · Rakoon · CC0 1.0 מקור · רישיון",
+            "home_link": true,
             "section_link": true,
-            "neighborhood_feed": null,
             "neighborhood_link": null,
-            "published_at": "2026-11-20T19:10:00+02:00",
-            "published_at_precision": "public card minute",
-            "duplicate_type_on_article": true,
-            "duplicate_type_on_home": true,
-            "controller_visual": "HTML and image bytes only",
-            "owner_desktop_visual": "passed",
-            "mobile_visual": "pending",
-            "status": "published_verified"
+            "source": {
+              "id": "savidor-purple-line-night-works-20261122",
+              "title": "ליד סבידור: חמישה לילות של עבודות לקו הסגול ברחוב על פרשת דרכים",
+              "section": "news",
+              "published_at": "2026-11-21T06:04:02.225343+00:00",
+              "updated_at": "2026-11-21T06:04:02.225343+00:00",
+              "status": "published",
+              "image_credit": "Rakoon · CC0 1.0 · הוקטן ונדחס ל־JPG"
+            },
+            "desktop_visual": "passed_by_owner",
+            "mobile_visual": "pending"
           }
         ],
         "latest_owner_run_status": "completed",
@@ -8769,7 +8912,7 @@
         "saved_version": 702,
         "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/97a01801-2058-832c-802d-32ee133e5941.json",
         "last_owner_started_at": "2026-11-18T14:48:34.830936Z",
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "coverage_queue_count": 9,
         "coverage_queue_checkpoint": "public/news/agents/real-estate/ledger.json",
         "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending",
@@ -8828,7 +8971,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-20T20:32:42Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "latest_metadata_check": {
           "last_owner_run_id": "8db3ae81-a69c-8331-afbd-33fb607a6a64",
           "status": "completed",
@@ -8952,7 +9095,7 @@
         "last_owner_started_at": "2026-11-18T10:17:14.345378Z",
         "pending_owner_result": false,
         "independent_full_body_image_credit_verified_at": "2026-11-16T17:00:46.396Z",
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 1,
@@ -9039,7 +9182,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-20T20:32:42Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "latest_metadata_check": {
           "last_owner_run_id": "f45dbfcf-ed34-832f-b758-7641f992a898",
           "status": "completed",
@@ -9122,7 +9265,7 @@
         "mini_site_technical_update_at": "2026-11-15T12:40:04.126313Z",
         "coverage_cursor": "kiryat-shalom",
         "last_owner_started_at": "2026-11-18T10:59:34.166480Z",
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 11,
@@ -9201,7 +9344,7 @@
           "findings": "Original owner picked up and prepared eligible update. Earlier article already contains 24 Nov 22:00 city-wide registration in a paragraph; prepared rewrite is not live. Compare exact body and asset after actual lease release. Preserve original owner and do not republish the existing article."
         },
         "last_section_link_checked_at": "2026-11-20T20:32:42Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "pending_ready": 0,
         "pending_verification": 9,
         "coverage_status": "Owner prepared update; immutable ops checkpoint retained while shared lane held",
@@ -9286,7 +9429,7 @@
           "verification_scope": "Fresh focused article/body/image/credit readback; owner619 proof retained for home/section links"
         },
         "last_owner_started_at": "2026-11-18T11:56:07.976170Z",
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
         "saved_version": 660,
         "coverage_queue_count": 8,
@@ -9325,7 +9468,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-20T20:32:42Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "publication_status": "published_verified_journal_pending_mobile_pending",
         "pending_ready": 0,
         "pending_verification": 6,
@@ -9457,7 +9600,7 @@
         "last_owner_new_articles": 2,
         "coverage_state": "three_owner_research_checkpoints_and_mobile_pending",
         "execution_anomaly_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "source_commit": "3f628bca2d16b7bc8be2c2c3f6e71930a7ee13c8",
         "saved_version": 665,
         "coverage_queue_count": 3,
@@ -9587,7 +9730,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-20T20:32:42Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "latest_metadata_check": {
           "last_owner_run_id": "028e5aaa-f7fc-8328-9501-b166e40f7d33",
           "status": "completed",
@@ -9661,7 +9804,7 @@
         "last_owner_run_status": "completed",
         "pending_owner_result": false,
         "last_owner_started_at": "2026-11-19T07:46:01.268727Z",
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "source_commit": "8bebe9ec75a07373cfeb8211a1eb0525474f04bd",
         "saved_version": 694,
         "coverage_queue_count": 7,
@@ -9809,7 +9952,7 @@
           }
         },
         "last_section_link_checked_at": "2026-11-20T20:32:42Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "latest_metadata_check": {
           "last_owner_run_id": "548ad7d7-4704-8321-a0b0-c24815aa588a",
           "status": "completed",
@@ -9878,7 +10021,7 @@
         "last_owner_started_at": "2026-11-18T10:59:34.166480Z",
         "last_owner_completed_at": "2026-11-18T11:26:01.746479Z",
         "owner_run_changed_since_checkpoint": false,
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "navigation_areas": 25,
         "original_localities": 73,
         "technical_version": 625,
@@ -9928,7 +10071,7 @@
           "at": "2026-11-19T19:09:52Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/812e0bb1-10c8-832e-8a83-5d6a6a70110c.json"
         },
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "latest_observed_owner_run": {
           "id": "afcac5cb-688c-8326-adc1-daad053f6672",
           "state": "completed",
@@ -9976,8 +10119,8 @@
         "lead_title": "תחזית ההכנסות מחניה בכחול־לבן ירדה ב־33 מיליון שקל. האם קל יותר למצוא חניה בתל אביב?",
         "section_status": 200,
         "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/f69ddfba-d18c-8330-b2a9-977150c124ec.json",
-        "metadata_checked_at": "2026-11-21T05:37:18.000Z",
-        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
+        "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
         "latest_observed_owner_run": {
           "id": "caf12d98-ec2c-8328-9c7e-18deae3cc074",
           "state": "completed",
@@ -10009,8 +10152,8 @@
       }
     },
     "qualification": "8 public section link checks; full article/image/credit for consumer, pending community existing version, legacy news and investigations. Later676 terminal only; no all-site audit.",
-    "metadata_checked_at": "2026-11-21T05:37:18.000Z",
-    "latest_metadata_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
+    "metadata_checked_at": "2026-11-21T06:37:28.000Z",
+    "latest_metadata_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
     "date_rollover": {
       "local_date": "2026-11-18",
       "observed_at": "2026-11-18T09:58:50.364Z",
@@ -10126,10 +10269,10 @@
         ]
       }
     },
-    "last_delta_checked_at": "2026-11-21T05:37:18.000Z",
-    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
-    "latest_checked_release": 705,
-    "latest_checked_release_source": "ba5d275295093049aa499abab28bbaa581b4cda6"
+    "last_delta_checked_at": "2026-11-21T06:37:28.000Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
+    "latest_checked_release": 706,
+    "latest_checked_release_source": "b283dfc4d62f2a78bff8111814dbc7d2e8457cd1"
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-20T10:15:04.731Z",
@@ -10568,14 +10711,14 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-21T05:37:18.000Z",
+    "observed_at": "2026-11-21T06:37:28.000Z",
     "from": "2026-11-21T03:42:15Z",
     "through": "2026-11-21T03:42:15Z",
     "strictly_new": 0,
     "boundary_crossed": true,
     "full_logs_read": 0,
     "pending_run_ids": [],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -10629,23 +10772,23 @@
   ],
   "latest_incremental_review": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "e3afe7d9-ba48-8328-bc51-52c866ecfb84",
-    "runKey": "ops-2026-11-21-e3afe7d9-ba48-8328-bc51-52c866ecfb84",
+    "run_id": "af295dbc-7db0-8328-913a-97e30fe53616",
+    "runKey": "ops-2026-11-21-af295dbc-7db0-8328-913a-97e30fe53616",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 2,
-    "observed_at": "2026-11-21T05:37:18.000Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json",
-    "status": "no_update",
-    "saved_version": 705,
+    "observed_at": "2026-11-21T06:37:28.000Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
+    "status": "owner_publications_verified",
+    "saved_version": 706,
     "public_checked_version_prior": 705,
     "current_health_http": 200,
-    "deployment_id": "appgdep_6b009eeb33dc8191b44606d0833d0fdd",
-    "source_commit": "ba5d275295093049aa499abab28bbaa581b4cda6",
-    "source_head": "dd871416afec02cfbb28cee7c7369157b5bc1564",
+    "deployment_id": "appgdep_6b01357023ec8191a87f31801423be36",
+    "source_commit": "b283dfc4d62f2a78bff8111814dbc7d2e8457cd1",
+    "source_head": "7dcdb480a7c3884e0f147679e33201ea0f8be2f3",
     "new_actions": 0,
     "new_inbox": 0,
     "new_social_rows": 0,
-    "new_articles": 0,
+    "new_articles": 2,
     "controller_new_deployments": 0,
     "controller_editorial_writes": 0,
     "full_logs_read": 0,
@@ -10850,7 +10993,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-21T05:37:18.000Z",
+    "observed_at": "2026-11-21T06:37:28.000Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -11494,7 +11637,7 @@
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/e3afe7d9-ba48-8328-bc51-52c866ecfb84.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
   },
   "source_report_checkpoint": {
     "status": "executed_on_current_published_source_plus_owner_receipt",
@@ -11871,7 +12014,19 @@
     "latest_sports_status": "two_articles_independently_verified",
     "latest_evidence": "ops/tlvnet-stability/observations/2026-11-20/81d3d078-76bc-8330-a9fa-8a8cdb65531d.json"
   },
-  "current_pending_task_runs": [],
+  "current_pending_task_runs": [
+    {
+      "task_id": "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a",
+      "title": "מערכת הרצליה נט",
+      "run_id": "6684eb16-97f4-832c-9fbe-21e969cb96ad",
+      "status": "in_progress",
+      "started_at": "2026-11-21T06:33:54.250308Z",
+      "completed_at": null,
+      "linked": false,
+      "result_at": "2026-11-20T17:44:35.307723Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
+    }
+  ],
   "herzliya_coordination": {
     "source_writes": 0,
     "deployments": 0,
@@ -11968,48 +12123,35 @@
     "mobile_visual": "pending",
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json",
     "latest": {
-      "id": 812401,
-      "owner_run_id": "4f51cf97-0a48-8323-8678-5068e8473758",
-      "owner_completed_at": "2026-11-20T17:05:40.210564Z",
+      "id": 812409,
+      "owner_run_id": "b60ec145-3510-8333-97b9-2dca949d230c",
+      "owner_completed_at": "2026-11-21T06:01:10.744607Z",
       "target": "ISNET-CMS-59",
-      "public_url": "https://www.raanananet.co.il/%d7%aa%d7%a8%d7%91%d7%95%d7%aa/raanana-saturday-events-20261121",
+      "public_url": "https://www.raanananet.co.il/%d7%aa%d7%a8%d7%91%d7%95%d7%aa/raanana-world-jazz-music-festival-2026-guide",
       "section_url": "https://www.raanananet.co.il/%D7%AA%D7%A8%D7%91%D7%95%D7%AA",
       "home_url": "https://www.raanananet.co.il/",
       "home_link": true,
       "section_link": true,
-      "body_sample_checks": [
-        "19:30",
-        "20:30",
-        "11:00",
-        "אזל"
-      ],
-      "paragraph_lengths": [
-        300,
-        315,
-        302,
-        286,
-        338,
-        248,
-        30,
-        35,
-        26,
-        117,
-        27
-      ],
-      "image": {
-        "status": 200,
-        "url": "https://www.raanananet.co.il/dyncontent/tmp/209/2026_11_16_e3e74e96-2551-4c25-8e98-f4bfab3c5434_640_480_Crop_.jpg",
-        "jpeg": true,
-        "sha256": "d418b9a4d785766ce5d9af595f244a2ae6ecf05af19b82bc102b0ac4aad65269",
-        "alt": "צילום המחשה, לא מאירוע ברעננה: Daniel Ponomarev / Pexels (Pexels License)",
-        "title": "צילום המחשה, לא מאירוע ברעננה: Daniel Ponomarev / Pexels (Pexels License)",
-        "mime": "image/jpeg"
+      "body": {
+        "heading": "פקיטו דה ריברה, אהוד בנאי וג'אז לילדים: הפסטיבל מגיע לרעננה",
+        "paragraphs": 9,
+        "confirmed_terms": [
+          "פקיטו דה ריברה",
+          "אהוד בנאי",
+          "ג'אז לילדים"
+        ]
       },
-      "credit": "image alt/title present; visible figure credit not observed in article HTML",
+      "image": {
+        "url": "https://www.raanananet.co.il/dyncontent/tmp/209/2026_11_16_e3e74e96-2551-4c25-8e98-f4bfab3c5434_640_480_Crop_.jpg",
+        "status": 200,
+        "sha256": "d418b9a4d785766ce5d9af595f244a2ae6ecf05af19b82bc102b0ac4aad65269",
+        "jpeg": true
+      },
+      "credit": "Credit present in image attributes; no visible figure caption observed, matching the existing template behavior.",
       "visual": "pending",
       "status": "published_public_verified_caption_presentation_pending",
-      "observed_at": "2026-11-20T17:47:58Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-20/c1f2d516-b7d8-832c-ab62-ed4b7a7da857.json"
+      "observed_at": "2026-11-21T06:37:28.000Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json"
     }
   },
   "latest_cinema_public_readback": {
