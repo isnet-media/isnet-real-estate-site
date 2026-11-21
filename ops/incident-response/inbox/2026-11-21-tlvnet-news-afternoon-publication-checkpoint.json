@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "prepared_editorial_release_checkpoint",
+  "status": "publication_pending_existing_writer",
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "runKey": "news-20261121-afternoon-db07eb5d-eeb6-412e-9a33-7e8df579dc52",
+  "recorded_at": "2026-11-21T12:23:32.848Z",
+  "target": "TLVNET-site",
+  "section": "news",
+  "fingerprint": "tlvnet|news|publication_pending_existing_writer|2026-11-21-afternoon",
+  "evidence": {
+    "lease_state": "held",
+    "holding_owner": "Automation_e2f02000cdf4819190022b85f4391076",
+    "lease_until": "2026-11-21T12:46:19.439Z",
+    "source_commit_checked": "4c35312ab8eff1332ab74e973368ebfd77dc23c8",
+    "last_confirmed_live_version": 710,
+    "dispatch_http_status": 403,
+    "dispatch_known_blocker": true,
+    "source_queue_write": "blocked_by_active_target_lease"
+  },
+  "articleIds": [
+    "la-guardia-hamasger-night-bus-changes-20261122",
+    "wallenberg-night-closure-kavim-634-20261122",
+    "levinsky-chelnov-purple-line-night-works-20261120",
+    "einstein-lane-reduction-nov23-20261119",
+    "hatikva-street-violence-serious-injury-20261108"
+  ],
+  "articles": [
+    {
+      "article_id": "la-guardia-hamasger-night-bus-changes-20261122",
+      "action": "new",
+      "body_sha256": "236aa4266752b44edf90a8e44b2fc44c7799207326932dad5d8dc2af5a03708a",
+      "asset_sha256": "e64f440e7d1ffaf22b97accb0f2de3f243a54645e167dd97eb4dea685b114d52",
+      "sources": [
+        "https://superbus.co.il/inner.asp?item=5924&page=news",
+        "https://www.kavim-t.com/passenger-information/traffic-updates/hashmonaim-updates/update_14665223741",
+        "https://www.kavim-t.com/passenger-information/traffic-updates/hadera-netanya-updates/14665217471",
+        "https://www.kavim-t.com/passenger-information/traffic-updates/hashmonaim-updates/update_14665229961"
+      ]
+    },
+    {
+      "article_id": "wallenberg-night-closure-kavim-634-20261122",
+      "action": "new",
+      "body_sha256": "09a112c0f356fbc0d74a90977b5b76ff889d186e1b0d26f1d05dda58a8b8b623",
+      "asset_sha256": "5eddb74d0903bb63abfd4655392bae99204822e1e5ff4ede136224ff7d69c60d",
+      "sources": [
+        "https://www.kavim-t.com/passenger-information/traffic-updates/hadera-netanya-updates/update_14665375222"
+      ]
+    },
+    {
+      "article_id": "levinsky-chelnov-purple-line-night-works-20261120",
+      "action": "update",
+      "body_sha256": "b958749577a88c4ec15f812127b76912746c580e285bbed00e8d45c7fa2e9945",
+      "asset_sha256": "950628be78ce327a463330e7302ff9e14d5171158c757e9803decba1293719f1",
+      "sources": [
+        "https://superbus.co.il/inner.asp?item=5933&page=news"
+      ]
+    },
+    {
+      "article_id": "einstein-lane-reduction-nov23-20261119",
+      "action": "update",
+      "body_sha256": "5b4bec941d9dcc22620259b97bfb77f4334b03898bb6d84834a1ce09c67a3ae7",
+      "asset_sha256": "950628be78ce327a463330e7302ff9e14d5171158c757e9803decba1293719f1",
+      "sources": [
+        "https://www.kavim-t.com/passenger-information/traffic-updates/hadera-netanya-updates/update_14665253627",
+        "https://www.kavim-t.com/passenger-information/traffic-updates/hadera-netanya-updates/update_14665256209"
+      ]
+    },
+    {
+      "article_id": "hatikva-street-violence-serious-injury-20261108",
+      "action": "update",
+      "body_sha256": "6d1d35439b8d155399fe28817f64d11f274188dfae327259d2e077df79ee5b70",
+      "asset_sha256": "fc0d4c0a98582fea6d926d33ce0196d8b301834648697ce2fee355c8240f5b26",
+      "sources": [
+        "https://telavivi.news/hatikva-assault-prosecutor-statement/"
+      ]
+    }
+  ],
+  "private_checkpoint": {
+    "filename": "TLVNET-News-Checkpoint-2026-11-21-Afternoon.json",
+    "sha256": "714cc1781178ed25028e4acd501a69eb02d7f0180dd211a2d5c840cb16f81693",
+    "access": "Publisher's private ChatGPT Library. Public repository stores only this pointer and hashes."
+  },
+  "metrics": {
+    "discovered": 6,
+    "verified": 5,
+    "newly_published": 0,
+    "updated": 0,
+    "rejected": 5,
+    "pending_ready": 5,
+    "pending_verification": 7,
+    "blocked_real": 9,
+    "duplicate": 11
+  },
+  "next_action": "At the next authorized release opportunity read the private checkpoint and current source, reconcile duplicates and active service dates, verify original evidence and acquire the existing CAS lease. Apply updates to the same IDs without changing publication dates. Verify actual live output. Do not start a new schedule or invoke the controller."
+}
