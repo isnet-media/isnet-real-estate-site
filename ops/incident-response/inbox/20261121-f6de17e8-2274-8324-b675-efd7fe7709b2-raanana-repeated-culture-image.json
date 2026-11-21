@@ -5,7 +5,7 @@
   "recorded_at": "2026-11-21T12:25:10.000Z",
   "policy_version": "2026-11-15/1.2",
   "signature": "raanana-culture-repeated-hero-image-851225",
-  "status": "blocked_waiting_for_owner_rights_and_write_window",
+  "status": "owner_cms_images_corrected_public_QA_pending",
   "target": "ISNET-CMS-59",
   "owner_task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
   "owner_run_id": "906243e4-f308-832f-8c6b-6a008f062d3c",
@@ -49,5 +49,60 @@
     "cms_full_record_read": "Owner reported incomplete; controller operated on public readback only.",
     "rights": "Specific replacement assets have not been approved for reuse in Raanana."
   },
-  "next_action": "Existing Raanana owner should confirm rights for distinct replacements, recheck the current CMS records under an available write lease, update the existing posts and verify new image, credits, home and section. Keep fourth item for owner selection."
+  "next_action": "Existing Raanana owner should confirm rights for distinct replacements, recheck the current CMS records under an available write lease, update the existing posts and verify new image, credits, home and section. Keep fourth item for owner selection.",
+  "owner_resolution": {
+    "recorded_at": "2026-11-21T17:02:28.098Z",
+    "owner_task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+    "lease_token": "raanana-culture-image-repair-20261121-c15t32",
+    "corrections": [
+      {
+        "postId": 812409,
+        "oldImageId": 851225,
+        "newImageId": 852123,
+        "subject": "Paquito D'Rivera",
+        "source": "https://commons.wikimedia.org/wiki/File:Paquito_D%E2%80%99Rivera.jpg",
+        "author": "Jacek Proszyk",
+        "license": "CC BY-SA 4.0",
+        "archivalYear": 2022
+      },
+      {
+        "postId": 812401,
+        "oldImageId": 851225,
+        "newImageId": 852122,
+        "subject": "Itay Herman",
+        "source": "https://commons.wikimedia.org/wiki/File:Itay_Herman.jpg",
+        "author": "בר",
+        "license": "CC BY-SA 3.0",
+        "archivalYear": 2021
+      },
+      {
+        "postId": 812012,
+        "oldImageId": 851225,
+        "newImageId": 852124,
+        "subject": "Ariel Zilber",
+        "source": "https://commons.wikimedia.org/wiki/File:Ariel_Zilber_IMG_3732.JPG",
+        "author": "Deror avi",
+        "license": "CC BY-SA 3.0",
+        "archivalYear": 2009
+      }
+    ],
+    "evidence": "ISNET admin list_posts websiteId59 post IDs 812409,812401,812012 after update shows 852123,852122,852124; original publish dates unchanged, visible and template=false. Licensed sources matched to depicted subjects, file credits say archive. Original image851225 no longer referenced by these three.",
+    "pending": [
+      "Public pages in web-search result are cached and still display old caption; refreshed live image URL/credit must be checked in real browser",
+      "Visual homepage and 390px QA not possible with available browser context; do not claim verified",
+      "Post 811802 and post 812206 still use old generic 851225; separate owner review needed",
+      "CMS get_post returned empty object; body footer of post812012 might still describe previous stage illustration and should be reviewed",
+      "No byte-level hash available via administrative file connection; distinct new media IDs confirmed"
+    ],
+    "no_changes": [
+      "post IDs",
+      "createDate",
+      "text",
+      "categories",
+      "headlines",
+      "CMS37279",
+      "site design",
+      "schedule"
+    ]
+  }
 }
