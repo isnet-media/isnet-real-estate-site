@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T16:46:34.000Z",
+  "updated_at": "2026-11-21T17:59:19.000Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7394,10 +7394,10 @@
     {
       "id": "raanana-culture-repeated-hero-image-851225",
       "signature": "raanana-culture-repeated-hero-image-851225",
-      "status": "open",
+      "status": "mitigated",
       "severity": "editorial_media_quality",
       "first_seen_at": "2026-11-21T12:25:10.000Z",
-      "last_seen_at": "2026-11-21T12:25:10.000Z",
+      "last_seen_at": "2026-11-21T17:59:19.000Z",
       "root_cause": "Four entries serve identical public stock image bytes. Replacement rights and current CMS record verification remain pending.",
       "owner_task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
       "owner_run_id": "906243e4-f308-832f-8c6b-6a008f062d3c",
@@ -7408,8 +7408,27 @@
         811802
       ],
       "source_inbox": "ops/incident-response/inbox/20261121-f6de17e8-2274-8324-b675-efd7fe7709b2-raanana-repeated-culture-image.json",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-21/f6de17e8-2274-8324-b675-efd7fe7709b2.json",
-      "next_action": "Existing Raanana owner should confirm rights for distinct replacements, recheck the current CMS records under an available write lease, update the existing posts and verify new image, credits, home and section. Keep fourth item for owner selection."
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
+      "next_action": "Existing Raanana owner closes the caption and visible attribution issues, then reviews the other two records under the same established path and lease.",
+      "updated_at": "2026-11-21T17:59:19.000Z",
+      "owner_inbox": "ops/incident-response/inbox/20261121-f6de17e8-2274-8324-b675-efd7fe7709b2-raanana-repeated-culture-image.json",
+      "followup_inbox": "ops/incident-response/inbox/65110276-c2ac-8324-8e97-f556621e31e8-raanana-culture-caption-followup.json",
+      "public_verification": {
+        "article_ids": [
+          812409,
+          812401,
+          812012
+        ],
+        "all_distinct_current_jpeg_loaded": true,
+        "home_and_culture_cards_verified_in_public_html": true,
+        "visible_image_credits_pending": true,
+        "stale_body_caption_post_id": 812012,
+        "additional_old_image_ids": [
+          811802,
+          812206
+        ],
+        "mobile_pending": true
+      }
     },
     {
       "id": "tlvnet-controller-current-public-readback-unavailable",
@@ -7456,7 +7475,7 @@
       "live_article": "https://tlvnet.com/news/terra-design-conditional-affordable-housing-explained-20261121"
     }
   ],
-  "last_review_runKey": "ops-2026-11-21-2e3415b1-d944-8324-81cf-8b2acab9633e",
+  "last_review_runKey": "ops-2026-11-21-65110276-c2ac-8324-8e97-f556621e31e8",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
