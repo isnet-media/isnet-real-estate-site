@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T18:45:05.000Z",
+  "updated_at": "2026-11-21T19:44:28Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-21T18:08:36Z",
   "initial_history": {
@@ -20,15 +20,15 @@
       "remaining": "118 historical entries remain in2workflow groups; failed-step metadata only, roots unconfirmed.",
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
-        "observed_at": "2026-11-21T18:45:05.000Z",
+        "observed_at": "2026-11-21T19:44:28Z",
         "run_ids": [
-          42487330312,
-          42487110766
+          42486413506,
+          42486298271
         ],
-        "evidence": "ops/tlvnet-stability/observations/2026-11-21/87e7dd4b-fe40-8324-b7fa-c155db08470e.json",
-        "status": "Historical failed-step metadata; exact roots unconfirmed."
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
+        "status": "Historical failed-step metadata only; root unconfirmed."
       },
-      "remaining_without_failed_step_metadata": 44
+      "remaining_without_failed_step_metadata": 42
     },
     "full_logs_read_this_cycle": 0,
     "unconfirmed_publish_failure_ids": [
@@ -1989,7 +1989,20 @@
           "conclusion": "failure",
           "source_commit": "8f4e07446c3bf57d034a71de0e815dbb0deb78e0",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42486413506",
-          "classification": "Historical metadata only; exact root unconfirmed. No current outage or recovery inferred."
+          "classification": "Historical metadata only; exact root unconfirmed. No current outage or recovery inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-21T19:44:28Z",
+            "jobs": [
+              {
+                "id": 128749159710,
+                "name": "check",
+                "steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json"
+          }
         },
         {
           "run_id": 42486298271,
@@ -2001,7 +2014,20 @@
           "conclusion": "failure",
           "source_commit": "8f4e07446c3bf57d034a71de0e815dbb0deb78e0",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42486298271",
-          "classification": "Historical metadata only; exact root unconfirmed. No current outage or recovery inferred."
+          "classification": "Historical metadata only; exact root unconfirmed. No current outage or recovery inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-21T19:44:28Z",
+            "jobs": [
+              {
+                "id": 128748796879,
+                "name": "check",
+                "steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json"
+          }
         },
         {
           "run_id": 42485933137,
@@ -2551,26 +2577,25 @@
   },
   "inbox_path": "ops/incident-response/inbox/",
   "last_verified_publish_run": 43362366874,
-  "last_verified_public_readback_run": "65110276-c2ac-8324-8e97-f556621e31e8",
+  "last_verified_public_readback_run": "745ec3da-4394-8324-8e04-e515362196f2",
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "87e7dd4b-fe40-8324-b7fa-c155db08470e",
-    "runKey": "ops-2026-11-21-87e7dd4b-fe40-8324-b7fa-c155db08470e",
+    "run_id": "745ec3da-4394-8324-8e04-e515362196f2",
+    "runKey": "ops-2026-11-21-745ec3da-4394-8324-8e04-e515362196f2",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 2,
-    "observed_at": "2026-11-21T18:45:05.000Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/87e7dd4b-fe40-8324-b7fa-c155db08470e.json",
-    "status": "no_material_delta_unchanged_v713",
-    "saved_version": 713,
-    "independently_checked_public_version": null,
-    "previous_verified_version": 713,
+    "observed_at": "2026-11-21T19:44:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
+    "status": "original_owner_publication_independently_verified",
+    "saved_version": 714,
+    "independently_checked_public_version": 714,
     "current_health_http": 200,
-    "deployment_id": "appgdep_6b01d12545388191b1d5597865b68f81",
-    "source_commit": "64868d3c06707c0d0025518ec4dc7e8127a53814",
-    "new_actions": 2,
+    "deployment_id": "appgdep_6b01ebcc1f0881918464babf663238f4",
+    "source_commit": "2c5f409de30c04af50d42eaf31f94c133a19fffe",
+    "new_actions": 0,
     "new_inbox": 0,
     "new_social_rows": 0,
-    "new_articles": 0,
+    "new_articles": 2,
     "updated_articles": 0,
     "controller_new_deployments": 0,
     "controller_editorial_writes": 0,
@@ -2620,20 +2645,20 @@
     },
     "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
       "enabled": true,
-      "last_run_id": "54c01aca-5440-8322-bb97-20f798299412",
-      "started_at": "2026-11-21T07:00:21.927376Z",
-      "completed_at": "2026-11-21T07:22:20.598212Z",
+      "last_run_id": "4a387728-d740-8332-a50a-00d8a11ed401",
+      "started_at": "2026-11-21T18:56:07.437167Z",
+      "completed_at": "2026-11-21T19:11:12.363303Z",
       "recorded_status": "completed",
-      "result": "פורסמה ואומתה [הכתבה על נוער מכבי לקראת שריף טירספול](https://tlvnet.com/news/maccabi-youth-sheriff-round32-preview-20261121).\n\nנבדקו הגוף המלא, האילוסטרציה המסומנת והקישורים מהשער, ממדור הספורט ומעמוד קריית שלום.\n\nבמחזור פורסמה כתבה אחת, נמנעו שלוש כפילויות ושני מועמדים נדחו. שלושה פריטי מחקר נשמרו לאימות נוסף. בדיקת המובייל ממתינה.",
-      "result_run_id": "54c01aca-5440-8322-bb97-20f798299412",
-      "observed_at": "2026-11-21T07:30:21.000Z",
+      "result": "פורסמו ואומתו שתי כתבות ספורט חדשות:\n\n- [נוער מכבי ניצח את אשדוד ושמר על הפסגה](https://tlvnet.com/news/maccabi-youth-ashdod-win-20261121)\n- [הפועל תל אביב ניצחה את קריית אתא 60:85](https://tlvnet.com/news/hapoel-kiryat-ata-home-win-20261121)\n\nאומתו הגוף, התמונות, הקרדיטים והקישורים מהשער, ממדור הספורט ומעמודי השכונות. היומן נשמר והנעילה שוחררה.\n\nארבעה פריטים נשמרו להמשך אימות. ביקורת התצוגה במחשב ובמובייל עדיין ממתינה.",
+      "result_run_id": "4a387728-d740-8332-a50a-00d8a11ed401",
+      "observed_at": "2026-11-21T19:44:28Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.4",
-      "result_created_at": "2026-11-21T07:22:20.379564Z",
+      "result_created_at": "2026-11-21T19:11:12.191965Z",
       "qualification": "Exact run/result read; old latest_result not attributed to new run. Public owner proof and controller verification separate.",
-      "effective_policy": "2026-11-14/1.3",
+      "effective_policy": "2026-11-15/1.4",
       "result_matches_attempt": true,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-21/e0f90536-9274-8328-8c91-4402d6aaca78.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
       "result_summary_truncated": false
     },
     "Automation_82add5edecd8819197814e83bac85a75": {
@@ -4256,6 +4281,31 @@
       "full_logs_read": 0,
       "owners_checked": 13,
       "pending_original_owner_release": 0
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "745ec3da-4394-8324-8e04-e515362196f2",
+      "runKey": "ops-2026-11-21-745ec3da-4394-8324-8e04-e515362196f2",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 2,
+      "observed_at": "2026-11-21T19:44:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
+      "status": "original_owner_publication_independently_verified",
+      "saved_version": 714,
+      "independently_checked_public_version": 714,
+      "current_health_http": 200,
+      "deployment_id": "appgdep_6b01ebcc1f0881918464babf663238f4",
+      "source_commit": "2c5f409de30c04af50d42eaf31f94c133a19fffe",
+      "new_actions": 0,
+      "new_inbox": 0,
+      "new_social_rows": 0,
+      "new_articles": 2,
+      "updated_articles": 0,
+      "controller_new_deployments": 0,
+      "controller_editorial_writes": 0,
+      "full_logs_read": 0,
+      "owners_checked": 13,
+      "pending_original_owner_release": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -4667,37 +4717,27 @@
     "target": "TLVNET-site",
     "state": "free",
     "owner": null,
-    "observed_at": "2026-11-20T07:31:45.056Z",
+    "observed_at": "2026-11-21T19:44:28Z",
     "last_release": {
-      "owner": "Automation_c1b175347cc481918eaba3cbaf3582d2",
-      "run_key": "publisher-headline-2026-11-19T11:24:05.812Z",
-      "released_at": "2026-11-19T11:27:16.209Z",
+      "owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+      "run_key": "sports-20261121-evening-4a387728-d740-8332-a50a-00d8a11ed401",
+      "released_at": "2026-11-21T19:10:50.000Z",
       "status": "published_verified",
-      "version_number": 673,
-      "deployment_id": "appgdep_6afedcd0a5348191bf6cea754b33ef20",
-      "source_commit": "1173c4a993d05985f7b0db195619720264b51e9a",
-      "article_ids": [
-        "la-guardia-bicycle-network-20261119"
-      ],
-      "public_url": "https://tlvnet.com/news/la-guardia-bicycle-network-20261119"
+      "version_number": 714,
+      "deployment_id": "appgdep_6b01ebcc1f0881918464babf663238f4",
+      "source_commit": "2c5f409de30c04af50d42eaf31f94c133a19fffe",
+      "journal_commit": "ccd6ea71877f75ff002c722a4f2ef5c236372d38",
+      "newly_published": 2,
+      "updated": 0,
+      "post_publication_visual_review": "desktop_pending_mobile_pending"
     },
     "controller_acquisition_attempts": 1,
     "qualification": "Previously observed lease is no longer active. Prepared community update remains with original owner.",
     "pending_items_reference": null,
-    "pending_items": [
-      {
-        "pending_ready": 1,
-        "owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
-        "owner_run_id": "52a229d3-175c-8328-a1cb-32792489b027",
-        "checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json",
-        "current_public_title": "שישירוק ביד אליהו: ההרשמה לעשרה דוכנים עד 8 בנובמבר | TLVNET",
-        "status": "owner_prepared_update_not_live_earlier_lease_released",
-        "next_action": "Original owner to revalidate deadline and consume checkpoint. Existing article retained."
-      }
-    ],
+    "pending_items": [],
     "lease_until": null,
     "owner_run_key": null,
-    "lease_blob_sha": "bfd7c6af95ec0f7cd6fb90df8d3d81ceb1108827",
+    "lease_blob_sha": "1d8e64ea53a9de5e42fd07e75e4fd0f226723ece",
     "pending_item_references": [
       "ops/incident-response/inbox/20261116-news-2fbb7d04-publication-pending.json",
       "ops/incident-response/inbox/2026-11-16-economy-tech-fa8047fe-publication-pending.json",
@@ -4939,6 +4979,14 @@
         "owner_run_id": "6beb8dc9-9da4-832a-b839-5042d39cbb82",
         "desktop_visual": "pending",
         "mobile_visual": "pending"
+      },
+      {
+        "article_id": "tlv-neighborhood-garage-sale-20261106",
+        "status": "updated_existing_verified_owner_queue_reconciled",
+        "original_checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json",
+        "owner_run_id": "58479812-f554-8332-bf2c-9c661bf1c7a1",
+        "url": "https://tlvnet.com/news/tlv-neighborhood-garage-sale-20261106",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json"
       }
     ],
     "latest_historical_reconciliation": {
@@ -5070,8 +5118,8 @@
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/100eea27-f180-832c-a674-75914025141c.json",
     "new_rows_this_cycle": 0,
     "public_verification": "No new social run; previously reported run_failed guard unchanged.",
-    "last_checked_at": "2026-11-21T18:45:05.000Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/87e7dd4b-fe40-8324-b7fa-c155db08470e.json"
+    "last_checked_at": "2026-11-21T19:44:28Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json"
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -6133,6 +6181,30 @@
       "pending_ready": 0,
       "pending_verification": 7,
       "evidence": "ops/tlvnet-stability/observations/2026-11-21/c5379c5c-e74c-8324-861c-ed23089293c0.json"
+    },
+    "current_cycle": {
+      "observed_at": "2026-11-21T19:44:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
+      "community": {
+        "ready": 0,
+        "verification": 10,
+        "previous_checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json",
+        "classification": "Owner consumed checkpoint, corrected stale queue status, and controller independently verified revised existing garage sale article; no home link required for this existing article.",
+        "proof": "https://tlvnet.com/news/tlv-neighborhood-garage-sale-20261106",
+        "article_deadline_in_source": "2026-11-24T22:00:00+02:00"
+      },
+      "sports": {
+        "ready": 0,
+        "verification": 4,
+        "blocked_real": 0,
+        "duplicates": 4,
+        "owner_run_id": "4a387728-d740-8332-a50a-00d8a11ed401"
+      },
+      "bli_heshbon": {
+        "research_pending": "Ganei Shapira, awaiting updated primary evidence of occupancy and next enrollment",
+        "owner": "אבי אור",
+        "live_article": "https://tlvnet.com/news/parking-blue-white-budget-20261120"
+      }
     }
   },
   "pending_task_run_ids": [],
@@ -6540,10 +6612,10 @@
     "scheduled_watermarks_advanced": false
   },
   "tlvnet_section_freshness": {
-    "observed_at": "2026-11-20T17:47:58Z",
-    "source_commit": "6d3b820b1bd086f30bdc683e2485039505352e6d",
-    "saved_version": 703,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/c1f2d516-b7d8-832c-ab62-ed4b7a7da857.json",
+    "observed_at": "2026-11-21T19:44:28Z",
+    "source_commit": "2c5f409de30c04af50d42eaf31f94c133a19fffe",
+    "saved_version": 714,
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
     "desks": {
       "news": {
         "last_new_published_at": "2026-11-21T17:07:17.725121+00:00",
@@ -6564,8 +6636,8 @@
         "ledger_sha256": "e567ecf0545807e0e2a2088a4d37c5c1597ba90ed70be45726ad334b7b3dc8b2",
         "latest_body_sha256": "97919bad178431b1a6c285b1befb12d95e25500cf70889259c44f93af4fab951",
         "section_url": "https://tlvnet.com/news/index.html",
-        "lead_article_id": "hatzuk-beach-woman-rescue-20261119",
-        "lead_published_at": "2026-11-19T17:07:37.472451+00:00",
+        "lead_article_id": "la-guardia-hamasger-night-bus-changes-20261122",
+        "lead_published_at": "2026-11-21T17:07:17.725121+00:00",
         "last_owner_run_id": "6966f07b-9c0c-8330-9622-7d6cd83539fb",
         "last_owner_completed_at": "2026-11-21T17:15:47.423087Z",
         "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
@@ -7196,7 +7268,8 @@
         "last_owner_existing_updates": 0,
         "pending_verification": 7,
         "last_owner_updated_articles": 4,
-        "latest_source_projection_qualification": "Owner typed terminal evidence separately corroborated in Sites and independently compared with live article, section and home artifacts."
+        "latest_source_projection_qualification": "Owner typed terminal evidence separately corroborated in Sites and independently compared with live article, section and home artifacts.",
+        "section_route_checked_at": "2026-11-21T19:44:28Z"
       },
       "real-estate": {
         "last_new_published_at": "2026-11-21T15:09:39.438241+00:00",
@@ -7424,7 +7497,8 @@
           "source_published_at": null,
           "source_substantive_update_at": null,
           "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json"
-        }
+        },
+        "section_route_checked_at": "2026-11-21T19:44:28Z"
       },
       "economy-tech": {
         "last_new_published_at": "2026-11-21T10:47:20.599942+00:00",
@@ -7442,8 +7516,8 @@
         "ledger_sha256": "cb7f4373e13d5c96bdb2698db208d02d6685bd121f180383f7bf20cfec2c1079",
         "latest_body_sha256": "45b9f4efd05ff9df4cfda08e4a839183527cce806367a2c079f2a8030cfca899",
         "section_url": "https://tlvnet.com/news/economy-tech.html",
-        "lead_article_id": "islo-incredibuild-ai-software-factory-investment-20261120",
-        "lead_published_at": "2026-11-18T10:21:46.730111+00:00",
+        "lead_article_id": "corma-defensive-ai-series-a-tlv-20261121",
+        "lead_published_at": "2026-11-21T10:47:20.599942+00:00",
         "last_owner_run_id": "8195b63b-fa2c-8331-a9fa-4e3845770c37",
         "last_owner_completed_at": "2026-11-21T10:57:00.540155Z",
         "owner_task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
@@ -7596,7 +7670,8 @@
           }
         },
         "last_owner_existing_updates": 0,
-        "public_checked_version": 710
+        "public_checked_version": 710,
+        "section_route_checked_at": "2026-11-21T19:44:28Z"
       },
       "community": {
         "last_new_published_at": "2026-11-18T11:11:13.937148+00:00",
@@ -7615,7 +7690,7 @@
         "latest_body_sha256": "faa57b72206eaa5a15992fb2a4f8cda935fbb40388621de7a12b3e0162f7eb0a",
         "section_url": "https://tlvnet.com/news/community.html",
         "lead_article_id": "arik-einstein-neighborhood-hanukkah-20261117",
-        "lead_published_at": "2026-11-16T11:18:25.962766+00:00",
+        "lead_published_at": "2026-11-18T11:11:13.937148+00:00",
         "last_owner_run_id": "58479812-f554-8332-bf2c-9c661bf1c7a1",
         "last_owner_completed_at": "2026-11-21T11:14:58.103328Z",
         "owner_task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
@@ -7643,7 +7718,7 @@
           "community-shablul-49970-20261116",
           "coverage-frankfurt-retiree-havruta-20261115"
         ],
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
         "coverage_complete": false,
         "latest_runKey": "community-2026-11-18-daily",
         "public_verification": {
@@ -7712,7 +7787,7 @@
         "last_section_link_checked_at": "2026-11-20T20:32:42Z",
         "latest_check_evidence": "ops/tlvnet-stability/observations/2026-11-21/c6216c62-ad98-8324-ab53-6a18e36fb3a5.json",
         "pending_ready": 0,
-        "pending_verification": 9,
+        "pending_verification": 10,
         "coverage_status": "Owner prepared update; immutable ops checkpoint retained while shared lane held",
         "owner_checkpoint": "ops/incident-response/inbox/20261119-community-ready-garage-update.json",
         "latest_metadata_check": {
@@ -7758,7 +7833,8 @@
             "completedAt": null
           }
         },
-        "last_owner_existing_updates": 0
+        "last_owner_existing_updates": 0,
+        "section_route_checked_at": "2026-11-21T19:44:28Z"
       },
       "consumer": {
         "last_new_published_at": "2026-11-21T12:26:42.071847+00:00",
@@ -7776,8 +7852,8 @@
         "ledger_sha256": "9b82368a0ec43739c2f5b2f5ae4d5e26094f3fab425d2d5896fb233e11b69f65",
         "latest_body_sha256": "ada37c97cad3373ed4c327f5f6c641ec77950c4a9be97236dd741cc43601fc63",
         "section_url": "https://tlvnet.com/news/consumer.html",
-        "lead_article_id": "good-pharm-charity-cream-terms-20261119",
-        "lead_published_at": "2026-11-16T12:12:18.684499+00:00",
+        "lead_article_id": "kv-yavne-cucumber-recall-26142-20261119",
+        "lead_published_at": "2026-11-21T12:22:35.965669+00:00",
         "last_owner_run_id": "05a110eb-9344-832c-9d78-e008d0a56f29",
         "last_owner_completed_at": "2026-11-21T12:29:18.369154Z",
         "owner_task_id": "Automation_e2f02000cdf4819190022b85f4391076",
@@ -7886,12 +7962,13 @@
         },
         "last_owner_existing_updates": 0,
         "public_checked_version": 711,
-        "mobile_visual_review": "pending"
+        "mobile_visual_review": "pending",
+        "section_route_checked_at": "2026-11-21T19:44:28Z"
       },
       "sports": {
-        "last_new_published_at": "2026-11-21T07:14:24.419857+00:00",
-        "last_new_id": "maccabi-youth-sheriff-round32-preview-20261121",
-        "last_substantive_update_at": "2026-11-21T07:14:24.419857+00:00",
+        "last_new_published_at": "2026-11-21T19:02:45.635788+00:00",
+        "last_new_id": "hapoel-kiryat-ata-home-win-20261121",
+        "last_substantive_update_at": "2026-11-21T19:02:45.635788+00:00",
         "last_updated_id": "maccabi-youth-sheriff-round32-preview-20261121",
         "update_basis": "Source-declared article timestamps; no inferred edit from rebuild or publication label",
         "published_count": 47,
@@ -7902,10 +7979,10 @@
         "ledger_sha256": "a0e71c02fdece470ef7883ea6ec884cd771e961e7b8b33e1e4c4c24c83b84d3a",
         "latest_body_sha256": "872795b2b7295c2c0639baab4f8e34220719e07a3fc72f83110fd10b5d981c3f",
         "section_url": "https://tlvnet.com/news/sports.html",
-        "lead_article_id": "maccabi-ramat-gan-training-loss-20261120",
-        "lead_published_at": "2026-11-19T07:01:29.520007Z",
-        "last_owner_run_id": "54c01aca-5440-8322-bb97-20f798299412",
-        "last_owner_completed_at": "2026-11-21T07:22:20.598212Z",
+        "lead_article_id": "hapoel-kiryat-ata-home-win-20261121",
+        "lead_published_at": "2026-11-21T19:02:45.635788+00:00",
+        "last_owner_run_id": "4a387728-d740-8332-a50a-00d8a11ed401",
+        "last_owner_completed_at": "2026-11-21T19:11:12.363303Z",
         "owner_task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
         "owner_run_changed_since_checkpoint": false,
         "last_new_published_basis": "Current source metadata; no publication-date changes; linked public owner evidence retained.",
@@ -7968,7 +8045,7 @@
           "created_by": "Automation_9776808c73848191a9d748dd09315960"
         },
         "last_owner_new_articles": 1,
-        "coverage_state": "three_owner_research_checkpoints_and_mobile_pending",
+        "coverage_state": "research_remaining_with_owner",
         "execution_anomaly_evidence": "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json",
         "metadata_checked_at": "2026-11-21T06:37:28.000Z",
         "source_commit": "811e93e52e13813f806d1a48add64b2d56aef3b2",
@@ -8001,7 +8078,7 @@
             "next_action": "Check material municipal/company progress when source changes."
           }
         ],
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-21/e0f90536-9274-8328-8c91-4402d6aaca78.json",
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
         "last_owner_existing_updates": 0,
         "public_verification": "Original owner full publication readback matched run and separate controller section/caption browser readback",
         "coverage_complete": false,
@@ -8147,7 +8224,9 @@
           }
         },
         "public_checked_version": 707,
-        "mobile_visual_review": "pending"
+        "mobile_visual_review": "pending",
+        "section_route_checked_at": "2026-11-21T19:44:28Z",
+        "pending_verification": 4
       },
       "culture-news": {
         "last_new_published_at": "2026-11-21T07:25:39.004484+00:00",
@@ -8164,8 +8243,8 @@
         "ledger_sha256": "7d95b86607a5005b1da45f1dfb06369d551699a24c97b610ddb657f87c3af007",
         "latest_body_sha256": "86b3d410cbd5da637871e9ce3c96f9af50082145b26a2354c95bc2923e0b7381",
         "section_url": "https://tlvnet.com/news/culture",
-        "lead_article_id": "kamea-erga-arison-friday-20261120",
-        "lead_published_at": "2026-11-20T07:48:47.349789+00:00",
+        "lead_article_id": "shlomo-emanuel-amiad-book-exhibition-20261124",
+        "lead_published_at": "2026-11-21T07:25:39.004484+00:00",
         "last_owner_run_id": "02c5dd04-8d38-832b-94d0-35ceda38bd0c",
         "last_owner_completed_at": "2026-11-21T07:31:03.312090Z",
         "owner_task_id": "Automation_53543605ce188191ba90f3f1979203dc",
@@ -8377,7 +8456,8 @@
           }
         },
         "public_checked_version": 708,
-        "mobile_visual_review": "pending"
+        "mobile_visual_review": "pending",
+        "section_route_checked_at": "2026-11-21T19:44:28Z"
       },
       "neighborhoods": {
         "total": 73,
@@ -8541,7 +8621,8 @@
           "url": "https://tlvnet.com/news/bli-heshbon",
           "observed_at": "2026-11-21T18:45:05.000Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-21/87e7dd4b-fe40-8324-b7fa-c155db08470e.json"
-        }
+        },
+        "section_route_checked_at": "2026-11-21T19:44:28Z"
       }
     },
     "qualification": "8 public section link checks; full article/image/credit for consumer, pending community existing version, legacy news and investigations. Later676 terminal only; no all-site audit.",
@@ -9104,14 +9185,14 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-21T18:45:05.000Z",
-    "from": "2026-11-21T15:37:21Z",
+    "observed_at": "2026-11-21T19:44:28Z",
+    "from": "2026-11-21T18:08:36Z",
     "through": "2026-11-21T18:08:36Z",
-    "strictly_new": 2,
+    "strictly_new": 0,
     "boundary_crossed": true,
     "full_logs_read": 0,
     "pending_run_ids": [],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/87e7dd4b-fe40-8324-b7fa-c155db08470e.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -9190,101 +9271,20 @@
     "pending_original_owner_release": 0
   },
   "latest_owner_publication_observation": {
-    "checked_at": "2026-11-20T17:47:58Z",
-    "owner_run_id": "62f7a368-64d8-8324-a4a7-3349c81e2996",
-    "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+    "observed_at": "2026-11-21T19:44:28Z",
+    "owner_task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+    "owner_run_id": "4a387728-d740-8332-a50a-00d8a11ed401",
     "status": "published_verified",
-    "deployment": {
-      "version": 703,
-      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_158c5e4af7f88191b57f655d7b1c7e49",
-      "source_commit": "6d3b820b1bd086f30bdc683e2485039505352e6d",
-      "deployment_id": "appgdep_6b007ffc8bd48191b6b2fe90c84b7055",
-      "status": "succeeded",
-      "terminal_at": "2026-11-20T17:14:55.244632+00:00",
-      "domain": "https://tlvnet.com/",
-      "observed_at": "2026-11-20T17:47:58Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-20/c1f2d516-b7d8-832c-ab62-ed4b7a7da857.json"
-    },
+    "version": 714,
+    "source_commit": "2c5f409de30c04af50d42eaf31f94c133a19fffe",
+    "journal_commit": "ccd6ea71877f75ff002c722a4f2ef5c236372d38",
+    "deployment_id": "appgdep_6b01ebcc1f0881918464babf663238f4",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
     "publications": [
-      {
-        "id": "ha-maapilim-robbery-arrest-20261120",
-        "url": "https://tlvnet.com/news/ha-maapilim-robbery-arrest-20261120",
-        "title": "נעצר חשוד בשוד של אישה בת 85 בביתה ברחוב המעפילים | TLVNET",
-        "paragraph_lengths": [
-          100,
-          166,
-          138,
-          143,
-          49
-        ],
-        "image": {
-          "status": 200,
-          "url": "https://tlvnet.com/photo-bank/assets/police-patrol-tlv-2026.jpg",
-          "jpeg": true,
-          "sha256": "c4fea703cb182b0dddc575126b6793b2fe16dde18d4b24263518ec7db3b79a07",
-          "alt": "ניידת משטרה בתל אביב",
-          "title": "",
-          "mime": "image/jpeg"
-        },
-        "visible_credit": "אילוסטרציה · ניידת משטרה בתל אביב · 2026-02-28 · ארכיון · צילום: MoserB · CC0 1.0 מקור · רישיון",
-        "homepage_link": true,
-        "section_link": true,
-        "neighborhood_feed": {
-          "id": "ha-maapilim-robbery-arrest-20261120",
-          "title": "נעצר חשוד בשוד של אישה בת 85 בביתה ברחוב המעפילים",
-          "url": "/news/ha-maapilim-robbery-arrest-20261120.html",
-          "neighborhoods": [
-            "יד אליהו"
-          ],
-          "published_at": "2026-11-20T17:10:52.603951+00:00",
-          "updated_at": "2026-11-20T17:10:52.603951+00:00"
-        },
-        "neighborhood_link": true,
-        "published_at": "2026-11-20T17:10:52.603951+00:00",
-        "published_at_precision": "source-declared milliseconds",
-        "duplicate_type_on_article": true,
-        "duplicate_type_on_home": true,
-        "controller_visual": "HTML and image bytes only",
-        "owner_desktop_visual": "passed",
-        "mobile_visual": "pending",
-        "status": "published_verified"
-      },
-      {
-        "id": "hatzuk-beach-woman-rescue-20261119",
-        "url": "https://tlvnet.com/news/hatzuk-beach-woman-rescue-20261119",
-        "title": "צעירה חולצה מהמים בחוף הצוק ופונתה במצב קשה | TLVNET",
-        "paragraph_lengths": [
-          104,
-          162,
-          140,
-          78,
-          49
-        ],
-        "image": {
-          "status": 200,
-          "url": "https://tlvnet.com/photo-bank/assets/coast-tlv-aerial-2026.jpg",
-          "jpeg": true,
-          "sha256": "e32b02af0a474b439ed74d62265e2e5ab06a34e1f09a31274c30d9f3fa2f2ab7",
-          "alt": "קו החוף של תל אביב ממטוס",
-          "title": "",
-          "mime": "image/jpeg"
-        },
-        "visible_credit": "אילוסטרציה · קו החוף של תל אביב ממטוס · ארכיון 2026-02-25 · צילום: MoserB · CC0 מקור · רישיון",
-        "homepage_link": true,
-        "section_link": true,
-        "neighborhood_feed": null,
-        "neighborhood_link": null,
-        "published_at": "2026-11-20T19:10:00+02:00",
-        "published_at_precision": "public card minute",
-        "duplicate_type_on_article": true,
-        "duplicate_type_on_home": true,
-        "controller_visual": "HTML and image bytes only",
-        "owner_desktop_visual": "passed",
-        "mobile_visual": "pending",
-        "status": "published_verified"
-      }
+      "https://tlvnet.com/news/hapoel-kiryat-ata-home-win-20261121",
+      "https://tlvnet.com/news/maccabi-youth-ashdod-win-20261121"
     ],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/c1f2d516-b7d8-832c-ab62-ed4b7a7da857.json"
+    "rendered_review": "pending"
   },
   "retained_editorial_checkpoints": [
     {
@@ -9401,7 +9401,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-21T17:59:19.000Z",
+    "observed_at": "2026-11-21T19:44:28Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -9856,6 +9856,10 @@
         "sha": "7742a2b8bc9d7bb3c98423b42b0ff90e442e797f"
       },
       {
+        "path": "ops/incident-response/inbox/README.md",
+        "sha": "a4d2c38eb7fe80dad30b3b84aadedb3596e91863"
+      },
+      {
         "path": "ops/incident-response/inbox/a54ff66b-def8-8322-8f51-13ea81f38301-1.json",
         "sha": "4c5ec2c8e2b785a9236c8824ddafc79545f3613b"
       },
@@ -10060,10 +10064,6 @@
         "sha": "4b97d05ed125a756adaa280d0f1d6ded636fc4a6"
       },
       {
-        "path": "ops/incident-response/inbox/README.md",
-        "sha": "a4d2c38eb7fe80dad30b3b84aadedb3596e91863"
-      },
-      {
         "path": "ops/incident-response/inbox/real-estate-20261118-missing-generated-article.json",
         "sha": "684fda905407621b13dbb20d3b5af0cd6905cb79"
       },
@@ -10085,7 +10085,7 @@
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/745ec3da-4394-8324-8e04-e515362196f2.json",
     "last_checked_at": "2026-11-21T18:45:05.000Z",
     "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/87e7dd4b-fe40-8324-b7fa-c155db08470e.json"
   },
