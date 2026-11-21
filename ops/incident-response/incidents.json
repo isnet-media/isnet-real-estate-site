@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T09:55:07.000Z",
+  "updated_at": "2026-11-21T10:44:34.000Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7014,11 +7014,16 @@
     {
       "id": "tlvnet-news-nested-receipt-checks-projection",
       "status": "mitigated",
-      "updated_at": "2026-11-19T17:43:36.024Z",
+      "updated_at": "2026-11-21T10:44:34.000Z",
       "root_cause": "News owner stores receipt assertions below .checks; current report requires flattened legacy shape. Five real publications independently verified on custom domain.",
       "evidence": "ops/incident-response/inbox/08a7e9f6-cc00-832e-a764-0743b12984db-news-nested-publication-receipt.json",
-      "verification": "ops/tlvnet-stability/observations/2026-11-19/08a7e9f6-cc00-832e-a764-0743b12984db.json",
-      "next_action": "Adopt isolated tested normalization in existing authorized source lane without rebuilding only for journal; preserve missing per-item classification."
+      "verification": "ops/tlvnet-stability/observations/2026-11-21/64207e61-fe38-8324-a1ee-2145e6b11545.json",
+      "next_action": "Adopt isolated tested normalization in existing authorized source lane without rebuilding only for journal; preserve missing per-item classification.",
+      "current_candidate": {
+        "status": "isolated_candidate_checked_no_source_push",
+        "base": "a41576c2fadbb20d76e2e435efaf538e24112e35",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/64207e61-fe38-8324-a1ee-2145e6b11545.json"
+      }
     },
     {
       "id": "tlvnet-worker-fallback-disturbed-response-stream",
@@ -7306,7 +7311,7 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-21/fe24fdfe-2cb0-8328-a30e-495cb5ce471b.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-21-fe24fdfe-2cb0-8328-a30e-495cb5ce471b",
+  "last_review_runKey": "ops-2026-11-21-64207e61-fe38-8324-a1ee-2145e6b11545",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
