@@ -1,0 +1,60 @@
+name: Verify isolated anonymous Yavne supermarket read canary (not public cutover)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - '.github/workflows/super-public-canary-check.yml'
+      - 'supabase/functions/isnet-super-public-canary/index.ts'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  shadow-canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify anonymous HTTPS read, byte identity, freshness disclosure, restrictions, CORS, and private Storage
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint="https://qomkxhafrprooekwgsxf.supabase.co/functions/v1/isnet-super-public-canary"
+          release="5958cfaca9a61eacfdb1aa216635c3d3ff810850"
+          query="?city=YAVNE&file=prices.json&release=$release"
+          expected="d0b3ffc01047f89bc08d34f652dc61de27cb16e4356db689594b2f824223072c"
+          code=$(curl --silent --show-error --connect-timeout 10 --max-time 35 \
+            -D "$RUNNER_TEMP/headers" -o "$RUNNER_TEMP/prices.json" -w '%{http_code}' \
+            "$endpoint$query")
+          test "$code" = 200
+          cmp SUPER.YAVNE/data/prices.json "$RUNNER_TEMP/prices.json"
+          actual=$(sha256sum "$RUNNER_TEMP/prices.json" | cut -d' ' -f1)
+          test "$actual" = "$expected"
+          grep -Eqi '^x-isnet-preview-only: true' "$RUNNER_TEMP/headers"
+          grep -Eqi '^x-isnet-snapshot-at: 2026-11-10' "$RUNNER_TEMP/headers"
+          grep -Eqi '^cache-control: no-store' "$RUNNER_TEMP/headers"
+          grep -Eqi '^x-robots-tag: noindex' "$RUNNER_TEMP/headers"
+          grep -Eqi '^access-control-allow-origin: \*' "$RUNNER_TEMP/headers"
+          python - <<'PY'
+          import json, pathlib
+          d=json.loads(pathlib.Path("SUPER.YAVNE/data/prices.json").read_bytes())
+          assert d["retrieved_at"]=="2026-11-10T10:40:34.858582+02:00"
+          assert d["branch_count"]==7
+          print("Public canary returns an explicitly dated PINNED SNAPSHOT, not fresh prices")
+          PY
+          for suffix in \
+            "?city=ASHDOD&file=prices.json&release=$release" \
+            "?city=YAVNE&file=source-status.json&release=$release" \
+            "?city=YAVNE&file=prices.json&release=0000000000000000" \
+            "?city=YAVNE&file=prices.json"; do
+            denied=$(curl -s -o /dev/null --max-time 15 -w '%{http_code}' "$endpoint$suffix")
+            test "$denied" = "404"
+          done
+          reject=$(curl -s -X POST -o /dev/null --max-time 15 -w '%{http_code}' "$endpoint$query")
+          test "$reject" = "405"
+          preflight=$(curl -s -X OPTIONS -D "$RUNNER_TEMP/options" -o /dev/null --max-time 15 -w '%{http_code}' "$endpoint$query")
+          test "$preflight" = "204"
+          grep -Eqi '^access-control-allow-origin: \*' "$RUNNER_TEMP/options"
+          direct="https://qomkxhafrprooekwgsxf.supabase.co/storage/v1/object/public/isnet-super-staging/releases/YAVNE/$release/SUPER.YAVNE/data/prices.json"
+          blocked=$(curl -s -o /dev/null --max-time 15 -w '%{http_code}' "$direct")
+          case "$blocked" in 400|401|403|404) : ;; *) echo "Private bucket unexpectedly public: $blocked"; exit 1;; esac
+          echo "SHADOW CANARY PASS: anonymous HTTPS + immutable YAVNE price byte identity; all other public paths closed. No DNS or live site cutover."

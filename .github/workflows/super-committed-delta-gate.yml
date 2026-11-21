@@ -1,0 +1,39 @@
+name: Read-only committed supermarket delta gate (no collection or publication)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - 'scripts/super_committed_delta_preflight.py'
+      - 'tests/test_super_committed_delta_preflight.py'
+      - '.github/workflows/super-committed-delta-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: isnet-super-committed-delta-readonly
+  cancel-in-progress: false
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test fail-closed committed-source delta safety
+        run: python -m unittest discover -s tests -p 'test_super_committed_delta_preflight.py' -v
+      - name: Read only the current committed main sources
+        run: git fetch --quiet origin main
+      - name: Compare current main to seven immutable private releases without collecting or publishing
+        run: python scripts/super_committed_delta_preflight.py --output "$RUNNER_TEMP/isnet-super-committed-delta.json"
+      - name: Preserve signed-file identity and freshness report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isnet-super-committed-delta-${{ github.run_id }}
+          path: ${{ runner.temp }}/isnet-super-committed-delta.json
+          retention-days: 7
+          if-no-files-found: warn

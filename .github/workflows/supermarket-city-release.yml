@@ -1,0 +1,86 @@
+name: Independent supermarket city release (artifact only)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/stage_super_city_release.py'
+      - 'tests/test_stage_super_city_release.py'
+      - '.github/workflows/supermarket-city-release.yml'
+permissions:
+  contents: read
+concurrency:
+  group: supermarket-isolation-artifact-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  city-bundle:
+    strategy:
+      fail-fast: false
+      matrix:
+        city: [ASHDOD, YAVNE, KGAT, RISHON, HOLON, BATYAM, TLV]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify independent city packaging behavior
+        run: python -m unittest discover -s tests -p 'test_stage_super_city_release.py'
+      - name: Stage exact original city prices and media with integrity manifest
+        run: python scripts/stage_super_city_release.py --city "${{ matrix.city }}" --output "$RUNNER_TEMP/super-city-release"
+      - name: Verify content integrity of each staged file
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'super-city-release'
+          manifest=json.loads((root/'release-manifest.json').read_text())
+          for item in manifest['files']:
+              p=root/item['path']
+              assert p.is_file()
+              assert p.stat().st_size==item['bytes']
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256']
+          print('Integrity OK:',manifest['city'],manifest['file_count'],manifest['payload_bytes'])
+          PY
+      - name: Verify Yavne shared-root analytics over isolated loopback HTTP
+        if: matrix.city == 'YAVNE'
+        run: |
+          python - <<'PY'
+          import hashlib, os, pathlib, threading
+          from functools import partial
+          from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+          from urllib.request import urlopen
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'super-city-release'
+          shared=(root/'assets/yavne-analytics.js').read_bytes()
+          original=pathlib.Path('assets/yavne-analytics.js').read_bytes()
+          assert hashlib.sha256(shared).digest()==hashlib.sha256(original).digest()
+          site=root/'SUPER.YAVNE'
+          with_refs=[p for p in site.rglob('*.html') if '/assets/yavne-analytics.js' in p.read_text(encoding='utf-8')]
+          assert with_refs, 'No HTML reference to shared-root analytics'
+          class QuietHandler(SimpleHTTPRequestHandler):
+              def log_message(self,*args): pass
+          server=ThreadingHTTPServer(('127.0.0.1',0),partial(QuietHandler,directory=str(root)))
+          thread=threading.Thread(target=server.serve_forever,daemon=True)
+          thread.start()
+          try:
+              base=f'http://127.0.0.1:{server.server_port}'
+              with urlopen(base+'/SUPER.YAVNE/index.html',timeout=10) as resp:
+                  assert resp.status==200 and b'<html' in resp.read().lower()
+              with urlopen(base+'/assets/yavne-analytics.js?v=20261022-1',timeout=10) as resp:
+                  got=resp.read()
+                  assert resp.status==200 and got==original
+              print('Private artifact loopback PASS: /SUPER.YAVNE/ and /assets/yavne-analytics.js; refs',len(with_refs),'sha256',hashlib.sha256(got).hexdigest())
+          finally:
+              server.shutdown()
+              server.server_close()
+              thread.join(timeout=3)
+          PY
+      - name: Archive exact original POSIX file names without renaming price shards
+        run: |
+          tar -czf "$RUNNER_TEMP/supermarket-${{ matrix.city }}.tar.gz" -C "$RUNNER_TEMP/super-city-release" .
+          tar -tzf "$RUNNER_TEMP/supermarket-${{ matrix.city }}.tar.gz" >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: supermarket-${{ matrix.city }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/supermarket-${{ matrix.city }}.tar.gz
+          retention-days: 7
+          if-no-files-found: error

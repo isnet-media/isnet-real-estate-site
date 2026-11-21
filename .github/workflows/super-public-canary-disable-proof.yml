@@ -1,0 +1,24 @@
+name: Verify shadow supermarket canary final fail-closed rollback
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - '.github/workflows/super-public-canary-disable-proof.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  anonymous-disabled:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Assert canary emergency version rejects anonymous GET without affecting production
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint="https://qomkxhafrprooekwgsxf.supabase.co/functions/v1/isnet-super-public-canary"
+          code=$(curl -sSL --max-time 25 -o "$RUNNER_TEMP/blocked.json" -w '%{http_code}' "$endpoint?city=YAVNE&file=prices.json&release=5958cfaca9a61eacfdb1aa216635c3d3ff810850")
+          test "$code" = "503"
+          python -m json.tool "$RUNNER_TEMP/blocked.json" >/dev/null
+          grep -q '"Canary disabled"' "$RUNNER_TEMP/blocked.json"
+          echo "CANARY CUTOVER ROLLBACK CONFIRMED: HTTP $code; no live traffic changed"

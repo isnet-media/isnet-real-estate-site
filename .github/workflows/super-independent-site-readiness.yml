@@ -1,0 +1,46 @@
+name: Audit seven independent supermarket static sites (no publish, no collectors)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - "scripts/audit_super_independent_site.py"
+      - "tests/test_audit_super_independent_site.py"
+      - ".github/workflows/super-independent-site-readiness.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check site readiness audit safety rules (no network)
+        run: python -m unittest discover -s tests -p 'test_audit_super_independent_site.py' -v
+      - name: Produce city-by-city private site asset and route audit
+        run: python scripts/audit_super_independent_site.py --output "$RUNNER_TEMP/isnet-private-site-readiness.json"
+      - name: Report blocking findings, not a false PASS for production hosting
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          d=json.loads((Path(os.environ["RUNNER_TEMP"])/"isnet-private-site-readiness.json").read_text())
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a") as f:
+              f.write("## Offline readiness audit — NO PUBLIC CUTOVER\n")
+              f.write("| City | HTML | Missing local resources | Offsite refs | Root route checks | Redirect index | Media assets |\n")
+              f.write("|---|---:|---:|---:|---:|---|---:|\n")
+              for c in d["cities"]:
+                  f.write(f'| {c["city"]} | {c.get("html_count",0)} | {len(c.get("missing_local_static_resources",[]))} | {len(c.get("external_static_resources",[]))} | {len(c.get("origin_routes_needing_proxy_review",[]))} | {c.get("meta_or_script_redirect_index",False)} | {c.get("media_file_count",0)} |\n')
+              f.write("\n**ALL seven public cutovers BLOCKED** pending media rights, real-browser verification, approved independent hosting, and live rollback. Offline asset checks are not real browser tests.\n")
+              f.write("No collection, storage writes, DNS, publication or billing changes.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: supermarket-private-site-readiness-${{ github.run_id }}
+          path: ${{ runner.temp }}/isnet-private-site-readiness.json
+          retention-days: 7
+          if-no-files-found: error

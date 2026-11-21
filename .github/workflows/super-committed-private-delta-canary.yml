@@ -1,0 +1,44 @@
+name: Private canary of committed supermarket deltas (no collections/no cutover)
+on:
+  push:
+    branches: [infra/supermarket-isolation-20261110]
+    paths:
+      - "scripts/stage_super_committed_delta.py"
+      - "tests/test_stage_super_committed_delta.py"
+      - ".github/workflows/super-committed-private-delta-canary.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: isnet-super-committed-private-delta-canary
+  cancel-in-progress: false
+jobs:
+  validate-and-stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      SUPABASE_URL: ${{ secrets.CMS_SUPABASE_URL || secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.CMS_SUPABASE_SERVER_KEY || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests for private-only source and coverage safety
+        run: python -m unittest discover -s tests -p 'test_stage_super_committed_delta.py' -v
+      - name: Fetch committed main snapshot (no collector execution)
+        run: git fetch --quiet origin main
+      - name: Fail-closed read-only gate for seven city editions
+        run: python scripts/super_committed_delta_preflight.py --output "$RUNNER_TEMP/isnet-delta-source-audit.json"
+      - name: Upload and SHA256 read back only three changed cities' critical JSON, private
+        run: python scripts/stage_super_committed_delta.py
+      - name: Preserve source audit for reproducibility
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isnet-private-committed-delta-audit-${{ github.run_id }}
+          path: ${{ runner.temp }}/isnet-delta-source-audit.json
+          retention-days: 7
+          if-no-files-found: warn
