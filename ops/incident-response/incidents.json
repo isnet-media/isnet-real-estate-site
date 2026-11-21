@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T19:18:56Z",
+  "updated_at": "2026-11-21T08:40:15.000Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7266,9 +7266,31 @@
           }
         ]
       }
+    },
+    {
+      "id": "tlvnet-culture-nested-verification-deployment-projection",
+      "signature": "tlvnet-culture-nested-verification-deployment-projection",
+      "related_incident": "tlvnet-news-nested-receipt-checks-projection",
+      "status": "mitigated",
+      "severity": "monitoring",
+      "first_seen_at": "2026-11-21T08:40:15.000Z",
+      "last_seen_at": "2026-11-21T08:40:15.000Z",
+      "root_cause": "Culture writer puts release in deployment and readback in verification[].checks. Compact report reads flat release fields and supported legacy proof containers, so returns source_published_receipt_incomplete even though body/hash/credit/home/section are live.",
+      "verification": {
+        "independent_public_url": "https://tlvnet.com/news/shlomo-emanuel-amiad-book-exhibition-20261124",
+        "body_image_credit_and_links": true,
+        "release": 708,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/104d6708-090c-8328-96d0-cac56a6c693b.json"
+      },
+      "change": {
+        "status": "isolated_fix_verified_pending_source_adoption",
+        "checkpoint": "ops/incident-response/inbox/20261121-104d6708-090c-8328-96d0-cac56a6c693b-culture-nested-publication-receipt.json",
+        "controller_deployments": 0
+      },
+      "prevention": "Strict receipt dialect normalization with actual ledger regression and independent live verification; count publication types only when per-item evidence supports them."
     }
   ],
-  "last_review_runKey": "ops-2026-11-20-c1f2d516-b7d8-832c-ab62-ed4b7a7da857",
+  "last_review_runKey": "ops-2026-11-21-104d6708-090c-8328-96d0-cac56a6c693b",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
