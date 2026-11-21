@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T12:25:10.000Z",
+  "updated_at": "2026-11-21T16:11:33.000Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5176,6 +5176,24 @@
           "existing_signature": true,
           "inbox": "ops/incident-response/inbox/44762981803-1.json",
           "evidence": "ops/tlvnet-stability/observations/2026-11-20/97a01801-2058-832c-802d-32ee133e5941.json"
+        },
+        {
+          "id": "ims-sea-no-currently-valid-period",
+          "run_id": 44914805506,
+          "job_id": 136878006095,
+          "source_commit": "2b429dfa25f35a47e13f6f43084fe7bbe7e4c44c",
+          "source_script_sha": "74688b9a3d00bbab96e8cb8110677bd0c88df958",
+          "error": "No currently valid forecast; retaining last good file",
+          "tests_passed": 5,
+          "public_widget_freshness": null,
+          "source_valid_now": null,
+          "manual_retry": false,
+          "inbox": "ops/incident-response/inbox/44914805506-1.json",
+          "observed_at": "2026-11-21T16:11:33.000Z",
+          "exact_existing_signature": true,
+          "last_good_preserved": true,
+          "public_has_current_forecast": null,
+          "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json"
         }
       ],
       "status": "awaiting_external_action",
@@ -5183,8 +5201,8 @@
       "root_cause": "Live IMS response issued16Nov16:23Israel contains only20:00onward periods for213/210. Current local time not covered. Validation correctly rejects; no current replacement exists in the observed source.",
       "impact": "New18Nov refresh rejected uncovered current period and retained lastgood. Actual current XML periods and live widget freshness not independently verified.",
       "first_seen_at": "2026-11-09T22:24:11Z",
-      "last_seen_at": "2026-11-18T15:37:10Z",
-      "updated_at": "2026-11-16T15:56:31.918Z",
+      "last_seen_at": "2026-11-21T14:37:14.739Z",
+      "updated_at": "2026-11-21T16:11:33.000Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-16-b28a8a3c-a510-8332-b4c5-feedac37ad04.json",
       "change": "No code change, data overwrite, manual rerun or deployment. Existing guard passed regression.",
       "tests": {
@@ -5216,14 +5234,25 @@
         "production_data_written": false
       },
       "canonical_incident_id": "ims-no-valid-current-period",
-      "last_controller_observed_at": "2026-11-18T16:05:59.739Z",
+      "last_controller_observed_at": "2026-11-21T16:11:33.000Z",
       "last_evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json",
       "current_recurrence": {
-        "source_commit": "d74be1db3dda794855631eb4a8277e9fdefe2d14",
-        "run_id": 44337585068,
+        "id": "ims-sea-no-currently-valid-period",
+        "run_id": 44914805506,
+        "job_id": 136878006095,
+        "source_commit": "2b429dfa25f35a47e13f6f43084fe7bbe7e4c44c",
+        "source_script_sha": "74688b9a3d00bbab96e8cb8110677bd0c88df958",
         "error": "No currently valid forecast; retaining last good file",
-        "tests": "5 parser tests passed",
-        "primary_reader_limit": "One IMS XML reader call unsupported text/xml; source current periods not independently observed. No retry or claimed HTTP outage."
+        "tests_passed": 5,
+        "public_widget_freshness": null,
+        "source_valid_now": null,
+        "manual_retry": false,
+        "inbox": "ops/incident-response/inbox/44914805506-1.json",
+        "observed_at": "2026-11-21T16:11:33.000Z",
+        "exact_existing_signature": true,
+        "last_good_preserved": true,
+        "public_has_current_forecast": null,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json"
       }
     },
     {
@@ -7044,7 +7073,7 @@
       "id": "tlvnet-worker-fallback-disturbed-response-stream",
       "status": "open",
       "priority": "low",
-      "updated_at": "2026-11-20T05:53:34.264Z",
+      "updated_at": "2026-11-21T16:11:33.000Z",
       "root_cause": "Worker reported an already-consumed response stream during a request outside supported navigation. Specific source branch and trigger are unconfirmed.",
       "evidence": [
         "ops/incident-response/inbox/3362ff4e-e93c-8330-b03b-e5c5b91a0ebb-worker-fallback-response-stream.json",
@@ -7056,7 +7085,26 @@
         "normal_publication_impact_observed": false,
         "occurrences": 1
       },
-      "next_action": "Observe once for recurrence or impact on a real TLVNET route. If reproduced on a supported route, inspect current routing/response body ownership under the authorized source path, then verify a local regression before production change."
+      "next_action": "Observe once for recurrence or impact on a real TLVNET route. If reproduced on a supported route, inspect current routing/response body ownership under the authorized source path, then verify a local regression before production change.",
+      "last_seen_at": "2026-11-21T15:59:32.656Z",
+      "latest_observation": {
+        "sample_exceptions": [
+          {
+            "at": "2026-11-21T15:59:32.656Z",
+            "path": "/v1/chat/completions",
+            "outcome": "exception",
+            "signature": "existing tlvnet-worker-fallback-disturbed-response-stream"
+          },
+          {
+            "at": "2026-11-21T15:59:32.595Z",
+            "path": "/v1/chat/completions",
+            "outcome": "exception",
+            "signature": "existing tlvnet-worker-fallback-disturbed-response-stream"
+          }
+        ],
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json",
+        "known_public_route_impact": null
+      }
     },
     {
       "id": "tlvnet-duplicate-banner-runtime",
@@ -7362,9 +7410,44 @@
       "source_inbox": "ops/incident-response/inbox/20261121-f6de17e8-2274-8324-b675-efd7fe7709b2-raanana-repeated-culture-image.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-21/f6de17e8-2274-8324-b675-efd7fe7709b2.json",
       "next_action": "Existing Raanana owner should confirm rights for distinct replacements, recheck the current CMS records under an available write lease, update the existing posts and verify new image, credits, home and section. Keep fourth item for owner selection."
+    },
+    {
+      "id": "tlvnet-controller-current-public-readback-unavailable",
+      "signature": "TLVNET/controller/public-readback/browser-tool-unavailable-and-web-reader-inaccessible",
+      "status": "awaiting_external_action",
+      "root_cause": "Web reader unable to access TLVNET pages; browser connector reports Unknown tool, and the current execution has no executor.",
+      "impact": "Current independent article, section, home, area, and health verification unavailable. Owner receipt and terminal deployment are recorded independently of this issue.",
+      "next_action": "Restore an existing supported public-read capability in the scheduled controller environment and resume focused verification of current release. Preserve the approved schedule and stable public version.",
+      "inbox": "ops/incident-response/inbox/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c-tlvnet-public-readback-unavailable.json",
+      "first_seen_at": "2026-11-21T16:11:33.000Z",
+      "last_seen_at": "2026-11-21T16:11:33.000Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json",
+      "updated_at": "2026-11-21T16:11:33.000Z"
+    },
+    {
+      "id": "tlvnet-real-estate-duplicate-presentation-preflight",
+      "signature": "build-news:image_presentation.load_reviews:duplicate_src",
+      "status": "mitigated",
+      "root_cause": "A source/SHA already covered by a presentation review was appended under a different bank ID.",
+      "change": "Original owner removed duplicate review only and preserved its original same-SHA framing approval before one successful release.",
+      "tests": [
+        "build-news.py passed after correction",
+        "check-photo-bank.py passed",
+        "tests/image-presentation.py passed after prepare-public",
+        "npm run build passed"
+      ],
+      "prevention": "Resolve the existing review by exact src and SHA before inserting another; run framing regression after preparing public markup.",
+      "deployment_id": "appgdep_6b01b5e26b4c81919524061baf262215",
+      "article_url": "https://tlvnet.com/news/terra-design-conditional-affordable-housing-explained-20261121",
+      "public_verification": "Owner receipt verified; independent controller readback and mobile review pending.",
+      "inbox": "ops/incident-response/inbox/2026-11-21-tlvnet-real-estate-duplicate-presentation-resolved.json",
+      "first_seen_at": "2026-11-21T16:11:33.000Z",
+      "last_seen_at": "2026-11-21T16:11:33.000Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json",
+      "updated_at": "2026-11-21T16:11:33.000Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-21-f6de17e8-2274-8324-b675-efd7fe7709b2",
+  "last_review_runKey": "ops-2026-11-21-b1b3c8d4-a92c-8324-a50d-ad7543d8f77c",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
