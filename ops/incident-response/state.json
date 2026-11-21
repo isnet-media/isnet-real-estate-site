@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T16:46:34.000Z",
+  "updated_at": "2026-11-21T17:59:19.000Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-21T15:37:21Z",
   "initial_history": {
@@ -20,15 +20,15 @@
       "remaining": "118 historical entries remain in2workflow groups; failed-step metadata only, roots unconfirmed.",
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
-        "observed_at": "2026-11-21T16:46:34.000Z",
+        "observed_at": "2026-11-21T17:59:19.000Z",
         "run_ids": [
-          42492429891,
-          42492216110
+          42490009758,
+          42487486527
         ],
-        "evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
         "status": "Historical failed-step metadata; roots unconfirmed."
       },
-      "remaining_without_failed_step_metadata": 48
+      "remaining_without_failed_step_metadata": 46
     },
     "full_logs_read_this_cycle": 0,
     "unconfirmed_publish_failure_ids": [
@@ -1889,7 +1889,20 @@
           "conclusion": "failure",
           "source_commit": "41b9ebc926ffb8286d01e565e9396c0a46edbcd1",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42490009758",
-          "classification": "Historical metadata only; exact cause unconfirmed; no present outage or repair inferred."
+          "classification": "Historical metadata only; exact cause unconfirmed; no present outage or repair inferred.",
+          "last_failed_step_metadata": {
+            "jobs": [
+              {
+                "job_id": 128760130435,
+                "failed_steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "observed_at": "2026-11-21T17:59:19.000Z",
+            "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
+            "root_confirmed": false
+          }
         },
         {
           "run_id": 42487486527,
@@ -1901,7 +1914,20 @@
           "conclusion": "failure",
           "source_commit": "5ac7b76c2c05df4ff90d138561c857b996eab5e0",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42487486527",
-          "classification": "Historical metadata only; exact cause unconfirmed; no present outage or repair inferred."
+          "classification": "Historical metadata only; exact cause unconfirmed; no present outage or repair inferred.",
+          "last_failed_step_metadata": {
+            "jobs": [
+              {
+                "job_id": 128752441361,
+                "failed_steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "observed_at": "2026-11-21T17:59:19.000Z",
+            "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
+            "root_confirmed": false
+          }
         },
         {
           "run_id": 42487330312,
@@ -2499,31 +2525,31 @@
   },
   "inbox_path": "ops/incident-response/inbox/",
   "last_verified_publish_run": 43362366874,
-  "last_verified_public_readback_run": "2e3415b1-d944-8324-81cf-8b2acab9633e",
+  "last_verified_public_readback_run": "65110276-c2ac-8324-8e97-f556621e31e8",
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "2e3415b1-d944-8324-81cf-8b2acab9633e",
-    "runKey": "ops-2026-11-21-2e3415b1-d944-8324-81cf-8b2acab9633e",
+    "run_id": "65110276-c2ac-8324-8e97-f556621e31e8",
+    "runKey": "ops-2026-11-21-65110276-c2ac-8324-8e97-f556621e31e8",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 2,
-    "observed_at": "2026-11-21T16:46:34.000Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json",
-    "status": "independent_public_readback_restored_verified_v712",
-    "saved_version": 712,
-    "independently_checked_public_version": 712,
+    "observed_at": "2026-11-21T17:59:19.000Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
+    "status": "news_owner_queue_resolved_raanana_caption_followup",
+    "saved_version": 713,
+    "independently_checked_public_version": 713,
     "current_health_http": 200,
-    "deployment_id": "appgdep_6b01b5e26b4c81919524061baf262215",
-    "source_commit": "541d21aa2cd450de8af8056e8c6bfbe64760d719",
+    "deployment_id": "appgdep_6b01d12545388191b1d5597865b68f81",
+    "source_commit": "64868d3c06707c0d0025518ec4dc7e8127a53814",
     "new_actions": 0,
-    "new_inbox": 0,
+    "new_inbox": 2,
     "new_social_rows": 0,
-    "new_articles": 0,
-    "previously_published_independently_verified": 1,
+    "new_articles": 2,
+    "updated_articles": 4,
     "controller_new_deployments": 0,
     "controller_editorial_writes": 0,
     "full_logs_read": 0,
     "owners_checked": 13,
-    "pending_original_owner_release": 5
+    "pending_original_owner_release": 0
   },
   "concurrent_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -2549,20 +2575,20 @@
   "task_results_watermark": {
     "Automation_b3345c399b988191a1ba9848e3e3668b": {
       "enabled": true,
-      "last_run_id": "29701ad6-c900-8330-a59f-101085180f50",
-      "started_at": "2026-11-21T12:10:49.224598Z",
-      "completed_at": "2026-11-21T12:23:54.264678Z",
+      "last_run_id": "6966f07b-9c0c-8330-9622-7d6cd83539fb",
+      "started_at": "2026-11-21T16:56:12.416085Z",
+      "completed_at": "2026-11-21T17:15:47.423087Z",
       "recorded_status": "completed",
-      "result": "**חמישה פריטים אומתו והוכנו לפרסום בחדשות תל אביב.** מפרסם אחר מחזיק בנעילת האתר, ולכן לא פורסמה כתבה חדשה ולא עודכנה כתבה קיימת במחזור הזה. הטיוטות המלאות נשמרו בקובץ פרטי, ונקודת ההמשך נשמרה ואומתה בתור התפעול הקיים.\n\n- שתי ידיעות חדשות על שינויי האוטובוסים בלה גווארדיה והמסגר ועל הסטת קו 634 בראול ולנברג. genui{\"citation\":{\"refs\":[\"turn693774113view0\",\"turn302897901view0\",\"turn302897901view3\"]}}\n- שלושה עדכונים לכתבות קיימות על קו 163 בצ׳לנוב, קו 633 באיינשטיין והדיווח על הצהרת תובע בפרשת התקיפה בשכונת התקווה. genui{\"citation\":{\"refs\":[\"turn693774113view2\",\"turn302897901view5\",\"turn645711993view2\",\"turn529565427view1\"]}}\n\nהתגלו 6 מועמדים, 5 אומתו וממתינים לפרסום, ו־11 כפילויות זוהו. חמישה פריטים נדחו בשל חוסר זיקה מקומית, חלוף המועד או היעדר התפתחות חדשה. בתור נותרו 7 פריטים שממתינים לאימות ו־9 חסמים קודמים. גרסה 2 של ההוראות נקראה מהמקור הפרטי והקריאה תועדה.\n\n[הטיוטות ונקודת ההמשך](https://chatgpt.com/library?file_id=libfile_b2c517f469848191a8e52fc29792bada&account_id=personal)",
-      "result_run_id": "29701ad6-c900-8330-a59f-101085180f50",
-      "observed_at": "2026-11-21T13:25:41.000Z",
+      "result": "ב־TLVNET פורסמו ואומתו **שתי ידיעות חדשות וארבעה עדכונים**. בדקתי באתר החי את גוף הכתבות, התמונות והקרדיטים. כל שש הכתבות מופיעות במדור החדשות, ושתי הידיעות החדשות מופיעות גם בשער. בדיקת המובייל נשארה בתור.\n\n**ידיעות חדשות**\n\n- [שינויי אוטובוסים בלילות בלה גווארדיה והמסגר](https://tlvnet.com/news/la-guardia-hamasger-night-bus-changes-20261122)\n- [סגירות הלילה בראול ולנברג והשינויים בקו 634](https://tlvnet.com/news/wallenberg-night-closure-kavim-634-20261122)\n\n**כתבות שעודכנו בכתובותיהן המקוריות**\n\n- [לוינסקי וצ׳לנוב — השינוי בקו 163](https://tlvnet.com/news/levinsky-chelnov-purple-line-night-works-20261120)\n- [רחוב איינשטיין — השינויים בקווים 633 ו־171](https://tlvnet.com/news/einstein-lane-reduction-nov23-20261119)\n- [סבידור ודרך נמיר — השינויים בקווים 71 ו־171](https://tlvnet.com/news/savidor-purple-line-night-works-20261122)\n- [שכונת התקווה — דיווח על הגשת הצהרת תובע](https://tlvnet.com/news/hatikva-street-violence-serious-injury-20261108)\n\nבסריקה אותרו 3 מועמדים נוספים וזוהו 3 כפילויות. בתור נשארו 10 פריטים להשלמת אימות ו־9 פריטים עם חסמים מתועדים. אין כתבות מוכנות שממתינות לפרסום. חמישה פריטים נפסלו משום שעסקו במועדים שחלפו או באירועים מחוץ לתחום הסיקור. הסיבה לכל פריט נשמרה ביומן הדסק.",
+      "result_run_id": "6966f07b-9c0c-8330-9622-7d6cd83539fb",
+      "observed_at": "2026-11-21T17:59:19.000Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-16/1.2",
-      "result_created_at": "2026-11-21T12:23:54.085721Z",
+      "result_created_at": "2026-11-21T17:15:47.277176Z",
       "qualification": "Exact run/result read; old latest_result not attributed to new run. Public owner proof and controller verification separate.",
       "effective_policy": "2026-11-14/1.0",
       "result_matches_attempt": true,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-21/c5379c5c-e74c-8324-861c-ed23089293c0.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
       "result_summary_truncated": false
     },
     "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
@@ -2707,21 +2733,21 @@
     },
     "Automation_845f7ef0033c8191b7490e0dc5748754": {
       "enabled": true,
-      "last_run_id": "906243e4-f308-832f-8c6b-6a008f062d3c",
-      "started_at": "2026-11-21T12:11:19.202603Z",
-      "completed_at": "2026-11-21T12:14:26.040068Z",
+      "last_run_id": "d6996741-bca8-832f-8c67-db1d8b414524",
+      "started_at": "2026-11-21T16:57:40.211661Z",
+      "completed_at": "2026-11-21T17:03:08.117491Z",
       "recorded_status": "completed",
-      "result": "## רעננה נט — בקרת תמונות ופרסומים, 21.11.2026\n\n**אימתתי את בעיית התמונה החוזרת בשלוש כתבות התרבות. התיקון עדיין לא בוצע.**\n\n| כתבה | מזהה CMS | תמונה נוכחית | מצב |\n|---|---|---|---|\n| פסטיבל הג'אז הבינלאומי | 812409 | 851225 | דורשת החלפה |\n| טריוויה עם הצ'ייסר ואירועי שבת | 812401 | 851225 | דורשת החלפה |\n| אריאל זילבר ואסי כהן | 812012 | 851225 | דורשת החלפה |\n\nשלושת דפי הכתבות נגישים באתר הציבורי, ובכולם מופיע אותו קרדיט לתמונת המחשה של Daniel Ponomarev / Pexels. <Cite refs={[\"turn506776search1\",\"turn470845search3\",\"turn506776search4\"]}/>\n\nמצאתי גם כתבה רביעית, על קובי מידן ואיתי פרל, שמשתמשת באותה תמונה.\n\n**חומרי צילום חלופיים:** איתרתי צילומים מזוהים של פקיטו דה ריברה בפרסומי הפסטיבל ותצלום של איתי הרמן באתר ההזמנות של האמן. עדיין אין אימות של הרשאת שימוש חוזר באתר רעננה נט, ולכן לא העליתי אותם לבנק התמונות. <Cite refs={[\"turn586121search6\",\"turn586121search1\"]}/>\n\n### מדוע לא בוצע תיקון\n\nבעת הבדיקה נמצאה נעילת כתיבה פעילה ב־`ISNET-CMS-59` של פעולת ביקורת תמונות אחרת. בהתאם למנגנון מניעת ההתנגשויות, לא דרסתי אותה. בנוסף, קריאת הפרטים המלאים של הכתבות מממשק הניהול לא החזירה תוכן תקין.\n\nבמחזור זה לא שונתה תמונה, לא פורסמה כתבה חדשה ולא נערכו הראשיות או CMS37279. לא נוצרו כפילויות.\n\n**סטטוס:** `blocked` לשלושת תיקוני התמונות; אימות חזותי חדש של דף הבית ברוחב 390 פיקסלים עדיין `pending`. המשימה הקיימת נשארת פעילה, ללא שינוי בתזמון.",
-      "result_run_id": "906243e4-f308-832f-8c6b-6a008f062d3c",
-      "result_created_at": "2026-11-21T12:14:25.545920Z",
-      "observed_at": "2026-11-21T12:25:10.000Z",
+      "result": "## רעננה נט — שלושה תיקוני תמונות בוצעו בפועל\n\n<row align=\"center\" gap={2}>\n  <icon name=\"check-circle\" color=\"success\"/>\n  **שלוש תמונות ראשיות הוחלפו ב־CMS59 ונבדקו בקריאה חוזרת.**\n</row>\n\nהחלפתי את תמונת ההופעה הכללית 851225 בשלוש תמונות שונות של האנשים שעליהם הכתבות, ממקורות בעלי רישיון שימוש מתועד.\n\n| כתבה | התמונה החדשה | תוצאה |\n|---|---|---|\n| פסטיבל הג'אז — 812409 | פקיטו דה ריברה, צילום ארכיון 2022. תמונה **852123** | תוקן ב־CMS |\n| טריוויה, סרט ומוזיקה — 812401 | איתי הרמן, צילום ארכיון 2021. תמונה **852122** | תוקן ב־CMS |\n| אריאל זילבר — 812012 | אריאל זילבר, צילום ארכיון 2009. תמונה **852124** | תוקן ב־CMS |\n\nהתמונות מגיעות מוויקישיתוף, עם קרדיטים ושיוך לארכיון. רישיונות השימוש אומתו: CC BY-SA 4.0 לפקיטו דה ריברה ו־CC BY-SA 3.0 לשתי האחרות. <Cite refs={[\"turn291612search0\",\"turn291612search3\",\"turn291612search2\"]}/>\n\n**בדיקת שמירה:** שלוש הרשומות מצביעות כעת למזהי התמונות החדשים. מזהי הכתבות, תאריכי הפרסום, הקטגוריות והסטטוס הגלוי נשמרו.\n\n### מה עדיין פתוח\n\nקריאות האתר הציבורי החזירו עדיין תצוגות שמורות עם קרדיט התמונה הישנה. לכן אין עדיין אישור שהתמונות החדשות מופיעות בפועל בכל כרטיסי המדור ובבית. בדיקות תצוגת המחשב ורוחב 390 פיקסלים נשארות `pending`. גם בדיקת hash עצמאית של הקבצים החדשים לא הושלמה.\n\nמצאתי עוד שתי כתבות שמשתמשות בתמונה הישנה — 811802 ו־812206. הן לא שונו במחזור זה. בנוסף, גוף הכתבה על אריאל זילבר עדיין עשוי להכיל את ההסבר הישן על תמונת במה, ודרושה בדיקת התאמה.\n\nתיעדתי את שלושת התיקונים ואת החוסרים ברישום בקר התקלות הקיים, ב־<Link url=\"https://github.com/isnet-media/isnet-real-estate-site/commit/d143966c36273a0047a7a4cba4fda712ebb0c9f6\" title=\"GitHub — דוח התיקונים\"/>.\n\nנעילת CMS59 שוחררה ואומתה כפנויה. לא שיניתי ראשיות, את CMS37279, את האוטומציה של עמוד הבית או את שעות הפעילות.\n\n**סיכום:** שלוש ההחלפות בוצעו ונשמרו במערכת. האימות החזותי באתר החי והטיפול בשתי התמונות החוזרות הנוספות עדיין פתוחים.",
+      "result_run_id": "d6996741-bca8-832f-8c67-db1d8b414524",
+      "result_created_at": "2026-11-21T17:03:07.459205Z",
+      "observed_at": "2026-11-21T17:59:19.000Z",
       "qualification": "Exact run/result read; old latest_result not attributed to new run. Public owner proof and controller verification separate.",
       "effective_policy": "2026-11-14/1.1",
       "current_policy_version": "2026-11-18/herzliya-news-2",
       "current_configuration_observed_at": "2026-11-18T08:40:36.667Z",
       "configuration_status": "readback_observed_owner_run_pending",
       "result_matches_attempt": true,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-21/f6de17e8-2274-8324-b675-efd7fe7709b2.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
       "result_summary_truncated": false
     },
     "Automation_50ecabf864448191ac5bee0edaecca74": {
@@ -2740,16 +2766,16 @@
     },
     "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a": {
       "enabled": true,
-      "last_run_id": "b7849f40-e414-8328-a199-e189759d7f25",
-      "started_at": "2026-11-21T12:30:26.560881Z",
-      "completed_at": "2026-11-21T12:38:16.621674Z",
+      "last_run_id": "8fb620fd-aa50-8328-8a04-c97292b13251",
+      "started_at": "2026-11-21T17:26:36.584020Z",
+      "completed_at": "2026-11-21T17:35:41.882368Z",
       "recorded_status": "completed",
-      "result_run_id": "b7849f40-e414-8328-a199-e189759d7f25",
-      "result": "פורסמה **גרסה 35** ב[הרצליה נט](https://herzliyanet.co.il/), commit ‏`09c890b`.\n\n- עודכנה כתבת ויצמן הקיימת בדיווח מיוחס על מתווה הלימודים בזמן הבנייה, ללא שינוי כתובתה ותאריך פרסומה.\n- הוסרה מקרוסלת הקולנוע הקרנת הבוקר שחלפה; שש הכרזות נטענו בחי.\n- שתי מסירות המגזינים זוהו כקיימות. לא נוספו עותקים; נשמרו 708 רשומות כתבות.\n- הבנייה והבדיקות עברו, כולל **109 בדיקות חיות ללא כשל** ובדיקת רוחב 375 פיקסלים מקומית.\n\nנותרו חסם סינמה סיטי, 24 התאמות לטקסטי קולנוע ואישורי מדיה חסרים. הסרטון המקורי של ויצמן לא אומת; העדכון מיוחס לדיווח המקומי.\n\n[דוח וראיות](sandbox:/workspace/sites/herzliya-afternoon21/.sites-checkout/ops/direct-afternoon-20261121.json)",
-      "observed_at": "2026-11-21T13:25:41.000Z",
-      "result_created_at": "2026-11-21T12:38:16.367904Z",
+      "result_run_id": "8fb620fd-aa50-8328-8a04-c97292b13251",
+      "result": "פורסמה גרסה 36 ב[הרצליה נט](https://herzliyanet.co.il/#home-cinema), commit ‏a49b8ff. ״לה סטראדה״ הוסר מקרוסלת הבית לאחר שהקרנתו חלפה, ובמקומו מוצג ״שיעור באהבה״. הכרטיסים והכתובות נשמרו.\n\n108 בדיקות חיות עברו ללא כשל; שש הכרזות נטענו, ובדיקת רוחב 375 פיקסלים עברה מקומית. לא נוצרו כתבות חדשות או עותקי מגזינים, ולא בוצעה כתיבה ל־CMS62. מספר הרשומות נשאר 708.\n\nנבדקו מקורות חדשות וספורט רשמיים; החומר שנמצא כבר מסוקר. נותרו 22 התאמות לטקסטי קולנוע, חסם סינמה סיטי ויתרות זכויות מדיה וארכיון. מכשיר נייד פיזי לא נבדק.\n\n[דוח וראיות](sandbox:/workspace/sites/herzliya-evening21/.sites-checkout/ops/direct-evening-20261121.json)",
+      "observed_at": "2026-11-21T17:59:19.000Z",
+      "result_created_at": "2026-11-21T17:35:41.493994Z",
       "result_matches_attempt": true,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-21/c5379c5c-e74c-8324-861c-ed23089293c0.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
       "result_summary_truncated": false
     },
     "Automation_c1b175347cc481918eaba3cbaf3582d2": {
@@ -3102,7 +3128,8 @@
     "tlvnet-news-nested-receipt-checks-projection",
     "tlvnet-worker-fallback-disturbed-response-stream",
     "tlvnet-social-managed-public-availability",
-    "TLVNET/real-estate/local-source-read/telavivi-yaaz-http403"
+    "TLVNET/real-estate/local-source-read/telavivi-yaaz-http403",
+    "raanana-culture-repeated-hero-image-851225"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -3283,27 +3310,12 @@
     "ops/incident-response/inbox/0ba50283-5f4c-832c-a319-5676f8d9f760-sports-research-role-handoff.json",
     "ops/incident-response/inbox/2026-11-21-tlvnet-real-estate-duplicate-presentation-resolved.json",
     "ops/incident-response/inbox/44914805506-1.json",
-    "ops/incident-response/inbox/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c-tlvnet-public-readback-unavailable.json"
+    "ops/incident-response/inbox/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c-tlvnet-public-readback-unavailable.json",
+    "ops/incident-response/inbox/20261121-f6de17e8-2274-8324-b675-efd7fe7709b2-raanana-repeated-culture-image.json",
+    "ops/incident-response/inbox/65110276-c2ac-8324-8e97-f556621e31e8-raanana-culture-caption-followup.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
-    {
-      "task_id": "Automation_9776808c73848191a9d748dd09315960",
-      "run_id": "a417a947-b0a8-8330-8218-96760fc933b0",
-      "runKey": "ops-2026-11-20-a417a947-b0a8-8330-8218-96760fc933b0",
-      "policy_version": "2026-11-15/1.2",
-      "observed_at": "2026-11-20T00:53:27.484Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-20/a417a947-b0a8-8330-8218-96760fc933b0.json",
-      "status": "admin_release_and_independent_recovery_metadata_verified",
-      "saved_version": 683,
-      "public_checked_version": 683,
-      "source_commit": "5dd7099fa139f05b5117eb959deb92edc1e391da",
-      "new_actions": 2,
-      "new_social_rows": 0,
-      "new_inbox": 0,
-      "full_logs_read": 0,
-      "controller_new_deployments": 0
-    },
     {
       "task_id": "Automation_9776808c73848191a9d748dd09315960",
       "run_id": "b6b20eff-2fa0-8330-a211-1b1ebe57dc56",
@@ -4183,6 +4195,31 @@
       "full_logs_read": 0,
       "owners_checked": 13,
       "pending_original_owner_release": 5
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "65110276-c2ac-8324-8e97-f556621e31e8",
+      "runKey": "ops-2026-11-21-65110276-c2ac-8324-8e97-f556621e31e8",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 2,
+      "observed_at": "2026-11-21T17:59:19.000Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
+      "status": "news_owner_queue_resolved_raanana_caption_followup",
+      "saved_version": 713,
+      "independently_checked_public_version": 713,
+      "current_health_http": 200,
+      "deployment_id": "appgdep_6b01d12545388191b1d5597865b68f81",
+      "source_commit": "64868d3c06707c0d0025518ec4dc7e8127a53814",
+      "new_actions": 0,
+      "new_inbox": 2,
+      "new_social_rows": 0,
+      "new_articles": 2,
+      "updated_articles": 4,
+      "controller_new_deployments": 0,
+      "controller_editorial_writes": 0,
+      "full_logs_read": 0,
+      "owners_checked": 13,
+      "pending_original_owner_release": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -4997,8 +5034,8 @@
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/100eea27-f180-832c-a674-75914025141c.json",
     "new_rows_this_cycle": 0,
     "public_verification": "No new social run; previously reported run_failed guard unchanged.",
-    "last_checked_at": "2026-11-21T16:46:34.000Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json"
+    "last_checked_at": "2026-11-21T17:59:19.000Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json"
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -5542,15 +5579,16 @@
       "acquired_at": null,
       "lease_until": null,
       "last_release": {
-        "owner": "Automation_82add5edecd8819197814e83bac85a75",
-        "run_key": "real-estate-20261121-47883972-5806-4793-8c43-7684a29d6e53",
-        "released_at": "2026-11-21T15:20:38.371Z",
+        "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+        "run_key": "news-20261121-evening-227434f4-3390-4ed9-b1a1-dc362d37dc64",
+        "released_at": "2026-11-21T17:15:24.623Z",
         "status": "published_verified",
-        "version_number": 712,
-        "deployment_id": "appgdep_6b01b5e26b4c81919524061baf262215",
-        "source_commit": "541d21aa2cd450de8af8056e8c6bfbe64760d719",
-        "journal_commit": "48143433bf265468eddafe348ec0daad14430cdf",
-        "newly_published": 1,
+        "version_number": 713,
+        "deployment_id": "appgdep_6b01d12545388191b1d5597865b68f81",
+        "source_commit": "64868d3c06707c0d0025518ec4dc7e8127a53814",
+        "journal_commit": "ef5366c01ac65414aa6116c45b75891baa3175dc",
+        "newly_published": 2,
+        "updated": 4,
         "post_publication_visual_review": "desktop_verified_mobile_pending"
       },
       "token_excluded": true
@@ -5733,8 +5771,8 @@
         }
       }
     },
-    "last_delta_checked_at": "2026-11-21T16:46:34.000Z",
-    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json",
+    "last_delta_checked_at": "2026-11-21T17:59:19.000Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
     "news_morning_ledger_readback": {
       "discovered": 3,
       "verified": 2,
@@ -5779,9 +5817,9 @@
       "mobile_pending": true
     },
     "global_pending_ready_independently_verified": false,
-    "latest_incremental_queue_basis": "Matched the new real-estate result to its terminal release and retained the unchanged 5-item original news-owner checkpoint. Admin aggregate had no recent rows; independent live dispatch unavailable.",
+    "latest_incremental_queue_basis": "Owner evening journal and terminal deployment reconciled to six exact live body/photo comparisons. The previous five-item news handoff was picked up and published; other owners' research queues unchanged.",
     "news_pending_ready_owner_report": 0,
-    "news_pending_verification_owner_report": 5,
+    "news_pending_verification_owner_report": 10,
     "news_prior_blockers_owner_report": 9,
     "dispatch_source_projection": {
       "news": {
@@ -5909,7 +5947,7 @@
       }
     ],
     "news_afternoon_owner_handoff": {
-      "status": "prepared_waiting_for_original_owner_release",
+      "status": "published_verified_by_original_owner",
       "owner": {
         "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
         "title": "חדשות תל אביב — שלוש פעמים ביום",
@@ -5981,9 +6019,9 @@
       },
       "homepage_link_ids": [],
       "evidence": "ops/tlvnet-stability/observations/2026-11-21/c5379c5c-e74c-8324-861c-ed23089293c0.json",
-      "last_rechecked_at": "2026-11-21T16:46:34.000Z",
-      "owner_pickup_after_lock_release": "not corroborated; owner run unchanged",
-      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json",
+      "last_rechecked_at": "2026-11-21T17:59:19.000Z",
+      "owner_pickup_after_lock_release": "verified",
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
       "focused_comparison": [
         {
           "id": "la-guardia-hamasger-night-bus-changes-20261122",
@@ -6040,6 +6078,18 @@
           "home": false,
           "news": true
         }
+      ],
+      "original_owner_picked_up": true,
+      "owner_release_run_id": "6966f07b-9c0c-8330-9622-7d6cd83539fb",
+      "owner_release_run_key": "news-20261121-evening-227434f4-3390-4ed9-b1a1-dc362d37dc64",
+      "resolved_ready_count": 5,
+      "pending_ready_remaining": 0,
+      "live_verified_articles": [
+        "https://tlvnet.com/news/la-guardia-hamasger-night-bus-changes-20261122",
+        "https://tlvnet.com/news/wallenberg-night-closure-kavim-634-20261122",
+        "https://tlvnet.com/news/levinsky-chelnov-purple-line-night-works-20261120",
+        "https://tlvnet.com/news/einstein-lane-reduction-nov23-20261119",
+        "https://tlvnet.com/news/hatikva-street-violence-serious-injury-20261108"
       ]
     },
     "consumer_ready_closed": {
@@ -6460,10 +6510,10 @@
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/c1f2d516-b7d8-832c-ab62-ed4b7a7da857.json",
     "desks": {
       "news": {
-        "last_new_published_at": "2026-11-21T06:04:02.225343+00:00",
-        "last_new_id": "savidor-purple-line-night-works-20261122",
-        "last_substantive_update_at": "2026-11-21T06:04:02.225343+00:00",
-        "last_updated_id": "savidor-purple-line-night-works-20261122",
+        "last_new_published_at": "2026-11-21T17:07:17.725121+00:00",
+        "last_new_id": "la-guardia-hamasger-night-bus-changes-20261122",
+        "last_substantive_update_at": "2026-11-21T17:07:17.725121+00:00",
+        "last_updated_id": "levinsky-chelnov-purple-line-night-works-20261120",
         "update_basis": "Source-declared article timestamps; no inferred edit from rebuild or publication label",
         "published_count": 94,
         "handoff_status_counts": {
@@ -6480,8 +6530,8 @@
         "section_url": "https://tlvnet.com/news/index.html",
         "lead_article_id": "hatzuk-beach-woman-rescue-20261119",
         "lead_published_at": "2026-11-19T17:07:37.472451+00:00",
-        "last_owner_run_id": "29701ad6-c900-8330-a59f-101085180f50",
-        "last_owner_completed_at": "2026-11-21T12:23:54.264678Z",
+        "last_owner_run_id": "6966f07b-9c0c-8330-9622-7d6cd83539fb",
+        "last_owner_completed_at": "2026-11-21T17:15:47.423087Z",
         "owner_task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
         "owner_run_changed_since_checkpoint": true,
         "last_new_published_basis": "Exact authenticated news source and live public evidence",
@@ -6492,7 +6542,7 @@
         "pending_draft_inbox": null,
         "last_release_executor_task_id": "Automation_9776808c73848191a9d748dd09315960",
         "last_release_runKey": "continuity-repair-20261115T130716Z",
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/c1f2d516-b7d8-832c-ab62-ed4b7a7da857.json",
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
         "remaining_queue": [
           {
             "content_id": "coverage-dan-levinski-289-5-20261116",
@@ -6613,9 +6663,9 @@
             "reason": "17Novpublication describes event afterSaturday, no actualeventdate established; not presented as tonight."
           }
         ],
-        "source_commit": "b283dfc4d62f2a78bff8111814dbc7d2e8457cd1",
-        "saved_version": 706,
-        "last_owner_started_at": "2026-11-21T12:10:49.224598Z",
+        "source_commit": "64868d3c06707c0d0025518ec4dc7e8127a53814",
+        "saved_version": 713,
+        "last_owner_started_at": "2026-11-21T16:56:12.416085Z",
         "throughput_followup": {
           "status": "normal_owner_published4_verified",
           "checkpoint": "ops/incident-response/inbox/manual-news-throughput-audit-2026-11-16T04-30-49-134Z.json",
@@ -6633,7 +6683,7 @@
           },
           "pending_run_id": "56df7f4a-8c98-832e-95fc-9e51446caa96"
         },
-        "metadata_checked_at": "2026-11-21T06:37:28.000Z",
+        "metadata_checked_at": "2026-11-21T17:59:19.000Z",
         "coverage_queue_count": 17,
         "coverage_queue_checkpoint": "public/news/agents/news/ledger.json",
         "public_verification": [
@@ -6789,7 +6839,7 @@
           }
         ],
         "lead_basis": "Current fresh source plus news freshness regression and actual live news/home links",
-        "last_owner_new_articles": 0,
+        "last_owner_new_articles": 2,
         "last_owner_prepared_articles": 0,
         "controller_new_deployed_articles": 0,
         "morning_original_owner_new_verified_articles": 4,
@@ -7016,7 +7066,7 @@
           "completed_at": "2026-11-20T17:16:59.777341Z",
           "result_matches_run": true
         },
-        "pending_ready": 5,
+        "pending_ready": 0,
         "pending_visual_review": true,
         "latest_verified_public_ids": [
           "kamuel-suspected-drugs-ammunition-arrest-20261119",
@@ -7024,61 +7074,63 @@
           "purple-line-center-night-closures-20261122"
         ],
         "latest_owner_pending_counts": {
-          "research_pending": 5,
-          "previous_blockers": 9
+          "research_pending": 10,
+          "prior_blockers": 9
         },
         "latest_publications": [
           {
-            "id": "florentin-fiber-electricity-works-20261122",
-            "url": "https://tlvnet.com/news/florentin-fiber-electricity-works-20261122",
-            "heading": "מיום ראשון בפלורנטין: עבודות סיבים בהרבי מבכרך וכבלי חשמל באברבנאל",
-            "status": 200,
-            "paragraphs": 6,
-            "image_url": "https://tlvnet.com/photo-bank/assets/florentin-abarbanel-corner-2010.jpg",
-            "image_status": 200,
-            "image_mime": "image/jpeg",
-            "jpeg": true,
-            "credit": "אילוסטרציה · פינת פלורנטין ואברבנאל · צילום ארכיון מ־2010 · Anatoli Axelrod · CC BY 3.0 מקור · רישיון",
-            "home_link": true,
-            "section_link": true,
-            "neighborhood_link": true,
-            "source": {
-              "id": "florentin-fiber-electricity-works-20261122",
-              "title": "מיום ראשון בפלורנטין: עבודות סיבים בהרבי מבכרך וכבלי חשמל באברבנאל",
-              "section": "news",
-              "published_at": "2026-11-21T06:04:02.225343+00:00",
-              "updated_at": "2026-11-21T06:04:02.225343+00:00",
-              "status": "published",
-              "image_credit": "Anatoli Axelrod · CC BY 3.0 · הוקטן ונדחס ל־JPG"
-            },
-            "desktop_visual": "passed_by_owner",
-            "mobile_visual": "pending"
+            "id": "la-guardia-hamasger-night-bus-changes-20261122",
+            "url": "https://tlvnet.com/news/la-guardia-hamasger-night-bus-changes-20261122",
+            "kind": "new",
+            "published_at": "2026-11-21T17:07:17.725121+00:00",
+            "updated_at": "2026-11-21T17:07:17.725121+00:00",
+            "home": true,
+            "section": true
+          },
+          {
+            "id": "wallenberg-night-closure-kavim-634-20261122",
+            "url": "https://tlvnet.com/news/wallenberg-night-closure-kavim-634-20261122",
+            "kind": "new",
+            "published_at": "2026-11-21T17:07:17.725121+00:00",
+            "updated_at": "2026-11-21T17:07:17.725121+00:00",
+            "home": true,
+            "section": true
+          },
+          {
+            "id": "levinsky-chelnov-purple-line-night-works-20261120",
+            "url": "https://tlvnet.com/news/levinsky-chelnov-purple-line-night-works-20261120",
+            "kind": "substantive_update",
+            "published_at": "2026-11-20T06:11:08.142691+00:00",
+            "updated_at": "2026-11-21T17:07:17.725121+00:00",
+            "home": false,
+            "section": true
+          },
+          {
+            "id": "einstein-lane-reduction-nov23-20261119",
+            "url": "https://tlvnet.com/news/einstein-lane-reduction-nov23-20261119",
+            "kind": "substantive_update",
+            "published_at": "2026-11-19T17:07:37.472451+00:00",
+            "updated_at": "2026-11-21T17:07:17.725121+00:00",
+            "home": false,
+            "section": true
           },
           {
             "id": "savidor-purple-line-night-works-20261122",
             "url": "https://tlvnet.com/news/savidor-purple-line-night-works-20261122",
-            "heading": "ליד סבידור: חמישה לילות של עבודות לקו הסגול ברחוב על פרשת דרכים",
-            "status": 200,
-            "paragraphs": 5,
-            "image_url": "https://tlvnet.com/photo-bank/assets/namir-road-archive-2016.jpg",
-            "image_status": 200,
-            "image_mime": "image/jpeg",
-            "jpeg": true,
-            "credit": "אילוסטרציה · דרך נמיר בתל אביב · צילום ארכיון מ־2016 · Rakoon · CC0 1.0 מקור · רישיון",
-            "home_link": true,
-            "section_link": true,
-            "neighborhood_link": null,
-            "source": {
-              "id": "savidor-purple-line-night-works-20261122",
-              "title": "ליד סבידור: חמישה לילות של עבודות לקו הסגול ברחוב על פרשת דרכים",
-              "section": "news",
-              "published_at": "2026-11-21T06:04:02.225343+00:00",
-              "updated_at": "2026-11-21T06:04:02.225343+00:00",
-              "status": "published",
-              "image_credit": "Rakoon · CC0 1.0 · הוקטן ונדחס ל־JPG"
-            },
-            "desktop_visual": "passed_by_owner",
-            "mobile_visual": "pending"
+            "kind": "substantive_update",
+            "published_at": "2026-11-21T06:04:02.225343+00:00",
+            "updated_at": "2026-11-21T17:07:17.725121+00:00",
+            "home": true,
+            "section": true
+          },
+          {
+            "id": "hatikva-street-violence-serious-injury-20261108",
+            "url": "https://tlvnet.com/news/hatikva-street-violence-serious-injury-20261108",
+            "kind": "substantive_update",
+            "published_at": "2026-11-09T05:12:05Z",
+            "updated_at": "2026-11-21T17:07:17.725121+00:00",
+            "home": false,
+            "section": true
           }
         ],
         "latest_owner_run_status": "completed",
@@ -7106,7 +7158,9 @@
           }
         },
         "last_owner_existing_updates": 0,
-        "pending_verification": 7
+        "pending_verification": 7,
+        "last_owner_updated_articles": 4,
+        "latest_source_projection_qualification": "Owner typed terminal evidence separately corroborated in Sites and independently compared with live article, section and home artifacts."
       },
       "real-estate": {
         "last_new_published_at": "2026-11-21T15:09:39.438241+00:00",
@@ -8440,37 +8494,11 @@
         "coverage_state": "Ganei Shapira research requires primary confirmation",
         "latest_public_route_check": {
           "url": "https://tlvnet.com/news/bli-heshbon",
-          "status": 200,
-          "home_and_section_links": {
-            "home": {
-              "parking": [
-                "/news/parking-blue-white-budget-20261120",
-                "/news/parking-blue-white-budget-20261120",
-                "/news/hatarbut-tlv-parking-benefit-guide-20261116"
-              ],
-              "bike": [],
-              "bicycle": [
-                "/news/la-guardia-bicycle-network-20261119"
-              ]
-            },
-            "section": {
-              "parking": [
-                "/news/parking-blue-white-budget-20261120",
-                "/news/parking-blue-white-budget-20261120",
-                "/news/parking-blue-white-budget-20261120",
-                "/news/parking-blue-white-budget-20261120"
-              ],
-              "bike": [],
-              "bicycle": [
-                "/news/la-guardia-bicycle-network-20261119",
-                "/news/la-guardia-bicycle-network-20261119",
-                "/news/la-guardia-bicycle-network-20261119"
-              ]
-            }
-          },
-          "research_stays_with_owner": true,
-          "observed_at": "2026-11-21T16:46:34.000Z",
-          "evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json"
+          "h1": "בלי חשבון",
+          "parking": true,
+          "bicycle": true,
+          "observed_at": "2026-11-21T17:59:19.000Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json"
         }
       }
     },
@@ -9034,14 +9062,14 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-21T16:46:34.000Z",
+    "observed_at": "2026-11-21T17:59:19.000Z",
     "from": "2026-11-21T15:37:21Z",
     "through": "2026-11-21T15:37:21Z",
     "strictly_new": 0,
     "boundary_crossed": true,
     "full_logs_read": 0,
     "pending_run_ids": [],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -9095,28 +9123,28 @@
   ],
   "latest_incremental_review": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "2e3415b1-d944-8324-81cf-8b2acab9633e",
-    "runKey": "ops-2026-11-21-2e3415b1-d944-8324-81cf-8b2acab9633e",
+    "run_id": "65110276-c2ac-8324-8e97-f556621e31e8",
+    "runKey": "ops-2026-11-21-65110276-c2ac-8324-8e97-f556621e31e8",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 2,
-    "observed_at": "2026-11-21T16:46:34.000Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json",
-    "status": "independent_public_readback_restored_verified_v712",
-    "saved_version": 712,
-    "independently_checked_public_version": 712,
+    "observed_at": "2026-11-21T17:59:19.000Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
+    "status": "news_owner_queue_resolved_raanana_caption_followup",
+    "saved_version": 713,
+    "independently_checked_public_version": 713,
     "current_health_http": 200,
-    "deployment_id": "appgdep_6b01b5e26b4c81919524061baf262215",
-    "source_commit": "541d21aa2cd450de8af8056e8c6bfbe64760d719",
+    "deployment_id": "appgdep_6b01d12545388191b1d5597865b68f81",
+    "source_commit": "64868d3c06707c0d0025518ec4dc7e8127a53814",
     "new_actions": 0,
-    "new_inbox": 0,
+    "new_inbox": 2,
     "new_social_rows": 0,
-    "new_articles": 0,
-    "previously_published_independently_verified": 1,
+    "new_articles": 2,
+    "updated_articles": 4,
     "controller_new_deployments": 0,
     "controller_editorial_writes": 0,
     "full_logs_read": 0,
     "owners_checked": 13,
-    "pending_original_owner_release": 5
+    "pending_original_owner_release": 0
   },
   "latest_owner_publication_observation": {
     "checked_at": "2026-11-20T17:47:58Z",
@@ -9289,10 +9317,24 @@
     "remaining": 218
   },
   "latest_daily_stability_summary": {
-    "observed_at": "2026-11-20T17:47:58Z",
-    "site": "TLVNET",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/c1f2d516-b7d8-832c-ab62-ed4b7a7da857.json",
-    "qualification_started_at": null
+    "observed_at": "2026-11-21T17:59:19.000Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    },
+    "daily_catalog": {
+      "local_date": "2026-11-21",
+      "scope": "Published records in v713 catalog; counts are not fresh independent checks of every article.",
+      "news": 4,
+      "economy-tech": 3,
+      "real-estate": 1,
+      "consumer": 1,
+      "culture-news": 1,
+      "sports": 1
+    }
   },
   "latest_sea_source_checkpoint": {
     "observed_at": "2026-11-17T18:45:50.646Z",
@@ -9316,7 +9358,7 @@
     "no_task_triggered": true
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-21T16:11:33.000Z",
+    "observed_at": "2026-11-21T17:59:19.000Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -9576,7 +9618,7 @@
       },
       {
         "path": "ops/incident-response/inbox/20261121-f6de17e8-2274-8324-b675-efd7fe7709b2-raanana-repeated-culture-image.json",
-        "sha": "7dd715cf660ed559ee4af77aef761e905fac5853"
+        "sha": "a3b084f80c66153421da51ed736189f82a4a2e59"
       },
       {
         "path": "ops/incident-response/inbox/20261121T084849Z-culture-herzliya-new-media-required.json",
@@ -9705,6 +9747,10 @@
       {
         "path": "ops/incident-response/inbox/5a385977-ca7c-8322-af47-4efed6bfbc13-1.json",
         "sha": "f44d39430d2b39985dffa34099a7eded3f44ba00"
+      },
+      {
+        "path": "ops/incident-response/inbox/65110276-c2ac-8324-8e97-f556621e31e8-raanana-culture-caption-followup.json",
+        "sha": "4cf5cda2faf6d9b9fecf3c20a302bbabb8c3ea2f"
       },
       {
         "path": "ops/incident-response/inbox/65b92745-d7d0-832e-a574-d87e57682c18-bnei-efraim-neighborhood-readback.json",
@@ -9997,8 +10043,8 @@
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
     "evidence": "ops/tlvnet-stability/observations/2026-11-21/af295dbc-7db0-8328-913a-97e30fe53616.json",
-    "last_checked_at": "2026-11-21T16:46:34.000Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json"
+    "last_checked_at": "2026-11-21T17:59:19.000Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json"
   },
   "source_report_checkpoint": {
     "status": "executed_on_current_published_source_plus_owner_receipt",
@@ -10542,11 +10588,11 @@
   "latest_raanana_independent_readback": {
     "target": "ISNET-CMS-59",
     "id": 812329,
-    "owner_run_id": "f318a6c9-5294-8327-9a58-cd6b2d7b5d20",
+    "owner_run_id": "d6996741-bca8-832f-8c67-db1d8b414524",
     "owner_reported_cms_verified": true,
     "completed_at": "2026-11-20T06:05:48.075451Z",
     "publication_time": "2026-11-20T08:03:00+02:00",
-    "status": "published_public_verified_caption_presentation_pending",
+    "status": "three_replaced_photos_public_verified_caption_followup_open",
     "public": {
       "home": {
         "status": 200,
@@ -10601,7 +10647,7 @@
     "template_changed_by_controller": false,
     "desktop_visual": "pending",
     "mobile_visual": "pending",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-20/9dd0685b-e524-8330-816e-2f23a07ea01a.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-21/65110276-c2ac-8324-8e97-f556621e31e8.json",
     "latest": {
       "id": 812409,
       "owner_run_id": "b60ec145-3510-8333-97b9-2dca949d230c",
@@ -10646,7 +10692,14 @@
       ],
       "original_owner_run": "906243e4-f308-832f-8c6b-6a008f062d3c",
       "inbox": "ops/incident-response/inbox/20261121-f6de17e8-2274-8324-b675-efd7fe7709b2-raanana-repeated-culture-image.json"
-    }
+    },
+    "observed_at": "2026-11-21T17:59:19.000Z",
+    "new_photo_ids": [
+      852123,
+      852122,
+      852124
+    ],
+    "inbox": "ops/incident-response/inbox/65110276-c2ac-8324-8e97-f556621e31e8-raanana-culture-caption-followup.json"
   },
   "latest_cinema_public_readback": {
     "owner_run_id": "a92ade65-15d8-8322-a07f-eabef135bc0d",
