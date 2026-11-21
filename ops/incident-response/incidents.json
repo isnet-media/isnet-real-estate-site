@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T10:44:34.000Z",
+  "updated_at": "2026-11-21T11:28:11.000Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7013,16 +7013,31 @@
     },
     {
       "id": "tlvnet-news-nested-receipt-checks-projection",
-      "status": "mitigated",
-      "updated_at": "2026-11-21T10:44:34.000Z",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-21T11:28:11.000Z",
       "root_cause": "News owner stores receipt assertions below .checks; current report requires flattened legacy shape. Five real publications independently verified on custom domain.",
       "evidence": "ops/incident-response/inbox/08a7e9f6-cc00-832e-a764-0743b12984db-news-nested-publication-receipt.json",
-      "verification": "ops/tlvnet-stability/observations/2026-11-21/64207e61-fe38-8324-a1ee-2145e6b11545.json",
+      "verification": {
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/c6216c62-ad98-8324-ab53-6a18e36fb3a5.json",
+        "public_articles": [
+          "vero-ai-agent-security-seed-tlv-20261121",
+          "newsbound-pr-ai-preseed-tlv-20261121",
+          "corma-defensive-ai-series-a-tlv-20261121",
+          "florentin-fiber-electricity-works-20261122",
+          "savidor-purple-line-night-works-20261122"
+        ],
+        "regression": "Both nested local-news receipt shapes now recognized. Two actual v706 records show verified new publication; prior v681 records without per-item kind retained as unspecified. False/missing flags, failed deployment, stale body and image rejected. Culture reporter regression passed."
+      },
       "next_action": "Adopt isolated tested normalization in existing authorized source lane without rebuilding only for journal; preserve missing per-item classification.",
       "current_candidate": {
         "status": "isolated_candidate_checked_no_source_push",
         "base": "a41576c2fadbb20d76e2e435efaf538e24112e35",
         "evidence": "ops/tlvnet-stability/observations/2026-11-21/64207e61-fe38-8324-a1ee-2145e6b11545.json"
+      },
+      "change": {
+        "status": "source_correction_readback_verified",
+        "source_commit": "4c35312ab8eff1332ab74e973368ebfd77dc23c8",
+        "controller_deployments": 0
       }
     },
     {
@@ -7309,9 +7324,24 @@
       "next_action": "Herzliya owner imports the verified photo, assigns local media ID and completes the existing direct handoff.",
       "source_inbox": "ops/incident-response/inbox/20261121T084849Z-culture-herzliya-new-media-required.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-21/fe24fdfe-2cb0-8328-a30e-495cb5ce471b.json"
+    },
+    {
+      "id": "events-health-herzliya-landing-transient503",
+      "signature": "ISNET/events-health/herzliya-landing/HTTP503",
+      "status": "mitigated",
+      "severity": "monitoring",
+      "first_seen_at": "2026-11-21T10:58:49Z",
+      "last_seen_at": "2026-11-21T11:28:11.000Z",
+      "root_cause": "Single HTTP 503 from public event landing health runner; provider origin not established.",
+      "verification": {
+        "status": 200,
+        "url": "https://isnet.co.il/events-preview/herzliya/",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-21/c6216c62-ad98-8324-ab53-6a18e36fb3a5.json"
+      },
+      "workflow_run_id": 44896827728
     }
   ],
-  "last_review_runKey": "ops-2026-11-21-64207e61-fe38-8324-a1ee-2145e6b11545",
+  "last_review_runKey": "ops-2026-11-21-c6216c62-ad98-8324-ab53-6a18e36fb3a5",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
