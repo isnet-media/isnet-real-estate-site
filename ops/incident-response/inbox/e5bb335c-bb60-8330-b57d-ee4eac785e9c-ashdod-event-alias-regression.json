@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "controller_event_integrity_handoff",
+  "status": "isolated_patch_passed_shared_release_still_blocked",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "e5bb335c-bb60-8330-b57d-ee4eac785e9c",
+  "runKey": "ops-2026-11-22-e5bb335c-bb60-8330-b57d-ee4eac785e9c",
+  "recorded_at": "2026-11-22T13:50:14Z",
+  "incident_id": "ashdod-confirmed-event-aliases-block-pages",
+  "observed_failed_run": 45029106417,
+  "production_source_under_test": "6d7a129df0e4e9146d9a90a0350be43dfa4cdf65",
+  "affected": [
+    [
+      {
+        "event_id": "mevalim_as_133828",
+        "title": "פלסטלינה בצבעים - מי אני באמת",
+        "at": "2026-12-02 18:30",
+        "venue": "בית יד לבנים אשדוד",
+        "original": "https://tickets.mevalim.co.il/event/29dAzKbN6zLKUgA?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fashdod%2F&tbn=הופעות באשדוד&tbid=43948&idx=6",
+        "booking": "https://tickets.mevalim.co.il/event/29dAzKbN6zLKUgA?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fashdod%2F&tbn=הופעות באשדוד&tbid=43948&idx=6",
+        "category": "kids"
+      },
+      {
+        "event_id": "makore_as_39fa1ce072164a9790",
+        "title": "פלסטלינה בצבעים- מי אני באמת מחזמר על הרצון להשתייך ועל החופש להיות מי שאנחנו",
+        "at": "2026-12-02 18:30",
+        "venue": "בית יד לבנים אשדוד",
+        "original": "https://www.makore.co.il/event/פלסטלינה-בצבעים-מי-אני-באמת-מחזמר-על-הרצון-להשתיי--e1f48616",
+        "booking": "https://ashdod.smarticket.co.il/event/17730/",
+        "category": "theatre"
+      }
+    ],
+    [
+      {
+        "event_id": "mevalim_as_129852",
+        "title": "אמי הגנרלית - התיאטרון העברי",
+        "at": "2027-01-16 21:00",
+        "venue": "המשכן לאמנויות הבמה אשדוד",
+        "original": "https://tickets.mevalim.co.il/event/D2IY7lfbJDueTDB?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fashdod%2F&tbn=הופעות באשדוד&tbid=43948&idx=48",
+        "booking": "https://tickets.mevalim.co.il/event/D2IY7lfbJDueTDB?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fashdod%2F&tbn=הופעות באשדוד&tbid=43948&idx=48",
+        "category": "theatre"
+      },
+      {
+        "event_id": "board_d6d6202f1c4ea730ad",
+        "title": "אמי הגנרלית - מחזמר - תיאטרון העברי",
+        "at": "2027-01-16 21:00",
+        "venue": "המשכן לאמנויות הבמה אשדוד",
+        "original": "https://sababa.events/he/event/moya-mat-generalsha-myuzikl/ashdod/",
+        "booking": "https://sababaevents.kartisim.co.il/announce/buy/212587",
+        "category": "theatre"
+      }
+    ]
+  ],
+  "primary_sources": [
+    "https://ashdod.smarticket.co.il/event/17730/",
+    "https://www.teatron.org.il/shows/אמי-הגנרלית-מחזמר/",
+    "https://mishkan-ashdod.smarticket.co.il/iframe/אימי_הגנרלית/?id=8244"
+  ],
+  "isolated_patch": "--- events-preview/shared/event-overlay.js\n+++ events-preview/shared/event-overlay.js\n@@ -82,6 +82,11 @@\n // Primary venue page reviewed 13 Nov 2026: same named cast, 3 Dec 2026,\n // 21:00 at Heichal Rishon. Keep both original IDs, source titles and offers.\n reviewedProductions.push({id:'lets-not-talk-yael-guy-2026',titles:['בוא לא נדבר על זה','בוא לא נדבר על זה - המופע של יעל בר זוהר וגיא זו ארץ | בוא לא נדבר על זה-יעל בר זהר וגיא זוארץ • חמישי 03/12/2026'],source:'https://htrl.co.il/show/בוא-לא-נדבר-על-זה-2/'});\n+// Confirmed in the Ashdod municipal ticket office and the Hebrew Theatre's run list.\n+reviewedProductions.push(\n+ {id:'plasticine-who-am-i-ashdod-2026',titles:['פלסטלינה בצבעים - מי אני באמת','פלסטלינה בצבעים- מי אני באמת מחזמר על הרצון להשתייך ועל החופש להיות מי שאנחנו'],source:'https://ashdod.smarticket.co.il/event/17730/'},\n+ {id:'imi-generalit-musical',titles:['אמי הגנרלית - מחזמר - תיאטרון העברי'],source:'https://www.teatron.org.il/shows/אמי-הגנרלית-מחזמר/'}\n+);\n const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));\n function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}\n function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\\s*([1-9]\\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\\s*\\d+/g,'').replace(/^(?:אולם|אודיטוריום)\\s+/,'');let key=e.venue_institution_id;\n",
+  "tests": {
+    "group_count_each": 1,
+    "both_source_ids_resolve": true,
+    "different_time_or_venue_stays_separate": true,
+    "ashdod_unresolved": 0,
+    "herzliya_unresolved_ids": [
+      "herzliya-5e465374c392b17a",
+      "herzliya-94323f69accb9675"
+    ]
+  },
+  "next_action": "After the existing Herzliya event owner resolves the conflicting cast offer, apply the exact verified aliases on a fresh branch, regenerate the shared overlay version references, and run the full integrity suite before the normal shared Pages release. No listener, production asset or deploy was modified by this checkpoint."
+}
