@@ -1,0 +1,29 @@
+{
+  "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+  "runKey": "economy-tech-20261122-fdb570bd-6e67-494c-b218-6a0e54400244",
+  "policy_revision": 2,
+  "status": "fixed_verified",
+  "signature": "TLVNET/economy-local-build/missing-bs4-and-new-asset-metadata",
+  "root_cause": "New execution Python environment lacked bs4; newly created media record initially omitted required usage_note_he and geography. Not a production outage.",
+  "correction": "Added truthful usage/geography metadata; installed beautifulsoup4==4.14.3 in ephemeral execution environment. One focused retry passed photo bank, content/media gates and full standard Sites build. No gate/baseline/security/schema changes.",
+  "evidence": {
+    "version": 722,
+    "deployment_id": "appgdep_6b02c873a9b8819195ddbcc36a21453f",
+    "deployment_status": "succeeded",
+    "source_commit": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
+    "public_url": "https://tlvnet.com/news/spines-equity-growth-financing-explained-20261122",
+    "verified_at": "2026-11-22T10:49:07.079090+00:00",
+    "checks": [
+      "title",
+      "full body",
+      "JPG bytes and hash",
+      "caption",
+      "home link",
+      "economy section link",
+      "live bank verified/unblocked",
+      "collector enabled"
+    ]
+  },
+  "remaining": "Rendered desktop/mobile review pending in existing quality-issues;4 unrelated existing research blockers retained without unchanged retry.",
+  "next_action": "Retain environment prerequisite in normal runner preparation; no controller invocation or schedule mutation requested."
+}
