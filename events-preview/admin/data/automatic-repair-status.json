@@ -1,59 +1,16 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-22T13:27:37.947026+00:00",
+  "checked_at": "2026-11-22T13:39:08.248094+00:00",
   "mode": "apply",
   "state": "attention",
   "scope": "Ashdod source feeds; CMS overlays remain authoritative; no claim of live-page verification",
   "input_sha256": {
-    "events-preview/ashdod/data/events.json": "c3275e0745253f6a99b518dc6cfb0dbd22622f059a7e941eb559c8dff3ef27f4",
+    "events-preview/ashdod/data/events.json": "234c5e4ff3ad9c772a9310407224b4249b3fdab7453b75c71de5379d656be947",
     "events-preview/admin/data/taxonomy.json": "27f370d6a53e27f31ac61bb7833f311f930e19b5b391ac2f2a84afc360a43d5c",
     "events-preview/admin/data/subcategory-definitions.json": "6c2273cba22422c976f2834c424b8229c222037ca7090f86faffafc6c4f7223b",
     "events-preview/shared/standup-videos.json": "d1e6b4414492ed406bec59c7e4066f4ce9fd6c13f30ec2a4e9d036a3a6de41d7"
   },
-  "repairs": [
-    {
-      "event_id": "auto_as_a21af1d1076d6ffbd2f5",
-      "reason": "verified_subcategory_rule",
-      "before": {
-        "subcategory": null,
-        "subcategory_review_status": null,
-        "subcategory_review_confidence": null
-      },
-      "after": {
-        "subcategory": "standup",
-        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
-        "subcategory_review_confidence": 0.97
-      }
-    },
-    {
-      "event_id": "board_45cda970947ac43950",
-      "reason": "verified_subcategory_rule",
-      "before": {
-        "subcategory": null,
-        "subcategory_review_status": null,
-        "subcategory_review_confidence": null
-      },
-      "after": {
-        "subcategory": "standup",
-        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
-        "subcategory_review_confidence": 0.97
-      }
-    },
-    {
-      "event_id": "board_d6d6202f1c4ea730ad",
-      "reason": "verified_subcategory_rule",
-      "before": {
-        "subcategory": null,
-        "subcategory_review_status": null,
-        "subcategory_review_confidence": null
-      },
-      "after": {
-        "subcategory": "musical",
-        "subcategory_review_status": "auto_repaired_from_explicit_evidence",
-        "subcategory_review_confidence": 0.97
-      }
-    }
-  ],
+  "repairs": [],
   "unresolved": [
     {
       "id": "cd5f7d917527b38a2361",
@@ -4944,6 +4901,12 @@
       "reason": "Source reports failed or partial collection"
     },
     {
+      "id": "upstream-workflow",
+      "type": "source_workflow_failed",
+      "title": "Daily Ashdod supplemental source publication",
+      "reason": "Upstream workflow cancelled; https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45028286604"
+    },
+    {
       "id": "trailer-hot-cinema-4012",
       "type": "cinema_trailer",
       "title": "פיניק 2 - להציל את המפלצות עברית",
@@ -4963,8 +4926,8 @@
     }
   ],
   "counts": {
-    "repairs": 3,
-    "unresolved": 702
+    "repairs": 0,
+    "unresolved": 703
   },
   "data_readback_verified": true
 }
