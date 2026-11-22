@@ -35,7 +35,8 @@ jobs:
           node --test bus/kiryat-gat/*.test.cjs bus/ashdod/*.test.cjs scripts/test_ashdod_bus.cjs
   browser-smoke:
     needs: node-tests
-    runs-on: ubuntu-latest
+    # Playwright 1.55 supports Ubuntu 24.04, but not the 26.04 default.
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
