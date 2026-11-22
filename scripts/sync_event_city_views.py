@@ -40,6 +40,17 @@ def localize(content: str, name: str, city: dict, suffix: str) -> str:
     if name=='seniors-hub.js':content=re.sub(r'  // ASHDOD_LOCAL_SENIOR_GUIDE_START[\s\S]*?  // ASHDOD_LOCAL_SENIOR_GUIDE_END\n','',content)
     from cinema_loading import optimize
     content=optimize(_localize(content,name,city,suffix),name,suffix,city['slug'])
+    if city["slug"] == "kiryat-gat" and name == "index.html":
+        content = re.sub(r'<a\b[^>]*href="#cinema"[^>]*>.*?</a>', '', content, flags=re.S)
+        content = content.replace('</head>', '''
+<style>
+a[href="https://isnet.co.il/events-preview/kiryat-gat/cinema.html"],
+.cinemaEditorialIndex,
+details:has(summary):has(a[href*="/events-preview/kiryat-gat/cinema/"]) {
+  display: none !important;
+}
+</style>
+</head>''', 1)
     content=re.sub(r'(?:(?:\.\./[a-z-]+/)*|/events-preview/[a-z-]+/)?assets/branding/(?:ashdodnet|rishonet|yavnenet|kgatnet|holonnet|herzliyanet)-dark\.svg', '/events-preview/shared/publishers/'+city['slug']+'.png', content)
     return content
 
