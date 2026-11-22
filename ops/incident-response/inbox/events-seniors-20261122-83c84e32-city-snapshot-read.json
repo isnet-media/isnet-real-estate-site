@@ -1,0 +1,18 @@
+{
+  "task_id": "Automation_50ecabf864448191ac5bee0edaecca74",
+  "runKey": "events-seniors-20261122-83c84e32-15aa-4393-a122-abfa5bc59508",
+  "recorded_at": "2026-11-22 08:57:46 UTC",
+  "signature": "github.fetch_file.city-events-snapshot.no-returned-body",
+  "status": "unresolved_read_limitation",
+  "attempts": 1,
+  "affected_paths": [
+    "events-preview/ashdod/data/events.json",
+    "events-preview/kiryat-gat/data/events.json",
+    "events-preview/rishon-lezion/data/events.json",
+    "events-preview/yavne/data/events.json"
+  ],
+  "evidence": "Four connected fetch_file calls rejected in one bounded batch without a retained serializable error/body. Exact transport/root cause unknown; not classified as403, missing files, provider-wide outage or denied permissions.",
+  "independent_read": "Holon snapshot returned normally:204 raw records; source timestamp9Nov with some19Nov row dates. Snapshot-only evidence, no live refresh inferred.",
+  "impact": "No collection, data mutation or public verification in those cities. TLV independent publication version720 succeeded and actual live374future occurrences verified.",
+  "next_action": "Resume exact city checkpoints in next regular cycle or when read environment changes; no unchanged retry, other-task invocation or schedule change."
+}
