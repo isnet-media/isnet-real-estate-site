@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T09:45:26Z",
+  "updated_at": "2026-11-22T10:56:50Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-22T08:48:35Z",
+  "last_processed_run_created_at": "2026-11-22T09:47:20Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -21,14 +21,14 @@
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
         "run_ids": [
-          42460462003,
-          42460172119
+          42456157825,
+          42452434210
         ],
-        "observed_at": "2026-11-22T09:45:26Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+        "observed_at": "2026-11-22T10:56:50Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
         "status": "Historical failed-step metadata only; root unconfirmed."
       },
-      "remaining_without_failed_step_metadata": 12
+      "remaining_without_failed_step_metadata": 10
     },
     "full_logs_read_this_cycle": 0,
     "unconfirmed_publish_failure_ids": [
@@ -2799,7 +2799,21 @@
           "conclusion": "failure",
           "source_commit": "a4b0c0dd4bfe42ff9b7aabaef4579e72c5ccc129",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42456157825",
-          "classification": "Historical metadata only; exact cause unconfirmed. No present outage or recovery inferred."
+          "classification": "Historical metadata only; exact cause unconfirmed. No present outage or recovery inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-22T10:56:50Z",
+            "jobs": [
+              {
+                "id": 128655508631,
+                "name": "check",
+                "conclusion": "failure",
+                "failed_steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
+          }
         },
         {
           "run_id": 42452434210,
@@ -2811,7 +2825,21 @@
           "conclusion": "failure",
           "source_commit": "ef727a70b5140bf0f1329a2befcef6ab6777af9d",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42452434210",
-          "classification": "Historical metadata only; exact cause unconfirmed. No present outage or recovery inferred."
+          "classification": "Historical metadata only; exact cause unconfirmed. No present outage or recovery inferred.",
+          "last_failed_step_metadata": {
+            "observed_at": "2026-11-22T10:56:50Z",
+            "jobs": [
+              {
+                "id": 128644315129,
+                "name": "check",
+                "conclusion": "failure",
+                "failed_steps": [
+                  "Run python scripts/check_super_public.py"
+                ]
+              }
+            ],
+            "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
+          }
         },
         {
           "run_id": 42433980328,
@@ -2977,30 +3005,29 @@
   },
   "inbox_path": "ops/incident-response/inbox/",
   "last_verified_publish_run": 43362366874,
-  "last_verified_public_readback_run": "29361082-f020-8320-9560-b3958f38941f",
+  "last_verified_public_readback_run": "2c75ddd2-129c-8330-9fdd-832288f3f951",
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "29361082-f020-8320-9560-b3958f38941f",
-    "runKey": "ops-2026-11-22-29361082-f020-8320-9560-b3958f38941f",
+    "run_id": "2c75ddd2-129c-8330-9fdd-832288f3f951",
+    "runKey": "ops-2026-11-22-2c75ddd2-129c-8330-9fdd-832288f3f951",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 2,
-    "observed_at": "2026-11-22T09:45:26Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+    "observed_at": "2026-11-22T10:56:50Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
     "status": "material_changes_verified",
-    "saved_version": 721,
-    "previous_verified_version": 718,
+    "saved_version": 722,
+    "previous_verified_version": 721,
     "current_health_http": 200,
-    "deployment_id": "appgdep_6b02b1ff16048191bcc17afee407c8b9",
-    "source_commit": "5d268da7f29c8be619c5e8942c1a6fc477290219",
+    "deployment_id": "appgdep_6b02c873a9b8819195ddbcc36a21453f",
+    "source_commit": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
     "new_actions": 2,
-    "new_inbox": 3,
+    "new_inbox": 1,
     "new_articles": 1,
     "updated_articles": 0,
-    "non_article_board_updates": 1,
     "controller_new_deployments": 0,
     "controller_editorial_writes": 0,
     "full_logs_read": 0,
-    "owners_checked": 15,
+    "owners_checked": 14,
     "new_social_rows": 0
   },
   "concurrent_controller_observation": {
@@ -3084,21 +3111,23 @@
     },
     "Automation_a32c48a7ae848191a5769078a5c74a09": {
       "enabled": true,
-      "last_run_id": "8195b63b-fa2c-8331-a9fa-4e3845770c37",
-      "started_at": "2026-11-21T10:33:53.698384Z",
-      "completed_at": "2026-11-21T10:57:00.540155Z",
+      "last_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+      "started_at": "2026-11-22T10:38:02.346476Z",
+      "completed_at": "2026-11-22T10:51:11.644043Z",
       "recorded_status": "completed",
-      "result": "פורסמו ואומתו באתר החי 3 כתבות חדשות:\n\n- [Vero — גיוס של 11 מיליון דולר](https://tlvnet.com/news/vero-ai-agent-security-seed-tlv-20261121)\n- [Newsbound — גיוס של 3 מיליון דולר](https://tlvnet.com/news/newsbound-pr-ai-preseed-tlv-20261121)\n- [Corma — גיוס של 125 מיליון דולר](https://tlvnet.com/news/corma-defensive-ai-series-a-tlv-20261121)\n\nנקראה ותועדה גרסה 2 מהמקור הפרטי. אומתו הגוף, התמונות המסומנות וההפניות במדור ובשער. תצוגת המחשב נבדקה; המובייל ממתין לבדיקה.\n\nהמדדים: 4 מועמדים התגלו, 3 אומתו ופורסמו, 7 כפילויות נמנעו; ללא עדכונים או דחיות סופיות, וללא פריטים מוכנים שממתינים לפרסום.\n\nבתור נשמרו: דו״ח השכר — נתוני האוצר חסרים; Spines — מקור מלא ועדכניות; Manpower — מתודולוגיה; בנק ישראל — זיקה מקומית; Cyberridge — מסמך מימון מתוארך.\n\nהנעילה שוחררה ואומתה כפנויה. התזמון וההרשאות נשמרו.",
-      "result_run_id": "8195b63b-fa2c-8331-a9fa-4e3845770c37",
-      "observed_at": "2026-11-21T11:28:11.000Z",
+      "result": "פורסם ואומת במדור הכלכלה: [64 מיליון דולר ל־Spines: למה השקעת הון ומסגרת מימון אינן אותו דבר](https://tlvnet.com/news/spines-equity-growth-financing-explained-20261122).\n\nהניתוח מבוסס על ההודעה מ־9 בנובמבר. נבדקו הגוף המלא, התמונה וההפניות בשער ובמדור. ארבעה פריטים נוספים נשמרו להמשך אימות; ביקורת התצוגה במחשב ובמובייל עדיין ממתינה.",
+      "result_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+      "observed_at": "2026-11-22T10:56:50Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.1",
-      "result_created_at": "2026-11-21T10:57:00.324362Z",
+      "result_created_at": "2026-11-22T10:51:11.121395Z",
       "qualification": "Exact run/result read; old latest_result not attributed to new run. Public owner proof and controller verification separate.",
       "effective_policy": "2026-11-14/1.0",
       "result_matches_attempt": true,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-21/c6216c62-ad98-8324-ab53-6a18e36fb3a5.json",
-      "result_summary_truncated": false
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
+      "result_summary_truncated": false,
+      "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "title": "כלכלה והייטק — צהריים"
     },
     "Automation_53543605ce188191ba90f3f1979203dc": {
       "enabled": true,
@@ -3277,11 +3306,11 @@
   },
   "sites": {
     "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
-    "version_number": 721,
-    "deployment_id": "appgdep_6b02b1ff16048191bcc17afee407c8b9",
+    "version_number": 722,
+    "deployment_id": "appgdep_6b02c873a9b8819195ddbcc36a21453f",
     "status": "succeeded",
-    "published_source": "5d268da7f29c8be619c5e8942c1a6fc477290219",
-    "observed_at": "2026-11-22T09:45:26Z",
+    "published_source": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
+    "observed_at": "2026-11-22T10:56:50Z",
     "other_observed_versions": [
       {
         "version": 587,
@@ -3420,22 +3449,22 @@
         "status": "published_verified"
       }
     ],
-    "last_status_check": "2026-11-22T09:45:26Z",
-    "latest_saved_version": 721,
+    "last_status_check": "2026-11-22T10:56:50Z",
+    "latest_saved_version": 722,
     "TLVNET": {
-      "version_number": 721,
-      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_8dfbcfbbf0688191b8acbafcfa8894e3",
-      "source_commit": "5d268da7f29c8be619c5e8942c1a6fc477290219",
-      "journal_head": null,
-      "deployment_id": "appgdep_6b02b1ff16048191bcc17afee407c8b9",
+      "version_number": 722,
+      "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_7e1eda03ffa88191acd3ce4ae3c24c3b",
+      "source_commit": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
+      "journal_head": "865b9a83cd74842cbc3913ce5c8be5a10b419faa",
+      "deployment_id": "appgdep_6b02c873a9b8819195ddbcc36a21453f",
       "deployment_status": "succeeded",
-      "observed_at": "2026-11-22T09:45:26Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json"
+      "observed_at": "2026-11-22T10:56:50Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
     },
-    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_8dfbcfbbf0688191b8acbafcfa8894e3",
-    "source_commit": "5d268da7f29c8be619c5e8942c1a6fc477290219",
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_7e1eda03ffa88191acd3ce4ae3c24c3b",
+    "source_commit": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
     "deployment_status": "succeeded",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
     "latest_status_check": {
       "observed_at": "2026-11-20T19:02:47Z",
       "version": 703,
@@ -3451,30 +3480,29 @@
       },
       "evidence": "ops/tlvnet-stability/observations/2026-11-20/100eea27-f180-832c-a674-75914025141c.json"
     },
-    "journal_head": null,
+    "journal_head": "865b9a83cd74842cbc3913ce5c8be5a10b419faa",
     "latest_controller_verification": {
       "task_id": "Automation_9776808c73848191a9d748dd09315960",
-      "run_id": "29361082-f020-8320-9560-b3958f38941f",
-      "runKey": "ops-2026-11-22-29361082-f020-8320-9560-b3958f38941f",
+      "run_id": "2c75ddd2-129c-8330-9fdd-832288f3f951",
+      "runKey": "ops-2026-11-22-2c75ddd2-129c-8330-9fdd-832288f3f951",
       "policy_version": "2026-11-15/1.2",
       "private_definition_revision": 2,
-      "observed_at": "2026-11-22T09:45:26Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+      "observed_at": "2026-11-22T10:56:50Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
       "status": "material_changes_verified",
-      "saved_version": 721,
-      "previous_verified_version": 718,
+      "saved_version": 722,
+      "previous_verified_version": 721,
       "current_health_http": 200,
-      "deployment_id": "appgdep_6b02b1ff16048191bcc17afee407c8b9",
-      "source_commit": "5d268da7f29c8be619c5e8942c1a6fc477290219",
+      "deployment_id": "appgdep_6b02c873a9b8819195ddbcc36a21453f",
+      "source_commit": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
       "new_actions": 2,
-      "new_inbox": 3,
+      "new_inbox": 1,
       "new_articles": 1,
       "updated_articles": 0,
-      "non_article_board_updates": 1,
       "controller_new_deployments": 0,
       "controller_editorial_writes": 0,
       "full_logs_read": 0,
-      "owners_checked": 15,
+      "owners_checked": 14,
       "new_social_rows": 0
     },
     "latest_owner_admin_release_check": {
@@ -3814,7 +3842,8 @@
     "ops/incident-response/inbox/44999592859-1.json",
     "ops/incident-response/inbox/20261122T0902Z-future-prepared-release-b9a31d82.json",
     "ops/incident-response/inbox/events-seniors-20261122-83c84e32-city-snapshot-read.json",
-    "ops/incident-response/inbox/events-seniors-20261122-83c84e32-source-access.json"
+    "ops/incident-response/inbox/events-seniors-20261122-83c84e32-source-access.json",
+    "ops/incident-response/inbox/economy-tech-20261122-fdb570bd-local-build-resolved.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4647,6 +4676,30 @@
       "full_logs_read": 0,
       "owners_checked": 15,
       "new_social_rows": 0
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "2c75ddd2-129c-8330-9fdd-832288f3f951",
+      "runKey": "ops-2026-11-22-2c75ddd2-129c-8330-9fdd-832288f3f951",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 2,
+      "observed_at": "2026-11-22T10:56:50Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
+      "status": "material_changes_verified",
+      "saved_version": 722,
+      "previous_verified_version": 721,
+      "current_health_http": 200,
+      "deployment_id": "appgdep_6b02c873a9b8819195ddbcc36a21453f",
+      "source_commit": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
+      "new_actions": 2,
+      "new_inbox": 1,
+      "new_articles": 1,
+      "updated_articles": 0,
+      "controller_new_deployments": 0,
+      "controller_editorial_writes": 0,
+      "full_logs_read": 0,
+      "owners_checked": 14,
+      "new_social_rows": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -5459,8 +5512,8 @@
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/100eea27-f180-832c-a674-75914025141c.json",
     "new_rows_this_cycle": 0,
     "public_verification": "No new social run; previously reported run_failed guard unchanged.",
-    "last_checked_at": "2026-11-22T09:45:26Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json"
+    "last_checked_at": "2026-11-22T10:56:50Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -5992,12 +6045,12 @@
       "owner": null,
       "acquired_at": null,
       "lease_until": null,
-      "source_blob": "eeae61e6a7b0f2f57c66c5df47f8cfa176e9be0c",
+      "source_blob": "e10183265251f91f3eeb83d47cc4bf901694b9cd",
       "last_release": {
-        "owner": "Automation_c1b175347cc481918eaba3cbaf3582d2",
-        "released_at": "2026-11-22T09:13:59.877Z",
-        "version_number": 721,
-        "source_commit": "5d268da7f29c8be619c5e8942c1a6fc477290219"
+        "owner": "Automation_a32c48a7ae848191a5769078a5c74a09",
+        "released_at": "2026-11-22 10:50:59 UTC",
+        "version_number": 722,
+        "journal_commit": "865b9a83cd74842cbc3913ce5c8be5a10b419faa"
       }
     },
     "pending_recovery_reason": "Actual active owner lease; fresh source helper unavailable. No changed-input recovery beyond one initial source attempt. No deployment.",
@@ -6201,8 +6254,8 @@
         }
       }
     },
-    "last_delta_checked_at": "2026-11-22T09:45:26Z",
-    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+    "last_delta_checked_at": "2026-11-22T10:56:50Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
     "news_morning_ledger_readback": {
       "discovered": 3,
       "verified": 2,
@@ -6553,30 +6606,59 @@
       }
     },
     "latest_controller_delta": {
-      "news": 0,
-      "real-estate": 0,
-      "economy-tech": 0,
-      "community": 0,
-      "consumer": 0,
-      "sports": 0,
-      "culture-news": 0,
-      "scope": "Current source ledgers at version 721. Three historical consumer entries match one published item; no pending-ready records were seen in current ledgers.",
-      "lease": {
-        "state": "free",
-        "owner": null,
-        "acquired_at": null,
-        "lease_until": null,
-        "source_blob": "eeae61e6a7b0f2f57c66c5df47f8cfa176e9be0c",
-        "last_release": {
-          "owner": "Automation_c1b175347cc481918eaba3cbaf3582d2",
-          "released_at": "2026-11-22T09:13:59.877Z",
-          "version_number": 721,
-          "source_commit": "5d268da7f29c8be619c5e8942c1a6fc477290219"
+      "source_ledgers": {
+        "news": {
+          "latest_status": "published_verified",
+          "runKey": "news-20261121-morning-810e0c10-090a-44c4-b867-cdb87ea30872",
+          "live_candidate_handoffs": [],
+          "source_sha256": "ada21c2782625bd2f03a649eb7a6d6821c41622f39c36240882b5bc72e1caa04"
+        },
+        "real-estate": {
+          "latest_status": "published_verified",
+          "runKey": "real-estate-20261121-47883972-5806-4793-8c43-7684a29d6e53",
+          "live_candidate_handoffs": [],
+          "source_sha256": "0f0501572e87b989fbeaecfffb553707fd24363c5edeed27c450ce8ea354a6bc"
+        },
+        "economy-tech": {
+          "latest_status": "publication_prepared",
+          "runKey": "economy-tech-20261122-fdb570bd-6e67-494c-b218-6a0e54400244",
+          "live_candidate_handoffs": [],
+          "source_sha256": "c221846dd402befeb1c7ded78388f9267aff7b9140876db15f89b3b03075adc5"
+        },
+        "community": {
+          "latest_status": "checkpoint_pending_verification",
+          "runKey": "community-20261121T110230Z-fc0052f5-6fa6-41f9-a2be-e769882123c0",
+          "live_candidate_handoffs": [],
+          "source_sha256": "94584b851176c65d5537e99af2c3a76c362551f96cbe5b4fac2cde10dcfdbd37"
+        },
+        "consumer": {
+          "latest_status": "published_verified",
+          "runKey": "consumer-20261121T120242Z-consumer-1795263379439-ehc953wa7",
+          "live_candidate_handoffs": [],
+          "source_sha256": "83b9ddf76f12e2421707269cfa587e1777adbe659d61b86b78ccaf36d9c14ae2"
+        },
+        "sports": {
+          "latest_status": "published_verified",
+          "runKey": "sports-20261122-morning-c7262f75-21a4-832e-97e1-dcc61cf1bb8e",
+          "live_candidate_handoffs": [],
+          "source_sha256": "b12ab43bc57c51953015a6ce6f0d41642c8e493579e3383daedfd3ab9fb7e1d9"
+        },
+        "culture-news": {
+          "latest_status": "published_verified",
+          "runKey": "culture-night-20261122-e012ae7e-093b-4ddb-b84f-9155230a73d6",
+          "live_candidate_handoffs": [],
+          "source_sha256": "b66a39b3e333cedd2bb579a915d8dc0ebc40ae868dea221c44f38a4888608ee2"
         }
       },
-      "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
-      "events": 720,
-      "prepared_magazine": "ops/incident-response/inbox/20261122T0902Z-future-prepared-release-b9a31d82.json"
+      "owner_post_release_journal": {
+        "deployed_snapshot_status": "publication_prepared",
+        "post_release_source_journal_status": "published_verified",
+        "journal_commit": "865b9a83cd74842cbc3913ce5c8be5a10b419faa"
+      },
+      "prepared_magazine_unchanged": true,
+      "ready_economy": 0,
+      "verification_economy": 4,
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
     }
   },
   "pending_task_run_ids": [],
@@ -8021,10 +8103,10 @@
         "section_route_checked_at": "2026-11-21T19:44:28Z"
       },
       "economy-tech": {
-        "last_new_published_at": "2026-11-21T10:47:20.599942+00:00",
-        "last_new_id": "vero-ai-agent-security-seed-tlv-20261121",
-        "last_substantive_update_at": "2026-11-21T10:47:20.599942+00:00",
-        "last_updated_id": "islo-incredibuild-ai-software-factory-investment-20261120",
+        "last_new_published_at": "2026-11-22T10:43:34.020401+00:00",
+        "last_new_id": "spines-equity-growth-financing-explained-20261122",
+        "last_substantive_update_at": "2026-11-22T10:43:34.020401+00:00",
+        "last_updated_id": "spines-equity-growth-financing-explained-20261122",
         "update_basis": "Source-declared article timestamps; no inferred edit from rebuild or publication label",
         "published_count": 34,
         "handoff_status_counts": {
@@ -8035,31 +8117,31 @@
         },
         "ledger_sha256": "cb7f4373e13d5c96bdb2698db208d02d6685bd121f180383f7bf20cfec2c1079",
         "latest_body_sha256": "45b9f4efd05ff9df4cfda08e4a839183527cce806367a2c079f2a8030cfca899",
-        "section_url": "https://tlvnet.com/news/economy-tech.html",
-        "lead_article_id": "corma-defensive-ai-series-a-tlv-20261121",
-        "lead_published_at": "2026-11-21T10:47:20.599942+00:00",
-        "last_owner_run_id": "8195b63b-fa2c-8331-a9fa-4e3845770c37",
-        "last_owner_completed_at": "2026-11-21T10:57:00.540155Z",
+        "section_url": "https://tlvnet.com/news/economy-tech",
+        "lead_article_id": "spines-equity-growth-financing-explained-20261122",
+        "lead_published_at": "2026-11-22T10:43:34.020401+00:00",
+        "last_owner_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+        "last_owner_completed_at": "2026-11-22T10:51:11.644043Z",
         "owner_task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
         "owner_run_changed_since_checkpoint": false,
         "last_new_published_basis": "Owner confirmed native release and public article with terminal deployment 697. Exact source publication time not observed.",
         "previous_completed_owner_run_id": "be1bbf37-d410-8327-a142-2c1c170f14dd",
         "last_owner_run_status": "completed",
-        "last_owner_started_at": "2026-11-18T10:17:14.345378Z",
+        "last_owner_started_at": "2026-11-22T10:38:02.346476Z",
         "pending_owner_result": false,
         "independent_full_body_image_credit_verified_at": "2026-11-16T17:00:46.396Z",
         "metadata_checked_at": "2026-11-21T10:44:34.000Z",
-        "source_commit": "895fdbc1c6ee6aa3133f22654bbaefbe2fd2beee",
-        "saved_version": 660,
-        "coverage_queue_count": 1,
+        "source_commit": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
+        "saved_version": 722,
+        "coverage_queue_count": 4,
         "coverage_queue_checkpoint": "public/news/agents/economy-tech/ledger.json",
-        "coverage_state": "incomplete_research_held",
+        "coverage_state": "research_remaining_with_owner",
         "prepared_pending": [],
         "lead_basis": "Fresh live economy section and embedded home.html lead link verified",
-        "last_owner_new_articles": 3,
+        "last_owner_new_articles": 1,
         "controller_new_deployed_articles": 3,
         "public_verification": "Original owner reported fullbody/JPG/credit/home/section; native656 succeeded. Controller independent publicread pending.",
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-20/b9f12e0b-0e7c-832c-8ce3-69a07559f03f.json",
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
         "last_release_executor_task_id": "Automation_9776808c73848191a9d748dd09315960",
         "last_release_runKey": "ops-2026-11-16-c7423892-2320-8332-8334-0ca60137294d",
         "remaining_queue": [
@@ -8149,7 +8231,7 @@
         "source_latest_declared_update": "2026-11-18T10:21:46.730111+00:00",
         "source_latest_declared_update_id": "tlv-center-tech-entry-jobs-snapshot-20261118",
         "result_matches_run": true,
-        "lead_title": "15 מיליון דולר ל־Islo: Incredibuild מתל אביב מרחיבה את ההימור על סוכני AI",
+        "lead_title": "64 מיליון דולר ל־Spines: למה השקעת הון ומסגרת מימון אינן אותו דבר",
         "section_status": 200,
         "latest_observed_owner_run": {
           "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
@@ -8190,8 +8272,11 @@
           }
         },
         "last_owner_existing_updates": 0,
-        "public_checked_version": 710,
-        "section_route_checked_at": "2026-11-21T19:44:28Z"
+        "public_checked_version": 722,
+        "section_route_checked_at": "2026-11-21T19:44:28Z",
+        "latest_owner_result_matches_run": true,
+        "runtime_publication_link": "https://tlvnet.com/news/spines-equity-growth-financing-explained-20261122",
+        "mobile_visual_review": "pending"
       },
       "community": {
         "last_new_published_at": "2026-11-18T11:11:13.937148+00:00",
@@ -9261,10 +9346,10 @@
         ]
       }
     },
-    "last_delta_checked_at": "2026-11-22T09:45:26Z",
-    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
-    "latest_checked_release": 721,
-    "latest_checked_release_source": "5d268da7f29c8be619c5e8942c1a6fc477290219"
+    "last_delta_checked_at": "2026-11-22T10:56:50Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
+    "latest_checked_release": 722,
+    "latest_checked_release_source": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f"
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-20T10:15:04.731Z",
@@ -9703,14 +9788,14 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-22T09:45:26Z",
-    "from": "2026-11-22T08:14:17Z",
-    "through": "2026-11-22T08:48:35Z",
+    "observed_at": "2026-11-22T10:56:50Z",
+    "from": "2026-11-22T08:48:35Z",
+    "through": "2026-11-22T09:47:20Z",
     "strictly_new": 2,
     "boundary_crossed": true,
     "full_logs_read": 0,
     "pending_run_ids": [],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
     "verification_run_read_separately": 45004399983
   },
   "remaining_followup": [
@@ -9790,61 +9875,64 @@
     "pending_original_owner_release": 0
   },
   "latest_owner_publication_observation": {
-    "observed_at": "2026-11-22T09:45:26Z",
-    "owner_task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
-    "owner_run_id": "57f2e7b2-05dc-832c-89ac-58f5e0fb5ddc",
+    "observed_at": "2026-11-22T10:56:50Z",
+    "owner_task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+    "owner_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
     "status": "published_verified",
-    "version": 721,
-    "source_commit": "5d268da7f29c8be619c5e8942c1a6fc477290219",
-    "journal_commit": null,
-    "deployment_id": "appgdep_6b02b1ff16048191bcc17afee407c8b9",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+    "version": 722,
+    "source_commit": "a7aee0538e87c5eb20c63c54c75fd3bc3393525f",
+    "journal_commit": "865b9a83cd74842cbc3913ce5c8be5a10b419faa",
+    "deployment_id": "appgdep_6b02c873a9b8819195ddbcc36a21453f",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
     "publications": [
       {
-        "owner": "Automation_c1b175347cc481918eaba3cbaf3582d2",
-        "id": "daycare-tender-mair-bint-20261122",
-        "published_at": "2026-11-22T09:04:41.961736+00:00",
         "status": "published_verified",
-        "article": {
+        "article_id": "spines-equity-growth-financing-explained-20261122",
+        "published_at": "2026-11-22T10:43:34.020401+00:00",
+        "source_notice_date": "2026-11-09",
+        "proof": {
+          "url": "https://tlvnet.com/news/spines-equity-growth-financing-explained-20261122",
           "http": 200,
-          "url": "https://tlvnet.com/news/daycare-tender-mair-bint-20261122",
-          "ms": 8526,
-          "title": "הציעו לתל אביב 9,000 שקל לחודש על מבנה למעון. כעבור שנה העירייה ביקשה 2,150",
-          "article_link": 7,
-          "future_link": false,
-          "paragraphs": 9,
-          "credit": [
-            "אילוסטרציה – AI"
-          ],
-          "image": {
-            "url": "https://tlvnet.com/photo-bank/assets/daycare-chairs-municipal-tenders-20261122.jpg",
-            "http": 200,
-            "sha256": "974a9c25aa5cf6fe7fae184288a52b9575593e1ff26b422071843bf8aeb8a64b",
-            "jpeg": true
-          }
-        },
-        "source_comparison": {
-          "http": 200,
-          "url": "https://tlvnet.com/news/daycare-tender-mair-bint-20261122",
-          "source_p_count": 7,
+          "ms": 6973,
+          "card": true,
+          "title": "64 מיליון דולר ל־Spines: למה השקעת הון ומסגרת מימון אינן אותו דבר",
+          "body_paragraphs": 7,
           "matched": 7,
+          "image_in_html": true,
           "credit_visible": true,
-          "source_body_sha256": "7c09360fb8aa8ecde37dd7d1f82b6f0f52fcd493f418163a7de236a711bacece"
+          "body_sha256": "721d8fe49134facfcbce93cd643572f1c5373a51db7c3057625167faecc59f63"
         },
-        "home_lead": true,
-        "section_has_article": true,
-        "news_index_has_article": true,
-        "archive_links_verified": true,
-        "expected_image_matches": true,
-        "city_hub_has_entry": false,
-        "city_hub_assignment": "No area metadata on the owner source record; no inferred misroute",
-        "viewport": {
-          "desktop_owner": "verified",
-          "mobile": "pending"
+        "image": {
+          "url": "https://tlvnet.com/photo-bank/assets/ai-publishing-mixed-finance-concept-20261122.jpg",
+          "http": 200,
+          "ms": 6434,
+          "jpeg": true,
+          "hash": "4db50f12618c0206e8281dfe78d4bd3f41c21f6bf54e3cc96e21c6e98fa68d27",
+          "exact_source_match": true
+        },
+        "home": true,
+        "section": {
+          "url": "https://tlvnet.com/news/economy-tech",
+          "http": 200,
+          "ms": 7321,
+          "card": true,
+          "title": "כלכלה והייטק"
+        },
+        "neighborhood_assignment": "None in final source",
+        "desk_queue": {
+          "ready": 0,
+          "pending_verification": 4
+        },
+        "desktop_visual": "pending",
+        "mobile_visual": "pending",
+        "receipt": {
+          "deployed_snapshot_status": "publication_prepared",
+          "post_release_source_journal_status": "published_verified",
+          "journal_commit": "865b9a83cd74842cbc3913ce5c8be5a10b419faa"
         }
       }
     ],
-    "rendered_review": "owner desktop verified; mobile pending"
+    "rendered_review": "desktop and mobile pending"
   },
   "retained_editorial_checkpoints": [
     {
@@ -10576,6 +10664,10 @@
         "sha": "552fb4a432390d6280f59d9304ff570a6ad61f1b"
       },
       {
+        "path": "ops/incident-response/inbox/economy-tech-20261122-fdb570bd-local-build-resolved.json",
+        "sha": "0113741df89454a14542779ed30d30007e2c2f4f"
+      },
+      {
         "path": "ops/incident-response/inbox/ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
         "sha": "91a61f6bf728e82a4854245c5a595226c985e749"
       },
@@ -10710,8 +10802,8 @@
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
     "evidence": "ops/tlvnet-stability/observations/2026-11-22/0684e0df-ebf0-8320-aa9f-608bd79c72c1.json",
-    "last_checked_at": "2026-11-22T09:45:26Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json"
+    "last_checked_at": "2026-11-22T10:56:50Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
   },
   "source_report_checkpoint": {
     "status": "executed_on_current_published_source_plus_owner_receipt",
@@ -10913,27 +11005,23 @@
     }
   },
   "latest_isnet_source_backup_observation": {
-    "id": 44891395402,
+    "id": 45009116653,
     "title": "Daily ISNET source backup",
     "status": "completed",
     "conclusion": "success",
-    "completed_at": "2026-11-21T09:50:45Z",
-    "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44891395402",
+    "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45009116653",
     "artifacts": [
       {
-        "id": 14701778805,
-        "name": "isnet-source-backup-44891395402",
-        "size_bytes": 917202577,
-        "digest": "sha256:28b215e66b7bf3bb79ec8c8ccbf851f1d343c0bd17e53b7ed5760a00e66f8c19",
-        "created_at": "2026-11-21T09:50:42Z",
-        "expires_at": "2026-11-28T09:50:34Z",
-        "expired": false
+        "id": 14748777396,
+        "name": "isnet-source-backup-45009116653",
+        "size_bytes": 923270247,
+        "expires_at": "2026-11-29T09:47:04Z",
+        "digest": "sha256:296304df1e61c6b05f2e6bc7bfc05bd8c51c88b4140fd06eeb0cd05ebf363c21"
       }
     ],
-    "scope": "ISNET repository backup only; no TLVNET full backup/restore proof",
-    "observed_at": "2026-11-22T07:20:47Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/2d98f2c5-c084-8320-8078-fa7be8913cda.json",
-    "new_metadata_rows": 3
+    "scope": "ISNET source archive only",
+    "observed_at": "2026-11-22T10:56:50Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
   },
   "media_source_policy_checkpoint": {
     "version": "2026-11-17/1.1",
@@ -11124,8 +11212,8 @@
     "no_source_push": true
   },
   "latest_pending_run_reconciliation": {
-    "observed_at": "2026-11-22T09:45:26Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+    "observed_at": "2026-11-22T10:56:50Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
     "sports_run_id": "028e5aaa-f7fc-8328-9501-b166e40f7d33",
     "controller_report_run_id": "812e0bb1-10c8-832e-8a83-5d6a6a70110c",
     "status": "completed_result_scope_mismatch",
@@ -11133,7 +11221,7 @@
     "latest_sports_owner_run_id": "c7262f75-21a4-832e-97e1-dcc61cf1bb8e",
     "latest_sports_status": "published_verified",
     "latest_evidence": "ops/tlvnet-stability/observations/2026-11-22/2d98f2c5-c084-8320-8078-fa7be8913cda.json",
-    "latest_checked_at": "2026-11-22T09:45:26Z",
+    "latest_checked_at": "2026-11-22T10:56:50Z",
     "latest_completed_owner": {
       "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
       "title": "חדשות תרבות — יומי",
@@ -11150,39 +11238,15 @@
     "current_pending": [],
     "latest_completed_owners": [
       {
-        "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
-        "title": "החיים של המחר — יום כן יום לא",
+        "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+        "title": "כלכלה והייטק — צהריים",
         "enabled": true,
-        "last_run_id": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+        "last_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
         "recorded_status": "completed",
-        "started_at": "2026-11-22T08:46:54.187089Z",
-        "completed_at": "2026-11-22T09:03:11.837106Z",
-        "result_run_id": "b9a31d82-11d4-8332-98da-2d7f380fa421",
-        "result_created_at": "2026-11-22T09:03:10.938826Z",
-        "result_matches_attempt": true
-      },
-      {
-        "task_id": "Automation_50ecabf864448191ac5bee0edaecca74",
-        "title": "אירועים וגמלאים — שבועי",
-        "enabled": true,
-        "last_run_id": "cafcf2ad-6c6c-832c-aea5-83a03a4b14a8",
-        "recorded_status": "completed",
-        "started_at": "2026-11-22T08:32:08.095875Z",
-        "completed_at": "2026-11-22T08:58:33.972064Z",
-        "result_run_id": "cafcf2ad-6c6c-832c-aea5-83a03a4b14a8",
-        "result_created_at": "2026-11-22T08:58:33.587849Z",
-        "result_matches_attempt": true
-      },
-      {
-        "task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
-        "title": "בלי חשבון — תחקירי TLVNET",
-        "enabled": true,
-        "last_run_id": "57f2e7b2-05dc-832c-89ac-58f5e0fb5ddc",
-        "recorded_status": "completed",
-        "started_at": "2026-11-22T08:54:57.270234Z",
-        "completed_at": "2026-11-22T09:14:16.086567Z",
-        "result_run_id": "57f2e7b2-05dc-832c-89ac-58f5e0fb5ddc",
-        "result_created_at": "2026-11-22T09:14:15.690825Z",
+        "started_at": "2026-11-22T10:38:02.346476Z",
+        "completed_at": "2026-11-22T10:51:11.644043Z",
+        "result_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+        "result_created_at": "2026-11-22T10:51:11.121395Z",
         "result_matches_attempt": true
       }
     ]
