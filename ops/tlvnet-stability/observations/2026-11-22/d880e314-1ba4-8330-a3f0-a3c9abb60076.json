@@ -1,0 +1,508 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "d880e314-1ba4-8330-a3f0-a3c9abb60076",
+  "runKey": "ops-2026-11-22-d880e314-1ba4-8330-a3f0-a3c9abb60076",
+  "policy_version": "2026-11-15/1.2",
+  "private_definition_revision": 2,
+  "observed_at": "2026-11-22T14:15:30Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json",
+  "status": "no_new_failure_signature",
+  "saved_version": 724,
+  "previous_verified_version": 724,
+  "deployment_id": "appgdep_6b02ddabdcb08191bfe93b48d408eb9c",
+  "source_commit": "34ac8aca97f0e21c217fa1d32d176ecd8e6620b3",
+  "public_home_rendered": true,
+  "new_actions": 19,
+  "new_inbox": 1,
+  "new_articles": 0,
+  "updated_articles": 0,
+  "controller_new_deployments": 0,
+  "controller_editorial_writes": 0,
+  "full_logs_read": 2,
+  "owners_checked": 14,
+  "new_social_rows": 0,
+  "started_at": "2026-11-22T14:10:07.989297Z",
+  "policy_read": {
+    "revision": 2,
+    "checksum": "056de9284cd0c7eb642f8de9ff73cfc82d3b598882c03992d3f2b3b8fdbc01a6",
+    "last_read_at": "2026-11-22 14:10:42.231195+00"
+  },
+  "source_readback": {
+    "incident_runbook_blob": "95bd3f4cc76ab079b65050b0bce2c2ba34c6ec43",
+    "stability_runbook_blob": "f387d51e4ee86bf466504263a2d51ca5ca445dff",
+    "incident_state_blob": "47d80bc1a58c7885091ce69f8c4c99ecabb2fda2",
+    "incidents_blob": "ab62c8f03bdf4a7607cc5a7642f9f8e63a80dd65",
+    "stability_state_blob": "0f8d7edef5a160bdb1d1ef04254b9c2e129c318d"
+  },
+  "deployment_metadata": {
+    "version_number": 724,
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_70371606a0b48191ba7af1c7e020fa16",
+    "deployment_id": "appgdep_6b02ddabdcb08191bfe93b48d408eb9c",
+    "source_commit": "34ac8aca97f0e21c217fa1d32d176ecd8e6620b3",
+    "status": "succeeded",
+    "terminal_at": "2026-11-22T12:19:13.062116+00:00",
+    "verified_at": "2026-11-22T12:51:17Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/d9f867d4-aeac-8330-a315-7f6422ee46f9.json",
+    "metadata_checked_at": "2026-11-22T14:15:30Z"
+  },
+  "lease": {
+    "state": "free",
+    "owner": null,
+    "acquired_at": null,
+    "lease_until": null,
+    "source_blob": "4f4b2bd62d88a2ad1d10ae8a273b752c8c262604",
+    "last_release": {
+      "owner": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "released_at": "2026-11-22T12:21:17Z",
+      "version_number": 724
+    }
+  },
+  "owners": {
+    "Automation_b3345c399b988191a1ba9848e3e3668b": {
+      "title": "חדשות תל אביב — שלוש פעמים ביום",
+      "run_id": "9b8b5560-a1f8-8328-9c5d-89d708449050",
+      "result_run_id": "9b8b5560-a1f8-8328-9c5d-89d708449050",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
+      "title": "חדשות ספורט — פעמיים ביום",
+      "run_id": "c7262f75-21a4-832e-97e1-dcc61cf1bb8e",
+      "result_run_id": "c7262f75-21a4-832e-97e1-dcc61cf1bb8e",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_82add5edecd8819197814e83bac85a75": {
+      "title": "נדל״ן — יומי",
+      "run_id": "11c220c3-44c0-8327-93b8-7198d2e4e505",
+      "result_run_id": "11c220c3-44c0-8327-93b8-7198d2e4e505",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_a32c48a7ae848191a5769078a5c74a09": {
+      "title": "כלכלה והייטק — צהריים",
+      "run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+      "result_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_53543605ce188191ba90f3f1979203dc": {
+      "title": "חדשות תרבות — יומי",
+      "run_id": "6e66d489-6ad4-8323-a1c8-463fb6f7240a",
+      "result_run_id": "6e66d489-6ad4-8323-a1c8-463fb6f7240a",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_e03d80ff914c8191a790fc66e7447826": {
+      "title": "קהילה ושכונות — TLVNET יומי",
+      "run_id": "431615ae-d940-832a-bb73-2a2d7e2c5fe9",
+      "result_run_id": "431615ae-d940-832a-bb73-2a2d7e2c5fe9",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_e2f02000cdf4819190022b85f4391076": {
+      "title": "צרכנות — TLVNET יומי",
+      "run_id": "a2c816a4-9f64-8324-8755-0229349d35cf",
+      "result_run_id": "a2c816a4-9f64-8324-8755-0229349d35cf",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_46f4cacaaa288191aad7b49de5a04ae7": {
+      "title": "תרבות נט — יום כן יום לא",
+      "run_id": "040042ea-f184-8324-ac19-1267f90bf89f",
+      "result_run_id": "040042ea-f184-8324-ac19-1267f90bf89f",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_09c630803fe481919ccd2f476f0d6916": {
+      "title": "החיים של המחר — יום כן יום לא",
+      "run_id": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "result_run_id": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_845f7ef0033c8191b7490e0dc5748754": {
+      "title": "כתב חדשות — רעננה",
+      "run_id": "7bd9a9cb-392c-8327-807d-b27df5436b6c",
+      "result_run_id": "7bd9a9cb-392c-8327-807d-b27df5436b6c",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_50ecabf864448191ac5bee0edaecca74": {
+      "title": "אירועים וגמלאים — שבועי",
+      "run_id": "cafcf2ad-6c6c-832c-aea5-83a03a4b14a8",
+      "result_run_id": "cafcf2ad-6c6c-832c-aea5-83a03a4b14a8",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a": {
+      "title": "מערכת הרצליה נט",
+      "run_id": "b1b42984-6838-8320-b0b6-2bb494ffcdbf",
+      "result_run_id": "b1b42984-6838-8320-b0b6-2bb494ffcdbf",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_c1b175347cc481918eaba3cbaf3582d2": {
+      "title": "בלי חשבון — תחקירי TLVNET",
+      "run_id": "57f2e7b2-05dc-832c-89ac-58f5e0fb5ddc",
+      "result_run_id": "57f2e7b2-05dc-832c-89ac-58f5e0fb5ddc",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    },
+    "Automation_fa808d30470c8191b3eb981f197bbb1d": {
+      "title": "סופרים — א׳ ג׳ ה׳",
+      "run_id": "99180a2e-d568-8329-8bf1-4f4f82854694",
+      "result_run_id": "99180a2e-d568-8329-8bf1-4f4f82854694",
+      "recorded_status": "completed",
+      "source_unchanged": true
+    }
+  },
+  "sections_reviewed": [
+    "news",
+    "real-estate",
+    "economy-tech",
+    "community",
+    "consumer",
+    "sports",
+    "culture-news",
+    "neighborhoods",
+    "bli-heshbon"
+  ],
+  "source_public": {
+    "home": {
+      "url": "https://tlvnet.com/",
+      "rendered": true,
+      "lead": "daycare-tender-mair-bint-20261122",
+      "sample_latency_ms": null
+    },
+    "bli": {
+      "url": "https://tlvnet.com/news/bli-heshbon",
+      "rendered": true,
+      "owner": "אבי אור",
+      "latest_id": "daycare-tender-mair-bint-20261122",
+      "item_count": 3
+    },
+    "article": {
+      "url": "https://tlvnet.com/news/daycare-tender-mair-bint-20261122",
+      "visible_full_body": true,
+      "image_element": true,
+      "public_media_label": "אילוסטרציה – AI",
+      "byline": "אבי אור",
+      "section_link": true,
+      "lead_at_home": true,
+      "desktop_and_mobile_visual_qa": "pending"
+    },
+    "neighborhood": {
+      "feed_url": "https://tlvnet.com/city-hub/updates.json",
+      "area_url": "https://tlvnet.com/city-hub/areas/yad-eliyahu/",
+      "feed_and_area_match": [
+        "galipolis-yad-eliyahu-reported-demolition-20261116",
+        "maccabi-holon-home-win-20261121"
+      ],
+      "scope": "One area sampled from current JSON and rendered destination."
+    },
+    "pages_release": {
+      "url": "https://isnet.co.il/deployment-version.json",
+      "rendered": true,
+      "marker": {
+        "source_commit": "077d1bbf6a6fdf6665ca17ea8350c5a4717806f0",
+        "run_id": "45018779471",
+        "run_attempt": "1"
+      },
+      "failed_releases_absent": true
+    }
+  },
+  "actions": {
+    "window_from_inclusive": "2026-11-22T13:45:59Z",
+    "through": "2026-11-22T14:02:24Z",
+    "boundary_ids": [
+      45029204269,
+      45029204367,
+      45029204356
+    ],
+    "new_runs": [
+      {
+        "id": 45030628325,
+        "attempt": 1,
+        "workflow": "Record operation failures",
+        "conclusion": "skipped",
+        "created_at": "2026-11-22T14:02:24Z",
+        "source_commit": "27d5771a8594202d143275bcb954a96b49488cd2"
+      },
+      {
+        "id": 45030586518,
+        "attempt": 1,
+        "workflow": "Record operation failures",
+        "conclusion": "skipped",
+        "created_at": "2026-11-22T14:01:57Z",
+        "source_commit": "27d5771a8594202d143275bcb954a96b49488cd2"
+      },
+      {
+        "id": 45030586583,
+        "attempt": 1,
+        "workflow": "Publish validated independent supermarket release",
+        "conclusion": "success",
+        "created_at": "2026-11-22T14:01:57Z",
+        "source_commit": "27d5771a8594202d143275bcb954a96b49488cd2"
+      },
+      {
+        "id": 45030546035,
+        "attempt": 1,
+        "workflow": "Refresh Yavne supermarket prices",
+        "conclusion": "success",
+        "created_at": "2026-11-22T14:01:29Z",
+        "source_commit": "27d5771a8594202d143275bcb954a96b49488cd2"
+      },
+      {
+        "id": 45030420906,
+        "attempt": 1,
+        "workflow": "Record operation failures",
+        "conclusion": "skipped",
+        "created_at": "2026-11-22T14:00:17Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d"
+      },
+      {
+        "id": 45030421005,
+        "attempt": 1,
+        "workflow": "Publish priceboard",
+        "conclusion": "skipped",
+        "created_at": "2026-11-22T14:00:17Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d"
+      },
+      {
+        "id": 45030410461,
+        "attempt": 1,
+        "workflow": "Record operation failures",
+        "conclusion": "skipped",
+        "created_at": "2026-11-22T14:00:11Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d"
+      },
+      {
+        "id": 45030410414,
+        "attempt": 1,
+        "workflow": "Audit event illustration coverage",
+        "conclusion": "success",
+        "created_at": "2026-11-22T14:00:11Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d"
+      },
+      {
+        "id": 45030410448,
+        "attempt": 1,
+        "workflow": "Auto-publish events after media QA",
+        "conclusion": "success",
+        "created_at": "2026-11-22T14:00:11Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d"
+      },
+      {
+        "id": 45030410419,
+        "attempt": 1,
+        "workflow": "Publish priceboard",
+        "conclusion": "failure",
+        "created_at": "2026-11-22T14:00:11Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d"
+      },
+      {
+        "id": 45030410383,
+        "attempt": 1,
+        "workflow": "Refresh Ashdod event source images",
+        "conclusion": "success",
+        "created_at": "2026-11-22T14:00:11Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d"
+      },
+      {
+        "id": 45030410463,
+        "attempt": 1,
+        "workflow": "Build central media bank",
+        "conclusion": "success",
+        "created_at": "2026-11-22T14:00:11Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d"
+      },
+      {
+        "id": 45030382526,
+        "attempt": 1,
+        "workflow": "Verify public event feed read-back",
+        "conclusion": "skipped",
+        "created_at": "2026-11-22T13:59:54Z",
+        "source_commit": "ff336d12173b780f4ab1bf1fc511b115b6a20c4b"
+      },
+      {
+        "id": 45030382520,
+        "attempt": 1,
+        "workflow": "Public events health checks",
+        "conclusion": "skipped",
+        "created_at": "2026-11-22T13:59:54Z",
+        "source_commit": "ff336d12173b780f4ab1bf1fc511b115b6a20c4b"
+      },
+      {
+        "id": 45030382574,
+        "attempt": 1,
+        "workflow": "Record operation failures",
+        "conclusion": "success",
+        "created_at": "2026-11-22T13:59:54Z",
+        "source_commit": "ff336d12173b780f4ab1bf1fc511b115b6a20c4b"
+      },
+      {
+        "id": 45030319483,
+        "attempt": 1,
+        "workflow": "Record operation failures",
+        "conclusion": "skipped",
+        "created_at": "2026-11-22T13:59:09Z",
+        "source_commit": "ff336d12173b780f4ab1bf1fc511b115b6a20c4b"
+      },
+      {
+        "id": 45030319591,
+        "attempt": 1,
+        "workflow": "Publish priceboard",
+        "conclusion": "failure",
+        "created_at": "2026-11-22T13:59:09Z",
+        "source_commit": "ff336d12173b780f4ab1bf1fc511b115b6a20c4b"
+      },
+      {
+        "id": 45030319555,
+        "attempt": 1,
+        "workflow": "Build central media bank",
+        "conclusion": "cancelled",
+        "created_at": "2026-11-22T13:59:09Z",
+        "source_commit": "ff336d12173b780f4ab1bf1fc511b115b6a20c4b"
+      },
+      {
+        "id": 45030319524,
+        "attempt": 1,
+        "workflow": "Verify and cache Rishon event photos",
+        "conclusion": "success",
+        "created_at": "2026-11-22T13:59:09Z",
+        "source_commit": "ff336d12173b780f4ab1bf1fc511b115b6a20c4b"
+      }
+    ],
+    "previous_pending": {
+      "id": 45026850964,
+      "created_at": "2026-11-22T13:19:17Z",
+      "completed_at": "2026-11-22T13:59:07Z",
+      "status": "completed",
+      "conclusion": "success",
+      "scope": "Event enrichment workflow completed; live publication requires separate release evidence."
+    },
+    "occurrences": [
+      {
+        "run_id": 45030319591,
+        "attempt": 1,
+        "workflow": "Publish priceboard",
+        "created_at": "2026-11-22T13:59:09Z",
+        "completed_at": "2026-11-22T13:59:52Z",
+        "source_commit": "ff336d12173b780f4ab1bf1fc511b115b6a20c4b",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45030319591",
+        "job_id": 137232280701,
+        "failed_step": "Build compact event listings and canonical sitemap",
+        "assertion": "ashdod has unresolved candidates before release (actual 2, expected 0)",
+        "test": "scripts/test-event-integrity.cjs:141",
+        "recorded_at": "2026-11-22T14:15:30Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+      },
+      {
+        "run_id": 45030410419,
+        "attempt": 1,
+        "workflow": "Publish priceboard",
+        "created_at": "2026-11-22T14:00:11Z",
+        "completed_at": "2026-11-22T14:00:54Z",
+        "source_commit": "363a55c1cb1c6675a6f6cfce68b6bfac578f517d",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45030410419",
+        "job_id": 137232554852,
+        "failed_step": "Build compact event listings and canonical sitemap",
+        "assertion": "ashdod has unresolved candidates before release (actual 2, expected 0)",
+        "test": "scripts/test-event-integrity.cjs:141",
+        "recorded_at": "2026-11-22T14:15:30Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+      }
+    ],
+    "independent_release": {
+      "city": "Yavne",
+      "run_id": 45030586583,
+      "job_id": 137233078563,
+      "status": "success",
+      "public_supermarket_verification": "Outside verification window; metadata only."
+    }
+  },
+  "inbox": [
+    {
+      "path": "ops/incident-response/inbox/45030319591-1.json",
+      "sha": "76cfdd8539a169abe2209a451583dad048cece7a"
+    }
+  ],
+  "history": {
+    "failed_step_sample": [
+      {
+        "run_id": 42177933507,
+        "job_id": 127760639771,
+        "step": "Run python scripts/check_super_public.py",
+        "observed_at": "2026-11-22T14:15:30Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+      },
+      {
+        "run_id": 42177656602,
+        "job_id": 127759734198,
+        "step": "Run python scripts/check_super_public.py",
+        "observed_at": "2026-11-22T14:15:30Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+      }
+    ],
+    "remaining_without_failed_step_metadata": 2,
+    "remaining_root_triage_entries": 118,
+    "roots_unconfirmed": true
+  },
+  "queues": {
+    "current_owner_ids_unchanged": true,
+    "eligibility": "No newly eligible handoff in current owner results or current inbox delta. Global live dispatch was not revalidated.",
+    "pending_consumer_release": 2,
+    "consumer_owner_pickup_verified": false,
+    "consumer_research_retained": 6,
+    "consumer_preserved_checkpoint": "ops/incident-response/inbox/20261122-consumer-two-recalls-publication-pending.json",
+    "consumer_reason": "Unchanged normal exact JPEG/build gate; nutmeg notice date distinction remains for owner. Previous news lease expired, current lease free.",
+    "research_owner_unchanged": true
+  },
+  "social": {
+    "new_rows": 0,
+    "max_finished_at": "2026-11-20T10:00:03.588Z"
+  },
+  "stability": {
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    },
+    "qualification_started_at": null,
+    "site_backup_metadata": [
+      {
+        "id": "administrative-state",
+        "updated_at": "2026-11-22T08:14:35.092Z",
+        "checksum_recorded": true,
+        "error_present": false
+      },
+      {
+        "id": "recent-news",
+        "updated_at": "2026-11-22T12:21:57.590Z",
+        "checksum_recorded": true,
+        "error_present": false
+      },
+      {
+        "id": "source-configuration",
+        "updated_at": "2026-11-22T12:21:58.738Z",
+        "checksum_recorded": true,
+        "error_present": false
+      }
+    ],
+    "homepage_sample_latency_ms": null,
+    "worker_metrics": null,
+    "isolated_capacity_measurement": null,
+    "next_daily_at_or_after": "2026-11-22T17:59:00Z"
+  },
+  "recovery": {
+    "attempted": false,
+    "last_known_event_alias_patch_release_pending": true,
+    "same_gate_signature": true,
+    "no_new_source_or_approval_for_ready_items": true
+  },
+  "usage": {
+    "full_logs_read": 2
+  }
+}
