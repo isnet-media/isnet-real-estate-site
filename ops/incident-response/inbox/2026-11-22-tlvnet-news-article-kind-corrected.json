@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-22T06:12:00.850Z",
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "runKey": "news-20261122-morning-1691f3aa-46fe-4422-86f9-52838b953ec6",
+  "target": "TLVNET-site",
+  "source_commit": "0fbafd1d6c7db4196f1a50b6f11aba3792849db8",
+  "journal_commit": "d903b6537725521b37dcd89263d32d7f2e3cf9b3",
+  "controller_triggered": false,
+  "subsystem": "TLVNET news presentation",
+  "signature": "build-news:meta:unknown_content_kind_article_for_news",
+  "status": "fixed_verified",
+  "root_cause": "The news entries were initially supplied with content_kind=article; the renderer correctly fell back to the magazine label for an unknown value.",
+  "correction": "Changed the three new items to the existing news classifier. Preserved all body and asset hashes, dates and URLs.",
+  "verification": {
+    "initial_version": 715,
+    "corrected_version": 716,
+    "deployment_id": "appgdep_6b02875ab56c81919aac22d3064b67a8",
+    "live_label": "ידיעה",
+    "all_new_article_labels_verified": 3,
+    "full_public_readback": 6
+  },
+  "prevention": "Use content_kind=news for news desk entries and assert the public article badge."
+}
