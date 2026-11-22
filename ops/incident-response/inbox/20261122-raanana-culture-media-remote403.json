@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-22T12:00:30.876Z",
+  "target": "ISNET-CMS-59",
+  "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "signature": "raanana-culture-media-upload-commons-http403",
+  "status": "owner_blocked_on_media_ingest",
+  "severity": "low",
+  "new_controller_task": false,
+  "affected": [
+    {
+      "post_id": 811802,
+      "old_image_id": 851225,
+      "subject": "קובי מידן",
+      "candidate": "https://commons.wikimedia.org/wiki/File:קובי_מידן.jpg",
+      "photographer": "Neukoln",
+      "license": "CC BY-SA 3.0",
+      "date": "2014",
+      "rights_verified": true,
+      "uploaded": false
+    },
+    {
+      "post_id": 812206,
+      "old_image_id": 851225,
+      "subject": "דן אריאלי",
+      "candidate": "https://commons.wikimedia.org/wiki/File:Dan_Ariely_January_2019.jpg",
+      "photographer": "Yael Zur for TAU Alumni",
+      "license": "CC BY-SA 4.0 / Wikimedia VRT ticket 2019071410002281",
+      "date": "2019",
+      "rights_verified": true,
+      "uploaded": false
+    }
+  ],
+  "observed": "ISNET upload_file(url) returned HTTP 403 for upload.wikimedia.org originals, then for thumb.wikimedia.org thumbnails. Two attempts with changed CDN host. No further retry. No post/image modified. Source licenses and subjects checked on Wikimedia Commons.",
+  "public_findings": [
+    {
+      "post_id": 812409,
+      "view": "article page publicly returned subject image credit for Paquito D'Rivera archive; CMS list defaultImageId 852123"
+    },
+    {
+      "post_id": 812401,
+      "view": "article page publicly returned subject image credit for Itay Herman archive; CMS list defaultImageId 852122"
+    },
+    {
+      "post_id": 812012,
+      "view": "public article shows Ariel Zilber archive credit and CMS image 852124, BUT stale article text says 'תמונת המחשה של במה'"
+    },
+    {
+      "post_id": 812206,
+      "view": "public article still displays old generic Pexels image credit"
+    }
+  ],
+  "blocker": "Image ingestion connector cannot retrieve Wikimedia CDN (HTTP403), and get_post(websiteId=59) returned {}, preventing safe minimal edit of outdated body text in 812012.",
+  "next_action": "Do not republish or change dates. Route licensed bytes through supported authorized image bank upload flow if/when available; verify file image/hash, edit only defaultImageId and credits on original 811802/812206, then public QA. Fix stale caption in 812012 only after full article readback supports preserving human edits. Do not modify homepage auto-headline script.",
+  "prior_ticket": "ops/incident-response/inbox/20261121-f6de17e8-2274-8324-b675-efd7fe7709b2-raanana-repeated-culture-image.json",
+  "homepage_desktop_QA": "pending_browser_not_available",
+  "homepage_390_QA": "pending_browser_not_available"
+}
