@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-21T17:59:19.000Z",
+  "updated_at": "2026-11-22T06:53:36Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7030,15 +7030,79 @@
     },
     {
       "id": "playwright155-ubuntu2604-browser-install",
-      "status": "open",
-      "updated_at": "2026-11-19T16:57:54.984Z",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-22T06:53:36Z",
       "root_cause": "Playwright 1.55 chromium install rejects ubuntu26.04-x64",
       "runs": [
         44560679071,
-        44560679082
+        44560679082,
+        44994686609,
+        44994347870,
+        44994303270
       ],
-      "evidence": "ops/incident-response/inbox/6fe3b20b-30d4-832e-ba6d-d891ed5bd241-playwright155-ubuntu2604.json",
-      "next_action": "Move checks to a verified supported runner or adapt pinned browser dependency, keeping Chromium checks required."
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/0684e0df-ebf0-8320-aa9f-608bd79c72c1.json",
+      "next_action": "Reopen only on a new observed failure; retain Chromium tests.",
+      "repair_commit": "19d816c6e2533403670b31c4dfaa8ea996e64218",
+      "regression": [
+        {
+          "id": 44995284967,
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44995284967",
+          "workflow": "Event integrity release checks",
+          "jobs": [
+            {
+              "id": 137124886581,
+              "name": "all-cities",
+              "status": "completed",
+              "conclusion": "success",
+              "steps": [
+                [
+                  "Run npx playwright install --with-deps chromium",
+                  "success"
+                ],
+                [
+                  "Run node scripts/test-event-integrity-browser.cjs",
+                  "success"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": 44995284923,
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44995284923",
+          "workflow": "Holon events release checks",
+          "jobs": [
+            {
+              "id": 137124886371,
+              "name": "data-and-browser",
+              "status": "completed",
+              "conclusion": "success",
+              "steps": [
+                [
+                  "Run npx playwright install --with-deps chromium",
+                  "success"
+                ],
+                [
+                  "Run node scripts/test-holon-events-browser.cjs",
+                  "success"
+                ]
+              ]
+            },
+            {
+              "id": 137125170903,
+              "name": "live",
+              "status": "completed",
+              "conclusion": "success",
+              "steps": [
+                [
+                  "Run node scripts/test-holon-events-live.cjs",
+                  "success"
+                ]
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "tlvnet-news-nested-receipt-checks-projection",
@@ -7473,9 +7537,44 @@
       "verified_at": "2026-11-21T16:46:34.000Z",
       "verification_evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json",
       "live_article": "https://tlvnet.com/news/terra-design-conditional-affordable-housing-explained-20261121"
+    },
+    {
+      "id": "tlvnet-build-photo-visual-queue-overwrite",
+      "status": "mitigated",
+      "updated_at": "2026-11-22T06:53:36Z",
+      "root_cause": "The generated image quality report replaced matching pending operator visual reviews during subsequent builds.",
+      "source_fix": {
+        "status": "source_verified_next_build_pending",
+        "script": "scripts/audit-image-quality.py",
+        "source_base": "d903b6537725521b37dcd89263d32d7f2e3cf9b3",
+        "source_commit": "4f309b7c892abd9fef3a6664f8882bdcaa668c4c",
+        "source_push_readback": true,
+        "protected_pending_records": 9,
+        "test": "Two fixture audit runs byte-identical, while retaining matching pending records and excluding duplicates, superseded body/media, removed articles and resolved entries.",
+        "production_redeployment": false
+      },
+      "original_inbox": "ops/incident-response/inbox/2026-11-22-tlvnet-photo-visual-queue-rebuild-overwrite.json",
+      "next_action": "Verify that the next normal owner build preserves matching pending reviews. Visual QA stays pending until performed.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/0684e0df-ebf0-8320-aa9f-608bd79c72c1.json"
+    },
+    {
+      "id": "tlvnet-news-unknown-article-kind-20261122",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-22T06:53:36Z",
+      "root_cause": "content_kind=article fell back to magazine classification in the news renderer.",
+      "change": "Original owner classified the three news items with the existing news value. No body, image, date or URL edits for the classification fix.",
+      "deployment_id": "appgdep_6b02875ab56c81919aac22d3064b67a8",
+      "version": 716,
+      "article_urls": [
+        "https://tlvnet.com/news/habima-daycare-parents-protest-20261122",
+        "https://tlvnet.com/news/tel-aviv-bennett-online-threat-investigation-20261121",
+        "https://tlvnet.com/news/kavim-634-atidim-permanent-route-change-20261129"
+      ],
+      "independent_public_readback": "All three new public home cards display ידיעה; articles and news section accessible.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/0684e0df-ebf0-8320-aa9f-608bd79c72c1.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-21-65110276-c2ac-8324-8e97-f556621e31e8",
+  "last_review_runKey": "ops-2026-11-22-0684e0df-ebf0-8320-aa9f-608bd79c72c1",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
