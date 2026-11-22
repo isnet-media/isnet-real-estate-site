@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "run_key": "2026-11-22T14:00:00+02:00",
+  "recorded_at": "2026-11-22T12:00:46.477Z",
+  "owner_task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "policy_version": "2026-11-19/raanana-only-1",
+  "target": "ISNET-CMS-59",
+  "cadence_changed": false,
+  "checkpoint_source": "ops/agent-harmony/releases/raanana-news-2026-11-22-0800.json",
+  "queue": "existing historical pending 811802/812206 media repeats; no standalone Raanana queue file confirmed",
+  "discovery_sources": [
+    "https://www.raanana.muni.il/articles/",
+    "https://tickets.raanana.muni.il/",
+    "https://www.tzomet-ran.co.il/culture/75289",
+    "https://inhasharon.co.il/",
+    "https://raanananet.co.il/חדשות/חדשות-רעננה"
+  ],
+  "results": {
+    "discovered": 1,
+    "verified": 1,
+    "published": 0,
+    "published_verified_new": 0,
+    "duplicates_prevented": 1,
+    "blocked": 2,
+    "media_repair_completed": 0
+  },
+  "editorial_decision": "Local weekly events item published 22 Nov 11:28 overlaps 22 Nov morning events article 812457; no additional verified consequential news independent enough to warrant publication. Avoid filler or duplicate.",
+  "cms_observations": {
+    "website_id": 59,
+    "site_and_categories_verified": true,
+    "posted_list_read": true,
+    "get_post_readback": "{} (unavailable)",
+    "latest_news_local_id": 812180,
+    "existing_culture_id": 812457
+  },
+  "public_readback": [
+    {
+      "post_id": 812457,
+      "public_url": "https://raanananet.co.il/תרבות/raanana-family-storytime-concerts-20261122",
+      "status": "web search indexed full article and credits; direct open disabled; no browser visual QA"
+    },
+    {
+      "post_id": 812409,
+      "public_url": "https://raanananet.co.il/תרבות/raanana-world-jazz-music-festival-2026-guide",
+      "status": "full HTML read; subject photo alt/credit Paquito D'Rivera archive and body; published visible"
+    },
+    {
+      "post_id": 812401,
+      "public_url": "https://raanananet.co.il/תרבות/raanana-saturday-events-20261121",
+      "status": "full HTML read; subject photo alt/credit Itay Herman archive and body; published visible"
+    },
+    {
+      "post_id": 812012,
+      "public_url": "https://raanananet.co.il/תרבות/הערב-ברעננה-אריאל-זילבר-במפגש-מוזיקלי-המופע-של-אסי-כהן-כבר-אזל-812012",
+      "status": "full HTML read; new archival photo alt credit; stale body caption 'תמונת המחשה של במה' remains"
+    }
+  ],
+  "outstanding": [
+    {
+      "post_id": 811802,
+      "old_image_id": 851225,
+      "photo_subject": "קובי מידן",
+      "image_candidate_licensed": true,
+      "status": "blocked_remote_403"
+    },
+    {
+      "post_id": 812206,
+      "old_image_id": 851225,
+      "photo_subject": "דן אריאלי",
+      "image_candidate_licensed": true,
+      "status": "blocked_remote_403"
+    },
+    {
+      "post_id": 812012,
+      "status": "stale_illustration_body_caption_cannot_safely_fix_without_full_cms_get_post"
+    }
+  ],
+  "rights": {
+    "sources": "Wikimedia Commons",
+    "license_refs": [
+      "https://commons.wikimedia.org/wiki/File:קובי_מידן.jpg",
+      "https://commons.wikimedia.org/wiki/File:Dan_Ariely_January_2019.jpg"
+    ],
+    "current_image_hash": "not_measured",
+    "new_image_ids": []
+  },
+  "homepage": {
+    "script": "raanana-auto-headlines-v1",
+    "manually_changed": false,
+    "desktop_QA": "pending",
+    "viewport_390_QA": "pending",
+    "browser_observation": "web crawler is not a JS viewport proof"
+  },
+  "blocker_ticket": "ops/incident-response/inbox/20261122-raanana-culture-media-remote403.json",
+  "changed": {
+    "published": false,
+    "existing_post_updated": false,
+    "CMS37279": false,
+    "headlines": false,
+    "schedule": false
+  }
+}
