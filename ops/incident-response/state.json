@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T14:15:30Z",
+  "updated_at": "2026-11-22T15:57:34Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-22T14:02:24Z",
+  "last_processed_run_created_at": "2026-11-22T15:43:38Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -21,14 +21,14 @@
       "root_triage_evidence": "ops/incident-response/evidence/ops-2026-11-18-e7a34709-e5ac-8322-abcd-3d377a6b50a7.json",
       "last_attempt": {
         "run_ids": [
-          42177933507,
-          42177656602
+          42177371685,
+          42166739159
         ],
-        "observed_at": "2026-11-22T14:15:30Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json",
-        "status": "Historical failed-step metadata only; root unconfirmed."
+        "observed_at": "2026-11-22T15:57:34Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+        "status": "Historical failed-step metadata only; historical root triage remains open."
       },
-      "remaining_without_failed_step_metadata": 2
+      "remaining_without_failed_step_metadata": 0
     },
     "full_logs_read_this_cycle": 0,
     "unconfirmed_publish_failure_ids": [
@@ -3045,7 +3045,14 @@
           "conclusion": "failure",
           "source_commit": "9148c122d12933061f166ffb42929c15265a097f",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42177371685",
-          "classification": "Historical metadata only; full log not read, root signature unconfirmed."
+          "classification": "Historical metadata only; full log not read, root signature unconfirmed.",
+          "last_failed_step_metadata": {
+            "run_id": 42177371685,
+            "job_id": 127758817250,
+            "step": "Run python scripts/check_super_public.py",
+            "observed_at": "2026-11-22T15:57:34Z",
+            "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
+          }
         },
         {
           "run_id": 42166739159,
@@ -3057,7 +3064,14 @@
           "conclusion": "failure",
           "source_commit": "1f0402b9b06c0418fd5b5107a17b7cb67dfb22de",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42166739159",
-          "classification": "Historical metadata only; full log not read, root signature unconfirmed."
+          "classification": "Historical metadata only; full log not read, root signature unconfirmed.",
+          "last_failed_step_metadata": {
+            "run_id": 42166739159,
+            "job_id": 127724865128,
+            "step": "Run python scripts/check_super_public.py",
+            "observed_at": "2026-11-22T15:57:34Z",
+            "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
+          }
         }
       ],
       ".github/workflows/ashdod-sea.yml": [],
@@ -3106,21 +3120,21 @@
   "last_verified_public_readback_run": "d9f867d4-aeac-8330-a315-7f6422ee46f9",
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "d880e314-1ba4-8330-a3f0-a3c9abb60076",
-    "runKey": "ops-2026-11-22-d880e314-1ba4-8330-a3f0-a3c9abb60076",
+    "run_id": "a15528f9-e6a8-8330-9256-a5d9276bfce4",
+    "runKey": "ops-2026-11-22-a15528f9-e6a8-8330-9256-a5d9276bfce4",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 2,
-    "observed_at": "2026-11-22T14:15:30Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json",
-    "status": "no_new_failure_signature",
-    "saved_version": 724,
+    "observed_at": "2026-11-22T15:57:34Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+    "status": "verified_owner_release_new_organizer_data_incident",
+    "saved_version": 725,
     "previous_verified_version": 724,
-    "deployment_id": "appgdep_6b02ddabdcb08191bfe93b48d408eb9c",
-    "source_commit": "34ac8aca97f0e21c217fa1d32d176ecd8e6620b3",
+    "deployment_id": "appgdep_6b0304c258e08191886f6486dc24cf7c",
+    "source_commit": "e9b86681b1000196458a1d42bc931fe58fad6d97",
     "public_home_rendered": true,
-    "new_actions": 19,
-    "new_inbox": 1,
-    "new_articles": 0,
+    "new_actions": 84,
+    "new_inbox": 9,
+    "new_articles": 2,
     "updated_articles": 0,
     "controller_new_deployments": 0,
     "controller_editorial_writes": 0,
@@ -3193,20 +3207,20 @@
     },
     "Automation_82add5edecd8819197814e83bac85a75": {
       "enabled": true,
-      "last_run_id": "11c220c3-44c0-8327-93b8-7198d2e4e505",
-      "started_at": "2026-11-21T14:55:03.045326Z",
-      "completed_at": "2026-11-21T15:21:12.843509Z",
+      "last_run_id": "c9ba8175-5c50-8333-b83e-0b755d99dd4a",
+      "started_at": "2026-11-22T14:48:44.834629Z",
+      "completed_at": "2026-11-22T15:09:43.221432Z",
       "recorded_status": "completed",
-      "result": "פורסמה ואומתה [סקירת מרחב טרה וחלופת 57 הדירות במחיר מפוקח](https://tlvnet.com/news/terra-design-conditional-affordable-housing-explained-20261121).\n\n- הגוף, התמונה, הקרדיט וההפניות בשער, במדור ובשכונה אומתו.\n- אותרו 3 מועמדים; אומתה ופורסמה סקירה אחת. עדכונים ודחיות: 0; כפילויות שנמנעו: 7.\n- בתור נותרו 11 פריטים לאימות ו־4 חסומים, עם סיבות פרטניות. אין פריטים מוכנים שלא פורסמו.\n- תצוגת מחשב נבדקה; מובייל ממתין. הנעילה שוחררה והתזמון נשמר.",
-      "result_run_id": "11c220c3-44c0-8327-93b8-7198d2e4e505",
-      "observed_at": "2026-11-21T16:11:33.000Z",
+      "result": "פורסמו ואומתו שתי ידיעות חדשות במדור הנדל״ן של תל אביב נט.\n\n- [דיווח על הפקעת רצועת מדרכה בפינסקר–בוגרשוב](https://tlvnet.com/news/pinsker-bograshov-sidewalk-expropriation-report-20261122)\n- [מכירת חנות בדיזנגוף 310 ב־1.7 מיליון שקל](https://tlvnet.com/news/dizengoff-310-reported-shop-sale-20261122)\n\nשתיהן מוצגות כדיווחים מיוחסים. השלמת רישום ההפקעה ומועד חתימת עסקת החנות טרם אומתו.\n\nנבדקו הגוף, התמונות, הכיתובים וההפניות בשער ובמדור. תצוגת המחשב אומתה, ובדיקת המובייל נשמרה להמשך.\n\nאותרו 6 מועמדים חדשים, פורסמו 2 ונמנעו 9 כפילויות. בתור נותרו 13 פריטים לאימות ו־4 עם חסמים מתועדים. היומן נשמר ונעילת הפרסום שוחררה.",
+      "result_run_id": "c9ba8175-5c50-8333-b83e-0b755d99dd4a",
+      "observed_at": "2026-11-22T15:57:34Z",
       "current_configuration_observed_at": "2026-11-16T05:46:55.355Z",
       "current_policy_version": "2026-11-15/1.1",
-      "result_created_at": "2026-11-21T15:21:12.196789Z",
+      "result_created_at": "2026-11-22T15:09:42.777497Z",
       "qualification": "Exact run/result read; old latest_result not attributed to new run. Public owner proof and controller verification separate.",
       "effective_policy": "2026-11-14/1.0",
       "result_matches_attempt": true,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
       "result_summary_truncated": false
     },
     "Automation_a32c48a7ae848191a5769078a5c74a09": {
@@ -3758,7 +3772,8 @@
     "raanana-culture-media-upload-commons-http403",
     "tlvnet-consumer-recall-ready-after-lock-and-date-check",
     "ashdod-confirmed-event-aliases-block-pages",
-    "kiryat-gat-events-shared-asset-integrity-aborted"
+    "kiryat-gat-events-shared-asset-integrity-aborted",
+    "ashdod-ofek-future-snapshot-empty"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -3981,7 +3996,16 @@
     "ops/incident-response/inbox/45028608637-1.json",
     "ops/incident-response/inbox/45029106417-1.json",
     "ops/incident-response/inbox/e5bb335c-bb60-8330-b57d-ee4eac785e9c-ashdod-event-alias-regression.json",
-    "ops/incident-response/inbox/45030319591-1.json"
+    "ops/incident-response/inbox/45030319591-1.json",
+    "ops/incident-response/inbox/45033275600-1.json",
+    "ops/incident-response/inbox/45034479915-1.json",
+    "ops/incident-response/inbox/45034991733-1.json",
+    "ops/incident-response/inbox/45035067962-1.json",
+    "ops/incident-response/inbox/45035306220-1.json",
+    "ops/incident-response/inbox/45035386850-1.json",
+    "ops/incident-response/inbox/45039740410-1.json",
+    "ops/incident-response/inbox/45039829171-1.json",
+    "ops/incident-response/inbox/a15528f9-e6a8-8330-9256-a5d9276bfce4-ashdod-ofek-future-snapshot.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4934,6 +4958,30 @@
       "full_logs_read": 2,
       "owners_checked": 14,
       "new_social_rows": 0
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "a15528f9-e6a8-8330-9256-a5d9276bfce4",
+      "runKey": "ops-2026-11-22-a15528f9-e6a8-8330-9256-a5d9276bfce4",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 2,
+      "observed_at": "2026-11-22T15:57:34Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+      "status": "verified_owner_release_new_organizer_data_incident",
+      "saved_version": 725,
+      "previous_verified_version": 724,
+      "deployment_id": "appgdep_6b0304c258e08191886f6486dc24cf7c",
+      "source_commit": "e9b86681b1000196458a1d42bc931fe58fad6d97",
+      "public_home_rendered": true,
+      "new_actions": 84,
+      "new_inbox": 9,
+      "new_articles": 2,
+      "updated_articles": 0,
+      "controller_new_deployments": 0,
+      "controller_editorial_writes": 0,
+      "full_logs_read": 2,
+      "owners_checked": 14,
+      "new_social_rows": 0
     }
   ],
   "photo_controls_checkpoint": {
@@ -5746,8 +5794,8 @@
     "evidence": "ops/tlvnet-stability/observations/2026-11-20/100eea27-f180-832c-a674-75914025141c.json",
     "new_rows_this_cycle": 0,
     "public_verification": "No new social run; previously reported run_failed guard unchanged.",
-    "last_checked_at": "2026-11-22T14:15:30Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+    "last_checked_at": "2026-11-22T15:57:34Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
   },
   "publisher_manual_recovery": {
     "observed_at": "2026-11-14T04:55:32.725Z",
@@ -6488,8 +6536,8 @@
         }
       }
     },
-    "last_delta_checked_at": "2026-11-22T14:15:30Z",
-    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json",
+    "last_delta_checked_at": "2026-11-22T15:57:34Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
     "news_morning_ledger_readback": {
       "discovered": 3,
       "verified": 2,
@@ -6523,15 +6571,13 @@
       "article": "https://tlvnet.com/news/good-pharm-charity-cream-terms-20261119"
     },
     "latest_owner_real_estate_result": {
-      "owner_report_new_publications": 1,
-      "pending_ready": 0,
-      "research_pending": 11,
+      "owner_run_id": "c9ba8175-5c50-8333-b83e-0b755d99dd4a",
+      "verified_new_publications": 2,
+      "pending_verification": 13,
       "prior_blockers": 4,
-      "owner_run_id": "11c220c3-44c0-8327-93b8-7198d2e4e505",
       "independent_public_readback_pending": false,
-      "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json",
-      "independent_public_evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json",
-      "mobile_pending": true
+      "mobile_pending": true,
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
     },
     "global_pending_ready_independently_verified": false,
     "latest_incremental_queue_basis": "Owner release/terminal deployment unchanged, prior exact live proof retained. Queue workflow step completed without additional verified release or recent admin queue rows in the observed scope.",
@@ -6921,7 +6967,7 @@
       },
       "evidence": "ops/tlvnet-stability/observations/2026-11-22/d9f867d4-aeac-8330-a315-7f6422ee46f9.json"
     },
-    "current_release_unchanged": true
+    "current_release_unchanged": false
   },
   "pending_task_run_ids": [],
   "latest_supermarket_execution_checkpoint": {
@@ -8156,11 +8202,11 @@
         "mobile_visual_review": "pending"
       },
       "real-estate": {
-        "last_new_published_at": "2026-11-21T15:09:39.438241+00:00",
-        "last_new_id": "terra-design-conditional-affordable-housing-explained-20261121",
-        "last_substantive_update_at": "2026-11-21T15:09:39.438241+00:00",
-        "last_updated_id": "terra-design-conditional-affordable-housing-explained-20261121",
-        "update_basis": "Source-declared article timestamps; no inferred edit from rebuild or publication label",
+        "last_new_published_at": "2026-11-22T15:00:24.496295+00:00",
+        "last_new_id": "dizengoff-310-reported-shop-sale-20261122",
+        "last_substantive_update_at": "2026-11-22T15:00:24.496295+00:00",
+        "last_updated_id": "dizengoff-310-reported-shop-sale-20261122",
+        "update_basis": "New publication time in public city feed; no substantive edit to a previously published article reported by owner.",
         "published_count": 33,
         "handoff_status_counts": {
           "published_verified": 4,
@@ -8171,11 +8217,11 @@
         },
         "ledger_sha256": "827db6f6fe8f00593f4d909048951a55febd07fe97a86b901b87231d2b27fa76",
         "latest_body_sha256": "b11601b49b2b14ed5daf0430f20a7c9a6ab2123b1a034a72d8ce246211cede7d",
-        "section_url": "https://tlvnet.com/news/real-estate.html",
-        "lead_article_id": "terra-design-conditional-affordable-housing-explained-20261121",
-        "lead_published_at": "2026-11-21T15:09:39.438241+00:00",
-        "last_owner_run_id": "11c220c3-44c0-8327-93b8-7198d2e4e505",
-        "last_owner_completed_at": "2026-11-21T15:21:12.843509Z",
+        "section_url": "https://tlvnet.com/news/real-estate",
+        "lead_article_id": "dizengoff-310-reported-shop-sale-20261122",
+        "lead_published_at": "2026-11-22T15:00:24.496295+00:00",
+        "last_owner_run_id": "c9ba8175-5c50-8333-b83e-0b755d99dd4a",
+        "last_owner_completed_at": "2026-11-22T15:09:43.221432Z",
         "owner_task_id": "Automation_82add5edecd8819197814e83bac85a75",
         "owner_run_changed_since_checkpoint": true,
         "last_new_published_basis": "Current owner source plus terminal deployment and independent custom-domain body/image/credit/home/section readback",
@@ -8223,15 +8269,15 @@
             "status": "deferred_budget"
           }
         ],
-        "source_commit": "541d21aa2cd450de8af8056e8c6bfbe64760d719",
-        "saved_version": 712,
-        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-21/2e3415b1-d944-8324-81cf-8b2acab9633e.json",
-        "last_owner_started_at": "2026-11-21T14:55:03.045326Z",
-        "metadata_checked_at": "2026-11-21T16:46:34.000Z",
+        "source_commit": "e9b86681b1000196458a1d42bc931fe58fad6d97",
+        "saved_version": 725,
+        "verification_evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+        "last_owner_started_at": "2026-11-22T14:48:44.834629Z",
+        "metadata_checked_at": "2026-11-22T15:57:34Z",
         "coverage_queue_count": 9,
         "coverage_queue_checkpoint": "public/news/agents/real-estate/ledger.json",
         "lead_basis": "Current source generated section ordering and freshness regression; live followup for633pending",
-        "last_owner_new_articles": 1,
+        "last_owner_new_articles": 2,
         "coverage_complete": false,
         "latest_runKey": "real-estate-2026-11-16-b0cae23f",
         "handoff_total": 16,
@@ -8308,46 +8354,28 @@
           "completed_at": "2026-11-20T15:21:11.521187Z",
           "result_matches_run": true
         },
-        "pending_ready": 0,
+        "pending_ready": null,
         "latest_owner_pending_counts": {
-          "research_pending": 11,
+          "pending_verification": 13,
           "prior_blockers": 4
         },
         "latest_publication": {
-          "url": "https://tlvnet.com/news/terra-design-conditional-affordable-housing-explained-20261121",
-          "title": "מרחב טרה: מה עומד מאחורי חלופת 57 הדירות בשכר דירה מפוקח",
-          "body_observed": true,
-          "body_html_paragraph_count_including_lead_and_shared_ui": 6,
-          "body_separately_compared_to_owner_source": false,
-          "visible_credit": "אילוסטרציה · מגדל ToHa ואזור יגאל אלון, תל אביב · Depositphotos מקור",
-          "image": {
-            "size": 258027,
-            "sha256": "45bda39608b2a2fe10c26f93730e4b3a038d5a6fbd7c02950fff5606647a67ea",
-            "format": "JPEG",
-            "dimensions": [
-              1600,
-              887
-            ],
-            "url": "https://tlvnet.com/photo-bank/assets/deposit-toha-sunset.jpg",
-            "http_status": 200
-          },
-          "desktop": "live_browser_rendered_heading_body_and_credit",
+          "id": "dizengoff-310-reported-shop-sale-20261122",
+          "url": "https://tlvnet.com/news/dizengoff-310-reported-shop-sale-20261122",
+          "published_at": "2026-11-22T15:00:24.496295+00:00",
+          "credit": "אילוסטרציה – AI",
+          "feed_neighborhood": "הצפון הישן",
+          "area": "https://tlvnet.com/city-hub/areas/old-north/",
+          "body": true,
+          "image_element": true,
+          "visible_credit": true,
+          "home_card": true,
+          "section_card": true,
+          "neighborhood_card": true,
+          "owner_desktop_verified": true,
+          "controller_desktop_accessibility_tree": true,
           "mobile": "pending",
-          "published_at": "2026-11-21T15:09:39.438241+00:00",
-          "updated_at": "2026-11-21T15:09:39.438241+00:00",
-          "status": "published_verified",
-          "area": {
-            "feed_url": "https://tlvnet.com/city-hub/updates.json",
-            "feed_article_id": "terra-design-conditional-affordable-housing-explained-20261121",
-            "feed_neighborhoods": [
-              "נחלת יצחק"
-            ],
-            "actual_area_url": "https://tlvnet.com/city-hub/areas/nahalat-yitzhak/",
-            "actual_area_http": 200,
-            "actual_area_link": true
-          },
-          "home_link": true,
-          "section_link": true
+          "independent_image_hash": null
         },
         "metadata_correction_at": "2026-11-20T15:18:21.141398+00:00",
         "latest_queue_source_check": {
@@ -8382,7 +8410,46 @@
           "source_substantive_update_at": null,
           "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json"
         },
-        "section_route_checked_at": "2026-11-21T19:44:28Z"
+        "section_route_checked_at": "2026-11-21T19:44:28Z",
+        "last_owner_result_matches_run": true,
+        "latest_publications": [
+          {
+            "id": "pinsker-bograshov-sidewalk-expropriation-report-20261122",
+            "url": "https://tlvnet.com/news/pinsker-bograshov-sidewalk-expropriation-report-20261122",
+            "published_at": "2026-11-22T14:57:36.196129+00:00",
+            "credit": "אילוסטרציה · רחוב בוגרשוב, תל אביב · Depositphotos",
+            "feed_neighborhood": "לב תל אביב",
+            "area": "https://tlvnet.com/city-hub/areas/lev-tel-aviv/",
+            "body": true,
+            "image_element": true,
+            "visible_credit": true,
+            "home_card": true,
+            "section_card": true,
+            "neighborhood_card": true,
+            "owner_desktop_verified": true,
+            "controller_desktop_accessibility_tree": true,
+            "mobile": "pending",
+            "independent_image_hash": null
+          },
+          {
+            "id": "dizengoff-310-reported-shop-sale-20261122",
+            "url": "https://tlvnet.com/news/dizengoff-310-reported-shop-sale-20261122",
+            "published_at": "2026-11-22T15:00:24.496295+00:00",
+            "credit": "אילוסטרציה – AI",
+            "feed_neighborhood": "הצפון הישן",
+            "area": "https://tlvnet.com/city-hub/areas/old-north/",
+            "body": true,
+            "image_element": true,
+            "visible_credit": true,
+            "home_card": true,
+            "section_card": true,
+            "neighborhood_card": true,
+            "owner_desktop_verified": true,
+            "controller_desktop_accessibility_tree": true,
+            "mobile": "pending",
+            "independent_image_hash": null
+          }
+        ]
       },
       "economy-tech": {
         "last_new_published_at": "2026-11-22T10:43:34.020401+00:00",
@@ -9632,10 +9699,10 @@
         ]
       }
     },
-    "last_delta_checked_at": "2026-11-22T14:15:30Z",
-    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json",
-    "latest_checked_release": 724,
-    "latest_checked_release_source": "34ac8aca97f0e21c217fa1d32d176ecd8e6620b3"
+    "last_delta_checked_at": "2026-11-22T15:57:34Z",
+    "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+    "latest_checked_release": 725,
+    "latest_checked_release_source": "e9b86681b1000196458a1d42bc931fe58fad6d97"
   },
   "latest_social_publication_diagnosis": {
     "observed_at": "2026-11-20T10:15:04.731Z",
@@ -9964,12 +10031,22 @@
     "reconciled_at": "2026-11-16T05:46:55.355Z"
   },
   "unread_inbox_checkpoint": {
-    "observed_at": "2026-11-22T14:15:30Z",
+    "observed_at": "2026-11-22T15:57:34Z",
     "new_entries_processed": [
-      "ops/incident-response/inbox/45030319591-1.json"
+      "ops/incident-response/inbox/45033275600-1.json",
+      "ops/incident-response/inbox/45034479915-1.json",
+      "ops/incident-response/inbox/45034991733-1.json",
+      "ops/incident-response/inbox/45035067962-1.json",
+      "ops/incident-response/inbox/45035306220-1.json",
+      "ops/incident-response/inbox/45035386850-1.json",
+      "ops/incident-response/inbox/45039740410-1.json",
+      "ops/incident-response/inbox/45039829171-1.json",
+      "ops/incident-response/inbox/e5bb335c-bb60-8330-b57d-ee4eac785e9c-ashdod-event-alias-regression.json"
     ],
-    "controller_created_inbox": [],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+    "controller_created_inbox": [
+      "ops/incident-response/inbox/a15528f9-e6a8-8330-9256-a5d9276bfce4-ashdod-ofek-future-snapshot.json"
+    ],
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
   },
   "latest_publication_throughput_audit": {
     "runKey": "publication-throughput-audit-2026-11-15T13-00-39-186Z",
@@ -10076,25 +10153,19 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-22T14:15:30Z",
-    "from": "2026-11-22T13:45:59Z",
-    "through": "2026-11-22T14:02:24Z",
-    "strictly_new": 19,
+    "observed_at": "2026-11-22T15:57:34Z",
+    "from": "2026-11-22T14:02:24Z",
+    "through": "2026-11-22T15:43:38Z",
+    "strictly_new": 84,
     "boundary_crossed": true,
     "boundary_ids": [
-      45030628325
+      45039889356,
+      45039889383,
+      45039889442
     ],
     "full_logs_read": 2,
     "pending_run_ids": [],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json",
-    "previous_pending_completed": {
-      "id": 45026850964,
-      "created_at": "2026-11-22T13:19:17Z",
-      "completed_at": "2026-11-22T13:59:07Z",
-      "status": "completed",
-      "conclusion": "success",
-      "scope": "Event enrichment workflow completed; live publication requires separate release evidence."
-    }
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -11193,12 +11264,52 @@
       {
         "path": "ops/incident-response/inbox/45030319591-1.json",
         "sha": "76cfdd8539a169abe2209a451583dad048cece7a"
+      },
+      {
+        "path": "ops/incident-response/inbox/45033275600-1.json",
+        "sha": "e1221d16a6d6f370933d66d10913b335b8bde35a"
+      },
+      {
+        "path": "ops/incident-response/inbox/45034479915-1.json",
+        "sha": "77a94548a1b356d0272747c3dd950e9460c83ed5"
+      },
+      {
+        "path": "ops/incident-response/inbox/45034991733-1.json",
+        "sha": "0fb4dc161a3f3e50f3e22a8c045b780014b9ed39"
+      },
+      {
+        "path": "ops/incident-response/inbox/45035067962-1.json",
+        "sha": "471542c4df8a0183d2a4ad4b04080b6a4422bb02"
+      },
+      {
+        "path": "ops/incident-response/inbox/45035306220-1.json",
+        "sha": "7772544e557b703a32dbee913ad428fad1de5eee"
+      },
+      {
+        "path": "ops/incident-response/inbox/45035386850-1.json",
+        "sha": "1b795a83fedd3747de27679d1fe9d4f39e06ac05"
+      },
+      {
+        "path": "ops/incident-response/inbox/45039740410-1.json",
+        "sha": "6f680701222566a9d457dd1bb52f62c93a61b30a"
+      },
+      {
+        "path": "ops/incident-response/inbox/45039829171-1.json",
+        "sha": "bd0edc53ae92bdad9f02cae9fd0979b0c53d5e0d"
+      },
+      {
+        "path": "ops/incident-response/inbox/e5bb335c-bb60-8330-b57d-ee4eac785e9c-ashdod-event-alias-regression.json",
+        "sha": "d9b540c4124641d678517e1745d31648cfbd2848"
+      },
+      {
+        "path": "ops/incident-response/inbox/a15528f9-e6a8-8330-9256-a5d9276bfce4-ashdod-ofek-future-snapshot.json",
+        "sha": "705b4f3a1e6fb02f07d0bb4c3fec6b93427365c7"
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
     "evidence": "ops/tlvnet-stability/observations/2026-11-22/0684e0df-ebf0-8320-aa9f-608bd79c72c1.json",
-    "last_checked_at": "2026-11-22T14:15:30Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+    "last_checked_at": "2026-11-22T15:57:34Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
   },
   "source_report_checkpoint": {
     "status": "executed_on_current_published_source_plus_owner_receipt",
