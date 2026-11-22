@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-11-22",
+  "run_key": "2026-11-22T08:00+02:00:morning-run8",
+  "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "target": "ISNET-CMS-59",
+  "policy_version": "2026-11-19/raanana-only-1",
+  "discovery": "One pass across Ra'anana municipal calendar, official city notices, Tzomet Hasharon and local news sources.",
+  "sources": [
+    "https://tickets.raanana.muni.il/",
+    "https://www.raanana.muni.il/articles/",
+    "https://www.tzomet-ran.co.il/"
+  ],
+  "verified_local_event_details": 7,
+  "published": [
+    {
+      "id": 812457,
+      "title": "היום ברעננה: שעות סיפור בשתי שכונות, קונצרט לילדים ומוזיקה בערב",
+      "cms_date": "2026-11-22T08:07:18.75",
+      "category": "תרבות",
+      "website_id": 59,
+      "media_id": 852184,
+      "media_source": "https://www.pexels.com/photo/man-reading-in-front-of-children-8466901/",
+      "media_credit": "צילום המחשה לשעת סיפור, לא ברעננה: Anastasia Shuraeva / Pexels (Pexels License)",
+      "cms_readback": "list_posts shows one visible non-template item, correct title/category/photo/date",
+      "public_verified": false,
+      "public_url": null,
+      "public_QA": "Direct public-page fetch not accessible via web; category and homepage results appeared cached from earlier dates.",
+      "home_desktop_QA": "pending_browser_unavailable",
+      "home_390_QA": "pending_browser_unavailable",
+      "byte_level_image_sha256": "unavailable_in_admin_connection"
+    }
+  ],
+  "duplicate_check": {
+    "searches": [
+      "22 בנובמבר",
+      "שעת סיפור",
+      "שוקו ובלון",
+      "תזמורת",
+      "מה עושים היום"
+    ],
+    "same_topic_found": false,
+    "image_id_unused_prior": true,
+    "new_copy_count": 1
+  },
+  "existing_image_fixes": {
+    "fixed_previous_run": [
+      {
+        "post_id": 812409,
+        "image_id": 852123
+      },
+      {
+        "post_id": 812401,
+        "image_id": 852122
+      },
+      {
+        "post_id": 812012,
+        "image_id": 852124
+      }
+    ],
+    "confirmed_in_list_posts": true,
+    "still_using_generic_851225": [
+      811802,
+      812206
+    ],
+    "no_additional_changes": true
+  },
+  "cms_get_post_status": "returned empty object; article body and public route cannot be independently read back",
+  "code_and_headlines_changed": false,
+  "next_actions": [
+    "Verify new article and image credits on public page in real browser",
+    "Confirm automatic homepage headline injection and 390px display",
+    "Review 811802 and 812206 for separate, rights-cleared subject images; don't reuse generic 851225",
+    "Do not republish 812457 for QA alone"
+  ],
+  "state": "cms_published_public_qa_pending"
+}
