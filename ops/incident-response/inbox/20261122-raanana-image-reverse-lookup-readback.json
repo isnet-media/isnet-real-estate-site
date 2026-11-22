@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-22T17:04:59.485Z",
+  "target": "ISNET-CMS-59",
+  "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "severity": "low",
+  "signature": "isnet-list-posts-usedImageId-inconsistent-with-defaultImageId",
+  "status": "needs_connector_investigation",
+  "new_controller_task": false,
+  "observation": "After successful create_post(publish=true), list_posts(search exact title) and list_posts(latest) show post 812636 with defaultImageId=852347, but list_posts(usedImageId=852347) returned totalItems=0. Repeated after create and get_file confirmed image exists. get_post(websiteId=59,id=812636) returned empty data, consistent with previously reported detail-readback limitation.",
+  "impact": "The image reverse-lookup cannot serve as reliable sole check for reuse by adjacent posts; use main post listing and actual public cards until resolved. Public HTML and 390px viewport QA remain pending.",
+  "post_id": 812636,
+  "image_id": 852347,
+  "related_previous_ticket": "ops/incident-response/inbox/20261122-raanana-culture-media-remote403.json",
+  "safety": "No changes to CMS37279/headlines; no additional automation created."
+}
