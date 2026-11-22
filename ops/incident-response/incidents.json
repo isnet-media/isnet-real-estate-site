@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T06:53:36Z",
+  "updated_at": "2026-11-22T07:20:47Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -801,8 +801,8 @@
         ],
         "tlv_stale_branch_count": 19
       },
-      "resolution": "No off-window public scan or price collection performed on Friday. Existing data retained; no freshness claim.",
-      "next_action": "Existing execution administrator must confirm current collector enabled/running state and authorize execution through the original daily-claim mechanism. Clarify approval scope for supermarket public metadata; do not create keys, enable cancelled workflows or modify schedules.",
+      "resolution": "Legacy verification route repaired and independently verified. The current delivery was readable. Data freshness remains partial and the health check still fails on stale/retained sources.",
+      "next_action": "Review the next changed owner collection checkpoint during the authorized window. Retained KGAT supplier data and the other six stale targets remain open.",
       "prevention": "Keep schedule correction and actual public/data recovery as distinct evidence.",
       "reported_runKey": "ops-manual-2026-11-13T04-33-57-638Z-568ec413",
       "occurrences": [
@@ -924,17 +924,40 @@
         "observed_at": "2026-11-17T03:08:55.683Z",
         "evidence": "ops/incident-response/evidence/ops-2026-11-17-bbb95af5-26f8-832e-98c2-7641462cce8d.json"
       },
-      "last_seen_at": "2026-11-17T03:08:55.683Z",
+      "last_seen_at": "2026-11-22T07:20:47Z",
       "remaining_historical_review": "212 historical entries across8workflow groups; no new current failure established.",
       "latest_authorized_window_metadata_check": {
-        "observed_at": "2026-11-17T06:14:58.331Z",
-        "source_claim_dates": "All seven12Nov",
-        "source_refresh_report_dates": "All seven12Nov",
-        "current_day_claim": false,
-        "new_collector_actions": 0,
-        "workflow_enabled_state": "unverified_connector_workflow_inventory_unsupported",
-        "public_readback": "rejected_by_auto_review_no_result_used",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-17-1eeeaba5-b3a8-832e-b3f5-4322c5faf65d.json"
+        "observed_at": "2026-11-22T07:20:47Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/2d98f2c5-c084-8320-8078-fa7be8913cda.json",
+        "source_inbox": "ops/incident-response/inbox/supermarkets-20261122T070222Z-3770287b73d2.json",
+        "public_release": "621b7cc6333082c94b340f3a38c2fefe064c7077",
+        "KGAT": {
+          "updated": 7,
+          "total": 9,
+          "retained": [
+            {
+              "branch_id": "7290696200003-055",
+              "chain": "ויקטורי",
+              "last_good_source_date": "2026-11-10",
+              "error": "ConnectTimeout",
+              "host": "laibcatalog.co.il",
+              "attempts": 2
+            },
+            {
+              "branch_id": "7290661400001-077",
+              "chain": "מחסני השוק",
+              "last_good_source_date": "2026-11-10",
+              "error": "ConnectTimeout",
+              "host": "laibcatalog.co.il",
+              "attempts": 2
+            }
+          ]
+        },
+        "other_cities_last_report": "2026-11-12",
+        "tlv_last_good_prices": "2026-11-09",
+        "ci": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44997562377",
+        "route_incident": "supermarket-health-legacy-data-route",
+        "window": "Collection window still in progress at observation."
       }
     },
     {
@@ -7540,8 +7563,8 @@
     },
     {
       "id": "tlvnet-build-photo-visual-queue-overwrite",
-      "status": "mitigated",
-      "updated_at": "2026-11-22T06:53:36Z",
+      "status": "fixed_verified",
+      "updated_at": "2026-11-22T07:20:47Z",
       "root_cause": "The generated image quality report replaced matching pending operator visual reviews during subsequent builds.",
       "source_fix": {
         "status": "source_verified_next_build_pending",
@@ -7554,8 +7577,19 @@
         "production_redeployment": false
       },
       "original_inbox": "ops/incident-response/inbox/2026-11-22-tlvnet-photo-visual-queue-rebuild-overwrite.json",
-      "next_action": "Verify that the next normal owner build preserves matching pending reviews. Visual QA stays pending until performed.",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-22/0684e0df-ebf0-8320-aa9f-608bd79c72c1.json"
+      "next_action": "Keep the 11 open visual checks for their assigned reviewers. The deployed owner build preserved the nine preceding records and added two.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/0684e0df-ebf0-8320-aa9f-608bd79c72c1.json",
+      "production_verification": {
+        "status": "fixed_verified",
+        "source_fix": "4f309b7c892abd9fef3a6664f8882bdcaa668c4c",
+        "terminal_owner_build": 717,
+        "retained_unchanged": 9,
+        "added": 2,
+        "open_after_build": 11,
+        "desktop_visual": "pending",
+        "mobile_visual": "pending",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/2d98f2c5-c084-8320-8078-fa7be8913cda.json"
+      }
     },
     {
       "id": "tlvnet-news-unknown-article-kind-20261122",
@@ -7572,9 +7606,32 @@
       ],
       "independent_public_readback": "All three new public home cards display ידיעה; articles and news section accessible.",
       "evidence": "ops/tlvnet-stability/observations/2026-11-22/0684e0df-ebf0-8320-aa9f-608bd79c72c1.json"
+    },
+    {
+      "id": "supermarket-health-legacy-data-route",
+      "status": "fixed_verified",
+      "fingerprint": "supermarket_health_legacy_pages_data_url_after_offload",
+      "root_cause": "The public-health script requested ISNET Pages JSON paths after the public Pages build had offloaded them to a separate delivery site.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/2d98f2c5-c084-8320-8078-fa7be8913cda.json",
+      "reported_runKey": "ops-2026-11-22-2d98f2c5-c084-8320-8078-fa7be8913cda",
+      "original_inbox": "ops/incident-response/inbox/2d98f2c5-c084-8320-8078-fa7be8913cda-supermarket-legacy-health-route.json",
+      "resolution": {
+        "status": "fixed_verified",
+        "commit": "021d2f87ad5818530e17e97ffb1712300f28de6a",
+        "ci_run_id": 44997562377,
+        "ci_job_id": 137131787425,
+        "ci_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44997562377",
+        "regression": "passed locally and in push CI",
+        "production_readback": "Page HTML and pinned source data independently checked. CI reported stale/retained data for all seven cities and no legacy data route failures. Overall health check remains failed.",
+        "release": "621b7cc6333082c94b340f3a38c2fefe064c7077",
+        "verified_at": "2026-11-22T07:20:47Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/2d98f2c5-c084-8320-8078-fa7be8913cda.json"
+      },
+      "prevention": "Resolve the delivery revision once, verify its shape, use pinned data for the six offloaded cities, and retain regression coverage for site isolation and unavailable delivery.",
+      "next_action": "Track data collection and retained suppliers separately under supermarket-public-http-and-stale-branches."
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-0684e0df-ebf0-8320-aa9f-608bd79c72c1",
+  "last_review_runKey": "ops-2026-11-22-2d98f2c5-c084-8320-8078-fa7be8913cda",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
