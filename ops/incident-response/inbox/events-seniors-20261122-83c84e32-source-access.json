@@ -1,0 +1,26 @@
+{
+  "task_id": "Automation_50ecabf864448191ac5bee0edaecca74",
+  "runKey": "events-seniors-20261122-83c84e32-15aa-4393-a122-abfa5bc59508",
+  "observed_at": "2026-11-22T08:36:00Z",
+  "related_incident": "tlvnet-senior-events-expired-verification-feed-empty",
+  "signature": "TLVNET/events/reich/primary-browser-access-denied-473",
+  "classification": "new precise source-access evidence for existing coverage blocker",
+  "evidence": {
+    "browser_status": 473,
+    "browser_message": "Access Denied",
+    "browsing_issue_id": "39284ec4-2266-4f51-996c-af33749f2ddc",
+    "public_source": "https://www.coing.co/TelAvivReich",
+    "qualification": "Official Reich page opened in authorized cloud browser; no current event details read; no bypass or repeated login/fetch. Exact programme URL remains in source checkpoint."
+  },
+  "impact": "Cannot reverify 7-Nov Reich/Boaz feed records. Original timestamps and archive retained; stale rows excluded by existing gate. Five separate 18-Nov municipal seniors records retained in primary feed. Other events collectors succeeded.",
+  "known_unchanged": [
+    "Levontin source crawl timeout100s; two last-good future occurrences retain original timestamps",
+    "Broader exhibition/standup/senior sources remain incomplete"
+  ],
+  "local_remediation": {
+    "children_dependency": "requests missing; installed ephemeral dependency then one focused successful retry",
+    "scope": "No schedule, automation, claims, storage or permission changes"
+  },
+  "checkpoint": "TLVNET Sites ops/event-refresh-checkpoint.json",
+  "next_action": "Existing owner continues from exact per-item checkpoint when current primary programme and permitted event media become accessible; do not restamp stale data or bypass access."
+}
