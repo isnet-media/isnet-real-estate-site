@@ -29,8 +29,9 @@ def localize(content,name,city,suffix):
  if name=='index.html':
   nav='<nav class="kgat-discover" aria-label="מגלים את קריית גת"><a href="/meusharim/kiryat-gat/">חוגים וקורסים</a><a href="attractions.html">טיולים ואטרקציות באזור</a></nav>'
   content=content.replace('<main',nav+'<main',1)
-  # Keep dining beside the cinema card; never in the compact discovery row.
-  content=re.sub(r'(<nav class="isnetNavDiscovery__lifestyle"[^>]*>)([\s\S]*?)(</nav>)',lambda m:m[1]+m[2]+food+m[3],content,count=1)
+  # Pair the restaurant card with seniors in the two-column primary grid.
+  content=re.sub(r'(<a class="isnetNavFeature isnetNavFeature--green" href="category.html\?category=seniors">[\s\S]*?</a>)',lambda m:m[1]+food,content,count=1)
+  content=re.sub(r'<nav class="isnetNavDiscovery__lifestyle"[^>]*>\s*</nav>','',content,count=1)
   content=content.replace('<a class="isnetNavSmall" href="places.html?category=beaches">','<a class="isnetNavSmall" href="places.html?category=nature">').replace('<strong>חופים</strong>','<strong>טיולים בסביבה</strong>')
  if suffix=='.js':
   content=content.replace('window.ashdodAnalytics', 'window.kgatEventsAnalytics')
