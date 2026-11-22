@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "type": "controller_verified_incident",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "2d98f2c5-c084-8320-8078-fa7be8913cda",
+  "runKey": "ops-2026-11-22-2d98f2c5-c084-8320-8078-fa7be8913cda",
+  "observed_at": "2026-11-22T07:20:47Z",
+  "target": "ISNET supermarket public health",
+  "incident_id": "supermarket-health-legacy-data-route",
+  "fingerprint": "supermarket_health_legacy_pages_data_url_after_offload",
+  "status": "fixed_verified",
+  "issue": "Health verification used obsolete Pages JSON paths for six ISNET cities after data delivery was moved to an independent public endpoint.",
+  "repair": {
+    "status": "fixed_verified",
+    "commit": "021d2f87ad5818530e17e97ffb1712300f28de6a",
+    "ci_run_id": 44997562377,
+    "ci_job_id": 137131787425,
+    "ci_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44997562377",
+    "regression": "passed locally and in push CI",
+    "production_readback": "Page HTML and pinned source data independently checked. CI reported stale/retained data for all seven cities and no legacy data route failures. Overall health check remains failed.",
+    "release": "621b7cc6333082c94b340f3a38c2fefe064c7077",
+    "verified_at": "2026-11-22T07:20:47Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-22/2d98f2c5-c084-8320-8078-fa7be8913cda.json"
+  },
+  "remaining_incident": "supermarket-public-http-and-stale-branches",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-22/2d98f2c5-c084-8320-8078-fa7be8913cda.json"
+}
