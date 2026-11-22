@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "run_key": "2026-11-22T19:00:00+02:00",
+  "recorded_at": "2026-11-22T17:05:15.511Z",
+  "owner_task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "policy_version": "2026-11-19/raanana-only-1",
+  "target": "ISNET-CMS-59",
+  "checkpoint_source": "ops/agent-harmony/releases/raanana-news-2026-11-22-1400.json",
+  "cadence_changed": false,
+  "discovery_sources": [
+    "https://www.raanana.muni.il/articles/",
+    "https://tickets.raanana.muni.il/",
+    "https://www.tzomet-ran.co.il/education/75197",
+    "https://sharonline.co.il/education/התנגדות-בית-ספר-קדם-רעננה/",
+    "https://www.tzomet-ran.co.il/news/75239",
+    "https://raanananet.co.il/"
+  ],
+  "results": {
+    "discovered": 3,
+    "verified": 3,
+    "published_cms": 1,
+    "published_verified_new": 0,
+    "duplicates_prevented": 2,
+    "blocked_existing_image_repair": 2
+  },
+  "editorial_decisions": [
+    {
+      "subject": "Kedem school near HaShizaf St, proposed Sept 2027, transport/access concern reported 19 Nov",
+      "action": "published_original_contextual_reporting",
+      "post_id": 812636,
+      "source_event_date": "proposed Sep 2027",
+      "news_dates": [
+        "2026-11-12",
+        "2026-11-19"
+      ]
+    },
+    {
+      "subject": "35m NIS infrastructure tranche",
+      "action": "duplicate_prevented",
+      "existing_post_id": 812303
+    },
+    {
+      "subject": "22 Nov municipal event roundup",
+      "action": "duplicate_prevented",
+      "existing_post_id": 812457
+    }
+  ],
+  "post": {
+    "id": 812636,
+    "title": "בית הספר ״קדם״ מתוכנן ברעננה ל־2027; הורים מעלים שאלות על המיקום",
+    "category": "חינוך",
+    "category_id": 1953,
+    "created_at_cms": "2026-11-22T19:04:04.247",
+    "creator": "מערכת רעננה נט",
+    "image_id": 852347,
+    "publish": true,
+    "hide": false,
+    "template": false,
+    "cms_list_search_readback": "exact one published result",
+    "cms_get_post_readback": "empty result; full body not independently fetched",
+    "public_url_candidate": "https://raanananet.co.il/חינוך/raanana-kedem-school-2027-parents-questions-20261122",
+    "public_url_verified": false,
+    "published_verified": false
+  },
+  "rights": {
+    "main_image_source": "https://www.pexels.com/photo/wooden-tables-and-chairs-inside-a-classroom-8499580/",
+    "image_origin": "https://images.pexels.com/photos/8499580/pexels-photo-8499580.jpeg",
+    "author": "RDNE Stock project",
+    "license": "Pexels License shown on source page; illustration unrelated to actual building",
+    "image_file_confirmed_in_cms": true,
+    "credits": "צילום אילוסטרציה לכיתה (לא בית הספר קדם ברעננה): RDNE Stock project / Pexels (Pexels License)",
+    "sha256": "not_measured; no file-byte readback tool",
+    "image_usage_reverse_lookup": "returned [] despite CMS post list showing defaultImageId=852347; incident filed"
+  },
+  "homepage": {
+    "script": "raanana-auto-headlines-v1",
+    "manually_changed": false,
+    "desktop_QA": "pending_no_js_browser_observation",
+    "viewport_390_QA": "pending_no_visual_viewport",
+    "public_html_observation": "Web crawler served homepage date 2026-11-22 12:58 prior to new post; not valid evidence of current script result"
+  },
+  "backlog": [
+    {
+      "post_id": 811802,
+      "issue": "old repeated generic culture image 851225; remote Commons ingestion 403 in previous run"
+    },
+    {
+      "post_id": 812206,
+      "issue": "old repeated generic culture image 851225; remote Commons ingestion 403 in previous run"
+    },
+    {
+      "post_id": 812012,
+      "issue": "stale body caption; get_post detail fetch unavailable"
+    }
+  ],
+  "blockers": [
+    "ops/incident-response/inbox/20261122-raanana-culture-media-remote403.json",
+    "ops/incident-response/inbox/20261122-raanana-image-reverse-lookup-readback.json"
+  ],
+  "locks": {
+    "cas_acquired": true,
+    "cas_readback": true,
+    "token": "raanana-2026-11-22T17-02-15-103Z-9shc5sfrqts",
+    "lease_until": "2026-11-22T17:28:15.103Z",
+    "release": "pending"
+  },
+  "changed": {
+    "cms59_post_new": true,
+    "cms59_image_new": true,
+    "existing_posts": false,
+    "homepage_script_CMS37279": false,
+    "headlines": false,
+    "website_config": false,
+    "schedule": false
+  }
+}
