@@ -334,6 +334,11 @@ jobs:
       - name: Apply city search metadata and savings guides after all generators
         run: python scripts/apply_local_search_seo.py
 
+      - name: Apply Kiryat Gat guide analytics after all page generators
+        run: |
+          node --check assets/kgat-events-analytics.js
+          python scripts/apply_kgat_events_analytics.py
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:

@@ -33,6 +33,7 @@ def localize(content,name,city,suffix):
   content=re.sub(r'(<nav class="isnetNavDiscovery__lifestyle"[^>]*>)([\s\S]*?)(</nav>)',lambda m:m[1]+m[2]+food+m[3],content,count=1)
   content=content.replace('<a class="isnetNavSmall" href="places.html?category=beaches">','<a class="isnetNavSmall" href="places.html?category=nature">').replace('<strong>חופים</strong>','<strong>טיולים בסביבה</strong>')
  if suffix=='.js':
+  content=content.replace('window.ashdodAnalytics', 'window.kgatEventsAnalytics')
   content=content.replace('if(e.price_min_ils==null)return "מחיר לא פורסם";', 'if(e.price_min_ils==null)return e.friends_offer?.regular_price_ils!=null?"מחיר רגיל ב־FRIENDS: "+currency.format(e.friends_offer.regular_price_ils):"מחיר לא פורסם";')
  if name=='event.js':
   content=content.replace('window.ISNET_EVENT_TOOLS?.render(e,occ);','window.ISNET_EVENT_TOOLS?.render(e,occ);window.KGAT_EVENTS?.renderOffers?.(e);')
