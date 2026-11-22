@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "controller_source_integrity_incident",
+  "status": "open",
+  "id": "ashdod-ofek-future-snapshot-empty",
+  "incident_id": "ashdod-ofek-future-snapshot-empty",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "a15528f9-e6a8-8330-9256-a5d9276bfce4",
+  "runKey": "ops-2026-11-22-a15528f9-e6a8-8330-9256-a5d9276bfce4",
+  "recorded_at": "2026-11-22T15:57:34Z",
+  "workflow_run": 45039829171,
+  "job_id": 137261560384,
+  "source_commit": "e5d15ee0b404956beb6df5d0bb312c8a1dcb5768",
+  "source_workflow": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45039829171",
+  "failed_check": "scripts/test-institution-ui.cjs:31",
+  "scope": "Ashdod Ofek organizer event data",
+  "assertion": "Ofek verified future snapshot is empty; refresh the source evidence",
+  "root_cause": "Ofek records in the build input admin/data/ashdod-local-snapshot.json did not contain any matching local_source_name with a date on or after the current Asia/Jerusalem day. Organizer website listed future dates. The build input file was unavailable at the failed source SHA and at main through the GitHub file reader, so the precise upstream ingest or expiry cause is unconfirmed.",
+  "impact": "Ofek event data verification failed. The warning is nonblocking for frontend changes. The shared release separately failed the known Ashdod duplicate-candidate gate and never replaced production.",
+  "sources": [
+    {
+      "url": "https://www.ofek-ashdod.org.il/page.php?type=events",
+      "observed_at": "2026-11-22T15:57:34Z",
+      "dated_examples": [
+        "2026-11-24",
+        "2026-12-01",
+        "2026-12-15"
+      ]
+    }
+  ],
+  "next_action": "Existing Ashdod events owner: refresh the organizer snapshot through its authorized ingestion path, verify exact future dates, departure details and source identities, rebuild existing artifacts, run the organizer and shared event-integrity checks, then verify the public Ofek listing through the normal release route. Preserve last good and existing guards.",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
+}
