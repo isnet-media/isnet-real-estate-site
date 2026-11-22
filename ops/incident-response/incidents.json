@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T10:56:50Z",
+  "updated_at": "2026-11-22T12:10:44Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7804,9 +7804,120 @@
       "next_action": "Preserve the city checkpoints. Reconcile the next owner read or changed source path; avoid a blind full payload retry.",
       "reported_runKey": "ops-2026-11-22-29361082-f020-8320-9560-b3958f38941f",
       "last_seen_at": "2026-11-22T09:45:26Z"
+    },
+    {
+      "id": "herzliya-conflicting-cast-blocked-pages",
+      "status": "open",
+      "workflow_run": 45020156928,
+      "failed_job": 137201030739,
+      "failed_source_commit": "14abd1999004edba89471b3354ee243001c42a59",
+      "qualification": "Source refresh succeeded, subsequent shared Pages release was stopped by event-integrity regression. Existing public deploy marker remains previous successful commit.",
+      "exact_pair": [
+        {
+          "id": "herzliya-5e465374c392b17a",
+          "title": "עידן אלתרמן - סטנדאפ",
+          "date": "2026-12-31",
+          "time": "21:30",
+          "venue": "היכל בעיר",
+          "booking": "https://www.heichalbair.co.il/%D7%A2%D7%99%D7%93%D7%9F_%D7%90%D7%9C%D7%AA%D7%A8%D7%9E%D7%9F_-_%D7%A1%D7%98%D7%A0%D7%93%D7%90%D7%A4/?id=3116",
+          "source": "https://www.heichalbair.co.il/%D7%A2%D7%99%D7%93%D7%9F_%D7%90%D7%9C%D7%AA%D7%A8%D7%9E%D7%9F_-_%D7%A1%D7%98%D7%A0%D7%93%D7%90%D7%A4/?id=3116",
+          "category": "standup"
+        },
+        {
+          "id": "herzliya-94323f69accb9675",
+          "title": "עידן אלתרמן ויעל לבנטל במופע משותף",
+          "date": "2026-12-31",
+          "time": "21:30",
+          "venue": "היכל בעיר הרצליה",
+          "booking": "https://tickets.mevalim.co.il/event/Oxq_ymEQAi5OKif?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fherzliya%2F&tbn=הופעות בהרצליה&tbid=44207&idx=20",
+          "source": "https://tickets.mevalim.co.il/event/Oxq_ymEQAi5OKif?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fherzliya%2F&tbn=הופעות בהרצליה&tbid=44207&idx=20",
+          "category": "standup"
+        }
+      ],
+      "source_readback": [
+        "200 https://www.heichalbair.co.il/%D7%A2%D7%99%D7%93%D7%9F_%D7%90%D7%9C%D7%AA%D7%A8%D7%9E%D7%9F_-_%D7%A1%D7%98%D7%A0%D7%93%D7%90%D7%A4/?id=3116 עידן אלתרמן - סטנדאפ • היכל בעיר - הרצליה • בידור {'עידן אלתרמן': 11, 'יעל לבנטל': 0, '31/12': 1, '31.12': 0, '21:30': 4}",
+        "200 https://tickets.mevalim.co.il/event/Oxq_ymEQAi5OKif?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fherzliya%2F&tbn=%D7%94%D7%95%D7%A4%D7%A2%D7%95%D7%AA%20%D7%91%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94&tbid=44207&idx=20 עידן אלתרמן ויעל לבנטל במופע משותף | 31.12.2026 21:30 - מבלים כרטיסים {'עידן אלתרמן': 20, 'יעל לבנטל': 20, '31/12': 0, '31.12': 11, '21:30': 11}"
+      ],
+      "public_pages_marker": {
+        "http": 200,
+        "url": "https://isnet.co.il/deployment-version.json",
+        "ms": 6684,
+        "marker": {
+          "source_commit": "077d1bbf6a6fdf6665ca17ea8350c5a4717806f0",
+          "run_id": "45018779471",
+          "run_attempt": "1"
+        }
+      },
+      "public_city_page": {
+        "http": 200,
+        "url": "https://isnet.co.il/events-preview/herzliya/",
+        "ms": 6716,
+        "card": false,
+        "title": "מה עושים בהרצליה?"
+      },
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a.json",
+      "next_action": "Existing Herzliya event owner verifies the organizer cast and which purchase link is authoritative, or uses a supported hold for the conflicting row. Preserve IDs and keep the release check.",
+      "last_seen_at": "2026-11-22T12:10:44Z",
+      "reported_runKey": "ops-2026-11-22-e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a"
+    },
+    {
+      "id": "holon-event-refresh-cinema-art-and-event-media",
+      "status": "open",
+      "workflow_run": 45019340746,
+      "failed_job": 137198542038,
+      "failed_source_commit": "077d1bbf6a6fdf6665ca17ea8350c5a4717806f0",
+      "qualification": "Fresh collector output failed two current tests: duplicate artwork in the newly generated cinema projection and 109 qualifying event images against 110 expected. Generated failed rows were not available in the public source. The tracked prior cinema has 29 movie rows with distinct poster URLs.",
+      "prior_catalog": {
+        "movies": 29,
+        "unique_posters": 29
+      },
+      "public_city_page": {
+        "http": 200,
+        "url": "https://isnet.co.il/events-preview/holon/",
+        "ms": 6744,
+        "card": false,
+        "title": "מה עושים בחולון?"
+      },
+      "public_pages_marker": {
+        "http": 200,
+        "url": "https://isnet.co.il/deployment-version.json",
+        "ms": 6684,
+        "marker": {
+          "source_commit": "077d1bbf6a6fdf6665ca17ea8350c5a4717806f0",
+          "run_id": "45018779471",
+          "run_attempt": "1"
+        }
+      },
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a.json",
+      "next_action": "Retain last verified public projection. Identify the new colliding film rows within the failed refresh output, restore film-specific lawful images or withhold unresolved rows through the existing owner path, and keep the media integrity checks.",
+      "last_seen_at": "2026-11-22T12:10:44Z",
+      "reported_runKey": "ops-2026-11-22-e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a"
+    },
+    {
+      "id": "raanana-culture-media-upload-commons-http403",
+      "status": "awaiting_external_action",
+      "affected": [
+        {
+          "post_id": 811802,
+          "credit": "Neukoln",
+          "license": "CC BY-SA 3.0",
+          "candidate": "https://commons.wikimedia.org/wiki/File:קובי_מידן.jpg"
+        },
+        {
+          "post_id": 812206,
+          "credit": "Yael Zur for TAU Alumni",
+          "license": "CC BY-SA 4.0 / Wikimedia VRT ticket 2019071410002281",
+          "candidate": "https://commons.wikimedia.org/wiki/File:Dan_Ariely_January_2019.jpg"
+        }
+      ],
+      "qualification": "Owner attempts via both original and thumbnail URLs received 403. No further upload attempted in this cycle. Supported small-content base64 upload exists, but publication requires approved exact bytes, license and safe destination readback. Full CMS body readback for a separate caption edit was unavailable.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a.json",
+      "next_action": "Existing authorized CMS-59 writer can ingest verified licensed bytes through supported content upload (with complete attribution and evidence) and verify existing posts. Preserve original publication dates.",
+      "last_seen_at": "2026-11-22T12:10:44Z",
+      "reported_runKey": "ops-2026-11-22-e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a"
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-2c75ddd2-129c-8330-9fdd-832288f3f951",
+  "last_review_runKey": "ops-2026-11-22-e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
