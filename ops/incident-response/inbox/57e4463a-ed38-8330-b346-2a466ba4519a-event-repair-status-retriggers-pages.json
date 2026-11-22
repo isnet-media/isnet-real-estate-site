@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "controller_deployment_trigger_incident",
+  "id": "ashdod-event-repair-status-triggers-shared-pages",
+  "incident_id": "ashdod-event-repair-status-triggers-shared-pages",
+  "status": "open",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "57e4463a-ed38-8330-b346-2a466ba4519a",
+  "runKey": "ops-2026-11-22-57e4463a-ed38-8330-b346-2a466ba4519a",
+  "recorded_at": "2026-11-22T16:45:33Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-22/57e4463a-ed38-8330-b346-2a466ba4519a.json",
+  "repair_run": 45043194403,
+  "repair_run_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45043194403",
+  "failed_publish_run": 45043295308,
+  "failed_publish_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45043295308",
+  "source_commit": "7c167e1e127311778c3bcdcebf4213bd448f946a",
+  "commit_changed_paths": [
+    "events-preview/admin/data/automatic-repair-status.json"
+  ],
+  "catalog_changed_by_commit": false,
+  "repair_count": 0,
+  "workflow_path": ".github/workflows/pages.yml",
+  "workflow_match": "events-preview/**",
+  "current_public_marker": "077d1bbf6a6fdf6665ca17ea8350c5a4717806f0",
+  "root_cause": "Push path rules treated an audit-only status file as a change requiring the shared Pages build. That admin report is served as a static file and is explicitly read together with the history in automatic-repair.html.",
+  "impact": "This push triggered a full shared build with no changes to event records or repair history. The known Ashdod duplicate assertion stopped deployment. The known Ofek validation warning also reappeared.",
+  "next_action": "The existing event release owner should preserve freshness of the admin status/history through an authorized readback path and separate status-only writes from shared release triggers. Verify a report-only push and a mixed report/catalog push in isolation before changing production. Keep editor-facing report reads and event integrity checks intact."
+}
