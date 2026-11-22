@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T14:15:30Z",
+  "updated_at": "2026-11-22T15:57:34Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5227,6 +5227,15 @@
           "last_good_preserved": true,
           "public_has_current_forecast": null,
           "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json"
+        },
+        {
+          "run_id": 45033275600,
+          "job_id": 137241339665,
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45033275600",
+          "source_commit": "bd4735fdff3697d84dfc8cf035842395e36165e7",
+          "observed_at": "2026-11-22T15:57:34Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+          "classification": "Known forecast-period validation rejected non-current data; workflow retained last good."
         }
       ],
       "status": "awaiting_external_action",
@@ -5234,7 +5243,7 @@
       "root_cause": "Live IMS response issued16Nov16:23Israel contains only20:00onward periods for213/210. Current local time not covered. Validation correctly rejects; no current replacement exists in the observed source.",
       "impact": "New18Nov refresh rejected uncovered current period and retained lastgood. Actual current XML periods and live widget freshness not independently verified.",
       "first_seen_at": "2026-11-09T22:24:11Z",
-      "last_seen_at": "2026-11-21T14:37:14.739Z",
+      "last_seen_at": "2026-11-22T15:57:34Z",
       "updated_at": "2026-11-21T16:11:33.000Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-16-b28a8a3c-a510-8332-b4c5-feedac37ad04.json",
       "change": "No code change, data overwrite, manual rerun or deployment. Existing guard passed regression.",
@@ -8022,7 +8031,7 @@
       },
       "reason": "Two Ashdod productions were represented by distinct source titles at the exact same times and venues. Exact aliases removed both suspects locally; the shared gate still found the previously known Herzliya cast conflict.",
       "next_action": "After the existing Herzliya event owner resolves the conflicting cast offer, apply the exact verified aliases on a fresh branch, regenerate the shared overlay version references, and run the full integrity suite before the normal shared Pages release. No listener, production asset or deploy was modified by this checkpoint.",
-      "last_seen_at": "2026-11-22T14:15:30Z",
+      "last_seen_at": "2026-11-22T15:57:34Z",
       "reported_runKey": "ops-2026-11-22-e5bb335c-bb60-8330-b57d-ee4eac785e9c",
       "occurrences": [
         {
@@ -8059,9 +8068,100 @@
           "test": "scripts/test-event-integrity.cjs:141",
           "recorded_at": "2026-11-22T14:15:30Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+        },
+        {
+          "run_id": 45034479915,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "1d28889c362b1af833ccaa6e726d27b769a3ce9d",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45034479915",
+          "job_id": 137245053745,
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "created_at": "2026-11-22T14:44:51Z",
+          "recorded_at": "2026-11-22T15:57:34Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+          "qualification": "Same failure step; exact assertion not reread"
+        },
+        {
+          "run_id": 45034991733,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "601c88a64b3d372591f66bcf01752211a89209e1",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45034991733",
+          "job_id": 137246642668,
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "created_at": "2026-11-22T14:50:26Z",
+          "recorded_at": "2026-11-22T15:57:34Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+          "qualification": "Same failure step; exact assertion not reread"
+        },
+        {
+          "run_id": 45035067962,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "95c9c59901310b1fba5d220fd715c46b606bf66c",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45035067962",
+          "job_id": 137246879994,
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "created_at": "2026-11-22T14:51:16Z",
+          "recorded_at": "2026-11-22T15:57:34Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+          "qualification": "Same failure step; exact assertion not reread"
+        },
+        {
+          "run_id": 45035306220,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "30d3839f3f231013c5c3faf7f0bf5e7b96b52e28",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45035306220",
+          "job_id": 137247621297,
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "created_at": "2026-11-22T14:53:59Z",
+          "recorded_at": "2026-11-22T15:57:34Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+          "qualification": "Same failure step; exact assertion not reread"
+        },
+        {
+          "run_id": 45035386850,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "06b6e16aba439e0b0f8a4f73d1c2243b7eb4cd0c",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45035386850",
+          "job_id": 137247871426,
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "created_at": "2026-11-22T14:54:54Z",
+          "recorded_at": "2026-11-22T15:57:34Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+          "qualification": "Same failure step; exact assertion not reread"
+        },
+        {
+          "run_id": 45039740410,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "5e6e3e04a9da531969fe5b826f4f9f7139f18ae9",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45039740410",
+          "job_id": 137261294043,
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "created_at": "2026-11-22T15:42:00Z",
+          "recorded_at": "2026-11-22T15:57:34Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+          "qualification": "Same failure step; exact assertion not reread"
+        },
+        {
+          "run_id": 45039829171,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "source_commit": "e5d15ee0b404956beb6df5d0bb312c8a1dcb5768",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45039829171",
+          "job_id": 137261560384,
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "created_at": "2026-11-22T15:42:57Z",
+          "recorded_at": "2026-11-22T15:57:34Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+          "qualification": "Known Ashdod assertion and 2 unresolved candidates confirmed from log"
         }
       ],
-      "last_occurrence_evidence": "ops/tlvnet-stability/observations/2026-11-22/d880e314-1ba4-8330-a3f0-a3c9abb60076.json"
+      "last_occurrence_evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
     },
     {
       "id": "kiryat-gat-events-shared-asset-integrity-aborted",
@@ -8079,9 +8179,45 @@
       "next_action": "Preserve the last live feed; expose existing subprocess diagnostic output in the authorized build path or identify the failed generated scope before a focused retry. Do not skip shared integrity checks.",
       "last_seen_at": "2026-11-22T13:50:45Z",
       "reported_runKey": "ops-2026-11-22-e5bb335c-bb60-8330-b57d-ee4eac785e9c"
+    },
+    {
+      "schema_version": 1,
+      "kind": "controller_source_integrity_incident",
+      "status": "open",
+      "id": "ashdod-ofek-future-snapshot-empty",
+      "incident_id": "ashdod-ofek-future-snapshot-empty",
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "a15528f9-e6a8-8330-9256-a5d9276bfce4",
+      "runKey": "ops-2026-11-22-a15528f9-e6a8-8330-9256-a5d9276bfce4",
+      "recorded_at": "2026-11-22T15:57:34Z",
+      "workflow_run": 45039829171,
+      "job_id": 137261560384,
+      "source_commit": "e5d15ee0b404956beb6df5d0bb312c8a1dcb5768",
+      "source_workflow": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45039829171",
+      "failed_check": "scripts/test-institution-ui.cjs:31",
+      "scope": "Ashdod Ofek organizer event data",
+      "assertion": "Ofek verified future snapshot is empty; refresh the source evidence",
+      "root_cause": "Ofek records in the build input admin/data/ashdod-local-snapshot.json did not contain any matching local_source_name with a date on or after the current Asia/Jerusalem day. Organizer website listed future dates. The build input file was unavailable at the failed source SHA and at main through the GitHub file reader, so the precise upstream ingest or expiry cause is unconfirmed.",
+      "impact": "Ofek event data verification failed. The warning is nonblocking for frontend changes. The shared release separately failed the known Ashdod duplicate-candidate gate and never replaced production.",
+      "sources": [
+        {
+          "url": "https://www.ofek-ashdod.org.il/page.php?type=events",
+          "observed_at": "2026-11-22T15:57:34Z",
+          "dated_examples": [
+            "2026-11-24",
+            "2026-12-01",
+            "2026-12-15"
+          ]
+        }
+      ],
+      "next_action": "Existing Ashdod events owner: refresh the organizer snapshot through its authorized ingestion path, verify exact future dates, departure details and source identities, rebuild existing artifacts, run the organizer and shared event-integrity checks, then verify the public Ofek listing through the normal release route. Preserve last good and existing guards.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
+      "source_inbox": "ops/incident-response/inbox/a15528f9-e6a8-8330-9256-a5d9276bfce4-ashdod-ofek-future-snapshot.json",
+      "reported_runKey": "ops-2026-11-22-a15528f9-e6a8-8330-9256-a5d9276bfce4",
+      "first_seen_at": "2026-11-22T15:57:34Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-d880e314-1ba4-8330-a3f0-a3c9abb60076",
+  "last_review_runKey": "ops-2026-11-22-a15528f9-e6a8-8330-9256-a5d9276bfce4",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
