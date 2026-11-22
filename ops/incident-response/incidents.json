@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T17:36:53.403Z",
+  "updated_at": "2026-11-22T18:25:42.437Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7388,6 +7388,24 @@
         "execution": "separately authorized manual recovery and one-off same-hour publication; observed by controller",
         "evidence": "ops/tlvnet-stability/observations/2026-11-22/b7189b45-4d38-8330-b620-167c81f51ffd.json",
         "qualification": "Publisher-requested exact article passed once; later unpinned scheduled publication remains an independent check."
+      },
+      "latest_ordinary_public_verification": {
+        "status": "published_verified",
+        "slot": "2026-11-22T18",
+        "started_at": "2026-11-22T18:00:01.269Z",
+        "finished_at": "2026-11-22T18:00:15.518Z",
+        "post_id": "1520426491146188_122112201057545268",
+        "permalink": "https://www.facebook.com/122103410883545268/posts/122112201057545268",
+        "article_url": "https://tlvnet.com/news/hashalom-bridge-ayalon-south-ramp-reported-20261123.html",
+        "nextAction": null,
+        "supportRequired": false,
+        "notifyPublisher": false,
+        "stopped": false,
+        "public_body_and_article_link_observed": true,
+        "source": "D1 social_runs and social_posts, plus logged-out public Facebook rendering",
+        "execution": "normal next slot after targeted manual release; distinct URL and post ID",
+        "observed_at": "2026-11-22T18:25:42.437Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/0b05f5fe-9108-8330-a13e-015fcbacccf4.json"
       }
     },
     {
@@ -8323,10 +8341,26 @@
       "next_action": "Connector owner to align usedImageId query with posts' main-image relationship and add a regression covering a newly published same-site post; verify public article independently.",
       "occurrences": [
         812636
-      ]
+      ],
+      "public_article_readback": {
+        "url": "https://raanananet.co.il/%d7%a7%d7%94%d7%99%d7%9c%d7%94/raanana-kedem-school-2027-parents-questions-20261122",
+        "visible_credit": "RDNE Stock project / Pexels (Pexels License)",
+        "image_loaded_width": 640,
+        "body_paragraphs_observed": 8,
+        "home_link": true,
+        "section_link": null,
+        "viewport_width": 1363,
+        "mobile_visual_review_pending": true,
+        "article_category_link": true,
+        "post_id": 812636,
+        "image_id": 852347,
+        "observed_at": "2026-11-22T18:25:42.437Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/0b05f5fe-9108-8330-a13e-015fcbacccf4.json",
+        "qualification": "The article and image are public; the reverse filter discrepancy remains open."
+      }
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-b7189b45-4d38-8330-b620-167c81f51ffd",
+  "last_review_runKey": "ops-2026-11-22-0b05f5fe-9108-8330-a13e-015fcbacccf4",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
