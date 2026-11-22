@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T12:51:17Z",
+  "updated_at": "2026-11-22T13:50:45Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7857,7 +7857,7 @@
       },
       "evidence": "ops/tlvnet-stability/observations/2026-11-22/e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a.json",
       "next_action": "Existing Herzliya event owner verifies the organizer cast and which purchase link is authoritative, or uses a supported hold for the conflicting row. Preserve IDs and keep the release check.",
-      "last_seen_at": "2026-11-22T12:51:17Z",
+      "last_seen_at": "2026-11-22T13:50:45Z",
       "reported_runKey": "ops-2026-11-22-e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a",
       "latest_same_signature": {
         "run_id": 45023762727,
@@ -7868,6 +7868,15 @@
           "run_id": "45018779471",
           "run_attempt": "1"
         }
+      },
+      "latest_local_reproduction": {
+        "observed_at": "2026-11-22T13:50:45Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/e5bb335c-bb60-8330-b57d-ee4eac785e9c.json",
+        "after_ashdod_candidate_alias_correction": true,
+        "pair": [
+          "herzliya-5e465374c392b17a",
+          "herzliya-94323f69accb9675"
+        ]
       }
     },
     {
@@ -7940,9 +7949,101 @@
         "zafran-ground-nutmeg-recall-20261120"
       ],
       "next_action": "Existing consumer owner: reconcile government webpage publication versus original notice before releasing the nutmeg draft, then verify both existing approved items and original JPEGs via ordinary publication gates. Preserve the independent trout handoff and do not treat the old lease as active."
+    },
+    {
+      "id": "ashdod-confirmed-event-aliases-block-pages",
+      "status": "isolated_patch_verified_release_pending",
+      "workflow_run": 45029106417,
+      "job_id": 137228522768,
+      "scope": "Shared ISNET Pages build",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/e5bb335c-bb60-8330-b57d-ee4eac785e9c.json",
+      "source_inbox": "ops/incident-response/inbox/e5bb335c-bb60-8330-b57d-ee4eac785e9c-ashdod-event-alias-regression.json",
+      "exact_pairs": [
+        [
+          {
+            "event_id": "mevalim_as_133828",
+            "title": "פלסטלינה בצבעים - מי אני באמת",
+            "at": "2026-12-02 18:30",
+            "venue": "בית יד לבנים אשדוד",
+            "original": "https://tickets.mevalim.co.il/event/29dAzKbN6zLKUgA?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fashdod%2F&tbn=הופעות באשדוד&tbid=43948&idx=6",
+            "booking": "https://tickets.mevalim.co.il/event/29dAzKbN6zLKUgA?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fashdod%2F&tbn=הופעות באשדוד&tbid=43948&idx=6",
+            "category": "kids"
+          },
+          {
+            "event_id": "makore_as_39fa1ce072164a9790",
+            "title": "פלסטלינה בצבעים- מי אני באמת מחזמר על הרצון להשתייך ועל החופש להיות מי שאנחנו",
+            "at": "2026-12-02 18:30",
+            "venue": "בית יד לבנים אשדוד",
+            "original": "https://www.makore.co.il/event/פלסטלינה-בצבעים-מי-אני-באמת-מחזמר-על-הרצון-להשתיי--e1f48616",
+            "booking": "https://ashdod.smarticket.co.il/event/17730/",
+            "category": "theatre"
+          }
+        ],
+        [
+          {
+            "event_id": "mevalim_as_129852",
+            "title": "אמי הגנרלית - התיאטרון העברי",
+            "at": "2027-01-16 21:00",
+            "venue": "המשכן לאמנויות הבמה אשדוד",
+            "original": "https://tickets.mevalim.co.il/event/D2IY7lfbJDueTDB?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fashdod%2F&tbn=הופעות באשדוד&tbid=43948&idx=48",
+            "booking": "https://tickets.mevalim.co.il/event/D2IY7lfbJDueTDB?referrer=https%3A%2F%2Fwww.mevalim.co.il%2Fashdod%2F&tbn=הופעות באשדוד&tbid=43948&idx=48",
+            "category": "theatre"
+          },
+          {
+            "event_id": "board_d6d6202f1c4ea730ad",
+            "title": "אמי הגנרלית - מחזמר - תיאטרון העברי",
+            "at": "2027-01-16 21:00",
+            "venue": "המשכן לאמנויות הבמה אשדוד",
+            "original": "https://sababa.events/he/event/moya-mat-generalsha-myuzikl/ashdod/",
+            "booking": "https://sababaevents.kartisim.co.il/announce/buy/212587",
+            "category": "theatre"
+          }
+        ]
+      ],
+      "primary_sources": [
+        "https://ashdod.smarticket.co.il/event/17730/",
+        "https://www.teatron.org.il/shows/אמי-הגנרלית-מחזמר/",
+        "https://mishkan-ashdod.smarticket.co.il/iframe/אימי_הגנרלית/?id=8244"
+      ],
+      "regression": {
+        "group_count_each": 1,
+        "both_source_ids_resolve": true,
+        "different_time_or_venue_stays_separate": true,
+        "ashdod_unresolved": 0,
+        "herzliya_unresolved_ids": [
+          "herzliya-5e465374c392b17a",
+          "herzliya-94323f69accb9675"
+        ]
+      },
+      "live_release_marker": {
+        "source_commit": "077d1bbf6a6fdf6665ca17ea8350c5a4717806f0",
+        "run_id": "45018779471",
+        "run_attempt": "1"
+      },
+      "reason": "Two Ashdod productions were represented by distinct source titles at the exact same times and venues. Exact aliases removed both suspects locally; the shared gate still found the previously known Herzliya cast conflict.",
+      "next_action": "After the existing Herzliya event owner resolves the conflicting cast offer, apply the exact verified aliases on a fresh branch, regenerate the shared overlay version references, and run the full integrity suite before the normal shared Pages release. No listener, production asset or deploy was modified by this checkpoint.",
+      "last_seen_at": "2026-11-22T13:50:45Z",
+      "reported_runKey": "ops-2026-11-22-e5bb335c-bb60-8330-b57d-ee4eac785e9c"
+    },
+    {
+      "id": "kiryat-gat-events-shared-asset-integrity-aborted",
+      "status": "open",
+      "workflow_run": 45027667067,
+      "job_id": 137224132338,
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/e5bb335c-bb60-8330-b57d-ee4eac785e9c.json",
+      "source_inbox": "ops/incident-response/inbox/45027667067-1.json",
+      "reason": "The city refresh stopped during the shared build_event_public_assets.py integrity subprocess. The Python traceback does not expose the Node stderr or failing city/pair; a separate provider 403 was present in an earlier football source step.",
+      "live_page": {
+        "http": 200,
+        "ms": 9338,
+        "url": "https://isnet.co.il/events-preview/kiryat-gat/"
+      },
+      "next_action": "Preserve the last live feed; expose existing subprocess diagnostic output in the authorized build path or identify the failed generated scope before a focused retry. Do not skip shared integrity checks.",
+      "last_seen_at": "2026-11-22T13:50:45Z",
+      "reported_runKey": "ops-2026-11-22-e5bb335c-bb60-8330-b57d-ee4eac785e9c"
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-d9f867d4-aeac-8330-a315-7f6422ee46f9",
+  "last_review_runKey": "ops-2026-11-22-e5bb335c-bb60-8330-b57d-ee4eac785e9c",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
