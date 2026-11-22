@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T16:45:33Z",
+  "updated_at": "2026-11-22T17:36:53.403Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7374,7 +7374,21 @@
       "change": "Exclude unedited source mirrors and use existing canonical source path for genuine editorial overlays.",
       "tests": "Scheduler/publisher regression, foundation, production build, bundle inspection and affected public routes pass.",
       "remaining": "Non-authentication scheduling circuit breaker is still active; no authorized recovery route for this exact flag was found. Existing successful post and absence of a second send claim verified.",
-      "next_action": "In authorized production maintenance, reconcile and release only the confirmed run_failed state after preserving claims and both slots; validate a future ordinary send."
+      "next_action": "In authorized production maintenance, reconcile and release only the confirmed run_failed state after preserving claims and both slots; validate a future ordinary send.",
+      "latest_targeted_public_verification": {
+        "state": "published_verified",
+        "network": "facebook",
+        "slot": "2026-11-22T17",
+        "published_at": "2026-11-22T17:31:36.713Z",
+        "post_id": "1520426491146188_122112189747545268",
+        "permalink": "https://www.facebook.com/122103410883545268/posts/122112189747545268",
+        "article_url": "https://tlvnet.com/news/daycare-tender-mair-bint-20261122",
+        "caption": "2,150 שקל שכירות לכיתת מעון, 4,800 שקל שכר לימוד לפעוט. מה ההורים מקבלים בתמורה? קראו ב־TLVNET, המקומון החדש של תל אביב",
+        "verification": "Terminal D1 result, Meta permalink and logged-out public Facebook post body and article link observed",
+        "execution": "separately authorized manual recovery and one-off same-hour publication; observed by controller",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/b7189b45-4d38-8330-b620-167c81f51ffd.json",
+        "qualification": "Publisher-requested exact article passed once; later unpinned scheduled publication remains an independent check."
+      }
     },
     {
       "id": "tlvnet-economy-municipal-wage-primary-source-access",
@@ -7886,6 +7900,23 @@
           "herzliya-5e465374c392b17a",
           "herzliya-94323f69accb9675"
         ]
+      },
+      "latest_cross_city_audit": {
+        "run_id": 45048264894,
+        "job_id": 137287516143,
+        "source": "ops/incident-response/inbox/45048264894-1.json",
+        "classification": "validation_stopped_before_public_parity",
+        "confirmed_normalizer": "audit-event-integrity.cjs",
+        "unresolved_duplicate_candidates_cities": [
+          "ashdod",
+          "rishon-lezion",
+          "herzliya"
+        ],
+        "public_deployment_failure_inferred": false,
+        "public_marker_readback": "unavailable",
+        "action": "Retain release integrity gate; affected source owners should reconcile exact occurrence pairs from source evidence.",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/b7189b45-4d38-8330-b620-167c81f51ffd.json",
+        "observed_at": "2026-11-22T17:36:53.403Z"
       }
     },
     {
@@ -8277,9 +8308,25 @@
       "source_inbox": "ops/incident-response/inbox/57e4463a-ed38-8330-b346-2a466ba4519a-event-repair-status-retriggers-pages.json",
       "first_seen_at": "2026-11-22T16:45:33Z",
       "reported_runKey": "ops-2026-11-22-57e4463a-ed38-8330-b346-2a466ba4519a"
+    },
+    {
+      "id": "isnet-cms-list-posts-main-image-reverse-lookup",
+      "signature": "isnet-list-posts-usedImageId-inconsistent-with-defaultImageId",
+      "status": "open",
+      "scope": "ISNET-CMS-59",
+      "root_cause": "Reverse query returned zero while get_post defaultImageId pointed to the same image and list_files returned that image in website 59. Underlying filter implementation is not visible.",
+      "first_seen_at": "2026-11-22T17:04:59.485Z",
+      "last_seen_at": "2026-11-22T17:36:53.403Z",
+      "impact": "A reverse lookup alone cannot establish that the image is unused. Public article state remains pending.",
+      "inbox": "ops/incident-response/inbox/20261122-raanana-image-reverse-lookup-readback.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/b7189b45-4d38-8330-b620-167c81f51ffd.json",
+      "next_action": "Connector owner to align usedImageId query with posts' main-image relationship and add a regression covering a newly published same-site post; verify public article independently.",
+      "occurrences": [
+        812636
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-57e4463a-ed38-8330-b346-2a466ba4519a",
+  "last_review_runKey": "ops-2026-11-22-b7189b45-4d38-8330-b620-167c81f51ffd",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
