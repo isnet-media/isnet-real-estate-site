@@ -1,5 +1,5 @@
 """Read-only verification of deployed supermarket data in every city."""
-import concurrent.futures,json,requests
+import concurrent.futures,re,requests
 from datetime import datetime,date,timedelta
 from zoneinfo import ZoneInfo
 from super_schedule import in_window, expected_collection_day
@@ -9,15 +9,33 @@ def collection_due(checked_at, current):
  expected=expected_collection_day(current)
  checked=datetime.fromisoformat(checked_at).astimezone(ZoneInfo('Asia/Jerusalem'))
  return checked.date()<expected
-def check(city,minimum):
+DELIVERY_ORIGIN = 'https://isnetsuper.ebs987449.chatgpt.site'
+
+def get_delivery_release():
+ response = requests.get(DELIVERY_ORIGIN + '/release', timeout=(10, 40),
+                         headers={'Cache-Control': 'no-cache'})
+ response.raise_for_status()
+ release = response.json().get('source_commit')
+ if not isinstance(release, str) or not re.fullmatch(r'[0-9a-f]{40}', release):
+  raise ValueError('Invalid supermarket delivery release')
+ return release
+
+def check(city,minimum,release=None):
  base='https://tlvnet.com/super/' if city=='TLV' else f'https://isnet.co.il/SUPER.{city}/'
  def get(path):
-  url=('https://tlvnet.com/api/super-data/'+path[len('data/'):]) if city=='TLV' and path.startswith('data/') else base+path
+  url = base + path
+  if path.startswith('data/'):
+   if city == 'TLV':
+    url = 'https://tlvnet.com/api/super-data/' + path[len('data/'):]
+   else:
+    url = f'{DELIVERY_ORIGIN}/SUPER.{city}/{path}?__release={release}'
   response=requests.get(url,timeout=(10,40),headers={'Cache-Control':'no-cache'})
   response.raise_for_status()
   return path,response
  paths=['','deals/','recipes/','smart-shopping/','data/prices.json','data/refresh-status.json']
  try:
+  if city != 'TLV' and not release:
+   return city, ['Independent data release unavailable']
   with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:responses=dict(pool.map(get,paths))
   prices=responses['data/prices.json'].json();refresh=responses['data/refresh-status.json'].json()
   errors=[]
@@ -36,8 +54,13 @@ def main():
  if not in_window(now,health=True):
   print("Skipped: supermarket health checks only Sun/Tue/Thu mornings in Israel")
   return
+ try:
+  release = get_delivery_release()
+ except (requests.RequestException, ValueError, AttributeError) as error:
+  print(f'Independent supermarket release unavailable ({type(error).__name__})')
+  release = None
  with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
-  results=list(pool.map(lambda item:check(*item),CITIES.items()))
+  results=list(pool.map(lambda item:check(*item,release=release),CITIES.items()))
  for city,errors in results:
   print(city+': '+('; '.join(errors) if errors else 'public pages and branch data verified'))
  if any(errors for _,errors in results):raise SystemExit(1)
