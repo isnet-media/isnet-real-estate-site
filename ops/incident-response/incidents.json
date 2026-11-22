@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T09:45:26Z",
+  "updated_at": "2026-11-22T10:56:50Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -6586,16 +6586,40 @@
           "owner_runKey": "news-20261119-morning-1795068050826",
           "inbox": "ops/incident-response/inbox/2026-11-19-news-morning-python-bs4.json",
           "version": 664
+        },
+        {
+          "observed_at": "2026-11-22T10:56:50Z",
+          "owner_task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+          "owner_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+          "owner_runKey": "economy-tech-20261122-fdb570bd-6e67-494c-b218-6a0e54400244",
+          "inbox": "ops/incident-response/inbox/economy-tech-20261122-fdb570bd-local-build-resolved.json",
+          "version": 722
         }
       ],
       "regression": {
         "status": "public_release_recovered_persistent_regression_pending",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-19/9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7.json"
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
       },
-      "release_blocker": "No source checkout or reusable authenticated Sites source credential is available in this controller execution. The repair must use the existing authorized source path.",
-      "next_action": "Have the existing source owner declare or confirm Beautiful Soup in the tracked build dependencies, install the declared dependencies before build-news.py, and confirm the news build once from a clean workspace. Close the recurrence risk only after that check and a matching live result.",
+      "release_blocker": "Recovered terminal source and journal are readable. Persistent dependency setup requires the authorized Site source write and a clean release verification.",
+      "next_action": "Declare the existing Beautiful Soup and Pillow requirements in the source build setup and install into the same interpreter used by build-news/prepare-public. Verify from a clean checkout with a changed source input, keep the prepared-snapshot hash checks intact.",
       "inbox": "ops/incident-response/inbox/2026-11-19-news-morning-python-bs4.json",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-19/9ce68da9-c8a8-8332-bbf2-1c38e9ff88a7.json"
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
+      "last_seen_at": "2026-11-22T10:56:50Z",
+      "latest_recurrence": {
+        "incident_id": "tlvnet-news-python-bs4-after-workspace-cleanup",
+        "status": "mitigated_release_verified_persistent_setup_pending",
+        "owner_run": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+        "build_runKey": "economy-tech-20261122-fdb570bd-6e67-494c-b218-6a0e54400244",
+        "owner_inbox": "ops/incident-response/inbox/economy-tech-20261122-fdb570bd-local-build-resolved.json",
+        "root": "Fresh execution Python lacked Beautiful Soup. The owner also corrected required usage and geography fields for the new asset before the successful build.",
+        "existing_prepared_snapshot_behavior": "prepare-public searches python/python3 for bs4, uses a fingerprinted snapshot only when unchanged; new content still requires a compatible Python.",
+        "isolated_interpreter_readback": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python 4.14.3 13.0.0",
+          "/usr/bin/python3 False"
+        ],
+        "production_validation": "Owner standard build plus independent full public readback passed. Persistent build prerequisites were unchanged.",
+        "required_source_change": "Declare the existing Beautiful Soup and Pillow requirements in the source build setup and install into the same interpreter used by build-news/prepare-public. Verify from a clean checkout with a changed source input, keep the prepared-snapshot hash checks intact."
+      }
     },
     {
       "id": "tlvnet-investigations-publication-route-unverified",
@@ -7782,7 +7806,7 @@
       "last_seen_at": "2026-11-22T09:45:26Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-29361082-f020-8320-9560-b3958f38941f",
+  "last_review_runKey": "ops-2026-11-22-2c75ddd2-129c-8330-9fdd-832288f3f951",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
