@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-22T06:12:00.850Z",
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "runKey": "news-20261122-morning-1691f3aa-46fe-4422-86f9-52838b953ec6",
+  "target": "TLVNET-site",
+  "source_commit": "0fbafd1d6c7db4196f1a50b6f11aba3792849db8",
+  "journal_commit": "d903b6537725521b37dcd89263d32d7f2e3cf9b3",
+  "controller_triggered": false,
+  "subsystem": "TLVNET photo review queue",
+  "signature": "prepare-public:audit-image-quality:replaces_operator_visual_followups",
+  "status": "mitigated",
+  "root_cause": "scripts/audit-image-quality.py rewrites data/photo-bank/quality-issues.json as a generated report. Six open post-publication mobile-review records known in the prior journal were absent after a later site build.",
+  "correction": "Recovered three prior records with exact matching body and asset hashes. Superseded the other three with current body/hash records for legitimately updated stories. Added current-run records for all six published/updated items.",
+  "verification": {
+    "loss_source_commit": "ccd6ea71877f75ff002c722a4f2ef5c236372d38",
+    "prior_queue_commit": "ef5366c01ac65414aa6116c45b75891baa3175dc",
+    "verified_queue_commit": "d903b6537725521b37dcd89263d32d7f2e3cf9b3"
+  },
+  "remaining": "Generator still replaces the queue on a future build. Controller should preserve unresolved own-source records by article and matching body/asset hash, with a focused regression test."
+}
