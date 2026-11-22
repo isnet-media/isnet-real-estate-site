@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T15:57:34Z",
+  "updated_at": "2026-11-22T16:45:33Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8031,7 +8031,7 @@
       },
       "reason": "Two Ashdod productions were represented by distinct source titles at the exact same times and venues. Exact aliases removed both suspects locally; the shared gate still found the previously known Herzliya cast conflict.",
       "next_action": "After the existing Herzliya event owner resolves the conflicting cast offer, apply the exact verified aliases on a fresh branch, regenerate the shared overlay version references, and run the full integrity suite before the normal shared Pages release. No listener, production asset or deploy was modified by this checkpoint.",
-      "last_seen_at": "2026-11-22T15:57:34Z",
+      "last_seen_at": "2026-11-22T16:45:33Z",
       "reported_runKey": "ops-2026-11-22-e5bb335c-bb60-8330-b57d-ee4eac785e9c",
       "occurrences": [
         {
@@ -8159,9 +8159,20 @@
           "recorded_at": "2026-11-22T15:57:34Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
           "qualification": "Known Ashdod assertion and 2 unresolved candidates confirmed from log"
+        },
+        {
+          "run_id": 45043295308,
+          "job_id": 137272270355,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45043295308",
+          "source_commit": "7c167e1e127311778c3bcdcebf4213bd448f946a",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/57e4463a-ed38-8330-b346-2a466ba4519a.json",
+          "recorded_at": "2026-11-22T16:45:33Z",
+          "qualification": "2 unresolved candidates, expected 0; blocking"
         }
       ],
-      "last_occurrence_evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json"
+      "last_occurrence_evidence": "ops/tlvnet-stability/observations/2026-11-22/57e4463a-ed38-8330-b346-2a466ba4519a.json"
     },
     {
       "id": "kiryat-gat-events-shared-asset-integrity-aborted",
@@ -8214,10 +8225,61 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
       "source_inbox": "ops/incident-response/inbox/a15528f9-e6a8-8330-9256-a5d9276bfce4-ashdod-ofek-future-snapshot.json",
       "reported_runKey": "ops-2026-11-22-a15528f9-e6a8-8330-9256-a5d9276bfce4",
-      "first_seen_at": "2026-11-22T15:57:34Z"
+      "first_seen_at": "2026-11-22T15:57:34Z",
+      "occurrences": [
+        {
+          "run_id": 45043295308,
+          "job_id": 137272270355,
+          "attempt": 1,
+          "workflow": "Publish priceboard",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45043295308",
+          "source_commit": "7c167e1e127311778c3bcdcebf4213bd448f946a",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-22/57e4463a-ed38-8330-b346-2a466ba4519a.json",
+          "recorded_at": "2026-11-22T16:45:33Z",
+          "qualification": "No verified future Ofek rows in build input; warning only"
+        }
+      ],
+      "last_seen_at": "2026-11-22T16:45:33Z",
+      "last_occurrence_evidence": "ops/tlvnet-stability/observations/2026-11-22/57e4463a-ed38-8330-b346-2a466ba4519a.json",
+      "snapshot_path_corrected": {
+        "path": "events-preview/admin/data/ashdod-local-snapshot.json",
+        "blob": "6fd3d046c797552c4e4ffaab52c858cfb8772f23",
+        "contents_readback": "Unavailable from connector; failure log establishes empty filtered set, underlying source intake cause still unverified."
+      }
+    },
+    {
+      "schema_version": 1,
+      "kind": "controller_deployment_trigger_incident",
+      "id": "ashdod-event-repair-status-triggers-shared-pages",
+      "incident_id": "ashdod-event-repair-status-triggers-shared-pages",
+      "status": "open",
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "57e4463a-ed38-8330-b346-2a466ba4519a",
+      "runKey": "ops-2026-11-22-57e4463a-ed38-8330-b346-2a466ba4519a",
+      "recorded_at": "2026-11-22T16:45:33Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/57e4463a-ed38-8330-b346-2a466ba4519a.json",
+      "repair_run": 45043194403,
+      "repair_run_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45043194403",
+      "failed_publish_run": 45043295308,
+      "failed_publish_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45043295308",
+      "source_commit": "7c167e1e127311778c3bcdcebf4213bd448f946a",
+      "commit_changed_paths": [
+        "events-preview/admin/data/automatic-repair-status.json"
+      ],
+      "catalog_changed_by_commit": false,
+      "repair_count": 0,
+      "workflow_path": ".github/workflows/pages.yml",
+      "workflow_match": "events-preview/**",
+      "current_public_marker": "077d1bbf6a6fdf6665ca17ea8350c5a4717806f0",
+      "root_cause": "Push path rules treated an audit-only status file as a change requiring the shared Pages build. That admin report is served as a static file and is explicitly read together with the history in automatic-repair.html.",
+      "impact": "This push triggered a full shared build with no changes to event records or repair history. The known Ashdod duplicate assertion stopped deployment. The known Ofek validation warning also reappeared.",
+      "next_action": "The existing event release owner should preserve freshness of the admin status/history through an authorized readback path and separate status-only writes from shared release triggers. Verify a report-only push and a mixed report/catalog push in isolation before changing production. Keep editor-facing report reads and event integrity checks intact.",
+      "source_inbox": "ops/incident-response/inbox/57e4463a-ed38-8330-b346-2a466ba4519a-event-repair-status-retriggers-pages.json",
+      "first_seen_at": "2026-11-22T16:45:33Z",
+      "reported_runKey": "ops-2026-11-22-57e4463a-ed38-8330-b346-2a466ba4519a"
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-a15528f9-e6a8-8330-9256-a5d9276bfce4",
+  "last_review_runKey": "ops-2026-11-22-57e4463a-ed38-8330-b346-2a466ba4519a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
