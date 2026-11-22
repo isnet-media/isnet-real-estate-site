@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T08:49:51Z",
+  "updated_at": "2026-11-22T09:45:26Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4308,7 +4308,17 @@
           "Broader exhibition/community/seniors coverage and missing official photos",
           "Sportpalace index/detail two-hour disagreement on21Nov/28Nov, withheld pendingconfirmation"
         ]
-      }
+      },
+      "latest_source_verification": {
+        "observed_at": "2026-11-22T09:45:26Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+        "deployment": 720,
+        "raw_public_event_count": 376,
+        "explicit_seniors_owner_report": 5,
+        "reich_access_status": "Access denied 473, per original owner checkpoint",
+        "status": "partial_recovery_other_sources; current Reich programme remains unavailable"
+      },
+      "last_seen_at": "2026-11-22T09:45:26Z"
     },
     {
       "id": "tlvnet-neighborhood-cross-desk-live-aggregation",
@@ -7671,9 +7681,108 @@
       },
       "prevention": "Resolve the delivery revision once, verify its shape, use pinned data for the six offloaded cities, and retain regression coverage for site isolation and unavailable delivery.",
       "next_action": "Track data collection and retained suppliers separately under supermarket-public-http-and-stale-branches."
+    },
+    {
+      "id": "future-20261122-prepared-release-held-and-herzliya-media",
+      "status": "open",
+      "fingerprint": "future-owner-approved-TLV-release-delayed_herzliya-local-asset_holon-home-card",
+      "root_cause": "Release overlap was resolved. The approved article remains absent from the dedicated TLVNET magazine catalog; the general news recovery helper does not write that catalog. Herzliya has a separate local media ID dependency. The published Holon article is absent from the home cards in the sampled HTML.",
+      "source_checkpoint": "ops/incident-response/inbox/20261122T0902Z-future-prepared-release-b9a31d82.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+      "targets": {
+        "TLVNET": {
+          "status": "prepared_pending_owner_release",
+          "article": {
+            "http": 404,
+            "url": "https://tlvnet.com/future/article-daily-2026-11-20.html",
+            "ms": 4026,
+            "title": "404",
+            "article_link": 0,
+            "future_link": true
+          },
+          "section": {
+            "http": 200,
+            "url": "https://tlvnet.com/future/",
+            "ms": 8764,
+            "title": "החיים של המחר.",
+            "article_link": 0,
+            "future_link": false
+          },
+          "catalog": {
+            "http": 200,
+            "url": "https://tlvnet.com/future/articles.json",
+            "ms": 4690,
+            "keys": [
+              "articles"
+            ],
+            "contains_id": false
+          },
+          "qualification": "Current future source catalog and live catalog exclude the ID; existing mechanical recovery helper is scoped to public/news/articles.json and briefs specialist profile, not the future magazine. Retain the exact approved original for the magazine publication path."
+        },
+        "herzliya": {
+          "status": "blocked_missing_local_media_id",
+          "qualification": "Owner handoff specifies a receiver-local approved media.fileId; no valid ID provided."
+        },
+        "holon": {
+          "status": "public_home_article_card_missing",
+          "post_id": 812567,
+          "article_url": "https://holonnet.co.il/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812567",
+          "article_title_and_credit_readback": true,
+          "home_card_absent_in_fresh_html": true,
+          "qualification": "Owner verified section; public direct link and home HTML independently checked. Preserve existing article."
+        }
+      },
+      "next_action": "Retain this approved body and media unchanged for the magazine owner; reuse the published Holon item and verify its home feed. For Herzliya use an approved local media import and a real destination media ID.",
+      "reported_runKey": "ops-2026-11-22-29361082-f020-8320-9560-b3958f38941f",
+      "last_seen_at": "2026-11-22T09:45:26Z"
+    },
+    {
+      "id": "events-city-snapshot-reader-returned-metadata-only",
+      "status": "open",
+      "fingerprint": "city-event-files-repo-reader-blob-metadata-no-payload",
+      "root_cause": "Unknown reader limitation. The four current file SHAs exist and all returned metadata, but the bounded reader provided no header content. A public outage or permission regression is not established.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-22/29361082-f020-8320-9560-b3958f38941f.json",
+      "source_inbox": "ops/incident-response/inbox/events-seniors-20261122-83c84e32-city-snapshot-read.json",
+      "targets": [
+        {
+          "city": "ashdod",
+          "sha": "588ffc26812c71c7eb3ee9b876eecc1dedeacb6d",
+          "size": 5861575,
+          "readable_header": false,
+          "header_reported_timestamp": null,
+          "readback_sha": "588ffc26812c71c7eb3ee9b876eecc1dedeacb6d"
+        },
+        {
+          "city": "kiryat-gat",
+          "sha": "b0bfb7f96732e83577c95c01ad840ea597fa001e",
+          "size": 1078299,
+          "readable_header": false,
+          "header_reported_timestamp": null,
+          "readback_sha": "b0bfb7f96732e83577c95c01ad840ea597fa001e"
+        },
+        {
+          "city": "rishon-lezion",
+          "sha": "32cf60ef2bce0d53efc8dc0faa869903dacf7555",
+          "size": 11438235,
+          "readable_header": false,
+          "header_reported_timestamp": null,
+          "readback_sha": "32cf60ef2bce0d53efc8dc0faa869903dacf7555"
+        },
+        {
+          "city": "yavne",
+          "sha": "645a181f2a342e3ecdaa4cf728930cb5883beadb",
+          "size": 1220923,
+          "readable_header": false,
+          "header_reported_timestamp": null,
+          "readback_sha": "645a181f2a342e3ecdaa4cf728930cb5883beadb"
+        }
+      ],
+      "next_action": "Preserve the city checkpoints. Reconcile the next owner read or changed source path; avoid a blind full payload retry.",
+      "reported_runKey": "ops-2026-11-22-29361082-f020-8320-9560-b3958f38941f",
+      "last_seen_at": "2026-11-22T09:45:26Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-993cfc24-dd40-8320-99cf-96f9e9bfbe67",
+  "last_review_runKey": "ops-2026-11-22-29361082-f020-8320-9560-b3958f38941f",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
