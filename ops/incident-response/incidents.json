@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T11:43:50.744Z",
+  "updated_at": "2026-11-23T12:47:26.105Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8006,7 +8006,7 @@
     },
     {
       "id": "tlvnet-consumer-recall-ready-after-lock-and-date-check",
-      "status": "open",
+      "status": "fixed_verified",
       "root_cause": "The shared release lane collision ended. Both approved handoffs are still absent from the deployed catalog and require the existing owner media/build path. The nutmeg handoff's notice date differs from the current government webpage's publication date.",
       "evidence": "ops/tlvnet-stability/observations/2026-11-22/d9f867d4-aeac-8330-a315-7f6422ee46f9.json",
       "reported_runKey": "ops-2026-11-22-d9f867d4-aeac-8330-a315-7f6422ee46f9",
@@ -8017,7 +8017,29 @@
         "santa-bremor-trout-recall-5161-20261121",
         "zafran-ground-nutmeg-recall-20261120"
       ],
-      "next_action": "Existing consumer owner: reconcile government webpage publication versus original notice before releasing the nutmeg draft, then verify both existing approved items and original JPEGs via ordinary publication gates. Preserve the independent trout handoff and do not treat the old lease as active."
+      "next_action": "Retain remaining source-verification candidates with the owner; no retry or duplicate release for the two live articles.",
+      "resolved_at": "2026-11-23T12:47:26.105Z",
+      "resolution": {
+        "owner_resumed_checkpoint": true,
+        "owner_run": "867dfbdc-afe0-8330-bf09-b78400e5612a",
+        "public_articles": [
+          "https://tlvnet.com/news/santa-bremor-trout-recall-5161-20261121",
+          "https://tlvnet.com/news/zafran-ground-nutmeg-recall-20261120"
+        ],
+        "deployment": {
+          "version": 730,
+          "source_commit": "0cdb7d301f853d6a55c34940eee48e9d972f31b6",
+          "deployment_id": "appgdep_6b0430d13f888191bb7914c333acedeb",
+          "status": "succeeded",
+          "succeeded_at": "2026-11-23T12:26:08.329716+00:00"
+        },
+        "evidence": [
+          "ops/incident-response/inbox/20261123-consumer-730-verified.json",
+          "ops/tlvnet-stability/observations/2026-11-23/b6b80989-bf84-8328-8cd1-e5b586a23a57.json"
+        ],
+        "remaining_owner_research": 6,
+        "mobile_visual_review": "pending"
+      }
     },
     {
       "id": "ashdod-confirmed-event-aliases-block-pages",
@@ -8468,7 +8490,17 @@
         "operational_checkpoint_retained": true
       },
       "next_action": "Inspect scheduler dispatch records for affected run IDs, restore the existing TLVNET Sites source session, and confirm one owner execution by receipt, matching result and public readback through the normal lane.",
-      "reported_runKey": "ops-2026-11-23-cbd3cbe0-30fc-8328-9f32-748e1f1e1742"
+      "reported_runKey": "ops-2026-11-23-cbd3cbe0-30fc-8328-9f32-748e1f1e1742",
+      "latest_recovery": {
+        "observed_at": "2026-11-23T12:47:26.105Z",
+        "status": "partial",
+        "news_owner_run": "84f66cb8-dda8-8320-9b26-3f8541a10ee4",
+        "consumer_owner_run": "867dfbdc-afe0-8330-bf09-b78400e5612a",
+        "independent_publications": 4,
+        "source_changed": true,
+        "remaining": "Sports and other affected desks require their own result/readback. Herzliya owner cycle has started, with publication reconciliation pending.",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-23/b6b80989-bf84-8328-8cd1-e5b586a23a57.json"
+      }
     }
   ],
   "last_review_runKey": "ops-2026-11-22-0b05f5fe-9108-8330-a13e-015fcbacccf4",
