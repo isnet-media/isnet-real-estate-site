@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T18:57:39.328Z",
+  "updated_at": "2026-11-23T19:20:39.796Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8549,7 +8549,15 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-23/3fc0d7ff-304c-8328-b014-791346c8a4d8.json"
         },
         "other_affected_desks": "Specialist sports, community, economy, culture and investigation runs have not yet produced newer matching results during this recovery.",
-        "last_checked_at": "2026-11-23T13:21:12.618Z"
+        "last_checked_at": "2026-11-23T19:20:39.796Z",
+        "sports": {
+          "run_id": "36d29c3f-9b1c-8322-8ea5-883a7e6fb6be",
+          "recorded_status": "in_progress",
+          "policy_read_at": "2026-11-23T19:05:20.086135Z",
+          "qualification": "Receipt and research observed before task scope switched back to controller. No matching terminal sports result or new sport publication proven.",
+          "handoff": "ops/incident-response/inbox/51c4b6b4-2598-8328-82ff-aae9fb709dad-sports-research-role-handoff.json"
+        },
+        "source_access": "Current canonical read and source-only write succeeded. Other affected desk terminal results unchanged."
       }
     },
     {
@@ -8566,25 +8574,27 @@
     },
     {
       "id": "tlvnet-build-password-auth-test-fixed-window-rollover",
-      "status": "open",
+      "status": "mitigated",
       "root_cause_status": "Likely wall-clock rollover from owner incident; deterministic test-only correction passed locally.",
       "latest_observation": {
-        "path": "ops/incident-response/inbox/2026-11-23-tlvnet-password-auth-test-window-boundary.json",
-        "sha": "cd63ca2d00c405dbbf6917a2788b91aa1dd9bcf7",
-        "local_only": true,
-        "status": "isolated_patch_verified_release_pending",
-        "base_source": "be456fd9fa0697cf22f5301e67232f537e1c500f",
-        "patch_scope": "tests/password-auth.mjs only, freeze clock within rate-limit assertions and restore in finally; production limiter and all other tests untouched",
-        "baseline_and_patched_test_pass": true,
-        "diff_check_pass": true,
-        "full_build_with_patch": false,
-        "blocker": "Exact deployed source available locally without a configured canonical remote. Existing authorization excludes obtaining new credentials. No source push or deployment."
+        "incident_id": "tlvnet-build-password-auth-test-fixed-window-rollover",
+        "path": "tests/password-auth.mjs",
+        "change": "Freeze Date.now only around the rate-limit assertion loop, restore in finally. Runtime authentication/rate-limit code unchanged.",
+        "source_commit": "71fd4d3afe222c7676a0e896629bc50c6f5d4765",
+        "targeted_regression": "passed",
+        "foundation_regression": "passed",
+        "diff_check": "passed",
+        "production_deployed": false,
+        "status": "source_regression_verified_release_pending",
+        "environment": "Initial full suite could not find typescript. Existing dependency installer completed; full foundation suite subsequently passed. This was a local prerequisite, not a public outage.",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-23/51c4b6b4-2598-8328-82ff-aae9fb709dad.json"
       },
       "evidence": [
         "ops/incident-response/inbox/2026-11-23-tlvnet-password-auth-test-window-boundary.json",
         "ops/tlvnet-stability/observations/2026-11-23/1a2e43a6-9c70-8328-806b-991d6d800dd4.json"
       ],
-      "next_action": "Merge the scoped test-clock fix through the canonical source owner and run full build. Keep the production rate limiter and deployed release untouched for a journal-only update."
+      "next_action": "Preserve pushed test-only clock correction at71fd4d3afe222c7676a0e896629bc50c6f5d4765 in next genuine owner release. Full foundation suite passes; full application build/deployment not performed for this source-only change.",
+      "updated_at": "2026-11-23T19:20:39.796Z"
     },
     {
       "id": "tlvnet-sites-source-credential-http400",
@@ -8596,7 +8606,7 @@
           "observed_at": "2026-11-23T18:01:46.569Z"
         }
       ],
-      "status": "open",
+      "status": "mitigated",
       "root_cause_status": "Unconfirmed Sites source binding/access failure. Active owner site metadata and last terminal deployment both readable.",
       "impact": "Three staged articles and two existing, time-bounded transport corrections could not be applied.",
       "latest_observation": {
@@ -8611,7 +8621,18 @@
         "ops/incident-response/inbox/2026-11-23-tlvnet-sites-source-credential-400.json",
         "ops/tlvnet-stability/observations/2026-11-23/7a23db64-9c68-8328-a1bc-0f5999c42c4f.json"
       ],
-      "next_action": "Have existing source owner verify canonical Sites repository binding and valid existing access. Reopen current HEAD, revalidate transport dates and editorial assets, then continue through the shared release lane."
+      "next_action": "Resume existing owner checkpoint through fresh source and normal CAS after completing pending image/body approvals; observe next owner build and live publication. Do not replay unchanged HTTP400 or infer a permanent fix.",
+      "updated_at": "2026-11-23T19:20:39.796Z",
+      "latest_recovery": {
+        "observed_at": "2026-11-23T19:20:39.796Z",
+        "existing_project_credential_succeeded": true,
+        "canonical_source_readback": "442c3b529ad02e3c8cb23281cecce78de6c019de",
+        "source_write_readback": "71fd4d3afe222c7676a0e896629bc50c6f5d4765",
+        "root_cause": null,
+        "status": "current_access_read_write_verified",
+        "remaining": "Original news owner must complete3asset ingestions/image approvals and2updated-body image reviews. No controller article approval or deployment.",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-23/51c4b6b4-2598-8328-82ff-aae9fb709dad.json"
+      }
     },
     {
       "id": "rishon-public-events-readback-connection-reset",
@@ -8658,7 +8679,7 @@
       "last_seen_at": "2026-11-23T18:57:39.328Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-22-0b05f5fe-9108-8330-a13e-015fcbacccf4",
+  "last_review_runKey": "ops-2026-11-23-51c4b6b4-2598-8328-82ff-aae9fb709dad",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
