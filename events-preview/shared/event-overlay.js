@@ -94,6 +94,8 @@ reviewedProductions.push({id:'ayelet-metayelet-2027',titles:['איילת מטי�
 // Official Mishkan subscription listing: same performance on each of 2 and 6 Feb 2027;
 // occurrence matcher still requires exact day/time/venue, so distinct performances stay separate.
 reviewedProductions.push({id:'muteret-lekol-adam-2027',titles:['מותרת לכל אדם- עונת המנויים 26-27'],source:'https://www.mishkan-ashdod.co.il/event.asp?event=5652'});
+// Mevalim spelling variant, same Mishkan Ashdod slot as the official subscription record (3 Feb 2027, 20:30).
+reviewedProductions.push({id:'muteret-lekol-adam-2027',titles:['מותרת לכל אדם - תאטרון באר שבע'],source:'https://www.mishkan-ashdod.co.il/event.asp?event=5652'});
 const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
 function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
 function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\s*([1-9]\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\s*\d+/g,'').replace(/^(?:אולם|אודיטוריום)\s+/,'');let key=e.venue_institution_id;
