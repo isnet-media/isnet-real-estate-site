@@ -87,6 +87,13 @@ reviewedProductions.push({id:'lets-not-talk-yael-guy-2026',titles:['בוא לא 
 reviewedProductions.push({id:'plastelina-mi-ani-2026',titles:['פלסטלינה בצבעים - מי אני באמת','פלסטלינה בצבעים- מי אני באמת מחזמר על הרצון להשתייך ועל החופש להיות מי שאנחנו'],source:'https://www.makore.co.il/event/פלסטלינה-בצבעים-מי-אני-באמת-מחזמר-על-הרצון-להשתיי--e1f48616'});
 // Two entries of the same Mishkan production: 1 Feb 2027, 20:30, Ashdod.
 reviewedProductions.push({id:'muteret-lekol-adam-2027',titles:['מותרת לכל אדם- תיאטרון באר שבע','מותרת לכל אדם'],source:'https://live.tickchak.co.il/event/ernPGdJDj'});
+// Same Sababa source and Mishkan slot (16 Jan 2027, 21:00); the longer board title is another alias.
+reviewedProductions.push({id:'imi-generalit-musical',titles:['אמי הגנרלית - מחזמר - תיאטרון העברי'],source:'https://sababa.events/he/event/moya-mat-generalsha-myuzikl/ashdod/'});
+// FRIENDS and Mevalim listings: Ayelet Metayelet, 19 Jan 2027 17:30 at Diona, Ashdod.
+reviewedProductions.push({id:'ayelet-metayelet-2027',titles:['איילת מטיילת','איילת מטיילת - הצגה חדשה ע"פ רב המכר של רינת הופר'],source:'https://friends-hist.co.il/show/איילת-מטיילת/'});
+// Official Mishkan subscription listing: same performance on each of 2 and 6 Feb 2027;
+// occurrence matcher still requires exact day/time/venue, so distinct performances stay separate.
+reviewedProductions.push({id:'muteret-lekol-adam-2027',titles:['מותרת לכל אדם- עונת המנויים 26-27'],source:'https://www.mishkan-ashdod.co.il/event.asp?event=5652'});
 const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
 function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
 function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\s*([1-9]\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\s*\d+/g,'').replace(/^(?:אולם|אודיטוריום)\s+/,'');let key=e.venue_institution_id;
