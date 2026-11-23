@@ -13,15 +13,15 @@ for stamp in ['2026-11-15T07:59:59+02:00','2026-11-15T11:00:00+02:00',
               '2026-11-18T08:30:00+02:00','2026-11-20T08:30:00+02:00',
               '2026-11-21T08:30:00+02:00','2026-07-07T09:00:00+00:00']:
  assert not d.allowed(now(stamp),{},{}),stamp
-for stamp in ['2026-11-15T08:00:00+02:00','2026-11-17T10:59:59+02:00',
-              '2026-11-19T09:00:00+02:00','2026-07-07T05:00:00+00:00',
-              '2026-10-25T06:00:00+00:00']:
+for stamp in ['2026-11-17T10:59:59+02:00',
+              '2026-07-07T05:00:00+00:00',
+              '2026-11-24T06:00:00+00:00']:
  assert d.allowed(now(stamp),{},{}),stamp
-for record in [{'started_at':'2026-11-15T08:00:00+02:00','status':'failed'},
-               {'started_at':'2026-11-15T08:00:00+02:00','status':'completed'}]:
- assert not d.allowed(now('2026-11-15T09:00:00+02:00'),record,{})
-assert not d.allowed(now('2026-11-15T09:00:00+02:00'),{}, {'checked_at':'2026-11-15T08:00:00+02:00'})
-assert d.allowed(now('2026-11-17T08:00:00+02:00'),{'started_at':'2026-11-15T08:00:00+02:00'}, {})
+for record in [{'started_at':'2026-11-17T08:00:00+02:00','status':'failed'},
+               {'started_at':'2026-11-17T08:00:00+02:00','status':'completed'}]:
+ assert not d.allowed(now('2026-11-17T09:00:00+02:00'),record,{})
+assert not d.allowed(now('2026-11-17T09:00:00+02:00'),{}, {'checked_at':'2026-11-17T08:00:00+02:00'})
+assert d.allowed(now('2026-11-24T08:00:00+02:00'),{'started_at':'2026-11-17T08:00:00+02:00'}, {})
 # A non-overlapping push race is retried without replacing another city's data.
 calls=[]
 def git(*args):
@@ -43,7 +43,7 @@ for name,p in workflows.items():
  assert "local_hour" not in t,p
  import re
  crons=re.findall(r"cron: '([^']+)'",t)
- assert len(crons)==1 and crons[0].split()==[str(expected_minutes[name]),'6','*','*','0,2,4'],p
+ assert len(crons)==1 and crons[0].split()==[str(expected_minutes[name]),'6','*','*','2'],p
  if p.name!='super-prices.yml':assert '--deployment-only' in t,p
  assert '  refresh:' in t and '    steps:' in t,p
-print('Passed: DST, delayed runners, once-daily failed/successful attempts, concurrent publication retry and seven Sun/Tue/Thu morning workflow guards')
+print('Passed: DST, delayed runners, once-daily failed/successful attempts, concurrent publication retry and seven Tuesday-only morning workflow guards')
