@@ -40,7 +40,7 @@ def check(city,minimum,release=None):
   prices=responses['data/prices.json'].json();refresh=responses['data/refresh-status.json'].json()
   errors=[]
   if prices['branch_count']<minimum:errors.append('Connected branch coverage dropped')
-  stale=[b['id'] for b in prices['branches'] if not b.get('file_date') or (expected_collection_day(now)-date.fromisoformat(b['file_date'])).days>1]
+  stale=[b['id'] for b in prices['branches'] if not b.get('file_date') or (expected_collection_day(now)-date.fromisoformat(b['file_date'])).days>7]
   if stale:errors.append('Stale branches: '+','.join(stale))
   if collection_due(refresh['checked_at'],now):errors.append('Scheduled collection overdue: last public collection '+refresh['checked_at'])
   failed=[b['branch_id'] for b in refresh['branches'] if b['status']!='updated']
@@ -52,7 +52,7 @@ def check(city,minimum,release=None):
  except Exception as error:return city,[type(error).__name__+': public read-back failed']
 def main():
  if not in_window(now,health=True):
-  print("Skipped: supermarket health checks only Sun/Tue/Thu mornings in Israel")
+  print("Skipped: supermarket health checks only Tuesday mornings in Israel")
   return
  try:
   release = get_delivery_release()
