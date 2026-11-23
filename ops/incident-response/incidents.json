@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T18:01:46.569Z",
+  "updated_at": "2026-11-23T18:57:39.328Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8612,6 +8612,50 @@
         "ops/tlvnet-stability/observations/2026-11-23/7a23db64-9c68-8328-a1bc-0f5999c42c4f.json"
       ],
       "next_action": "Have existing source owner verify canonical Sites repository binding and valid existing access. Reopen current HEAD, revalidate transport dates and editorial assets, then continue through the shared release lane."
+    },
+    {
+      "id": "rishon-public-events-readback-connection-reset",
+      "occurrences": [
+        {
+          "run_id": 45241649943,
+          "attempt": 1,
+          "source_commit": "b381f01a10d0dee860ae16796ff0d99f99fd6d99",
+          "job_id": 137927586177,
+          "observed_cause": "ConnectionResetError while reading Rishon LeZion event feed",
+          "had_http_200_headers": true,
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45241649943",
+          "inbox": "ops/incident-response/inbox/45241649943-1.json"
+        }
+      ],
+      "status": "mitigated",
+      "root_cause_status": "Observed connection reset during public feed verification; no evidence of content mismatch or outage",
+      "latest_recovery": {
+        "run_id": 45241996144,
+        "comparison_step_passed": true,
+        "source_commit": "37940c78292f5695a984b929c20386498f022c04",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45241996144",
+        "independent_public_feed": {
+          "url": "https://isnet.co.il/events-preview/rishon-lezion/data/events.json",
+          "http": 200,
+          "seconds": 4.859,
+          "complete_json": false,
+          "count": null,
+          "unique_event_ids": null,
+          "last_modified": "Mon, 23 Nov 2026 18:46:34 GMT"
+        },
+        "full_independent_feed_comparison": false,
+        "independent_read_note": "HTTP response sampled, body exceeded the 12 MB verification cap.",
+        "public_release": {
+          "source_commit": "b381f01a10d0dee860ae16796ff0d99f99fd6d99",
+          "run_id": "45241480628",
+          "run_attempt": "1"
+        }
+      },
+      "evidence": [
+        "ops/incident-response/inbox/45241649943-1.json",
+        "ops/tlvnet-stability/observations/2026-11-23/b2edf175-c938-8328-93f7-020a0234ed05.json"
+      ],
+      "last_seen_at": "2026-11-23T18:57:39.328Z"
     }
   ],
   "last_review_runKey": "ops-2026-11-22-0b05f5fe-9108-8330-a13e-015fcbacccf4",
