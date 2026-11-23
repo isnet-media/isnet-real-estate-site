@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo('Asia/Jerusalem')
-COLLECTION_DAYS = frozenset({6, 1, 3})  # Python: Sunday, Tuesday, Thursday.
+COLLECTION_DAYS = frozenset({1})  # Python weekday 1: Tuesday only.
 
 def in_window(now, *, health=False):
     local = now.astimezone(TZ)
