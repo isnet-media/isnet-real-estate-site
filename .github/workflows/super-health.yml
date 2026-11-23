@@ -1,8 +1,8 @@
 name: All cities supermarket public health
 on:
   schedule:
-    # Sun/Tue/Thu only; actual Israel execution time is checked before HTTP reads.
-    - cron: '0 8 * * 0,2,4'
+    # Tuesday only; actual Israel execution time is checked before HTTP reads.
+    - cron: '0 8 * * 2'
   workflow_dispatch:
   push:
     branches: [main]
