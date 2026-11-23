@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T16:54:11.837Z",
+  "updated_at": "2026-11-23T18:01:46.569Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8035,7 +8035,15 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-22/e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a.json",
       "next_action": "Existing authorized CMS-59 writer can ingest verified licensed bytes through supported content upload (with complete attribution and evidence) and verify existing posts. Preserve original publication dates.",
       "last_seen_at": "2026-11-22T12:10:44Z",
-      "reported_runKey": "ops-2026-11-22-e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a"
+      "reported_runKey": "ops-2026-11-22-e1ae6a19-e4b8-8330-aa59-c9eb310e2a0a",
+      "latest_occurrence": {
+        "inbox": "ops/incident-response/inbox/20261123-raanana-winter-festival-subject-media-blocked.json",
+        "observed_at": "2026-11-23T18:01:46.569Z",
+        "canonical_import_http": 403,
+        "alternate_import_http": 404,
+        "still_unpublished": true,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-23/7a23db64-9c68-8328-a1bc-0f5999c42c4f.json"
+      }
     },
     {
       "id": "tlvnet-consumer-recall-ready-after-lock-and-date-check",
@@ -8577,6 +8585,33 @@
         "ops/tlvnet-stability/observations/2026-11-23/1a2e43a6-9c70-8328-806b-991d6d800dd4.json"
       ],
       "next_action": "Merge the scoped test-clock fix through the canonical source owner and run full build. Keep the production rate limiter and deployed release untouched for a journal-only update."
+    },
+    {
+      "id": "tlvnet-sites-source-credential-http400",
+      "occurrences": [
+        {
+          "run_id": "59111b4b-4cc8-8320-8bc5-a8a5e6fa6a9b",
+          "runKey": "news-20261123-evening-18fead55-c31d-41ac-a6ec-2f3b915fa6aa",
+          "inbox": "ops/incident-response/inbox/2026-11-23-tlvnet-sites-source-credential-400.json",
+          "observed_at": "2026-11-23T18:01:46.569Z"
+        }
+      ],
+      "status": "open",
+      "root_cause_status": "Unconfirmed Sites source binding/access failure. Active owner site metadata and last terminal deployment both readable.",
+      "impact": "Three staged articles and two existing, time-bounded transport corrections could not be applied.",
+      "latest_observation": {
+        "writer_source_credential_http": 400,
+        "writer_authorized_git_http": 404,
+        "controller_site_active": true,
+        "controller_site_role": "owner",
+        "controller_fresh_canonical_source_head": "unverified",
+        "lease": "free"
+      },
+      "evidence": [
+        "ops/incident-response/inbox/2026-11-23-tlvnet-sites-source-credential-400.json",
+        "ops/tlvnet-stability/observations/2026-11-23/7a23db64-9c68-8328-a1bc-0f5999c42c4f.json"
+      ],
+      "next_action": "Have existing source owner verify canonical Sites repository binding and valid existing access. Reopen current HEAD, revalidate transport dates and editorial assets, then continue through the shared release lane."
     }
   ],
   "last_review_runKey": "ops-2026-11-22-0b05f5fe-9108-8330-a13e-015fcbacccf4",
