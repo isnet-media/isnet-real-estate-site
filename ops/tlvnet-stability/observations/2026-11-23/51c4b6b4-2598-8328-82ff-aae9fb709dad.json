@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "51c4b6b4-2598-8328-82ff-aae9fb709dad",
+  "runKey": "ops-2026-11-23-51c4b6b4-2598-8328-82ff-aae9fb709dad",
+  "policy_version": "2026-11-15/1.2",
+  "private_definition": {
+    "revision": 2,
+    "checksum": "056de9284cd0c7eb642f8de9ff73cfc82d3b598882c03992d3f2b3b8fdbc01a6",
+    "read_receipt_at": "2026-11-23T19:10:38.151615Z"
+  },
+  "observed_at": "2026-11-23T19:20:39.796Z",
+  "scope": {
+    "site": "TLVNET.COM",
+    "sections": [
+      "news",
+      "real-estate",
+      "economy-tech",
+      "community",
+      "consumer",
+      "sports",
+      "culture-news",
+      "bli-heshbon"
+    ],
+    "other_controls": "Incremental GitHub Actions and existing inbox; no new entries beyond recorded boundary",
+    "new_tasks": 0,
+    "task_triggers": 0,
+    "schedules_changed": 0,
+    "enabled_changed": 0,
+    "editorial_approvals": 0,
+    "editorial_publications": 0,
+    "deployments": 0
+  },
+  "source_access": {
+    "status": "mitigated_current_access_verified",
+    "previous_signature": "TLVNET/Sites/source-write-credential/HTTP400",
+    "current_credential_request_succeeded": true,
+    "canonical_head_opened": "442c3b529ad02e3c8cb23281cecce78de6c019de",
+    "source_push": "71fd4d3afe222c7676a0e896629bc50c6f5d4765",
+    "remote_readback_matches": true,
+    "root_cause": null,
+    "qualification": "Current existing-project source read/write access verified; historical HTTP400 cause unconfirmed; not a guarantee of future availability. Empty-checkout history transfer was interrupted and existing complete object cache reused for supported incremental source open. No secret persisted."
+  },
+  "technical_change": {
+    "incident_id": "tlvnet-build-password-auth-test-fixed-window-rollover",
+    "path": "tests/password-auth.mjs",
+    "change": "Freeze Date.now only around the rate-limit assertion loop, restore in finally. Runtime authentication/rate-limit code unchanged.",
+    "source_commit": "71fd4d3afe222c7676a0e896629bc50c6f5d4765",
+    "targeted_regression": "passed",
+    "foundation_regression": "passed",
+    "diff_check": "passed",
+    "production_deployed": false,
+    "status": "source_regression_verified_release_pending",
+    "environment": "Initial full suite could not find typescript. Existing dependency installer completed; full foundation suite subsequently passed. This was a local prerequisite, not a public outage."
+  },
+  "lease": {
+    "acquired_at": "2026-11-23T19:15:24.960Z",
+    "lease_until": "2026-11-23T19:30:24.960Z",
+    "owner": "Automation_9776808c73848191a9d748dd09315960",
+    "released_at": "2026-11-23T19:19:00.617Z",
+    "final_state": "free"
+  },
+  "deployment": {
+    "version": 732,
+    "source_commit": "be456fd9fa0697cf22f5301e67232f537e1c500f",
+    "deployment_id": "appgdep_6b045d3a9c048191ae326a021abfb9f1",
+    "terminal": "succeeded",
+    "terminal_at": "2026-11-23T15:35:39.500095+00:00",
+    "replayed": false
+  },
+  "owner_results": [
+    {
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "title": "חדשות תל אביב — שלוש פעמים ביום",
+      "enabled": true,
+      "run_id": "59111b4b-4cc8-8320-8bc5-a8a5e6fa6a9b",
+      "status": "completed",
+      "started_at": "2026-11-23T17:03:44.848554Z",
+      "completed_at": "2026-11-23T17:12:56.706117Z",
+      "result_run_id": "59111b4b-4cc8-8320-8bc5-a8a5e6fa6a9b",
+      "result_matches": true
+    },
+    {
+      "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "title": "נדל״ן — יומי",
+      "enabled": true,
+      "run_id": "3f935db7-a38c-832b-a7ec-dda2a17ae91e",
+      "status": "completed",
+      "started_at": "2026-11-23T15:22:25.568658Z",
+      "completed_at": "2026-11-23T15:37:37.964867Z",
+      "result_run_id": "3f935db7-a38c-832b-a7ec-dda2a17ae91e",
+      "result_matches": true
+    },
+    {
+      "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "title": "כלכלה והייטק — צהריים",
+      "enabled": true,
+      "run_id": "db159018-590c-8321-8662-80aea82e1cc1",
+      "status": "no_update",
+      "started_at": "2026-11-23T10:28:29.784824Z",
+      "completed_at": "2026-11-23T10:28:30.467544Z",
+      "result_run_id": "6fe41119-13bc-8329-b2cd-88e399e7c0be",
+      "result_matches": false
+    },
+    {
+      "task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "title": "קהילה ושכונות — TLVNET יומי",
+      "enabled": true,
+      "run_id": "1dc849de-b4d0-8322-875d-d92aee876144",
+      "status": "no_update",
+      "started_at": "2026-11-23T11:02:35.470274Z",
+      "completed_at": "2026-11-23T11:02:35.851680Z",
+      "result_run_id": "431615ae-d940-832a-bb73-2a2d7e2c5fe9",
+      "result_matches": false
+    },
+    {
+      "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "title": "צרכנות — TLVNET יומי",
+      "enabled": true,
+      "run_id": "867dfbdc-afe0-8330-bf09-b78400e5612a",
+      "status": "completed",
+      "started_at": "2026-11-23T12:04:15.815010Z",
+      "completed_at": "2026-11-23T12:30:09.673917Z",
+      "result_run_id": "867dfbdc-afe0-8330-bf09-b78400e5612a",
+      "result_matches": true
+    },
+    {
+      "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+      "title": "חדשות ספורט — פעמיים ביום",
+      "enabled": true,
+      "run_id": "36d29c3f-9b1c-8322-8ea5-883a7e6fb6be",
+      "status": "in_progress",
+      "started_at": "2026-11-23T19:03:12.042717Z",
+      "completed_at": null,
+      "result_run_id": "c7bea171-a774-832a-9836-6bdfcde77cb8",
+      "result_matches": false
+    },
+    {
+      "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+      "title": "חדשות תרבות — יומי",
+      "enabled": true,
+      "run_id": "f767cb8f-639c-832f-bc60-7b6396cd272a",
+      "status": "no_update",
+      "started_at": "2026-11-23T08:24:14.492819Z",
+      "completed_at": "2026-11-23T08:24:15.486121Z",
+      "result_run_id": "6e66d489-6ad4-8323-a1c8-463fb6f7240a",
+      "result_matches": false
+    },
+    {
+      "task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
+      "title": "בלי חשבון — תחקירי TLVNET",
+      "enabled": true,
+      "run_id": "61383a57-fc50-8324-837d-de08317e1528",
+      "status": "no_update",
+      "started_at": "2026-11-23T08:52:00.908255Z",
+      "completed_at": "2026-11-23T08:52:01.135158Z",
+      "result_run_id": "57f2e7b2-05dc-832c-89ac-58f5e0fb5ddc",
+      "result_matches": false
+    }
+  ],
+  "queue": {
+    "news_checkpoint": {
+      "library_file_id": "libfile_0e72372521008191840ebe2873394f6e",
+      "version": 2,
+      "sha256": "540e172467496b225e9de828ad4de12d9fa3f94ddbdf6a1de839c4536338656a",
+      "preserved_unchanged": true,
+      "reported_pending_ready": 3,
+      "mechanically_releasable_now": 0,
+      "staged_ids": [
+        "sde-dov-even-gabirol-north-opening-20261126",
+        "bitzaron-tavyov-iec-electric-cable-works-20261122",
+        "dizengoff-276-296-water-utility-night-lane-reduction-20261129"
+      ],
+      "blocker": "image_review=pending_bank_ingest, photo_bank_id absent. Source access restored; original owner must finish asset ingestion and exact body/asset image approval.",
+      "existing_updates": 2,
+      "existing_update_blocker": "image_review=pending_updated_body; time-sensitive source recheck and final image/body review belong to existing news owner.",
+      "next_action": "Original existing owner resumes saved checkpoint against current source; no forced task trigger."
+    },
+    "dispatch_counts": {
+      "news_research": 28,
+      "real_estate_research": 19,
+      "economy_research": 9,
+      "community_research": 18,
+      "consumer_research": 6,
+      "sports_dispatch_research": 2,
+      "culture_news_research": 16
+    },
+    "sports_latest_ledger_remaining": 4,
+    "sports_research_preserved": "ops/incident-response/inbox/51c4b6b4-2598-8328-82ff-aae9fb709dad-sports-research-role-handoff.json",
+    "no_republish": "Source-published verification-only historical Arlozorov record and already-live current articles not replayed."
+  },
+  "public_checks": {
+    "method": "Fresh live cloud-browser DOM with desktop screenshot for daycare; native terminal record separately",
+    "home": {
+      "url": "https://tlvnet.com/",
+      "rendered": true,
+      "daycare_headline": true,
+      "sport_article_link": true
+    },
+    "bli_heshbon": {
+      "url": "https://tlvnet.com/news/bli-heshbon",
+      "heading": "בלי חשבון",
+      "daycare_card": true,
+      "avi_or": true
+    },
+    "daycare": {
+      "url": "https://tlvnet.com/news/daycare-tender-mair-bint-20261122",
+      "full_body": false,
+      "paragraph_count": 9,
+      "author": "אבי אור",
+      "image_loaded": true,
+      "image_width": 1672,
+      "credit": "אילוסטרציה – AI",
+      "desktop_visual": "verified",
+      "mobile_visual": "pending",
+      "body_present": true,
+      "full_body_match": "Not repeated for unchanged source; prior verified body retained, current9paragraph DOM observed."
+    },
+    "neighborhood": {
+      "feed_url": "https://tlvnet.com/city-hub/updates.json",
+      "feed_count": 79,
+      "article_id": "dizengoff-310-reported-shop-sale-20261122",
+      "mapped_neighborhood": "הצפון הישן",
+      "area_url": "https://tlvnet.com/city-hub/areas/old-north/",
+      "area_article_link": true
+    },
+    "sports_section": {
+      "url": "https://tlvnet.com/news/sports",
+      "article_count_visible": 51,
+      "latest": "maccabi-1977-presidential-meeting-20261122"
+    },
+    "desktop_other": "Metadata/DOM only",
+    "mobile_other": "pending",
+    "health_http": null,
+    "health_latency": null,
+    "collection_limit": "Executor HTTP reader returned403; not interpreted as site downtime. Live browser rendered affected routes."
+  },
+  "social": {
+    "table": "social_runs",
+    "new_rows": 1,
+    "slot": "2026-11-23T19",
+    "status": "published_verified",
+    "finished_at": "2026-11-23T19:00:13.665Z",
+    "post_id": "1520426491146188_122112779421545268",
+    "public_url": "https://www.facebook.com/61596358055015/posts/122112779421545268/",
+    "public_caption_verified": true,
+    "article_link_verified": true,
+    "article_url": "https://tlvnet.com/news/maccabi-holon-home-win-20261121.html",
+    "detail": null,
+    "retries": 0,
+    "qualification": "Only new rows interpreted; native reader required paging through existing rows to reach current entries. No old send replayed."
+  },
+  "actions": {
+    "watermark": "2026-11-23T18:46:53Z",
+    "boundary_ids": [
+      45241996144,
+      45241996219,
+      45241996181
+    ],
+    "new_runs": 0,
+    "pending": [],
+    "full_logs_read": 0
+  },
+  "inbox": {
+    "inventory_count": 237,
+    "new_entries": 0,
+    "historical_unread_retained": 18
+  },
+  "worker_sample": {
+    "minutes": 30,
+    "limit": 20,
+    "observed_paths": [
+      "/favicon.ico",
+      "/meta.json"
+    ],
+    "observed_http": [
+      404
+    ],
+    "observed_5xx": 0,
+    "qualification": "Bounded errors-only sample; no total request count, error-rate, capacity or percentile inference. No request headers or IPs retained."
+  },
+  "stability": {
+    "qualification_started_at": null,
+    "gates_unchanged": true,
+    "backup": null,
+    "restore": null,
+    "capacity": null,
+    "daily_summary_due": false,
+    "remaining": "Automated complete offsite backup, running full restore and isolated hosted capacity still not verified."
+  },
+  "usage": {
+    "calls": null,
+    "cost": null,
+    "reason": "No complete measured usage/cost metric exposed"
+  },
+  "section_freshness": {
+    "news": {
+      "last_new_published_at": "2026-11-23T12:32:51.031320+00:00",
+      "last_substantive_update_at": "2026-11-23T12:32:51.031320+00:00",
+      "latest_article_id": "nordau-pinkas-dan-bus-night-diversion-20261123",
+      "count": 122
+    },
+    "real-estate": {
+      "last_new_published_at": "2026-11-23T15:28:26.729592+00:00",
+      "last_substantive_update_at": "2026-11-23T15:28:26.729592+00:00",
+      "latest_article_id": "levanda-office-leasing-handover-reported-20261123",
+      "count": 39
+    },
+    "economy-tech": {
+      "last_new_published_at": "2026-11-22T10:43:34.020401+00:00",
+      "last_substantive_update_at": "2026-11-22T10:43:34.020401+00:00",
+      "latest_article_id": "spines-equity-growth-financing-explained-20261122",
+      "count": 39
+    },
+    "community": {
+      "last_new_published_at": "2026-11-22T11:11:25.109413+00:00",
+      "last_substantive_update_at": "2026-11-22T11:11:25.109413+00:00",
+      "latest_article_id": "ficus-hackathon-20261122",
+      "count": 29
+    },
+    "consumer": {
+      "last_new_published_at": "2026-11-23T12:17:55.762297+00:00",
+      "last_substantive_update_at": "2026-11-23T12:17:55.762297+00:00",
+      "latest_article_id": "santa-bremor-trout-recall-5161-20261121",
+      "count": 16
+    },
+    "sports": {
+      "last_new_published_at": "2026-11-22T19:02:31.548853+00:00",
+      "last_substantive_update_at": "2026-11-22T19:02:31.548853+00:00",
+      "latest_article_id": "maccabi-1977-presidential-meeting-20261122",
+      "count": 51
+    },
+    "culture-news": {
+      "last_new_published_at": "2026-11-22T07:20:50.900959+00:00",
+      "last_substantive_update_at": "2026-11-22T07:20:50.900959+00:00",
+      "latest_article_id": "yam-katan-bialik-20261209",
+      "count": 52
+    },
+    "bli-heshbon": {
+      "last_new_published_at": "2026-11-22T09:04:41.961736+00:00",
+      "last_substantive_update_at": "2026-11-22T09:04:41.961736+00:00",
+      "latest_article_id": "daycare-tender-mair-bint-20261122",
+      "count": 3
+    }
+  }
+}
