@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-22T18:25:42.437Z",
+  "updated_at": "2026-11-23T11:43:50.744Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4876,6 +4876,16 @@
           "created_at": "2026-11-15T12:42:36Z",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43715219054",
           "error": "Fetching artifact metadata failed; no artifacts named github-pages-43715219054-1 found"
+        },
+        {
+          "run_id": 45122673848,
+          "attempt": 1,
+          "name": "Publish priceboard",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45122673848",
+          "source_commit": "f8daaea3b93b51e288a86e9f99a386898698c647",
+          "failed_step": "Deploy",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-23/cbd3cbe0-30fc-8328-9f32-748e1f1e1742.json",
+          "source_inbox": "ops/incident-response/inbox/45122673848-1.json"
         }
       ],
       "recovery": {
@@ -4899,7 +4909,8 @@
         "new_security_release_success": 44571272587,
         "evidence": "ops/tlvnet-stability/observations/2026-11-19/6fe3b20b-30d4-832e-ba6d-d891ed5bd241.json",
         "at": "2026-11-19T16:57:54.984Z"
-      }
+      },
+      "last_seen_at": "2026-11-23T11:43:50.744Z"
     },
     {
       "id": "tlvnet-local-coverage-completed-handoff-build-regression",
@@ -8080,7 +8091,7 @@
       },
       "reason": "Two Ashdod productions were represented by distinct source titles at the exact same times and venues. Exact aliases removed both suspects locally; the shared gate still found the previously known Herzliya cast conflict.",
       "next_action": "After the existing Herzliya event owner resolves the conflicting cast offer, apply the exact verified aliases on a fresh branch, regenerate the shared overlay version references, and run the full integrity suite before the normal shared Pages release. No listener, production asset or deploy was modified by this checkpoint.",
-      "last_seen_at": "2026-11-22T16:45:33Z",
+      "last_seen_at": "2026-11-23T11:43:50.744Z",
       "reported_runKey": "ops-2026-11-22-e5bb335c-bb60-8330-b57d-ee4eac785e9c",
       "occurrences": [
         {
@@ -8219,6 +8230,16 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-22/57e4463a-ed38-8330-b346-2a466ba4519a.json",
           "recorded_at": "2026-11-22T16:45:33Z",
           "qualification": "2 unresolved candidates, expected 0; blocking"
+        },
+        {
+          "run_id": 45107225355,
+          "attempt": 1,
+          "name": "Publish priceboard",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45107225355",
+          "source_commit": "4a49f06bb4699975442633c441234cec3162da0e",
+          "failed_step": "Build compact event listings and canonical sitemap",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-23/cbd3cbe0-30fc-8328-9f32-748e1f1e1742.json",
+          "source_inbox": "ops/incident-response/inbox/45107225355-1.json"
         }
       ],
       "last_occurrence_evidence": "ops/tlvnet-stability/observations/2026-11-22/57e4463a-ed38-8330-b346-2a466ba4519a.json"
@@ -8358,6 +8379,96 @@
         "evidence": "ops/tlvnet-stability/observations/2026-11-22/0b05f5fe-9108-8330-a13e-015fcbacccf4.json",
         "qualification": "The article and image are public; the reverse filter discrepancy remains open."
       }
+    },
+    {
+      "id": "tlvnet-multiple-agent-no-update-before-policy-read-20261123",
+      "status": "open",
+      "fingerprint": "TLVNET scheduled editorial dispatch / no_update under two seconds / earlier result / no matching private policy receipt",
+      "root_cause": null,
+      "root_cause_status": "Execution handoff pending diagnosis. Work quota exhaustion was observed independently and causation is unverified.",
+      "impact": "Six editorial agents had only a previous-day or older receipt. The news agent also had no matching scheduled-run receipt but read the policy later in a manual recovery that stopped at source access. Enabled states alone do not establish actual work.",
+      "occurrences": [
+        {
+          "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+          "title": "חדשות תל אביב — שלוש פעמים ביום",
+          "run_id": "7f07ef3a-f67c-8324-ab7e-cae029cc1ba3",
+          "started_at": "2026-11-23T05:56:26.150970Z",
+          "completed_at": "2026-11-23T05:56:27.764515Z",
+          "duration_s": 1.614,
+          "last_policy_read": "2026-11-23 10:44:41.488604+00",
+          "result_matches": false
+        },
+        {
+          "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+          "title": "כלכלה והייטק — צהריים",
+          "run_id": "db159018-590c-8321-8662-80aea82e1cc1",
+          "started_at": "2026-11-23T10:28:29.784824Z",
+          "completed_at": "2026-11-23T10:28:30.467544Z",
+          "duration_s": 0.683,
+          "last_policy_read": "2026-11-22 10:38:39.341+00",
+          "result_matches": false
+        },
+        {
+          "task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+          "title": "קהילה ושכונות — TLVNET יומי",
+          "run_id": "1dc849de-b4d0-8322-875d-d92aee876144",
+          "started_at": "2026-11-23T11:02:35.470274Z",
+          "completed_at": "2026-11-23T11:02:35.851680Z",
+          "duration_s": 0.381,
+          "last_policy_read": "2026-11-22 10:59:30.250561+00",
+          "result_matches": false
+        },
+        {
+          "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+          "title": "חדשות ספורט — פעמיים ביום",
+          "run_id": "c6e2726f-f8b8-8326-87ef-2e05facbbc11",
+          "started_at": "2026-11-23T06:55:43.962952Z",
+          "completed_at": "2026-11-23T06:55:44.422749Z",
+          "duration_s": 0.46,
+          "last_policy_read": "2026-11-22 18:56:23.391247+00",
+          "result_matches": false
+        },
+        {
+          "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+          "title": "חדשות תרבות — יומי",
+          "run_id": "f767cb8f-639c-832f-bc60-7b6396cd272a",
+          "started_at": "2026-11-23T08:24:14.492819Z",
+          "completed_at": "2026-11-23T08:24:15.486121Z",
+          "duration_s": 0.994,
+          "last_policy_read": "2026-11-22 07:12:05.237981+00",
+          "result_matches": false
+        },
+        {
+          "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+          "title": "תרבות נט — יום כן יום לא",
+          "run_id": "75f97ddf-c9e0-8328-8769-3c3092e7076c",
+          "started_at": "2026-11-23T09:24:53.210029Z",
+          "completed_at": "2026-11-23T09:24:53.676083Z",
+          "duration_s": 0.466,
+          "last_policy_read": "2026-11-21 08:53:11.782315+00",
+          "result_matches": false
+        },
+        {
+          "task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
+          "title": "בלי חשבון — תחקירי TLVNET",
+          "run_id": "61383a57-fc50-8324-837d-de08317e1528",
+          "started_at": "2026-11-23T08:52:00.908255Z",
+          "completed_at": "2026-11-23T08:52:01.135158Z",
+          "duration_s": 0.227,
+          "last_policy_read": "2026-11-22 08:55:34.232406+00",
+          "result_matches": false
+        }
+      ],
+      "evidence": [
+        "ops/incident-response/inbox/tlvnet-multiple-agent-no-update-before-policy-read-20261123.json",
+        "ops/tlvnet-stability/observations/2026-11-23/cbd3cbe0-30fc-8328-9f32-748e1f1e1742.json"
+      ],
+      "controller_repair": {
+        "deployments": 0,
+        "operational_checkpoint_retained": true
+      },
+      "next_action": "Inspect scheduler dispatch records for affected run IDs, restore the existing TLVNET Sites source session, and confirm one owner execution by receipt, matching result and public readback through the normal lane.",
+      "reported_runKey": "ops-2026-11-23-cbd3cbe0-30fc-8328-9f32-748e1f1e1742"
     }
   ],
   "last_review_runKey": "ops-2026-11-22-0b05f5fe-9108-8330-a13e-015fcbacccf4",
