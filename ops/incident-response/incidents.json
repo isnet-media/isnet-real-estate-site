@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T19:20:39.796Z",
+  "updated_at": "2026-11-23T20:35:50Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5059,7 +5059,7 @@
       "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
       "prevention": "Keep actual executor identity separate from intended owner; explicit active-role reconciliation before approval/CAS. Procedural mitigation only; no runtime fixed_verified claim.",
       "remaining": "Inspect scheduler/context isolation and result attribution for these exact two runs/conversations through the platform runtime; this connector exposes task prompt/result metadata but not execution routing logs or an isolation-repair operation. Do not replay/trigger tasks or change schedules to simulate repair.",
-      "last_observed_at": "2026-11-19T20:50:22Z",
+      "last_observed_at": "2026-11-23T20:35:50Z",
       "new_runtime_evidence": {
         "sports_run_id": "37cbf175-5f34-8320-b921-abb82295b707",
         "controller_previous_run_id": "66f4eaea-b874-8326-9b23-1510b4bf3d77",
@@ -5069,19 +5069,22 @@
         "sports_completed_without_evening_publication": true,
         "source_unchanged": true
       },
-      "last_seen_at": "2026-11-19T20:50:22Z",
+      "last_seen_at": "2026-11-23T20:35:50Z",
       "latest_occurrence": {
-        "run_id": "eb664208-f2e0-832a-a49d-4e3bb644dd6a",
-        "observed_at": "2026-11-19T20:50:22Z",
-        "sports_run_id": "028e5aaa-f7fc-8328-9501-b166e40f7d33",
-        "controller_result_run_id": "812e0bb1-10c8-832e-8a83-5d6a6a70110c",
+        "run_id": "1eedc47d-d7cc-8324-8e58-88e0610fa17e",
+        "observed_at": "2026-11-23T20:35:50Z",
+        "sports_run_id": "36d29c3f-9b1c-8322-8ea5-883a7e6fb6be",
+        "controller_result_run_id": "51c4b6b4-2598-8328-82ff-aae9fb709dad",
         "signature": "controller-active-scope-inherited-writer-approval",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
-        "inbox": "ops/incident-response/inbox/eb664208-f2e0-832a-a49d-4e3bb644dd6a-sports-controller-scope-recurrence.json",
-        "current_state": "Sports completed with the same controller report as the distinct controller run. Current sports pages and ledger supply no new publication mapped to that sports run."
+        "evidence": "ops/tlvnet-stability/observations/2026-11-23/1eedc47d-d7cc-8324-8e58-88e0610fa17e.json",
+        "inbox": "ops/incident-response/inbox/1eedc47d-d7cc-8324-8e58-88e0610fa17e-sports-attribution-and-cms61-lease.json",
+        "results_exact_equal": true,
+        "distinct_chat_refs": true,
+        "owner_result_status": "completed_with_controller_output",
+        "next_action": "Existing platform support must inspect execution routing and result attribution for both run IDs; the scheduled-task connector has read-only result metadata and no routing repair endpoint. Preserve existing owner research. Require an authentic owner result and public article evidence before attributing success."
       },
-      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
-      "next_action": "Use existing runtime support to reconcile exact task/result context for the paired run IDs. Retain original sports owner and prior research candidates. Recheck at next normal owner result or actual runtime change. No forced rerun or site redeploy for result attribution.",
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-23/1eedc47d-d7cc-8324-8e58-88e0610fa17e.json",
+      "next_action": "Existing platform support must inspect execution routing and result attribution for both run IDs; the scheduled-task connector has read-only result metadata and no routing repair endpoint. Preserve existing owner research. Require an authentic owner result and public article evidence before attributing success.",
       "latest_pending_run_observation": {
         "observed_at": "2026-11-19T20:50:22Z",
         "evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
@@ -5110,6 +5113,19 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
           "inbox": "ops/incident-response/inbox/eb664208-f2e0-832a-a49d-4e3bb644dd6a-sports-controller-scope-recurrence.json",
           "current_state": "Sports completed with the same controller report as the distinct controller run. Current sports pages and ledger supply no new publication mapped to that sports run."
+        },
+        {
+          "run_id": "1eedc47d-d7cc-8324-8e58-88e0610fa17e",
+          "observed_at": "2026-11-23T20:35:50Z",
+          "sports_run_id": "36d29c3f-9b1c-8322-8ea5-883a7e6fb6be",
+          "controller_result_run_id": "51c4b6b4-2598-8328-82ff-aae9fb709dad",
+          "signature": "controller-active-scope-inherited-writer-approval",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-23/1eedc47d-d7cc-8324-8e58-88e0610fa17e.json",
+          "inbox": "ops/incident-response/inbox/1eedc47d-d7cc-8324-8e58-88e0610fa17e-sports-attribution-and-cms61-lease.json",
+          "results_exact_equal": true,
+          "distinct_chat_refs": true,
+          "owner_result_status": "completed_with_controller_output",
+          "next_action": "Existing platform support must inspect execution routing and result attribution for both run IDs; the scheduled-task connector has read-only result metadata and no routing repair endpoint. Preserve existing owner research. Require an authentic owner result and public article evidence before attributing success."
         }
       ]
     },
@@ -8677,9 +8693,33 @@
         "ops/tlvnet-stability/observations/2026-11-23/b2edf175-c938-8328-93f7-020a0234ed05.json"
       ],
       "last_seen_at": "2026-11-23T18:57:39.328Z"
+    },
+    {
+      "id": "isnet-cms61-sports-publication-without-lease",
+      "signature": "isnet/cms61/sports/create_post-before-target-lease-cas",
+      "classification": "publication/lease",
+      "status": "open",
+      "first_seen_at": "2026-11-23T20:35:50Z",
+      "last_seen_at": "2026-11-23T20:35:50Z",
+      "root_cause": "Owner reported that CMS61 article 812792 was published before locating/acquiring its lease. Later readback was free; contemporaneous lease state is unknown.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-23/1eedc47d-d7cc-8324-8e58-88e0610fa17e.json",
+      "inbox": "ops/incident-response/inbox/1eedc47d-d7cc-8324-8e58-88e0610fa17e-sports-attribution-and-cms61-lease.json",
+      "public_proof": [
+        "https://www.kgatnet.co.il/ספורט/אחרי-חמישה-ניצחונות-נערי-קריית-גת-הפסידו-באשדוד-812792"
+      ],
+      "next_action": "Existing sports owner must read fresh source and an exact target lease before the next CMS61 write, acquire expiring CAS and verify it by readback before public mutation, then follow normal public verification and release own lease. Preserve the already live article. No defect in the CAS service inferred.",
+      "prevention": "Existing authorized owner acquires and reads back the exact target CAS lease before entering any write path; preserve the already-live article.",
+      "occurrences": [
+        {
+          "run_id": "23dd70a1-d544-8326-8633-afae9211f70e",
+          "completed_at": "2026-11-23T19:12:19.295808Z",
+          "post_id": 812792,
+          "observed_at": "2026-11-23T20:35:50Z"
+        }
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-23-51c4b6b4-2598-8328-82ff-aae9fb709dad",
+  "last_review_runKey": "ops-2026-11-23-1eedc47d-d7cc-8324-8e58-88e0610fa17e",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
