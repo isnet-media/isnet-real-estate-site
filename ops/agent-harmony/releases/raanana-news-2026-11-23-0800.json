@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "run_key": "2026-11-23T08:00:00+02:00",
+  "recorded_at": "2026-11-23T06:02:31.312Z",
+  "owner_task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "policy_version": "2026-11-19/raanana-only-1",
+  "target": "ISNET-CMS-59",
+  "checkpoint_source": "ops/agent-harmony/releases/raanana-news-2026-11-22-1900.json",
+  "discovery_sources": [
+    "https://www.raanana.muni.il/",
+    "https://tickets.raanana.muni.il/",
+    "https://www.tzomet-ran.co.il/",
+    "https://www.mako.co.il/news-law/2026_q4/Article-5f3a7a4013502a1027.htm",
+    "https://www.i24news.co.il/news/news/local/traffic-police-commander-hits-cyclist-raanana",
+    "https://www.israelhayom.co.il/news/local/article/21910164",
+    "https://www.walla.co.il/news/israel/383962623",
+    "https://www.pexels.com/photo/cyclist-riding-bicycle-on-city-street-in-daytime-6016935/"
+  ],
+  "results": {
+    "discovered_topics_reviewed": 4,
+    "verified_topics": 4,
+    "published_cms": 1,
+    "published_verified_new": 0,
+    "duplicates_prevented": 2,
+    "backlog_image_repair_blocked": 2
+  },
+  "editorial_decisions": [
+    {
+      "subject": "22 Nov night route 4 bicycle collision near Raanana junction involving head of national traffic police",
+      "action": "published_original_factual_news",
+      "sources": "Police statement as relayed by i24NEWS, Walla and Israel Hayom; preliminary traffic-light account attributed and explicitly not determined",
+      "post_id": 812667
+    },
+    {
+      "subject": "35 million NIS municipal infrastructure program",
+      "action": "duplicate_prevented",
+      "existing_post_id": 812303
+    },
+    {
+      "subject": "Kedem school location/access concerns",
+      "action": "duplicate_prevented",
+      "existing_post_id": 812636
+    },
+    {
+      "subject": "23 Nov municipal events",
+      "action": "reviewed_official_calendar_no_filler",
+      "detail": "Already extensive civic events coverage in preceding days; no new high-value independent development"
+    }
+  ],
+  "post": {
+    "id": 812667,
+    "title": "תאונה ליד צומת רעננה: מפקד משטרת התנועה הארצית היה מעורב, רוכב אופניים נפצע",
+    "category": "חדשות רעננה",
+    "category_id": 1947,
+    "created_at_cms": "2026-11-23T08:01:09.147",
+    "image_id": 852416,
+    "creator": "מערכת רעננה נט",
+    "published": true,
+    "hide": false,
+    "template": false,
+    "cms_list_search_readback": "one exact public published result",
+    "cms_get_post_readback": "{} returned; full body readback unavailable",
+    "public_url_candidate_unverified": "https://raanananet.co.il/חדשות/חדשות-רעננה/raanana-route4-traffic-police-commander-cyclist-20261122",
+    "public_url_verified": false,
+    "published_verified": false
+  },
+  "rights": {
+    "image_source": "https://www.pexels.com/photo/cyclist-riding-bicycle-on-city-street-in-daytime-6016935/",
+    "image_original_url": "https://images.pexels.com/photos/6016935/pexels-photo-6016935.jpeg?cs=srgb&dl=pexels-introspectivedsgn-6016935.jpg&fm=jpg",
+    "creator": "Erik Mclean",
+    "license": "Pexels License",
+    "usage": "Clearly marked generic cyclist on street illustration, not Raanana crash",
+    "image_file_confirmed_in_cms": true,
+    "image_id": 852416,
+    "sha256": "not measured (file bytes unavailable)",
+    "reverse_image_search": "[] despite CMS direct defaultImageId confirmation; known connector issue"
+  },
+  "homepage": {
+    "script": "raanana-auto-headlines-v1",
+    "changed": false,
+    "desktop_QA": "pending_browser_no_JS_viewport",
+    "viewport_390_QA": "pending_browser_no_viewport",
+    "public_html_observation": "Crawler page was cached at 2026-11-22 20:22 prior to new post; no evidence of current JS refresh"
+  },
+  "backlog": [
+    {
+      "post_id": 811802,
+      "issue": "generic photo 851225 repeated; remote Commons upload previously HTTP403; unchanged"
+    },
+    {
+      "post_id": 812206,
+      "issue": "generic photo 851225 repeated; remote Commons upload previously HTTP403; unchanged"
+    },
+    {
+      "post_id": 812012,
+      "issue": "stale illustration paragraph despite corrected photo; get_post returns empty object, unsafe to edit"
+    }
+  ],
+  "incidents": [
+    "ops/incident-response/inbox/20261122-raanana-culture-media-remote403.json",
+    "ops/incident-response/inbox/20261122-raanana-image-reverse-lookup-readback.json"
+  ],
+  "validation_notes": [
+    "Create rejected initial too-long subTitle (>50); corrected once before success",
+    "create_post returned {}, list_posts readback confirmed new unique published record",
+    "No changes to CMS37265-37268 or CMS37279",
+    "No CMS62 action; no new task or schedule changes"
+  ],
+  "lock": {
+    "target": "ISNET-CMS-59",
+    "acquired": true,
+    "cas_readback_verified": true,
+    "release": "pending"
+  }
+}
