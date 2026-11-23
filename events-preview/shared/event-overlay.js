@@ -82,6 +82,11 @@ reviewedProductions.push({id:'toc-toc-tomix-2026',titles:['טוק טוק – ק�
 // Primary venue page reviewed 13 Nov 2026: same named cast, 3 Dec 2026,
 // 21:00 at Heichal Rishon. Keep both original IDs, source titles and offers.
 reviewedProductions.push({id:'lets-not-talk-yael-guy-2026',titles:['בוא לא נדבר על זה','בוא לא נדבר על זה - המופע של יעל בר זוהר וגיא זו ארץ | בוא לא נדבר על זה-יעל בר זהר וגיא זוארץ • חמישי 03/12/2026'],source:'https://htrl.co.il/show/בוא-לא-נדבר-על-זה-2/'});
+// Source-matched Ashdod aliases (same scheduled occurrence and venue); preserve both IDs and ticket links.
+// Makore and Mevalim: 2 Dec 2026, 18:30, Beit Yad Labanim, Ashdod.
+reviewedProductions.push({id:'plastelina-mi-ani-2026',titles:['פלסטלינה בצבעים - מי אני באמת','פלסטלינה בצבעים- מי אני באמת מחזמר על הרצון להשתייך ועל החופש להיות מי שאנחנו'],source:'https://www.makore.co.il/event/פלסטלינה-בצבעים-מי-אני-באמת-מחזמר-על-הרצון-להשתיי--e1f48616'});
+// Two entries of the same Mishkan production: 1 Feb 2027, 20:30, Ashdod.
+reviewedProductions.push({id:'muteret-lekol-adam-2027',titles:['מותרת לכל אדם- תיאטרון באר שבע','מותרת לכל אדם'],source:'https://live.tickchak.co.il/event/ernPGdJDj'});
 const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
 function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
 function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\s*([1-9]\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\s*\d+/g,'').replace(/^(?:אולם|אודיטוריום)\s+/,'');let key=e.venue_institution_id;
