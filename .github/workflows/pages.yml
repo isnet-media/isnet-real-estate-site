@@ -142,6 +142,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -361,13 +362,31 @@ jobs:
           path: ${{ runner.temp }}/isnet-pages-public
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
+      - name: Wait for uploaded Pages artifact to be visible in Actions API
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_NAME: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          # GitHub can finalize an upload before its metadata is queryable by deploy-pages.
+          # Keep the exact run/attempt artifact identity; never deploy a stale artifact.
+          for attempt in $(seq 1 18); do
+            artifact_count=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts" --jq '[.artifacts[] | select(.name == env.ARTIFACT_NAME and .expired == false)] | length' 2>/dev/null || echo 0)
+            if [ "$artifact_count" = "1" ]; then
+              echo "Pages artifact visible for this run on check $attempt"
+              exit 0
+            fi
+            echo "Pages artifact not yet indexed (check $attempt/18)"
+            sleep 5
+          done
+          echo "::error::The exact Pages artifact never became visible; deployment withheld."
+          exit 1
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-          # Slow syncing must not be cancelled at the previous ten-minute boundary.
-          timeout: 1200000
+          timeout: 600000
 
 
 
