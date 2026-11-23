@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T15:14:29.684Z",
+  "updated_at": "2026-11-23T16:54:11.837Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4899,13 +4899,24 @@
         }
       ],
       "recovery": {
-        "later_run_id": 43723605312,
+        "later_run_id": 45202687049,
         "upload_step": "success",
         "deploy_step": "success",
         "automatic": true,
         "source_changed": true,
         "controller_rerun": false,
-        "public_verification": "not independently performed; no fixed_verified claim"
+        "public_verification": {
+          "http": 200,
+          "url": "https://isnet.co.il/deployment-version.json",
+          "seconds": 6.008,
+          "mime": "application/json; charset=utf-8",
+          "source_commit": "13630dede433e4c843ee43401ca58a2a2c7de7e3",
+          "run_id": "45202687049",
+          "run_attempt": "1"
+        },
+        "source_commit": "13630dede433e4c843ee43401ca58a2a2c7de7e3",
+        "verified_at": "2026-11-23T16:54:11.837Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-23/1a2e43a6-9c70-8328-806b-991d6d800dd4.json"
       },
       "evidence": "ops/incident-response/evidence/ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19.json",
       "next_action": "Observe pending regular deployments. Do not retry unchanged transient failure or weaken artifact validation.",
@@ -4928,8 +4939,9 @@
           "run_id": "45199438154",
           "run_attempt": "1"
         },
-        "evidence": "ops/tlvnet-stability/observations/2026-11-23/bbfb3eb4-d180-8328-a03e-b24ad4efac43.json",
-        "status": "awaiting_next_terminal_release"
+        "evidence": "ops/tlvnet-stability/observations/2026-11-23/1a2e43a6-9c70-8328-806b-991d6d800dd4.json",
+        "status": "live_release_recovery_verified",
+        "recovery_run_id": 45202687049
       },
       "last_seen_at": "2026-11-23T15:14:29.684Z"
     },
@@ -8543,6 +8555,28 @@
         "ops/incident-response/inbox/20261123-controller-private-policy-read-empty-recovered.json",
         "ops/tlvnet-stability/observations/2026-11-23/bbfb3eb4-d180-8328-a03e-b24ad4efac43.json"
       ]
+    },
+    {
+      "id": "tlvnet-build-password-auth-test-fixed-window-rollover",
+      "status": "open",
+      "root_cause_status": "Likely wall-clock rollover from owner incident; deterministic test-only correction passed locally.",
+      "latest_observation": {
+        "path": "ops/incident-response/inbox/2026-11-23-tlvnet-password-auth-test-window-boundary.json",
+        "sha": "cd63ca2d00c405dbbf6917a2788b91aa1dd9bcf7",
+        "local_only": true,
+        "status": "isolated_patch_verified_release_pending",
+        "base_source": "be456fd9fa0697cf22f5301e67232f537e1c500f",
+        "patch_scope": "tests/password-auth.mjs only, freeze clock within rate-limit assertions and restore in finally; production limiter and all other tests untouched",
+        "baseline_and_patched_test_pass": true,
+        "diff_check_pass": true,
+        "full_build_with_patch": false,
+        "blocker": "Exact deployed source available locally without a configured canonical remote. Existing authorization excludes obtaining new credentials. No source push or deployment."
+      },
+      "evidence": [
+        "ops/incident-response/inbox/2026-11-23-tlvnet-password-auth-test-window-boundary.json",
+        "ops/tlvnet-stability/observations/2026-11-23/1a2e43a6-9c70-8328-806b-991d6d800dd4.json"
+      ],
+      "next_action": "Merge the scoped test-clock fix through the canonical source owner and run full build. Keep the production rate limiter and deployed release untouched for a journal-only update."
     }
   ],
   "last_review_runKey": "ops-2026-11-22-0b05f5fe-9108-8330-a13e-015fcbacccf4",
