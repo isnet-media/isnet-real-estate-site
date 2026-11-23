@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T13:21:12.618Z",
+  "updated_at": "2026-11-23T15:14:29.684Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4886,6 +4886,16 @@
           "failed_step": "Deploy",
           "evidence": "ops/tlvnet-stability/observations/2026-11-23/cbd3cbe0-30fc-8328-9f32-748e1f1e1742.json",
           "source_inbox": "ops/incident-response/inbox/45122673848-1.json"
+        },
+        {
+          "run_id": 45199629634,
+          "attempt": 1,
+          "sha": "b1ee88e8c5d0cdd32091e90f10e2b692a68f0960",
+          "job_id": 137780371794,
+          "step": "Deploy",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45199629634",
+          "signature": "expected exact Pages artifact metadata returned no artifact",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-23/bbfb3eb4-d180-8328-a03e-b24ad4efac43.json"
         }
       ],
       "recovery": {
@@ -4901,16 +4911,27 @@
       "next_action": "Observe pending regular deployments. Do not retry unchanged transient failure or weaken artifact validation.",
       "reported_runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
       "latest_observation": {
-        "runs": [
-          44560022386,
-          44561651779
+        "at": "2026-11-23T15:14:29.684Z",
+        "run_id": 45199629634,
+        "attempt": 1,
+        "sha": "b1ee88e8c5d0cdd32091e90f10e2b692a68f0960",
+        "job_id": 137780371794,
+        "step": "Deploy",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45199629634",
+        "signature": "expected exact Pages artifact metadata returned no artifact",
+        "later_run_ids": [
+          45202687049
         ],
-        "later_ordinary_success": 44561835377,
-        "new_security_release_success": 44571272587,
-        "evidence": "ops/tlvnet-stability/observations/2026-11-19/6fe3b20b-30d4-832e-ba6d-d891ed5bd241.json",
-        "at": "2026-11-19T16:57:54.984Z"
+        "live_marker": {
+          "url": "https://isnet.co.il/deployment-version.json",
+          "source_commit": "797e09ee9420dd2f0da021ebc3fad23492002253",
+          "run_id": "45199438154",
+          "run_attempt": "1"
+        },
+        "evidence": "ops/tlvnet-stability/observations/2026-11-23/bbfb3eb4-d180-8328-a03e-b24ad4efac43.json",
+        "status": "awaiting_next_terminal_release"
       },
-      "last_seen_at": "2026-11-23T11:43:50.744Z"
+      "last_seen_at": "2026-11-23T15:14:29.684Z"
     },
     {
       "id": "tlvnet-local-coverage-completed-handoff-build-regression",
@@ -8510,6 +8531,18 @@
         "other_affected_desks": "Specialist sports, community, economy, culture and investigation runs have not yet produced newer matching results during this recovery.",
         "last_checked_at": "2026-11-23T13:21:12.618Z"
       }
+    },
+    {
+      "id": "tlvnet-controller-private-policy-read-empty-20261123",
+      "status": "mitigated",
+      "root_cause": null,
+      "root_cause_status": "unconfirmed; observed transient visibility, no evidence of deletion, access change or policy edit",
+      "impact": "One controller cycle stopped before site checks",
+      "resolution": "Identical SELECT and receipt succeeded next observed run. No definition change observed.",
+      "evidence": [
+        "ops/incident-response/inbox/20261123-controller-private-policy-read-empty-recovered.json",
+        "ops/tlvnet-stability/observations/2026-11-23/bbfb3eb4-d180-8328-a03e-b24ad4efac43.json"
+      ]
     }
   ],
   "last_review_runKey": "ops-2026-11-22-0b05f5fe-9108-8330-a13e-015fcbacccf4",
