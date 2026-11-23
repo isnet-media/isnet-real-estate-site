@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "run_key": "2026-11-23T19:00:00+02:00",
+  "recorded_at": "2026-11-23T17:06:08.327Z",
+  "owner_task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+  "policy_version": "2026-11-19/raanana-only-1",
+  "target": "ISNET-CMS-59",
+  "checkpoint_source": "ops/agent-harmony/releases/raanana-news-2026-11-23-1400.json",
+  "discovery_sources": [
+    "https://www.raanana.muni.il/",
+    "https://tickets.raanana.muni.il/_WinteRaanana",
+    "https://www.tzomet-ran.co.il/",
+    "https://sharonline.co.il/community/עולים-חדשים-רעננה-נובמבר-2026/",
+    "https://sharonline.co.il/culture/פסטיבל-החורף-ברעננה/",
+    "https://www.ynet.co.il/judaism/article/hye2jfgjmg",
+    "https://www.gov.il/he/service/contact-moia-service"
+  ],
+  "results": {
+    "discovered_topics_reviewed": 3,
+    "verified_topics": 2,
+    "published_cms": 1,
+    "published_verified_new": 0,
+    "duplicates_prevented": 1,
+    "blocked_public_verification": 1,
+    "blocked_media_publication": 1,
+    "backlog_image_repair_blocked": 2
+  },
+  "published_post": {
+    "id": 812788,
+    "title": "1,036 עולים חדשים בחרו ברעננה השנה — העיר חמישית בארץ",
+    "cms_createDate": "2026-11-23T19:04:13.837",
+    "categoryId": 1947,
+    "category": "חדשות רעננה",
+    "creator": "מערכת רעננה נט",
+    "imageId": 852586,
+    "published_in_CMS": true,
+    "template": false,
+    "hide": false,
+    "cms_list_title_readback": "one published visible record; no duplicates; newest page",
+    "get_post_readback": "{} - no full content",
+    "slug": "raanana-1036-new-immigrants-2026-ministry",
+    "public_url_candidate_unverified": "https://raanananet.co.il/חדשות/חדשות-רעננה/raanana-1036-new-immigrants-2026-ministry",
+    "public_url_verified": false,
+    "published_verified": false
+  },
+  "image": {
+    "id": 852586,
+    "source_page": "https://www.pexels.com/photo/people-sitting-at-an-airport-8919589/",
+    "source_photo_id": "8919589",
+    "creator": "Marina Kuznetsova",
+    "license": "Pexels License",
+    "actual_subject": "people at airport terminal with luggage, not immigrants to Raanana",
+    "status": "illustration explicitly marked",
+    "file_url": "/file/852586",
+    "file_readback_confirmed": true,
+    "sha256": "not measured; CMS file bytes unavailable",
+    "image_duplicate_status": "no use of same image detected in adjacent recent CMS59 post list; full binary hash comparison unavailable"
+  },
+  "verified_findings": [
+    {
+      "topic": "immigration",
+      "report_date": "2026-11-22/23",
+      "event_cutoff_date": "2026-11-22",
+      "local_new_immigrants": 1036,
+      "local_rank": 5,
+      "national_new_immigrants": 18661,
+      "source": "Ministry of Aliyah and Jewish Agency via ynet and local reporting",
+      "editorial_action": "published original 812788"
+    },
+    {
+      "topic": "WinteRaanana 3",
+      "source": "https://tickets.raanana.muni.il/_WinteRaanana",
+      "dates": [
+        "2026-12-09",
+        "2026-12-10"
+      ],
+      "artists": [
+        "Guy Mazig 2026-12-09 20:45",
+        "Jimbo J 2026-12-10 20:45"
+      ],
+      "features": [
+        "free festival entry",
+        "winter market",
+        "paid prescheduled skating"
+      ],
+      "editorial_action": "queued_no_post_pending_authorized_subject_photo",
+      "rights_attempt": "Wikimedia Guy Mazig photo CC BY-SA 4.0, valid license at https://commons.wikimedia.org/wiki/File:Guy_Mazig.jpg; remote media import HTTP403, changed-host proxy HTTP404; no further retry this cycle"
+    },
+    {
+      "topic": "line 112 affected stations",
+      "duplicate_existing_post_id": 812774,
+      "action": "duplicate_prevented"
+    }
+  ],
+  "existing_backlog": [
+    {
+      "post_id": 811802,
+      "issue": "previously repeated image 851225; upload blocker persists, unchanged"
+    },
+    {
+      "post_id": 812206,
+      "issue": "previously repeated image 851225; upload blocker persists, unchanged"
+    },
+    {
+      "post_id": 812012,
+      "issue": "stale illustration text after prior photo replacement, get_post {} prevents safe edit"
+    }
+  ],
+  "homepage": {
+    "script": "raanana-auto-headlines-v1",
+    "changed": false,
+    "four_cards_manual_changes": false,
+    "homepage_desktop_QA": "pending, crawler readback cached from 2026-11-22 20:22",
+    "homepage_390_QA": "pending, no visual mobile browser",
+    "public_post_QA": "pending, new URL not reachable via web tool",
+    "image_card_match": "pending"
+  },
+  "permissions": {
+    "websiteId59_verified": true,
+    "categories_verified": true,
+    "media_file_verified": true,
+    "cas_lock_owned_and_readback": true,
+    "archive_herzliya_untouched": true,
+    "cms62_writes": 0
+  },
+  "safety": {
+    "no_duplicates_created": true,
+    "no_changes_to_cms37265_37268": true,
+    "no_changes_to_cms37279": true,
+    "no_schedule_change": true,
+    "no_further_media_retry": true
+  },
+  "incidents": [
+    "ops/incident-response/inbox/20261122-raanana-culture-media-remote403.json"
+  ],
+  "lease": {
+    "target": "ISNET-CMS-59",
+    "acquired_and_readback_verified": true,
+    "release": "not yet recorded"
+  }
+}
