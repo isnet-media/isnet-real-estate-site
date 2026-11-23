@@ -96,6 +96,17 @@ reviewedProductions.push({id:'ayelet-metayelet-2027',titles:['איילת מטי�
 reviewedProductions.push({id:'muteret-lekol-adam-2027',titles:['מותרת לכל אדם- עונת המנויים 26-27'],source:'https://www.mishkan-ashdod.co.il/event.asp?event=5652'});
 // Mevalim spelling variant, same Mishkan Ashdod slot as the official subscription record (3 Feb 2027, 20:30).
 reviewedProductions.push({id:'muteret-lekol-adam-2027',titles:['מותרת לכל אדם - תאטרון באר שבע'],source:'https://www.mishkan-ashdod.co.il/event.asp?event=5652'});
+// Rishon LeZion: reviewed source variants. Same city, hall, date and time are always required by sameOccurrence().
+// Official Heichal Hatarbut lists 27 Dec 2026 at 17:30 with Naama Super Al.
+reviewedProductions.push({id:'back-to-light-naama-2026',titles:['בחזרה אל האור – חנוכה 2026','בחזרה אל האור – נעמה סופר על – חנוכה 2026'],source:'https://htrl.co.il/show/בחזרה-אל-האור-חנוכה-2026/'});
+// Bravo confirms the 19 Jan 2027 Gili Shohat / Niki Goldstein concert, 20:30 in Heichal Meir Nitzan.
+reviewedProductions.push({id:'gili-shohat-niki-2027',titles:['גיל שוחט','גיל שוחט מארח את ניקי גולדשטיין'],source:'https://kupatbravo.co.il/announce/87949'});
+// Exact performer, same date/time/venue; retain each originating ticket ID.
+reviewedProductions.push({id:'adir-miller-rishon-2027',titles:['אדיר מילר','אדיר מילר בהיכל התרבות ראשון לציון'],source:'https://www.makore.co.il/event/אדיר-מילר--cfd97607'});
+// FRIENDS venue: 11 Mar 2027 21:00; hosted board adds the hall to the name.
+reviewedProductions.push({id:'daniel-styopin-rishon-2027',titles:['דניאל סטיופין','דניאל סטיופין ב-Friends ראשון לציון'],source:'https://friends-hist.co.il/show/דניאל-סטיופין/'});
+// FRIENDS 20 Mar 2027 11:30, exact Hansel & Gretel children's performance.
+reviewedProductions.push({id:'hansel-gretel-friends-2027',titles:['עמי ותמי','עמי ותמי - הצגת ילדים'],source:'https://www.hakartis.co.il/event/עמי-ותמי/'});
 const reviewedTitleKeys=new Map(reviewedProductions.flatMap(p=>p.titles.map(t=>[norm(t),'production:'+p.id])));
 function titleKey(e){return ['theatre','music','kids','standup'].includes(e.category)&&reviewedTitleKeys.get(norm(e.title))||baseTitleKey(e)}
 function venueKey(e){const room=String(e.venue||'').match(/(?:אולם|חדר)\s*([1-9]\d*)/);const v=norm(e.venue||e.venue_name||'').replace(/(?:אולם|חדר)\s*\d+/g,'').replace(/^(?:אולם|אודיטוריום)\s+/,'');let key=e.venue_institution_id;
