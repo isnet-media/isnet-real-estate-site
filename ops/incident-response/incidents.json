@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-24T05:23:06Z",
+  "updated_at": "2026-11-24T05:38:12Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8690,7 +8690,7 @@
         "ops/tlvnet-stability/observations/2026-11-23/7a23db64-9c68-8328-a1bc-0f5999c42c4f.json"
       ],
       "next_action": "Resume existing owner checkpoint through fresh source and normal CAS after completing pending image/body approvals; observe next owner build and live publication. Do not replay unchanged HTTP400 or infer a permanent fix.",
-      "updated_at": "2026-11-24T05:23:06Z",
+      "updated_at": "2026-11-24T05:38:12Z",
       "latest_recovery": {
         "observed_at": "2026-11-23T19:20:39.796Z",
         "existing_project_credential_succeeded": true,
@@ -8721,7 +8721,7 @@
       },
       "publication_prevention_review": {
         "observed_at": "2026-11-24T05:23:06Z",
-        "status": "recovery_unverified_in_normal_writer_run",
+        "status": "manual_run_verified_live_scheduled_regression_check_pending",
         "owner_last_run_id": "59111b4b-4cc8-8320-8bc5-a8a5e6fa6a9b",
         "next_existing_owner_run": "2026-11-24T08:00:00+02:00",
         "last_terminal_site_version": 732,
@@ -8744,7 +8744,29 @@
             "check": "Match a fresh policy receipt and terminal result to the owner run, match the new terminal deployment to the written source, and check the article body, image and credit plus section and homepage placement. If the approved item remains queued at the end of the run, retain it and flag the failed stage."
           }
         ],
-        "implementation": "Operational follow-up recorded in the existing incident. No credential, production code or schedule change."
+        "implementation": "Operational follow-up recorded in the existing incident. No credential, production code or schedule change.",
+        "historical_cause_detail": "Sites returned 400 with generic input rejection, followed by Git source-read 404. Current manual release passed. Provider-side request stage and correlation metadata required to distinguish incorrect request parameters from runtime binding or access rejection."
+      },
+      "latest_manual_recovery": {
+        "observed_at": "2026-11-24T05:38:12Z",
+        "status": "owner_publication_recovered_verified_live",
+        "owner_run_id": "60edd0e4-19bc-832a-bde2-ad04d6fe2df1",
+        "owner_run_status_at_readback": "in_progress",
+        "site_version": 733,
+        "source_commit": "d403f3679ad62582a337b7d8fa8d1f20f6030220",
+        "deployment_id": "appgdep_6b052258be5881918d755a6f1bf26f4d",
+        "deployed_at": "2026-11-24T05:36:40.932843+00:00",
+        "live_articles": [
+          "https://tlvnet.com/news/sde-dov-even-gabirol-north-opening-20261126",
+          "https://tlvnet.com/news/bitzaron-tavyov-iec-electric-cable-works-20261122",
+          "https://tlvnet.com/news/dizengoff-276-296-water-utility-night-lane-reduction-20261129",
+          "https://tlvnet.com/news/nahalat-binyamin-food-business-closure-20261124"
+        ],
+        "public_home": "https://tlvnet.com/",
+        "public_section": "https://tlvnet.com/news/",
+        "verification": "All four articles found on home and section. Each article opened independently and showed a title, body, loaded image and visible credit. Mobile visual review not performed in this verification.",
+        "lease_reconciliation": "Owner lease still held at last check; controller did not mutate lease.",
+        "permanent_root_cause_confirmed": false
       }
     },
     {
