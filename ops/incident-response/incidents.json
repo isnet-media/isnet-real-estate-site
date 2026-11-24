@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-24T05:18:35Z",
+  "updated_at": "2026-11-24T05:23:06Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8690,7 +8690,7 @@
         "ops/tlvnet-stability/observations/2026-11-23/7a23db64-9c68-8328-a1bc-0f5999c42c4f.json"
       ],
       "next_action": "Resume existing owner checkpoint through fresh source and normal CAS after completing pending image/body approvals; observe next owner build and live publication. Do not replay unchanged HTTP400 or infer a permanent fix.",
-      "updated_at": "2026-11-24T05:18:35Z",
+      "updated_at": "2026-11-24T05:23:06Z",
       "latest_recovery": {
         "observed_at": "2026-11-23T19:20:39.796Z",
         "existing_project_credential_succeeded": true,
@@ -8718,6 +8718,33 @@
         "disposition": "Resume persistent owner checkpoint, verify current owner source write path and publication lease, complete image approvals, and verify actual live output. No mechanically eligible item.",
         "observed_at": "2026-11-24T05:18:35Z",
         "evidence": "ops/tlvnet-stability/observations/2026-11-24/4b23be35-3b10-8324-b567-d76a673b89cd.json"
+      },
+      "publication_prevention_review": {
+        "observed_at": "2026-11-24T05:23:06Z",
+        "status": "recovery_unverified_in_normal_writer_run",
+        "owner_last_run_id": "59111b4b-4cc8-8320-8bc5-a8a5e6fa6a9b",
+        "next_existing_owner_run": "2026-11-24T08:00:00+02:00",
+        "last_terminal_site_version": 732,
+        "last_terminal_site_deployment_at": "2026-11-23T15:35:39.500095+00:00",
+        "gates": [
+          {
+            "stage": "owner_preflight",
+            "check": "Verify the existing Sites project and canonical repository mapping, and that the publishing identity can read the exact branch and is authorized to write. Use the same identity and runtime as the scheduled owner."
+          },
+          {
+            "stage": "before_lease_or_build",
+            "check": "On a source access 400/404, retain the owner checkpoint with the failing step, response status and actual run identity; alert once per root signature; resume only after evidence the access path changed."
+          },
+          {
+            "stage": "independent_items",
+            "check": "Keep missing media approval or source refresh scoped to the affected item; continue processing other eligible owner items."
+          },
+          {
+            "stage": "release_reconciliation",
+            "check": "Match a fresh policy receipt and terminal result to the owner run, match the new terminal deployment to the written source, and check the article body, image and credit plus section and homepage placement. If the approved item remains queued at the end of the run, retain it and flag the failed stage."
+          }
+        ],
+        "implementation": "Operational follow-up recorded in the existing incident. No credential, production code or schedule change."
       }
     },
     {
