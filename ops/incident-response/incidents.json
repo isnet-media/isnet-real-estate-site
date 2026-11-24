@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-23T20:35:50Z",
+  "updated_at": "2026-11-24T04:12:16Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4896,6 +4896,19 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45199629634",
           "signature": "expected exact Pages artifact metadata returned no artifact",
           "evidence": "ops/tlvnet-stability/observations/2026-11-23/bbfb3eb4-d180-8328-a03e-b24ad4efac43.json"
+        },
+        {
+          "run_id": 45320531816,
+          "attempt": 1,
+          "job_id": 138197704772,
+          "step": "Deploy",
+          "observed_error": "GitHub Pages Deploy could not retrieve the exact artifact github-pages-45320531816-1. The artifact visibility gate had passed before Deploy.",
+          "created_at": "2026-11-24T03:35:09Z",
+          "failed_at": "2026-11-24T03:37:07Z",
+          "source_commit": "dd5d65d6161d9dd98b8e2e00283f733fa2c792eb",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45320531816",
+          "source_inbox": "ops/incident-response/inbox/45320531816-1.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-24/d90dc58f-578c-8324-92e0-d906db3c8ef5.json"
         }
       ],
       "recovery": {
@@ -4922,28 +4935,67 @@
       "next_action": "Observe pending regular deployments. Do not retry unchanged transient failure or weaken artifact validation.",
       "reported_runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
       "latest_observation": {
-        "at": "2026-11-23T15:14:29.684Z",
-        "run_id": 45199629634,
+        "run_id": 45320531816,
         "attempt": 1,
-        "sha": "b1ee88e8c5d0cdd32091e90f10e2b692a68f0960",
-        "job_id": 137780371794,
+        "job_id": 138197704772,
         "step": "Deploy",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45199629634",
-        "signature": "expected exact Pages artifact metadata returned no artifact",
-        "later_run_ids": [
-          45202687049
-        ],
-        "live_marker": {
-          "url": "https://isnet.co.il/deployment-version.json",
-          "source_commit": "797e09ee9420dd2f0da021ebc3fad23492002253",
-          "run_id": "45199438154",
-          "run_attempt": "1"
-        },
-        "evidence": "ops/tlvnet-stability/observations/2026-11-23/1a2e43a6-9c70-8328-806b-991d6d800dd4.json",
-        "status": "live_release_recovery_verified",
-        "recovery_run_id": 45202687049
+        "observed_error": "GitHub Pages Deploy could not retrieve the exact artifact github-pages-45320531816-1. The artifact visibility gate had passed before Deploy.",
+        "created_at": "2026-11-24T03:35:09Z",
+        "failed_at": "2026-11-24T03:37:07Z",
+        "source_commit": "dd5d65d6161d9dd98b8e2e00283f733fa2c792eb",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45320531816",
+        "source_inbox": "ops/incident-response/inbox/45320531816-1.json",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-24/d90dc58f-578c-8324-92e0-d906db3c8ef5.json",
+        "at": "2026-11-24T04:12:16Z",
+        "status": "recurrence_provider_recovered_public_marker_unverified",
+        "recovery": {
+          "run_id": 45320531816,
+          "run_attempt": 2,
+          "job_id": 138199014113,
+          "terminal_at": "2026-11-24T03:40:48Z",
+          "source_commit": "dd5d65d6161d9dd98b8e2e00283f733fa2c792eb",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45320531816",
+          "deploy_step": "success",
+          "controller_rerun": false,
+          "status": "provider_deployment_succeeded_public_marker_unverified",
+          "public_verification": {
+            "url": "https://isnet.co.il/deployment-version.json",
+            "status": "not_verified_auto_review_denied",
+            "reason": "Browser origin approval gate denied ISNET public readback citing TLVNET scope. No workaround was attempted."
+          },
+          "downstream_event_checks": [
+            {
+              "run_id": 45321180305,
+              "head": "211eb79900467fd5298b95f2b29d651898c7cd0a",
+              "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45321180305",
+              "conclusion": "success",
+              "executed": [
+                "Run actions/checkout@v4",
+                "Check public city endpoints without generating load",
+                "Verify live event identity and media rules and cache versions in all six cities",
+                "Retain health report"
+              ]
+            },
+            {
+              "run_id": 45321180361,
+              "head": "211eb79900467fd5298b95f2b29d651898c7cd0a",
+              "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45321180361",
+              "conclusion": "success",
+              "executed": [
+                "Checkout the published input snapshot",
+                "Checkout read-only verification code",
+                "Run actions/setup-node@v4",
+                "Normalize expected feeds with the publication integrity policy",
+                "Show unresolved identity candidates without changing them",
+                "Compare public JSON with normalized current GitHub feed",
+                "Retain read-back evidence"
+              ]
+            }
+          ],
+          "evidence": "ops/tlvnet-stability/observations/2026-11-24/d90dc58f-578c-8324-92e0-d906db3c8ef5.json"
+        }
       },
-      "last_seen_at": "2026-11-23T15:14:29.684Z"
+      "last_seen_at": "2026-11-24T03:37:07Z"
     },
     {
       "id": "tlvnet-local-coverage-completed-handoff-build-regression",
@@ -8719,7 +8771,7 @@
       ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-23-1eedc47d-d7cc-8324-8e58-88e0610fa17e",
+  "last_review_runKey": "ops-2026-11-24-d90dc58f-578c-8324-92e0-d906db3c8ef5",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
