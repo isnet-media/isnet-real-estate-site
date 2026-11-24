@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-24T04:12:16Z",
+  "updated_at": "2026-11-24T05:18:35Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8690,7 +8690,7 @@
         "ops/tlvnet-stability/observations/2026-11-23/7a23db64-9c68-8328-a1bc-0f5999c42c4f.json"
       ],
       "next_action": "Resume existing owner checkpoint through fresh source and normal CAS after completing pending image/body approvals; observe next owner build and live publication. Do not replay unchanged HTTP400 or infer a permanent fix.",
-      "updated_at": "2026-11-23T19:20:39.796Z",
+      "updated_at": "2026-11-24T05:18:35Z",
       "latest_recovery": {
         "observed_at": "2026-11-23T19:20:39.796Z",
         "existing_project_credential_succeeded": true,
@@ -8700,6 +8700,24 @@
         "status": "current_access_read_write_verified",
         "remaining": "Original news owner must complete3asset ingestions/image approvals and2updated-body image reviews. No controller article approval or deployment.",
         "evidence": "ops/tlvnet-stability/observations/2026-11-23/51c4b6b4-2598-8328-82ff-aae9fb709dad.json"
+      },
+      "latest_owner_followup": {
+        "desk": "news",
+        "last_owner_run_id": "59111b4b-4cc8-8320-8bc5-a8a5e6fa6a9b",
+        "writer_last_release_attempt": {
+          "site_source_http": 400,
+          "git_http": 404,
+          "published": 0
+        },
+        "current_controller_canonical_head": "442c3b529ad02e3c8cb23281cecce78de6c019de",
+        "current_owner_write_verified": false,
+        "latest_historical_source_write_recovery": "2026-11-23T19:20:39.796Z",
+        "pending_image_ingest": 3,
+        "updates_pending_review": 2,
+        "next_existing_owner_slot": "2026-11-24T08:00:00+02:00",
+        "disposition": "Resume persistent owner checkpoint, verify current owner source write path and publication lease, complete image approvals, and verify actual live output. No mechanically eligible item.",
+        "observed_at": "2026-11-24T05:18:35Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-24/4b23be35-3b10-8324-b567-d76a673b89cd.json"
       }
     },
     {
@@ -8771,7 +8789,7 @@
       ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-24-d90dc58f-578c-8324-92e0-d906db3c8ef5",
+  "last_review_runKey": "ops-2026-11-24-4b23be35-3b10-8324-b567-d76a673b89cd",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
