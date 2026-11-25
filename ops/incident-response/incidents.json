@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T08:53:54.748Z",
+  "updated_at": "2026-11-25T09:59:20.777Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4943,7 +4943,18 @@
         "public_readback_verified": false,
         "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json"
       },
-      "last_seen_at": "2026-11-25T08:53:54.748Z"
+      "last_seen_at": "2026-11-25T08:53:54.748Z",
+      "reconciled_prior_occurrences": [
+        {
+          "observed_at": "2026-11-25T09:59:20.777Z",
+          "run_id": 45420529592,
+          "failed_step": "Deploy",
+          "later_success_run_id": 45422441008,
+          "later_success_same_sha": false,
+          "public_readback_verified": false,
+          "evidence": "ops/tlvnet-stability/observations/2026-11-25/1824b0c6-51ac-8330-ab97-c01ee5fa2aec.json"
+        }
+      ]
     },
     {
       "id": "tlvnet-local-coverage-completed-handoff-build-regression",
@@ -8801,6 +8812,15 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json",
       "next_action": "Rebase the isolated chronological merge on the fresh authoritative source, complete the build, then verify the affected public homepage order and older article link after a serialized release.",
       "prevention": "Regression scenario with interleaving current CMS and static cards, older CMS article, repeated canonical link and six-card cap."
+    },
+    {
+      "id": "culture-20261125-media-transfer-and-herzliya-handoff",
+      "status": "open",
+      "root_cause": null,
+      "blocked_stage": "A first licensed candidate image transfer returned 403, so no asset was ingested. Underlying rejection reason was not established.",
+      "inbox": "ops/incident-response/inbox/20261125T0851Z-culture-image-transfer-c2452c1f.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-25/1824b0c6-51ac-8330-ab97-c01ee5fa2aec.json",
+      "next_action": "Original owner to arrange an approved image intake with bytes and rights, plus verify local availability or qualify the timing in their editorial review. Keep the existing separate Herzliya local media-ID incident."
     }
   ],
   "last_review_runKey": "ops-2026-11-24-4b23be35-3b10-8324-b567-d76a673b89cd",
