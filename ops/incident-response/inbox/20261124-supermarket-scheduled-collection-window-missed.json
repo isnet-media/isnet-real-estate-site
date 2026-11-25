@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "id": "supermarket-weekly-collection-github-dispatch-after-window",
+  "status": "awaiting_external_action",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "observed_at": "2026-11-25T22:59:49Z",
+  "run_id": "9c7a5c90-c210-8328-97e6-6499da137f09",
+  "affected_date": "2026-11-24",
+  "classification": "scheduler/late_dispatch",
+  "root_cause": "The seven scheduled GitHub collector runs became visible outside the Tuesday 08:00–11:00 Israel window, and their actual-clock guard skipped collection. The public-health run also skipped its check after noon. Why the provider delivered these scheduled events late is unconfirmed.",
+  "impact": "No Tuesday collection or health check in these runs, and no new durable collection claim for any of the seven cities. A green workflow or delivery run does not establish price freshness.",
+  "window": {
+    "allowed_collection": "08:00–11:00 Israel Tuesday",
+    "scheduled_collection_runs_created_local": "18:35–19:57",
+    "health_run_created_local": "21:21"
+  },
+  "repository_run_inventory": {
+    "date_utc": "2026-11-24",
+    "pages": 3,
+    "run_count": 130
+  },
+  "run_evidence": [
+    {
+      "run_id": 45469281122,
+      "name": "All cities supermarket public health",
+      "created_at": "2026-11-24T19:21:05Z",
+      "attempt": 1,
+      "source_commit": "a70b01906a6af42283eebb2331cf6853431277ec",
+      "run_conclusion": "success",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45469281122",
+      "job_id": 138712499976,
+      "guard": {
+        "name": "Check actual Israel morning window",
+        "conclusion": "success"
+      },
+      "action": {
+        "name": "Run python scripts/check_super_public.py",
+        "conclusion": "skipped"
+      }
+    },
+    {
+      "run_id": 45454204491,
+      "name": "Refresh Tel Aviv supermarket prices",
+      "created_at": "2026-11-24T17:57:19Z",
+      "attempt": 1,
+      "source_commit": "83fae5f41cf71b856c50382177de9e01c62ad005",
+      "run_conclusion": "success",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45454204491",
+      "job_id": 138659133942,
+      "guard": {
+        "name": "Claim collection only Tuesday 08:00-11:00 Israel",
+        "conclusion": "success"
+      },
+      "action": {
+        "name": "Collect only reviewed TLV branches with shared adapters",
+        "conclusion": "skipped"
+      }
+    },
+    {
+      "run_id": 45453034329,
+      "name": "Refresh Bat Yam supermarket prices",
+      "created_at": "2026-11-24T17:50:47Z",
+      "attempt": 1,
+      "source_commit": "83fae5f41cf71b856c50382177de9e01c62ad005",
+      "run_conclusion": "success",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45453034329",
+      "job_id": 138654976756,
+      "guard": {
+        "name": "Claim collection only Tuesday 08:00-11:00 Israel",
+        "conclusion": "success"
+      },
+      "action": {
+        "name": "Collect reviewed physical Bat Yam branches",
+        "conclusion": "skipped"
+      }
+    },
+    {
+      "run_id": 45451145215,
+      "name": "Refresh Holon supermarket prices",
+      "created_at": "2026-11-24T17:40:25Z",
+      "attempt": 1,
+      "source_commit": "83fae5f41cf71b856c50382177de9e01c62ad005",
+      "run_conclusion": "success",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45451145215",
+      "job_id": 138648254364,
+      "guard": {
+        "name": "Claim collection only Tuesday 08:00-11:00 Israel",
+        "conclusion": "success"
+      },
+      "action": {
+        "name": "Collect reviewed physical Holon branches",
+        "conclusion": "skipped"
+      }
+    },
+    {
+      "run_id": 45449909536,
+      "name": "Refresh Rishon supermarket prices",
+      "created_at": "2026-11-24T17:33:35Z",
+      "attempt": 1,
+      "source_commit": "42ce8ad81ce28401a782315b70e4463ec6716a0f",
+      "run_conclusion": "success",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45449909536",
+      "job_id": 138643805931,
+      "guard": {
+        "name": "Claim collection only Tuesday 08:00-11:00 Israel",
+        "conclusion": "success"
+      },
+      "action": {
+        "name": "Collect reviewed physical Rishon branches",
+        "conclusion": "skipped"
+      }
+    },
+    {
+      "run_id": 45449895044,
+      "name": "Refresh Kiryat Gat supermarket prices",
+      "created_at": "2026-11-24T17:33:30Z",
+      "attempt": 1,
+      "source_commit": "42ce8ad81ce28401a782315b70e4463ec6716a0f",
+      "run_conclusion": "success",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45449895044",
+      "job_id": 138643753858,
+      "guard": {
+        "name": "Claim collection only Tuesday 08:00-11:00 Israel",
+        "conclusion": "success"
+      },
+      "action": {
+        "name": "Collect reviewed physical Kiryat Gat branches",
+        "conclusion": "skipped"
+      }
+    },
+    {
+      "run_id": 45449608990,
+      "name": "Refresh Yavne supermarket prices",
+      "created_at": "2026-11-24T17:31:59Z",
+      "attempt": 1,
+      "source_commit": "42ce8ad81ce28401a782315b70e4463ec6716a0f",
+      "run_conclusion": "success",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45449608990",
+      "job_id": 138642755288,
+      "guard": {
+        "name": "Claim collection only Tuesday 08:00-11:00 Israel",
+        "conclusion": "success"
+      },
+      "action": {
+        "name": "Collect reviewed Yavne branches and validate city isolation",
+        "conclusion": "skipped"
+      }
+    },
+    {
+      "run_id": 45438902106,
+      "name": "Refresh Ashdod supermarket prices",
+      "created_at": "2026-11-24T16:35:28Z",
+      "attempt": 1,
+      "source_commit": "269e627643a3109ee3868ea42bce5adf50123b01",
+      "run_conclusion": "success",
+      "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45438902106",
+      "job_id": 138604205847,
+      "guard": {
+        "name": "Claim collection only Tuesday 08:00-11:00 Israel",
+        "conclusion": "success"
+      },
+      "action": {
+        "name": "Collect official branch files",
+        "conclusion": "skipped"
+      }
+    }
+  ],
+  "representative_guard_logs": [
+    {
+      "time": "2026-11-24T16:35:57.0086278Z",
+      "message": "No collection: outside Tuesday 08:00-11:00 Israel or already attempted today"
+    },
+    {
+      "time": "2026-11-24T17:57:39.3713217Z",
+      "message": "No collection: outside Tuesday 08:00-11:00 Israel or already attempted today"
+    }
+  ],
+  "claim_readback": [
+    {
+      "city": "ASHDOD",
+      "started_at": "2026-11-12T15:57:38.611670+02:00",
+      "finished_at": "2026-11-12T16:01:57.086000+02:00",
+      "status": "completed",
+      "run_id": "43232159660",
+      "blob_sha": "c7bff860985cab99a96136980f2f92af88fc663a"
+    },
+    {
+      "city": "YAVNE",
+      "started_at": "2026-11-12T15:57:46.379982+02:00",
+      "finished_at": "2026-11-12T16:01:24.061274+02:00",
+      "status": "completed",
+      "run_id": "43232188705",
+      "blob_sha": "2a1ea8f0958b4ab527eca7e9882cd4723e1c9b79"
+    },
+    {
+      "city": "KGAT",
+      "started_at": "2026-11-22T08:00:21.226954+02:00",
+      "finished_at": "2026-11-22T08:04:02.886568+02:00",
+      "status": "completed",
+      "run_id": "44557220608",
+      "blob_sha": "d246c1792cfc034d655c62613425f01905dd88c0"
+    },
+    {
+      "city": "RISHON",
+      "started_at": "2026-11-12T15:59:34.085987+02:00",
+      "finished_at": "2026-11-12T16:06:31.874550+02:00",
+      "status": "completed",
+      "run_id": "43232469710",
+      "blob_sha": "2381d60812212d164465092bd9a8d96b38bd31ce"
+    },
+    {
+      "city": "HOLON",
+      "started_at": "2026-11-12T16:01:10.735124+02:00",
+      "finished_at": "2026-11-12T16:06:24.199134+02:00",
+      "status": "completed",
+      "run_id": "43232694483",
+      "blob_sha": "fe9c04537d462ea49d7b43a084ed53ceb93ca252"
+    },
+    {
+      "city": "BATYAM",
+      "started_at": "2026-11-12T16:01:17.425943+02:00",
+      "finished_at": "2026-11-12T16:05:30.953656+02:00",
+      "status": "completed",
+      "run_id": "43232746622",
+      "blob_sha": "2b704d3f34c9fa24fd792381b9d9e97987d74ceb"
+    },
+    {
+      "city": "TLV",
+      "started_at": "2026-11-12T16:10:17.215422+02:00",
+      "finished_at": "2026-11-12T16:16:59.424358+02:00",
+      "status": "completed",
+      "run_id": "43234261399",
+      "blob_sha": "a91aab3237db09e464f38fc0a2c30ec722d845d5"
+    }
+  ],
+  "related_incident": "supermarket-out-of-window-start",
+  "did_collect": false,
+  "did_check_live_catalog": false,
+  "did_change_workflows_or_schedule": false,
+  "next_action": "Investigate GitHub Actions scheduled-event delivery for the cited runs. In the next existing approved Tuesday window, verify a fresh durable city claim and a completed collection step for each city before treating the week as refreshed. Keep the actual-time guard; prevent silent green skips by checking missing claims separately from the workflow conclusion.",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-26/9c7a5c90-c210-8328-97e6-6499da137f09.json",
+  "inbox": "ops/incident-response/inbox/20261124-supermarket-scheduled-collection-window-missed.json"
+}
