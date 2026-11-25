@@ -1,0 +1,19 @@
+{
+  "subsystem": "tlvnet",
+  "status": "mitigated",
+  "signature": "public-http-timeout-extension-browser-unavailable",
+  "observed_at": "2026-11-25T14:27:00Z",
+  "evidence": {
+    "public_http": "Canonical home, section, article and asset requests timed out",
+    "extension_browser": "browser.js returned Unknown tool",
+    "cloud_browser": "Live article full text, title, loaded illustration 1672x941, section lead and homepage link verified"
+  },
+  "affected_url": "https://tlvnet.com/news/maccabi-jaffa-rotem-shani-tender-reported-20261125",
+  "remaining": [
+    "mobile visual review",
+    "public binary checksum"
+  ],
+  "durable_quality_queue": "data/photo-bank/quality-issues.json",
+  "journal_commit": "eba3ecae80506c49d211e76f140a4737c8a37412",
+  "next_action": "Use existing quality queue to verify mobile layout and served asset bytes when access supports it. No publication failure observed."
+}
