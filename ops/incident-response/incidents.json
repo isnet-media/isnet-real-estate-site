@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T13:49:37Z",
+  "updated_at": "2026-11-25T14:39:06Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4977,7 +4977,16 @@
           "public_readback_verified": false,
           "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json"
         }
-      ]
+      ],
+      "latest_related_failure": {
+        "observed_at": "2026-11-25T14:39:06Z",
+        "run_id": 45635573542,
+        "job_id": 139279976212,
+        "source_commit": "ce414784bf06fa62936bab7371253672c269ddfd",
+        "failed_step": "Deploy",
+        "classification": "same stage; exact cause not verified in this cycle",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json"
+      }
     },
     {
       "id": "tlvnet-local-coverage-completed-handoff-build-regression",
@@ -8831,16 +8840,27 @@
       "impact": "An older CMS story appeared before five newer stories already visible on the homepage.",
       "root_cause": "The homepage render prepends a batch of CMS cards and discards static slots before comparing publication times; its browser fallback also prepends. Confirmed against observed card origin/order and a local source snapshot.",
       "first_seen_at": "2026-11-24",
-      "last_seen_at": "2026-11-25T11:56:27.948Z",
+      "last_seen_at": "2026-11-25T14:39:06Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json",
       "next_action": "Rebase the isolated chronological merge on the fresh authoritative source, complete the build, then verify the affected public homepage order and older article link after a serialized release.",
       "prevention": "Regression scenario with interleaving current CMS and static cards, older CMS article, repeated canonical link and six-card cap.",
       "latest_public_observation": {
-        "observed_at": "2026-11-25T11:56:27.948Z",
-        "version": 735,
+        "url": "https://tlvnet.com/",
+        "viewport": [
+          1363,
+          936
+        ],
         "first_date": "2026-11-19",
         "newer_cards_after_first": 5,
-        "evidence": "ops/tlvnet-stability/observations/2026-11-25/c3940ceb-fe84-832c-86b3-9678f1c39b48.json"
+        "newer_cards_date": "2026-11-24",
+        "status": "still_reproduced",
+        "saved_version": 737,
+        "source_commit": "28747fb4eddd40143225447729244960ae4fdbdf",
+        "canonical_head_independently_verified": false,
+        "patch_applied_to_737": false,
+        "previous_patch_evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json",
+        "observed_at": "2026-11-25T14:39:06Z"
       },
       "latest_source_recheck": {
         "observed_at": "2026-11-25T13:49:37Z",
@@ -8873,9 +8893,21 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/c3940ceb-fe84-832c-86b3-9678f1c39b48.json",
       "observed_at": "2026-11-25T11:56:27.948Z",
       "republication_attempted": false
+    },
+    {
+      "id": "tlvnet-public-http-timeout-extension-browser-unavailable",
+      "status": "mitigated",
+      "fingerprint": "TLVNET/public-readback/public-http-timeout-extension-browser-unavailable",
+      "first_seen_at": "2026-11-25T14:27:00Z",
+      "last_seen_at": "2026-11-25T14:39:06Z",
+      "impact": "Direct HTTP and browser extension could not verify the real-estate article. Production served the article, image, section and homepage through independent browser check.",
+      "root_cause": "Direct verifier request timed out and browser extension was unavailable in the owner's environment; cause of timeout unestablished.",
+      "source_inbox": "ops/incident-response/inbox/2026-11-25-real-estate-browser-read-verification.json",
+      "resolution_scope": "Desktop article, image and links independently verified. Mobile and served binary checksum remain in owner quality queue.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-25-fc49f081-8ec0-832c-982b-1df6923a7624",
+  "last_review_runKey": "ops-2026-11-25-dc04c7ef-f7cc-832c-a995-4f1da7a828da",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
