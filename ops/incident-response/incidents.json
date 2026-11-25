@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-24T05:39:10Z",
+  "updated_at": "2026-11-25T08:53:54.748Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4935,67 +4935,15 @@
       "next_action": "Observe pending regular deployments. Do not retry unchanged transient failure or weaken artifact validation.",
       "reported_runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
       "latest_observation": {
-        "run_id": 45320531816,
-        "attempt": 1,
-        "job_id": 138197704772,
-        "step": "Deploy",
-        "observed_error": "GitHub Pages Deploy could not retrieve the exact artifact github-pages-45320531816-1. The artifact visibility gate had passed before Deploy.",
-        "created_at": "2026-11-24T03:35:09Z",
-        "failed_at": "2026-11-24T03:37:07Z",
-        "source_commit": "dd5d65d6161d9dd98b8e2e00283f733fa2c792eb",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45320531816",
-        "source_inbox": "ops/incident-response/inbox/45320531816-1.json",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-24/d90dc58f-578c-8324-92e0-d906db3c8ef5.json",
-        "at": "2026-11-24T04:12:16Z",
-        "status": "recurrence_provider_recovered_public_marker_unverified",
-        "recovery": {
-          "run_id": 45320531816,
-          "run_attempt": 2,
-          "job_id": 138199014113,
-          "terminal_at": "2026-11-24T03:40:48Z",
-          "source_commit": "dd5d65d6161d9dd98b8e2e00283f733fa2c792eb",
-          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45320531816",
-          "deploy_step": "success",
-          "controller_rerun": false,
-          "status": "provider_deployment_succeeded_public_marker_unverified",
-          "public_verification": {
-            "url": "https://isnet.co.il/deployment-version.json",
-            "status": "not_verified_auto_review_denied",
-            "reason": "Browser origin approval gate denied ISNET public readback citing TLVNET scope. No workaround was attempted."
-          },
-          "downstream_event_checks": [
-            {
-              "run_id": 45321180305,
-              "head": "211eb79900467fd5298b95f2b29d651898c7cd0a",
-              "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45321180305",
-              "conclusion": "success",
-              "executed": [
-                "Run actions/checkout@v4",
-                "Check public city endpoints without generating load",
-                "Verify live event identity and media rules and cache versions in all six cities",
-                "Retain health report"
-              ]
-            },
-            {
-              "run_id": 45321180361,
-              "head": "211eb79900467fd5298b95f2b29d651898c7cd0a",
-              "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45321180361",
-              "conclusion": "success",
-              "executed": [
-                "Checkout the published input snapshot",
-                "Checkout read-only verification code",
-                "Run actions/setup-node@v4",
-                "Normalize expected feeds with the publication integrity policy",
-                "Show unresolved identity candidates without changing them",
-                "Compare public JSON with normalized current GitHub feed",
-                "Retain read-back evidence"
-              ]
-            }
-          ],
-          "evidence": "ops/tlvnet-stability/observations/2026-11-24/d90dc58f-578c-8324-92e0-d906db3c8ef5.json"
-        }
+        "observed_at": "2026-11-25T08:53:54.748Z",
+        "run_id": 45457608514,
+        "failed_step": "Deploy",
+        "later_success_run_id": 45457788297,
+        "later_success_same_sha": false,
+        "public_readback_verified": false,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json"
       },
-      "last_seen_at": "2026-11-24T03:37:07Z"
+      "last_seen_at": "2026-11-25T08:53:54.748Z"
     },
     {
       "id": "tlvnet-local-coverage-completed-handoff-build-regression",
@@ -5355,7 +5303,7 @@
       "root_cause": "Live IMS response issued16Nov16:23Israel contains only20:00onward periods for213/210. Current local time not covered. Validation correctly rejects; no current replacement exists in the observed source.",
       "impact": "New18Nov refresh rejected uncovered current period and retained lastgood. Actual current XML periods and live widget freshness not independently verified.",
       "first_seen_at": "2026-11-09T22:24:11Z",
-      "last_seen_at": "2026-11-22T15:57:34Z",
+      "last_seen_at": "2026-11-25T08:53:54.748Z",
       "updated_at": "2026-11-21T16:11:33.000Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-16-b28a8a3c-a510-8332-b4c5-feedac37ad04.json",
       "change": "No code change, data overwrite, manual rerun or deployment. Existing guard passed regression.",
@@ -5391,22 +5339,11 @@
       "last_controller_observed_at": "2026-11-21T16:11:33.000Z",
       "last_evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json",
       "current_recurrence": {
-        "id": "ims-sea-no-currently-valid-period",
-        "run_id": 44914805506,
-        "job_id": 136878006095,
-        "source_commit": "2b429dfa25f35a47e13f6f43084fe7bbe7e4c44c",
-        "source_script_sha": "74688b9a3d00bbab96e8cb8110677bd0c88df958",
+        "observed_at": "2026-11-25T08:53:54.748Z",
+        "run_id": 45450827604,
+        "failed_step": "Refresh forecast",
         "error": "No currently valid forecast; retaining last good file",
-        "tests_passed": 5,
-        "public_widget_freshness": null,
-        "source_valid_now": null,
-        "manual_retry": false,
-        "inbox": "ops/incident-response/inbox/44914805506-1.json",
-        "observed_at": "2026-11-21T16:11:33.000Z",
-        "exact_existing_signature": true,
-        "last_good_preserved": true,
-        "public_has_current_forecast": null,
-        "evidence": "ops/tlvnet-stability/observations/2026-11-21/b1b3c8d4-a92c-8324-a50d-ad7543d8f77c.json"
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json"
       }
     },
     {
@@ -8626,6 +8563,14 @@
           "handoff": "ops/incident-response/inbox/51c4b6b4-2598-8328-82ff-aae9fb709dad-sports-research-role-handoff.json"
         },
         "source_access": "Current canonical read and source-only write succeeded. Other affected desk terminal results unchanged."
+      },
+      "latest_recurrence": {
+        "observed_at": "2026-11-25T08:53:54.748Z",
+        "affected_desks": 7,
+        "status": "no_update_with_older_result_and_no_current_policy_read_receipt",
+        "observed_today_desks": 3,
+        "root_cause_confirmed": false,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json"
       }
     },
     {
@@ -8845,6 +8790,17 @@
           "observed_at": "2026-11-23T20:35:50Z"
         }
       ]
+    },
+    {
+      "id": "tlvnet-home-news-rail-batch-precedence",
+      "status": "open",
+      "impact": "An older CMS story appeared before five newer stories already visible on the homepage.",
+      "root_cause": "The homepage render prepends a batch of CMS cards and discards static slots before comparing publication times; its browser fallback also prepends. Confirmed against observed card origin/order and a local source snapshot.",
+      "first_seen_at": "2026-11-24",
+      "last_seen_at": "2026-11-25T08:53:54.748Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json",
+      "next_action": "Rebase the isolated chronological merge on the fresh authoritative source, complete the build, then verify the affected public homepage order and older article link after a serialized release.",
+      "prevention": "Regression scenario with interleaving current CMS and static cards, older CMS article, repeated canonical link and six-card cap."
     }
   ],
   "last_review_runKey": "ops-2026-11-24-4b23be35-3b10-8324-b567-d76a673b89cd",
