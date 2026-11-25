@@ -17,7 +17,7 @@
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": "2026-11-25T12:33:26.202Z",
+  "last_observation_at": "2026-11-25T13:49:37Z",
   "last_daily_summary_at": "2026-11-25T08:53:54.748Z",
   "observations": [
     {
@@ -320,6 +320,12 @@
       "path": "ops/tlvnet-stability/observations/2026-11-25/9bdda1f5-3b50-832c-bbd6-85cf8432739e.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/9bdda1f5-3b50-832c-bbd6-85cf8432739e.json",
       "observed_at": "2026-11-25T12:33:26.202Z"
+    },
+    {
+      "run_id": "fc49f081-8ec0-832c-982b-1df6923a7624",
+      "path": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json",
+      "observed_at": "2026-11-25T13:49:37Z"
     }
   ],
   "remaining": [
@@ -348,18 +354,18 @@
   "access_request": "BACKUP_ACCESS_REQUEST_20261115.md",
   "latest_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "9bdda1f5-3b50-832c-bbd6-85cf8432739e",
-    "runKey": "ops-2026-11-25-9bdda1f5-3b50-832c-bbd6-85cf8432739e",
+    "run_id": "fc49f081-8ec0-832c-982b-1df6923a7624",
+    "runKey": "ops-2026-11-25-fc49f081-8ec0-832c-982b-1df6923a7624",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 3,
-    "observed_at": "2026-11-25T12:33:26.202Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-25/9bdda1f5-3b50-832c-bbd6-85cf8432739e.json",
-    "status": "consumer_publication_verified_news_queue_retained",
+    "observed_at": "2026-11-25T13:49:37Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json",
+    "status": "herzliya_publication_verified_homepage_patch_still_pending",
     "saved_version": 736,
     "deployed_source_commit": "37c746c7b1f647a9f84b60e02726b4465bddbed6",
     "deployment_id": "appgdep_6b06d10893c8819180b81de781399bf0",
-    "new_actions": 0,
-    "new_external_inbox": 2,
+    "new_actions": 20,
+    "new_external_inbox": 1,
     "new_social_rows": 1,
     "controller_new_deployments": 0
   },
@@ -423,28 +429,22 @@
   },
   "last_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "b2edf175-c938-8328-93f7-020a0234ed05",
-    "runKey": "ops-2026-11-23-b2edf175-c938-8328-93f7-020a0234ed05",
+    "run_id": "fc49f081-8ec0-832c-982b-1df6923a7624",
+    "runKey": "ops-2026-11-25-fc49f081-8ec0-832c-982b-1df6923a7624",
     "policy_version": "2026-11-15/1.2",
-    "private_definition_revision": 2,
-    "observed_at": "2026-11-23T18:57:39.328Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-23/b2edf175-c938-8328-93f7-020a0234ed05.json",
-    "status": "daily_stability_summary_readback_recovered",
-    "saved_version": 732,
-    "source_commit": "be456fd9fa0697cf22f5301e67232f537e1c500f",
-    "deployment_id": "appgdep_6b045d3a9c048191ae326a021abfb9f1",
-    "public_home_http": 200,
-    "new_actions": 18,
-    "new_inbox": 1,
-    "controller_new_deployments": 0,
-    "new_tlvnet_articles_independently_verified": 0,
-    "public_health": {
-      "http": 200,
-      "seconds": 6.028792,
-      "url": "https://tlvnet.com/"
-    }
+    "private_definition_revision": 3,
+    "observed_at": "2026-11-25T13:49:37Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json",
+    "status": "herzliya_publication_verified_homepage_patch_still_pending",
+    "saved_version": 736,
+    "deployed_source_commit": "37c746c7b1f647a9f84b60e02726b4465bddbed6",
+    "deployment_id": "appgdep_6b06d10893c8819180b81de781399bf0",
+    "new_actions": 20,
+    "new_external_inbox": 1,
+    "new_social_rows": 1,
+    "controller_new_deployments": 0
   },
-  "updated_at": "2026-11-25T12:33:26.202Z",
+  "updated_at": "2026-11-25T13:49:37Z",
   "latest_daily_summary": {
     "for_local_date": "2026-11-25",
     "due": true,
@@ -556,11 +556,19 @@
     "foundation": "passed",
     "generated_date_attributes": "verified on both homepage files",
     "full_local_build": "passed",
-    "integration": "pending fresh canonical source access with overlap check",
+    "integration": "requires existing authorized canonical source access",
     "public_deployment": false,
     "based_on": "126f6339cc0011037c25398becfffd3b9491d0d8",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-25/c3940ceb-fe84-832c-86b3-9678f1c39b48.json",
-    "checked_at": "2026-11-25T11:58:14.157Z"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json",
+    "checked_at": "2026-11-25T13:49:37Z",
+    "previous_full_build_base": "126f6339cc0011037c25398becfffd3b9491d0d8",
+    "additional_apply_check": {
+      "deployed_commit": "37c746c7b1f647a9f84b60e02726b4465bddbed6",
+      "journal_commit": "c02fb81f4b5ed699996ad4f0ae847ff8ce015994",
+      "status": "passed_both",
+      "relevant_files_changed": false
+    },
+    "canonical_head_independently_verified": false
   },
   "latest_verified_consumer": {
     "status": "published_verified_desktop",
