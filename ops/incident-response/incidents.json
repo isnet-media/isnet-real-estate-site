@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T18:16:35Z",
+  "updated_at": "2026-11-25T21:08:37Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5216,7 +5216,7 @@
       "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
       "prevention": "Keep actual executor identity separate from intended owner; explicit active-role reconciliation before approval/CAS. Procedural mitigation only; no runtime fixed_verified claim.",
       "remaining": "Inspect scheduler/context isolation and result attribution for these exact two runs/conversations through the platform runtime; this connector exposes task prompt/result metadata but not execution routing logs or an isolation-repair operation. Do not replay/trigger tasks or change schedules to simulate repair.",
-      "last_observed_at": "2026-11-23T20:35:50Z",
+      "last_observed_at": "2026-11-25T21:08:37Z",
       "new_runtime_evidence": {
         "sports_run_id": "37cbf175-5f34-8320-b921-abb82295b707",
         "controller_previous_run_id": "66f4eaea-b874-8326-9b23-1510b4bf3d77",
@@ -5226,22 +5226,28 @@
         "sports_completed_without_evening_publication": true,
         "source_unchanged": true
       },
-      "last_seen_at": "2026-11-23T20:35:50Z",
+      "last_seen_at": "2026-11-25T21:08:37Z",
       "latest_occurrence": {
-        "run_id": "1eedc47d-d7cc-8324-8e58-88e0610fa17e",
-        "observed_at": "2026-11-23T20:35:50Z",
-        "sports_run_id": "36d29c3f-9b1c-8322-8ea5-883a7e6fb6be",
-        "controller_result_run_id": "51c4b6b4-2598-8328-82ff-aae9fb709dad",
+        "run_id": "91cc188e-b3a4-8328-af1e-ef568f3701ea",
+        "observed_at": "2026-11-25T21:08:37Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/91cc188e-b3a4-8328-af1e-ef568f3701ea.json",
         "signature": "controller-active-scope-inherited-writer-approval",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-23/1eedc47d-d7cc-8324-8e58-88e0610fa17e.json",
-        "inbox": "ops/incident-response/inbox/1eedc47d-d7cc-8324-8e58-88e0610fa17e-sports-attribution-and-cms61-lease.json",
+        "incident_id": "controller-active-scope-inherited-writer-approval",
+        "sports_run_id": "13950c84-9b88-8326-8ec8-79cab6ad90cb",
+        "controller_result_run_id": "1d20b946-add0-832c-944e-b40b18a37cef",
+        "sports_result_at": "2026-11-25T19:35:44.564288Z",
+        "controller_result_at": "2026-11-25T19:35:45.931039Z",
         "results_exact_equal": true,
         "distinct_chat_refs": true,
-        "owner_result_status": "completed_with_controller_output",
-        "next_action": "Existing platform support must inspect execution routing and result attribution for both run IDs; the scheduled-task connector has read-only result metadata and no routing repair endpoint. Preserve existing owner research. Require an authentic owner result and public article evidence before attributing success."
+        "source_handoff": "ops/incident-response/inbox/sports-20261125-13950c84-context-restored-published.json",
+        "public_sports_publication_verified_independently": true,
+        "root_cause": "Platform routing/result attribution cause not established",
+        "next_action": "Platform runtime owner to compare execution routing and result attribution for the two run IDs.",
+        "owner_result_status": "completed_sports_articles_verified",
+        "verified_deployment_id": "appgdep_6b0737791ec08191b6b3dbe27785d9a7"
       },
-      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-23/1eedc47d-d7cc-8324-8e58-88e0610fa17e.json",
-      "next_action": "Existing platform support must inspect execution routing and result attribution for both run IDs; the scheduled-task connector has read-only result metadata and no routing repair endpoint. Preserve existing owner research. Require an authentic owner result and public article evidence before attributing success.",
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-25/91cc188e-b3a4-8328-af1e-ef568f3701ea.json",
+      "next_action": "Platform runtime owner to compare execution routing and result attribution for the two run IDs.",
       "latest_pending_run_observation": {
         "observed_at": "2026-11-19T20:50:22Z",
         "evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
@@ -5283,6 +5289,25 @@
           "distinct_chat_refs": true,
           "owner_result_status": "completed_with_controller_output",
           "next_action": "Existing platform support must inspect execution routing and result attribution for both run IDs; the scheduled-task connector has read-only result metadata and no routing repair endpoint. Preserve existing owner research. Require an authentic owner result and public article evidence before attributing success."
+        },
+        {
+          "run_id": "91cc188e-b3a4-8328-af1e-ef568f3701ea",
+          "observed_at": "2026-11-25T21:08:37Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-25/91cc188e-b3a4-8328-af1e-ef568f3701ea.json",
+          "signature": "controller-active-scope-inherited-writer-approval",
+          "incident_id": "controller-active-scope-inherited-writer-approval",
+          "sports_run_id": "13950c84-9b88-8326-8ec8-79cab6ad90cb",
+          "controller_result_run_id": "1d20b946-add0-832c-944e-b40b18a37cef",
+          "sports_result_at": "2026-11-25T19:35:44.564288Z",
+          "controller_result_at": "2026-11-25T19:35:45.931039Z",
+          "results_exact_equal": true,
+          "distinct_chat_refs": true,
+          "source_handoff": "ops/incident-response/inbox/sports-20261125-13950c84-context-restored-published.json",
+          "public_sports_publication_verified_independently": true,
+          "root_cause": "Platform routing/result attribution cause not established",
+          "next_action": "Platform runtime owner to compare execution routing and result attribution for the two run IDs.",
+          "owner_result_status": "completed_sports_articles_verified",
+          "verified_deployment_id": "appgdep_6b0737791ec08191b6b3dbe27785d9a7"
         }
       ]
     },
@@ -8950,31 +8975,35 @@
     },
     {
       "id": "tlvnet-home-news-rail-batch-precedence",
-      "status": "open",
+      "status": "fixed_verified",
       "impact": "An older CMS story appeared before five newer stories already visible on the homepage.",
       "root_cause": "The homepage render prepends a batch of CMS cards and discards static slots before comparing publication times; its browser fallback also prepends. Confirmed against observed card origin/order and a local source snapshot.",
       "first_seen_at": "2026-11-24",
       "last_seen_at": "2026-11-25T17:22:07Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json",
-      "next_action": "Rebase the isolated chronological merge on the fresh authoritative source, complete the build, then verify the affected public homepage order and older article link after a serialized release.",
+      "next_action": "Keep chronological merge regression in the existing release checks.",
       "prevention": "Regression scenario with interleaving current CMS and static cards, older CMS article, repeated canonical link and six-card cap.",
       "latest_public_observation": {
+        "status": "fixed_verified",
+        "observed_at": "2026-11-25T21:08:37Z",
         "url": "https://tlvnet.com/",
-        "viewport_width": 1363,
-        "first_date": "2026-11-19",
-        "first_article_url": "https://tlvnet.com/news/rokach-pedestrian-killed-motorcycle-20261119",
-        "newer_cards_after_first": 5,
-        "newer_cards_date_range": [
-          "2026-11-24",
-          "2026-11-25"
+        "version": 740,
+        "source_commit": "8c470125c928cc2abe7aba3dec14d7d2d575aa94",
+        "fix_release": 739,
+        "fix_source_commit": "3a36d54369948cb9975cd93e2258b78bdef2d747",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/91cc188e-b3a4-8328-af1e-ef568f3701ea.json",
+        "card_dates": [
+          "25.11.2026 · 19:09",
+          "25.11.2026 · 19:09",
+          "25.11.2026 · 19:09",
+          "24.11.2026 · 07:31",
+          "24.11.2026 · 07:31",
+          "24.11.2026 · 07:31"
         ],
-        "status": "still_reproduced",
-        "saved_version": 738,
-        "source_commit": "9925667cfc0d2f757cca2ecd2325a86cb8fe1d23",
-        "canonical_head_independently_verified": false,
-        "patch_applied_to_738": false,
-        "evidence": "ops/tlvnet-stability/observations/2026-11-25/e0b690aa-07cc-832c-b4f0-759ac5b5b196.json",
-        "observed_at": "2026-11-25T17:22:07Z"
+        "unique_canonical_links": 6,
+        "older_article_status": 200,
+        "older_article_in_archive": true,
+        "regression": "node tests/home-news-publication-order.mjs passed on the v740 source"
       },
       "latest_source_recheck": {
         "sha256": "6143d1589a071a06407709e6580016381e68d546c0a8150444eda82d524c2697",
@@ -9011,7 +9040,27 @@
           "first_three_date": "2026-11-25",
           "no_out_of_order_dates": true
         }
-      }
+      },
+      "prior_public_observation": {
+        "url": "https://tlvnet.com/",
+        "viewport_width": 1363,
+        "first_date": "2026-11-19",
+        "first_article_url": "https://tlvnet.com/news/rokach-pedestrian-killed-motorcycle-20261119",
+        "newer_cards_after_first": 5,
+        "newer_cards_date_range": [
+          "2026-11-24",
+          "2026-11-25"
+        ],
+        "status": "still_reproduced",
+        "saved_version": 738,
+        "source_commit": "9925667cfc0d2f757cca2ecd2325a86cb8fe1d23",
+        "canonical_head_independently_verified": false,
+        "patch_applied_to_738": false,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/e0b690aa-07cc-832c-b4f0-759ac5b5b196.json",
+        "observed_at": "2026-11-25T17:22:07Z"
+      },
+      "verified_at": "2026-11-25T21:08:37Z",
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-25/91cc188e-b3a4-8328-af1e-ef568f3701ea.json"
     },
     {
       "id": "culture-20261125-media-transfer-and-herzliya-handoff",
@@ -9047,7 +9096,7 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-25-881f8a89-5cd4-832c-9188-5bb6707d5b2a",
+  "last_review_runKey": "ops-2026-11-25-91cc188e-b3a4-8328-af1e-ef568f3701ea",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
