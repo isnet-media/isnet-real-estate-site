@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T17:22:07Z",
+  "updated_at": "2026-11-25T18:16:35Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4998,13 +4998,25 @@
         }
       ],
       "latest_related_failure": {
-        "observed_at": "2026-11-25T14:39:06Z",
-        "run_id": 45635573542,
-        "job_id": 139279976212,
-        "source_commit": "ce414784bf06fa62936bab7371253672c269ddfd",
-        "failed_step": "Deploy",
-        "classification": "same stage; exact cause not verified in this cycle",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json"
+        "observed_at": "2026-11-25T18:16:35Z",
+        "failed_run_id": 45666429418,
+        "failed_job_id": 139389694347,
+        "failed_stage": "Deploy",
+        "failed_source_commit": "9f25bcbdd749681ca3f4ec3ec15faeb83978bdc7",
+        "workflow_trigger": "workflow_run",
+        "failure_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45666429418",
+        "exact_error_signature_confirmed": false,
+        "matching_known_stage": true,
+        "later_success": {
+          "run_id": 45666569396,
+          "source_commit": "eba09720c120e1052915202c6b81328854ec58c4",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45666569396",
+          "deploy_step": "success"
+        },
+        "health_run_id": 45667135371,
+        "feed_readback_run_id": 45667135395,
+        "direct_public_readback": false,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/881f8a89-5cd4-832c-9188-5bb6707d5b2a.json"
       },
       "latest_ci_recovery": {
         "observed_at": "2026-11-25T15:18:35Z",
@@ -8965,14 +8977,40 @@
         "observed_at": "2026-11-25T17:22:07Z"
       },
       "latest_source_recheck": {
-        "observed_at": "2026-11-25T13:49:37Z",
-        "deployed_commit": "37c746c7b1f647a9f84b60e02726b4465bddbed6",
-        "journal_commit": "c02fb81f4b5ed699996ad4f0ae847ff8ce015994",
-        "status": "passed_both",
-        "relevant_files_changed": false,
-        "canonical_head_independently_verified": false,
+        "sha256": "6143d1589a071a06407709e6580016381e68d546c0a8150444eda82d524c2697",
+        "focused_regression": "passed",
+        "foundation": "passed",
+        "generated_date_attributes": "verified in both homepage files",
+        "full_local_build": "previous v735 passed; not rerun on v738",
+        "integration": "existing local clone origins chain stale; canonical source head and authorized write transport unavailable",
         "public_deployment": false,
-        "evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json"
+        "based_on": "126f6339cc0011037c25398becfffd3b9491d0d8",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/881f8a89-5cd4-832c-9188-5bb6707d5b2a.json",
+        "checked_at": "2026-11-25T18:16:35Z",
+        "previous_full_build_base": "126f6339cc0011037c25398becfffd3b9491d0d8",
+        "additional_apply_check": {
+          "deployed_commit": "37c746c7b1f647a9f84b60e02726b4465bddbed6",
+          "journal_commit": "c02fb81f4b5ed699996ad4f0ae847ff8ce015994",
+          "status": "passed_both",
+          "relevant_files_changed": false
+        },
+        "canonical_head_independently_verified": false,
+        "observed_at": "2026-11-25T18:16:35Z",
+        "checked_on_release": 738,
+        "checked_on_exact_deployed_source": "9925667cfc0d2f757cca2ecd2325a86cb8fe1d23",
+        "owner_journal_head": "18e20bd235223dded33798d018e107d886693239",
+        "patch_sha256": "6143d1589a071a06407709e6580016381e68d546c0a8150444eda82d524c2697",
+        "git_apply_check": "passed",
+        "generated_chronological_order": {
+          "paths": [
+            "public/index.html",
+            "public/home.html"
+          ],
+          "card_count": 6,
+          "unique_links": 6,
+          "first_three_date": "2026-11-25",
+          "no_out_of_order_dates": true
+        }
       }
     },
     {
@@ -9009,7 +9047,7 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-25-e0b690aa-07cc-832c-b4f0-759ac5b5b196",
+  "last_review_runKey": "ops-2026-11-25-881f8a89-5cd4-832c-9188-5bb6707d5b2a",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
