@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T09:59:20.777Z",
+  "updated_at": "2026-11-25T11:56:27.948Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8808,10 +8808,17 @@
       "impact": "An older CMS story appeared before five newer stories already visible on the homepage.",
       "root_cause": "The homepage render prepends a batch of CMS cards and discards static slots before comparing publication times; its browser fallback also prepends. Confirmed against observed card origin/order and a local source snapshot.",
       "first_seen_at": "2026-11-24",
-      "last_seen_at": "2026-11-25T08:53:54.748Z",
+      "last_seen_at": "2026-11-25T11:56:27.948Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json",
       "next_action": "Rebase the isolated chronological merge on the fresh authoritative source, complete the build, then verify the affected public homepage order and older article link after a serialized release.",
-      "prevention": "Regression scenario with interleaving current CMS and static cards, older CMS article, repeated canonical link and six-card cap."
+      "prevention": "Regression scenario with interleaving current CMS and static cards, older CMS article, repeated canonical link and six-card cap.",
+      "latest_public_observation": {
+        "observed_at": "2026-11-25T11:56:27.948Z",
+        "version": 735,
+        "first_date": "2026-11-19",
+        "newer_cards_after_first": 5,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/c3940ceb-fe84-832c-86b3-9678f1c39b48.json"
+      }
     },
     {
       "id": "culture-20261125-media-transfer-and-herzliya-handoff",
@@ -8821,6 +8828,18 @@
       "inbox": "ops/incident-response/inbox/20261125T0851Z-culture-image-transfer-c2452c1f.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/1824b0c6-51ac-8330-ab97-c01ee5fa2aec.json",
       "next_action": "Original owner to arrange an approved image intake with bytes and rights, plus verify local availability or qualify the timing in their editorial review. Keep the existing separate Herzliya local media-ID incident."
+    },
+    {
+      "id": "economy-tech-post-deploy-verification-unavailable-20261125-9f5e0ec5",
+      "status": "mitigated",
+      "root_cause": "Owner lost access to the verification environment after the production deployment. The underlying transport cause is unconfirmed.",
+      "resolution": "Independent production readback confirmed three articles, their images and visible credits, and their homepage and section references. Original infrastructure interruption is not claimed fixed.",
+      "version": 735,
+      "source_commit": "126f6339cc0011037c25398becfffd3b9491d0d8",
+      "inbox": "ops/incident-response/inbox/2026-11-25-economy-tech-post-deploy-verification-unavailable-9f5e0ec5.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-25/c3940ceb-fe84-832c-86b3-9678f1c39b48.json",
+      "observed_at": "2026-11-25T11:56:27.948Z",
+      "republication_attempted": false
     }
   ],
   "last_review_runKey": "ops-2026-11-24-4b23be35-3b10-8324-b567-d76a673b89cd",
