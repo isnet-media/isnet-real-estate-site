@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T21:08:37Z",
+  "updated_at": "2026-11-25T22:59:49Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9094,9 +9094,40 @@
       "source_inbox": "ops/incident-response/inbox/2026-11-25-real-estate-browser-read-verification.json",
       "resolution_scope": "Desktop article, image and links independently verified. Mobile and served binary checksum remain in owner quality queue.",
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json"
+    },
+    {
+      "id": "supermarket-weekly-collection-github-dispatch-after-window",
+      "status": "awaiting_external_action",
+      "classification": "scheduler/late_dispatch",
+      "root_cause": "The seven scheduled GitHub collector runs became visible outside the Tuesday 08:00–11:00 Israel window, and their actual-clock guard skipped collection. The public-health run also skipped its check after noon. Why the provider delivered these scheduled events late is unconfirmed.",
+      "first_seen_at": "2026-11-25T22:59:49Z",
+      "last_seen_at": "2026-11-25T22:59:49Z",
+      "affected_date": "2026-11-24",
+      "impact": "No Tuesday collection or health check in these runs, and no new durable collection claim for any of the seven cities. A green workflow or delivery run does not establish price freshness.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/9c7a5c90-c210-8328-97e6-6499da137f09.json",
+      "inbox": "ops/incident-response/inbox/20261124-supermarket-scheduled-collection-window-missed.json",
+      "occurrences": [
+        {
+          "run_id": "9c7a5c90-c210-8328-97e6-6499da137f09",
+          "observed_at": "2026-11-25T22:59:49Z",
+          "affected_date": "2026-11-24",
+          "collector_runs": [
+            45454204491,
+            45453034329,
+            45451145215,
+            45449909536,
+            45449895044,
+            45449608990,
+            45438902106
+          ],
+          "health_run": 45469281122
+        }
+      ],
+      "prevention": "Retain the actual-clock safety guard. Reconcile a missed weekly collection using expected Tuesday date, a successful collection step and a fresh durable claim; do not equate a green run with collected data.",
+      "next_action": "Investigate GitHub Actions scheduled-event delivery for the cited runs. In the next existing approved Tuesday window, verify a fresh durable city claim and a completed collection step for each city before treating the week as refreshed. Keep the actual-time guard; prevent silent green skips by checking missing claims separately from the workflow conclusion."
     }
   ],
-  "last_review_runKey": "ops-2026-11-25-91cc188e-b3a4-8328-af1e-ef568f3701ea",
+  "last_review_runKey": "ops-2026-11-26-9c7a5c90-c210-8328-97e6-6499da137f09",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
