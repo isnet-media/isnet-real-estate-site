@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T14:39:06Z",
+  "updated_at": "2026-11-25T15:18:35Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4986,6 +4986,89 @@
         "failed_step": "Deploy",
         "classification": "same stage; exact cause not verified in this cycle",
         "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json"
+      },
+      "latest_ci_recovery": {
+        "observed_at": "2026-11-25T15:18:35Z",
+        "workflow_run_id": 45638468728,
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45638468728",
+        "source_commit": "29ea0b967be1ca88afbd50853e4823ec394aec73",
+        "deploy_jobs": [
+          {
+            "id": 139290206025,
+            "name": "deploy",
+            "conclusion": "success",
+            "relevant": [
+              [
+                "Report event-source QA failure without blocking visual deployment",
+                "success"
+              ],
+              [
+                "Wait for uploaded Pages artifact to be visible in Actions API",
+                "success"
+              ],
+              [
+                "Deploy",
+                "success"
+              ]
+            ]
+          }
+        ],
+        "readback_workflow": {
+          "id": 45638828773,
+          "jobs": [
+            {
+              "id": 139291494870,
+              "name": "audit",
+              "conclusion": "success",
+              "relevant": [
+                [
+                  "Normalize expected feeds with the publication integrity policy",
+                  "success"
+                ],
+                [
+                  "Retain read-back evidence",
+                  "success"
+                ]
+              ]
+            }
+          ]
+        },
+        "health_workflow": {
+          "id": 45638828871,
+          "jobs": [
+            {
+              "id": 139291495654,
+              "name": "check",
+              "conclusion": "success",
+              "relevant": [
+                [
+                  "Retain health report",
+                  "success"
+                ]
+              ]
+            }
+          ]
+        },
+        "prior_pending_runs": [
+          {
+            "id": 45636055258,
+            "status": "completed",
+            "conclusion": "success",
+            "source_commit": "da373a8031da3472cdeb71b4dc933b3a1162c5d8",
+            "updated_at": "2026-11-25T14:40:49Z",
+            "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45636055258"
+          },
+          {
+            "id": 45635869460,
+            "status": "completed",
+            "conclusion": "success",
+            "source_commit": "ddd6c3fd823ce516dffd7949566c5911677f258c",
+            "updated_at": "2026-11-25T14:38:40Z",
+            "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45635869460"
+          }
+        ],
+        "controller_direct_public_readback": false,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/c78bb9df-821c-832c-ac38-7bd92caa6865.json"
       }
     },
     {
@@ -8907,7 +8990,7 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/dc04c7ef-f7cc-832c-a995-4f1da7a828da.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-25-dc04c7ef-f7cc-832c-a995-4f1da7a828da",
+  "last_review_runKey": "ops-2026-11-25-c78bb9df-821c-832c-ac38-7bd92caa6865",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
