@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-25T11:56:27.948Z",
+  "updated_at": "2026-11-25T13:49:37Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -4909,6 +4909,20 @@
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45320531816",
           "source_inbox": "ops/incident-response/inbox/45320531816-1.json",
           "evidence": "ops/tlvnet-stability/observations/2026-11-24/d90dc58f-578c-8324-92e0-d906db3c8ef5.json"
+        },
+        {
+          "run_id": 45616684350,
+          "attempt": 1,
+          "job_id": 139213786315,
+          "step": "Deploy",
+          "step_number": 32,
+          "created_at": "2026-11-25T12:44:34Z",
+          "failed_at": "2026-11-25T12:46:37Z",
+          "source_commit": "5d246469cea07244b5320df2e394e5722823fa7d",
+          "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45616684350",
+          "observed_error": "No artifacts named github-pages-45616684350-1",
+          "source_inbox": "ops/incident-response/inbox/45616684350-1.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json"
         }
       ],
       "recovery": {
@@ -4935,15 +4949,15 @@
       "next_action": "Observe pending regular deployments. Do not retry unchanged transient failure or weaken artifact validation.",
       "reported_runKey": "ops-2026-11-15-51efb7ad-f444-8326-ac9e-e0d1c88ecf19",
       "latest_observation": {
-        "observed_at": "2026-11-25T08:53:54.748Z",
-        "run_id": 45457608514,
+        "observed_at": "2026-11-25T13:49:37Z",
+        "run_id": 45616684350,
         "failed_step": "Deploy",
-        "later_success_run_id": 45457788297,
+        "later_success_run_id": 45621887119,
         "later_success_same_sha": false,
         "public_readback_verified": false,
-        "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json"
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json"
       },
-      "last_seen_at": "2026-11-25T08:53:54.748Z",
+      "last_seen_at": "2026-11-25T13:49:37Z",
       "reconciled_prior_occurrences": [
         {
           "observed_at": "2026-11-25T09:59:20.777Z",
@@ -4953,6 +4967,15 @@
           "later_success_same_sha": false,
           "public_readback_verified": false,
           "evidence": "ops/tlvnet-stability/observations/2026-11-25/1824b0c6-51ac-8330-ab97-c01ee5fa2aec.json"
+        },
+        {
+          "observed_at": "2026-11-25T08:53:54.748Z",
+          "run_id": 45457608514,
+          "failed_step": "Deploy",
+          "later_success_run_id": 45457788297,
+          "later_success_same_sha": false,
+          "public_readback_verified": false,
+          "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json"
         }
       ]
     },
@@ -8818,6 +8841,16 @@
         "first_date": "2026-11-19",
         "newer_cards_after_first": 5,
         "evidence": "ops/tlvnet-stability/observations/2026-11-25/c3940ceb-fe84-832c-86b3-9678f1c39b48.json"
+      },
+      "latest_source_recheck": {
+        "observed_at": "2026-11-25T13:49:37Z",
+        "deployed_commit": "37c746c7b1f647a9f84b60e02726b4465bddbed6",
+        "journal_commit": "c02fb81f4b5ed699996ad4f0ae847ff8ce015994",
+        "status": "passed_both",
+        "relevant_files_changed": false,
+        "canonical_head_independently_verified": false,
+        "public_deployment": false,
+        "evidence": "ops/tlvnet-stability/observations/2026-11-25/fc49f081-8ec0-832c-982b-1df6923a7624.json"
       }
     },
     {
@@ -8842,7 +8875,7 @@
       "republication_attempted": false
     }
   ],
-  "last_review_runKey": "ops-2026-11-24-4b23be35-3b10-8324-b567-d76a673b89cd",
+  "last_review_runKey": "ops-2026-11-25-fc49f081-8ec0-832c-982b-1df6923a7624",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
