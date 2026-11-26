@@ -7,8 +7,8 @@
     "checksum": "a2a7ef7626a66b1c7b85a1cbf19eabd1936f6dbfeac4094c0a73b23d3c902840",
     "read_full_text": true
   },
-  "recorded_at": "2026-11-26T17:37:58.576586+02:00",
-  "status": "source_prepared_pending_public_readback",
+  "recorded_at": "2026-11-26T15:47:38Z",
+  "status": "partial_published_verified_with_followups",
   "catalog_new_ids": [
     "cinema-city-6534",
     "the-stranger-ozon-2025"
@@ -9280,9 +9280,90 @@
       "next_action": "Verify original title/year and canonical identity using this exact official film URL. No title matching."
     }
   ],
-  "public_verification": [],
-  "desktop_visual_review": "pending",
-  "mobile_visual_review": "pending",
+  "public_verification": [
+    {
+      "city": "tel-aviv",
+      "url": "https://tlvnet.com/guide/movie.html?id=lev-tlv-896aa32b1c4b",
+      "checked_at": "2026-11-26T15:47:38Z",
+      "status": "published_verified",
+      "title": "סוס פרא תשע",
+      "full_body": true,
+      "approved_existing_poster": true,
+      "visible_credit": true,
+      "rich_sections": true,
+      "score": "92% Popcornmeter, source and count visible",
+      "schedule_sample": "2026-11-26 19:15",
+      "booking_url": "https://www.lev.co.il/order/?pcode=611057&loc=7",
+      "method": "Rendered live cloud browser AX and desktop screenshot"
+    },
+    {
+      "city": "tel-aviv",
+      "url": "https://tlvnet.com/guide/movie.html?id=lev-tlv-da0f7b1fa7a9",
+      "checked_at": "2026-11-26T15:47:38Z",
+      "status": "published_verified",
+      "title": "הזר",
+      "full_body": true,
+      "approved_existing_poster": true,
+      "visible_credit": true,
+      "rich_sections": true,
+      "score": "80% Popcornmeter, source and count visible",
+      "schedule_sample": "2026-12-01 16:10",
+      "booking_url": "https://www.lev.co.il/order/?pcode=611299&loc=8",
+      "method": "Rendered live cloud browser AX and desktop text screenshot"
+    },
+    {
+      "city": "tel-aviv",
+      "url": "https://tlvnet.com/guide/cinema.html",
+      "checked_at": "2026-11-26T15:47:38Z",
+      "status": "section_readback_verified",
+      "sample_title": "הזר",
+      "schedule_sample": "2026-12-01 16:10",
+      "body": "84 cards observed; only the 36 exact LEV matches were refreshed by this run; other feeds not recollected"
+    },
+    {
+      "city": "rishon-lezion",
+      "url": "https://isnet.co.il/events-preview/rishon-lezion/movies/our-loves/",
+      "checked_at": "2026-11-26T15:47:38Z",
+      "status": "schedule_readback_verified",
+      "state": "continuing",
+      "original_body_preserved": true,
+      "schedule_sample": "2026-11-26 20:30",
+      "booking_url": "https://tickets5.planetcinema.co.il/api/order/370714?lang=he",
+      "media_review": "existing media unchanged, not re-approved by this run"
+    },
+    {
+      "city": "rishon-lezion",
+      "url": "https://isnet.co.il/events-preview/rishon-lezion/movies/digger/",
+      "checked_at": "2026-11-26T15:47:38Z",
+      "status": "archive_readback_verified",
+      "state": "no_verified_future_screening",
+      "card_preserved": true,
+      "no_ticket_buttons": true
+    },
+    {
+      "city": "rishon-lezion",
+      "url": "https://isnet.co.il/events-preview/rishon-lezion/cinema/",
+      "checked_at": "2026-11-26T15:47:38Z",
+      "status": "section_readback_verified",
+      "active_titles_observed": 49,
+      "continuing_sample": "האהבות שלנו",
+      "catalog_new_text_reuse_sample": "סוס פרא תשע",
+      "archive_sample": "דיגר is below active entries, explicitly no verified times"
+    },
+    {
+      "city": "ashdod",
+      "url": "https://isnet.co.il/events-preview/ashdod/movies/cinema-city-6534/",
+      "checked_at": "2026-11-26T15:47:38Z",
+      "status": "body_and_schedule_verified_media_rights_pending",
+      "full_body": true,
+      "rich_sections": true,
+      "schedule_sample": "2026-11-27 17:40",
+      "booking_url": "https://tickets.cinema-city.co.il/order/904096",
+      "schedule_owner": "Existing Ashdod collector feed dated2026-11-26T17:07:06+02:00 reused without recollection"
+    }
+  ],
+  "desktop_visual_review": "performed_on_TLVNET_two_cards",
+  "mobile_visual_review": "pending; connected extension tool unknown, cloud browser provided desktop surface; no viewport emulation available or claimed",
   "coverage_complete": false,
   "notes": [
     "Ashdod existing official snapshot26Nov17:07 reused without duplicate collection.",
@@ -9366,6 +9447,15 @@
         }
       ],
       "reason": "Official future film dated10Dec found. Film identity/year and canonical card pending before adding a public card."
+    },
+    {
+      "source": "ashdod-existing-cinema-city-poster",
+      "status": "blocked_real",
+      "root_signature": "official-poster-content-type-is-not-reuse-permission",
+      "canonical_id": "cinema-city-6534",
+      "source_url": "https://www.cinema-city.co.il/movie/6534",
+      "evidence": "Existing cinema.json poster_candidates.cinema-city.rights_status=reuse_permission_not_verified while poster_url is set and the live card displays it. New shared text was verified; network destination media rights are not approved by this run.",
+      "next_action": "Review actual destination license/publicity permission and existing renderer image gate through authorized owner. Do not infer license from content_type. No new asset was copied or downloaded."
     }
   ],
   "image_review": {
@@ -9387,5 +9477,80 @@
     }
   },
   "scope_complete": false,
-  "pending_count": 63
+  "pending_count": 63,
+  "source_commit": "d4d4cf07ac63325632733fa27046a5126a44579b",
+  "deployment": {
+    "workflow_run_id": 45851828770,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45851828770"
+  },
+  "readback_limitations": [
+    "Direct independent HTTP reader returned403 for TLVNET API and ISNET pages; live cloud browser rendered current bodies, images and showtimes successfully. No bot-detection inference.",
+    "Booking link destinations were read from rendered pages and matched official collected session IDs; no checkout, seat selection, reservation or purchase was performed."
+  ],
+  "metrics": {
+    "catalog_new_records": 2,
+    "catalog_total": 103,
+    "existing_catalog_records_preserved": 101,
+    "tel_aviv_existing_ids_schedule_refreshed": 36,
+    "tel_aviv_verified_source_sessions": 188,
+    "rishon_existing_ids_schedule_refreshed": 47,
+    "rishon_verified_source_sessions_applied": 870,
+    "unresolved_research_queue": 63,
+    "queue_scope": "Existing per-city candidates; not63 newly written film guides",
+    "api_dollar_cost": "not_measured"
+  },
+  "quality_issues": [
+    {
+      "url": "https://tlvnet.com/guide/movie.html?id=lev-tlv-896aa32b1c4b",
+      "status": "mobile_visual_review_pending",
+      "body_sha256": "2028042144356651ebecf2d7ea407d98dc3323ce878869a62a6ec4d3ee878112",
+      "asset_sha256": "8842900d2a3acb154a60b566ea5f5fd24b666b8f3c69453938e0fd761264c413"
+    },
+    {
+      "url": "https://tlvnet.com/guide/movie.html?id=lev-tlv-da0f7b1fa7a9",
+      "status": "mobile_visual_review_pending",
+      "body_sha256": "8d8f4540301c03578642b81b8817f7bfd61bcf1288928035c27818406fbcd96e",
+      "asset_sha256": "e57d542467549621a30c21a4ae2abf0dae236729cb7be0d23ac577f268924994"
+    }
+  ],
+  "city_delivery": {
+    "tel-aviv": {
+      "changed": "36 existing LEV records;188 verified source sessions;2 shared rich text additions",
+      "public_status": "two full cards and section sample verified",
+      "remaining": "Other local source coverage not recollected by this run; queued candidates retained"
+    },
+    "rishon-lezion": {
+      "changed": "47 existing Planet source identities;870 sessions through24December; original bodies and URLs preserved",
+      "public_status": "active schedule, shared text reuse, archive and listing verified",
+      "remaining": "10 unmatched Planet versions plus6 prior identity candidates; Cinema City temporary serializer failure retained"
+    },
+    "ashdod": {
+      "changed": "shared Wild Horse Nine rich text; current17:07 collector times reused",
+      "public_status": "body and times verified; existing poster license unresolved",
+      "remaining": "25 canonical research candidates"
+    },
+    "yavne": {
+      "changed": "none",
+      "public_status": "not reverified publicly;2 future source-feed films retained",
+      "remaining": "existing Nov30/Dec7 source dates not advanced"
+    },
+    "kiryat-gat": {
+      "changed": "none",
+      "public_status": "no new published card",
+      "remaining": "Dec10 official film candidate requires original title/year/canonical identity"
+    },
+    "holon": {
+      "changed": "none",
+      "public_status": "not reverified publicly",
+      "remaining": "6 identity candidates; existing true future times retained"
+    },
+    "herzliya": {
+      "changed": "none; board/project/CMS62 untouched",
+      "public_status": "not independently verified",
+      "remaining": "16 canonical candidates from existing owner feed; owner retains implementation and deployment"
+    }
+  },
+  "next_action": "Resume63 queued identity/editorial candidates and KG Dec10 candidate; recover Cinema City data serialization without unchanged-source loops; verify destination poster rights and mobile rendering. Do not rewrite the2 verified shared guides or duplicate cards."
 }
