@@ -1,0 +1,382 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc",
+  "runKey": "ops-2026-11-26-e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc",
+  "policy_version": "2026-11-15/1.2",
+  "private_policy_ack": {
+    "revision": 3,
+    "checksum": "df2b31113830da025dab985ee5ffe778779a6027315c0af31dc01d286066df08",
+    "reader": "chatgpt-scheduled",
+    "last_read_at": "2026-11-26 09:22:06.033486+00"
+  },
+  "observed_at": "2026-11-26T09:26:22Z",
+  "status": "investigation_live_verified_guide_taxonomy_fault",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-26/e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc.json",
+  "site": {
+    "version_number": 745,
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_6a2f81a01d5881919695383ef1533d14",
+    "source_commit": "c653837507eee00679d2b02c9842e5c00b2a2d58",
+    "deployment_id": "appgdep_6b07f6d8a63c8191a5452dae55d2d37c",
+    "status": "succeeded",
+    "terminal_at": "2026-11-26T09:08:00.692978+00:00",
+    "controller_deployments": 0,
+    "source_audit": {
+      "status": "current_site_version_known_exact_checkout_unavailable",
+      "last_available_local_source": "9d1d620666a0c8d96bb336e944743504ca1522d6",
+      "prior_report_evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json"
+    }
+  },
+  "public_health": {
+    "url": "https://tlvnet.com/",
+    "status": 200,
+    "elapsed_seconds": 9.037962,
+    "sample_count": 1,
+    "news_lead": "jaffa-car-breakins-indictment-20261126",
+    "news_lead_displayed_at": "2026-11-26T08:09:00+02:00",
+    "qualification": "One live sample only."
+  },
+  "publications": [
+    {
+      "status": "published_verified",
+      "owner": "Automation_c1b175347cc481918eaba3cbaf3582d2",
+      "owner_run_id": "4863bc28-2820-8320-a329-3a50ddf81b94",
+      "owner_completed_at": "2026-11-26T09:10:22.185786Z",
+      "owner_result_matches_run": true,
+      "owner_policy_read": {
+        "revision": 8,
+        "at": "2026-11-26 08:50:59.964242+00",
+        "within_attempt": true
+      },
+      "released_at": "2026-11-26T09:08:00.692978+00:00",
+      "displayed_article_timestamp": "2026-11-26T11:00:00+02:00",
+      "url": "https://tlvnet.com/news/yad-eliyahu-affordable-rent-count-20261126",
+      "section_url": "https://tlvnet.com/news/bli-heshbon",
+      "home_url": "https://tlvnet.com/",
+      "title": "ביד אליהו תכננו 37 דירות בשכירות מוזלת. חישוב אחר היה משאיר כ־24",
+      "article_status": 200,
+      "article_body_paragraphs_observed": 9,
+      "hero_home": true,
+      "lead_in_section": true,
+      "previous_investigation_routed_in_section": true,
+      "image_url": "https://tlvnet.com/photo-bank/assets/flash90-F250710GY06.jpg",
+      "image_http": 200,
+      "image_bytes": 122864,
+      "image_sha256": "db528c8e2392761552a71c569b076e877b7e23316e5782ab370c99fbd060fe9d",
+      "visible_media_caption": "אילוסטרציה · Shahar Yaari / פלאש 90",
+      "mobile_visual_review": "owner_reported_passed; controller independently checked live HTML and image bytes",
+      "verified_at": "2026-11-26T09:26:22Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc.json"
+    }
+  ],
+  "guide": {
+    "incident_id": "tlvnet-guide-missing-taxonomy-asset",
+    "status": "open",
+    "first_observed_in_sample": true,
+    "site_guide": "https://tlvnet.com/guide/",
+    "guide_http": 200,
+    "script": "https://tlvnet.com/guide/pilot/app.js",
+    "script_http": 200,
+    "missing_route": "/admin/data/taxonomy.json",
+    "route_http": 404,
+    "alternative_probe_http": 404,
+    "worker_observed_count": 4,
+    "root": "The live guide makes a page-relative request for its taxonomy from the missing root /admin/data/taxonomy.json. Its fallback yields an empty taxonomy, so configured subcategory controls and subcategory query URLs cannot use the taxonomy.",
+    "underlying_origin_of_missing_file": "unverified",
+    "no_changes_reason": "Live version 745 had no exact source checkout in the permitted existing local repository and no verified TLVNET taxonomy asset was available in the paths examined.",
+    "next_action": "Use the authoritative TLVNET source and intended guide taxonomy to ship a public guide data asset at a site-owned route. Cover data status/schema, category filter rendering, and a subcategory deep link in regression before publish.",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-26/e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc.json"
+  },
+  "tracked": [
+    {
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "title": "חדשות תל אביב — שלוש פעמים ביום",
+      "enabled": true,
+      "run_id": "9086233a-2e48-8320-b22c-940f9e635e07",
+      "status": "completed",
+      "result_run_id": "9086233a-2e48-8320-b22c-940f9e635e07",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+      "title": "חדשות ספורט — פעמיים ביום",
+      "enabled": true,
+      "run_id": "6b4924bf-a2c4-8322-a976-b4718e716b78",
+      "status": "completed",
+      "result_run_id": "6b4924bf-a2c4-8322-a976-b4718e716b78",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "title": "נדל״ן — יומי",
+      "enabled": true,
+      "run_id": "15f02b3c-2ffc-832f-98f6-efe7c981707c",
+      "status": "completed",
+      "result_run_id": "15f02b3c-2ffc-832f-98f6-efe7c981707c",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+      "title": "כלכלה והייטק — צהריים",
+      "enabled": true,
+      "run_id": "d21957ac-86e8-8325-bacf-b8748a0e92d1",
+      "status": "completed",
+      "result_run_id": "d21957ac-86e8-8325-bacf-b8748a0e92d1",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+      "title": "חדשות תרבות — יומי",
+      "enabled": true,
+      "run_id": "d9690686-212c-832b-b119-ecbee7b24356",
+      "status": "completed",
+      "result_run_id": "d9690686-212c-832b-b119-ecbee7b24356",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_e03d80ff914c8191a790fc66e7447826",
+      "title": "קהילה ושכונות — TLVNET יומי",
+      "enabled": true,
+      "run_id": "2c871f37-f4e0-8326-aade-67107ef28c66",
+      "status": "completed",
+      "result_run_id": "2c871f37-f4e0-8326-aade-67107ef28c66",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "title": "צרכנות — TLVNET יומי",
+      "enabled": true,
+      "run_id": "b864b5e6-9528-8320-87fd-df0d9f2cd0cb",
+      "status": "completed",
+      "result_run_id": "b864b5e6-9528-8320-87fd-df0d9f2cd0cb",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+      "title": "תרבות נט — יומי",
+      "enabled": true,
+      "run_id": "c2452c1f-59fc-832c-bb02-dbf0380909ce",
+      "status": "completed",
+      "result_run_id": "c2452c1f-59fc-832c-bb02-dbf0380909ce",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+      "title": "החיים של המחר — יום כן יום לא",
+      "enabled": true,
+      "run_id": "258c21da-0060-8326-86db-39648fe24f9f",
+      "status": "completed",
+      "result_run_id": "258c21da-0060-8326-86db-39648fe24f9f",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "title": "כתב חדשות — רעננה",
+      "enabled": true,
+      "run_id": "f0d776ef-dd9c-8333-8a20-bbac5fd4176c",
+      "status": "completed",
+      "result_run_id": "f0d776ef-dd9c-8333-8a20-bbac5fd4176c",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_50ecabf864448191ac5bee0edaecca74",
+      "title": "אירועים וגמלאים — שבועי",
+      "enabled": true,
+      "run_id": "cafcf2ad-6c6c-832c-aea5-83a03a4b14a8",
+      "status": "completed",
+      "result_run_id": "cafcf2ad-6c6c-832c-aea5-83a03a4b14a8",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a",
+      "title": "מערכת הרצליה נט",
+      "enabled": true,
+      "run_id": "b99e5224-6148-832c-9055-29ae646c3a52",
+      "status": "completed",
+      "result_run_id": "b99e5224-6148-832c-9055-29ae646c3a52",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
+      "title": "בלי חשבון — תחקירי TLVNET",
+      "enabled": true,
+      "run_id": "4863bc28-2820-8320-a329-3a50ddf81b94",
+      "status": "completed",
+      "result_run_id": "4863bc28-2820-8320-a329-3a50ddf81b94",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_fa808d30470c8191b3eb981f197bbb1d",
+      "title": "סופרים — שלישי שבועי",
+      "enabled": true,
+      "run_id": "90584a61-6850-832d-adad-38d8bfc422f5",
+      "status": "no_update",
+      "result_run_id": "99180a2e-d568-8329-8bf1-4f4f82854694",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_29d3e70850b48191a6b03b0aa468fdc9",
+      "title": "ספורט מקומי וסטטיסטיקות — רשת ISNET",
+      "enabled": true,
+      "run_id": "5da68a2f-a270-8326-9a4a-c22e4446ddd4",
+      "status": "completed",
+      "result_run_id": "5da68a2f-a270-8326-9a4a-c22e4446ddd4",
+      "checked": true
+    },
+    {
+      "task_id": "Automation_bd5d9910af90819197d16e9f82f62bdf",
+      "title": "בלי חשבון — ראשון נט",
+      "enabled": true,
+      "run_id": "06c6470d-1698-832d-b9e4-7cba79f2855c",
+      "status": "completed",
+      "result_run_id": "06c6470d-1698-832d-b9e4-7cba79f2855c",
+      "checked": true
+    }
+  ],
+  "actions": {
+    "from": "2026-11-26T07:48:05Z",
+    "previous_boundary_seen": true,
+    "newest": [
+      {
+        "id": 45787890677,
+        "name": "Record operation failures",
+        "created_at": "2026-11-26T08:59:46Z",
+        "status": "completed",
+        "conclusion": "skipped",
+        "head_sha": "882272473834e02eafa22cddfd88dd5f86ca151f",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45787890677"
+      },
+      {
+        "id": 45787827509,
+        "name": "TLVNET dedicated newsroom agents",
+        "created_at": "2026-11-26T08:59:17Z",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "3e42fe333fce17851ed0b9ec03be4e44effad528",
+        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45787827509"
+      }
+    ],
+    "full_logs_read": 0,
+    "desk_job": [
+      {
+        "name": "process",
+        "conclusion": "success",
+        "started_at": "2026-11-26T08:59:21Z",
+        "completed_at": "2026-11-26T08:59:42Z",
+        "steps": [
+          [
+            "Set up job",
+            "success"
+          ],
+          [
+            "Run actions/checkout@v4",
+            "success"
+          ],
+          [
+            "Run actions/setup-python@v5",
+            "success"
+          ],
+          [
+            "Run python -m pip install requests==2.32.5",
+            "success"
+          ],
+          [
+            "Process only the TLVNET queue, at most three tasks",
+            "success"
+          ],
+          [
+            "Post Run actions/setup-python@v5",
+            "success"
+          ],
+          [
+            "Post Run actions/checkout@v4",
+            "success"
+          ],
+          [
+            "Complete job",
+            "success"
+          ]
+        ]
+      }
+    ],
+    "dedicated_queue_scope": "Job completion checked. No new independent claim about job queue inventory."
+  },
+  "inbox": {
+    "new_entries": [],
+    "previous_commit_seen": "3e42fe333fce17851ed0b9ec03be4e44effad528"
+  },
+  "social": {
+    "complete": true,
+    "page_count": 5,
+    "rows": [
+      {
+        "slot": "2026-11-26T09",
+        "status": "published",
+        "finished_at": "2026-11-26T09:00:12.591Z",
+        "article_url": "https://tlvnet.com/news/hapoel-olympiacos-euroleague-loss-20261125.html",
+        "post_id": "1520426491146188_122114200359545268",
+        "attempt": null,
+        "nextAction": null,
+        "supportRequired": null,
+        "notifyPublisher": null,
+        "stopped": null,
+        "detail_present": false,
+        "public_readback": "Facebook returned a login page; no article link or post body",
+        "qualification": "Provider-reported publication only; no replay."
+      }
+    ]
+  },
+  "backups": {
+    "components": [
+      {
+        "id": "administrative-state",
+        "checksum": "059df0ecd94e19098b17442521839037dd665b9a3d1e70a5793d78fa1904a9e8",
+        "updated_at": "2026-11-25T10:06:39.049Z",
+        "error_present": false
+      },
+      {
+        "id": "recent-news",
+        "checksum": "fc5cbeb68f1d3daa271c84dc11fb90385e6d92521c7bccfabcaa802147772f4f",
+        "updated_at": "2026-11-26T09:08:31.456Z",
+        "error_present": false
+      },
+      {
+        "id": "source-configuration",
+        "checksum": "eb854cafc7402e1f3e4a89a9a4cd8709b2caf0f7b2198b94879e0dbc45b2185c",
+        "updated_at": "2026-11-26T09:08:33.435Z",
+        "error_present": false
+      }
+    ],
+    "production_recovery_progress": [
+      {
+        "complete": 0,
+        "updated_at": "2026-11-26T09:19:02.176Z"
+      }
+    ],
+    "qualification": "Full hosted restore is not verified.",
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    }
+  },
+  "remaining": [
+    {
+      "item": "future daily-2026-11-20",
+      "status": "original_owner_recovery_pending_workspace_capacity",
+      "changed": false,
+      "workspace_free_reported": "147M (rounded filesystem report, insufficient evidence of opening current full source)"
+    },
+    {
+      "item": "community garage-sale existing article refresh",
+      "status": "original_owner_update_pending",
+      "changed": false
+    }
+  ],
+  "lease": {
+    "state": "free",
+    "last_release_at": "2026-11-26T09:09:20.000Z"
+  },
+  "security": "previous follow-up unchanged",
+  "calls_or_cost_metered": null
+}
