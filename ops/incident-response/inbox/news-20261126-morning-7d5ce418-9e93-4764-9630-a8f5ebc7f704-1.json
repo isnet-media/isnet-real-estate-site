@@ -1,0 +1,16 @@
+{
+  "run_id": "news-20261126-morning-7d5ce418-9e93-4764-9630-a8f5ebc7f704",
+  "attempt": 1,
+  "agent_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "subsystem": "Sites source",
+  "target": "TLVNET-site",
+  "workflow": "scheduled local news",
+  "step": "post-publication journal write",
+  "recorded_at": "2026-11-26T06:17:04.418Z",
+  "status": "mitigated",
+  "conclusion": "tool_output_handling_incident",
+  "root_cause": "Terminal echo remained enabled during input for a scoped, automatically expiring source credential.",
+  "evidence": "The credential appeared in the execution transcript. No credential data is included here. The journal push succeeded and the release lease was subsequently verified free. Access outside this run was not assessed.",
+  "mitigation": "Terminal echo is disabled before the temporary journal helper reads input and restored afterward. A dummy-input PTY regression check confirmed the marker was absent from output.",
+  "next_action": "Review handling of the recorded execution transcript in the authorized operational console. Validate the hidden-input source path for subsequent journal writes."
+}
