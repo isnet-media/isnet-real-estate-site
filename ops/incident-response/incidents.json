@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T07:23:01.460Z",
+  "updated_at": "2026-11-26T08:59:30.611Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -8786,7 +8786,15 @@
           "qualification": "Receipt and research observed before task scope switched back to controller. No matching terminal sports result or new sport publication proven.",
           "handoff": "ops/incident-response/inbox/51c4b6b4-2598-8328-82ff-aae9fb709dad-sports-research-role-handoff.json"
         },
-        "source_access": "Current canonical read and source-only write succeeded. Other affected desk terminal results unchanged."
+        "source_access": "Current canonical read and source-only write succeeded. Other affected desk terminal results unchanged.",
+        "local_culture": {
+          "observed_at": "2026-11-26T08:59:30.611Z",
+          "run_id": "d9690686-212c-832b-b119-ecbee7b24356",
+          "owner_policy_revision": 3,
+          "status": "verified_this_owner_cycle",
+          "evidence_url": "https://tlvnet.com/news/noma-bar-weekend-tours-workshops-20261127",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json"
+        }
       },
       "latest_recurrence": {
         "observed_at": "2026-11-25T08:53:54.748Z",
@@ -8795,7 +8803,8 @@
         "observed_today_desks": 3,
         "root_cause_confirmed": false,
         "evidence": "ops/tlvnet-stability/observations/2026-11-25/1635c80a-3984-8330-b8ba-2c8d79cd6915.json"
-      }
+      },
+      "qualification": "Local culture is publishing again. Original intermittent multi-owner dispatch cause remains unconfirmed."
     },
     {
       "id": "tlvnet-controller-private-policy-read-empty-20261123",
@@ -9111,7 +9120,27 @@
       "blocked_stage": "A first licensed candidate image transfer returned 403, so no asset was ingested. Underlying rejection reason was not established.",
       "inbox": "ops/incident-response/inbox/20261125T0851Z-culture-image-transfer-c2452c1f.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-25/1824b0c6-51ac-8330-ab97-c01ee5fa2aec.json",
-      "next_action": "Original owner to arrange an approved image intake with bytes and rights, plus verify local availability or qualify the timing in their editorial review. Keep the existing separate Herzliya local media-ID incident."
+      "next_action": "Original owner to arrange an approved image intake with bytes and rights, plus verify local availability or qualify the timing in their editorial review. Keep the existing separate Herzliya local media-ID incident.",
+      "last_seen_at": "2026-11-26T08:59:30.611Z",
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json",
+      "latest_occurrence": {
+        "inbox": "ops/incident-response/inbox/culture-night-20261126-04587b87-7f45-4c20-a946-0b95819cdc84-1.json",
+        "affected_ids": [
+          "jaffa-saraya-culture-center-20261125"
+        ],
+        "step": "Import specific licensed Saraya image",
+        "http": 403,
+        "reported_at": "2026-11-26T07:47:14.397Z",
+        "scope": "Individual media import; museum article independently verified live."
+      },
+      "occurrences": [
+        {
+          "controller_run": "7c89e4aa-a3ac-8328-962b-8dd272eb01d1",
+          "status": 403,
+          "inbox": "ops/incident-response/inbox/culture-night-20261126-04587b87-7f45-4c20-a946-0b95819cdc84-1.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json"
+        }
+      ]
     },
     {
       "id": "economy-tech-post-deploy-verification-unavailable-20261125-9f5e0ec5",
@@ -9193,16 +9222,16 @@
     },
     {
       "id": "tlvnet-sites-checkout-workspace-enospc",
-      "status": "mitigated",
+      "status": "open",
       "classification": "runtime/storage",
       "root_cause": "Workspace filesystem had no free space during Git pack indexing of an initial full checkout.",
-      "impact": "Initial source-open failed before editorial writes. The exact current source was reopened elsewhere and the sports release succeeded and was verified publicly.",
+      "impact": "An isolated checkout recovered the earlier sports release. This recurrence held an already prepared Future article for TLVNET; public production remained available.",
       "first_seen_at": "2026-11-26T07:15:10Z",
-      "mitigation": "Used a volume with adequate free space and a verified matching source checkout. No production rollback.",
+      "mitigation": "Only the controller's stale, unreferenced partial Git pack was removed, reclaiming 209649664 bytes on temporary storage. The original writer's workspace capacity was not demonstrated restored.",
       "prevention": "Check destination free space before a full fetch and reuse a verified current local object cache for large site histories.",
-      "next_action": "Retain working fallback; monitor workspace capacity. No production outage inferred.",
+      "next_action": "Check capacity on the actual execution volume, reuse a matching source checkout or select an authorized volume with capacity for working tree, build and package, then let the existing magazine owner verify and release the exact prepared item.",
       "inbox": "ops/incident-response/inbox/sports-20261126-morning-6b4924bf-a2c4-8322-a976-b4718e716b78-1.json",
-      "last_seen_at": "2026-11-26T07:23:01.460Z",
+      "last_seen_at": "2026-11-26T08:59:30.611Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
       "occurrences": [
         {
@@ -9210,8 +9239,16 @@
           "observed_at": "2026-11-26T07:23:01.460Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
           "inbox": "ops/incident-response/inbox/sports-20261126-morning-6b4924bf-a2c4-8322-a976-b4718e716b78-1.json"
+        },
+        {
+          "controller_run": "7c89e4aa-a3ac-8328-962b-8dd272eb01d1",
+          "reported_owner_run": "258c21da-0060-8326-86db-39648fe24f9f",
+          "reported_at": "2026-11-26T08:10:04.484Z",
+          "inbox": "ops/incident-response/inbox/20261126T0809Z-future-workspace-full-258c21da.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json"
         }
-      ]
+      ],
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json"
     },
     {
       "id": "raanana-exact-binary-retrieval-and-adjacent-hash-gate",
@@ -9237,7 +9274,7 @@
       "first_timestamped_evidence_at": "2026-11-24T12:07:22.859Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-74e0fc15-5084-8328-abdc-59ae24521acc",
+  "last_review_runKey": "ops-2026-11-26-7c89e4aa-a3ac-8328-962b-8dd272eb01d1",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
