@@ -1,0 +1,16 @@
+{
+  "run_id": "sports-20261126-morning-6b4924bf-a2c4-8322-a976-b4718e716b78",
+  "attempt": 1,
+  "agent_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "subsystem": "Sites source",
+  "target": "TLVNET-site",
+  "workflow": "scheduled local sports",
+  "step": "open current source",
+  "recorded_at": "2026-11-26T07:15:09.751Z",
+  "status": "mitigated",
+  "conclusion": "workspace_capacity_exhausted",
+  "root_cause": "The workspace volume had no free space for the initial source fetch. Git reported ENOSPC while indexing the new pack.",
+  "evidence": "The first checkout failed before editorial source writes. The scoped remote HEAD was subsequently confirmed and opened from a matching isolated checkout on a volume with free space. Build, production deployment and article readback passed.",
+  "mitigation": "Used an isolated checkout with adequate free storage and the exact current source. No production rollback was needed.",
+  "next_action": "Check available checkout volume before a full source fetch and reuse matching source objects when available."
+}
