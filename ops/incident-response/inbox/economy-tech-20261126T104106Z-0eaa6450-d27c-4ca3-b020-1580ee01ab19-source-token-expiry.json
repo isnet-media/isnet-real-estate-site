@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+  "runKey": "economy-tech-20261126T104106Z-0eaa6450-d27c-4ca3-b020-1580ee01ab19",
+  "recorded_at": "2026-11-26T10:52:15.852Z",
+  "subsystem": "TLVNET Sites source publication",
+  "root_signature": "sites-source-push-short-lived-token-expired-during-full-build",
+  "status": "mitigated",
+  "evidence": {
+    "step": "source git push after successful full build",
+    "message": "remote: Invalid or expired token; HTTP403. Local source commit retained.",
+    "source_commit": "91f3cbbd0e1709fe9084cc1c8931c802e11e6c6b"
+  },
+  "impact": "Initial source push failed; no initial deploy. Three new economy articles and three recovered existing-publication receipts preserved.",
+  "changed_cause_retry": {
+    "count": 1,
+    "reason": "Supported same-project short-lived credential refresh; no key, permission or environment change.",
+    "result": "Same unchanged tested source commit pushed and packaged; single production deployment succeeded."
+  },
+  "deployment": {
+    "version": 746,
+    "id": "appgdep_6b080f42ca088191aa0615d87e9a0bcc",
+    "status": "succeeded"
+  },
+  "public_verification": "pending_next_step",
+  "prevention": "Mint source write credential immediately before push when a full build may outlast short token TTL. No claim of permanent fix.",
+  "secrets_stored": false,
+  "controller_activated": false
+}
