@@ -20,6 +20,21 @@ function plan(artifacts,runs,now=Date.now()) {
   }
   return {remove,protectedRuns:newestRuns};
 }
+// Inventory is read-only: classify every retained artifact, even unknown and protected ones.
+function inventory(artifacts) {
+  const groups=new Map();
+  const current=artifacts.filter(a=>!a.expired);
+  for(const a of current){
+    const name=String(a.name||'unnamed');
+    const group=name.replace(/-\d{8,}(?:-\d+)?$/,'').replace(/-\d{4}-\d{2}-\d{2}$/,'');
+    const entry=groups.get(group)||{group,count:0,bytes:0,oldest:null,newest:null};
+    entry.count++;entry.bytes+=Number(a.size_in_bytes)||0;
+    const created=a.created_at||null;
+    if(created){if(!entry.oldest||created<entry.oldest)entry.oldest=created;if(!entry.newest||created>entry.newest)entry.newest=created;}
+    groups.set(group,entry);
+  }
+  return {groups:[...groups.values()].sort((a,b)=>b.bytes-a.bytes),largest:current.slice().sort((a,b)=>b.size_in_bytes-a.size_in_bytes).slice(0,20).map(a=>({id:a.id,name:a.name,bytes:a.size_in_bytes,created:a.created_at,expires:a.expires_at,run:a.workflow_run?.id}))};
+}
 module.exports=async function({github,context,core}) {
   const repo=context.repo;
   const artifacts=await github.paginate(github.rest.actions.listArtifactsForRepo,{...repo,per_page:100});
@@ -39,6 +54,12 @@ module.exports=async function({github,context,core}) {
   const remaining=await github.paginate(github.rest.actions.listArtifactsForRepo,{...repo,per_page:100});
   const retained=remaining.filter(a=>!a.expired);
   const report={deletedCount,deletedBytes,protectedSuccessfulRuns:p.protectedRuns,remainingCount:retained.length,remainingBytes:retained.reduce((n,a)=>n+a.size_in_bytes,0)};
-  core.info(JSON.stringify(report));await core.summary.addHeading('Verified artifact housekeeping').addCodeBlock(JSON.stringify(report,null,2),'json').write();
+  const detail=inventory(retained);
+  core.info(JSON.stringify(report));core.info(JSON.stringify({storage_inventory:detail}));
+  await core.summary.addHeading('Verified artifact housekeeping').addCodeBlock(JSON.stringify(report,null,2),'json')
+    .addHeading('Retained storage by artifact family').addTable([[{data:'Artifact family',header:true},{data:'Count',header:true},{data:'Bytes',header:true},{data:'Oldest',header:true},{data:'Newest',header:true}],...detail.groups.map(g=>[g.group,String(g.count),String(g.bytes),g.oldest||'-',g.newest||'-'])])
+    .addHeading('Largest retained artifacts (audit only)').addCodeBlock(JSON.stringify(detail.largest,null,2),'json').write();
 };
 module.exports.plan=plan;
+
+module.exports.inventory=inventory;
