@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T13:13:16Z",
+  "updated_at": "2026-11-26T15:48:19Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -704,23 +704,7 @@
       "status": "open",
       "fingerprint": "audit-cinema-trailers/Verify active film trailer coverage/4 absent trailer_youtube_id@d39fb331",
       "root_cause": "Coverage gate correctly reports four active films without verified trailer embeds (53/57 on 2026-11-12).",
-      "evidence": {
-        "run_id": 43231513869,
-        "attempt": 1,
-        "workflow": "Audit Ashdod cinema trailer coverage",
-        "created_at": "2026-11-12T13:52:44Z",
-        "source_commit": "d39fb331d3692a59d52871e995a739ab46bd324b",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/43231513869",
-        "job_id": 131227740363,
-        "missing_movie_ids": [
-          "hot-cinema-3973",
-          "hot-cinema-3992",
-          "hot-cinema-4012",
-          "hot-cinema-4013"
-        ],
-        "source_script": "scripts/audit_cinema_trailers.py",
-        "log_read_full": true
-      },
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
       "resolution": "No content invented and gate retained. No collection/import or retry performed.",
       "next_action": "Existing cinema owner to verify official trailer assets during Thursday cycle or actual source-data change; retain gate. Timer now aligned with Thursday policy.",
       "prevention": "Incomplete optional enrichment must stay visible without triggering unrelated publication retries.",
@@ -768,6 +752,13 @@
           "source_commit": "cc32a48eba4b358820fb2c700756ba36f189693f",
           "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/42222539769",
           "classification": "Historical full log:44active,42embedded,2missing; not current coverage. Grouped with known incomplete-trailer root."
+        },
+        {
+          "controller_run": "47d6492b-c048-8324-ae21-b7231cd512c2",
+          "observed_at": "2026-11-26T15:48:19Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
+          "inbox": "ops/incident-response/inbox/45849994637-1.json",
+          "workflow_run_id": 45849994637
         }
       ],
       "historical_evidence_20261106": {
@@ -794,7 +785,9 @@
         "incident_id": "ashdod-cinema-four-missing-trailers",
         "status": "failed_step_matches_existing_root; exact current missing count not inferred",
         "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/44545279458"
-      }
+      },
+      "latest_observation": "49 of 53 active films have verified embedded trailers. Gate remains open.",
+      "last_seen_at": "2026-11-26T15:48:19Z"
     },
     {
       "id": "supermarket-public-http-and-stale-branches",
@@ -1657,6 +1650,13 @@
             "qualification": "Current source mitigates exact historical HTML ownership collision. No genuine current collector run/public regression checked; do not mark fixed_verified."
           },
           "evidence_path": "ops/incident-response/evidence/ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d.json"
+        },
+        {
+          "controller_run": "47d6492b-c048-8324-ae21-b7231cd512c2",
+          "observed_at": "2026-11-26T15:48:19Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
+          "inbox": "ops/incident-response/inbox/45851594364-1.json",
+          "workflow_run_id": 45851594364
         }
       ],
       "current_source": {
@@ -1704,7 +1704,10 @@
           "evidence": "ops/incident-response/evidence/ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d.json"
         }
       ],
-      "last_review_runKey": "ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d"
+      "last_review_runKey": "ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d",
+      "latest_scope": "Rishon cinema refresh could not push after the network cinema writer advanced main between fetch/rebase and push. Concurrent owner checkpoint awaiting public verification.",
+      "last_seen_at": "2026-11-26T15:48:19Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json"
     },
     {
       "id": "tlvnet-legacy-event-cadence-divergence",
@@ -9391,9 +9394,30 @@
       ],
       "first_reported_date": "2026-11-26",
       "first_timestamped_evidence_at": "2026-11-26T12:26:42.097139+00:00"
+    },
+    {
+      "id": "sites-package-tmpfs-enospc",
+      "status": "mitigated",
+      "classification": "publication/package_staging_capacity",
+      "root_cause": "TLVNET archive packaging ran out of space in tmpfs after a successful build.",
+      "impact": "One packaging attempt failed; same source succeeded with workspace-backed staging.",
+      "mitigation": "Workspace-backed staging replaced full tmpfs; same source packaged and deployed.",
+      "prevention": "Select staging and output locations with enough space for both copies.",
+      "inbox": "ops/incident-response/inbox/2026-11-26-real-estate-package-enospc-fa169c6b.json",
+      "last_seen_at": "2026-11-26T15:48:19Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
+      "occurrences": [
+        {
+          "controller_run": "47d6492b-c048-8324-ae21-b7231cd512c2",
+          "observed_at": "2026-11-26T15:48:19Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
+          "inbox": "ops/incident-response/inbox/2026-11-26-real-estate-package-enospc-fa169c6b.json",
+          "deployment_id": "appgdep_6b08482e5974819189c7e7ee4341d2ea"
+        }
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-80d9b17b-e048-8324-a5e7-b54b916416de",
+  "last_review_runKey": "ops-2026-11-26-47d6492b-c048-8324-ae21-b7231cd512c2",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
