@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T05:44:20Z",
+  "updated_at": "2026-11-26T07:23:01.460Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9167,9 +9167,76 @@
       ],
       "prevention": "Retain the actual-clock safety guard. Reconcile a missed weekly collection using expected Tuesday date, a successful collection step and a fresh durable claim; do not equate a green run with collected data.",
       "next_action": "Investigate GitHub Actions scheduled-event delivery for the cited runs. In the next existing approved Tuesday window, verify a fresh durable city claim and a completed collection step for each city before treating the week as refreshed. Keep the actual-time guard; prevent silent green skips by checking missing claims separately from the workflow conclusion."
+    },
+    {
+      "id": "tlvnet-sites-journal-terminal-echo-credential-exposure",
+      "status": "mitigated",
+      "classification": "security/tool_output",
+      "severity": "elevated",
+      "root_cause": "Terminal input echo remained enabled during a short-lived scoped source credential submission for an owner journal write.",
+      "impact": "Credential appeared in the execution transcript. The owner journal and public release were verified; transcript access and expiry or revocation are not independently confirmed.",
+      "first_seen_at": "2026-11-26T06:17:04.418Z",
+      "mitigation": "The actual journal helper suppresses and restores terminal echo. Controller reran a no-network PTY regression with deliberately invalid dummy input and verified that its marker was absent.",
+      "prevention": "Submit credentials only into a tested hidden-input path. Keep secrets out of shell arguments, files, logs, and incident reports.",
+      "next_action": "In the authorized service console, verify the credential expired or was revoked, and review and restrict access to the original execution transcript using the supported process.",
+      "inbox": "ops/incident-response/inbox/news-20261126-morning-7d5ce418-9e93-4764-9630-a8f5ebc7f704-1.json",
+      "last_seen_at": "2026-11-26T07:23:01.460Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
+      "occurrences": [
+        {
+          "controller_run": "74e0fc15-5084-8328-abdc-59ae24521acc",
+          "observed_at": "2026-11-26T07:23:01.460Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
+          "inbox": "ops/incident-response/inbox/news-20261126-morning-7d5ce418-9e93-4764-9630-a8f5ebc7f704-1.json"
+        }
+      ]
+    },
+    {
+      "id": "tlvnet-sites-checkout-workspace-enospc",
+      "status": "mitigated",
+      "classification": "runtime/storage",
+      "root_cause": "Workspace filesystem had no free space during Git pack indexing of an initial full checkout.",
+      "impact": "Initial source-open failed before editorial writes. The exact current source was reopened elsewhere and the sports release succeeded and was verified publicly.",
+      "first_seen_at": "2026-11-26T07:15:10Z",
+      "mitigation": "Used a volume with adequate free space and a verified matching source checkout. No production rollback.",
+      "prevention": "Check destination free space before a full fetch and reuse a verified current local object cache for large site histories.",
+      "next_action": "Retain working fallback; monitor workspace capacity. No production outage inferred.",
+      "inbox": "ops/incident-response/inbox/sports-20261126-morning-6b4924bf-a2c4-8322-a976-b4718e716b78-1.json",
+      "last_seen_at": "2026-11-26T07:23:01.460Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
+      "occurrences": [
+        {
+          "controller_run": "74e0fc15-5084-8328-abdc-59ae24521acc",
+          "observed_at": "2026-11-26T07:23:01.460Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
+          "inbox": "ops/incident-response/inbox/sports-20261126-morning-6b4924bf-a2c4-8322-a976-b4718e716b78-1.json"
+        }
+      ]
+    },
+    {
+      "id": "raanana-exact-binary-retrieval-and-adjacent-hash-gate",
+      "status": "open",
+      "classification": "media/binary_access_and_rights",
+      "root_cause": "Owner runtime reported DNS failures and could not fetch exact candidate or adjacent-image bytes. That environment capability remains unresolved.",
+      "impact": "Owner has 10 pending subjects. Two existing public article JPEG byte checks passed independently from controller environment; this does not establish the candidate bytes, adjacent comparison or publication rights.",
+      "first_seen_at": "2026-11-24T00:00:00+02:00",
+      "mitigation": "Verified an existing authorized HTTPS path on two already-public files, with actual distinct hashes and MIME.",
+      "prevention": "Run byte and rights checks independently from CMS metadata and distinguish source bytes from served crops.",
+      "next_action": "Existing owner to verify exact candidate and adjacent-image bytes via authorized path, and require actual media rights before publishing through CMS59. Rendered 390px homepage check remains pending.",
+      "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json",
+      "last_seen_at": "2026-11-26T07:23:01.460Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
+      "occurrences": [
+        {
+          "controller_run": "74e0fc15-5084-8328-abdc-59ae24521acc",
+          "observed_at": "2026-11-26T07:23:01.460Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
+          "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json"
+        }
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-77d64c2b-0044-8328-a758-85f12ee4f259",
+  "last_review_runKey": "ops-2026-11-26-74e0fc15-5084-8328-abdc-59ae24521acc",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
