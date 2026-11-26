@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T08:59:30.611Z",
+  "updated_at": "2026-11-26T09:26:22Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9272,9 +9272,34 @@
       ],
       "first_reported_date": "2026-11-24",
       "first_timestamped_evidence_at": "2026-11-24T12:07:22.859Z"
+    },
+    {
+      "id": "tlvnet-guide-missing-taxonomy-asset",
+      "status": "open",
+      "classification": "public_guide/static_asset_and_navigation",
+      "root_cause": "The live guide makes a page-relative request for its taxonomy from the missing root /admin/data/taxonomy.json. Its fallback yields an empty taxonomy, so configured subcategory controls and subcategory query URLs cannot use the taxonomy.",
+      "impact": "Missing configured subcategory controls and ignored subcategory parameters. Guide HTML remains reachable.",
+      "mitigation": "Documented live 404 and fallback. Existing broad categories can still render.",
+      "prevention": "Include taxonomy asset HTTP/schema and a live control and subcategory-deep-link smoke test before guide deploy.",
+      "next_action": "Use the authoritative TLVNET source and intended guide taxonomy to ship a public guide data asset at a site-owned route. Cover data status/schema, category filter rendering, and a subcategory deep link in regression before publish.",
+      "repair_blocker": "Live version 745 had no exact source checkout in the permitted existing local repository and no verified TLVNET taxonomy asset was available in the paths examined.",
+      "last_seen_at": "2026-11-26T09:26:22Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc.json",
+      "occurrences": [
+        {
+          "controller_run": "e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc",
+          "observed_at": "2026-11-26T09:26:22Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc.json",
+          "saved_version": 745,
+          "route": "/admin/data/taxonomy.json",
+          "http": 404
+        }
+      ],
+      "first_reported_date": "2026-11-26",
+      "first_timestamped_evidence_at": "2026-11-26T09:26:22Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-7c89e4aa-a3ac-8328-962b-8dd272eb01d1",
+  "last_review_runKey": "ops-2026-11-26-e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
