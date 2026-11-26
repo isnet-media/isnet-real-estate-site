@@ -9219,7 +9219,6 @@
       "classification": "media/binary_access_and_rights",
       "root_cause": "Owner runtime reported DNS failures and could not fetch exact candidate or adjacent-image bytes. That environment capability remains unresolved.",
       "impact": "Owner has 10 pending subjects. Two existing public article JPEG byte checks passed independently from controller environment; this does not establish the candidate bytes, adjacent comparison or publication rights.",
-      "first_seen_at": "2026-11-24T00:00:00+02:00",
       "mitigation": "Verified an existing authorized HTTPS path on two already-public files, with actual distinct hashes and MIME.",
       "prevention": "Run byte and rights checks independently from CMS metadata and distinguish source bytes from served crops.",
       "next_action": "Existing owner to verify exact candidate and adjacent-image bytes via authorized path, and require actual media rights before publishing through CMS59. Rendered 390px homepage check remains pending.",
@@ -9233,7 +9232,9 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
           "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json"
         }
-      ]
+      ],
+      "first_reported_date": "2026-11-24",
+      "first_timestamped_evidence_at": "2026-11-24T12:07:22.859Z"
     }
   ],
   "last_review_runKey": "ops-2026-11-26-74e0fc15-5084-8328-abdc-59ae24521acc",
