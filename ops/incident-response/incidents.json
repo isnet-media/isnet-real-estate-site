@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T15:48:19Z",
+  "updated_at": "2026-11-26T16:41:19Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -1657,6 +1657,14 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
           "inbox": "ops/incident-response/inbox/45851594364-1.json",
           "workflow_run_id": 45851594364
+        },
+        {
+          "controller_run": "925aa592-13c4-8324-96a9-8a643f78aac0",
+          "observed_at": "2026-11-26T16:41:19Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/925aa592-13c4-8324-96a9-8a643f78aac0.json",
+          "inbox": "ops/incident-response/inbox/2026-11-26-network-film-checkpoint-5df63abd.json",
+          "owner_run_id": "9f268192-f7ac-832c-b1f5-5f4b959a698d",
+          "deployment_run": 45851828770
         }
       ],
       "current_source": {
@@ -1706,8 +1714,16 @@
       ],
       "last_review_runKey": "ops-2026-11-14-fba1cd12-96dc-832e-b810-da869f9a971d",
       "latest_scope": "Rishon cinema refresh could not push after the network cinema writer advanced main between fetch/rebase and push. Concurrent owner checkpoint awaiting public verification.",
-      "last_seen_at": "2026-11-26T15:48:19Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json"
+      "last_seen_at": "2026-11-26T16:41:19Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/925aa592-13c4-8324-96a9-8a643f78aac0.json",
+      "latest_rishon_recovery": {
+        "classification": "sample_live_recovered_via_designated_owner",
+        "url": "https://isnet.co.il/events-preview/rishon-lezion/cinema/",
+        "active": "https://isnet.co.il/events-preview/rishon-lezion/movies/our-loves/",
+        "archive": "https://isnet.co.il/events-preview/rishon-lezion/movies/digger/",
+        "workflow": 45851828770,
+        "qualification": "Planet output and archive validated; permanent race prevention and Cinema City ingestion unverified."
+      }
     },
     {
       "id": "tlvnet-legacy-event-cadence-divergence",
@@ -9415,9 +9431,51 @@
           "deployment_id": "appgdep_6b08482e5974819189c7e7ee4341d2ea"
         }
       ]
+    },
+    {
+      "id": "official-poster-content-type-is-not-reuse-permission",
+      "status": "open",
+      "classification": "cinema/media_rights",
+      "root_cause": "Ashdod renderer references an existing poster marked reuse_permission_not_verified in public cinema metadata.",
+      "impact": "The poster is referenced on the live film card; no destination reuse approval was verified.",
+      "next_action": "Verify documented authorization for this exact poster and destination through the existing film owner. If permission is absent, apply the existing safe poster fallback through that owner.",
+      "inbox": "ops/incident-response/inbox/2026-11-26-network-film-checkpoint-5df63abd.json",
+      "last_seen_at": "2026-11-26T16:41:19Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/925aa592-13c4-8324-96a9-8a643f78aac0.json",
+      "occurrences": [
+        {
+          "controller_run": "925aa592-13c4-8324-96a9-8a643f78aac0",
+          "observed_at": "2026-11-26T16:41:19Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/925aa592-13c4-8324-96a9-8a643f78aac0.json",
+          "inbox": "ops/incident-response/inbox/2026-11-26-network-film-checkpoint-5df63abd.json",
+          "owner_run_id": "9f268192-f7ac-832c-b1f5-5f4b959a698d",
+          "deployment_run": 45851828770
+        }
+      ]
+    },
+    {
+      "id": "cinema-intake-set-json-serialization",
+      "status": "open",
+      "classification": "cinema/data_serialization",
+      "root_cause": "The Rishon Cinema City intake reported a non-JSON-serializable set in temporary processing.",
+      "impact": "The Cinema City portion did not persist. Public Planet schedule and archive were independently verified.",
+      "next_action": "Use the existing owner to normalize the temporary collection, test serialization and preserve canonical data before any release.",
+      "inbox": "ops/incident-response/inbox/2026-11-26-network-film-checkpoint-5df63abd.json",
+      "last_seen_at": "2026-11-26T16:41:19Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/925aa592-13c4-8324-96a9-8a643f78aac0.json",
+      "occurrences": [
+        {
+          "controller_run": "925aa592-13c4-8324-96a9-8a643f78aac0",
+          "observed_at": "2026-11-26T16:41:19Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/925aa592-13c4-8324-96a9-8a643f78aac0.json",
+          "inbox": "ops/incident-response/inbox/2026-11-26-network-film-checkpoint-5df63abd.json",
+          "owner_run_id": "9f268192-f7ac-832c-b1f5-5f4b959a698d",
+          "deployment_run": 45851828770
+        }
+      ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-47d6492b-c048-8324-ae21-b7231cd512c2",
+  "last_review_runKey": "ops-2026-11-26-925aa592-13c4-8324-96a9-8a643f78aac0",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
