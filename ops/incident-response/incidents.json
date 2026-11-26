@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T11:02:37Z",
+  "updated_at": "2026-11-26T12:29:55Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9231,8 +9231,8 @@
       "prevention": "Check destination free space before a full fetch and reuse a verified current local object cache for large site histories.",
       "next_action": "Check capacity on the actual execution volume, reuse a matching source checkout or select an authorized volume with capacity for working tree, build and package, then let the existing magazine owner verify and release the exact prepared item.",
       "inbox": "ops/incident-response/inbox/sports-20261126-morning-6b4924bf-a2c4-8322-a976-b4718e716b78-1.json",
-      "last_seen_at": "2026-11-26T08:59:30.611Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
+      "last_seen_at": "2026-11-26T12:29:55Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
       "occurrences": [
         {
           "controller_run": "74e0fc15-5084-8328-abdc-59ae24521acc",
@@ -9246,32 +9246,46 @@
           "reported_at": "2026-11-26T08:10:04.484Z",
           "inbox": "ops/incident-response/inbox/20261126T0809Z-future-workspace-full-258c21da.json",
           "evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json"
+        },
+        {
+          "controller_run": "cef26c64-f1e0-8324-856d-481608589c47",
+          "observed_at": "2026-11-26T12:29:55Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
+          "inbox": "ops/incident-response/inbox/20261126-community-c2a2cb70.json"
         }
       ],
-      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json"
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json",
+      "latest_workaround": "Publisher succeeded in a fresh isolated /tmp checkout after ENOSPC in /workspace; permanent capacity not verified."
     },
     {
       "id": "raanana-exact-binary-retrieval-and-adjacent-hash-gate",
       "status": "open",
       "classification": "media/binary_access_and_rights",
       "root_cause": "Owner runtime reported DNS failures and could not fetch exact candidate or adjacent-image bytes. That environment capability remains unresolved.",
-      "impact": "Owner has 10 pending subjects. Two existing public article JPEG byte checks passed independently from controller environment; this does not establish the candidate bytes, adjacent comparison or publication rights.",
+      "impact": "Raanana owner reports 11 retained topics and zero new publications. Controller independently reproduced name-resolution failures for the same three hosts; no internet-wide outage established.",
       "mitigation": "Verified an existing authorized HTTPS path on two already-public files, with actual distinct hashes and MIME.",
       "prevention": "Run byte and rights checks independently from CMS metadata and distinguish source bytes from served crops.",
       "next_action": "Existing owner to verify exact candidate and adjacent-image bytes via authorized path, and require actual media rights before publishing through CMS59. Rendered 390px homepage check remains pending.",
       "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json",
-      "last_seen_at": "2026-11-26T07:23:01.460Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
+      "last_seen_at": "2026-11-26T12:29:55Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
       "occurrences": [
         {
           "controller_run": "74e0fc15-5084-8328-abdc-59ae24521acc",
           "observed_at": "2026-11-26T07:23:01.460Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-26/74e0fc15-5084-8328-abdc-59ae24521acc.json",
           "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json"
+        },
+        {
+          "controller_run": "cef26c64-f1e0-8324-856d-481608589c47",
+          "observed_at": "2026-11-26T12:29:55Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
+          "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json"
         }
       ],
       "first_reported_date": "2026-11-24",
-      "first_timestamped_evidence_at": "2026-11-24T12:07:22.859Z"
+      "first_timestamped_evidence_at": "2026-11-24T12:07:22.859Z",
+      "latest_media_scope": "Scoped controller and owner DNS failures. Public outage not established. No approved media bytes or browser visual QA here."
     },
     {
       "id": "tlvnet-guide-missing-taxonomy-asset",
@@ -9329,9 +9343,33 @@
       ],
       "first_reported_date": "2026-11-26",
       "first_timestamped_evidence_at": "2026-11-26T10:52:15.852Z"
+    },
+    {
+      "id": "TLVNET-site/community/release/image-resize-notice-not-rendered/dizengoff-square-2024",
+      "status": "fixed_verified",
+      "classification": "publication/licensed_image_caption",
+      "root_cause": "Approved image display selected the bank caption and omitted the resize disclosure that was only in the article caption.",
+      "impact": "A licensed resized archive photo was shown without the required description of the modification.",
+      "mitigation": "Publisher added the resize disclosure to the displayed bank caption. It was verified in version 748 and independently observed in the current version 750.",
+      "prevention": "Place required adaptation disclosure in the displayed bank caption and validate rendered caption before completion.",
+      "next_action": "None for this asset; retain regression check on reused adaptations.",
+      "inbox": "ops/incident-response/inbox/20261126-community-c2a2cb70.json",
+      "last_seen_at": "2026-11-26T12:29:55Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
+      "occurrences": [
+        {
+          "controller_run": "cef26c64-f1e0-8324-856d-481608589c47",
+          "observed_at": "2026-11-26T12:29:55Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
+          "inbox": "ops/incident-response/inbox/20261126-community-c2a2cb70.json",
+          "deployment_id": "appgdep_6b0816cbf9ac819191f7371019a0a307"
+        }
+      ],
+      "first_reported_date": "2026-11-26",
+      "first_timestamped_evidence_at": "2026-11-26T11:28:51Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-732f9b32-2b60-8324-8975-97517e7f75f2",
+  "last_review_runKey": "ops-2026-11-26-cef26c64-f1e0-8324-856d-481608589c47",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
