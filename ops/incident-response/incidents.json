@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T09:26:22Z",
+  "updated_at": "2026-11-26T11:02:37Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9279,12 +9279,12 @@
       "classification": "public_guide/static_asset_and_navigation",
       "root_cause": "The live guide makes a page-relative request for its taxonomy from the missing root /admin/data/taxonomy.json. Its fallback yields an empty taxonomy, so configured subcategory controls and subcategory query URLs cannot use the taxonomy.",
       "impact": "Missing configured subcategory controls and ignored subcategory parameters. Guide HTML remains reachable.",
-      "mitigation": "Documented live 404 and fallback. Existing broad categories can still render.",
+      "mitigation": "Exact deployed version source reviewed. Live route still returns 404 and no taxonomy asset is tracked in this source.",
       "prevention": "Include taxonomy asset HTTP/schema and a live control and subcategory-deep-link smoke test before guide deploy.",
       "next_action": "Use the authoritative TLVNET source and intended guide taxonomy to ship a public guide data asset at a site-owned route. Cover data status/schema, category filter rendering, and a subcategory deep link in regression before publish.",
-      "repair_blocker": "Live version 745 had no exact source checkout in the permitted existing local repository and no verified TLVNET taxonomy asset was available in the paths examined.",
-      "last_seen_at": "2026-11-26T09:26:22Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-26/e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc.json",
+      "repair_blocker": "Authoritative taxonomy data is absent from the current source tree.",
+      "last_seen_at": "2026-11-26T11:02:37Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/732f9b32-2b60-8324-8975-97517e7f75f2.json",
       "occurrences": [
         {
           "controller_run": "e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc",
@@ -9293,13 +9293,45 @@
           "saved_version": 745,
           "route": "/admin/data/taxonomy.json",
           "http": 404
+        },
+        {
+          "controller_run": "732f9b32-2b60-8324-8975-97517e7f75f2",
+          "observed_at": "2026-11-26T11:02:37Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/732f9b32-2b60-8324-8975-97517e7f75f2.json",
+          "saved_version": 746,
+          "http": 404
         }
       ],
       "first_reported_date": "2026-11-26",
       "first_timestamped_evidence_at": "2026-11-26T09:26:22Z"
+    },
+    {
+      "id": "sites-source-push-short-lived-token-expired-during-full-build",
+      "status": "mitigated",
+      "classification": "publication/source_access_lifetime",
+      "root_cause": "First source push returned 403 after the build because temporary access expired. No initial deployment.",
+      "impact": "Initial publication attempt stopped before deployment. Three economy articles reached the site following the authorized retry.",
+      "mitigation": "Authorized existing publisher renewed access and pushed the same source. One production deployment succeeded; three live article proofs were independently verified.",
+      "prevention": "Use already-authorized source access refresh immediately before push following long builds. Durable prevention remains untested.",
+      "next_action": "Use supported short-lived credential renewal just before future long-build pushes; verify next real attempt before closing permanent prevention.",
+      "inbox": "ops/incident-response/inbox/economy-tech-20261126T104106Z-0eaa6450-d27c-4ca3-b020-1580ee01ab19-source-token-expiry.json",
+      "last_seen_at": "2026-11-26T11:02:37Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/732f9b32-2b60-8324-8975-97517e7f75f2.json",
+      "occurrences": [
+        {
+          "controller_run": "732f9b32-2b60-8324-8975-97517e7f75f2",
+          "observed_at": "2026-11-26T11:02:37Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/732f9b32-2b60-8324-8975-97517e7f75f2.json",
+          "inbox": "ops/incident-response/inbox/economy-tech-20261126T104106Z-0eaa6450-d27c-4ca3-b020-1580ee01ab19-source-token-expiry.json",
+          "owner_run_id": "ad5b3979-e088-8331-b321-f48f00336952",
+          "deployment_id": "appgdep_6b080f42ca088191aa0615d87e9a0bcc"
+        }
+      ],
+      "first_reported_date": "2026-11-26",
+      "first_timestamped_evidence_at": "2026-11-26T10:52:15.852Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc",
+  "last_review_runKey": "ops-2026-11-26-732f9b32-2b60-8324-8975-97517e7f75f2",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
