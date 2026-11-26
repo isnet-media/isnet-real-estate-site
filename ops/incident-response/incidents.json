@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-26T12:29:55Z",
+  "updated_at": "2026-11-26T13:13:16Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9367,9 +9367,33 @@
       ],
       "first_reported_date": "2026-11-26",
       "first_timestamped_evidence_at": "2026-11-26T11:28:51Z"
+    },
+    {
+      "id": "tlvnet-consumer-journal-non-bare-origin",
+      "status": "mitigated",
+      "classification": "publication_journal/source_checkout_remote",
+      "root_cause": "The ordinary push to the origin alias was refused because it targeted a local non-bare checkout.",
+      "impact": "Delay in publication journal receipt only. The live version had already succeeded.",
+      "mitigation": "The original push targeted a local non-bare checkout. One retry to the authorized Sites remote saved the receipt. No second publication.",
+      "prevention": "Resolve the authorized remote for the existing project before journal sync and read back the commit. Keep unchanged-content journal sync separate from deployment.",
+      "next_action": "Verify the next journal sync uses the authorized Sites remote; no replay.",
+      "inbox": "ops/incident-response/inbox/20261126-consumer-1ca1a7d0.json",
+      "last_seen_at": "2026-11-26T13:13:16Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/80d9b17b-e048-8324-a5e7-b54b916416de.json",
+      "occurrences": [
+        {
+          "controller_run": "80d9b17b-e048-8324-a5e7-b54b916416de",
+          "observed_at": "2026-11-26T13:13:16Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-26/80d9b17b-e048-8324-a5e7-b54b916416de.json",
+          "inbox": "ops/incident-response/inbox/20261126-consumer-1ca1a7d0.json",
+          "journal_commit": "43090c6ae1b2bab44509ac1c0a93b4330f8ad627"
+        }
+      ],
+      "first_reported_date": "2026-11-26",
+      "first_timestamped_evidence_at": "2026-11-26T12:26:42.097139+00:00"
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-cef26c64-f1e0-8324-856d-481608589c47",
+  "last_review_runKey": "ops-2026-11-26-80d9b17b-e048-8324-a5e7-b54b916416de",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
