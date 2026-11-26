@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "incident_id": "future-20261126-workspace-enospc",
+  "reported_at": "2026-11-26T08:10:04.484Z",
+  "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+  "runKey": "258c21da-0060-8326-86db-39648fe24f9f",
+  "policy_version": "2026-11-14/1.0",
+  "private_policy_read": {
+    "revision": 3,
+    "checksum": "f47eba1a3c6a069784f585b5d2b7235a61902ec02add897406740d4f0b08a405",
+    "reader": "chatgpt-scheduled",
+    "audit_insert_succeeded": true
+  },
+  "status": "publication_pending_workspace_capacity",
+  "root_cause": {
+    "signature": "workspace/source-preparation/ENOSPC",
+    "evidence": [
+      "df -h /workspace/scratch: /dev/vdb20G,19Gused,0available,100%",
+      "df -i:28%used; capacityratherthaninodeexhaustion",
+      "mkdir future26-clean: No space left on device",
+      "Source helper: Existing remote source requires an empty checkout. Initial incomplete files preserved; no force/overwrite."
+    ],
+    "scope": "Shared executor filesystem; not proven Sites production or CMS outage.",
+    "smallest_next_action": "Existing environment/ops owner frees verified disposable workspace build/cache data or restores available executor capacity, then original writer resumes exact prepared item. No new purchase,key,permission or schedulechange."
+  },
+  "source": {
+    "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+    "fresh_remote_commit": "9d1d620666a0c8d96bb336e944743504ca1522d6",
+    "read_method": "Fresh fetch succeeded; gitshowFETCH_HEAD read articles and networkledger. Full working checkout did not complete and no build possible.",
+    "last_live_version": 744,
+    "observed_deployment": "appgdep_6b07e66638008191a6d7af30e75f78a2",
+    "observed_deployment_status": "succeeded",
+    "observed_deployment_owner": "another priorwriter",
+    "pending_article_in_fresh_articles": false,
+    "pending_article_in_fresh_networkledger": false,
+    "source_write": false,
+    "push": false,
+    "build": false,
+    "deploy": false
+  },
+  "lease": {
+    "observed_state": "free",
+    "observed_blob_sha": "2dc5658f747fd436717011e859ac0a22379ba0ff",
+    "acquired": false,
+    "released": false,
+    "note": "No lease acquired while source cannot be safely prepared; no other owner's token changed."
+  },
+  "checkpoint_reference": "ops/incident-response/inbox/20261122T0902Z-future-prepared-release-b9a31d82.json",
+  "prepared_original": {
+    "id": "daily-2026-11-20",
+    "source_fingerprint": "doi:10.1088/1748-9326/aebbd4",
+    "title": "הענן רחוק מהבית. הזיהום שלו לא בהכרח",
+    "lead": "מחקר אמריקאי חדש עוקב אחרי החשמל של מרכזי הנתונים ועד האוויר שאנשים נושמים הרחק מהם. אומדן של כ־650 מקרי מוות מוקדם ב־2023 מעלה שאלות על תשתיות המחר — ואינו מדידה של נזק מצ׳טבוט מסוים.",
+    "body_html": "<p>דמיינו שאתם גרים רחוק מחוות השרתים. אין ליד הבית גדר של חברת ענן, לא בניין מלא מאווררים ולא שלט שמבטיח את העתיד. על פניו, מהפכת הבינה המלאכותית מתרחשת במקום אחר. מחקר חדש מציע להוסיף לתמונה גם את תחנת הכוח שמייצרת את החשמל ואת האוויר שנע ממנה הלאה.</p>\n<p>המרחק מהשרת אינו בהכרח המרחק מההשפעה שלו. הודעת MIT ותקציר המחקר מתארים שרשרת שבדרך כלל נעלמת מאחורי המילה הנוחה ״ענן״: ביקוש לחישוב, ייצור חשמל, פליטות, תנועה באטמוספרה וחשיפה של אוכלוסיות.</p>\n<h2>האומדן אינו ספירה של אנשים</h2>\n<p>במחקר שעליו דיווח MIT ב־19 בנובמבר, החוקרים אמדו כ־650 מקרי מוות מוקדם בארצות הברית בשנת 2023 הקשורים לתוספת זיהום האוויר מייצור החשמל עבור מרכזי נתונים. חשוב לקרוא את המשפט עד הסוף: זהו אומדן המבוסס על מודלים ועל קשרים אפידמיולוגיים, ולא רשימה של אנשים שמותם נבדק ונקשר למתקן מסוים.</p>\n<p>המחקר עוסק בביקוש החשמל של מרכזי נתונים בכלל. אין בו בסיס לחלק את המספר בין שיחה עם צ׳טבוט, צפייה בסרט, שירות ענן עסקי ופעולות מחשוב אחרות. בוודאי שאין כאן נוסחה שמתרגמת שאלה אחת למערכת AI לנזק בריאותי אישי.</p>\n<h2>השקע נמצא במדינה אחת, החשבון באחרת</h2>\n<p>החוקרים חיברו מודל של ייצור החשמל בארצות הברית למודל של תנועת מזהמים והכימיה שלהם באוויר. הם השוו את פעילות מערכת החשמל, שעה אחר שעה, עם ביקוש מרכזי הנתונים ובלעדיו. אחר כך בחנו כיצד שינוי הפליטות משפיע על חלקיקים עדינים ועל אוזון ועל אומדני התמותה הקשורים לחשיפה.</p>\n<p>התוצאה המרכזית היא חוסר התאמה גיאוגרפי: המקומות שבהם מרוכז ביקוש המחשוב אינם בהכרח אלה שנושאים בנטל הבריאותי הגבוה ביותר. רשת החשמל מחברת בין אזורים, והמזהמים אינם עוצרים בגבול מנהלי. תנאי האטמוספרה ותמהיל התחנות משנים את התוצאה.</p>\n<p>לפי תקציר המחקר, בחלקים מהמערב התיכון שילוב של פליטות מתחנות פחמיות ותנאים עשירים באמוניה מעודד יצירה של חלקיקים משניים. לכן בדיקה של המתקן בלבד עלולה להחמיץ חלק מהתמונה. זו מסקנה לגבי מערכת אמריקאית שנחקרה, לא קביעה על רמת הזיהום ליד בית ישראלי.</p>\n<h2>הביקוש גדל, אבל העתיד אינו מספר יחיד</h2>\n<p>דוח מעבדת לורנס ברקלי מ־2024, כפי שסוכם גם בהודעת המעבדה, מספק את קנה המידה: מרכזי הנתונים בארצות הברית צרכו לפי האומדן 176 טרה־ואט־שעה ב־2023, כ־4.4% מצריכת החשמל במדינה. הדוח הציג לשנת 2028 טווח תרחישים של 325–580 טרה־ואט־שעה. זהו טווח תחזיות מהדוח ההוא, לא מדידה של צריכה שכבר התרחשה ולא הבטחה שכך ייראה העתיד.</p>\n<p>ההבחנה חשובה גם מחוץ למעבדה. נתון היסטורי, מודל של נזק ותחזית ביקוש עונים על שלוש שאלות שונות. חיבור שלהם לכותרת דרמטית אחת אולי חוסך מילים, אבל מסתיר את מה שצריך לברר לפני שמקבלים החלטות.</p>\n<h2>מה כדאי לשאול כשהענן מגיע לעיר</h2>\n<p>המשמעות המעשית אינה שכל מרכז נתונים הוא רעיון רע. היא שדיון בתשתית דיגיטלית צריך להגיע מעבר לשטח הבניין ולמספר מקומות העבודה. מאין יגיע החשמל הנוסף? אילו תחנות יגיבו לביקוש? מי נחשף לפליטות שלהן, ואילו הנחות נכללו בבדיקה?</p>\n<p>לישראל נדרשים נתונים מקומיים כדי לענות על השאלות האלה. המחקר האמריקאי אינו מספק מספר שניתן להעתיק לכאן. הוא מציע שאלה טובה יותר: כשאנחנו מתפעלים מהמחשבים של המחר, האם אנחנו בודקים גם את מערכת החשמל והסביבה שמאפשרת להם לעבוד היום?</p>\n",
+    "category": "עבודה ולייף סטייל",
+    "key": "work",
+    "author": "כתב החיים של המחר",
+    "sources": [
+      {
+        "title": "MIT News — Study reveals data centers’ long-distance damage to air quality",
+        "url": "https://news.mit.edu/2026/study-reveals-data-centers-long-distance-damage-air-quality-1119",
+        "language": "en",
+        "published": "2026-11-19",
+        "read": "full institutional announcement"
+      },
+      {
+        "title": "MIT CS3 — Spatially distributed air quality and health impacts of data center electricity demand",
+        "url": "https://cs3.mit.edu/publication/118903",
+        "language": "en",
+        "published": "2026-11-19",
+        "read": "full authors' abstract; journal full text unavailable",
+        "doi": "10.1088/1748-9326/aebbd4"
+      },
+      {
+        "title": "Berkeley Lab — 2024 United States Data Center Energy Usage Report",
+        "url": "https://eta.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report",
+        "language": "en",
+        "published": "2024-12-19",
+        "read": "report metadata and abstract"
+      },
+      {
+        "title": "Berkeley Lab — Report evaluates increase in electricity demand from data centers",
+        "url": "https://newscenter.lbl.gov/2025/01/15/berkeley-lab-report-evaluates-increase-in-electricity-demand-from-data-centers/",
+        "language": "en",
+        "published": "2025-01-15",
+        "read": "full institutional report summary"
+      }
+    ],
+    "source_urls": [
+      "https://news.mit.edu/2026/study-reveals-data-centers-long-distance-damage-air-quality-1119",
+      "https://cs3.mit.edu/publication/118903",
+      "https://eta.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report",
+      "https://newscenter.lbl.gov/2025/01/15/berkeley-lab-report-evaluates-increase-in-electricity-demand-from-data-centers/"
+    ],
+    "tags": [
+      "מרכזי נתונים",
+      "בינה מלאכותית",
+      "חשמל",
+      "סביבה",
+      "החיים של המחר"
+    ],
+    "body_sha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+    "words": 474,
+    "editor_review": {
+      "status": "approved",
+      "read_full_text": true,
+      "owner_automation_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "body_sha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "reviewed_at": "2026-11-22T08:53:13.893Z",
+      "sources_read": [
+        {
+          "url": "https://news.mit.edu/2026/study-reveals-data-centers-long-distance-damage-air-quality-1119",
+          "read": "full institutional announcement"
+        },
+        {
+          "url": "https://cs3.mit.edu/publication/118903",
+          "read": "full authors' abstract; journal full text unavailable"
+        },
+        {
+          "url": "https://eta.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report",
+          "read": "report metadata and abstract"
+        },
+        {
+          "url": "https://newscenter.lbl.gov/2025/01/15/berkeley-lab-report-evaluates-increase-in-electricity-demand-from-data-centers/",
+          "read": "full institutional report summary"
+        }
+      ],
+      "reason": "Full 474-word body read; all numerical claims verified against institutional announcement, authors' full abstract and Lab report summary; modeled burden, historical consumption and 2024 future scenarios distinguished. No inference of Israeli exposure or individual AI causal harm. Journal full text unavailable and not claimed read."
+    },
+    "image_review": {
+      "status": "approved",
+      "read_full_text": true,
+      "owner_automation_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "body_sha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "selected_bank_id": "datacenter-server-racks-2015",
+      "asset_sha256": "505eaf6ced3c81ecc2cf63f368f28a886bc4ae59dd4e7c391f0af750371f433c",
+      "asset_viewed": true,
+      "rights_verified_for": [
+        "TLVNET",
+        "ISNET",
+        "Herzliya"
+      ],
+      "reviewed_at": "2026-11-22T08:53:13.893Z",
+      "selection_reason": "Actual existing1800x1200JPEG viewed: physical server racks/cables/raisedfloor, no identifiable people or claimed study facility; relevant archivephoto dated2015, explicitly labelled. IndividualCommonsfile and CC BY2.0deed re-read; commercial reuse and archive permitted with creator/title/license/changes. No Flash90.",
+      "desktop_preview": "unavailable",
+      "mobile_preview": "unavailable",
+      "post_publication_visual_review": "pending"
+    },
+    "date_iso": "2026-11-22T10:54:20.8452319+02:00",
+    "display_date": "22.11.2026",
+    "image_url": "/future/assets/daily-2026-11-20-datacenter.jpg",
+    "photo_bank_id": "datacenter-server-racks-2015",
+    "image_credit": "צילום ארכיון 2015: Carl Lender · Datacenter Server Racks · CC BY 2.0 · הוקטן/נדחס",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg",
+    "image_license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "image_date": "2015-11-04",
+    "image_subject": {
+      "kind": "object_illustration",
+      "message": "Physical data-center infrastructure associated with grid electricity demand; explicitly archival, not identified study premises, AIinstallation or pollution evidence",
+      "people": [],
+      "exclusions": [
+        "no current facility identification",
+        "no documentary health-impact claim"
+      ]
+    }
+  },
+  "media": {
+    "selected_bank_id": "datacenter-server-racks-2015",
+    "local_source": "public/photo-bank/assets/datacenter-server-racks-2015.jpg",
+    "public_source": "https://tlvnet.com/photo-bank/assets/datacenter-server-racks-2015.jpg",
+    "sha256": "505eaf6ced3c81ecc2cf63f368f28a886bc4ae59dd4e7c391f0af750371f433c",
+    "width": 1800,
+    "height": 1200,
+    "creator": "Carl Lender",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg",
+    "photo_date": "2015-11-04",
+    "commercial_reuse": true,
+    "archive_storage": true,
+    "permitted_destinations": [
+      "TLVNET",
+      "ISNET",
+      "herzliya"
+    ],
+    "modifications": "Resized/recompressed full frame; no crop",
+    "rights_note": "File-specific CC BY2.0 license freshly read. Unrelated Turner/sharealike text in historical bank evidence is not a condition of this Carl Lender asset."
+  },
+  "existing_cms_publications": [
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 2,
+      "categoryId": 2114,
+      "postId": 812563,
+      "imageId": 852238,
+      "sourcePublishedAt": "2026-11-22T10:54:20.8452319+02:00",
+      "url": "https://ashdodnet.com/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812563",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "screenshot_viewed",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.822Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 55,
+      "categoryId": 2178,
+      "postId": 812564,
+      "imageId": 852239,
+      "sourcePublishedAt": "2026-11-22T10:54:29.0250665+02:00",
+      "url": "https://batyamnet.co.il/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812564",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 51,
+      "categoryId": 2179,
+      "postId": 812565,
+      "imageId": 852240,
+      "sourcePublishedAt": "2026-11-22T10:54:36.5802874+02:00",
+      "url": "https://gederanet.co.il/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812565",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 26,
+      "categoryId": 2180,
+      "postId": 812566,
+      "imageId": 852241,
+      "sourcePublishedAt": "2026-11-22T10:54:56.6466167+02:00",
+      "url": "https://www.ganyavne.net/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812566",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 60,
+      "categoryId": 2182,
+      "postId": 812567,
+      "imageId": 852242,
+      "sourcePublishedAt": "2026-11-22T10:55:05.5171483+02:00",
+      "url": "https://holonnet.co.il/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812567",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "section_link_present_article_card_missing",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 28,
+      "categoryId": 2183,
+      "postId": 812568,
+      "imageId": 852243,
+      "sourcePublishedAt": "2026-11-22T10:55:13.9414966+02:00",
+      "url": "https://www.yavnenet.co.il/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812568",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 25,
+      "categoryId": 2174,
+      "postId": 812569,
+      "imageId": 852244,
+      "sourcePublishedAt": "2026-11-22T10:55:21.4374808+02:00",
+      "url": "https://www.yeshuvnik.net/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812569",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 61,
+      "categoryId": 2184,
+      "postId": 812570,
+      "imageId": 852245,
+      "sourcePublishedAt": "2026-11-22T10:55:28.9820516+02:00",
+      "url": "https://kgatnet.co.il/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812570",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 41,
+      "categoryId": 2185,
+      "postId": 812571,
+      "imageId": 852246,
+      "sourcePublishedAt": "2026-11-22T10:55:35.7633409+02:00",
+      "url": "https://www.rishonet.com/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812571",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    },
+    {
+      "section": "future",
+      "sourceArticleId": "daily-2026-11-20",
+      "websiteId": 59,
+      "categoryId": 2187,
+      "postId": 812572,
+      "imageId": 852247,
+      "sourcePublishedAt": "2026-11-22T10:55:42.9391619+02:00",
+      "url": "https://raanananet.co.il/%d7%94%d7%97%d7%99%d7%99%d7%9d-%d7%a9%d7%9c-%d7%94%d7%9e%d7%97%d7%a8/%d7%94%d7%a2%d7%a0%d7%9f-%d7%a8%d7%97%d7%95%d7%a7-%d7%9e%d7%94%d7%91%d7%99%d7%aa-%d7%94%d7%96%d7%99%d7%94%d7%95%d7%9d-%d7%a9%d7%9c%d7%95-%d7%9c%d7%90-%d7%91%d7%94%d7%9b%d7%a8%d7%97-812572",
+      "status": "published_verified",
+      "bodySha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+      "fullCmsBodyReadbackExact": true,
+      "publicTitleBodyFirstLastCreditAndLicenseVerified": true,
+      "publicImageDecoded": true,
+      "publicImageDimensions": [
+        640,
+        480
+      ],
+      "publicImageByteHash": "pending; original-bank hash is separately retained, not attributed to CMS crop",
+      "sectionCardVerified": true,
+      "homeChecked": true,
+      "homepageStatus": "current",
+      "desktop_visual_review": "DOM_image_and_body_checked",
+      "mobile_visual_review": "pending",
+      "runKey": "b9a31d82-11d4-8332-98da-2d7f380fa421",
+      "verifiedAt": "2026-11-22T09:01:48.823Z",
+      "verification_context": "Historical Nov22proof, preserved IDs; not recreated or reverified Nov26."
+    }
+  ],
+  "primary_source_recheck": {
+    "checked_at": "2026-11-26T08:10:04.485Z",
+    "sources": [
+      {
+        "url": "https://news.mit.edu/2026/study-reveals-data-centers-long-distance-damage-air-quality-1119",
+        "published_at": "2026-11-19",
+        "read": "full institutional announcement",
+        "result": "650modeledprematuredeaths,regionalgrid/atmospheric mechanism unchanged"
+      },
+      {
+        "url": "https://cs3.mit.edu/publication/118903",
+        "read": "full authors abstract",
+        "result": "513PM+137ozone modeled2023mortality; attribution and geographic mismatch unchanged"
+      }
+    ],
+    "new_full_paper_read": false,
+    "new_media_view": false
+  },
+  "remaining_queue": [
+    {
+      "target": "TLVNET-site",
+      "content_id": "daily-2026-11-20",
+      "status": "publication_pending_workspace_capacity",
+      "body_sha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c"
+    },
+    {
+      "target": "herzliya",
+      "content_id": "daily-2026-11-20",
+      "status": "publication_pending_direct_handoff",
+      "note": "Nov22 required-local-media blocker retained; not rechecked against Herzliya source today because shared storageblock. No CMS62write/review/deploy."
+    },
+    {
+      "target": "ISNET-CMS-60-home",
+      "postId": 812567,
+      "status": "verification_pending",
+      "note": "Nov22missinghomecard retained; no currentpubliccheckclaimed."
+    }
+  ],
+  "counters": {
+    "new_research_rounds": 0,
+    "ready_originals_resumed": 1,
+    "new_articles_created": 0,
+    "new_publications": 0,
+    "source_preparation_focused_recovery": 1,
+    "api_calls": "not_measured",
+    "cost": "not_measured"
+  },
+  "automation_state": "unchanged; transient shared workspace capacity blocker does not complete recurring editorial mandate",
+  "next_step": "Resume exact approved daily-2026-11-20 after workspacecapacity restored; re-openfreshsource/dedup/rights/bankcontrol and realCASlease, normalgates/build then fullpublicproof. Never recreate CMS812563-812572. No agent/task/controller trigger."
+}
