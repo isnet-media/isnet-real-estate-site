@@ -12,5 +12,13 @@
   "root_cause": "The workspace volume had no free space for the initial source fetch. Git reported ENOSPC while indexing the new pack.",
   "evidence": "The first checkout failed before editorial source writes. The scoped remote HEAD was subsequently confirmed and opened from a matching isolated checkout on a volume with free space. Build, production deployment and article readback passed.",
   "mitigation": "Used an isolated checkout with adequate free storage and the exact current source. No production rollback was needed.",
-  "next_action": "Check available checkout volume before a full source fetch and reuse matching source objects when available."
+  "next_action": "Check available checkout volume before a full source fetch and reuse matching source objects when available.",
+  "publication_readback": {
+    "url": "https://tlvnet.com/news/hapoel-olympiacos-euroleague-loss-20261125",
+    "body_sha256": "139906d476e647261eee7510acfc2263963876066f13ea7c641b9ccddf852a47",
+    "asset_sha256": "0cac335dbaf7e051b0393de37de1ce37924558ac8880c2cf9b8a0d7b373d8e63",
+    "desktop_visual": "verified live browser; heading, lead and image rendered, archive label and photographer confirmed in the accessibility tree",
+    "mobile_visual": "pending in existing photo review queue",
+    "observed_at": "2026-11-26T07:16:26.482Z"
+  }
 }
