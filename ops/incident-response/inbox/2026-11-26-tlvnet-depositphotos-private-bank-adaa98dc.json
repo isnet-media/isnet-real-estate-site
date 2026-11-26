@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "event_type": "scheduled_editorial_media_import_trial",
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "runKey": "adaa98dc-0fd8-8330-b0e6-e59408e19ad7",
+  "recorded_at": "2026-11-26T17:04:34Z",
+  "site": "https://tlvnet.com",
+  "policy_revision": 7,
+  "root_signature": "tlvnet-depositphotos-private-bank-import-route-missing",
+  "status": "blocked_real",
+  "source": "https://depositphotos.com/editorial/fire-and-water-fountain-in-tel-aviv-israel-74795379.html",
+  "provider_asset_id": 74795379,
+  "verified_purchase": {
+    "license": "standard",
+    "catalog_use": "editorial",
+    "size": "L",
+    "width": 2000,
+    "height": 812,
+    "creator_account": "lucidwaters",
+    "status": "active"
+  },
+  "evidence": [
+    "Provider get_purchases succeeded in the scheduled environment.",
+    "No matching ID/title in fresh static and visible live bank records; exact file hash unavailable before transfer.",
+    "Existing photo-bank POST manages controls. Private editorial-media uploads into editorial_media, which is separate from the bank catalog. Team chat collector imports only Commons assets."
+  ],
+  "file_imported": false,
+  "redownload_started": false,
+  "site_deployment_for_trial": false,
+  "reason": "Existing authorized paths do not support an imported Depositphotos file and matching metadata in the private photo bank without live changes.",
+  "next_action": "Resume only when a supported private bank import accepts verified provider files and metadata. Do not repurchase, relabel as publisher upload or repeat on identical inputs.",
+  "activate_controller": false
+}
