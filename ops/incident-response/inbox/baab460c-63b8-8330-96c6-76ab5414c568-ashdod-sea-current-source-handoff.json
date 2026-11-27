@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "controller_run_id": "baab460c-63b8-8330-96c6-76ab5414c568",
+  "kind": "existing_incident_source_became_valid",
+  "incident_id": "ims-sea-no-currently-valid-period",
+  "status": "source_valid_existing_owner_release_pending",
+  "qualification": "Exact current repository parser accepts both distinct official regions now. Live public files remain expired. Publication awaits the existing owner workflow.",
+  "official_source": {
+    "sample": "200 7.694485 text/xml https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml",
+    "sha256": "ceb513d93cc0bfa86c946f2baccabe886f05b4f00e4c7104842351b2516f6f00",
+    "now": "2026-11-27 20:36",
+    "issued_at": "2026-11-27 16:33",
+    "regions": [
+      {
+        "id": "213",
+        "periods": [
+          [
+            "2026-11-27 20:00",
+            "2026-11-28 08:00"
+          ],
+          [
+            "2026-11-28 08:00",
+            "2026-11-28 20:00"
+          ]
+        ],
+        "current": true
+      },
+      {
+        "id": "210",
+        "periods": [
+          [
+            "2026-11-27 20:00",
+            "2026-11-28 08:00"
+          ],
+          [
+            "2026-11-28 08:00",
+            "2026-11-28 20:00"
+          ]
+        ],
+        "current": true
+      }
+    ]
+  },
+  "parser_proof": {
+    "output": {
+      "source_sha256": "ceb513d93cc0bfa86c946f2baccabe886f05b4f00e4c7104842351b2516f6f00",
+      "checked_at": "2026-11-27T18:37:07.012Z",
+      "result": [
+        {
+          "id": 213,
+          "issue": "2026-11-27T16:33",
+          "current_from": "2026-11-27T20:00",
+          "current_to": "2026-11-28T08:00",
+          "parsed_periods": 2
+        },
+        {
+          "id": 210,
+          "issue": "2026-11-27T16:33",
+          "current_from": "2026-11-27T20:00",
+          "current_to": "2026-11-28T08:00",
+          "parsed_periods": 2
+        }
+      ]
+    },
+    "test_state": "five parser tests passed"
+  },
+  "public_southern": {
+    "sample": "200 6.314018 application/json; charset=utf-8 https://isnet.co.il/weather/ashdod/sea.json",
+    "regionId": 213,
+    "issuedAtLocal": "2026-11-23T16:14",
+    "fetchedAt": "2026-11-23T18:02:10.982Z",
+    "periods": [
+      [
+        "2026-11-23T20:00",
+        "2026-11-24T08:00"
+      ],
+      [
+        "2026-11-24T08:00",
+        "2026-11-24T20:00"
+      ]
+    ]
+  },
+  "public_central": {
+    "sample": "200 6.320594 application/json; charset=utf-8 https://isnet.co.il/weather/ashdod/central.json",
+    "regionId": 210,
+    "issuedAtLocal": "2026-11-23T16:14",
+    "fetchedAt": "2026-11-23T18:02:10.997Z",
+    "periods": [
+      [
+        "2026-11-23T20:00",
+        "2026-11-24T08:00"
+      ],
+      [
+        "2026-11-24T08:00",
+        "2026-11-24T20:00"
+      ]
+    ]
+  },
+  "previous_failed_run_id": 46035068206,
+  "next_action": "Use the existing validated refresh after confirming the official periods are current; verify live JSON in both regions. No ad hoc workflow retry in this controller role.",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-27/baab460c-63b8-8330-96c6-76ab5414c568.json",
+  "observed_at": "2026-11-27T18:37:32Z",
+  "inbox": "ops/incident-response/inbox/baab460c-63b8-8330-96c6-76ab5414c568-ashdod-sea-current-source-handoff.json"
+}
