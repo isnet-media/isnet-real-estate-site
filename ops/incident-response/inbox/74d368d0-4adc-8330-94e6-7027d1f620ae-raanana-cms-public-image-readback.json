@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "controller_run_id": "74d368d0-4adc-8330-94e6-7027d1f620ae",
+  "kind": "existing_incident_mitigation",
+  "incident_id": "raanana-exact-binary-retrieval-and-adjacent-hash-gate",
+  "owner": {
+    "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+    "title": "כתב חדשות — רעננה",
+    "run_id": "bd3a652f-4ed4-8327-8330-702078eb3341",
+    "status": "completed",
+    "started_at": "2026-11-27T17:01:01.862438Z",
+    "scheduled_for": "2026-11-27T17:00:00Z",
+    "completed_at": "2026-11-27T17:03:21.110658Z",
+    "result_run_id": "bd3a652f-4ed4-8327-8330-702078eb3341",
+    "matched": true,
+    "result_created_at": "2026-11-27T17:03:20.350413Z"
+  },
+  "owner_queue": 16,
+  "owner_drafts": 2,
+  "owner_published": 0,
+  "owner_report": "ops/agent-harmony/releases/raanana-news-2026-11-27-1900.json",
+  "public_file_method": "Resolve non-private get_file URL against the matching public website, follow its canonical redirect, verify status, MIME and image signature, then hash served bytes. Keep same file variant for comparisons and separately check candidate authorization.",
+  "files": [
+    {
+      "id": 853419,
+      "metadata_url": "/file/853419",
+      "http": 200,
+      "mime": "image/jpeg",
+      "host": "www.raanananet.co.il",
+      "path": "/File/853419.jpg",
+      "bytes": 57068,
+      "image_signature": true,
+      "sha256": "89f12825d9c562cdc777f6ab7dc8b829ba1d324d039fba8b0ab2ba67787ea8f6"
+    },
+    {
+      "id": 853125,
+      "metadata_url": "/file/853125",
+      "status": "200",
+      "mime": "image/jpeg",
+      "url": "https://www.raanananet.co.il/File/853125.jpg",
+      "bytes": 280558,
+      "jpeg": true,
+      "sha256": "efc0a4b5633e60d233204817ae7975230cd89a7e8fa25a6c112e975445a0e3df"
+    }
+  ],
+  "scope": "Verified different publicly served JPEG bytes from controller environment. Owner DNS and rights for draft images remain unresolved. The tested file addresses represent public bytes, not proof of underlying original-source bytes or publication permission.",
+  "next_action": "Reuse the documented file path for the adjacent image side of the checks in the authorized owner runtime. Obtain and verify candidate source bytes and rights separately before any release.",
+  "inbox": "ops/incident-response/inbox/74d368d0-4adc-8330-94e6-7027d1f620ae-raanana-cms-public-image-readback.json",
+  "observed_at": "2026-11-27T17:44:08Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
+}
