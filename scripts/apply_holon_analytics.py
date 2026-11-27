@@ -18,5 +18,6 @@ for scope in SCOPES:
         html = html.replace(TAG, '')
         head_end = re.search(r'</head\s*>', html, re.IGNORECASE)
         if not head_end:
-            raise RuntimeError(f'No closing head in {page}')
+            # HTML fragments are embedded by their host document.
+            continue
         page.write_text(html[:head_end.start()] + TAG + html[head_end.start():], encoding='utf-8')
