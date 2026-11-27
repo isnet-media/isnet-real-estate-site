@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "signature": "desk-staging-external-db-backup-stale",
+  "status": "open",
+  "target": "ISNET Desk staging",
+  "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "controller_run_id": "2aedae80-e898-8330-b361-f02ca0a3cc2f",
+  "recorded_at": "2026-11-27T15:15:57Z",
+  "checked_at": "2026-11-27 15:13:47.539309+00",
+  "latest_db_backup": {
+    "kind": "db",
+    "ok": true,
+    "created_at": "2026-11-26T12:55:47.730012+00:00"
+  },
+  "age_hours": 26.299946944444443,
+  "threshold_hours": 26,
+  "threshold_crossed_at": "2026-11-27T14:55:47.730Z",
+  "related_incident_id": "desk-staging-external-media-backup-stale",
+  "latest_media_backup": {
+    "kind": "media",
+    "ok": true,
+    "created_at": "2026-11-26T10:17:51.799605+00:00"
+  },
+  "media_age_hours": 28.93215,
+  "handoff_reconcile": {
+    "runid": 192,
+    "status": "succeeded",
+    "start_time": "2026-11-27T15:10:00.1289+00:00",
+    "end_time": "2026-11-27T15:10:00.14233+00:00"
+  },
+  "herzliya_queue_count": 0,
+  "qualification": "No external DB backup success is recorded after the previous good receipt. The reason for no newer receipt and any common cause with media remain unverified.",
+  "diagnostic_access": "Prior GitHub workflow listing for the separate Desk repo was denied by the active connector. Staging monitoring SQL is available read-only.",
+  "next_action": "Have the existing backup operator inspect scheduled invocation, destination write, and receipt insertion for DB and media. Verify new successful external records and separately confirm recoverability.",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json"
+}
