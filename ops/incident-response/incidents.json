@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T16:24:42Z",
+  "updated_at": "2026-11-27T17:44:08Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5503,6 +5503,14 @@
           "observed_at": "2026-11-22T15:57:34Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-22/a15528f9-e6a8-8330-9256-a5d9276bfce4.json",
           "classification": "Known forecast-period validation rejected non-current data; workflow retained last good."
+        },
+        {
+          "run_id": 46035068206,
+          "job_id": 140628278377,
+          "inbox": "ops/incident-response/inbox/46035068206-1.json",
+          "controller_run": "74d368d0-4adc-8330-94e6-7027d1f620ae",
+          "observed_at": "2026-11-27T17:44:08Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
         }
       ],
       "status": "awaiting_external_action",
@@ -5510,8 +5518,8 @@
       "root_cause": "Live IMS response issued16Nov16:23Israel contains only20:00onward periods for213/210. Current local time not covered. Validation correctly rejects; no current replacement exists in the observed source.",
       "impact": "New18Nov refresh rejected uncovered current period and retained lastgood. Actual current XML periods and live widget freshness not independently verified.",
       "first_seen_at": "2026-11-09T22:24:11Z",
-      "last_seen_at": "2026-11-26T17:34:00Z",
-      "updated_at": "2026-11-21T16:11:33.000Z",
+      "last_seen_at": "2026-11-27T17:44:08Z",
+      "updated_at": "2026-11-27T17:44:08Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-16-b28a8a3c-a510-8332-b4c5-feedac37ad04.json",
       "change": "No code change, data overwrite, manual rerun or deployment. Existing guard passed regression.",
       "tests": {
@@ -5522,12 +5530,7 @@
       },
       "next_action": "Resume existing owner/workflow on materially changed current IMS periods. Keep lastgood dates honest; no manual retry, schedulechange, region substitution or guard relaxation.",
       "prevention": "Keep sourceIssue/from/to provenance and current-period exclusion. Group recurrence by this signature; source HTTP200 alone does not verify current data.",
-      "public_verification": {
-        "url": "https://ashdodnet.com/",
-        "reader_status": 403,
-        "render_verification": "pending",
-        "not_outage_proof": true
-      },
+      "public_verification": "Public forecast files do not cover 27 November; last supplied periods ended 24 November at 20:00. Fresh IMS file starts at 20:00 on 27 November in both regions and did not cover the check at 19:41.",
       "latest_source_recheck": {
         "observed_at": "2026-11-16T18:24:05.469Z",
         "source_issue": "2026-11-16T16:23",
@@ -5544,20 +5547,85 @@
       },
       "canonical_incident_id": "ims-no-valid-current-period",
       "last_controller_observed_at": "2026-11-21T16:11:33.000Z",
-      "last_evidence": "ops/incident-response/evidence/ops-2026-11-18-6f31adc1-f9dc-8322-b26c-3775cfe0712a.json",
+      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
       "current_recurrence": {
         "incident_id": "ims-sea-no-currently-valid-period",
-        "observed_at": "2026-11-26T17:34:00Z",
-        "run_id": 45862513790,
-        "job_id": 140056891199,
-        "source_commit": "5c8863b6379fb7668775410b0df3883e8892dd46",
-        "url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/45862513790",
+        "run_id": 46035068206,
+        "job_id": 140628278377,
+        "source_commit": "54bc0d041543f68b471ca2b46549702675ad1b9a",
         "signature": "No currently valid forecast; retaining last good file",
-        "regression_expired_rejection_passed": true,
-        "public_widget_rechecked": false,
-        "rerun": false,
-        "inbox": "ops/incident-response/inbox/45862513790-1.json",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-26/2bd2263e-970c-8324-8053-afe2cbaa6aff.json"
+        "actual_current_source": {
+          "sha256": "ceb513d93cc0bfa86c946f2baccabe886f05b4f00e4c7104842351b2516f6f00",
+          "issued": "2026-11-27 16:33",
+          "regions": [
+            {
+              "id": "213",
+              "periods": [
+                [
+                  "2026-11-27 20:00",
+                  "2026-11-28 08:00"
+                ],
+                [
+                  "2026-11-28 08:00",
+                  "2026-11-28 20:00"
+                ]
+              ],
+              "current": false
+            },
+            {
+              "id": "210",
+              "periods": [
+                [
+                  "2026-11-27 20:00",
+                  "2026-11-28 08:00"
+                ],
+                [
+                  "2026-11-28 08:00",
+                  "2026-11-28 20:00"
+                ]
+              ],
+              "current": false
+            }
+          ],
+          "now": "2026-11-27 19:41"
+        },
+        "public_southern": {
+          "status": "200 application/json; charset=utf-8",
+          "regionId": 213,
+          "issuedAtLocal": "2026-11-23T16:14",
+          "fetchedAt": "2026-11-23T18:02:10.982Z",
+          "periods": [
+            {
+              "from": "2026-11-23T20:00",
+              "to": "2026-11-24T08:00"
+            },
+            {
+              "from": "2026-11-24T08:00",
+              "to": "2026-11-24T20:00"
+            }
+          ]
+        },
+        "public_central": {
+          "status": "200 application/json; charset=utf-8",
+          "regionId": 210,
+          "issuedAtLocal": "2026-11-23T16:14",
+          "fetchedAt": "2026-11-23T18:02:10.997Z",
+          "periods": [
+            {
+              "from": "2026-11-23T20:00",
+              "to": "2026-11-24T08:00"
+            },
+            {
+              "from": "2026-11-24T08:00",
+              "to": "2026-11-24T20:00"
+            }
+          ]
+        },
+        "inbox": "ops/incident-response/inbox/46035068206-1.json",
+        "impact": "Public forecast files do not cover 27 November; last supplied periods ended 24 November at 20:00. Fresh IMS file starts at 20:00 on 27 November in both regions and did not cover the check at 19:41.",
+        "next_action": "When source period becomes current, existing sea forecast owner can run normal validated refresh and verify both published files. No guard or schedule change.",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
+        "observed_at": "2026-11-27T17:44:08Z"
       }
     },
     {
@@ -9341,12 +9409,12 @@
       "status": "open",
       "classification": "media/binary_access_and_rights",
       "root_cause": "Owner runtime reported DNS failures and could not fetch exact candidate or adjacent-image bytes. That environment capability remains unresolved.",
-      "impact": "Two owner drafts held. Controller independently verified distinct public article-image 640x480 JPEG hashes for CMS59 news, sport and culture.",
-      "mitigation": "Verified an existing authorized HTTPS path on two already-public files, with actual distinct hashes and MIME.",
+      "impact": "Sixteen pending items in Raanana owner's evening checkpoint, two new drafts held, zero new releases. The controller verified distinct JPEG bytes on two metadata-resolved public file routes.",
+      "mitigation": "Resolve non-private get_file URL against the matching public website, follow its canonical redirect, verify status, MIME and image signature, then hash served bytes. Keep same file variant for comparisons and separately check candidate authorization.",
       "prevention": "Run byte and rights checks independently from CMS metadata and distinguish source bytes from served crops.",
-      "next_action": "Candidate rights, owner runtime and rendered 390px QA remain unverified.",
+      "next_action": "Reuse the documented file path for the adjacent image side of the checks in the authorized owner runtime. Obtain and verify candidate source bytes and rights separately before any release.",
       "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json",
-      "last_seen_at": "2026-11-27T12:56:52Z",
+      "last_seen_at": "2026-11-27T17:44:08Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
       "occurrences": [
         {
@@ -9365,12 +9433,21 @@
           "controller_run": "e1e7bd73-82e4-8330-8432-8811075361c4",
           "observed_at": "2026-11-27T12:56:52Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+        },
+        {
+          "owner_run_id": "bd3a652f-4ed4-8327-8330-702078eb3341",
+          "inbox": "ops/incident-response/inbox/74d368d0-4adc-8330-94e6-7027d1f620ae-raanana-cms-public-image-readback.json",
+          "controller_run": "74d368d0-4adc-8330-94e6-7027d1f620ae",
+          "observed_at": "2026-11-27T17:44:08Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
         }
       ],
       "first_reported_date": "2026-11-24",
       "first_timestamped_evidence_at": "2026-11-24T12:07:22.859Z",
-      "latest_media_scope": "Scoped controller and owner DNS failures. Public outage not established. No approved media bytes or browser visual QA here.",
-      "next": "Existing owner can use the observed public article-image URLs via ordinary HTTP for adjacent-image comparison. Confirm the candidate's own binary, rights and writer-environment access before release."
+      "latest_media_scope": "Verified different publicly served JPEG bytes from controller environment. Owner DNS and rights for draft images remain unresolved. The tested file addresses represent public bytes, not proof of underlying original-source bytes or publication permission.",
+      "next": "Existing owner can use the observed public article-image URLs via ordinary HTTP for adjacent-image comparison. Confirm the candidate's own binary, rights and writer-environment access before release.",
+      "updated_at": "2026-11-27T17:44:08Z",
+      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
     },
     {
       "id": "tlvnet-guide-missing-taxonomy-asset",
@@ -9730,14 +9807,24 @@
           "controller_run": "e1e7bd73-82e4-8330-8432-8811075361c4",
           "observed_at": "2026-11-27T12:56:52Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+        },
+        {
+          "owner_run_id": "390b6c55-74a4-8320-9e5a-139d19e7d9b2",
+          "inbox": "ops/incident-response/inbox/74d368d0-4adc-8330-94e6-7027d1f620ae-herzliya-desk-raziel-lease.json",
+          "controller_run": "74d368d0-4adc-8330-94e6-7027d1f620ae",
+          "observed_at": "2026-11-27T17:44:08Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
         }
       ],
       "status": "open",
       "classification": "writer_lease",
-      "root_cause": "Owner reported NULL when requesting its shared writing lease. Lock backend and cause unconfirmed. Free CMS62 GitHub lease is separate evidence and does not cancel the reported result.",
-      "next_action": "Identify the exact shared writer lease backend in the owner's report and validate its active ownership before attempting the next write.",
-      "last_seen_at": "2026-11-27T12:56:52Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+      "root_cause": "Owner matched active Desk assignment for already live Raziel story to writer lease denial; owner reports expiry 2026-11-28T10:40:00+02:00.",
+      "next_action": "Authorized Desk owner reconciles the active Raziel assignment against existing published record through normal Desk flow, checks writer access, and validates the next legitimate new publication. Do not bypass shared assignment.",
+      "last_seen_at": "2026-11-27T17:44:08Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
+      "updated_at": "2026-11-27T17:44:08Z",
+      "impact": "Owner reports gating of new independent stories. Existing Raziel article and handball score update independently available on public site.",
+      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
     },
     {
       "id": "tlvnet-real-estate-unresolved-sde-dov-neighborhood-slug",
