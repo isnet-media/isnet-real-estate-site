@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "61d78629-e180-8330-a5b3-3b7463885bfe",
+  "runKey": "ops-2026-11-27-61d78629-e180-8330-a5b3-3b7463885bfe",
+  "policy_version": "2026-11-15/1.2",
+  "private_policy_read": {
+    "revision": 4,
+    "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
+    "last_read_at": "2026-11-27 13:43:36.074873+00"
+  },
+  "observed_at": "2026-11-27T13:44:41Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-27/61d78629-e180-8330-a5b3-3b7463885bfe.json",
+  "deployment": {
+    "version": 761,
+    "source_commit": "1eca5a2193bdd8c6061ef55a2d62f0236d78eebc",
+    "deployment_id": "appgdep_6b09759e047481919172ebc9a6e97d00",
+    "status": "succeeded",
+    "completed_at": "2026-11-27T12:21:02.367178+00:00",
+    "unchanged_from": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+  },
+  "home": {
+    "url": "https://tlvnet.com/",
+    "http": 200,
+    "reader_seconds": 11.08414,
+    "verified_links": {
+      "rothschild-raanan-stabbings-20261127": true,
+      "tel-aviv-night-drink-driving-enforcement-20261127": true,
+      "ibn-gabirol-green-stations-wall-casting-20261201": true,
+      "hagana-purple-line-directional-closures-20261129": true,
+      "tel-aviv-neighborhood-tool-libraries-20261127": true
+    }
+  },
+  "desk": {
+    "checked_at": "2026-11-27 13:43:37.932225+00",
+    "health": {
+      "last_backup_at": "2026-11-27T09:52:59.641332+00:00",
+      "hours_since_backup": 3.8439696925,
+      "failed_backups_7d": 0,
+      "handoff_stuck_over_2h": 0,
+      "handoff_failed": 3,
+      "autopublish_enabled": false,
+      "last_migration": "20261127_100000_alert_log"
+    },
+    "backups": [
+      {
+        "kind": "db",
+        "ok": true,
+        "created_at": "2026-11-26T12:55:47.730012+00:00"
+      },
+      {
+        "kind": "media",
+        "ok": true,
+        "created_at": "2026-11-26T10:17:51.799605+00:00"
+      }
+    ],
+    "reconcile": {
+      "runid": 183,
+      "status": "succeeded",
+      "start_time": "2026-11-27T13:40:00.051502+00:00",
+      "end_time": "2026-11-27T13:40:00.05888+00:00"
+    },
+    "herzliya_queued": {
+      "count": 0,
+      "oldest_handoff_at": null,
+      "oldest_created_at": null
+    },
+    "backup_age_hours": {
+      "db": 24.797278333333335,
+      "media": 27.429481388888888
+    },
+    "alert": "Media remains beyond threshold on same latest success, already reported. DB below threshold; reconcile and queue healthy.",
+    "prior_alert": "ops/incident-response/inbox/20261127-desk-staging-external-media-backup-age.json"
+  },
+  "tlvnet_backup": {
+    "components": [
+      {
+        "id": "administrative-state",
+        "checksum": "6603d6d2c133f69309393428c5be5dbc626c9ec494ed15e0985de9fb0b988622",
+        "updated_at": "2026-11-27T07:17:07.889Z",
+        "error": false
+      },
+      {
+        "id": "recent-news",
+        "checksum": "a28afa38f7acfa4e24c11b4362ff1062abfcc838f7141e5bbb04705f3cf1a20c",
+        "updated_at": "2026-11-27T12:21:59.714Z",
+        "error": false
+      },
+      {
+        "id": "source-configuration",
+        "checksum": "b93b33aca108b8ea156b1ee628acc3a3e29cccbf65edbf13b881edab5cef5815",
+        "updated_at": "2026-11-27T12:22:02.411Z",
+        "error": false
+      }
+    ],
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    }
+  },
+  "actions": {
+    "new": [
+      {
+        "id": 46002711191,
+        "name": "Record operation failures",
+        "created_at": "2026-11-27T12:55:36Z",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 46002698097,
+        "name": "Record operation failures",
+        "created_at": "2026-11-27T12:55:30Z",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 46002597842,
+        "name": "Record operation failures",
+        "created_at": "2026-11-27T12:54:47Z",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "id": 46002597479,
+        "name": "Public events health checks",
+        "created_at": "2026-11-27T12:54:47Z",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 46002597256,
+        "name": "Verify public event feed read-back",
+        "created_at": "2026-11-27T12:54:46Z",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "reconciled": {
+      "id": 46002264278,
+      "status": "completed",
+      "conclusion": "success",
+      "manifest": {
+        "source_commit": "5fae942d6ac851609189f5eced15e71be8d60ba8",
+        "run_id": "46002264278",
+        "run_attempt": "1"
+      },
+      "public_http": 200,
+      "verified_exact": true,
+      "url": "https://isnet.co.il/deployment-version.json"
+    },
+    "history": "118 historical entries remain in2workflow groups; failed-step metadata only, roots unconfirmed."
+  },
+  "owners": [
+    {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "run": "ee3b2692-fa88-8327-8812-b33b2e3222d6",
+      "status": "completed",
+      "result_run": "ee3b2692-fa88-8327-8812-b33b2e3222d6"
+    },
+    {
+      "task_id": "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a",
+      "run": "d6c91d0a-cf20-8320-92bd-834f6748aced",
+      "status": "completed",
+      "result_run": "d6c91d0a-cf20-8320-92bd-834f6748aced"
+    }
+  ],
+  "inbox_delta": [],
+  "social": {
+    "new_rows": [
+      {
+        "slot": "2026-11-27T13",
+        "status": "published",
+        "article_url": "https://tlvnet.com/news/rothschild-raanan-stabbings-20261127.html",
+        "post_id": "1520426491146188_122114810319545268",
+        "detail": null,
+        "started_at": "2026-11-27T13:00:02.216Z",
+        "finished_at": "2026-11-27T13:00:16.721Z"
+      }
+    ],
+    "public_verification": "DisabledError, no resend warranted"
+  },
+  "controller_editorial_writes": 0,
+  "controller_deploys": 0
+}
