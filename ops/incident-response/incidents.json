@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T12:56:52Z",
+  "updated_at": "2026-11-27T14:38:58Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9725,6 +9725,36 @@
       "next_action": "Identify the exact shared writer lease backend in the owner's report and validate its active ownership before attempting the next write.",
       "last_seen_at": "2026-11-27T12:56:52Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+    },
+    {
+      "id": "tlvnet-real-estate-unresolved-sde-dov-neighborhood-slug",
+      "status": "open",
+      "owner_task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "article_id": "rainbow-sde-dov-q3-sales-reported-20261127",
+      "public_article": "https://tlvnet.com/news/rainbow-sde-dov-q3-sales-reported-20261127",
+      "root_cause": "The published article names sde-dov as a neighborhood slug. The live neighborhood registry contains no matching slug or alias, and the article is absent from the public updates snapshot. The neighborhood endpoint rejects the unrecognized name.",
+      "impact": "The article is live in its own page, the homepage and real-estate section. The neighborhood feed omits it.",
+      "next_action": "The real-estate owner should confirm the project's actual geography, map it to a supported neighborhood or area where appropriate, and add a publication check that flags unresolved explicit neighborhood slugs. Verify the exact feed and area on the next normal owner release.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/642d4d88-0144-8330-a422-a4a5a18af92f.json",
+      "updated_at": "2026-11-27T14:38:58Z",
+      "first_seen_at": "2026-11-27T14:38:58Z",
+      "occurrences": [
+        {
+          "run_id": "642d4d88-0144-8330-a422-a4a5a18af92f",
+          "writer_run_id": "07c3600f-8390-8333-be53-2adb48828b29",
+          "saved_version": 762,
+          "source_commit": "0e8bea6d71d3232124be759f73c8d224656549ee",
+          "observed_at": "2026-11-27T14:38:58Z",
+          "inbox": "ops/incident-response/inbox/642d4d88-0144-8330-a422-a4a5a18af92f-real-estate-rainbow-neighborhood.json",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/642d4d88-0144-8330-a422-a4a5a18af92f.json"
+        }
+      ],
+      "prevention": "Validate explicit neighborhood identifiers against the production registry before a release, while preserving independently valid article publication.",
+      "tests": [
+        "Article, homepage and real-estate section show the article.",
+        "Live updates snapshot omits the article and exact neighborhood route API returns 400.",
+        "Registry lacks sde-dov, while the other article's lamed slug resolves and appears in its area."
+      ]
     }
   ],
   "last_review_runKey": "ops-2026-11-27-e1e7bd73-82e4-8330-8432-8811075361c4",
