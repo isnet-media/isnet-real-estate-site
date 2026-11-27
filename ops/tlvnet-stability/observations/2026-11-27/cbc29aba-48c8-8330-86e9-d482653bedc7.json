@@ -1,0 +1,365 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "cbc29aba-48c8-8330-86e9-d482653bedc7",
+  "runKey": "ops-2026-11-27-cbc29aba-48c8-8330-86e9-d482653bedc7",
+  "observed_at": "2026-11-27T16:24:42Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json",
+  "policy_version": "2026-11-15/1.2",
+  "private_definition_revision": 4,
+  "status": "no_update_existing_issues_monitored",
+  "saved_version": 762,
+  "deployed_source_commit": "0e8bea6d71d3232124be759f73c8d224656549ee",
+  "deployment_id": "appgdep_6b0990f7657c8191b9dcb1e052377a89",
+  "new_actions": 2,
+  "new_external_inbox": 0,
+  "new_social_rows": 1,
+  "controller_new_deployments": 0,
+  "private_policy_read": {
+    "revision": 4,
+    "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
+    "last_read_at": "2026-11-27 16:22:41.553465+00"
+  },
+  "deployment": {
+    "id": "appgdep_6b0990f7657c8191b9dcb1e052377a89",
+    "status": "succeeded",
+    "completed_at": "2026-11-27T14:17:43.224418+00:00",
+    "unchanged": true
+  },
+  "home": {
+    "sample": "200 5.884986 https://tlvnet.com/",
+    "lead": "שבעה מחסני השאלה ברשימה של תל אביב. לשניים יש הודעות השבתה, ואחד החליף אתר",
+    "sections": {
+      "local-news": [
+        "/news/rothschild-raanan-stabbings-20261127",
+        "/news/tel-aviv-night-drink-driving-enforcement-20261127"
+      ],
+      "local-bli-heshbon": [
+        "/news/jaffa-saraya-opening-archive-20261127",
+        "/news/yad-eliyahu-affordable-rent-count-20261126"
+      ],
+      "local-real-estate": [
+        "/news/shikun-l-objections-5500-20261126",
+        "/news/rainbow-sde-dov-q3-sales-reported-20261127"
+      ],
+      "local-economy-tech": [
+        "/news/tlv-mall-q3-2026-financial-report-1001564354",
+        "/news/q-security-post-quantum-seed-tlv-20261126"
+      ],
+      "local-community": [
+        "/news/liebling-public-space-policy-20261214",
+        "/news/ficus-hackathon-20261122"
+      ],
+      "local-sports": [
+        "/news/maccabi-miller-return-league-blitz-injury-20261126",
+        "/news/hapoel-petah-tikva-return-boateng-preview-20261126"
+      ],
+      "local-culture-news": [
+        "/news/hanukkah-bialik-20261210",
+        "/news/jaffa-saraya-culture-center-20261125"
+      ],
+      "local-consumer": [
+        "/news/next-israel-delivery-collection-20261126",
+        "/news/universal-sardines-arsenic-recall-20261125"
+      ]
+    }
+  },
+  "reader_qualification": "Completed low-impact homepage HTML sample. No production latency percentile or viewport review inferred.",
+  "desk": {
+    "checked_at": "2026-11-27 16:22:58.820364+00",
+    "health": {
+      "last_backup_at": "2026-11-27T09:52:59.641332+00:00",
+      "hours_since_backup": 6.499771953333333,
+      "failed_backups_7d": 0,
+      "handoff_stuck_over_2h": 0,
+      "handoff_failed": 3,
+      "autopublish_enabled": false,
+      "last_migration": "20261127_100000_alert_log"
+    },
+    "backups": [
+      {
+        "kind": "db",
+        "ok": true,
+        "created_at": "2026-11-26T12:55:47.730012+00:00"
+      },
+      {
+        "kind": "media",
+        "ok": true,
+        "created_at": "2026-11-26T10:17:51.799605+00:00"
+      }
+    ],
+    "reconcile": {
+      "runid": 199,
+      "status": "succeeded",
+      "start_time": "2026-11-27T16:20:00.119439+00:00",
+      "end_time": "2026-11-27T16:20:00.137737+00:00"
+    },
+    "herzliya_queued": {
+      "count": 0,
+      "oldest_handoff_at": null,
+      "oldest_created_at": null
+    },
+    "backup_age_hours": {
+      "db": 27.453080555555555,
+      "media": 30.085283611111112
+    },
+    "alert": "Reported external DB and media backup freshness breaches still open. Same latest successful receipts. Reconciliation succeeded and Herzliya queue empty.",
+    "db_alert": "ops/incident-response/inbox/20261127-desk-staging-external-db-backup-age.json",
+    "prior_alert": "ops/incident-response/inbox/20261127-desk-staging-external-media-backup-age.json",
+    "observed_at": "2026-11-27T16:24:42Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+  },
+  "desk_receipt_changes": [],
+  "github_actions": {
+    "runs": [
+      {
+        "id": 46025510460,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T15:30:27Z",
+        "source_commit": "de333693e0d8a56a007a53d7883231a58a852482",
+        "event": "workflow_run"
+      },
+      {
+        "id": 46025440936,
+        "name": "Audit event illustration coverage",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T15:30:02Z",
+        "source_commit": "de333693e0d8a56a007a53d7883231a58a852482",
+        "event": "schedule"
+      },
+      {
+        "id": 46021509589,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T15:03:54Z",
+        "source_commit": "a9735ba0a3ee5575caf48f55ce935ed2876120f1",
+        "event": "workflow_run"
+      }
+    ],
+    "total_count": 3,
+    "historical_remaining": 118
+  },
+  "social": {
+    "rows": [
+      {
+        "slot": "2026-11-27T16",
+        "status": "published",
+        "article_url": "https://tlvnet.com/news/rainbow-sde-dov-q3-sales-reported-20261127.html",
+        "post_id": "1520426491146188_122114882271545268",
+        "detail": null,
+        "started_at": "2026-11-27T16:00:02.145Z",
+        "finished_at": "2026-11-27T16:00:17.594Z"
+      }
+    ],
+    "public_status": "The public permalink reader returned DisabledError. Recorded status only, no resend.",
+    "worker_meta_request": "Sampled GET /meta.json 404 is not evidence of a social send failure."
+  },
+  "worker_sample": {
+    "limit": 15,
+    "events": [
+      {
+        "at": "2026-11-27T16:23:13.988Z",
+        "level": "info",
+        "status": 404,
+        "outcome": "ok",
+        "signal": "favicon"
+      },
+      {
+        "at": "2026-11-27T16:06:28.469Z",
+        "level": "info",
+        "status": 404,
+        "outcome": "ok",
+        "signal": "social"
+      },
+      {
+        "at": "2026-11-27T15:59:15.692Z",
+        "level": "info",
+        "status": 404,
+        "outcome": "ok",
+        "signal": "unclassified"
+      },
+      {
+        "at": "2026-11-27T15:58:01.975Z",
+        "level": "info",
+        "outcome": "canceled",
+        "signal": "unclassified"
+      },
+      {
+        "at": "2026-11-27T15:57:57.578Z",
+        "level": "info",
+        "status": 404,
+        "outcome": "ok",
+        "signal": "unclassified"
+      },
+      {
+        "at": "2026-11-27T15:57:23.518Z",
+        "level": "info",
+        "outcome": "canceled",
+        "signal": "unclassified"
+      },
+      {
+        "at": "2026-11-27T15:48:08.281Z",
+        "level": "info",
+        "outcome": "canceled",
+        "signal": "unclassified"
+      },
+      {
+        "at": "2026-11-27T15:48:00.113Z",
+        "level": "info",
+        "status": 404,
+        "outcome": "ok",
+        "signal": "favicon"
+      },
+      {
+        "at": "2026-11-27T15:35:33.633Z",
+        "level": "error",
+        "outcome": "exception",
+        "signal": "unclassified"
+      },
+      {
+        "at": "2026-11-27T15:35:33.633Z",
+        "level": "error",
+        "signal": "body_stream"
+      },
+      {
+        "at": "2026-11-27T15:35:13.510Z",
+        "level": "info",
+        "status": 404,
+        "outcome": "ok",
+        "signal": "unclassified"
+      }
+    ],
+    "focused_events": [
+      {
+        "at": "2026-11-27T16:06:28.469Z",
+        "path": "/meta.json",
+        "method": "GET",
+        "status": 404,
+        "outcome": "ok",
+        "bodyStream": false,
+        "errorName": null
+      },
+      {
+        "at": "2026-11-27T15:35:33.633Z",
+        "path": "/xmlrpc.php",
+        "method": "POST",
+        "outcome": "exception",
+        "bodyStream": false,
+        "errorName": null
+      },
+      {
+        "at": "2026-11-27T15:35:33.633Z",
+        "path": "/xmlrpc.php",
+        "method": "POST",
+        "bodyStream": true,
+        "errorName": null
+      }
+    ],
+    "known_occurrence": {
+      "id": "tlvnet-worker-fallback-disturbed-response-stream",
+      "status": "open",
+      "controller_run": "cbc29aba-48c8-8330-86e9-d482653bedc7",
+      "observed_at": "2026-11-27T16:24:42Z",
+      "event_at": "2026-11-27T15:35:33.633Z",
+      "method": "POST",
+      "path": "/xmlrpc.php",
+      "signal": "Consumed response stream observed on unsupported WordPress path. No affected normal publication or navigation route verified.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+    }
+  },
+  "tlvnet_backup_components": {
+    "components": [
+      {
+        "id": "administrative-state",
+        "checksum": "6603d6d2c133f69309393428c5be5dbc626c9ec494ed15e0985de9fb0b988622",
+        "updated_at": "2026-11-27T07:17:07.889Z",
+        "error_present": false
+      },
+      {
+        "id": "recent-news",
+        "checksum": "dd2456096f03ec1b4fe6dd7957d8718cbc41f9c954ed211086b42c9a64ec78f9",
+        "updated_at": "2026-11-27T15:35:16.709Z",
+        "error_present": false
+      },
+      {
+        "id": "source-configuration",
+        "checksum": "40f450f0c6242d65376f819eeee239900634b76f9cc4c4b8d8f1c92c17edba7c",
+        "updated_at": "2026-11-27T15:35:17.540Z",
+        "error_present": false
+      }
+    ],
+    "previous_evidence": "ops/tlvnet-stability/observations/2026-11-27/61d78629-e180-8330-a5b3-3b7463885bfe.json",
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    },
+    "qualification_started_at": null,
+    "qualification": "Component records only; full external backup and isolated full-running-site recovery are not inferred."
+  },
+  "owner_runs": {
+    "Automation_845f7ef0033c8191b7490e0dc5748754": {
+      "title": "כתב חדשות — רעננה",
+      "run_id": "ee3b2692-fa88-8327-8812-b33b2e3222d6",
+      "started_at": "2026-11-27T11:57:42.543955Z",
+      "status": "completed",
+      "result_run_id": "ee3b2692-fa88-8327-8812-b33b2e3222d6",
+      "matching_result": true
+    },
+    "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a": {
+      "title": "מערכת הרצליה נט",
+      "run_id": "d6c91d0a-cf20-8320-92bd-834f6748aced",
+      "started_at": "2026-11-27T12:31:15.563056Z",
+      "status": "completed",
+      "result_run_id": "d6c91d0a-cf20-8320-92bd-834f6748aced",
+      "matching_result": true
+    },
+    "Automation_b3345c399b988191a1ba9848e3e3668b": {
+      "title": "חדשות תל אביב — שלוש פעמים ביום",
+      "run_id": "34db6762-9018-8328-a8f2-d434f925a070",
+      "started_at": "2026-11-27T12:04:06.806799Z",
+      "status": "completed",
+      "result_run_id": "34db6762-9018-8328-a8f2-d434f925a070",
+      "matching_result": true
+    },
+    "Automation_499e6c8b36648191a9f8f102b0d5d6fe": {
+      "title": "חדשות ספורט — פעמיים ביום",
+      "run_id": "ff227f55-6a00-832e-bbcc-30938d2141df",
+      "started_at": "2026-11-27T07:03:29.022183Z",
+      "status": "completed",
+      "result_run_id": "ff227f55-6a00-832e-bbcc-30938d2141df",
+      "matching_result": true
+    }
+  },
+  "lease": {
+    "state": "free",
+    "owner": null,
+    "lease_until": null
+  },
+  "retained_task_attempts": [
+    {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "title": "כתב חדשות — רעננה",
+      "enabled": true,
+      "run_id": "f177b9fd-b3e0-832f-8c0e-29cd750fa2ce",
+      "started_at": "2026-11-26T17:00:12.094006Z",
+      "completed_at": "2026-11-26T17:01:11.753840Z",
+      "scheduled_for": "2026-11-26T17:00:00Z",
+      "recorded_status": "completed",
+      "result_run_id": null,
+      "result_created_at": null,
+      "result_matches_attempt": false,
+      "reason": "Completed status without linked attempt result or exact release evidence.",
+      "observed_at": "2026-11-26T17:34:00Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/2bd2263e-970c-8324-8053-afe2cbaa6aff.json"
+    }
+  ],
+  "retained_article_followups": [
+    "tlvnet-real-estate-unresolved-sde-dov-neighborhood-slug"
+  ]
+}
