@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T18:37:32Z",
+  "updated_at": "2026-11-27T19:44:26Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9655,9 +9655,9 @@
       "root_cause": "TLVNET archive packaging ran out of space in tmpfs after a successful build.",
       "impact": "One packaging attempt failed; same source succeeded with workspace-backed staging.",
       "mitigation": "Workspace-backed staging replaced full tmpfs; same source packaged and deployed.",
-      "prevention": "Select staging and output locations with enough space for both copies.",
+      "prevention": "Check free space before packaging; use workspace-backed staging if tmpfs cannot hold a full staging copy, and check archive-output space too.",
       "inbox": "ops/incident-response/inbox/2026-11-26-real-estate-package-enospc-fa169c6b.json",
-      "last_seen_at": "2026-11-26T15:48:19Z",
+      "last_seen_at": "2026-11-27T19:44:26Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
       "occurrences": [
         {
@@ -9666,8 +9666,20 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
           "inbox": "ops/incident-response/inbox/2026-11-26-real-estate-package-enospc-fa169c6b.json",
           "deployment_id": "appgdep_6b08482e5974819189c7e7ee4341d2ea"
+        },
+        {
+          "controller_run": "d4b0d9c3-5304-8330-b130-c4318303ee80",
+          "observed_at": "2026-11-27T19:44:26Z",
+          "owner_run": "44177cd3-c710-832a-b1d3-47a939f06075",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/d4b0d9c3-5304-8330-b130-c4318303ee80.json",
+          "inbox": "ops/incident-response/inbox/2026-11-27-sports-44177cd3-packaging-enospc.json",
+          "deployment_id": "appgdep_6b09d6893e148191b0442ce4f98b78fd",
+          "occurrence_resolution": "fixed_verified_for_this_release"
         }
-      ]
+      ],
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-27/d4b0d9c3-5304-8330-b130-c4318303ee80.json",
+      "latest_workaround": "Workspace-backed TMPDIR, same build and source SHA. Public proof on all three articles.",
+      "permanent_fix_verified": false
     },
     {
       "id": "official-poster-content-type-is-not-reuse-permission",
