@@ -1,0 +1,525 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "e1e7bd73-82e4-8330-8432-8811075361c4",
+  "runKey": "ops-2026-11-27-e1e7bd73-82e4-8330-8432-8811075361c4",
+  "policy_version": "2026-11-15/1.2",
+  "private_policy_read": {
+    "revision": 4,
+    "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
+    "last_read_at": "2026-11-27 12:53:43.584105+00"
+  },
+  "observed_at": "2026-11-27T12:56:52Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
+  "deployment": {
+    "version": 761,
+    "source_commit": "1eca5a2193bdd8c6061ef55a2d62f0236d78eebc",
+    "deployment_id": "appgdep_6b09759e047481919172ebc9a6e97d00",
+    "status": "succeeded",
+    "completed_at": "2026-11-27T12:21:02.367178+00:00"
+  },
+  "home": {
+    "url": "https://tlvnet.com/",
+    "http": 200,
+    "reader_seconds": 7.720253
+  },
+  "desk": {
+    "checked_at": "2026-11-27 12:53:45.163177+00",
+    "health": {
+      "last_backup_at": "2026-11-27T09:52:59.641332+00:00",
+      "hours_since_backup": 3.0126449569444445,
+      "failed_backups_7d": 0,
+      "handoff_stuck_over_2h": 0,
+      "handoff_failed": 3,
+      "autopublish_enabled": false,
+      "last_migration": "20261127_100000_alert_log"
+    },
+    "backups": [
+      {
+        "kind": "db",
+        "ok": true,
+        "created_at": "2026-11-26T12:55:47.730012+00:00"
+      },
+      {
+        "kind": "media",
+        "ok": true,
+        "created_at": "2026-11-26T10:17:51.799605+00:00"
+      }
+    ],
+    "reconcile": {
+      "runid": 178,
+      "status": "succeeded",
+      "start_time": "2026-11-27T12:50:00.11316+00:00",
+      "end_time": "2026-11-27T12:50:00.120377+00:00"
+    },
+    "herzliya_queued": {
+      "count": 0,
+      "oldest_handoff_at": null,
+      "oldest_created_at": null
+    },
+    "backup_age_hours": {
+      "db": 23.96595361111111,
+      "media": 26.598156666666668
+    },
+    "alert": {
+      "path": "ops/incident-response/inbox/20261127-desk-staging-external-media-backup-age.json",
+      "saved": true,
+      "scope": "staging media backup freshness; job history restricted by connector"
+    }
+  },
+  "news": {
+    "owner": {
+      "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+      "title": "חדשות תל אביב — שלוש פעמים ביום",
+      "enabled": true,
+      "run_id": "34db6762-9018-8328-a8f2-d434f925a070",
+      "status": "completed",
+      "started_at": "2026-11-27T12:04:06.806799Z",
+      "completed_at": "2026-11-27T12:23:11.411519Z",
+      "result_run_id": "34db6762-9018-8328-a8f2-d434f925a070",
+      "matched": true
+    },
+    "proof": [
+      {
+        "id": "rothschild-raanan-stabbings-20261127",
+        "url": "https://tlvnet.com/news/rothschild-raanan-stabbings-20261127",
+        "http": "200 text/html; charset=utf-8 https://tlvnet.com/news/rothschild-raanan-stabbings-20261127",
+        "body": true,
+        "head": "שני אירועי דקירה בתל אביב לפנות בוקר, חשוד נעצר",
+        "picture": "https://tlvnet.com/photo-bank/assets/rothschild-boulevard-2016.jpg",
+        "picture_status": "200 image/jpeg https://tlvnet.com/photo-bank/assets/rothschild-boulevard-2016.jpg",
+        "jpeg": true,
+        "hash_match": true,
+        "credit": "אילוסטרציה · שדרות רוטשילד, צילום ארכיון · ארכיון 2016-10-28 · צילום: Arnonbreuer · CC BY-SA 4.0 מקור · רישיון",
+        "home": true,
+        "section": true,
+        "areas": [],
+        "city": [],
+        "published": "2026-11-27T12:12:14.310011+00:00",
+        "run_key": "34db6762-9018-8328-a8f2-d434f925a070"
+      },
+      {
+        "id": "tel-aviv-night-drink-driving-enforcement-20261127",
+        "url": "https://tlvnet.com/news/tel-aviv-night-drink-driving-enforcement-20261127",
+        "http": "200 text/html; charset=utf-8 https://tlvnet.com/news/tel-aviv-night-drink-driving-enforcement-20261127",
+        "body": true,
+        "head": "שבעה נהגים עוכבו או נעצרו בחשד לנהיגה בשכרות במרכז תל אביב",
+        "picture": "https://tlvnet.com/photo-bank/assets/police-patrol-tlv-2026.jpg",
+        "picture_status": "200 image/jpeg https://tlvnet.com/photo-bank/assets/police-patrol-tlv-2026.jpg",
+        "jpeg": true,
+        "hash_match": true,
+        "credit": "אילוסטרציה · ניידת משטרה בתל אביב · 2026-02-28 · ארכיון · צילום: MoserB · CC0 1.0 מקור · רישיון",
+        "home": true,
+        "section": true,
+        "areas": [],
+        "city": [],
+        "published": "2026-11-27T12:12:14.310011+00:00",
+        "run_key": "34db6762-9018-8328-a8f2-d434f925a070"
+      },
+      {
+        "id": "ibn-gabirol-green-stations-wall-casting-20261201",
+        "url": "https://tlvnet.com/news/ibn-gabirol-green-stations-wall-casting-20261201",
+        "http": "200 text/html; charset=utf-8 https://tlvnet.com/news/ibn-gabirol-green-stations-wall-casting-20261201",
+        "body": true,
+        "head": "שלוש תחנות באבן גבירול נכנסות לחודש של עבודות ערב",
+        "picture": "https://tlvnet.com/photo-bank/assets/city-hall-rabin-2020.jpg",
+        "picture_status": "200 image/jpeg https://tlvnet.com/photo-bank/assets/city-hall-rabin-2020.jpg",
+        "jpeg": true,
+        "hash_match": true,
+        "credit": "אילוסטרציה · בניין העירייה וכיכר רבין ממגדל גן העיר · ארכיון 2020-08-12 · צילום: Anagoria · CC BY 3.0 מקור · רישיון",
+        "home": true,
+        "section": true,
+        "areas": [
+          "north"
+        ],
+        "city": [
+          [
+            "הצפון הישן"
+          ]
+        ],
+        "published": "2026-11-27T12:12:14.310011+00:00",
+        "run_key": "34db6762-9018-8328-a8f2-d434f925a070"
+      },
+      {
+        "id": "hagana-purple-line-directional-closures-20261129",
+        "url": "https://tlvnet.com/news/hagana-purple-line-directional-closures-20261129",
+        "http": "200 text/html; charset=utf-8 https://tlvnet.com/news/hagana-purple-line-directional-closures-20261129",
+        "body": true,
+        "head": "סגירות לילה בדרך ההגנה מיום ראשון: הכיוון משתנה לפי התאריך",
+        "picture": "https://tlvnet.com/photo-bank/assets/tlv-night-roadworks-ai-20261109.jpg",
+        "picture_status": "200 image/jpeg https://tlvnet.com/photo-bank/assets/tlv-night-roadworks-ai-20261109.jpg",
+        "jpeg": true,
+        "hash_match": true,
+        "credit": "אילוסטרציה – AI",
+        "home": true,
+        "section": true,
+        "areas": [
+          "area"
+        ],
+        "city": [
+          [
+            "התקווה"
+          ]
+        ],
+        "published": "2026-11-27T12:12:14.310011+00:00",
+        "run_key": "34db6762-9018-8328-a8f2-d434f925a070"
+      }
+    ],
+    "section": "https://tlvnet.com/news/",
+    "owner_queue": {
+      "discovered": 12,
+      "new": 4,
+      "ready": 0,
+      "verification": 25
+    },
+    "mobile": "pending",
+    "neighborhood": "Hatikva and Old North links verified in feed and area HTML. Generic city-center mapping absent from sampled Lev Tel Aviv route; distinct target unresolved."
+  },
+  "herzliya": {
+    "owner": {
+      "task_id": "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a",
+      "title": "מערכת הרצליה נט",
+      "enabled": true,
+      "run_id": "d6c91d0a-cf20-8320-92bd-834f6748aced",
+      "status": "completed",
+      "started_at": "2026-11-27T12:31:15.563056Z",
+      "completed_at": "2026-11-27T12:41:07.585269Z",
+      "result_run_id": "d6c91d0a-cf20-8320-92bd-834f6748aced",
+      "matched": true
+    },
+    "published_owner_version": 48,
+    "new": 0,
+    "lock_observation": "Owner reported shared lease returned NULL. CMS62 GitHub lease presently free; identity of owner's lock and root cause unconfirmed.",
+    "alt_proof": [
+      {
+        "alt": "כלב וחתול צועדים בשביל במדיירה — צילום להמחשה בלבד",
+        "src": "/media/cms/1900000027.jpg"
+      }
+    ],
+    "live_url": "https://herzliyanet.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/herzliya-sos-adoption-day-20261128/"
+  },
+  "raanana": {
+    "owner": {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "title": "כתב חדשות — רעננה",
+      "enabled": true,
+      "run_id": "ee3b2692-fa88-8327-8812-b33b2e3222d6",
+      "status": "completed",
+      "started_at": "2026-11-27T11:57:42.543955Z",
+      "completed_at": "2026-11-27T12:00:34.202184Z",
+      "result_run_id": "ee3b2692-fa88-8327-8812-b33b2e3222d6",
+      "matched": true
+    },
+    "owner_queue": 13,
+    "owner_drafts": 2,
+    "source_report": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json",
+    "public_jpgs": [
+      {
+        "url": "https://www.raanananet.co.il/%d7%97%d7%93%d7%a9%d7%95%d7%aa/%d7%94%d7%99%d7%95%d7%9d-%d7%95%d7%9e%d7%97%d7%a8-%d7%91%d7%a8%d7%a2%d7%a0%d7%a0%d7%94-%d7%97%d7%a1%d7%99%d7%9e%d7%95%d7%aa-%d7%91%d7%a8%d7%97%d7%95%d7%91%d7%95%d7%aa-%d7%9e%d7%9b%d7%91%d7%99-%d7%95%d7%90%d7%9c%d7%a4%d7%a1%d7%99-%d7%91%d7%a9%d7%a2%d7%95%d7%aa-%d7%94%d7%99%d7%95%d7%9d-812989",
+        "dom_article_image": "https://www.raanananet.co.il/dyncontent/tmp/194/2026_11_25_bb786d2d-adc6-46c7-9c2e-e14f4b8d40e2_640_480_Crop_.jpg",
+        "result": "200 image/jpeg",
+        "jpeg": true,
+        "sha256": "b790c8be47a7dafce569f358daa2bd173202f0a11a2549eba5325505a2a70337"
+      },
+      {
+        "url": "https://www.raanananet.co.il/%d7%a1%d7%a4%d7%95%d7%a8%d7%98/%d7%a9%d7%9c%d7%95%d7%a9%d7%a2%d7%a8-%d7%91%d7%97%d7%9e%d7%a9-%d7%93%d7%a7%d7%95%d7%aa-%d7%9c%d7%95%d7%a8%d7%9f-%d7%96%d7%90%d7%95%d7%93%d7%94-%d7%94%d7%95%d7%91%d7%99%d7%9c%d7%94-%d7%90%d7%aa-%d7%a0%d7%a2%d7%a8%d7%95%d7%aa-%d7%a8%d7%a2%d7%a0%d7%a0%d7%94-%d7%9c-5-0-813252",
+        "dom_article_image": "https://www.raanananet.co.il/dyncontent/tmp/132/2026_11_27_06cbcaa8-d6e1-45a2-883d-2056f345b6f3_640_480_Crop_.jpg",
+        "result": "200 image/jpeg",
+        "jpeg": true,
+        "sha256": "cae463c5a0c028f0862e54acb8cf54e98335c12ec9a0c9ff724fc9cef9f03f6a"
+      },
+      {
+        "url": "https://raanananet.co.il/תרבות-נט/נשות-הציד-חזרו-בטקסס-הזאת-היוקרה-היא-רק-כיסוי-לאליבי-813275",
+        "dom_article_image": "https://raanananet.co.il/dyncontent/tmp/174/2026_11_27_47818d4e-0012-4e7e-9df6-4504714104b3_640_480_Crop_.jpg",
+        "result": "200 image/jpeg",
+        "jpeg": true,
+        "sha256": "bef1f3dd5b932cf1eb0a121a76384f93388845ef628c15eb03241f0a71ca3aaa"
+      }
+    ],
+    "og_jpgs": [
+      {
+        "url": "https://www.raanananet.co.il/%d7%97%d7%93%d7%a9%d7%95%d7%aa/%d7%94%d7%99%d7%95%d7%9d-%d7%95%d7%9e%d7%97%d7%a8-%d7%91%d7%a8%d7%a2%d7%a0%d7%a0%d7%94-%d7%97%d7%a1%d7%99%d7%9e%d7%95%d7%aa-%d7%91%d7%a8%d7%97%d7%95%d7%91%d7%95%d7%aa-%d7%9e%d7%9b%d7%91%d7%99-%d7%95%d7%90%d7%9c%d7%a4%d7%a1%d7%99-%d7%91%d7%a9%d7%a2%d7%95%d7%aa-%d7%94%d7%99%d7%95%d7%9d-812989",
+        "page_status": "200 text/html; charset=utf-8",
+        "page_error": "",
+        "image": "https://raanananet.co.il/dyncontent/tmp/194/2026_11_25_bb786d2d-adc6-46c7-9c2e-e14f4b8d40e2_1200_628_Fit_.jpg",
+        "image_status": "200 image/jpeg",
+        "image_error": "",
+        "jpeg": true,
+        "sha256": "b8ad69d3ee875a01adec8c2fb3b52cb91dfe8fb4b6b36d4cf260ef4022d3996b"
+      },
+      {
+        "url": "https://www.raanananet.co.il/%d7%a1%d7%a4%d7%95%d7%a8%d7%98/%d7%a9%d7%9c%d7%95%d7%a9%d7%a2%d7%a8-%d7%91%d7%97%d7%9e%d7%a9-%d7%93%d7%a7%d7%95%d7%aa-%d7%9c%d7%95%d7%a8%d7%9f-%d7%96%d7%90%d7%95%d7%93%d7%94-%d7%94%d7%95%d7%91%d7%99%d7%9c%d7%94-%d7%90%d7%aa-%d7%a0%d7%a2%d7%a8%d7%95%d7%aa-%d7%a8%d7%a2%d7%a0%d7%a0%d7%94-%d7%9c-5-0-813252",
+        "page_status": "200 text/html; charset=utf-8",
+        "page_error": "",
+        "image": "https://raanananet.co.il/dyncontent/tmp/132/2026_11_27_06cbcaa8-d6e1-45a2-883d-2056f345b6f3_1200_628_Fit_.jpg",
+        "image_status": "200 image/jpeg",
+        "image_error": "",
+        "jpeg": true,
+        "sha256": "2e23f900b35bd17742e1a2b66687a4dcca5e190ebcd70b2307c66b3b96df2396"
+      },
+      {
+        "url": "https://raanananet.co.il/תרבות-נט/נשות-הציד-חזרו-בטקסס-הזאת-היוקרה-היא-רק-כיסוי-לאליבי-813275",
+        "page_status": "200 text/html; charset=utf-8",
+        "page_error": "",
+        "image": "https://raanananet.co.il/dyncontent/tmp/174/2026_11_27_47818d4e-0012-4e7e-9df6-4504714104b3_1200_628_Fit_.jpg",
+        "image_status": "200 image/jpeg",
+        "image_error": "",
+        "jpeg": true,
+        "sha256": "6de35c288b388da2499d10da29580ccd4178761fb87badc27931a1c9d382e3c6"
+      }
+    ],
+    "qualification": "Controller regular GET fetched 640x480 crops and individual hashes for latest existing news, sport and culture. Owner environment DNS and candidate license/image still unresolved."
+  },
+  "consumer": {
+    "owner": {
+      "task_id": "Automation_e2f02000cdf4819190022b85f4391076",
+      "title": "צרכנות — TLVNET יומי",
+      "enabled": true,
+      "run_id": "e1582c57-45d8-8324-9e26-5737c651787f",
+      "status": "completed",
+      "started_at": "2026-11-27T12:01:55.224327Z",
+      "completed_at": "2026-11-27T12:08:11.879868Z",
+      "result_run_id": "e1582c57-45d8-8324-9e26-5737c651787f",
+      "matched": true
+    },
+    "blocked": "Owner reported 403 original Commons JPEG transfer for a single Flydubai draft.",
+    "queue": "7 additional items pending verification.",
+    "inbox": "ops/incident-response/inbox/20261127-consumer-0s13f7en7ipb.json"
+  },
+  "actions": {
+    "new": [
+      {
+        "id": 46002264278,
+        "name": "Publish priceboard",
+        "status": "in_progress",
+        "conclusion": null,
+        "created_at": "2026-11-27T12:52:19Z"
+      },
+      {
+        "id": 46002264395,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T12:52:19Z"
+      },
+      {
+        "id": 46001909850,
+        "name": "Refresh Kiryat Gat bus and rail schedules",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T12:49:45Z"
+      },
+      {
+        "id": 46001469448,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T12:46:33Z"
+      },
+      {
+        "id": 46001392042,
+        "name": "Audit expired Ashdod event occurrences",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T12:45:59Z"
+      },
+      {
+        "id": 46001388811,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T12:45:58Z"
+      },
+      {
+        "id": 46001323970,
+        "name": "Audit Ashdod public editorial copy",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T12:45:30Z"
+      },
+      {
+        "id": 45996294612,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T12:09:31Z"
+      },
+      {
+        "id": 45996285279,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T12:09:27Z"
+      },
+      {
+        "id": 45996200843,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T12:08:50Z"
+      },
+      {
+        "id": 45996200721,
+        "name": "Public events health checks",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T12:08:50Z"
+      },
+      {
+        "id": 45996200741,
+        "name": "Verify public event feed read-back",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T12:08:50Z"
+      },
+      {
+        "id": 45995906660,
+        "name": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T12:06:43Z"
+      },
+      {
+        "id": 45995906829,
+        "name": "Publish priceboard",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T12:06:43Z"
+      },
+      {
+        "id": 45995518161,
+        "name": "Refresh Ashdod bus schedules",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T12:03:53Z"
+      }
+    ],
+    "pending": [
+      46002264278
+    ],
+    "history": "118 historical entries remain in2workflow groups; failed-step metadata only, roots unconfirmed."
+  },
+  "backup": {
+    "tlvnet": [
+      {
+        "id": "administrative-state",
+        "checksum": "6603d6d2c133f69309393428c5be5dbc626c9ec494ed15e0985de9fb0b988622",
+        "updated_at": "2026-11-27T07:17:07.889Z",
+        "error_present": false
+      },
+      {
+        "id": "recent-news",
+        "checksum": "a28afa38f7acfa4e24c11b4362ff1062abfcc838f7141e5bbb04705f3cf1a20c",
+        "updated_at": "2026-11-27T12:21:59.714Z",
+        "error_present": false
+      },
+      {
+        "id": "source-configuration",
+        "checksum": "b93b33aca108b8ea156b1ee628acc3a3e29cccbf65edbf13b881edab5cef5815",
+        "updated_at": "2026-11-27T12:22:02.411Z",
+        "error_present": false
+      }
+    ],
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    }
+  },
+  "worker_sample": [
+    {
+      "at": "2026-11-27T12:52:56.218Z",
+      "path": "/api/public-articles",
+      "status": null,
+      "outcome": "canceled"
+    },
+    {
+      "at": "2026-11-27T12:50:14.529Z",
+      "path": "/meta.json",
+      "status": 404,
+      "outcome": "ok"
+    },
+    {
+      "at": "2026-11-27T12:50:14.105Z",
+      "path": "/favicon.ico",
+      "status": 404,
+      "outcome": "ok"
+    },
+    {
+      "at": "2026-11-27T12:44:52.125Z",
+      "path": "/favicon.ico",
+      "status": 404,
+      "outcome": "ok"
+    },
+    {
+      "at": "2026-11-27T12:40:57.772Z",
+      "path": "/favicon.ico",
+      "status": 404,
+      "outcome": "ok"
+    },
+    {
+      "at": "2026-11-27T12:34:48.069Z",
+      "path": "/favicon.ico",
+      "status": 404,
+      "outcome": "ok"
+    },
+    {
+      "at": "2026-11-27T12:22:08.933Z",
+      "path": "/api/ads-inventory",
+      "status": null,
+      "outcome": "canceled"
+    },
+    {
+      "at": "2026-11-27T12:22:08.884Z",
+      "path": "/api/ads-inventory",
+      "status": null,
+      "outcome": "canceled"
+    },
+    {
+      "at": "2026-11-27T12:22:08.675Z",
+      "path": "/api/ads-inventory",
+      "status": null,
+      "outcome": "canceled"
+    },
+    {
+      "at": "2026-11-27T12:22:08.149Z",
+      "path": "/api/ads-inventory",
+      "status": null,
+      "outcome": "canceled"
+    },
+    {
+      "at": "2026-11-27T12:21:53.046Z",
+      "path": "/favicon.ico",
+      "status": 404,
+      "outcome": "ok"
+    },
+    {
+      "at": "2026-11-27T12:20:57.481Z",
+      "path": "/favicon.ico",
+      "status": 404,
+      "outcome": "ok"
+    }
+  ],
+  "social": {
+    "new_rows": [
+      {
+        "slot": "2026-11-27T12",
+        "status": "published",
+        "article_url": "https://tlvnet.com/news/hanukkah-bialik-20261210.html",
+        "post_id": "1520426491146188_122114785623545268",
+        "detail": null,
+        "started_at": "2026-11-27T12:00:01.705Z",
+        "finished_at": "2026-11-27T12:00:15.402Z"
+      }
+    ],
+    "public_permalink": "https://www.facebook.com/1520426491146188/posts/122114785623545268",
+    "public_result": "DisabledError, no grounds to resend"
+  },
+  "inbox_delta": [
+    "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json",
+    "ops/incident-response/inbox/20261127-consumer-0s13f7en7ipb.json"
+  ],
+  "controller_editorial_writes": 0,
+  "controller_deploys": 0
+}
