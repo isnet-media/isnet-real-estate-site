@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T15:15:57Z",
+  "updated_at": "2026-11-27T16:24:42Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7546,7 +7546,7 @@
         "occurrences": 1
       },
       "next_action": "Observe once for recurrence or impact on a real TLVNET route. If reproduced on a supported route, inspect current routing/response body ownership under the authorized source path, then verify a local regression before production change.",
-      "last_seen_at": "2026-11-27T04:05:55.676Z",
+      "last_seen_at": "2026-11-27T16:24:42Z",
       "latest_observation": {
         "sample_exceptions": [
           {
@@ -7581,7 +7581,20 @@
         ],
         "status": "same_signature_unsupported_route",
         "supported_route_impact_observed": false
-      }
+      },
+      "occurrences": [
+        {
+          "id": "tlvnet-worker-fallback-disturbed-response-stream",
+          "status": "open",
+          "controller_run": "cbc29aba-48c8-8330-86e9-d482653bedc7",
+          "observed_at": "2026-11-27T16:24:42Z",
+          "event_at": "2026-11-27T15:35:33.633Z",
+          "method": "POST",
+          "path": "/xmlrpc.php",
+          "signal": "Consumed response stream observed on unsupported WordPress path. No affected normal publication or navigation route verified.",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+        }
+      ]
     },
     {
       "id": "tlvnet-duplicate-banner-runtime",
