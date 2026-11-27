@@ -1,0 +1,19 @@
+{
+  "task_id": "Automation_a32c48a7ae848191a5769078a5c74a09",
+  "runKey": "2960a7d3-b23c-8329-a52a-5ca97b98cac9",
+  "site_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+  "target": "TLVNET-site",
+  "status": "mitigated",
+  "signature": "public-http-reader/default-user-agent/403",
+  "observed_at": "2026-11-27T10:32:17.964401+00:00",
+  "step": "Public image ingestion",
+  "evidence": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/TLV_fashion_mall.jpg",
+    "initial_result": "HTTP403 with default urllib User-Agent",
+    "focused_retry": "Same public original URL with descriptive TLVNET editorial User-Agent; no authentication/cookie/security changes",
+    "retry_result": "3670204byte original JPEG downloaded; source SHA256 2abbe4305bf0bc70e10168a5984ce32a656d564b74e5aadbee466a686e32954d; original and resized JPEG actually viewed"
+  },
+  "impact": "Initial request failed; image ingestion completed on one materially changed retry. No content/license/security gate bypass.",
+  "remaining": "No global reader fix claimed; live article/image verification will be recorded in owner's ledger. No controller triggered.",
+  "next_action": "Use explicit descriptive User-Agent for ordinary authorized public-source reads. No unchanged retries."
+}
