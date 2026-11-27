@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T17:44:08Z",
+  "updated_at": "2026-11-27T18:37:32Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5511,6 +5511,13 @@
           "controller_run": "74d368d0-4adc-8330-94e6-7027d1f620ae",
           "observed_at": "2026-11-27T17:44:08Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
+        },
+        {
+          "controller_run": "baab460c-63b8-8330-96c6-76ab5414c568",
+          "observed_at": "2026-11-27T18:37:32Z",
+          "kind": "source became current; updated files not live",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/baab460c-63b8-8330-96c6-76ab5414c568.json",
+          "inbox": "ops/incident-response/inbox/baab460c-63b8-8330-96c6-76ab5414c568-ashdod-sea-current-source-handoff.json"
         }
       ],
       "status": "awaiting_external_action",
@@ -5518,8 +5525,8 @@
       "root_cause": "Live IMS response issued16Nov16:23Israel contains only20:00onward periods for213/210. Current local time not covered. Validation correctly rejects; no current replacement exists in the observed source.",
       "impact": "New18Nov refresh rejected uncovered current period and retained lastgood. Actual current XML periods and live widget freshness not independently verified.",
       "first_seen_at": "2026-11-09T22:24:11Z",
-      "last_seen_at": "2026-11-27T17:44:08Z",
-      "updated_at": "2026-11-27T17:44:08Z",
+      "last_seen_at": "2026-11-27T18:37:32Z",
+      "updated_at": "2026-11-27T18:37:32Z",
       "evidence": "ops/incident-response/evidence/ops-2026-11-16-b28a8a3c-a510-8332-b4c5-feedac37ad04.json",
       "change": "No code change, data overwrite, manual rerun or deployment. Existing guard passed regression.",
       "tests": {
@@ -5528,26 +5535,113 @@
         "future_only_20_at_17_40_rejection": "passed_synthetic_reproduction",
         "production_data_written": false
       },
-      "next_action": "Resume existing owner/workflow on materially changed current IMS periods. Keep lastgood dates honest; no manual retry, schedulechange, region substitution or guard relaxation.",
+      "next_action": "Use the existing validated refresh after confirming the official periods are current; verify live JSON in both regions. No ad hoc workflow retry in this controller role.",
       "prevention": "Keep sourceIssue/from/to provenance and current-period exclusion. Group recurrence by this signature; source HTTP200 alone does not verify current data.",
-      "public_verification": "Public forecast files do not cover 27 November; last supplied periods ended 24 November at 20:00. Fresh IMS file starts at 20:00 on 27 November in both regions and did not cover the check at 19:41.",
+      "public_verification": "Source parser passed for both current periods; public files still expire on 2026-11-24.",
       "latest_source_recheck": {
-        "observed_at": "2026-11-16T18:24:05.469Z",
-        "source_issue": "2026-11-16T16:23",
-        "current_period": {
-          "from": "2026-11-16T20:00",
-          "to": "2026-11-17T08:00",
-          "minCm": 30,
-          "maxCm": 50
+        "incident_id": "ims-sea-no-currently-valid-period",
+        "status": "source_valid_existing_owner_release_pending",
+        "qualification": "Exact current repository parser accepts both distinct official regions now. Live public files remain expired. Publication awaits the existing owner workflow.",
+        "official_source": {
+          "sample": "200 7.694485 text/xml https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml",
+          "sha256": "ceb513d93cc0bfa86c946f2baccabe886f05b4f00e4c7104842351b2516f6f00",
+          "now": "2026-11-27 20:36",
+          "issued_at": "2026-11-27 16:33",
+          "regions": [
+            {
+              "id": "213",
+              "periods": [
+                [
+                  "2026-11-27 20:00",
+                  "2026-11-28 08:00"
+                ],
+                [
+                  "2026-11-28 08:00",
+                  "2026-11-28 20:00"
+                ]
+              ],
+              "current": true
+            },
+            {
+              "id": "210",
+              "periods": [
+                [
+                  "2026-11-27 20:00",
+                  "2026-11-28 08:00"
+                ],
+                [
+                  "2026-11-28 08:00",
+                  "2026-11-28 20:00"
+                ]
+              ],
+              "current": true
+            }
+          ]
         },
-        "production_source_files_still_expired": true,
-        "parser_result": "Both213/210valid after real20:00 threshold",
-        "evidence": "ops/incident-response/evidence/ops-2026-11-16-eabf7763-57e0-8332-9f0b-6a083f8d23b5.json",
-        "production_data_written": false
+        "parser_proof": {
+          "output": {
+            "source_sha256": "ceb513d93cc0bfa86c946f2baccabe886f05b4f00e4c7104842351b2516f6f00",
+            "checked_at": "2026-11-27T18:37:07.012Z",
+            "result": [
+              {
+                "id": 213,
+                "issue": "2026-11-27T16:33",
+                "current_from": "2026-11-27T20:00",
+                "current_to": "2026-11-28T08:00",
+                "parsed_periods": 2
+              },
+              {
+                "id": 210,
+                "issue": "2026-11-27T16:33",
+                "current_from": "2026-11-27T20:00",
+                "current_to": "2026-11-28T08:00",
+                "parsed_periods": 2
+              }
+            ]
+          },
+          "test_state": "five parser tests passed"
+        },
+        "public_southern": {
+          "sample": "200 6.314018 application/json; charset=utf-8 https://isnet.co.il/weather/ashdod/sea.json",
+          "regionId": 213,
+          "issuedAtLocal": "2026-11-23T16:14",
+          "fetchedAt": "2026-11-23T18:02:10.982Z",
+          "periods": [
+            [
+              "2026-11-23T20:00",
+              "2026-11-24T08:00"
+            ],
+            [
+              "2026-11-24T08:00",
+              "2026-11-24T20:00"
+            ]
+          ]
+        },
+        "public_central": {
+          "sample": "200 6.320594 application/json; charset=utf-8 https://isnet.co.il/weather/ashdod/central.json",
+          "regionId": 210,
+          "issuedAtLocal": "2026-11-23T16:14",
+          "fetchedAt": "2026-11-23T18:02:10.997Z",
+          "periods": [
+            [
+              "2026-11-23T20:00",
+              "2026-11-24T08:00"
+            ],
+            [
+              "2026-11-24T08:00",
+              "2026-11-24T20:00"
+            ]
+          ]
+        },
+        "previous_failed_run_id": 46035068206,
+        "next_action": "Use the existing validated refresh after confirming the official periods are current; verify live JSON in both regions. No ad hoc workflow retry in this controller role.",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-27/baab460c-63b8-8330-96c6-76ab5414c568.json",
+        "observed_at": "2026-11-27T18:37:32Z",
+        "inbox": "ops/incident-response/inbox/baab460c-63b8-8330-96c6-76ab5414c568-ashdod-sea-current-source-handoff.json"
       },
       "canonical_incident_id": "ims-no-valid-current-period",
       "last_controller_observed_at": "2026-11-21T16:11:33.000Z",
-      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
+      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/baab460c-63b8-8330-96c6-76ab5414c568.json",
       "current_recurrence": {
         "incident_id": "ims-sea-no-currently-valid-period",
         "run_id": 46035068206,
