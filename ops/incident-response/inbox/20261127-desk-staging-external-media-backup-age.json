@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "signature": "desk-staging/external-media-backup/age-over-26h",
+  "status": "open",
+  "target": "ISNET Desk staging",
+  "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "controller_run_id": "e1e7bd73-82e4-8330-8432-8811075361c4",
+  "recorded_at": "2026-11-27 12:53:45.163177+00",
+  "latest_media_backup": {
+    "kind": "media",
+    "ok": true,
+    "created_at": "2026-11-26T10:17:51.799605+00:00"
+  },
+  "age_hours": 26.598156666666668,
+  "threshold_hours": 26,
+  "desk_database_backup": {
+    "kind": "db",
+    "ok": true,
+    "created_at": "2026-11-26T12:55:47.730012+00:00"
+  },
+  "handoff_reconcile": {
+    "runid": 178,
+    "status": "succeeded",
+    "start_time": "2026-11-27T12:50:00.11316+00:00",
+    "end_time": "2026-11-27T12:50:00.120377+00:00"
+  },
+  "herzliya_queue_count": 0,
+  "qualification": "Fresh authorized SELECT found stale external media receipt. No underlying job failure was confirmed. Workflow listing on isnet-desk was denied by GitHub connector scope.",
+  "next_action": "Trace the existing media backup workflow and receipt using its authorized owner path, then verify a new successful external media record. Read-only Desk mandate."
+}
