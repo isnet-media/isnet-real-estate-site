@@ -1,16 +1,12 @@
 (() => {
   if (!['isnet.co.il', 'www.isnet.co.il'].includes(location.hostname)) return;
 
-  const sections = new Map([
-    ['/events-preview/holon/', 'events'],
-    ['/events-preview/holon/index.html', 'events'],
-    ['/events-preview/holon/health.html', 'health'],
-    ['/super.holon/', 'supermarket'],
-    ['/super.holon/index.html', 'supermarket'],
-    ['/astrology/', 'astrology'],
-    ['/astrology/index.html', 'astrology'],
-  ]);
-  const section = sections.get(location.pathname.toLowerCase());
+  const path = location.pathname.toLowerCase();
+  const section = path === '/events-preview/holon/health.html' ? 'health'
+    : path.startsWith('/events-preview/holon/') ? 'events'
+    : path.startsWith('/super.holon/') ? 'supermarket'
+    : path.startsWith('/astrology/') ? 'astrology'
+    : '';
   if (!section) return;
 
   const referrerOrigin = document.referrer ? new URL(document.referrer).origin : '';
