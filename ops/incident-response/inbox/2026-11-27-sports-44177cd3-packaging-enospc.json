@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "reported_at": "2026-11-27 19:15:02 UTC",
+  "reporter": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "runtime_run_id": "44177cd3-c710-832a-b1d3-47a939f06075",
+  "runKey": "sports-20261127-evening-44177cd3-c710-832a-b1d3-47a939f06075",
+  "target": "TLVNET-site",
+  "subsystem": "Sites artifact packaging",
+  "status": "mitigated",
+  "root_cause": "Default OS temporary filesystem /tmp had only235MiB free (4.7GiB used of4.9GiB); packaging staging copy failed ENOSPC. Workspace filesystem had9.5GiB available.",
+  "observed_failure": "ENOSPC creating staged dist/client/future/assets after successful build. Source push987a3a2655abbf485bce50bb2cd9e6f6f52b136f completed; no deployment was started by failed packaging.",
+  "correction": "One focused retry with TMPDIR in this run's workspace outside the checkout. No deletion of shared temporary files or other writers' files. Reused already-passed build.",
+  "verification": "site-workflow packaging exited0 and save_site_version produced764 from unchanged987a3a2655abbf485bce50bb2cd9e6f6f52b136f. Production publication still being verified.",
+  "prevention": "For large Sites artifacts use a workspace staging directory with checked free space before packaging; do not use shared nearly-full tmpfs.",
+  "controller_activation_requested": false
+}
