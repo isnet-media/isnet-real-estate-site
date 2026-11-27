@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "2aedae80-e898-8330-b361-f02ca0a3cc2f",
+  "runKey": "ops-2026-11-27-2aedae80-e898-8330-b361-f02ca0a3cc2f",
+  "observed_at": "2026-11-27T15:15:57Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json",
+  "policy_version": "2026-11-15/1.2",
+  "private_definition_revision": 4,
+  "status": "desk_staging_db_backup_threshold_crossed",
+  "saved_version": 762,
+  "deployed_source_commit": "0e8bea6d71d3232124be759f73c8d224656549ee",
+  "deployment_id": "appgdep_6b0990f7657c8191b9dcb1e052377a89",
+  "new_actions": 2,
+  "new_external_inbox": 0,
+  "new_social_rows": 1,
+  "controller_new_deployments": 0,
+  "private_policy_read": {
+    "revision": 4,
+    "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
+    "last_read_at": "2026-11-27 15:13:27.66045+00"
+  },
+  "deployment": {
+    "id": "appgdep_6b0990f7657c8191b9dcb1e052377a89",
+    "status": "succeeded",
+    "updated_at": "2026-11-27T14:17:43.224418+00:00",
+    "unchanged_since_previous_checkpoint": true
+  },
+  "home": {
+    "sample": "200 5.178486 https://tlvnet.com/",
+    "title": "חדשות תל אביב ומה עושים בעיר | תל אביב נט, TLVNET",
+    "lead": "שבעה מחסני השאלה ברשימה של תל אביב. לשניים יש הודעות השבתה, ואחד החליף אתר",
+    "sections": {
+      "local-news": [
+        "/news/rothschild-raanan-stabbings-20261127",
+        "/news/tel-aviv-night-drink-driving-enforcement-20261127"
+      ],
+      "local-bli-heshbon": [
+        "/news/bli-heshbon",
+        "/news/bli-heshbon"
+      ],
+      "local-real-estate": [
+        "/news/real-estate",
+        "/news/real-estate"
+      ],
+      "local-economy-tech": [
+        "/news/economy-tech",
+        "/news/economy-tech"
+      ],
+      "local-community": [
+        "/news/community",
+        "/news/community"
+      ],
+      "local-sports": [
+        "/news/sports",
+        "/news/sports"
+      ],
+      "local-culture-news": [
+        "/news/culture",
+        "/news/culture"
+      ],
+      "local-consumer": [
+        "/news/consumer",
+        "/news/consumer"
+      ]
+    }
+  },
+  "visual_review": "No new release. This cycle sampled server-rendered HTML.",
+  "reader_qualification": "One completed live homepage sample. Client timing is not a production percentile.",
+  "provider_worker_sample": {
+    "new_since": "2026-11-27T14:38:58Z",
+    "events": [
+      {
+        "at": "2026-11-27T15:09:27.808Z",
+        "level": "info",
+        "outcome": "ok",
+        "status": 404,
+        "path": null,
+        "signals": [
+          "favicon"
+        ]
+      },
+      {
+        "at": "2026-11-27T15:01:59.327Z",
+        "level": "info",
+        "outcome": "ok",
+        "status": 404,
+        "path": null,
+        "signals": [
+          "social"
+        ]
+      },
+      {
+        "at": "2026-11-27T14:48:17.178Z",
+        "level": "info",
+        "outcome": "ok",
+        "status": 404,
+        "path": null,
+        "signals": [
+          "favicon"
+        ]
+      },
+      {
+        "at": "2026-11-27T14:39:31.925Z",
+        "level": "info",
+        "outcome": "ok",
+        "status": 404,
+        "path": null,
+        "signals": [
+          "favicon"
+        ]
+      }
+    ],
+    "social_get_readback": [
+      {
+        "eventKeys": [
+          "request",
+          "path",
+          "search",
+          "response"
+        ],
+        "requestKeys": [
+          "headers",
+          "method",
+          "url"
+        ],
+        "route": null,
+        "method": "GET",
+        "hasSocialRunId": false,
+        "recordedStatus": 404
+      }
+    ],
+    "qualification": "Bounded sample. The social-related GET 404 has no corroborated link to a send failure."
+  },
+  "desk": {
+    "checked_at": "2026-11-27 15:13:47.539309+00",
+    "health": {
+      "last_backup_at": "2026-11-27T09:52:59.641332+00:00",
+      "hours_since_backup": 5.346638326944444,
+      "failed_backups_7d": 0,
+      "handoff_stuck_over_2h": 0,
+      "handoff_failed": 3,
+      "autopublish_enabled": false,
+      "last_migration": "20261127_100000_alert_log"
+    },
+    "backups": [
+      {
+        "kind": "db",
+        "ok": true,
+        "created_at": "2026-11-26T12:55:47.730012+00:00"
+      },
+      {
+        "kind": "media",
+        "ok": true,
+        "created_at": "2026-11-26T10:17:51.799605+00:00"
+      }
+    ],
+    "reconcile": {
+      "runid": 192,
+      "status": "succeeded",
+      "start_time": "2026-11-27T15:10:00.1289+00:00",
+      "end_time": "2026-11-27T15:10:00.14233+00:00"
+    },
+    "herzliya_queued": {
+      "count": 0,
+      "oldest_handoff_at": null,
+      "oldest_created_at": null
+    },
+    "backup_age_hours": {
+      "db": 26.299946944444443,
+      "media": 28.93215
+    },
+    "alert": "External DB crossed 26 hours. Existing media alert continues. Reconcile and Herzliya queue within limits.",
+    "db_alert": "ops/incident-response/inbox/20261127-desk-staging-external-db-backup-age.json",
+    "prior_alert": "ops/incident-response/inbox/20261127-desk-staging-external-media-backup-age.json",
+    "observed_at": "2026-11-27T15:15:57Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json"
+  },
+  "new_incident": {
+    "id": "desk-staging-external-db-backup-stale",
+    "status": "open",
+    "classification": "backup_freshness",
+    "first_seen_at": "2026-11-27T15:15:57Z",
+    "last_seen_at": "2026-11-27T15:15:57Z",
+    "related_incident_id": "desk-staging-external-media-backup-stale",
+    "root_cause": "No external DB backup success is recorded after the previous good receipt. The reason for no newer receipt and any common cause with media remain unverified.",
+    "diagnostic_access": "Prior GitHub workflow listing for the separate Desk repo was denied by the active connector. Staging monitoring SQL is available read-only.",
+    "next_action": "Have the existing backup operator inspect scheduled invocation, destination write, and receipt insertion for DB and media. Verify new successful external records and separately confirm recoverability.",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json",
+    "inbox": "ops/incident-response/inbox/20261127-desk-staging-external-db-backup-age.json",
+    "occurrences": [
+      {
+        "controller_run": "2aedae80-e898-8330-b361-f02ca0a3cc2f",
+        "observed_at": "2026-11-27T15:15:57Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json"
+      }
+    ]
+  },
+  "lease": {
+    "state": "free",
+    "owner": null,
+    "lease_until": null
+  },
+  "owners": {
+    "Automation_845f7ef0033c8191b7490e0dc5748754": {
+      "title": "כתב חדשות — רעננה",
+      "run_id": "ee3b2692-fa88-8327-8812-b33b2e3222d6",
+      "scheduled_for": "2026-11-27T12:00:00Z",
+      "started_at": "2026-11-27T11:57:42.543955Z",
+      "completed_at": "2026-11-27T12:00:34.202184Z",
+      "status": "completed",
+      "result_run_id": "ee3b2692-fa88-8327-8812-b33b2e3222d6",
+      "matches": true,
+      "changed": false
+    },
+    "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a": {
+      "title": "מערכת הרצליה נט",
+      "run_id": "d6c91d0a-cf20-8320-92bd-834f6748aced",
+      "scheduled_for": "2026-11-27T12:30:00Z",
+      "started_at": "2026-11-27T12:31:15.563056Z",
+      "completed_at": "2026-11-27T12:41:07.585269Z",
+      "status": "completed",
+      "result_run_id": "d6c91d0a-cf20-8320-92bd-834f6748aced",
+      "matches": true,
+      "changed": false
+    }
+  },
+  "actions": {
+    "rows": [
+      {
+        "id": 46021509589,
+        "workflow": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T15:03:54Z",
+        "source_commit": "a9735ba0a3ee5575caf48f55ce935ed2876120f1",
+        "event": "workflow_run"
+      },
+      {
+        "id": 46021398963,
+        "workflow": "Audit event content clarity",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-27T15:03:09Z",
+        "source_commit": "d405bbb38d30aea49c8063de3f9a1b095bb2f009",
+        "event": "schedule"
+      },
+      {
+        "id": 46014205929,
+        "workflow": "Record operation failures",
+        "status": "completed",
+        "conclusion": "skipped",
+        "created_at": "2026-11-27T14:15:03Z",
+        "source_commit": "f8f80598fe396e850b9c33dd578ec14086e974f0",
+        "event": "workflow_run"
+      }
+    ],
+    "total_count": 3,
+    "retained_history_count": 118
+  },
+  "backup": {
+    "components": [
+      {
+        "id": "administrative-state",
+        "checksum": "6603d6d2c133f69309393428c5be5dbc626c9ec494ed15e0985de9fb0b988622",
+        "updated_at": "2026-11-27T07:17:07.889Z",
+        "error_present": false
+      },
+      {
+        "id": "recent-news",
+        "checksum": "a28afa38f7acfa4e24c11b4362ff1062abfcc838f7141e5bbb04705f3cf1a20c",
+        "updated_at": "2026-11-27T12:21:59.714Z",
+        "error_present": false
+      },
+      {
+        "id": "source-configuration",
+        "checksum": "b93b33aca108b8ea156b1ee628acc3a3e29cccbf65edbf13b881edab5cef5815",
+        "updated_at": "2026-11-27T12:22:02.411Z",
+        "error_present": false
+      }
+    ],
+    "gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    },
+    "qualification_started_at": null
+  },
+  "social": {
+    "rows": [
+      {
+        "slot": "2026-11-27T15",
+        "status": "published",
+        "article_url": "https://tlvnet.com/news/shikun-l-objections-5500-20261126.html",
+        "post_id": "1520426491146188_122114856255545268",
+        "detail": null,
+        "started_at": "2026-11-27T15:00:01.865Z",
+        "finished_at": "2026-11-27T15:00:10.352Z"
+      }
+    ],
+    "public_status": "Exact permalink reader returns DisabledError. No resending."
+  },
+  "retained_task_attempts": [
+    {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "title": "כתב חדשות — רעננה",
+      "enabled": true,
+      "run_id": "f177b9fd-b3e0-832f-8c0e-29cd750fa2ce",
+      "started_at": "2026-11-26T17:00:12.094006Z",
+      "completed_at": "2026-11-26T17:01:11.753840Z",
+      "scheduled_for": "2026-11-26T17:00:00Z",
+      "recorded_status": "completed",
+      "result_run_id": null,
+      "result_created_at": null,
+      "result_matches_attempt": false,
+      "reason": "Completed status without linked attempt result or exact release evidence.",
+      "observed_at": "2026-11-26T17:34:00Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/2bd2263e-970c-8324-8053-afe2cbaa6aff.json"
+    }
+  ],
+  "retained_neighborhood_incident": "tlvnet-real-estate-unresolved-sde-dov-neighborhood-slug",
+  "previous_site_article_verification": "ops/tlvnet-stability/observations/2026-11-27/642d4d88-0144-8330-a422-a4a5a18af92f.json"
+}
