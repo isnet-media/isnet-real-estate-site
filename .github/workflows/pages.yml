@@ -90,6 +90,7 @@ on:
       - "scripts/cinema_loading.py"
       - "scripts/herzliya_cinema_loading.py"
       - "scripts/apply_yavne_analytics.py"
+      - "scripts/apply_holon_analytics.py"
       - "scripts/test-yavne-analytics.cjs"
       - "scripts/test-event-date-chips.cjs"
       - "scripts/test-institution-ui.cjs"
@@ -355,6 +356,7 @@ jobs:
         run: |
           node scripts/test_adsense.cjs
           node scripts/apply_adsense.cjs "$RUNNER_TEMP/isnet-pages-public"
+          python scripts/apply_holon_analytics.py "$RUNNER_TEMP/isnet-pages-public"
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
