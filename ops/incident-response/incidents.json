@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T05:01:42Z",
+  "updated_at": "2026-11-27T08:34:28Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5228,10 +5228,7 @@
       "public_proof": [
         "https://tlvnet.com/news/maccabi-jerusalem-home-loss-20261114"
       ],
-      "evidence": [
-        "ops/incident-response/evidence/ops-2026-11-15-66f4eaea-b874-8326-9b23-1510b4bf3d77.json",
-        "ops/incident-response/evidence/ops-2026-11-15-d4367d19-cf9c-8322-b165-2140fcce9361.json"
-      ],
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
       "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
       "prevention": "Keep actual executor identity separate from intended owner; explicit active-role reconciliation before approval/CAS. Procedural mitigation only; no runtime fixed_verified claim.",
       "remaining": "Inspect scheduler/context isolation and result attribution for these exact two runs/conversations through the platform runtime; this connector exposes task prompt/result metadata but not execution routing logs or an isolation-repair operation. Do not replay/trigger tasks or change schedules to simulate repair.",
@@ -5245,7 +5242,7 @@
         "sports_completed_without_evening_publication": true,
         "source_unchanged": true
       },
-      "last_seen_at": "2026-11-25T21:08:37Z",
+      "last_seen_at": "2026-11-27T08:34:28Z",
       "latest_occurrence": {
         "run_id": "91cc188e-b3a4-8328-af1e-ef568f3701ea",
         "observed_at": "2026-11-25T21:08:37Z",
@@ -5327,8 +5324,17 @@
           "next_action": "Platform runtime owner to compare execution routing and result attribution for the two run IDs.",
           "owner_result_status": "completed_sports_articles_verified",
           "verified_deployment_id": "appgdep_6b0737791ec08191b6b3dbe27785d9a7"
+        },
+        {
+          "controller_run": "415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
+          "observed_at": "2026-11-27T08:34:28Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
+          "sports_run_id": "ff227f55-6a00-832e-bbcc-30938d2141df",
+          "prior_controller_run_id": "ce4d822f-9f08-8320-bdbe-0b8b7db3fc57",
+          "exact_result_equal": true
         }
-      ]
+      ],
+      "impact": "27 Nov morning TLVNET sports attempt ended with a controller report and no new sports article verified; prior evening publication remains live in index. Do not treat completed as sports delivery."
     },
     {
       "id": "historical-super-batyam-private-write-http400",
@@ -5975,9 +5981,9 @@
       "first_seen_at": "2026-11-17T09:18:25Z",
       "status": "awaiting_external_action",
       "severity": "partial_homepage_distribution",
-      "last_seen_at": "2026-11-17T09:55:12.179Z",
+      "last_seen_at": "2026-11-27T08:34:28Z",
       "root_cause": "Homepage gateway retains old seed on failed category fetch; underlying browser failure cause not established. Current code/path/nativecategory verified. Component editor session absent.",
-      "evidence": "ops/incident-response/evidence/ops-2026-11-17-ec310390-60fc-832e-98e4-f71cc8457a0b.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
       "observations": {
         "homepage_http": 200,
         "inline_function": "startMagazineGateway",
@@ -5997,11 +6003,28 @@
         "browser_admin": "Observed https://admin.isnet.co.il/Manager/SignIn?returnUrl=%2F login wall; no authenticated component-editor session",
         "source_file_checked": "events-preview/shared/public-cms.js does not contain startMagazineGateway; function observed inline in servedhomepage"
       },
-      "next_action": "Use existing authorized CMS component-editor session for Gedera51; inspect actual category-fetch error, preserve current homepage and other writer changes, then repair fetch/seed and verify811887 home card. No access expansion, key creation or article replay.",
+      "next_action": "Existing CMS component editor access is needed to diagnose the live gateway fetch and update the shared homepage component. Preserve published articles.",
       "post_id": 811887,
       "website_id": 51,
       "publication_replay": false,
-      "publisher_notified_at": "2026-11-17T09:55:12.179Z"
+      "publisher_notified_at": "2026-11-17T09:55:12.179Z",
+      "impact": "Six city homepage initial HTML samples show old culture cards. Raanana also observed stale in owner rendered browser. Articles verified in sections by owner.",
+      "occurrences": [
+        {
+          "controller_run": "415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
+          "observed_at": "2026-11-27T08:34:28Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
+          "owner_run_id": "8d56f04f-8504-8330-b956-5ef5aacda217",
+          "sites": [
+            "gederanet.co.il",
+            "holonnet.co.il",
+            "yavnenet.co.il",
+            "kgatnet.co.il",
+            "rishonet.com",
+            "raanananet.co.il"
+          ]
+        }
+      ]
     },
     {
       "id": "tlvnet-publication-evidence-receipt-shapes",
@@ -9518,9 +9541,92 @@
           "owner_run_id": "adaa98dc-0fd8-8330-b0e6-e59408e19ad7"
         }
       ]
+    },
+    {
+      "id": "isnet-pages-holon-analytics-headless-fragment",
+      "first_seen_at": "2026-11-27T08:34:28Z",
+      "occurrences": [
+        {
+          "controller_run": "415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
+          "observed_at": "2026-11-27T08:34:28Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
+          "failed_run": 45960892517,
+          "recovery_run": 45961149374,
+          "source_commit": "99cc2dae62552333074b98201ac5cc331c7f2b66"
+        }
+      ],
+      "status": "fixed_verified",
+      "classification": "publication/html_fragment",
+      "root_cause": "Full-document analytics injection raised on intentional sources.html fragment with no </head>.",
+      "mitigation": "Current code skips headless fragments, preserves tag insertion for full pages.",
+      "prevention": "Retain the fragment regression and assert host page has exactly one loader, embedded fragment none, and live manifest ties to successful deploy.",
+      "next_action": "Monitor recurrence after next genuine deployment.",
+      "last_seen_at": "2026-11-27T08:34:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json"
+    },
+    {
+      "id": "ISNET-CMS-33-publication-lease-missing",
+      "first_seen_at": "2026-11-27T08:34:28Z",
+      "occurrences": [
+        {
+          "controller_run": "415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
+          "observed_at": "2026-11-27T08:34:28Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
+          "owner_run_id": "8d56f04f-8504-8330-b956-5ef5aacda217",
+          "lease_commit": "dc1659de6cb4fb82020c1f2753e9b44e032565f2"
+        }
+      ],
+      "status": "mitigated",
+      "classification": "publication/missing_lock_record",
+      "root_cause": "No shared lease file for existing authorized culture category 2188 on CMS33.",
+      "mitigation": "Initialized the existing shared CAS mechanism for this target with a free record; verified target and free state by readback.",
+      "impact": "Preparation and publication of the existing candidate remain with the original culture writer.",
+      "next_action": "Owner takes and verifies this lease and resumes the same article through the approved route.",
+      "last_seen_at": "2026-11-27T08:34:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json"
+    },
+    {
+      "id": "TLVNET-source-transfer-timeout-culture-20261127",
+      "first_seen_at": "2026-11-27T08:34:28Z",
+      "occurrences": [
+        {
+          "controller_run": "415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
+          "observed_at": "2026-11-27T08:34:28Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
+          "owner_run_id": "8d56f04f-8504-8330-b956-5ef5aacda217",
+          "inbox": "ops/incident-response/inbox/20261127T0825Z-culture-source-timeout-and-handoff-8d56f04f.json"
+        }
+      ],
+      "status": "open",
+      "classification": "publication/source_transfer_timeout",
+      "root_cause": "Full source transfer did not finish; one subsequent shallow authorized fetch also timed out. Underlying transfer throughput cause unconfirmed.",
+      "impact": "Network culture article retained in existing inbox and absent from live TLVNET index. Ten CMS publications reported owner-verified.",
+      "next_action": "Resume the same owner-approved article from its checkpoint when the authorized source can be opened; same-input retry already exhausted.",
+      "last_seen_at": "2026-11-27T08:34:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json"
+    },
+    {
+      "id": "tlvnet-culture-archive-caption-metadata-20261127",
+      "first_seen_at": "2026-11-27T08:34:28Z",
+      "occurrences": [
+        {
+          "controller_run": "415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
+          "observed_at": "2026-11-27T08:34:28Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
+          "owner_run_id": "646e1ae9-a0ac-8323-807f-197da1dd9fa1",
+          "deployment_id": "appgdep_6b093af2042481919ed1661c08b8c98b"
+        }
+      ],
+      "status": "fixed_verified",
+      "classification": "publication/licensed_image_caption",
+      "root_cause": "Real venue archive images were classified as location_archive; renderer uses venue_archive for correct label and strips some credit segments beginning with a resize prefix.",
+      "mitigation": "Owner corrected the asset classification and resize wording. Controller verified both corrected archive labels, credits, body, JPEG hash and links on production 756.",
+      "prevention": "Use venue_archive for actual venue archive photos and verify resize attribution in live public caption.",
+      "last_seen_at": "2026-11-27T08:34:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-26-79c6fa62-9650-8324-8b74-296627f144a9",
+  "last_review_runKey": "ops-2026-11-27-415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
