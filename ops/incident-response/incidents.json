@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T14:38:58Z",
+  "updated_at": "2026-11-27T15:15:57Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9754,6 +9754,26 @@
         "Article, homepage and real-estate section show the article.",
         "Live updates snapshot omits the article and exact neighborhood route API returns 400.",
         "Registry lacks sde-dov, while the other article's lamed slug resolves and appears in its area."
+      ]
+    },
+    {
+      "id": "desk-staging-external-db-backup-stale",
+      "status": "open",
+      "classification": "backup_freshness",
+      "first_seen_at": "2026-11-27T15:15:57Z",
+      "last_seen_at": "2026-11-27T15:15:57Z",
+      "related_incident_id": "desk-staging-external-media-backup-stale",
+      "root_cause": "No external DB backup success is recorded after the previous good receipt. The reason for no newer receipt and any common cause with media remain unverified.",
+      "diagnostic_access": "Prior GitHub workflow listing for the separate Desk repo was denied by the active connector. Staging monitoring SQL is available read-only.",
+      "next_action": "Have the existing backup operator inspect scheduled invocation, destination write, and receipt insertion for DB and media. Verify new successful external records and separately confirm recoverability.",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json",
+      "inbox": "ops/incident-response/inbox/20261127-desk-staging-external-db-backup-age.json",
+      "occurrences": [
+        {
+          "controller_run": "2aedae80-e898-8330-b361-f02ca0a3cc2f",
+          "observed_at": "2026-11-27T15:15:57Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json"
+        }
       ]
     }
   ],
