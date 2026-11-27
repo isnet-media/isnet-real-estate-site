@@ -17,8 +17,8 @@
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": "2026-11-27T08:34:28Z",
-  "last_daily_summary_at": "2026-11-26T08:59:30.611Z",
+  "last_observation_at": "2026-11-27T09:33:59Z",
+  "last_daily_summary_at": "2026-11-27T09:33:59Z",
   "observations": [
     {
       "run_id": "5c6088b3-b974-8320-b8ad-1b7f493c4d6a",
@@ -693,6 +693,12 @@
       "path": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
       "observed_at": "2026-11-27T08:34:28Z"
+    },
+    {
+      "run_id": "d6516d0b-c0b4-8320-b9b9-18fdf548af58",
+      "path": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
+      "observed_at": "2026-11-27T09:33:59Z"
     }
   ],
   "remaining": [
@@ -704,21 +710,25 @@
   ],
   "scope": "TLVNET.COM only for this stabilization program; no DNS, other-city work, new paid services or security expansion",
   "latest_deployment": {
-    "version": 756,
-    "source_commit": "24b3b4a7921668cc993b7ed63a7a37130884c152",
-    "deployment_id": "appgdep_6b093af2042481919ed1661c08b8c98b",
+    "version": 758,
+    "source_commit": "db0150b4cc37db08c79db7de939572457dbce006",
+    "deployment_id": "appgdep_6b0946e76990819189cbfe92719bbf17",
     "status": "succeeded",
-    "completed_at": "2026-11-27T08:11:14.039962+00:00"
+    "completed_at": "2026-11-27T09:01:41.727839+00:00",
+    "prior_succeeded": {
+      "version": 757,
+      "id": "appgdep_6b094232cbd88191a5e99c103a3bc236"
+    }
   },
   "daily_summary_status": "reported",
   "access_request": "BACKUP_ACCESS_REQUEST_20261115.md",
   "latest_controller_observation": {
-    "run_id": "415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
-    "observed_at": "2026-11-27T08:34:28Z",
-    "status": "public_culture_readback_and_scoped_recovery_verified",
-    "version": 756,
-    "deployment_id": "appgdep_6b093af2042481919ed1661c08b8c98b",
+    "run_id": "d6516d0b-c0b4-8320-b9b9-18fdf548af58",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
+    "observed_at": "2026-11-27T09:33:59Z",
+    "status": "investigations_verified_daily_stability",
+    "version": 758,
+    "deployment_id": "appgdep_6b0946e76990819189cbfe92719bbf17",
     "controller_new_deployments": 0
   },
   "latest_contact_repair": {
@@ -796,24 +806,38 @@
     "new_social_rows": 0,
     "controller_new_deployments": 0
   },
-  "updated_at": "2026-11-27T08:34:28Z",
+  "updated_at": "2026-11-27T09:33:59Z",
   "latest_daily_summary": {
-    "reported_at": "2026-11-26T08:59:30.611Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json",
-    "health_sample": {
-      "http": 200,
-      "roundtrip_seconds": 6.457059
+    "at": "2026-11-27T09:33:59Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
+    "date_local": "2026-11-27",
+    "new_by_section": {
+      "bli-heshbon": [
+        "tel-aviv-neighborhood-tool-libraries-20261127",
+        "jaffa-saraya-opening-archive-20261127"
+      ],
+      "culture-news": [
+        "hanukkah-bialik-20261210",
+        "jaffa-saraya-culture-center-20261125",
+        "nalagaat20-festival-20261201",
+        "olim-talent-enav-20261215"
+      ],
+      "news": [
+        "milan-square-renewal-20261129",
+        "jaffa-tel-giborim-scooter-crash-reported-20261127"
+      ]
     },
-    "culture": "verified live",
-    "future": "prepared and blocked by recurrence of filesystem capacity",
-    "phase": "baseline_and_repairs",
+    "substantive_updates": [
+      "purple-line-allenby-levinsky-night-closures-20261129"
+    ],
+    "verification_scope": "Eight new: earlier controller evidence for two news/four culture, current verification for two investigations. Separate earlier public evidence for Purple Line update.",
+    "qualification_started_at": null,
     "gates": {
       "automated_full_offsite_backup": "not_verified",
       "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
       "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
       "scheduled_publication_reconciliation": "partial"
-    },
-    "qualification_started_at": null
+    }
   },
   "latest_source_access_recovery": {
     "status": "mitigated_current_access_verified",
@@ -1122,8 +1146,6 @@
     "older_article_in_first_six": false
   },
   "latest_backup_component_observation": {
-    "observed_at": "2026-11-27T08:34:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
     "components": [
       {
         "id": "administrative-state",
@@ -1133,14 +1155,14 @@
       },
       {
         "id": "recent-news",
-        "checksum": "7d329ac77c6e499abcf9e16feeb13ca7cc2d36117f77d46a494bc411594c1ef6",
-        "updated_at": "2026-11-27T08:13:35.968Z",
+        "checksum": "c417c9f933fbf6e12b608a80113504403ad81ec9b9bc58710ecf8ae494406937",
+        "updated_at": "2026-11-27T09:02:19.820Z",
         "error_present": false
       },
       {
         "id": "source-configuration",
-        "checksum": "6e1647f530f52bf4b6610975ba2b7190fbe75cbf4a64f1f07dea4d1aede61882",
-        "updated_at": "2026-11-27T08:13:37.785Z",
+        "checksum": "0deecf1fbfb2bd3d728f7874ccb0dd26a5f88f6b85c274ab08367bee9ba1f17f",
+        "updated_at": "2026-11-27T09:02:21.560Z",
         "error_present": false
       }
     ],
@@ -1150,7 +1172,9 @@
       "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
       "scheduled_publication_reconciliation": "partial"
     },
-    "qualification_started_at": null
+    "qualification_started_at": null,
+    "observed_at": "2026-11-27T09:33:59Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json"
   },
   "latest_verified_news": {
     "observed_at": "2026-11-27T07:11:47Z",
@@ -1277,10 +1301,12 @@
   "latest_public_health_sample": {
     "url": "https://tlvnet.com/",
     "http": 200,
-    "reader_seconds": 7.8748,
-    "measurement": "one client GET, including network",
-    "observed_at": "2026-11-27T08:34:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json"
+    "reader_seconds": 8.837038,
+    "scope": "one reader/network GET; no uptime or server distribution inference",
+    "first_article": "/news/tel-aviv-neighborhood-tool-libraries-20261127",
+    "leading_general_news_published_at": "2026-11-27T06:15:36.014287+00:00",
+    "observed_at": "2026-11-27T09:33:59Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json"
   },
   "latest_editorial_gap": {
     "culture": {
@@ -1386,13 +1412,13 @@
     }
   },
   "latest_desk_health_observation": {
-    "observed_at": "2026-11-27T08:34:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json",
+    "observed_at": "2026-11-27T09:33:59Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
     "reconcile": {
-      "runid": 152,
+      "runid": 158,
       "status": "succeeded",
-      "start_time": "2026-11-27T08:30:00.097942+00:00",
-      "end_time": "2026-11-27T08:30:00.101761+00:00"
+      "start_time": "2026-11-27T09:30:00.160477+00:00",
+      "end_time": "2026-11-27T09:30:00.168783+00:00"
     },
     "external_backups": [
       {
@@ -1436,5 +1462,54 @@
       }
     ],
     "visual_mobile_pending": true
+  },
+  "latest_verified_investigations": {
+    "task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
+    "run_id": "5eefc9d6-d9e0-832c-bff7-c06cb549a266",
+    "status": "completed",
+    "started_at": "2026-11-27T08:46:38.396526Z",
+    "completed_at": "2026-11-27T09:03:49.891247Z",
+    "result_id": "5eefc9d6-d9e0-832c-bff7-c06cb549a266",
+    "matching_result": true,
+    "articles": [
+      {
+        "id": "tel-aviv-neighborhood-tool-libraries-20261127",
+        "url": "https://tlvnet.com/news/tel-aviv-neighborhood-tool-libraries-20261127",
+        "title": "שבעה מחסני השאלה ברשימה של תל אביב. לשניים יש הודעות השבתה, ואחד החליף אתר",
+        "heading": "שבעה מחסני השאלה ברשימה של תל אביב. לשניים יש הודעות השבתה, ואחד החליף אתר",
+        "http": "200 text/html; charset=utf-8",
+        "all_body_elements": true,
+        "elements": 8,
+        "asset": "https://tlvnet.com/photo-bank/assets/workshop-tools-ovsyannykov-2017.jpg",
+        "image_status": "200 image/jpeg",
+        "jpeg": true,
+        "sha256": "3a658a62b0c5a9f1fb7b92efaa2a1b56752cbb632144abfe5cd28fbe0ffb5f69",
+        "credit": "אילוסטרציה · כלי עבודה בארגז",
+        "home": true,
+        "section": true,
+        "city_feed": false,
+        "published_at": "2026-11-27T08:55:56.632388+00:00"
+      },
+      {
+        "id": "jaffa-saraya-opening-archive-20261127",
+        "url": "https://tlvnet.com/news/jaffa-saraya-opening-archive-20261127",
+        "title": "בית הסראייה ביפו כבר נחנך ב־2017. המסמכים מספרים מה קרה אחרי הטקס",
+        "heading": "בית הסראייה ביפו כבר נחנך ב־2017. המסמכים מספרים מה קרה אחרי הטקס",
+        "http": "200 text/html; charset=utf-8",
+        "all_body_elements": true,
+        "elements": 9,
+        "asset": "https://tlvnet.com/photo-bank/assets/jaffa-saraya-clock-square-gpo-1938.jpg",
+        "image_status": "200 image/jpeg",
+        "jpeg": true,
+        "sha256": "43612e5677e1578442d261d28616e7188a0b49d67f00f904a9e604a0d14f53ae",
+        "credit": "צילום ארכיון: בית הסראייה וכיכר השעון ביפו, 1938 · אוסף התצלומים הלאומי, לשכת העיתונות הממשלתית",
+        "home": true,
+        "section": true,
+        "city_feed": false,
+        "published_at": "2026-11-27T08:36:22.293930+00:00"
+      }
+    ],
+    "observed_at": "2026-11-27T09:33:59Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json"
   }
 }
