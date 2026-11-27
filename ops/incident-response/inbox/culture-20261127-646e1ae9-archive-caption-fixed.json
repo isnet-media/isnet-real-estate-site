@@ -1,0 +1,70 @@
+{
+  "run_id": "646e1ae9-a0ac-8323-807f-197da1dd9fa1",
+  "attempt": 1,
+  "agent_id": "Automation_53543605ce188191ba90f3f1979203dc",
+  "subsystem": "TLVNET news image presentation",
+  "target": "TLVNET-site",
+  "workflow": "Culture daily original owner publication",
+  "step": "Live photo caption readback",
+  "recorded_at": "2026-11-27 08:15:27 UTC",
+  "status": "fixed_verified",
+  "conclusion": "Two new archived real-building photos rendered with an illustration label and incomplete resize attribution; original owner corrected input metadata and verified live.",
+  "root_cause": "New Commons assets used subject_kind=location_archive. Existing news_images.py assigns the truthful archive caption only for venue_archive/exhibition_archive. The existing clean_photo_credit also strips credit segments beginning הוקטן. No renderer or gate was changed.",
+  "mitigation": "Set the two real venue photos to existing venue_archive classification and retained a readable full-frame reduction phrase in the CC attribution. Body, JPEG bytes, addresses and publication dates preserved.",
+  "tests": [
+    "build-news.py",
+    "check-photo-bank.py",
+    "npm run build including prepare-public",
+    "Exact live full-body, JPEG-hash, visible-credit, archive-label, source/purchase-link, section and homepage checks",
+    "Live desktop browser caption review"
+  ],
+  "deployment": {
+    "version": 756,
+    "id": "appgdep_6b093af2042481919ed1661c08b8c98b",
+    "status": "succeeded",
+    "commit_sha": "24b3b4a7921668cc993b7ed63a7a37130884c152"
+  },
+  "publication_readback": [
+    {
+      "article_id": "jaffa-saraya-culture-center-20261125",
+      "url": "https://tlvnet.com/news/jaffa-saraya-culture-center-20261125",
+      "body_sha256": "d214bb5618765150715d70a6d2807955837905b2cd605ef310a7e7e05d722ec4",
+      "asset_sha256": "e4d2f078f081349479ed3dd7ddb5cc4ef642fd2c1757c8f6a16f9d5aaea718df",
+      "checks": {
+        "heading": true,
+        "lead": true,
+        "full_body": true,
+        "exact_image": true,
+        "credit": true,
+        "section": true,
+        "home": true,
+        "source_links": true
+      },
+      "status": 200,
+      "image_status": 200,
+      "checked_at": "2026-11-27T08:11:58.742147+00:00",
+      "published_verified": true
+    },
+    {
+      "article_id": "olim-talent-enav-20261215",
+      "url": "https://tlvnet.com/news/olim-talent-enav-20261215",
+      "body_sha256": "d9ba936ac3915a36c9b365c544b94f9bbc7b79764005bf983a37f11711586ab8",
+      "asset_sha256": "8b7a785eb246ee6280ab908a6fef31a8c9e87a7765971a1d19f595d03d4380c0",
+      "checks": {
+        "heading": true,
+        "lead": true,
+        "full_body": true,
+        "exact_image": true,
+        "credit": true,
+        "section": true,
+        "home": true,
+        "source_links": true
+      },
+      "status": 200,
+      "image_status": 200,
+      "checked_at": "2026-11-27T08:11:58.750522+00:00",
+      "published_verified": true
+    }
+  ],
+  "next_action": "Use the existing venue_archive field for real archive venue assets and verify reader-facing modifications attribution before release. Mobile review remains pending in the existing quality-issues queue; no controller invoked."
+}
