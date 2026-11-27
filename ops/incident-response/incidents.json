@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T11:56:42Z",
+  "updated_at": "2026-11-27T12:56:52Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9328,13 +9328,13 @@
       "status": "open",
       "classification": "media/binary_access_and_rights",
       "root_cause": "Owner runtime reported DNS failures and could not fetch exact candidate or adjacent-image bytes. That environment capability remains unresolved.",
-      "impact": "Raanana owner reports 11 retained topics and zero new publications. Controller independently reproduced name-resolution failures for the same three hosts; no internet-wide outage established.",
+      "impact": "Two owner drafts held. Controller independently verified distinct public article-image 640x480 JPEG hashes for CMS59 news, sport and culture.",
       "mitigation": "Verified an existing authorized HTTPS path on two already-public files, with actual distinct hashes and MIME.",
       "prevention": "Run byte and rights checks independently from CMS metadata and distinguish source bytes from served crops.",
-      "next_action": "Existing owner to verify exact candidate and adjacent-image bytes via authorized path, and require actual media rights before publishing through CMS59. Rendered 390px homepage check remains pending.",
+      "next_action": "Candidate rights, owner runtime and rendered 390px QA remain unverified.",
       "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json",
-      "last_seen_at": "2026-11-26T12:29:55Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
+      "last_seen_at": "2026-11-27T12:56:52Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
       "occurrences": [
         {
           "controller_run": "74e0fc15-5084-8328-abdc-59ae24521acc",
@@ -9347,11 +9347,17 @@
           "observed_at": "2026-11-26T12:29:55Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
           "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json"
+        },
+        {
+          "controller_run": "e1e7bd73-82e4-8330-8432-8811075361c4",
+          "observed_at": "2026-11-27T12:56:52Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
         }
       ],
       "first_reported_date": "2026-11-24",
       "first_timestamped_evidence_at": "2026-11-24T12:07:22.859Z",
-      "latest_media_scope": "Scoped controller and owner DNS failures. Public outage not established. No approved media bytes or browser visual QA here."
+      "latest_media_scope": "Scoped controller and owner DNS failures. Public outage not established. No approved media bytes or browser visual QA here.",
+      "next": "Existing owner can use the observed public article-image URLs via ordinary HTTP for adjacent-image comparison. Confirm the candidate's own binary, rights and writer-environment access before release."
     },
     {
       "id": "tlvnet-guide-missing-taxonomy-asset",
@@ -9666,9 +9672,62 @@
       "status": "mitigated",
       "last_seen_at": "2026-11-27T11:56:42Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/c124fd32-02b8-8330-8926-d5fb7aad7b7e.json"
+    },
+    {
+      "id": "desk-staging-external-media-backup-stale",
+      "first_seen_at": "2026-11-27T12:56:52Z",
+      "occurrences": [
+        {
+          "controller_run": "e1e7bd73-82e4-8330-8432-8811075361c4",
+          "observed_at": "2026-11-27T12:56:52Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+        }
+      ],
+      "status": "open",
+      "classification": "backup_freshness",
+      "root_cause": "Latest external media backup success crossed 26 hours. Cause of missing newer success is unconfirmed.",
+      "next_action": "Inspect the existing backup workflow under the authorized service owner and verify the next successful external media record.",
+      "inbox": "ops/incident-response/inbox/20261127-desk-staging-external-media-backup-age.json",
+      "last_seen_at": "2026-11-27T12:56:52Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+    },
+    {
+      "id": "TLVNET/consumer/media-ingest/Commons-original-HTTP403",
+      "first_seen_at": "2026-11-27T12:56:52Z",
+      "occurrences": [
+        {
+          "controller_run": "e1e7bd73-82e4-8330-8432-8811075361c4",
+          "observed_at": "2026-11-27T12:56:52Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+        }
+      ],
+      "status": "awaiting_external_action",
+      "classification": "media_ingest",
+      "root_cause": "Owner's original photo retrieval returned HTTP 403. No source image bytes or permitted transfer confirmed.",
+      "next_action": "Original writer may use a supported equivalent licensed asset or resume after material transfer change. Same input held.",
+      "inbox": "ops/incident-response/inbox/20261127-consumer-0s13f7en7ipb.json",
+      "last_seen_at": "2026-11-27T12:56:52Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+    },
+    {
+      "id": "herzliya-shared-writer-lease-null-20261127",
+      "first_seen_at": "2026-11-27T12:56:52Z",
+      "occurrences": [
+        {
+          "controller_run": "e1e7bd73-82e4-8330-8432-8811075361c4",
+          "observed_at": "2026-11-27T12:56:52Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+        }
+      ],
+      "status": "open",
+      "classification": "writer_lease",
+      "root_cause": "Owner reported NULL when requesting its shared writing lease. Lock backend and cause unconfirmed. Free CMS62 GitHub lease is separate evidence and does not cancel the reported result.",
+      "next_action": "Identify the exact shared writer lease backend in the owner's report and validate its active ownership before attempting the next write.",
+      "last_seen_at": "2026-11-27T12:56:52Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-27-c124fd32-02b8-8330-8926-d5fb7aad7b7e",
+  "last_review_runKey": "ops-2026-11-27-e1e7bd73-82e4-8330-8432-8811075361c4",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
