@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "15674df1-52a8-8320-a38e-e74535e459ae",
+  "runKey": "ops-2026-11-27-15674df1-52a8-8320-a38e-e74535e459ae",
+  "policy_version": "2026-11-15/1.2",
+  "observed_at": "2026-11-27T05:24:50Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-27/15674df1-52a8-8320-a38e-e74535e459ae.json",
+  "private_policy_read": {
+    "revision": 3,
+    "checksum": "df2b31113830da025dab985ee5ffe778779a6027315c0af31dc01d286066df08",
+    "reader": "chatgpt-scheduled",
+    "last_read_at": "2026-11-27 05:23:27.872673+00"
+  },
+  "scope": [
+    "TLVNET homepage leads, Bli Heshbon and neighborhood links",
+    "Owner and pending attempts",
+    "Actions, incident inbox and social deltas",
+    "Backup components and restore checkpoint"
+  ],
+  "deployment": {
+    "version_number": 753,
+    "version_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32~appgver_b323633d668481918ec042db7ccb811d",
+    "deployment_id": "appgdep_6b0883fe94a4819196b9a9c14e2d4cb9",
+    "source_commit": "6f160aa62c7bac4c4e695fe6275942c04b48b422",
+    "status": "succeeded",
+    "terminal_at": "2026-11-26T19:10:05.647011+00:00",
+    "unchanged": true
+  },
+  "home": {
+    "http": 200,
+    "roundtrip_seconds": 7.07395,
+    "url": "https://tlvnet.com/",
+    "section_leads": {
+      "home-cover": [
+        "/news/yad-eliyahu-affordable-rent-count-20261126"
+      ],
+      "local-news": [
+        "/news/purple-line-allenby-levinsky-night-closures-20261129",
+        "/news/tel-aviv-school-staff-parents-violence-response-20261126"
+      ],
+      "local-bli-heshbon": [
+        "/news/north-tel-aviv-jackals-20261124",
+        "/news/daycare-tender-mair-bint-20261122"
+      ],
+      "local-real-estate": [
+        "/news/dunietz-dan-merger-tel-aviv-projects-20261126",
+        "/news/maccabi-jaffa-rotem-shani-tender-reported-20261125"
+      ],
+      "local-economy-tech": [
+        "/news/q-security-post-quantum-seed-tlv-20261126",
+        "/news/eon-reported-funding-talks-tlv-20261126"
+      ],
+      "local-community": [
+        "/news/liebling-public-space-policy-20261214",
+        "/news/ficus-hackathon-20261122"
+      ],
+      "local-sports": [
+        "/news/maccabi-miller-return-league-blitz-injury-20261126",
+        "/news/hapoel-petah-tikva-return-boateng-preview-20261126"
+      ],
+      "local-culture-news": [
+        "/news/noma-bar-weekend-tours-workshops-20261127",
+        "/news/yam-katan-bialik-20261209"
+      ],
+      "local-consumer": [
+        "/news/next-israel-delivery-collection-20261126",
+        "/news/universal-sardines-arsenic-recall-20261125"
+      ]
+    }
+  },
+  "direct_public_routes": {
+    "bli_heshbon": {
+      "http": 200,
+      "cover_article_present": true
+    },
+    "city_hub": {
+      "http": 200,
+      "items": 90,
+      "cover_tagged_yad_eliyahu": true
+    },
+    "yad_eliyahu": {
+      "http": 200,
+      "cover_article_link_present": true
+    }
+  },
+  "source_projection": {
+    "retained": "ops/tlvnet-stability/observations/2026-11-26/f1f75bc7-b820-8320-a411-6c4352bcd56c.json",
+    "source_commit": "6f160aa62c7bac4c4e695fe6275942c04b48b422",
+    "unchanged": true
+  },
+  "owner_results_changed": 0,
+  "owner_metadata_read": 17,
+  "pending_owner_results": [
+    {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "title": "כתב חדשות — רעננה",
+      "enabled": true,
+      "run_id": "f177b9fd-b3e0-832f-8c0e-29cd750fa2ce",
+      "started_at": "2026-11-26T17:00:12.094006Z",
+      "completed_at": "2026-11-26T17:01:11.753840Z",
+      "scheduled_for": "2026-11-26T17:00:00Z",
+      "recorded_status": "completed",
+      "result_run_id": null,
+      "result_created_at": null,
+      "result_matches_attempt": false,
+      "reason": "Completed status without linked attempt result or exact release evidence.",
+      "observed_at": "2026-11-26T17:34:00Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-26/2bd2263e-970c-8324-8053-afe2cbaa6aff.json",
+      "rechecked_at": "2026-11-27T05:24:50Z"
+    }
+  ],
+  "actions": {
+    "from": "2026-11-27T03:37:37Z",
+    "through": "2026-11-27T03:37:37Z",
+    "boundary_ids": [
+      45935265058
+    ],
+    "boundary_crossed": true,
+    "strictly_new": 0,
+    "pending_run_ids": [],
+    "full_logs_read": 0
+  },
+  "inbox": {
+    "new_external_paths": [],
+    "through": "2026-11-26T17:04:35Z",
+    "boundary_crossed": true
+  },
+  "social": {
+    "new_rows": 0,
+    "previous_row_observed": true,
+    "has_more": false
+  },
+  "worker_sample": {
+    "events": 6,
+    "sample_limit": 25,
+    "confirmed_supported_route_server_failure": false,
+    "known_favicon_404_samples": 1,
+    "cancellation": {
+      "at": "2026-11-27T05:12:15.489Z",
+      "path": "/api/public-articles",
+      "outcome": "canceled",
+      "http_status": null,
+      "wall_time_ms": 3933,
+      "impact_verified": false
+    }
+  },
+  "backup": {
+    "components": [
+      {
+        "id": "administrative-state",
+        "checksum": "3469c01415310003c8eee05f70193afb6fdbd9f8749c0137e2a354b56b1e90b8",
+        "updated_at": "2026-11-27T04:24:14.819Z",
+        "error_present": false
+      },
+      {
+        "id": "recent-news",
+        "checksum": "0f8071137bebe2068a5dc957a1f4737227d2fd9e6b6b17e4f2a48bf8b146f040",
+        "updated_at": "2026-11-26T19:14:51.573Z",
+        "error_present": false
+      },
+      {
+        "id": "source-configuration",
+        "checksum": "4ec0467c2e72b506f5fc16178a92481ae8e9bb737a311e3c3e982c7197f7a96c",
+        "updated_at": "2026-11-26T19:14:52.410Z",
+        "error_present": false
+      }
+    ],
+    "production_recovery_progress": [
+      {
+        "id": 1,
+        "updated_at": "2026-11-27T04:23:59.128Z",
+        "complete": 1,
+        "scope": "Production CMS import marker"
+      }
+    ],
+    "full_hosted_restoration_verified": false
+  },
+  "publication_lease_state": "free",
+  "controller_new_deployments": 0,
+  "schedule_changed": false
+}
