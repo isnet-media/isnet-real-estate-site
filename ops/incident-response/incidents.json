@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T00:47:01Z",
+  "updated_at": "2026-11-27T05:01:42Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7523,7 +7523,7 @@
         "occurrences": 1
       },
       "next_action": "Observe once for recurrence or impact on a real TLVNET route. If reproduced on a supported route, inspect current routing/response body ownership under the authorized source path, then verify a local regression before production change.",
-      "last_seen_at": "2026-11-27T00:12:42.520Z",
+      "last_seen_at": "2026-11-27T04:05:55.676Z",
       "latest_observation": {
         "sample_exceptions": [
           {
@@ -7543,12 +7543,21 @@
         "known_public_route_impact": null
       },
       "latest_recurrence": {
-        "observed_at": "2026-11-27T00:47:01Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-27/f4f04f5e-fcfc-8320-895d-08f05f7f74c3.json",
+        "observed_at": "2026-11-27T05:01:42Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-27/ddacf28c-de18-8320-8ee5-bdcdc85271af.json",
+        "event_at": "2026-11-27T04:05:55.676Z",
+        "events": [
+          {
+            "at": "2026-11-27T04:05:55.676Z",
+            "path": "/v1/chat/completions"
+          },
+          {
+            "at": "2026-11-27T04:05:55.609Z",
+            "path": "/v1/chat/completions"
+          }
+        ],
         "status": "same_signature_unsupported_route",
-        "supported_route_impact_observed": false,
-        "event_at": "2026-11-27T00:12:42.520Z",
-        "path": "/xmlrpc.php"
+        "supported_route_impact_observed": false
       }
     },
     {
