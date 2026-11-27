@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T08:34:28Z",
+  "updated_at": "2026-11-27T11:56:42Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9624,9 +9624,51 @@
       "prevention": "Use venue_archive for actual venue archive photos and verify resize attribution in live public caption.",
       "last_seen_at": "2026-11-27T08:34:28Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/415ebd73-fae4-8320-a4ab-ba90a9f29a0b.json"
+    },
+    {
+      "id": "TLVNET/economy/public-source-reader-default-403",
+      "first_seen_at": "2026-11-27T11:56:42Z",
+      "occurrences": [
+        {
+          "owner_run_id": "2960a7d3-b23c-8329-a52a-5ca97b98cac9",
+          "inbox": "ops/incident-response/inbox/2026-11-27-economy-tech-2960a7d3-http-reader.json",
+          "controller_run": "c124fd32-02b8-8330-8926-d5fb7aad7b7e",
+          "observed_at": "2026-11-27T11:56:42Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/c124fd32-02b8-8330-8926-d5fb7aad7b7e.json"
+        }
+      ],
+      "classification": "source_fetch",
+      "root_cause": "Owner's default HTTP client received 403 on a public library image request; server-side cause unconfirmed.",
+      "mitigation": "Owner retried once with a descriptive editorial User-Agent and verified the JPEG. Controller matched the published JPEG to the approved image hash and checked full article, section and home.",
+      "impact": "Single ingestion recovered; no evidence of a shared outage.",
+      "next_action": "Retain the existing descriptive public-source client behavior and evaluate recurrence.",
+      "status": "mitigated",
+      "last_seen_at": "2026-11-27T11:56:42Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/c124fd32-02b8-8330-8926-d5fb7aad7b7e.json"
+    },
+    {
+      "id": "TLVNET/community/source-open/generic-helper-failure",
+      "first_seen_at": "2026-11-27T11:56:42Z",
+      "occurrences": [
+        {
+          "owner_run_id": "e12f7cc8-db10-832a-8f9b-0104d08b04de",
+          "inbox": "ops/incident-response/inbox/20261127-community-a0d1708d.json",
+          "controller_run": "c124fd32-02b8-8330-8926-d5fb7aad7b7e",
+          "observed_at": "2026-11-27T11:56:42Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-27/c124fd32-02b8-8330-8926-d5fb7aad7b7e.json"
+        }
+      ],
+      "classification": "source_open",
+      "root_cause": "Workspace helper returned a generic failure opening this source; exact root unconfirmed.",
+      "mitigation": "Owner used an isolated copy verified against remote HEAD. Deployment 760 succeeded and updated article, image and section read back publicly.",
+      "impact": "Community update reached production. Mobile check remains pending.",
+      "next_action": "Preserve the owner's current procedure and inspect the helper only if recurrence changes scope.",
+      "status": "mitigated",
+      "last_seen_at": "2026-11-27T11:56:42Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/c124fd32-02b8-8330-8926-d5fb7aad7b7e.json"
     }
   ],
-  "last_review_runKey": "ops-2026-11-27-415ebd73-fae4-8320-a4ab-ba90a9f29a0b",
+  "last_review_runKey": "ops-2026-11-27-c124fd32-02b8-8330-8926-d5fb7aad7b7e",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
