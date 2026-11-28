@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T07:39:42.242Z",
+  "updated_at": "2026-11-28T08:31:39.870Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -5221,7 +5221,7 @@
       "id": "controller-active-scope-inherited-writer-approval",
       "status": "awaiting_external_action",
       "classification": "ownership/scope",
-      "root_cause": "Cross-task result attribution/context anomaly: sports owner run and controller run have byte-identical controller-scope final text despite distinct task prompts and conversations. Backend root cause is not established; prior procedural mitigation is not an end-to-end repair.",
+      "root_cause": "Different task IDs, run IDs and chats received identical result text on multiple occasions. On this occurrence the reported task was Future, and the network Culture task had no same-day recorded private-policy read. Internal execution or result attribution root cause is unverified.",
       "observed_at": "2026-11-15T19:31:58.042Z",
       "change": "Invalidated local approvals; retained unapproved drafts in existing immutable inbox; isolated dirty research checkout; opened fresh source; released only exact token created by this execution; added procedural RUNBOOK guard.",
       "tests": "Local draft body/image checks and build passed before correction, but not owner authorization. Current public MaccabiJerusalem fullbody/loaded image/credit and desktop viewed; no new article published.",
@@ -5232,7 +5232,7 @@
       "checkpoint": "ops/incident-response/inbox/66f4eaea-b874-8326-9b23-1510b4bf3d77-sports-research-identity-checkpoint.json",
       "prevention": "Keep actual executor identity separate from intended owner; explicit active-role reconciliation before approval/CAS. Procedural mitigation only; no runtime fixed_verified claim.",
       "remaining": "Inspect scheduler/context isolation and result attribution for these exact two runs/conversations through the platform runtime; this connector exposes task prompt/result metadata but not execution routing logs or an isolation-repair operation. Do not replay/trigger tasks or change schedules to simulate repair.",
-      "last_observed_at": "2026-11-25T21:08:37Z",
+      "last_observed_at": "2026-11-28T08:31:39.870Z",
       "new_runtime_evidence": {
         "sports_run_id": "37cbf175-5f34-8320-b921-abb82295b707",
         "controller_previous_run_id": "66f4eaea-b874-8326-9b23-1510b4bf3d77",
@@ -5242,28 +5242,58 @@
         "sports_completed_without_evening_publication": true,
         "source_unchanged": true
       },
-      "last_seen_at": "2026-11-27T08:34:28Z",
+      "last_seen_at": "2026-11-28T08:31:39.870Z",
       "latest_occurrence": {
-        "run_id": "91cc188e-b3a4-8328-af1e-ef568f3701ea",
-        "observed_at": "2026-11-25T21:08:37Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-25/91cc188e-b3a4-8328-af1e-ef568f3701ea.json",
-        "signature": "controller-active-scope-inherited-writer-approval",
         "incident_id": "controller-active-scope-inherited-writer-approval",
-        "sports_run_id": "13950c84-9b88-8326-8ec8-79cab6ad90cb",
-        "controller_result_run_id": "1d20b946-add0-832c-944e-b40b18a37cef",
-        "sports_result_at": "2026-11-25T19:35:44.564288Z",
-        "controller_result_at": "2026-11-25T19:35:45.931039Z",
-        "results_exact_equal": true,
+        "observed_at": "2026-11-28T08:31:39.870Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/412e9b79-53b4-832c-8de6-06ebf5c85d29.json",
+        "run_id": "412e9b79-53b4-832c-8de6-06ebf5c85d29",
+        "culture": {
+          "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+          "run_id": "d20594d1-eb30-8328-84dd-04812844f653",
+          "result_run_id": "d20594d1-eb30-8328-84dd-04812844f653",
+          "status": "completed",
+          "scheduled_for": "2026-11-28T08:00:00Z",
+          "started_at": "2026-11-28T08:15:06.458653Z",
+          "result_at": "2026-11-28T08:20:11.796520Z",
+          "chat_id": "6aed6cf2-2c38-83eb-8a9a-5c5f2e45a1ef",
+          "enabled": true,
+          "next_run_time": "2026-11-29T10:00:00+02:00"
+        },
+        "future": {
+          "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+          "run_id": "04a4f577-bfe0-832a-9481-e2c0269f414a",
+          "result_run_id": "04a4f577-bfe0-832a-9481-e2c0269f414a",
+          "status": "completed",
+          "scheduled_for": "2026-11-28T08:00:00Z",
+          "started_at": "2026-11-28T08:15:17.867329Z",
+          "result_at": "2026-11-28T08:20:13.228849Z",
+          "chat_id": "6aed7da7-acdc-83eb-a2ce-ab27bfac8cc0",
+          "enabled": true,
+          "next_run_time": "2026-11-30T10:00:00+02:00"
+        },
         "distinct_chat_refs": true,
-        "source_handoff": "ops/incident-response/inbox/sports-20261125-13950c84-context-restored-published.json",
-        "public_sports_publication_verified_independently": true,
-        "root_cause": "Platform routing/result attribution cause not established",
-        "next_action": "Platform runtime owner to compare execution routing and result attribution for the two run IDs.",
-        "owner_result_status": "completed_sports_articles_verified",
-        "verified_deployment_id": "appgdep_6b0737791ec08191b6b3dbe27785d9a7"
+        "results_exact_equal": true,
+        "result_scope": "future",
+        "policy_read_rows": [
+          {
+            "agent_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+            "revision": 4,
+            "read_revision": 4,
+            "last_read_at": "2026-11-28 08:15:56.995446+00"
+          },
+          {
+            "agent_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+            "revision": 5,
+            "read_revision": 5,
+            "last_read_at": "2026-11-27 08:04:13.75909+00"
+          }
+        ],
+        "qualification": "Do not credit this run as network culture output. Results attributed to two different scheduled runs are identical. Missing same-day culture audit is independent confirmation that its policy read was not recorded. Internal execution or result routing cause remains unverified.",
+        "next_action": "Runtime owner to compare the two exact task/run bindings and restore task-specific execution and result attribution."
       },
-      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-25/91cc188e-b3a4-8328-af1e-ef568f3701ea.json",
-      "next_action": "Platform runtime owner to compare execution routing and result attribution for the two run IDs.",
+      "latest_evidence": "ops/tlvnet-stability/observations/2026-11-28/412e9b79-53b4-832c-8de6-06ebf5c85d29.json",
+      "next_action": "Runtime owner to compare the two exact task/run bindings and restore task-specific execution and result attribution.",
       "latest_pending_run_observation": {
         "observed_at": "2026-11-19T20:50:22Z",
         "evidence": "ops/tlvnet-stability/observations/2026-11-19/eb664208-f2e0-832a-a49d-4e3bb644dd6a.json",
@@ -8284,7 +8314,31 @@
       },
       "next_action": "Retain this approved body and media unchanged for the magazine owner; reuse the published Holon item and verify its home feed. For Herzliya use an approved local media import and a real destination media ID.",
       "reported_runKey": "ops-2026-11-22-29361082-f020-8320-9560-b3958f38941f",
-      "last_seen_at": "2026-11-22T09:45:26Z"
+      "last_seen_at": "2026-11-28T08:31:39.870Z",
+      "latest_controller_recheck": {
+        "observed_at": "2026-11-28T08:31:39.870Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/412e9b79-53b4-832c-8de6-06ebf5c85d29.json",
+        "content_id": "daily-2026-11-20",
+        "source_fingerprint": "doi:10.1088/1748-9326/aebbd4",
+        "owner_task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+        "owner_run_id": "04a4f577-bfe0-832a-9481-e2c0269f414a",
+        "owner_checkpoint": "ops/incident-response/inbox/20261128T0819Z-future-prepared-checkpoint-04a4f577.json",
+        "status": "prepared_pending_owner_release",
+        "article_public_http": 404,
+        "public_catalog_http": 200,
+        "present_in_public_catalog": false,
+        "present_in_source_catalog": false,
+        "source_catalog_count": 15,
+        "approved_body_sha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+        "approved_asset_sha256": "505eaf6ced3c81ecc2cf63f368f28a886bc4ae59dd4e7c391f0af750371f433c",
+        "asset_public_http": 200,
+        "asset_matches_source_and_approved_hash": true,
+        "herzliya": "pending_approved_receiver_local_media_fileId",
+        "cmp_placements_historical_or_owner_verified": 10,
+        "mechanical_release": "Existing general news recovery helper is briefs-only. Preserve owner approvals and the original future magazine path.",
+        "capacity": "Prior ENOSPC not reproduced by the owner or by independent source fetch and worktree checkout. No build capacity claim.",
+        "lease_state": "free"
+      }
     },
     {
       "id": "events-city-snapshot-reader-returned-metadata-only",
@@ -9477,7 +9531,7 @@
       "prevention": "Check destination free space before a full fetch and reuse a verified current local object cache for large site histories.",
       "next_action": "Check capacity on the actual execution volume, reuse a matching source checkout or select an authorized volume with capacity for working tree, build and package, then let the existing magazine owner verify and release the exact prepared item.",
       "inbox": "ops/incident-response/inbox/sports-20261126-morning-6b4924bf-a2c4-8322-a976-b4718e716b78-1.json",
-      "last_seen_at": "2026-11-26T12:29:55Z",
+      "last_seen_at": "2026-11-28T08:31:39.870Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-26/cef26c64-f1e0-8324-856d-481608589c47.json",
       "occurrences": [
         {
@@ -9501,7 +9555,14 @@
         }
       ],
       "latest_evidence": "ops/tlvnet-stability/observations/2026-11-26/7c89e4aa-a3ac-8328-962b-8dd272eb01d1.json",
-      "latest_workaround": "Publisher succeeded in a fresh isolated /tmp checkout after ENOSPC in /workspace; permanent capacity not verified."
+      "latest_workaround": "Publisher succeeded in a fresh isolated /tmp checkout after ENOSPC in /workspace; permanent capacity not verified.",
+      "latest_recheck": {
+        "observed_at": "2026-11-28T08:31:39.870Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/412e9b79-53b4-832c-8de6-06ebf5c85d29.json",
+        "source_fetch_and_checkout": "passed",
+        "future_owner_capacity_recheck": "passed",
+        "build_headroom": "unverified"
+      }
     },
     {
       "id": "raanana-exact-binary-retrieval-and-adjacent-hash-gate",
@@ -10067,9 +10128,49 @@
       "observed_at": "2026-11-28T07:39:42.242Z",
       "last_seen_at": "2026-11-28T07:39:42.242Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json"
+    },
+    {
+      "id": "tlvnet-culture-final-body-after-generator",
+      "status": "fixed_verified",
+      "classification": "publication/rendered_body",
+      "root_cause": "The first deployed page was generated before the last source edit. Substring checks accepted the extra disclaimer.",
+      "change": "Owner regenerated from final source and redeployed. Exact live/canonical paragraph equality, source media hashes, captions and index placements independently checked.",
+      "prevention": "Regenerate after the final source edit and require exact paragraph equality.",
+      "observed_at": "2026-11-28T08:31:39.870Z",
+      "last_seen_at": "2026-11-28T08:31:39.870Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/412e9b79-53b4-832c-8de6-06ebf5c85d29.json",
+      "occurrence": "ops/incident-response/inbox/culture-20261128-005432de-render-body-1.json",
+      "deployment": {
+        "version": 768,
+        "source_commit": "df52bee426989d1f45fc17fb193080a96b0b2947",
+        "source_checkpoint": "82b4ca63ec07ffb853118e3d6065d751cfe83648",
+        "deployment_id": "appgdep_6b0a8db694c88191b2de001af71d5f7f",
+        "status": "succeeded",
+        "completed_at": "2026-11-28T08:16:04.431281+00:00",
+        "previous_version": 767,
+        "previous_deployment_id": "appgdep_6b0a8c1926588191966adea9ea67f5a1"
+      },
+      "public_proof": {
+        "article_id": "malka-baneshema-hatikva-novel-20261127",
+        "url": "https://tlvnet.com/news/malka-baneshema-hatikva-novel-20261127",
+        "section_url": "https://tlvnet.com/news/",
+        "home_url": "https://tlvnet.com/",
+        "status": 200,
+        "matching_source_h1_and_all_article_paragraphs_and_caption": true,
+        "paragraphs": 8,
+        "image_status": 200,
+        "asset_sha256": "25598834702289be5540620df75cc4a92feb803375add340d1c921f609476855",
+        "image_matches_canonical_source": true,
+        "dimensions": [
+          800,
+          533
+        ],
+        "visual_mobile_review": "pending",
+        "sections_and_home_links_verified": true
+      }
     }
   ],
-  "last_review_runKey": "ops-2026-11-28-4495b81e-abd8-832c-8405-1dab74ae4361",
+  "last_review_runKey": "ops-2026-11-28-412e9b79-53b4-832c-8de6-06ebf5c85d29",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
