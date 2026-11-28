@@ -17,7 +17,7 @@
   "monitor_owner": "Automation_9776808c73848191a9d748dd09315960",
   "schedule_changed": false,
   "new_automation_created": false,
-  "last_observation_at": "2026-11-28T03:22:48Z",
+  "last_observation_at": "2026-11-28T05:06:01Z",
   "last_daily_summary_at": "2026-11-27T09:33:59Z",
   "observations": [
     {
@@ -807,6 +807,12 @@
       "path": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
       "observed_at": "2026-11-28T03:22:48Z"
+    },
+    {
+      "run_id": "8281db4c-9b50-832c-a13d-9d31719f5452",
+      "path": "ops/tlvnet-stability/observations/2026-11-28/8281db4c-9b50-832c-a13d-9d31719f5452.json",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/8281db4c-9b50-832c-a13d-9d31719f5452.json",
+      "observed_at": "2026-11-28T05:06:01Z"
     }
   ],
   "remaining": [
@@ -828,13 +834,13 @@
   "access_request": "BACKUP_ACCESS_REQUEST_20261115.md",
   "latest_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "baa864b9-bbc8-832c-a601-39d28cf490e1",
-    "runKey": "ops-2026-11-28-baa864b9-bbc8-832c-a601-39d28cf490e1",
+    "run_id": "8281db4c-9b50-832c-a13d-9d31719f5452",
+    "runKey": "ops-2026-11-28-8281db4c-9b50-832c-a13d-9d31719f5452",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T03:22:48Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
-    "summary": "Fresh successful external DB and media backup receipts clear Desk staging's 26-hour freshness alerts. The earlier delay's cause and restore capability have not been verified. Reconciliation succeeded, Herzliya queue is empty, and TLVNET production 764 and homepage rails are unchanged."
+    "observed_at": "2026-11-28T05:06:01Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/8281db4c-9b50-832c-a13d-9d31719f5452.json",
+    "summary": "Live TLVNET 764 and its homepage rails are unchanged. New Pages and event-readback workflows completed successfully. Desk reconciliation succeeded, the Herzliya queue is empty, and both external backup receipts remain within their freshness threshold."
   },
   "latest_contact_repair": {
     "status": "fixed_verified",
@@ -895,15 +901,15 @@
     ]
   },
   "last_observation": {
-    "run_id": "baa864b9-bbc8-832c-a601-39d28cf490e1",
-    "path": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
-    "observed_at": "2026-11-28T03:22:48Z",
+    "run_id": "8281db4c-9b50-832c-a13d-9d31719f5452",
+    "path": "ops/tlvnet-stability/observations/2026-11-28/8281db4c-9b50-832c-a13d-9d31719f5452.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/8281db4c-9b50-832c-a13d-9d31719f5452.json",
+    "observed_at": "2026-11-28T05:06:01Z",
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "runKey": "ops-2026-11-28-baa864b9-bbc8-832c-a601-39d28cf490e1",
+    "runKey": "ops-2026-11-28-8281db4c-9b50-832c-a13d-9d31719f5452",
     "policy_version": "2026-11-15/1.2"
   },
-  "updated_at": "2026-11-28T03:22:48Z",
+  "updated_at": "2026-11-28T05:06:01Z",
   "latest_daily_summary": {
     "at": "2026-11-27T09:33:59Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
@@ -1456,9 +1462,9 @@
   "latest_public_health_sample": {
     "url": "https://tlvnet.com/",
     "http": 200,
-    "observed_wall_seconds": 8.898338,
-    "observed_at": "2026-11-28T03:22:48Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json"
+    "observed_wall_seconds": 8.686012,
+    "observed_at": "2026-11-28T05:06:01Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/8281db4c-9b50-832c-a13d-9d31719f5452.json"
   },
   "latest_editorial_gap": {
     "culture": {
@@ -1564,10 +1570,10 @@
     }
   },
   "latest_desk_health_observation": {
-    "checked_at": "2026-11-28 03:21:21.433239+00",
+    "checked_at": "2026-11-28 05:04:32.055007+00",
     "health": {
       "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
-      "hours_since_backup": 2.1059276502777777,
+      "hours_since_backup": 3.8255448080555556,
       "failed_backups_7d": 0,
       "handoff_stuck_over_2h": 0,
       "handoff_failed": 3,
@@ -1587,10 +1593,10 @@
       }
     ],
     "reconcile": {
-      "runid": 267,
+      "runid": 277,
       "status": "succeeded",
-      "start_time": "2026-11-28T03:20:00.119125+00:00",
-      "end_time": "2026-11-28T03:20:00.129314+00:00"
+      "start_time": "2026-11-28T05:00:00.108585+00:00",
+      "end_time": "2026-11-28T05:00:00.111339+00:00"
     },
     "herzliya_queued": {
       "count": 0,
@@ -1598,46 +1604,14 @@
       "oldest_created_at": null
     },
     "backup_age_hours": {
-      "db": 0.7,
-      "media": 0.2
+      "db": 2.4,
+      "media": 1.9
     },
-    "reconcile_age_minutes": 1.4,
+    "reconcile_age_minutes": 4.5,
     "alert": null,
     "backup_status_scope": "External receipts themselves have advanced and succeeded. Restore status remains unverified.",
-    "freshness_recovery": [
-      {
-        "kind": "db",
-        "latest": {
-          "kind": "db",
-          "ok": true,
-          "created_at": "2026-11-28T02:41:03.124878+00:00"
-        },
-        "previous": {
-          "kind": "db",
-          "ok": true,
-          "created_at": "2026-11-26T12:55:47.730012+00:00"
-        },
-        "age_hours": 0.7,
-        "freshness_restored": true
-      },
-      {
-        "kind": "media",
-        "latest": {
-          "kind": "media",
-          "ok": true,
-          "created_at": "2026-11-28T03:10:08.426668+00:00"
-        },
-        "previous": {
-          "kind": "media",
-          "ok": true,
-          "created_at": "2026-11-26T10:17:51.799605+00:00"
-        },
-        "age_hours": 0.2,
-        "freshness_restored": true
-      }
-    ],
-    "observed_at": "2026-11-28T03:22:48Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
+    "observed_at": "2026-11-28T05:06:01Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/8281db4c-9b50-832c-a13d-9d31719f5452.json",
     "db_alert": "ops/incident-response/inbox/20261127-desk-staging-external-db-backup-age.json",
     "prior_alert": "ops/incident-response/inbox/20261127-desk-staging-external-media-backup-age.json"
   },
