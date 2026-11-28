@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "kind": "technical_failure_repair_pending_ci",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "914f2d10-7650-8328-ba44-bd1f41ff08b7",
+  "reported_at": "2026-11-28T12:41:57.191Z",
+  "fingerprint": "ashdod-bus-tests/browser-smoke/playwright1.55-ubuntu26.04",
+  "affected_actions": [
+    46145597647,
+    46145612383,
+    46145640786
+  ],
+  "cause": "Pinned Playwright 1.55.0 Chromium installer rejected the new Ubuntu 26.04 runner image. The other city already uses Ubuntu 24.04 for the same Playwright version.",
+  "change": "Pin only Ashdod browser-smoke runs-on to Ubuntu 24.04, preserve pinned dependencies and input/output tests.",
+  "source_commit": "1bf37788e251c9b113a4345e62824e67d3585bfe",
+  "workflow": ".github/workflows/ashdod-bus-tests.yml",
+  "runner": "ubuntu-24.04",
+  "source_readback": true,
+  "known_version": "Playwright 1.55.0",
+  "previous_failure_id": 46145640786,
+  "test_run_id": 46145770981
+}
