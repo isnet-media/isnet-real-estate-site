@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T06:50:22Z",
+  "updated_at": "2026-11-28T07:39:42.242Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
   "last_processed_run_created_at": "2026-11-28T03:40:08Z",
   "initial_history": {
@@ -3120,13 +3120,14 @@
   "last_verified_public_readback_run": "e1e7bd73-82e4-8330-8432-8811075361c4",
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "4495b81e-abd8-832c-8405-1dab74ae4361",
-    "runKey": "ops-2026-11-28-4495b81e-abd8-832c-8405-1dab74ae4361",
+    "run_id": "17c42cd0-1908-832c-b2ed-5b5fd7d2a68c",
+    "runKey": "ops-2026-11-28-17c42cd0-1908-832c-b2ed-5b5fd7d2a68c",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T06:50:22Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
-    "summary": "TLVNET release 765: new lead and existing update verified with article, section, image bytes and captions. Recurring clean-runner Python dependency issue mitigated for this release. Herzliya going-out update verified; writer lease remains unresolved. Raanana candidate media rights and owner runtime verification remain pending."
+    "observed_at": "2026-11-28T07:39:42.242Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+    "status": "sports_live_verified_herzliya_sports_handoff_pending",
+    "summary": "Verified sports publication, current eight section leads, home order and neighborhood reference. Desk reconciliation current; Herzliya local writer remains blocked per owner. New sports handoff retained."
   },
   "concurrent_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -3556,11 +3557,11 @@
   },
   "sites": {
     "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
-    "version_number": 764,
-    "deployment_id": "appgdep_6b09d6893e148191b0442ce4f98b78fd",
+    "version_number": 766,
+    "deployment_id": "appgdep_6b0a8008799c8191b09d009a80856ca6",
     "status": "succeeded",
-    "published_source": "987a3a2655abbf485bce50bb2cd9e6f6f52b136f",
-    "observed_at": "2026-11-27T22:13:03Z",
+    "published_source": "95b4cf28ce1b3e0e061eb85aefe4ea62f7d11e28",
+    "observed_at": "2026-11-28T07:39:42.242Z",
     "other_observed_versions": [
       {
         "version": 587,
@@ -3572,8 +3573,8 @@
       }
     ],
     "new_deployments_started": false,
-    "public_content_check": "Current public homepage order and four owner sports articles verified.",
-    "recorded_public_evidence": "ops/tlvnet-stability/observations/2026-11-25/91cc188e-b3a4-8328-af1e-ef568f3701ea.json",
+    "public_content_check": "New sports article independently verified with exact source paragraphs, asset hash, visible credit and public section/home references.",
+    "recorded_public_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
     "latest_verified_article": {
       "id": "louis-marshall-10-16-reported-demolition-20261120",
       "url": "https://tlvnet.com/news/louis-marshall-10-16-reported-demolition-20261120",
@@ -3728,6 +3729,22 @@
     "latest_verified_banner_repair": {
       "version": 688,
       "evidence": "ops/incident-response/evidence/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-fix.json"
+    },
+    "latest_verified_sports_article": {
+      "id": "kfar-shalem-eighth-win-jaffa-comeback-20261127",
+      "http": 200,
+      "title": "כפר שלם עלתה זמנית לפסגה; יפו ניצחה בדקה ה־94",
+      "title_matches": true,
+      "body_paragraphs_matched": 7,
+      "body_paragraphs_expected": 7,
+      "body_sha256": "86266028bb93e0b7fe8e70aa126bbdd3fea9a3d9088ca13cae67b86da02017f5",
+      "image_http": 200,
+      "image_jpeg": true,
+      "image_sha256": "4eb63c04c54e32a11ecc41162127a3b9f8b326ae18d2768a926e8151a1b77402",
+      "image_expected": "4eb63c04c54e32a11ecc41162127a3b9f8b326ae18d2768a926e8151a1b77402",
+      "credit": "אצטדיון שכונת התקווה בתל אביב, 23.7.2025. ארכיון של המגרש, לא תיעוד האירוע המדווח. · אבשלום ששוני/פלאש 90 מקור",
+      "published_at": "2026-11-28T07:11:16.890576+00:00",
+      "updated_at": "2026-11-28T07:11:16.890576+00:00"
     }
   },
   "open_incident_ids": [
@@ -3830,7 +3847,9 @@
     "TLVNET/consumer/media-ingest/Commons-original-HTTP403",
     "herzliya-shared-writer-lease-null-20261127",
     "tlvnet-real-estate-unresolved-sde-dov-neighborhood-slug",
-    "desk-staging-external-db-backup-stale"
+    "desk-staging-external-db-backup-stale",
+    "tlvnet-sports-cas-lease-expiration-over-cap",
+    "herzliya-sports-handoff-receiver-route-unverified"
   ],
   "processed_inbox_entries": [
     "ef60759f-874c-8332-aabc-d09b34980c0b-1.json",
@@ -4206,7 +4225,9 @@
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/baab460c-63b8-8330-96c6-76ab5414c568.json"
     },
     "2026-11-27-sports-44177cd3-packaging-enospc.json",
-    "20261127-herzliya-sports-results-owner-handoff.json"
+    "20261127-herzliya-sports-results-owner-handoff.json",
+    "ops/incident-response/inbox/20261127-herzliya-sports-results-owner-handoff.json",
+    "ops/incident-response/inbox/20261128-tlvnet-sports-lease-expiration-policy.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4839,6 +4860,16 @@
       "observed_at": "2026-11-28T06:50:22Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
       "summary": "TLVNET release 765: new lead and existing update verified with article, section, image bytes and captions. Recurring clean-runner Python dependency issue mitigated for this release. Herzliya going-out update verified; writer lease remains unresolved. Raanana candidate media rights and owner runtime verification remain pending."
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "17c42cd0-1908-832c-b2ed-5b5fd7d2a68c",
+      "runKey": "ops-2026-11-28-17c42cd0-1908-832c-b2ed-5b5fd7d2a68c",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 4,
+      "observed_at": "2026-11-28T07:39:42.242Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+      "status": "sports_live_verified_herzliya_sports_handoff_pending"
     }
   ],
   "photo_controls_checkpoint": {
@@ -5589,7 +5620,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-27T19:00:17.752Z",
+    "max_finished_at": "2026-11-28T07:00:10.932Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -5725,9 +5756,10 @@
       "2026-11-27T16",
       "2026-11-27T17",
       "2026-11-27T18",
-      "2026-11-27T19"
+      "2026-11-27T19",
+      "2026-11-28T07"
     ],
-    "observed_at": "2026-11-28T06:50:22Z",
+    "observed_at": "2026-11-28T07:39:42.242Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
     "new_rows_this_cycle": 0,
     "public_verification": "Facebook redirected to login; provider receipt only. No new send attempted.",
@@ -6170,6 +6202,89 @@
         }
       ],
       "release_executor": "existing magazine publisher; generic controller news recovery does not support this future catalog"
+    },
+    "latest_current_catalog": {
+      "news": {
+        "status": "published_verified",
+        "runKey": "47a72f60-58a8-4de0-9911-3f1faa02669e",
+        "run_id": null,
+        "remaining_queue": 26,
+        "pending_ready": null,
+        "pending_image": null,
+        "pending_verification": null,
+        "blocked_real": null,
+        "source_commit": "fa4d4513d3a0a57b49a1026ca1785853aa083680"
+      },
+      "real-estate": {
+        "status": "published_verified",
+        "runKey": "real-estate-20261127-e131dde2-40d7-4a0b-abad-e6bc4e1f9a9d",
+        "run_id": null,
+        "remaining_queue": 23,
+        "pending_ready": 0,
+        "pending_image": null,
+        "pending_verification": null,
+        "blocked_real": null,
+        "source_commit": "0e8bea6d71d3232124be759f73c8d224656549ee"
+      },
+      "economy-tech": {
+        "status": "published_verified",
+        "runKey": "2960a7d3-b23c-8329-a52a-5ca97b98cac9",
+        "run_id": null,
+        "remaining_queue": 10,
+        "pending_ready": 0,
+        "pending_image": null,
+        "pending_verification": 6,
+        "blocked_real": 4,
+        "source_commit": "a89adb6e9b891fe5bb9b5193fc85ce5084d7a2db"
+      },
+      "sports": {
+        "status": "published_verified",
+        "runKey": "sports-20261128-morning-3af58a9e-51b0-8326-9206-c96dd093c137",
+        "run_id": "3af58a9e-51b0-8326-9206-c96dd093c137",
+        "remaining_queue": 7,
+        "pending_ready": 0,
+        "pending_image": 1,
+        "pending_verification": 6,
+        "blocked_real": 0,
+        "source_commit": "95b4cf28ce1b3e0e061eb85aefe4ea62f7d11e28"
+      },
+      "community": {
+        "status": "published_verified_mobile_visual_pending",
+        "runKey": "community-20261127T110924Z-a0d1708d-30d8-4ae1-a617-eb506795eed5",
+        "run_id": null,
+        "remaining_queue": null,
+        "pending_ready": null,
+        "pending_image": null,
+        "pending_verification": 14,
+        "blocked_real": null,
+        "source_commit": null
+      },
+      "consumer": {
+        "status": "checkpoint_saved_item_blocked",
+        "runKey": "consumer-20261127T120441Z-0s13f7en7ipb",
+        "run_id": null,
+        "remaining_queue": 8,
+        "pending_ready": null,
+        "pending_image": null,
+        "pending_verification": null,
+        "blocked_real": 1,
+        "source_commit": null
+      },
+      "culture-news": {
+        "status": "published_verified",
+        "runKey": "646e1ae9-a0ac-8323-807f-197da1dd9fa1",
+        "run_id": null,
+        "remaining_queue": 4,
+        "pending_ready": null,
+        "pending_image": null,
+        "pending_verification": null,
+        "blocked_real": null,
+        "source_commit": "24b3b4a7921668cc993b7ed63a7a37130884c152"
+      },
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+      "source_commit": "d37bec4088ba5d03d775761f568aabbbeebbca92",
+      "draft_count": 0,
+      "observed_at": "2026-11-28T07:39:42.242Z"
     }
   },
   "pending_task_run_ids": [
@@ -9770,10 +9885,10 @@
     },
     "last_delta_checked_at": "2026-11-26T16:41:19Z",
     "last_delta_evidence": "ops/tlvnet-stability/observations/2026-11-26/925aa592-13c4-8324-96a9-8a643f78aac0.json",
-    "latest_checked_release": 751,
-    "latest_checked_release_source": "ba4557d38757234617f80ea254187b222e83b83e",
-    "latest_live_readback_at": "2026-11-27T12:56:52Z",
-    "latest_live_readback_evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
+    "latest_checked_release": 766,
+    "latest_checked_release_source": "95b4cf28ce1b3e0e061eb85aefe4ea62f7d11e28",
+    "latest_live_readback_at": "2026-11-28T07:39:42.242Z",
+    "latest_live_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
     "news": {
       "last_new_published_at": "2026-11-28T06:21:15.148293+00:00",
       "last_substantive_update_at": "2026-11-28T06:21:15.148293+00:00",
@@ -9785,8 +9900,8 @@
       "coverage_status": "Four new publications verified plus one update. No ready releases pending. Twenty-two awaiting verification and one events handoff.",
       "observed_at": "2026-11-28T06:50:22Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
-      "last_public_lead_readback_at": "2026-11-26T18:47:39Z",
-      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-26/79c6fa62-9650-8324-8b74-296627f144a9.json",
+      "last_public_lead_readback_at": "2026-11-28T07:39:42.242Z",
+      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
       "latest_live_leading_article_id": "superbus-night-detours-south-tel-aviv-20261129",
       "last_home_route_checked_at": "2026-11-27T17:44:08Z",
       "latest_age_hours": 1.7,
@@ -9809,7 +9924,10 @@
       "queue_status": {
         "pending_verification": 26
       },
-      "coverage": "incomplete"
+      "coverage": "incomplete",
+      "latest_live_leading_article_published_at": "2026-11-28T06:15:24.061145+00:00",
+      "latest_live_leading_article_updated_at": "2026-11-28T06:15:24.061145+00:00",
+      "latest_live_lead_home_link": true
     },
     "real-estate": {
       "latest_article_id": "shikun-l-objections-5500-20261126",
@@ -9820,9 +9938,9 @@
       "coverage_status": "Two new articles verified on site, one neighborhood association unresolved. Nineteen in verification and four blocked.",
       "observed_at": "2026-11-27T14:38:58Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/642d4d88-0144-8330-a422-a4a5a18af92f.json",
-      "last_public_lead_readback_at": "2026-11-26T15:48:19Z",
-      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-26/47d6492b-c048-8324-ae21-b7231cd512c2.json",
-      "latest_live_leading_article_id": "dunietz-dan-merger-tel-aviv-projects-20261126",
+      "last_public_lead_readback_at": "2026-11-28T07:39:42.242Z",
+      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+      "latest_live_leading_article_id": "shikun-l-objections-5500-20261126",
       "last_home_route_checked_at": "2026-11-27T16:24:42Z",
       "latest_age_hours": 9,
       "latest_update_article_id": "maccabi-jaffa-rotem-shani-tender-reported-20261125",
@@ -9843,7 +9961,10 @@
       "last_new_published_at": "2026-11-27T14:12:15.591473+00:00",
       "public_index_checked_at": "2026-11-27T14:38:58Z",
       "last_substantive_update_at": "2026-11-27T14:12:15.591473+00:00",
-      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json",
+      "latest_live_leading_article_published_at": "2026-11-27T14:12:15.591473+00:00",
+      "latest_live_leading_article_updated_at": "2026-11-27T14:12:15.591473+00:00",
+      "latest_live_lead_home_link": true
     },
     "economy-tech": {
       "last_new_published_at": "2026-11-27T10:35:54.872059+00:00",
@@ -9856,16 +9977,19 @@
       "coverage_status": "Three new publications verified. Six research and three blocked entries in source ledger.",
       "observed_at": "2026-11-26T11:02:37Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/c124fd32-02b8-8330-8926-d5fb7aad7b7e.json",
-      "last_public_lead_readback_at": "2026-11-26T11:02:37Z",
-      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-26/732f9b32-2b60-8324-8975-97517e7f75f2.json",
-      "latest_live_leading_article_id": "q-security-post-quantum-seed-tlv-20261126",
+      "last_public_lead_readback_at": "2026-11-28T07:39:42.242Z",
+      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+      "latest_live_leading_article_id": "tlv-mall-q3-2026-financial-report-1001564354",
       "last_home_route_checked_at": "2026-11-27T16:24:42Z",
       "latest_age_hours": 12,
       "latest_update_article_id": "boi-november-rate-unchanged-business-tlv-20261125",
       "current_attempt_policy_receipt": null,
       "retained_queue_count": 9,
       "public_index_checked_at": "2026-11-27T11:56:42Z",
-      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json",
+      "latest_live_leading_article_published_at": "2026-11-27T10:35:54.872059+00:00",
+      "latest_live_leading_article_updated_at": "2026-11-27T10:35:54.872059+00:00",
+      "latest_live_lead_home_link": true
     },
     "community": {
       "last_new_published_at": "2026-11-26T11:12:43.956253+00:00",
@@ -9878,8 +10002,8 @@
       "coverage_status": "Current owner receipt reconciled; adapted image caption fixed and checked live. Fourteen verification items and one blocked.",
       "observed_at": "2026-11-26T12:29:55Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/c124fd32-02b8-8330-8926-d5fb7aad7b7e.json",
-      "last_public_lead_readback_at": "2026-11-26T11:23:33Z",
-      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-26/34fa5d32-6e50-8324-8c54-d0b12390f280.json",
+      "last_public_lead_readback_at": "2026-11-28T07:39:42.242Z",
+      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
       "latest_live_leading_article_id": "liebling-public-space-policy-20261214",
       "last_home_route_checked_at": "2026-11-27T16:24:42Z",
       "latest_age_hours": null,
@@ -9890,7 +10014,10 @@
       "latest_updated_article_id": "tlv-neighborhood-garage-sale-20261106",
       "pending_ready": 0,
       "pending_verification": 14,
-      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json",
+      "latest_live_leading_article_published_at": "2026-11-26T11:12:43.956253+00:00",
+      "latest_live_leading_article_updated_at": "2026-11-26T11:12:43.956253+00:00",
+      "latest_live_lead_home_link": true
     },
     "consumer": {
       "last_new_published_at": "2026-11-26T12:13:56.324725+00:00",
@@ -9903,8 +10030,8 @@
       "coverage_status": "Published article independently verified in prior cycle. Final journal now read back; seven pending verification, one recorded blocker, no ready item.",
       "observed_at": "2026-11-26T12:29:55Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
-      "last_public_lead_readback_at": "2026-11-25T22:59:49Z",
-      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-26/9c7a5c90-c210-8328-97e6-6499da137f09.json",
+      "last_public_lead_readback_at": "2026-11-28T07:39:42.242Z",
+      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
       "latest_live_leading_article_id": "next-israel-delivery-collection-20261126",
       "last_home_route_checked_at": "2026-11-27T16:24:42Z",
       "latest_age_hours": 11,
@@ -9919,22 +10046,25 @@
       "pending_ready": 0,
       "pending_verification": 7,
       "item_block": "Owner reported 403 original Commons JPEG transfer for a single Flydubai draft.",
-      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json",
+      "latest_live_leading_article_published_at": "2026-11-26T12:13:56.324725+00:00",
+      "latest_live_leading_article_updated_at": null,
+      "latest_live_lead_home_link": true
     },
     "sports": {
-      "last_new_published_at": "2026-11-26T19:02:39.900705+00:00",
-      "last_substantive_update_at": "2026-11-26T19:02:39.900705+00:00",
+      "last_new_published_at": "2026-11-28T07:11:16.890576+00:00",
+      "last_substantive_update_at": "2026-11-28T07:11:16.890576+00:00",
       "latest_article_id": "maccabi-miller-return-league-blitz-injury-20261126",
       "count": 58,
-      "last_owner_run_id": "ff227f55-6a00-832e-bbcc-30938d2141df",
+      "last_owner_run_id": "3af58a9e-51b0-8326-9206-c96dd093c137",
       "owner_run_status": "completed",
-      "source_commit": "6f160aa62c7bac4c4e695fe6275942c04b48b422",
-      "coverage_status": "Two new verified articles; five verification items and one image pending; no ready items remain.",
+      "source_commit": "95b4cf28ce1b3e0e061eb85aefe4ea62f7d11e28",
+      "coverage_status": "One verified new story; six verification and one image item retained; pending_ready=0.",
       "observed_at": "2026-11-26T19:50:04Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
-      "last_public_lead_readback_at": "2026-11-26T19:50:04Z",
-      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-26/d1ec43f8-00e4-8324-a59f-7c4b19ea8ebe.json",
-      "latest_live_leading_article_id": "maccabi-miller-return-league-blitz-injury-20261126",
+      "last_public_lead_readback_at": "2026-11-28T07:39:42.242Z",
+      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+      "latest_live_leading_article_id": "kfar-shalem-eighth-win-jaffa-comeback-20261127",
       "last_home_route_checked_at": "2026-11-27T16:24:42Z",
       "latest_age_hours": 0.8,
       "latest_update_article_id": null,
@@ -9950,7 +10080,10 @@
       "latest_home_route_evidence": "ops/tlvnet-stability/observations/2026-11-26/d1ec43f8-00e4-8324-a59f-7c4b19ea8ebe.json",
       "public_index_checked_at": "2026-11-27T09:33:59Z",
       "latest_attempt_outcome": "controller_scope_result; no new sport article verified",
-      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json",
+      "latest_live_leading_article_published_at": "2026-11-28T07:11:16.890576+00:00",
+      "latest_live_leading_article_updated_at": "2026-11-28T07:11:16.890576+00:00",
+      "latest_live_lead_home_link": true
     },
     "culture-news": {
       "last_new_published_at": "2026-11-27T07:51:26.296905+00:00",
@@ -9963,9 +10096,9 @@
       "coverage_status": "not_proven",
       "observed_at": "2026-11-26T08:59:30.611Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
-      "last_public_lead_readback_at": "2026-11-26T08:59:30.611Z",
-      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-26/9c7a5c90-c210-8328-97e6-6499da137f09.json",
-      "latest_live_leading_article_id": "noma-bar-weekend-tours-workshops-20261127",
+      "last_public_lead_readback_at": "2026-11-28T07:39:42.242Z",
+      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+      "latest_live_leading_article_id": "hanukkah-bialik-20261210",
       "last_home_route_checked_at": "2026-11-27T16:24:42Z",
       "latest_age_hours": 88,
       "latest_update_article_id": "yam-katan-bialik-20261209",
@@ -9982,7 +10115,10 @@
         "verification": 3,
         "image_rights": 1
       },
-      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json",
+      "latest_live_leading_article_published_at": "2026-11-27T07:51:26.296905+00:00",
+      "latest_live_leading_article_updated_at": "2026-11-27T07:54:38.721845+00:00",
+      "latest_live_lead_home_link": true
     },
     "bli-heshbon": {
       "last_new_published_at": "2026-11-27T08:55:56.632388+00:00",
@@ -9995,9 +10131,9 @@
       "coverage_status": "New investigation independently confirmed in homepage hero and desk lead.",
       "observed_at": "2026-11-26T09:26:22Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/d6516d0b-c0b4-8320-b9b9-18fdf548af58.json",
-      "last_public_lead_readback_at": "2026-11-26T09:26:22Z",
-      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-26/e52bf8e5-3e9c-8328-9e2d-cb4c47f130bc.json",
-      "latest_live_leading_article_id": "yad-eliyahu-affordable-rent-count-20261126",
+      "last_public_lead_readback_at": "2026-11-28T07:39:42.242Z",
+      "last_public_lead_readback_evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+      "latest_live_leading_article_id": "tel-aviv-neighborhood-tool-libraries-20261127",
       "last_home_route_checked_at": "2026-11-27T16:24:42Z",
       "latest_age_hours": null,
       "current_attempt_policy_receipt": {
@@ -10009,7 +10145,10 @@
       "latest_ready_queue_count": null,
       "public_index_checked_at": "2026-11-27T09:33:59Z",
       "verified_publication_count": 2,
-      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json"
+      "last_home_route_checked_evidence": "ops/tlvnet-stability/observations/2026-11-27/cbc29aba-48c8-8330-86e9-d482653bedc7.json",
+      "latest_live_leading_article_published_at": "2026-11-27T08:55:56.632388+00:00",
+      "latest_live_leading_article_updated_at": "2026-11-27T08:55:56.632388+00:00",
+      "latest_live_lead_home_link": true
     },
     "latest_owner_run_deltas_at": "2026-11-26T15:48:19Z"
   },
@@ -10539,7 +10678,7 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-28T06:50:22Z",
+    "observed_at": "2026-11-28T07:39:42.242Z",
     "from": "2026-11-28T03:40:08Z",
     "through": "2026-11-28T03:40:08Z",
     "strictly_new": 0,
@@ -10552,7 +10691,7 @@
     ],
     "pending_run_ids": [],
     "full_logs_read": 0,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -11348,7 +11487,7 @@
     }
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-28T06:50:22Z",
+    "observed_at": "2026-11-28T07:39:42.242Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -11760,7 +11899,7 @@
       },
       {
         "path": "ops/incident-response/inbox/20261127-herzliya-sports-results-owner-handoff.json",
-        "sha": "703f1b77931151fe671e4d571327482b47bbc2c1"
+        "sha": "9fd394d87630ad67276cf084824f00dbafe47553"
       },
       {
         "path": "ops/incident-response/inbox/20261127T0821Z-culture-daily-CMS-checkpoint-8d56f04f.json",
@@ -12496,7 +12635,7 @@
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
     "last_checked_at": "2026-11-27T13:44:41Z",
     "check_evidence": "ops/tlvnet-stability/observations/2026-11-27/61d78629-e180-8330-a5b3-3b7463885bfe.json",
     "count": 277
@@ -13731,7 +13870,30 @@
     "next_action": "Authorized Desk owner reconciles the active Raziel assignment against existing published record through normal Desk flow, checks writer access, and validates the next legitimate new publication. Do not bypass shared assignment.",
     "inbox": "ops/incident-response/inbox/74d368d0-4adc-8330-94e6-7027d1f620ae-herzliya-desk-raziel-lease.json",
     "observed_at": "2026-11-27T17:44:08Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
+    "latest_controller_observation": {
+      "status": "owner_reported_lease_denial_unchanged",
+      "owner_run": "8fbf42c5-16e8-8330-90e7-b3541def8e18",
+      "owner_status": "completed",
+      "owner_result_matches": true,
+      "reported_assignment_expires_local": "2026-11-28T10:40:50+02:00",
+      "cause": "Owner reports existing active Desk assignment for an already-live Raziel story prevents the independent local writer from acquiring its lease. No Desk mutation authorized for controller.",
+      "going_out": {
+        "http": 200,
+        "url": "https://herzliyanet.co.il/going-out/",
+        "named_artist_visible": true
+      },
+      "sports_handoff": {
+        "inbox": "ops/incident-response/inbox/20261127-herzliya-sports-results-owner-handoff.json",
+        "blob": "9fd394d87630ad67276cf084824f00dbafe47553",
+        "recipient": "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a",
+        "sports_section_http": 200,
+        "acre_match_link_observed": false,
+        "receiver_contract_current": "Direct editorial inbox accepts only culture and future bags. No scope change, duplicate publication or Desk write. Retained in operations queue for existing Herzliya owner to confirm approved route and reconcile."
+      },
+      "observed_at": "2026-11-28T07:39:42.242Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json"
+    }
   },
   "latest_private_policy_read_observation": {
     "revision": 4,
@@ -13965,50 +14127,47 @@
     "mitigation_tested": true,
     "expiry_and_transcript_review": "requires authorized service console"
   },
-  "tasks_last_observed_at": "2026-11-28T06:50:22Z",
+  "tasks_last_observed_at": "2026-11-28T07:39:42.242Z",
   "latest_desk_health_observation": {
-    "checked_at": "2026-11-28 06:47:30.354185+00",
     "health": {
-      "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
-      "hours_since_backup": 5.541739024166667,
-      "failed_backups_7d": 0,
-      "handoff_stuck_over_2h": 0,
       "handoff_failed": 3,
+      "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
+      "last_migration": "20261127_100000_alert_log",
+      "failed_backups_7d": 0,
+      "hours_since_backup": 6.3380793580555554,
       "autopublish_enabled": false,
-      "last_migration": "20261127_100000_alert_log"
+      "handoff_stuck_over_2h": 0
     },
     "backups": [
       {
-        "kind": "db",
         "ok": true,
+        "kind": "db",
         "created_at": "2026-11-28T02:41:03.124878+00:00"
       },
       {
-        "kind": "media",
         "ok": true,
+        "kind": "media",
         "created_at": "2026-11-28T03:10:08.426668+00:00"
       }
     ],
     "reconcile": {
-      "runid": 287,
       "status": "succeeded",
-      "start_time": "2026-11-28T06:40:00.051511+00:00",
-      "end_time": "2026-11-28T06:40:00.055939+00:00"
+      "end_time": "2026-11-28T07:30:00.070382+00:00",
+      "start_time": "2026-11-28T07:30:00.064943+00:00"
     },
     "herzliya_queued": {
       "count": 0,
-      "oldest_handoff_at": null,
       "oldest_created_at": null
     },
     "backup_age_hours": {
-      "db": 4.1,
-      "media": 3.6
+      "db": 5,
+      "media": 4.5
     },
-    "reconcile_age_minutes": 7.5,
+    "reconcile_age_minutes": 9.7,
     "alert": null,
-    "backup_status_scope": "External receipts themselves have advanced and succeeded. Restore status remains unverified.",
-    "observed_at": "2026-11-28T06:50:22Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json"
+    "scope": "Desk staging read-only. Three historically failed handoffs unchanged since previous sample; no queued Herzliya article; successful fresh backup receipts do not prove restore.",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+    "observed_at": "2026-11-28T07:39:42.242Z"
   },
   "latest_news_owner_publication_observation": {
     "owner": {
@@ -14177,13 +14336,13 @@
   },
   "latest_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "4495b81e-abd8-832c-8405-1dab74ae4361",
-    "runKey": "ops-2026-11-28-4495b81e-abd8-832c-8405-1dab74ae4361",
+    "run_id": "17c42cd0-1908-832c-b2ed-5b5fd7d2a68c",
+    "runKey": "ops-2026-11-28-17c42cd0-1908-832c-b2ed-5b5fd7d2a68c",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T06:50:22Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
-    "summary": "TLVNET release 765: new lead and existing update verified with article, section, image bytes and captions. Recurring clean-runner Python dependency issue mitigated for this release. Herzliya going-out update verified; writer lease remains unresolved. Raanana candidate media rights and owner runtime verification remain pending."
+    "observed_at": "2026-11-28T07:39:42.242Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+    "status": "sports_live_verified_herzliya_sports_handoff_pending"
   },
   "latest_culture_network_release_observation": {
     "observed_at": "2026-11-27T08:34:28Z",
@@ -14211,22 +14370,24 @@
     }
   },
   "latest_sports_role_result_observation": {
-    "task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
-    "status": "completed",
+    "id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+    "title": "חדשות ספורט — פעמיים ביום",
     "enabled": true,
-    "run_id": "44177cd3-c710-832a-b1d3-47a939f06075",
-    "completed_at": "2026-11-27T19:18:56.545385Z",
-    "scheduled_for": "2026-11-27T19:00:00Z",
+    "run_id": "3af58a9e-51b0-8326-9206-c96dd093c137",
+    "status": "completed",
+    "started_at": "2026-11-28T07:28:01.408858Z",
+    "completed_at": "2026-11-28T07:28:52.443139Z",
+    "scheduled_for": "2026-11-28T07:00:00Z",
+    "next_run": "2026-11-28T21:00:00+02:00",
+    "result_id": "3af58a9e-51b0-8326-9206-c96dd093c137",
     "result_matches": true,
     "publication_verified": true,
-    "source_commit": "987a3a2655abbf485bce50bb2cd9e6f6f52b136f",
-    "version": 764,
+    "source_commit": "95b4cf28ce1b3e0e061eb85aefe4ea62f7d11e28",
+    "version": 766,
     "article_ids": [
-      "hapoel-petah-tikva-loss-run-ended-20261127",
-      "hapoel-basketball-foreign-player-cap-rejected-20261127",
-      "hapoel-basketball-kfar-saba-youth-partnership-20261127"
+      "kfar-shalem-eighth-win-jaffa-comeback-20261127"
     ],
-    "evidence": "ops/tlvnet-stability/observations/2026-11-27/d4b0d9c3-5304-8330-b130-c4318303ee80.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json"
   },
   "latest_investigation_publication_observation": {
     "task_id": "Automation_c1b175347cc481918eaba3cbaf3582d2",
