@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T03:22:48Z",
+  "updated_at": "2026-11-28T06:50:22Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -7060,10 +7060,10 @@
         "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json"
       },
       "release_blocker": "Recovered terminal source and journal are readable. Persistent dependency setup requires the authorized Site source write and a clean release verification.",
-      "next_action": "Declare the existing Beautiful Soup and Pillow requirements in the source build setup and install into the same interpreter used by build-news/prepare-public. Verify from a clean checkout with a changed source input, keep the prepared-snapshot hash checks intact.",
+      "next_action": "Use an existing dependency manifest or the existing build bootstrap to install pinned dependencies in the actual interpreter. Verify via a clean existing writer run.",
       "inbox": "ops/incident-response/inbox/2026-11-19-news-morning-python-bs4.json",
       "evidence": "ops/tlvnet-stability/observations/2026-11-22/2c75ddd2-129c-8330-9fdd-832288f3f951.json",
-      "last_seen_at": "2026-11-22T10:56:50Z",
+      "last_seen_at": "2026-11-28T06:50:22Z",
       "latest_recurrence": {
         "incident_id": "tlvnet-news-python-bs4-after-workspace-cleanup",
         "status": "mitigated_release_verified_persistent_setup_pending",
@@ -7078,6 +7078,11 @@
         ],
         "production_validation": "Owner standard build plus independent full public readback passed. Persistent build prerequisites were unchanged.",
         "required_source_change": "Declare the existing Beautiful Soup and Pillow requirements in the source build setup and install into the same interpreter used by build-news/prepare-public. Verify from a clean checkout with a changed source input, keep the prepared-snapshot hash checks intact."
+      },
+      "updated_at": "2026-11-28T06:50:22Z",
+      "last_observation": {
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
+        "finding": "Recurring clean runner lacks bs4. Writer installed pinned version, passed build and photo bank checks, and release 765 was verified live. Permanent build setup remains unverified."
       }
     },
     {
@@ -9506,9 +9511,9 @@
       "impact": "Sixteen pending items in Raanana owner's evening checkpoint, two new drafts held, zero new releases. The controller verified distinct JPEG bytes on two metadata-resolved public file routes.",
       "mitigation": "Resolve non-private get_file URL against the matching public website, follow its canonical redirect, verify status, MIME and image signature, then hash served bytes. Keep same file variant for comparisons and separately check candidate authorization.",
       "prevention": "Run byte and rights checks independently from CMS metadata and distinguish source bytes from served crops.",
-      "next_action": "Reuse the documented file path for the adjacent image side of the checks in the authorized owner runtime. Obtain and verify candidate source bytes and rights separately before any release.",
+      "next_action": "Use the previously authorized public file path in the owner runtime. Obtain reuse permission for the exact candidate photo, or clear a licensed alternative, then compare matching card variants before publication.",
       "inbox": "ops/incident-response/inbox/20261124-raanana-media-byte-verification-blocked.json",
-      "last_seen_at": "2026-11-27T17:44:08Z",
+      "last_seen_at": "2026-11-28T06:50:22Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
       "occurrences": [
         {
@@ -9540,8 +9545,12 @@
       "first_timestamped_evidence_at": "2026-11-24T12:07:22.859Z",
       "latest_media_scope": "Verified different publicly served JPEG bytes from controller environment. Owner DNS and rights for draft images remain unresolved. The tested file addresses represent public bytes, not proof of underlying original-source bytes or publication permission.",
       "next": "Existing owner can use the observed public article-image URLs via ordinary HTTP for adjacent-image comparison. Confirm the candidate's own binary, rights and writer-environment access before release.",
-      "updated_at": "2026-11-27T17:44:08Z",
-      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
+      "updated_at": "2026-11-28T06:50:22Z",
+      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
+      "last_observation": {
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
+        "finding": "Owner has 16 active items and no publications this cycle. A current controller fetch verified one existing public JPEG and SHA256; owner runtime and candidate rights/hashes are unresolved."
+      }
     },
     {
       "id": "tlvnet-guide-missing-taxonomy-asset",
@@ -9939,12 +9948,16 @@
       "status": "open",
       "classification": "writer_lease",
       "root_cause": "Owner matched active Desk assignment for already live Raziel story to writer lease denial; owner reports expiry 2026-11-28T10:40:00+02:00.",
-      "next_action": "Authorized Desk owner reconciles the active Raziel assignment against existing published record through normal Desk flow, checks writer access, and validates the next legitimate new publication. Do not bypass shared assignment.",
-      "last_seen_at": "2026-11-27T17:44:08Z",
+      "next_action": "Authorized Desk or CMS owner reconciles the active assignment with the existing published article, verifies normal lease acquisition, and confirms the next new local article live.",
+      "last_seen_at": "2026-11-28T06:50:22Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
-      "updated_at": "2026-11-27T17:44:08Z",
+      "updated_at": "2026-11-28T06:50:22Z",
       "impact": "Owner reports gating of new independent stories. Existing Raziel article and handball score update independently available on public site.",
-      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
+      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
+      "last_observation": {
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/4495b81e-abd8-832c-8405-1dab74ae4361.json",
+        "finding": "Owner again reported NULL writer lease and local news age over 24h. Desk queue is empty and reconciliation succeeds; public going-out update independently verified."
+      }
     },
     {
       "id": "tlvnet-real-estate-unresolved-sde-dov-neighborhood-slug",
@@ -10011,7 +10024,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-28-baa864b9-bbc8-832c-a601-39d28cf490e1",
+  "last_review_runKey": "ops-2026-11-28-4495b81e-abd8-832c-8405-1dab74ae4361",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
