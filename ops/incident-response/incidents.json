@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T08:31:39.870Z",
+  "updated_at": "2026-11-28T09:16:49.678Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -10010,16 +10010,25 @@
       "classification": "writer_lease",
       "root_cause": "Owner matched active Desk assignment for already live Raziel story to writer lease denial; owner reports expiry 2026-11-28T10:40:00+02:00.",
       "next_action": "Authorized Desk or CMS owner reconciles the active assignment with the existing published article, verifies normal lease acquisition, and confirms the next new local article live.",
-      "last_seen_at": "2026-11-28T07:39:42.242Z",
+      "last_seen_at": "2026-11-28T09:16:49.678Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
       "updated_at": "2026-11-28T06:50:22Z",
       "impact": "Owner reports gating of new independent stories. Existing Raziel article and handball score update independently available on public site.",
       "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
       "last_observation": {
-        "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
-        "finding": "owner_reported_lease_denial_unchanged",
+        "observed_at": "2026-11-28T09:16:49.678Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/000c7557-396c-832c-bc47-8bd3e9cb648c.json",
+        "finding": "reported_expiry_passed_no_nonexpired_claims_in_staging",
         "owner_run": "8fbf42c5-16e8-8330-90e7-b3541def8e18",
-        "reported_assignment_expiry": "2026-11-28T10:40:50+02:00"
+        "reported_assignment_expiry": "2026-11-28T08:40:50.407Z",
+        "staging_claim_metadata": {
+          "measured_at": "2026-11-28 09:16:15.275876+00",
+          "nonexpired_claims": 0,
+          "claim_records": 2,
+          "raziel": []
+        },
+        "qualification": "Staging read only. No nonexpired Herzliya claim appeared in staging after the previously reported expiry. The previous Raziel identity was not present in the staging rows inspected. This does not confirm that the writer's live acquisition now works.",
+        "next_action": "Observe the next existing Herzliya owner result and require a successful acquisition and live new article to verify recovery."
       }
     },
     {
@@ -10170,7 +10179,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-28-412e9b79-53b4-832c-8de6-06ebf5c85d29",
+  "last_review_runKey": "ops-2026-11-28-000c7557-396c-832c-bc47-8bd3e9cb648c",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
