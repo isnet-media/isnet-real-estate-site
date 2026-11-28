@@ -18,7 +18,7 @@ def collect(feed,out,city_name='אשדוד'):
   all_stops={r['stop_id']:r for r in rows(z,'stops.txt')}
   bus_cities=[]
   for r in all_stops.values():
-   city=re.search(r'עיר:\s*(.*?)\s*רציף:',r['stop_desc'])
+   city=re.search(r'עיר:\s*(.*?)\s*רציף:',r.get('stop_desc') or '')
    if city and city[1].strip():bus_cities.append((float(r['stop_lat']),float(r['stop_lon']),city[1].strip(),r['stop_id']))
   def nearest_city(r):
    lat,lon=float(r['stop_lat']),float(r['stop_lon'])
