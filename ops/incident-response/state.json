@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T14:44:52Z",
+  "updated_at": "2026-11-28T15:33:28Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-28T14:28:41Z",
+  "last_processed_run_created_at": "2026-11-28T15:29:01Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -3120,14 +3120,14 @@
   "last_verified_public_readback_run": "914f2d10-7650-8328-ba44-bd1f41ff08b7",
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "262bbd50-2344-8328-9f42-36d81ea8a1e3",
-    "runKey": "ops-2026-11-28-262bbd50-2344-8328-9f42-36d81ea8a1e3",
+    "run_id": "9ea3af46-be7c-8328-88f2-50894bee76d4",
+    "runKey": "ops-2026-11-28-9ea3af46-be7c-8328-88f2-50894bee76d4",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T14:44:52Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
-    "status": "completed_without_new_incident",
-    "summary": "One real-estate item from the queue verified in the new public release. The existing owner released the lease. No new failure roots in Actions or the monitored publication paths. Desk reconciliation and backups are current in staging."
+    "observed_at": "2026-11-28T15:33:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "status": "known_ims_forecast_gap_reconciled",
+    "summary": "Reconciled a recurring IMS validity gap and expired public files. Existing publisher handoff remains open. TLVNET homepage, public Facebook post and read-only Desk staging controls were sampled."
   },
   "concurrent_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -4130,7 +4130,8 @@
     "ops/incident-response/inbox/46145612383-1.json",
     "ops/incident-response/inbox/46145640786-1.json",
     "ops/incident-response/inbox/914f2d10-7650-8328-ba44-bd1f41ff08b7-rail-optional-stop-description.json",
-    "ops/incident-response/inbox/914f2d10-7650-8328-ba44-bd1f41ff08b7-ashdod-playwright-runner.json"
+    "ops/incident-response/inbox/914f2d10-7650-8328-ba44-bd1f41ff08b7-ashdod-playwright-runner.json",
+    "ops/incident-response/inbox/46160011646-1.json"
   ],
   "pending_github_run_ids": [],
   "cycle_history": [
@@ -4843,6 +4844,16 @@
       "observed_at": "2026-11-28T14:44:52Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
       "status": "completed_without_new_incident"
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "9ea3af46-be7c-8328-88f2-50894bee76d4",
+      "runKey": "ops-2026-11-28-9ea3af46-be7c-8328-88f2-50894bee76d4",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 4,
+      "observed_at": "2026-11-28T15:33:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+      "status": "known_ims_forecast_gap_reconciled"
     }
   ],
   "photo_controls_checkpoint": {
@@ -5593,7 +5604,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-28T14:00:08.493Z",
+    "max_finished_at": "2026-11-28T15:00:10.434Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -5737,7 +5748,8 @@
       "2026-11-28T11",
       "2026-11-28T12",
       "2026-11-28T13",
-      "2026-11-28T14"
+      "2026-11-28T14",
+      "2026-11-28T15"
     ],
     "observed_at": "2026-11-28T12:45:00.282Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-28/914f2d10-7650-8328-ba44-bd1f41ff08b7.json",
@@ -10658,25 +10670,27 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-28T14:44:52Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
-    "from": "2026-11-28T13:31:59Z",
-    "through": "2026-11-28T14:28:41Z",
-    "watermark": "2026-11-28T14:28:41Z",
+    "observed_at": "2026-11-28T15:33:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "from": "2026-11-28T14:28:41Z",
+    "through": "2026-11-28T15:29:01Z",
+    "watermark": "2026-11-28T15:29:01Z",
     "boundary_crossed": true,
     "boundary_ids": [
-      46154849161
+      46160086942
     ],
     "previous_boundary_ids": [
-      46150076378,
-      46150076638
+      46154849161
     ],
-    "strictly_new": 4,
-    "total_returned": 6,
+    "strictly_new": 2,
+    "total_returned": 3,
     "new_failure_roots": 0,
     "pending_run_ids": [],
-    "full_logs_read": 0,
-    "new_runs": 4
+    "full_logs_read": 1,
+    "matched_known_run_ids": [
+      46160011646
+    ],
+    "new_runs": 2
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -11360,82 +11374,50 @@
     "no_task_triggered": true,
     "latest_recurrence": {
       "incident_id": "ims-sea-no-currently-valid-period",
-      "run_id": 46035068206,
-      "job_id": 140628278377,
-      "source_commit": "54bc0d041543f68b471ca2b46549702675ad1b9a",
+      "observed_at": "2026-11-28T15:33:28Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+      "run_id": 46160011646,
+      "attempt": 1,
+      "job_id": 141025031692,
+      "source_commit": "ca77f155fd588ff0d27d0a7304fdd858b4479054",
+      "run_url": "https://github.com/isnet-media/isnet-real-estate-site/actions/runs/46160011646",
+      "inbox": "ops/incident-response/inbox/46160011646-1.json",
+      "classification": "existing_source_validity_window",
       "signature": "No currently valid forecast; retaining last good file",
-      "actual_current_source": {
-        "sha256": "ceb513d93cc0bfa86c946f2baccabe886f05b4f00e4c7104842351b2516f6f00",
-        "issued": "2026-11-27 16:33",
+      "official": {
+        "url": "https://ims.gov.il/sites/default/files/ims_data/xml_files/isr_sea.xml",
+        "http": 200,
+        "issued_local": "2026-11-28T16:46+02:00",
+        "first_valid_local": "2026-11-28T20:00+02:00",
+        "end_local": "2026-11-29T20:00+02:00",
         "regions": [
-          {
-            "id": "213",
-            "periods": [
-              [
-                "2026-11-27 20:00",
-                "2026-11-28 08:00"
-              ],
-              [
-                "2026-11-28 08:00",
-                "2026-11-28 20:00"
-              ]
-            ],
-            "current": false
-          },
-          {
-            "id": "210",
-            "periods": [
-              [
-                "2026-11-27 20:00",
-                "2026-11-28 08:00"
-              ],
-              [
-                "2026-11-28 08:00",
-                "2026-11-28 20:00"
-              ]
-            ],
-            "current": false
-          }
+          213,
+          210
         ],
-        "now": "2026-11-27 19:41"
+        "sha256": "346ccf8387eb840fb186c8ad8764fbfc424cd3430067e2beb60faac29db7d1ed",
+        "valid_at_failed_attempt": false
       },
-      "public_southern": {
-        "status": "200 application/json; charset=utf-8",
-        "regionId": 213,
-        "issuedAtLocal": "2026-11-23T16:14",
-        "fetchedAt": "2026-11-23T18:02:10.982Z",
-        "periods": [
-          {
-            "from": "2026-11-23T20:00",
-            "to": "2026-11-24T08:00"
-          },
-          {
-            "from": "2026-11-24T08:00",
-            "to": "2026-11-24T20:00"
-          }
-        ]
+      "public": [
+        {
+          "region": 213,
+          "url": "https://isnet.co.il/weather/ashdod/sea.json",
+          "http": 200
+        },
+        {
+          "region": 210,
+          "url": "https://isnet.co.il/weather/ashdod/central.json",
+          "http": 200
+        }
+      ],
+      "source_and_public_latest_persisted_period_ended_local": "2026-11-24T20:00+02:00",
+      "checks": {
+        "workflow_tests_passed": 5,
+        "independent_exact_revision_tests_passed": 5,
+        "source_guard_rejects_1959_both_regions": true,
+        "source_guard_accepts_2000_both_regions": true
       },
-      "public_central": {
-        "status": "200 application/json; charset=utf-8",
-        "regionId": 210,
-        "issuedAtLocal": "2026-11-23T16:14",
-        "fetchedAt": "2026-11-23T18:02:10.997Z",
-        "periods": [
-          {
-            "from": "2026-11-23T20:00",
-            "to": "2026-11-24T08:00"
-          },
-          {
-            "from": "2026-11-24T08:00",
-            "to": "2026-11-24T20:00"
-          }
-        ]
-      },
-      "inbox": "ops/incident-response/inbox/46035068206-1.json",
-      "impact": "Public forecast files do not cover 27 November; last supplied periods ended 24 November at 20:00. Fresh IMS file starts at 20:00 on 27 November in both regions and did not cover the check at 19:41.",
-      "next_action": "When source period becomes current, existing sea forecast owner can run normal validated refresh and verify both published files. No guard or schedule change.",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
-      "observed_at": "2026-11-27T17:44:08Z"
+      "next_action": "Verify a normal authorized source refresh and both live endpoints when the issued periods are current. The refresh currently requires a valid period at execution. Preserve the guard, avoid an early retry and retain the open owner handoff. Review timing alignment with IMS if separately authorized.",
+      "new_root": false
     },
     "latest_source_recheck": {
       "incident_id": "ims-sea-no-currently-valid-period",
@@ -11557,7 +11539,7 @@
     }
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-28T14:44:52Z",
+    "observed_at": "2026-11-28T15:33:28Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -11980,6 +11962,22 @@
         "sha": "5134048e96174d3279a7a0eef530c534279d928d"
       },
       {
+        "path": "ops/incident-response/inbox/20261128-community-ysg26y0xrr.json",
+        "sha": "ca8fae8775a575b074557edbb5215017a1128505"
+      },
+      {
+        "path": "ops/incident-response/inbox/20261128-consumer-08a0deb7.json",
+        "sha": "6e2d230ca995d40308c6b12d6fd2629e6c8ffa3b"
+      },
+      {
+        "path": "ops/incident-response/inbox/20261128-tlvnet-sports-lease-expiration-policy.json",
+        "sha": "e0546c8a6163a75add76d5d2997e2f6070717b2f"
+      },
+      {
+        "path": "ops/incident-response/inbox/20261128T0819Z-future-prepared-checkpoint-04a4f577.json",
+        "sha": "991e70d27e9f17778f7b07e3976e40961be71dcb"
+      },
+      {
         "path": "ops/incident-response/inbox/2d98f2c5-c084-8320-8078-fa7be8913cda-supermarket-legacy-health-route.json",
         "sha": "6acbf4e71f13609cbe1eed77718b30c429035b74"
       },
@@ -12292,6 +12290,30 @@
         "sha": "1c94cbd3628a15c153d8c2893c9c18487aef4d2e"
       },
       {
+        "path": "ops/incident-response/inbox/46140783231-1.json",
+        "sha": "7dcc51b595dc2107db55eac491aa1916c20b9f70"
+      },
+      {
+        "path": "ops/incident-response/inbox/46142618876-1.json",
+        "sha": "968c9be87d2d852182f42318a42a8efd6b6a28d9"
+      },
+      {
+        "path": "ops/incident-response/inbox/46145597647-1.json",
+        "sha": "2f573d9c63f0c658a77c617a660808eb15b425e3"
+      },
+      {
+        "path": "ops/incident-response/inbox/46145612383-1.json",
+        "sha": "e6619c342ac37bb44285ab251074dbf166cabf56"
+      },
+      {
+        "path": "ops/incident-response/inbox/46145640786-1.json",
+        "sha": "bce76d7359b5d8aa03923098974747263bb7f82d"
+      },
+      {
+        "path": "ops/incident-response/inbox/46160011646-1.json",
+        "sha": "b7a3634ea378b1a05dc87737f25b011b080e4f12"
+      },
+      {
         "path": "ops/incident-response/inbox/47abf9a3-eae0-8328-9c3a-36c7c86fcaf5-sports.json",
         "sha": "a37f43fbc10fe2a82cd50ac62842406273c42994"
       },
@@ -12408,16 +12430,20 @@
         "sha": "1ded4bdfe50bdd1b2b40e67a4f410f87de39f69b"
       },
       {
+        "path": "ops/incident-response/inbox/914f2d10-7650-8328-ba44-bd1f41ff08b7-ashdod-playwright-runner.json",
+        "sha": "401a7b058b6260d26890a8298478b84ba47f15c6"
+      },
+      {
+        "path": "ops/incident-response/inbox/914f2d10-7650-8328-ba44-bd1f41ff08b7-rail-optional-stop-description.json",
+        "sha": "97a7131639abfd81703faea15c9a563eb5189883"
+      },
+      {
         "path": "ops/incident-response/inbox/9386f7de-5bf0-8332-bf04-b81deb328608-investigations-publication-route.json",
         "sha": "7d10be91be395cb6466c13acd878597e1826c13a"
       },
       {
         "path": "ops/incident-response/inbox/9dd0685b-e524-8330-816e-2f23a07ea01a-banner-double-runtime.json",
         "sha": "7742a2b8bc9d7bb3c98423b42b0ff90e442e797f"
-      },
-      {
-        "path": "ops/incident-response/inbox/README.md",
-        "sha": "a4d2c38eb7fe80dad30b3b84aadedb3596e91863"
       },
       {
         "path": "ops/incident-response/inbox/a15528f9-e6a8-8330-9256-a5d9276bfce4-ashdod-ofek-future-snapshot.json",
@@ -12468,6 +12494,10 @@
         "sha": "309437359563be3ba0723a75e580a49637ce4ae0"
       },
       {
+        "path": "ops/incident-response/inbox/c55da3d5-ad98-8328-9b7c-c1013ae64495-community-receipt-projection.json",
+        "sha": "5dfd5195b533f4f7ef972fd33416ee7afe59befd"
+      },
+      {
         "path": "ops/incident-response/inbox/c7423892-2320-8332-8334-0ca60137294d-publication-verified-visual-pending.json",
         "sha": "6307649390a9394f564dd18bc5278b6605d05548"
       },
@@ -12482,6 +12512,10 @@
       {
         "path": "ops/incident-response/inbox/culture-20261127-646e1ae9-archive-caption-fixed.json",
         "sha": "66da7a599b69113f3976999093f289fbbbe0ddb3"
+      },
+      {
+        "path": "ops/incident-response/inbox/culture-20261128-005432de-render-body-1.json",
+        "sha": "644e1f0cc2dbc6cc192d04a040cf4fcea0fb613e"
       },
       {
         "path": "ops/incident-response/inbox/culture-night-20261126-04587b87-7f45-4c20-a946-0b95819cdc84-1.json",
@@ -12668,6 +12702,10 @@
         "sha": "4b97d05ed125a756adaa280d0f1d6ded636fc4a6"
       },
       {
+        "path": "ops/incident-response/inbox/README.md",
+        "sha": "a4d2c38eb7fe80dad30b3b84aadedb3596e91863"
+      },
+      {
         "path": "ops/incident-response/inbox/real-estate-20261118-missing-generated-article.json",
         "sha": "684fda905407621b13dbb20d3b5af0cd6905cb79"
       },
@@ -12702,65 +12740,13 @@
       {
         "path": "ops/incident-response/inbox/work-readiness-20261115-616.json",
         "sha": "776685a1d097ea753cbad8ce0f6d42e8952fcad0"
-      },
-      {
-        "path": "ops/incident-response/inbox/20261128-tlvnet-sports-lease-expiration-policy.json",
-        "sha": "e0546c8a6163a75add76d5d2997e2f6070717b2f"
-      },
-      {
-        "path": "ops/incident-response/inbox/20261128T0819Z-future-prepared-checkpoint-04a4f577.json",
-        "sha": "991e70d27e9f17778f7b07e3976e40961be71dcb"
-      },
-      {
-        "path": "ops/incident-response/inbox/culture-20261128-005432de-render-body-1.json",
-        "sha": "644e1f0cc2dbc6cc192d04a040cf4fcea0fb613e"
-      },
-      {
-        "path": "ops/incident-response/inbox/20261128-community-ysg26y0xrr.json",
-        "sha": "ca8fae8775a575b074557edbb5215017a1128505"
-      },
-      {
-        "path": "ops/incident-response/inbox/c55da3d5-ad98-8328-9b7c-c1013ae64495-community-receipt-projection.json",
-        "sha": "5dfd5195b533f4f7ef972fd33416ee7afe59befd"
-      },
-      {
-        "path": "ops/incident-response/inbox/20261128-consumer-08a0deb7.json",
-        "sha": "6e2d230ca995d40308c6b12d6fd2629e6c8ffa3b"
-      },
-      {
-        "path": "ops/incident-response/inbox/46140783231-1.json",
-        "sha": "7dcc51b595dc2107db55eac491aa1916c20b9f70"
-      },
-      {
-        "path": "ops/incident-response/inbox/46142618876-1.json",
-        "sha": "968c9be87d2d852182f42318a42a8efd6b6a28d9"
-      },
-      {
-        "path": "ops/incident-response/inbox/46145597647-1.json",
-        "sha": "2f573d9c63f0c658a77c617a660808eb15b425e3"
-      },
-      {
-        "path": "ops/incident-response/inbox/46145612383-1.json",
-        "sha": "e6619c342ac37bb44285ab251074dbf166cabf56"
-      },
-      {
-        "path": "ops/incident-response/inbox/46145640786-1.json",
-        "sha": "bce76d7359b5d8aa03923098974747263bb7f82d"
-      },
-      {
-        "path": "ops/incident-response/inbox/914f2d10-7650-8328-ba44-bd1f41ff08b7-rail-optional-stop-description.json",
-        "sha": "97a7131639abfd81703faea15c9a563eb5189883"
-      },
-      {
-        "path": "ops/incident-response/inbox/914f2d10-7650-8328-ba44-bd1f41ff08b7-ashdod-playwright-runner.json",
-        "sha": "401a7b058b6260d26890a8298478b84ba47f15c6"
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
-    "last_checked_at": "2026-11-27T13:44:41Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-27/61d78629-e180-8330-a5b3-3b7463885bfe.json",
-    "count": 277
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "last_checked_at": "2026-11-28T15:33:28Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "count": 300
   },
   "source_report_checkpoint": {
     "observed_at": "2026-11-28T12:45:00.282Z",
@@ -13855,11 +13841,11 @@
     "previous_incident_observation_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
   },
   "latest_private_policy_read_observation": {
-    "observed_at": "2026-11-28T14:44:52Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
     "revision": 4,
     "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
-    "last_read_at": "2026-11-28 14:40:50.636813+00"
+    "last_read_at": "2026-11-28 15:32:26.759057+00",
+    "observed_at": "2026-11-28T15:33:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json"
   },
   "latest_homepage_order_observation": {
     "incident_id": "tlvnet-home-news-rail-batch-precedence",
@@ -14090,14 +14076,15 @@
   },
   "tasks_last_observed_at": "2026-11-28T14:44:52Z",
   "latest_desk_health_observation": {
-    "observed_at": "2026-11-28T14:44:52Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
+    "observed_at": "2026-11-28T15:33:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "sampled_at": "2026-11-28 15:32:55.757686+00",
     "health": {
       "handoff_failed": 3,
       "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
       "last_migration": "20261127_100000_alert_log",
       "failed_backups_7d": 0,
-      "hours_since_backup": 13.439129215555555,
+      "hours_since_backup": 14.298795552222222,
       "autopublish_enabled": false,
       "handoff_stuck_over_2h": 0
     },
@@ -14115,8 +14102,8 @@
     ],
     "reconcile": {
       "status": "succeeded",
-      "end_time": "2026-11-28T14:40:00.066224+00:00",
-      "start_time": "2026-11-28T14:40:00.060071+00:00"
+      "end_time": "2026-11-28T15:30:00.074078+00:00",
+      "start_time": "2026-11-28T15:30:00.060592+00:00"
     },
     "herzliya": {
       "count": 0,
@@ -14162,13 +14149,13 @@
   },
   "latest_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "262bbd50-2344-8328-9f42-36d81ea8a1e3",
-    "runKey": "ops-2026-11-28-262bbd50-2344-8328-9f42-36d81ea8a1e3",
+    "run_id": "9ea3af46-be7c-8328-88f2-50894bee76d4",
+    "runKey": "ops-2026-11-28-9ea3af46-be7c-8328-88f2-50894bee76d4",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T14:44:52Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
-    "status": "completed_without_new_incident"
+    "observed_at": "2026-11-28T15:33:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "status": "known_ims_forecast_gap_reconciled"
   },
   "latest_culture_network_release_observation": {
     "observed_at": "2026-11-27T08:34:28Z",
@@ -14467,28 +14454,27 @@
     }
   },
   "latest_public_homepage_order": {
-    "observed_at": "2026-11-28T14:44:52Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
+    "observed_at": "2026-11-28T15:33:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
     "home": {
       "url": "https://tlvnet.com/",
       "http": 200,
-      "latency_seconds": 9.099378,
-      "stale_19_nov_article_title_present": false,
-      "latest_news_link_present": true,
-      "latest_real_estate_link_present": true
+      "latency_seconds": 7.082764,
+      "current_news_and_real_estate_links": true,
+      "prior_stale_headline_absent": true
     }
   },
   "latest_social_publication_readback": {
-    "observed_at": "2026-11-28T14:44:52Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
+    "observed_at": "2026-11-28T15:33:28Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
     "posts": [
       {
-        "slot": "2026-11-28T14",
-        "article_url": "https://tlvnet.com/news/hapoel-basketball-foreign-player-cap-rejected-20261127.html",
-        "finished_at": "2026-11-28T14:00:08.493Z",
+        "slot": "2026-11-28T15",
+        "article_url": "https://tlvnet.com/news/tlv-average-rent-q3-2026-reported-20261128.html",
         "status": "published",
-        "post_id": "1520426491146188_122115258843545268",
-        "url": "https://www.facebook.com/61596358055015/posts/122115258843545268/",
+        "finished_at": "2026-11-28T15:00:10.434Z",
+        "post_id": "1520426491146188_122115301221545268",
+        "url": "https://www.facebook.com/61596358055015/posts/122115301221545268/",
         "http": 200,
         "id_and_title_match": true
       }
