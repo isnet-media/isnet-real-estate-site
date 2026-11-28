@@ -1,0 +1,239 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "262bbd50-2344-8328-9f42-36d81ea8a1e3",
+  "runKey": "ops-2026-11-28-262bbd50-2344-8328-9f42-36d81ea8a1e3",
+  "policy_version": "2026-11-15/1.2",
+  "private_definition_revision": 4,
+  "observed_at": "2026-11-28T14:44:52Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
+  "status": "completed_without_new_incident",
+  "private_policy_read": {
+    "observed_at": "2026-11-28T14:44:52Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
+    "revision": 4,
+    "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
+    "last_read_at": "2026-11-28 14:40:50.636813+00"
+  },
+  "tlvnet": {
+    "deployment": {
+      "version": 771,
+      "status": "succeeded",
+      "source_commit": "b34907332d2fe34a22bd3edc822f623ddd5eaffb",
+      "source_checkpoint": "c48927fe09bec6c81353e486383646afbfa1d1eb",
+      "deployment_id": "appgdep_6b0ae7c6e55c8191a9e49ad07b236618",
+      "completed_at": "2026-11-28T14:40:32.254682+00:00"
+    },
+    "home": {
+      "url": "https://tlvnet.com/",
+      "http": 200,
+      "latency_seconds": 9.099378,
+      "stale_19_nov_article_title_present": false,
+      "latest_news_link_present": true,
+      "latest_real_estate_link_present": true
+    },
+    "worker_log_sample": {
+      "error_events": 0,
+      "minutes": 70,
+      "limit": 15
+    },
+    "backup_components": [
+      {
+        "id": "administrative-state",
+        "updated_at": "2026-11-27T07:17:07.889Z",
+        "checksum": "6603d6d2c133f69309393428c5be5dbc626c9ec494ed15e0985de9fb0b988622",
+        "error_present": false
+      },
+      {
+        "id": "recent-news",
+        "updated_at": "2026-11-28T12:14:05.642Z",
+        "checksum": "a6a9c185a2ce46bc9fba623a0205f0c02d4fb0fbdbbedaffd854b161ec68d6d9",
+        "error_present": false
+      },
+      {
+        "id": "source-configuration",
+        "updated_at": "2026-11-28T12:14:06.614Z",
+        "checksum": "ad80c88e25c21cf096d40ef2056bfda8e5fe7b49fbd2b7d8782c4d818993dd80",
+        "error_present": false
+      }
+    ],
+    "stability_gates": {
+      "automated_full_offsite_backup": "not_verified",
+      "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+      "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+      "scheduled_publication_reconciliation": "partial"
+    },
+    "lease": {
+      "initial_state": "held",
+      "initial_owner": "Automation_82add5edecd8819197814e83bac85a75",
+      "initial_expiry": "2026-11-28T14:58:33.061Z",
+      "final_state": "free",
+      "released_at": "2026-11-28T14:41:41.674Z"
+    },
+    "routes": {
+      "without_account": {
+        "url": "https://tlvnet.com/news/bli-heshbon",
+        "http": 200
+      },
+      "neighborhood_feed": {
+        "url": "https://tlvnet.com/city-hub/updates.json",
+        "http": 200,
+        "count": 106
+      },
+      "active_events": [
+        {
+          "area_url": "https://tlvnet.com/city-hub/areas/jaffa/",
+          "http": 200,
+          "item": "u-are-perfect-jaffa-community-fair-20261128",
+          "valid_until": "2026-11-28T18:00:00.000Z",
+          "link_present": true
+        }
+      ],
+      "neighborhood_news": [
+        {
+          "area_url": "https://tlvnet.com/city-hub/areas/florentin/",
+          "http": 200,
+          "item": "abarbanel-violence-injury-reported-20261128",
+          "link_present": true
+        }
+      ]
+    }
+  },
+  "real_estate_publication": {
+    "observed_at": "2026-11-28T14:44:52Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
+    "article_id": "tlv-average-rent-q3-2026-reported-20261128",
+    "url": "https://tlvnet.com/news/tlv-average-rent-q3-2026-reported-20261128",
+    "section_url": "https://tlvnet.com/news/real-estate",
+    "title": "7,488 שקל בחודש: ממוצע שכר הדירה בתל אביב ברבעון השלישי",
+    "displayed_publication_minute": "2026-11-28T16:30+02:00",
+    "owner_run": {
+      "task_id": "Automation_82add5edecd8819197814e83bac85a75",
+      "title": "נדל״ן — יומי",
+      "enabled": true,
+      "run_id": "1c8d5dd3-a8c8-832b-a4aa-c93b069d68d4",
+      "scheduled_for": "2026-11-28T14:00:00Z",
+      "started_at": "2026-11-28T14:26:12.090830Z",
+      "completed_at": "2026-11-28T14:41:56.250619Z",
+      "recorded_status": "completed",
+      "result_run_id": "1c8d5dd3-a8c8-832b-a4aa-c93b069d68d4",
+      "result_created_at": "2026-11-28T14:41:55.946091Z",
+      "result_matches_attempt": true
+    },
+    "deployment": {
+      "version": 771,
+      "status": "succeeded",
+      "source_commit": "b34907332d2fe34a22bd3edc822f623ddd5eaffb",
+      "source_checkpoint": "c48927fe09bec6c81353e486383646afbfa1d1eb",
+      "deployment_id": "appgdep_6b0ae7c6e55c8191a9e49ad07b236618",
+      "completed_at": "2026-11-28T14:40:32.254682+00:00"
+    },
+    "independent_readback": {
+      "article_http": 200,
+      "section_http": 200,
+      "section_lead_is_exact_article": true,
+      "homepage_link": true,
+      "body_present": true,
+      "image_http": 200,
+      "image_url": "https://tlvnet.com/photo-bank/assets/tel-aviv-aerial-2024.jpg",
+      "image_sha256": "1367843e43ea8bdff71d0da16917fc416d16350a0760208ac38b2d538d54eb87",
+      "image_jpeg_size": [
+        1256,
+        720
+      ],
+      "image_credit": "Yosef Ben Melamed",
+      "image_license_label": "CC BY-SA 4.0",
+      "photo_credit_present": true,
+      "primary_source_link_present": true,
+      "exact_body_and_image_match_to_source": "Reported by owner in release receipt; controller verified public body, media bytes, credit and links independently.",
+      "desktop_mobile_visual_review": "pending per owner"
+    },
+    "owner_queue": {
+      "published_from_queue": 1,
+      "new_candidates": 0,
+      "ready": 0,
+      "needs_verification": 18,
+      "blocked": 4,
+      "duplicates_prevented": 7
+    },
+    "neighborhood_scope": "Citywide rent report without a specific neighborhood assignment.",
+    "status": "published_verified"
+  },
+  "desk_staging": {
+    "observed_at": "2026-11-28T14:44:52Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
+    "health": {
+      "handoff_failed": 3,
+      "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
+      "last_migration": "20261127_100000_alert_log",
+      "failed_backups_7d": 0,
+      "hours_since_backup": 13.439129215555555,
+      "autopublish_enabled": false,
+      "handoff_stuck_over_2h": 0
+    },
+    "backups": [
+      {
+        "ok": true,
+        "kind": "db",
+        "created_at": "2026-11-28T02:41:03.124878+00:00"
+      },
+      {
+        "ok": true,
+        "kind": "media",
+        "created_at": "2026-11-28T03:10:08.426668+00:00"
+      }
+    ],
+    "reconcile": {
+      "status": "succeeded",
+      "end_time": "2026-11-28T14:40:00.066224+00:00",
+      "start_time": "2026-11-28T14:40:00.060071+00:00"
+    },
+    "herzliya": {
+      "count": 0,
+      "oldest_created_at": null
+    },
+    "scope": "staging_read_only",
+    "alert": false
+  },
+  "herzliya": {
+    "latest_version": 51,
+    "owner_run_id": "575087ad-d3f8-832c-a50d-0731e30b63d8",
+    "changes_since_previous_public_readback": false
+  },
+  "github_actions": {
+    "observed_at": "2026-11-28T14:44:52Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/262bbd50-2344-8328-9f42-36d81ea8a1e3.json",
+    "from": "2026-11-28T13:31:59Z",
+    "through": "2026-11-28T14:28:41Z",
+    "watermark": "2026-11-28T14:28:41Z",
+    "boundary_crossed": true,
+    "boundary_ids": [
+      46154849161
+    ],
+    "previous_boundary_ids": [
+      46150076378,
+      46150076638
+    ],
+    "strictly_new": 4,
+    "total_returned": 6,
+    "new_failure_roots": 0,
+    "pending_run_ids": [],
+    "full_logs_read": 0
+  },
+  "immutable_inbox_new_count": 0,
+  "social": {
+    "slot": "2026-11-28T14",
+    "article_url": "https://tlvnet.com/news/hapoel-basketball-foreign-player-cap-rejected-20261127.html",
+    "finished_at": "2026-11-28T14:00:08.493Z",
+    "status": "published",
+    "post_id": "1520426491146188_122115258843545268",
+    "url": "https://www.facebook.com/61596358055015/posts/122115258843545268/",
+    "http": 200,
+    "id_and_title_match": true
+  },
+  "existing_pending_task_run_ids": [
+    "f177b9fd-b3e0-832f-8c0e-29cd750fa2ce"
+  ],
+  "production_modified": false,
+  "automations_changed": false,
+  "cost_measured": false
+}
