@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-27T19:44:26Z",
+  "updated_at": "2026-11-28T03:22:48Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9879,13 +9879,27 @@
           "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
         }
       ],
-      "status": "open",
+      "status": "mitigated",
       "classification": "backup_freshness",
       "root_cause": "Latest external media backup success crossed 26 hours. Cause of missing newer success is unconfirmed.",
-      "next_action": "Inspect the existing backup workflow under the authorized service owner and verify the next successful external media record.",
+      "next_action": "Monitor the next expected external backup and preserve the new successful receipt. Root cause and isolated restore remain unverified.",
       "inbox": "ops/incident-response/inbox/20261127-desk-staging-external-media-backup-age.json",
       "last_seen_at": "2026-11-27T12:56:52Z",
-      "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json"
+      "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
+      "updated_at": "2026-11-28T03:22:48Z",
+      "freshness_alert_active": false,
+      "mitigation": "Supabase staging has a new successful external backup receipt within the 26-hour freshness threshold.",
+      "recovery": {
+        "observed_at": "2026-11-28T03:22:48Z",
+        "receipt": {
+          "kind": "media",
+          "ok": true,
+          "created_at": "2026-11-28T03:10:08.426668+00:00"
+        },
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
+        "restore_verified": false,
+        "permanent_fix_verified": false
+      }
     },
     {
       "id": "TLVNET/consumer/media-ingest/Commons-original-HTTP403",
@@ -9964,14 +9978,14 @@
     },
     {
       "id": "desk-staging-external-db-backup-stale",
-      "status": "open",
+      "status": "mitigated",
       "classification": "backup_freshness",
       "first_seen_at": "2026-11-27T15:15:57Z",
       "last_seen_at": "2026-11-27T15:15:57Z",
       "related_incident_id": "desk-staging-external-media-backup-stale",
       "root_cause": "No external DB backup success is recorded after the previous good receipt. The reason for no newer receipt and any common cause with media remain unverified.",
       "diagnostic_access": "Prior GitHub workflow listing for the separate Desk repo was denied by the active connector. Staging monitoring SQL is available read-only.",
-      "next_action": "Have the existing backup operator inspect scheduled invocation, destination write, and receipt insertion for DB and media. Verify new successful external records and separately confirm recoverability.",
+      "next_action": "Monitor the next expected external backup and preserve the new successful receipt. Root cause and isolated restore remain unverified.",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json",
       "inbox": "ops/incident-response/inbox/20261127-desk-staging-external-db-backup-age.json",
       "occurrences": [
@@ -9980,10 +9994,24 @@
           "observed_at": "2026-11-27T15:15:57Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-27/2aedae80-e898-8330-b361-f02ca0a3cc2f.json"
         }
-      ]
+      ],
+      "updated_at": "2026-11-28T03:22:48Z",
+      "freshness_alert_active": false,
+      "mitigation": "Supabase staging has a new successful external backup receipt within the 26-hour freshness threshold.",
+      "recovery": {
+        "observed_at": "2026-11-28T03:22:48Z",
+        "receipt": {
+          "kind": "db",
+          "ok": true,
+          "created_at": "2026-11-28T02:41:03.124878+00:00"
+        },
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
+        "restore_verified": false,
+        "permanent_fix_verified": false
+      }
     }
   ],
-  "last_review_runKey": "ops-2026-11-27-e1e7bd73-82e4-8330-8432-8811075361c4",
+  "last_review_runKey": "ops-2026-11-28-baa864b9-bbc8-832c-a601-39d28cf490e1",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
