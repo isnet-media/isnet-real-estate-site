@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T09:16:49.678Z",
+  "updated_at": "2026-11-28T10:34:25.913Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -9623,7 +9623,7 @@
       "prevention": "Include taxonomy asset HTTP/schema and a live control and subcategory-deep-link smoke test before guide deploy.",
       "next_action": "Use the authoritative TLVNET source and intended guide taxonomy to ship a public guide data asset at a site-owned route. Cover data status/schema, category filter rendering, and a subcategory deep link in regression before publish.",
       "repair_blocker": "Authoritative taxonomy data is absent from the current source tree.",
-      "last_seen_at": "2026-11-26T11:02:37Z",
+      "last_seen_at": "2026-11-28T10:34:25.913Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-26/732f9b32-2b60-8324-8975-97517e7f75f2.json",
       "occurrences": [
         {
@@ -9643,7 +9643,16 @@
         }
       ],
       "first_reported_date": "2026-11-26",
-      "first_timestamped_evidence_at": "2026-11-26T09:26:22Z"
+      "first_timestamped_evidence_at": "2026-11-26T09:26:22Z",
+      "latest_occurrence": {
+        "observed_at": "2026-11-28T10:34:25.913Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/c3567e17-6084-8328-a70c-4f2ce5794963.json",
+        "run_id": "c3567e17-6084-8328-a70c-4f2ce5794963",
+        "version": 768,
+        "guide_http": 200,
+        "taxonomy_http": 404,
+        "source_data_still_absent": true
+      }
     },
     {
       "id": "sites-source-push-short-lived-token-expired-during-full-build",
@@ -10179,7 +10188,7 @@
       }
     }
   ],
-  "last_review_runKey": "ops-2026-11-28-000c7557-396c-832c-bc47-8bd3e9cb648c",
+  "last_review_runKey": "ops-2026-11-28-c3567e17-6084-8328-a70c-4f2ce5794963",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
