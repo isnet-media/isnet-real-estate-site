@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T12:45:00.282Z",
+  "updated_at": "2026-11-28T13:36:41Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -10086,22 +10086,29 @@
           "controller_run": "74d368d0-4adc-8330-94e6-7027d1f620ae",
           "observed_at": "2026-11-27T17:44:08Z",
           "evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json"
+        },
+        {
+          "controller_run": "43c0a9cb-d9fc-8328-b2fc-66e26645d484",
+          "owner_run_id": "575087ad-d3f8-832c-a50d-0731e30b63d8",
+          "observed_at": "2026-11-28T13:36:41Z",
+          "evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json",
+          "state": "recovery_verified"
         }
       ],
-      "status": "open",
+      "status": "fixed_verified",
       "classification": "writer_lease",
       "root_cause": "Owner matched active Desk assignment for already live Raziel story to writer lease denial; owner reports expiry 2026-11-28T10:40:00+02:00.",
-      "next_action": "Authorized Desk or CMS owner reconciles the active assignment with the existing published article, verifies normal lease acquisition, and confirms the next new local article live.",
+      "next_action": "Monitor the next scheduled owner cycle, preserving the authorized Desk claim flow and exact public readback.",
       "last_seen_at": "2026-11-28T09:16:49.678Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-27/e1e7bd73-82e4-8330-8432-8811075361c4.json",
-      "updated_at": "2026-11-28T06:50:22Z",
+      "updated_at": "2026-11-28T13:36:41Z",
       "impact": "Owner reports gating of new independent stories. Existing Raziel article and handball score update independently available on public site.",
-      "last_evidence": "ops/tlvnet-stability/observations/2026-11-27/74d368d0-4adc-8330-94e6-7027d1f620ae.json",
+      "last_evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json",
       "last_observation": {
-        "observed_at": "2026-11-28T09:16:49.678Z",
-        "evidence": "ops/tlvnet-stability/observations/2026-11-28/000c7557-396c-832c-bc47-8bd3e9cb648c.json",
-        "finding": "reported_expiry_passed_no_nonexpired_claims_in_staging",
-        "owner_run": "8fbf42c5-16e8-8330-90e7-b3541def8e18",
+        "observed_at": "2026-11-28T13:36:41Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json",
+        "finding": "existing_authorized_owner_resumed_after_reported_expiry",
+        "owner_run": "575087ad-d3f8-832c-a50d-0731e30b63d8",
         "reported_assignment_expiry": "2026-11-28T08:40:50.407Z",
         "staging_claim_metadata": {
           "measured_at": "2026-11-28 09:16:15.275876+00",
@@ -10110,8 +10117,20 @@
           "raziel": []
         },
         "qualification": "Staging read only. No nonexpired Herzliya claim appeared in staging after the previously reported expiry. The previous Raziel identity was not present in the staging rows inspected. This does not confirm that the writer's live acquisition now works.",
-        "next_action": "Observe the next existing Herzliya owner result and require a successful acquisition and live new article to verify recovery."
-      }
+        "next_action": "Observe the next existing Herzliya owner result and require a successful acquisition and live new article to verify recovery.",
+        "previous_observation_at": "2026-11-28T09:16:49.678Z"
+      },
+      "verified_at": "2026-11-28T13:36:41Z",
+      "recovery": {
+        "owner_run_id": "575087ad-d3f8-832c-a50d-0731e30b63d8",
+        "deployment_id": "appgdep_6b0acbc859648191b85d47adc7042adb",
+        "source_commit": "6752ad4cce5aae4fc5a2b989b7f68631069c88b9",
+        "public_url": "https://herzliyanet.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/herzliya-apollonia-cliff-collapse-20261128/",
+        "title_and_full_body_match": true,
+        "homepage_and_section_links": true,
+        "image_present": false
+      },
+      "prevention": "Continue reconciling already-published identities against active Desk claims through the authorized owner flow. Verify acquisition and public readback in existing cycles."
     },
     {
       "id": "tlvnet-real-estate-unresolved-sde-dov-neighborhood-slug",
@@ -10390,7 +10409,7 @@
       ]
     }
   ],
-  "last_review_runKey": "ops-2026-11-28-914f2d10-7650-8328-ba44-bd1f41ff08b7",
+  "last_review_runKey": "ops-2026-11-28-43c0a9cb-d9fc-8328-b2fc-66e26645d484",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
