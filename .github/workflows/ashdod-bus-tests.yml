@@ -35,7 +35,8 @@ jobs:
 
   browser-smoke:
     needs: node-tests
-    runs-on: ubuntu-latest
+    # The pinned Playwright 1.55 browser installer requires Ubuntu 24.04 on this runner.
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
