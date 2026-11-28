@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-11-28T06:17:45.185Z",
+  "task_id": "Automation_b3345c399b988191a1ba9848e3e3668b",
+  "runKey": "47a72f60-58a8-4de0-9911-3f1faa02669e",
+  "target": "TLVNET-site",
+  "subsystem": "Sites newsroom build dependency",
+  "root_signature": "tlvnet-sites-build-python-bs4-missing-on-clean-runner",
+  "status": "mitigated",
+  "evidence": {
+    "initial_error": "ModuleNotFoundError: No module named 'bs4' in scripts/editorial_sources.py while running scripts/build-news.py",
+    "source_commit_before_edits": "921b9a18b048d538bcfc0f6c354f0fae48bd333c",
+    "corrective_attempts": 1,
+    "changed_condition": "Installed beautifulsoup4==4.14.3 in the current build environment",
+    "focused_readback": "Python imports bs4 4.14.3; build-news.py and photo-bank checks subsequently passed."
+  },
+  "next_action": "Check that the clean-runner dependency setup includes Python Beautiful Soup before starting the existing build. No deployment is required for this incident record."
+}
