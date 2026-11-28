@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T15:33:28Z",
+  "updated_at": "2026-11-28T16:27:20Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-28T15:29:01Z",
+  "last_processed_run_created_at": "2026-11-28T16:25:18Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -3120,14 +3120,14 @@
   "last_verified_public_readback_run": "914f2d10-7650-8328-ba44-bd1f41ff08b7",
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "9ea3af46-be7c-8328-88f2-50894bee76d4",
-    "runKey": "ops-2026-11-28-9ea3af46-be7c-8328-88f2-50894bee76d4",
+    "run_id": "27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02",
+    "runKey": "ops-2026-11-28-27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T15:33:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
-    "status": "known_ims_forecast_gap_reconciled",
-    "summary": "Reconciled a recurring IMS validity gap and expired public files. Existing publisher handoff remains open. TLVNET homepage, public Facebook post and read-only Desk staging controls were sampled."
+    "observed_at": "2026-11-28T16:27:20Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json",
+    "status": "no_new_incident",
+    "summary": "No new failure. Verified TLVNET homepage and the new public Facebook post, observed normal Desk staging reconciliation and retained the existing Ashdod forecast handoff and historical pending work."
   },
   "concurrent_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -4854,6 +4854,16 @@
       "observed_at": "2026-11-28T15:33:28Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
       "status": "known_ims_forecast_gap_reconciled"
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02",
+      "runKey": "ops-2026-11-28-27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 4,
+      "observed_at": "2026-11-28T16:27:20Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json",
+      "status": "no_new_incident"
     }
   ],
   "photo_controls_checkpoint": {
@@ -5604,7 +5614,7 @@
   },
   "social_runs_watermark": {
     "table": "social_runs",
-    "max_finished_at": "2026-11-28T15:00:10.434Z",
+    "max_finished_at": "2026-11-28T16:00:14.468Z",
     "seen_slots": [
       "2026-11-13T09",
       "2026-11-13T10",
@@ -5749,7 +5759,8 @@
       "2026-11-28T12",
       "2026-11-28T13",
       "2026-11-28T14",
-      "2026-11-28T15"
+      "2026-11-28T15",
+      "2026-11-28T16"
     ],
     "observed_at": "2026-11-28T12:45:00.282Z",
     "evidence": "ops/tlvnet-stability/observations/2026-11-28/914f2d10-7650-8328-ba44-bd1f41ff08b7.json",
@@ -10670,27 +10681,30 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-28T15:33:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
-    "from": "2026-11-28T14:28:41Z",
-    "through": "2026-11-28T15:29:01Z",
-    "watermark": "2026-11-28T15:29:01Z",
+    "observed_at": "2026-11-28T16:27:20Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json",
+    "from": "2026-11-28T15:29:01Z",
+    "through": "2026-11-28T16:25:18Z",
+    "watermark": "2026-11-28T16:25:18Z",
     "boundary_crossed": true,
     "boundary_ids": [
-      46160086942
+      46165067940
     ],
     "previous_boundary_ids": [
-      46154849161
+      46160086942
     ],
-    "strictly_new": 2,
-    "total_returned": 3,
+    "strictly_new": 20,
+    "total_returned": 21,
     "new_failure_roots": 0,
     "pending_run_ids": [],
-    "full_logs_read": 1,
-    "matched_known_run_ids": [
-      46160011646
-    ],
-    "new_runs": 2
+    "full_logs_read": 0,
+    "spot_checks": {
+      "recovery_artifact_housekeeping_run": "46164993456",
+      "artifact_retention_tests_and_cleanup_job": "success",
+      "ashdod_stage_audit_run": "46164466389",
+      "candidate_audit_without_event_write": "success"
+    },
+    "new_runs": 20
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -12744,8 +12758,8 @@
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
     "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
-    "last_checked_at": "2026-11-28T15:33:28Z",
-    "check_evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "last_checked_at": "2026-11-28T16:27:20Z",
+    "check_evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json",
     "count": 300
   },
   "source_report_checkpoint": {
@@ -13843,9 +13857,9 @@
   "latest_private_policy_read_observation": {
     "revision": 4,
     "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
-    "last_read_at": "2026-11-28 15:32:26.759057+00",
-    "observed_at": "2026-11-28T15:33:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json"
+    "last_read_at": "2026-11-28 16:25:45.915189+00",
+    "observed_at": "2026-11-28T16:27:20Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json"
   },
   "latest_homepage_order_observation": {
     "incident_id": "tlvnet-home-news-rail-batch-precedence",
@@ -14076,15 +14090,13 @@
   },
   "tasks_last_observed_at": "2026-11-28T14:44:52Z",
   "latest_desk_health_observation": {
-    "observed_at": "2026-11-28T15:33:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
-    "sampled_at": "2026-11-28 15:32:55.757686+00",
+    "sampled_at": "2026-11-28 16:26:07.080408+00",
     "health": {
       "handoff_failed": 3,
       "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
       "last_migration": "20261127_100000_alert_log",
       "failed_backups_7d": 0,
-      "hours_since_backup": 14.298795552222222,
+      "hours_since_backup": 15.18527408611111,
       "autopublish_enabled": false,
       "handoff_stuck_over_2h": 0
     },
@@ -14102,13 +14114,15 @@
     ],
     "reconcile": {
       "status": "succeeded",
-      "end_time": "2026-11-28T15:30:00.074078+00:00",
-      "start_time": "2026-11-28T15:30:00.060592+00:00"
+      "end_time": "2026-11-28T16:20:00.097842+00:00",
+      "start_time": "2026-11-28T16:20:00.09211+00:00"
     },
     "herzliya": {
       "count": 0,
       "oldest_created_at": null
     },
+    "observed_at": "2026-11-28T16:27:20Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json",
     "scope": "staging_read_only",
     "alert": false
   },
@@ -14149,13 +14163,13 @@
   },
   "latest_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "9ea3af46-be7c-8328-88f2-50894bee76d4",
-    "runKey": "ops-2026-11-28-9ea3af46-be7c-8328-88f2-50894bee76d4",
+    "run_id": "27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02",
+    "runKey": "ops-2026-11-28-27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T15:33:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
-    "status": "known_ims_forecast_gap_reconciled"
+    "observed_at": "2026-11-28T16:27:20Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json",
+    "status": "no_new_incident"
   },
   "latest_culture_network_release_observation": {
     "observed_at": "2026-11-27T08:34:28Z",
@@ -14454,27 +14468,29 @@
     }
   },
   "latest_public_homepage_order": {
-    "observed_at": "2026-11-28T15:33:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "observed_at": "2026-11-28T16:27:20Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json",
     "home": {
       "url": "https://tlvnet.com/",
       "http": 200,
-      "latency_seconds": 7.082764,
-      "current_news_and_real_estate_links": true,
-      "prior_stale_headline_absent": true
+      "latency_seconds": 7.078716,
+      "news_link_present": true,
+      "real_estate_link_present": true,
+      "without_account_lead_link_present": true,
+      "stale_19_nov_article_title_present": false
     }
   },
   "latest_social_publication_readback": {
-    "observed_at": "2026-11-28T15:33:28Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/9ea3af46-be7c-8328-88f2-50894bee76d4.json",
+    "observed_at": "2026-11-28T16:27:20Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/27b5d31e-a9cc-8328-a1ad-c0ad7d7edf02.json",
     "posts": [
       {
-        "slot": "2026-11-28T15",
-        "article_url": "https://tlvnet.com/news/tlv-average-rent-q3-2026-reported-20261128.html",
+        "slot": "2026-11-28T16",
+        "article_url": "https://tlvnet.com/news/hapoel-basketball-kfar-saba-youth-partnership-20261127.html",
         "status": "published",
-        "finished_at": "2026-11-28T15:00:10.434Z",
-        "post_id": "1520426491146188_122115301221545268",
-        "url": "https://www.facebook.com/61596358055015/posts/122115301221545268/",
+        "finished_at": "2026-11-28T16:00:14.468Z",
+        "post_id": "1520426491146188_122115338337545268",
+        "url": "https://www.facebook.com/61596358055015/posts/122115338337545268/",
         "http": 200,
         "id_and_title_match": true
       }
