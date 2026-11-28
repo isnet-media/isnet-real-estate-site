@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "technical_failure_recovered_in_source",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "c55da3d5-ad98-8328-9b7c-c1013ae64495",
+  "observed_at": "2026-11-28T11:40:05.760Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-28/c55da3d5-ad98-8328-9b7c-c1013ae64495.json",
+  "id": "tlvnet-community-nested-publication-receipt-projection",
+  "status": "fixed_verified",
+  "before": {
+    "outcome": "run_outcome_unspecified",
+    "version": null,
+    "queue": null
+  },
+  "after": {
+    "outcome": "article_records",
+    "version": 769,
+    "coverage": "incomplete",
+    "queue": 15,
+    "record": "source_published_receipt_incomplete"
+  },
+  "root_cause": "The current community ledger stores canonical links, deployment proof and queue in nested fields the evidence report did not project.",
+  "change": "Project the exact owner, article and matching terminal deployment; preserve incomplete receipt verification until byte evidence exists.",
+  "tests": "Existing publication-evidence regressions plus positive and negative nested community cases passed. Patched projection against exact current canonical ledger produces one article and 15 pending entries without elevating recorded proof.",
+  "source_commit": "b476e64db7e232bd1860bfd2718c752dd591b902",
+  "verified_remote": true,
+  "paths": [
+    "lib/publication-evidence.mjs",
+    "tests/publication-evidence-receipt-shapes.mjs"
+  ],
+  "inbox": "ops/incident-response/inbox/c55da3d5-ad98-8328-9b7c-c1013ae64495-community-receipt-projection.json",
+  "production_deploy": false
+}
