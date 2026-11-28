@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T02:18:53Z",
+  "updated_at": "2026-11-28T03:22:48Z",
   "controller_task_id": "Automation_9776808c73848191a9d748dd09315960",
-  "last_processed_run_created_at": "2026-11-27T19:43:25Z",
+  "last_processed_run_created_at": "2026-11-28T02:19:46Z",
   "initial_history": {
     "status": "metadata_complete_root_triage_partial",
     "days": 7,
@@ -3120,13 +3120,13 @@
   "last_verified_public_readback_run": "e1e7bd73-82e4-8330-8432-8811075361c4",
   "last_cycle": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "4fe124d0-8b1c-832c-abd5-900f8480dc28",
-    "runKey": "ops-2026-11-28-4fe124d0-8b1c-832c-abd5-900f8480dc28",
+    "run_id": "baa864b9-bbc8-832c-a601-39d28cf490e1",
+    "runKey": "ops-2026-11-28-baa864b9-bbc8-832c-a601-39d28cf490e1",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T02:18:53Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4fe124d0-8b1c-832c-abd5-900f8480dc28.json",
-    "summary": "Live TLVNET deployment 764 and homepage rails unchanged. No new action, inbox, social or monitored owner failure. Desk reconciliation succeeded, Herzliya queue empty, and previously reported external backup receipt gaps persist."
+    "observed_at": "2026-11-28T03:22:48Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
+    "summary": "Fresh successful external DB and media backup receipts clear Desk staging's 26-hour freshness alerts. The earlier delay's cause and restore capability have not been verified. Reconciliation succeeded, Herzliya queue is empty, and TLVNET production 764 and homepage rails are unchanged."
   },
   "concurrent_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
@@ -4796,6 +4796,16 @@
       "observed_at": "2026-11-28T02:18:53Z",
       "evidence": "ops/tlvnet-stability/observations/2026-11-28/4fe124d0-8b1c-832c-abd5-900f8480dc28.json",
       "summary": "Live TLVNET deployment 764 and homepage rails unchanged. No new action, inbox, social or monitored owner failure. Desk reconciliation succeeded, Herzliya queue empty, and previously reported external backup receipt gaps persist."
+    },
+    {
+      "task_id": "Automation_9776808c73848191a9d748dd09315960",
+      "run_id": "baa864b9-bbc8-832c-a601-39d28cf490e1",
+      "runKey": "ops-2026-11-28-baa864b9-bbc8-832c-a601-39d28cf490e1",
+      "policy_version": "2026-11-15/1.2",
+      "private_definition_revision": 4,
+      "observed_at": "2026-11-28T03:22:48Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
+      "summary": "Fresh successful external DB and media backup receipts clear Desk staging's 26-hour freshness alerts. The earlier delay's cause and restore capability have not been verified. Reconciliation succeeded, Herzliya queue is empty, and TLVNET production 764 and homepage rails are unchanged."
     }
   ],
   "photo_controls_checkpoint": {
@@ -5684,8 +5694,8 @@
       "2026-11-27T18",
       "2026-11-27T19"
     ],
-    "observed_at": "2026-11-28T02:18:53Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4fe124d0-8b1c-832c-abd5-900f8480dc28.json",
+    "observed_at": "2026-11-28T03:22:48Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
     "new_rows_this_cycle": 0,
     "public_verification": "Facebook redirected to login; provider receipt only. No new send attempted.",
     "last_checked_at": "2026-11-27T22:13:03Z",
@@ -10491,20 +10501,20 @@
     }
   },
   "actions_delta_checkpoint": {
-    "observed_at": "2026-11-28T02:18:53Z",
+    "observed_at": "2026-11-28T03:22:48Z",
     "from": "2026-11-27T19:43:25Z",
-    "through": "2026-11-27T19:43:25Z",
-    "strictly_new": 0,
+    "through": "2026-11-28T02:19:46Z",
+    "strictly_new": 2,
     "boundary_crossed": true,
     "boundary_ids": [
-      46058677042
+      46097519882
     ],
     "previous_boundary_ids": [
-      46043626365
+      46058677042
     ],
     "pending_run_ids": [],
     "full_logs_read": 0,
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4fe124d0-8b1c-832c-abd5-900f8480dc28.json"
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json"
   },
   "remaining_followup": [
     "18historical inbox paths",
@@ -11300,7 +11310,7 @@
     }
   },
   "inbox_inventory_checkpoint": {
-    "observed_at": "2026-11-28T02:18:53Z",
+    "observed_at": "2026-11-28T03:22:48Z",
     "files": [
       {
         "path": "ops/incident-response/inbox/01a1d3fd-dc9b-7622-91a6-fd0834fae599-1.json",
@@ -12444,7 +12454,7 @@
       }
     ],
     "next_action": "Existing Instagram incident reconciled; tested caption patch stays with the existing release path.",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4fe124d0-8b1c-832c-abd5-900f8480dc28.json",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
     "last_checked_at": "2026-11-27T13:44:41Z",
     "check_evidence": "ops/tlvnet-stability/observations/2026-11-27/61d78629-e180-8330-a5b3-3b7463885bfe.json",
     "count": 277
@@ -13913,12 +13923,12 @@
     "mitigation_tested": true,
     "expiry_and_transcript_review": "requires authorized service console"
   },
-  "tasks_last_observed_at": "2026-11-28T02:18:53Z",
+  "tasks_last_observed_at": "2026-11-28T03:22:48Z",
   "latest_desk_health_observation": {
-    "checked_at": "2026-11-28 02:17:38.997409+00",
+    "checked_at": "2026-11-28 03:21:21.433239+00",
     "health": {
       "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
-      "hours_since_backup": 1.0441399197222223,
+      "hours_since_backup": 2.1059276502777777,
       "failed_backups_7d": 0,
       "handoff_stuck_over_2h": 0,
       "handoff_failed": 3,
@@ -13929,19 +13939,19 @@
       {
         "kind": "db",
         "ok": true,
-        "created_at": "2026-11-26T12:55:47.730012+00:00"
+        "created_at": "2026-11-28T02:41:03.124878+00:00"
       },
       {
         "kind": "media",
         "ok": true,
-        "created_at": "2026-11-26T10:17:51.799605+00:00"
+        "created_at": "2026-11-28T03:10:08.426668+00:00"
       }
     ],
     "reconcile": {
-      "runid": 259,
+      "runid": 267,
       "status": "succeeded",
-      "start_time": "2026-11-28T02:10:00.034728+00:00",
-      "end_time": "2026-11-28T02:10:00.042281+00:00"
+      "start_time": "2026-11-28T03:20:00.119125+00:00",
+      "end_time": "2026-11-28T03:20:00.129314+00:00"
     },
     "herzliya_queued": {
       "count": 0,
@@ -13949,14 +13959,46 @@
       "oldest_created_at": null
     },
     "backup_age_hours": {
-      "db": 37.4,
-      "media": 40
+      "db": 0.7,
+      "media": 0.2
     },
-    "reconcile_age_minutes": 7.6,
-    "alert": "Previously reported external backup age breaches persist; reconciliation succeeded; Herzliya queue empty.",
-    "backup_status_scope": "Fresh success recorded in ops.backup_log; the external DB and media receipt rows have not advanced. The status view does not independently attest the offsite destination.",
-    "observed_at": "2026-11-28T02:18:53Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4fe124d0-8b1c-832c-abd5-900f8480dc28.json",
+    "reconcile_age_minutes": 1.4,
+    "alert": null,
+    "backup_status_scope": "External receipts themselves have advanced and succeeded. Restore status remains unverified.",
+    "freshness_recovery": [
+      {
+        "kind": "db",
+        "latest": {
+          "kind": "db",
+          "ok": true,
+          "created_at": "2026-11-28T02:41:03.124878+00:00"
+        },
+        "previous": {
+          "kind": "db",
+          "ok": true,
+          "created_at": "2026-11-26T12:55:47.730012+00:00"
+        },
+        "age_hours": 0.7,
+        "freshness_restored": true
+      },
+      {
+        "kind": "media",
+        "latest": {
+          "kind": "media",
+          "ok": true,
+          "created_at": "2026-11-28T03:10:08.426668+00:00"
+        },
+        "previous": {
+          "kind": "media",
+          "ok": true,
+          "created_at": "2026-11-26T10:17:51.799605+00:00"
+        },
+        "age_hours": 0.2,
+        "freshness_restored": true
+      }
+    ],
+    "observed_at": "2026-11-28T03:22:48Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
     "db_alert": "ops/incident-response/inbox/20261127-desk-staging-external-db-backup-age.json",
     "prior_alert": "ops/incident-response/inbox/20261127-desk-staging-external-media-backup-age.json"
   },
@@ -14127,13 +14169,13 @@
   },
   "latest_controller_observation": {
     "task_id": "Automation_9776808c73848191a9d748dd09315960",
-    "run_id": "4fe124d0-8b1c-832c-abd5-900f8480dc28",
-    "runKey": "ops-2026-11-28-4fe124d0-8b1c-832c-abd5-900f8480dc28",
+    "run_id": "baa864b9-bbc8-832c-a601-39d28cf490e1",
+    "runKey": "ops-2026-11-28-baa864b9-bbc8-832c-a601-39d28cf490e1",
     "policy_version": "2026-11-15/1.2",
     "private_definition_revision": 4,
-    "observed_at": "2026-11-28T02:18:53Z",
-    "evidence": "ops/tlvnet-stability/observations/2026-11-28/4fe124d0-8b1c-832c-abd5-900f8480dc28.json",
-    "summary": "Live TLVNET deployment 764 and homepage rails unchanged. No new action, inbox, social or monitored owner failure. Desk reconciliation succeeded, Herzliya queue empty, and previously reported external backup receipt gaps persist."
+    "observed_at": "2026-11-28T03:22:48Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/baa864b9-bbc8-832c-a601-39d28cf490e1.json",
+    "summary": "Fresh successful external DB and media backup receipts clear Desk staging's 26-hour freshness alerts. The earlier delay's cause and restore capability have not been verified. Reconciliation succeeded, Herzliya queue is empty, and TLVNET production 764 and homepage rails are unchanged."
   },
   "latest_culture_network_release_observation": {
     "observed_at": "2026-11-27T08:34:28Z",
