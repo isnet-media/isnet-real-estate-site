@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "technical_failure_repair_pending_live_readback",
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "914f2d10-7650-8328-ba44-bd1f41ff08b7",
+  "reported_at": "2026-11-28T12:39:06.289Z",
+  "fingerprint": "transport/rail-collectors/optional-gtfs-stop-description-none",
+  "affected_actions": [
+    46140783231,
+    46142618876
+  ],
+  "cause": "CSV DictReader returns None for the missing trailing optional stop_desc field, which had been passed directly to re.search in both collectors.",
+  "change": "Treat missing and empty descriptions equivalently, preserving the existing origin matching, timetable and minimum data checks.",
+  "pr": "https://github.com/isnet-media/isnet-real-estate-site/pull/79",
+  "merged_commit": "f1352471e6f45afd17a4eb15b15379eb72834b2d",
+  "regression_test": "Both original collectors reproduce TypeError. Both patched collectors preserve the same 40 stations, 100 trips, origins and service dates as complete-row controls.",
+  "recovery_workflows": [
+    46145640910,
+    46145640798
+  ]
+}
