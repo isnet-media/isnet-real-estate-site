@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "kind": "publication_lease_policy_deviation",
+  "target": "TLVNET-site",
+  "status": "closed_lease_protocol_followup",
+  "observed_at": "2026-11-28T07:39:42.242Z",
+  "owner_task_id": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+  "controller_run": "17c42cd0-1908-832c-b2ed-5b5fd7d2a68c",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-28/17c42cd0-1908-832c-b2ed-5b5fd7d2a68c.json",
+  "lease": {
+    "state": "held",
+    "owner": "Automation_499e6c8b36648191a9f8f102b0d5d6fe",
+    "run_key": "sports-20261128-morning-3af58a9e-51b0-8326-9206-c96dd093c137",
+    "acquired_at": "2026-11-28T07:07:45.643Z",
+    "lease_until": "2026-11-28T08:07:45.643Z",
+    "expected_max_minutes": 30,
+    "configured_minutes": 60,
+    "actual_held_minutes": 20.56,
+    "current_state": "free",
+    "released_at": "2026-11-28T07:28:19.328Z",
+    "acquisition_evidence": "https://github.com/isnet-media/isnet-real-estate-site/commit/4f8e2bbe941270e97acec51b39e16719fcc22ada",
+    "impact": "Released within 30 minutes, no observed overlap or publication failure. Owner should use a fresh random token and lease expiration at most 30 minutes, with one policy-compliant renewal only if needed."
+  }
+}
