@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-28T10:34:25.913Z",
+  "updated_at": "2026-11-28T11:40:05.760Z",
   "incidents": [
     {
       "id": "rishon-reviewed-duplicate-blocks-pages",
@@ -10186,9 +10186,52 @@
         "visual_mobile_review": "pending",
         "sections_and_home_links_verified": true
       }
+    },
+    {
+      "id": "tlvnet-community-nested-publication-receipt-projection",
+      "status": "fixed_verified",
+      "before": {
+        "outcome": "run_outcome_unspecified",
+        "version": null,
+        "queue": null
+      },
+      "after": {
+        "outcome": "article_records",
+        "version": 769,
+        "coverage": "incomplete",
+        "queue": 15,
+        "record": "source_published_receipt_incomplete"
+      },
+      "root_cause": "The current community ledger stores canonical links, deployment proof and queue in nested fields the evidence report did not project.",
+      "change": "Project the exact owner, article and matching terminal deployment; preserve incomplete receipt verification until byte evidence exists.",
+      "tests": "Existing publication-evidence regressions plus positive and negative nested community cases passed. Patched projection against exact current canonical ledger produces one article and 15 pending entries without elevating recorded proof.",
+      "source_commit": "b476e64db7e232bd1860bfd2718c752dd591b902",
+      "verified_remote": true,
+      "paths": [
+        "lib/publication-evidence.mjs",
+        "tests/publication-evidence-receipt-shapes.mjs"
+      ],
+      "inbox": "ops/incident-response/inbox/c55da3d5-ad98-8328-9b7c-c1013ae64495-community-receipt-projection.json",
+      "production_deploy": false,
+      "classification": "monitoring_receipt_projection",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/c55da3d5-ad98-8328-9b7c-c1013ae64495.json",
+      "observed_at": "2026-11-28T11:40:05.760Z",
+      "last_seen_at": "2026-11-28T11:40:05.760Z"
+    },
+    {
+      "id": "tlvnet-jaffa-adjacent-community-culture-archive-photo-20261128",
+      "status": "open",
+      "scope": "Two adjacent news cards and neighborhood masthead reuse the archival Jaffa Port photo; the two news articles have different stories. Confirmed in rendered browser state and exact image URLs.",
+      "url": "https://tlvnet.com/neighborhoods/jaffa/",
+      "asset": "/photo-bank/assets/flash90-F181227HP04.jpg",
+      "next_action": "Existing editorial owner to use an independently approved relevant alternative or supported card-display option; mobile visual review remains open.",
+      "classification": "display/image_reuse",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/c55da3d5-ad98-8328-9b7c-c1013ae64495.json",
+      "observed_at": "2026-11-28T11:40:05.760Z",
+      "last_seen_at": "2026-11-28T11:40:05.760Z"
     }
   ],
-  "last_review_runKey": "ops-2026-11-28-c3567e17-6084-8328-a70c-4f2ce5794963",
+  "last_review_runKey": "ops-2026-11-28-c55da3d5-ad98-8328-9b7c-c1013ae64495",
   "external_source_checkpoints": [
     {
       "signature": "classes/source-detail-read/web-retrieval-unavailable",
