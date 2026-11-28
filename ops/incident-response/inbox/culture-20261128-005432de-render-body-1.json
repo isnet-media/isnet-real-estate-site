@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "writer_recovered_failure",
+  "created_at": "2026-11-28T08:17:35.099Z",
+  "signature": "TLVNET/culture-news/final-body-after-generator",
+  "task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+  "runKey": "005432de-817e-4058-bce9-349293bf39ad",
+  "attempt": 1,
+  "site": "https://tlvnet.com",
+  "project_id": "appgprj_6aeb3c238d748191bf82c9cd9c653c32",
+  "status": "fixed_verified",
+  "severity": "low",
+  "article_id": "malka-baneshema-hatikva-novel-20261127",
+  "root_cause": "A final editorial source edit followed initial build-news generation. The first public page retained one extra disclaimer sentence. Browser readback identified the difference; substring-based paragraph validation was too permissive.",
+  "initial_deployment_id": "appgdep_6b0a8c1926588191966adea9ea67f5a1",
+  "correction": "Regenerated from final source, passed existing build and rights checks, made one targeted corrective deployment, then required exact paragraph equality. IDs, URLs and publication dates preserved; no duplicate article created.",
+  "source_commit": "df52bee426989d1f45fc17fb193080a96b0b2947",
+  "version_number": 768,
+  "deployment_id": "appgdep_6b0a8db694c88191b2de001af71d5f7f",
+  "evidence": [
+    {
+      "article_id": "malka-baneshema-hatikva-novel-20261127",
+      "url": "https://tlvnet.com/news/malka-baneshema-hatikva-novel-20261127",
+      "status": 200,
+      "image_status": 200,
+      "body_sha256": "f29d64a719a983608784ed3ef672124afd8d5e06e5d2264c792ff267ea2097b3",
+      "asset_sha256": "25598834702289be5540620df75cc4a92feb803375add340d1c921f609476855",
+      "checks": {
+        "heading": true,
+        "lead": true,
+        "full_body": true,
+        "exact_image": true,
+        "credit": true,
+        "source_links": true,
+        "section": true,
+        "home": true,
+        "rtl": true,
+        "http": true,
+        "image_source_link": true
+      },
+      "published_verified": true,
+      "checked_at": "2026-11-28T08:16:19.172691+00:00"
+    }
+  ],
+  "prevention": "Run the article generator after the final source edit and compare each public paragraph exactly; do not accept substring-only body validation.",
+  "pending": "Mobile visual review queued separately; no controller activation or schedule changes.",
+  "next_action": "Group this recovered occurrence by signature; no further content release required."
+}
