@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "412e9b79-53b4-832c-8de6-06ebf5c85d29",
+  "runKey": "ops-2026-11-28-412e9b79-53b4-832c-8de6-06ebf5c85d29",
+  "policy_version": "2026-11-15/1.2",
+  "private_definition_revision": 4,
+  "observed_at": "2026-11-28T08:31:39.870Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-28/412e9b79-53b4-832c-8de6-06ebf5c85d29.json",
+  "status": "culture_render_fixed_verified_network_culture_result_mismatch",
+  "summary": "Independently verified the corrected TLVNET culture article, a second culture story and the night story, plus current news homepage lead. Network culture result repeats Future result and lacks same-day culture policy-read audit. Future approved item remains absent from TLVNET.",
+  "private_policy_read": {
+    "revision": 4,
+    "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
+    "reader": "chatgpt-scheduled",
+    "last_read_at": "2026-11-28 08:26:33.929662+00"
+  },
+  "latest_deployment": {
+    "version": 768,
+    "source_commit": "df52bee426989d1f45fc17fb193080a96b0b2947",
+    "source_checkpoint": "82b4ca63ec07ffb853118e3d6065d751cfe83648",
+    "deployment_id": "appgdep_6b0a8db694c88191b2de001af71d5f7f",
+    "status": "succeeded",
+    "completed_at": "2026-11-28T08:16:04.431281+00:00",
+    "previous_version": 767,
+    "previous_deployment_id": "appgdep_6b0a8c1926588191966adea9ea67f5a1"
+  },
+  "public_health_sample": {
+    "url": "https://tlvnet.com/",
+    "status": 200,
+    "duration_seconds": 8.109726,
+    "news_section": "#local-news",
+    "lead": "https://tlvnet.com/news/superbus-night-detours-south-tel-aviv-20261129",
+    "lead_displayed": "28.11.2026 08:15 Asia/Jerusalem",
+    "accident_headline_19_nov_absent": true
+  },
+  "culture_local": {
+    "owner_task_id": "Automation_53543605ce188191ba90f3f1979203dc",
+    "owner_run_id": "9f3c65d4-8d28-832f-bba6-da11cc1297a6",
+    "cause": "The first deployed page was generated before the last source edit. Substring checks accepted the extra disclaimer.",
+    "resolution": "Owner regenerated from final source and redeployed. Exact live/canonical paragraph equality, source media hashes, captions and index placements independently checked.",
+    "prevention": "Regenerate after the final source edit and require exact paragraph equality.",
+    "public_readback": [
+      {
+        "article_id": "jaffa-port-christmas-fair-20261217",
+        "url": "https://tlvnet.com/news/jaffa-port-christmas-fair-20261217",
+        "section_url": "https://tlvnet.com/news/",
+        "home_url": "https://tlvnet.com/",
+        "status": 200,
+        "matching_source_h1_and_all_article_paragraphs_and_caption": true,
+        "paragraphs": 8,
+        "image_status": 200,
+        "asset_sha256": "3f8c6404b355b11ef9079985c0c612ad20fe50671897ed0d591307231f6c3037",
+        "image_matches_canonical_source": true,
+        "dimensions": [
+          800,
+          533
+        ],
+        "visual_mobile_review": "pending",
+        "sections_and_home_links_verified": true
+      },
+      {
+        "article_id": "malka-baneshema-hatikva-novel-20261127",
+        "url": "https://tlvnet.com/news/malka-baneshema-hatikva-novel-20261127",
+        "section_url": "https://tlvnet.com/news/",
+        "home_url": "https://tlvnet.com/",
+        "status": 200,
+        "matching_source_h1_and_all_article_paragraphs_and_caption": true,
+        "paragraphs": 8,
+        "image_status": 200,
+        "asset_sha256": "25598834702289be5540620df75cc4a92feb803375add340d1c921f609476855",
+        "image_matches_canonical_source": true,
+        "dimensions": [
+          800,
+          533
+        ],
+        "visual_mobile_review": "pending",
+        "sections_and_home_links_verified": true
+      },
+      {
+        "article_id": "jazz-annette-koby-shemtov-20261130",
+        "url": "https://tlvnet.com/night/stories/jazz-annette-koby-shemtov-20261130",
+        "section_url": "https://tlvnet.com/night/",
+        "home_url": "https://tlvnet.com/night/",
+        "status": 200,
+        "matching_source_h1_and_all_article_paragraphs_and_caption": true,
+        "paragraphs": 8,
+        "image_status": 200,
+        "asset_sha256": "7ecd165169143bf011222508a12406b9171d76cd2743acce286e45eb91847d0b",
+        "image_matches_canonical_source": true,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "visual_mobile_review": "pending",
+        "sections_and_home_links_verified": true
+      }
+    ]
+  },
+  "network_culture_result": {
+    "incident_id": "controller-active-scope-inherited-writer-approval",
+    "observed_at": "2026-11-28T08:31:39.870Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/412e9b79-53b4-832c-8de6-06ebf5c85d29.json",
+    "run_id": "412e9b79-53b4-832c-8de6-06ebf5c85d29",
+    "culture": {
+      "task_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+      "run_id": "d20594d1-eb30-8328-84dd-04812844f653",
+      "result_run_id": "d20594d1-eb30-8328-84dd-04812844f653",
+      "status": "completed",
+      "scheduled_for": "2026-11-28T08:00:00Z",
+      "started_at": "2026-11-28T08:15:06.458653Z",
+      "result_at": "2026-11-28T08:20:11.796520Z",
+      "chat_id": "6aed6cf2-2c38-83eb-8a9a-5c5f2e45a1ef",
+      "enabled": true,
+      "next_run_time": "2026-11-29T10:00:00+02:00"
+    },
+    "future": {
+      "task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+      "run_id": "04a4f577-bfe0-832a-9481-e2c0269f414a",
+      "result_run_id": "04a4f577-bfe0-832a-9481-e2c0269f414a",
+      "status": "completed",
+      "scheduled_for": "2026-11-28T08:00:00Z",
+      "started_at": "2026-11-28T08:15:17.867329Z",
+      "result_at": "2026-11-28T08:20:13.228849Z",
+      "chat_id": "6aed7da7-acdc-83eb-a2ce-ab27bfac8cc0",
+      "enabled": true,
+      "next_run_time": "2026-11-30T10:00:00+02:00"
+    },
+    "distinct_chat_refs": true,
+    "results_exact_equal": true,
+    "result_scope": "future",
+    "policy_read_rows": [
+      {
+        "agent_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+        "revision": 4,
+        "read_revision": 4,
+        "last_read_at": "2026-11-28 08:15:56.995446+00"
+      },
+      {
+        "agent_id": "Automation_46f4cacaaa288191aad7b49de5a04ae7",
+        "revision": 5,
+        "read_revision": 5,
+        "last_read_at": "2026-11-27 08:04:13.75909+00"
+      }
+    ],
+    "qualification": "Do not credit this run as network culture output. Results attributed to two different scheduled runs are identical. Missing same-day culture audit is independent confirmation that its policy read was not recorded. Internal execution or result routing cause remains unverified.",
+    "next_action": "Runtime owner to compare the two exact task/run bindings and restore task-specific execution and result attribution."
+  },
+  "prepared_future": {
+    "content_id": "daily-2026-11-20",
+    "source_fingerprint": "doi:10.1088/1748-9326/aebbd4",
+    "owner_task_id": "Automation_09c630803fe481919ccd2f476f0d6916",
+    "owner_run_id": "04a4f577-bfe0-832a-9481-e2c0269f414a",
+    "owner_checkpoint": "ops/incident-response/inbox/20261128T0819Z-future-prepared-checkpoint-04a4f577.json",
+    "status": "prepared_pending_owner_release",
+    "article_public_http": 404,
+    "public_catalog_http": 200,
+    "present_in_public_catalog": false,
+    "present_in_source_catalog": false,
+    "source_catalog_count": 15,
+    "approved_body_sha256": "4a612c83a2ff9874f21278bfb7ce2371726140a1dfed702ee5a67c2474d9619c",
+    "approved_asset_sha256": "505eaf6ced3c81ecc2cf63f368f28a886bc4ae59dd4e7c391f0af750371f433c",
+    "asset_public_http": 200,
+    "asset_matches_source_and_approved_hash": true,
+    "herzliya": "pending_approved_receiver_local_media_fileId",
+    "cmp_placements_historical_or_owner_verified": 10,
+    "mechanical_release": "Existing general news recovery helper is briefs-only. Preserve owner approvals and the original future magazine path.",
+    "capacity": "Prior ENOSPC not reproduced by the owner or by independent source fetch and worktree checkout. No build capacity claim."
+  },
+  "lease": {
+    "target": "TLVNET-site",
+    "state": "free",
+    "last_release": {
+      "owner": "Automation_53543605ce188191ba90f3f1979203dc",
+      "run_key": "005432de-817e-4058-bce9-349293bf39ad",
+      "released_at": "2026-11-28T08:18:11.667Z"
+    }
+  },
+  "desk_staging": {
+    "health": {
+      "handoff_failed": 3,
+      "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
+      "last_migration": "20261127_100000_alert_log",
+      "failed_backups_7d": 0,
+      "hours_since_backup": 7.200243618333333,
+      "autopublish_enabled": false,
+      "handoff_stuck_over_2h": 0
+    },
+    "backups": [
+      {
+        "ok": true,
+        "kind": "db",
+        "created_at": "2026-11-28T02:41:03.124878+00:00"
+      },
+      {
+        "ok": true,
+        "kind": "media",
+        "created_at": "2026-11-28T03:10:08.426668+00:00"
+      }
+    ],
+    "reconcile": {
+      "status": "succeeded",
+      "end_time": "2026-11-28T08:20:00.059218+00:00",
+      "start_time": "2026-11-28T08:20:00.056671+00:00"
+    },
+    "herzliya": {
+      "count": 0,
+      "oldest_created_at": null
+    }
+  },
+  "backup_components": {
+    "entries": [
+      {
+        "id": "administrative-state",
+        "updated_at": "2026-11-27T07:17:07.889Z",
+        "checksum": "6603d6d2c133f69309393428c5be5dbc626c9ec494ed15e0985de9fb0b988622",
+        "error_present": false
+      },
+      {
+        "id": "recent-news",
+        "updated_at": "2026-11-28T07:17:52.108Z",
+        "checksum": "bdecbabba622b31978d67159a8b8916ef36a5bd947565c76774999e5b6621594",
+        "error_present": false
+      },
+      {
+        "id": "source-configuration",
+        "updated_at": "2026-11-28T07:17:53.858Z",
+        "checksum": "9873ce90603bae14c9a57cfd6897a819f1815a1fa140f04eccf295823bc7ca28",
+        "error_present": false
+      }
+    ],
+    "scope": "Component metadata. Full isolated restore and qualification remain pending."
+  },
+  "social": {
+    "arr": [
+      {
+        "slot": "2026-11-28T08",
+        "status": "published",
+        "finished_at": "2026-11-28T08:00:11.025Z",
+        "article_url": "https://tlvnet.com/news/kfar-shalem-eighth-win-jaffa-comeback-20261127.html",
+        "post_id": "1520426491146188_122115156495545268"
+      }
+    ],
+    "pages": 6,
+    "complete": true,
+    "scope": "Database publication receipt only. Public Facebook readback not performed."
+  },
+  "worker_logs": {
+    "returned_entries": 0,
+    "complete": false
+  },
+  "actions": {
+    "previous_watermark": "2026-11-28T03:40:08Z",
+    "returned_boundary_run_id": 46103948173,
+    "returned_boundary_status": "skipped",
+    "new_runs": 0
+  },
+  "source_report": {
+    "source_commit": "82b4ca63ec07ffb853118e3d6065d751cfe83648",
+    "catalog_sha256": "417eb1bc018941869ceafa296472de08f29dfdd808644b741d2e27131c7178ca",
+    "latest_entries": 7,
+    "drafts_in_projection": 0,
+    "scope": "Existing receipt projection."
+  },
+  "inbox_read": [
+    {
+      "path": "ops/incident-response/inbox/20261128T0819Z-future-prepared-checkpoint-04a4f577.json",
+      "sha": "991e70d27e9f17778f7b07e3976e40961be71dcb"
+    },
+    {
+      "path": "ops/incident-response/inbox/culture-20261128-005432de-render-body-1.json",
+      "sha": "644e1f0cc2dbc6cc192d04a040cf4fcea0fb613e"
+    }
+  ],
+  "remaining": [
+    "Platform task result identity investigation",
+    "Approved Future article to be taken by current owner; Herzliya destination local media ID remains missing",
+    "Mobile visual review",
+    "Stability qualification prerequisites and historical unreconciled run retained"
+  ],
+  "schedule_changed": false,
+  "permissions_changed": false,
+  "triggered_tasks": [],
+  "production_changes_by_controller": false,
+  "api_cost": null
+}
