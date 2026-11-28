@@ -1,0 +1,201 @@
+{
+  "task_id": "Automation_9776808c73848191a9d748dd09315960",
+  "run_id": "43c0a9cb-d9fc-8328-b2fc-66e26645d484",
+  "runKey": "ops-2026-11-28-43c0a9cb-d9fc-8328-b2fc-66e26645d484",
+  "policy_version": "2026-11-15/1.2",
+  "private_definition_revision": 4,
+  "observed_at": "2026-11-28T13:36:41Z",
+  "evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json",
+  "status": "herzliya_independent_publication_recovery_verified",
+  "private_policy_read": {
+    "observed_at": "2026-11-28T13:36:41Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json",
+    "revision": 4,
+    "checksum": "4afe874dabf4c5c745e4e83b526f92a39f63efd8d8186994308c778c82339806",
+    "last_read_at": "2026-11-28 13:32:42.524887+00"
+  },
+  "sites": {
+    "tlvnet": {
+      "deployment": {
+        "version": 770,
+        "status": "succeeded",
+        "source_commit": "c5a8506208913a8764fe6bd2b7457ca53eb656f0",
+        "source_checkpoint": "2e96ea255d074d230a37ed4ec219b881873ed4b7",
+        "deployment_id": "appgdep_6b0ac35928d481919f5d41e2418a3e9b",
+        "completed_at": "2026-11-28T12:04:54.206827+00:00"
+      },
+      "home": {
+        "url": "https://tlvnet.com/",
+        "http": 200,
+        "latency_seconds": 7.746807,
+        "stale_19_nov_article_title_present": false,
+        "link_to_latest_news": true,
+        "latest_news_url": "https://tlvnet.com/news/abarbanel-violence-injury-reported-20261128"
+      },
+      "source_projection_regressions": "6 pass groups on local release checkpoint",
+      "new_release_observed": false,
+      "owner_checkpoint": "Prior qualifications and source queues retained.",
+      "backup_qualification_gates": {
+        "automated_full_offsite_backup": "not_verified",
+        "full_production_data_restore": "actual_d1_r2_data_restored_running_site_not_verified",
+        "isolated_capacity_test": "offline_application_handlers_passed_hosted_capacity_not_measured",
+        "scheduled_publication_reconciliation": "partial"
+      },
+      "sample_scope": "Single public homepage measurement; provider logs sampled."
+    },
+    "herzliya": {
+      "incident_id": "herzliya-shared-writer-lease-null-20261127",
+      "observed_at": "2026-11-28T13:36:41Z",
+      "evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json",
+      "status": "fixed_verified",
+      "owner": {
+        "task_id": "Automation_22f7bf4652ec8191bbe40bdbfd0dd70a",
+        "title": "מערכת הרצליה נט",
+        "enabled": true,
+        "run_id": "575087ad-d3f8-832c-a50d-0731e30b63d8",
+        "last_run_id": "575087ad-d3f8-832c-a50d-0731e30b63d8",
+        "scheduled_for": "2026-11-28T12:30:00Z",
+        "started_at": "2026-11-28T12:30:16.027708Z",
+        "completed_at": "2026-11-28T12:45:33.956484Z",
+        "recorded_status": "completed",
+        "status": "completed",
+        "result_run_id": "575087ad-d3f8-832c-a50d-0731e30b63d8",
+        "result_created_at": "2026-11-28T12:45:33.001810Z",
+        "result_matches_attempt": true,
+        "observed_at": "2026-11-28T13:36:41Z",
+        "evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json",
+        "next_run_local": "2026-11-28T19:30:00+02:00"
+      },
+      "article_id": "1206555082",
+      "url": "https://herzliyanet.co.il/%D7%97%D7%93%D7%A9%D7%95%D7%AA/herzliya-apollonia-cliff-collapse-20261128/",
+      "version": 51,
+      "source_commit": "6752ad4cce5aae4fc5a2b989b7f68631069c88b9",
+      "deployment_id": "appgdep_6b0acbc859648191b85d47adc7042adb",
+      "deployment_status": "succeeded",
+      "deployed_at": "2026-11-28T12:40:55.923719+00:00",
+      "owner_evidence": "ops/report-20261128-afternoon.md",
+      "lease": {
+        "owner_report_acquired": true,
+        "renewed": true,
+        "released": true,
+        "reason_preceding_denial": "Owner associated the denial with a Desk assignment for an already published story. Its reported expiry passed, with no nonexpired staging claim in the prior sample.",
+        "controller_modified_claim": false
+      },
+      "independent_live": {
+        "article_http": 200,
+        "title_matches_release": true,
+        "exact_ordered_body_paragraphs": 6,
+        "homepage": {
+          "url": "https://herzliyanet.co.il/",
+          "http": 200,
+          "link_match": true
+        },
+        "section": {
+          "url": "https://herzliyanet.co.il/news/",
+          "http": 200,
+          "link_match": true
+        },
+        "image_present": false,
+        "og_image_present": false,
+        "reason_no_image": "Owner did not verify photo rights.",
+        "controller_visual_review": "HTML content readback only",
+        "owner_visual_review": "Desktop and narrow emulated viewport reported; no physical phone tested."
+      },
+      "prevention": "Continue reconciling already-published identities against active Desk claims through the authorized owner flow. Verify acquisition and public readback in existing cycles.",
+      "remaining_editorial": {
+        "direct_authorized_handoffs_missing": [
+          "culture-net:813266",
+          "future:812563"
+        ],
+        "sports_handoff": "Receiver-route incident remains open.",
+        "local_culture": "Owner reports more than 48 hours without new item."
+      }
+    }
+  },
+  "desk_staging": {
+    "observed_at": "2026-11-28T13:36:41Z",
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json",
+    "health": {
+      "handoff_failed": 3,
+      "last_backup_at": "2026-11-28T01:15:00.093698+00:00",
+      "last_migration": "20261127_100000_alert_log",
+      "failed_backups_7d": 0,
+      "hours_since_backup": 12.293493403888888,
+      "autopublish_enabled": false,
+      "handoff_stuck_over_2h": 0
+    },
+    "backups": [
+      {
+        "ok": true,
+        "kind": "db",
+        "created_at": "2026-11-28T02:41:03.124878+00:00"
+      },
+      {
+        "ok": true,
+        "kind": "media",
+        "created_at": "2026-11-28T03:10:08.426668+00:00"
+      }
+    ],
+    "reconcile": {
+      "status": "succeeded",
+      "end_time": "2026-11-28T13:30:00.121476+00:00",
+      "start_time": "2026-11-28T13:30:00.098135+00:00"
+    },
+    "herzliya": {
+      "count": 0,
+      "oldest_created_at": null
+    },
+    "access": "read_only",
+    "scope": "staging",
+    "alert": false
+  },
+  "social": {
+    "slot": "2026-11-28T13",
+    "article_url": "https://tlvnet.com/news/abarbanel-violence-injury-reported-20261128.html",
+    "provider_status": "published",
+    "finished_at": "2026-11-28T13:00:10.056Z",
+    "post_id": "1520426491146188_122115240555545268",
+    "url": "https://www.facebook.com/61596358055015/posts/122115240555545268/",
+    "http": 200,
+    "id_and_title_match": true
+  },
+  "github_actions": {
+    "observed_at": "2026-11-28T13:36:41Z",
+    "from": "2026-11-28T12:03:08Z",
+    "through": "2026-11-28T13:31:59Z",
+    "boundary_crossed": true,
+    "boundary_ids": [
+      46150076378,
+      46150076638
+    ],
+    "overlap_ids": [
+      46142746976
+    ],
+    "count": 66,
+    "strictly_new": 65,
+    "pages": 2,
+    "watermark": "2026-11-28T13:31:59Z",
+    "pending_run_ids": [],
+    "known_reconciled_failure_run_ids": [
+      46145640786,
+      46145612383,
+      46145597647
+    ],
+    "previously_verified_recovery_run_id": 46145770981,
+    "new_failure_roots": 0,
+    "full_logs_read": 0,
+    "evidence": "ops/tlvnet-stability/observations/2026-11-28/43c0a9cb-d9fc-8328-b2fc-66e26645d484.json"
+  },
+  "immutable_inbox_new_count": 0,
+  "retained_pending": [
+    {
+      "task_id": "Automation_845f7ef0033c8191b7490e0dc5748754",
+      "run_id": "f177b9fd-b3e0-832f-8c0e-29cd750fa2ce",
+      "latest_result_run_id": "881f8c86-f210-8333-84b5-3b1cb819160d",
+      "reason": "Latest exact result is a different attempt."
+    }
+  ],
+  "production_changes": false,
+  "task_schedule_or_permission_changed": false,
+  "provider_usage_or_cost_measured": false
+}
